@@ -11,7 +11,7 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="com.laundry.business.vo.BusinessVO" alias="businessVO" />
+		<typeAlias type="com.drumtong.business.vo.BusinessVO" alias="businessVO" />
 	</typeAliases>
 	
 </configuration>		
