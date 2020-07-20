@@ -86,12 +86,12 @@
 
 
 <!-- 		[service 전역 설정] -->
-	<context:component-scan base-package="com.laundry.business.service" />
-	<context:component-scan base-package="com.laundry.customer.service" />
+	<context:component-scan base-package="com.drumtong.business.service" />
+	<context:component-scan base-package="com.drumtong.customer.service" />
 		
 <!-- 		[mybatis dao 전역 설정] -->
-	<mybatis-spring:scan base-package="com.laundry.business.dao" factory-ref="businessFactory"/>
-	<mybatis-spring:scan base-package="com.laundry.customer.dao" factory-ref="customerFactory"/>
+	<mybatis-spring:scan base-package="com.drumtong.business.dao" factory-ref="businessFactory"/>
+	<mybatis-spring:scan base-package="com.drumtong.customer.dao" factory-ref="customerFactory"/>
 
 
 </beans>

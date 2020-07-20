@@ -1,22 +1,20 @@
-package com.laundry.business.service;
-
+package com.drumtong.customer.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.laundry.business.dao.BusinessDAO;
-
-
+import com.drumtong.customer.dao.CustomerDAO;
 
 @Service
-public class BusinessService {
-	@Autowired BusinessDAO dao;
+public class CustomerService {
+	@Autowired CustomerDAO dao;
 	
 	public ModelAndView test() {
-		ModelAndView mv = new ModelAndView("business/businessMain");
+		ModelAndView mv = new ModelAndView("customer/customerMain");
 		mv.addObject("test",dao.test());
 		return mv;
 	}
 	
-//	@Transactional(timeout=5)
+	
+	//@Transactional(timeout=5)
 }
