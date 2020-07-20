@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 		
 	<footer>
-		footer
+		footer sangjae
 	</footer>
 </body>
 </html>
