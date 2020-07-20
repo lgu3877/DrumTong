@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 		
 	<footer>
-		footer sangjae
+		footer dohyun
 	</footer>
 </body>
 </html>
