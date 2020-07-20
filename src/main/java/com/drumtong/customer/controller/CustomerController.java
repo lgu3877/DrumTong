@@ -21,4 +21,14 @@ public class CustomerController {
 		return svc.test();
 	}
 	
+	
+	@RequestMapping(value = "customerLogin/", method = RequestMethod.GET)
+	public String login() {
+		return "customer/customerLogin/customerLogin";
+	}
+	
+	@RequestMapping(value = "customerJoin/", method = RequestMethod.GET)
+	public String join() {
+		return "customer/customerLogin/customerJoin";
+	}
 }

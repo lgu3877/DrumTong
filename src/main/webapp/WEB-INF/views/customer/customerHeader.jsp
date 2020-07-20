@@ -10,6 +10,7 @@
   	<title>customerMain :: Laundry</title>
   	<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'>
   	<link rel="stylesheet" href="${cpath }/customer/css/customerStyle.css">
+  	<link rel="stylesheet" href="${cpath }/customer/css/style.css">
 </head>
 <body>
 	
