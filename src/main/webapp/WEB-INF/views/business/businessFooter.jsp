@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 		
 	<footer>
-		footer dohyun
+		footer 상재입니다...!!!!!!
 	</footer>
 </body>
 </html>
