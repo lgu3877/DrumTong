@@ -1,4 +1,4 @@
-package com.laundry.business.dao;
+package com.drumtong.business.dao;
 
 public interface BusinessDAO {
 	String test();

@@ -1,4 +1,4 @@
-package com.laundry.customer.interceptor;
+package com.drumtong.customer.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
