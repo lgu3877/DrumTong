@@ -20,8 +20,8 @@
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:2522:xe" />
-		<property name="user" value="scott" />
-		<property name="password" value="tiger" />
+		<property name="user" value="laundry" />
+		<property name="password" value="drumtong" />
 		<property name="maxPoolSize" value="100" />
 		<property name="maxIdleTime" value="600" />
 		<property name="idleConnectionTestPeriod" value="300" />
@@ -86,8 +86,8 @@
 
 
 <!-- 		[service 전역 설정] -->
-	<context:component-scan base-package="com.drumtong.business.service" />
-	<context:component-scan base-package="com.drumtong.customer.service" />
+	<context:component-scan base-package="com.drumtong.business.service.*" />
+	<context:component-scan base-package="com.drumtong.customer.service.*" />
 		
 <!-- 		[mybatis dao 전역 설정] -->
 	<mybatis-spring:scan base-package="com.drumtong.business.dao" factory-ref="businessFactory"/>

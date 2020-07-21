@@ -1,27 +1,17 @@
-package com.drumtong.customer.controller;
-
+package com.drumtong.customer.controller.membership;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.drumtong.customer.service.CustomerService;
-
+import com.drumtong.customer.service.membership.CustomerMemberService;
 
 @Controller
-@RequestMapping("/customer/")
-public class CustomerController {
+public class CustomerMembershipController {
 	
-	@Autowired CustomerService svc;
-	
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView home() {
-		return svc.test();
-	}
-	
-	
+	@Autowired CustomerMemberService svc;
+
 	@RequestMapping(value = "customerLogin/", method = RequestMethod.GET)
 	public String login() {
 		return "customer/customerLogin/customerLogin";
