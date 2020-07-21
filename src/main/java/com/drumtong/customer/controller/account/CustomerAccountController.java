@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.drumtong.customer.service.account.CustomerAccountService;
 
 @Controller
-@RequestMapping("/account/")
+@RequestMapping("customer/account/")
 public class CustomerAccountController {
 
 	@Autowired CustomerAccountService svc;

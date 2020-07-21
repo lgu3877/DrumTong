@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.drumtong.customer.service.membership.CustomerMemberService;
 
 @Controller
-@RequestMapping("membership/")
+@RequestMapping("customer/membership/")
 public class CustomerMembershipController {
 	
 	@Autowired CustomerMemberService svc;
