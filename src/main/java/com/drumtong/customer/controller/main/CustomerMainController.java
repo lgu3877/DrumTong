@@ -11,7 +11,7 @@ import com.drumtong.customer.service.main.CustomerMainService;
 
 
 @Controller
-@RequestMapping("/customer/")
+@RequestMapping("customer/")
 public class CustomerMainController {
 	
 	@Autowired CustomerMainService svc;

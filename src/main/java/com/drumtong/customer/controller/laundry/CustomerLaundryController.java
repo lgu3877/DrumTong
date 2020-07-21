@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.drumtong.customer.service.laundry.CustomerLaundryService;
 
 @Controller
-@RequestMapping("/laundry/")
+@RequestMapping("customer/laundry/")
 public class CustomerLaundryController {
 
 	@Autowired CustomerLaundryService svc;
