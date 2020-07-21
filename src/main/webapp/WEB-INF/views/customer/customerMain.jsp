@@ -10,7 +10,7 @@
 			<p class="searchs_p">살고 싶으신가요?</p>
 			<div class="searchBox">
 				<i class="fa fa-search-plus" aria-hidden="true"></i> 
-				<input
+				<input 
 					class="searchLine"
 					type="text" 
 					name="search" 

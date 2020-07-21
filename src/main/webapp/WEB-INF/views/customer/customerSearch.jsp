@@ -21,7 +21,7 @@
 			<option>옵션2</option>
 		</select> <select class="filter_op">
 			<option>옵션3</option>
-			<option>옵션3</option>
+			<option>옵션3</option> 
 		</select> <select class="filter_op">
 			<option>옵션4</option>
 			<option>옵션4</option>
