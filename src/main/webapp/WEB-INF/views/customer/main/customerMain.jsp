@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="main/businessHeader.jsp" %>    
+<%@ include file="customerHeader.jsp" %>    
 
 <section>
+	<h2>Customer Main</h2>
 	${test }
-	섹션
 </section>
 
-<%@ include file="main/businessFooter.jsp" %>    
+<%@ include file="customerFooter.jsp" %>    
