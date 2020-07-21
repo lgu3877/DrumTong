@@ -1,0 +1,553 @@
+/*
+	[css 작성 규약]
+	
+	0. css 작성 순서
+	  - width, height
+	  - padding , margin
+	  % 큰단위 순서대로 내려옵니다
+	  
+	
+	1. 묶을 수 있는 것은 최대한 묶는다
+		ex) body, footer, section 배경이 하얀색이면
+		body,footer,section {
+			background-color : white;
+		}
+	
+	2. 중복되는 코드는 사용하지 않는다.
+	
+	3. 명시적인 클래스명을 사용한다.
+	
+	4. 클래스명은 카멜 표기법으로
+	
+	5. 코드에 주석 작성
+	
+	[기본 css] 
+
+
+	(Point Color) : #009fe3 / #00acd4 / #0091e4 / #3598fe / #097ce6 / #35aefd / 
+	
+	(Main Color) : #FFFFFF
+	
+	(hr Color) : #EAEAEA
+	
+	
+	규격 : 1900 x 3000px
+	0
+	font-size : 16px
+	
+	font-family  : spoqa han sans
+	
+	
+	{Front 개발자는 서로 합의해서 규약을 정해서 개발을 할 수 있도록 한다.}
+	
+	[기본 규약]
+	
+	1. css는 클래스 이름에 설정해라
+	
+	2. html로만 모든 페이지를 구성해라
+	
+	3. 막히는게 있으면 20분 이상 고민하지말고 다음 걸로 넘어간다.
+	
+	4. 추후에 마치고 완료가 됐다고 생각하면 팀원들에게 확인을 하고 GitHub에는 최종적으로 확인이 다 된 것만 올린다.
+*/
+
+/* @charset "utf-8"; */
+@charset "utf-8";
+
+* {
+	user-select: none;
+	font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';
+	font-size: 16px;
+	box-sizing: border-box;
+}
+
+
+/* body, header, nav, ul, li, section, article, div, footer { */
+
+/* } */
+html {
+	width: 1900px;
+	height: auto;
+}
+
+body,
+header,
+section {
+	background-color: white;
+	width: 1900px;
+	box-sizing: border-box;
+}
+
+body {
+	/* border: 1px solid black; */
+	margin: auto;
+	height: 1500px;
+
+	/* 	최대크기 */
+	max-width: 1900px;
+	max-height: 3000px;
+
+	/* 	최소크기 */
+	/* min-width : 100%; */
+	/* min-height: 100%; */
+}
+
+/* ====================섹션 CSS================================ */
+body section {
+	width: 1900px;
+	height: 1400px;
+	/* padding: 10px; */
+	/* margin-top: 70px; */
+}
+
+body section fa-search-plus {
+	color: #373737;
+}
+
+/* ====================메인 검색(search) CSS========================= */
+body .section_main .search {
+	width: auto;
+	height: 500px;
+	display: flex;
+	flex-direction: row;
+	box-sizing: border-box;
+	/* background-color: antiquewhite; */
+	background-color: #FFFFFF;
+	padding-top: 150px;
+	
+}
+
+body .section_main .search .searchs {
+	width: auto;
+	margin: 0 auto;
+}
+
+body .section_main .search .searchs .searchs_p {
+	width: auto;
+	text-align: center;
+	font-size: 25px;
+	margin: 10px;
+}
+
+
+body .section_main .search .searchBox {
+	text-align: center;
+	width: 900px;
+	height: 50px;
+	border: 1px solid black;
+	margin: 0 auto;
+	padding-top: 5px;
+	border-color: #097ce6
+}
+
+body .section_main .search .searchBox .searchLine {
+	text-align: center;
+	width: 800px;
+	height: 40px;
+	/* border:none; */
+	border-right: 0px;
+	border-top: 0px;
+	border-left: 0px;
+	border-bottom: 0px;
+
+}
+
+body .section_main .search .searchBox .search_button {
+	width: 50px;
+	height: 40px;
+	border: 1px solid#EAEAEA;
+	outline: 0;
+}
+
+body .section_main .search .searchBox .search_button:active {
+	background-color: #0091e4;
+}
+
+body .section_main .search .searchs .filter{
+	width: auto;
+	height: 100px;
+	padding: 10px 50px;
+	margin-top: 150px;
+	border: 1px solid black;
+}
+
+/* ====================공지사항(notice) CSS========================== */
+body .section_main .notice {
+	box-sizing: border-box;
+	width: auto;
+	height: 450px;
+	/* background-color: aliceblue; */
+	background-color: #FFFFFF;
+	text-align: center;
+
+}
+
+body .section_main .notice .notice_name {
+	width: auto;
+	font-size: 25px;
+	margin: 0;
+	padding-top: 20px;
+}
+
+body .section_main .notice .notices {
+	/* border: 1px solid black; */
+	width: 1144px;
+	height: 340px;
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+body .section_main .notice .notices .notices_0 {
+	text-align: center;
+	margin-top: 30px;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid #EAEAEA;
+	
+}
+
+body .section_main .notice .notices .notices_1 {
+	float: left;
+	width: 550px;
+	height: 250px;
+	padding: 10px;
+	
+}
+
+body .section_main .notice .notices .notices_2 {
+	float: left;
+	width: 550px;
+	height: 250px;
+	padding: 10px;
+}
+
+body .section_main .notice .notices .notices_0 .notice_hr {
+	/* border: 1px solid #EAEAEA; */
+	/* height: 1px; */
+	border: 0;
+    height: 1px;
+    background: #EAEAEA;
+}
+
+body .section_main .notice .notices .notices_0 a {
+	text-decoration: none;
+}
+
+body .section_main .notice .notices .notices_0 .notices_1_1 {
+	font-size: 20pt;
+}
+
+body .section_main .notice .notices .notice_ul {
+	padding: 10px;
+	margin: 10px;
+}
+
+body .section_main .notice .notices .notice_ul .notice_li {
+	margin: 10px;
+	/* list-style: none; */
+}
+
+body .section_main .notice .notices .notice_ul .notice_li a {
+	text-decoration: none;
+	color: #373737;
+}
+
+
+/* ====================세탁소(laundryList) 미리보기 CSS========================== */
+body .section_main .laundryList {
+	box-sizing: border-box;
+	width: 1900px;
+	height: 320px;
+	background-color: #FFFFFF;
+	text-align: center;
+}
+
+body .section_main .laundryList .laundry_p {
+	width: 1900px;
+	font-size: 25px;
+	margin: 0;
+	padding-top: 20px;
+}
+
+body .section_main .laundryList .laundry_p1 {
+	font-size: 16pt;
+	font-weight: bolder;
+	
+}
+
+body .section_main .laundryList .laundry_p2 {
+	font-size: 10pt;
+}
+
+body .section_main .laundryList .laundryLists {
+	/* border: 1px solid black; */
+	width: 1100px;
+	height: 175px;
+	text-align: center;
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+}
+
+body .section_main .laundryList .laundryLists a {
+	text-decoration: none;
+	color: black;
+	width: 180px;
+	height: 170px;
+}
+
+body .section_main .laundryList .laundryLists .laundryLists_1 {
+	border: 1px solid #EAEAEA;
+	width: 300px;
+	height: 170px;
+	margin-left: 20px;
+	/* padding-top: 5px; */
+	/* text-align: center; */
+	
+}
+
+body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_1 {
+	/* background-color: blueviolet; */
+	width: 200px;
+	height: 100px;
+	margin: 0px;
+}
+
+body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_1 img {
+	width: 198px;
+	height: 100px;
+	margin: 0px;
+}
+
+body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_2 {
+	/* background-color: bisque; */
+	width: auto;
+	height: 70px;
+	padding: 10px 15px;
+	margin: 0;
+}
+
+body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_2 p {
+	text-align: left;
+	font-size: 16px;
+	margin: 0px;
+	margin-bottom: 5px;
+}
+
+body .section_main .laundryList .laundryLists .btn {
+	width: 37px;
+	height: 50px;
+	margin: 70px 27px;
+	font-size: 25px;
+	text-align: center;
+	border-radius: 30px;
+	background-color: #FFFFFF;
+	border: 1px solid#EAEAEA;
+	outline: 0;
+}
+
+body .section_main .laundryList .laundryLists .btn:active {
+	background-color: #EAEAEA;
+}
+
+/* ====================회원정보 수정(joinchange) 미리보기 CSS========================== */
+
+body .section_Joinchange {
+	padding-top: 70px;
+	width: 1900px;
+	height: 1400px;
+}
+
+
+body .section_Joinchange .join_mainName {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 30px;
+}
+
+body .section_Joinchange .join_change {
+	width: 800px;
+	height: 900px;
+	padding: 30px;
+	border: 1px solid #EAEAEA;
+	/* padding-top: 200px; */
+	/* margin-top: 200px; */
+	margin-left: auto;
+	margin-right: auto;
+	box-shadow: 5px 5px 5px 5px #EAEAEA;
+}
+
+body .section_Joinchange .join_change .join_button{
+	float: right;
+	width: 60px;
+	height: 40px;
+	border: 0;
+	outline-color: #35aefd;
+	/* margin-right: 30px; */
+}
+
+body .section_Joinchange .join_change form .join_name {
+	margin-top: 20px;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+
+body .section_Joinchange .join_change form .join_name .join_id_p {
+	display: inline-block;
+}
+
+body .section_Joinchange .join_change .join_inputbox{
+	width: 500px;
+	height: 40px;
+	outline-color: #35aefd;
+	border: 0;
+	/* margin-bottom: 15px; */
+	/* text-align: center; */
+}
+
+body .section_Joinchange .join_change .join_pnum {
+	width: 500px;
+	display: inline-block;
+}
+
+body .section_Joinchange .join_change .join_pum_ok {
+	width: 85px;
+	height: 40px;
+	float: right;
+	border: 0;
+	outline-color: #35aefd;
+	/* margin-right: 30px; */
+}
+
+/* body section .join_change .join_pnum_info {
+	width: auto;
+	padding-left: 0px;
+}
+
+body section .join_change .join_pnum_info li {
+	font-size: 8pt;
+	list-style: none;
+	text-decoration: underline;
+} */
+
+body .section_Joinchange .join_change .join_joso {
+	width: 220px;
+	display: inline-block;
+}
+
+body .section_Joinchange .join_change .join_joso_ok {
+	width: 85px;
+	height: 35px;
+	border: 0;
+	float: right;
+	outline-color: #35aefd;
+	/* margin-right: 30px; */
+}
+
+/* body section .join_change .join_cmp {
+	width: auto;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+} */
+
+/* body section .join_change .join_cmp .join_complete {
+	width: 300px;
+	height: 40px;
+	margin-top: 15px;
+	border: 0;
+	outline: none;
+} */
+
+body .section_Joinchange .join_change .join_cmp .join_complete:active {
+	background-color: #35aefd;
+}
+
+/* ====================상세페이지 검색(search) CSS========================= */
+
+body .section_search {
+	padding-top: 70px;
+}
+
+body .section_search .filter {
+	width: 1900px;
+	height: 70px;
+	display: inline-flex;
+	border-bottom: 1px solid #EAEAEA;
+}
+
+body .section_search .filter .searchBox {
+	border-right: 1px solid #EAEAEA;
+	width: 280px;
+	height: 70px;
+	text-align: center;
+	display: flex;
+	margin: 0px;
+	margin-top: 2px;
+	padding-left: 25px;
+	
+}
+
+body .section_search .filter .searchBox .searchLine {
+	height: 66px;
+	border: 0;
+	outline: none;
+	padding: 10px;
+}
+
+body .section_search .filter .searchBox .search_button {
+	width: 60px;
+	height: 35px;
+	margin-top: 15px;
+	margin-right: 5px;
+	border: 0;
+	outline: none;
+}
+
+body .section_search .filter .searchBox .search_button:active {
+	background-color: #35aefd;
+}
+
+body .section_search .filter .filter_op {
+	height: 37px;
+	margin-top: 15px;
+	margin-left: 30px;
+	text-align: center;
+	padding: 0px 15px;
+	border: 1px solid #EAEAEA;
+}
+
+body .section_search .filter .filter_op1 {
+	margin-left: 350px;
+}
+
+body .section_search .filter .filter_reset {
+	width: 800px;
+	height: auto;
+	/* border: 1px solid black; */
+	/* display: flex; */
+}
+
+body .section_search .filter .filter_reset .filter_resets {
+	border-left: 1px solid #EAEAEA;
+	width: 180px;
+	height: 68px;
+	float: right;
+}
+
+body .section_search .filter .filter_reset button {
+	width: 150px;
+	height: 50px;
+	margin: 10px 13px;
+	border: 0;
+	outline: none;
+	float: right;
+	background-color: #EAEAEA;
+}
+
+body .section_search .filter .filter_reset button:active {
+	background-color: #35aefd;
+}
