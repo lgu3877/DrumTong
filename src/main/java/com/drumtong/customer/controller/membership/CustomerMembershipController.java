@@ -8,17 +8,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.drumtong.customer.service.membership.CustomerMemberService;
 
 @Controller
+@RequestMapping("membership/")
 public class CustomerMembershipController {
 	
 	@Autowired CustomerMemberService svc;
 
 	@RequestMapping(value = "customerLogin/", method = RequestMethod.GET)
 	public String login() {
-		return "customer/customerLogin/customerLogin";
+		return "customer/membership/customerLogin";
 	}
 	
-	@RequestMapping(value = "customerJoin/", method = RequestMethod.GET)
+	@RequestMapping(value = "customerSignUp/", method = RequestMethod.GET)
 	public String join() {
-		return "customer/customerLogin/customerJoin";
+		return "customer/membership/customerSignUp";
 	}
 }
+
+
+
+
