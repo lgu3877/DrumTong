@@ -17,6 +17,6 @@ public class BusinessController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home() {
 		return svc.test();
-	}
+	} 
 	
 }
