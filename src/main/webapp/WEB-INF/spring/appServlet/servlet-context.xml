@@ -81,7 +81,7 @@
 	
 	
 <!-- 	Simple Mapping -->
-	<!-- 	<view-controller path="/" view-name="home" /> -->
+		<view-controller path="/" view-name="customer/customerMain" />
 	
 	
 </beans:beans>
