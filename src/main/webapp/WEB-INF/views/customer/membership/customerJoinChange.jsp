@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="customerHeader.jsp"%>
+<%@ include file="../main/customerHeader.jsp"%>
 
 <section class="section_Joinchange">
 	<h1 class="join_mainName">개인정보 수정</h1>
@@ -82,4 +82,4 @@
 
 
 
-<%@ include file="customerFooter.jsp"%>
+<%@ include file="../main/customerFooter.jsp"%>
