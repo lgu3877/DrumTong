@@ -56,7 +56,10 @@
 		<property name="configLocation" value="classpath:customerConfig/mybatis-config.xml" />
 		<property name="mapperLocations">
 			<list>
-				<value>classpath:customerConfig/sqlmap-customer.xml</value>
+				<value>classpath:customerConfig/sqlmap-**</value>
+<!-- 				<value>classpath:customerConfig/sqlmap-CCustomer.xml</value> -->
+<!-- 				<value>classpath:customerConfig/sqlmap-CPayment.xml</value> -->
+<!-- 				<value>classpath:customerConfig/sqlmap-CPrivateData.xml</value> -->
 			</list>
 		</property>
 	</bean>
