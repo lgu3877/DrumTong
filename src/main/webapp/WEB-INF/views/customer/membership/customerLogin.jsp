@@ -43,11 +43,11 @@
           <img src="#" class="login-logo" />
           <div class="login-alert">메세지</div>
           <div class="login-input">
-            <input type="text" name="userid" id="userid" class="login-input-boxs" />
-            <input type="password" name="userpw" id="userpw" class="login-input-boxs" />
+            <input type="text" name="id" id="userid" class="login-input-boxs" />
+            <input type="password" name="pw" id="userpw" class="login-input-boxs" />
 
             <div class="login-check">
-              <label><input type="checkbox" id="storeid" class="login-storeid" />ID 기억하기</label>
+              <label><input type="checkbox" id="storeid" class="login-storeid" />자동 로그인</label>
               <a href="#" class="login-idFind">ID/PW 찾기</a>
             </div>
 

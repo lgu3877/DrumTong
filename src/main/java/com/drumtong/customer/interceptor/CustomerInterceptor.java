@@ -1,5 +1,9 @@
 package com.drumtong.customer.interceptor;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,10 +25,33 @@ public class CustomerInterceptor extends HandlerInterceptorAdapter {
 		// referer에서 와서 RequestURI로 향한다
 //				System.out.println("requestURI : " + request.getRequestURI());
 //				System.out.println("referer" + request.getHeader("referer"));
-
+		// referer : 이전에 있던 페이지 주소, requestURI : 인터셉터로 오기 전 이동하려 했던 주소
 		// 만약, 세션이 존재하면 세션을 반환하고, 세션이 없으면 새로 생성하지 않고 null을 반환한다(기존 세션만 사용)
 		HttpSession session = request.getSession(false);
-//				session.setAttribute("address", request.getRequestURI().substring(request.getContextPath().length()));
+		
+		// 로그인 기록 남기기
+		// 1. 로그인 로그 객체 만들기
+//		SLoginLog loginLog = new SLoginLog();
+		
+		// 2. LOGINDATE, LOGINIP, LOGINURL 넣기;
+		new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+		request.getRemoteAddr();
+		request.getHeader("referer");
+		
+		// 3. 자동로그인이면(쿠키에 저장된 로그인 데이터가 있다면) USERID 값과 LOGINRESULT에 'AUTO'
+		Cookie[] cookie = request.getCookies();
+		if(cookie.length != 0) {
+			for(Cookie c : cookie) {
+				if(c.getName().equals("login")) {
+					// 자동로그인 
+				}
+			}
+		}
+		
+		
+		// 4. 로그인을 해야한다면 USERID 값과 LOGINRESULT는 컨트롤러의 메서드에서 'SUCCESS','FAIL' 값을 넣어줌
+		
+		session.setAttribute("address", request.getRequestURI().substring(request.getContextPath().length()));
 
 		String address = request.getRequestURI().substring(request.getContextPath().length() + 1);
 		System.out.println("인터셉터 address : " + address);
