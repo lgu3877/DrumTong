@@ -85,3 +85,103 @@
 	
 	
 </beans:beans>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+
+
+
+<!-- ===============================resources Mapping======================================= -->
+	
+	<resources mapping="/resources/**" location="/resources/" />
+	
+	<!-- business mapping -->
+	<resources mapping="/business/css/**" location="/resources/business/css/" />
+	<resources mapping="/business/js/**" location="/resources/business/js/" />
+	<resources mapping="/business/img/**" location="file:D:/business/upload/**" />
+	
+	
+	<!-- customer mapping -->
+	<resources mapping="/customer/css/**" location="/resources/customer/css/" />
+	<resources mapping="/customer/js/**" location="/resources/customer/js/" />
+	<resources mapping="/customer/img/**" location="file:D:/customer/upload/**" />
+	
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	
+	
+	
+	
+	
+<!-- ===============================Intercepter======================================= -->
+<!-- 	□■□■□■□■□■□■□■□■□■□■□■interceptors 여러개 배치 했을 때 확인하기□■□■□■□■□■□■□■□■□■□■□■ -->
+	
+<!--  business intercepter function -->
+<!-- 	<interceptors> -->
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/business/**"/> -->
+			
+<!-- 			수정해야함...! -->
+<!-- 			<exclude-mapping path="/"/> -->
+<!-- 			<exclude-mapping path="/login"/> -->
+			
+<!-- 			<beans:bean id="businessInterceptor" class="com.drumtong.business.interceptor.BusinessInterceptor" /> -->
+<!-- 		</interceptor> -->
+<!-- 	</interceptors> -->
+	
+	
+<!--  customer intercepter function -->
+	<interceptors>
+	
+<!-- 	외부에서 접속했을 때 ip기록과 자동로그인 체크 -->
+		<interceptor>
+<!-- 		□■□■□■□■□■□■□■□■□■□■□■mapping 주소 확인하기(수정필요)□■□■□■□■□■□■□■□■□■□■□■ -->
+			<mapping path="/**"/>
+			<beans:bean id="CustomerInitInterceptor" class="com.drumtong.customer.interceptor.CustomerInitInterceptor" />
+		</interceptor>
+	
+<!-- 		로그인이 필요한 페이지일 때 로그인으로 이동, 로그인로그 -->
+		<interceptor>
+<!-- 		□■□■□■□■□■□■□■□■□■□■□■mapping 주소 확인하기(수정필요)□■□■□■□■□■□■□■□■□■□■□■ -->
+			<mapping path="/customer/**"/>
+			
+<!-- 		로그인 여부와 상관없이 이용할 수 있는 페이지 목록(수정필요) -->
+<!-- 			<exclude-mapping path="/"/> -->
+			
+			<beans:bean id="customerLoginInterceptor" class="com.drumtong.customer.interceptor.CustomerLoginInterceptor" />
+		</interceptor>
+	</interceptors>
+	
+
+
+
+
+<!-- ===============================Controller package mapping======================================= -->
+
+	<context:component-scan base-package="com.drumtong.customer.controller.*" />
+	<context:component-scan base-package="com.drumtong.business.controller.*" />
+	
+	
+<!-- 	Simple Mapping -->
+<!-- 	main 페이지 이동 시 db에서 가져와야할 것들 확인하기(view controller 삭제할지) -->
+	<view-controller path="/" view-name="customer/main/customerMain" />
+	
+	
+</beans:beans>

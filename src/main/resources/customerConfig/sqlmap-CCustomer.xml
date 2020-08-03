@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+		"-//mybatis.org//DTD Mapper 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 고객 테이블 -->
+<mapper namespace="com.drumtong.customer.dao.CCustomerDAO">
+
+<!-- 	신규 데이터 입력 -->
+	<insert id="insertSignUp" parameterType="String">
+		INSERT INTO CCUSTOMER 
+			VALUES
+			(#{MemberID})
+	</insert>
+	
+	
+<!-- 	UUID 중복검사 -->
+	<select id="confirm" resultType="int" parameterType="String">
+		SELECT COUNT(#{MemberID}) from CCUSTOMER
+	</select>
+	
+	<!-- 로그인 -->
+	<select id="selectLogin" resultType="CCustomerVO" parameterType="String">
+		SELECT * FROM CCUSTOMER WHERE MEMBERID=#{MemberID}
+	</select>
+
+</mapper>
