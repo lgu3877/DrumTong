@@ -21,19 +21,48 @@
 	
 	5. 코드에 주석 작성
 	
+	[기본 css] 
+
+
+	(Point Color) : #009fe3 / #00acd4 / #0091e4 / #3598fe / #097ce6 / #35aefd / 
+	
+	(Main Color) : #FFFFFF
+	
+	(hr Color) : #EAEAEA
 	
 	
+	규격 : 1900 x 3000px
+	0
+	font-size : 16px
 	
+	font-family  : spoqa han sans
+	
+	
+	{Front 개발자는 서로 합의해서 규약을 정해서 개발을 할 수 있도록 한다.}
+	
+	[기본 규약]
+	
+	1. css는 클래스 이름에 설정해라
+	
+	2. html로만 모든 페이지를 구성해라
+	
+	3. 막히는게 있으면 20분 이상 고민하지말고 다음 걸로 넘어간다.
+	
+	4. 추후에 마치고 완료가 됐다고 생각하면 팀원들에게 확인을 하고 GitHub에는 최종적으로 확인이 다 된 것만 올린다.
 */
+
+/* @charset "utf-8"; */
 @charset "utf-8";
+
 * {
-    user-select: none;
-    font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';
-    font-size: 16px;
-    
-/*     수정 임시용.. */
-/*     margin:0; */
-/*     padding:0; */
+	user-select: none;
+	font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';
+	font-size: 16px;
+	box-sizing: border-box;
+
+	/*     수정 임시용.. */
+	/*     margin:0; */
+	/*     padding:0; */
 }
 
 
@@ -42,46 +71,165 @@
 /*     padding:0; */
 /* } */
 
+html {
+	width: 1900px;
+	height: auto;
+	margin: 0;
+	padding: 0;
+}
 
-body,header,section {
+body,
+header,
+section {
 	background-color: white;
 }
+
 body {
-/* 	border: 1px solid black; */
-    margin: auto;
-/*     padding: 20px 0px 0px 0px; */
+	/* 	border: 1px solid black; */
+	margin: auto;
+	height: 1500px;
+	/*     padding: 20px 0px 0px 0px; */
 
-/* 	최대크기 */
-    max-width: 1900px;
-    max-height: 3000px;
+	/* 	최대크기 */
+	max-width: 1900px;
+	max-height: 1500px;
 
-/* 	최소크기 */
-    min-width : 100%;
-    min-height: 2500px;
-    
+	/* 	최소크기 */
+	min-width: 100%;
+	min-height: 100%;
+
 }
 
+/* ====================헤더(Header) CSS========================= */
 header {
-	width: 100%;
-	height : 70px; 
-	
+	width: 1900px;
+	height: 70px;
 	padding-left: 30px;
 	padding-right: 30px;
-	
 	border-bottom: 1px solid #EAEAEA;
-	
+	position: absolute;
 }
 
-section {
-	width: 100%;
-	height : 500px;
+header .fa-cloud {
+	margin-top: 5px;
+	font-size: 60px;
+	color: #009fe3;
+}
+
+header a:hover {
+	font-weight: bold;
+}
+
+header .logo {
+	width: 80px;
+	height: 40px;
+	margin: 0px;
+	margin-top: 20px;
+	display: flex;
+	float: left;
+	background-color: aqua;
+	padding: 10;
+}
+
+header .mainMenu {
+	display: flex;
+	float: right;
+	margin-right: 10%;
+	margin-top: 5px;
+	text-align: center;
+	/* background-color: antiquewhite; */
+}
+
+header .mainMenu .menu {
+	width: 100px;
+	height: 30px;
+	color: #0091e4;
+}
+
+header .mainMenu .menu li {
+	list-style: none;
+}
+
+header .mainMenu .menu .mypage {
+	display: none;
+	flex-direction: column;
+}
+
+header .mainMenu .menu .login {
+	white-space: nowrap;
+	width: 80px;
+
+}
+
+header .mainMenu .menu .login:hover .mypage {
+	display: contents;
+}
+
+header .mainMenu .menu .login .mypage .listButtons {
+	margin-top: 10px;
+}
+
+header .mainMenu .menu .login .mypage .listButtons .mypageList {
+	margin-top: 10px;
+
+}
+
+header .mainMenu .menu .login .mypage .listButtons .mypageList .listButton {
+	color: #373737;
+	font-size: 10pt;
+	text-decoration: none;
+
+}
+
+header .mainMenu .menu .mypage .listButtons .mypageList:hover {
+	background-color: cornsilk;
+}
+
+header .middleMenu {
+	color: #35aefd;
+	text-decoration: none;
+
+}
+
+header .mainMenu .middleMenu:hover {
+	color: black;
+}
+
+header .middleMenu2 {
+	color: #0091e4;
 }
 
 
+
+/* ====================푸터(Footer) CSS========================== */
 footer {
-	width: 100%;
-	height : 500px;
-	background-color: #373737;
-    position: absolute;
-    top: 2400px;
+	width: 1900px;
+	height: 70px;
+	margin-top: 100px;
+	margin-left: 0;
+	margin-right: 0;
+	background-color: gray;
+	position: sticky;
+/* 	bottom: 0; */
+	/* background-color: #373737; */
+	/* border: 1px solid black; */
+}
+
+footer .footer_main {
+	width: 1500px;
+	height: 55px;
+	color: #EAEAEA;
+	padding: 5px 5px;
+	margin-top: 7px;
+	margin-left: 199px;
+	margin-right: auto;
+	/* border: 1px solid red; */
+	/* text-align: center; */
+}
+
+footer .footer_p {
+	width: 1480px;
+	height: auto;
+	margin: 0;
+	font-size: 15px;
 }
