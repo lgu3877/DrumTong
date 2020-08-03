@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+		"-//mybatis.org//DTD Mapper 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 고객 개인정보 테이블	 -->
+<mapper namespace="com.drumtong.customer.dao.CPrivateDataDAO">
+
+	<!-- 신규 데이터 입력 -->
+	<insert id="insertSignUp" parameterType="CPrivateDataVO">
+		INSERT INTO CPRIVATEDATA 
+			VALUES
+			(#{memberid}, #{id}, #{pw}, #{name}, #{birth},
+			 #{genderboolean}, #{phonenum}, #{mainaddress}, #{detailaddress},
+			 #{mainreceiptaddress}, #{detailreceiptaddress},#{email})
+	</insert>
+	
+	<!-- 아이디,비밀번호와 일치하는 유저 객체 반환 -->
+	<select id="selectUser" parameterType="String" resultType="CPrivateDataVO">
+		SELECT * FROM CPRIVATEDATA WHERE PW=#{pw}
+	</select>
+	
+		
+	<select id="selectID" parameterType="String" resultType="String">
+		SELECT ID FROM CPRIVATEDATA WHERE MEMBERID=#{MemberID}
+	</select>
+	
+</mapper>
