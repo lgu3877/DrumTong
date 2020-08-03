@@ -14,4 +14,3 @@ $(document).ready(function() {
 		pauseOnHover : true, 			// 슬라이드 이동시 마우스 호버하면 슬라이더 멈추게 설정
 	});
 })
-
