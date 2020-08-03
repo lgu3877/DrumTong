@@ -47,7 +47,7 @@
             <input type="password" name="pw" id="userpw" class="login-input-boxs" />
 
             <div class="login-check">
-              <label><input type="checkbox" id="storeid" class="login-storeid" />자동 로그인</label>
+              <label><input type="checkbox" name="storeid" id="storeid" class="login-storeid" />자동 로그인</label>
               <a href="#" class="login-idFind">ID/PW 찾기</a>
             </div>
 

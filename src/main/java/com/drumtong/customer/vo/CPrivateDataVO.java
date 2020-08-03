@@ -6,9 +6,12 @@ public class CPrivateDataVO {
 	private String pw;
 	private String name;
 	private String birth;
-	private String genderboolean;
+	private char genderboolean;		// Value : M or W 
 	private String phonenum;
-	private String address;
+	private String mainaddress;
+	private String detailaddress;
+	private String mainreceiptaddress;
+	private String detailreceiptaddress;
 	private String email;
 	
 	public String getMemberid() {
@@ -18,7 +21,7 @@ public class CPrivateDataVO {
 		this.memberid = memberid;
 	}
 	public String getId() {
-		return id; 
+		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
@@ -41,10 +44,11 @@ public class CPrivateDataVO {
 	public void setBirth(String birth) {
 		this.birth = birth;
 	}
-	public String getGenderboolean() {
+	
+	public char getGenderboolean() {
 		return genderboolean;
 	}
-	public void setGenderboolean(String genderboolean) {
+	public void setGenderboolean(char genderboolean) {
 		this.genderboolean = genderboolean;
 	}
 	public String getPhonenum() {
@@ -53,11 +57,29 @@ public class CPrivateDataVO {
 	public void setPhonenum(String phonenum) {
 		this.phonenum = phonenum;
 	}
-	public String getAddress() {
-		return address;
+	public String getMainaddress() {
+		return mainaddress;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setMainaddress(String mainaddress) {
+		this.mainaddress = mainaddress;
+	}
+	public String getDetailaddress() {
+		return detailaddress;
+	}
+	public void setDetailaddress(String detailaddress) {
+		this.detailaddress = detailaddress;
+	}
+	public String getMainreceiptaddress() {
+		return mainreceiptaddress;
+	}
+	public void setMainreceiptaddress(String mainreceiptaddress) {
+		this.mainreceiptaddress = mainreceiptaddress;
+	}
+	public String getDetailreceiptaddress() {
+		return detailreceiptaddress;
+	}
+	public void setDetailreceiptaddress(String detailreceiptaddress) {
+		this.detailreceiptaddress = detailreceiptaddress;
 	}
 	public String getEmail() {
 		return email;
