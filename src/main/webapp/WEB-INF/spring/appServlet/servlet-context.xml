@@ -43,33 +43,43 @@
 	
 	
 <!-- ===============================Intercepter======================================= -->
-
+<!-- 	□■□■□■□■□■□■□■□■□■□■□■interceptors 여러개 배치 했을 때 확인하기□■□■□■□■□■□■□■□■□■□■□■ -->
+	
 <!--  business intercepter function -->
 <!-- 	<interceptors> -->
 <!-- 		<interceptor> -->
-<!-- 			<mapping path="/**"/> -->
+<!-- 			<mapping path="/business/**"/> -->
 			
 <!-- 			수정해야함...! -->
 <!-- 			<exclude-mapping path="/"/> -->
 <!-- 			<exclude-mapping path="/login"/> -->
 			
-<!-- 			<beans:bean id="businessInterceptor" class="com.laundry.business.interceptor.BusinessInterceptor" /> -->
+<!-- 			<beans:bean id="businessInterceptor" class="com.drumtong.business.interceptor.BusinessInterceptor" /> -->
 <!-- 		</interceptor> -->
 <!-- 	</interceptors> -->
 	
 	
 <!--  customer intercepter function -->
-<!-- 	<interceptors> -->
-<!-- 		<interceptor> -->
-<!-- 			<mapping path="/**"/> -->
+	<interceptors>
+	
+<!-- 	외부에서 접속했을 때 ip기록과 자동로그인 체크 -->
+		<interceptor>
+<!-- 		□■□■□■□■□■□■□■□■□■□■□■mapping 주소 확인하기(수정필요)□■□■□■□■□■□■□■□■□■□■□■ -->
+			<mapping path="/**"/>
+			<beans:bean id="CustomerInitInterceptor" class="com.drumtong.customer.interceptor.CustomerInitInterceptor" />
+		</interceptor>
+	
+<!-- 		로그인이 필요한 페이지일 때 로그인으로 이동, 로그인로그 -->
+		<interceptor>
+<!-- 		□■□■□■□■□■□■□■□■□■□■□■mapping 주소 확인하기(수정필요)□■□■□■□■□■□■□■□■□■□■□■ -->
+			<mapping path="/customer/**"/>
 			
-<!-- 			수정해야함...! -->
+<!-- 		로그인 여부와 상관없이 이용할 수 있는 페이지 목록(수정필요) -->
 <!-- 			<exclude-mapping path="/"/> -->
-<!-- 			<exclude-mapping path="/login"/> -->
 			
-<!-- 			<beans:bean id="customerInterceptor" class="com.laundry.customer.interceptor.CustomerInterceptor" /> -->
-<!-- 		</interceptor> -->
-<!-- 	</interceptors> -->
+			<beans:bean id="customerLoginInterceptor" class="com.drumtong.customer.interceptor.CustomerLoginInterceptor" />
+		</interceptor>
+	</interceptors>
 	
 
 
@@ -82,7 +92,8 @@
 	
 	
 <!-- 	Simple Mapping -->
-		<view-controller path="/" view-name="customer/main/customerMain" />
+<!-- 	main 페이지 이동 시 db에서 가져와야할 것들 확인하기(view controller 삭제할지) -->
+	<view-controller path="/" view-name="customer/main/customerMain" />
 	
 	
 </beans:beans>
