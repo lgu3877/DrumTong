@@ -4,11 +4,11 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 고객 테이블 -->
-<mapper namespace="com.drumtong.customer.dao.CCustomer">
+<mapper namespace="com.drumtong.customer.dao.CCustomerDAO">
 
 <!-- 	신규 데이터 입력 -->
 	<insert id="insertSignUp" parameterType="String">
-		INSERT INTO CCUSTOMER 
+		INSERT INTO CCUSTOMER  (MEMBERID)
 			VALUES
 			(#{MemberID})
 	</insert>
