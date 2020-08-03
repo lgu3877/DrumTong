@@ -11,14 +11,13 @@ import com.drumtong.customer.service.main.CustomerMainService;
 
 
 @Controller
-@RequestMapping("customer/")
+@RequestMapping(value = {"/customer/", "/"})
 public class CustomerMainController {
 	
-	@Autowired CustomerMainService svc;
-	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView main() {
-		return svc.test();
+	public String main() {
+		return "customer/main/customerMain";
 	}
+
 	
 }
