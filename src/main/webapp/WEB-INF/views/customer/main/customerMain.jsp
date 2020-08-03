@@ -11,11 +11,11 @@
 			<div class="searchBox">
 				<i class="fa fa-search-plus" aria-hidden="true"></i> 
 				<input 
-					class="searchLine"
+					class="searchLine" 
 					type="text" 
 					name="search" 
-					id="search"
-					placeholder="검색어를 입력하세요"/> 
+					id="search" 
+					placeholder="                                                                 검색어를 입력하세요"/>
 				<input 
 					class="search_button"
 					type="button" 

@@ -17,26 +17,13 @@
     <script type="text/javascript" src="http://kenwheeler.github.io/slick/slick/slick.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            // alert("Asd");
-            $('.laundryLists').slick({
-                infinite: true,				// 무한 반복 옵션
-                slidesToShow: 5,			// 한 화면에 보여질 컨텐츠 개수
-                slidesToScroll: 1,			// 스크롤 한번에 움직일 컨텐츠 개수
-                autoplay: true,				// 자동 스크롤 사용 여부
-                autoplaySpeed:3000,			// 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
-                dots: true,					// 스크롤바 아래 점으로 페이지네이션 여부
-                pauseOnHover : true,		// 슬라이드 이동시 마우스 호버하면 슬라이더 멈추게 설정
-            });
-        });
-    </script>
+	<script type="text/javascript" src="${cpath }/customer/js/main/customerHeader.js"></script>
+	
 </head>
 <body>
 	
 	<header>
-        <a href="${cpath }/customer/"><i class="fa fa-cloud" aria-hidden="true"></i></a>
+        <a href="${cpath }/"><i class="fa fa-cloud" aria-hidden="true"></i></a>
         
         <div class="mainMenu">
             
