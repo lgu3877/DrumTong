@@ -19,7 +19,7 @@
 
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.0.52:1521:xe" />
 		<property name="user" value="laundry" />
 		<property name="password" value="drumtong" />
 		<property name="maxPoolSize" value="100" />
@@ -56,13 +56,32 @@
 		<property name="configLocation" value="classpath:customerConfig/mybatis-config.xml" />
 		<property name="mapperLocations">
 			<list>
-				<value>classpath:customerConfig/sqlmap-customer.xml</value>
+				<value>classpath:customerConfig/sqlmap-**</value>
+<!-- 				<value>classpath:customerConfig/sqlmap-CCustomer.xml</value> -->
+<!-- 				<value>classpath:customerConfig/sqlmap-CPayment.xml</value> -->
+<!-- 				<value>classpath:customerConfig/sqlmap-CPrivateData.xml</value> -->
 			</list>
 		</property>
 	</bean>
 	
 	<bean id="customerTemplate" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
 		<constructor-arg ref="customerFactory" />
+	</bean>
+
+<!-- 	system mybatis	 -->
+	<bean id="systemFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:systemConfig/mybatis-config.xml" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:systemConfig/sqlmap-**</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="systemTemplate" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg ref="systemFactory" />
 	</bean>
 	
 	
@@ -92,6 +111,7 @@
 <!-- 		[mybatis dao 전역 설정] -->
 	<mybatis-spring:scan base-package="com.drumtong.business.dao" factory-ref="businessFactory"/>
 	<mybatis-spring:scan base-package="com.drumtong.customer.dao" factory-ref="customerFactory"/>
+	<mybatis-spring:scan base-package="com.drumtong.system.dao" factory-ref="systemFactory"/>
 
 
 </beans>
