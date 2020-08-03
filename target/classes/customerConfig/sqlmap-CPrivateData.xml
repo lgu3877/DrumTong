@@ -12,7 +12,7 @@
 			VALUES
 			(#{memberid}, #{id}, #{pw}, #{name}, #{birth},
 			 #{genderboolean}, #{phonenum}, #{mainaddress}, #{detailaddress},
-			 #{mainreceiptaddress}, #{detailreceiptaddress},#{email)
+			 #{mainreceiptaddress}, #{detailreceiptaddress},#{email})
 	</insert>
 	
 	

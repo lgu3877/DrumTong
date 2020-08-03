@@ -9,12 +9,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.drumtong.customer.service.membership.CustomerMembershipService;
 import com.drumtong.customer.vo.CPrivateDataVO;
 
+// 회원가입 컨트롤러
 @Controller
 @RequestMapping("customer/membership/")
 public class CustomerMembershipController {
 	
+	// 회원가입 서비스
 	@Autowired CustomerMembershipService svc;
-
+	
 	@RequestMapping(value = "customerLogin/", method = RequestMethod.GET)
 	public String login() {
 		return "customer/membership/customerLogin";

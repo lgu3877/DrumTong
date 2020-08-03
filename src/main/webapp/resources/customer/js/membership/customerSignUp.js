@@ -121,16 +121,15 @@
         if (usertel === '') {
           telmsg.innerHTML = '전화번호를 입력해주세요';
           telmsg.style.color = 'red';
-          document.querySelector('#usertel').focus();
         }
 
-        if (regExp.test(usertel) == false) {
-          telmsg.innerHTML = '전화번호는 - 을 포함해서 입력해주세요';
+        if (regExp.test(usertel) === false) {
+          telmsg.innerHTML = '전화번호는 - 을 포함해서 입력해주세요.';
           telmsg.style.color = 'red';
-          document.querySelector('#usertel').focus();
           return false;
-        } else {
-          telmsg.innerHTML = '전화번호 인증 완료';
+        } 
+        else if(regExp.test(usertel) === true ) {
+          telmsg.innerHTML = '전화번호 인증 완료!';
           telmsg.style.color = 'blue';
           return true;
         }
@@ -143,19 +142,17 @@
         const emailmsg = document.getElementById('emailmsg');
 
         if (email === '') {
-          telmsg.innerHTML = 'Email을 입력해주세요';
-          telmsg.style.color = 'red';
-          document.querySelector('#email').focus();
+          emailmsg.innerHTML = 'Email을 입력해주세요';
+          emailmsg.style.color = 'red';
         }
-
-        if (regExp.test(email) == false) {
-          telmsg.innerHTML = '전화번호는 - 을 포함해서 입력해주세요';
-          telmsg.style.color = 'red';
-          document.querySelector('#usertel').focus();
+        else if (regExp.test(email) == false) {
+          emailmsg.innerHTML = '올바르지 않은 이메일 형식입니다.';
+          emailmsg.style.color = 'red';
+          
           return false;
         } else {
-          telmsg.innerHTML = '전화번호 인증 완료';
-          telmsg.style.color = 'blue';
+          emailmsg.innerHTML = '이메일 인증 완료';
+          emailmsg.style.color = 'blue';
           return true;
         }
       }
@@ -176,6 +173,6 @@
 
         
 
-        if (cnt !== loginInputs.length) return;
+        if (cnt !== joinInputs.length) return;
         document.getElementById('loginForm').submit();
       } //submit 체크 함수 종료
