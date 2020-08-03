@@ -105,10 +105,18 @@ public class CustomerMembershipService {
 		String MainReceiptAddress = cPrivateDataVO.getMainaddress();
 		String DetailReceiptAddress = cPrivateDataVO.getDetailaddress();
 		
+		// 암호화할 아이디, 패스워드 받기
+		String PassWord = cPrivateDataVO.getPw();
+		String ID = cPrivateDataVO.getId();
+		
+		// 암호화
+		cPrivateDataVO.setPw(Encrypt.SecurePassword(ID, PassWord));
+		
 		// 고객 정보 VO에 MemberID, MainReciptAddress, DetailReceiptAddress 입력
 		cPrivateDataVO.setMemberid(MemberID);
 		cPrivateDataVO.setMainreceiptaddress(MainReceiptAddress);
 		cPrivateDataVO.setDetailreceiptaddress(DetailReceiptAddress);
+		
 		
 		
 		// 1. CCustomer 신규 데이터 생성	( 고객 테이블 )
