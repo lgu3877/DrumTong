@@ -121,19 +121,18 @@
         const emailmsg = document.getElementById('emailmsg');
 
         if (email === '') {
-          telmsg.innerHTML = 'Email을 입력해주세요';
-          telmsg.style.color = 'red';
+        	emailmsg.innerHTML = 'Email을 입력해주세요';
+        	emailmsg.style.color = 'red';
           document.querySelector('#email').focus();
         }
-
-        if (regExp.test(email) == false) {
-          telmsg.innerHTML = '전화번호는 - 을 포함해서 입력해주세요';
-          telmsg.style.color = 'red';
-          document.querySelector('#usertel').focus();
+        else if (regExp.test(email) == false) {
+        	emailmsg.innerHTML = 'test`';
+        	emailmsg.style.color = 'red';
+          document.querySelector('#email').focus();
           return false;
         } else {
-          telmsg.innerHTML = '전화번호 인증 완료';
-          telmsg.style.color = 'blue';
+        	emailmsg.innerHTML = 'test2 인증 완료';
+        	emailmsg.style.color = 'blue';
           return true;
         }
       }
@@ -154,18 +153,8 @@
           }
         }
 
-        if (joinInputs[0].value === '' && loginInputs[1].value === '') {
-          console.log('얼럿 시작 둘다없음');
-          joinAlert[0].innerText = '입력된 정보가 없습니다';
-        } else if (loginInputs[0].value === '') {
-          console.log('얼럿 시작 아디없엉');
-          joinAlert[0].innerText = '아이디를 입력해주세요';
-        } else if (loginInputs[1].value === '') {
-          console.log('얼럿 시작 비번내놔');
-          joinAlert[0].innerText = '비밀번호를 입력해주세요';
-        }
 
-        if (cnt !== loginInputs.length) return;
+        if (cnt !== joinInputs.length) return;
         document.getElementById('loginForm').submit();
       } //submit 체크 함수 종료
     </script>
@@ -200,6 +189,7 @@
               </ul>
             </div>
             <input type="text" name="email" id="email" class="join-input-boxs" placeholder="E-mail" />
+            <span class="emailmsg" id="emailmsg"></span>
             <input type="text" name="zipcode" id="zipcode" class="join-input-boxs" placeholder="우편번호" />
             <input type="button" value="주소찾기" id="findZipcode" class="join-input-buttons" />
             <input type="text" name="address" id="address" class="join-input-boxs" placeholder="상세주소" />
@@ -241,7 +231,7 @@
       //전화번호 검사 함수
       document.getElementById('checkTel').addEventListener('click', checkTel);
       //이메일 검사 함수
-      document.getElementById('email').addEventListener('keyup', checkEmail);
+      document.getElementById('email').addEventListener('keydown', checkEmail);
 
       document.querySelectorAll('input.join-input-boxs').forEach((input) => {
         input.addEventListener('keypress', enter);
