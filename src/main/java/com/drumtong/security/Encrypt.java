@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 public class Encrypt {
-	// 비밀번호를 암호화하여 해쉬값 반환[영경]
+	// 비밀번호를 암호화하여 해시값 반환[영경]
 	public static String SecurePassword(String id, String pw){
 		MessageDigest mdHash;
 		try {
