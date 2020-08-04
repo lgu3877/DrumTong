@@ -8,7 +8,7 @@
 
 <!-- 	신규 데이터 입력 -->
 	<insert id="insertSignUp" parameterType="String">
-		INSERT INTO CCUSTOMER 
+		INSERT INTO CCUSTOMER  (MEMBERID)
 			VALUES
 			(#{MemberID})
 	</insert>

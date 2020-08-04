@@ -1,3 +1,4 @@
+
 package com.drumtong.customer.service.membership;
 
 import javax.servlet.http.Cookie;
@@ -28,6 +29,7 @@ public class CustomerMembershipService {
 	@Autowired CAlarmDAO cAlarmDAO;					// 고객알람 테이블
 	@Autowired CPaymentDAO cPaymentDAO;				// 고객결제 테이블
 	@Autowired SLoginLogDAO sLoginLogDAO;
+	
 	
 	// 로그인 페이지로 이동[영경]
 	public ModelAndView login() {
@@ -105,41 +107,57 @@ public class CustomerMembershipService {
 	
 	// 고객 회원가입 (POST)
 	public ModelAndView signUp(CPrivateDataVO cPrivateDataVO) {
-		System.out.println("signUP 구문 실행");
-		System.out.println(cPrivateDataVO.getId());
+
 		ModelAndView mav = new ModelAndView("/");
 		
 		// SerialUUID 생성
 		String MemberID =  SerialUUID.getSerialUUID("CPrivateData", "MemberID");
 		
-		// 고객 정보 VO에 MemberID 입력
+		
+		// 세탁된 물품을 회수받는 주소
+		String MainReceiptAddress = cPrivateDataVO.getMainaddress();
+		String DetailReceiptAddress = cPrivateDataVO.getDetailaddress();
+		
+		// 암호화할 아이디, 패스워드 받기
+		String PassWord = cPrivateDataVO.getPw();
+		String ID = cPrivateDataVO.getId();
+		
+		// 암호화
+		cPrivateDataVO.setPw(Encrypt.SecurePassword(ID, PassWord));
+		
+		// 고객 정보 VO에 MemberID, MainReciptAddress, DetailReceiptAddress 입력
 		cPrivateDataVO.setMemberid(MemberID);
+		cPrivateDataVO.setMainreceiptaddress(MainReceiptAddress);
+		cPrivateDataVO.setDetailreceiptaddress(DetailReceiptAddress);
 		
 		
-		// 1. CCustomer 신규 데이터 생성
+		
+		// 1. CCustomer 신규 데이터 생성	( 고객 테이블 )
 		
 		int CustomerReuslt = cCustomerDAO.insertSignUp(MemberID);
 		
 		
 		
-		// 2. CPrivateData 신규 데이터 생성
+		// 2. CPrivateData 신규 데이터 생성	( 고객 개인정보 테이블 )
 		
 		int PrivateDataResult = cPrivateDataDAO.insertSignUp(cPrivateDataVO);
 		
 		
 		
-		// 3. CAlarm 신규 데이터 생성
+		// 3. CAlarm 신규 데이터 생성	( 고객 알람 테이블 )
 		
 		int AlarmResult = cAlarmDAO.insertSignUp(MemberID);
 		
 		
 		
-		// 4. CCpayment 신규 데이터 생성
+		// 4. CCpayment 신규 데이터 생성	( 고객 지불 테이블 )
 		
 		int PaymentResult = cPaymentDAO.insertSignUp(MemberID);
 		
 		
 		return mav;
 	}
+	
+	
 
 }

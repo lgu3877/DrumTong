@@ -7,10 +7,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Service
 public class CustomerMainService {
 //	@Autowired CustomerDAO dao;
-	
-	public ModelAndView test() {
-		return new ModelAndView("customer/main/customerMain");
-	}
+//	
+//	public ModelAndView test() {
+//		ModelAndView mv = new ModelAndView("customer/main/customerMain");
+//		mv.addObject("test",dao.test());
+//		return mv;
+//	}
 	
 	//@Transactional(timeout=5)
 }

@@ -18,6 +18,7 @@ public class SerialUUID {
 	public static String getSerialUUID(String TableName, String FieldName) {
 		int result = 0;
 		String SerialUUID = "";
+
 		while(result != 0) {
 			SerialUUID = FieldName + "_" + UUID.randomUUID().toString().replace("-", "");
 			switch(TableName) {

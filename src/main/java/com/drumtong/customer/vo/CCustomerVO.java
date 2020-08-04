@@ -32,6 +32,7 @@ public class CCustomerVO {
 	public void setUpdatedate(String updatedate) {
 		this.updatedate = updatedate;
 	}
+
 	public char getDeleteboolean() {
 		return deleteboolean;
 	}
