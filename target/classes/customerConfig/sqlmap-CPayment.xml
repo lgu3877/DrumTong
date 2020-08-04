@@ -8,9 +8,8 @@
 	
 	<!--신규 데이터 입력 -->
 	<insert id="insertSignUp" parameterType="String">
-		INSERT INTO CPAYMENT 
+		INSERT INTO CPAYMENT (MEMBERID) 
 			VALUES
 			(#{MemberID})
 	</insert>
-
 </mapper>
