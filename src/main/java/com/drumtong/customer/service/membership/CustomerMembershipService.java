@@ -81,6 +81,22 @@ public class CustomerMembershipService {
 		return mav;
 	}
 	
+	// 로그아웃 객체
+	public ModelAndView logout(HttpServletRequest req, HttpServletResponse resp) {
+		ModelAndView mav = new ModelAndView();
+		HttpSession Session = req.getSession();
+		Session.removeAttribute("AutoLogin");
+		Session.removeAttribute("Login");
+		Cookie[] cookie = req.getCookies();
+		for(Cookie c : cookie) {
+			if(c.getName().equals("JSESSIONID")) {
+				c.setMaxAge(0);
+				resp.addCookie(c);
+			}
+		}
+		return mav;
+	}
+	
 	// 고객 회원가입 (GET)
 	public ModelAndView signUp() {
 		ModelAndView mav = new ModelAndView("customer/membership/customerSignUp");
