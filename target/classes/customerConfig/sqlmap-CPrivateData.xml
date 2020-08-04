@@ -25,4 +25,12 @@
 		SELECT ID FROM CPRIVATEDATA WHERE MEMBERID=#{MemberID}
 	</select>
 	
+	
+<!-- 	=========================================== REST    ================================================================ -->
+
+
+<!-- 	(REST) 아이디 중복 검사 -->
+	<select id="useridDupl" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM CPRIVATEDATA WHERE ID=#{id}
+	</select> 
 </mapper>

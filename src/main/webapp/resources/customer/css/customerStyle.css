@@ -155,26 +155,26 @@ header .mainMenu .menu .mypage {
 	flex-direction: column;
 }
 
-header .mainMenu .menu .login {
+header .mainMenu .menu .headerLogin {
 	white-space: nowrap;
 	width: 80px;
 
 }
 
-header .mainMenu .menu .login:hover .mypage {
+header .mainMenu .menu .headerLogin:hover .mypage {
 	display: contents;
 }
 
-header .mainMenu .menu .login .mypage .listButtons {
+header .mainMenu .menu .headerLogin .mypage .listButtons {
 	margin-top: 10px;
 }
 
-header .mainMenu .menu .login .mypage .listButtons .mypageList {
+header .mainMenu .menu .headerLogin .mypage .listButtons .mypageList {
 	margin-top: 10px;
 
 }
 
-header .mainMenu .menu .login .mypage .listButtons .mypageList .listButton {
+header .mainMenu .menu .headerLogin .mypage .listButtons .mypageList .listButton {
 	color: #373737;
 	font-size: 10pt;
 	text-decoration: none;

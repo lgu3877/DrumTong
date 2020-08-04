@@ -36,46 +36,53 @@
                     }).open();
         }
 
-      let ajaxRet;
+      const cpath = '${pageContext.request.contextPath}';
+      
+      
 
       function checkUserid() {
         const userid = document.querySelector('#userid').value;
-        console.log('userid : ' + userid);
+        idmsg = document.querySelector('#idmsg');
+        console.log(userid.length);
         if (userid === '') {
-          idmsg = document.querySelector('#idmsg');
           idmsg.innerText = '아이디를 입력하세요';
           idmsg.style.color = 'red';
           document.querySelector('#userid').focus();
           return;
-        } else {
-          idmsg.innerText = '';
+        } else if(userid.length < 4){ 
+          console.log('userid 실행');
+          idmsg.innerText = '아이디 최소길이는 5글자 이상입니다.';
+          idmsg.style.color = 'red';
+          document.querySelector('#userid').focus();
+          return;
         }
-        //바닐라 자바스크립트
-        const request = new XMLHttpRequest();
-        // 		request.open("GET","${cpath}/checkid/?email=" + email, true);
-        // 		request.setRequestHeader('Content-type', 'text; charset=UTF-8');
+        console.log('axGet 실행');
+        const axGet = async (userid) => {	// async : 비동기 실행 함수
 
-        request.open('POST', '${cpath}/checkid/}', true);
-        request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-        request.onreadystatechange = function () {
-          if (request.readyState == 4 && request.status == 200) {
-            idmsg.innerText = request.responseText;
-            if (request.responseText === '사용가능한 아이디입니다') {
+          await axios.get('/drumtong/customer/membership/customerSignUp/rest/useridDupl/' + userid + '/')
+          // 정상
+          
+          .then( (response) => {
+            const idmsg = document.getElementById('idmsg');
+            const data = response.data;
+            console.log("data : ", data);
+            if(data === true){  
+              console.log('responsedata 실행');
+              idmsg.innerHTML = "사용 가능한 아이디입니다.";
               idmsg.style.color = 'blue';
-              ajaxRet = true;
-            } else {
-              idmsg.innetText = request.responseText;
-              idmsg.style.color = 'red';
-              // 					document.querySelector('#userid').focus();
-              ajaxRet = false;
             }
+            else if(data === false){
+              console.log('responsedata2 실행');
+              idmsg.innerHTML = "중복된 아이디입니다. 다른 아이디를 입력해주세요.";
+              idmsg.style.color = 'red';
+              document.querySelector('#userid').focus();
+            }
+            
+            })
           }
-        };
-        // 	request.send(); //GET
-        request.send('userid=' + userid); //POST
+          axGet(userid);
       }
-  
+        
       //비밀번호 검사
       function checkPassword(event) {
         if (event.keyCode != 13 || event.keyCode != 9) {
@@ -131,6 +138,8 @@
         else if(regExp.test(usertel) === true ) {
           telmsg.innerHTML = '전화번호 인증 완료!';
           telmsg.style.color = 'blue';
+          document.getElementById('usertel').readOnly = true;
+          document.getElementById('usertel').style.backgroundColor = 'grey';
           return true;
         }
       }
@@ -161,17 +170,19 @@
         console.log('submit작동');
         joinInputs = document.querySelectorAll('input.join-input-boxs');
 
-        cnt = 3;
+        console.log("joinInputs : ",joinInputs);
+        cnt = 2;
 
-        for (i = 3; i < joinInputs.length; i++) {
+        for (i = 2; i < joinInputs.length; i++) {
           if (joinInputs[i].value === '') {
             joinInputs[i].style.border = '1px solid red';
-          } else {
-            cnt++;
+          } else if(joinInputs[i].value !== ''){
+            joinInputs[i].style.border = '1px solid black';
+            cnt++
           }
         }
 
-        
+        console.log("cnt : ",cnt);
 
         if (cnt !== joinInputs.length) return;
         document.getElementById('loginForm').submit();
