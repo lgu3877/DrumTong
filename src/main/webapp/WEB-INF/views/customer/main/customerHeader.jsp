@@ -11,6 +11,7 @@
   	<link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet" type="text/css">
     <link rel="stylesheet" href="${cpath }/customer/css/customerStyle.css">
     <link rel="stylesheet" href="${cpath }/customer/css/customerStyleDohyun.css">
+    <link rel="stylesheet" href="${cpath }/customer/css/customerStyleSangJae.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="http://kenwheeler.github.io/slick/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="http://kenwheeler.github.io/slick/slick/slick-theme.css" />
@@ -52,8 +53,8 @@
             </ul>  
 
             <ul class="menu">
-                <li class="login">
-                    <a href="" class="middleMenu middleMenu2 ">로그인</a>
+                <li class="headerLogin">
+                    <a href="${cpath }/" class="middleMenu middleMenu2 ">로그인</a>
                     <ul class="mypage">
                         <div class="listButtons">
                             <li class="mypageList"><a href="#" class="listButton">즐겨찾기</a></li>

@@ -2,18 +2,24 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../main/customerHeader.jsp" %>    
 
-   <!-- 스크립트 영역 -->
+   	<!-- 스크립트 영역 -->
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
+	<!-- Axios script -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	
     <!-- JavaScript Ajax-->
-    <script src="${cpath }/customer/js/membership/customerSignUp.js"></script>
-
+    <script type="text/javascript" src="${cpath }/customer/js/membership/customerSignUp.js" charset="UTF-8"></script>
+	
+		
+	
     <!-- 본문 영역 -->
     <section>
       <div class="join">
         <form method="POST" id="loginForm">
           <img src="#" class="login-logo" />
           <div class="login-input">
-            <input type="text" name="id" id="userid" class="join-input-boxs" placeholder="ID" />
+            <input type="text" name="id" id="userid" class="join-input-boxs" placeholder="ID"  onblur="axGet(document.getElementById('userid').value)" maxlength="25">
             <span class="idmsg" id="idmsg"></span>
             <input type="password" name="pw" id="userpw" class="join-input-boxs" placeholder="PW" />
             <span class="pwmsg" id="pwmsg"></span>
@@ -26,7 +32,7 @@
               <option value="M">남성</option>
               <option value="W">여성</option>
             </select>
-            <input type="text" name="birth" id="userbirth" class="join-input-boxs" placeholder="생년월일" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" />
+            <input type="date" max="9999-12-31" name="birth" id="userbirth" class="join-input-boxs" placeholder="생년월일" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" />
             <input type="text" name="phonenum" id="usertel" class="join-input-boxs" placeholder="-을 넣어주세요." />
             <input type="button" value="인증하기" id="checkTel" class="join-input-buttons" />
             <span class="telmsg" id="telmsg"></span>
