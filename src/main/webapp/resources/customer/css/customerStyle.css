@@ -141,13 +141,14 @@ header .mainMenu {
 }
 
 header .mainMenu .menu {
-	width: 120px;
+	width: 105px;
 	height: 30px;
-	color: #0091e4;
+	
 }
 
 header .mainMenu .menu li {
 	list-style: none;
+	
 }
 
 header .mainMenu .menu .mypage {
@@ -186,17 +187,17 @@ header .mainMenu .menu .mypage .listButtons .mypageList:hover {
 }
 
 header .middleMenu {
-	color: #35aefd;
+	color: #000000;
 	text-decoration: none;
 
 }
 
 header .mainMenu .middleMenu:hover {
-	color: black;
+	color: #3185F8;
 }
 
 header .middleMenu2 {
-	color: #0091e4;
+	color: #000000;
 }
 
 

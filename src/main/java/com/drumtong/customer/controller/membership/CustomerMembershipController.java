@@ -33,8 +33,8 @@ public class CustomerMembershipController {
 	
 	// 로그아웃
 	@RequestMapping(value = "customerLogOut/", method = RequestMethod.GET)
-	public void logOut() {
-		svc.logOut();
+	public ModelAndView logOut(HttpServletRequest req, HttpServletResponse resp) {
+		return svc.logOut(req,resp);
 	}
 	
 	

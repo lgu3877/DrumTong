@@ -67,7 +67,7 @@
 		                            <li class="mypageList"><a href="#" class="listButton">즐겨찾기</a></li>
 		                            <li class="mypageList"><a href="#" class="listButton">주문내역</a></li>
 		<!--                             <li class="mypageList"><a href="#" class="listButton">계정</a></li> -->
-		                            <li class="mypageList"><a href="#" class="listButton">로그아웃</a></li>
+		                            <li class="mypageList"><a href="${cpath }/customer/membership/customerLogOut/" class="listButton">로그아웃</a></li>
 		                        </div>
 		                    </ul>
                 		</c:when>
