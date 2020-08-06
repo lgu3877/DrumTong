@@ -36,6 +36,14 @@ public class CustomerInitInterceptor extends HandlerInterceptorAdapter {
 //		◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
 		boolean isLogin = Session.getAttribute("Login") != null ? true: false;
 		
+		String Logout = (String)Session.getAttribute("Logout");
+		if(Logout != null) {
+			if(Logout.equals("firstPage"))
+				Session.removeAttribute("Logout");
+			else if(Logout.equals("Logout"))
+				Session.setAttribute("Logout", "firstPage");
+		}
+		
 		// 로그인 되어있고 페이지를 계속 사용중이라면 Session 유지시간 3시간으로 업데이트
 		if(isLogin)
 			Session.setMaxInactiveInterval(60 * 60 * 3);
