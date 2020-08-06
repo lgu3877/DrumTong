@@ -93,7 +93,7 @@
 	
 <!-- 	Simple Mapping -->
 <!-- 	main 페이지 이동 시 db에서 가져와야할 것들 확인하기(view controller 삭제할지) -->
-	<view-controller path="/" view-name="customer/main/customerMain" />
+<!-- 	<view-controller path="/" view-name="customer/main/customerMain" /> -->
 	
 	
 </beans:beans>

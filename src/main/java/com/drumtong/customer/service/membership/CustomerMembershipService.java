@@ -84,7 +84,8 @@ public class CustomerMembershipService {
 	}
 	
 	// 로그아웃 객체
-	public ModelAndView logout(HttpServletRequest req, HttpServletResponse resp) {
+	public ModelAndView logOut(HttpServletRequest req, HttpServletResponse resp) {
+		
 		ModelAndView mav = new ModelAndView();
 		HttpSession Session = req.getSession();
 		Session.removeAttribute("AutoLogin");
