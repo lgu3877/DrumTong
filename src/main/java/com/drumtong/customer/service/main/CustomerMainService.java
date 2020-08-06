@@ -1,6 +1,5 @@
 package com.drumtong.customer.service.main;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,7 +13,6 @@ public class CustomerMainService {
 //		mv.addObject("test",dao.test());
 //		return mv;
 //	}
-	
 	
 	//@Transactional(timeout=5)
 }

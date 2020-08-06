@@ -59,14 +59,11 @@
         </form>
       </div>
     </section>
-    
-
 
     <!-- 스크립트 영역 -->
     <script>
-      document.getElementById('loginSubmit').addEventListener('click', submit);
-    </script>
+     	document.getElementById('loginSubmit').addEventListener('click', submit);
+  	</script> 
     
-    
-        	</body>
-	</html>
+       	</body>
+</html>

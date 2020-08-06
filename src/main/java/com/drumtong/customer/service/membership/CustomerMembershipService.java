@@ -1,3 +1,4 @@
+
 package com.drumtong.customer.service.membership;
 
 import javax.servlet.http.Cookie;
@@ -28,10 +29,6 @@ public class CustomerMembershipService {
 	@Autowired CAlarmDAO cAlarmDAO;					// 고객알람 테이블
 	@Autowired CPaymentDAO cPaymentDAO;				// 고객결제 테이블
 	@Autowired SLoginLogDAO sLoginLogDAO;
-	
-	
-	
-	
 	
 	
 	// 로그인 페이지로 이동[영경]
@@ -83,6 +80,22 @@ public class CustomerMembershipService {
 			resp.addCookie(SessionID);
 		}
 
+		return mav;
+	}
+	
+	// 로그아웃 객체
+	public ModelAndView logout(HttpServletRequest req, HttpServletResponse resp) {
+		ModelAndView mav = new ModelAndView();
+		HttpSession Session = req.getSession();
+		Session.removeAttribute("AutoLogin");
+		Session.removeAttribute("Login");
+		Cookie[] cookie = req.getCookies();
+		for(Cookie c : cookie) {
+			if(c.getName().equals("JSESSIONID")) {
+				c.setMaxAge(0);
+				resp.addCookie(c);
+			}
+		}
 		return mav;
 	}
 	

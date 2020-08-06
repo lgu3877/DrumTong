@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.drumtong.security.GetIPAddress;
 import com.drumtong.system.vo.SLoginLogVO;
 
 //Customer Login Intercepter
@@ -44,7 +45,7 @@ public class CustomerLoginInterceptor extends HandlerInterceptorAdapter {
 		sLoginLogVO = new SLoginLogVO();
 		
 		// 3. LOGINIP, LOGINURL 넣기;
-		sLoginLogVO.setLoginip(request.getRemoteAddr());
+		sLoginLogVO.setLoginip(GetIPAddress.getIP(request));
 		sLoginLogVO.setLoginurl(request.getHeader("referer"));
 		
 		Session.setAttribute("sLoginLogVO", sLoginLogVO);
