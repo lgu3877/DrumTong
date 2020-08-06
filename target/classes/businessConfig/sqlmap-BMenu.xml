@@ -5,8 +5,8 @@
 
 
 <!-- resultType="businessVO"	 -->
-<mapper namespace="com.drumtong.business.dao.BusinessDAO">
-	<select id="test" resultType="String" >
-		select * from v$version where rownum=1
+<mapper namespace="com.drumtong.business.dao.BMenuDAO">
+	<select id="select" parameterType="String" resultType="BMenuVO" >
+		SELECT * FROM BMENU WHERE ESTID=#{estid}
 	</select>
 </mapper>

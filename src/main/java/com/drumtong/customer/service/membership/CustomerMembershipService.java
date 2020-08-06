@@ -17,6 +17,7 @@ import com.drumtong.customer.dao.CPrivateDataDAO;
 import com.drumtong.customer.vo.CCustomerVO;
 import com.drumtong.customer.vo.CPrivateDataVO;
 import com.drumtong.security.Encrypt;
+import com.drumtong.security.GetIPAddress;
 import com.drumtong.security.SerialUUID;
 import com.drumtong.system.dao.SLoginLogDAO;
 import com.drumtong.system.vo.SLoginLogVO;
@@ -85,9 +86,20 @@ public class CustomerMembershipService {
 	
 	// 로그아웃 객체
 	public ModelAndView logOut(HttpServletRequest req, HttpServletResponse resp) {
-		
-		ModelAndView mav = new ModelAndView();
+		String Referer = req.getHeader("referer");
+		String AddressToMove = Referer.split("drumtong")[1];
+		ModelAndView mav = new ModelAndView("redirect:" + AddressToMove);
 		HttpSession Session = req.getSession();
+		SLoginLogVO sLoginLogVO = new SLoginLogVO();
+		CCustomerVO Login = (CCustomerVO)Session.getAttribute("Login");
+		
+		sLoginLogVO.setUserid(cPrivateDataDAO.selectID(Login.getMemberid()));
+		sLoginLogVO.setLoginip(GetIPAddress.getIP(req));
+		sLoginLogVO.setLoginurl(Referer);
+		sLoginLogVO.setLoginresult("LOGOUT");
+		
+		sLoginLogDAO.insertLoginLog(sLoginLogVO);
+		
 		Session.removeAttribute("AutoLogin");
 		Session.removeAttribute("Login");
 		Cookie[] cookie = req.getCookies();
@@ -97,6 +109,10 @@ public class CustomerMembershipService {
 				resp.addCookie(c);
 			}
 		}
+		
+		// 로그아웃 했을 때 표시해주기
+		Session = req.getSession();
+		Session.setAttribute("Logout", "Logout");
 		return mav;
 	}
 	
