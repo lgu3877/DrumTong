@@ -1,6 +1,7 @@
 package com.drumtong.business.vo;
 
 public class BEstablishmentVO {
+
 	private String bpersonid;
 	private String estid;
 	private String registdate;
@@ -44,5 +45,6 @@ public class BEstablishmentVO {
 	public void setDeletedate(String deletedate) {
 		this.deletedate = deletedate;
 	}
+	
 	
 }
