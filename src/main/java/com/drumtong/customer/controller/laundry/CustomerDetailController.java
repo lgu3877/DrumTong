@@ -20,10 +20,10 @@ public class CustomerDetailController {
 	public ModelAndView detail(@PathVariable("estid") String estid, HttpServletRequest req) {
 		System.out.println("테스트");
 		req.getSession().setAttribute("estid", estid);
-		return new ModelAndView("redirect:/customer/laundry/customerDetail/detailPage/");
+		return new ModelAndView("redirect:/customer/laundry/customerDetail/detail/");
 	}
 	
-	@RequestMapping("customerDetail/detailPage/")
+	@RequestMapping("customerDetail/detail/")
 	public ModelAndView detail2(HttpServletRequest req) {	
 		return svc.detail((String)req.getSession().getAttribute("estid"));
 	}
