@@ -11,7 +11,11 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="com.drumtong.business.vo.BusinessVO" alias="businessVO" />
+		<typeAlias type="com.drumtong.business.vo.BCouponVO" alias="BCouponVO" />
+		<typeAlias type="com.drumtong.business.vo.BEstablishmentVO" alias="BEstablishmentVO" />
+		<typeAlias type="com.drumtong.business.vo.BInformationVO" alias="BInformationVO" />
+		<typeAlias type="com.drumtong.business.vo.BManagementVO" alias="BManagementVO" />
+		<typeAlias type="com.drumtong.business.vo.BMenuVO" alias="BMenuVO" />
 	</typeAliases>
 	
 </configuration>		
