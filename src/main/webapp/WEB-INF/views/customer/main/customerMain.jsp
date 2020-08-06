@@ -6,8 +6,8 @@
 
 	<article class="search">
 		<form class="searchs">
-			<p class="searchs_p">어떤 동네, 어떤 방에서</p>
-			<p class="searchs_p">살고 싶으신가요?</p>
+			<p class="searchs_p">세탁물을 깨끗하게</p>
+			<p class="searchs_p">주거지까지 배달합니다.</p>
 			<div class="searchBox">
 				<i class="fa fa-search-plus" aria-hidden="true"></i> 
 				<input 
@@ -34,7 +34,7 @@
 
 			<div class="notices_0 notices_1">
 				<a href="#">
-					<div class="notices_1_1">게 시 판 1</div>
+					<div class="notices_1_1">공지사항1</div>
 				</a>
 				<hr class="notice_hr">
 				<ul class="notice_ul">
@@ -48,7 +48,7 @@
 
 			<div class="notices_0 notices_2">
 				<a href="#">
-					<div class="notices_1_1">게 시 판 2</div>
+					<div class="notices_1_1">공지사항2</div>
 				</a>
 				<hr class="notice_hr">
 				<ul class="notice_ul">
