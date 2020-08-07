@@ -194,6 +194,7 @@ header .middleMenu {
 
 header .mainMenu .middleMenu:hover {
 	color: #3185F8;
+	font-weight: normal;
 }
 
 header .middleMenu2 {

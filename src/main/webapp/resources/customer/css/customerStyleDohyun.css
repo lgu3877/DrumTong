@@ -95,7 +95,7 @@ body {
 /* ====================섹션 CSS================================ */
 body section {
 	width: 1900px;
-	height: 1400px;
+	height: 2000px;
 	/* padding: 10px; */
 	/* margin-top: 70px; */
 }
@@ -107,7 +107,7 @@ body section fa-search-plus {
 /* ====================메인 검색(search) CSS========================= */
 body .section_main .search {
 	width: auto;
-	height: 500px;
+	height: 300px;
 	display: flex;
 	flex-direction: row;
 	box-sizing: border-box;
@@ -189,7 +189,7 @@ body .section_main .search .searchs .filter {
 body .section_main .notice {
 	box-sizing: border-box;
 	width: auto;
-	height: 450px;
+	height: 300px;
 	/* background-color: aliceblue; */
 	background-color: #FFFFFF;
 	text-align: center;
@@ -198,9 +198,10 @@ body .section_main .notice {
 
 body .section_main .notice .notice_name {
 	width: auto;
-	font-size: 25px;
+	font-size: 27px;
 	margin: 0;
 	padding-top: 20px;
+	font-weight: bolder;
 }
 
 body .section_main .notice .notices {
@@ -310,7 +311,7 @@ body .section_main .notice .notices .notice_ul .notice_li a {
 body .section_main .laundryList {
 	box-sizing: border-box;
 	width: 1900px;
-	height: 320px;
+	height: 600px;
 	background-color: #FFFFFF;
 	text-align: center;
 }
@@ -323,40 +324,40 @@ body .section_main .laundryList .laundry_p {
 }
 
 body .section_main .laundryList .laundry_p1 {
-	font-size: 16pt;
+	font-size: 17pt;
 	font-weight: bolder;
 
 }
 
 body .section_main .laundryList .laundry_p2 {
-	font-size: 10pt;
+	font-size: 11pt;
 }
 
 body .section_main .laundryList .laundryLists {
 /* 	@주석처리해라 */
-	border: 1px solid black;
+/* 	border: 1px solid black; */
 	
 	width: 1500px;
-	height: 400px;
+	height: 550px;
 	text-align: center;
 	margin-top: 10px;
 	margin-left: auto;
-	margin-right: auto;
+	margin-right: auto;	
 	display: flex;
 }
 
 body .section_main .laundryList .laundryLists a {
 	text-decoration: none;
 	color: black;
-	width: 180px;
-	height: 170px;
+	width: 480px;
+	height: 550px;
 }
 
 body .section_main .laundryList .laundryLists .laundryLists_1 {
 	border: 1px solid #EAEAEA;
-	width: 300px;
-	height: 170px;
-	margin-left: 20px;
+	width: 480px;
+	height: 550px;
+	margin-left: 10px;
 	/* padding-top: 5px; */
 	/* text-align: center; */
 
@@ -364,26 +365,28 @@ body .section_main .laundryList .laundryLists .laundryLists_1 {
 
 body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_1 {
 	/* background-color: blueviolet; */
-	width: 200px;
-	height: 100px;
+	width: 480px;
+	height: 400px;
 	margin: 0px;
 }
 
 body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_1 img {
-	width: 198px;
-	height: 100px;
+	width: 487px;
+	height: 400px;
 	margin: 0px;
 }
 
 body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_2 {
 	/* background-color: bisque; */
 	width: auto;
-	height: 70px;
+	height: auto;
 	padding: 10px 15px;
 	margin: 0;
 }
 
 body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_2 p {
+	width : auto;
+	height: auto;
 	text-align: left;
 	font-size: 16px;
 	margin: 0px;
@@ -524,6 +527,7 @@ body .section_Joinchange .join_change .join_cmp .join_complete:active {
 
 body .section_search {
 	padding-top: 70px;
+	
 }
 
 body .section_search .filter {
