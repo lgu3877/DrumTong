@@ -51,7 +51,6 @@
 	4. 추후에 마치고 완료가 됐다고 생각하면 팀원들에게 확인을 하고 GitHub에는 최종적으로 확인이 다 된 것만 올린다.
 */
 
-/* @charset "utf-8"; */
 @charset "utf-8";
 
 * {
@@ -66,7 +65,7 @@
 
 /* } */
 html {
-	width: 1900px;
+	width: 100%;
 	height: auto;
 }
 
@@ -81,7 +80,7 @@ section {
 body {
 	/* border: 1px solid black; */
 	margin: auto;
-	height: 1500px;
+	height: auto;
 
 	/* 	최대크기 */
 	max-width: 1900px;
@@ -100,14 +99,14 @@ body section {
 	/* margin-top: 70px; */
 }
 
-body section fa-search-plus {
-	color: #373737;
+body section .fa-search-plus {
+	color: #0091e4;
 }
 
 /* ====================메인 검색(search) CSS========================= */
 body .section_main .search {
 	width: auto;
-	height: 500px;
+	height: 400px;
 	display: flex;
 	flex-direction: row;
 	box-sizing: border-box;
@@ -145,16 +144,16 @@ body .section_main .search .searchBox .fa-search-plus {
 }
 
 body .section_main .search .searchBox .searchLine {
-	/* text-align: center; */
 	width: 850px;
 	height: 40px;
-	/* border:none; */
 	border-right: 0px;
 	border-top: 0px;
 	border-left: 0px;
 	border-bottom: 0px;
 	outline: 0;
 	padding-left: 10px;
+	/* border:none; */
+	/* text-align: center; */
 }
 
 body .section_main .search .searchBox .search_button {
@@ -184,7 +183,7 @@ body .section_main .search .searchs .filter {
 body .section_main .notice {
 	box-sizing: border-box;
 	width: auto;
-	height: 450px;
+	height: 350px;
 	/* background-color: aliceblue; */
 	background-color: #FFFFFF;
 	text-align: center;
@@ -206,6 +205,10 @@ body .section_main .notice .notices {
 	margin-left: auto;
 	margin-right: auto;
 }
+body .section_main .notice .notices .notices_0 a {
+	text-decoration: none;
+	color: black;
+}
 
 body .section_main .notice .notices .notices_0 {
 	text-align: center;
@@ -213,7 +216,6 @@ body .section_main .notice .notices .notices_0 {
 	margin-left: auto;
 	margin-right: auto;
 	border: 1px solid #EAEAEA;
-
 }
 
 body .section_main .notice .notices .notices_1 {
@@ -246,7 +248,7 @@ body .section_main .notice .notices .notice_ul {
 
 body .section_main .notice .notices .notice_ul .notice_li {
 	margin: 10px;
-	/* list-style: none; */
+	list-style: none;
 }
 
 body .section_main .notice .notices .notice_ul .notice_li a {
@@ -282,28 +284,30 @@ body .section_main .laundryList .laundry_p2 {
 }
 
 body .section_main .laundryList .laundryLists {
-	/* border: 1px solid black; */
-	width: 1100px;
-	height: 175px;
+	border: 1px solid black;
+	width: 1400px;
+	height: 350px;
 	text-align: center;
 	margin-top: 10px;
 	margin-left: auto;
 	margin-right: auto;
+	padding-right: 5px;
 	display: flex;
 }
 
 body .section_main .laundryList .laundryLists a {
 	text-decoration: none;
 	color: black;
-	width: 180px;
-	height: 170px;
+	width: 327px;
+	height: 350px;
 }
 
 body .section_main .laundryList .laundryLists .laundryLists_1 {
 	border: 1px solid #EAEAEA;
-	width: 300px;
-	height: 170px;
+	width: 327px;
+	height: 335px;
 	margin-left: 20px;
+	margin-top: 5px;
 	/* padding-top: 5px; */
 	/* text-align: center; */
 
@@ -311,26 +315,30 @@ body .section_main .laundryList .laundryLists .laundryLists_1 {
 
 body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_1 {
 	/* background-color: blueviolet; */
-	width: 200px;
-	height: 100px;
+	width: 327px;
+	height: auto;
 	margin: 0px;
 }
 
 body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_1 img {
-	width: 198px;
-	height: 100px;
+	width: 327px;
+	height: 200px;
 	margin: 0px;
+	/* margin-top: 5px; */
+
 }
 
 body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_2 {
 	/* background-color: bisque; */
 	width: auto;
-	height: 70px;
+	height: auto;
 	padding: 10px 15px;
 	margin: 0;
 }
 
 body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_2 p {
+	width: auto;
+	height: auto;
 	text-align: left;
 	font-size: 16px;
 	margin: 0px;
@@ -374,20 +382,28 @@ body .section_Joinchange .join_change {
 	height: 900px;
 	padding: 30px;
 	border: 1px solid #EAEAEA;
-	/* padding-top: 200px; */
-	/* margin-top: 200px; */
+	box-shadow: 5px 5px 5px 5px #EAEAEA;
 	margin-left: auto;
 	margin-right: auto;
-	box-shadow: 5px 5px 5px 5px #EAEAEA;
+	/* padding-top: 200px; */
+	/* margin-top: 200px; */
 }
 
-body .section_Joinchange .join_change .join_button{
+body .section_Joinchange .join_change .join_button {
 	float: right;
 	width: 60px;
 	height: 40px;
-	border: 0;
-	outline-color: #35aefd;
-	/* margin-right: 30px; */
+	outline: 0;
+	border-radius: 20px;
+	border-color: #EAEAEA;
+	border-style: dotted;
+	/* border: 0; */
+	
+}
+
+body .section_Joinchange .join_change .join_button:active {
+	border: 1px solid #35aefd;
+
 }
 
 body .section_Joinchange .join_change form .join_name {
@@ -400,7 +416,7 @@ body .section_Joinchange .join_change form .join_name .join_id_p {
 	display: inline-block;
 }
 
-body .section_Joinchange .join_change .join_inputbox{
+body .section_Joinchange .join_change .join_inputbox {
 	width: 500px;
 	height: 40px;
 	outline-color: #35aefd;
@@ -423,17 +439,6 @@ body .section_Joinchange .join_change .join_pum_ok {
 	/* margin-right: 30px; */
 }
 
-/* body section .join_change .join_pnum_info {
-	width: auto;
-	padding-left: 0px;
-}
-
-body section .join_change .join_pnum_info li {
-	font-size: 8pt;
-	list-style: none;
-	text-decoration: underline;
-} */
-
 body .section_Joinchange .join_change .join_joso {
 	width: 220px;
 	display: inline-block;
@@ -448,29 +453,15 @@ body .section_Joinchange .join_change .join_joso_ok {
 	/* margin-right: 30px; */
 }
 
-/* body section .join_change .join_cmp {
-	width: auto;
-	text-align: center;
-	margin-left: auto;
-	margin-right: auto;
-} */
-
-/* body section .join_change .join_cmp .join_complete {
-	width: 300px;
-	height: 40px;
-	margin-top: 15px;
-	border: 0;
-	outline: none;
-} */
-
 body .section_Joinchange .join_change .join_cmp .join_complete:active {
 	background-color: #35aefd;
 }
 
-/* ====================상세페이지 검색(search) CSS========================= */
+/* ====================검색 상세페이지 (search) CSS========================= */
 
 body .section_search {
 	padding-top: 70px;
+	height: 797px;
 }
 
 body .section_search .filter {
@@ -489,7 +480,9 @@ body .section_search .filter .searchBox {
 	margin: 0px;
 	margin-top: 2px;
 	padding-left: 25px;
+
 }
+
 
 body .section_search .filter .searchBox .search_icon {
 	margin-top: 25px;
@@ -507,8 +500,11 @@ body .section_search .filter .searchBox .search_button {
 	height: 35px;
 	margin-top: 15px;
 	margin-right: 5px;
-	border: 0;
-	outline: none;
+	border: 1px solid #EAEAEA;
+	background-color: #0091e4;
+	color: white;
+	outline: 0;
+	font-weight: bolder;
 }
 
 body .section_search .filter .searchBox .search_button:active {
@@ -546,12 +542,583 @@ body .section_search .filter .filter_reset button {
 	width: 150px;
 	height: 50px;
 	margin: 10px 13px;
-	border: 0;
-	outline: none;
+	outline: 0;
 	float: right;
-	background-color: #EAEAEA;
+	border: 1px solid #EAEAEA;
+	background-color: #0091e4;
+	color: white;
+	font-weight: bolder;
 }
 
 body .section_search .filter .filter_reset button:active {
 	background-color: #35aefd;
+}
+
+body .section_search .laundryList_main {
+	width: 1900px;
+	height: 797px;
+	/* border-bottom: 1px solid red; */
+	/* display: inline-flex; */
+}
+
+body .section_search .laundryList_main .laundryList_list {
+	width: 1100px;
+	height: 797px;
+	float: left;
+	/* border: 1px solid red; */
+}
+
+body .section_search .laundryList_main .laundryList_map {
+	width: 800px;
+	height: 797px;
+	border: 1px solid blue;
+	float: left;
+}
+
+body .section_search .laundryList_main .laundryList_list .laundryList_sum {
+	width: 1100px;
+	height: 70px;
+	padding: 10px 30px;
+	/* display: inline-flex; */
+	/* border-bottom: 1px solid #EAEAEA; */
+}
+
+body .section_search .laundryList_main .laundryList_list .laundryList_sum .sum_hr {
+	border: 0;
+	height: 1px;
+	background: #EAEAEA;
+}
+
+body .section_search .laundryList_main .laundryList_list .laundryList_child {
+	width: auto;
+	height: 710px;
+	padding: 0px 5px 0px 15px;
+	/* border: 1px solid violet; */
+	/* overflow-y: scroll; */
+	
+}
+
+body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list {
+	width: auto;
+	height: 695px;
+	padding: 0px;
+	overflow-y: scroll;
+	/* display: inline-block; */
+	
+}
+
+body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs {
+	border: 1px solid #EAEAEA;
+	width: 200px;
+	height: 170px;
+	margin-left: 20px;
+	margin-top: 20px;
+	display: inline-flex;
+	/* flex-wrap: wrap; */
+}
+
+body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs .childs_info_1 {
+	width: 230px;
+	height: 100px;
+	margin: 0px;
+	
+}
+
+body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs .childs_info_1 img {
+	width: 230px;
+	height: 100px;
+	margin: 0px;
+}
+
+body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs .childs_info_1_1 {
+	width: auto;
+	height: 70px;
+	padding: 10px 15px;
+	margin: 0;
+}
+
+body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs .childs_info_1_1 p {
+	width: auto;
+	text-align: left;
+	font-size: 16px;
+	margin: 0px;
+	margin-bottom: 5px;
+}
+body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs {
+	width: 230px;
+	height: 170px;
+}
+
+body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs a {
+	text-decoration: none;
+	color: black;
+
+}
+
+/* ====================결제 수단 및 쿠폰 마일리지 관리 (PayAndCopon) CSS========================= */
+
+body .section_pac {
+	padding-top: 70px;
+	width: 1900px;
+	height: 1100px;
+}
+
+body .section_pac .pac_mainName {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 25px;
+}
+
+body .section_pac .pac_list {
+	width: 800px;
+	height: auto;
+	/* text-align: center; */
+	margin-left: auto;
+	margin-right: auto;
+}
+
+body .section_pac .pac_list .pac_lists{
+	width: auto;
+	height: auto;
+	display: inline-flex;
+	/* border-bottom: 1px solid #EAEAEA; */
+}
+
+body .section_pac .pac_list .pac_pay {
+	width: 400px;
+	height: auto;
+	text-align: center;
+	/* border: 1px solid red; */
+}
+
+body .section_pac .pac_list .pac_pay #pac_pay_button {
+	width: 200px;
+	height: 30px;
+	border: 0;
+	outline: 0;
+	color: white;
+	background-color: #35aefd;
+	box-shadow: 2px 2px 2px 2px #EAEAEA;
+	font-size: 20px;
+}
+
+body .section_pac .pac_list .pac_copon {
+	width: 400px;
+	height: auto;
+	text-align: center;
+	/* border: 1px solid blue; */
+}
+
+body .section_pac .pac_list .pac_copon #pac_coupon_button {
+	width: 200px;
+	height: 30px;
+	border: 0;
+	outline: 0;
+	background-color: white;
+	box-shadow: 2px 2px 2px 2px #EAEAEA;
+	font-size: 20px;
+}
+
+body .section_pac .pac_list .pac_mileage {
+	width: 100px;
+	text-align: center;
+	
+}
+
+body .section_pac .pac_list button {
+	outline: 0;
+	border-radius: 50px;
+	border-color: #EAEAEA;
+	/* border-style: 1px dotted; */
+	/* border: 1px dashed ; */
+	
+}
+
+body .section_pac .pac_list button:active {
+	border: 1px solid #35aefd;
+	/* border-bottom: 1px solid #35aefd; */
+}
+
+body .section_pac .pac_mainList_pay{
+	width: auto;
+	height: 200px;
+	margin: 50px 100px;
+	border: 1px solid white;
+	/* display: none; */
+}
+
+body .section_pac .pac_mainList_pay .pac_mainPay:active {
+	display: flex;
+}
+
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList {
+	width: 1000px;
+	height: auto;
+	border: 1px solid white;
+	margin: 10px 10px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payText {
+	width: 800px;
+	height: 50px;
+	font-size: 25px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 120px;
+}
+
+
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists {
+	width: 800px;
+	height: 45px;
+	border: 1px solid #EAEAEA;
+	box-shadow: 2px 2px 2px 2px #EAEAEA;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+	text-align: left;
+}
+
+
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_name {
+	width: 100px;
+	height: auto;
+	padding: 8px 10px;
+	display: inline-flex;
+	margin: 0px;
+	margin-left: 30px;
+	/* border-right: 1px solid #EAEAEA; */
+}
+
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_num1 {
+	width: 260px;
+	height: 45px;
+	display: inline-flex;
+	border: 1px solid #EAEAEA;
+	text-align: center;
+	/* margin-bottom: 10px; */
+	outline: 0;
+}
+
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_num2 {
+	width: 260px;
+	height: 45px;
+	display: inline-flex;
+	border: 1px solid #EAEAEA;
+	text-align: center;
+	outline: 0;
+
+}
+
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payText .pac_payCard_add {
+	width: 100px;
+	margin: 5px 15px;
+	float: right;
+	border: 1px solid #EAEAEA;
+	border-radius: 30px;
+	background-color: #0091e4;
+	color: white;
+	outline: 0;
+	font-weight: bolder;
+}
+
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payText .pac_payCard_add:hover {
+	background-color: #373737;
+	transition-duration: 0.5s;
+}
+
+body .section_pac .pac_mainList_copon {
+	width: auto;
+	height: 200px;
+	/* border: 1px solid blue; */
+	margin: 50px 100px;
+	display: none;
+}
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList {
+	width: 1000px;
+	height: auto;
+	margin: 10px 10px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	border: 1px solid white;
+	
+}
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponText {
+	width: auto;
+	height: 45px;
+	font-size: 25px;
+	margin: 0;
+	margin-top: 15px;
+}
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists {
+	width: 800px;
+	height: 45px;
+	border: 1px solid #EAEAEA;
+	box-shadow: 2px 2px 2px 2px #EAEAEA;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+	display: inline-flex;
+}
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_name {
+	width: 100px;
+	height: auto;
+	border-right: 1px solid #EAEAEA;
+	padding: 8px 10px;
+	display: inline-flex;
+	margin: 5px 15px;
+}
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_num {
+	width: 600px;
+	height: 30px;
+	display: block;
+	text-align: center;
+	margin: 10px 15px;
+}
+
+.pac_payCard_save {
+	width: 90px;
+	margin: 10px 5px;
+	margin-right: 12px;
+	float: right;
+	border: 1px solid #EAEAEA;
+	border-radius: 30px;
+	background-color: #0091e4;
+	color: white;
+	font-weight: bolder;
+	outline: 0;
+}
+.pac_payCard_save:hover {
+	background-color: #373737;
+	transition-duration: 0.5s;
+}
+
+
+/* ====================게시판 (board) CSS========================= */
+
+body .section_board {
+	width: auto;
+	height: 1000px;
+	border: 1px solid black;
+}
+
+body .section_board .board {
+	width: auto;
+	height: 700px;
+	border: 1px solid red;
+	margin: 100px 200px;
+}
+
+body .section_board .board .board_mainName {
+	width: auto;
+	text-align: center;
+	font-size: 25px;
+	margin: 10px 700px;
+	border-bottom: 1px solid black;
+}
+
+body .section_board .board .board_box {
+	width: auto;
+	height: 700px;
+	border: 1px solid blue;
+}
+
+.btn{
+	width: auto; 
+	height: 30px;
+	border: 1px solid #EAEAEA;
+	background-color: #0091e4;
+	color: white;
+	outline: 0;
+	font-weight: bolder;
+    /* border-radius: 15px; */
+}
+.btn:hover{
+	background-color: #373737;
+	transition-duration: 0.5s;
+}
+
+/* ====================게시판 읽기 (boardRead) CSS========================= */
+.boardList {
+    margin-bottom: 20px;
+}
+.boardMenu {
+	width: 800px;
+	height: 50px;
+    margin-top: 50px;
+	margin-bottom: 20px;
+	margin-left: 340px;
+	margin-right: auto;
+    position: relative;
+    text-align: center;
+    top:0;
+	left:0;
+}
+.boardMenu .leftMenu form {
+	display: inline-block;
+}
+
+.boardMenu .rightMenu {
+	float: right;
+}
+.boardMenu2 {
+	width: 1100px;
+	height: 50px;
+    margin-top: 30px;
+	margin-bottom: 20px;
+	margin-left: 200px;
+	margin-right: auto;
+	
+}
+.boardMenu2 .rightMenu2 {
+	float: right;
+	
+}
+.boardLine{
+    width: 800px;
+    border-bottom: 1px solid #dadada;
+    margin: auto;
+    font-size: 11pt;
+    color: #5a5a5a;
+    height: 40px;
+    line-height: 35px;
+}
+.boardLine2{
+    width: 1100px;
+    border-bottom: 1px solid #dadada;
+    margin: auto;
+    font-size: 11pt;
+    color: #5a5a5a;
+    height: 40px;
+    line-height: 35px;
+}
+.boardLine .num {
+    width: 3%;
+    text-align: center;
+}
+.boardLine .title {
+	left: 0;
+    text-align: center;
+    padding-left: 30px;
+    width: 45%;
+    font-weight: bolder;
+}
+.boardLine .registdate {
+    width: 200px;
+    float: right;
+    margin-right: 50px;
+    text-align: center;
+}
+.boardLine .num2 {
+    width: 3%;
+}
+.boardLine .title2 {
+	left: 0;
+    text-align: center;
+    padding-left: 30px;
+    width: 45%;
+    font-weight: bolder;
+}
+.boardLine .registdate2 {
+    width: 200px;
+    float: right;
+    margin-right: 70px;
+}
+.boardLine * {
+    display: inline-block;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.boardContent {
+    text-align: left;
+    padding: 20px;
+    border: 1px solid #dadada;
+    border-top: 0px;
+    width: 1100px;
+    height: 450px;
+    margin: auto;
+}
+
+div.boardList a {
+    display: block;
+    width: 500px;
+}
+div.paging {
+	width: auto;
+	height: auto;
+    text-align: center;
+}
+div.paging a {
+    display: inline;
+}
+div.boardLine:hover {
+    background-color: #dadada;
+}
+div.boardMenu input[type="text"] {
+    height:25px;
+}
+div.boardMenu select {
+    width: 80px;
+    height:30px;
+}
+
+div.boardLine input, div.boardLine input {
+    padding: 7px;
+    border: 1px solid skyblue;
+}
+div.boardLine input:focus, div.boardLine input:focus, textarea:focus {
+    border: 1px solid rgb(135, 145, 235);
+}
+textarea {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    resize: none;
+    border: none;
+}
+
+/* ====================게시판 쓰기 (boardWrite) CSS========================= */
+
+.boardContent2 {
+    width: 1100px;
+    height: 450px;
+    text-align: left;
+    padding: 20px;
+    border: 1px solid #dadada;
+    margin: auto;
+	margin-top: 10px;
+}
+
+.boardLine3{
+    width: 1100px;
+    border-bottom: 1px solid #dadada;
+    margin: auto;
+    font-size: 11pt;
+    color: #5a5a5a;
+    height: 40px;
+    line-height: 35px;
+}
+
+.boardLine .title2 {
+	left: 0;
+    text-align: center;
+    padding-left: 30px;
+    width: 45%;
+    font-weight: bolder;
+}
+
+.boardLine .writer2{
+    width: 10%;
 }
