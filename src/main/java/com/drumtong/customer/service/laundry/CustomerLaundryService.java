@@ -22,6 +22,12 @@ public class CustomerLaundryService {
 	@Autowired BManagementDAO bManagementDAO;
 	@Autowired BMenuDAO bMenuDAO;
 	
+	// 검색 페이지 이동 [GET]
+	public ModelAndView search() {
+		ModelAndView mav = new ModelAndView("customer/laundry/customerSearch");
+		return mav;
+	}
+	
 	public ModelAndView detail(String estid) {
 		// estid가 널 값일 때 처리해주기
 		ModelAndView mav = new ModelAndView("customer/laundry/customerDetail");
@@ -39,3 +45,4 @@ public class CustomerLaundryService {
 	}
 	
 }
+

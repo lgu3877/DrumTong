@@ -16,6 +16,12 @@ import com.drumtong.customer.service.laundry.CustomerLaundryService;
 public class CustomerLaundryController {
 	@Autowired CustomerLaundryService svc;
 	
+	// 검색 페이지 이동 [GET]
+	@RequestMapping("customerSearch/")
+	public ModelAndView detail2(HttpServletRequest req) {	
+		return svc.search();
+	}
+	
 	@RequestMapping(value="customerDetail/{estid}/",method = RequestMethod.GET)
 	public ModelAndView detail(@PathVariable("estid") String estid, HttpServletRequest req) {
 		req.getSession().setAttribute("estid", estid);
@@ -23,7 +29,8 @@ public class CustomerLaundryController {
 	}
 	
 	@RequestMapping("customerDetail/detail/")
-	public ModelAndView detail2(HttpServletRequest req) {	
+	public ModelAndView detail(HttpServletRequest req) {	
 		return svc.detail((String)req.getSession().getAttribute("estid"));
 	}
 }
+

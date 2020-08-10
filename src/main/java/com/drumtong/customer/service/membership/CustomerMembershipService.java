@@ -85,7 +85,7 @@ public class CustomerMembershipService {
 	}
 	
 	// 로그아웃 객체
-	public ModelAndView logout(HttpServletRequest req, HttpServletResponse resp) {
+	public ModelAndView logOut(HttpServletRequest req, HttpServletResponse resp) {
 		String Referer = req.getHeader("referer");
 		String AddressToMove = Referer != null ? Referer.split("drumtong")[1] : "/customer/";
 		ModelAndView mav = new ModelAndView("redirect:" + AddressToMove);
@@ -174,6 +174,8 @@ public class CustomerMembershipService {
 		
 		return mav;
 	}
+
+	
 	
 	
 
