@@ -23,7 +23,7 @@
 					name="search" 
 					id="search" 
 					value="검색"
-					onclick="location.replace('${cpath}/customer/laundry/customerSearch/')"/>
+					onclick="location.href='${cpath}/customer/laundry/customerSearch/'"/>
 			</div>
 		</form>
 	</article>
