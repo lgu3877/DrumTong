@@ -7,6 +7,6 @@
 <!-- resultType="businessVO"	 -->
 <mapper namespace="com.drumtong.business.dao.BMenuDAO">
 	<select id="select" parameterType="String" resultType="BMenuVO" >
-		SELECT * FROM BMENU WHERE ESTID=#{estid}
+		SELECT * FROM BMENU WHERE ESTID=#{estid} ORDER BY NUM ASC
 	</select>
 </mapper>
