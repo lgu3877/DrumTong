@@ -31,6 +31,13 @@ public class CustomerMembershipController {
 		return svc.login(req, resp, cPrivateDatavo, storeid);
 	}
 	
+	// 로그아웃
+	@RequestMapping(value = "customerLogOut/", method = RequestMethod.GET)
+	public ModelAndView logOut(HttpServletRequest req, HttpServletResponse resp) {
+		return svc.logOut(req,resp);
+	}
+	
+	
 	// 고객 회원가입 (GET)
 	@RequestMapping(value = "customerSignUp/", method = RequestMethod.GET)
 	public ModelAndView signUp() {
@@ -43,6 +50,8 @@ public class CustomerMembershipController {
 		System.out.println("실행");
 		return svc.signUp(cPrivateDataVO);
 	}
+	
+
 }
 
 

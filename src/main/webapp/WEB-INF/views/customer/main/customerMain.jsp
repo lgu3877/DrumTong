@@ -2,12 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="customerHeader.jsp"%>
 
+
 <section class="section_main">
 
 	<article class="search">
 		<form class="searchs">
-			<p class="searchs_p">어떤 동네, 어떤 방에서</p>
-			<p class="searchs_p">살고 싶으신가요?</p>
+			<p class="searchs_p"><b>세탁물</b>을 <b>깨끗</b>하게</p>
+			<p class="searchs_p">주거지까지 배달합니다.</p>
 			<div class="searchBox">
 				<i class="fa fa-search-plus" aria-hidden="true"></i> 
 				<input 
@@ -22,41 +23,57 @@
 					name="search" 
 					id="search" 
 					value="검색"
-					onclick="location.replace('${cpath}/customer/laundry/customerSearch/')"/>
+					onclick="location.href='${cpath}/customer/laundry/customerSearch/'"/>
 			</div>
 		</form>
 	</article>
 
 	<article class="notice">
-		<p class="notice_name">공지사항</p>
+		<p class="notice_name">게시판</p>
 
 		<div class="notices">
 
 			<div class="notices_0 notices_1">
-				<a href="#">
-					<div class="notices_1_1">게 시 판 1</div>
+				<a href="${cpath }/">
+					<div class="notices_1_1">공지사항 게시판</div>
 				</a>
 				<hr class="notice_hr">
 				<ul class="notice_ul">
-					<li class="notice_li"><a href="#">게시물1</a></li>
-					<li class="notice_li"><a href="#">게시물1</a></li>
-					<li class="notice_li"><a href="#">게시물1</a></li>
-					<li class="notice_li"><a href="#">게시물1</a></li>
-					<li class="notice_li"><a href="#">게시물1</a></li>
+					<c:forEach items="${boardRecentList }" var="bList">
+							<div class="notice_area">
+								<div class="notice_area_title">
+									<div class="notice_new">
+										<c:if test="${bList.registdate eq todayDate }">new</c:if>
+									</div>
+									[공지] ${bList.title } 
+								</div>
+								<div class="notice_area_registdate">
+									${bList.registdate }
+								</div>
+							</div>
+					</c:forEach>
 				</ul>
 			</div>
 
 			<div class="notices_0 notices_2">
 				<a href="#">
-					<div class="notices_1_1">게 시 판 2</div>
+					<div class="notices_1_2">이벤트 게시판</div>
 				</a>
 				<hr class="notice_hr">
 				<ul class="notice_ul">
-					<li class="notice_li"><a href="#">게시물2</a></li>
-					<li class="notice_li"><a href="#">게시물2</a></li>
-					<li class="notice_li"><a href="#">게시물2</a></li>
-					<li class="notice_li"><a href="#">게시물2</a></li>
-					<li class="notice_li"><a href="#">게시물2</a></li>
+					<c:forEach items="${eventRecentList }" var="eList">
+							<div class="notice_area">
+								<div class="notice_area_title">
+									<div class="notice_new">
+										<c:if test="${eList.registdate eq todayDate }">new</c:if>
+									</div>
+									[event] ${eList.title } 
+								</div>
+								<div class="notice_area_registdate">
+									${eList.registdate }
+								</div>
+							</div>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>
@@ -64,8 +81,8 @@
 	</article>
 
 	<article class="laundryList">
-		<p class="laundry_p laundry_p1">쉬운 방 찾기</p>
-		<p class="laundry_p laundry_p2">방 찾기 초보를 위한 초간단 솔루션!</p>
+		<p class="laundry_p laundry_p1">간편한 세탁소 찾기</p>
+		<p class="laundry_p laundry_p2">쉽게 세탁소를 찾기 위한 솔루션!</p>
 		<div class="laundryLists">
 
 			<div class="laundryLists_1">
