@@ -54,10 +54,114 @@
                 <div class="laundryList_child">
 
                     <ul class="laundryList_child_list">
+                        <div class="premium_nameBox">
+                            <p class="premium_name">프리미엄</p>
+                            <a class="premium_more">더보기 〉</a>
+                        </div>
+                        <hr class="premium_hr">
+
+                        <div class="laundryList_premium">
+                            <ul class="premium_list">
+
+                                <li class="laundryList_childs premium_childs">
+                                    <a href="#">
+                                        <div class="childs_info_1 premium_childs_info_1">
+                                            <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
+                                            <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
+                                            <!-- <img/> -->
+                                        </div>
+                                        <div class="childs_info_1_1 premium_childs_info_1_1">
+                                            <p>펭수에욤</p>
+                                            <p>버럭!</p>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li class="laundryList_childs premium_childs">
+                                    <a href="#">
+                                        <div class="childs_info_1 premium_childs_info_1">
+                                            <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
+                                            <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
+                                            <!-- <img/> -->
+                                        </div>
+                                        <div class="childs_info_1_1 premium_childs_info_1_1">
+                                            <p>펭수에욤</p>
+                                            <p>버럭!</p>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="laundryList_childs premium_childs">
+                                    <a href="#">
+                                        <div class="childs_info_1 premium_childs_info_1">
+                                            <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
+                                            <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
+                                            <!-- <img/> -->
+                                        </div>
+                                        <div class="childs_info_1_1 premium_childs_info_1_1">
+                                            <p>펭수에욤</p>
+                                            <p>버럭!</p>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li class="laundryList_childs premium_childs">
+                                    <a href="#">
+                                        <div class="childs_info_1 premium_childs_info_1">
+                                            <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
+                                            <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
+                                        </div>
+                                        <div class="childs_info_1_1 premium_childs_info_1_1">
+                                            <p>펭수에욤</p>
+                                            <p>버럭!</p>
+                                        </div>
+                                    </a>
+                                </li>
+                                 
+                                <li class="laundryList_childs premium_childs">
+                                    <a href="#">
+                                        <div class="childs_info_1 premium_childs_info_1">
+                                            <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
+                                            <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
+                                        </div>
+                                        <div class="childs_info_1_1 premium_childs_info_1_1">
+                                            <p>펭수에욤</p>
+                                            <p>버럭!</p>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="laundryList_childs premium_childs">
+                                    <a href="#">
+                                        <div class="childs_info_1 premium_childs_info_1">
+                                            <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
+                                            <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
+                                        </div>
+                                        <div class="childs_info_1_1 premium_childs_info_1_1">
+                                            <p>펭수에욤</p>
+                                            <p>버럭!</p>
+                                        </div>
+                                    </a>
+                                </li>
+                                
+                                <!-- <li class="laundryList_childs premium_childs">
+                                    <a href="#">
+                                        <div class="childs_info_1 premium_childs_info_1">
+                                            <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
+                                            <img src="/laundry/src/main/webapp/resources/customer/img/펭수버럭.jpg">
+                                        </div>
+                                        <div class="childs_info_1_1 premium_childs_info_1_1">
+                                            <p>펭수에욤</p>
+                                            <p>버럭!</p>
+                                        </div>
+                                    </a>
+                                </li> -->
+                            </ul>
+                        </div>
+                        <hr class="premium_hr">
 
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -70,11 +174,11 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
-                                    <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
-                                </div>
-                                <div class="childs_info_1_1">
-                                    <p>펭수에욤</p>
-                                    <p>버럭!</p>
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
+                                    <img src="${cpath }/resources/customer/img/펭수버럭.jpg"> </div> <div
+                                        class="childs_info_1_1">
+                                        <p>펭수에욤</p>
+                                        <p>버럭!</p>
                                 </div>
                             </a>
                         </li>
@@ -82,6 +186,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/펭수귀염.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -94,6 +199,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -106,6 +212,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/펭수귀염.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -118,6 +225,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -130,6 +238,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/시크도시.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -142,6 +251,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/파란하늘.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -154,6 +264,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/펭수귀염.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -166,6 +277,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/시크도시.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -178,6 +290,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -190,6 +303,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -202,6 +316,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/펭수귀염.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -214,6 +329,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -226,6 +342,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/펭수귀염.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -238,6 +355,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -250,6 +368,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/시크도시.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -262,6 +381,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/파란하늘.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -274,6 +394,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/펭수귀염.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -286,6 +407,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/시크도시.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -298,6 +420,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -310,6 +433,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -322,6 +446,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/펭수귀염.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -334,6 +459,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -346,6 +472,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/펭수귀염.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -358,6 +485,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -370,6 +498,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/시크도시.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -382,6 +511,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/파란하늘.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -394,6 +524,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/펭수귀염.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -406,6 +537,7 @@
                         <li class="laundryList_childs">
                             <a href="#">
                                 <div class="childs_info_1">
+                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                     <img src="${cpath }/resources/customer/img/시크도시.jpg">
                                 </div>
                                 <div class="childs_info_1_1">
@@ -417,7 +549,7 @@
 
                     </ul>
                 </div>
-              
+
             </div>
 
             <div class="laundryList_map">
@@ -426,3 +558,14 @@
         </article>
 
     </section>
+
+    <script>
+        let more = document.querySelector('.premium_more');
+        let counts = document.querySelectorAll('.premium_childs');
+
+        console.log("펭수 몇마리? = " + counts.length);
+
+        if(counts.length > 6){
+            more.style.display = 'block';
+        }
+    </script>
