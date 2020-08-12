@@ -6,6 +6,14 @@ var totalData = document.getElementsByClassName('laundryList_childs'); //총 데
 var dataPerPage = 20; // 한 페이지에 나타낼 데이터 수
 var pageCount = 10; // 한 화면에 나타낼 페이지 수
 
+
+function bookmark() {
+    let icon = event.target;
+
+    icon.style.color = (icon.style.color === 'yellow') ? 'white' : 'yellow';
+}
+
+
 function laundryList_paging(totalData, dataPerPage, pageCount, currentPage) {
 
             console.log("currentPage : " + currentPage);

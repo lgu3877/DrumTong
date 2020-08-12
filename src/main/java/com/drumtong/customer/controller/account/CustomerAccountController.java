@@ -25,7 +25,7 @@ public class CustomerAccountController {
 	public String jc() {
 		return "customer/account/customerJoinChange";
 	}
-}
+
 
 	@RequestMapping("customerBookmark/")
 	public ModelAndView bookmark() {
