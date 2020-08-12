@@ -6,7 +6,7 @@ public class BCouponVO {
 	private int issuenum;
 	private int discount;
 	private String period;
-	private String minimunprice;
+	private String minimumprice;
 	private char duplboolean;
 	private String registdate;
 	private String updatedate;
@@ -43,11 +43,11 @@ public class BCouponVO {
 	public void setPeriod(String period) {
 		this.period = period;
 	}
-	public String getMinimunprice() {
-		return minimunprice;
+	public String getMinimumprice() {
+		return minimumprice;
 	}
-	public void setMinimunprice(String minimunprice) {
-		this.minimunprice = minimunprice;
+	public void setMinimumprice(String minimumprice) {
+		this.minimumprice = minimumprice;
 	}
 	public char getDuplboolean() {
 		return duplboolean;
