@@ -11,6 +11,7 @@
   	<link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet" type="text/css">
     <link rel="stylesheet" href="${cpath }/customer/css/customerStyle.css">
     <link rel="stylesheet" href="${cpath }/customer/css/customerStyleDohyun.css">
+    <link rel="stylesheet" href="${cpath }/customer/css/customerStyleSangJae.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="http://kenwheeler.github.io/slick/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="http://kenwheeler.github.io/slick/slick/slick-theme.css" />
@@ -47,21 +48,32 @@
 
             <ul class="menu">
                 <li>
-                    <a href="#" class="middleMenu">메뉴우</a>
+                    <a href="customer/membership/customerSignUp/" class="middleMenu">회원가입</a>
                 </li>
             </ul>  
 
             <ul class="menu">
-                <li class="login">
-                    <a href="" class="middleMenu middleMenu2 ">로그인</a>
-                    <ul class="mypage">
-                        <div class="listButtons">
-                            <li class="mypageList"><a href="#" class="listButton">즐겨찾기</a></li>
-                            <li class="mypageList"><a href="#" class="listButton">주문내역</a></li>
-                            <li class="mypageList"><a href="#" class="listButton">계정</a></li>
-                            <li class="mypageList"><a href="#" class="listButton">로그아웃</a></li>
-                        </div>
-                    </ul>
+                <li class="headerLogin">
+                	<c:choose>
+                		<c:when test="${empty Login}">
+                			<a href="${cpath }/customer/membership/customerLogin/" class="middleMenu middleMenu2 ">로그인</a>
+                		</c:when>
+                		
+                		<c:when test="${not empty Login}">
+                			<a href="${cpath }/" class="middleMenu middleMenu2 ">내 계정</a>
+                			
+                			<ul class="mypage">
+		                        <div class="listButtons">
+		                            <li class="mypageList"><a href="#" class="listButton">즐겨찾기</a></li>
+		                            <li class="mypageList"><a href="#" class="listButton">주문내역</a></li>
+		<!--                             <li class="mypageList"><a href="#" class="listButton">계정</a></li> -->
+		                            <li class="mypageList"><a href="${cpath }/customer/membership/customerLogOut/" class="listButton">로그아웃</a></li>
+		                        </div>
+		                    </ul>
+                		</c:when>
+                	</c:choose>
+                	
+                    
                 </li>
             </ul> 
         </div>

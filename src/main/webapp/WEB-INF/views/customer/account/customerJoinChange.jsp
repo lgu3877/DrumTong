@@ -115,5 +115,6 @@
         cpath = '${pageContext.request.contextPath}';
         document.getElementById('submit').addEventListener('click', FileSubmit);
     </script>
-    
+
+	
 <%@ include file="../main/customerFooter.jsp"%>

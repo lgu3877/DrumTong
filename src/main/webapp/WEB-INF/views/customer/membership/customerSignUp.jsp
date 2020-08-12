@@ -2,195 +2,38 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../main/customerHeader.jsp" %>    
 
-   <!-- 스크립트 영역 -->
-
+   	<!-- 스크립트 영역 -->
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
+	<!-- Axios script -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	
     <!-- JavaScript Ajax-->
-    <script>
-      let ajaxRet;
-
-      function checkUserid() {
-        const userid = document.querySelector('#userid').value;
-        console.log('userid : ' + userid);
-        if (userid === '') {
-          idmsg = document.querySelector('#idmsg');
-          idmsg.innerText = '아이디를 입력하세요';
-          idmsg.style.color = 'red';
-          document.querySelector('#userid').focus();
-          return;
-        } else {
-          idmsg.innerText = '';
-        }
-        //바닐라 자바스크립트
-        const request = new XMLHttpRequest();
-        // 		request.open("GET","${cpath}/checkid/?email=" + email, true);
-        // 		request.setRequestHeader('Content-type', 'text; charset=UTF-8');
-
-        request.open('POST', '${cpath}/checkid/}', true);
-        request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-        request.onreadystatechange = function () {
-          if (request.readyState == 4 && request.status == 200) {
-            idmsg.innerText = request.responseText;
-            if (request.responseText === '사용가능한 아이디입니다') {
-              idmsg.style.color = 'blue';
-              ajaxRet = true;
-            } else {
-              idmsg.innetText = request.responseText;
-              idmsg.style.color = 'red';
-              // 					document.querySelector('#userid').focus();
-              ajaxRet = false;
-            }
-          }
-        };
-        // 	request.send(); //GET
-        request.send('userid=' + userid); //POST
-      }
-    </script>
-
-    <script>
-      //비밀번호 검사
-      function checkPassword(event) {
-        if (event.keyCode != 13 || event.keyCode != 9) {
-          //13 = 엔터, 9 = 탭
-          pw1 = document.getElementById('userpw').value;
-          pw2 = document.getElementById('userpw2').value;
-
-          if (pw1 == pw2) {
-            document.getElementById('pwmsg2').innerHTML = '비밀번호가 일치합니다';
-            document.getElementById('pwmsg2').style.color = 'blue';
-          } else {
-            document.getElementById('pwmsg2').innerHTML = '비밀번호가 일치하지 않습니다';
-            document.getElementById('pwmsg2').style.color = 'red';
-          }
-        }
-      }
-    </script>
-
-    <script>
-      //비밀번호 복잡성 검증
-      function passwordComplexity(event) {
-        //비밀번호 정규식
-        var regExp = /^.*(?=^.{7,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-
-        const userpw = document.getElementById('userpw').value;
-        const pwmsg = document.getElementById('pwmsg');
-
-        if (regExp.test(userpw) == false) {
-          pwmsg.innerHTML = '비밀번호는 영문 대소문자, 숫자의 조합 6~12자리로';
-          pwmsg.style.color = 'red';
-          return false;
-        } else {
-          pwmsg.innerHTML = '비밀번호 검증 완료';
-          pwmsg.style.color = 'blue';
-          return true;
-        }
-      }
-    </script>
-
-    <script>
-      function checkTel() {
-        var regExp = /^\d{3}-\d{3,4}-\d{4}$/;
-
-        const usertel = document.getElementById('usertel').value;
-        const telmsg = document.getElementById('telmsg');
-
-        if (usertel === '') {
-          telmsg.innerHTML = '전화번호를 입력해주세요';
-          telmsg.style.color = 'red';
-          document.querySelector('#usertel').focus();
-        }
-
-        if (regExp.test(usertel) == false) {
-          telmsg.innerHTML = '전화번호는 - 을 포함해서 입력해주세요';
-          telmsg.style.color = 'red';
-          document.querySelector('#usertel').focus();
-          return false;
-        } else {
-          telmsg.innerHTML = '전화번호 인증 완료';
-          telmsg.style.color = 'blue';
-          return true;
-        }
-      }
-    </script>
-
-    <script>
-      function checkEmail() {
-        var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-
-        const email = document.getElementById('email').value;
-        const emailmsg = document.getElementById('emailmsg');
-
-        if (email === '') {
-          telmsg.innerHTML = 'Email을 입력해주세요';
-          telmsg.style.color = 'red';
-          document.querySelector('#email').focus();
-        }
-
-        if (regExp.test(email) == false) {
-          telmsg.innerHTML = '전화번호는 - 을 포함해서 입력해주세요';
-          telmsg.style.color = 'red';
-          document.querySelector('#usertel').focus();
-          return false;
-        } else {
-          telmsg.innerHTML = '전화번호 인증 완료';
-          telmsg.style.color = 'blue';
-          return true;
-        }
-      }
-    </script>
-
-    <script>
-      function submit() {
-        console.log('submit작동');
-        joinInputs = document.querySelectorAll('input.join-input-boxs');
-
-        cnt = 3;
-
-        for (i = 3; i < joinInputs.length; i++) {
-          if (joinInputs[i].value === '') {
-            joinInputs[i].style.border = '1px solid red';
-          } else {
-            cnt++;
-          }
-        }
-
-        if (joinInputs[0].value === '' && loginInputs[1].value === '') {
-          console.log('얼럿 시작 둘다없음');
-          joinAlert[0].innerText = '입력된 정보가 없습니다';
-        } else if (loginInputs[0].value === '') {
-          console.log('얼럿 시작 아디없엉');
-          joinAlert[0].innerText = '아이디를 입력해주세요';
-        } else if (loginInputs[1].value === '') {
-          console.log('얼럿 시작 비번내놔');
-          joinAlert[0].innerText = '비밀번호를 입력해주세요';
-        }
-
-        if (cnt !== loginInputs.length) return;
-        document.getElementById('loginForm').submit();
-      } //submit 체크 함수 종료
-    </script>
-
+    <script type="text/javascript" src="${cpath }/customer/js/membership/customerSignUp.js" charset="UTF-8"></script>
+	
+		
+	
     <!-- 본문 영역 -->
     <section>
       <div class="join">
         <form method="POST" id="loginForm">
           <img src="#" class="login-logo" />
           <div class="login-input">
-            <input type="text" name="userid" id="userid" class="join-input-boxs" placeholder="ID" />
+            <input type="text" name="id" id="userid" class="join-input-boxs" placeholder="ID"  onblur="axGet(document.getElementById('userid').value)" maxlength="25">
             <span class="idmsg" id="idmsg"></span>
-            <input type="password" name="userpw" id="userpw" class="join-input-boxs" placeholder="PW" />
+            <input type="password" name="pw" id="userpw" class="join-input-boxs" placeholder="PW" />
             <span class="pwmsg" id="pwmsg"></span>
-            <input type="password" name="userpw2" id="userpw2" class="join-input-boxs" placeholder="PW 확인" />
+            <input type="password" name="pw2" id="userpw2" class="join-input-boxs" placeholder="PW 확인" />
             <span class="pwmsg2" id="pwmsg2"></span>
             <hr />
             <span class="join-alert"></span>
-            <input type="text" name="username" id="username" class="join-input-boxs" placeholder="이름" />
-            <select class="join-input-boxs">
-              <option>남성</option>
-              <option>여성</option>
+            <input type="text" name="name" id="username" class="join-input-boxs" placeholder="이름" />
+            <select name="genderboolean" class="join-input-boxs">
+              <option value="M">남성</option>
+              <option value="W">여성</option>
             </select>
-            <input type="text" name="userbirth" id="userbirth" class="join-input-boxs" placeholder="생년월일" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" />
-            <input type="text" name="usertel" id="usertel" class="join-input-boxs" placeholder="전화번호" />
+            <input type="date" max="9999-12-31" name="birth" id="userbirth" class="join-input-boxs" placeholder="생년월일" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" />
+            <input type="text" name="phonenum" id="usertel" class="join-input-boxs" placeholder="-을 넣어주세요." />
             <input type="button" value="인증하기" id="checkTel" class="join-input-buttons" />
             <span class="telmsg" id="telmsg"></span>
             <div class="checkTelNotice">
@@ -200,11 +43,12 @@
               </ul>
             </div>
             <input type="text" name="email" id="email" class="join-input-boxs" placeholder="E-mail" />
-            <input type="text" name="zipcode" id="zipcode" class="join-input-boxs" placeholder="우편번호" />
-            <input type="button" value="주소찾기" id="findZipcode" class="join-input-buttons" />
-            <input type="text" name="address" id="address" class="join-input-boxs" placeholder="상세주소" />
+            <span class="emailmsg" id="emailmsg"></span>
+            <input type="text" name="mainaddress" id="zipcode" class="join-input-boxs" placeholder="우편번호" />
+            <input type="button" value="주소찾기" onclick="searchAddress()" id="findZipcode" class="join-input-buttons" />
+            <input type="text" name="detailaddress" id="address" class="join-input-boxs" placeholder="상세주소" />
             <div class="login-buttons">
-              <input type="button" value="Join Now" id="joinSubmit" class="join-input-buttons" />
+              <input type="button" value="회원가입" id="joinSubmit" class="join-input-buttons" />
             </div>
           </div>
         </form>
@@ -249,7 +93,5 @@
 
       document.getElementById('joinSubmit').addEventListener('click', submit);
     </script>
-    
-    
         	</body>
 	</html>
