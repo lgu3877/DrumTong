@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+		"-//mybatis.org//DTD Mapper 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<!-- 고객 결제 정보 테이블	 -->
+<mapper namespace="com.drumtong.customer.dao.CPaymentDAO">
+	
+	<!--신규 데이터 입력 -->
+	<insert id="insertSignUp" parameterType="String">
+		INSERT INTO CPAYMENT (MEMBERID) 
+			VALUES
+			(#{MemberID})
+	</insert>
+</mapper>

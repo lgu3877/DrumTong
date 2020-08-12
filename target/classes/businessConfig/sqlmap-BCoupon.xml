@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+		"-//mybatis.org//DTD Mapper 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- resultType="businessVO"	 -->
+<mapper namespace="com.drumtong.business.dao.BCouponDAO">
+	<select id="select" parameterType="String" resultType="BCouponVO" >
+		SELECT * FROM BCOUPON WHERE ESTID=#{estid}
+	</select>
+	
+	<select id="selectUsableCoupon" parameterType="hashmap" resultType="BCouponVO">
+		SELECT B.COUPONID, DISCOUNT, PERIOD, MINIMUMPRICE FROM (SELECT COUPONID FROM CCOUPON 
+						WHERE 
+						MEMBERID=#{memberid} AND USEBOOLEAN='N') A,
+		(SELECT * FROM BCOUPON 
+				WHERE ESTID=#{estid}) B 
+		WHERE (A.COUPONID=B.COUPONID) AND DELETEBOOLEAN='N'
+		
+
+	</select>
+</mapper>

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.drumtong.security.GetIPAddress;
 import com.drumtong.system.vo.SLoginLogVO;
 
 //Customer Login Intercepter
@@ -33,18 +34,26 @@ public class CustomerLoginInterceptor extends HandlerInterceptorAdapter {
 			}
 			return true;
 		}
+		
+		// ■□■□■□■□■□방금 로그아웃 했고 이전 페이지가 로그인 해야하는 페이지일 경우 메인으로!■□■□■□■□■□
+		if("firstPage".equals(Session.getAttribute("Logout"))) {
+			response.sendRedirect(request.getContextPath() + "/customer/");
+			return false;
+		}
+		
 		// ■□■□■□■□■□■□■□■□■□■□■로그인이 안되어있다면□■□■□■□■□■□■□■□■□■□■□
 		// 1. 이동할 주소 session에 저장
 		AddressToMove = AddressToMove.equals("customer/membership/customerLogin/")
 				? "customer/"	// 로그인 페이지를 눌러 이동한거면
 				: AddressToMove;	// 로그인 페이지가 아닌 다른 페이지에서 왔다면
+
 		Session.setAttribute("AddressToMove", AddressToMove);
 		
 		// 2. 로그인 로그 객체 만들기
 		sLoginLogVO = new SLoginLogVO();
 		
 		// 3. LOGINIP, LOGINURL 넣기;
-		sLoginLogVO.setLoginip(request.getRemoteAddr());
+		sLoginLogVO.setLoginip(GetIPAddress.getIP(request));
 		sLoginLogVO.setLoginurl(request.getHeader("referer"));
 		
 		Session.setAttribute("sLoginLogVO", sLoginLogVO);
@@ -60,6 +69,7 @@ public class CustomerLoginInterceptor extends HandlerInterceptorAdapter {
 		HttpSession Session = request.getSession();
 		Session.removeAttribute("AddressToMove");
 		Session.removeAttribute("sLoginLogVO");
+		Session.removeAttribute("Logout");
 		
 		// TODO Auto-generated method stub
 		super.postHandle(request, response, handler, modelAndView);

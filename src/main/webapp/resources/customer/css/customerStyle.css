@@ -87,7 +87,7 @@ section {
 body {
 	/* 	border: 1px solid black; */
 	margin: auto;
-	height: 1500px;
+	height: auto;
 	/*     padding: 20px 0px 0px 0px; */
 
 	/* 	최대크기 */
@@ -141,13 +141,14 @@ header .mainMenu {
 }
 
 header .mainMenu .menu {
-	width: 100px;
+	width: 105px;
 	height: 30px;
-	color: #0091e4;
+	
 }
 
 header .mainMenu .menu li {
 	list-style: none;
+	
 }
 
 header .mainMenu .menu .mypage {
@@ -155,26 +156,26 @@ header .mainMenu .menu .mypage {
 	flex-direction: column;
 }
 
-header .mainMenu .menu .login {
+header .mainMenu .menu .headerLogin {
 	white-space: nowrap;
 	width: 80px;
 
 }
 
-header .mainMenu .menu .login:hover .mypage {
+header .mainMenu .menu .headerLogin:hover .mypage {
 	display: contents;
 }
 
-header .mainMenu .menu .login .mypage .listButtons {
+header .mainMenu .menu .headerLogin .mypage .listButtons {
 	margin-top: 10px;
 }
 
-header .mainMenu .menu .login .mypage .listButtons .mypageList {
+header .mainMenu .menu .headerLogin .mypage .listButtons .mypageList {
 	margin-top: 10px;
 
 }
 
-header .mainMenu .menu .login .mypage .listButtons .mypageList .listButton {
+header .mainMenu .menu .headerLogin .mypage .listButtons .mypageList .listButton {
 	color: #373737;
 	font-size: 10pt;
 	text-decoration: none;
@@ -186,17 +187,18 @@ header .mainMenu .menu .mypage .listButtons .mypageList:hover {
 }
 
 header .middleMenu {
-	color: #35aefd;
+	color: #000000;
 	text-decoration: none;
 
 }
 
 header .mainMenu .middleMenu:hover {
-	color: black;
+	color: #3185F8;
+	font-weight: normal;
 }
 
 header .middleMenu2 {
-	color: #0091e4;
+	color: #000000;
 }
 
 

@@ -5,7 +5,7 @@ public class CCustomerVO {
 	private String memberid;
 	private String registdate;
 	private String updatedate;
-	private String deleteboolean;
+	private char deleteboolean;
 	private String deletedate;
 	
 	public String getCustomer() {
@@ -32,10 +32,11 @@ public class CCustomerVO {
 	public void setUpdatedate(String updatedate) {
 		this.updatedate = updatedate;
 	}
-	public String getDeleteboolean() {
+
+	public char getDeleteboolean() {
 		return deleteboolean;
 	}
-	public void setDeleteboolean(String deleteboolean) {
+	public void setDeleteboolean(char deleteboolean) {
 		this.deleteboolean = deleteboolean;
 	}
 	public String getDeletedate() {

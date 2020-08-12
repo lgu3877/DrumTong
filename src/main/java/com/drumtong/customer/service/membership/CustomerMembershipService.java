@@ -1,3 +1,4 @@
+
 package com.drumtong.customer.service.membership;
 
 import javax.servlet.http.Cookie;
@@ -16,6 +17,7 @@ import com.drumtong.customer.dao.CPrivateDataDAO;
 import com.drumtong.customer.vo.CCustomerVO;
 import com.drumtong.customer.vo.CPrivateDataVO;
 import com.drumtong.security.Encrypt;
+import com.drumtong.security.GetIPAddress;
 import com.drumtong.security.SerialUUID;
 import com.drumtong.system.dao.SLoginLogDAO;
 import com.drumtong.system.vo.SLoginLogVO;
@@ -28,6 +30,7 @@ public class CustomerMembershipService {
 	@Autowired CAlarmDAO cAlarmDAO;					// 고객알람 테이블
 	@Autowired CPaymentDAO cPaymentDAO;				// 고객결제 테이블
 	@Autowired SLoginLogDAO sLoginLogDAO;
+	
 	
 	// 로그인 페이지로 이동[영경]
 	public ModelAndView login() {
@@ -81,6 +84,38 @@ public class CustomerMembershipService {
 		return mav;
 	}
 	
+	// 로그아웃 객체
+	public ModelAndView logOut(HttpServletRequest req, HttpServletResponse resp) {
+		String Referer = req.getHeader("referer");
+		String AddressToMove = Referer != null ? Referer.split("drumtong")[1] : "/customer/";
+		ModelAndView mav = new ModelAndView("redirect:" + AddressToMove);
+		HttpSession Session = req.getSession();
+		SLoginLogVO sLoginLogVO = new SLoginLogVO();
+		CCustomerVO Login = (CCustomerVO)Session.getAttribute("Login");
+		
+		sLoginLogVO.setUserid(cPrivateDataDAO.selectID(Login.getMemberid()));
+		sLoginLogVO.setLoginip(GetIPAddress.getIP(req));
+		sLoginLogVO.setLoginurl(Referer);
+		sLoginLogVO.setLoginresult("LOGOUT");
+		
+		sLoginLogDAO.insertLoginLog(sLoginLogVO);
+		
+		Session.removeAttribute("AutoLogin");
+		Session.removeAttribute("Login");
+		Cookie[] cookie = req.getCookies();
+		for(Cookie c : cookie) {
+			if(c.getName().equals("JSESSIONID")) {
+				c.setMaxAge(0);
+				resp.addCookie(c);
+			}
+		}
+		
+		// 로그아웃 했을 때 표시해주기
+		Session = req.getSession();
+		Session.setAttribute("Logout", "Logout");
+		return mav;
+	}
+	
 	// 고객 회원가입 (GET)
 	public ModelAndView signUp() {
 		ModelAndView mav = new ModelAndView("customer/membership/customerSignUp");
@@ -89,41 +124,59 @@ public class CustomerMembershipService {
 	
 	// 고객 회원가입 (POST)
 	public ModelAndView signUp(CPrivateDataVO cPrivateDataVO) {
-		System.out.println("signUP 구문 실행");
-		System.out.println(cPrivateDataVO.getId());
+
 		ModelAndView mav = new ModelAndView("/");
 		
 		// SerialUUID 생성
 		String MemberID =  SerialUUID.getSerialUUID("CPrivateData", "MemberID");
 		
-		// 고객 정보 VO에 MemberID 입력
+		
+		// 세탁된 물품을 회수받는 주소
+		String MainReceiptAddress = cPrivateDataVO.getMainaddress();
+		String DetailReceiptAddress = cPrivateDataVO.getDetailaddress();
+		
+		// 암호화할 아이디, 패스워드 받기
+		String PassWord = cPrivateDataVO.getPw();
+		String ID = cPrivateDataVO.getId();
+		
+		// 암호화
+		cPrivateDataVO.setPw(Encrypt.SecurePassword(ID, PassWord));
+		
+		// 고객 정보 VO에 MemberID, MainReciptAddress, DetailReceiptAddress 입력
 		cPrivateDataVO.setMemberid(MemberID);
+		cPrivateDataVO.setMainreceiptaddress(MainReceiptAddress);
+		cPrivateDataVO.setDetailreceiptaddress(DetailReceiptAddress);
 		
 		
-		// 1. CCustomer 신규 데이터 생성
+		
+		// 1. CCustomer 신규 데이터 생성	( 고객 테이블 )
 		
 		int CustomerReuslt = cCustomerDAO.insertSignUp(MemberID);
 		
 		
 		
-		// 2. CPrivateData 신규 데이터 생성
+		// 2. CPrivateData 신규 데이터 생성	( 고객 개인정보 테이블 )
 		
 		int PrivateDataResult = cPrivateDataDAO.insertSignUp(cPrivateDataVO);
 		
 		
 		
-		// 3. CAlarm 신규 데이터 생성
+		// 3. CAlarm 신규 데이터 생성	( 고객 알람 테이블 )
 		
 		int AlarmResult = cAlarmDAO.insertSignUp(MemberID);
 		
 		
 		
-		// 4. CCpayment 신규 데이터 생성
+		// 4. CCpayment 신규 데이터 생성	( 고객 지불 테이블 )
 		
 		int PaymentResult = cPaymentDAO.insertSignUp(MemberID);
 		
 		
 		return mav;
 	}
+
+	
+	
+	
 
 }
