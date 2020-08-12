@@ -780,15 +780,16 @@ body .section_search .laundryList_main .laundryList_list .laundryList_child .lau
 	list-style: none;
 	margin: 0px;
 	padding: 0px;
-	/* top: 0; */
-	/* margin-top: 5px; */
 	margin-left: 293px;
 	float: right;
 	cursor: pointer; 
 	color: white;
-	/* background-color: orange; */
 	display: inline-flex;
-	font-size: x-large;	
+	font-size: x-large;
+/* 	-webkit-text-stroke: none; */
+	/* background-color: orange; */
+	/* top: 0; */
+	/* margin-top: 5px; */
 }
 
 /* .fa-start:active {
