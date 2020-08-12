@@ -30,7 +30,7 @@ public class CustomerLaundryController {
 	
 	@RequestMapping("customerDetail/detail/")
 	public ModelAndView detail(HttpServletRequest req) {	
-		return svc.detail((String)req.getSession().getAttribute("estid"));
+		return svc.detail(req, (String)req.getSession().getAttribute("estid"));
 	}
 }
 
