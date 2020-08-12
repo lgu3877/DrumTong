@@ -15,6 +15,7 @@
 		<typeAlias type="com.drumtong.customer.vo.CPrivateDataVO" alias="CPrivateDataVO" />
 		<typeAlias type="com.drumtong.customer.vo.CAlarmVO" alias="CAlarmVO" />
 		<typeAlias type="com.drumtong.customer.vo.CPaymentVO" alias="CPaymentVO" />
+		<typeAlias type="com.drumtong.customer.vo.CBookmarkVO" alias="CBookmarkVO" />
 	</typeAliases>
 	
 </configuration>		

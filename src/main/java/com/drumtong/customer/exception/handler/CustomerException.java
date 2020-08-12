@@ -1,4 +1,4 @@
-package com.drumtong.customer.exception;
+package com.drumtong.customer.exception.handler;
 
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
