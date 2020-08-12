@@ -87,7 +87,7 @@ section {
 body {
 	/* 	border: 1px solid black; */
 	margin: auto;
-	height: 1500px;
+	height: auto;
 	/*     padding: 20px 0px 0px 0px; */
 
 	/* 	최대크기 */
