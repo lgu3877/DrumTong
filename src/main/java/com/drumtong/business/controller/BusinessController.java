@@ -6,17 +6,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.drumtong.business.service.BusinessService;
-
-@Controller
-@RequestMapping("/business/")
-public class BusinessController {
-	
-	@Autowired BusinessService svc;
-	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView home() {
-		return new ModelAndView("");
-	} 
-	
-}
+//import com.drumtong.business.service.BusinessService;
+//
+//@Controller
+//@RequestMapping("/business/")
+//public class BusinessController {
+//	
+//	@Autowired BusinessService svc;
+//	
+//	@RequestMapping(value = "/", method = RequestMethod.GET)
+//	public ModelAndView home() {
+//		return new ModelAndView("");
+//	} 
+//	
+//}

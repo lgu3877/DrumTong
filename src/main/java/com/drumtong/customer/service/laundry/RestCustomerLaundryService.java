@@ -1,10 +1,13 @@
 package com.drumtong.customer.service.laundry;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.drumtong.business.dao.BInformationDAO;
+import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.customer.dao.CBookmarkDAO;
 import com.drumtong.customer.vo.CBookmarkVO;
 
@@ -12,6 +15,15 @@ import com.drumtong.customer.vo.CBookmarkVO;
 public class RestCustomerLaundryService {
 	
 	@Autowired CBookmarkDAO cBookmarkDAO;
+	@Autowired BInformationDAO bInformationDAO;		
+	
+	
+	public List<BInformationVO> BusinessMapInfo(){
+		
+		// 사업장의 위도와 경도를 받아온다.
+		return bInformationDAO.selectBusinessMapInfo();
+	}
+	
 	
 	public String setBookmark(HashMap<String, String> param) {
 		String result = param.get("result");
