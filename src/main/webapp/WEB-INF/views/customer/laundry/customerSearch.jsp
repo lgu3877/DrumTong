@@ -2,8 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../main/customerHeader.jsp"%>
 
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js" -->
+<!-- 	integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" -->
+<!-- 	crossorigin="anonymous"></script> -->
 
-<section class="section_search">
+
+<!-- Axios script -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+<section class="section_search" >
 
         <article class="filter">
             <div class="searchBox">
@@ -573,32 +581,105 @@
     </script>
    </section>
    
-
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0c218bd435ac24618816391ea2acab62"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0c218bd435ac24618816391ea2acab62&libraries=services,clusterer,drawing"></script>
 <script>
-	var container = document.getElementsByClassName('laundryList_map')[0]; //지도를 담을 영역의 DOM 레퍼런스
-	var options = { //지도를 생성할 때 필요한 기본 옵션
-		center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-		level: 3 //지도의 레벨(확대, 축소 정도)
-	};
-	
-	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+	// 지도 초기화 함수
+// 	function initMap() {
+		
+		var container = document.getElementsByClassName('laundryList_map')[0]; //지도를 담을 영역의 DOM 레퍼런스
+		var options = { //지도를 생성할 때 필요한 기본 옵션
+			center: new kakao.maps.LatLng(37.553505, 126.969641), //지도의 중심좌표.
+			level: 7 //지도의 레벨(확대, 축소 정도)
+		};
+		
+		var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+		
+		
+		var clusterer = new kakao.maps.MarkerClusterer({
+	        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+	        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+	        minLevel: 0 // 클러스터 할 최소 지도 레벨 
+		});
+		
+		
+		console.log('실행');
+		// ============================ 비동기 실행  =================================
+		const axGet = async () => {	// async : 비동기 실행 함수
+			
+// 			실제 코드 동작 시
+// 	        await axios.get('${pageContext.request.contextPath}/customer/laundry/customerSearch/rest/clusterer/')
 
+//			테스트 코드 동작 시
+			await axios.get('${pageContext.request.contextPath}/customer/js/laundry/MapTestData.json')
+	        // 정상 통신 시에..
+	        .then( (response) => {
+	        	console.log('실행');
+	        	console.log(response.data.positions);
+	        	
+	        	
+	        	// 마커들의 저장 함수
+	        	var markers = response.data.positions.map(function(i, position) {
+
+	        		// 마커 생성
+	        		var marker = new kakao.maps.Marker({
+		                position : new kakao.maps.LatLng(i.lat, i.lng),
+		                clickable : true
+		            });
+		           
+	        		// 띄울 Info css 정의
+	        		
+		            
+	        		// 인포윈도우를 생성합니다
+	        		
+//                     var infowindow = new kakao.maps.InfoWindow({
+//                         content : iwContent,
+//                         removable : iwRemoveable
+//                     });
+	        		
+                 	// 마커에 클릭이벤트 처리
+//                     kakao.maps.event.addListener(marker, 'click', function() {
+                    	
+//                           // 마커 위에 인포윈도우를 표시합니다
+//                           infowindow.open(map, marker);    
+                          
+//                     });
+                   
+                   //생성된 마커를 반환
+                   return marker;
+		            
+		        });
+	        	
+	        	
+	        	// 클러스터 클릭 시에 실행할 함수
+// 	        	kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
+		             
+// 	            });
+	          	clusterer.addMarkers(markers);
+		    });
+// 	        ,error : function(xhr, status, error){
+// 	            //요청에 실패하면 에러코드 출력  
+// 	            alert("에러코드 : " + xhr.status);
+// 	       }
+	        	
+	    };
+	    axGet();
+// 	 }
 	
-// 	var clusterer = new kakao.maps.MarkerClusterer({
-//         map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
-//         averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-//         minLevel: 1 // 클러스터 할 최소 지도 레벨 
-// 	});
+	
 	 
-// 	    // 데이터를 가져오기 위해 jQuery를 사용합니다
-// 	    // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
-// 	    $.get("C:\Users\KGITBANK29\Desktop\Project png\MapTestData.txt", function(data) {
+	
+	
+    
+	
+	    // 데이터를 가져오기 위해 jQuery를 사용합니다
+	    // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
+// 	    $.get("${pageContext.request.contextPath}/customer/js/MapTestData.json", function(data) {
 // 	        // 데이터에서 좌표 값을 가지고 마커를 표시합니다
 // 	        // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
 // 	        var markers = $(data.positions).map(function(i, position) {
 // 	            return new kakao.maps.Marker({
-// 	                position : new kakao.maps.LatLng(position.lat, position.lng)
+// 	                position : new kakao.maps.LatLng(position.lat, position.lng),
+// 	                clickable : true
 // 	            });
 // 	        });
 

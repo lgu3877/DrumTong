@@ -2,6 +2,9 @@ package com.drumtong.business.service;
 
 import org.springframework.stereotype.Service;
 
+//import com.drumtong.business.dao.BusinessDAO;
+
+
 @Service
 public class BusinessService {
 //	@Autowired BusinessDAO dao;
@@ -12,5 +15,6 @@ public class BusinessService {
 //		return mv;
 //	}
 	
+
 //	@Transactional(timeout=5)
 }
