@@ -1,4 +1,7 @@
-    function searchAddress() {
+// 수정해야할 부분
+// 1. 이메일 정규식 확인!!(.을 넣지 않아도 올바른 식으로 처리되는 문제)
+// 2. (전화번호 인증을 누르지 않아도 submit이 실행되는 문제)
+function searchAddress() {
             new daum.Postcode(
                     {
                         oncomplete : function(data) {

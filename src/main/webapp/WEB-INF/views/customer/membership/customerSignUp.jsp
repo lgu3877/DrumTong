@@ -14,7 +14,7 @@
 		
 	
     <!-- 본문 영역 -->
-    <section>
+    <section class="section-SangJae">
       <div class="join">
         <form method="POST" id="loginForm">
           <img src="#" class="login-logo" />
@@ -44,7 +44,7 @@
             </div>
             <input type="text" name="email" id="email" class="join-input-boxs" placeholder="E-mail" />
             <span class="emailmsg" id="emailmsg"></span>
-            <input type="text" name="mainaddress" id="zipcode" class="join-input-boxs" placeholder="우편번호" />
+            <input type="text" name="mainaddress" id="zipcode" class="join-input-boxs" placeholder="우편번호" readonly/>
             <input type="button" value="주소찾기" onclick="searchAddress()" id="findZipcode" class="join-input-buttons" />
             <input type="text" name="detailaddress" id="address" class="join-input-boxs" placeholder="상세주소" />
             <div class="login-buttons">
