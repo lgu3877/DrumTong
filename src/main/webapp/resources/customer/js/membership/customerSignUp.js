@@ -50,7 +50,7 @@
           idmsg.style.color = 'red';
           document.querySelector('#userid').focus();
           return;
-        } else if(userid.length < 4){ 
+        } else if(userid.length < 5){ 
           console.log('userid 실행');
           idmsg.innerText = '아이디 최소길이는 5글자 이상입니다.';
           idmsg.style.color = 'red';

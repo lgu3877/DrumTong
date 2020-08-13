@@ -18,7 +18,7 @@ public class CustomerLaundryController {
 	
 	// 검색 페이지 이동 [GET]
 	@RequestMapping("customerSearch/")
-	public ModelAndView detail2(HttpServletRequest req) {	
+	public ModelAndView search(HttpServletRequest req) {	
 		return svc.search();
 	}
 }
