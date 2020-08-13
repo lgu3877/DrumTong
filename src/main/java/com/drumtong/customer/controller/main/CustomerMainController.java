@@ -9,7 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.drumtong.customer.service.main.CustomerMainService;
 
-
 @Controller
 @RequestMapping(value = {"/customer/", "/"})
 public class CustomerMainController {

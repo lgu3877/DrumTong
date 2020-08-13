@@ -37,7 +37,7 @@
     </script>
 
     <!-- 본문 영역 -->
-    <section>
+    <section class="section-SangJae">
       <div class="login">
         <form method="POST" id="loginForm">
           <img src="#" class="login-logo" />
