@@ -1,4 +1,3 @@
-=======
 /*
 	[css 작성 규약]
 	
@@ -866,6 +865,8 @@ body .section_pac {
 }
 
 body .section_pac .pac_mainName {
+	width: 1900px;
+	height: 33px;
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
@@ -874,10 +875,10 @@ body .section_pac .pac_mainName {
 
 body .section_pac .pac_list {
 	width: 800px;
-	height: auto;
-	/* text-align: center; */
+	height: 50px;
 	margin-left: auto;
 	margin-right: auto;
+	/* text-align: center; */
 }
 
 body .section_pac .pac_list .pac_lists {

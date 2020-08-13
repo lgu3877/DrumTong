@@ -6,7 +6,7 @@
 <script></script>
 
 <!-- 본문 영역 -->
-<section>
+<section class="section-SangJae">
   <div class="orderlist-wrap">
     <div class="orderlist-card">
       <div class="orderData1">
