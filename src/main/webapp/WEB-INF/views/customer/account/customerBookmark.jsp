@@ -9,7 +9,7 @@
 </script>
 
 <!-- 본문 영역 -->
-<section>
+<section class="section-SangJae">
   <div class="bookmark-row">
     <div class="bookmark" onclick="location.href='#'">
       <div class="bookmark-context">

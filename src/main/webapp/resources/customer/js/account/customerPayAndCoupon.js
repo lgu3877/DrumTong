@@ -12,7 +12,7 @@
 //            pac_payList.appendChild(newRow);
 //}
 
-function listup() {
+function cardup() {
     newRow = document.createElement("div");
     newRow.setAttribute("class", "pac_payLists");
     newRow.innerHTML =

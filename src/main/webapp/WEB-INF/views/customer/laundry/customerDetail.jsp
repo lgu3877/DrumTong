@@ -171,7 +171,7 @@
 
     <!-- 본문 영역 -->
 <!--     <header>헤더셈</header> -->
-    <section>
+    <section class="section-SangJae">
       <div class="detailview-wrap">
         <div class="detailview-top">
           <div class="detailview-imgBlock">
@@ -189,7 +189,7 @@
           <div class="detailview-companyIntro">
             <div class="detailview-intro-headline">
               <h1>${bInformationVO.brandnaming}</h1>
-              <i class="fas fa-star ${Login != null ? (Color eq 'orange' ? 'remove' : 'add') : 'add' }" id="bookMarker" style="-webkit-text-stroke: 2px ${Login != null ? Color : 'skyblue'};color:${(Login != null && Color == 'orange') ? '' : 'yellow' }" onclick="addBookmark()"></i>
+              <i class="fas fa-star ${Login != null ? (Color eq 'orange' ? 'remove' : 'add') : 'add' }" id="bookMarker" style="-webkit-text-stroke: 2px ${Login != null ? Color : 'skyblue'};color:${(Login != null && Color == 'orange') ? 'yellow' : '' }" onclick="addBookmark()"></i>
             </div>
             <textarea readonly>${bManagementVO.introduction }</textarea>
           </div>
@@ -197,7 +197,7 @@
 
         <div class="detailview-bottom">
           <div class="detailview-options">
-            <button class="add-coupon" id="add-coupon" value="1000">쿠폰 받기 ${bCouponVO }</button>
+            <button class="add-coupon" id="add-coupon" value="1000">쿠폰 받기</button>
 
             <div class="detailview-selectOptions">
             <!-- 수정한 부분 ★★★★★★ -->
@@ -209,7 +209,7 @@
                 </div>
                 <input type="number" class="quantity" id="quantity" placeholder="0" min="0" value="0" />
                 <div class="option-price">${menu.price } 원</div>
-                <input type="checkbox" class="quick" id="quick" value="1000" />+${menu.quickprice } 원
+                <input type="checkbox" class="quick" id="quick" value="${menu.quickprice }" />+${menu.quickprice } 원
               </div>
 			</c:forEach>
 
@@ -286,8 +286,9 @@
 
       <div class="modal-content1" id="modal-content1">
         <select class="modal-couponList">
-          <option>쿠폰1 1000원</option>
-          <option>쿠폰2 5000원</option>
+        <c:forEach items="${bCouponVO }" var="bco">
+          <option>${bco.discount }원 할인/${bco.minimumprice }원 이상[${bco.period }]</option>
+        </c:forEach>
         </select>
         <button class="modal-addCoupon">받기</button>
       </div>
