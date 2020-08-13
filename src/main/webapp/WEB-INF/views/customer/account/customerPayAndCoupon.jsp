@@ -23,7 +23,7 @@
             <div class="pac_mainPay">
                 <div class="pac_payList" id="pac_payList">
                     <p class="pac_payText">결제수단 관리
-                        <button class="pac_payCard_add" onclick="listup()">카드추가</button>
+                        <button class="pac_payCard_add" onclick="cardup()">카드추가</button>
                     </p>
                     <div class="pac_payLists">
                         <div class="pac_payCard_name">카드번호</div>

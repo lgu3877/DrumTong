@@ -1,14 +1,9 @@
-html {
-  /* 	최대크기 */
-  width: 100%;
-  /* height: 3000px; */
-}
 
 * {
   box-sizing: border-box;
 }
 
-section {
+.section-SangJae{
   display: flex;
   justify-content: center;
   flex-wrap: wrap;

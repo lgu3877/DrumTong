@@ -16,16 +16,16 @@ public class CustomerAccountController {
 	@Autowired CustomerAccountService svc;
 	
 
-	@RequestMapping(value = "customerPayAndCopon/", method = RequestMethod.GET)
+	@RequestMapping(value = "customerPayAndCoupon/", method = RequestMethod.GET)
 	public String pac() {
-		return "customer/account/customerPayAndCopon";
+		return "customer/account/customerPayAndCoupon";
 	}
 	
 	@RequestMapping(value = "customerJoinChange/", method = RequestMethod.GET)
 	public String jc() {
 		return "customer/account/customerJoinChange";
 	}
-}
+
 
 	@RequestMapping("customerBookmark/")
 	public ModelAndView bookmark() {
