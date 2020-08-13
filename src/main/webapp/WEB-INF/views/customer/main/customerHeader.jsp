@@ -20,7 +20,7 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 	<script type="text/javascript" src="${cpath }/customer/js/main/customerHeader.js"></script>
 	<script type="text/javascript" src="${cpath }/customer/js/laundry/customerSearch.js"></script>
-    <script type="text/javascript" src="${cpath }/customer/js/account/customerPayAndCopon.js"></script>
+    <script type="text/javascript" src="${cpath }/customer/js/account/customerPayAndCoupon.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/account/customerJoinChange.js"></script>
     <script src="https://kit.fontawesome.com/7522a35233.js" crossorigin="anonymous"></script>
 	
@@ -40,13 +40,13 @@
 
             <ul class="menu" >
                 <li>
-                    <a href="#" class="middleMenu">메뉴</a>
+                    <a href="#" class="middleMenu">메뉴1</a>
                 </li>
             </ul>   
 
             <ul class="menu">
                 <li>
-                    <a href="#" class="middleMenu">메늉</a>
+                    <a href="#" class="middleMenu">메뉴2</a>
                 </li>
             </ul>
 
