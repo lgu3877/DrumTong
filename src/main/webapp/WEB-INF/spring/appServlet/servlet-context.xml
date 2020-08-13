@@ -29,6 +29,7 @@
 	<resources mapping="/customer/css/**" location="/resources/customer/css/" />
 	<resources mapping="/customer/js/**" location="/resources/customer/js/" />
 	<resources mapping="/customer/img/**" location="file:D:/customer/upload/**" />
+	<resources mapping="/customer/json/**" location="/resources/customer/json/" />
 	
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->

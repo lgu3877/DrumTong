@@ -687,6 +687,130 @@
 // 	        clusterer.addMarkers(markers);
 // 	    });
 	
+
+	    
+// 			폴리곤 생성 코드
+
+	    	const axGet2 = async () => {	// async : 비동기 실행 함수
+			
+// 			실제 코드 동작 시
+// 	        await axios.get('${pageContext.request.contextPath}/customer/laundry/customerSearch/rest/clusterer/')
+
+//			테스트 코드 동작 시
+			await axios.get('${pageContext.request.contextPath}/customer/json/EMD.geojson')
+	        // 정상 통신 시에..
+	        .then( (response) => {
+	        	console.log('실행');
+	        	console.log(response.data.positions);
+	        	
+	        	var data = response.data.features;
+	        	var coordinates = [];
+	        	var name = '';
+	        	
+// 	        	jquery문
+// 	        	$.each(data, function(index, val) {
+	        		
+// 	        		coordinates = val.geometry.coordinates;
+// 	        		name = val.properties.SIG_KOR_NM;
+	        		
+// 	        		displayArea(coordinates, name);
+// 	        	})
+	        	
+	        	data.forEach(function(val,index) {
+	        		coordinates = val.geometry.coordinates;
+	        		name = val.properties.SIG_KOR_NM;
+	        		
+	        		displayArea(coordinates, name);
+	        	})
+		            
+		    });
+	        	
+	    };
+	    axGet2();
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    var polygons = [];
+	    
+	    function displayArea(coordinates, name) {
+	    	var path = [];
+	    	var points =[];
+	    	
+// 	    	jquery문
+// 	    	$.each(coordinates[0], function(index, coordinate) {
+// 	    		var point = new Object();
+// 	    		point.x = coordinate[1];
+// 	    		point.y = coordinate[0];
+// 	    		points.push(point);
+// 	    		path.push(new kakaomaps.LatLng(coordinate[1], coordinate[0]));
+// 	    	})
+	    	
+	    	coordinates[0].forEach(function (coordinate, index) {
+	    		var point = new Object();
+	    		point.x = coordinate[1];
+	    		point.y = coordinate[0];
+	    		points.push(point);
+	    		path.push(new kakao.maps.LatLng(coordinate[1], coordinate[0]));
+	    	});
+	    	
+	    	// 다각형 생성
+	    	var polygon = new kakao.maps.Polygon({
+	    		map : map,
+	    		path : path,
+	    		strokeWeight : 1,
+	    		strokeColor : '#004c80',
+	    		strokeOpacity : 0.8,
+	    		fillColor : '#fff',
+	    		fillOpacity : 0.7
+	    	});
+	    	
+	    	polygons.push(polygon);
+	    	
+	    	kakao.maps.event.addListener(polygon, 'mouseover', function(mouseEvent) {
+	    		polygon.setOptions({
+	    			fillColor : '#09f'
+	    		});
+	    		
+	    		customOverlay.setContent('<div class="area">' + name + '</div>');
+	    		
+	    		customOverlay.setPosition(mouseEvent.latLng);
+	    		customOverlay.setMap(map);
+	    	});
+	    	
+	    	
+	    	kakao.maps.event.addListener(polygon, 'mousemove', function(mouseEvent) {
+	    		customOverlay.setPosition(mouseEvent.latLng);
+	    	});
+	    	
+	    	
+	    	kakao.maps.event.addListener(polygon, 'mouseout', function(mouseEvent) {
+	    		polygon.setOptions({
+	    			fillColor : '#fff'
+	    		});
+	    		customOverlay.setMap(null);
+	    	});
+	    	
+	    	kakao.maps.event.addListener(polygon, 'click', function() {
+	    		
+	    		var level = map.getLevel() -2;
+	    		
+	    		map.setLevel(level, {anchor : centroid(points), animate : {
+	    			duration : 350
+	    		}});
+	    		
+	    		deletePolygon(polygons);
+	    	});
+	    	
+	    }
+	    
+	    
 	    
 </script>
    
