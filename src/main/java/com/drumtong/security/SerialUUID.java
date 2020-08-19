@@ -18,11 +18,10 @@ public class SerialUUID {
 	public static String getSerialUUID(String TableName, String FieldName) {
 		int result = 0;
 		String SerialUUID = "";
-
-		while(result != 0) {
+		while(result != 1) {
 			SerialUUID = FieldName + "_" + UUID.randomUUID().toString().replace("-", "");
 			switch(TableName) {
-				case "CPrivateDataDAO" : result = cCustomerDAO.confirm(SerialUUID);
+				case "CPrivateData" : result = cCustomerDAO.confirm(SerialUUID);
 					break;
 					
 //				case "BBusinessDAO" : result = bBusinessDAO.confirm(SerialUUID);

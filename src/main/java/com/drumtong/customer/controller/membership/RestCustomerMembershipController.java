@@ -1,8 +1,15 @@
 package com.drumtong.customer.controller.membership;
 
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,7 +34,12 @@ public class RestCustomerMembershipController {
 				: "false";
 	}
 	
-	
+	// 로그인 비동기식 버전
+	@RequestMapping("customerLogin/rest/login/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String login(HttpServletRequest req, HttpServletResponse resp, @RequestBody HashMap<String, String> param) {
+		return svc.login(req, resp, param);
+	}
 }
 
 

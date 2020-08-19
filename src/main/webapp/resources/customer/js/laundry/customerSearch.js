@@ -11,6 +11,7 @@ function bookmark() {
     let icon = event.target;
 
     icon.style.color = (icon.style.color === 'yellow') ? 'white' : 'yellow';
+    
 }
 
 

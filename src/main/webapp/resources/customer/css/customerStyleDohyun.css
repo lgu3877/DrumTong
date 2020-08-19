@@ -1113,13 +1113,13 @@ body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLi
 body .section_board {
 	width: auto;
 	height: 1000px;
-	border: 1px solid black;
+	border: 1px solid white;
 }
 
 body .section_board .board {
 	width: auto;
 	height: 700px;
-	border: 1px solid red;
+/* 	border: 1px solid red; */
 	margin: 100px 200px;
 }
 
@@ -1134,7 +1134,7 @@ body .section_board .board .board_mainName {
 body .section_board .board .board_box {
 	width: auto;
 	height: 700px;
-	border: 1px solid blue;
+/* 	border: 1px solid blue; */
 }
 
 .btn {

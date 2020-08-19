@@ -34,7 +34,7 @@
 		<div class="notices">
 
 			<div class="notices_0 notices_1">
-				<a href="${cpath }/">
+				<a href="${cpath }/customer/board/customerBoard/">
 					<div class="notices_1_1">공지사항 게시판</div>
 				</a>
 				<hr class="notice_hr">
