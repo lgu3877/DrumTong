@@ -20,6 +20,7 @@ public class CustomerLoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		System.out.println("Login");
 		HttpSession Session = request.getSession();
 		String AddressToMove = request.getRequestURI();
 		AddressToMove = AddressToMove.substring(request.getContextPath().length(),AddressToMove.length());
