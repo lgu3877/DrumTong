@@ -46,19 +46,19 @@ public class Login {
 		boolean LoginResult = false;		// 로그인 성공여부
 		boolean CheckAutoLogin = "on".equals(storeid);	// 자동로그인 체크여부
 		
-		System.out.println("cPrivateDataDAO : " + cPrivateDataDAO);		
-		System.out.println("cCustomerDAO : " + cCustomerDAO);		
-		System.out.println("sLoginLogDAO : " + sLoginLogDAO);
+//		System.out.println("cPrivateDataDAO : " + cPrivateDataDAO);		
+//		System.out.println("cCustomerDAO : " + cCustomerDAO);		
+//		System.out.println("sLoginLogDAO : " + sLoginLogDAO);
 		// 1. 아이디 비밀번호 일치 여부 확인하기(계정 가져오기)
 		String test=Encrypt.SecurePassword(ID, PW);
-		System.out.println("test : " + test);
+//		System.out.println("test : " + test);
 		User = cPrivateDataDAO.selectUser(test);
 		
 		// 2. 일치하는 계정 있다면 Login 계정 생성하고 세션에 저장!(세션 시간은 3시간)
 		if(User != null) {
 			Login = cCustomerDAO.selectLogin(User.getMemberid());
 			session.setAttribute("Login", Login);
-			System.out.println("로그인 객체 : " + session.getAttribute("Login"));
+//			System.out.println("로그인 객체 : " + session.getAttribute("Login"));
 			session.setMaxInactiveInterval(60 * 60 * 3);
 			LoginResult = true;
 			
