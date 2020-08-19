@@ -5,7 +5,7 @@ public class BMenuVO {
 	private int num;
 	private String name;
 	private int price;
-	private char quickprice;
+	private int quickprice;
 	private int ete;
 	public String getEstid() {
 		return estid;
@@ -31,10 +31,10 @@ public class BMenuVO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public char getQuickprice() {
+	public int getQuickprice() {
 		return quickprice;
 	}
-	public void setQuickprice(char quickprice) {
+	public void setQuickprice(int quickprice) {
 		this.quickprice = quickprice;
 	}
 	public int getEte() {

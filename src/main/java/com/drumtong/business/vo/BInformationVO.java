@@ -10,6 +10,9 @@ public class BInformationVO {
 	private String detaillocation;
 	private String reportcard;
 	private String license;
+	private String latitude;
+	private String longitude;
+	
 	public String getEstid() {
 		return estid;
 	}
@@ -63,6 +66,18 @@ public class BInformationVO {
 	}
 	public void setLicense(String license) {
 		this.license = license;
+	}
+	public String getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+	public String getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
 	}
 	
 }

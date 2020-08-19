@@ -1,4 +1,7 @@
-    function searchAddress() {
+// 수정해야할 부분
+// 1. 이메일 정규식 확인!!(.을 넣지 않아도 올바른 식으로 처리되는 문제)
+// 2. (전화번호 인증을 누르지 않아도 submit이 실행되는 문제)
+function searchAddress() {
             new daum.Postcode(
                     {
                         oncomplete : function(data) {
@@ -50,7 +53,7 @@
           idmsg.style.color = 'red';
           document.querySelector('#userid').focus();
           return;
-        } else if(userid.length < 4){ 
+        } else if(userid.length < 5){ 
           console.log('userid 실행');
           idmsg.innerText = '아이디 최소길이는 5글자 이상입니다.';
           idmsg.style.color = 'red';

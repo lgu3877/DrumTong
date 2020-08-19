@@ -13,15 +13,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.drumtong.business.dao.BCouponDAO;
+import com.drumtong.business.dao.BImageDAO;
 import com.drumtong.business.dao.BInformationDAO;
 import com.drumtong.business.dao.BManagementDAO;
 import com.drumtong.business.dao.BMenuDAO;
 import com.drumtong.business.vo.BCouponVO;
+import com.drumtong.business.vo.BImageVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BManagementVO;
 import com.drumtong.business.vo.BMenuVO;
 import com.drumtong.customer.dao.CBookmarkDAO;
-import com.drumtong.customer.dao.CCouponDAO;
 import com.drumtong.customer.vo.CCustomerVO;
 
 @Service
@@ -30,8 +31,8 @@ public class CustomerLaundryService {
 	@Autowired BInformationDAO bInformationDAO;
 	@Autowired BManagementDAO bManagementDAO;
 	@Autowired BMenuDAO bMenuDAO;
-	@Autowired CCouponDAO cCouponDAO;
 	@Autowired CBookmarkDAO cBookmarkDAO;
+	@Autowired BImageDAO bImageDAO;
 	
 	// 검색 페이지 이동 [GET]
 	public ModelAndView search() {
@@ -48,6 +49,10 @@ public class CustomerLaundryService {
 		
 		// 매장관리(소개글, 배달, 퀵여부)를 저장한 객체
 		BManagementVO bManagementVO = bManagementDAO.selectCustomerDetail(estid);
+		
+		// ★★★★★★★★미완성★★★★★★★★★
+		List<BImageVO> bImageVO = bImageDAO.selectImageList(estid);
+		if(bImageVO != null) mav.addObject("bImageVO", bImageVO);
 		
 		// 쿠폰(할인가격, 기간, 최소금액, 중복가능여부) 객체를 유효기간에 해당하는 리스트만 불러왔음
 		List<BCouponVO> bCouponVO = comparePeriod(bCouponDAO.select(estid));
@@ -72,7 +77,8 @@ public class CustomerLaundryService {
 			List<BCouponVO> CouponList = comparePeriod(bCouponDAO.selectUsableCoupon(map));
 			mav.addObject("CouponList", CouponList);
 			
-			mav.addObject("Color", (cBookmarkDAO.isCheck(map) != null) ? "orange" : "skyblue");
+//			mav.addObject("Color", (cBookmarkDAO.isCheck(map) != null) ? "orange" : "skyblue");
+			mav.addObject("Bookmark", (cBookmarkDAO.isCheck(map) != null) ? "y" : "n");
 		}
 		
 		return mav;

@@ -1,17 +1,32 @@
 package com.drumtong.customer.service.laundry;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.drumtong.business.dao.BInformationDAO;
+import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.customer.dao.CBookmarkDAO;
+import com.drumtong.customer.dao.CCouponDAO;
 import com.drumtong.customer.vo.CBookmarkVO;
+import com.drumtong.customer.vo.CCouponVO;
 
 @Service
 public class RestCustomerLaundryService {
 	
 	@Autowired CBookmarkDAO cBookmarkDAO;
+	@Autowired CCouponDAO cCouponDAO;
+	@Autowired BInformationDAO bInformationDAO;		
+	
+	
+	public List<BInformationVO> BusinessMapInfo(){
+		
+		// 사업장의 위도와 경도를 받아온다.
+		return bInformationDAO.selectBusinessMapInfo();
+	}
+	
 	
 	public String setBookmark(HashMap<String, String> param) {
 		String result = param.get("result");
@@ -37,5 +52,24 @@ public class RestCustomerLaundryService {
 		}
 		
 		return AddOrRemove ? "true" : "false";
+	}
+
+
+	public String setCoupon(HashMap<String, String> param) {
+		System.out.println("memberid : " + param.get("memberid"));
+		System.out.println("couponid : " + param.get("couponid"));
+		
+		// 쿠폰아이디와 멤버아이디로 중복확인
+		CCouponVO hasCoupon = cCouponDAO.selectCheck(param);
+		
+		// 없다면 추가
+		int insertResult = 0;
+		if(hasCoupon == null) {
+			insertResult = cCouponDAO.insertCoupon(param);
+		} else {
+			System.out.println("널아니");
+		}
+		
+		return insertResult == 1 ? "true" : "false";
 	}
 }

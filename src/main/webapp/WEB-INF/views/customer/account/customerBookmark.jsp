@@ -9,13 +9,23 @@
 </script>
 
 <!-- 본문 영역 -->
-<section>
+<section class="section-SangJae">
   <div class="bookmark-row">
-    <div class="bookmark" onclick="location.href='#'">
-      <div class="bookmark-context">
-        <p>(주)드럼통 해운대구</p>
-      </div>
-    </div>
+  <c:if test="${not empty bookmarkList}">
+	  <c:forEach items="${bookmarkList }" var="bo">
+	  	<div class="bookmark" onclick="location.href='${pageContext.request.contextPath}/customer/laundry/customerDetail/${bo.estid }/'">
+	      <div class="bookmark-context">
+	        <p>${bo.brandnaming } | ${bo.mainlocation } ${bo.detaillocation }</p>
+	        
+	      </div>
+	    </div>
+	  </c:forEach>
+  </c:if>
+<!--     <div class="bookmark" onclick="location.href='#'"> -->
+<!--       <div class="bookmark-context"> -->
+<!--         <p>(주)드럼통 해운대구</p> -->
+<!--       </div> -->
+<!--     </div> -->
   </div>
 </section>
 
