@@ -17,7 +17,7 @@
     <section class="section-SangJae">
       <div class="join">
         <form method="POST" id="loginForm">
-          <img src="#" class="login-logo" />
+          <img src="${cpath }/resources/customer/img/logo4.png" class="login-logo" />
           <div class="login-input">
             <input type="text" name="id" id="userid" class="join-input-boxs" placeholder="ID"  onblur="axGet(document.getElementById('userid').value)" maxlength="25">
             <span class="idmsg" id="idmsg"></span>

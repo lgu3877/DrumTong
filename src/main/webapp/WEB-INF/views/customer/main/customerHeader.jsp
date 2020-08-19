@@ -28,7 +28,10 @@
 <body>
 	
 	<header>
-        <a href="${cpath }/"><i class="fa fa-cloud" aria-hidden="true"></i></a>
+<%--         <a href="${cpath }/"><img class="logo" src="${cpath }/resources/customer/img/logo1.png"></img></a> --%>
+<%--         <a href="${cpath }/"><img class="logo" src="${cpath }/resources/customer/img/logo2.png"></img></a> --%>
+        <a href="${cpath }/"><img class="logo" src="${cpath }/resources/customer/img/logo3.png"></img></a>
+<%--         <a href="${cpath }/"><img class="logo" src="${cpath }/resources/customer/img/logo4.png"></img></a> --%>
         
         <div class="mainMenu">
             

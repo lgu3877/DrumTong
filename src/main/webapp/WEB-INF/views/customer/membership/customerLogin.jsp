@@ -11,7 +11,7 @@
     <section class="section-SangJae">
       <div class="login">
         <form method="POST" id="loginForm">
-          <img src="#" class="login-logo" />
+          <img src="${cpath }/resources/customer/img/logo4.png" class="login-logo" />
           <div class="login-alert">메세지</div>
           <div class="login-input">
             <input type="text" name="id" id="userid" class="login-input-boxs" />
