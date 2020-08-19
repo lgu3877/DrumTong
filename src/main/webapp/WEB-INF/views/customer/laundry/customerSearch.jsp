@@ -9,7 +9,7 @@
 
 <!-- Axios script -->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
+<%-- <script type="text/javascript" src="${cpath }/customer/js/laundry/customerSearch.js" charset="UTF-8"></script> --%>
 
 <section class="section_search" >
 
