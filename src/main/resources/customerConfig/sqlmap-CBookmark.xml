@@ -2,17 +2,23 @@
 <!DOCTYPE mapper PUBLIC 	
 		"-//mybatis.org//DTD Mapper 3.0//EN" 
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- 고객 알람 테이블 -->
+
+<!-- 고객 북마크 테이블 -->
 <mapper namespace="com.drumtong.customer.dao.CBookmarkDAO">
+
+<!-- 	북마크 체크 여부 -->
 	<select id="isCheck" parameterType="hashmap" resultType="CBookmarkVO">
 		SELECT * FROM CBOOKMARK WHERE ESTID=#{estid} AND MEMBERID=#{memberid}
 	</select>
 	
+<!-- 	북마크 추가 -->
 	<insert id="insert" parameterType="hashmap">
 		INSERT INTO CBOOKMARK VALUES (#{memberid}, #{estid})
 	</insert>
 	
+<!-- 	북마크 삭제 -->
 	<delete id="delete" parameterType="hashmap">
 		DELETE FROM CBOOKMARK WHERE MEMBERID=#{memberid} AND ESTID=#{estid}
 	</delete>
+	
 </mapper>

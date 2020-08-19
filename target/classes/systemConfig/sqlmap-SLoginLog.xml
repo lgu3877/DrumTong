@@ -4,7 +4,7 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<!-- resultType="businessVO"	 -->
+<!-- resultType="SLoginLogVO"	 -->
 <mapper namespace="com.drumtong.system.dao.SLoginLogDAO">
 	<insert id="insertLoginLog" parameterType="SLoginLogVO">
 		INSERT INTO SLOGINLOG (USERID, LOGINIP, LOGINURL, LOGINRESULT)
