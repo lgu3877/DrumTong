@@ -4,7 +4,7 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<!-- resultType="SCustomerBoardVO"	 -->
+<!-- 시스템 이벤트 테이블	 -->
 <mapper namespace="com.drumtong.system.dao.SCustomerBoard2DAO">
 	
 	<!-- 	최근 이벤트 데이터 5개를 Main으로 보내준다. -->
