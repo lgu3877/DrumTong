@@ -1,5 +1,7 @@
 package com.drumtong.customer.controller.account;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +30,8 @@ public class CustomerAccountController {
 
 
 	@RequestMapping("customerBookmark/")
-	public ModelAndView bookmark() {
-		return new ModelAndView("customer/account/customerBookmark");
+	public ModelAndView bookmark(HttpServletRequest req) {
+		return svc.bookmark(req);
 	}
 	
 	@RequestMapping("customerMenu/")

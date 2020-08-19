@@ -18,6 +18,6 @@
 				WHERE ESTID=#{estid}) B 
 		WHERE (A.COUPONID=B.COUPONID) AND DELETEBOOLEAN='N'
 		
-
 	</select>
+
 </mapper>

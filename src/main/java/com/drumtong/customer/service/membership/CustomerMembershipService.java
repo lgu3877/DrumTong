@@ -18,6 +18,7 @@ import com.drumtong.customer.vo.CCustomerVO;
 import com.drumtong.customer.vo.CPrivateDataVO;
 import com.drumtong.security.Encrypt;
 import com.drumtong.security.GetIPAddress;
+import com.drumtong.security.Login;
 import com.drumtong.security.SerialUUID;
 import com.drumtong.system.dao.SLoginLogDAO;
 import com.drumtong.system.vo.SLoginLogVO;
@@ -42,44 +43,13 @@ public class CustomerMembershipService {
 	public ModelAndView login(HttpServletRequest req, HttpServletResponse resp, CPrivateDataVO cPrivateDatavo, String storeid){
 		ModelAndView mav = new ModelAndView();
 		HttpSession Session = req.getSession();
-		String ID = cPrivateDatavo.getId();	// 아이디
-		String PW = cPrivateDatavo.getPw();	// 비밀번호
-		CPrivateDataVO User = null;	// ID, PW과 일치하는 객체 저장
-		CCustomerVO Login = null;	// User의  MemberID와 일치하는 객체 저장
-		// CustomerLoginInterceptor 에서 만들어 세션에 저장해두었던 LoginLogVO 객체 불러오기
-		SLoginLogVO sLoginLogVO = (SLoginLogVO)Session.getAttribute("sLoginLogVO");	// 인터셉터에서 받아온 loginlogo불러오기
 		String AddressToMove = (String)Session.getAttribute("AddressToMove");		// 인터셉터 들어가기 전 이동하려던 주소
-		boolean LoginResult = false;		// 로그인 성공여부
-		boolean CheckAutoLogin = "on".equals(storeid);	// 자동로그인 체크여부
 		
-		// 1. 아이디 비밀번호 일치 여부 확인하기(계정 가져오기)
-		User = cPrivateDataDAO.selectUser(Encrypt.SecurePassword(ID, PW));
-		
-		// 2. 일치하는 계정 있다면 Login 계정 생성하고 세션에 저장!(세션 시간은 3시간)
-		if(User != null) {
-			Login = cCustomerDAO.selectLogin(User.getMemberid());
-			Session.setAttribute("Login", Login);
-			Session.setMaxInactiveInterval(60 * 60 * 3);
-			LoginResult = true;
-		}
+		boolean LoginResult = Login.login(Session, resp, cPrivateDatavo, storeid);		// 로그인 성공여부
 		
 		// 3. 로그인 성공 여부로 반환할 주소 값 다르게 저장
 		mav.setViewName("redirect:" + (LoginResult ? AddressToMove : "/customer/membership/customerLogin/" ));
 		
-		// 4. 로그인로그에 데이터 입력 후 DB에 저장
-		sLoginLogVO.setUserid(ID);
-		sLoginLogVO.setLoginresult(LoginResult ? "SUCCESS" : "FAIL");
-		int LoginLogResult = sLoginLogDAO.insertLoginLog(sLoginLogVO);
-		
-		// 5. 자동로그인 체크되어있고, 로그인 결과 값이 true이면 쿠키에 저장
-		if(CheckAutoLogin && LoginResult) {
-			Session.setAttribute("AutoLogin", Login);
-			Session.setMaxInactiveInterval(60 * 60 * 24 * 7);
-			Cookie SessionID = new Cookie("JSESSIONID", Session.getId());
-			SessionID.setPath("/drumtong/");
-			SessionID.setMaxAge(60 * 60 * 24 * 7);
-			resp.addCookie(SessionID);
-		}
 
 		return mav;
 	}
@@ -92,7 +62,7 @@ public class CustomerMembershipService {
 		HttpSession Session = req.getSession();
 		SLoginLogVO sLoginLogVO = new SLoginLogVO();
 		CCustomerVO Login = (CCustomerVO)Session.getAttribute("Login");
-		
+
 		sLoginLogVO.setUserid(cPrivateDataDAO.selectID(Login.getMemberid()));
 		sLoginLogVO.setLoginip(GetIPAddress.getIP(req));
 		sLoginLogVO.setLoginurl(Referer);
@@ -103,10 +73,12 @@ public class CustomerMembershipService {
 		Session.removeAttribute("AutoLogin");
 		Session.removeAttribute("Login");
 		Cookie[] cookie = req.getCookies();
-		for(Cookie c : cookie) {
-			if(c.getName().equals("JSESSIONID")) {
-				c.setMaxAge(0);
-				resp.addCookie(c);
+		if(cookie != null) {
+			for(Cookie c : cookie) {
+				if(c.getName().equals("JSESSIONID")) {
+					c.setMaxAge(0);
+					resp.addCookie(c);
+				}
 			}
 		}
 		
@@ -129,7 +101,7 @@ public class CustomerMembershipService {
 		
 		// SerialUUID 생성
 		String MemberID =  SerialUUID.getSerialUUID("CPrivateData", "MemberID");
-		
+		System.out.println("MemberID : " + MemberID);
 		
 		// 세탁된 물품을 회수받는 주소
 		String MainReceiptAddress = cPrivateDataVO.getMainaddress();
