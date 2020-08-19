@@ -125,7 +125,7 @@ public class CustomerMembershipService {
 	// 고객 회원가입 (POST)
 	public ModelAndView signUp(CPrivateDataVO cPrivateDataVO) {
 
-		ModelAndView mav = new ModelAndView("/");
+		ModelAndView mav = new ModelAndView("redirect:/");
 		
 		// SerialUUID 생성
 		String MemberID =  SerialUUID.getSerialUUID("CPrivateData", "MemberID");

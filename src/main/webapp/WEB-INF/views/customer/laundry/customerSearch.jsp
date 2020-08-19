@@ -2,9 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../main/customerHeader.jsp"%>
 
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js" -->
-<!-- 	integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" -->
-<!-- 	crossorigin="anonymous"></script> -->
+
 
 
 <!-- Axios script -->
@@ -589,7 +587,9 @@
 		var container = document.getElementsByClassName('laundryList_map')[0]; //지도를 담을 영역의 DOM 레퍼런스
 		var options = { //지도를 생성할 때 필요한 기본 옵션
 			center: new kakao.maps.LatLng(37.553505, 126.969641), //지도의 중심좌표.
-			level: 7 //지도의 레벨(확대, 축소 정도)
+			level: 7, //지도의 레벨(확대, 축소 정도)
+			maxLevel: 11,
+			minLevel : 0,
 		};
 		
 		var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
@@ -598,7 +598,8 @@
 		var clusterer = new kakao.maps.MarkerClusterer({
 	        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
 	        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-	        minLevel: 0 // 클러스터 할 최소 지도 레벨 
+	        minLevel: 0, // 클러스터 할 최소 지도 레벨 
+	        
 		});
 		
 		
@@ -718,7 +719,7 @@
 	        	
 	        	data.forEach(function(val,index) {
 	        		coordinates = val.geometry.coordinates;
-	        		name = val.properties.SIG_KOR_NM;
+	        		name = val.properties.EMD_KOR_NM;
 	        		
 	        		displayArea(coordinates, name);
 	        	})
@@ -738,6 +739,8 @@
 	    
 	    
 	    var polygons = [];
+	    var customOverlay;
+	    
 	    
 	    function displayArea(coordinates, name) {
 	    	var path = [];
@@ -777,11 +780,20 @@
 	    		polygon.setOptions({
 	    			fillColor : '#09f'
 	    		});
+	    		console.log("name : ", name);
 	    		
-	    		customOverlay.setContent('<div class="area">' + name + '</div>');
+	    		var content =  '<div class="area">' + name + '</div>';
+	    		var customOverlay = new kakao.maps.CustomerOverlay({
+	    	    	map : map,
+	    	    	position : mouseEvent.latLng,
+	    	    	content : content,
+	    		}); 
 	    		
-	    		customOverlay.setPosition(mouseEvent.latLng);
-	    		customOverlay.setMap(map);
+	    		
+// 	    		customOverlay.setContent('<div class="area">' + name + '</div>');
+// 	    		customOverlay.setPosition(mouseEvent.latLng);
+// 	    		customOverlay.setMap(map);
+
 	    	});
 	    	
 	    	
@@ -799,7 +811,7 @@
 	    	
 	    	kakao.maps.event.addListener(polygon, 'click', function() {
 	    		
-	    		var level = map.getLevel() -2;
+	    		var level = map.getLevel() -2; 
 	    		
 	    		map.setLevel(level, {anchor : centroid(points), animate : {
 	    			duration : 350
