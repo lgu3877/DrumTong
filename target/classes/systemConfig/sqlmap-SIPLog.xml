@@ -4,7 +4,7 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<!-- resultType="businessVO"	 -->
+<!-- resultType="SIPLogVO"	 -->
 <mapper namespace="com.drumtong.system.dao.SIPLogDAO">
 	<insert id="insertIPLog" parameterType="SIPLogVO">
 		INSERT INTO SIPLOG (USERIP, IPURL) VALUES (#{userip}, #{ipurl})

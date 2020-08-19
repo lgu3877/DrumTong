@@ -4,7 +4,7 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<!-- resultType="businessVO"	 -->
+<!-- resultType="SCustomerBoardVO"	 -->
 <mapper namespace="com.drumtong.system.dao.SCustomerBoard1DAO">
 
 	<!-- 	최근 공지사항 데이터 5개를 Main으로 보내준다. -->
@@ -14,5 +14,6 @@
 			NUM <![CDATA[ >= ]]> (SELECT MAX(NUM) FROM SCUSTOMERBOARD1) - #{NumberOfData}
 			ORDER BY NUM DESC
 	</select>
+	
 </mapper>
 
