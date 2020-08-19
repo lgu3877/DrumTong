@@ -52,7 +52,7 @@
 
             <ul class="menu">
                 <li>
-                    <a href="customer/membership/customerSignUp/" class="middleMenu">회원가입</a>
+                    <a href="${cpath }/customer/membership/customerSignUp/" class="middleMenu">회원가입</a>
                 </li>
             </ul>  
 
