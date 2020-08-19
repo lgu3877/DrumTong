@@ -21,4 +21,26 @@ public class RestCustomerLaundryController {
 	public String setBookmark(@RequestBody HashMap<String, String> param) {
 		return svc.setBookmark(param);
 	}
+	
+	@RequestMapping("customerDetail/rest/addCoupon/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String setCoupon(@RequestBody HashMap<String, String> param) {
+		return svc.setCoupon(param);
+	}
+	
+//	@RequestMapping("customerSearch/rest/clusterer/")
+//	@GetMapping(produces="application/json; charset=utf8")	
+//	public String clusterer(){
+//		
+////		테스트코드
+//		
+//		return;
+//		
+
+	    // 실제 코드
+//		List<BInformationVO> list = svc.BusinessMapInfo();
+//		return list != null
+//				? new ObjectMapper().writeValueAsString(list)
+//				: null;
+//	}
 }

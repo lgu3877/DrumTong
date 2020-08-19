@@ -2,42 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../main/customerHeader.jsp" %>    
 
+	<!-- Axios script -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <body>
     <!-- 스크립트 영역 -->
-    <script>
-      function submit() {
-        console.log('submit작동');
-        loginInputs = document.querySelectorAll('input.login-input-boxs');
-        loginAlert = document.getElementsByClassName('login-alert');
-        cnt = 0;
-
-        for (i = 0; i < loginInputs.length; i++) {
-          if (loginInputs[i].value === '') {
-            loginInputs[i].style.border = '1px solid red';
-            loginAlert[0].style.display = 'block';
-          } else {
-            cnt++;
-          }
-        }
-
-        if (loginInputs[0].value === '' && loginInputs[1].value === '') {
-          console.log('얼럿 시작 둘다없음');
-          loginAlert[0].innerText = '입력된 정보가 없습니다';
-        } else if (loginInputs[0].value === '') {
-          console.log('얼럿 시작 아디없엉');
-          loginAlert[0].innerText = '아이디를 입력해주세요';
-        } else if (loginInputs[1].value === '') {
-          console.log('얼럿 시작 비번내놔');
-          loginAlert[0].innerText = '비밀번호를 입력해주세요';
-        }
-
-        if (cnt !== loginInputs.length) return;
-        document.getElementById('loginForm').submit();
-      } //submit 체크 함수 종료
-    </script>
-
+	    <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>
     <!-- 본문 영역 -->
-    <section>
+    <section class="section-SangJae">
       <div class="login">
         <form method="POST" id="loginForm">
           <img src="#" class="login-logo" />
@@ -62,7 +33,7 @@
 
     <!-- 스크립트 영역 -->
     <script>
-     	document.getElementById('loginSubmit').addEventListener('click', submit);
+     	document.getElementById('loginSubmit').addEventListener('click', function(){ logiinSubmit('synchronous');});
   	</script> 
     
        	</body>

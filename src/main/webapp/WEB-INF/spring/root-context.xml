@@ -107,6 +107,12 @@
 <!-- 		[service 전역 설정] -->
 	<context:component-scan base-package="com.drumtong.business.service.*" />
 	<context:component-scan base-package="com.drumtong.customer.service.*" />
+	
+	
+	
+<!-- 	[ security 전역 설정] -->
+	<context:component-scan base-package="com.drumtong.security"/>
+	
 		
 <!-- 		[mybatis dao 전역 설정] -->
 	<mybatis-spring:scan base-package="com.drumtong.business.dao" factory-ref="businessFactory"/>

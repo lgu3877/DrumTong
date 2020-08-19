@@ -1,5 +1,6 @@
 package com.drumtong.customer.dao;
 
+import org.springframework.stereotype.Repository;
 
 import com.drumtong.customer.vo.CPrivateDataVO;
 
