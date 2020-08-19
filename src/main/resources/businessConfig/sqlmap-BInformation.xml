@@ -13,4 +13,10 @@
 	<select id="selectBusinessMapInfo"  resultType="BInformationVO" >
 		SELECT LATITUDE, LONGITUDE FROM BINFORMATION
 	</select>
+	
+	<select id="selectBookmark" parameterType="String" resultType="BInformationVO">
+		SELECT * FROM BINFORMATION B, (SELECT ESTID FROM CBOOKMARK WHERE MEMBERID=#{memberid}) A 
+			WHERE 
+				B.ESTID=A.ESTID
+	</select>
 </mapper>

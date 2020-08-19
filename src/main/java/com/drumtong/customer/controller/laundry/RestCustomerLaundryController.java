@@ -22,6 +22,12 @@ public class RestCustomerLaundryController {
 		return svc.setBookmark(param);
 	}
 	
+	@RequestMapping("customerDetail/rest/addCoupon/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String setCoupon(@RequestBody HashMap<String, String> param) {
+		return svc.setCoupon(param);
+	}
+	
 //	@RequestMapping("customerSearch/rest/clusterer/")
 //	@GetMapping(produces="application/json; charset=utf8")	
 //	public String clusterer(){

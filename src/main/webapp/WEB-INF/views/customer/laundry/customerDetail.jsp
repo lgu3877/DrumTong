@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
  <!-- 스크립트 영역 -->
+ 	<script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>s
     <script>
       function listUp(event) {
         choose = event.target;
@@ -14,15 +15,12 @@
         price = choose.children[2].innerText;
         quick = choose.children[3];
 		
-        // 바꾼부분1 : 주문개수(quantity)가 0일 땐 주문목록에 들어가지 않도록 설정
         if(quantity !== '0'){
-        	// 바꾼부분2 : checked 만 빼고 동일한 코드길래 if문 지우고 삼항연산자로 바꿨고, ` 대신 '로 사용, EL태그 지움
 	        quickHTML = '<input type="checkbox" class="quick" id="quick" value="' + quick.value + '" ' + (quick.checked ? 'checked' : '' ) + ' onclick="calTotal()"/>';
 	
 	        newRow = document.createElement('div');
 	        newRow.setAttribute('class', 'selected-row');
 			
-	        // 바꾼부분3 : ` 대신 ' 사용, EL태그 지움
 	     	newRow.innerHTML = '<div class="selected-text"><div class="selected-name" id="selected-name">'
 				+optionName+'</div><div class="selected-context">'+optionText
 				+'</div></div><input type="number" class="quantity" id="selected-quantity" value="'+quantity+'" min="1" /><div class="option-price">'
@@ -37,12 +35,6 @@
 	        calTotal();
         }
         
-      }
-    </script>
-
-    <script>
-      function addQuantity(){
-        calTotal();
       }
     </script>
     
@@ -81,7 +73,6 @@
           totalPrice += parseInt(quantity) * parseInt(price[0]) + quickCal;
         }
 		
-        // 바꾼부분4 : ` 대신 ' 사용
         quickText.innerText = 'Quick 요금 : ' +quickPrice +' 원';
         totalText.innerText = 'Total : '+totalPrice+' 원';
       }
@@ -89,10 +80,15 @@
 
     <script>
       function addBookmark() {
+    	if('${Login}' == ''){
+    		LoginModalOpen();
+    		return;
+    	}  
+    	  
         icon = event.target;
         className = icon.className;
         console.log(event.target.className.search(/add/));
-
+		
         if (className.search(/add/) > 0) {
           icon.style['-webkit-text-stroke'] = '2px orange';
           icon.style.color = 'yellow';
@@ -105,7 +101,6 @@
         }
         
         const axPost = async (memberid) =>{
-        	console.log(memberid);
         	ob={
         		'memberid' : memberid,
         		'estid' : '${estid}',
@@ -113,7 +108,6 @@
         	};
         	await axios.post('/drumtong/customer/laundry/customerDetail/rest/addBookmark/', ob)
         	.then ((response) => {
-        		console.log('북마크 결과값 받아오기 성공', response.data);
         		if(response.data === true){
         			console.log("추가함");
         		} else {
@@ -121,9 +115,8 @@
         		}
         	})
         	
-        }
+        };
         
-        // 로그인 되어있을 때 북마크
         if('${Login}' != null && '${Login}' !='' ) { 
         	axPost('${Login.memberid}'); }
         
@@ -132,7 +125,6 @@
 
     <script>
       function submit() {
-        console.log('submit작동');
         selecteds = document.querySelectorAll('.selected-row');
 
         cnt = 0;
@@ -174,7 +166,7 @@
     <section class="section-SangJae">
       <div class="detailview-wrap">
         <div class="detailview-top">
-          <div class="detailview-imgBlock">
+          <div class="detailview-imgBlock" id="detailview-imgBlock">
             <div class="detailview-imgBlock-main">
               <img src="stampSample.png" />
             </div>
@@ -189,7 +181,8 @@
           <div class="detailview-companyIntro">
             <div class="detailview-intro-headline">
               <h1>${bInformationVO.brandnaming}</h1>
-              <i class="fas fa-star ${Login != null ? (Color eq 'orange' ? 'remove' : 'add') : 'add' }" id="bookMarker" style="-webkit-text-stroke: 2px ${Login != null ? Color : 'skyblue'};color:${(Login != null && Color == 'orange') ? 'yellow' : '' }" onclick="addBookmark()"></i>
+              <c:set var="checkBookmark" value="${empty Login || Bookmark eq 'n' }" />
+              <i class="fas fa-star ${checkBookmark ? 'add': 'remove' }" id="bookMarker" style="-webkit-text-stroke: 2px ${checkBookmark ? 'skyblue': 'orange' };color:${checkBookmark ? '': 'yellow' }" onclick="addBookmark()"></i>
             </div>
             <textarea readonly>${bManagementVO.introduction }</textarea>
           </div>
@@ -200,7 +193,6 @@
             <button class="add-coupon" id="add-coupon" value="1000">쿠폰 받기</button>
 
             <div class="detailview-selectOptions">
-            <!-- 수정한 부분 ★★★★★★ -->
         	<c:forEach items="${bMenuVO }" var="menu">
               <div class="option-row" id="choose+${menu.num }" >
                 <div class="option-text">
@@ -222,12 +214,17 @@
             <div class="select-coupon">
               내 쿠폰
               <select>
-              	<c:if test="${Login != null }">
-              			<option>선택하기</option>
-              		<c:forEach items="${CouponList }" var="co">
-	                	<option value="${co.minimumprice }" disabled="disabled">${co.discount }원 할인/${co.minimumprice }원 이상[${co.period }]</option>
-              		</c:forEach>
-              	</c:if>
+	              		<option>선택하기</option>
+              	<c:choose>
+              		<c:when test="${Login != null }">
+	              		<c:forEach items="${CouponList }" var="co">
+		                	<option value="${co.minimumprice }" disabled="disabled">${co.discount }원 할인/${co.minimumprice }원 이상[${co.period }]</option>
+	              		</c:forEach>
+              		</c:when>
+              		<c:otherwise>
+              			<option disabled>로그인 후 이용가능</option>
+              		</c:otherwise>
+              	</c:choose>
               </select>
             </div>
             <div class="select-deli" id="select-deli"><input type="checkbox" id="deli-check" checked onclick="calTotal()" /> 배달 (+ 2000 원)</div>
@@ -285,12 +282,12 @@
       <!-- Modal content -->
 
       <div class="modal-content1" id="modal-content1">
-        <select class="modal-couponList">
+        <select class="modal-couponList" id="modal-couponList">
         <c:forEach items="${bCouponVO }" var="bco">
-          <option>${bco.discount }원 할인/${bco.minimumprice }원 이상[${bco.period }]</option>
+          <option value="${bco.couponid }">${bco.discount }원 할인/${bco.minimumprice }원 이상[${bco.period }]</option>
         </c:forEach>
         </select>
-        <button class="modal-addCoupon">받기</button>
+        <button class="modal-addCoupon" id="modal-addCoupon">받기</button>
       </div>
 
       <div class="modal-content2" id="modal-content2">
@@ -325,11 +322,11 @@
           <img src="#" class="login-logo" />
           <div class="login-alert">메세지</div>
           <div class="login-input">
-            <input type="text" name="userid" placeholder="ID" id="userid" class="login-input-boxs" />
-            <input type="password" name="userpw" placeholder="PW" id="userpw" class="login-input-boxs" />
-
+            <input type="text" name="id" placeholder="ID" id="userid" class="login-input-boxs" />
+            <input type="password" name="pw" placeholder="PW" id="userpw" class="login-input-boxs" />
+			<input type="hidden" name="estid" value="${estid }">
             <div class="login-check">
-              <label><input type="checkbox" id="storeid" class="login-storeid" />ID 기억하기</label>
+              <label><input type="checkbox" name="storeid" id="storeid" class="login-storeid" />ID 기억하기</label>
               <a href="#" class="login-idFind">ID/PW 찾기</a>
             </div>
 
@@ -362,75 +359,131 @@
 
     <!-- 스크립트 영역 -->
     <script>
- // Get the modal
-    var modal = document.getElementById('myModal');
+    function test(){
+    	console.log('작동 테스트');
+    	// Get the modal
+        var modal = document.getElementById('myModal');
 
-    var modalContent1 = document.getElementById('modal-content1');
-    var modalContent2 = document.getElementById('modal-content2');
-    var modalContent3 = document.getElementById('modal-content3');
-    var modalContent4 = document.getElementById('modal-content4');
+        var modalContent1 = document.getElementById('modal-content1');	// 쿠폰 받기 화면
+        var modalContent2 = document.getElementById('modal-content2');	// 결제 화면
+        var modalContent3 = document.getElementById('modal-content3');	// 로그인 화면
+        var modalContent4 = document.getElementById('modal-content4');	// 리뷰 화면
 
-    // Get the button that opens the modal
-    var btn1 = document.getElementById('add-coupon');
-    var btn2 = document.getElementById('order-submit');
-    var btn3 = document.getElementById('review-more');
-    var btn4 = document.getElementById('modal-submit');
+        // Get the button that opens the modal
+        var btn1 = document.getElementById('add-coupon');
+        var btn2 = document.getElementById('order-submit');
+        var btn3 = document.getElementById('review-more');
+        var btn4 = document.getElementById('modal-submit');
+        var btn5 = document.getElementById('modal-addCoupon');// 모달에서 쿠폰받기 누르면
 
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName('close')[0];
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName('close')[0];
 
-    // When the user clicks on the button, open the modal
-    btn1.onclick = function () {
-      modal.style.display = 'block';
-      modalContent1.style.display = 'flex';
-    };
+        function LoginModalOpen(){
+        	modal.style.display = 'block';
+        	modalContent3.style.display = 'flex';
+        }
+        
+        // When the user clicks on the button, open the modal
+        btn1.onclick = function () {
+        	console.log('로그인 되어있나 ? ', '${Login}');
+    	   	if('${Login}' == ''){
+    	   		LoginModalOpen();
+    	   		return;
+    	   	}  
+          modal.style.display = 'block';
+          modalContent1.style.display = 'flex';
+          document.getElementsByClassName('select-coupon').reload;
+        };
 
-    btn2.onclick = function () {
-      modal.style.display = 'block';
-      modalContent2.style.display = 'flex';
-    };
+        btn2.onclick = function () {
+          modal.style.display = 'block';
+        	
+         //로그인이 안되있으면 이 문장을 수행
+         if('${Login}' == ''){
+        	 modalContent3.style.display = 'flex';
+         } else{
+       	  //로그인이 되어있다면 submit 기능 수행
+         	 modalContent2.style.display = 'flex';
+         }
+        };
 
-    btn3.onclick = function () {
-      modal.style.display = 'block';
-      modalContent4.style.display = 'flex';
-    };
-    
-    btn4.onclick = function () {
-      modal.style.display = 'block';
+        btn3.onclick = function () {
+          modal.style.display = 'block';
+          modalContent4.style.display = 'flex';
+        };
+        
+        btn4.onclick = function () {
+          modal.style.display = 'block';
 
-      //로그인이 안되있으면 이 문장을 수행
-      modalContent3.style.display = 'flex';
+          submit();
 
-      //로그인이 되어있다면 submit 기능 수행
-      submit();
-    };
+        };
+        
 
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-      modal.style.display = 'none';
-      modalContent1.style.display = 'none';
-      modalContent2.style.display = 'none';
-      modalContent3.style.display = 'none';
-      modalContent4.style.display = 'none';
-    };
+        btn5.onclick = function(){
+        	selectedCouponID = document.getElementById('modal-couponList').value;
+            const axPost = async (memberid) =>{
+            	ob={
+            		'memberid' : memberid,
+            		'couponid' : selectedCouponID,
+            	};
+            	await axios.post('/drumtong/customer/laundry/customerDetail/rest/addCoupon/', ob)
+            	.then ((response) => {
+            		if(response.data === true){
+            			console.log("쿠폰 발급 성공");
+            		} else {
+            			console.log("쿠폰 발급 실패");
+            		}
+            		modal.style.display = 'none';
+    		        modalContent1.style.display = 'none';
+            	})
+            	
+            };
+            if('${Login}' != ''	){
+    	        axPost('${Login.memberid}');
+            } else{
+            	console.log("로그인 안되어 있어서 다운못해요~");
+            }
+        	
+        }
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-      if (event.target == modal) {
-        modal.style.display = 'none';
-        modalContent1.style.display = 'none';
-        modalContent2.style.display = 'none';
-        modalContent3.style.display = 'none';
-        modalContent4.style.display = 'none';
-      }
-    };
-    
-      // 수정한 부분(메뉴에 모두 클릭이벤트 적용)★★★★★★
-      document.querySelectorAll('.option-row').forEach(function(element){
-    	  console.log('test');
-    	  element.addEventListener('click', listUp);
-      }); 
-      
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+          modal.style.display = 'none';
+          modalContent1.style.display = 'none';
+          modalContent2.style.display = 'none';
+          modalContent3.style.display = 'none';
+          modalContent4.style.display = 'none';
+        };
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+          if (event.target == modal) {
+            modal.style.display = 'none';
+            modalContent1.style.display = 'none';
+            modalContent2.style.display = 'none';
+            modalContent3.style.display = 'none';
+            modalContent4.style.display = 'none';
+          }
+        };
+        
+          // 수정한 부분(메뉴에 모두 클릭이벤트 적용)★★★★★★
+          document.querySelectorAll('.option-row').forEach(function(element){
+        	  console.log('test');
+        	  element.addEventListener('click', listUp);
+          });
+          
+    		// ★★★★★★★★미완성★★★★★★★★★
+          imgbox = document.getElementById('detailview-imgBlock').querySelectorAll('img');
+          imgList = '${bImageVO}';
+          console.log('123');
+          console.log(imgList.size);
+          
+          document.getElementById('loginSubmit').addEventListener('click', function(){ logiinSubmit('asynchronous');});
+
+    }
+    test();
     </script>
 
 <%@ include file="../main/customerFooter.jsp" %>    
