@@ -7,8 +7,9 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  height: 100%;
+  min-height: calc(100vh - 170px);
   padding-top: 70px;
+  margin-bottom: 70px;
 }
 
 /* login */
@@ -16,12 +17,14 @@
 .join {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  position: relative;
   margin-top: 100px;
   margin-bottom: 70px;
   background-color: white;
   width: 370px;
   height: 400px;
-  padding: 30px;
+  padding: 10px;
   border: #eaeaea;
   box-shadow: 5px 5px 5px 5px #eaeaea;
   color: black;
@@ -30,10 +33,10 @@
 .login-logo {
   	width: 50px;
 	height: auto;
-	margin: 0px;
+	margin: 10px 5px;
+	margin-bottom: 15px;
 	display: flex;
 	float: left;
-	margin-top: 5px;
 }
 
 .login-alert,
@@ -46,8 +49,15 @@
   display: none;
 }
 
+.login-alert{
+	margin-top:30px;
+	padding-left: 100px;
+	width: 80%;
+}
+
 .login-input {
-  height: 300px;
+  height: 100%;
+  padding: 0px 20px;
   display: block;
 }
 
@@ -97,7 +107,20 @@
 
 /* join */
 .join {
-  height: 950px;
+  position: absolute;
+  min-height: 900px;
+  height: auto;
+}
+.join-input {
+  height: auto;
+  width : 100%;
+  display: block;
+}
+
+.joinForm{
+	width: 100%;
+	height: 100%;
+	padding: 20px;
 }
 
 .join-input-boxs {
@@ -132,11 +155,18 @@
 }
 
 /*customerMenu*/
+
+.userMenu-wrap{
+	height: 100%;
+	width: 100%;
+}
+
 .userMenu-row,
 .bookmark-row {
   display: flex;
   justify-content: center;
   width: 100%;
+  height: auto;
 }
 
 .userMenu {
@@ -327,30 +357,35 @@
 /*detail*/
 
 .detailview-wrap {
-  resize: none;
-  width: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 1220px;
   height: 100%;
   padding: 20px 0px;
-  border-left: 1px solid #d8d8d8;
-  border-right: 1px solid #d8d8d8;
+  border-left: 20px solid skyblue;
+  border-right: 20px solid skyblue;
+  background-color: white;
 }
 
 .detailview-top {
   display: flex;
   justify-content: space-between;
-  height: 500px;
-  padding: 0px 20px;
+  height: 514px;
+  width: 1140px;
+  background-color: #f7f7f7;
 }
 
 .detailview-imgBlock {
-  width: 50%;
+  width: 570px;
   height: 400px;
   margin: 0;
 }
 
 .detailview-imgBlock-main,
 .detailview-imgBlock-main img {
-  width: 500px;
+  width: 570px;
   height: 400px;
   background-color: teal;
 }
@@ -360,19 +395,14 @@
 }
 
 .detailview-imgBlock-subRow {
-  width: 100%;
-  background-color: violet;
-}
-
-.detailview-imgBlock-subRow {
-  width: 500px;
+  width: 570px;
   height: 80px;
   font-size: 0;
 }
 
 .detailview-imgBlock-subRow img {
-  width: 100px;
-  height: 100px;
+  width: 114px;
+  height: 114px;
   margin: 0;
   background-color: salmon;
   cursor: pointer;
@@ -407,17 +437,18 @@
 
 .detailview-companyIntro textarea {
   width: 100%;
-  height: 450px;
+  height: 462px;
   resize: none;
   padding: 0;
   border: none;
   outline-style: none;
+  background-color: #f7f7f7;
 }
 
 .detailview-bottom {
   display: flex;
   justify-content: space-between;
-
+  width: 100%;
   padding: 20px;
 }
 
@@ -430,13 +461,18 @@
 }
 
 .add-coupon {
-  border: 2px solid #35aefd;
-  background-color: #ffffff;
+  border: 10px solid #35aefd;
+  background-color: #35aefd;
   border-radius: 10px;
+  box-shadow: 5px 5px 5px 5px #d8d8d8;
   height: 80px;
   width: 100%;
   margin-bottom: 30px;
   cursor: pointer;
+
+  font-size: 40px;
+  font-weight: 900;
+  color: white;
 }
 
 .add-coupon:focus,
@@ -465,8 +501,7 @@
   width: 300px;
   pointer-events: none;
 }
-
-.option-name,
+check .option-name,
 .selected-name {
   width: 250px;
   font-weight: bold;
@@ -486,7 +521,22 @@
 }
 
 .quick {
+  display: inline-block;
+  width: 80px;
   font-size: small;
+  cursor: pointer;
+}
+
+.quickcheck {
+  display: none;
+}
+
+.fa-shipping-fast {
+  color: #35aefd;
+}
+
+.quick input[type='checkbox'] {
+  display: none;
 }
 
 .detailview-select {
@@ -497,10 +547,10 @@
   float: right;
   width: 550px;
   height: 810px;
-  padding-top: 5px;
   border: 1px solid #cacacab0;
   border-radius: 15px;
   background-color: white;
+  box-shadow: 5px 5px 5px 5px #d8d8d8;
 }
 .selected-row {
   width: 525px;
@@ -514,9 +564,27 @@
   height: 590px;
   overflow-y: scroll;
 }
+.select-head {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  height: 80px;
+  background-color: #35aefd;
+  text-align: center;
+  line-height: 80px;
+
+  font-size: 30px;
+  font-weight: 900;
+  color: white;
+}
 
 .selected-row {
   cursor: default;
+}
+
+.selected-price{
+	font-size: small;
+	width: 80px;
+	margin-left: 10px;
 }
 
 .selected-prices {
@@ -539,6 +607,8 @@
   width: 440px;
 }
 
+
+
 .select-deli,
 .select-quick {
   border-bottom: 1px solid #d8d8d8;
@@ -546,6 +616,18 @@
   line-height: 30px;
   padding: 0px 10px;
   text-align: right;
+}
+
+.remove-button {
+  font-size: medium;
+  color: #35aefd;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.fa-times {
+  pointer-events: none;
 }
 
 .select-total {
@@ -572,7 +654,7 @@
   display: flex;
   flex-direction: column;
   height: auto;
-  width: 100%;
+  width: 1180px;
 }
 
 .detailview-review-list {
@@ -580,21 +662,20 @@
   justify-content: space-between;
   flex-wrap: wrap;
   height: auto;
-  width: 1198px;
+  width: 1180px;
+  padding: 0px 20px;
 }
 
 .detailview-review-row {
-  border: 1px solid #d8d8d8;
   margin-bottom: 10px;
-  width: 595px;
+  width: 560px;
 }
 
 .review-head {
   display: flex;
   justify-content: flex-start;
-  border-bottom: 1px solid #d8d8d8;
   border-collapse: collapse;
-  padding: 5px 20px;
+  padding: 5px;
 }
 
 .review-profilePic {
@@ -610,21 +691,29 @@
 .review-writer {
   width: 200px;
   text-align: left;
+  padding: 10px;
 }
 
 .review-writer p {
   margin: 5px 5px;
 }
 
-.review-date {
-  border-left: 1px solid #d8d8d8;
-  width: 200px;
-  text-align: center;
+.review-writer p strong {
+  font-weight: bold;
 }
-
 .review-context {
   width: 100%;
   min-height: 100px;
+  padding: 10px;
+}
+
+.review-more {
+  background-color: rgba(89, 147, 255, 0.3);
+  border: none;
+  outline-style: none;
+  height: 30px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .modal-total {
@@ -684,6 +773,12 @@
 .modal-addCoupon {
   width: 80px;
   height: 50px;
+  border: none;
+  border-radius: 5px;
+  background-color: #35aefd;
+  font-size: large;
+  font-weight: 900;
+  color: white;
 }
 
 .modal-grade {
