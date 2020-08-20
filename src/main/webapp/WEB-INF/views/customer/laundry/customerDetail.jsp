@@ -17,7 +17,7 @@
       
         if(quantity !== '0'){
         
-           quickHTML = '<input type="checkbox" id="quick" class="quickcheck" value="' + quick.value + '" ' + (quick.checked ? 'checked' : '' ) + ' onclick="calTotal()"/>'
+           quickHTML = '<input type="checkbox" id="' + quick.getAttribute("id") + '" class="quickcheck" value="' + quick.value + '" ' + (quick.checked ? 'checked' : '' ) + ' onclick="calTotal()"/>'
            + '<label class="quick" id="checkLabel" for="quick" title="빠른 서비스"><i class="fas fa-shipping-fast"></i>+' + quick.value + '원</label>';
    
            newRow = document.createElement('div');
@@ -92,9 +92,10 @@
 
     <script>
       function quickMark(){
+    	  event.stopPropagation()
         check = event.target;
-        row = event.target.parentNode;
-       	console.log(check.parentNode);
+        row = check.parentNode;
+       	console.log(check);
 
         if(check.checked){
           row.style.backgroundRepeat = "no-repeat";
@@ -230,7 +231,7 @@
                 </div>
                 <input type="number" class="quantity" id="quantity" placeholder="0" min="0" value="0" />
                 <div class="option-price">${menu.price } 원</div>
-                <input type="checkbox" id="quick" class="quickcheck" value="${menu.quickprice }">
+                <input type="checkbox" id="quick" class="quickcheck ${menu.num }" value="${menu.quickprice }">
                 <label class="quick" id="checkLabel" for="quick" title="빠른 서비스"><i class="fas fa-shipping-fast"></i>+${menu.quickprice } 원</label>
               </div>
          </c:forEach>
@@ -239,6 +240,9 @@
           </div>
 
           <div class="detailview-select">
+            <div class="select-head">
+              My Selection
+            </div>
             <div class="select-list" id="selected-List"></div>
 
             <div class="select-coupon">
