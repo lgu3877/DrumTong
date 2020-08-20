@@ -687,10 +687,10 @@ check .option-name,
   justify-content: center;
   width: 70px;
   height: 70px;
-  background-color: pink;
   border-radius: 50%;
-  background: url(/drumtong/src/main/webapp/resources/customer/img/profilePic.png) center no-repeat;
-  background-size: cover;
+/*   background-image : url(https://i1.wp.com/tccwayland.org/wp-content/uploads/2018/02/blank-profile-picture-973460_1280.png?fit=300%2C300&ssl=1) center no-repeat; */
+  background : url(https://az-pe.com/wp-content/uploads/2018/05/kemptons-blank-profile-picture.jpg) center no-repeat;;
+  background-size: contain;
 }
 
 .review-writer {

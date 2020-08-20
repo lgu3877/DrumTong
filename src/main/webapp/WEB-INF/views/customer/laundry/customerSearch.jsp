@@ -584,18 +584,18 @@
 	// 지도 초기화 함수
 // 	function initMap() {
 		
-		var container = document.getElementsByClassName('laundryList_map')[0]; //지도를 담을 영역의 DOM 레퍼런스
-		var options = { //지도를 생성할 때 필요한 기본 옵션
+		let container = document.getElementsByClassName('laundryList_map')[0]; //지도를 담을 영역의 DOM 레퍼런스
+		let options = { //지도를 생성할 때 필요한 기본 옵션
 			center: new kakao.maps.LatLng(37.553505, 126.969641), //지도의 중심좌표.
 			level: 7, //지도의 레벨(확대, 축소 정도)
 			maxLevel: 11,
 			minLevel : 0,
 		};
 		
-		var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+		let map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 		
 		
-		var clusterer = new kakao.maps.MarkerClusterer({
+		let clusterer = new kakao.maps.MarkerClusterer({
 	        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
 	        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
 	        minLevel: 0, // 클러스터 할 최소 지도 레벨 
@@ -619,10 +619,10 @@
 	        	
 	        	
 	        	// 마커들의 저장 함수
-	        	var markers = response.data.positions.map(function(i, position) {
+	        	let markers = response.data.positions.map(function(i, position) {
 
 	        		// 마커 생성
-	        		var marker = new kakao.maps.Marker({
+	        		let marker = new kakao.maps.Marker({
 		                position : new kakao.maps.LatLng(i.lat, i.lng),
 		                clickable : true
 		            });
@@ -704,9 +704,9 @@
 	        	console.log('실행');
 	        	console.log(response.data.positions);
 	        	
-	        	var data = response.data.features;
-	        	var coordinates = [];
-	        	var name = '';
+	        	let data = response.data.features;
+	        	let coordinates = [];
+	        	let name = '';
 	        	
 // 	        	jquery문
 // 	        	$.each(data, function(index, val) {
@@ -727,7 +727,7 @@
 		    });
 	        	
 	    };
-	    axGet2();
+// 	    axGet2();
 	    
 	    
 	    
@@ -738,13 +738,13 @@
 	    
 	    
 	    
-	    var polygons = [];
-	    var customOverlay;
+	    let polygons = [];
+	    let customOverlay;
 	    
 	    
 	    function displayArea(coordinates, name) {
-	    	var path = [];
-	    	var points =[];
+	    	let path = [];
+	    	let points =[];
 	    	
 // 	    	jquery문
 // 	    	$.each(coordinates[0], function(index, coordinate) {
@@ -756,7 +756,7 @@
 // 	    	})
 	    	
 	    	coordinates[0].forEach(function (coordinate, index) {
-	    		var point = new Object();
+	    		let point = new Object();
 	    		point.x = coordinate[1];
 	    		point.y = coordinate[0];
 	    		points.push(point);
@@ -764,7 +764,7 @@
 	    	});
 	    	
 	    	// 다각형 생성
-	    	var polygon = new kakao.maps.Polygon({
+	    	let polygon = new kakao.maps.Polygon({
 	    		map : map,
 	    		path : path,
 	    		strokeWeight : 1,
@@ -782,8 +782,8 @@
 	    		});
 	    		console.log("name : ", name);
 	    		
-	    		var content =  '<div class="area">' + name + '</div>';
-	    		var customOverlay = new kakao.maps.CustomerOverlay({
+	    		let content =  '<div class="area">' + name + '</div>';
+	    		let customOverlay = new kakao.maps.CustomerOverlay({
 	    	    	map : map,
 	    	    	position : mouseEvent.latLng,
 	    	    	content : content,
@@ -811,7 +811,7 @@
 	    	
 	    	kakao.maps.event.addListener(polygon, 'click', function() {
 	    		
-	    		var level = map.getLevel() -2; 
+	    		let level = map.getLevel() -2; 
 	    		
 	    		map.setLevel(level, {anchor : centroid(points), animate : {
 	    			duration : 350
