@@ -197,14 +197,14 @@
         <div class="detailview-top">
           <div class="detailview-imgBlock" id="detailview-imgBlock">
             <div class="detailview-imgBlock-main">
-              <img src="stampSample.png" />
+              <img src="${cpath }/resources/business/img/laundry1_01.jpg" />
             </div>
             <div class="detailview-imgBlock-subRow">
-              <img src="stampSample.png" />
-              <img src="stampSample.png" />
-              <img src="stampSample.png" />
-              <img src="stampSample.png" />
-              <img src="stampSample.png" />
+              <img src="${cpath }/resources/business/img/laundry1_02.jpg" />
+              <img src="${cpath }/resources/business/img/laundry1_03.jpg" />
+              <img src="${cpath }/resources/business/img/laundry1_04.jpg" />
+              <img src="${cpath }/resources/business/img/laundry1_05.jpg" />
+              <img src="${cpath }/resources/business/img/laundry1_06.jpg" />
             </div>
           </div>
           <div class="detailview-companyIntro">
