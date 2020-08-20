@@ -13,13 +13,12 @@
 			(#{MemberID})
 	</insert>
 	
-	
 <!-- 	UUID 중복검사 -->
 	<select id="confirm" resultType="int" parameterType="String">
 		SELECT COUNT(MEMBERID) from CCUSTOMER WHERE MEMBERID = #{MemberID}
 	</select>
 	
-	<!-- 로그인 -->
+<!-- 로그인 -->
 	<select id="selectLogin" resultType="CCustomerVO" parameterType="String">
 		SELECT * FROM CCUSTOMER WHERE MEMBERID=#{MemberID}
 	</select>

@@ -41,7 +41,6 @@ public class CustomerLaundryService {
 	}
 	
 	public ModelAndView detail(HttpServletRequest req, String estid) {
-		// exception : estid가 널이거나 유효하지 않을 때
 		ModelAndView mav = new ModelAndView("customer/laundry/customerDetail");
 		
 		// 상호명, 메인주소, 상세주소를 저장한 객체
@@ -77,7 +76,6 @@ public class CustomerLaundryService {
 			List<BCouponVO> CouponList = comparePeriod(bCouponDAO.selectUsableCoupon(map));
 			mav.addObject("CouponList", CouponList);
 			
-//			mav.addObject("Color", (cBookmarkDAO.isCheck(map) != null) ? "orange" : "skyblue");
 			mav.addObject("Bookmark", (cBookmarkDAO.isCheck(map) != null) ? "y" : "n");
 		}
 		

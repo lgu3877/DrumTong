@@ -3,10 +3,12 @@
 		"-//mybatis.org//DTD Mapper 3.0//EN" 
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
-<!-- resultType="businessVO"	 -->
+<!-- 	사업장 메뉴 테이블	 -->
 <mapper namespace="com.drumtong.business.dao.BMenuDAO">
+
+<!-- 메뉴 번호순으로 반환 -->
 	<select id="select" parameterType="String" resultType="BMenuVO" >
 		SELECT * FROM BMENU WHERE ESTID=#{estid} ORDER BY NUM ASC
 	</select>
+	
 </mapper>

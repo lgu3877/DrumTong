@@ -3,13 +3,15 @@
 		"-//mybatis.org//DTD Mapper 3.0//EN" 
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
-<!-- resultType="businessVO"	 -->
+<!-- 사업장 쿠폰 테이블	 -->
 <mapper namespace="com.drumtong.business.dao.BCouponDAO">
+
+<!-- 	사업장 별 쿠폰 리스트 -->
 	<select id="select" parameterType="String" resultType="BCouponVO" >
 		SELECT * FROM BCOUPON WHERE ESTID=#{estid}
 	</select>
 	
+<!-- 	고객이 보유하고 있는 현 사업장 쿠폰 리스트	 -->
 	<select id="selectUsableCoupon" parameterType="hashmap" resultType="BCouponVO">
 		SELECT B.COUPONID, DISCOUNT, PERIOD, MINIMUMPRICE FROM (SELECT COUPONID FROM CCOUPON 
 						WHERE 
@@ -17,7 +19,6 @@
 		(SELECT * FROM BCOUPON 
 				WHERE ESTID=#{estid}) B 
 		WHERE (A.COUPONID=B.COUPONID) AND DELETEBOOLEAN='N'
-		
 	</select>
 
 </mapper>

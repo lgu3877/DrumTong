@@ -3,8 +3,12 @@
 		"-//mybatis.org//DTD Mapper 3.0//EN" 
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!-- 	사업장 매장관리 테이블	 -->
 <mapper namespace="com.drumtong.business.dao.BManagementDAO">
+
+<!-- 사업장 정보 가져오기 -->
 	<select id="selectCustomerDetail" parameterType="String" resultType="BManagementVO" >
 		SELECT * FROM BMANAGEMENT WHERE ESTID=#{estid}
 	</select>
+	
 </mapper>

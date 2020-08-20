@@ -4,11 +4,10 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<!-- resultType="businessVO"	 -->
+<!-- 시스템 이벤트 테이블	 -->
 <mapper namespace="com.drumtong.system.dao.SCustomerBoard2DAO">
 	
-	
-	<!-- 	최근 게시판 데이터 5개를 Main으로 보내준다. -->
+	<!-- 	최근 이벤트 데이터 5개를 Main으로 보내준다. -->
 	<select id="selectRecentData2" parameterType="int" resultType="SCustomerBoardVO">
 		SELECT TITLE, SUBSTR(REGISTDATE,1,10)  as registdate FROM SCUSTOMERBOARD2  
 			WHERE  
