@@ -52,33 +52,34 @@
                     <a href="#" class="middleMenu">메뉴2</a>
                 </li>
             </ul>
-
+            
+            
+                <c:if test="${empty Login}">
             <ul class="menu">
                 <li>
                     <a href="${cpath }/customer/membership/customerSignUp/" class="middleMenu">회원가입</a>
                 </li>
             </ul>  
-
+				</c:if>
             <ul class="menu">
+            	
                 <li class="headerLogin">
-                	<c:choose>
-                		<c:when test="${empty Login}">
+                		<c:if test="${empty Login}">
                 			<a href="${cpath }/customer/membership/customerLogin/" class="middleMenu middleMenu2 ">로그인</a>
-                		</c:when>
+                		</c:if>
                 		
-                		<c:when test="${not empty Login}">
-                			<a href="${cpath }/" class="middleMenu middleMenu2 ">내 계정</a>
+                		<c:if test="${not empty Login}">
+                			<a href="${cpath }/customer/account/customerMenu/" class="middleMenu middleMenu2 ">내 계정</a>
                 			
                 			<ul class="mypage">
 		                        <div class="listButtons">
-		                            <li class="mypageList"><a href="#" class="listButton">즐겨찾기</a></li>
-		                            <li class="mypageList"><a href="#" class="listButton">주문내역</a></li>
+		                            <li class="mypageList"><a href="${cpath }/customer/account/customerBookmark/" class="listButton">즐겨찾기</a></li>
+		                            <li class="mypageList"><a href="${cpath }/customer/account/customerOrderList/" class="listButton">주문내역</a></li>
 		<!--                             <li class="mypageList"><a href="#" class="listButton">계정</a></li> -->
 		                            <li class="mypageList"><a href="${cpath }/customer/membership/customerLogOut/" class="listButton">로그아웃</a></li>
 		                        </div>
 		                    </ul>
-                		</c:when>
-                	</c:choose>
+                		</c:if>
                 	
                     
                 </li>
