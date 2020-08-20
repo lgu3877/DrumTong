@@ -16,9 +16,9 @@
     <!-- 본문 영역 -->
     <section class="section-SangJae">
       <div class="join">
-        <form method="POST" id="loginForm">
+          <div class="join-input">
           <img src="${cpath }/resources/customer/img/logo4.png" class="login-logo" />
-          <div class="login-input">
+          <form method="POST" id="loginForm" class="joinForm">
             <input type="text" name="id" id="userid" class="join-input-boxs" placeholder="ID"  onblur="axGet(document.getElementById('userid').value)" maxlength="25">
             <span class="idmsg" id="idmsg"></span>
             <input type="password" name="pw" id="userpw" class="join-input-boxs" placeholder="PW" />
@@ -50,8 +50,8 @@
             <div class="login-buttons">
               <input type="button" value="회원가입" id="joinSubmit" class="join-input-buttons" />
             </div>
+            </form>
           </div>
-        </form>
       </div>
     </section>
 
