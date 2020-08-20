@@ -4,9 +4,12 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<!-- resultType="businessVO"	 -->
+<!-- 사업장 테이블	 -->
 <mapper namespace="com.drumtong.business.dao.BusinessDAO">
+
+<!-- 	테스트 코드 -->
 	<select id="test" resultType="String" >
 		select * from v$version where rownum=1
 	</select>
+	
 </mapper>

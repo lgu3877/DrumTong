@@ -3,7 +3,7 @@
 		"-//mybatis.org//DTD Mapper 3.0//EN" 
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- resultType="businessVO"	 -->
+<!-- 사업장 정보 테이블	 -->
 <mapper namespace="com.drumtong.business.dao.BInformationDAO">
 	<select id="selectCustomerDetail" parameterType="String" resultType="BInformationVO" >
 		SELECT BRANDNAMING, MAINLOCATION, DETAILLOCATION FROM BINFORMATION WHERE ESTID=#{estid}
@@ -14,9 +14,11 @@
 		SELECT LATITUDE, LONGITUDE FROM BINFORMATION
 	</select>
 	
+<!-- 	고객이 등록한 북마크 리스트 -->
 	<select id="selectBookmark" parameterType="String" resultType="BInformationVO">
 		SELECT * FROM BINFORMATION B, (SELECT ESTID FROM CBOOKMARK WHERE MEMBERID=#{memberid}) A 
 			WHERE 
 				B.ESTID=A.ESTID
 	</select>
+	
 </mapper>

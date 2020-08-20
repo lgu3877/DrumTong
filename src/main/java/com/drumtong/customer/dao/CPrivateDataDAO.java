@@ -1,7 +1,5 @@
 package com.drumtong.customer.dao;
 
-import org.springframework.stereotype.Repository;
-
 import com.drumtong.customer.vo.CPrivateDataVO;
 
 public interface CPrivateDataDAO {
@@ -13,9 +11,7 @@ public interface CPrivateDataDAO {
 	CPrivateDataVO selectUser(String securePassword);
 
 	String selectID(String memberID);
-
 	
-//	=========================================== REST ================================================================
 //	(REST) 아이디 중복 검사 
 	int useridDupl(String id);
 	

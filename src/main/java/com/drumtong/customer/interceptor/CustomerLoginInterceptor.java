@@ -65,7 +65,7 @@ public class CustomerLoginInterceptor extends HandlerInterceptorAdapter {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		
-		// Service 에서 1회성으로 사용하는 Session들 삭제해주기
+		// 더이상 사용하지 않을 Session들 삭제해주기
 		HttpSession Session = request.getSession();
 		Session.removeAttribute("AddressToMove");
 		Session.removeAttribute("sLoginLogVO");
