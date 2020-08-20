@@ -3,7 +3,6 @@ package com.drumtong.business.dao;
 import java.util.List;
 
 import com.drumtong.business.vo.BInformationVO;
-import com.drumtong.customer.vo.CCustomerVO;
 
 public interface BInformationDAO {
 
