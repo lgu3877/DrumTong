@@ -689,7 +689,7 @@ check .option-name,
   height: 70px;
   background-color: pink;
   border-radius: 50%;
-  background: url(./profilePic.png) center no-repeat;
+  background: url(/drumtong/src/main/webapp/resources/customer/img/profilePic.png) center no-repeat;
   background-size: cover;
 }
 
