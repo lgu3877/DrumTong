@@ -17,6 +17,7 @@
 		<typeAlias type="com.drumtong.customer.vo.CPaymentVO" alias="CPaymentVO" />
 		<typeAlias type="com.drumtong.customer.vo.CBookmarkVO" alias="CBookmarkVO" />
 		<typeAlias type="com.drumtong.customer.vo.CCouponVO" alias="CCouponVO" />
+		<typeAlias type="com.drumtong.customer.vo.CPointVO" alias="CPointVO" />
 	</typeAliases>
 	
 </configuration>		

@@ -1,6 +1,6 @@
 package com.drumtong.system.vo;
 
-public class SCustomerBoardVO {
+public class SBoardVO {
 	private String notice;
 	private int num;
 	private String title;
