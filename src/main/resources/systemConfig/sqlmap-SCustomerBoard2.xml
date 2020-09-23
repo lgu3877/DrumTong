@@ -8,7 +8,7 @@
 <mapper namespace="com.drumtong.system.dao.SCustomerBoard2DAO">
 	
 	<!-- 	최근 이벤트 데이터 5개를 Main으로 보내준다. -->
-	<select id="selectRecentData2" parameterType="int" resultType="SCustomerBoardVO">
+	<select id="selectRecentData2" parameterType="int" resultType="SBoardVO">
 		SELECT TITLE, SUBSTR(REGISTDATE,1,10)  as registdate FROM SCUSTOMERBOARD2  
 			WHERE  
 			NUM <![CDATA[ >= ]]> (SELECT MAX(NUM) FROM SCUSTOMERBOARD2) - #{NumberOfData}
