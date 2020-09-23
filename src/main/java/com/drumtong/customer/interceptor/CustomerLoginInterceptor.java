@@ -23,7 +23,7 @@ public class CustomerLoginInterceptor extends HandlerInterceptorAdapter {
 		HttpSession Session = request.getSession();
 		String AddressToMove = request.getRequestURI();
 		AddressToMove = AddressToMove.substring(request.getContextPath().length(),AddressToMove.length());
-		SLoginLogVO sLoginLogVO = null;
+		SLoginLogVO sLoginLogVO = null; 
 		
 		// ■□■□■□■□■□■□■□■□■□■□■□로그인이 되어있다면■□■□■□■□■□■□■□■□■□■□■□
 		if(Session.getAttribute("Login") != null) {
