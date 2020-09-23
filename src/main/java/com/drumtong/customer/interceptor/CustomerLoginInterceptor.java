@@ -57,6 +57,8 @@ public class CustomerLoginInterceptor extends HandlerInterceptorAdapter {
 		sLoginLogVO.setLoginurl(request.getHeader("referer"));
 		
 		Session.setAttribute("sLoginLogVO", sLoginLogVO);
+		
+		// redirect 넣고, return false로 바꾸기
 		return true;
 	}
 
