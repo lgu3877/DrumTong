@@ -14,7 +14,25 @@
 <body>
 	
 	<header>
-		헤더
-	
+		<div style="width: 20%; height: 100%;" class="marginzero inlineBlock">
+			<img src="${cpath}/resources/business/img/laundry.png" style="height: 100%;">
+		</div>
+		<div style="width: 40%;" class="marginzero inlineBlock"></div>
+		
+		<!-- 매장선택 -->
+		<!-- 나중에 리스트 받아와서 반복문 돌리자 -->
+		<div class="marginzero inlineBlock" style="float: right;">
+			<div style="margin: auto">
+			<select>
+				<option>매장선택</option>
+				<option>A</option>
+				<option>B</option>
+				<option>C</option>
+			</select>
+			<button onclick="#">개인정보수정</button>
+			</div>
+		</div>
+		
+			
 	</header>
 	
