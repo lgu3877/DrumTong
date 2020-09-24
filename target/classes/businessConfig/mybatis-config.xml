@@ -17,6 +17,8 @@
 		<typeAlias type="com.drumtong.business.vo.BManagementVO" alias="BManagementVO" />
 		<typeAlias type="com.drumtong.business.vo.BMenuVO" alias="BMenuVO" />
 		<typeAlias type="com.drumtong.business.vo.BImageVO" alias="BImageVO" />
+		<typeAlias type="com.drumtong.business.vo.BPrivateDataVO" alias="BPrivateDataVO" />
+		
 	</typeAliases>
 	
 </configuration>		
