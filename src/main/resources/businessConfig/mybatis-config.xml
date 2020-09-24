@@ -18,6 +18,18 @@
 		<typeAlias type="com.drumtong.business.vo.BMenuVO" alias="BMenuVO" />
 		<typeAlias type="com.drumtong.business.vo.BImageVO" alias="BImageVO" />
 		<typeAlias type="com.drumtong.business.vo.BPrivateDataVO" alias="BPrivateDataVO" />
+		<typeAlias type="com.drumtong.business.vo.BSalesVO" alias="BSalesVO" />
+		<typeAlias type="com.drumtong.business.vo.BDetailSalesVO" alias="BDetailSalesVO" />
+		<typeAlias type="com.drumtong.business.vo.BHitsVO" alias="BHitsVO" />
+		<typeAlias type="com.drumtong.business.vo.BPaymentVO" alias="BPaymentVO" />
+		<typeAlias type="com.drumtong.business.vo.BScheduleTimeVO" alias="BScheduleTimeVO" />
+		<typeAlias type="com.drumtong.business.vo.BScheduleDaysVO" alias="BScheduleDaysVO" />
+		<typeAlias type="com.drumtong.business.vo.BTempHolidayVO" alias="BTempHolidayVO" />
+		<typeAlias type="com.drumtong.business.vo.BTempSuspensionVO" alias="BTempSuspensionVO" />
+		<typeAlias type="com.drumtong.business.vo.BDeliveryAreaVO" alias="BDeliveryAreaVO" />
+		<typeAlias type="com.drumtong.business.vo.BReviewVO" alias="BReviewVO" />
+		<typeAlias type="com.drumtong.business.vo.BCustomerReviewVO" alias="BCustomerReviewVO" />
+		<typeAlias type="com.drumtong.business.vo.BBusinessReviewVO" alias="BBusinessReviewVO" />
 		
 	</typeAliases>
 	

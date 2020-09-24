@@ -14,6 +14,7 @@
 		<typeAlias type="com.drumtong.system.vo.SIPLogVO" alias="SIPLogVO" />
 		<typeAlias type="com.drumtong.system.vo.SLoginLogVO" alias="SLoginLogVO" />
 		<typeAlias type="com.drumtong.system.vo.SBoardVO" alias="SBoardVO" />
+		<typeAlias type="com.drumtong.system.vo.SVirtualAccoutVO" alias="SVirtualAccoutVO" />
 	</typeAliases>
 	
 </configuration>		
