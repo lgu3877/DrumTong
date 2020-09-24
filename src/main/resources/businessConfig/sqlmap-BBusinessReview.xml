@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+		"-//mybatis.org//DTD Mapper 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 사업장 사업자리뷰 테이블	 -->
+<mapper namespace="com.drumtong.business.dao.BBusinessReviewDAO">
+
+
+</mapper>
