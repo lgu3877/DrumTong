@@ -6,6 +6,14 @@ public class BManagementVO {
 	private char deliveryboolean;
 	private char quickboolean;
 	private int hits;
+	private String defaultcategory;
+	
+	public String getDefaultcategory() {
+		return defaultcategory;
+	}
+	public void setDefaultcategory(String defaultcategory) {
+		this.defaultcategory = defaultcategory;
+	}
 	public String getEstid() {
 		return estid;
 	}
