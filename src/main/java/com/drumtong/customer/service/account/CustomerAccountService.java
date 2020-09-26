@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.drumtong.business.dao.BInformationDAO;
 import com.drumtong.business.vo.BInformationVO;
-import com.drumtong.customer.vo.CCustomerVO;
+import com.drumtong.customer.vo.CPrivateDataVO;
 
 @Service
 public class CustomerAccountService {
@@ -18,7 +18,7 @@ public class CustomerAccountService {
 	
 	public ModelAndView bookmark(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView("customer/account/customerBookmark");
-		CCustomerVO Login = ((CCustomerVO)req.getSession().getAttribute("Login"));
+		CPrivateDataVO Login = ((CPrivateDataVO)req.getSession().getAttribute("Login"));
 		// cbookmark 에서 memberid를 검색해 estid 리스트 출력
 		
 		// estid 와 일치하는 사업자 테이블 리스트 출력
