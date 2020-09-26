@@ -14,7 +14,6 @@ import com.drumtong.customer.dao.CAlarmDAO;
 import com.drumtong.customer.dao.CCustomerDAO;
 import com.drumtong.customer.dao.CPaymentDAO;
 import com.drumtong.customer.dao.CPrivateDataDAO;
-import com.drumtong.customer.vo.CCustomerVO;
 import com.drumtong.customer.vo.CPrivateDataVO;
 import com.drumtong.security.Encrypt;
 import com.drumtong.security.GetIPAddress;
@@ -61,8 +60,10 @@ public class CustomerMembershipService {
 		ModelAndView mav = new ModelAndView("redirect:" + AddressToMove);
 		HttpSession Session = req.getSession();
 		SLoginLogVO sLoginLogVO = new SLoginLogVO();
-		CCustomerVO Login = (CCustomerVO)Session.getAttribute("Login");
-
+		CPrivateDataVO Login = (CPrivateDataVO)Session.getAttribute("Login");
+		System.out.println("Login : " + Login);
+		System.out.println("Login.getMemberid() : " + Login.getMemberid());
+		System.out.println("cPrivateDataDAO : " + cPrivateDataDAO);
 		sLoginLogVO.setUserid(cPrivateDataDAO.selectID(Login.getMemberid()));
 		sLoginLogVO.setLoginip(GetIPAddress.getIP(req));
 		sLoginLogVO.setLoginurl(Referer);

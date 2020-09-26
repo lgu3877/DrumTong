@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.drumtong.customer.dao.CPrivateDataDAO;
-import com.drumtong.customer.vo.CCustomerVO;
+import com.drumtong.customer.vo.CPrivateDataVO;
 import com.drumtong.security.GetIPAddress;
 import com.drumtong.system.dao.SIPLogDAO;
 import com.drumtong.system.dao.SLoginLogDAO;
@@ -52,7 +52,7 @@ public class CustomerInitInterceptor extends HandlerInterceptorAdapter {
 		if(LinkInitialConnection) {
 			String IP;
 			SIPLogVO sIPLogVO = new SIPLogVO();
-			CCustomerVO AutoLogin = (CCustomerVO)Session.getAttribute("AutoLogin");
+			CPrivateDataVO AutoLogin = (CPrivateDataVO)Session.getAttribute("AutoLogin");
 			SLoginLogVO sLoginLogVO = new SLoginLogVO();
 			
 			// 1. referer과 ip 구하기
