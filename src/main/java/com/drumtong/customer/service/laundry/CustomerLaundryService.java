@@ -23,7 +23,7 @@ import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BManagementVO;
 import com.drumtong.business.vo.BMenuVO;
 import com.drumtong.customer.dao.CBookmarkDAO;
-import com.drumtong.customer.vo.CCustomerVO;
+import com.drumtong.customer.vo.CPrivateDataVO;
 
 @Service
 public class CustomerLaundryService {
@@ -65,7 +65,7 @@ public class CustomerLaundryService {
 		mav.addObject("bMenuVO", bMenuVO);
 		
 		// 로그인 되어있을 때 쿠폰 정보, 북마크 체크 여부
-		CCustomerVO Login = (CCustomerVO)req.getSession().getAttribute("Login");
+		CPrivateDataVO Login = (CPrivateDataVO)req.getSession().getAttribute("Login");
 		if(Login != null) {
 			// 1. map에 memberid, estid를 넣어준다
 			HashMap<String, String> map = new HashMap<String, String>();

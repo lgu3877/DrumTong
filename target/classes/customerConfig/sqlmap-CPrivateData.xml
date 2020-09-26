@@ -15,8 +15,8 @@
 			 #{mainreceiptaddress}, #{detailreceiptaddress},#{email})
 	</insert>
 	
-<!-- 	아이디,비밀번호와 일치하는 유저 객체 반환 -->
-	<select id="selectUser" parameterType="String" resultType="CPrivateDataVO">
+<!-- 	아이디,비밀번호와 일치하는 로그인 객체 반환 -->
+	<select id="selectLogin" parameterType="String" resultType="CPrivateDataVO">
 		SELECT * FROM CPRIVATEDATA WHERE PW=#{pw}
 	</select>
 	
