@@ -34,7 +34,7 @@ public class CustomerInitInterceptor extends HandlerInterceptorAdapter {
 		// pull 하고나서 수정 : !referer.startsWith("http://본인아이피주소:본인포트번호/drumtong/"))
 		Boolean LinkInitialConnection = (Referer == null || !Referer.startsWith("http://localhost:7070/drumtong/"));
 //		◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
-		boolean isLogin = Session.getAttribute("Login") != null ? true: false;
+		boolean isLogin = Session.getAttribute("cLogin") != null ? true: false;
 		
 		String Logout = (String)Session.getAttribute("Logout");
 		if(Logout != null) {
@@ -52,7 +52,7 @@ public class CustomerInitInterceptor extends HandlerInterceptorAdapter {
 		if(LinkInitialConnection) {
 			String IP;
 			SIPLogVO sIPLogVO = new SIPLogVO();
-			CPrivateDataVO AutoLogin = (CPrivateDataVO)Session.getAttribute("AutoLogin");
+			CPrivateDataVO AutoLogin = (CPrivateDataVO)Session.getAttribute("cAutoLogin");
 			SLoginLogVO sLoginLogVO = new SLoginLogVO();
 			
 			// 1. referer과 ip 구하기

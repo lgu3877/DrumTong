@@ -26,7 +26,7 @@ public class CustomerLoginInterceptor extends HandlerInterceptorAdapter {
 		SLoginLogVO sLoginLogVO = null; 
 		
 		// ■□■□■□■□■□■□■□■□■□■□■□로그인이 되어있다면■□■□■□■□■□■□■□■□■□■□■□
-		if(Session.getAttribute("Login") != null) {
+		if(Session.getAttribute("cLogin") != null) {
 			// 로그인 되어있을 땐 로그인 페이지를 들어갈 수 없게! 만약 들어왔다면 메인으로 이동
 			if(AddressToMove.equals("/customer/membership/customerLogin/") ) {
 				response.sendRedirect(request.getContextPath() + "/customer/");
