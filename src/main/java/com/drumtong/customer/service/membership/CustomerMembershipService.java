@@ -60,10 +60,8 @@ public class CustomerMembershipService {
 		ModelAndView mav = new ModelAndView("redirect:" + AddressToMove);
 		HttpSession Session = req.getSession();
 		SLoginLogVO sLoginLogVO = new SLoginLogVO();
-		CPrivateDataVO Login = (CPrivateDataVO)Session.getAttribute("Login");
-		System.out.println("Login : " + Login);
-		System.out.println("Login.getMemberid() : " + Login.getMemberid());
-		System.out.println("cPrivateDataDAO : " + cPrivateDataDAO);
+		CPrivateDataVO Login = (CPrivateDataVO)Session.getAttribute("cLogin");
+		
 		sLoginLogVO.setUserid(cPrivateDataDAO.selectID(Login.getMemberid()));
 		sLoginLogVO.setLoginip(GetIPAddress.getIP(req));
 		sLoginLogVO.setLoginurl(Referer);
@@ -71,8 +69,8 @@ public class CustomerMembershipService {
 		
 		sLoginLogDAO.insertLoginLog(sLoginLogVO);
 		
-		Session.removeAttribute("AutoLogin");
-		Session.removeAttribute("Login");
+		Session.removeAttribute("cAutoLogin");
+		Session.removeAttribute("cLogin");
 		Cookie[] cookie = req.getCookies();
 		if(cookie != null) {
 			for(Cookie c : cookie) {

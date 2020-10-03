@@ -24,12 +24,12 @@ public class BusinessMembershipController {
 		return svc.login();
 	}
 	
-//	// 로그인[건욱]
-//	@RequestMapping(value = "businessLogin/", method = RequestMethod.POST)
-//	public ModelAndView login(HttpServletRequest req, HttpServletResponse resp, BPrivateDataVO bPrivateDatavo, String storeid) {
-//		return svc.login(req, resp, bPrivateDatavo, storeid);
-//	}
-//	
+	// 로그인[영경]
+	@RequestMapping(value = "businessLogin/", method = RequestMethod.POST)
+	public ModelAndView login(HttpServletRequest req, HttpServletResponse resp, BPrivateDataVO bPrivateDatavo, String storeid) {
+		return svc.login(req, resp, bPrivateDatavo, storeid);
+	}
+	
 //	// 로그아웃[건욱]
 //	@RequestMapping(value = "businessLogOut/", method = RequestMethod.GET)
 //	public ModelAndView logOut(HttpServletRequest req, HttpServletResponse resp) {

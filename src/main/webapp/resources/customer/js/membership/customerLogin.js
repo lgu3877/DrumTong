@@ -42,6 +42,6 @@ function logiinSubmit(type) {
         		})
         	}
         	axPost(loginInputs[0].value,loginInputs[1].value, document.getElementById('storeid').value);
-        	console.log("로그인", "${Login}");
+        	console.log("로그인", "${cLogin}");
         }
       } //submit 체크 함수 종료

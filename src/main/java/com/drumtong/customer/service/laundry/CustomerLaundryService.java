@@ -65,7 +65,7 @@ public class CustomerLaundryService {
 		mav.addObject("bMenuVO", bMenuVO);
 		
 		// 로그인 되어있을 때 쿠폰 정보, 북마크 체크 여부
-		CPrivateDataVO Login = (CPrivateDataVO)req.getSession().getAttribute("Login");
+		CPrivateDataVO Login = (CPrivateDataVO)req.getSession().getAttribute("cLogin");
 		if(Login != null) {
 			// 1. map에 memberid, estid를 넣어준다
 			HashMap<String, String> map = new HashMap<String, String>();
