@@ -16,14 +16,14 @@ public class BusinessMembershipService {
 	@Autowired BBusinessDAO bBusinessDAO;			// 사업자 테이블
 	@Autowired BPrivateDataDAO bPrivateDataDAO;		// 사업자 개인 정보 테이블
 	
-	// 비즈니스 로그인 이동 [건욱]
+	// 비즈니스 로그인 이동 (GET) [건욱]
 	public ModelAndView login() {
 		ModelAndView mav = new ModelAndView("business/membership/businessLogin");
 		return mav;
 	}
 	
 
-	// 비즈니스 회원가입 (GET)
+	// 비즈니스 회원가입 이동 (GET) [건욱]
 	public ModelAndView signUp() {
 		ModelAndView mav = new ModelAndView("business/membership/businessSignUp");
 		return mav;
@@ -61,6 +61,49 @@ public class BusinessMembershipService {
 		
 		
 		return mav;
+	}
+
+	// 사업자 회원가입 완료 이동 (GET) [건욱]
+	public ModelAndView finishSignUp() {
+		ModelAndView mav = new ModelAndView("business/membership/businessFinishSignUp");
+		return mav;
+	}
+	
+
+
+	// 사업자 계약해지 & 패스워드 재확인 이동 (GET) [건욱]
+	public ModelAndView pwReconfirm() {
+		ModelAndView mav = new ModelAndView("business/membership/businessPWReconfirm");
+		return mav;
+	}
+	
+	
+
+	// 사업자 계정 정보 관리 이동 (GET) [건욱]
+	public ModelAndView accountInfo() {
+		ModelAndView mav = new ModelAndView("business/membership/businessAccountInfo");
+		return mav;
+	}
+
+
+	// 사업자 계정 찾기 이동 (GET) [건욱]
+	public ModelAndView accountFind() {
+		ModelAndView mav = new ModelAndView("business/membership/businessAccountFind");
+		return mav;
+	}
+
+
+	// 사업자 ID 찾기 이동 (GET) [건욱]
+	public ModelAndView idFind() {
+		ModelAndView mav = new ModelAndView("business/membership/businessIDFind");
+		return mav;		
+	}
+
+
+	// 사업자 PW 찾기 이동 (GET) [건욱]
+	public ModelAndView pwFind() {
+		ModelAndView mav = new ModelAndView("business/membership/businessPWFind");
+		return mav;		
 	}
 	
 	
