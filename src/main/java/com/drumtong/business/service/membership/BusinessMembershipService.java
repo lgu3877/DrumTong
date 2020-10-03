@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.drumtong.business.dao.BBusinessDAO;
 import com.drumtong.business.dao.BPrivateDataDAO;
 import com.drumtong.business.vo.BPrivateDataVO;
-import com.drumtong.customer.vo.CPrivateDataVO;
 import com.drumtong.security.Encrypt;
 import com.drumtong.security.Login;
 import com.drumtong.security.SerialUUID;
@@ -40,6 +39,21 @@ public class BusinessMembershipService {
 		mav.setViewName("redirect:" + (LoginResult ? AddressToMove : "/business/membership/businessLogin/" ));
 		
 
+		return mav;
+	}
+	
+	// 로그아웃 객체
+	public ModelAndView logOut(HttpServletRequest req, HttpServletResponse resp) {
+		String Referer = req.getHeader("referer");
+		String AddressToMove = Referer != null ? Referer.split("drumtong")[1] : "/business/";
+		ModelAndView mav = new ModelAndView("redirect:" + AddressToMove);
+		HttpSession Session = req.getSession();
+		
+		Login.logout(Session, req, resp, Referer, (BPrivateDataVO)Session.getAttribute("bLogin"));
+		
+		// 로그아웃 했을 때 표시해주기
+		Session = req.getSession();
+		Session.setAttribute("Logout", "Logout");
 		return mav;
 	}
 
