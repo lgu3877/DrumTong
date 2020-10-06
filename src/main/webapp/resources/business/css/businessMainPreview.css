@@ -1,0 +1,66 @@
+.m_preview_con * {
+	padding: 0;
+	margin: 0;
+}
+
+/* Preview Container */
+.m_preview_con {
+	width: 100%;
+	height: 40%;
+	display: flex;
+}
+
+/* Left Container */
+.m_preivew_left {
+	width: 40%;
+	height: 100%;
+	float: left;
+}
+
+.upper {
+	background-color: white;
+	width: 100%;
+	height: 50%;
+}
+
+.lower {
+	width: 100%;
+	height: 50%;
+}
+/* Right Container */
+.m_preivew_right {
+	width: 40%;
+	height: 100%;
+	float: right;
+}
+
+.right_entire {
+	margin:auto;
+	width: 480px;
+	height: 400px;
+	overflow: hidden;
+}
+
+.m_preview_con h1 {
+	font-size: 36pt;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.m_preview_con .previewpart {
+	width: 33.3%;
+	display: inline-block;
+	margin: 0;
+	float: left;
+}
+
+.m_preview_con .previewpart .countnum {
+	color: gray;
+	font-size: 18pt;
+}
+
+.m_preview_con .previewpart .countname {
+	font-weight: bold;
+	font-size: 18pt;
+}
+
