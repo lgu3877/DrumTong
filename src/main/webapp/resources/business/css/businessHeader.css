@@ -1,0 +1,56 @@
+* {
+	marign: 0;
+	padding: 0;
+}
+
+/* Header Wrapper */
+.h_wrapper {
+	display: flex;
+	height: 100%;
+}
+
+/* Logo */
+.h_left_con {
+	width: 30%;
+	min-width: 360px;
+	float:left;
+	justify-content: center;
+	align-items: center;
+}
+.h_left_con img {
+	width: 100%;
+	height: auto;
+}
+
+/* Navigation Wrapper */
+.h_right_con {
+	width: 100%;
+	float: right;
+	display: block;
+}
+
+/* Navigation > Member > login ... */
+.h_right_upper {
+	height: 35%;
+	text-align: right;
+	line-height: 2em;
+}
+.h_right_upper span {
+	margin-left: 20px;
+	margin-right: 20px
+}
+
+/* Navigation > SubMenu > 1, 2, 3, 4 ... */
+.h_right_lower {
+	color: 	#3b5998;
+	height: 65%;
+	display: flex;
+	justify-content: space-around;
+	padding-left: 200px;
+	line-height: 4em;
+}
+.h_right_lower div {
+	margin-left: 20px;
+	font-size: 25pt;
+	font-weight: 1000;
+}

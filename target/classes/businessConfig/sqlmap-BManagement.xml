@@ -11,4 +11,10 @@
 		SELECT * FROM BMANAGEMENT WHERE ESTID=#{estid}
 	</select>
 	
+	<insert id="insertSignUp" parameterType="BManagementVO">
+		INSERT INTO BMANAGEMENT 
+			VALUES
+			( #{estid} , #{defaultcategory})
+	</insert>
+	
 </mapper>
