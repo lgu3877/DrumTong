@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.drumtong.business.dao.BBusinessDAO;
+import com.drumtong.business.dao.BEstablishmentDAO;
 import com.drumtong.customer.dao.CCustomerDAO;
 import com.drumtong.customer.dao.CPrivateDataDAO;
 
@@ -17,19 +18,19 @@ public class SerialUUID {
 	static CCustomerDAO cCustomerDAO;
 	static BBusinessDAO bBusinessDAO;
 //	static BCouponDAO bCouponDAO;
-//	static BEstablishment bEstablishment;
+	static BEstablishmentDAO bEstablishmentDAO;
 	
 	@Autowired CCustomerDAO BeancCustomerDAO;
 	@Autowired BBusinessDAO BeanbBusinessDAO;
 //	@Autowired BCouponDAO BeanbCouponDAO;
-//	@Autowired BEstablishment BeanbEstablishment;
+	@Autowired BEstablishmentDAO BeanbEstablishmentDAO;
 	
 	@PostConstruct
 	private void init() {
 		this.cCustomerDAO = BeancCustomerDAO;
 		this.bBusinessDAO = BeanbBusinessDAO;
 //		this.bCouponDAO = BeanbCouponDAO;
-//		this.bEstablishment = BeanbEstablishment
+		this.bEstablishmentDAO = BeanbEstablishmentDAO;
 	}
 	
 	
@@ -55,8 +56,8 @@ public class SerialUUID {
 //				case "BCoupon" : result = bCouponDAO.confirm(SerialUUID);
 //					break;
 //					
-//				case "BEstablishment" : result = bEstablishment.confirm(SerialUUID);
-//					 break;
+				case "BEstablishment" : result = bEstablishmentDAO.confirm(SerialUUID);
+					 break;
 			}
 		}
 		

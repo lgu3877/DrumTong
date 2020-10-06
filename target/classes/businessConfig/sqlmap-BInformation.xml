@@ -5,6 +5,30 @@
 
 <!-- 사업장 정보 테이블	 -->
 <mapper namespace="com.drumtong.business.dao.BInformationDAO">
+	
+	
+<!-- 	신규 데이터 등록 -->
+	<insert id="insertSignUp" parameterType="BInformationVO">
+		INSERT INTO BINFORMATION 
+			VALUES
+			( #{estid}, #{taxation}, #{crn},
+			  #{brandnaming}, #{representative}, #{mainlocation},
+			  #{detaillocation}, #{reportcard}, #{license},
+			  #{latitude}, #{lognitude})
+	</insert>
+
+
+<!-- 프리미엄 광고 여부 업데이트 -->
+	<select id="updatePremiumBoolean" parameterType="BInformationVO">
+		UPDATE BINFORMATION 
+			SET
+				PREMIUMBOOLEAN = #{premiumboolean} 
+			WHERE
+				ESTID = #{estid}
+	</select>	
+	
+	
+	
 	<select id="selectCustomerDetail" parameterType="String" resultType="BInformationVO" >
 		SELECT BRANDNAMING, MAINLOCATION, DETAILLOCATION FROM BINFORMATION WHERE ESTID=#{estid}
 	</select>
@@ -20,5 +44,6 @@
 			WHERE 
 				B.ESTID=A.ESTID
 	</select>
+	
 	
 </mapper>
