@@ -2,6 +2,7 @@ package com.drumtong.security;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.drumtong.business.dao.BPrivateDataDAO;
+import com.drumtong.business.vo.BPrivateDataVO;
 import com.drumtong.customer.dao.CPrivateDataDAO;
 import com.drumtong.customer.vo.CPrivateDataVO;
 import com.drumtong.system.dao.SLoginLogDAO;
@@ -72,5 +74,31 @@ public class Login {
 		}
 
 		return LoginResult;
+	}
+	
+	public static void logout(HttpSession Session, HttpServletRequest req, HttpServletResponse resp, String Referer, PrivateData Login) {
+		SLoginLogVO sLoginLogVO = new SLoginLogVO();
+		boolean typeOfSite = Login instanceof CPrivateDataVO; // 고객 로그인일 때 true, 사업자 로그인일 때 false
+		
+		sLoginLogVO.setUserid(typeOfSite ?
+							cPrivateDataDAO.selectID(((CPrivateDataVO)Login).getMemberid())
+							:bPrivateDataDAO.selectID(((BPrivateDataVO)Login).getBpersonid()));
+		sLoginLogVO.setLoginip(GetIPAddress.getIP(req));
+		sLoginLogVO.setLoginurl(Referer);
+		sLoginLogVO.setLoginresult("LOGOUT");
+		
+		sLoginLogDAO.insertLoginLog(sLoginLogVO);
+		
+		Session.removeAttribute(typeOfSite ? "cAutoLogin" : "bAutoLogin");
+		Session.removeAttribute(typeOfSite ? "cLogin" : "bLogin");
+		Cookie[] cookie = req.getCookies();
+		if(cookie != null) {
+			for(Cookie c : cookie) {
+				if(c.getName().equals("JSESSIONID")) {
+					c.setMaxAge(0);
+					resp.addCookie(c);
+				}
+			}
+		}
 	}
 }
