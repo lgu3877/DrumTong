@@ -1,0 +1,134 @@
+/* single page login format */
+.single_page_login {
+	width: 500px;
+	padding-top: 50px;
+	margin: auto;
+}
+
+/* Login Default Style*/
+.login_wrapper * {
+	margin: 0;
+	padding: 0;
+}
+
+/* Login Wrapper */
+.login_wrapper {
+	width: 50%;
+	/* Login Box Height */
+	height: 300px;
+	overflow: hidden;
+}
+
+/* Title */
+.login_title {
+	height: 20%;
+	font-weight: bold;
+	text-align: center;
+}
+
+.login_title p {
+	color:  #3b5998;
+	font-size: 30pt;
+	letter-spacing: 0.8em;
+}
+
+/* Input Container (with Input Tags) */
+.login_input_con {
+	height: 80%;
+	margin: auto;
+	padding-top: 10px;
+}
+
+.login_input_con div {
+	margin: auto;
+	display: block;
+	width: 80%;
+	height: 33.33%;
+}
+
+.login_input_con input {
+	border: none;
+	outline: none;
+	border-radius: 15px;
+	font-size: 15pt;
+	width: 100%;
+	height: 70%;
+	background-color: #DEDFDF;
+}
+
+.login_input_con .login_button_con input {
+	background-color: #8b9dc3 !important;
+}
+
+/* Login & Join Button Container*/
+.login_button_con {
+	font-family: 'Roboto', sans-serif;
+	display: inline-block;
+	box-sizing: content-box;
+}
+
+/* Login & Button */
+.login_input_con input[type=submit] {
+	background-color: #e5e6eb;
+	letter-spacing: 2.5px;
+	text-transform: uppercase;
+	width: 40%;
+	padding: 0;
+	color: white;
+}
+
+.login_input_con button {
+	background-color: #8b9dc3;
+	letter-spacing: 2.5px;
+	text-transform: uppercsase;
+	border: none;
+	outline: none;
+	border-radius: 30px;
+	font-size: 15pt;
+	height: 70%;
+	width: 40%;
+	border-radius: 15px;
+	padding: 0;
+	width: 40%;
+	color: white;
+}
+
+/* input: focus */
+input[type=text]:focus, input[type=password]:focus {
+	transition: all 0.3s ease 0s;
+	transform: translate(-1px, -1px);
+	box-shadow: 0px 15px 20px rgba(223, 227, 238);
+}
+
+/* Button hover */
+input[type=submit]:hover, button:hover {
+	transition: all 0.3s ease 0s;
+	cursor: pointer;
+	box-shadow: 0px 15px 20px rgba(223, 227, 238);
+	transform: translate(-2px, -2px);
+}
+
+.single_page_login input {
+	margin-bottom: 15px;
+	height: 45px;
+}
+
+.single_page_login .input_title {
+	margin-left: 20px;
+	margin-bottom: 7px;
+}
+
+.single_page_login .login_form {
+	background-color:#D4F5FD;
+	border-radius: 5px;
+	padding: 50px 0;
+}
+
+.single_page_login input[type=submit] {
+	margin: 15px auto 20px auto;
+	color: white;
+}
+
+.login_search_con div {
+	margin: 5px auto 15px auto;
+}

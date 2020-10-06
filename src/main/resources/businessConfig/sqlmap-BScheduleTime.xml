@@ -5,6 +5,13 @@
 
 <!-- 사업장 영업시간관리 테이블	 -->
 <mapper namespace="com.drumtong.business.dao.BScheduleTimeDAO">
-
-
+	
+	
+<!-- 	신규 데이터 등록 -->
+	<insert id="insertSignUp" parameterType="String">
+		INSERT INTO BSCHEDULETIME 
+			VALUES
+			( #{ESTID} )
+	</insert>
+	
 </mapper>
