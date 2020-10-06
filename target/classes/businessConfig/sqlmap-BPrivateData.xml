@@ -31,5 +31,39 @@
 		SELECT COUNT(*) FROM BPRIVATEDATA WHERE ID=#{id}
 	</select>
 	
-
+	<!-- 아이디찾기(이름/휴대폰) -->
+	<select id="idFindNamePhoneNum" parameterType="BPrivateDataVO" resultType="String">
+		SELECT ID FROM BPRIVATEDATA WHERE NAME=#{NAME} AND PHONENUM=#{PHONENUM}
+	</select>
+	
+	<!-- 아이디찾기(이름/생년월일) -->
+	<select id="idFindNameBirth" parameterType="BPrivateDataVO" resultType="String">
+		SELECT ID FROM BPRIVATEDATA WHERE NAME=#{NAME} AND BIRTH=#{BIRTH}
+	</select>
+	
+	<!-- 아이디찾기(이름/이메일) -->
+	<select id="idFindNameEmail" parameterType="BPrivateDataVO" resultType="String">
+		SELECT ID FROM BPRIVATEDATA WHERE NAME=#{NAME} AND EMAIL=#{EMAIL}
+	</select>
+	
+	<!-- 아이디찾기(사업자번호/이메일) -->
+	<select id="idFindCRNEmail" parameterType="BPrivateDataVO" resultType="String">
+		SELECT ID FROM BPRIVATEDATA WHERE DELEGATECRN=#{DELEGATECRN} AND EMAIL=#{EMAIL}
+	</select>
+	
+	<!-- 아이디찾기(사업자번호/휴대폰) -->
+	<select id="idFindCRNPhone" parameterType="BPrivateDataVO" resultType="String">
+		SELECT ID FROM BPRIVATEDATA WHERE DELEGATECRN=#{DELEGATECRN} AND PHONENUM=#{PHONENUM} 
+	</select>
+	
+	<!-- 비밀번호찾기(전화번호/이름/아이디) -->
+	<select id="pwFindPhoneNameID" parameterType="BPrivateDataVO" resultType="BPrivateDataVO">
+		SELECT * FROM BPRIVATEDATA WHERE PHONENUM=#{PHONENUM} AND NAME=#{NAME} AND ID=#{ID}
+	</select>
+	
+	<!-- 비밀번호찾기(이메일/아이디) -->
+	<select id="pwFindEmailID" parameterType="BPrivateDataVO" resultType="BPrivateDataVO">
+		SELECT * FROM BPRIVATEDATA WHERE EMAIL=#{EMAIL} AND ID=#{ID}
+	</select>
+	
 </mapper>
