@@ -70,23 +70,23 @@ public class BusinessMembershipController {
 	}
 	
 	
-	// 사업자 계정 찾기 이동 (GET) [건욱]
+	// 사업자 계정 찾기 이동 (GET) [영경]
 	@RequestMapping(value = "businessAccountFind/", method = RequestMethod.GET)
 	public ModelAndView accountFind() {
 		return svc.accountFind();
 	}
 	
 	
-	// 사업자 ID 찾기 이동 (GET) [건욱]
+	// 사업자 ID 찾기 이동 (GET) [영경]
 	@RequestMapping(value = "businessIDFind/", method = RequestMethod.GET)
-	public ModelAndView idFind() {
-		return svc.idFind();
+	public ModelAndView idFind(BPrivateDataVO bprivatedatavo, String option) {
+		return svc.idFind(bprivatedatavo, option);
 	}
 	
-	// 사업자 PW 찾기 이동 (GET) [건욱]
+	// 사업자 PW 찾기 이동 (GET) [영경]
 	@RequestMapping(value = "businessPWFind/", method = RequestMethod.GET)
-	public ModelAndView pwFind() {
-		return svc.pwFind();
+	public ModelAndView pwFind(BPrivateDataVO bprivatedatavo, String option) {
+		return svc.pwFind(bprivatedatavo, option);
 	}
 	
 	
