@@ -42,7 +42,7 @@ public class BusinessMembershipService {
 		return mav;
 	}
 	
-	// 로그아웃 객체
+	// 로그아웃 객체[영경]
 	public ModelAndView logOut(HttpServletRequest req, HttpServletResponse resp) {
 		String Referer = req.getHeader("referer");
 		String AddressToMove = Referer != null ? Referer.split("drumtong")[1] : "/business/";
@@ -120,23 +120,52 @@ public class BusinessMembershipService {
 	}
 
 
-	// 사업자 계정 찾기 이동 (GET) [건욱]
+	// 사업자 계정 찾기 이동 (GET) [영경]
 	public ModelAndView accountFind() {
 		ModelAndView mav = new ModelAndView("business/membership/businessAccountFind");
 		return mav;
 	}
-
-
-	// 사업자 ID 찾기 이동 (GET) [건욱]
-	public ModelAndView idFind() {
+	
+	// 사업자 ID 찾기 결과 페이지로 이동 (GET) [영경]
+	public ModelAndView idFind(BPrivateDataVO bprivatedatavo, String option) {
 		ModelAndView mav = new ModelAndView("business/membership/businessIDFind");
+		String UserID = null;
+		switch(option) {
+			case "NamePhoneNum":
+				UserID = bPrivateDataDAO.idFindNamePhoneNum(bprivatedatavo);
+				break;
+			case "NameBirth":
+				UserID = bPrivateDataDAO.idFindNameBirth(bprivatedatavo);
+				break;
+			case "NameEmail":
+				UserID = bPrivateDataDAO.idFindNameEmail(bprivatedatavo);
+				break;
+			case "CRNEmail":
+				UserID = bPrivateDataDAO.idFindCRNEmail(bprivatedatavo);
+				break;
+			case "CRNPhone":
+				UserID = bPrivateDataDAO.idFindCRNPhone(bprivatedatavo);
+				break;
+		}
+		mav.addObject("result", (UserID == null ? "존재하지 않는 정보입니다." : "아이디는 " + UserID + "입니다."));
 		return mav;		
 	}
 
 
-	// 사업자 PW 찾기 이동 (GET) [건욱]
-	public ModelAndView pwFind() {
-		ModelAndView mav = new ModelAndView("business/membership/businessPWFind");
+	// 사업자 PW 찾기 이동 (GET) [영경]
+	public ModelAndView pwFind(BPrivateDataVO bprivatedatavo, String option) {
+		ModelAndView mav = new ModelAndView();
+		BPrivateDataVO User = null;
+		switch(option) {
+		case "phoneNameID":
+			User = bPrivateDataDAO.pwFindPhoneNameID(bprivatedatavo);
+			break;
+		case "emailID":
+			User = bPrivateDataDAO.pwFindEmailID(bprivatedatavo);
+			break;
+		}
+		mav.setViewName(User == null ? "business/membership/businessAccountFind" : "business/membership/businessPWFind");
+		mav.addObject("User", User);
 		return mav;		
 	}
 	
