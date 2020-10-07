@@ -44,7 +44,7 @@ public class RestBusinessMembershipService {
 	}
 	
 	// 계정이 일치한다면 이메일 전송[영경]
-	public int emailConfirm(BPrivateDataVO bprivatedatavo) {
+	public String emailConfirm(BPrivateDataVO bprivatedatavo) {
 		BPrivateDataVO User = bPrivateDataDAO.pwFindEmailID(bprivatedatavo);
 		// 인증번호 난수로 생성
 		int VerificationCode = ((int)Math.random() * 100000) + 1;
@@ -53,10 +53,10 @@ public class RestBusinessMembershipService {
 			String message = "<h1>DRUMTONG</h1>인증번호는 " + VerificationCode + "입니다.";
 			sendMail(bprivatedatavo.getEmail(), message);
 			// 정상적으로 입력했다면 인증번호 반환
-			return VerificationCode;
+			return VerificationCode + "";
 		}
 		// 잘못된 입력일 땐 -1 반환
-		return -1;
+		return "-1";
 	}
 
 	private void sendMail(String toEmail, String message) {
