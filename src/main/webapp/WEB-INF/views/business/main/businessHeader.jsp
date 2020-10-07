@@ -11,18 +11,12 @@
   	<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'>
   	<link rel="stylesheet" href="${cpath }/business/css/businessStyle.css">
   	<link rel="stylesheet" href="${cpath }/business/css/businessHeader.css">
-  	<link rel="stylesheet" href="${cpath }/busine	margin-top: 20px;ss/css/businessLogin.css">
-  	<link rel="stylesheet" href="${cpath }/business/css/businessMainPreview.css">
-  	<link rel="stylesheet" href="${cpath }/business/css/businessInnerNav.css">
-  	<link rel="stylesheet" href="${cpath }/business/css/businessLogin.css">
+	  	<link rel="stylesheet" href="${cpath }/business/css/businessLogin.css">
+  	
   	 <link
    		 rel="stylesheet"
    		 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
   />
-  	
-  	<!--Load the AJAX API-->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript" src="${cpath }/business/js/chart.js"></script>
 
   	
   	<script type="text/javascript"> 
