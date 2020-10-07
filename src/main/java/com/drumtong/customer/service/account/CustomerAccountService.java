@@ -18,7 +18,7 @@ public class CustomerAccountService {
 	
 	public ModelAndView bookmark(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView("customer/account/customerBookmark");
-		CPrivateDataVO Login = ((CPrivateDataVO)req.getSession().getAttribute("Login"));
+		CPrivateDataVO Login = ((CPrivateDataVO)req.getSession().getAttribute("cLogin"));
 		// cbookmark 에서 memberid를 검색해 estid 리스트 출력
 		
 		// estid 와 일치하는 사업자 테이블 리스트 출력

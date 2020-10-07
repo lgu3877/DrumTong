@@ -7,6 +7,8 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.drumtong.business.dao.BBusinessDAO;
+import com.drumtong.business.dao.BEstablishmentDAO;
 import com.drumtong.customer.dao.CCustomerDAO;
 import com.drumtong.customer.dao.CPrivateDataDAO;
 
@@ -14,21 +16,21 @@ import com.drumtong.customer.dao.CPrivateDataDAO;
 public class SerialUUID {
 
 	static CCustomerDAO cCustomerDAO;
-//	static BBusinessDAO bBusinessDAO;
+	static BBusinessDAO bBusinessDAO;
 //	static BCouponDAO bCouponDAO;
-//	static BEstablishment bEstablishment;
+	static BEstablishmentDAO bEstablishmentDAO;
 	
 	@Autowired CCustomerDAO BeancCustomerDAO;
-//	@Autowired BBusinessDAO BeanbBusinessDAO;
+	@Autowired BBusinessDAO BeanbBusinessDAO;
 //	@Autowired BCouponDAO BeanbCouponDAO;
-//	@Autowired BEstablishment BeanbEstablishment;
+	@Autowired BEstablishmentDAO BeanbEstablishmentDAO;
 	
 	@PostConstruct
 	private void init() {
 		this.cCustomerDAO = BeancCustomerDAO;
-//		this.bBusinessDAO = BeanbBusinessDAO;
+		this.bBusinessDAO = BeanbBusinessDAO;
 //		this.bCouponDAO = BeanbCouponDAO;
-//		this.bEstablishment = BeanbEstablishment
+		this.bEstablishmentDAO = BeanbEstablishmentDAO;
 	}
 	
 	
@@ -48,14 +50,14 @@ public class SerialUUID {
 				case "CPrivateData" : result = cCustomerDAO.confirm(SerialUUID);
 					break;
 					
-//				case "BBusiness" : result = bBusinessDAO.confirm(SerialUUID);
-//					break;
+				case "BBusiness" : result = bBusinessDAO.confirm(SerialUUID);
+					break;
 //					
 //				case "BCoupon" : result = bCouponDAO.confirm(SerialUUID);
 //					break;
 //					
-//				case "BEstablishment" : result = bEstablishment.confirm(SerialUUID);
-//					 break;
+				case "BEstablishment" : result = bEstablishmentDAO.confirm(SerialUUID);
+					 break;
 			}
 		}
 		
