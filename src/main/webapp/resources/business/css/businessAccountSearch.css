@@ -1,0 +1,87 @@
+.search_inner {
+	height: 100%;
+	padding-top: 100px;
+}
+
+.search_inner ul, .search_inner li {
+	list-style: none;
+}
+
+.search_con {
+	background-color: #bbeeff;
+	border-radius: 10px;
+	width: 600px;
+	margin: auto;
+}
+
+.search_box {
+	margin: auto;
+	width: 400px;
+	padding: 30px;
+}
+
+.search_nav {
+	display: flex;
+	justify-content: space-around;
+	text-align: center;
+}
+
+.search_nav li {
+	width: 200px;
+	border: 1px solid black;
+	text-decoration: underline;
+	padding: 10px 20px;
+	border-radius: 5px;
+	letter-spacing: 3px;
+}
+
+.nav_id_search {
+	margin-right: 30px; 
+}
+
+.serach_text_guide {
+	text-align: left;
+}
+
+.search_form_wrapper {
+	padding-top: 10px;
+}
+
+.search_form {
+	display: block;
+}
+
+.search_form p {
+	padding: 0;
+	maring: 0;
+	text-align: left;
+}
+
+.search_form {
+	padding: 0;
+	margin: auto;
+}
+
+.search_input_con {
+	
+}
+
+.search_input_con input[type=text] {
+	width: 100%;
+	height: 30px;
+}
+
+.search_birtyday_con ul {
+	justify-content: space-between;
+	display: flex;
+}
+
+.search_birtyday_con input[type=text], .search_birthday_con select {
+	width: 100px;
+	height: 30px;
+}
+
+.search_birtyday_con input[type=submit] {
+	width: 210px;
+	height: 70px;
+}
