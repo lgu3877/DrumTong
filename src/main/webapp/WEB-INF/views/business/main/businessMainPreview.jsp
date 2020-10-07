@@ -51,15 +51,15 @@
 				<h1>주문현황</h1>
 				<div class="previewpart">
 					<p class="countnum" id="counter7"></p>
-					<p class="countname">오늘</p>
+					<p class="countname">요청</p>
 				</div>					
 				<div class="previewpart">
 					<p class="countnum" id="counter8"></p>
-					<p class="countname">이번주</p>
+					<p class="countname">처리중</p>
 				</div>					
 				<div class="previewpart">
 					<p class="countnum" id="counter9"></p>
-					<p class="countname">이번달</p>
+					<p class="countname">완료</p>
 				</div>					
 			</div>
 		</div>
