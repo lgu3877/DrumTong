@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="businessHeader.jsp" %>    
-
+	  	<link rel="stylesheet" href="${cpath }/business/css/businessMainLogin.css">
+	<link rel="stylesheet" href="${cpath }/business/css/businessMainPreview.css">
+	<link rel="stylesheet" href="${cpath }/business/css/businessInnerNav.css">
 
 <section>
 	<!-- Preview -->
@@ -9,12 +11,6 @@
 	
 	<!-- Inner Navigation -->
 	<%@ include file="businessInnerNav.jsp" %>
-	
-	<div style="width:50%; background-color: tomato"></div>
-	
-	<!-- Login Include -->
-	<%@ include file="businessMainLogin.jsp" %> 
-	
 
 	
 	<div style="width: 100%; height: 30%; margin-top: 10px">
@@ -30,7 +26,6 @@
 	<!-- Login Include -->
 	<%@ include file="businessMainLogin.jsp" %> 
 	</div>
-
 </section>
 
 <script type="text/javascript" src="${cpath }/business/js/main.js"></script>
