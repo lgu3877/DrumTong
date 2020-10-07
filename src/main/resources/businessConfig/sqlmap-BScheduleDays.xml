@@ -6,5 +6,10 @@
 <!-- 사업장 정기휴무일정관리 테이블	 -->
 <mapper namespace="com.drumtong.business.dao.BScheduleDaysDAO">
 
-
+<!-- 	신규 데이터 등록 -->
+	<insert id="insertSignUp">
+		INSERT INTO BSCHEDULEDAYS
+			VALUES
+			( #{ESTID} )
+	</insert>
 </mapper>

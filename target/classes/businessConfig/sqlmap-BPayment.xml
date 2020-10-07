@@ -5,6 +5,24 @@
 
 <!-- 사업장 결제 테이블	 -->
 <mapper namespace="com.drumtong.business.dao.BPaymentDAO">
+	
+<!-- 	신규 데이터 생성 -->
+	<insert id="insertSignUp" parameterType="BPaymentVO">
+		INSERT INTO BPAYMENT
+			VALUES
+			( #{estid}, #{accountbank}, #{accountnum},
+			  #{copyofbankbook} )
+	</insert>
 
 
+
+<!-- 	프리미엄 광고 결제수단 업데이트 -->
+	<select id="updatePremiumPay" parameterType="BPaymentVO">
+		UPDATE BPAYMENT
+			SET
+				CARDNUM = #{cardnum},
+				CARDBANK = #{cardbank}
+			WHERE
+				ESTID = #{estid}
+	</select>
 </mapper>

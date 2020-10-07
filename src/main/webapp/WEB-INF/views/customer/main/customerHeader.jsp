@@ -54,7 +54,7 @@
             </ul>
             
             
-                <c:if test="${empty Login}">
+                <c:if test="${empty cLogin}">
             <ul class="menu">
                 <li>
                     <a href="${cpath }/customer/membership/customerSignUp/" class="middleMenu">회원가입</a>
@@ -64,11 +64,11 @@
             <ul class="menu">
             	
                 <li class="headerLogin">
-                		<c:if test="${empty Login}">
+                		<c:if test="${empty cLogin}">
                 			<a href="${cpath }/customer/membership/customerLogin/" class="middleMenu middleMenu2 ">로그인</a>
                 		</c:if>
                 		
-                		<c:if test="${not empty Login}">
+                		<c:if test="${not empty cLogin}">
                 			<a href="${cpath }/customer/account/customerMenu/" class="middleMenu middleMenu2 ">내 계정</a>
                 			
                 			<ul class="mypage">
