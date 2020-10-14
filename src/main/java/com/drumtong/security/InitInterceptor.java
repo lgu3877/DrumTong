@@ -1,4 +1,6 @@
-package com.drumtong.customer.interceptor;
+package com.drumtong.security;
+
+import java.awt.Window;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,19 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.drumtong.customer.dao.CPrivateDataDAO;
-import com.drumtong.customer.vo.CPrivateDataVO;
-import com.drumtong.security.GetIPAddress;
 import com.drumtong.system.dao.SIPLogDAO;
 import com.drumtong.system.dao.SLoginLogDAO;
 import com.drumtong.system.vo.SIPLogVO;
 import com.drumtong.system.vo.SLoginLogVO;
 
 //Customer Init Intercepter
-public class CustomerInitInterceptor extends HandlerInterceptorAdapter {
+public class InitInterceptor extends HandlerInterceptorAdapter {
 	// extends HandlerInterceptorAdaptor
 	// (Shift + Alt + S) + V
-	@Autowired CPrivateDataDAO cPrivateDAO;
 	@Autowired SIPLogDAO sIPLogDAO;
 	@Autowired SLoginLogDAO sLoginLogDAO;
 	
@@ -30,18 +28,20 @@ public class CustomerInitInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		HttpSession Session = request.getSession();
 		String Referer = request.getHeader("REFERER");
+		String typeOfSite = request.getRequestURI().split("drumtong")[1].contains("business") ? "b" : "c";
 //		◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
 		// pull 하고나서 수정 : !referer.startsWith("http://본인아이피주소:본인포트번호/drumtong/"))
-		Boolean LinkInitialConnection = (Referer == null || !Referer.startsWith("http://localhost:7070/drumtong/"));
+		Boolean LinkInitialConnection = (Referer == null || !Referer.startsWith("http://localhost:8080/drumtong/" + (typeOfSite.equals("b") ? "business/" : "")));
 //		◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
-		boolean isLogin = Session.getAttribute("cLogin") != null ? true: false;
+		boolean isLogin = Session.getAttribute(typeOfSite + "Login") != null ? true: false;
 		
-		String Logout = (String)Session.getAttribute("Logout");
+		String LogoutType = typeOfSite + "Logout";
+		String Logout = (String)Session.getAttribute(LogoutType);
 		if(Logout != null) {
 			if(Logout.equals("firstPage"))
-				Session.removeAttribute("Logout");
-			else if(Logout.equals("Logout"))
-				Session.setAttribute("Logout", "firstPage");
+				Session.removeAttribute(LogoutType);
+			else if(Logout.equals(LogoutType))
+				Session.setAttribute(LogoutType, "firstPage");
 		}
 		
 		// 로그인 되어있고 페이지를 계속 사용중이라면 Session 유지시간 3시간으로 업데이트
@@ -52,7 +52,7 @@ public class CustomerInitInterceptor extends HandlerInterceptorAdapter {
 		if(LinkInitialConnection) {
 			String IP;
 			SIPLogVO sIPLogVO = new SIPLogVO();
-			CPrivateDataVO AutoLogin = (CPrivateDataVO)Session.getAttribute("cAutoLogin");
+			PrivateData AutoLogin = (PrivateData)Session.getAttribute(LogoutType + "AutoLogin");
 			SLoginLogVO sLoginLogVO = new SLoginLogVO();
 			
 			// 1. referer과 ip 구하기
@@ -70,7 +70,7 @@ public class CustomerInitInterceptor extends HandlerInterceptorAdapter {
 
 			// 3. 자동로그인 정보가 있다면 로그인하고 로그인로그남기기
 			if(!isLogin && AutoLogin != null) {
-				String ID = cPrivateDAO.selectID(AutoLogin.getMemberid());
+				String ID = AutoLogin.getId();
 				sLoginLogVO.setUserid(ID);
 				sLoginLogVO.setLoginip(IP);
 				sLoginLogVO.setLoginurl(Referer);

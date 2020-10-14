@@ -7,7 +7,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  	<title>customerMain :: Laundry</title>
+  	<title>businessMain :: Laundry</title>
   	<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'>
   	<link rel="stylesheet" href="${cpath }/business/css/businessStyle.css">
   	<link rel="stylesheet" href="${cpath }/business/css/businessHeader.css">
@@ -56,14 +56,14 @@
 			<div class="h_right_con">
 				<div class="h_right_upper">
 					<div class="member_menu">
-						<span><a href="${cpath }/business/login">Login</a></span> <span>/</span> <span>Sign-up</span> <span>
+						<span><a href="${cpath }/business/membership/businessLogin/">Login</a></span> <span>/</span> <span><a href="${cpath }/business/membership/businessSignUp/">Sign-up</a></span> <span>
 							<select>
 								<option>매장선택</option>
 								<option>A</option>
 								<option>B</option>
 								<option>C</option>
 						</select>
-							<button onclick="#">개인정보수정</button>
+							<button onclick="location.href='${cpath}/business/membership/businessAccountInfo/'">개인정보수정</button>
 						</span>
 					</div>
 				</div>
