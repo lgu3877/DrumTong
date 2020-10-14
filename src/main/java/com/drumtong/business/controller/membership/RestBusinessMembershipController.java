@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.drumtong.business.service.membership.RestBusinessMembershipService;
 import com.drumtong.business.vo.BPrivateDataVO;
+import com.drumtong.security.Login;
 
 @RestController
 @RequestMapping("business/membership/")
@@ -40,6 +41,13 @@ public class RestBusinessMembershipController {
 	@PostMapping(produces="application/json; charset=utf8")
 	public String login(HttpServletRequest req, HttpServletResponse resp, @RequestBody HashMap<String, String> param) {
 		return svc.login(req, resp, param);
+	}
+	
+	// 로그인 POST로 넘기기 전 체크[영경]
+	@RequestMapping("businessLogin/rest/loginCheck/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String loginCheck(@RequestBody HashMap<String, String> param) {
+		return Login.loginCheck(param);
 	}
 	
 	// 계정이 일치한다면 이메일 전송[영경]

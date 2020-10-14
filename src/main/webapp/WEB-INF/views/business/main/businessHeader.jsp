@@ -7,22 +7,16 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  	<title>customerMain :: Laundry</title>
+  	<title>businessMain :: Laundry</title>
   	<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'>
   	<link rel="stylesheet" href="${cpath }/business/css/businessStyle.css">
   	<link rel="stylesheet" href="${cpath }/business/css/businessHeader.css">
-  	<link rel="stylesheet" href="${cpath }/busine	margin-top: 20px;ss/css/businessLogin.css">
-  	<link rel="stylesheet" href="${cpath }/business/css/businessMainPreview.css">
-  	<link rel="stylesheet" href="${cpath }/business/css/businessInnerNav.css">
-  	<link rel="stylesheet" href="${cpath }/business/css/businessLogin.css">
+	  	<link rel="stylesheet" href="${cpath }/business/css/businessLogin.css">
+  	
   	 <link
    		 rel="stylesheet"
    		 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
   />
-  	
-  	<!--Load the AJAX API-->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript" src="${cpath }/business/js/chart.js"></script>
 
   	
   	<script type="text/javascript"> 
@@ -62,14 +56,14 @@
 			<div class="h_right_con">
 				<div class="h_right_upper">
 					<div class="member_menu">
-						<span><a href="${cpath }/business/login">Login</a></span> <span>/</span> <span>Sign-up</span> <span>
+						<span><a href="${cpath }/business/membership/businessLogin/">Login</a></span> <span>/</span> <span><a href="${cpath }/business/membership/businessSignUp/">Sign-up</a></span> <span>
 							<select>
 								<option>매장선택</option>
 								<option>A</option>
 								<option>B</option>
 								<option>C</option>
 						</select>
-							<button onclick="#">개인정보수정</button>
+							<button onclick="location.href='${cpath}/business/membership/businessAccountInfo/'">개인정보수정</button>
 						</span>
 					</div>
 				</div>

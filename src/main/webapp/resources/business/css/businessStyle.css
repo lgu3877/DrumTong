@@ -31,7 +31,7 @@
     font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';
     font-size: 16px;
     
-
+    
 }
 
 
@@ -50,7 +50,7 @@ footer {
   }
 
 /* 메인 페이지 영역별 미디어쿼리 */
-@media (min-width:1401px) {
+@media (min-width:1400px) {
   body {
     text-align: center;
     
@@ -162,6 +162,24 @@ div .verticalCenter {
 div .parent {
     display: flex;
     align-items: center;
+}
+
+/* Global CSS */
+
+.ml-0 {
+	margin-left: 0;
+}
+
+.mb-1 {
+	margin-bottom: 10px;
+}
+
+.red-mark {
+	color: red;
+}
+
+.text-left {
+	text-align: left;
 }
 
 div .slide .item {
