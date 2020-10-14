@@ -18,6 +18,7 @@ import com.drumtong.business.service.membership.RestBusinessMembershipService;
 import com.drumtong.business.vo.BPrivateDataVO;
 
 @RestController
+@RequestMapping("business/membership/")
 public class RestBusinessMembershipController {
 
 	@Autowired RestBusinessMembershipService svc;
