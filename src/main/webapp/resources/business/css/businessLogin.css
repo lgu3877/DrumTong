@@ -68,7 +68,7 @@
 }
 
 /* Login & Button */
-.login_input_con input[type=submit] {
+.login_input_con input[type=button] {
 	background-color: #e5e6eb;
 	letter-spacing: 2.5px;
 	text-transform: uppercase;
@@ -101,7 +101,7 @@ input[type=text]:focus, input[type=password]:focus {
 }
 
 /* Button hover */
-input[type=submit]:hover, button:hover {
+input[type=button]:hover, button:hover {
 	transition: all 0.3s ease 0s;
 	cursor: pointer;
 	box-shadow: 0px 15px 20px rgba(223, 227, 238);
@@ -124,7 +124,7 @@ input[type=submit]:hover, button:hover {
 	padding: 50px 0;
 }
 
-.single_page_login input[type=submit] {
+.single_page_login input[type=button] {
 	margin: 15px auto 20px auto;
 	color: white;
 }
