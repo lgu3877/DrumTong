@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="businessHeader.jsp" %>    
-
+	  	<link rel="stylesheet" href="${cpath }/business/css/businessMainLogin.css">
+	<link rel="stylesheet" href="${cpath }/business/css/businessMainPreview.css">
+	<link rel="stylesheet" href="${cpath }/business/css/businessInnerNav.css">
 
 <section>
 	<!-- Preview -->
@@ -18,8 +20,8 @@
 			<img src="${cpath }/resources/business/img/laundry1_04.jpg" style="display: none" class="item">
 			<img src="${cpath }/resources/business/img/laundry1_05.jpg" style="display: none" class="item">
 			<img src="${cpath }/resources/business/img/laundry1_06.jpg" style="display: none" class="item">	
-			<img id="prevBtn" style="position: absolute; width: 10%; top: 40%; left: 0; z-index: 9999; opacity: 0.5; display: none" src="${cpath }/resources/business/img/prev_button.jpg" onclick="prevButton()">
-			<img id="nextBtn" style="position: absolute; width: 10%; top: 40%; right: 0; z-index: 9999;  opacity: 0.5; display: none" src="${cpath }/resources/business/img/next_button.jpg" onclick="nextButton()">			
+			<img id="prevBtn" style="position: absolute; width: 10%; top: 40%; left: 0; z-index: 9999; display: none" src="${cpath }/resources/business/img/prev_button.png" onclick="prevButton()">
+			<img id="nextBtn" style="position: absolute; width: 10%; top: 40%; right: 0; z-index: 9999; display: none" src="${cpath }/resources/business/img/next_button.png" onclick="nextButton()">			
 		</div>
 	<!-- Login Include -->
 	<%@ include file="businessMainLogin.jsp" %> 
