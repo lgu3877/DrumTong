@@ -29,4 +29,5 @@ public class BusinessMainController {
 	public String accountSearchView() {
 		return "business/main/member/businessAccountSearch";
 	}
+
 }

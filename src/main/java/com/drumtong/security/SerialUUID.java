@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import com.drumtong.business.dao.BBusinessDAO;
 import com.drumtong.business.dao.BEstablishmentDAO;
+import com.drumtong.business.dao.BImageDAO;
+import com.drumtong.business.vo.BImageVO;
 import com.drumtong.customer.dao.CCustomerDAO;
 import com.drumtong.customer.dao.CPrivateDataDAO;
 
@@ -19,11 +21,18 @@ public class SerialUUID {
 	static BBusinessDAO bBusinessDAO;
 //	static BCouponDAO bCouponDAO;
 	static BEstablishmentDAO bEstablishmentDAO;
+
+	// AWS S3 저장 파일명 지정용
+	static BImageDAO bImageDAO;
+	static BImageVO bImageVO;
 	
 	@Autowired CCustomerDAO BeancCustomerDAO;
 	@Autowired BBusinessDAO BeanbBusinessDAO;
 //	@Autowired BCouponDAO BeanbCouponDAO;
 	@Autowired BEstablishmentDAO BeanbEstablishmentDAO;
+	
+	// AWS S3 저장 파일명 지정용
+	@Autowired BImageDAO BeanbImageDAO;
 	
 	@PostConstruct
 	private void init() {
@@ -31,8 +40,15 @@ public class SerialUUID {
 		this.bBusinessDAO = BeanbBusinessDAO;
 //		this.bCouponDAO = BeanbCouponDAO;
 		this.bEstablishmentDAO = BeanbEstablishmentDAO;
+		
+		// AWS S3 저장 파일명 지정용
+		this.bImageDAO = BeanbImageDAO;
 	}
 	
+	public static void forAWS(BImageVO VO) {
+		bImageVO = new BImageVO();
+		bImageVO.setEstid(VO.getEstid());
+	}
 	
 	
 	// SerialUUID 생성코드
@@ -41,7 +57,7 @@ public class SerialUUID {
 		String SerialUUID = "";
 		
 //		System.out.println("while문 밖에 serailuuid : " + SerialUUID);
-		
+		 
 		while(result == 1) {
 			
 			SerialUUID = FieldName + "_" + UUID.randomUUID().toString().replace("-", "");
@@ -58,6 +74,13 @@ public class SerialUUID {
 //					
 				case "BEstablishment" : result = bEstablishmentDAO.confirm(SerialUUID);
 					 break;
+					 
+				case "BImage" : 
+					System.out.println("UUID 실행 " + bImageVO.getEstid() +"/"+ SerialUUID);
+					bImageVO.setStoreimg(bImageVO.getEstid() +"/"+ SerialUUID);
+					result = bImageDAO.confirm(bImageVO);
+					System.out.println("confirm result : " + result);
+					break;
 			}
 		}
 		

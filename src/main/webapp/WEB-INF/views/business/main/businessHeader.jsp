@@ -5,15 +5,21 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>customerMain :: Laundry</title>
-<link rel="stylesheet" href="${cpath }/business/css/businessStyle.css">
-<link rel="stylesheet" href="${cpath }/business/css/businessHeader.css">
-<link rel="stylesheet" href="${cpath }/business/css/businessLogin.css">
-<link rel="stylesheet" href="${cpath }/business/css/businessAccountFind.css">
-<link rel="stylesheet" href="${cpath }/business/css/businessIDFind.css">
-<link rel="stylesheet" href="${cpath }/business/css/businessPWFind.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<title>businessMain :: Laundry</title>
+  	<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="${cpath }/business/css/businessStyle.css">
+    <link rel="stylesheet" href="${cpath }/business/css/businessHeader.css">
+    <link rel="stylesheet" href="${cpath }/business/css/businessLogin.css">
+    <link rel="stylesheet" href="${cpath }/business/css/businessAccountFind.css">
+    <link rel="stylesheet" href="${cpath }/business/css/businessIDFind.css">
+    <link rel="stylesheet" href="${cpath }/business/css/businessPWFind.css">
+  	
+  	 <link
+   		 rel="stylesheet"
+   		 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+  />
 
 <!-- Font -->
 <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css'
@@ -75,7 +81,7 @@
 								<div>Option5</div>
 							</div>
 						</div>
-						<button onclick="console.log('개인정보수정')">개인정보수정</button>
+						<button onclick="location.href='${cpath}/business/membership/businessAccountInfo/'">개인정보수정</button>
 					</div>
 				</div>
 				<div class="h_right_lower">

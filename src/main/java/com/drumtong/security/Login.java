@@ -1,5 +1,9 @@
 package com.drumtong.security;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +41,7 @@ public class Login {
 		Cookie SessionID = new Cookie("JSESSIONID", session.getId());
 		String ID = privateData.getId();	// 아이디
 		String PW = privateData.getPw();	// 비밀번호
+		System.out.println("ID : " + ID + ", PW : " + PW);
 		PrivateData Login = null;	// User의  MemberID와 일치하는 객체 저장
 		// CustomerLoginInterceptor 에서 만들어 세션에 저장해두었던 LoginLogVO 객체 불러오기
 		SLoginLogVO sLoginLogVO = (SLoginLogVO)session.getAttribute("sLoginLogVO");	// 인터셉터에서 받아온 loginlogo불러오기
@@ -52,6 +57,7 @@ public class Login {
 				
 		// 2. 일치하는 계정 있다면 Login 계정 생성하고 세션에 저장!(세션 시간은 3시간)
 		if(Login != null) {
+			System.out.println("로그인 성공 ? " + Login.getName());
 			session.setAttribute(typeOfSite ? "cLogin" : "bLogin", Login);
 //			System.out.println("로그인 객체 : " + session.getAttribute("Login"));
 			session.setMaxInactiveInterval(60 * 60 * 3);
@@ -61,9 +67,14 @@ public class Login {
 		}
 		
 		// 4. 로그인로그에 데이터 입력 후 DB에 저장
-		sLoginLogVO.setUserid(ID);
-		sLoginLogVO.setLoginresult(LoginResult ? "SUCCESS" : "FAIL");
-		int LoginLogResult = sLoginLogDAO.insertLoginLog(sLoginLogVO);
+		if(sLoginLogVO != null) {
+			sLoginLogVO.setUserid(ID);
+			sLoginLogVO.setLoginresult(LoginResult ? "SUCCESS" : "FAIL");
+			int LoginLogResult = sLoginLogDAO.insertLoginLog(sLoginLogVO);
+			session.removeAttribute("sLoginLogVO");
+		} else {
+			System.out.println("로그인 로그 남기기 실패!!!");
+		}
 		
 		// 5. 자동로그인 체크되어있고, 로그인 결과 값이 true이면 쿠키에 저장
 		if(CheckAutoLogin && LoginResult) {
@@ -100,5 +111,16 @@ public class Login {
 				}
 			}
 		}
+	}
+
+	public static String loginCheck(HashMap<String, String> param) {
+		boolean TypeOfSite = "customer".equals(param.get("type")) ? true : false;
+		String ID = param.get("id");
+		String PW = param.get("pw");
+		
+		PrivateData Login = TypeOfSite ? 
+				cPrivateDataDAO.selectLogin(Encrypt.SecurePassword(ID, PW)):
+				bPrivateDataDAO.selectLogin(Encrypt.SecurePassword(ID, PW));
+		return Login != null ? "true" : "false";
 	}
 }

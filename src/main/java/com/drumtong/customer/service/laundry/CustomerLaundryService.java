@@ -41,6 +41,9 @@ public class CustomerLaundryService {
 	}
 	
 	public ModelAndView detail(HttpServletRequest req, String estid) {
+		if(estid == null) {
+			return new ModelAndView("customer/");
+		}
 		ModelAndView mav = new ModelAndView("customer/laundry/customerDetail");
 		
 		// 상호명, 메인주소, 상세주소를 저장한 객체
