@@ -7,9 +7,21 @@
 <mapper namespace="com.drumtong.business.dao.BScheduleDaysDAO">
 
 <!-- 	신규 데이터 등록 -->
-	<insert id="insertSignUp">
+	<insert id="insertSignUp" parameterType="String">
 		INSERT INTO BSCHEDULEDAYS
+			(ESTID) 
 			VALUES
 			( #{ESTID} )
 	</insert>
+	
+<!-- 	영업일정관리 {첫 번째 주, 두 번째 주, 세 번째 주, 네 번째 주, 다섯 번째 주, 여섯 번째 주, 공휴일 휴무 여부}를 업데이트 시켜준다.-->
+	<update id="updateConstract" parameterType="BScheduleDaysVO">
+		UPDATE BSCHEDULEDAYS
+			SET
+				FIRSTWEEK = #{firstweek}, SECONDWEEK = #{secondweek}, THIRDWEEK = #{thirdweek},
+				FOURWEEK = #{fourweek}, FIFTHWEEK = #{fifthweek}, SIXTHWEEK = #{sixthweek},
+				HOLIDAY = #{holiday} 
+			WHERE ESTID = #{estid}
+	</update>
+
 </mapper>
