@@ -5,7 +5,7 @@
 
 	<form class="login_wrapper">
 		<div class="login_title">
-			<p>Login</p>
+			<p class="title">Login</p>
 		</div>
 		<div class="login_input_con" action="#" method="POST">
 			<div>
