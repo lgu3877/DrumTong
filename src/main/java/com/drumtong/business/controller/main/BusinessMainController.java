@@ -25,14 +25,14 @@ public class BusinessMainController {
 		return svc.mainCover();
 	}
 	
-	@GetMapping("login")
-	public String loginView() {
-		return "business/main/member/businessLogin";
-	}
-	
-	@GetMapping("accountSearch")
-	public String accountSearchView() {
-		return "business/main/member/businessAccountSearch";
-	}
+//	@GetMapping("login")
+//	public String loginView() {
+//		return "business/main/member/businessLogin";
+//	}
+//	
+//	@GetMapping("accountSearch")
+//	public String accountSearchView() {
+//		return "business/main/member/businessAccountSearch";
+//	}
 
 }
