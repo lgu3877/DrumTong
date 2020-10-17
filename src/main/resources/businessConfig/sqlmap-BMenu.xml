@@ -8,7 +8,7 @@
 
 <!-- 메뉴 번호순으로 반환 -->
 	<select id="select" parameterType="String" resultType="BMenuVO" >
-		SELECT * FROM BMENU WHERE ESTID=#{estid} ORDER BY NUM ASC
+		SELECT * FROM BMENU WHERE ESTID=#{estid} ORDER BY NAME ASC
 	</select>
 	
 	
@@ -16,7 +16,7 @@
 	<insert id="insertConstract" parameterType="BMenuVO">
 		INSERT INTO BMENU
 			VALUES
-			(#{estid}, #{num}, #{name},
+			(#{estid}, #{name},
 			 #{price}, #{quickprice}, #{ete},
 			 #{maincategory}, #{subcategory}
 			)
