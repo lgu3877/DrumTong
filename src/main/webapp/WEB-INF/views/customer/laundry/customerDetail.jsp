@@ -224,14 +224,14 @@
 
             <div class="detailview-selectOptions">
            <c:forEach items="${bMenuVO }" var="menu">
-              <div class="option-row" id="choose+${menu.num }" >
+              <div class="option-row"" >
                 <div class="option-text">
-                  <div class="option-name" id="option-name">옵션 ${menu.num }</div>
+                  <div class="option-name" id="option-name">${menu.maincategory }/${menu.subcategory }</div>
                   <div class="option-context">${menu.name } / 예상시간 ${menu.ete }일</div>
                 </div>
                 <input type="number" class="quantity" id="quantity" placeholder="0" min="0" value="0" />
                 <div class="option-price">${menu.price } 원</div>
-                <input type="checkbox" id="quick" class="quickcheck ${menu.num }" value="${menu.quickprice }">
+                <input type="checkbox" id="quick" class="quickcheck" value="${menu.quickprice }">
                 <label class="quick" id="checkLabel" for="quick" title="빠른 서비스"><i class="fas fa-shipping-fast"></i>+${menu.quickprice } 원</label>
               </div>
          </c:forEach>
