@@ -57,7 +57,7 @@
   	</script>
 
 </head>
-<body onload="javascript:openPopup('${cpath}/business/mainCover')">
+<body onload="javascript:openPopup('${cpath}/business/mainCover/')">
 
 	<header>
 		<div class="h_wrapper">
@@ -68,7 +68,6 @@
 			<div class="h_right_con title">
 				<div class="h_right_upper">
 					<div class="member_menu">
-						<span><a
 							href="${cpath }/business/membership/businessLogin/">로그인</a></span> <span>/</span>
 						<span>회원가입</span>
 						<div id="menu" class="menu">

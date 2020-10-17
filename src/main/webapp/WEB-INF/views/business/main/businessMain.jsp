@@ -28,6 +28,10 @@
 	</div>
 </section>
 
+
+<%@ include file="businessFooter.jsp" %>
+
 <script type="text/javascript" src="${cpath }/business/js/main.js"></script>
 
-<%@ include file="businessFooter.jsp" %>    
+</body>
+</html>

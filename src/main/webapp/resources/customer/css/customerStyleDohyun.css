@@ -78,17 +78,30 @@ section {
 }
 
 body {
-	/* border: 1px solid black; */
+	border: 1px solid black;
+	margin: auto;
+	height: auto;
+
+		최대크기
+	max-width: 1900px;
+	max-height: 3000px;
+
+		최소크기
+	min-width : 100%;
+	min-height: 100%;
+}
+
+@media screen and (max-width : 600px) {
+	body {
+	
 	margin: auto;
 	height: auto;
 
 	/* 	최대크기 */
-	max-width: 1900px;
-	max-height: 3000px;
-
-	/* 	최소크기 */
-	/* min-width : 100%; */
-	/* min-height: 100%; */
+	max-width: 1000px;
+	max-height: 1500px;
+	
+	}
 }
 
 /* ====================섹션 CSS================================ */
