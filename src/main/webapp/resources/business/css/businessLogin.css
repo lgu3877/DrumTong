@@ -44,6 +44,7 @@
 	display: block;
 	width: 80%;
 	height: 33.33%;
+
 }
 
 .login_input_con input {
@@ -51,9 +52,11 @@
 	outline: none;
 	border-radius: 15px;
 	font-size: 15pt;
-	width: 100%;
+	width: 95%;
 	height: 70%;
 	background-color: #DEDFDF;
+	box-sizing: inherit;
+	overflow: auto;
 }
 
 .login_input_con .login_button_con input {
