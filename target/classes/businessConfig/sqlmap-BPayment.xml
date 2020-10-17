@@ -9,6 +9,7 @@
 <!-- 	신규 데이터 생성 -->
 	<insert id="insertSignUp" parameterType="BPaymentVO">
 		INSERT INTO BPAYMENT
+			(ESTID, ACCOUNTBANK, ACCOUNTNUM, COPYOFBANKBOOK)
 			VALUES
 			( #{estid}, #{accountbank}, #{accountnum},
 			  #{copyofbankbook} )
@@ -17,12 +18,12 @@
 
 
 <!-- 	프리미엄 광고 결제수단 업데이트 -->
-	<select id="updatePremiumPay" parameterType="BPaymentVO">
+	<update id="updatePremiumPay" parameterType="BPaymentVO">
 		UPDATE BPAYMENT
 			SET
 				CARDNUM = #{cardnum},
 				CARDBANK = #{cardbank}
 			WHERE
 				ESTID = #{estid}
-	</select>
+	</update>
 </mapper>

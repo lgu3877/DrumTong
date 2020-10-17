@@ -10,6 +10,8 @@
 <!-- 	신규 데이터 등록 -->
 	<insert id="insertSignUp" parameterType="BInformationVO">
 		INSERT INTO BINFORMATION 
+			(ESTID, TAXATION, CRN, BRANDNAMING, REPRESENTATIVE, MAINLOCATION,
+			 DETAILLOCATION, REPORTCARD, LICENSE, LATITUDE, LOGNITUDE) 
 			VALUES
 			( #{estid}, #{taxation}, #{crn},
 			  #{brandnaming}, #{representative}, #{mainlocation},
@@ -19,13 +21,13 @@
 
 
 <!-- 프리미엄 광고 여부 업데이트 -->
-	<select id="updatePremiumBoolean" parameterType="BInformationVO">
+	<update id="updatePremiumBoolean" parameterType="BInformationVO">
 		UPDATE BINFORMATION 
 			SET
 				PREMIUMBOOLEAN = #{premiumboolean} 
 			WHERE
 				ESTID = #{estid}
-	</select>	
+	</update>	
 	
 	
 	

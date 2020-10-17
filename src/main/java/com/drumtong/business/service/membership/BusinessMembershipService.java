@@ -21,7 +21,7 @@ public class BusinessMembershipService {
 	@Autowired BBusinessDAO bBusinessDAO;			// 사업자 테이블
 	@Autowired BPrivateDataDAO bPrivateDataDAO;		// 사업자 개인 정보 테이블
 	
-	// 비즈니스 로그인 이동 (GET) [건욱]
+	// 비즈니스 로그인 이동 (GET) [영경]
 	public ModelAndView login() {
 		ModelAndView mav = new ModelAndView("business/membership/businessLogin");
 		return mav;
@@ -32,11 +32,13 @@ public class BusinessMembershipService {
 		ModelAndView mav = new ModelAndView();
 		HttpSession Session = req.getSession();
 		String AddressToMove = (String)Session.getAttribute("AddressToMove");		// 인터셉터 들어가기 전 이동하려던 주소
+		if(AddressToMove == null) 	AddressToMove = "business/";
+		
 		
 		boolean LoginResult = Login.login(Session, resp, bPrivateDatavo, storeid);		// 로그인 성공여부
-		
+		System.out.println("AddressToMove" + AddressToMove);
 		// 3. 로그인 성공 여부로 반환할 주소 값 다르게 저장
-		mav.setViewName("redirect:" + (LoginResult ? AddressToMove : "/business/membership/businessLogin/" ));
+		mav.setViewName("redirect:/" + (LoginResult ? AddressToMove : "business/membership/businessLogin/" ));
 		
 
 		return mav;
@@ -53,7 +55,7 @@ public class BusinessMembershipService {
 		
 		// 로그아웃 했을 때 표시해주기
 		Session = req.getSession();
-		Session.setAttribute("Logout", "Logout");
+		Session.setAttribute("bLogout", "bLogout");
 		return mav;
 	}
 
