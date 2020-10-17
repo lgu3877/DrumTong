@@ -2,6 +2,7 @@ package com.drumtong.business.controller.membership;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.drumtong.business.service.membership.BusinessMembershipService;
 import com.drumtong.business.vo.BPrivateDataVO;
+import com.drumtong.security.LoginInterceptor;
 
 @Controller
 @RequestMapping("business/membership/")
@@ -18,19 +20,29 @@ public class BusinessMembershipController {
 
 	@Autowired BusinessMembershipService svc;
 	
-	// 로그인 페이지로 이동 (GET) [건욱]
+	// 로그인 페이지로 이동 (GET) [영경]
 	@RequestMapping(value = "businessLogin/", method = RequestMethod.GET)
 	public ModelAndView login() {
 		return svc.login();
 	}
 	
 	// 로그인[영경]
-	@RequestMapping(value = "businessLogin/", method = RequestMethod.POST)
+	@RequestMapping(value = "businessLogin/POST/", method = RequestMethod.POST)
 	public ModelAndView login(HttpServletRequest req, HttpServletResponse resp, BPrivateDataVO bPrivateDatavo, String storeid) {
 		return svc.login(req, resp, bPrivateDatavo, storeid);
 	}
 	
 	// 로그아웃[건욱]
+	// 로그인[영경]/비즈니스 메인페이지에서 로그인 하는 경우!/loginlog를 등록시켜주기 위함
+	@RequestMapping(value = "businessLogin/POST/main/", method = RequestMethod.POST)
+	public ModelAndView loginMain(HttpServletRequest req, HttpServletResponse resp, BPrivateDataVO bPrivateDatavo, String storeid) {
+		HttpSession Session = req.getSession();
+		new LoginInterceptor().CreateNewSLoginLog(req, Session, req.getHeader("Referer"));
+		Session.setAttribute("AddressToMove", "business/");
+		return login(req, resp, bPrivateDatavo, storeid);
+	}
+	
+	// 로그아웃[영경]
 	@RequestMapping(value = "businessLogOut/", method = RequestMethod.GET)
 	public ModelAndView logOut(HttpServletRequest req, HttpServletResponse resp) {
 		return svc.logOut(req,resp);

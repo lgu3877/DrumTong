@@ -26,7 +26,7 @@ public class CustomerMembershipController {
 	}
 	
 	// 로그인[영경]
-	@RequestMapping(value = "customerLogin/", method = RequestMethod.POST)
+	@RequestMapping(value = "customerLogin/POST/", method = RequestMethod.POST)
 	public ModelAndView login(HttpServletRequest req, HttpServletResponse resp, CPrivateDataVO cPrivateDatavo, String storeid) {
 		return svc.login(req, resp, cPrivateDatavo, storeid);
 	}
