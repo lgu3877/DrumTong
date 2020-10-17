@@ -1,0 +1,29 @@
+
+
+body {
+	height: 1000px !important;
+}
+
+
+.mainDiv {
+	margin: 0 auto;
+	width: 60%;
+	height: 50%; 
+	text-align: center; 
+	margin-top: 200px;
+}
+
+div.mainDiv h1 {
+	font-size: 24pt;
+}
+
+div.mainDiv div {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+div.mainDiv div button {
+	width: 40%;
+	height: 50px;
+	font-size: 18pt;
+}
