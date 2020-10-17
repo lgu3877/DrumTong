@@ -1,0 +1,55 @@
+.saerched_con {
+	margin: 250px auto;
+}
+
+.searched_view {
+	width: 500px;
+	margin: auto;
+	background-color: #3b5998;
+	border-radius: 5px;
+	box-shadow: 5px 5px 10px #a89c86;
+	padding: 50px 25px 50px 25px;
+	color: white;
+}
+
+.searched_title {
+	font-size: 25pt;
+	word-spacing: 1px;
+	letter-spacing: 1px;
+	padding-bottom: 25px;
+}
+
+.searched_content {
+	font-size: 14pt;
+    letter-spacing: 0.2px;
+}
+
+.searched_account {
+	font-size: 20pt;
+    text-decoration: underline;
+    text-underline-position: under;
+    letter-spacing: 2px;
+}
+
+.searched_options_con {
+	display: flex;
+	width: 500px;
+    margin: auto;
+	justify-content: space-evenly;
+	height: 80px;
+	margin-top: 30px;
+}
+
+.searched_options_con button {
+	width: 150px;
+    height: 50px;
+    outline: none;
+    border: none;
+    background-color: #8b9dc3;
+    color: white;
+    font-size: 12pt;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-radius: 5px;
+    margin: 0 48px;
+}

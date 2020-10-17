@@ -1,3 +1,7 @@
+
+
+
+// Slider
 	const slideImages = document.querySelectorAll('.slide .item');
 	console.log('slideitem 개수 : ' + slideImages.length);
 	
@@ -71,6 +75,5 @@
 		document.getElementById('slideDiv').addEventListener('mouseout',interval);
 		document.getElementById('slideDiv').addEventListener('mouseout',deactiveButton);
     }
-
 	
 	
