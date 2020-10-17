@@ -11,4 +11,52 @@
 		SELECT * FROM BMENU WHERE ESTID=#{estid} ORDER BY NUM ASC
 	</select>
 	
+	
+<!-- 	 메뉴 테이블에  {메뉴이름, 가격, 퀵가격, 예상소요시간}를 업데이트 시켜준다. -->
+	<insert id="insertConstract" parameterType="BMenuVO">
+		INSERT INTO BMENU
+			VALUES
+			(#{estid}, #{num}, #{name},
+			 #{price}, #{quickprice}, #{ete},
+			 #{maincategory}, #{subcategory}
+			)
+	</insert>
+	
+	
+	
+	
+	
+	
+<!--  ======================================= REST ================================================ -->
+
+
+
+
+	
+<!-- 	매장 메뉴를 비동기식으로 수정해주는 메서드입니다. -->
+	<update id="updateBMenu" parameterType="BMenuVO">
+		UPDATE BMENU 
+			SET
+				NUM = #{num}, NAME = #{name}, PRICE = #{price}, QUICKPRICE = #{quickprice},
+				ETE = #{ete}, MAINCATEGORY = #{maincategory}, SUBCATEGORY = #{subcategory}
+			WHERE ESTID = #{estid}
+				
+	</update>
+	
+	
+	
+<!-- 	매장 메뉴를 비동기식으로 삭제해주는 메서드입니다. -->
+	<delete id="deleteBMenu" parameterType="BMenuVO">
+		DELETE FROM BMENU 
+			WHERE 
+				ESTID=#{estid} 
+ 			AND 
+ 				MAINCATEGORY=#{maincategory} 
+ 			AND 
+ 				SUBCATEGORY = #{subcategory} 
+ 			AND 
+ 				NAME= #{name};
+	
+	</delete>
+	
 </mapper>

@@ -19,9 +19,11 @@ public class BusinessMainController {
 		return svc.main();
 	}
 
-	@RequestMapping(value = "mainCover", method = RequestMethod.GET)
+	@RequestMapping(value = "mainCover/", method = RequestMethod.GET)
 	public ModelAndView mainCover() {
 		return svc.mainCover();
 	}
 	
+	
+
 }

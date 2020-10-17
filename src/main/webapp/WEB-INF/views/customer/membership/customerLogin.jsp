@@ -10,7 +10,7 @@
     <!-- 본문 영역 -->
     <section class="section-SangJae">
       <div class="login">
-        <form method="POST" id="loginForm">
+        <form method="POST" id="loginForm" action="${cpath }/customer/membership/customerLogin/POST/">
           <img src="${cpath }/resources/customer/img/logo4.png" class="login-logo" />
           <div class="login-alert">메세지</div>
           <div class="login-input">
