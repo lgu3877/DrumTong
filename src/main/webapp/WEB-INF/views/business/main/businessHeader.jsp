@@ -56,7 +56,7 @@
 			<div class="h_right_con">
 				<div class="h_right_upper">
 					<div class="member_menu">
-						<span><a href="${cpath }/business/login">Login</a></span> <span>/</span> <span>Sign-up</span> <span>
+						<span><a href="${cpath }/business/membership/businessLogin/">Login</a></span> <span>/</span> <span>Sign-up</span> <span>
 							<select>
 								<option>매장선택</option>
 								<option>A</option>

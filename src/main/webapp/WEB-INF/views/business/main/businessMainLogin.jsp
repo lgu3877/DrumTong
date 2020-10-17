@@ -9,10 +9,10 @@
 		</div>
 		<div class="login_input_con" action="#" method="POST">
 			<div>
-				<input type="text" placeholder="   Account">
+				<input type="text" placeholder="Account" style="padding-left: 10%">				
 			</div>
 			<div>
-				<input type="password" placeholder="   Password">
+				<input type="password" placeholder="Password"  style="padding-left: 10%">
 			</div>
 			<div class="login_button_con">
 				<input type="submit" value="Login" style="float: left">
