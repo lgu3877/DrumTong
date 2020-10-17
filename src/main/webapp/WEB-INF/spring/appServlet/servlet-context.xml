@@ -104,7 +104,11 @@
 			<exclude-mapping path="/business/membership/businessLogin/POST/"/>
 			<exclude-mapping path="/business/membership/businessLogin/POST/main/"/>
 			<exclude-mapping path="/business/membership/businessSignUp/"/>
+			<exclude-mapping path="/business/membership/businessAccountFind/"/>
+			<exclude-mapping path="/business/membership/businessIDFind/"/>
+			<exclude-mapping path="/business/membership/businessPWFind/"/>
 			<exclude-mapping path="/business/mainCover/"/>
+
 			
 <!-- 			<exclude-mapping path="/customer/membership/customerLogin/rest/loginCheck/"/> -->
 <!-- 			<exclude-mapping path="/business/membership/businessLogin/rest/loginCheck/"/> -->
