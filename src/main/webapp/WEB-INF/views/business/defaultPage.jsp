@@ -3,8 +3,7 @@
 <%@ include file="main/businessHeader.jsp" %>    
 
 <section>
-	${test }
-	섹션
+	사업자 메인
 </section>
 
 <%@ include file="main/businessFooter.jsp" %>    
