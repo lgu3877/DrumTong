@@ -32,7 +32,6 @@ public class BusinessMembershipController {
 		return svc.login(req, resp, bPrivateDatavo, storeid);
 	}
 	
-	// 로그아웃[건욱]
 	// 로그인[영경]/비즈니스 메인페이지에서 로그인 하는 경우!/loginlog를 등록시켜주기 위함
 	@RequestMapping(value = "businessLogin/POST/main/", method = RequestMethod.POST)
 	public ModelAndView loginMain(HttpServletRequest req, HttpServletResponse resp, BPrivateDataVO bPrivateDatavo, String storeid) {
