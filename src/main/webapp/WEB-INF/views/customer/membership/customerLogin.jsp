@@ -4,7 +4,6 @@
 
 	<!-- Axios script -->
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <body>
     <!-- 스크립트 영역 -->
 	    <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>
     <!-- 본문 영역 -->
