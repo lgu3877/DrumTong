@@ -1,14 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+	pageEncoding="UTF-8"%>
+<%@ include file="../main/businessHeader.jsp"%>
 
-	<h1>비즈니스 ID 찾기 페이지입니다</h1>
 
-</body>
-</html>
+<section>
+	<div class="saerched_con">
+		<div class="searched_view">
+			<div class="searched_title title">아이디 찾기 결과</div>
+			<div class="searched_content">
+				<p>
+					회원님의 아이디는 [&nbsp;<span id="search-id" class="searched_account">abcd1234</span>&nbsp;] 입니다.
+				</p>
+			</div>
+		</div>
+		<div class="searched_options_con">
+			<button onclick="location.href='${cpath}/business/membership/businessLogin/'">로그인 하기</button>
+			<button onclick="location.href='${cpath}/business/membership/businessAccountFind/'">비밀번호 찾기</button>
+		</div>
+	</div>
+</section>
+
+<!-- encryption for showing ID -->
+<script type="text/javascript">
+	const searchId = document.getElementById('search-id').innerHTML;
+	const idLength = searchId.length;	
+	const visibleId = searchId.substring(0, idLength - 4);
+	
+	document.getElementById('search-id').innerHTML = visibleId + '***';	
+</script>
+
+<%@ include file="../main/businessFooter.jsp"%>

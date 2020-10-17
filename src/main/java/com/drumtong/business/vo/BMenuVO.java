@@ -2,7 +2,6 @@ package com.drumtong.business.vo;
 
 public class BMenuVO {
 	private String estid;
-	private int num;
 	private String name;
 	private int price;
 	private int quickprice;
@@ -27,12 +26,6 @@ public class BMenuVO {
 	}
 	public void setEstid(String estid) {
 		this.estid = estid;
-	}
-	public int getNum() {
-		return num;
-	}
-	public void setNum(int num) {
-		this.num = num;
 	}
 	public String getName() {
 		return name;
