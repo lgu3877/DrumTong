@@ -30,11 +30,11 @@ public class BusinessMembershipController {
 		return svc.login(req, resp, bPrivateDatavo, storeid);
 	}
 	
-//	// 로그아웃[건욱]
-//	@RequestMapping(value = "businessLogOut/", method = RequestMethod.GET)
-//	public ModelAndView logOut(HttpServletRequest req, HttpServletResponse resp) {
-//		return svc.logOut(req,resp);
-//	}
+	// 로그아웃[건욱]
+	@RequestMapping(value = "businessLogOut/", method = RequestMethod.GET)
+	public ModelAndView logOut(HttpServletRequest req, HttpServletResponse resp) {
+		return svc.logOut(req,resp);
+	}
 	
 	
 	// 사업자 회원가입 이동 (GET) [건욱]
@@ -68,7 +68,6 @@ public class BusinessMembershipController {
 	public ModelAndView accountInfo() {
 		return svc.accountInfo();
 	}
-	
 	
 	// 사업자 계정 찾기 이동 (GET) [영경]
 	@RequestMapping(value = "businessAccountFind/", method = RequestMethod.GET)

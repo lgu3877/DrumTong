@@ -1,8 +1,7 @@
 /* single page login format */
 .single_page_login {
 	width: 500px;
-	padding-top: 50px;
-	margin: auto;
+	margin: 150px auto;
 }
 
 /* Login Default Style*/
@@ -24,12 +23,14 @@
 	height: 20%;
 	font-weight: bold;
 	text-align: center;
+	margin: 10px auto;
 }
 
 .login_title p {
-	color:  #3b5998;
+	color: #3b5998;
 	font-size: 30pt;
-	letter-spacing: 0.8em;
+	letter-spacing: 10px;
+    margin: 25px;	
 }
 
 /* Input Container (with Input Tags) */
@@ -108,27 +109,145 @@ input[type=submit]:hover, button:hover {
 	transform: translate(-2px, -2px);
 }
 
-.single_page_login input {
-	margin-bottom: 15px;
-	height: 45px;
+.single_page_login_form {
+	background-color: #dfe3ee;
+    border-radius: 5px;
+    margin: 10px auto;
+    padding: 90px 50px 50px 50px;
 }
 
-.single_page_login .input_title {
+.single_page_login_form input[type=text] {
+	margin-bottom: 38px;
+    height: 40px;
+    text-indent: 15px;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+    font-family: auto;
+    font-weight: 400;
+    font-size: 11pt;
+    width: 100%;
+    border: none;
+    outline: none;
+    margin-top: 2px;
+}
+
+.single_page_login input[type=password] {
+	margin-bottom: 6px;
+    height: 40px;
+    text-indent: 15px;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+    font-family: auto;
+    font-weight: 400;
+    font-size: 11pt;
+    width: 100%;
+    border: none;
+    outline: none;
+    margin-top: 2px;
+}
+
+.single_page_login_form .input_title {
 	margin-left: 20px;
-	margin-bottom: 7px;
+    margin-bottom: 7px;
+    text-indent: -10px;
 }
 
 .single_page_login .login_form {
-	background-color:#D4F5FD;
+	background-color: #D4F5FD;
 	border-radius: 5px;
 	padding: 50px 0;
 }
 
-.single_page_login input[type=submit] {
-	margin: 15px auto 20px auto;
-	color: white;
+.single_page_login_btn {
+	background-color: #3b5998;
+    height: 35px;
+    border-radius: 5px;
+    letter-spacing: 2.5px;
+    width: 100%;
+    padding: 0;
+    color: white;
+    margin: 10px auto 40px auto;
+    border: none;
+    outline: none;
+    font-size: 16pt;
+    margin-top: 38px;
+}
+
+.login_search_con {
+
 }
 
 .login_search_con div {
-	margin: 5px auto 15px auto;
+	margin: 20px;
+}
+
+.login_search_con div a {
+	text-decoration: none;
+}
+
+.single_store_id_con {
+	display: table;
+	margin-top: 10px;
+}
+
+/* Modal Box */
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.md_overlay {
+	background-color: rgba(0, 0, 0, 0.6);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+.md_content {
+	width: 40%;
+	position: relative;
+	padding: 50px 50px;
+	background-color: white;
+	text-align: center;
+	border-radius: 6px;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.20), 0 6px 6px
+		rgba(0, 0, 0, 0.20);
+}
+
+.close_button {
+	padding: 0;
+	outline: none;
+	border: none;
+	justify-content: right;
+	background-color: transparent;
+	float: right;
+	position: inherit;
+	font-size: 15pt;
+}
+
+h1 {
+	margin: 0;
+	padding: 5px;
+}
+
+.hidden {
+	display: none;
+}
+
+.modal_selectbox {
+	padding: 16px;
+}
+
+.modal_selectbox button {
+	width: 150px;
+	height: 50px;
+	outline: 0;
+	border: none;
+	font-size: 13pt;
 }
