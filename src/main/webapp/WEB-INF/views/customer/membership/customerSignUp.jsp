@@ -14,7 +14,7 @@
 		
 	
     <!-- 본문 영역 -->
-    <section class="section-SangJae">
+    <section class="section-SangJae section-join">
       <div class="join">
           <div class="join-input">
           <img src="${cpath }/resources/customer/img/logo4.png" class="login-logo" />
