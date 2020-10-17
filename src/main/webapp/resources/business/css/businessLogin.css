@@ -45,6 +45,7 @@
 	display: block;
 	width: 80%;
 	height: 33.33%;
+
 }
 
 .login_input_con input {
@@ -52,9 +53,11 @@
 	outline: none;
 	border-radius: 15px;
 	font-size: 15pt;
-	width: 100%;
+	width: 95%;
 	height: 70%;
 	background-color: #DEDFDF;
+	box-sizing: inherit;
+	overflow: auto;
 }
 
 .login_input_con .login_button_con input {
@@ -69,7 +72,7 @@
 }
 
 /* Login & Button */
-.login_input_con input[type=button] {
+.login_input_con input[type=submit] {
 	background-color: #e5e6eb;
 	letter-spacing: 2.5px;
 	text-transform: uppercase;
@@ -102,7 +105,7 @@ input[type=text]:focus, input[type=password]:focus {
 }
 
 /* Button hover */
-input[type=button]:hover, button:hover {
+input[type=submit]:hover, button:hover {
 	transition: all 0.3s ease 0s;
 	cursor: pointer;
 	box-shadow: 0px 15px 20px rgba(223, 227, 238);
@@ -176,7 +179,7 @@ input[type=button]:hover, button:hover {
 .login_search_con {
 }
 
-.single_page_login input[type=button] {
+.single_page_login input[type=submit] {
 	margin: 15px auto 20px auto;
 	color: white;
 }

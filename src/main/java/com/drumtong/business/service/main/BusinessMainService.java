@@ -18,5 +18,10 @@ public class BusinessMainService {
 		return mav;
 	}
 
+	public ModelAndView mainCover() {
+		ModelAndView mav = new ModelAndView("business/main/mainCover");
+		return mav;
+	}
+
 //	@Transactional(timeout=5)
 }
