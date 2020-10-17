@@ -7,12 +7,6 @@
 	<!-- Login -->
 	<div class="search_inner">
 	
-	<!-- Result Testing View -->
-	<ul>
-		<li><a href="${cpath }/business/membership/businessIDFindTest/">아이디 찾기 결과</a></li>
-		<li><a href="${cpath }/business/membership/businessPWFindTest/">비밀번호 재설정</a></li>
-	</ul>
-	
 	<!-- Account Search -->
 		<div class="account_searchbox">
 			<div class="search_title title">아이디 찾기</div>
