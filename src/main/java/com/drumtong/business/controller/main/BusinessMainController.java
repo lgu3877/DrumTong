@@ -2,6 +2,7 @@ package com.drumtong.business.controller.main;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,6 +25,14 @@ public class BusinessMainController {
 		return svc.mainCover();
 	}
 	
+	@GetMapping("login")
+	public String loginView() {
+		return "business/main/member/businessLogin";
+	}
 	
+	@GetMapping("accountSearch")
+	public String accountSearchView() {
+		return "business/main/member/businessAccountSearch";
+	}
 
 }
