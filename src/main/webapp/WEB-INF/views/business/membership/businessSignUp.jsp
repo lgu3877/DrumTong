@@ -46,7 +46,8 @@
 	<div style="height: 2%"></div>
 	
 	<div class="marginauto" style="width: 80%; height: 5%; text-align: center;">
-		<h1 style="-webkit-transform: scale(1.5);"><input type="checkbox" id="allcheck" name="allcheck" onchange="AllAgree(this)">모든 이용약관에 동의하겠습니까?</h1>
+		<h1 style="-webkit-transform: scale(1.5);">
+		<input type="checkbox" id="allcheck" name="allcheck" onchange="AllAgree(this)">모든 이용약관에 동의하겠습니까?</h1>
 	</div>
 	<hr>
 	</div>

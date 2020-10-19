@@ -2,7 +2,6 @@ package com.drumtong.business.vo;
 
 public class BDeliveryAreaVO {
 	private String estid;
-	private int num;
 	private String addressa;
 	private String addressb;
 	private String addressc;
@@ -14,12 +13,6 @@ public class BDeliveryAreaVO {
 	}
 	public void setEstid(String estid) {
 		this.estid = estid;
-	}
-	public int getNum() {
-		return num;
-	}
-	public void setNum(int num) {
-		this.num = num;
 	}
 	public String getAddressa() {
 		return addressa;

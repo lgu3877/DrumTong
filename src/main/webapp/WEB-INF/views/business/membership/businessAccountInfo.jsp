@@ -68,7 +68,7 @@
 		<div style="display: inline-block; width: 75%; height: 100%; background-color: 	#f8f8fa">
 		<form action="#" style="width: 100%; height: 100%;">
 			<div class="rightdiv" style="margin-top: 5px">
-				<input class="input" type="text" name="id" placeholder="아이디" readonly>
+				<input class="input" type="text" name="id" placeholder="아이디"  readonly>
 				<input class="origininput">
 			</div>
 			<div class="rightdiv">

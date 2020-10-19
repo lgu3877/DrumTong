@@ -13,8 +13,6 @@ public interface BPrivateDataDAO {
 
 	String selectID(String BPersonID);
 	
-	//	(REST) 아이디 중복 검사 
-	int useridDupl(String id);
 	
 	// 아이디 찾기(이름/휴대폰)
 	String idFindNamePhoneNum(BPrivateDataVO bprivatedatavo);
@@ -36,6 +34,16 @@ public interface BPrivateDataDAO {
 
 	// 비밀번호 찾기(이메일/아이디)
 	BPrivateDataVO pwFindEmailID(BPrivateDataVO bprivatedatavo);
+	
+	// 개인정보 businessAccountInfo 데이터 페이지로 넘겨주기.
+	BPrivateDataVO selectbPrivateData(String bpersonid);
 
+	
+
+//	===============================REST==============================================
+	
+	
+	//	(REST) 아이디 중복 검사 
+	int useridDupl(String id);
 	
 }

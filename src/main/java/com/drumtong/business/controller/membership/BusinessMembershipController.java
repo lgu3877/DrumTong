@@ -77,8 +77,8 @@ public class BusinessMembershipController {
 	
 	// 사업자 계정 정보 관리 이동 (GET) [건욱]
 	@RequestMapping(value = "businessAccountInfo/", method = RequestMethod.GET)
-	public ModelAndView accountInfo() {
-		return svc.accountInfo();
+	public ModelAndView accountInfo(String BPersonID) {
+		return svc.accountInfo(BPersonID);
 	}
 	
 	// 사업자 계정 찾기 이동 (GET) [영경]

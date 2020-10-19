@@ -26,10 +26,6 @@
 		SELECT ID FROM BPRIVATEDATA WHERE BPERSONID=#{BPersonID}
 	</select>
 	
-<!-- 	아이디 중복 검사 -->
-	<select id="useridDupl" parameterType="String" resultType="int">
-		SELECT COUNT(*) FROM BPRIVATEDATA WHERE ID=#{id}
-	</select>
 	
 	<!-- 아이디찾기(이름/휴대폰) -->
 	<select id="idFindNamePhoneNum" parameterType="BPrivateDataVO" resultType="String">
@@ -65,5 +61,27 @@
 	<select id="pwFindEmailID" parameterType="BPrivateDataVO" resultType="BPrivateDataVO">
 		SELECT * FROM BPRIVATEDATA WHERE EMAIL=#{EMAIL} AND ID=#{ID}
 	</select>
+
+	
+	<!-- 	개인정보 businessAccountInfo 데이터 페이지로 넘겨주기. -->
+	<select id="selectbPrivateData" parameterType="String" resultType="BPrivateDataVO">
+		SELECT NAME, BIRTH, GENDERBOOLEAN, PHONENUM, 
+				MAINADDRESS, DETAILADDRESS,	EMAIL, DELEGATECRN 
+				FROM BPRIVATEDATA 
+				WHERE 
+				BPERSONID=#{bpersonid}
+	</select>
+	
+	
+	
+		
+<!-- 	=============================REST============================================== -->
+	
+	<!-- 	아이디 중복 검사 -->
+	<select id="useridDupl" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM BPRIVATEDATA WHERE ID=#{id}
+	</select>
+	
+	
 	
 </mapper>
