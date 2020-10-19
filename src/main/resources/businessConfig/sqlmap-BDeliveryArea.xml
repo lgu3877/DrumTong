@@ -12,7 +12,7 @@
 		INSERT INTO BDELIVERYAREA
 			VALUES
 			( 
-				#{estid}, #{num}, #{addressa},
+				#{estid}, #{addressa},
 				#{addressb}, #{addressc}, #{addressd},
 				#{addresse}, #{addressf}
 			)

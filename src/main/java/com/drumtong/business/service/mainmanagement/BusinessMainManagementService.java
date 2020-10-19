@@ -117,14 +117,12 @@ public class BusinessMainManagementService {
 		// 2. 매장사진 테이블에  {저장이미지}를 업데이트 시켜준다.
 		// 계약을 위한 매장사진 등록이기 떄문에 POST를 염두하고 작업해준다.
 		// 다중 이미지 업로드이기 떄문에 multipleUpload 메서드를 호출해준다.
-		// !!!!!BImage num 문제를 해결해야함 !!!!! --------> 순차적으로 증가하는 값에 대한 해결 방안을 모색해야함...
 		bImageVO.setEstid(ESTID);	// ESTID를 세팅하는 이유는 S3 저장방식이 ESTID(폴더명)/ESTID + UUID로 저장되기 때문에 sql문에 필요하다.
 		aws.multipleUpload(mpf, bImageVO);
 	
 		
 
 		// 3. 메뉴 테이블에  {메뉴이름, 가격, 퀵가격, 예상소요시간}를 업데이트 시켜준다.
-		// !!!!!BMenu num 문제를 해결해야함 !!!!! --------> 순차적으로 증가하는 값에 대한 해결 방안을 모색해야함...
 		int BMenuResult = bMenuDAO.insertConstract(bMenuVO);
 		
 		

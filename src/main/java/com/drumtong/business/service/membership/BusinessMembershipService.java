@@ -116,8 +116,17 @@ public class BusinessMembershipService {
 	
 
 	// 사업자 계정 정보 관리 이동 (GET) [건욱]
-	public ModelAndView accountInfo() {
+	public ModelAndView accountInfo(String BPersonID) {
 		ModelAndView mav = new ModelAndView("business/membership/businessAccountInfo");
+		
+		//TEST (지울것 추후에)
+		BPersonID = "BPersonID_8caa097de6914890a708a1a91136f948";
+		
+		
+		// 사업자 개인정보 가져오기 
+		mav.addObject("bPrivateDataVO", bPrivateDataDAO.selectbPrivateData(BPersonID));
+		
+		
 		return mav;
 	}
 

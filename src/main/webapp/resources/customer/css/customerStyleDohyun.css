@@ -78,15 +78,15 @@ section {
 }
 
 body {
-	border: 1px solid black;
+/* 	border: 1px solid black; */
 	margin: auto;
 	height: auto;
 
-		최대크기
+/* 		최대크기 */
 	max-width: 1900px;
 	max-height: 3000px;
 
-		최소크기
+/* 		최소크기 */
 	min-width : 100%;
 	min-height: 100%;
 }
