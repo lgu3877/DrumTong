@@ -1,5 +1,7 @@
 package com.drumtong.business.service.membership;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -9,7 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.drumtong.business.dao.BBusinessDAO;
+import com.drumtong.business.dao.BInformationDAO;
 import com.drumtong.business.dao.BPrivateDataDAO;
+import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BPrivateDataVO;
 import com.drumtong.security.Encrypt;
 import com.drumtong.security.Login;
@@ -20,6 +24,7 @@ public class BusinessMembershipService {
 	
 	@Autowired BBusinessDAO bBusinessDAO;			// 사업자 테이블
 	@Autowired BPrivateDataDAO bPrivateDataDAO;		// 사업자 개인 정보 테이블
+	@Autowired BInformationDAO bInformationDAO;		// 사업장 정보 테이블
 	
 	// 비즈니스 로그인 이동 (GET) [영경]
 	public ModelAndView login() {
@@ -32,14 +37,32 @@ public class BusinessMembershipService {
 		ModelAndView mav = new ModelAndView();
 		HttpSession Session = req.getSession();
 		String AddressToMove = (String)Session.getAttribute("AddressToMove");		// 인터셉터 들어가기 전 이동하려던 주소
-		if(AddressToMove == null) 	AddressToMove = "business/";
+		if(AddressToMove == null) 	AddressToMove = "/business/";
 		
 		
 		boolean LoginResult = Login.login(Session, resp, bPrivateDatavo, storeid);		// 로그인 성공여부
 		System.out.println("AddressToMove" + AddressToMove);
-		// 3. 로그인 성공 여부로 반환할 주소 값 다르게 저장
-		mav.setViewName("redirect:/" + (LoginResult ? AddressToMove : "business/membership/businessLogin/" ));
+
+		BPrivateDataVO User = ((BPrivateDataVO)Session.getAttribute("bLogin"));
+		// 사업장 정보 들고오기
+		if(User != null) {
+			List<BInformationVO> InformationList = bInformationDAO.selectInformationList(User.getBpersonid());
+			Session.setAttribute("InformationList", InformationList);
+			String selectEST = (String)Session.getAttribute("selectEST");
+			if(InformationList != null) {
+				if(selectEST == null) {
+					selectEST = InformationList.get(0).getEstid();
+					Session.setAttribute("selectEST", selectEST);
+					System.out.println("selectEST : " + selectEST);
+				}
+				Session.setAttribute("selectEstName", bInformationDAO.selectName(selectEST));
+			}
+			
+		}
 		
+		// 3. 로그인 성공 여부로 반환할 주소 값 다르게 저장
+		mav.setViewName("redirect:" + (LoginResult ? AddressToMove : "/business/membership/businessLogin/" ));
+
 
 		return mav;
 	}
@@ -56,6 +79,9 @@ public class BusinessMembershipService {
 		// 로그아웃 했을 때 표시해주기
 		Session = req.getSession();
 		Session.setAttribute("bLogout", "bLogout");
+		Session.removeAttribute("selectEST");
+		Session.removeAttribute("InformationList");
+		Session.removeAttribute("selectEstName");
 		return mav;
 	}
 
