@@ -38,12 +38,12 @@ public class CustomerMembershipService {
 		ModelAndView mav = new ModelAndView();
 		HttpSession Session = req.getSession();
 		String AddressToMove = (String)Session.getAttribute("AddressToMove");		// 인터셉터 들어가기 전 이동하려던 주소
-		if(AddressToMove == null) 	AddressToMove = "customer/";
+		if(AddressToMove == null) 	AddressToMove = "/customer/";
 		
 		boolean LoginResult = Login.login(Session, resp, cPrivateDatavo, storeid);		// 로그인 성공여부
 		
 		// 3. 로그인 성공 여부로 반환할 주소 값 다르게 저장
-		mav.setViewName("redirect:/" + (LoginResult ? AddressToMove : "customer/membership/customerLogin/" ));
+		mav.setViewName("redirect:" + (LoginResult ? AddressToMove : "/customer/membership/customerLogin/" ));
 		
 
 		return mav;

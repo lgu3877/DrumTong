@@ -1,7 +1,5 @@
 package com.drumtong.security;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.annotation.PostConstruct;
@@ -121,6 +119,7 @@ public class Login {
 		PrivateData Login = TypeOfSite ? 
 				cPrivateDataDAO.selectLogin(Encrypt.SecurePassword(ID, PW)):
 				bPrivateDataDAO.selectLogin(Encrypt.SecurePassword(ID, PW));
+		System.out.println("로그인 성공 ? " + ID + ", " + PW + ", " + Login);
 		return Login != null ? "true" : "false";
 	}
 }
