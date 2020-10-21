@@ -7,10 +7,16 @@
 		origininput[i].setAttribute("onclick", "changeInput(this)");
 	}
 
+	document.querySelector('.newinput').addEventListener('click', e => {
+		console.log('실행 event button');
+	});
+	
 	// 수정 버튼 클릭시
 	// 입력 input 태그가 활성화됨
 	// 입력 및 취소 버튼 활성화됨
 	function changeInput(obj) {
+		console.log('실행 changeInput');
+		console.log("obj : " + obj);
 		var inputdiv = obj.parentNode;
 		inputdiv.children[0].readOnly = false;
 		inputdiv.removeChild(inputdiv.children[1]);
@@ -19,11 +25,12 @@
 		newdiv.setAttribute("class", "newdiv");
 		
 		var submit = document.createElement('input');
-		submit.setAttribute("type", "submit");
+		submit.setAttribute("type", "button");
 		submit.setAttribute("value", "입력");
 		submit.setAttribute("class", "newinput");
+		submit.setAttribute("onclick", "inputData(this)");
 
-		// anx 비동기식으로 작동시키도록 하자 -> oblur
+		
 		
 		newdiv.appendChild(submit);
 
@@ -53,6 +60,53 @@
 	}
 	
 	
+	
+	function inputData(obj) {
+	// anx 비동기식으로 작동시키도록 하자 -> oblur
+	
+	const whereparam = document.getElementById("BPERSONID");
+	let div = (obj.parentNode).parentNode;
+	let inputChange = div.children[0];
+	
+	let ob={
+  		  'fieldname': inputChange.name,
+   		  'paramdata': inputChange.value,
+   		  'wheredata': whereparam.id,
+		  'whereparam': whereparam.value,
+		};
+		
+		console.log(inputChange.value);
+		console.log(ob.paramdata);
+		console.log(ob.whereparam);
+		
+		console.log('axPOST 실행');
+        const axPost = async (ob) => {	// async : 비동기 실행 함수
+
+          await axios.post('/drumtong/business/membership/rest/', ob)
+          // 정상
+          
+          .then( (response) => {
+            const data = response.data;
+            console.log("data : ", data);
+            if(data === true){  
+              console.log('responsedata 실행');
+			  inputChange.value = inputChange.value;
+			  cancle(obj);
+            }
+            else if(data === false){
+              console.log('responsedata2 실행');
+            }
+            
+            })
+          }
+          axPost(ob);
+			
+	}
+	
+	
+	
+	
+	
 	// 취소 버튼 클릭시
 	// input[type=text] 태그 readonly 상태로 변환
 	function cancle(obj) {
@@ -69,7 +123,7 @@
 		switch (inputdiv.children[0].id) {
 		case 'genderboolean':
 			specialcancle(inputdiv);
-			break;
+			break; 
 		case 'phonenum':
 			specialcancle(inputdiv);
 			break;

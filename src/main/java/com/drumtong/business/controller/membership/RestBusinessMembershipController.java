@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.drumtong.business.service.membership.RestBusinessMembershipService;
+import com.drumtong.business.vo.BManagementVO;
 import com.drumtong.business.vo.BPrivateDataVO;
 import com.drumtong.security.Login;
 
@@ -56,5 +57,62 @@ public class RestBusinessMembershipController {
 	public String emailConfirm(BPrivateDataVO bprivatedatavo) {
 		return svc.emailConfirm(bprivatedatavo);
 	}
+	
+	
+	// ========================= 대분류 [사업자 계정관리] ================================
+	
+	
+	// ===== 중분류 [BPrivateData] 테이블 ====
+	
+	
+	// === 소분류 [ NAME ] 필드 {이름} ==
+	// 1. 사업자 계정관리에 이름을 비동기식으로 수정해주는 메서드입니다.
+	@RequestMapping("Name/rest/updateName/{param}")
+	@GetMapping(produces="application/json; charset=utf8")
+	public String updateIntroduction(@PathVariable("param")BPrivateDataVO bPrivateDataVO) {
+		
+		int result = svc.updateName(bPrivateDataVO);
+		System.out.println(result + " : result 값 입니다");
+		return result == 0
+				? "true"
+				: "false";
+	}
+	
+	
+	
+	// === 소분류 [ BIRTH ] 필드 {생년월일} ==
+	// 2. 사업자 계정관리에 생년월일을 비동기식으로 수정해주는 메서드입니다.
+	@RequestMapping("Birth/rest/updateBirth/{param}")
+	@GetMapping(produces="application/json; charset=utf8")
+	public String updateBirth(@PathVariable("param")BPrivateDataVO bPrivateDataVO) {
+		
+		int result = svc.updateBirth(bPrivateDataVO);
+		System.out.println(result + " : result 값 입니다");
+		return result == 0
+				? "true"
+				: "false";
+	}
+	
+	// === 소분류 [ BIRTH ] 필드 {생년월일} == [건욱]
+	// 3. 사업자 계정관리에 생년월일을 비동기식으로 수정해주는 메서드입니다.
+	@RequestMapping("rest/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String restUpdate(HttpServletRequest req,@RequestBody HashMap<String, String> ob) {
+		int result = svc.restUpdate(req, ob);
+		System.out.println(result + " : result 값 입니다");
+		return result == 1
+				? "true"
+				: "false";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

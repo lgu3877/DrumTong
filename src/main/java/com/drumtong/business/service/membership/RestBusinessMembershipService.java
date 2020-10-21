@@ -1,6 +1,7 @@
 package com.drumtong.business.service.membership;
 
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -14,6 +15,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,5 +100,44 @@ public class RestBusinessMembershipService {
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		} 
+	}
+	
+	
+	// ========================= 대분류 [사업자 계정관리] ================================
+	
+	
+	// ===== 중분류 [BPrivateData] 테이블 ====
+		
+		
+	// === 소분류 [ NAME ] 필드 {이름} ==
+	// 1. 사업자 계정관리에 이름을 비동기식으로 수정해주는 메서드입니다.
+	public int updateName(BPrivateDataVO bPrivateDataVO) {
+		int RestUpdateNameReuslt = bPrivateDataDAO.updateName(bPrivateDataVO);
+		return RestUpdateNameReuslt;
+	}
+
+	
+	// === 소분류 [ BIRTH ] 필드 {생년월일} ==
+	// 2. 사업자 계정관리에 생년월일을 비동기식으로 수정해주는 메서드입니다.
+	public int updateBirth(BPrivateDataVO bPrivateDataVO) {
+		int RestUpdateBirthReuslt = bPrivateDataDAO.updateBirth(bPrivateDataVO);
+		return RestUpdateBirthReuslt;
+	}
+
+	// Rest Update [건욱]
+	public int restUpdate(HttpServletRequest req, HashMap<String, String> ob) {
+		
+//		 hashmap 출력
+//		for(Entry<String,String> entry : ob.entrySet()) {
+//			System.out.println("key : " + entry.getKey() +  "value : " + entry.getValue());
+//		}
+		
+		int RestUpdateResult = bPrivateDataDAO.restUpdate(ob);
+		
+		HttpSession Session = req.getSession();
+		Session.setAttribute("bLogin", bPrivateDataDAO.selectbPrivateData(ob.get("whereparam")));
+		
+		
+		return RestUpdateResult;
 	}
 }
