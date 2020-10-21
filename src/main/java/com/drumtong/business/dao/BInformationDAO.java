@@ -3,7 +3,6 @@ package com.drumtong.business.dao;
 import java.util.List;
 
 import com.drumtong.business.vo.BInformationVO;
-import com.drumtong.business.vo.BPaymentVO;
 
 public interface BInformationDAO {
 
@@ -20,6 +19,11 @@ public interface BInformationDAO {
 
 	// 프리미엄 광고 여부 업데이트
 	int updatePremiumBoolean(BInformationVO bInformationVO);
+
+	List<BInformationVO> selectInformationList(String bpersonid);
+
+	// 매장 이름 출력
+	String selectName(String estid);
 
 
 }

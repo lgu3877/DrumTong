@@ -52,8 +52,8 @@ public class BusinessMainManagementService {
 	
 	// 비즈니스 매장관리 페이지로 이동 (GET) [건욱]
 	public ModelAndView shopManagement() {
-// 		ModelAndView mav = new ModelAndView("business/mainmanagement/businessShopManagement");
-		ModelAndView mav = new ModelAndView("business/test"); //test 용임 지울 시 위에 코드 활성화 시켜줄 것
+ 		ModelAndView mav = new ModelAndView("business/mainmanagement/businessShopManagement");
+//		ModelAndView mav = new ModelAndView("business/test"); //test 용임 지울 시 위에 코드 활성화 시켜줄 것
 		
 		// MultipartFile mpf = new MultipartFile();
 //		aws.s3FileUpload(file, folderName);
