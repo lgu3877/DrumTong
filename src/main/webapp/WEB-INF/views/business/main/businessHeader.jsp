@@ -68,16 +68,21 @@
 			<div class="h_right_con title">
 				<div class="h_right_upper">
 					<div class="member_menu">
-							<a href="${cpath }/business/membership/businessLogin/">로그인</a></span> <span>/</span>
-						<span>회원가입</span>
+						<span><a href="${cpath }/business/membership/businessLogin/">로그인</a></span> <span>/</span>
+						<span><a  href="${cpath }/business/membership/businessSignUp/">회원가입</a></span>
 						<div id="menu" class="menu">
-							<a href="#" id="link1"> 매장선택 </a>
+							<a id="link1"> ${InformationList != null ? selectEstName : '매장 선택' } </a>
 							<div id="menulist" class="menulist">
-								<div>Option1</div>
-								<div>Option2</div>
-								<div>Option3</div>
-								<div>Option4</div>
-								<div>Option5</div>
+							<c:choose>
+								<c:when test="${InformationList != null }">
+									<c:forEach items="${InformationList }" var="list">
+										<div onclick="location.href='${cpath}/business/selectEST/${list.estid }/'">${list.brandnaming }</div>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<div>매장 없음</div>
+								</c:otherwise>
+							</c:choose>
 							</div>
 						</div>
 						<button onclick="location.href='${cpath}/business/membership/businessAccountInfo/'">개인정보수정</button>
