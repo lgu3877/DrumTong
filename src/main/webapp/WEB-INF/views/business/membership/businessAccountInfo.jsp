@@ -1,9 +1,25 @@
 <%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="cpath">${pageContext.request.contextPath }</c:set>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<title>businessMain :: Laundry</title>
+  	<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="${cpath }/business/css/businessStyle.css">
+    <link rel="stylesheet" href="${cpath }/business/css/businessHeader.css">
+	<link rel="stylesheet" href="${cpath }/business/css/businessLogin.css"> 
+	<link rel="stylesheet" href="${cpath }/business/css/membership/businessAccountInfo.css">	
+</head>	
+	
+	
+<body>	
 <%@ include file="../main/businessHeader.jsp" %>
 
-<link rel="stylesheet" href="${cpath }/business/css/membership/businessAccountInfo.css">
 
 <!-- 스크립트 영역 -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -21,17 +37,7 @@
 	</div>
 	
 	<div style="width: 80%; height: 80%; display: flex; margin-top: 8%" class="marginauto">
-		<div class="leftdiv">
-<!-- 			<div class="tablediv" style="margin-top: 5px"> -->
-<!-- 				<div class="celldiv"> -->
-<!-- 					아&nbsp&nbsp이&nbsp&nbsp디 -->
-<!-- 				</div> -->
-<!-- 			</div>		 -->
-			<div class="tablediv">
-				<div class="celldiv">
-					비밀번호
-				</div>
-			</div>		
+		<div class="leftdiv">	
 			<div class="tablediv">
 				<div class="celldiv">
 					이&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp름
@@ -66,25 +72,24 @@
 				<div class="celldiv">
 					주&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp소
 				</div>
+			</div>
+			<div class="tablediv">
+				<div class="celldiv">
+					비밀번호
+				</div>
 			</div>		
 		</div>
 		
 		<div style="display: inline-block; width: 75%; height: 100%; background-color: 	#f8f8fa">
 		<form action="#" style="width: 100%; height: 100%;">
-<!-- 			<div class="rightdiv" style="margin-top: 5px"> -->
-<%-- 				<input class="input" type="text" name="id" placeholder="아이디" value="${bPrivateDataVO.id}"  readonly> --%>
-<!-- 				<input class="origininput"> -->
-<!-- 			</div> -->
+
 			<div class="rightdiv">
-				<input class="input" type="text" name="pw" placeholder="비밀번호"  readonly>
+				<input class="input" type="text" name="name" value="${bLogin.name }" placeholder="이름을 입력하세요" readonly>
 				<input class="origininput">
+				<input type="hidden" value="${bLogin.name }">
 			</div>
 			<div class="rightdiv">
-				<input class="input" type="text" name="name" placeholder="이름" value="${bLogin.name}"readonly>
-				<input class="origininput">
-			</div>
-			<div class="rightdiv">
-				<input class="input" type="text" name="birth" placeholder="생년월일" value="${bLogin.birth}" readonly>
+				<input class="input" type="text" name="birth" value="${bLogin.birth }" placeholder="생년월일" readonly>
 				<input class="origininput">
 			</div>
 			<div class="rightdiv">
@@ -106,6 +111,10 @@
 			<div class="rightdiv">
 				<input class="input" type="text" id="address" placeholder="주소" value="${bLogin.mainaddress}" readonly>
 				<input class="origininput" >
+			</div>
+			<div class="rightdiv">
+				<input class="input" type="text" name="pw" id="pw" placeholder="비밀번호" readonly>
+				<input class="origininput">
 			</div>
 		</form>
 		</div>
