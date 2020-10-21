@@ -29,8 +29,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		String AddressToMove = CheckAddress(NotChangeAddressConfirm, Session, request);
 		boolean typeOfSite = AddressToMove.contains("/business/") ? false : true;
 		boolean NowLogin = Session.getAttribute(typeOfSite ? "cLogin" : "bLogin") != null;
-		String LoginPageName = typeOfSite ? "customer/membership/customerLogin/" : "business/membership/businessLogin/";
-		String MainPageName = typeOfSite ? "customer/" : "business/";
+		String LoginPageName = typeOfSite ? "/customer/membership/customerLogin/" : "/business/membership/businessLogin/";
+		String MainPageName = typeOfSite ? "/customer/" : "/business/";
 		
 		// ■□■□■□■□■□■□■□■□■□■□■□로그인이 되어있다면■□■□■□■□■□■□■□■□■□■□■□
 		if(NowLogin) {
@@ -41,7 +41,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		if("firstPage".equals(Session.getAttribute(typeOfSite ? "cLogout" : "bLogout"))) {
 			System.out.println("[로그인인터셉터] 방금 로그아웃&이동할 페이지가 로그인 해야하는 페이지");
 			Session.removeAttribute(typeOfSite? "cLogout" : "bLogout");
-			response.sendRedirect(request.getContextPath() + "/" + MainPageName);
+			response.sendRedirect(request.getContextPath() + MainPageName);
 			return false;
 		}
 		
@@ -57,7 +57,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		AddressToMove = MoveBeforeLogin(Session, LoginPageName, MainPageName, AddressToMove, request);
 		
 		System.out.println("[로그인 인터셉터] 맨마지막 줄 > 로그인 페이지로 redirect 수행 직전");
-		response.sendRedirect(request.getContextPath() + "/" + LoginPageName);
+		response.sendRedirect(request.getContextPath() + LoginPageName);
 		return false;
 //		return true;
 	}
@@ -68,7 +68,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		session.setAttribute("move", "move");
 		
 		
-		addressToMove = addressToMove.endsWith("/" + loginPageName)
+		addressToMove = addressToMove.endsWith(loginPageName)
 				? (Referer != null ? (Referer.split(request.getContextPath())[1]) : mainPageName)	// 로그인 페이지를 눌러 이동한거면
 				: addressToMove;	// 로그인 페이지가 아닌 다른 페이지에서 왔다면
 
@@ -97,7 +97,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		System.out.println("AddressToMove 삭제");
 		if(addressToMove.endsWith(loginPageName) ) {
 			System.out.println("[로그인 인터셉터] MoveAfterLogin > 로그인 되어있는데 주소창에 로그인 주소를 입력해 이동하려는 경우 메인으로 강제 이동");
-			response.sendRedirect(request.getContextPath() + "/" + mainPageName);
+			response.sendRedirect(request.getContextPath() + mainPageName);
 			return false;
 		}
 		return true;
@@ -111,6 +111,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		} else {
 			AddressToMove = request.getRequestURI();
 			AddressToMove = AddressToMove.substring(request.getContextPath().length(),AddressToMove.length());
+			System.out.println("로그인 인터셉터 : AddressToMove : " + AddressToMove);
 		}
 		return AddressToMove;
 	}

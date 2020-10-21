@@ -23,11 +23,14 @@
   margin-bottom: 70px;
   background-color: white;
   width: 370px;
-  height: 400px;
   padding: 10px;
   border: #eaeaea;
   box-shadow: 5px 5px 5px 5px #eaeaea;
   color: black;
+}
+
+.login{
+  height: 400px;
 }
 
 .login-logo {
@@ -109,8 +112,8 @@
 .join {
   position: absolute;
   min-height: 900px;
-  height: auto;
 }
+
 .join-input {
   height: auto;
   width : 100%;
@@ -851,4 +854,14 @@ check .option-name,
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+/**/
+.section-join{
+	height:1200px;
+}
+.section-menu,
+.section-bookmark,
+.section-orderlist{
+	height:600px;
 }

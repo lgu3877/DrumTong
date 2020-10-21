@@ -9,7 +9,7 @@
 </script>
 
 <!-- 본문 영역 -->
-<section class="section-SangJae">
+<section class="section-SangJae section-bookmark">
   <div class="bookmark-row">
   <c:if test="${not empty bookmarkList}">
 	  <c:forEach items="${bookmarkList }" var="bo">

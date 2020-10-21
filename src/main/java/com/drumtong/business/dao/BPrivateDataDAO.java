@@ -19,7 +19,7 @@ public interface BPrivateDataDAO {
 	// 아이디 찾기(이름/휴대폰)
 	String idFindNamePhoneNum(BPrivateDataVO bprivatedatavo);
 
-	// 아이디 찾기(이름/생년월일)
+	// 아이디 찾기(이름/생년월일/성별)
 	String idFindNameBirth(BPrivateDataVO bprivatedatavo);
 
 	// 아이디 찾기(이름/이메일)
