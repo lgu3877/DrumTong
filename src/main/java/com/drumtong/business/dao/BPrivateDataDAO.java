@@ -1,5 +1,7 @@
 package com.drumtong.business.dao;
 
+import java.util.HashMap;
+
 import com.drumtong.business.vo.BPrivateDataVO;
 
 public interface BPrivateDataDAO {
@@ -45,5 +47,16 @@ public interface BPrivateDataDAO {
 	
 	//	(REST) 아이디 중복 검사 
 	int useridDupl(String id);
+
+
+	// (REST) 사업자 계정관리에 이름을 비동기식으로 수정해주는 메서드입니다.
+	int updateName(BPrivateDataVO bPrivateDataVO);
+
+
+	// (REST) 사업자 계정관리에 생년월일을 비동기식으로 수정해주는 메서드입니다.
+	int updateBirth(BPrivateDataVO bPrivateDataVO);
+
+	// (REST) Rest Update [건욱]
+	int restUpdate(HashMap<String, String> ob);
 	
 }

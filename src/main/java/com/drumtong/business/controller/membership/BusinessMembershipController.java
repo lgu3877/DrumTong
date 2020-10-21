@@ -32,7 +32,6 @@ public class BusinessMembershipController {
 		return svc.login(req, resp, bPrivateDatavo, storeid);
 	}
 	
-	// 로그아웃[건욱]
 	// 로그인[영경]/비즈니스 메인페이지에서 로그인 하는 경우!/loginlog를 등록시켜주기 위함
 	@RequestMapping(value = "businessLogin/POST/main/", method = RequestMethod.POST)
 	public ModelAndView loginMain(HttpServletRequest req, HttpServletResponse resp, BPrivateDataVO bPrivateDatavo, String storeid) {
@@ -77,8 +76,8 @@ public class BusinessMembershipController {
 	
 	// 사업자 계정 정보 관리 이동 (GET) [건욱]
 	@RequestMapping(value = "businessAccountInfo/", method = RequestMethod.GET)
-	public ModelAndView accountInfo(String BPersonID) {
-		return svc.accountInfo(BPersonID);
+	public ModelAndView accountInfo() {
+		return svc.accountInfo();
 	}
 	
 	// 사업자 계정 찾기 이동 (GET) [영경]

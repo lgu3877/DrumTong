@@ -65,9 +65,7 @@
 	
 	<!-- 	개인정보 businessAccountInfo 데이터 페이지로 넘겨주기. -->
 	<select id="selectbPrivateData" parameterType="String" resultType="BPrivateDataVO">
-		SELECT NAME, BIRTH, GENDERBOOLEAN, PHONENUM, 
-				MAINADDRESS, DETAILADDRESS,	EMAIL, DELEGATECRN 
-				FROM BPRIVATEDATA 
+		SELECT * FROM BPRIVATEDATA 
 				WHERE 
 				BPERSONID=#{bpersonid}
 	</select>
@@ -77,11 +75,37 @@
 		
 <!-- 	=============================REST============================================== -->
 	
-	<!-- 	아이디 중복 검사 -->
+	<!-- (REST)	아이디 중복 검사 -->
 	<select id="useridDupl" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM BPRIVATEDATA WHERE ID=#{id}
 	</select>
 	
 	
+<!-- 	(REST) 사업자 계정관리에 이름을 비동기식으로 수정해주는 메서드입니다. -->
+	<update id="updateName" parameterType="BPrivateDataVO">
+		UPDATE BPRIVATEDATA
+			SET
+				NAME = #{name}
+			WHERE
+				BPERSONID=#{bpersonid}
+	</update>
+	
+	
+<!-- 	(REST) 사업자 계정관리에 생년월일을 비동기식으로 수정해주는 메서드입니다. -->
+	<update id="updateBirth" parameterType="BPrivateDataVO">
+		UPDATE BPRIVATEDATA
+			SET
+				BIRTH = #{birth}
+			WHERE
+				BPERSONID=#{bpersonid}
+	</update>
+	
+	<update id="restUpdate" parameterType="hashmap">
+		UPDATE BPRIVATEDATA
+			SET
+				${fieldname} = #{paramdata}
+			WHERE
+				${wheredata} = #{whereparam}
+	</update>
 	
 </mapper>

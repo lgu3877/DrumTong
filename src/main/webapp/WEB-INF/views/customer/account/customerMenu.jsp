@@ -6,7 +6,7 @@
 <script></script>
 
 <!-- 본문 영역 -->
-<section class="section-SangJae">
+<section class="section-SangJae section-menu">
 
   <div class="userMenu-row">
     <div class="userMenu" onclick="location.href='${cpath }/customer/account/customerJoinChange/'">
