@@ -53,43 +53,43 @@
 
 @charset "utf-8";
 
-* {
-	user-select: none;
-	font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';
-	font-size: 16px;
-	box-sizing: border-box;
-}
+/* * { */
+/* 	user-select: none; */
+/* 	font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif'; */
+/* 	font-size: 16px; */
+/* 	box-sizing: border-box; */
+/* } */
 
 
 /* body, header, nav, ul, li, section, article, div, footer { */
 
 /* } */
-html {
-	width: 100%;
-	height: auto;
-}
+/* html { */
+/* 	width: 100%; */
+/* 	height: auto; */
+/* } */
 
-body,
-header,
-section {
-	background-color: white;
-	width: 1900px;
-	box-sizing: border-box;
-}
+/* body, */
+/* header, */
+/* section { */
+/* 	background-color: white; */
+/* 	width: 1900px; */
+/* 	box-sizing: border-box; */
+/* } */
 
-body {
-	border: 1px solid black;
-	margin: auto;
-	height: auto;
+/* body { */
+/* 	border: 1px solid yellow; */
+/* 	margin: auto; */
+/* 	height: auto; */
 
-		최대크기
-	max-width: 1900px;
-	max-height: 3000px;
+/* 		최대크기 */ 
+/* 	max-width: 1900px; */
+/* 	max-height: 3000px; */
 
-		최소크기
-	min-width : 100%;
-	min-height: 100%;
-}
+/* 		최소크기 */ 
+/* 	min-width : 100%; */
+/* 	min-height: 100%; */
+/* } */
 
 @media screen and (max-width : 600px) {
 	body {
@@ -565,7 +565,7 @@ body .section_Joinchange .join_change .join_cmp .join_complete:active {
 
 body .section_search {
 	padding-top: 70px;
-	height: 797px;
+	height: 940px;
 }
 
 body .section_search .filter {
