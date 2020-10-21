@@ -155,14 +155,19 @@ public class BusinessMembershipService {
 	}
 	
 	// 사업자 ID 찾기 결과 페이지로 이동 (GET) [영경]
-	public ModelAndView idFind(BPrivateDataVO bprivatedatavo, String option) {
+	public ModelAndView idFind(BPrivateDataVO bprivatedatavo, String option, int[] birth) {
 		ModelAndView mav = new ModelAndView("business/membership/businessIDFind");
 		String UserID = null;
 		switch(option) {
 			case "NamePhoneNum":
+				String num = bprivatedatavo.getPhonenum();
+				bprivatedatavo.setPhonenum(num.substring(0,3) + "-" + num.substring(3,7) + "-" + num.substring(7));
+				System.out.println(bprivatedatavo.getPhonenum());
 				UserID = bPrivateDataDAO.idFindNamePhoneNum(bprivatedatavo);
 				break;
 			case "NameBirth":
+				bprivatedatavo.setBirth(birth[0] + "-" + (birth[1] < 10 ? "0" : "") + birth[1] + "-" + (birth[2] < 10 ? "0" : "") + birth[2]);
+				System.out.println(bprivatedatavo.getBirth());
 				UserID = bPrivateDataDAO.idFindNameBirth(bprivatedatavo);
 				break;
 			case "NameEmail":
@@ -175,7 +180,7 @@ public class BusinessMembershipService {
 				UserID = bPrivateDataDAO.idFindCRNPhone(bprivatedatavo);
 				break;
 		}
-		mav.addObject("result", (UserID == null ? "존재하지 않는 정보입니다." : "아이디는 " + UserID + "입니다."));
+		mav.addObject("result", UserID);
 		return mav;		
 	}
 
