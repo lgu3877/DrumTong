@@ -68,7 +68,16 @@
 			<div class="h_right_con title">
 				<div class="h_right_upper">
 					<div class="member_menu">
-						<span><a href="${cpath }/business/membership/businessLogin/">로그인</a></span> <span>/</span>
+						<span>
+							<c:choose>
+								<c:when test="${empty bLogin }">
+									<a href="${cpath }/business/membership/businessLogin/">로그인</a>
+								</c:when>
+								<c:otherwise>
+									<a href="${cpath }/business/membership/businessLogOut/">로그아웃</a>
+								</c:otherwise>
+							</c:choose>
+						</span> <span>/</span>
 						<span><a  href="${cpath }/business/membership/businessSignUp/">회원가입</a></span>
 						<div id="menu" class="menu">
 							<a id="link1"> ${InformationList != null ? selectEstName : '매장 선택' } </a>
