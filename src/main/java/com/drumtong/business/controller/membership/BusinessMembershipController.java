@@ -32,13 +32,12 @@ public class BusinessMembershipController {
 		return svc.login(req, resp, bPrivateDatavo, storeid);
 	}
 	
-	// 로그아웃[건욱]
 	// 로그인[영경]/비즈니스 메인페이지에서 로그인 하는 경우!/loginlog를 등록시켜주기 위함
 	@RequestMapping(value = "businessLogin/POST/main/", method = RequestMethod.POST)
 	public ModelAndView loginMain(HttpServletRequest req, HttpServletResponse resp, BPrivateDataVO bPrivateDatavo, String storeid) {
 		HttpSession Session = req.getSession();
 		new LoginInterceptor().CreateNewSLoginLog(req, Session, req.getHeader("Referer"));
-		Session.setAttribute("AddressToMove", "business/");
+		Session.setAttribute("AddressToMove", "/business/");
 		return login(req, resp, bPrivateDatavo, storeid);
 	}
 	
@@ -88,14 +87,14 @@ public class BusinessMembershipController {
 	}
 	
 	
-	// 사업자 ID 찾기 이동 (GET) [영경]
-	@RequestMapping(value = "businessIDFind/", method = RequestMethod.GET)
-	public ModelAndView idFind(BPrivateDataVO bprivatedatavo, String option) {
-		return svc.idFind(bprivatedatavo, option);
+	// 사업자 ID 찾기 이동 (POST) [영경]
+	@RequestMapping(value = "businessIDFind/", method = RequestMethod.POST)
+	public ModelAndView idFind(BPrivateDataVO bprivatedatavo, String option, int[] birth) {
+		return svc.idFind(bprivatedatavo, option, birth);
 	}
 	
 	// 사업자 PW 찾기 이동 (GET) [영경]
-	@RequestMapping(value = "businessPWFind/", method = RequestMethod.GET)
+	@RequestMapping(value = "businessPWFind/", method = RequestMethod.POST)
 	public ModelAndView pwFind(BPrivateDataVO bprivatedatavo, String option) {
 		return svc.pwFind(bprivatedatavo, option);
 	}

@@ -83,6 +83,10 @@
 			
 			<exclude-mapping path="/resources/**"/>
 			<exclude-mapping path="/business/main/mainCover/"/>
+			<exclude-mapping path="/business/selectEST/*/"/>
+			<exclude-mapping path="/customer/membership/customerLogin/POST/"/>
+			<exclude-mapping path="/business/membership/businessLogin/POST/"/>
+			<exclude-mapping path="/business/membership/businessLogin/POST/main/"/>
 			
 			<beans:bean id="InitInterceptor" class="com.drumtong.security.InitInterceptor" />
 		</interceptor>
@@ -104,13 +108,19 @@
 			<exclude-mapping path="/business/membership/businessLogin/POST/"/>
 			<exclude-mapping path="/business/membership/businessLogin/POST/main/"/>
 			<exclude-mapping path="/business/membership/businessSignUp/"/>
+			<exclude-mapping path="/business/membership/businessAccountFind/"/>
+			<exclude-mapping path="/business/membership/businessIDFind/"/>
+			<exclude-mapping path="/business/membership/businessPWFind/"/>
 			<exclude-mapping path="/business/mainCover/"/>
+			<exclude-mapping path="/business/selectEST/*/"/>
+			
 			
 <!-- 			<exclude-mapping path="/customer/membership/customerLogin/rest/loginCheck/"/> -->
 <!-- 			<exclude-mapping path="/business/membership/businessLogin/rest/loginCheck/"/> -->
 			<exclude-mapping path="/**/rest/**"/>
 			
 			<exclude-mapping path="/business/"/>
+			<exclude-mapping path="/business/selectEST/*/"/>
 			
 			<exclude-mapping path="/customer/css/**"/>
 			<exclude-mapping path="/customer/js/**"/>

@@ -47,5 +47,12 @@
 				B.ESTID=A.ESTID
 	</select>
 	
+	<select id="selectInformationList" parameterType="String" resultType="BInformationVO">
+		SELECT B.* FROM BINFORMATION B,(SELECT * FROM BESTABLISHMENT WHERE BPERSONID=#{bpersonid}) A 
+			WHERE B.ESTID=A.ESTID
+	</select>
 	
+	<select id="selectName" parameterType="String" resultType="String">
+		SELECT BRANDNAMING FROM BINFORMATION WHERE ESTID=#{estid}
+	</select>
 </mapper>
