@@ -70,7 +70,7 @@
 		<form class="marginauto signup" action="#" method="post" onsubmit="return AgreeCheck();">
 			<div>
 				<div class="table"><div class="cell">&nbsp아&nbsp이&nbsp디</div></div> 
-				<input type="text" name="id" id="userid" placeholder="ID" required>
+				<input type="text" name="id" id="userid" placeholder="ID" required maxlength="25">
 			</div>
 			<div id="useridmsg" class="message"></div>
 			<div>
@@ -86,7 +86,7 @@
 			<hr>
 			<div>
 				<div class="table"><div class="cell">&nbsp이&nbsp&nbsp&nbsp&nbsp&nbsp름</div></div>
-				<input type="text" name="name" placeholder="NAME" required>
+				<input type="text" name="name" placeholder="NAME" required maxlength="20">
 			</div>
 			<div>
 				<div class="table"><div class="cell">생년월일</div></div>
@@ -121,7 +121,7 @@
             <div id="delegatecrnmsg" class="message"></div>            
             <div>
             	<div class="table"><div class="cell">&nbsp이&nbsp메&nbsp일</div></div>
-            	<input type="text" name="email" id="email" placeholder="Email" required>
+            	<input type="text" name="email" id="email" placeholder="Email" required maxlength="50">
             </div>
             <div id="emailmsg" class="message"></div> 
             <div class="pass">
@@ -129,11 +129,11 @@
             	<div>
             		<!-- Reandonly, Disabled : input 작성 방지 기능 -->
             		<!-- Readonly는 form으로 전송가능하지만, disabled 는 form으로 어떤 값도 전송되지 못한다 -->
-            		<input type="text" name="mainaddress" id="mainaddress" placeholder="우편번호" style="width: 70%" readonly  required/>
+            		<input type="text" name="mainaddress" id="mainaddress" placeholder="우편번호" style="width: 70%" readonly required/>
             		<input type="button" value="주소찾기" id="checkTel" style="width: 25%" onclick="searchAddress()"/>
             	</div>
             	<div>
-            		<input id="detailadress" name="detailaddress" type="text" placeholder="나머지 주소를 입력하세요" style="width: 100%" required>
+            		<input id="detailadress" name="detailaddress" type="text" placeholder="나머지 주소를 입력하세요" style="width: 100%" required maxlength="15">
             	</div>
             </div>
             <div>
