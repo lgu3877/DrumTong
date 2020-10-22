@@ -67,3 +67,26 @@ function authInput(target) {
 	}
 }
 
+//Phone Number syntax
+function phoneNumCheck(accountSearchType) {
+	const phoneSyntax = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
+	const errorMessage = "잘못된 전화번호 형식입니다.";
+	const phoneNum = document.getElementById(accountSearchType).value;
+
+	console.log(phoneNum);
+
+	if (!regularSyntaxCheck(phoneSyntax, accountSearchType, errorMessage)) {
+		return false;
+	}
+	
+}
+
+function regularSyntaxCheck(expression, target, message) {
+	if (expression.test(target.value)) {
+		return true;
+	}
+	document.getElementById(target + '-error').innerHTML = "<b>" + message + "</b>";
+	document.getElementById(target).value = "";
+	document.getElementById(target).focus();
+	return false;
+}

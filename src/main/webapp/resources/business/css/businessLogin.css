@@ -13,62 +13,97 @@
 /* Login Wrapper */
 .login_wrapper {
 	width: 50%;
-	/* Login Box Height */
-	height: 300px;
-	overflow: hidden;
+    height: 300px;
+    overflow: auto;
+    padding-top: 10px;
 }
 
 /* Title */
 .login_title {
-	height: 20%;
-	font-weight: bold;
 	text-align: center;
-	margin: 10px auto;
+    margin: 0 auto;
 }
 
 .login_title p {
 	color: #3b5998;
-	font-size: 30pt;
-	letter-spacing: 10px;
-    margin: 25px;	
+    font-size: 30pt;
+    letter-spacing: 5px;
+    margin-bottom: 10px;
+    font-weight: 600;
 }
 
 /* Input Container (with Input Tags) */
 .login_input_con {
-	height: 80%;
 	margin: auto;
-	padding-top: 10px;
 }
 
-.login_input_con div {
+.login_input_con .input_box {
 	margin: auto;
-	display: block;
-	width: 80%;
-	height: 33.33%;
-
+    display: block;
+    width: 80%;
+    height: 60px;
 }
 
-.login_input_con input {
+.login_input_con .input_tag {
 	border: none;
-	outline: none;
-	border-radius: 15px;
-	font-size: 15pt;
-	width: 95%;
-	height: 70%;
-	background-color: #DEDFDF;
-	box-sizing: inherit;
-	overflow: auto;
+    outline: none;
+    border-radius: 5px;
+    font-size: 12pt;
+    width: 100%;
+    height: 85%;
+    background-color: #DEDFDF;
+    text-indent: 10px;
 }
+
+.login_input_con .store_id_con {
+    text-align: left;	
+}
+
+.login_input_con .store_id_input {
+	margin-left: 10px;
+}	    
 
 .login_input_con .login_button_con input {
 	background-color: #8b9dc3 !important;
 }
 
+.login_bottom_con {
+	display: flex;
+    margin-top: 8px;
+    justify-content: space-between;
+}
+
+.join_link {
+	cursor: pointer;
+    margin-right: 10px;
+    font-weight: 600;
+    text-decoration: underline;
+    color: #3b5998;
+}
+
 /* Login & Join Button Container*/
 .login_button_con {
-	font-family: 'Roboto', sans-serif;
-	display: inline-block;
-	box-sizing: content-box;
+	width: 80%;
+    display: flex;
+    margin: auto;
+}
+
+.login_button_con input[type=button] {
+    width: 100%;
+    height: 40px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    letter-spacing: 5px;
+    color: white;
+    margin-top: 40px;
+}
+
+.login_button_con input[type=button]:hover {
+	transform: translate(0, -1px);
+	transition: all 0.5s ease 0s;
+	box-shadow: 0px 15px 20px rgba(223, 227, 238);
 }
 
 /* Login & Button */
@@ -95,6 +130,87 @@
 	padding: 0;
 	width: 40%;
 	color: white;
+}
+
+/* after login box */
+.after_loign_con {
+	width: 50%;
+    height: 300px;
+    text-align: left;
+    float: right;
+    margin: auto;
+    background-color: #f7f7f7;
+}
+
+.after_loign_con div {
+	height: 25%;
+}
+
+.welcome_box {
+	font-size: 16pt;
+    margin-left: 20px;
+    padding-top: 15px;
+	margin-bottom: -20px;
+}
+.owner_name {
+	font-size: 22pt;
+	color: #8b9dc3;
+}
+
+.request_box {
+	margin-left: 20px;
+}
+
+.order_count {
+	font-size: 17pt;
+    margin: 0 8px;
+    font-weight: 600;
+    color: red;
+}
+
+.request_box p {
+	font-size: 13pt;
+	word-spacing: 3px;
+}
+
+.order_status_link{
+	text-decoration: underline;
+    margin: 0 5px;
+    font-weight: 600;
+    font-size: 14pt;
+    color: blue;
+    cursor: pointer
+}
+
+.premium_box {
+	display: flex;
+    margin-left: 20px;
+	margin-top: 25px;
+    word-spacing: 3px;
+}
+
+.premium_guide_con {
+	
+}
+
+.premium_guide_con p {
+	margin: 0;
+    padding: 10px;
+    font-size: 10pt;
+    background-color: #3b5998;
+    color: white;
+    border-radius: 8px;
+    letter-spacing: 0.5px;
+    word-spacing: 3px;
+}
+
+.premium_sign_up_btn {
+    outline: none;
+    border: none;;
+    margin: 10px auto 0 auto;
+    width: 100%;
+    background-color: #1da1f2;
+    color: white;
 }
 
 /* input: focus */
@@ -176,14 +292,6 @@ input[type=submit]:hover, button:hover {
     margin-top: 38px;
 }
 
-.login_search_con {
-}
-
-.single_page_login input[type=submit] {
-	margin: 15px auto 20px auto;
-	color: white;
-}
-
 .login_search_con div {
 	margin: 20px;
 }
@@ -196,6 +304,8 @@ input[type=submit]:hover, button:hover {
 	display: table;
 	margin-top: 10px;
 }
+
+
 
 /* Modal Box */
 .modal {
