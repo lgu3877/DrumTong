@@ -1,9 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../main/businessHeader.jsp"%>
-	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="cpath">${pageContext.request.contextPath }</c:set>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<title>businessFinishSignUp :: Laundry</title>
+  		
 	<link rel="stylesheet" href="${cpath }/business/css/membership/businessFinishSignUp.css">
-	
+	<link rel="stylesheet" href="${cpath }/business/css/businessStyle.css">
+    <link rel="stylesheet" href="${cpath }/business/css/businessHeader.css">
+  	
+</head>
+<body>  	
+<%@ include file="../main/businessHeader.jsp"%>
+
 	<div class="mainDiv">
 		<h1>회원가입 완료를 축하드립니다</h1>
 		<hr>
