@@ -37,7 +37,14 @@
 				<div class="searched_title title">아이디 찾기 결과</div>
 				<div class="searched_content">
 					<p>
-						회원님의 아이디는 [&nbsp;<span id="search-id" class="searched_account">abcd1234</span>&nbsp;] 입니다.
+            <c:choose>
+              <c:when test="${not empty result }">
+                회원님의 아이디는 [&nbsp;<span id="search-id" class="searched_account">${result} }</span>&nbsp;] 입니다.
+              </c:when>
+              <c:otherwise>
+                회원 정보를 찾을 수 없습니다.						
+						</c:otherwise>
+					</c:choose>
 					</p>
 				</div>
 			</div>
@@ -51,7 +58,7 @@
 		</div>
 	</section>
 
-	<!-- encryption for showing ID -->
+	<!-- encryption for showing ID [영경] 나중에 서버로 작업 -->
 	<script type="text/javascript">
 		const searchId = document.getElementById('search-id').innerHTML;
 		const idLength = searchId.length;
