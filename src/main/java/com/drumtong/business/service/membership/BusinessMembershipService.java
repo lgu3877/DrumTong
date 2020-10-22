@@ -47,7 +47,7 @@ public class BusinessMembershipService {
 		// 사업장 정보 들고오기
 		if(User != null) {
 			List<BInformationVO> InformationList = bInformationDAO.selectInformationList(User.getBpersonid());
-			Session.setAttribute("InformationList", InformationList);
+			
 			String selectEST = (String)Session.getAttribute("selectEST");
 			if(InformationList != null) {
 				if(selectEST == null) {
@@ -57,6 +57,23 @@ public class BusinessMembershipService {
 				}
 				Session.setAttribute("selectEstName", bInformationDAO.selectName(selectEST));
 			}
+			
+			for(int i = 0; i < InformationList.size(); i++) {
+				String naming = InformationList.get(i).getBrandnaming();
+				System.out.println("<바꾸기전>naming : " + naming);
+				if(naming.length() > 4) {
+					System.out.println("동작 테스트");
+					BInformationVO ChangeData = InformationList.get(i);
+					naming = naming.substring(0, 4) + "..";
+					ChangeData.setBrandnaming(naming);
+					System.out.println("<바꾼 후>naming : " + naming);
+					InformationList.set(i, ChangeData);
+					System.out.println("<리스트 확인>naming :" + InformationList.get(i).getBrandnaming());
+					
+				}
+			}
+			Session.setAttribute("InformationList", InformationList);
+
 			
 		}
 		

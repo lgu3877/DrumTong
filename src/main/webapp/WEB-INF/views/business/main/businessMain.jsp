@@ -20,6 +20,8 @@
    
    <!-- Font -->
    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+   
+   <!-- icon -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
    <!-- css -->
@@ -58,19 +60,6 @@
      
 
 
-<!-- body -->
-<body onload="javascript:openPopup('${cpath}/business/mainCover/')">
-   
-   <!-- header(navbar) -->
-   <%@ include file="businessHeader.jsp" %>
-   
-   <!-- section -->
-   <section>
-      <!-- Preview -->
-      <%@ include file="businessMainPreview.jsp" %> 
-   
-      <!-- Inner Navigation -->
-      <%@ include file="businessInnerNav.jsp" %>
 
 <!-- body -->
 <body onload="javascript:openPopup('${cpath}/business/mainCover/')">
