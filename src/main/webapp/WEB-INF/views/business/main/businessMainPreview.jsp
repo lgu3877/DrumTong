@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<div class="inner_login_btn"
+	style="position: absolute; z-index: 1; margin: 175px auto; width: 80%;">
+	<button
+		style="outline: none; border: none; width: 210px; height: 70px; color: white; background-color: #1da1f2; border-radius: 5px; font-size: 17pt;">로그인하기</button>
+</div>
+
 <div class="m_preview_con">
 	<div class="m_preivew_left">
 		<div class="upper">
@@ -82,7 +88,7 @@
 		</div>
 	</div>
 	
-	<script type="text/javascript">
+<script type="text/javascript">
 	function numberCounter(target_frame, target_number) {
 	    this.count = 0;
 	    this.diff = 0;
@@ -120,7 +126,7 @@
 	new numberCounter("counter10", 800);
 	new numberCounter("counter11", 8000);
 	new numberCounter("counter12", 80000);
-	</script>
+</script>
 <!-- 	<div class="m_preivew_right">
 		<div id="chart_div" class="right_entire"></div>
 	</div> -->
