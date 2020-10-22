@@ -1,18 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../main/businessHeader.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="cpath">${pageContext.request.contextPath }</c:set>
 
-
-<section>
-	<!-- Login -->
-	<div class="search_inner">
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-	<!-- Account Search -->
-		<div class="account_searchbox">
-			<div class="search_title title">아이디 찾기</div>
-			<div class="search_option_con">
-				<ul>
+	<!-- title -->
+  	<title>Login :: Laundry</title>
+  	
+  	<!-- global css -->
+    <link rel="stylesheet" href="${cpath }/business/css/businessStyle.css">
+    <!-- header css -->
+    <link rel="stylesheet" href="${cpath }/business/css/businessHeader.css">
+    <!-- account find css -->
+    <link rel="stylesheet" href="${cpath }/business/css/businessAccountFind.css"> 	  	
+    <link rel="stylesheet" href="${cpath }/business/css/businessLogin.css">
+	
+	<!-- Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+  	
+</head>
+
+
+<body>
+
+
+	<%@ include file="../main/businessHeader.jsp"%>
+
+
+	<section>
+		<!-- Login -->
+		<div class="search_inner">
+
+			<!-- Account Search -->
+			<div class="account_searchbox">
+				<div class="search_title title">아이디 찾기</div>
+				<div class="search_option_con">
+					<ul>
+					
 					<!-- Name & Email -->
+
 					<li class="search_options" onclick='openForm("email-search")'><i id="email-search-icon" class="fas fa-angle-down"></i><div>이메일로 찾기</div></li>
 					<li id="email-search" class="search_input_con" style="display: none">
 						<form action="${cpath }/business/membership/businessIDFind/" method="POST">
@@ -33,7 +65,7 @@
 					<!-- Name & PhoneNumber -->
 					<li class="search_options" onclick='openForm("hp-search")'><i id="hp-search-icon" class="fas fa-angle-down"></i><div>전화번호로 찾기</div></li>
 					<li id="hp-search" class="search_input_con" style="display: none">
-						<form action="${cpath }/business/membership/businessIDFind/" method="POST">
+						<form action="${cpath }/business/membership/businessIDFind/" method="POST" onsubmit='phoneNumCheck("name-phone-search")'>
 							<input type="hidden" name="option" value="NamePhoneNum" />
 							<div>
 								<div class="search_input_label">이름</div>
@@ -41,8 +73,12 @@
 							</div>
 							<div>
 								<div class="search_input_label">전화번호<span class="search_input_sublabel">('-'을 제외한 숫자로 적어주세요.)</span></div>
-								<input class="single_input" type="text" name="phonenum" required="required" oninvalid="this.setCustomValidity('11자리만 입력해주세요')" placeholder="예)01012345678" maxlength="11"/>
-							</div>
+                
+									<input class="single_input" type="text" name="phonenum" placeholder="예) 01012345678" />
+								<input id="name-phone-search" class="single_input" type="text" name="phonenum" required="required" oninvalid="this.setCustomValidity('11자리만 입력해주세요')" placeholder="예) 01012345678" maxlength="11"/>
+							  <!-- error message -->
+									<div id="name-phone-search-error" class="red-mark"></div>
+              </div>
 							<div>
 								<input class="single_input" type="submit" value="확인" />
 							</div>
@@ -79,7 +115,7 @@
 										<option value="11">11월</option>
 										<option value="12">12월</option>
 									</select>
-									<input class="birth_input" type="number" name="birth" required="required" placeholder="일" max="31" min="1"/>
+                  <input class="birth_input" type="number" name="birth" placeholder="일" min="1" max="31" />
 								</div>
 							</div>
 							<div class="search_gender_select">
@@ -132,13 +168,13 @@
 					</li>
 				</ul>
 			</div>
-		</div>
 
-	<!-- Password Search -->
-		<div class="account_searchbox">
-			<div class="search_title title">비밀번호 찾기</div>
-			<div class="search_option_con">
-				<ul>
+		<!-- Password Search -->
+			<div class="account_searchbox">
+				<div class="search_title title">비밀번호 찾기</div>
+				<div class="search_option_con">
+					<ul>
+					
 					<!-- ID & Email & PhoneNumber for Password -->
 					<li class="search_options" onclick='openForm("PwPhone-search")'><i id="PwPhone-search-icon" class="fas fa-angle-down"></i><div>전화번호로 찾기</div></li>
 					<li id="PwPhone-search" class="search_input_con" style="display: none">
@@ -192,12 +228,14 @@
 				</ul>
 			</div>
 		</div>
-	</div>
-</section>
+	</section>
 
-<!-- Account Search -->
-<script type="text/javascript" src="${cpath }/business/js/businessAccountSearch.js"></script>
+	<!-- Account Search -->
+	<script type="text/javascript" src="${cpath }/business/js/businessAccountSearch.js"></script>
+	
+	<!-- footer -->
+	<%@ include file="../main/businessFooter.jsp"%>
 
-<%@ include file="../main/businessFooter.jsp"%>
-
+</body>
+</html>
 	

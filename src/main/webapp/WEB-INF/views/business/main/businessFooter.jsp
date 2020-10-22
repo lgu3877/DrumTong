@@ -5,3 +5,10 @@
 		footer 입니다...!!!!!!
 	</footer>
 	
+<<<<<<< HEAD
+	<!-- Calendar -->
+	<script type="text/javascript" src="${cpath }/business/js/calendar.js"></script>
+</body>
+</html>
+=======
+>>>>>>> branch 'master' of https://github.com/lgu3877/DrumTong.git
