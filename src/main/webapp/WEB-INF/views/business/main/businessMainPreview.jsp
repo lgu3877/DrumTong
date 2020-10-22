@@ -7,7 +7,7 @@
 		style="outline: none; border: none; width: 210px; height: 70px; color: white; background-color: #1da1f2; border-radius: 5px; font-size: 17pt;">로그인하기</button>
 </div>
 
-<div class="m_preview_con">
+<div class="m_preview_con" style="filter:${empty bLogin ? 'blur(5px)':'blur(0px)'}"> 
 	<div class="m_preivew_left">
 		<div class="upper">
 			<div style="text-align: center;">

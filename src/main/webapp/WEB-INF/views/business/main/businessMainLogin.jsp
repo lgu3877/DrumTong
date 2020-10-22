@@ -49,7 +49,7 @@ function loginSubmit(){
 
 <!-- inner login form in main page -->
 <!-- Before Login -->
-<c:if test="${empty AddressToMove}">
+<c:if test="${empty bLogin}">
 	<form class="login_wrapper" method="POST" action="${cpath }/business/membership/businessLogin/POST/main/" onsubmit="return false;">
 		<div class="login_title">
 			<p>
@@ -86,7 +86,7 @@ function loginSubmit(){
 </c:if>
 
 <!-- After Login -->	
-<c:if test="${not empty AddressToMove}">
+<c:if test="${not empty bLogin}">
 	<div class="after_loign_con">
 		<div class="welcome_box">
 			<span class="owner_name">나이키</span>(abc123@gmail.com) 사장님 어서오세요.

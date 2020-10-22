@@ -28,8 +28,8 @@ public class AwsServiceImpl{
 	@Autowired BImageDAO bImageDAO;
 
     private static final String BUCKET_NAME = "laundrydrumtong";
-    private static final String ACCESS_KEY = "AKIAYBVBYYPFDCTJ5GZK";
-    private static final String SECRET_KEY = "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";
+    private static final String ACCESS_KEY = "AKIAYBVBYYPFP2GX3YWI";
+    private static final String SECRET_KEY = "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";
 
     private AmazonS3 amazonS3; // 인스턴스를 초기화한다.
 

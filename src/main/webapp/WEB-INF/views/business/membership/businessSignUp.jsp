@@ -17,6 +17,9 @@
 	<!-- 스크립트 영역 -->
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
+	<!-- icon -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+	
 </head>
 
 <body>

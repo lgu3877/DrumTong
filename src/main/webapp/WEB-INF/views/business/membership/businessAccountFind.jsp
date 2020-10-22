@@ -74,7 +74,6 @@
 							<div>
 								<div class="search_input_label">전화번호<span class="search_input_sublabel">('-'을 제외한 숫자로 적어주세요.)</span></div>
                 
-									<input class="single_input" type="text" name="phonenum" placeholder="예) 01012345678" />
 								<input id="name-phone-search" class="single_input" type="text" name="phonenum" required="required" oninvalid="this.setCustomValidity('11자리만 입력해주세요')" placeholder="예) 01012345678" maxlength="11"/>
 							  <!-- error message -->
 									<div id="name-phone-search-error" class="red-mark"></div>
@@ -227,6 +226,8 @@
 					</li>
 				</ul>
 			</div>
+		</div>
+		</div>
 		</div>
 	</section>
 

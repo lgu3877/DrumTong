@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="${cpath }/business/css/businessHeader.css">
 	<link rel="stylesheet" href="${cpath }/business/css/businessLogin.css"> 
 	<link rel="stylesheet" href="${cpath }/business/css/membership/businessAccountInfo.css">	
+	<!-- icon -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 </head>	
 	
 	
