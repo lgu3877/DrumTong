@@ -46,7 +46,7 @@
 	font-size: 20pt;
 }
 .search_option_con ul li div {
-	padding-top: 5px;
+	padding-top: 2px;
 }
 
 /* invisible parts */
@@ -180,5 +180,7 @@
 	border-radius: 5px;	
 }
 
-#hp-search {
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }
