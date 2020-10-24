@@ -49,7 +49,7 @@ public class BusinessMembershipService {
 			List<BInformationVO> InformationList = bInformationDAO.selectInformationList(User.getBpersonid());
 			
 			String selectEST = (String)Session.getAttribute("selectEST");
-			if(InformationList != null) {
+			if(InformationList != null && InformationList.size() != 0) {
 				if(selectEST == null) {
 					selectEST = InformationList.get(0).getEstid();
 					Session.setAttribute("selectEST", selectEST);
@@ -171,20 +171,17 @@ public class BusinessMembershipService {
 		return mav;
 	}
 	
-	// 사업자 ID 찾기 결과 페이지로 이동 (GET) [영경]
+	// 사업자 ID 찾기 결과 페이지로 이동 (POST) [영경]
 	public ModelAndView idFind(BPrivateDataVO bprivatedatavo, String option, int[] birth) {
 		ModelAndView mav = new ModelAndView("business/membership/businessIDFind");
 		String UserID = null;
+		bprivatedatavo = updateData(bprivatedatavo);
 		switch(option) {
 			case "NamePhoneNum":
-				String num = bprivatedatavo.getPhonenum();
-				bprivatedatavo.setPhonenum(num.substring(0,3) + "-" + num.substring(3,7) + "-" + num.substring(7));
-				System.out.println(bprivatedatavo.getPhonenum());
 				UserID = bPrivateDataDAO.idFindNamePhoneNum(bprivatedatavo);
 				break;
 			case "NameBirth":
 				bprivatedatavo.setBirth(birth[0] + "-" + (birth[1] < 10 ? "0" : "") + birth[1] + "-" + (birth[2] < 10 ? "0" : "") + birth[2]);
-				System.out.println(bprivatedatavo.getBirth());
 				UserID = bPrivateDataDAO.idFindNameBirth(bprivatedatavo);
 				break;
 			case "NameEmail":
@@ -205,6 +202,7 @@ public class BusinessMembershipService {
 	// 사업자 PW 찾기 이동 (GET) [영경]
 	public ModelAndView pwFind(BPrivateDataVO bprivatedatavo, String option) {
 		ModelAndView mav = new ModelAndView();
+		bprivatedatavo = updateData(bprivatedatavo);
 		BPrivateDataVO User = null;
 		switch(option) {
 		case "phoneNameID":
@@ -219,6 +217,13 @@ public class BusinessMembershipService {
 		return mav;		
 	}
 	
+	private BPrivateDataVO updateData(BPrivateDataVO bprivatedatavo) {
+		String Phonenum = bprivatedatavo.getPhonenum();
+		String Delegatecrn = bprivatedatavo.getDelegatecrn();
+		bprivatedatavo.setPhonenum(Phonenum.substring(0,3) + "-" + Phonenum.substring(3,7) + "-" + Phonenum.substring(7));
+		bprivatedatavo.setDelegatecrn(Delegatecrn.substring(0,6) + "-" + Delegatecrn.substring(6,8) + "-" + Delegatecrn.substring(8));
+		return bprivatedatavo;
+	}
 	
 	
 }
