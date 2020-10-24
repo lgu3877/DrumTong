@@ -48,10 +48,47 @@ function openForm(target) {
 function authInput(target) {
 	const authInfo = document.getElementById(target + '_input').value;
 	const targetDiv = document.getElementById(target + '_div');
+	const parentName = (target === 'auth_phone' ? 'PwPhone-search' : 'PwEmail-search');
+	const object = document.getElementById(parentName).querySelectorAll("input[type='text']");
+	console.log(object);
+	const check='false';
+	
+	
 	
 	// + 정보 일치여부 확인(ajax) > result(true or false)
-
-	if(authInfo) {
+	  var axPost = async (object) => {
+		let ob;
+		if(parentName === 'PwPhone-search'){
+			console.log(object[0].value);
+			console.log(object[1].value);
+			console.log(object[2].value);
+			ob={
+					'id':object[0].value,
+					'name':object[1].value,
+					'phonenum':object[2].value,
+			};
+		} else{
+			console.log(object[0].value);
+			console.log(object[1].value);
+			ob={
+					'id':object[0].value,
+					'email':object[1].value,
+			};
+		}
+	    await axios.post("/drumtong/business/membership/businessAccountFind/rest/userCheck/", ob)
+	
+	    .then( (response) => {
+	      if(response.data === true){
+	    	  check='true';
+	      } else{
+	        check='false';
+	      }
+	    })
+	  }
+	axPost(object);	
+	  
+	
+	if(check === 'true') {
 		targetDiv.innerHTML = "<div>"
 			+ "<div class='search_input_label'>인증번호"
 			+ "<span class='red-mark'>*</span>&nbsp;"
@@ -71,22 +108,22 @@ function authInput(target) {
 function phoneNumCheck(accountSearchType) {
 	const phoneSyntax = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
 	const errorMessage = "잘못된 전화번호 형식입니다.";
-	const phoneNum = document.getElementById(accountSearchType).value;
+	const phoneNum = document.getElementById(accountSearchType);
 
-	console.log(phoneNum);
+	console.log(phoneNum.value);
 
-	if (!regularSyntaxCheck(phoneSyntax, accountSearchType, errorMessage)) {
+	if (!regularSyntaxCheck(phoneSyntax, phoneNum, errorMessage)) {
 		return false;
 	}
-	
+	return true;
 }
 
 function regularSyntaxCheck(expression, target, message) {
 	if (expression.test(target.value)) {
 		return true;
 	}
-	document.getElementById(target + '-error').innerHTML = "<b>" + message + "</b>";
-	document.getElementById(target).value = "";
-	document.getElementById(target).focus();
+	document.getElementById(target.id + '-error').innerHTML = "<b>" + message + "</b>";
+	target.value = "";
+	target.focus();
 	return false;
 }
