@@ -71,7 +71,20 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		addressToMove = addressToMove.endsWith(loginPageName)
 				? (Referer != null ? (Referer.split(request.getContextPath())[1]) : mainPageName)	// 로그인 페이지를 눌러 이동한거면
 				: addressToMove;	// 로그인 페이지가 아닌 다른 페이지에서 왔다면
-
+		
+//				if(addressToMove.endsWith(loginPageName)) {	// 로그인 페이지로 직접이동
+//					if(Referer != null) {	// 주소창에 입력하지 않은 경우
+//						String tmp = Referer.split(request.getContextPath())[1];
+//						if(!tmp.endsWith(signUpPageName)){
+//							tmp = mainPageName; 
+//						}
+//						addressToMove = tmp;
+//					} else {	// 주소창 입력
+//						addressToMove = mainPageName;
+//					}
+//				}
+		
+				
 		session.setAttribute("AddressToMove", addressToMove);
 		System.out.println("최종 AddressToMove 는'" + addressToMove + "'로 로 되었고 sloginlog 생성함");
 		CreateNewSLoginLog(request, session, addressToMove);
