@@ -198,8 +198,7 @@ public class BusinessMembershipService {
 		return mav;		
 	}
 
-
-	// 사업자 PW 찾기 이동 (GET) [영경]
+	// 사업자 PW 찾기 이동 (POST) [영경]
 	public ModelAndView pwFind(BPrivateDataVO bprivatedatavo, String option) {
 		ModelAndView mav = new ModelAndView();
 		bprivatedatavo = updateData(bprivatedatavo);
@@ -220,8 +219,10 @@ public class BusinessMembershipService {
 	private BPrivateDataVO updateData(BPrivateDataVO bprivatedatavo) {
 		String Phonenum = bprivatedatavo.getPhonenum();
 		String Delegatecrn = bprivatedatavo.getDelegatecrn();
-		bprivatedatavo.setPhonenum(Phonenum.substring(0,3) + "-" + Phonenum.substring(3,7) + "-" + Phonenum.substring(7));
-		bprivatedatavo.setDelegatecrn(Delegatecrn.substring(0,6) + "-" + Delegatecrn.substring(6,8) + "-" + Delegatecrn.substring(8));
+		if(Phonenum != null)
+			bprivatedatavo.setPhonenum(Phonenum.substring(0,3) + "-" + Phonenum.substring(3,7) + "-" + Phonenum.substring(7));
+		if(Delegatecrn != null)
+			bprivatedatavo.setDelegatecrn(Delegatecrn.substring(0,3) + "-" + Delegatecrn.substring(3,5) + "-" + Delegatecrn.substring(5));
 		return bprivatedatavo;
 	}
 	
