@@ -52,7 +52,7 @@
 			WHERE B.ESTID=A.ESTID
 	</select>
 	
-	<select id="selectName" parameterType="String" resultType="String">
-		SELECT BRANDNAMING FROM BINFORMATION WHERE ESTID=#{estid}
+	<select id="selectEst" parameterType="String" resultType="String">
+		SELECT * FROM BINFORMATION WHERE ESTID=#{estid}
 	</select>
 </mapper>
