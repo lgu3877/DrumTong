@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,8 +53,8 @@ public class RestBusinessMembershipController {
 	// 계정이 일치한다면 이메일 전송[영경]
 	@RequestMapping("businessAccountFind/rest/userCheck/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String emailConfirm(BPrivateDataVO bprivatedatavo) {
-		return svc.emailConfirm(bprivatedatavo);
+	public String emailConfirm(HttpServletRequest req, @RequestBody BPrivateDataVO bprivatedatavo) {
+		return svc.emailConfirm(req, bprivatedatavo);
 	}
 	
 	
