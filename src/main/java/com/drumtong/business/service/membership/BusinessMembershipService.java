@@ -41,35 +41,27 @@ public class BusinessMembershipService {
 		
 		
 		boolean LoginResult = Login.login(Session, resp, bPrivateDatavo, storeid);		// 로그인 성공여부
-		System.out.println("AddressToMove" + AddressToMove);
 
 		BPrivateDataVO User = ((BPrivateDataVO)Session.getAttribute("bLogin"));
 		// 사업장 정보 들고오기
 		if(User != null) {
 			List<BInformationVO> InformationList = bInformationDAO.selectInformationList(User.getBpersonid());
 			
-			String selectEST = (String)Session.getAttribute("selectEST");
+			BInformationVO selectEST = (BInformationVO)Session.getAttribute("selectEST");
 			if(InformationList != null && InformationList.size() != 0) {
 				if(selectEST == null) {
-					selectEST = InformationList.get(0).getEstid();
+					selectEST = InformationList.get(0);
 					Session.setAttribute("selectEST", selectEST);
-					System.out.println("selectEST : " + selectEST);
 				}
-				Session.setAttribute("selectEstName", bInformationDAO.selectName(selectEST));
 			}
 			
 			for(int i = 0; i < InformationList.size(); i++) {
 				String naming = InformationList.get(i).getBrandnaming();
-				System.out.println("<바꾸기전>naming : " + naming);
 				if(naming.length() > 4) {
-					System.out.println("동작 테스트");
 					BInformationVO ChangeData = InformationList.get(i);
 					naming = naming.substring(0, 4) + "..";
 					ChangeData.setBrandnaming(naming);
-					System.out.println("<바꾼 후>naming : " + naming);
 					InformationList.set(i, ChangeData);
-					System.out.println("<리스트 확인>naming :" + InformationList.get(i).getBrandnaming());
-					
 				}
 			}
 			Session.setAttribute("InformationList", InformationList);
