@@ -1,7 +1,6 @@
 package com.drumtong.business.service.membership;
 
 import java.util.HashMap;
-import java.util.Map.Entry;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -46,16 +45,22 @@ public class RestBusinessMembershipService {
 	}
 	
 	// 계정이 일치한다면 이메일 전송[영경]
-	public String emailConfirm(BPrivateDataVO bprivatedatavo) {
-		BPrivateDataVO User = bPrivateDataDAO.pwFindEmailID(bprivatedatavo);
+	public String emailConfirm(HttpServletRequest req, BPrivateDataVO bprivatedatavo) {
+		String Phonenum = bprivatedatavo.getPhonenum();
+		if(Phonenum != null)
+			bprivatedatavo.setPhonenum(Phonenum.substring(0,3) + "-" + Phonenum.substring(3,7) + "-" + Phonenum.substring(7));
+		BPrivateDataVO User = bprivatedatavo.getEmail() != null ?
+					bPrivateDataDAO.pwFindEmailID(bprivatedatavo)
+					:bPrivateDataDAO.pwFindPhoneNameID(bprivatedatavo);
 		// 인증번호 난수로 생성
-		int VerificationCode = ((int)Math.random() * 100000) + 1;
+		int VerificationCode = ((int)(Math.random() * 1000000)) + 1;
 		if(User != null) {
 			// 이메일로 인증번호 전송하는 메서드
-			String message = "<h1>DRUMTONG</h1>인증번호는 " + VerificationCode + "입니다.";
-			sendMail(bprivatedatavo.getEmail(), message);
-			// 정상적으로 입력했다면 인증번호 반환
-			return VerificationCode + "";
+			String message = "[DRUMTONG]인증번호는 '" + VerificationCode + "'입니다.";
+			sendMail(User.getEmail(), message);
+			// 정상적으로 입력했다면 인증번호 세션에 저장
+			return  VerificationCode + "";
+			
 		}
 		// 잘못된 입력일 땐 -1 반환
 		return "-1";
@@ -74,22 +79,21 @@ public class RestBusinessMembershipService {
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.ssl.enable", "true");	// ssl 방식으로 보내기
 		props.put("mail.smtp.ssl.trust", host);
-		
+
 		Authenticator auth = new Authenticator() {
+			String username = "drumtonglaundry"; // 사용자;
+			String password = "drumtong@laundry";  // 패스워드;
 			protected PasswordAuthentication getPasswordAuthentication() {
-		          String username = ""; // 사용자;
-		          String password = "";  // 패스워드;
 		          return new PasswordAuthentication(username, password);
 		     }
 		};
-		
 		Session mailSession = Session.getDefaultInstance(props, auth);
 		mailSession.setDebug(true);
 		
 		Message mimeMessage = new MimeMessage(mailSession);
 		try {
 			// 보내는 사람 풀 주소
-			mimeMessage.setFrom(new InternetAddress("xx@naver.com"));
+			mimeMessage.setFrom(new InternetAddress("drumtonglaundry@naver.com"));
 			mimeMessage.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(toEmail));
 			
 			mimeMessage.setSubject("[DRUMTONG]비밀번호 변경을 위한 인증 번호입니다.");

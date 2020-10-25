@@ -179,7 +179,8 @@
 					<!-- ID & Email & PhoneNumber for Password -->
 					<li class="search_options" onclick='openForm("PwPhone-search")'><i id="PwPhone-search-icon" class="fas fa-angle-down"></i><div>전화번호로 찾기</div></li>
 					<li id="PwPhone-search" class="search_input_con" style="display: none">
-						<form action="${cpath }/business/membership/businessPWFind/" method="POST">
+						<form action="${cpath }/business/membership/businessPWFind/" method="POST" onsubmit="return false">
+							<input type="hidden" name="option" value="phoneNameID" />
 							<div>
 								<div class="search_input_label">아이디</div>
 								<input class="single_input" type="text" name="id" placeholder="아이디를 적어주세요." />
@@ -199,14 +200,15 @@
 								
 							</div>
 							<div>
-								<input class="single_input" type="submit" value="확인" />
+								<input id="auth_phone_confirm" class="single_input" type="submit" value="확인"  disabled="disabled"/>
 							</div>
 						</form>
 					</li>
 					<!-- ID & Email for Password -->
 					<li class="search_options" onclick='openForm("PwEmail-search")'><i id="PwEmail-search-icon" class="fas fa-angle-down"></i><div>이메일로 찾기</div></li>
 					<li id="PwEmail-search" class="search_input_con" style="display: none">
-						<form action="${cpath }/business/membership/businessPWFind/" method="POST">
+						<form action="${cpath }/business/membership/businessPWFind/" method="POST" onsubmit="return false">
+							<input type="hidden" name="option" value="emailID" />
 							<div>
 								<div class="search_input_label">아이디</div>
 								<input class="single_input" type="text" name="id" placeholder="아이디를 적어주세요." />
@@ -222,7 +224,7 @@
 								
 							</div>
 							<div>
-								<input class="single_input" type="submit" value="확인" />
+								<input id="auth_email_confirm" class="single_input" type="submit" value="확인" disabled="disabled"/>
 							</div>
 						</form>
 					</li>
