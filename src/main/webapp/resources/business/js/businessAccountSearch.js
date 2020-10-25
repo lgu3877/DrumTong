@@ -43,6 +43,30 @@ function openForm(target) {
 	}
 }
 
+function afterSendAuth(target, targetDiv, number){	// number : 인증번호
+	targetDiv.innerHTML = "<div>"
+		+ "<div class='search_input_label'>인증번호"
+		+ "<span class='red-mark'>*</span>&nbsp;"
+		+ "<span class='search_input_sublabel'>"
+		+ "입력하신 전화번호(혹은 이메일)로 인증번호가 발송됩니다."
+		+ "</span></div>"
+		+ "<input class='single_input' value='' id='"+target+"_yours' type='text' name='authCode' placeholder='인증번호를 적어주세요.' maxlength='6' />"
+		+ "</div>";
+	// submit 버튼도 활성화 되고 인증번호와 입력한 값을 비교해서 일치하면 페이지 이동, 일치하지 않으면 중지
+	confirmButton = document.getElementById(target + '_confirm');
+	confirmButton.disabled='';
+	confirmButton.onclick = function (){
+		console.log(target + "_yours");
+		yours = document.getElementById(target + "_yours");
+		console.log(yours);
+		if(yours.value == number){
+			((this.parentNode).parentNode).submit();
+		}else {
+			alert('인증에 실패하였습니다.');
+		}
+	};
+	
+}
 
 //Create Auth Input
 function authInput(target) {
@@ -51,7 +75,6 @@ function authInput(target) {
 	const parentName = (target === 'auth_phone' ? 'PwPhone-search' : 'PwEmail-search');
 	const object = document.getElementById(parentName).querySelectorAll("input[type='text']");
 	console.log(object);
-	const check='false';
 	
 	
 	
@@ -78,30 +101,16 @@ function authInput(target) {
 	    await axios.post("/drumtong/business/membership/businessAccountFind/rest/userCheck/", ob)
 	
 	    .then( (response) => {
-	      if(response.data === true){
-	    	  check='true';
+	      if(response.data !== -1){
+//	    	  계정이 일치한다면 이 함수를 실행합니당(영경)
+	    	afterSendAuth(target, targetDiv, response.data);
 	      } else{
-	        check='false';
+	        alert("입력하신 내용이 일치하지 않습니다.\n다시 입력해주세요.");
 	      }
 	    })
 	  }
 	axPost(object);	
 	  
-	
-	if(check === 'true') {
-		targetDiv.innerHTML = "<div>"
-			+ "<div class='search_input_label'>인증번호"
-			+ "<span class='red-mark'>*</span>&nbsp;"
-			+ "<span class='search_input_sublabel'>"
-			+ "입력하신 전화번호(혹은 이메일)로 인증번호가 발송됩니다."
-			+ "</span></div>"
-			+ "<input class='single_input' type='text' name='authCode' placeholder='인증번호를 적어주세요.' maxlength='6' />"
-			+ "</div>";
-		console.log('123');
-	}
-	else {
-		alert("입력하신 내용이 일치하지 않습니다.\n다시 입력해주세요.")
-	}
 }
 
 //Phone Number syntax
