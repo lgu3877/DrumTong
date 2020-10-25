@@ -23,7 +23,9 @@
 							</span>
 						</c:when>
 						<c:otherwise>
-							<span class="upper_options" style="cursor:none;">[${selectEstName }]</span><b>사장님, 반갑습니다.</b>&nbsp;&nbsp;&nbsp; 
+							<c:if test="${not empty selectEST.brandnaming }">
+								<span class="upper_options" style="cursor:default;">[${selectEST.brandnaming }]</span><b>사장님, 반갑습니다.</b>&nbsp;&nbsp;&nbsp; 
+							</c:if>
 							<span class="upper_options"
 								onclick='location.href="${cpath}/business/membership/businessAccountInfo/"'>
 								<i class="far fa-user"></i>&nbsp;개인정보수정
@@ -37,7 +39,7 @@
 						</a>
 						<div id="menulist" class="menulist">
 							<c:choose>
-								<c:when test="${InformationList != null }">
+								<c:when test="${InformationList != null && selectEST.brandnaming != '' && not empty selectEST.brandnaming}">
 									<c:forEach items="${InformationList }" var="list">
 										<div
 											onclick="location.href='${cpath}/business/selectEST/${list.estid }/'">${list.brandnaming }</div>
