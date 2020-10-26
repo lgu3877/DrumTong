@@ -23,7 +23,7 @@ public interface BInformationDAO {
 	List<BInformationVO> selectInformationList(String bpersonid);
 
 	// 매장 이름 출력
-	String selectEst(String estid);
+	BInformationVO selectEst(String estid);
 
 
 }

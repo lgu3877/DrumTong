@@ -50,7 +50,7 @@ public class BusinessMembershipService {
 			BInformationVO selectEST = (BInformationVO)Session.getAttribute("selectEST");
 			if(InformationList != null && InformationList.size() != 0) {
 				if(selectEST == null) {
-					selectEST = InformationList.get(0);
+					selectEST = bInformationDAO.selectEst(InformationList.get(0).getEstid());
 					Session.setAttribute("selectEST", selectEST);
 				}
 			}
