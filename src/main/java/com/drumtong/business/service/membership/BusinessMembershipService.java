@@ -214,9 +214,15 @@ public class BusinessMembershipService {
 		case "emailID":
 			User = bPrivateDataDAO.pwFindEmailID(bprivatedatavo);
 			break;
+		case "AccountInfo":
+			User = bPrivateDataDAO.selectbPrivateData(bprivatedatavo.getBpersonid());
+			break;
 		}
 		mav.setViewName(User == null ? "business/membership/businessAccountFind" : "business/membership/businessPWFind");
 		mav.addObject("User", User);
+		if(option.equals("AccountInfo")) {
+			mav.addObject("AccountPage", "AccountPage");
+		}
 		return mav;		
 	}
 	
