@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import com.drumtong.business.dao.BPrivateDataDAO;
 import com.drumtong.business.vo.BPrivateDataVO;
+import com.drumtong.security.Encrypt;
 import com.drumtong.security.Login;
 
 @Service
@@ -143,5 +144,15 @@ public class RestBusinessMembershipService {
 		
 		
 		return RestUpdateResult;
+	}
+
+	// 비밀번호 수정[영경]
+	public String pwFind(BPrivateDataVO bPrivateDataVO) {
+		bPrivateDataVO.setId(bPrivateDataDAO.selectID(bPrivateDataVO.getBpersonid()));
+		String id = bPrivateDataVO.getId();
+		String pw = bPrivateDataVO.getPw();
+		bPrivateDataVO.setPw(Encrypt.SecurePassword(id, pw));
+		int updatePwResult = bPrivateDataDAO.updatePW(bPrivateDataVO);
+		return updatePwResult == 1 ? "true" : "false";
 	}
 }
