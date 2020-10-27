@@ -3,11 +3,13 @@
 
 <div class="inner_login_btn"
 	style="position: absolute; z-index: 1; margin: 175px auto; width: 80%;">
-	<button
-		style="outline: none; border: none; width: 210px; height: 70px; color: white; background-color: #1da1f2; border-radius: 5px; font-size: 17pt;">로그인하기</button>
+	<button onclick="location.href='/drumtong/business/${empty bLogin ? 'membership/businessLogin/' : 'mainmanagement/businessShopManagement/'}'"
+		style="display:${empty bLogin ? '': ((not empty selectEST && selectEST !='' && selectEST.status=='SUCCESS') ? 'none' : '')};outline: none; border: none; width: 210px; height: 70px; color: white; background-color: #1da1f2; border-radius: 5px; font-size: 17pt;">
+		${empty bLogin ? '로그인하기' : ((not empty selectEST && selectEST !='' && selectEST.status=='SUCCESS') ? '' : '매장 등록')}
+	</button>
 </div>
 
-<div class="m_preview_con" style="filter:${empty bLogin ? 'blur(5px)':'blur(0px)'}"> 
+<div class="m_preview_con" style="filter:${empty bLogin ? 'blur(5px)': ((not empty selectEST && selectEST !='' && selectEST.status=='SUCCESS') ? 'blur(0px)' : 'blur(5px)')}"> 
 	<div class="m_preivew_left">
 		<div class="upper">
 			<div style="text-align: center;">

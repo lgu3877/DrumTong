@@ -58,5 +58,8 @@ public interface BPrivateDataDAO {
 
 	// (REST) Rest Update [건욱]
 	int restUpdate(HashMap<String, String> ob);
+
+	// (REST) 비밀번호 수정[영경]
+	int updatePW(BPrivateDataVO bPrivateDataVO);
 	
 }

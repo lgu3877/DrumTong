@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.drumtong.business.service.membership.RestBusinessMembershipService;
-import com.drumtong.business.vo.BManagementVO;
 import com.drumtong.business.vo.BPrivateDataVO;
 import com.drumtong.security.Login;
 
@@ -54,9 +52,17 @@ public class RestBusinessMembershipController {
 	// 계정이 일치한다면 이메일 전송[영경]
 	@RequestMapping("businessAccountFind/rest/userCheck/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String emailConfirm(BPrivateDataVO bprivatedatavo) {
-		return svc.emailConfirm(bprivatedatavo);
+	public String emailConfirm(HttpServletRequest req, @RequestBody BPrivateDataVO bprivatedatavo) {
+		return svc.emailConfirm(req, bprivatedatavo);
 	}
+	
+	// 비밀번호 수정[영경]
+	@RequestMapping("businessPWFind/rest/pwChange/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String pwFind(@RequestBody BPrivateDataVO bPrivateDataVO) {
+		return svc.pwFind(bPrivateDataVO);
+	}
+	
 	
 	
 	// ========================= 대분류 [사업자 계정관리] ================================
