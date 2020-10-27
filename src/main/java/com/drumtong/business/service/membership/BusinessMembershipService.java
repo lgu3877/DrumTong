@@ -90,7 +90,6 @@ public class BusinessMembershipService {
 		Session.setAttribute("bLogout", "bLogout");
 		Session.removeAttribute("selectEST");
 		Session.removeAttribute("InformationList");
-		Session.removeAttribute("selectEstName");
 		return mav;
 	}
 
@@ -197,6 +196,12 @@ public class BusinessMembershipService {
 			case "CRNPhone":
 				UserID = bPrivateDataDAO.idFindCRNPhone(bprivatedatavo);
 				break;
+		}
+		if("".equals(UserID) || UserID != null) {
+			UserID = UserID.substring(0,UserID.length() - 3) + "***";
+			UserID = "회원님의 아이디는 [ " + UserID + " ]입니다.";
+		} else {
+			UserID = "회원정보를 찾을 수 없습니다.";
 		}
 		mav.addObject("result", UserID);
 		return mav;		
