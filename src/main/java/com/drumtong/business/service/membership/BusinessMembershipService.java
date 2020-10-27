@@ -111,7 +111,7 @@ public class BusinessMembershipService {
 	// 비즈니스 회원가입 (POST) [건욱]
 	public ModelAndView signUp(BPrivateDataVO bPrivateDataVO) {
 
-		ModelAndView mav = new ModelAndView("redirect:/");
+		ModelAndView mav = new ModelAndView("business/membership/businessFinishSignUp");
 		
 		// SerialUUID 생성
 		String BPersonID =  SerialUUID.getSerialUUID("BBusiness", "BPersonID");
@@ -126,7 +126,19 @@ public class BusinessMembershipService {
 		// 사업자 개인정보 VO에 BPersonID UUID 넣어준다.
 		bPrivateDataVO.setBpersonid(BPersonID);
 		
-		
+		System.out.println("====================");
+		System.out.println("BPersonID : " + BPersonID);
+		System.out.println("bPrivateVO : " + bPrivateDataVO.getId());
+		System.out.println("bPrivateVO : " + bPrivateDataVO.getPw());
+		System.out.println("bPrivateVO : " + bPrivateDataVO.getName());
+		System.out.println("bPrivateVO : " + bPrivateDataVO.getBirth());
+		System.out.println("bPrivateVO : " + bPrivateDataVO.getGenderboolean());
+		System.out.println("bPrivateVO : " + bPrivateDataVO.getPhonenum());
+		System.out.println("bPrivateVO : " + bPrivateDataVO.getMainaddress());
+		System.out.println("bPrivateVO : " + bPrivateDataVO.getDetailaddress());
+		System.out.println("bPrivateVO : " + bPrivateDataVO.getEmail());
+		System.out.println("bPrivateVO : " + bPrivateDataVO.getDelegatecrn());
+		System.out.println("====================");
 		
 		// 1. BBusiness 신규 데이터 생성	( 사업자 테이블 )
 		

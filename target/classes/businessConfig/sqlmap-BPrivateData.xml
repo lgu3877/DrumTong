@@ -13,7 +13,7 @@
 			VALUES
 			(#{bpersonid}, #{id}, #{pw}, #{name}, #{birth},
 			 #{genderboolean}, #{phonenum}, #{mainaddress}, #{detailaddress},
-			 #{mainaddress}, #{detailaddress},#{email}, #{delegatecrn} )
+			 #{email}, #{delegatecrn} )
 	</insert>
 	
 <!-- 	아이디,비밀번호와 일치하는 로그인 객체 반환 -->
