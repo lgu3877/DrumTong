@@ -30,12 +30,6 @@ public class RestBusinessMembershipService {
 
 	@Autowired BPrivateDataDAO bPrivateDataDAO;		// 비즈니스 개인정보 테이블
 	
-	
-	// 아이디 중복 검사
-	public int useridDupl(String id) {
-		return bPrivateDataDAO.useridDupl(id);
-	}
-
 	// 비즈니스 로그인 [영경]
 	public String login(HttpServletRequest req, HttpServletResponse resp, HashMap<String, String> param) {
 		BPrivateDataVO bPrivateDataVO = new BPrivateDataVO();
@@ -140,4 +134,10 @@ public class RestBusinessMembershipService {
 		
 		return RestUpdateResult;
 	}
+	
+	// 아이디 중복 검사
+	public int useridDupl(String id) {
+			return bPrivateDataDAO.useridDupl(id);
+	}
+	
 }

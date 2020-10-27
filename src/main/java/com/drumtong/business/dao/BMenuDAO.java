@@ -14,10 +14,16 @@ public interface BMenuDAO {
 	int insertConstract(BMenuVO bMenuVO);
 
 
+	
+	
+//======================================= REST ================================================
+	
+	//매장 메뉴를 비동기식으로 새 데이터를 입력해주는 메서드입니다.
+	int insertBMenu(BMenuVO bMenuVO);
+	
 	// 매장 메뉴를 비둥기식으로 수정해주는 메서드입니다.
 	int updateBMenu(BMenuVO bMenuVO);
 
 	// 매장 메뉴를 비동기식으로 삭제해주는 메서드입니다.
 	int deleteBMenu(BMenuVO bMenuVO);
-
 }

@@ -25,15 +25,15 @@ public interface BManagementDAO {
 	int updateIntroduction(BManagementVO bManagementVO);
 
 
-	// 매장 관리에 배달유무를 비둥기식으로 수정해주는 메서드입니다.
+	// 매장 관리에 배달유무를 비둥기식으로 수정해주는 메서드입니다.	[REST]
 	int updateDeliveryBoolean(BManagementVO bManagementVO);
 
 
-	// 매장 관리에 퀵여부를 비둥기식으로 수정해주는 메서드입니다.
+	// 매장 관리에 퀵여부를 비둥기식으로 수정해주는 메서드입니다.	[REST]
 	int updateQuickBoolean(BManagementVO bManagementVO);
 	
 	
-	// 매장 관리에 기본 카테고리를 비둥기식으로 수정해주는 메서드입니다.
+	// 매장 관리에 기본 카테고리를 비둥기식으로 수정해주는 메서드입니다.	[REST]
 	int updateDefaultCategory(BManagementVO bManagementVO);
 
 }

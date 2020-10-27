@@ -1,21 +1,35 @@
 package com.drumtong.business.service.mainmanagement;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.drumtong.business.dao.BDeliveryAreaDAO;
 import com.drumtong.business.dao.BManagementDAO;
 import com.drumtong.business.dao.BMenuDAO;
+import com.drumtong.business.dao.BScheduleDaysDAO;
+import com.drumtong.business.dao.BScheduleTimeDAO;
 import com.drumtong.business.vo.BDeliveryAreaVO;
 import com.drumtong.business.vo.BManagementVO;
 import com.drumtong.business.vo.BMenuVO;
+import com.drumtong.business.vo.BScheduleDaysVO;
+import com.drumtong.business.vo.BScheduleTimeVO;
 
 @Service
 public class RestBusinessMainManagementService {
 	
+	
+	// 매장관리 테이블
 	@Autowired BManagementDAO bManagementDAO;
 	@Autowired BMenuDAO	bMenuDAO;
 	@Autowired BDeliveryAreaDAO bDeliveryAreaDAO;
+	
+	
+	// 일정관리 테이블
+	@Autowired BScheduleTimeDAO bScheduleTimeDAO;
+	@Autowired BScheduleDaysDAO bScheduleDaysDAO;
+	
 	
 	// ========================= 대분류 [매장관리] ================================
 	
@@ -66,11 +80,17 @@ public class RestBusinessMainManagementService {
 	
 	// ===== 중분류 [BManagement] 테이블 ====
 
+	// 0. 메장 메뉴를 비동기식으로 새로이 입력해주는 메서드입니다.
+	public int insertBMenu(BMenuVO bMenuVO) {
+		int RestInsertBMenuReuslt = bMenuDAO.insertBMenu(bMenuVO);
+		return RestInsertBMenuReuslt;
+	}
+	
 	
 	// 1. 매장 메뉴를 비둥기식으로 수정해주는 메서드입니다.
 	public int updateBMenu(BMenuVO bMenuVO) {
 		int RestUpdateBMenuReuslt = bMenuDAO.updateBMenu(bMenuVO);
-		
+		 
 		return RestUpdateBMenuReuslt;
 	}
 
@@ -96,5 +116,78 @@ public class RestBusinessMainManagementService {
 		
 		return RestUpdateBDeliveryAreaReuslt;
 	}
+
+
+	// ========================= 대분류 [일정관리] ================================
+	
+	
+	
+	// ===== 중분류 [BSCHEDULETIME] 테이블 ==== { 매장 시간 관리 }
+	
+	// 0. 매장 시간관리를 비동기식으로 수정해주는 메서드입니다.
+	public int updateBScheduleTime(BScheduleTimeVO bScheduleTimeVO) {
+		
+		// 이 메서드는 기존에 온라인계약할 당시에 사용하는 메서드와 똑같이 사용되기 때문에 재사용합니다.
+		int RestUpdateBScheduleTimeReuslt = bScheduleTimeDAO.updateConstract(bScheduleTimeVO);
+
+		return RestUpdateBScheduleTimeReuslt;
+	}	
+	
+	
+	
+	// ===== 중분류 [BSCHEDULEDAYS] 테이블 ==== { 매장 일정 관리 }
+	
+	
+	/* 
+	   *  ※※※※※※※※※ [ 해당 메서드를 사용할 때 주의사항 ] ※※※※※※※※※※※
+	 * 포함되는 메서드 @updateBScheduleDays / @insertBScheduleDays
+	 * 
+	 * 반드시 규격에 맞는 형식으로 데이터를 입력할 수 있도록 도와주세요.
+	 * 
+	 *  ex) javascript
+	 *  
+	 *  필드명 반드시 소문자로 부탁드립니다.
+	 *  
+	 *  ob = {
+	 *  	estid 		: 매장 estid명 ,
+	 *  	wherefield  : 삭제 혹은 추가하는 필드명 ,  ex) firstweek , secondweek 등등
+	 *  	changeparam : 삭제 혹은 추가하는 데이터 ,  ex) 토/, 일/, 월/    ※여기서 주의해야할 포인트는 반드시 '토' + '/' 를 붙인 상태에서 데이터값을 보내줘야함.
+	 *  }
+	 *  
+	 * 
+	 */
+	// 1. 매장 일정관리를 비동기식으로 삭제해주는 메서드입니다.
+	public int deleteBScheduleDays(HashMap<String,String> obj) {
+		
+		int RestDeleteBScheduleDaysReuslt = bScheduleDaysDAO.deleteBScheduleDays(obj);
+		
+		return RestDeleteBScheduleDaysReuslt;
+	
+	}
+
+
+	// 2. 매장 일정관리를 비동기식으로 추가해주는 메서드입니다.
+	public int insertBScheduleDays(HashMap<String, String> obj) {
+
+		int RestInsertBScheduleDaysReuslt = bScheduleDaysDAO.insertBScheduleDays(obj);
+		
+		return RestInsertBScheduleDaysReuslt;
+	}
+
+
+	// 3. 매장 일정관리에 공휴일 휴일 여부를 수정해주는 메서드입니다. 필드  { 휴일 유무  }
+	public int updateHoliday(BScheduleDaysVO bScheduleDaysVO) {
+		
+		int RestUpdateHolidayReuslt = bScheduleDaysDAO.updateHoliday(bScheduleDaysVO);
+		
+		return RestUpdateHolidayReuslt;
+	}
+
+
+
+	
+	
+	
+	
 
 }
