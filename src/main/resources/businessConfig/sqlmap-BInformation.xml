@@ -52,7 +52,7 @@
 			WHERE B.ESTID=A.ESTID
 	</select>
 	
-	<select id="selectEst" parameterType="String" resultType="String">
+	<select id="selectEst" parameterType="String" resultType="BInformationVO">
 		SELECT * FROM BINFORMATION WHERE ESTID=#{estid}
 	</select>
 </mapper>

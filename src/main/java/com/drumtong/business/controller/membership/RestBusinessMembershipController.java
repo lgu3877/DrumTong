@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.drumtong.business.service.membership.RestBusinessMembershipService;
-import com.drumtong.business.vo.BManagementVO;
 import com.drumtong.business.vo.BPrivateDataVO;
 import com.drumtong.security.Login;
 
@@ -56,6 +55,14 @@ public class RestBusinessMembershipController {
 	public String emailConfirm(HttpServletRequest req, @RequestBody BPrivateDataVO bprivatedatavo) {
 		return svc.emailConfirm(req, bprivatedatavo);
 	}
+	
+	// 비밀번호 수정[영경]
+	@RequestMapping("businessPWFind/rest/pwChange/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String pwFind(@RequestBody BPrivateDataVO bPrivateDataVO) {
+		return svc.pwFind(bPrivateDataVO);
+	}
+	
 	
 	
 	// ========================= 대분류 [사업자 계정관리] ================================

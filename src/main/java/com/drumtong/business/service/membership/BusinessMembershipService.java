@@ -50,7 +50,7 @@ public class BusinessMembershipService {
 			BInformationVO selectEST = (BInformationVO)Session.getAttribute("selectEST");
 			if(InformationList != null && InformationList.size() != 0) {
 				if(selectEST == null) {
-					selectEST = InformationList.get(0);
+					selectEST = bInformationDAO.selectEst(InformationList.get(0).getEstid());
 					Session.setAttribute("selectEST", selectEST);
 				}
 			}
@@ -216,6 +216,10 @@ public class BusinessMembershipService {
 		if(Delegatecrn != null)
 			bprivatedatavo.setDelegatecrn(Delegatecrn.substring(0,3) + "-" + Delegatecrn.substring(3,5) + "-" + Delegatecrn.substring(5));
 		return bprivatedatavo;
+	}
+
+	public ModelAndView pwChange() {
+		return new ModelAndView("redirect:/business/");
 	}
 	
 	
