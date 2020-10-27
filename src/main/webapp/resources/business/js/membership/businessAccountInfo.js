@@ -7,19 +7,20 @@
 		origininput[i].setAttribute("onclick", "changeInput(this)");
 	}
 
-	document.querySelector('.newinput').addEventListener('click', e => {
-		console.log('실행 event button');
-	});
+//	document.querySelector('.newinput').addEventListener('click', e => {
+//		console.log('실행 event button');
+//		});
 	
 	// 수정 버튼 클릭시
 	// 입력 input 태그가 활성화됨
 	// 입력 및 취소 버튼 활성화됨
 	function changeInput(obj) {
-		console.log('실행 changeInput');
-		console.log("obj : " + obj);
+		console.log(obj.parentNode.parentNode);
+		
 		var inputdiv = obj.parentNode;
 		inputdiv.children[0].readOnly = false;
-		inputdiv.removeChild(inputdiv.children[1]);
+		inputdiv.children[0].value = '';
+		inputdiv.removeChild(inputdiv.children[2]);
 		
 		var newdiv = document.createElement('div');
 		newdiv.setAttribute("class", "newdiv");
@@ -29,8 +30,6 @@
 		submit.setAttribute("value", "입력");
 		submit.setAttribute("class", "newinput");
 		submit.setAttribute("onclick", "inputData(this)");
-
-		
 		
 		newdiv.appendChild(submit);
 
@@ -38,6 +37,7 @@
 		cancle.setAttribute("type", "button");
 		cancle.setAttribute("value", "취소");
 		cancle.setAttribute("class", "newinput");
+		cancle.setAttribute("name", inputdiv.children[1].value);
 		cancle.setAttribute("onclick", "cancle(this)");
 		newdiv.appendChild(cancle);
 		
@@ -46,11 +46,20 @@
 		case 'genderboolean':
 			genderbooleanCreate(inputdiv, inputdiv.children[0].id);
 			break;
-		case 'phonenum':
-			phonenumCreate(inputdiv, inputdiv.children[0].id);
+		case 'phone':
+			phonenumCreate(inputdiv);
 			break;
 		case 'address':
 			addressCreate(inputdiv, inputdiv.children[0].id);
+			break;
+		case 'inputemail':
+			emailCreate(inputdiv);
+			break;
+		case 'inputcrn':
+			delegatecrnCreate(inputdiv);
+		case 'pw':
+			submit.setAttribute('type', 'submit');
+			submit.setAttribute('onclick', '');
 			break;
 		default:
 			break;
@@ -111,8 +120,9 @@
 	// input[type=text] 태그 readonly 상태로 변환
 	function cancle(obj) {
 		var inputdiv = obj.parentNode.parentNode;
-		inputdiv.removeChild(inputdiv.children[1]);
 		inputdiv.children[0].readOnly = true;
+		inputdiv.children[0].value = inputdiv.children[2].children[1].name;		
+		inputdiv.removeChild(inputdiv.children[2]);
 		
 		var origininput = document.createElement('input');
 		origininput.setAttribute("type", "button");
@@ -124,12 +134,21 @@
 		case 'genderboolean':
 			specialcancle(inputdiv);
 			break; 
-		case 'phonenum':
+		case 'phone':
 			specialcancle(inputdiv);
 			break;
 		case 'address':
 			specialcancle(inputdiv);
 			break;
+		case 'inputemail':
+			specialcancle(inputdiv);
+			break;
+		case 'inputcrn':
+			specialcancle(inputdiv);
+			break
+		case 'pw':
+			inputdiv.children[0].value = '';
+			break
 		default:
 			break;
 		}
@@ -161,7 +180,7 @@
 	}
 	
 	// 휴대폰 번호 입력란 활성화
-	function phonenumCreate(inputdiv, id) {
+	function phonenumCreate(inputdiv) {
 		inputdiv.children[0].style.display = 'none';
 		
 		var div = document.createElement('div');
@@ -176,7 +195,9 @@
 		
 		var input2 = document.createElement('input');
 		input2.setAttribute("type", "button");
+		input2.setAttribute("id", "checkphone");
 		input2.setAttribute("value", "인증하기");
+		input2.setAttribute("onclick", "phoneCheck()");
 		input2.setAttribute("class", "certification");
 		
 		var ul = document.createElement('ul');
@@ -195,6 +216,62 @@
 		
 		inputdiv.appendChild(div);
 	}
+	
+	
+	// 이메일 입력란 활성화
+	function emailCreate(inputdiv) {
+		inputdiv.children[0].style.display = 'none';
+		
+		var div = document.createElement('div');
+		div.setAttribute("class", "input");
+		
+		var input1 = document.createElement('input');
+		input1.setAttribute("type", "text");
+		input1.setAttribute("name", "email");
+		input1.setAttribute("id", "email");
+		input1.setAttribute("placeholder", "이메일 주소를 입력하세요");
+		input1.setAttribute("class", "email");
+		
+		var input2 = document.createElement('input');
+		input2.setAttribute("type", "button");
+		input2.setAttribute("id", "checkemail");
+		input2.setAttribute("value", "인증하기");
+		input2.setAttribute("onclick", "emailCheck()");
+		input2.setAttribute("class", "certification2");
+		
+		div.appendChild(input1);
+		div.appendChild(input2);
+				
+		inputdiv.appendChild(div);
+	}
+	
+	// 사업자번호 입력 활성화
+	function delegatecrnCreate(inputdiv) {
+		inputdiv.children[0].style.display = 'none';
+		
+		var div = document.createElement('div');
+		div.setAttribute("class", "input");
+		
+		var input1 = document.createElement('input');
+		input1.setAttribute("type", "text");
+		input1.setAttribute("name", "delegatecrn");
+		input1.setAttribute("id", "delegatecrn");
+		input1.setAttribute("placeholder", "-를 포함하여 입력하세요");
+		input1.setAttribute("class", "delegatecrn");
+		
+		var input2 = document.createElement('input');
+		input2.setAttribute("type", "button");
+		input2.setAttribute("id", "checkemail");
+		input2.setAttribute("value", "인증하기");
+		input2.setAttribute("onclick", "delegatecrnCheck()");
+		input2.setAttribute("class", "certification2");
+		
+		div.appendChild(input1);
+		div.appendChild(input2);
+				
+		inputdiv.appendChild(div);
+	}
+	
 	
 	// 주소 입력란 활성화
 	function addressCreate(inputdiv, id) {
@@ -231,11 +308,13 @@
 		inputdiv.appendChild(div);
 	}
 	
+
 	// 성별, 주소, 휴대폰번호 입력란 -> 입력란이 다른 것들과 다름
 	// 따라서, 취소 버튼도 다르게 생성함
 	function specialcancle(inputdiv) {
 		inputdiv.children[0].style.display = '';
-		inputdiv.removeChild(inputdiv.children[1]);
+		inputdiv.children[0].value = inputdiv.children[1].value;
+		inputdiv.removeChild(inputdiv.children[2]);
 	}
 	
 	// 주소 찾기
@@ -266,3 +345,97 @@
                     }
                 }).open();
     }
+
+
+
+/*// 휴대폰 인증
+  function phoneCheck() {
+        var regExp = /^\d{3}-\d{3,4}-\d{4}$/;
+
+        const phonenum = document.getElementById('phonenum').value;
+        const phonemsg = document.getElementById('phonemsg');
+
+        if (phonenum === '') {
+          phonemsg.innerHTML = '전화번호를 입력해주세요';
+          phonemsg.style.color = 'red';
+        }
+
+        if (regExp.test(phonenum) === false) {
+          phonemsg.innerHTML = '전화번호는 - 을 포함해서 입력해주세요.';
+          phonemsg.style.color = 'red';
+          return false;
+        } 
+        else if(regExp.test(phonenum) === true ) {
+          phonemsg.innerHTML = '전화번호 인증 완료!';
+          phonemsg.style.color = 'blue';
+          document.getElementById('phonenum').readOnly = true;
+          document.getElementById('phonenum').style.backgroundColor = 'grey';
+          return true;
+        }
+      }*/
+
+  // 휴대폰 인증
+  function phoneCheck() {
+        var regExp = /^\d{3}-\d{3,4}-\d{4}$/;
+
+        const phonenum = document.getElementById('phonenum').value;
+
+        if (phonenum === '') {
+			alert('전화번호를 입력부탁드립니다')
+        }
+
+        else if (regExp.test(phonenum) === false) {
+			alert('000-0000-0000 양식으로 입력바랍니다')
+          return false;
+        } 
+        else if(regExp.test(phonenum) === true ) {
+		  alert('인증 완료!');
+          document.getElementById('phonenum').readOnly = true;
+          document.getElementById('phonenum').style.backgroundColor = 'grey';
+          return true;
+        }
+      }
+
+  // 이메일 인증
+  function emailCheck() {
+        var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+        const email = document.getElementById('email').value;
+
+        if (email === '') {
+			alert('이메일을 입력부탁드립니다')
+        }
+
+        else if (regExp.test(email) === false) {
+			alert('-----@------.com 양식으로 입력바랍니다')
+          return false;
+        } 
+        else if(regExp.test(email) === true ) {
+		  alert('인증 완료!');
+          document.getElementById('email').readOnly = true;
+          document.getElementById('email').style.backgroundColor = 'grey';
+          return true;
+        }
+      }
+
+  // 사업자번호 인증
+  function delegatecrnCheck() {
+        var regExp = /^\d{3}-\d{3,4}-\d{4}$/;
+
+        const delegatecrn = document.getElementById('delegatecrn').value;
+
+        if (delegatecrn === '') {
+			alert('사업자번호를 입력부탁드립니다')
+        }
+
+        else if (regExp.test(delegatecrn) === false) {
+			alert('000-00-00000 양식으로 입력바랍니다')
+          return false;
+        } 
+        else if(regExp.test(delegatecrn) === true ) {
+		  alert('인증 완료!');
+          document.getElementById('delegatecrn').readOnly = true;
+          document.getElementById('delegatecrn').style.backgroundColor = 'grey';
+          return true;
+        }
+      }
