@@ -217,6 +217,10 @@ public class BusinessMembershipService {
 			bprivatedatavo.setDelegatecrn(Delegatecrn.substring(0,3) + "-" + Delegatecrn.substring(3,5) + "-" + Delegatecrn.substring(5));
 		return bprivatedatavo;
 	}
+
+	public ModelAndView pwChange() {
+		return new ModelAndView("redirect:/business/");
+	}
 	
 	
 }
