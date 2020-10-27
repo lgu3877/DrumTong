@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.drumtong.business.dao.BInformationDAO;
 import com.drumtong.business.service.main.BusinessMainService;
 
 @Controller
@@ -16,15 +17,16 @@ import com.drumtong.business.service.main.BusinessMainService;
 public class BusinessMainController {
 	
 	@Autowired BusinessMainService svc;
+	@Autowired BInformationDAO binformationdao;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView home(HttpServletRequest req) {
-		return svc.main(req);
+	public ModelAndView home() {
+		return svc.main();
 	}
 	
 	@RequestMapping(value = "selectEST/{selectEST}/", method = RequestMethod.GET)
 	public ModelAndView selectEstMain(HttpServletRequest req, @PathVariable("selectEST")String selectEST) {
-		req.getSession().setAttribute("selectEST", selectEST);
+		req.getSession().setAttribute("selectEST", binformationdao.selectEst(selectEST));
 		return new ModelAndView("redirect:/business/");
 	}
 

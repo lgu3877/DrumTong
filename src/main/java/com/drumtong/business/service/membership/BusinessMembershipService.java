@@ -41,35 +41,27 @@ public class BusinessMembershipService {
 		
 		
 		boolean LoginResult = Login.login(Session, resp, bPrivateDatavo, storeid);		// 로그인 성공여부
-		System.out.println("AddressToMove" + AddressToMove);
 
 		BPrivateDataVO User = ((BPrivateDataVO)Session.getAttribute("bLogin"));
 		// 사업장 정보 들고오기
 		if(User != null) {
 			List<BInformationVO> InformationList = bInformationDAO.selectInformationList(User.getBpersonid());
 			
-			String selectEST = (String)Session.getAttribute("selectEST");
-			if(InformationList != null) {
+			BInformationVO selectEST = (BInformationVO)Session.getAttribute("selectEST");
+			if(InformationList != null && InformationList.size() != 0) {
 				if(selectEST == null) {
-					selectEST = InformationList.get(0).getEstid();
+					selectEST = bInformationDAO.selectEst(InformationList.get(0).getEstid());
 					Session.setAttribute("selectEST", selectEST);
-					System.out.println("selectEST : " + selectEST);
 				}
-				Session.setAttribute("selectEstName", bInformationDAO.selectName(selectEST));
 			}
 			
 			for(int i = 0; i < InformationList.size(); i++) {
 				String naming = InformationList.get(i).getBrandnaming();
-				System.out.println("<바꾸기전>naming : " + naming);
 				if(naming.length() > 4) {
-					System.out.println("동작 테스트");
 					BInformationVO ChangeData = InformationList.get(i);
 					naming = naming.substring(0, 4) + "..";
 					ChangeData.setBrandnaming(naming);
-					System.out.println("<바꾼 후>naming : " + naming);
 					InformationList.set(i, ChangeData);
-					System.out.println("<리스트 확인>naming :" + InformationList.get(i).getBrandnaming());
-					
 				}
 			}
 			Session.setAttribute("InformationList", InformationList);
@@ -183,20 +175,17 @@ public class BusinessMembershipService {
 		return mav;
 	}
 	
-	// 사업자 ID 찾기 결과 페이지로 이동 (GET) [영경]
+	// 사업자 ID 찾기 결과 페이지로 이동 (POST) [영경]
 	public ModelAndView idFind(BPrivateDataVO bprivatedatavo, String option, int[] birth) {
 		ModelAndView mav = new ModelAndView("business/membership/businessIDFind");
 		String UserID = null;
+		bprivatedatavo = updateData(bprivatedatavo);
 		switch(option) {
 			case "NamePhoneNum":
-				String num = bprivatedatavo.getPhonenum();
-				bprivatedatavo.setPhonenum(num.substring(0,3) + "-" + num.substring(3,7) + "-" + num.substring(7));
-				System.out.println(bprivatedatavo.getPhonenum());
 				UserID = bPrivateDataDAO.idFindNamePhoneNum(bprivatedatavo);
 				break;
 			case "NameBirth":
 				bprivatedatavo.setBirth(birth[0] + "-" + (birth[1] < 10 ? "0" : "") + birth[1] + "-" + (birth[2] < 10 ? "0" : "") + birth[2]);
-				System.out.println(bprivatedatavo.getBirth());
 				UserID = bPrivateDataDAO.idFindNameBirth(bprivatedatavo);
 				break;
 			case "NameEmail":
@@ -213,10 +202,10 @@ public class BusinessMembershipService {
 		return mav;		
 	}
 
-
-	// 사업자 PW 찾기 이동 (GET) [영경]
+	// 사업자 PW 찾기 이동 (POST) [영경]
 	public ModelAndView pwFind(BPrivateDataVO bprivatedatavo, String option) {
 		ModelAndView mav = new ModelAndView();
+		bprivatedatavo = updateData(bprivatedatavo);
 		BPrivateDataVO User = null;
 		switch(option) {
 		case "phoneNameID":
@@ -231,6 +220,19 @@ public class BusinessMembershipService {
 		return mav;		
 	}
 	
+	private BPrivateDataVO updateData(BPrivateDataVO bprivatedatavo) {
+		String Phonenum = bprivatedatavo.getPhonenum();
+		String Delegatecrn = bprivatedatavo.getDelegatecrn();
+		if(Phonenum != null)
+			bprivatedatavo.setPhonenum(Phonenum.substring(0,3) + "-" + Phonenum.substring(3,7) + "-" + Phonenum.substring(7));
+		if(Delegatecrn != null)
+			bprivatedatavo.setDelegatecrn(Delegatecrn.substring(0,3) + "-" + Delegatecrn.substring(3,5) + "-" + Delegatecrn.substring(5));
+		return bprivatedatavo;
+	}
+
+	public ModelAndView pwChange() {
+		return new ModelAndView("redirect:/business/");
+	}
 	
 	
 }

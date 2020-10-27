@@ -24,6 +24,43 @@
 	<link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
   	
+  	<!-- Axios -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  	<!-- 영경 스크립트 -->
+  	<script>
+		function pwChange(bpersonid){
+			password = document.getElementsByName('password')[0].value;
+			confrimPassword = document.getElementsByName('confrimPassword')[0].value;
+			console.log(password);
+			console.log(confrimPassword);
+		      var axPost = async () => {
+		        ob={
+		        	'bpersonid' : bpersonid,
+		            'pw':password,
+		        };
+		        console.log(ob);
+		        await axios.post('/drumtong/business/membership/businessPWFind/rest/pwChange/', ob)
+		
+		        .then( (response) => {
+		          if(response.data === true){
+					alert('비밀번호가 성공적으로 변경되었습니다.');
+					return true;
+		          } else{
+		        	alert('비밀번호 변경 실패');
+		        	return false;
+		          }
+		        });
+		      };
+			
+			if(password === confrimPassword){
+				// 비밀번호 변경
+      			return axPost();
+			} else{
+				alert('비밀번호가 일치하지 않습니다.');
+			}
+			return false;
+		}  	
+  	</script>
 </head>
 
 
@@ -34,7 +71,7 @@
 
 	<section>
 		<div class="pw_reset_con">
-			<form class="pw_reset_view" method="POST">
+			<form class="pw_reset_view" method="POST" action="/drumtong/business/membership/businessPwChange/" onsubmit="return pwChange('${User.bpersonid}');">
 				<div class="pw_reset_title title">비밀번호 재설정</div>
 				<div class="pw_reset_content">
 					<p>기존의 비밀번호를 변경합니다. 보안을 위해 최소 10자리에서 20자리까지의 영문, 숫자의 조합으로
@@ -50,7 +87,7 @@
 							<input type="password" name="confrimPassword"
 								placeholder="정확한 입력을 위해 다시 한 번 입력해주세요." maxlength="20" required />
 						</div>
-						<input type="submit" value="변경하기" />
+						<input type="submit" value="변경하기"/>
 					</div>
 				</div>
 			</form>

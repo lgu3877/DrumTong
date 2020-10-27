@@ -112,6 +112,7 @@
 			<exclude-mapping path="/business/membership/businessIDFind/"/>
 			<exclude-mapping path="/business/membership/businessPWFind/"/>
 			<exclude-mapping path="/business/mainCover/"/>
+			<exclude-mapping path="/business/membership/businessPwChange/"/>
 			<exclude-mapping path="/business/selectEST/*/"/>
 			
 			
