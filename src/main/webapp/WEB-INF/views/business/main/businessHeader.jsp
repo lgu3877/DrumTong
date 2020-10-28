@@ -57,7 +57,7 @@
 				</div>
 			</div>
 			<div class="h_right_lower">
-				<div>메뉴 1</div>
+				<div onclick='location.href="${cpath}/business/contract/businessContract/"'>온라인계약</div>
 				<div>메뉴 2</div>
 				<div>메뉴 3</div>
 				<div>메뉴 4</div>
