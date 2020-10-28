@@ -5,7 +5,7 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
 function loginSubmit(){
-    loginInputs = document.querySelectorAll('input.loginInput');
+    loginInputs = document.querySelectorAll('input.input_tag');
     redmarks = document.querySelectorAll('span.red-mark');
     cnt = 0;
     
@@ -39,7 +39,7 @@ function loginSubmit(){
 					document.getElementsByName('pw')[0].value ='';
 				}
 			})
-		}
+		};
 		axPost(document.getElementsByName('id')[0].value,document.getElementsByName('pw')[0].value, document.getElementsByName('storeid')[0].value);	
     }
 }
@@ -54,8 +54,7 @@ function loginSubmit(){
 		<div class="login_title">
 			<p>
 				로그인
-			</p>
-		</div>
+			</p>		</div>
 		<div class="login_input_con">
 			<div class="input_box">
 				<input class="input_tag" type="text" name="id" placeholder="아이디를 입력하세요." required="required">
@@ -115,27 +114,5 @@ function loginSubmit(){
 
 <!-- login regular syntax -->
 <script>
-function loginSubmit(){
-	var axPost = async (id, pw, storeid) => {
-		ob={
-				'id':id,
-				'pw':pw,
-				'storeid':storeid,
-				'type':'business',
-		};
-		await axios.post('/drumtong/business/membership/businessLogin/rest/loginCheck/', ob)
-		
-		.then( (response) => {
-			if(response.data === true){
-	        	document.getElementsByClassName('login_wrapper')[0].submit();				
-			} else{
-				alert('로그인에 실패하였습니다.');
-				document.getElementsByName('pw')[0].value ='';
-				
-			}
-		});
-	}
-	axPost(document.getElementsByName('id')[0].value,document.getElementsByName('pw')[0].value, '');	
-}
   document.getElementById('loginSubmit').addEventListener('click', function(){ loginSubmit();});
 </script>
