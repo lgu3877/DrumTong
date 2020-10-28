@@ -23,6 +23,7 @@ import com.drumtong.business.dao.BPrivateDataDAO;
 import com.drumtong.business.vo.BPrivateDataVO;
 import com.drumtong.security.Encrypt;
 import com.drumtong.security.Login;
+import com.drumtong.security.Mail;
 
 @Service
 public class RestBusinessMembershipService {
@@ -47,60 +48,13 @@ public class RestBusinessMembershipService {
 		BPrivateDataVO User = bprivatedatavo.getEmail() != null ?
 					bPrivateDataDAO.pwFindEmailID(bprivatedatavo)
 					:bPrivateDataDAO.pwFindPhoneNameID(bprivatedatavo);
-		// 인증번호 난수로 생성
-		int VerificationCode = ((int)(Math.random() * 1000000)) + 1;
 		if(User != null) {
 			// 이메일로 인증번호 전송하는 메서드
-			String message = "[DRUMTONG]인증번호는 '" + VerificationCode + "'입니다.";
-			sendMail(User.getEmail(), message);
-			// 정상적으로 입력했다면 인증번호 세션에 저장
-			return  VerificationCode + "";
-			
+			return Mail.mailSendTypeAuth(User.getEmail()) + "";
 		}
 		// 잘못된 입력일 땐 -1 반환
 		return "-1";
 	}
-
-	private void sendMail(String toEmail, String message) {
-		// 네이버[smtp.naver.com] | 구글[smtp.gmail.com]
-		String host = "smtp.naver.com";
-		
-		// 정보 담을 객체 생성
-		Properties props = System.getProperties();
-		
-		// SMTP 서버 정보 설정
-		props.put("mail.smtp.host", host);
-		props.put("mail.smtp.port", 465);	// SMTP 서비스 포트
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.ssl.enable", "true");	// ssl 방식으로 보내기
-		props.put("mail.smtp.ssl.trust", host);
-
-		Authenticator auth = new Authenticator() {
-			String username = "drumtonglaundry"; // 사용자;
-			String password = "drumtong@laundry";  // 패스워드;
-			protected PasswordAuthentication getPasswordAuthentication() {
-		          return new PasswordAuthentication(username, password);
-		     }
-		};
-		Session mailSession = Session.getDefaultInstance(props, auth);
-		mailSession.setDebug(true);
-		
-		Message mimeMessage = new MimeMessage(mailSession);
-		try {
-			// 보내는 사람 풀 주소
-			mimeMessage.setFrom(new InternetAddress("drumtonglaundry@naver.com"));
-			mimeMessage.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(toEmail));
-			
-			mimeMessage.setSubject("[DRUMTONG]비밀번호 변경을 위한 인증 번호입니다.");
-			mimeMessage.setText(message);
-			Transport.send(mimeMessage);
-		} catch (AddressException e) {
-			e.printStackTrace();
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		} 
-	}
-	
 	
 	// ========================= 대분류 [사업자 계정관리] ================================
 	
