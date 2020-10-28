@@ -7,10 +7,6 @@
 		origininput[i].setAttribute("onclick", "changeInput(this)");
 	}
 
-	document.querySelector('.newinput').addEventListener('click', e => {
-		console.log('실행 event button');
-	});
-	
 	// 수정 버튼 클릭시
 	// 입력 input 태그가 활성화됨
 	// 입력 및 취소 버튼 활성화됨
