@@ -95,7 +95,7 @@
 				<input class="origininput">
 			</div>
 			<div class="rightdiv">
-				<input class="input" type="text" id="genderboolean" placeholder="성별" value="${bLogin.genderboolean}" readonly>
+				<input class="input" type="text" id="genderboolean" placeholder="성별" value="${bLogin.genderboolean.equals('M') ? '남성' : '여성' }" readonly>
 				<input class="origininput">
 			</div>
 			<div class="rightdiv">
