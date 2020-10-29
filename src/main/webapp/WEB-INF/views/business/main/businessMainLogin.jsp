@@ -58,15 +58,17 @@ function loginSubmit(){
 		<div class="login_input_con">
 			<div class="input_box">
 				<input class="input_tag" type="text" name="id" placeholder="아이디를 입력하세요." required="required">
-        <span class="red-mark"></span>
+       		<!-- incorrect id error message -->
+        		<div class="auth_error_msg red-mark">입력하신 아이디는 존재하지 않는 계정입니다.</div>
 			</div>
 			<div class="input_box">
 				<input class="input_tag" type="password" name="pw" placeholder="비밀번호를 입력하세요." required="required">
-        <span class="red-mark"></span>
+       		<!-- incorrect password error message -->
+		        <div class="auth_error_msg red-mark">비밀번호가 일치하지 않습니다.</div>
 				<div class="login_bottom_con">
 				<div class="store_id_con">
-					<label>
-						<input class="store_id_in	put" type="checkbox" name="storeid">
+					<label class="store_id_label">
+						<input class="store_id_input" type="checkbox" name="storeid">
 						<span>아이디 기억하기</span>
 					</label>
 				</div>
@@ -84,31 +86,102 @@ function loginSubmit(){
 	</form>
 </c:if>
 
+
 <!-- After Login -->	
 <c:if test="${not empty bLogin}">
 	<div class="after_loign_con">
-		<div class="welcome_box">
-			<span class="owner_name">나이키</span>(abc123@gmail.com) 사장님 어서오세요.
+		
+		
+	<!-- 로그인 -->
+	<!-- 
+		<div class="welcome_box_first">
+			<span class="owner_name">이름</span>(abc123@gmail.com) 사장님 어서오세요.
 		</div>
-		<div class="request_box">
-			<p>
-				현재 [<span class="order_count">13</span>] 명의 고객님이 서비스 이용을 희망합니다.<br>
-				자세한 내용은 <span class="order_status_link" onclick='location.href="${cpath}/business/submanagement/businessOrderStatusManagement/"'>해당 링크</span>를 통해 확인할 수 있습니다.
-			</p>
-		</div>
-		<div class="premium_box">
-			<div class="premium_guide_con">
+		<div class="store_register_box">
+			<div class="store_register_guide_con">
 				<p>
-					사장님은 현재 프리미엄 광고 서비스를 이용하고 계시지 않습니다.<br>
-					서비스 계약을 통해 보다 많은 고객님들께 서비스를 소개해보시는 건 어떠세요?<br>
+					현재 등록된 매장이 존재하지 않습니다.<br>
+					<span class="store_register_link" onclick='location.href="${cpath}/business/contract/businessContract/"'>온라인 계약</span>(매장 등록)을 통해 저희가 제공하는 많은 서비스를 이용하실 수 있습니다.<br>
+					자세한 내용은 아래 링크를 클릭해주세요.
 				</p>
 				<div>
-					<button class="premium_sign_up_btn" onclick='location.href="${cpath}/business/contract/businessPremiumAd/"'>광고
-						서비스 신청하기
+					<button class="store_register_sign_up_btn" onclick='location.href="${cpath}/business/contract/businessContract/"'>광고
+						온라인 계약(매장 등록)하러가기
 					</button>
 				</div>
 			</div>
 		</div>
+	-->
+
+	 	
+	<!-- 로그인 + 온라인계약 -->
+		<div class="welcome_box_second">
+			<span class="owner_name">이름</span>(abc123@gmail.com) 사장님 어서오세요.
+		</div>
+		<div class="premium_wrap">
+			<div class="request_box">
+				<p>
+					현재 [
+						<span class="order_count">13</span>
+					] 명의 고객님이 서비스 이용을 희망합니다.<br>
+					자세한 내용은 
+					<span class="order_status_link" onclick='location.href="${cpath}/business/submanagement/businessOrderStatusManagement/"'>
+						해당 링크
+					</span>
+					를 통해 확인할 수 있습니다.
+				</p>
+			</div>
+			<div class="premium_box">
+				<div class="premium_guide_con">
+					<p>
+						사장님은 현재 프리미엄 광고 서비스를 이용하고 계시지 않습니다.<br> 서비스 계약을 통해 보다 많은
+						고객님들께 서비스를 소개해보시는 건 어떠세요?<br>
+					</p>
+					<div>
+						<button class="premium_sign_up_btn"
+							onclick='location.href="${cpath}/business/contract/businessPremiumAd/"'>광고
+							서비스 신청하기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<!-- 로그인 + 온라인계약 + 프리미엄 광고 -->
+	<!-- 
+		<div class="welcome_box_second">
+			<span class="owner_name">이름</span>(abc123@gmail.com) 사장님 어서오세요.
+		</div>
+		<div class="premium_wrap">
+			<div class="request_box">
+				<p>
+					현재 [
+						<span class="order_count">13</span>
+					] 명의 고객님이 서비스 이용을 희망합니다.<br>
+					자세한 내용은 
+					<span class="order_status_link" onclick='location.href="${cpath}/business/submanagement/businessOrderStatusManagement/"'>
+						해당 링크
+					</span>
+					를 통해 확인할 수 있습니다.
+				</p>
+			</div>
+			<div class="premium_box">
+				<div class="premium_detail_con">
+					<p>
+						현재 프리미엄 광고를 이용하고 계십니다.<br>
+						해당 서비스는 [
+									<span>2020-10-01</span>
+										~
+									<span>2020-10-30</span>
+								]까지 유효합니다.<br>
+						서비스 기간이 만료되는 날 자동으로 계약이 갱신되니 서비스 이용 및 해지 관련은
+							<button class="premium_detail_btn" onclick='location.href="${cpath}/business/submanagement/businessCardAccountManagement/"'>프리미엄 계약 관리</button>
+						를 통해 관리할 수 있습니다. 
+					</p>
+				</div>
+			</div>
+		</div>
+	-->
+
 	</div>
 </c:if>
 
