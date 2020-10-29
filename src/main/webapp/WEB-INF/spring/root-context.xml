@@ -19,9 +19,10 @@
 
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@laundry.cp78wupdravw.ap-northeast-2.rds.amazonaws.com:1521:LAUNDRY" />
-		<property name="user" value="laundry" />
-		<property name="password" value="laundrydrumtong" />
+<!--         <property name="jdbcUrl" value="jdbc:oracle:thin:@laundry.cp78wupdravw.ap-northeast-2.rds.amazonaws.com:1521:LAUNDRY" /> -->
+        <property name="jdbcUrl" value="jdbc:oracle:thin:@laundry2.c9ntzfvvajqp.ap-northeast-2.rds.amazonaws.com:1521:LAUNDRY" /> 
+        <property name="user" value="laundry" />
+	    <property name="password" value="laundrydrumtong" />
 		<property name="maxPoolSize" value="100" />
 		<property name="maxIdleTime" value="600" />
 		<property name="idleConnectionTestPeriod" value="300" />

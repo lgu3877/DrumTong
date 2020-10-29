@@ -14,6 +14,9 @@
 	<link rel="stylesheet" href="${cpath }/business/css/businessLogin.css"> 
 	<link rel="stylesheet" href="${cpath }/business/css/membership/businessSignUp.css">
 	
+	<!-- Axios script -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	
 	<!-- 스크립트 영역 -->
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
@@ -71,10 +74,10 @@
 	</div>
 	
 	<div class="marginauto" style="width: 40%; height: 50%; min-width: 500px;">
-		<form class="marginauto signup" action="#" method="post" onsubmit="return AgreeCheck();">
+		<form class="marginauto signup" id="loginForm" method="POST" onsubmit="return AgreeCheck();">
 			<div>
 				<div class="table"><div class="cell">&nbsp아&nbsp이&nbsp디</div></div> 
-				<input type="text" name="id" id="userid" placeholder="ID" required maxlength="25">
+				<input type="text" name="id" id="userid" onblur="axGet(document.getElementById('userid').value)" placeholder="ID" required maxlength="25">
 			</div>
 			<div id="useridmsg" class="message"></div>
 			<div>
@@ -123,6 +126,11 @@
             	<input type="text" name="delegatecrn" id="delegatecrn" placeholder="Delegatecrn" required>
             </div>
             <div id="delegatecrnmsg" class="message"></div>            
+            	<div>
+            	<ul>
+                <li>사업번호 양식 ex) 123-45-67890</li>
+             	 </ul>
+            	</div>
             <div>
             	<div class="table"><div class="cell">&nbsp이&nbsp메&nbsp일</div></div>
             	<input type="text" name="email" id="email" placeholder="Email" required maxlength="50">
@@ -141,7 +149,7 @@
             	</div>
             </div>
             <div>
-            	<input type="submit" style="width: 100%" value="회원 가입">
+            	<input type="submit"  style="width: 100%" value="회원 가입">
             </div>
 		</form>
 	</div>

@@ -103,6 +103,8 @@ function authInput(target) {
 	    .then( (response) => {
 	      if(response.data !== -1){
 //	    	  계정이 일치한다면 이 함수를 실행합니당(영경)
+	    	console.log('이 텍스트는 resources/business/js/businessAccountSearch.js 의 authInput 함수 내에 있음');
+	    	console.log('인증번호는 ', response.data);
 	    	afterSendAuth(target, targetDiv, response.data);
 	      } else{
 	        alert("입력하신 내용이 일치하지 않습니다.\n다시 입력해주세요.");
