@@ -59,7 +59,7 @@
             alert('로그인에 실패하였습니다.');
             document.getElementsByName('pw')[0].value ='';
           }
-        })
+        });
       }
       axPost(document.getElementsByName('id')[0].value,document.getElementsByName('pw')[0].value, document.getElementsByName('storeid')[0].value);	
       }

@@ -31,8 +31,7 @@
 
 <div style="width: 70%; height: 100%; min-width: 900px; background-color: #d2d4dc;" class="marginauto">
 	
-	<input type="hidden" value="${bLogin.bpersonid}" id="BPERSONID">
-	
+
 	<div style="text-align: left; margin-bottom: 25px">
 		<h1 style="font-size: 32pt; margin-left: 20px;">비즈니스 계정 관리</h1>
 		<hr>
@@ -83,39 +82,51 @@
 		</div>
 		
 		<div style="display: inline-block; width: 75%; height: 100%; background-color: 	#f8f8fa">
-		<form action="#" style="width: 100%; height: 100%;">
-
+		<form action="${cpath }/business/membership/businessPWFind/" method="post" style="width: 100%; height: 100%;">
+			<input type="hidden" value="${bLogin.bpersonid}" id="BPERSONID" name="bpersonid">
+	
 			<div class="rightdiv">
 				<input class="input" type="text" name="name" value="${bLogin.name }" placeholder="이름을 입력하세요" readonly>
-				<input class="origininput">
 				<input type="hidden" value="${bLogin.name }">
-			</div>
+				<input class="origininput">
+			</div>			
 			<div class="rightdiv">
-				<input class="input" type="text" name="birth" value="${bLogin.birth }" placeholder="생년월일" readonly>
+				<input class="input" type="date" name="birth" value="${bLogin.birth }" placeholder="생년월일" readonly>
+				<input type="hidden" value="${bLogin.birth }">
+				<input class="origininput">
+			</div>
+			
+			<!-- 성별 가져올때 W,M 말고 남자, 여자로 가져올 수 있도록 백엔드 쪽으로 처리하기 -->
+			
+			<div class="rightdiv">
+				<input class="input" type="text" id="genderboolean" placeholder="성별" value="${bLogin.genderboolean.equals('M') ? '남성' : '여성' }" readonly>
+				<input type="hidden">
 				<input class="origininput">
 			</div>
 			<div class="rightdiv">
-				<input class="input" type="text" id="genderboolean" placeholder="성별" value="${bLogin.genderboolean}" readonly>
+				<input class="input" type="text" id="phone" placeholder="휴대폰 번호" value="${bLogin.phonenum}" readonly>
+				<input type="hidden" value="${bLogin.phonenum }">
+				<input class="origininput">
+			</div>
+			<div id="phonemsg"></div>
+			<div class="rightdiv">
+				<input class="input" type="text" name="inputcrn" id="inputcrn" placeholder="사업자 번호" value="${bLogin.delegatecrn}" readonly>
+				<input type="hidden" value="${bLogin.delegatecrn }">
 				<input class="origininput">
 			</div>
 			<div class="rightdiv">
-				<input class="input" type="text" id="phonenum" placeholder="휴대폰 번호" value="${bLogin.phonenum}" readonly>
-				<input class="origininput">
-			</div>
-			<div class="rightdiv">
-				<input class="input" type="text" name="delegatecrn" placeholder="사업자 번호" value="${bLogin.delegatecrn}" readonly>
-				<input class="origininput">
-			</div>
-			<div class="rightdiv">
-				<input class="input" type="text" name="email" placeholder="이메일" value="${bLogin.email}" readonly>
+				<input class="input" type="text" name="inputemail" id="inputemail" placeholder="이메일" value="${bLogin.email}" readonly>
+				<input type="hidden" value="${bLogin.email }">
 				<input class="origininput">
 			</div>
 			<div class="rightdiv">
 				<input class="input" type="text" id="address" placeholder="주소" value="${bLogin.mainaddress}" readonly>
+				<input type="hidden" value="${bLogin.mainaddress }">
 				<input class="origininput" >
 			</div>
 			<div class="rightdiv">
-				<input class="input" type="text" name="pw" id="pw" placeholder="비밀번호" readonly>
+				<input class="input" type="password" name="pw" id="pw" placeholder="비밀번호" readonly>
+				<input type="hidden" name="option" value="AccountInfo">
 				<input class="origininput">
 			</div>
 		</form>

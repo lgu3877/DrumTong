@@ -1,10 +1,12 @@
 //    document.getElementById('userid').addEventListener('blur', checkUserid);
-
+	
+    document.getElementById('userid').addEventListener('blur', checkUserid);
 	document.getElementById('pw').addEventListener('keyup', passwordComplexity);
 	document.getElementById('pwck').addEventListener('keyup', pwCheck);
     document.getElementById('checkphone').addEventListener('click', checkTel);
 	document.getElementById('delegatecrn').addEventListener('blur', checkBusinessNumber);
 	document.getElementById('email').addEventListener('blur', checkEmail);
+
 
 	// 약관 모두 동의
 	function AllAgree(obj) {
@@ -38,6 +40,10 @@
 					return false;
 				}
 			}
+		}
+		else{
+			// 모든 조건이 참일 때 submit 함수 호출\
+        	document.getElementById('loginForm').submit();
 		}
 	}
 	
@@ -196,9 +202,9 @@
         }
       }
 
- /*   function checkUserid() {
+    function checkUserid() {
         const userid = document.querySelector('#userid').value;
-        idmsg = document.querySelector('#idmsg');
+        idmsg = document.querySelector('#useridmsg');
         console.log(userid.length);
         if (userid === '') {
           idmsg.innerText = '아이디를 입력하세요';
@@ -213,13 +219,13 @@
           return;
         }
 
-        const axGet = async (userid) => {	// async : 비동기 실행 함수
+     	const axGet = async (userid) => {	// async : 비동기 실행 함수
 
-         // await axios.get('/drumtong/business/membership/businessSignUp/rest/useridDupl/' + userid + '/')
-         
+          await axios.get('/drumtong/business/membership/businessSignUp/rest/useridDupl/' + userid + '/')
+          // 정상
           
           .then( (response) => {
-            const idmsg = document.getElementById('idmsg');
+            const idmsg = document.getElementById('useridmsg');
             const data = response.data;
             console.log("data : ", data);
             if(data === true){  
@@ -238,4 +244,3 @@
           }
           axGet(userid);
       }
-*/

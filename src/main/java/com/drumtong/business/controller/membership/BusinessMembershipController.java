@@ -99,5 +99,10 @@ public class BusinessMembershipController {
 		return svc.pwFind(bprivatedatavo, option);
 	}
 	
+	// 사업자 PW 찾기 이동 (GET) [영경]
+	@RequestMapping(value = "businessPwChange/", method = RequestMethod.POST)
+	public ModelAndView pwChange() {
+		return svc.pwChange();
+	}
 	
 }

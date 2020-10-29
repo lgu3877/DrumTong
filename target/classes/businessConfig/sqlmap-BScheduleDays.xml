@@ -23,5 +23,46 @@
 				HOLIDAY = #{holiday} 
 			WHERE ESTID = #{estid}
 	</update>
-
+	
+	
+<!-- 	=======================================REST========================================= -->
+	
+	
+<!-- 	매장 일정관리를 비동기식으로 삭제해주는 메서드입니다.  -->
+	<update id="deleteBScheduleDays" parameterType="hashMap" >
+		UPDATE BSCHEDULEDAYS
+			SET
+		${wherefield} =
+			CASE WHEN
+				REPLACE(
+					SELECT a.${wherefield}
+						as acolumn
+					FROM BSCHEDULEDAYS
+						a WHERE
+					a.ESTID = #{estid}							
+				), #{changeparam})
+	    IS NULL THEN '-' END WHERE ESTID = #{estid};
+	</update>
+	
+	
+<!-- 	매장 일정관리를 비동기식으로 추가 입력해주는 메서드입니다. -->
+	<update id="insertBScheduleDays" parameterType="hashMap" >
+		UPDATE BSCHEDULEDAYS
+			SET
+				${wherefield} =
+					CASE WHEN 
+						(${wherefield}) = '-' then replace(${wherefield}, '-') else ${wherefield} end)||#{changeparam}
+			WHERE ESTID = #{estid}
+	</update>
+	
+	
+	
+<!-- 	매장 일정관리에 공휴일 휴일 여부를 수정해주는 메서드입니다. 필드  { 휴일 유무  } -->
+	<update id="updateHoliday" parameterType="BScheduleDaysVO">
+		UPDATE BSCHEDULEDAYS
+			SET
+				HOLIDAY = #{holiday}
+			WHERE ESTID = #{estid}
+	</update>
+	
 </mapper>

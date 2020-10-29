@@ -7,6 +7,31 @@ public class BPaymentVO {
 	private String copyofbankbook;
 	private String cardnum;
 	private String cardbank;
+	private String cardyear;
+	private String cardmonth;
+	private String cardcvc;
+	
+	public String getCardyear() {
+		return cardyear;
+	}
+	public void setCardyear(String cardyear) {
+		this.cardyear = cardyear;
+	}
+	public String getCardmonth() {
+		return cardmonth;
+	}
+	public void setCardmonth(String cardmonth) {
+		this.cardmonth = cardmonth;
+	}
+	public String getCardcvc() {
+		return cardcvc;
+	}
+	public void setCardcvc(String cardcvc) {
+		this.cardcvc = cardcvc;
+	}
+	public void setCardnum(String cardnum) {
+		this.cardnum = cardnum;
+	}
 	public String getEstid() {
 		return estid;
 	}

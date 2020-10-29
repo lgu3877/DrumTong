@@ -13,7 +13,7 @@
 			VALUES
 			(#{bpersonid}, #{id}, #{pw}, #{name}, #{birth},
 			 #{genderboolean}, #{phonenum}, #{mainaddress}, #{detailaddress},
-			 #{mainaddress}, #{detailaddress},#{email}, #{delegatecrn} )
+			 #{email}, #{delegatecrn} )
 	</insert>
 	
 <!-- 	아이디,비밀번호와 일치하는 로그인 객체 반환 -->
@@ -108,4 +108,8 @@
 				${wheredata} = #{whereparam}
 	</update>
 	
+	<!-- (REST)비밀번호 수정[영경] -->
+	<update id="updatePW" parameterType="BPrivateDataVO">
+		UPDATE BPRIVATEDATA SET PW=#{pw} WHERE ID=#{id}
+	</update>
 </mapper>
