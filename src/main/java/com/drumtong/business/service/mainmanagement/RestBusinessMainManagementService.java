@@ -10,11 +10,15 @@ import com.drumtong.business.dao.BManagementDAO;
 import com.drumtong.business.dao.BMenuDAO;
 import com.drumtong.business.dao.BScheduleDaysDAO;
 import com.drumtong.business.dao.BScheduleTimeDAO;
+import com.drumtong.business.dao.BTempHolidayDAO;
+import com.drumtong.business.dao.BTempSuspensionDAO;
 import com.drumtong.business.vo.BDeliveryAreaVO;
 import com.drumtong.business.vo.BManagementVO;
 import com.drumtong.business.vo.BMenuVO;
 import com.drumtong.business.vo.BScheduleDaysVO;
 import com.drumtong.business.vo.BScheduleTimeVO;
+import com.drumtong.business.vo.BTempHolidayVO;
+import com.drumtong.business.vo.BTempSuspensionVO;
 
 @Service
 public class RestBusinessMainManagementService {
@@ -29,7 +33,8 @@ public class RestBusinessMainManagementService {
 	// 일정관리 테이블
 	@Autowired BScheduleTimeDAO bScheduleTimeDAO;
 	@Autowired BScheduleDaysDAO bScheduleDaysDAO;
-	
+	@Autowired BTempHolidayDAO bTempHolidayDAO;
+	@Autowired BTempSuspensionDAO bTempSuspensionDAO;
 	
 	// ========================= 대분류 [매장관리] ================================
 	
@@ -183,10 +188,74 @@ public class RestBusinessMainManagementService {
 		return RestUpdateHolidayReuslt;
 	}
 
-
-
 	
 	
+	
+	
+	// ===== 중분류 [BTEMPHOLIDAY] 테이블 ==== { 매장 임시 휴무일 }
+	
+	
+	/* 
+	 * @사용되는 파라메타값 
+	 * 
+	 * changeparamter 값 : beginday, endday
+	 * where 값 : estid, num
+	 * 
+	 */
+	// 1. 매장 임시 휴무일을 수정해주는 메서드입니다. 
+	public int updateBTempHoliday(BTempHolidayVO bTempHolidayVO) {
+		int RestUpdateBTempHolidayReuslt = bTempHolidayDAO.updateBTempHoliday(bTempHolidayVO);
+		
+		return RestUpdateBTempHolidayReuslt;
+	}
+
+
+	// 2. 매장 임시 휴무일을 삭제해주는 메서드입니다.
+	public int deleteBTempHoliday(BTempHolidayVO bTempHolidayVO) {
+		int RestDeleteHolidayReuslt = bTempHolidayDAO.deleteBTempHoliday(bTempHolidayVO);
+		
+		return RestDeleteHolidayReuslt;
+	}
+
+
+	// 3. 매장 임시 휴무일에 새 데이터를 입력해주는 메서드입니다.
+	public int insertBTempHoliday(BTempHolidayVO bTempHolidayVO) {
+		int RestInsertHolidayReuslt = bTempHolidayDAO.insertBTempHoliday(bTempHolidayVO);
+		
+		return RestInsertHolidayReuslt;
+	}
+
+
+
+	// ===== 중분류 [BTEMPSUSPENSION] 테이블 ==== { 매장 임시 휴무일 }
+
+	/*
+	 * @사용되는 파라메타값
+	 * 
+	 * changeparamter 값 : beginday, endday, reason 
+	 * where 값 : estid, num
+	 * 
+	 */
+	// 1. 매장 임시 중지을 수정해주는 메서드입니다.
+	public int updateBTempSuspension(BTempSuspensionVO bTempSuspensionVO) {
+		int RestUpdateBTempSuspensionReuslt = bTempSuspensionDAO.updateBTempSuspension(bTempSuspensionVO);
+
+		return RestUpdateBTempSuspensionReuslt;
+	}
+
+	// 2. 매장 임시 중지을 삭제해주는 메서드입니다.
+	public int deleteBTempSuspension(BTempSuspensionVO bTempSuspensionVO) {
+		int RestDeleteBTempSuspensionReuslt = bTempSuspensionDAO.deleteBTempSuspension(bTempSuspensionVO);
+
+		return RestDeleteBTempSuspensionReuslt;
+	}
+
+	// 3. 매장 임시 중지에 새 데이터를 입력해주는 메서드입니다.
+	public int insertBTempSuspension(BTempSuspensionVO bTempSuspensionVO) {
+		int RestInsertBTempSuspensionReuslt = bTempSuspensionDAO.insertBTempSuspension(bTempSuspensionVO);
+
+		return RestInsertBTempSuspensionReuslt;
+	}
 	
 	
 

@@ -17,6 +17,8 @@ import com.drumtong.business.vo.BManagementVO;
 import com.drumtong.business.vo.BMenuVO;
 import com.drumtong.business.vo.BScheduleDaysVO;
 import com.drumtong.business.vo.BScheduleTimeVO;
+import com.drumtong.business.vo.BTempHolidayVO;
+import com.drumtong.business.vo.BTempSuspensionVO;
 
 /*
  *  [건욱]
@@ -184,10 +186,9 @@ public class RestBusinessMainManagementController {
 		return result == 0 ? "true" : "false";
 	}	
 	
+	
+	
 	// ===== 중분류 [BSCHEDULEDAYS] 테이블 ==== { 매장 일정 관리 }
-	
-	
-	
 	
 	
 	/* 
@@ -248,10 +249,100 @@ public class RestBusinessMainManagementController {
 		
 	
 
+	// ===== 중분류 [BTEMPHOLIDAY] 테이블 ==== { 매장 임시 휴무일 }
 	
 	
 	
+	/* 
+	 * @사용되는 파라메타값 
+	 * 
+	 * changeparamter 값 : beginday, endday
+	 * where 값 : estid, num
+	 * 
+	 */
+	// 1. 매장 임시 휴무일을 수정해주는 메서드입니다. 
+	@RequestMapping("BTempHoliday/rest/updateBTempHoliday/{param}")
+	@GetMapping(produces="application/json; charset=utf8")
+	public String updateBTempHoliday(@PathVariable("param")BTempHolidayVO bTempHolidayVO) {
+		
+		int result = svc.updateBTempHoliday(bTempHolidayVO);
+		System.out.println(result + " : result 값 입니다");
+		return result == 0
+				? "true"
+				: "false";
+	}
 	
+	
+	
+	// 2. 매장 임시 휴무일을 삭제해주는 메서드입니다.
+	@RequestMapping("BTempHoliday/rest/deleteBTempHoliday/{param}")
+	@GetMapping(produces="application/json; charset=utf8")
+	public String deleteBTempHoliday(@PathVariable("param")BTempHolidayVO bTempHolidayVO) {
+		
+		int result = svc.deleteBTempHoliday(bTempHolidayVO);
+		System.out.println(result + " : result 값 입니다");
+		return result == 0
+				? "true"
+				: "false";
+	}
+	
+	// 3. 매장 임시 휴무일에 새 데이터를 입력해주는 메서드입니다.
+	@RequestMapping("BTempHoliday/rest/insertBTempHoliday/{param}")
+	@GetMapping(produces = "application/json; charset=utf8")
+	public String insertBTempHoliday(@PathVariable("param") BTempHolidayVO bTempHolidayVO) {
+
+		int result = svc.insertBTempHoliday(bTempHolidayVO);
+		System.out.println(result + " : result 값 입니다");
+		return result == 0 ? "true" : "false";
+	}
+	
+
+	
+
+	// ===== 중분류 [BTEMPSUSPENSION] 테이블 ==== { 매장 임시 휴무일 }
+
+	/* 
+	 * @사용되는 파라메타값 
+	 * 
+	 * changeparamter 값 : beginday, endday, reason
+	 * where 값 : estid, num
+	 * 
+	 */
+	// 1. 매장 임시 중지를 수정해주는 메서드입니다. 
+	@RequestMapping("BTempSuspension/rest/updateBTempSuspension/{param}")
+	@GetMapping(produces="application/json; charset=utf8")
+	public String updateBTempSuspension(@PathVariable("param")BTempSuspensionVO bTempSuspensionVO) {
+		
+		int result = svc.updateBTempSuspension(bTempSuspensionVO);
+		System.out.println(result + " : result 값 입니다");
+		return result == 0
+				? "true"
+				: "false";
+	}
+	
+	
+	
+	// 2. 매장 임시 중지를 삭제해주는 메서드입니다.
+	@RequestMapping("BTempSuspension/rest/deleteBTempSuspension/{param}")
+	@GetMapping(produces="application/json; charset=utf8")
+	public String deleteBTempSuspension(@PathVariable("param")BTempSuspensionVO bTempSuspensionVO) {
+		
+		int result = svc.deleteBTempSuspension(bTempSuspensionVO);
+		System.out.println(result + " : result 값 입니다");
+		return result == 0
+				? "true"
+				: "false";
+	}
+	
+	// 3. 매장 임시 중지에 새 데이터를 입력해주는 메서드입니다.
+	@RequestMapping("BTempSuspension/rest/insertBTempSuspension/{param}")
+	@GetMapping(produces = "application/json; charset=utf8")
+	public String insertBTempSuspension(@PathVariable("param") BTempSuspensionVO bTempSuspensionVO) {
+
+		int result = svc.insertBTempSuspension(bTempSuspensionVO);
+		System.out.println(result + " : result 값 입니다");
+		return result == 0 ? "true" : "false";
+	}
 	
 	
 }

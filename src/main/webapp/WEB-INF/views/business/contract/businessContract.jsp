@@ -39,7 +39,8 @@
 			<i class="far fa-circle fa-3x"></i>
 		</div>
     	<img id="prevBtn" style="position: fixed; width: 70px; top: 45%; left: 0; z-index: 9999;" src="${cpath }/resources/business/img/prev_button.png" onclick="prevButton()">
-    	<img id="nextBtn" style="position: fixed; width: 70px; top: 45%; right: 0; z-index: 9999;" src="${cpath }/resources/business/img/next_button.png" onclick="nextButton()">
+    	<img id="nextBtn" style="position: fixed; width: 70px; top: 45%; rig
+    	ht: 0; z-index: 9999;" src="${cpath }/resources/business/img/next_button.png" onclick="nextButton()">
     	<form  class="marginauto" style="width: 800px; height: 800px;">
         	<%@ include file="./businessContract1.jsp" %>
         	<%@ include file="./businessContract2.jsp" %>

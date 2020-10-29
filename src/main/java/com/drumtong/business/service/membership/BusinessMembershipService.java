@@ -90,13 +90,21 @@ public class BusinessMembershipService {
 		Session.setAttribute("bLogout", "bLogout");
 		Session.removeAttribute("selectEST");
 		Session.removeAttribute("InformationList");
-		Session.removeAttribute("selectEstName");
 		return mav;
 	}
 
 	// 비즈니스 회원가입 이동 (GET) [건욱]
-	public ModelAndView signUp() {
-		ModelAndView mav = new ModelAndView("business/membership/businessSignUp");
+	public ModelAndView signUp(HttpServletRequest req) {
+
+		// premiumBoolean를 세션을 받아와준다.
+		boolean bol = req.getSession().getAttribute("bLogin") != null;
+		System.out.println("boolean : " + bol);
+
+		// boolean의 결과 값에 따라 true 이면 business로 우회해주고 false 이면 프리미엄광고 페이지로 이동시켜준다.
+		String route = bol ? "redirect:/business/" : "business/membership/businessSignUp"; 
+
+		
+		ModelAndView mav = new ModelAndView(route);
 		return mav;
 	}
 	
@@ -198,6 +206,12 @@ public class BusinessMembershipService {
 				UserID = bPrivateDataDAO.idFindCRNPhone(bprivatedatavo);
 				break;
 		}
+		if("".equals(UserID) || UserID != null) {
+			UserID = UserID.substring(0,UserID.length() - 3) + "***";
+			UserID = "회원님의 아이디는 [ " + UserID + " ]입니다.";
+		} else {
+			UserID = "회원정보를 찾을 수 없습니다.";
+		}
 		mav.addObject("result", UserID);
 		return mav;		
 	}
@@ -214,9 +228,15 @@ public class BusinessMembershipService {
 		case "emailID":
 			User = bPrivateDataDAO.pwFindEmailID(bprivatedatavo);
 			break;
+		case "AccountInfo":
+			User = bPrivateDataDAO.selectbPrivateData(bprivatedatavo.getBpersonid());
+			break;
 		}
 		mav.setViewName(User == null ? "business/membership/businessAccountFind" : "business/membership/businessPWFind");
 		mav.addObject("User", User);
+		if(option.equals("AccountInfo")) {
+			mav.addObject("AccountPage", "AccountPage");
+		}
 		return mav;		
 	}
 	
