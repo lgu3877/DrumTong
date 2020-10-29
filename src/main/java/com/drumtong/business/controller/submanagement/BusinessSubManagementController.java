@@ -24,27 +24,27 @@ public class BusinessSubManagementController {
 	
 	// 비즈니스 쿠폰관리 페이지로 이동 (GET) [건욱]
 	@RequestMapping(value="businessCouponManagement/", method = RequestMethod.GET)
-	public ModelAndView couponManagement() {
-		return svc.couponManagement();
+	public ModelAndView couponManagement(HttpServletRequest req) {
+		return svc.couponManagement(req);
 	}
 
 	// 비즈니스 카드계좌관리 페이지로 이동 (GET) [건욱]
 	@RequestMapping(value="businessCardAccountManagement/", method = RequestMethod.GET)
-	public ModelAndView cardAccountManagement() {
-		return svc.cardAccountManagement();
+	public ModelAndView cardAccountManagement(HttpServletRequest req) {
+		return svc.cardAccountManagement(req);
 	}
 	
 
 	// 비즈니스 통계관리 페이지로 이동 (GET) [건욱]
 	@RequestMapping(value="businessStatisticsManagement/", method = RequestMethod.GET)
-	public ModelAndView statisticsManagement() {
-		return svc.statisticsManagement();
+	public ModelAndView statisticsManagement(HttpServletRequest req) {
+		return svc.statisticsManagement(req);
 	}
 
 	// 비즈니스 주문관리 페이지로 이동 (GET) [건욱]
 	@RequestMapping(value="businessOrderStatusManagement/", method = RequestMethod.GET)
-	public ModelAndView orderStatusManagement() {
-		return svc.orderStatusManagement();
+	public ModelAndView orderStatusManagement(HttpServletRequest req) {
+		return svc.orderStatusManagement(req);
 	}
 	
 	

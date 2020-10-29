@@ -25,5 +25,8 @@ public interface BInformationDAO {
 	// 매장 이름 출력
 	BInformationVO selectEst(String estid);
 
+	// 페이지 방문을 위해 계약 여부를 확인합니다.
+	String selectPremiumBoolean(String estid);
+
 
 }
