@@ -16,7 +16,7 @@ public class BusinessSubManagementController {
 
 	@Autowired BusinessSubManagementService svc;
 	
-	// 비즈니스 리뷰관리 페이지로 이동 (GET) [건욱]
+	// 비즈니스 리뷰관리 페이지로 이동 (GET) [영경]
 	@RequestMapping(value="businessReviewManagement/", method = RequestMethod.GET)
 	public ModelAndView reviewManagement(HttpServletRequest req) {
 		return svc.reviewManagement(req);
