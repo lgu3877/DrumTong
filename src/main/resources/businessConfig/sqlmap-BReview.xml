@@ -6,5 +6,11 @@
 <!-- 사업장 메인리뷰 테이블	 -->
 <mapper namespace="com.drumtong.business.dao.BReviewDAO">
 
-
+	<select id="selectReview" parameterType="String" resultType="BReviewVO">
+		SELECT * FROM BREVIEW WHERE ESTID=#{estid}
+	</select>
+	
+	<select id="selectNoReply" parameterType="String" resultType="BReviewVO">
+		SELECT * FROM BREVIEW WHERE ESTID=#{estid} AND REPLYBOOLEAN='N'
+	</select>
 </mapper>

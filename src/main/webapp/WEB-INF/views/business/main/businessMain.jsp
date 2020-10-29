@@ -1,6 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath">${pageContext.request.contextPath }</c:set>
+<c:choose>
+	<c:when test="${empty bLogin }">
+		<c:set var="preLink" value="membership/businessLogin/"/>
+		<c:set var="preBtName" value="로그인하기" />
+	</c:when>
+	<c:when test="${selectEST == '' || empty selectEST}">
+		<c:set var="preLink" value="contract/businessContract/"/>
+		<c:set var="preBtName" value="온라인 계약하기" />
+	</c:when>
+	<c:when test="${selectEST.status=='FAIL' }">
+		<c:set var="preLink" value="mainmanagement/businessShopManagement/"/>
+		<c:set var="preBtName" value="매장 등록" />
+	</c:when>
+	<c:when test="${selectEST.premiumboolean=='N' }">
+		<c:set var="preLink" value="contract/businessPremiumAd/"/>
+		<c:set var="preBtName" value="프리미엄 광고" />
+	</c:when>
+	<c:otherwise>
+		<c:set var="preLink" value=""/>
+		<c:set var="preBtName" value="Finish" />
+	</c:otherwise>
+</c:choose>
 <!DOCTYPE html>
  
 <html lang="ko">

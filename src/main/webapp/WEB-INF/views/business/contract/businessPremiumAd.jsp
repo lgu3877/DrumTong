@@ -43,7 +43,7 @@
 			</div>
 			
 			<!-- form -->
-			<form class="ad_contract_form" action="#" method="POST">
+			<form class="ad_contract_form" method="POST">
 				<!-- card info input -->
 				<div class="ad_contract_card_input_con">	
 					<div>
@@ -65,25 +65,25 @@
 					<!-- card number input -->	
 						<div class="card_input_title"><i class="fas fa-digital-tachograph"></i>카드번호<span class="red-mark">*</span></div>
 						<div class="card_number_con">
-							<input class="card_number_input" type="text" name="cardnum1" maxlength="4" placeholder="****" />
-							<input class="card_number_input" type="text" name="cardnum2" maxlength="4" placeholder="****"/>
-							<input class="card_number_input" type="text" name="cardnum3" maxlength="4" placeholder="****" />
-							<input class="card_number_input" type="text" name="cardnum4" maxlength="4" placeholder="****" />
+							<input class="card_number_input" required="required" type="text" name="cardnum" maxlength="4" placeholder="****" />
+							<input class="card_number_input" required="required" type="text" name="cardnum" maxlength="4" placeholder="****"/>
+							<input class="card_number_input" required="required" type="password" name="cardnum" maxlength="4" placeholder="****" />
+							<input class="card_number_input" required="required" type="password" name="cardnum" maxlength="4" placeholder="****" />
 						</div>
 						<div class="input_subcon">
 					<!-- ex-date input -->
 							<div class="input_subcon_left">
 								<div class="card_input_title"><i class="far fa-calendar-alt"></i>카드만료(년/월)<span class="red-mark">*</span></div>
 								<div class="input_subcon">
-									<input class="card_exdate_input" type="text" name="cardnum1" maxlength="2" placeholder="YY" />
-									<input class="card_exdate_input" type="text" name="cardnum2" maxlength="2" placeholder="MM" />
+									<input class="card_exdate_input" required="required" type="text" name="cardyear" maxlength="2" placeholder="YY" />
+									<input class="card_exdate_input" required="required" type="text" name="cardmonth" maxlength="2" placeholder="MM" />
 								</div>
 							</div>
 					<!-- ccv input -->
 							<div class="input_subcon_right">
 								<div class="card_input_title"><i class="fab fa-expeditedssl"></i>CCV<span class="red-mark">*</span></div>
 								<div class="input_subcon">
-									<input class="card_ccv_input" type="text" name="cardnum1" maxlength="3" placeholder="***" />
+									<input class="card_ccv_input" required="required" type="password" name="cardcvc" maxlength="3" placeholder="***" />
 								</div>
 							</div>	
 						</div>
@@ -108,7 +108,7 @@
 						<div class="card_agree_title">
 							<label>
 								<span>월 정기 결제 서비스를 이용합니다.</span>
-								<input class="card_agree_chbox" type="checkbox" name="agree" value="adAgree">
+								<input class="card_agree_chbox" required="required" type="checkbox" name="agree" value="adAgree">
 							</label>
 						</div>
 					</div>

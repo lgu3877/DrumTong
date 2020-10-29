@@ -71,7 +71,7 @@
 
 	<section>
 		<div class="pw_reset_con">
-			<form class="pw_reset_view" method="POST" action="/drumtong/business/membership/businessPwChange/" onsubmit="return pwChange('${User.bpersonid}');">
+			<form class="pw_reset_view" method="${AccountPage == 'AccountPage' ? 'GET' : 'POST'}" action="/drumtong/business/membership/${AccountPage == 'AccountPage' ? 'businessAccountInfo/' : 'businessPwChange/'}" onsubmit="return pwChange('${User.bpersonid}');">
 				<div class="pw_reset_title title">비밀번호 재설정</div>
 				<div class="pw_reset_content">
 					<p>기존의 비밀번호를 변경합니다. 보안을 위해 최소 10자리에서 20자리까지의 영문, 숫자의 조합으로
