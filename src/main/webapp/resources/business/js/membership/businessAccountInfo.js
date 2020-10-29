@@ -46,7 +46,7 @@
          break;
       case 'phone':
          phonenumCreate(inputdiv);
-       submit.setAttribute('onclick', '');
+		 submit.setAttribute('onclick', '');
          break;
       case 'address':
          addressCreate(inputdiv, inputdiv.children[0].id);
@@ -83,11 +83,11 @@
         const axPost = async (ob) => {   // async : 비동기 실행 함수
           await axios.post('/drumtong/business/membership/rest/', ob)
           // 정상
-           .then( (response) => {
+     		.then( (response) => {
             const data = response.data;
             console.log("data : ", data);
             if(data === true){  
-                 axcancle(obj, inputChange.value);
+           		axcancle(obj, inputChange.value);
             }
             else if(data === false){
               console.log('responsedata2 실행');
@@ -98,8 +98,7 @@
         const axPostAddress = async (ob) => {   // async : 비동기 실행 함수
           await axios.post('/drumtong/business/membership/rest/', ob)
           // 정상
-           .then( (response) => {
-            const data = response.data;            
+     		.then( (response) => {
            })
         }
    
@@ -108,32 +107,30 @@
          inputChange = div.querySelector('select');
          break;
       case 'address':
-        inputChange = div.children[2].children[0];
-       let ob1={
-           'fieldname': inputChange.name,
+	 	 inputChange = div.children[2].children[0];
+		 let ob1={
            'paramdata': inputChange.value,
            'wheredata': whereparam.id,
            'whereparam': whereparam.value,
          };
-        var inputChange2 = div.children[2].children[2];
-       let ob2={
-           'fieldname': inputChange2.name,
+	 	 var inputChange2 = div.children[2].children[2];
+		 let ob2={
            'paramdata': inputChange2.value,
            'wheredata': whereparam.id,
            'whereparam': whereparam.value,
          };
-       axPostAddress(ob1);
-       axPostAddress(ob2);
-      
-      
-       axcancle(obj, inputChange.value + ' ' + inputChange2.value );
-      
+		 axPostAddress(ob1);
+		 axPostAddress(ob2);
+		
+		
+    	axcancle(obj, inputChange.value + ' ' + inputChange2.value );
+		
          break;
       case 'phone':
-     case 'inputcrn':
-     case 'inputemail':
-       inputChange = div.children[2].children[0];
-    break;
+	  case 'inputcrn':
+	  case 'inputemail':
+		 inputChange = div.children[2].children[0];
+	 break;
       default:
          break;
       }
@@ -167,10 +164,10 @@
       origininput.setAttribute("class", "origininput");
       
       switch (inputdiv.children[0].id) {
-     case 'pw':
+	  case 'pw':
       case 'phone':
-     case 'inputemail':
-     case 'inputcrn':
+	  case 'inputemail':
+	  case 'inputcrn':
          axspecialcancle(inputdiv, axReturn);
          break;
       case 'genderboolean':
@@ -181,7 +178,7 @@
          axspecialcancle(inputdiv, axReturn);
          break;
       case 'address':
-      
+		
          axspecialcancle(inputdiv, axReturn);
          break;
       default:
@@ -431,22 +428,22 @@
         var regExp = /^\d{3}-\d{3,4}-\d{4}$/;
 
         const phonenum = document.getElementById('phonenum').value;
-      var submit = document.getElementById('phonenum').parentNode.parentNode.querySelector('input[value="입력"]');
-      
+		var submit = document.getElementById('phonenum').parentNode.parentNode.querySelector('input[value="입력"]');
+		
         if (phonenum === '') {
-           alert('전화번호를 입력부탁드립니다');
+        	alert('전화번호를 입력부탁드립니다');
         }
 
         else if (regExp.test(phonenum) === false) {
-             alert('000-0000-0000 양식으로 입력바랍니다')
-             return false;
+          	alert('000-0000-0000 양식으로 입력바랍니다')
+          	return false;
         } 
         else if(regExp.test(phonenum) === true ) {
-           alert('인증 완료!');
-             document.getElementById('phonenum').readOnly = true;
-             document.getElementById('phonenum').style.backgroundColor = 'grey';
-         submit.setAttribute('onclick','inputData(this)');
-              return true;
+        	alert('인증 완료!');
+          	document.getElementById('phonenum').readOnly = true;
+          	document.getElementById('phonenum').style.backgroundColor = 'grey';
+			submit.setAttribute('onclick','inputData(this)');
+           	return true;
         }
       }
 
@@ -455,22 +452,22 @@
         var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
         const email = document.getElementById('email').value;
-      var submit = document.getElementById('email').parentNode.parentNode.querySelector('input[value="입력"]');
+		var submit = document.getElementById('email').parentNode.parentNode.querySelector('input[value="입력"]');
 
         if (email === '') {
-            alert('이메일을 입력부탁드립니다');
+         	alert('이메일을 입력부탁드립니다');
         }
 
         else if (regExp.test(email) === false) {
-            alert('-----@------.com 양식으로 입력바랍니다')
-             return false;
+         	alert('-----@------.com 양식으로 입력바랍니다')
+          	return false;
         } 
         else if(regExp.test(email) === true ) {
-           alert('인증 완료!');
-             document.getElementById('email').readOnly = true;
-             document.getElementById('email').style.backgroundColor = 'grey';
-         submit.setAttribute('onclick','inputData(this)');
-             return true;
+        	alert('인증 완료!');
+          	document.getElementById('email').readOnly = true;
+          	document.getElementById('email').style.backgroundColor = 'grey';
+			submit.setAttribute('onclick','inputData(this)');
+          	return true;
         }
       }
 
@@ -479,21 +476,20 @@
         var regExp = /^\d{3}-\d{2}-\d{5}$/;
 
         const delegatecrn = document.getElementById('delegatecrn').value;
-       var submit = document.getElementById('delegatecrn').parentNode.parentNode.querySelector('input[value="입력"]');
+	    var submit = document.getElementById('delegatecrn').parentNode.parentNode.querySelector('input[value="입력"]');
 
         if (delegatecrn === '') {
-            alert('사업자번호를 입력부탁드립니다')
+         	alert('사업자번호를 입력부탁드립니다')
         }
 
         else if (regExp.test(delegatecrn) === false) {
-            alert('000-00-00000 양식으로 입력바랍니다')
-             return false;
+         	alert('000-00-00000 양식으로 입력바랍니다')
+          	return false;
         } 
         else if(regExp.test(delegatecrn) === true ) {
-           alert('인증 완료!');
-             document.getElementById('delegatecrn').readOnly = true;
-             document.getElementById('delegatecrn').style.backgroundColor = 'grey';
-           submit.setAttribute('onclick','inputData(this)');
-             return true;
-        }
+        	alert('인증 완료!');
+          	document.getElementById('delegatecrn').readOnly = true;
+          	document.getElementById('delegatecrn').style.backgroundColor = 'grey';
+		  	submit.setAttribute('onclick','inputData(this)');
+          	return true;
       }
