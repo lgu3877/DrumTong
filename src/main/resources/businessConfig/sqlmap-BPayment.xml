@@ -22,7 +22,10 @@
 		UPDATE BPAYMENT
 			SET
 				CARDNUM = #{cardnum},
-				CARDBANK = #{cardbank}
+				CARDBANK = #{cardbank},
+				CARDYEAR = #{cardyear},
+				CARDMONTH = #{cardmonth},
+				CARDCVC = #{cardcvc}				
 			WHERE
 				ESTID = #{estid}
 	</update>

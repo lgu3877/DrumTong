@@ -13,4 +13,42 @@
 			(#{estid},#{num}, #{beginday}, #{endday}, #{reason})
 	</insert>
 
+
+
+
+
+<!-- ==============================================REST=============================================== -->
+
+<!-- 	 매장 임시 중지을 수정해주는 메서드입니다. -->
+	<update id="updateBTempSuspension" parameterType="BTempSuspensionVO">
+	UPDATE BTEMPSUSPENSION 
+			SET
+				BEGINDAY = #{beginday}, ENDDAY= #{enday}, REASON= #{reason} 
+			WHERE ESTID = #{estid} and NUM=#{num}		
+	</update>
+
+<!-- 	매장 임시 중지을 삭제해주는 메서드입니다. -->
+	<delete id="deleteBTempSuspension" parameterType="BTempSuspensionVO">
+		DELETE * FROM BTEMPSUSPENSION
+			WHERE ESTID = #{estid} and NUM=#{num}	
+	</delete>
+
+
+<!-- 	매장 임시 중지에 새 데이터를 입력해주는 메서드입니다. -->
+	<insert id="insertBTempSuspension" parameterType="BTempSuspensionVO">
+		    INSERT INTO BTEMPSUSPENSION
+			VALUES
+			(#{estid},
+				(CASE WHEN 
+					(SELECT MAX(NUM)+1 FROM 
+						BTEMPSUSPENSION 
+					WHERE ESTID=#{estid}) IS NULL THEN 1 
+					ELSE
+            (SELECT MAX(NUM)+1 FROM BTEMPSUSPENSION WHERE ESTID=#{estid}) end)
+			,#{beginday},#{endday},#{reason});
+	
+	</insert>
+	
+
+
 </mapper>

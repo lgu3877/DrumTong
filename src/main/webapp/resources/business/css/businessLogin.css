@@ -15,18 +15,18 @@
 	width: 50%;
     height: 300px;
     overflow: auto;
-    padding-top: 10px;
+	background: aliceblue;
 }
 
 /* Title */
 .login_title {
 	text-align: center;
-    margin: 0 auto;
+    margin: 7px auto;
 }
 
 .login_title p {
 	color: #3b5998;
-    font-size: 30pt;
+    font-size: 20pt;
     letter-spacing: 5px;
     margin-bottom: 10px;
     font-weight: 600;
@@ -38,7 +38,7 @@
 }
 
 .login_input_con .input_box {
-	margin: auto;
+	margin: 0 auto 16px auto;
     display: block;
     width: 80%;
     height: 60px;
@@ -50,13 +50,17 @@
     border-radius: 5px;
     font-size: 12pt;
     width: 100%;
-    height: 85%;
+    height: 45px;
     background-color: #DEDFDF;
     text-indent: 10px;
 }
 
 .login_input_con .store_id_con {
     text-align: left;	
+}
+
+.login_input_con .store_id_label {
+	cursor: pointer;
 }
 
 .login_input_con .store_id_input {
@@ -97,7 +101,7 @@
     cursor: pointer;
     letter-spacing: 5px;
     color: white;
-    margin-top: 40px;
+    margin-top: 45px;
 }
 
 .login_button_con input[type=button]:hover {
@@ -143,22 +147,29 @@
 }
 
 .after_loign_con div {
-	height: 25%;
+	
 }
 
-.welcome_box {
+.welcome_box_first {
 	font-size: 16pt;
-    margin-left: 20px;
+    margin: 0 20px;
     padding-top: 15px;
-	margin-bottom: -20px;
 }
+
+.welcome_box_second {
+	font-size: 16pt;
+    margin: 0 auto;
+    padding-top: 15px;
+    width: 90%;
+}
+
 .owner_name {
 	font-size: 22pt;
 	color: #8b9dc3;
 }
 
 .request_box {
-	margin-left: 20px;
+	
 }
 
 .order_count {
@@ -173,7 +184,7 @@
 	word-spacing: 3px;
 }
 
-.order_status_link{
+.order_status_link {
 	text-decoration: underline;
     margin: 0 5px;
     font-weight: 600;
@@ -182,15 +193,22 @@
     cursor: pointer
 }
 
-.premium_box {
-	display: flex;
-    margin-left: 20px;
-	margin-top: 25px;
-    word-spacing: 3px;
+.store_register_link {
+    text-decoration: underline;
+    font-weight: 600;
+    font-size: 14pt;
+    color: deepskyblue;
+    cursor: pointer;
 }
 
-.premium_guide_con {
-	
+.premium_wrap {
+	margin: 0 auto;
+    width: 90%;
+}
+
+.premium_box {
+	display: flex;
+    word-spacing: 3px;
 }
 
 .premium_guide_con p {
@@ -204,13 +222,64 @@
     word-spacing: 3px;
 }
 
+.premium_detail_con p {
+	margin: 0;
+    padding: 10px;
+    font-size: 12pt;
+    background-color: #3b5998;
+    color: white;
+    border-radius: 8px;
+    letter-spacing: 0.5px;
+    word-spacing: 3px;
+    line-height: 28px;
+}
+
+.premium_detail_btn {
+	background-color: bisque;
+    border: none;
+    outline: none;
+    padding: 3px;
+    border-radius: 4px;
+}
+
+
 .premium_sign_up_btn {
     outline: none;
     border: none;;
-    margin: 10px auto 0 auto;
+    margin: 15px auto 0 auto;
     width: 100%;
     background-color: #1da1f2;
     color: white;
+    height: 40px;
+}
+
+.store_register_box {
+	display: flex;
+    margin: -10px 20px 0 20px;
+    word-spacing: 3px;
+}
+
+.store_register_guide_con p {
+	margin: 30px 0 0 0;
+    padding: 10px;
+    font-size: 13pt;
+    background-color: #3b5998;
+    color: white;
+    border-radius: 8px;
+    letter-spacing: 0.5px;
+    word-spacing: 3px;
+    height: 130px;
+    line-height: 32px;
+}
+
+.store_register_sign_up_btn {
+    outline: none;
+    border: none;
+    margin: 15px auto 0 auto;
+    width: 100%;
+    background-color: #1da1f2;
+    color: white;
+    height: 40px;
 }
 
 /* input: focus */
@@ -305,8 +374,6 @@ input[type=submit]:hover, button:hover {
 	margin-top: 10px;
 }
 
-
-
 /* Modal Box */
 .modal {
 	position: fixed;
@@ -367,4 +434,10 @@ h1 {
 	outline: 0;
 	border: none;
 	font-size: 13pt;
+}
+
+.auth_error_msg {
+	text-align: left;
+	margin-top: 3px;
+	text-indent: 10px;
 }
