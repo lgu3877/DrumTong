@@ -43,7 +43,7 @@
 			</div>
 			
 			<!-- form -->
-			<form class="ad_contract_form" action="#" method="POST">
+			<form class="ad_contract_form" method="POST">
 				<!-- card info input -->
 				<div class="ad_contract_card_input_con">	
 					<div>
@@ -67,8 +67,8 @@
 						<div class="card_number_con">
 							<input class="card_number_input" required="required" type="text" name="cardnum" maxlength="4" placeholder="****" />
 							<input class="card_number_input" required="required" type="text" name="cardnum" maxlength="4" placeholder="****"/>
-							<input class="card_number_input" required="required" type="text" name="cardnum" maxlength="4" placeholder="****" />
-							<input class="card_number_input" required="required" type="text" name="cardnum" maxlength="4" placeholder="****" />
+							<input class="card_number_input" required="required" type="password" name="cardnum" maxlength="4" placeholder="****" />
+							<input class="card_number_input" required="required" type="password" name="cardnum" maxlength="4" placeholder="****" />
 						</div>
 						<div class="input_subcon">
 					<!-- ex-date input -->
@@ -83,7 +83,7 @@
 							<div class="input_subcon_right">
 								<div class="card_input_title"><i class="fab fa-expeditedssl"></i>CCV<span class="red-mark">*</span></div>
 								<div class="input_subcon">
-									<input class="card_ccv_input" required="required" type="text" name="cardcvc" maxlength="3" placeholder="***" />
+									<input class="card_ccv_input" required="required" type="password" name="cardcvc" maxlength="3" placeholder="***" />
 								</div>
 							</div>	
 						</div>

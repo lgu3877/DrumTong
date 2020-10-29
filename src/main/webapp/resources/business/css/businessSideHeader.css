@@ -1,0 +1,94 @@
+body {
+	position: relative;
+	margin: 0;
+}
+
+section {
+	padding-left: 200px;
+	padding-top: 8px;
+	font-size: 18px;
+}
+
+.side_header_con {
+	height: 100%;
+	width: 200px;
+	position: absolute;
+	margin: 0;
+	padding-top: 10px;
+	background-color: navy;
+	color: beige;
+}	
+
+.side_header_logo {
+	margin-bottom: 30px;
+}
+
+.side_header_logo img {
+	width: 170px;
+}
+
+.side_menu_con {
+    list-style: none;
+}
+
+.side_menu_list {
+	position: relative;
+	display: block;
+	padding: 15px 30px;
+	margin: 0 auto;
+	letter-spacing: 3px;
+	cursor: pointer;
+}
+
+.side_menu {
+	justify-content: space-between;
+	display: flex;
+}
+
+
+.side_menu_list:hover {
+	background-color: #3b5998;
+	transition: 0.5s;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+	
+.side_menu_list:hover .side_menu_dropdown {
+	display: block;
+}
+
+.side_menu_dropdown {
+	display: none;
+	padding: 10px;
+    text-align: left;
+    list-style: none;	
+}
+
+.side_menu_dropdown_list {
+	transition: 0.5s;
+	margin: 8px 0;
+}
+
+.side_menu_dropdown_list:hover {
+	font-weight: 600;
+}
+
+.side_menu_title {
+	font-size: 13pt;
+}
+
+.side_menu_icon i {
+	font-size: 15pt;
+    vertical-align: middle;
+}
+
+.side_menu_icon {
+	width: 10px;
+}
+
+.fa-angle-up {
+	display: none;
+}
+
+.side_menu_list:hover > .fa-angle-up {
+	display:inline;
+}
