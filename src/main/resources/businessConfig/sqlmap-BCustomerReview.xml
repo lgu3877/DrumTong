@@ -6,5 +6,12 @@
 <!-- 사업장 고객리뷰 테이블	 -->
 <mapper namespace="com.drumtong.business.dao.BCustomerReviewDAO">
 
+	<select id="selectReview" parameterType="String" resultType="BCustomerReviewVO">
+		SELECT * FROM BCUSTOMERREVIEW WHERE ESTID=#{estid}
+	</select>
 
+	<!-- 확인해야함! -->
+	<select id="selectNoReply" parameterType="String" resultType="BCustomerReviewVO">
+		SELECT * FROM (SELECT ESTID FROM BREVIEW WHERE ESTID=#{estid} AND REPLYBOOLEAN='N') A,BCUSTOMERREVIEW B WHERE A.ESTID=B.ESTID 
+	</select>
 </mapper>
