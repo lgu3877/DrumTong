@@ -1,5 +1,7 @@
 package com.drumtong.business.controller.submanagement;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,10 +16,10 @@ public class BusinessSubManagementController {
 
 	@Autowired BusinessSubManagementService svc;
 	
-	// 비즈니스 리뷰관리 페이지로 이동 (GET) [건욱]
+	// 비즈니스 리뷰관리 페이지로 이동 (GET) [영경]
 	@RequestMapping(value="businessReviewManagement/", method = RequestMethod.GET)
-	public ModelAndView reviewManagement() {
-		return svc.reviewManagement();
+	public ModelAndView reviewManagement(HttpServletRequest req) {
+		return svc.reviewManagement(req);
 	}
 	
 	// 비즈니스 쿠폰관리 페이지로 이동 (GET) [건욱]
