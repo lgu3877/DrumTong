@@ -50,8 +50,8 @@ public class BusinessMembershipController {
 	
 	// 사업자 회원가입 이동 (GET) [건욱]
 	@RequestMapping(value = "businessSignUp/", method = RequestMethod.GET)
-	public ModelAndView signUp() {
-		return svc.signUp();
+	public ModelAndView signUp(HttpServletRequest req) {
+		return svc.signUp(req);
 	}
 		
 	// 사업자 회원가입	(POST) [건욱]
@@ -82,7 +82,7 @@ public class BusinessMembershipController {
 	
 	// 사업자 계정 찾기 이동 (GET) [영경]
 	@RequestMapping(value = "businessAccountFind/", method = RequestMethod.GET)
-	public ModelAndView accountFind() {
+	public ModelAndView accountFind(HttpServletRequest req) {
 		return svc.accountFind();
 	}
 	
@@ -93,13 +93,13 @@ public class BusinessMembershipController {
 		return svc.idFind(bprivatedatavo, option, birth);
 	}
 	
-	// 사업자 PW 찾기 이동 (GET) [영경]
+	// 사업자 PW 찾기 이동 (POST) [영경]
 	@RequestMapping(value = "businessPWFind/", method = RequestMethod.POST)
 	public ModelAndView pwFind(BPrivateDataVO bprivatedatavo, String option) {
 		return svc.pwFind(bprivatedatavo, option);
 	}
 	
-	// 사업자 PW 찾기 이동 (GET) [영경]
+	// 사업자 PW 찾기 이동 (POST) [영경]
 	@RequestMapping(value = "businessPwChange/", method = RequestMethod.POST)
 	public ModelAndView pwChange() {
 		return svc.pwChange();

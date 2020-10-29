@@ -1,9 +1,9 @@
   var origininput = document.querySelectorAll("input.origininput");
    
   for (i = 0; i < origininput.length; i++) {
-      		origininput[i].setAttribute("type", "button");
-      		origininput[i].setAttribute("value", "수정");
-    		origininput[i].setAttribute("onclick", "changeInput(this)");
+            origininput[i].setAttribute("type", "button");
+            origininput[i].setAttribute("value", "수정");
+          origininput[i].setAttribute("onclick", "changeInput(this)");
   }
 
 
@@ -53,12 +53,12 @@
          break;
       case 'inputemail':
          emailCreate(inputdiv);
-		 submit.setAttribute('onclick', '');
+       submit.setAttribute('onclick', '');
          break;
       case 'inputcrn':
          delegatecrnCreate(inputdiv);
-		 submit.setAttribute('onclick', '');
-		 break;
+       submit.setAttribute('onclick', '');
+       break;
       case 'pw':
          submit.setAttribute('type', 'submit');
          submit.setAttribute('onclick', '');
@@ -99,7 +99,6 @@
           await axios.post('/drumtong/business/membership/rest/', ob)
           // 정상
      		.then( (response) => {
-            const data = response.data;            
            })
         }
    
@@ -110,14 +109,12 @@
       case 'address':
 	 	 inputChange = div.children[2].children[0];
 		 let ob1={
-           'fieldname': inputChange.name,
            'paramdata': inputChange.value,
            'wheredata': whereparam.id,
            'whereparam': whereparam.value,
          };
 	 	 var inputChange2 = div.children[2].children[2];
 		 let ob2={
-           'fieldname': inputChange2.name,
            'paramdata': inputChange2.value,
            'wheredata': whereparam.id,
            'whereparam': whereparam.value,
@@ -495,5 +492,4 @@
           	document.getElementById('delegatecrn').style.backgroundColor = 'grey';
 		  	submit.setAttribute('onclick','inputData(this)');
           	return true;
-        }
       }
