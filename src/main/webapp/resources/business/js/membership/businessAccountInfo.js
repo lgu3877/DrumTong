@@ -1,5 +1,5 @@
  
-
+  // origininput이라는 클래스를 이용하여 수정 버튼의 스타일 생성
   var origininput = document.querySelectorAll("input.origininput");
    
   for (i = 0; i < origininput.length; i++) {
@@ -7,7 +7,6 @@
           origininput[i].setAttribute("value", "수정");
           origininput[i].setAttribute("onclick", "changeInput(this)");
   }
-
 
 
    // 수정 버튼 클릭시
@@ -19,7 +18,7 @@
       var inputid = inputdiv.children[0].id;
       inputdiv.children[0].readOnly = false;
       inputdiv.children[0].value = '';
-      inputdiv.removeChild(inputdiv.children[2]);
+      inputdiv.removeChild(inputdiv.children[2]);		// 수정 버튼 삭제 시켰음
       
       var newdiv = document.createElement('div');
       newdiv.setAttribute("class", "newdiv");
@@ -37,7 +36,7 @@
       cancle.setAttribute("type", "button");
       cancle.setAttribute("value", "취소");
       cancle.setAttribute("class", "newinput");
-      cancle.setAttribute("name", inputdiv.children[1].value);
+      cancle.setAttribute("name", inputdiv.children[1].value);		// hidden 이 가지고 있는 value 값을 'name' 으로 저장 -> 취소 누르면 이 name 값을 원래 자리로 반환
       cancle.setAttribute("onclick", "cancle(this)");
       newdiv.appendChild(cancle);
       
@@ -64,6 +63,7 @@
       case 'pw':
          submit.setAttribute('type', 'submit');
          submit.setAttribute('onclick', '');
+		 inputdiv.children[0].placeholder = '비밀번호를 입력바랍니다';
          break;
       default:
          break;
@@ -87,14 +87,10 @@
           // 정상
      		.then( (response) => {
             const data = response.data;
-            console.log("data : ", data);
             if(data === true){  
            		axcancle(obj, inputChange.value);
             }
-            else if(data === false){
-              console.log('responsedata2 실행');
-            }
-            
+            else if(data === false){ console.log('responsedata2 실행'); }            
            })
         }
         const axPostAddress = async (ob) => {   // async : 비동기 실행 함수
@@ -108,24 +104,25 @@
       case 'genderboolean':
          inputChange = div.querySelector('select');
          break;
-      case 'address':
+      case 'address':		// address 는 비동기식으로 보내야 하는 객체가 두가지인데다 입력 후 반환하는 값은 '메인 주소 + 상세 주소' 값이어야 한다
 	 	 inputChange = div.children[2].children[0];
 		 let ob1={
+		   'fieldname': inputChange.name,
            'paramdata': inputChange.value,
            'wheredata': whereparam.id,
            'whereparam': whereparam.value,
          };
 	 	 var inputChange2 = div.children[2].children[2];
 		 let ob2={
+			'fieldname': inputChange2.name,
            'paramdata': inputChange2.value,
            'wheredata': whereparam.id,
            'whereparam': whereparam.value,
          };
 		 axPostAddress(ob1);
 		 axPostAddress(ob2);
-		
-		
-    	axcancle(obj, inputChange.value + ' ' + inputChange2.value );
+				
+    	 axcancle(obj, inputChange.value + ' ' + inputChange2.value );
 		
          break;
       case 'phone':
@@ -143,15 +140,14 @@
            'paramdata': inputChange.value,
            'wheredata': whereparam.id,
         'whereparam': whereparam.value,
-      };
-      
+      };      
           axPost(ob);
          
    }
    }
    
-   // 취소 버튼 클릭시
-   // input[type=text] 태그 readonly 상태로 변환
+   // axious 로 입력하고 난 이후
+   // '수정' 버튼을 다시 활성화시키고, 입력한 값을 원래 보기 위치에 나타내야 함
    function axcancle(obj, axReturn) {
       var inputdiv = obj.parentNode.parentNode;
 
@@ -170,6 +166,7 @@
       case 'phone':
 	  case 'inputemail':
 	  case 'inputcrn':
+	  case 'address':
          axspecialcancle(inputdiv, axReturn);
          break;
       case 'genderboolean':
@@ -177,10 +174,6 @@
             axReturn = '여성';
          else
             axReturn = '남성';            
-         axspecialcancle(inputdiv, axReturn);
-         break;
-      case 'address':
-		
          axspecialcancle(inputdiv, axReturn);
          break;
       default:
@@ -191,17 +184,14 @@
       inputdiv.appendChild(origininput);      
    }
    
-   
-   
-   
+      
    // 취소 버튼 클릭시
    // input[type=text] 태그 readonly 상태로 변환
    function cancle(obj) {
       var inputdiv = obj.parentNode.parentNode;
       inputdiv.children[0].readOnly = true;
-      inputdiv.children[0].value = inputdiv.children[2].children[1].name;
+      inputdiv.children[0].value = inputdiv.children[2].children[1].name;	// '수정' -> '취소' 입력 버튼에 저장된 name 으로써 원래 hidden에 있었던 value
       inputdiv.removeChild(inputdiv.children[2]);
-
       
       var origininput = document.createElement('input');
       origininput.setAttribute("type", "button");
@@ -219,11 +209,11 @@
          break
       case 'pw':
          inputdiv.children[0].value = '';
+         inputdiv.children[0].placeholder = '비밀번호';
          break
       default:
          break;
-      }
-            
+      }            
       inputdiv.appendChild(origininput);      
    }
    
@@ -307,7 +297,7 @@
       input2.setAttribute("type", "button");
       input2.setAttribute("id", "checkemail");
       input2.setAttribute("value", "인증하기");
-      input2.setAttribute("onclick", "emailCheck()");
+      input2.setAttribute("onclick", "emailCheck(this)");
       input2.setAttribute("class", "certification2");
       
       div.appendChild(input1);
@@ -388,8 +378,7 @@
       inputdiv.removeChild(inputdiv.children[2]);
    }
 
-   // 성별, 주소, 휴대폰번호 입력란 -> 입력란이 다른 것들과 다름
-   // 따라서, 취소 버튼도 다르게 생성함
+   // axious 입력 후 원래 상태로 되돌리기 위한 기능
    function axspecialcancle(inputdiv, axReturn) {
       inputdiv.children[0].style.display = '';
       inputdiv.children[0].value = axReturn;
@@ -450,11 +439,12 @@
       }
 
   // 이메일 인증
-  function emailCheck() {
+  function emailCheck(obj) {
         var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
         const email = document.getElementById('email').value;
 		var submit = document.getElementById('email').parentNode.parentNode.querySelector('input[value="입력"]');
+		var pkemail = obj.parentNode.parentNode.querySelector('input[type="hidden"]').value
 
         if (email === '') {
          	alert('이메일을 입력부탁드립니다');
@@ -465,6 +455,10 @@
           	return false;
         } 
         else if(regExp.test(email) === true ) {
+			if (email === pkemail) {
+				alert('기존에 사용중인 이메일 주소입니다');
+				return false;
+			}				
         	alert('인증 완료!');
           	document.getElementById('email').readOnly = true;
           	document.getElementById('email').style.backgroundColor = 'grey';
@@ -496,3 +490,34 @@
           	return true;
       }
 }
+
+	function newpw() {
+		var whereparam = document.getElementById('BPERSONID');
+		var id = document.getElementById('id');
+		var pw = document.getElementById('pw');
+		
+		let ob={
+		   'fieldname': pw.name,
+           'paramdata': pw.value,
+           'wheredata': whereparam.id,
+           'whereparam': whereparam.value,
+		   'id': id.value,            
+      	};
+
+        const axPost = async (ob) => {   // async : 비동기 실행 함수
+          await axios.post('/drumtong/business/membership/rest/', ob)
+          // 정상
+     		.then( (response) => {
+            const data = response.data;
+			console.log(data);
+            if(data === true){  
+           		return true;
+            }
+            else if(data === false){ 
+				alert('비밀번호가 틀렸습니다');
+				return false;
+			}            
+           })
+        }
+		return axPost(ob);
+	}

@@ -100,7 +100,7 @@ public class RestBusinessMembershipService {
 		 * 암호화된 encryptPW로 DB와 비교분석을 한 뒤 일치하면 새 비밀번호 설정할 수 있는 페이지로 이동해준다.
 		 * 
 		 */
-		if(value.equals("PW")) {
+		if(value.equals("pw")) {
 			String id = ob.get("id");
 			String pw = ob.get("paramdata");
 			
@@ -112,6 +112,7 @@ public class RestBusinessMembershipService {
 			
 			
 			RestUpdateResult = bPrivateDataDAO.checkEncryptPW(ob); 
+			System.out.println(RestUpdateResult);
 		}
 		else {
 			
