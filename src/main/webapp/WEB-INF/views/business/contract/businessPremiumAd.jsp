@@ -83,7 +83,7 @@
 							<div class="input_subcon_right">
 								<div class="card_input_title"><i class="fab fa-expeditedssl"></i>CCV<span class="red-mark">*</span></div>
 								<div class="input_subcon">
-									<input class="card_ccv_input" required="required" type="text" name="cardcvc" maxlength="3" placeholder="***" />
+									<input class="card_ccv_input" required="required" type="password" name="cardcvc" maxlength="3" placeholder="***" />
 								</div>
 							</div>	
 						</div>

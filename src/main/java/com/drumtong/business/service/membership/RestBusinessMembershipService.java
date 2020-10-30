@@ -1,6 +1,7 @@
 package com.drumtong.business.service.membership;
 
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -81,9 +82,9 @@ public class RestBusinessMembershipService {
 	public int restUpdate(HttpServletRequest req, HashMap<String, String> ob) {
 		
 //		 hashmap 출력
-//		for(Entry<String,String> entry : ob.entrySet()) {
-//			System.out.println("key : " + entry.getKey() +  "value : " + entry.getValue());
-//		}
+		for(Entry<String,String> entry : ob.entrySet()) {
+			System.out.println("key : " + entry.getKey() +  "value : " + entry.getValue());
+		}
 		
 		int RestUpdateResult = bPrivateDataDAO.restUpdate(ob);
 		

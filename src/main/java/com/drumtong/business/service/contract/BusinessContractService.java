@@ -1,5 +1,7 @@
 package com.drumtong.business.service.contract;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,6 +20,7 @@ import com.drumtong.security.SerialUUID;
 @Service
 public class BusinessContractService {
 
+	private static final String BInformationVO = null;
 	@Autowired BEstablishmentDAO bEstablishmentDAO;
 	@Autowired BInformationDAO bInformationDAO;
 	@Autowired BPaymentDAO bPaymentDAO;
@@ -77,24 +80,41 @@ public class BusinessContractService {
 
 
 	// 비즈니스 온라인 프리미엄 광고 계약으로 이동 (GET) [건욱]
-	public ModelAndView premiumAd() {
-		ModelAndView mav = new ModelAndView("business/contract/businessPremiumAd");
+	public ModelAndView premiumAd(HttpServletRequest req) {
+		
+		// premiumBoolean를 세션을 받아와준다.
+		String bol = ((BInformationVO)req.getSession().getAttribute("selectEST")).getPremiumboolean();
+
+		// boolean의 결과 값에 따라 'Y'이면 business로 우회해주고 'N'이면 프리미엄광고 페이지로 이동시켜준다.
+		String route = bol.equals("Y") ? "redirect:/business/" : "business/contract/businessPremiumAd"; 
+		
+		ModelAndView mav = new ModelAndView(route);
 		return mav;
 	}
 
 	
 	// 비즈니스 온라인 프리미엄 광고 계약 (POST)) [건욱]
 	// BInformation(사업장정보 테이블)의 Premium Boolean 값은  매개변수 값으로 String을 가져온다.
-	public ModelAndView premiumAd(BInformationVO bInformationVO, BPaymentVO bPaymentVO) {
-		ModelAndView mav = new ModelAndView("redirect:/");
+	public ModelAndView premiumAd(BInformationVO bInformationVO, BPaymentVO bPaymentVO, HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView("redirect:/business/");
 		
-		// 1. 프리미엄 광고 여부를 업데이트 시켜준다.
-		bInformationVO.setPremiumboolean("Y");
-		int BInformationResult = bInformationDAO.updatePremiumBoolean(bInformationVO);
+		// estid를 세션을 받아와준다.
+		String estid = ((BInformationVO)req.getSession().getAttribute("selectEST")).getEstid();
 		
+		// 입력받은 카드번호를  [OOOO-OOOO-OOOO-OOO] 형식으로 수정해준다.
+		bPaymentVO.setEstid(estid);
+		bPaymentVO.setCardnum(bPaymentVO.getCardnum().replace(",", "-"));
 		
-		// 2. 프리미엄 광고 결제 수단 정보를 업데이트 시켜준다.
+		// 1. 프리미엄 광고 결제 수단 정보를 업데이트 시켜준다.
 		int BPaymentResult = bPaymentDAO.updatePremiumPay(bPaymentVO);
+		
+		
+		// 2. 광고 결제 수단이 정상적으로 작동이 되면 프리미엄 광고 여부를 업데이트 시켜준다.
+		if(BPaymentResult == 1) {
+			bInformationVO.setEstid(estid);
+			bInformationVO.setPremiumboolean("Y");
+			int BInformationResult = bInformationDAO.updatePremiumBoolean(bInformationVO);
+		}
 		
 		
 		return mav;

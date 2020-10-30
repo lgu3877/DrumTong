@@ -94,8 +94,17 @@ public class BusinessMembershipService {
 	}
 
 	// 비즈니스 회원가입 이동 (GET) [건욱]
-	public ModelAndView signUp() {
-		ModelAndView mav = new ModelAndView("business/membership/businessSignUp");
+	public ModelAndView signUp(HttpServletRequest req) {
+
+		// premiumBoolean를 세션을 받아와준다.
+		boolean bol = req.getSession().getAttribute("bLogin") != null;
+		System.out.println("boolean : " + bol);
+
+		// boolean의 결과 값에 따라 true 이면 business로 우회해주고 false 이면 프리미엄광고 페이지로 이동시켜준다.
+		String route = bol ? "redirect:/business/" : "business/membership/businessSignUp"; 
+
+		
+		ModelAndView mav = new ModelAndView(route);
 		return mav;
 	}
 	
