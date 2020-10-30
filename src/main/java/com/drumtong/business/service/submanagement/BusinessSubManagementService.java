@@ -26,14 +26,14 @@ public class BusinessSubManagementService {
 	// 비즈니스 리뷰관리 페이지로 이동 (GET) [영경]
 	public ModelAndView reviewManagement(HttpServletRequest req) {
   
-  
 		// Status 계약 여부 필드를 세션을 받아와준다.
 		String bol = ((BInformationVO)req.getSession().getAttribute("selectEST")).getStatus();
-
-		// boolean의 결과 값에 따라 'SUCCESS'이면 business로 우회해주고 'FAIL'이면 서브관리 페이지들로 이동시켜준다.
-		String route = bol.equals("SUCCESS") ? "redirect:/business/" : "business/submanagement/businessReviewManagement"; 
-
-		ModelAndView mav = new ModelAndView(route);
+		// boolean의 결과 값에 따라 'FAIL'이면 business로 우회해주고 'SUCCESS'이면 서브관리 페이지들로 이동시켜준다.
+		if(bol.equals("FAIL"))
+			return new ModelAndView("redirect:/business/");
+			
+		
+		ModelAndView mav = new ModelAndView("business/submanagement/businessReviewManagement");
 		HttpSession Session = req.getSession();
 		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
 		String estid = bInformationVO.getEstid();
@@ -57,7 +57,7 @@ public class BusinessSubManagementService {
 		mav.addObject("NoReplybReviewCount", NoReplybReviewList.size());
 		mav.addObject("bCustomerNoReplyReview", bCustomerNoReplyReviewList);
 
-    return mav;
+		return mav;
 	}
 
 
@@ -66,12 +66,12 @@ public class BusinessSubManagementService {
 		
 		// Status 계약 여부 필드를 세션을 받아와준다.
 		String bol = ((BInformationVO)req.getSession().getAttribute("selectEST")).getStatus();
-
-		// boolean의 결과 값에 따라 'SUCCESS'이면 business로 우회해주고 'FAIL'이면 서브관리 페이지들로 이동시켜준다.
-		String route = bol.equals("SUCCESS") ? "redirect:/business/" : "business/submanagement/businessReviewManagement"; 
-
+		// boolean의 결과 값에 따라 'FAIL'이면 business로 우회해주고 'SUCCESS'이면 서브관리 페이지들로 이동시켜준다.
+		if(bol.equals("FAIL"))
+			return new ModelAndView("redirect:/business/");
 		
-		ModelAndView mav = new ModelAndView(route);
+		
+		ModelAndView mav = new ModelAndView("business/submanagement/businessReviewManagement");
 		return mav;
 	}
 
@@ -81,12 +81,11 @@ public class BusinessSubManagementService {
 
 		// Status 계약 여부 필드를 세션을 받아와준다.
 		String bol = ((BInformationVO)req.getSession().getAttribute("selectEST")).getStatus();
-
-		// boolean의 결과 값에 따라 'SUCCESS'이면 business로 우회해주고 'FAIL'이면 서브관리 페이지들로 이동시켜준다.
-		String route = bol.equals("SUCCESS") ? "redirect:/business/" : "business/submanagement/businessCardAccountManagement"; 
-
+		// boolean의 결과 값에 따라 'FAIL'이면 business로 우회해주고 'SUCCESS'이면 서브관리 페이지들로 이동시켜준다.
+		if(bol.equals("FAIL"))
+			return new ModelAndView("redirect:/business/");
 		
-		ModelAndView mav = new ModelAndView(route);
+		ModelAndView mav = new ModelAndView("business/submanagement/businessCardAccountManagement");
 		return mav;
 	}
 
@@ -97,12 +96,11 @@ public class BusinessSubManagementService {
 		
 		// Status 계약 여부 필드를 세션을 받아와준다.
 		String bol = ((BInformationVO)req.getSession().getAttribute("selectEST")).getStatus();
-
-		// boolean의 결과 값에 따라 'SUCCESS'이면 business로 우회해주고 'FAIL'이면 서브관리 페이지들로 이동시켜준다.
-		String route = bol.equals("SUCCESS") ? "redirect:/business/" : "business/submanagement/businessStatisticsManagement"; 
-
+		// boolean의 결과 값에 따라 'FAIL'이면 business로 우회해주고 'SUCCESS'이면 서브관리 페이지들로 이동시켜준다.
+		if(bol.equals("FAIL"))
+			return new ModelAndView("redirect:/business/");
 		
-		ModelAndView mav = new ModelAndView(route);
+		ModelAndView mav = new ModelAndView("business/submanagement/businessStatisticsManagement");
 		return mav;
 	}
 
@@ -112,12 +110,11 @@ public class BusinessSubManagementService {
 		
 		// Status 계약 여부 필드를 세션을 받아와준다.
 		String bol = ((BInformationVO)req.getSession().getAttribute("selectEST")).getStatus();
-
-		// boolean의 결과 값에 따라 'SUCCESS'이면 business로 우회해주고 'FAIL'이면 서브관리 페이지들로 이동시켜준다.
-		String route = bol.equals("SUCCESS") ? "redirect:/business/" : "business/submanagement/businessOrderStatusManagement"; 
-
+		// boolean의 결과 값에 따라 'FAIL'이면 business로 우회해주고 'SUCCESS'이면 서브관리 페이지들로 이동시켜준다.
+		if(bol.equals("FAIL"))
+			return new ModelAndView("redirect:/business/");
 		
-		ModelAndView mav = new ModelAndView(route);
+		ModelAndView mav = new ModelAndView("business/submanagement/businessOrderStatusManagement");
 		return mav;
 	}
 
