@@ -43,7 +43,7 @@
 			</div>
 			
 			<!-- form -->
-			<form class="ad_contract_form" action="#" method="POST">
+			<form class="ad_contract_form" action="#" method="POST" onsubmit="return checkForm()">
 				<!-- card info input -->
 				<div class="ad_contract_card_input_con">	
 					<div>
@@ -64,11 +64,11 @@
 						</div>	
 					<!-- card number input -->	
 						<div class="card_input_title"><i class="fas fa-digital-tachograph"></i>카드번호<span class="red-mark">*</span></div>
-						<div class="card_number_con">
-							<input class="card_number_input" required="required" type="text" name="cardnum" maxlength="4" placeholder="****" />
-							<input class="card_number_input" required="required" type="text" name="cardnum" maxlength="4" placeholder="****"/>
-							<input class="card_number_input" required="required" type="text" name="cardnum" maxlength="4" placeholder="****" />
-							<input class="card_number_input" required="required" type="text" name="cardnum" maxlength="4" placeholder="****" />
+						<div id="cardNum-con" class="card_number_con">
+							<input class="card_number_input" required="required" type="text" name="cardnum" maxlength="4" placeholder="****" onkeypress="return checkNumber(event)" />
+							<input class="card_number_input" required="required" type="text" name="cardnum" maxlength="4" placeholder="****" onkeypress="return checkNumber(event)" />
+							<input class="card_number_input" required="required" type="text" name="cardnum" maxlength="4" placeholder="****" onkeypress="return checkNumber(event)" />
+							<input class="card_number_input" required="required" type="text" name="cardnum" maxlength="4" placeholder="****" onkeypress="return checkNumber(event)" />
 						</div>
 						<div class="input_subcon">
 					<!-- ex-date input -->
@@ -151,6 +151,21 @@
 		// sum of card ex-date
 		
 	</script>
-
+	
+	
+	<script type="text/javascript">
+		function checkNumber(e) {
+			if(e.key >= 0 && e.key <= 9) return true;
+			return false;
+		}
+		
+		function checkForm() {
+			const cardNumCon = document.getElementById('cardNum-con');
+			for (var i = 0; i < cardNumCon.length; i++) {
+				console.log(cardNumCon[i]);
+			}
+		}
+	
+	</script>
 </body>
 </html>
