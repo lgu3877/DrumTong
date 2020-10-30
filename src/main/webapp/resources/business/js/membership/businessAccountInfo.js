@@ -1,8 +1,10 @@
+ 
+
   var origininput = document.querySelectorAll("input.origininput");
    
   for (i = 0; i < origininput.length; i++) {
-            origininput[i].setAttribute("type", "button");
-            origininput[i].setAttribute("value", "수정");
+          origininput[i].setAttribute("type", "button");
+          origininput[i].setAttribute("value", "수정");
           origininput[i].setAttribute("onclick", "changeInput(this)");
   }
 
@@ -53,11 +55,11 @@
          break;
       case 'inputemail':
          emailCreate(inputdiv);
-       submit.setAttribute('onclick', '');
+         submit.setAttribute('onclick', '');
          break;
       case 'inputcrn':
          delegatecrnCreate(inputdiv);
-       submit.setAttribute('onclick', '');
+         submit.setAttribute('onclick', '');
        break;
       case 'pw':
          submit.setAttribute('type', 'submit');
@@ -493,3 +495,4 @@
 		  	submit.setAttribute('onclick','inputData(this)');
           	return true;
       }
+}
