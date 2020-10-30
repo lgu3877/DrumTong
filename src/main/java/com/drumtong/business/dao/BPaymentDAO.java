@@ -8,7 +8,9 @@ public interface BPaymentDAO {
 	int insertSignUp(BPaymentVO bPaymentVO);
 
 
-	// 프리미엄 광고 결제수단 업데이트
+	// 프리미엄 광고 결제수단 업데이트 / REST일 시에도 사용
 	int updatePremiumPay(BPaymentVO bPaymentVO);
+
+
 
 }

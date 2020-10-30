@@ -17,7 +17,7 @@
 
 
 
-<!-- 	프리미엄 광고 결제수단 업데이트 -->
+<!-- 	프리미엄 광고 결제수단 업데이트 / (REST)일 때도 사용 -->
 	<update id="updatePremiumPay" parameterType="BPaymentVO">
 		UPDATE BPAYMENT
 			SET
@@ -29,4 +29,11 @@
 			WHERE
 				ESTID = #{estid}
 	</update>
+	
+	
+<!-- 	=======================================REST======================================= -->
+	
+
+
+	
 </mapper>
