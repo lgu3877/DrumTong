@@ -42,15 +42,15 @@
 				<p>프리미엄 광고 서비스 신청</p>
 			</div>
 			
-			<!-- form -->
-			<form class="ad_contract_form" action="#" method="POST" onsubmit="return checkForm()">
-				<!-- card info input -->
+		<!-- form -->
+			<form class="ad_contract_form" method="POST" onsubmit="return checkForm()">
+			<!-- card info input -->
 				<div class="ad_contract_card_input_con">	
 					<div>
 					<!-- card company input -->
 						<div class="card_input_title"><i class="fas fa-credit-card"></i>카드회사<span class="red-mark">*</span></div>
 						<div>
-							<select class="card_company_select" name="cardbank">
+							<select id="card-company-select" class="card_company_select" name="cardbank">
 								<option hidden="true">등록하실 카드회사를 선택해주세요.</option>
 								<option value="신한">신한</option>
 								<option value="현대">현대</option>
@@ -74,20 +74,22 @@
 					<!-- ex-date input -->
 							<div class="input_subcon_left">
 								<div class="card_input_title"><i class="far fa-calendar-alt"></i>카드만료(년/월)<span class="red-mark">*</span></div>
-								<div class="input_subcon">
-									<input class="card_exdate_input" required="required" type="text" name="cardyear" maxlength="2" placeholder="YY" />
-									<input class="card_exdate_input" required="required" type="text" name="cardmonth" maxlength="2" placeholder="MM" />
+								<div id="cardDate-con" class="input_subcon">
+									<input class="card_exdate_input" required="required" type="text" name="cardyear" maxlength="2" placeholder="YY" onkeypress="return checkNumber(event)" />
+									<input class="card_exdate_input" required="required" type="text" name="cardmonth" maxlength="2" placeholder="MM" onkeypress="return checkNumber(event)" />
 								</div>
 							</div>
 					<!-- ccv input -->
 							<div class="input_subcon_right">
 								<div class="card_input_title"><i class="fab fa-expeditedssl"></i>CCV<span class="red-mark">*</span></div>
-								<div class="input_subcon">
-									<input class="card_ccv_input" required="required" type="password" name="cardcvc" maxlength="3" placeholder="***" />
+								<div id="cardCcv-con" class="input_subcon">
+									<input class="card_ccv_input" required="required" type="password" name="cardcvc" maxlength="3" placeholder="***" onkeypress="return checkNumber(event)"/>
 								</div>
 							</div>	
 						</div>
 					</div>
+				<!-- date or ccv error message -->
+					<div id="auth-error-msg" class="ad_error_msg"></div>
 					<div class="ad_agree_con">
 						<div class="ad_agree_context">
 							<p>
@@ -126,46 +128,8 @@
 	
 	<!-- footer -->
 	<%@ include file="../main/businessFooter.jsp"%>
-
-	<script type="text/javascript">
-		// auto focus shift for card number
-		document.getElementById('').keyup(function() {
-			let charLimit = this.getAttribute("maxlength");
-			console.log(charLimit);
-		})
-		
-		
-		
-		/* $('.input-num-size').keyup (function () {
-        var charLimit = $(this).attr("maxlength");
-        console.log(charLimit);
-        if (this.value.length >= charLimit) {
-            console.log(this.value.length);
-            $(this).next().next().next('.input-num-size').focus();
-            return false;
-        }
-    }); */
-		
-		// sum of card numbers
-		
-		// sum of card ex-date
-		
-	</script>
 	
+	<script type="text/javascript" src="${cpath }/business/js/contract/premiumAd.js"></script>
 	
-	<script type="text/javascript">
-		function checkNumber(e) {
-			if(e.key >= 0 && e.key <= 9) return true;
-			return false;
-		}
-		
-		function checkForm() {
-			const cardNumCon = document.getElementById('cardNum-con');
-			for (var i = 0; i < cardNumCon.length; i++) {
-				console.log(cardNumCon[i]);
-			}
-		}
-	
-	</script>
 </body>
 </html>
