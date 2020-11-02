@@ -174,3 +174,13 @@ input[type=submit]:hover {
     outline: none;
     font-size: 16pt;
 }
+
+.ad_error_msg {
+	text-align: left;
+    color: red;
+    font-size: 12pt;
+    font-weight: 600;
+}
+.ad_error_msg i {
+	margin-right: 5px;
+}
