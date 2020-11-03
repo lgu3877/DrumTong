@@ -5,7 +5,7 @@
 
 
 	<div class="marginauto AllPre">
-		<input type="checkbox" id="allcheck" name="allcheck" onchange="AllAgree(this)" style="-webkit-transform: scale(1.5); margin-right: 15px">모든 이용약관에 동의하겠습니까?
+		<input type="checkbox" id="allcheck" name="allcheck" style="-webkit-transform: scale(1.5); margin-right: 15px">모든 이용약관에 동의하겠습니까?
 	</div>
 	
 
