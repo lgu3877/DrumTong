@@ -83,8 +83,9 @@
       </div>
       
       <div style="display: inline-block; width: 75%; height: 100%; background-color:    #f8f8fa">
-      <form action="${cpath }/business/membership/businessPWFind/" method="post" style="width: 100%; height: 100%;">
+      <form action="${cpath }/business/membership/businessPWFind/" method="post" style="width: 100%; height: 100%;" onsubmit="return newpw();">
          <input type="hidden" value="${bLogin.bpersonid}" id="BPERSONID" name="bpersonid">
+         <input type="hidden" value="${bLogin.id}" id="id" name="id">
    
          <div class="rightdiv">
             <input class="input" type="text" name="name" value="${bLogin.name }" placeholder="이름을 입력하세요" readonly>

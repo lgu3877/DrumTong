@@ -39,14 +39,13 @@
 			<i class="far fa-circle fa-3x"></i>
 		</div>
     	<img id="prevBtn" style="position: fixed; width: 70px; top: 45%; left: 0; z-index: 9999;" src="${cpath }/resources/business/img/prev_button.png" onclick="prevButton()">
-    	<img id="nextBtn" style="position: fixed; width: 70px; top: 45%; rig
-    	ht: 0; z-index: 9999;" src="${cpath }/resources/business/img/next_button.png" onclick="nextButton()">
-    	<form  class="marginauto" style="width: 800px; height: 800px;">
+    	<img id="nextBtn" style="position: fixed; width: 70px; top: 45%; right: 0; z-index: 9999;" src="${cpath }/resources/business/img/next_button.png" onclick="nextButton()">
+    	<form action="#" method="post" class="marginauto" style="width: 800px; height: 800px;" onsubmit="contract4Check()">
         	<%@ include file="./businessContract1.jsp" %>
         	<%@ include file="./businessContract2.jsp" %>
         	<%@ include file="./businessContract3.jsp" %>
         	<%@ include file="./businessContract4.jsp" %>
-        	<%@ include file="./businessContract5.jsp" %>
+        	<%@ include file="./businessContract5.jsp" %>	<!-- 뺄지 말지 정하도록 합시다 -->
     	</form>
     </div>
     
@@ -59,7 +58,13 @@
 	document.getElementById('crn').addEventListener('blur', checkBusinessNumber);
 	
     var container = document.querySelectorAll('form div.container');
+	
     
+    window.onload = function() {
+    	console.log('무사히 submit 완료되면 마지막 페이지 바로 활성화시키는 기능 추가');
+    }
+    
+    // 페이지 완성되면 삭제할 예정
 	function prevButton() {
 		for(i = 1; i < container.length; i++) {
 			if(container[i].style.display == '') {
@@ -76,6 +81,7 @@
 			}
 		}
 	}
+
 
 	function nextButton() {
 		for(i = 0; i < container.length - 1; i++) {
@@ -94,7 +100,7 @@
 		}
 	}
 	
-	// 어째서 getElementById 적용이 되지 않는가?
+	//  businessContract1.jsp -> 약관동의 
 	function preCheck(obj) {
 
 		var preA = obj.parentNode.querySelector('#preA');
@@ -107,12 +113,35 @@
 			alert('약관을 모두 동의하시길 바랍니다');
 	}
 
+	// businessContract2.jsp -> Next 버튼
     function contract2Check(obj) {
     	
     	var str_space = /\s/;               // 공백 체크
     	
     	var checkItem = obj.parentNode.querySelectorAll('div.c2-input input[type="text"]');
     	var checkFile = obj.parentNode.querySelector('div.c2-input input[type="file"]');
+    	
+    	//input 태그에 공백이거나 공백이 포함됐을 때 그쪽으로 focus
+		for(i = 0; i < checkItem.length; i++) {
+	    	if((str_space.exec(checkItem[i].value) || checkItem[i].value === '') && checkItem[i].name !== 'mainlocation') {
+	    		checkItem[i].focus();
+	    		return false;
+	    	}	    	
+		}		
+		// 사업자 등록증 삽입했는지 점검
+		if (!checkFile.value) {
+			checkFile.focus();
+			return false;
+		}		
+		nextButton();
+    }
+    
+	// businessContract3.jsp -> Next 버튼
+    function contract3Check(obj) {
+    	var str_space = /\s/;               // 공백 체크
+    	
+    	var checkItem = obj.parentNode.querySelectorAll('div.c3-input input[type="text"]');
+    	var checkFile = obj.parentNode.querySelector('div.c3-input input[type="file"]');
     	
     	//input 태그에 공백이거나 공백이 포함됐을 때 그쪽으로 focus
 		for(i = 0; i < checkItem.length; i++) {
@@ -128,11 +157,6 @@
 		}		
 		nextButton();
     }
-    
-    function contract3Check(onj) {
-    	
-    }
-    
     
     
 	// 사업자 번호 확인
@@ -194,7 +218,7 @@
 		}		
 	}
 	
-	// 모두 동의 누르면 약관 동의되도록
+	//  businessContract1.jsp -> 모두 동의 누르면 약관 동의되도록
 	document.getElementById('allcheck').addEventListener('change', function() {
 		if(this.checked) {
 			document.getElementById('preA').checked = true;
@@ -202,7 +226,7 @@
 		}
 	})
 	
-		// 주소 확인
+	//  businessContract2.jsp -> 주소 확인
 	function searchAddress() {
         new daum.Postcode(
                 {
@@ -241,12 +265,15 @@
                 }).open();
     }
 	
+	
+	
+	// businessContract3.jsp -> 은행찾기 선택시 은행 이미지가 모인 모달 창 띄우기 
 	document.getElementById('bank-modal-button').addEventListener('click', bankModal);
 	
 	function bankModal() {
         var modal = document.getElementById('modal');
 
-        // 모달 div 뒤에 희끄무레한 레이어
+        // 모달창 뒤에 나타나는 그림자같은 검은 레이어
         var bg = document.createElement('div');
         bg.id = 'modalbg';
         bg.setStyle({
@@ -275,6 +302,7 @@
 			backgroundColor: 'white',
 			width: '500px',
 			height: '500px',
+			overflow: 'scroll',
 			
             // div center 정렬
             top: '50%',
@@ -285,17 +313,52 @@
         });
     }
 
-    // Element 에 style 한번에 오브젝트로 설정하는 함수 추가
+    // businessContract3.jsp -> Element 에 style 한번에 오브젝트로 설정하는 함수 추가
     Element.prototype.setStyle = function(styles) {
         for (var k in styles) this.style[k] = styles[k];
         return this;
     };
 
+    // businessContract3.jsp -> 모달창에서 은행 이미지 선택시 값 입력하기 
     function selectBank(obj) {
     	document.getElementById('accountbank').value = obj.id;
     	document.getElementById('modalbg').remove();
     	obj.parentNode.style.display = 'none';    	
     }
+    
+    
+    
+    // businessContract4.jsp -> 카테고리 선택하면 해당 카테고리에 대한 input = hidden 생성 및 삭제
+ 	var categoryAll = document.querySelectorAll('div.categoryDiv div input[type=checkbox]');
+ 	
+ 	
+ 	for (i = 0; i < categoryAll.length; i++) {
+ 		categoryAll[i].addEventListener('change', function() {
+    		if(this.checked) {
+    			var hiddenCategory = document.createElement('input');
+    			hiddenCategory.setAttribute('type', 'hidden');
+    			hiddenCategory.setAttribute('name', 'defaultcategory');
+    			    			
+    			var path = '${cpath}/resources/business/img/category/';
+//    			console.log(path);
+//    			console.log(window.location.href);			// 현재 페이지의 href (URL) 반환
+//    			console.log(window.location.pathname);		// 현재 페이지의 경로와 파일 이름 반환
+//    			console.log(window.location.protocol);		// 사용하는 웹 프로토콜 반환 (http:// 혹은 https://)
+    			var imgsrc = this.parentNode.querySelector('img').src;
+    			
+    			var replace1 = imgsrc.replace(window.location.protocol + "//" + window.location.host,"");
+    			var replace2 = replace1.replace(path,"");
+    			var replace3 = replace2.split('.');   			
+    			
+    			hiddenCategory.setAttribute('value', replace3[0]);
+    			
+    			this.parentNode.appendChild(hiddenCategory);
+    		}
+	    	else {
+	    		this.parentNode.removeChild(this.parentNode.querySelector('input[type=hidden]'));
+    		}
+    	});
+ 	}
     
 /*     var path = '${cpath}/resources/business/img/bank/';
     var fs = require('fs`');

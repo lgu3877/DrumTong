@@ -112,6 +112,7 @@ public class RestBusinessMembershipService {
 			
 			
 			RestUpdateResult = bPrivateDataDAO.checkEncryptPW(ob); 
+			System.out.println(RestUpdateResult);
 		}
 		else {
 			
