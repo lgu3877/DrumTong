@@ -184,7 +184,7 @@ public class BusinessMembershipService {
 	}
 	
 	// 사업자 ID 찾기 결과 페이지로 이동 (POST) [영경]
-	public ModelAndView idFind(BPrivateDataVO bprivatedatavo, String option, int[] birth) {
+	public ModelAndView idFind(BPrivateDataVO bprivatedatavo, String option) {
 		ModelAndView mav = new ModelAndView("business/membership/businessIDFind");
 		String UserID = null;
 		bprivatedatavo = updateData(bprivatedatavo);
@@ -193,7 +193,7 @@ public class BusinessMembershipService {
 				UserID = bPrivateDataDAO.idFindNamePhoneNum(bprivatedatavo);
 				break;
 			case "NameBirth":
-				bprivatedatavo.setBirth(birth[0] + "-" + (birth[1] < 10 ? "0" : "") + birth[1] + "-" + (birth[2] < 10 ? "0" : "") + birth[2]);
+//				bprivatedatavo.setBirth(birth[0] + "-" + (birth[1] < 10 ? "0" : "") + birth[1] + "-" + (birth[2] < 10 ? "0" : "") + birth[2]);
 				UserID = bPrivateDataDAO.idFindNameBirth(bprivatedatavo);
 				break;
 			case "NameEmail":
@@ -243,10 +243,18 @@ public class BusinessMembershipService {
 	private BPrivateDataVO updateData(BPrivateDataVO bprivatedatavo) {
 		String Phonenum = bprivatedatavo.getPhonenum();
 		String Delegatecrn = bprivatedatavo.getDelegatecrn();
+		String Birth = bprivatedatavo.getBirth();
 		if(Phonenum != null)
 			bprivatedatavo.setPhonenum(Phonenum.substring(0,3) + "-" + Phonenum.substring(3,7) + "-" + Phonenum.substring(7));
 		if(Delegatecrn != null)
 			bprivatedatavo.setDelegatecrn(Delegatecrn.substring(0,3) + "-" + Delegatecrn.substring(3,5) + "-" + Delegatecrn.substring(5));
+		if(Birth != null) {
+			Birth = Birth.replace(",", "-");
+			if(Birth.length() == 8) {
+				Birth = Birth.substring(0,8) + "0" + Birth.substring(8);
+			}
+			bprivatedatavo.setBirth(Birth);
+		}
 		return bprivatedatavo;
 	}
 
