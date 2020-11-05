@@ -22,11 +22,14 @@
 	</select>
 	
 	<select id="selectReview" parameterType="hashmap" resultType="com.drumtong.business.vo.ReviewList">
-		SELECT P.NAME as customerName, A.* FROM CPRIVATEDATA P, 
+		SELECT P.NAME as customerName, A.* FROM CPRIVATEDATA P right outer join 
 				(SELECT R.*, C.CONTENT as ccontent, C.REGISTDATE as cregistdate, 
 							B.CONTENT as bcontent, B.REGISTDATE as bregistdate 
-					FROM BREVIEW R, BCUSTOMERREVIEW C, BBUSINESSREVIEW B  
-					WHERE R.ESTID=#{estid} AND C.ESTID=#{estid} AND B.ESTID=#{estid} 
+					FROM breview R 
+					left outer join bcustomerreview C
+					 on R.estid=#{estid} and R.estid=C.estid and R.memberid=C.memberid and R.salecode=C.salecode
+  					left outer join bbusinessreview B
+  					 on R.estid=B.estid and R.memberid=B.memberid and R.salecode=B.salecode
 				<choose>
 					<when test="division eq 'whole'.toString()">
 						AND R.BLOCKBOOLEAN = 'N'
@@ -39,7 +42,7 @@
 					</when>
 				</choose>
 					ORDER BY R.SALECODE DESC) A
-			WHERE P.MEMBERID=A.MEMBERID
+			on P.MEMBERID=A.MEMBERID
 <!-- 		AND ROWNUM <![CDATA[>=]]> #{start} AND ROWNUM <![CDATA[<=]]> #{end} -->
 	</select>
 	
