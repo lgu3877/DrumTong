@@ -10,23 +10,15 @@
 <body>
 	<h1>비즈니스 리뷰 관리 페이지입니다</h1>
 	매장 이름 : ${selectEST.brandnaming }
-	<h1>전체 리뷰(${ReviewCount })</h1>
-	<c:forEach items="${bReview }" varStatus="status">
+	<h1>${Name }(${wholePageNum })</h1>
+	<c:forEach items="${bReviewList }" var="Review">
 		<span style="border:1px solid pink;">
-			좋아요 : ${bReview[status.index].mgood }, 신고횟수 : ${bReview[status.index].reportcount }
-			고객 리뷰 내용 : ${bCustomerReview[status.index].content }
-			사업자 내용 : ${bBusinessReview[status.index].content }
+			좋아요 : ${Review.mgood }, 신고횟수 : ${Review.reportcount } | 
+			고객 리뷰 내용 : ${Review.ccontent }
+			고객 리뷰 날짜 : ${Review.cregistdate } | 
+			사업자 리뷰 내용 : ${Review.bcontent }
+			사업자 리뷰 날짜 : ${Review.bregistdate }
 		</span>
 	</c:forEach>
-	<h1>미답변 리뷰(${NoReplybReviewCount})</h1>
-	<c:forEach items="${NoReplybReview }" varStatus="status">
-		<c:if test="${NoReplybReview[status.index].replyboolean == 78}">
-			<span style="border:1px solid pink;">
-				좋아요 : ${NoReplybReview[status.index].mgood }, 신고횟수 : ${NoReplybReview[status.index].reportcount }
-				고객 리뷰 내용 : ${bCustomerNoReplyReview[status.index].content }
-			</span>
-		</c:if>
-	</c:forEach>
-	<h1>차단/허위 의심 리뷰</h1>
 </body>
 </html>
