@@ -4,8 +4,7 @@
 <header>
 	<div class="h_wrapper">
 		<div class="h_left_con">
-			<a href="${cpath }/business/"> <img
-				src="${cpath }/resources/business/img/businessLogo.png" />
+			<a href="${cpath }/business/"> <img src="${cpath }/resources/business/img/main/businessLogo.png" />
 			</a>
 		</div>
 		<div class="h_right_con title">
