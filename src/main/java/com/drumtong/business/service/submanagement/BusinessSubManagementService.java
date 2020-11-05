@@ -15,6 +15,7 @@ import com.drumtong.business.dao.BCustomerReviewDAO;
 import com.drumtong.business.dao.BReviewDAO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.ReviewList;
+import com.google.gson.Gson;
 
 @Service
 public class BusinessSubManagementService {
@@ -82,8 +83,11 @@ public class BusinessSubManagementService {
 		List<ReviewList> bReviewList = bReviewDAO.selectReview(map);
 		
 		mav.addObject("wholePageNum", wholePageNum);
-		mav.addObject("bReviewList", bReviewList);
 		
+		// 컨트롤러에서 jsp 로 JSON 넘기기 - GSON
+		Gson gson = new Gson();
+		String json = gson.toJson(bReviewList);
+		mav.addObject("bReviewList", json);
 		
 		return mav;
 	}
