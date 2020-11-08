@@ -119,7 +119,8 @@
     	var str_space = /\s/;               // 공백 체크
     	
     	var checkItem = obj.parentNode.querySelectorAll('div.c2-input input[type="text"]');
-    	var checkFile = obj.parentNode.querySelector('div.c2-input input[type="file"]');
+    	var checkFile = obj.parentNode.querySelectorAll('div.c2-input input[type="file"]');
+    	var texation = obj.parentNode.querySelector('#texation');
     	
     	//input 태그에 공백이거나 공백이 포함됐을 때 그쪽으로 focus
 		for(i = 0; i < checkItem.length; i++) {
@@ -127,12 +128,20 @@
 	    		checkItem[i].focus();
 	    		return false;
 	    	}	    	
-		}		
+		}
+    	
+    	if(texation.value === 'null') {
+    		texation.focus();
+    		return false;
+    	} 
+    	    	
 		// 사업자 등록증 삽입했는지 점검
-		if (!checkFile.value) {
-			checkFile.focus();
-			return false;
-		}		
+		for(j = 0; j < checkFile.length; j++){
+			if (!checkFile[j].value) {
+				//checkFile[j].focus();
+				return false;
+			}		
+		}
 		nextButton();
     }
     
@@ -150,9 +159,8 @@
 	    		return false;
 	    	}	    	
 		}		
-		// 사업자 등록증 삽입했는지 점검
 		if (!checkFile.value) {
-			checkFile.focus();
+			//checkFile.focus();
 			return false;
 		}		
 		nextButton();
@@ -197,6 +205,24 @@
 		
 		img.onload = function() {
 			imgspace.setAttribute('src', img.src);
+		}		
+	}
+
+	
+	// 영업자 신고증 업로드 버튼 변할 떄마다
+	document.getElementById('reportcard').addEventListener('change', reportcardDiv);
+	
+	// 영업자 신고증  삽입한 이미지 활성화시킴
+	function reportcardDiv() {
+
+		var reportcardspace = document.getElementById('reportcard-space');
+		var reportcard = document.getElementById('reportcard');
+		
+		var img = new Image();		
+		img.src = URL.createObjectURL(reportcard.files[0]);
+		
+		img.onload = function() {
+			reportcardspace.setAttribute('src', img.src);
 		}		
 	}
 	

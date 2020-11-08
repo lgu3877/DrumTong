@@ -12,7 +12,14 @@
  
     <div  class="c2-input">
     	<h1>과세구분</h1>
-    	<input type="text" placeholder="과세구분을 입력하세요" name="texation" id="texation" required>
+    	<select name="texation" id="texation" required>
+    		<option value="null" selected disabled>=== 과세구분 유형선택 ===</option>
+    		<option value="일반과세자">일반과세자</option>
+    		<option value="간이과세자">간이과세자</option>
+    		<option value="법인과세자">법인과세자</option>    		
+    		<option value="부가가치세 면세사업자">부가가치세 면세사업자</option>    		
+    		<option value="면세법인 사업자">면세법인 사업자</option>    		
+    	</select>
     </div>    
 
     <div  class="c2-input">
@@ -34,6 +41,16 @@
         <div class="c2-input" name="address">
     	<input type="text" placeholder="상세소세지를 입력하세요" name="detaillocation" id="detaillocation">
     </div>
+    
+    <div  class="c2-input">
+    	<h1>영업자 신고증</h1>
+    	<label for="reportcard" class="forLabel" style="display: table;"><span style="display: table-cell; vertical-align: middle;">업로드</span></label>
+    	<input type="file" placeholder="영업자 신고증을 등록하세요" name="reportcard" id="reportcard" required>
+    </div>
+    <div id="reportcarddiv">
+    	<img id="reportcard-space" width="600px">
+    </div>
+	
     <div  class="c2-input">
     	<h1>사업자 등록증</h1>
     	<label for="license" class="forLabel" style="display: table;"><span style="display: table-cell; vertical-align: middle;">업로드</span></label>
