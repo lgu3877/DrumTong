@@ -29,4 +29,19 @@ public interface BInformationDAO {
 	String selectPremiumBoolean(String estid);
 
 
+	//	UUID 중복검사 aws S3에 들어가는 이미지입니다 	
+	int ReportCardconfirm(String SerialUUID);
+
+	//	UUID 중복검사 aws S3에 들어가는 이미지입니다 	
+	int Licenseconfirm(String SerialUUID);
+	
+	// 영업신고증을 업데이트 시켜줍니다. S3에 사용돕니다.
+	int updateReportCard(BInformationVO vo);
+
+	
+	// 사업자등록증을 업데이트 시켜줍니다. S3에 사용됩니다.
+	int updateLicense(BInformationVO vo);
+
+
+
 }

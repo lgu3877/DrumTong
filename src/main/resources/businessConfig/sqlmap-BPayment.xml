@@ -6,13 +6,17 @@
 <!-- 사업장 결제 테이블	 -->
 <mapper namespace="com.drumtong.business.dao.BPaymentDAO">
 	
+<!-- 	UUID 중복검사 aws S3에 들어가는 이미지입니다 -->
+	<select id="confirm" resultType="int" parameterType="String">
+		SELECT COUNT(COPYOFBANKBOOK) FROM BPAYMENT WHERE COPYOFBANKBOOK LIKE '%'||#{SerialUUID}||'%'
+	</select>
+	
 <!-- 	신규 데이터 생성 -->
 	<insert id="insertSignUp" parameterType="BPaymentVO">
 		INSERT INTO BPAYMENT
-			(ESTID, ACCOUNTBANK, ACCOUNTNUM, COPYOFBANKBOOK)
+			(ESTID, ACCOUNTBANK, ACCOUNTNUM)
 			VALUES
-			( #{estid}, #{accountbank}, #{accountnum},
-			  #{copyofbankbook} )
+			( #{estid}, #{accountbank}, #{accountnum})
 	</insert>
 
 
@@ -30,6 +34,15 @@
 				ESTID = #{estid}
 	</update>
 	
+	
+<!-- 	통장사본을 업데이트 시켜줍니다. S3에 사용 -->
+	<update id="updateCopyOfBankBook" parameterType="BPaymentVO">
+		UPDATE BPAYMENT
+			SET
+				COPYOFBANKBOOK = #{copyofbankbook}
+			WHERE 
+				ESTID = #{estid}
+	</update>
 	
 <!-- 	=======================================REST======================================= -->
 	
