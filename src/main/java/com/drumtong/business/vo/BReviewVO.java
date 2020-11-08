@@ -4,7 +4,7 @@ public class BReviewVO {
 	private String memberid;
 	private String estid;
 	private String salecode;
-	private int gpa;
+	private double gpa;
 	private int mgood;
 	private int reportcount;
 	private char secreatbolean;
@@ -31,10 +31,10 @@ public class BReviewVO {
 	public void setSalecode(String salecode) {
 		this.salecode = salecode;
 	}
-	public int getGpa() {
+	public double getGpa() {
 		return gpa;
 	}
-	public void setGpa(int gpa) {
+	public void setGpa(double gpa) {
 		this.gpa = gpa;
 	}
 	public int getMgood() {
