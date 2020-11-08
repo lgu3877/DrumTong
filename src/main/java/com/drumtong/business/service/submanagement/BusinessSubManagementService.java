@@ -1,8 +1,5 @@
 package com.drumtong.business.service.submanagement;
 
-import java.util.HashMap;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,8 +11,7 @@ import com.drumtong.business.dao.BBusinessReviewDAO;
 import com.drumtong.business.dao.BCustomerReviewDAO;
 import com.drumtong.business.dao.BReviewDAO;
 import com.drumtong.business.vo.BInformationVO;
-import com.drumtong.business.vo.ReviewList;
-import com.google.gson.Gson;
+import com.drumtong.security.Review;
 
 @Service
 public class BusinessSubManagementService {
@@ -37,57 +33,12 @@ public class BusinessSubManagementService {
 		// ===================================================================================
 		
 		String estid = bInformationVO.getEstid();
-		
-		
-		pageKind = pageKind == null ? "whole" : pageKind;				// 페이지 종류에 대한 정보가 없으면 "whole"
-		
-		
-		
-		int page = pageNum == null ? 1 : Integer.parseInt(pageNum);		// 페이지에 대한 정보가 없으면 1 페이지
-		int gap = 5;													//한  페이지 당 보여주는 리뷰 개수
-		
-		int start = gap * (page - 1) + 1;
-		int end = start + gap - 1;
-		
-		
-		
 		ModelAndView mav = new ModelAndView("business/submanagement/businessReviewManagement");
 		
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("start", start + "");
-		map.put("end", end + "");
-		map.put("estid", estid);
+//		Review.reviewForBusiness(mav, estid, pageKind, pageNum);
+		Review.reviewForBusiness(mav, estid, pageKind);
 		
 		
-		
-		switch(pageKind) {
-		case "whole":	// 전체 페이지 수, 페이지 별 리스트
-			map.put("division", "whole");
-			mav.addObject("Name", "전체 리뷰");
-			break;
-		case "noReply": // 미답변 페이지 수, 페이지 별 리스트
-			map.put("division", "noReply");
-			mav.addObject("Name", "미답변 리뷰");
-			break;
-		case "reportReply": // 신고한리뷰 페이지 수, 페이지 별 리스트
-			map.put("division", "reportReply");	//	10개 이상일 때 신고로 이동
-			mav.addObject("Name", "신고 리뷰");
-			break;
-		}
-		
-		// 전체 페이지 수
-		int wholePageNum = bReviewDAO.selectReviewNum(map);
-		
-		// 페이지 번호, estid
-		// 현재 승원씨 테스트를 위해 페이징은 기능은 제외해둠
-		List<ReviewList> bReviewList = bReviewDAO.selectReview(map);
-		
-		mav.addObject("wholePageNum", wholePageNum);
-		
-		// 컨트롤러에서 jsp 로 JSON 넘기기 - GSON
-		Gson gson = new Gson();
-		String json = gson.toJson(bReviewList);
-		mav.addObject("bReviewList", json);
 		
 		return mav;
 	}

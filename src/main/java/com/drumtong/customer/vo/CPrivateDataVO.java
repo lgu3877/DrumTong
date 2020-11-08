@@ -6,7 +6,14 @@ public class CPrivateDataVO extends PrivateData{
 	private String memberid;
 	private String mainreceiptaddress;
 	private String detailreceiptaddress;
+	private String profileimg;
 	
+	public String getProfileimg() {
+		return profileimg;
+	}
+	public void setProfileimg(String profileimg) {
+		this.profileimg = profileimg;
+	}
 	public String getMemberid() {
 		return memberid;
 	}
