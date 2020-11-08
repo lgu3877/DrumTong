@@ -1,5 +1,7 @@
 package com.drumtong.business.controller.submanagement;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.drumtong.business.service.submanagement.RestBusinessSubManagementService;
 import com.drumtong.business.vo.BPaymentVO;
+import com.google.gson.Gson;
 
 
 @RestController
@@ -56,5 +59,12 @@ public class RestBusinessSubManagementController {
 	// ========================= 대분류 [주문현황] ================================ [건욱]
 	
 		
+	// ========================= 대분류 [리뷰관리] ================================ [영경]
+	// 자세한건 추후 페이지 어떻게 구현할 지 정한 후 만들기
+	@RequestMapping("businessReviewManagement/rest/reload/{pageKind}")
+	@GetMapping(produces="application/json; charset=utf8")
+	public Gson reloadReview(HttpServletRequest req, @PathVariable("pageKind")String pageKind) {
+		return svc.reloadReview(req, pageKind);
+	}
 	
 }
