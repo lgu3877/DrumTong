@@ -8,7 +8,7 @@
 
 	<!-- 	UUID 중복검사 aws S3에 들어가는 이미지입니다 -->
 	<select id="confirm" resultType="int" parameterType="String">
-		SELECT COUNT(STOREIMG) FROM BIMAGE WHERE STOREIMG LIKE '%'||#{estid}||'%'
+		SELECT COUNT(STOREIMG) FROM BIMAGE WHERE STOREIMG LIKE '%'||#{SerialUUID}||'%'
 	</select>
 
 <!-- 사업장 이미지 반환 -->
@@ -21,7 +21,7 @@
 	<insert id="insertConstract" parameterType="BImageVO">
 		INSERT INTO BIMAGE
 			VALUES
-			( #{estid}, #{num}, #{storeimg} )
+			( #{estid}, #{storeimg}, #{registdate}, #{delegatephotoboolean} )
 	</insert>
 
 

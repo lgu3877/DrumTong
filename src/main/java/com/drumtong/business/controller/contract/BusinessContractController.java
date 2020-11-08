@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.drumtong.business.service.contract.BusinessContractService;
@@ -29,9 +30,12 @@ public class BusinessContractController {
 	// 온라인 계약 매장 생성 (POST) [건욱]  
 	// ※ BManagementVO의 DefayktCategory(메뉴 카테고리)는 Javascript에서 "/"를 넣어준다
 	// ex) 일반의류/신발/카페트/
+	// BpersonID 값을 불러오기 위해 resp값도 가져와준다.
+	// 이미지를 S3에 저장하기위해 Multipartrequest를 불러와준다.
 	@RequestMapping(value = "businessContract/", method = RequestMethod.POST)
-	public ModelAndView contract(BInformationVO bInformationVO, BPaymentVO bPaymentVO, BManagementVO bManagementVO) {
-		return svc.contract(bInformationVO, bPaymentVO, bManagementVO);
+	public ModelAndView contract(BInformationVO bInformationVO, BPaymentVO bPaymentVO,
+								BManagementVO bManagementVO, HttpServletRequest req, MultipartHttpServletRequest mpf) {
+		return svc.contract(bInformationVO, bPaymentVO, bManagementVO, req, mpf);
 	}
 	
 	
