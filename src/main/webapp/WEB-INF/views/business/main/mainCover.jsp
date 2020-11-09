@@ -63,8 +63,8 @@
 		<h1>닥치고 동의나 하거라!</h1>
 		<input type="button" id="check" onclick="deletePopup();" value="시작하기" class="cookiebutton">	
 	</div>
-	<img id="prevBtn" style="position: absolute; top: 45%; left: 0; z-index: 9999; width: 5%; opacity: 0.6; display: none" src="${cpath }/resources/business/img/prev_button.png" onclick="prevCover()">
-	<img id="nextBtn" style="position: absolute; top: 45%; right: 0; z-index: 9999; width: 5%; opacity: 0.6; display: none" src="${cpath }/resources/business/img/next_button.png" onclick="nextCover()">
+	<img id="prevBtn" style="position: absolute; top: 45%; left: 0; z-index: 9999; width: 5%; opacity: 0.6; display: none" src="${cpath }/resources/business/img/arrow/prev_button.png" onclick="prevCover()">
+	<img id="nextBtn" style="position: absolute; top: 45%; right: 0; z-index: 9999; width: 5%; opacity: 0.6; display: none" src="${cpath }/resources/business/img/arrow/next_button.png" onclick="nextCover()">
 </body>
 
 <script type="text/javascript">
