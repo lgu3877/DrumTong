@@ -6,6 +6,7 @@
 <!-- 사업장 메인리뷰 테이블	 -->
 <mapper namespace="com.drumtong.business.dao.BReviewDAO">
 
+<!-- 사업장 리뷰 갯수 불러오기 -->
 	<select id="selectReviewNum" parameterType="hashmap" resultType="int">
 		SELECT count(*) FROM BREVIEW WHERE ESTID=#{estid}
 			<choose>
@@ -20,8 +21,9 @@
 				</when>
 			</choose>
 	</select>
-<!-- 	(CONCAT(SUBSTR(P.NAME,0,5),'***')) -->
-	<select id="selectReview" parameterType="hashmap" resultType="com.drumtong.business.vo.ReviewList">
+	
+<!-- 사업장 리뷰관리 리스트 불러오기 -->
+	<select id="selectReview" parameterType="hashmap" resultType="ReviewList">
 		SELECT CONCAT(SUBSTR(P.NAME,0,2),'***') as customerName, profileimg, A.* FROM CPRIVATEDATA P right outer join 
 				(SELECT R.*, C.CONTENT as ccontent, C.REGISTDATE as cregistdate, 
 							B.CONTENT as bcontent, B.REGISTDATE as bregistdate 
@@ -48,7 +50,13 @@
 <!-- 		AND ROWNUM <![CDATA[>=]]> #{start} AND ROWNUM <![CDATA[<=]]> #{end} -->
 	</select>
 	
-	<select id="selectNoReply" parameterType="String" resultType="BReviewVO">
-		SELECT * FROM BREVIEW WHERE ESTID=#{estid} AND REPLYBOOLEAN='N'
-	</select>
+	<update id="updateReplyConfirm" parameterType="ReviewList">
+		UPDATE BREVIEW SET REPLYBOOLEAN='Y' WHERE ESTID=#{estid} AND SALECODE=#{salecode}
+	</update>
+	
+	<update id="updateReportConfirm" parameterType="ReviewList">
+		UPDATE BREVIEW SET REPORTBOOLEAN='Y' WHERE ESTID=#{estid} AND SALECODE=#{salecode}
+	</update>
+	
+	
 </mapper>

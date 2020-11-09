@@ -5,8 +5,10 @@
 
 <!-- 사업장 사업자리뷰 테이블	 -->
 <mapper namespace="com.drumtong.business.dao.BBusinessReviewDAO">
-
-	<select id="selectReview" parameterType="String" resultType="BBusinessReviewVO">
-		SELECT * FROM BBUSINESSREVIEW WHERE ESTID=#{estid}
-	</select>
+	
+	<update id="updateReply" parameterType="ReviewList">
+		UPDATE BBUSINESSREVIEW SET 
+			CONTENT=#{content}, registdate=TO_CHAR(sysdate,'YYYY-MM-DD HH24:MI:SS') 
+			WHERE ESTID=#{estid} AND SALECODE=#{salecode}
+	</update>
 </mapper>
