@@ -25,22 +25,24 @@
 		SELECT CONCAT(SUBSTR(P.NAME,0,2),'***') as customerName, profileimg, A.* FROM CPRIVATEDATA P right outer join 
 				(SELECT R.*, C.CONTENT as ccontent, C.REGISTDATE as cregistdate, 
 							B.CONTENT as bcontent, B.REGISTDATE as bregistdate 
-					FROM breview R 
+					FROM (SELECT * FROM BREVIEW WHERE 
+						<choose>
+							<when test="division eq 'whole'.toString()">
+								BLOCKBOOLEAN = 'N'
+							</when>
+							<when test="division eq 'noReply'.toString()">
+								REPLYBOOLEAN = 'N' AND BLOCKBOOLEAN = 'N' 
+							</when>
+							<when test="division eq 'reportReply'.toString()">
+								BLOCKBOOLEAN = 'Y'
+							</when>
+						</choose>
+					) R 
 					left outer join bcustomerreview C
 					 on R.estid=#{estid} and R.estid=C.estid and R.memberid=C.memberid and R.salecode=C.salecode
   					left outer join bbusinessreview B
   					 on R.estid=B.estid and R.memberid=B.memberid and R.salecode=B.salecode
-				<choose>
-					<when test="division eq 'whole'.toString()">
-						AND R.BLOCKBOOLEAN = 'N'
-					</when>
-					<when test="division eq 'noReply'.toString()">
-						AND R.REPLYBOOLEAN = 'N' AND R.BLOCKBOOLEAN = 'N' 
-					</when>
-					<when test="division eq 'reportReply'.toString()">
-						AND R.BLOCKBOOLEAN = 'Y'
-					</when>
-				</choose>
+
 					ORDER BY R.SALECODE DESC) A
 			on P.MEMBERID=A.MEMBERID
 <!-- 		AND ROWNUM <![CDATA[>=]]> #{start} AND ROWNUM <![CDATA[<=]]> #{end} -->
