@@ -1,0 +1,148 @@
+.customerReview {
+	width: 100%;  
+	display: flex
+}
+
+.reviewName {
+	width: 10%;
+	display: inline-block;
+}
+
+.reviewContent {
+	width: 50%;
+	display: inline-block;
+}
+
+.reviewDate {
+	width: 20%;
+	display: inline-block;
+}
+
+
+
+div.reviewflex {
+	width: 100%;
+	height: 100px;
+	display: flex;
+	margin: 0 auto;
+}
+
+div.reviewflex .imgdiv {
+	width: 20%;
+	height: 100%;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+div.reviewflex .imgdiv img {
+	width: 100%;
+}
+
+div.reviewflex .table {
+	width: 60%;
+	height: 100%;
+	display: table;
+}
+
+div.reviewflex .table .row {
+	width: 100%;
+	display: table-row;
+}
+
+.table .row .customerName {
+ 	width: 25%;
+ 	text-align: left;
+ 	display: inline-block;
+ }
+ 
+.table .row .cregistdate {
+ 	width: 75%; 
+ 	text-align: left; 
+ 	display: inline-block;
+ }
+ 
+.table .row .left10 {
+   	width: 10%; 
+   	text-align: left; 
+   	display: inline-block;
+   }
+
+.table .row .left15 {
+   	width: 15%; 
+   	text-align: left; 
+   	display: inline-block;
+   }
+   
+.table .row .left35 {
+   	width: 35%; 
+   	text-align: left; 
+   	display: inline-block;
+   }
+
+.table .row .center15 {
+   	width: 15%; 
+   	text-align: center; 
+   	display: inline-block;
+   }
+ 
+.btndiv {
+ 	width: 20%;
+ }
+ 
+.btndiv input[type="button"] {
+ 	width: 100%;
+ 	height: 45%;
+ }
+ 
+.btndiv div {
+  	height: 10%;
+  }
+  
+div.extradiv {
+  	width: 100%; margin-top: 10px; margin-bottom: 10px
+  }
+  
+div.extradiv textarea {
+	width: 80%; 
+	border: none; 
+	resize: none;
+	outline: none;
+	margin: 0 auto;
+}
+
+div.extradiv img {
+	width: 50%;
+	margin: o auto;
+}
+
+#reviewpage div {
+	height: 100%;
+	display: table-cell;
+}
+
+#reviewpage .currentPage {
+	vertical-align: middle; 
+	border-radius: 50%; 
+	border: 2px solid #666; 
+	width: 48px; 
+	height: 48px; 
+	font-size: 24pt; 
+	display: inline-block; 
+	background-color: grey
+}
+
+#reviewpage .notcurrentPage {
+	vertical-align: middle; 
+	border-radius: 50%; 
+	border: 2px solid #666; 
+	width: 48px; 
+	height: 48px; 
+	font-size: 24pt; 
+	display: inline-block; 
+}
+
+#reviewpage i {
+	vertical-align: middle;
+}
