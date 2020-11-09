@@ -38,7 +38,7 @@ public class BusinessSubManagementController {
 		return new ModelAndView("redirect:/business/submanagement/businessReviewManagement/");
 	}
 	
-	// 비즈니스 쿠폰관리 페이지로 이동 (GET) [건욱]
+	// 비즈니스 쿠폰관리 페이지로 이동 (GET) [영경]
 	@RequestMapping(value="businessCouponManagement/", method = RequestMethod.GET)
 	public ModelAndView couponManagement(HttpServletRequest req) {
 		return svc.couponManagement(req);
