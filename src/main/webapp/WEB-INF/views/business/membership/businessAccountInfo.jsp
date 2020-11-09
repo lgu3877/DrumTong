@@ -88,7 +88,7 @@
          <input type="hidden" value="${bLogin.id}" id="id" name="id">
    
          <div class="rightdiv">
-            <input class="input" type="text" name="name" value="${bLogin.name }" placeholder="이름을 입력하세요" readonly>
+            <input class="input" type="text" name="name" value="${bLogin.name }" placeholder="이름을 입력하세요" maxlength="10" readonly>
             <input type="hidden" value="${bLogin.name }">
             <input class="origininput">
          </div>         
@@ -126,7 +126,7 @@
             <input class="origininput" >
          </div>
          <div class="rightdiv">
-            <input class="input" type="password" name="pw" id="pw" placeholder="비밀번호" readonly>
+            <input class="input" type="password" name="pw" id="pw" placeholder="비밀번호" readonly required>
             <input type="hidden" name="option" value="AccountInfo">
             <input class="origininput">
          </div>
