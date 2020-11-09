@@ -42,13 +42,13 @@
 <!-- 	신규 데이터 등록 -->
 	<insert id="insertSignUp" parameterType="BInformationVO">
 		INSERT INTO BINFORMATION 
-			(ESTID, TAXATION, CRN, BRANDNAMING, REPRESENTATIVE, MAINLOCATION,
-			 DETAILLOCATION, LATITUDE, LOGNITUDE) 
+			(ESTID, TAXATION, CRN, 
+			BRANDNAMING, REPRESENTATIVE, MAINLOCATION,
+			 DETAILLOCATION) 
 			VALUES
 			( #{estid}, #{taxation}, #{crn},
 			  #{brandnaming}, #{representative}, #{mainlocation},
-			  #{detaillocation}, #{reportcard}, #{license},
-			  #{latitude}, #{lognitude})
+			  #{detaillocation})
 	</insert>
 
 
