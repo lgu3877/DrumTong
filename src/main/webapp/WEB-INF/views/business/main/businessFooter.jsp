@@ -6,6 +6,6 @@
 	</footer>
 	
 	<!-- Calendar -->
-	<script type="text/javascript" src="${cpath }/business/js/calendar.js"></script>
+	<%-- <script type="text/javascript" src="${cpath }/business/js/calendar.js"></script> --%>
 </body>
 </html>

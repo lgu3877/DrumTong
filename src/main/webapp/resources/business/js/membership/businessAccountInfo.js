@@ -290,6 +290,7 @@
       input1.setAttribute("type", "text");
       input1.setAttribute("name", "email");
       input1.setAttribute("id", "email");
+      input1.setAttribute("maxlength", "50");
       input1.setAttribute("placeholder", "이메일 주소를 입력하세요");
       input1.setAttribute("class", "email");
       
@@ -345,6 +346,7 @@
       input1.setAttribute("type", "text");
       input1.setAttribute("name", "mainaddress");
       input1.setAttribute("id", "mainaddress");
+	  input1.readOnly = true;
       input1.setAttribute("placeholder", "우편번호");
       input1.setAttribute("class", "mainaddress");
       
@@ -359,6 +361,7 @@
       input3.setAttribute("type", "text");
       input3.setAttribute("name", "detailaddress");
       input3.setAttribute("id", "detailaddress");
+      input3.setAttribute("maxlength", "25");
       input3.setAttribute("placeholder", "나머지 주소를 입력하세요");
       input3.setAttribute("class", "detailadress");
       
