@@ -1,10 +1,19 @@
 package com.drumtong.business.service.submanagement;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.drumtong.business.dao.BPaymentDAO;
+import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BPaymentVO;
+import com.drumtong.business.vo.ReviewList;
+import com.drumtong.security.Review;
+import com.google.gson.Gson;
 
 @Service
 public class RestBusinessSubManagementService {
@@ -31,6 +40,15 @@ public class RestBusinessSubManagementService {
 	public int updateAccount(BPaymentVO bPaymentVO) {
 		int RestUpdateAccountReuslt = bPaymentDAO.updatePremiumPay(bPaymentVO);
 		return RestUpdateAccountReuslt;
+	}
+
+
+	public Gson reloadReview(HttpServletRequest req, String pageKind) {
+		HttpSession Session = req.getSession();
+		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+		String estid= bInformationVO.getEstid();
+		List<ReviewList> list = Review.reviewForBusiness(null, estid, pageKind);
+		return null;
 	}
 
 
