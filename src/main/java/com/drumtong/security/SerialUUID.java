@@ -65,12 +65,12 @@ public class SerialUUID {
 		int result = 1;
 		String SerialUUID = "";
 		
-//		System.out.println("while문 밖에 serailuuid : " + SerialUUID);
+		System.out.println("while문 밖에 serailuuid : " + SerialUUID);
 		 
 		while(result == 1) {
 			
 			SerialUUID = FieldName + "_" + UUID.randomUUID().toString().replace("-", "");
-//			System.out.println("while문 안에 serailuuid : " + SerialUUID);
+			System.out.println("while문 안에 serailuuid : " + SerialUUID);
 			switch(TableName) {
 				case "CPrivateData" : result = cCustomerDAO.confirm(SerialUUID);
 					break;

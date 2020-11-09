@@ -11,13 +11,14 @@
 
     <div class="c3-input">
     	<h1>계좌번호</h1>
-    	<input type="text" placeholder="계좌번호를 입력하세요" name="accountnum" id="accountnum" required style="height: 40px; width: 400px">
+    	<input type="text" placeholder="계좌번호를 입력하세요" name="accountnum" id="accountnum" 
+    	maxlength="20" required style="height: 40px; width: 400px">
     </div>
     
     <div  class="c3-input">
     	<h1>통장사본</h1>
     	<label for="copyofbankbook" class="forLabel" style="display: table;"><span style="display: table-cell; vertical-align: middle;">업로드</span></label>
-    	<input type="file" placeholder="통장사본을 등록하세요" name="copyofbankbook" id="copyofbankbook" required>
+    	<input type="file" placeholder="통장사본을 등록하세요" name="file" id="copyofbankbook" required>
     </div>
     
     <div id="copydiv">

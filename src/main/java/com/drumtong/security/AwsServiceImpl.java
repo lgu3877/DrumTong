@@ -34,9 +34,9 @@ public class AwsServiceImpl{
 	@Autowired BInformationDAO bInformationDAO;
 	
 	
-    private static final String BUCKET_NAME = "laundrydrumtong";
-    private static final String ACCESS_KEY = "AKIAYBVBYYPFP2GX3YWI";
-    private static final String SECRET_KEY = "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";
+    private static final String BUCKET_NAME = "laundrydrumtong2";
+    private static final String ACCESS_KEY = "AKIARY57UYCGCWQCGNXQ";
+    private static final String SECRET_KEY = "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";
 
     private AmazonS3 amazonS3; // 인스턴스를 초기화한다.
 
@@ -142,6 +142,7 @@ public class AwsServiceImpl{
          	 * BInformation에서는 한꺼번에 처리하기가 힘들기 때문에 1차 입력 2차수정으로 동작시켜준다.
          	 */
          	else if(object instanceof BInformationVO && count < 2) {
+         		System.out.println("BInformationVO 동작 합니다 [count] : " + count);
 //         		BInformationVO vo = (BInformationVO)object;
          		subFolderName = "CONTRACT";
          		
