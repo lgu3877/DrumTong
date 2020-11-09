@@ -12,5 +12,9 @@ public interface BReviewDAO {
 
 	// 페이지별 리뷰 불러오기
 	List<ReviewList> selectReview(HashMap<String, String> map);
+
+	int updateReplyConfirm(ReviewList reviewList);
+
+	int updateReportConfirm(ReviewList reviewList);
 	
 }
