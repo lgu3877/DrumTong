@@ -380,7 +380,7 @@
     			console.log(replace2);
     			var replace3 = replace2.split('.');
     			console.log(replace3);
-    			
+    			console.log(replace3[0]);
     			hiddenCategory.setAttribute('value', replace3[0]);
     			
     			this.parentNode.appendChild(hiddenCategory);

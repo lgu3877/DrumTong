@@ -68,11 +68,9 @@ public class BusinessContractService {
 	@Transactional	// 복잡한 쿼리가 구현되기 때문에 트랜잭션 어노테이션을 추가했습니다.
 	public ModelAndView contract(BInformationVO bInformationVO, BPaymentVO bPaymentVO, 
 									BManagementVO bManagementVO, HttpServletRequest req,MultipartHttpServletRequest mpf) {
+
 		
-		System.out.println("@@@@@@@@@@@온라인 계약 작동@@@@@@@@@@@@@@@@");
-		
-		
-		ModelAndView mav = new ModelAndView("redirect:/business");
+		ModelAndView mav = new ModelAndView("redirect:/business/");
 		
 		// BEstablishment 테이블을 위한 ESTID UUID 생성
 		/*
@@ -85,66 +83,68 @@ public class BusinessContractService {
 		String ESTID = SerialUUID.getSerialUUID("BEstablishment", "ESTID");
 
 		// bpersonid값을 가져와주기 위해 sessoin 생성
+		
 		HttpSession Session = req.getSession();
 		BPrivateDataVO User = ((BPrivateDataVO)Session.getAttribute("bLogin"));
 		String Bpersonid = User.getBpersonid();
 		
-		System.out.println(Bpersonid);
+		
+		
+		
 		
 		//BEstablishment 테이블 생성을 위해 데이터를 셋팅해준다.
+		
 		BEstablishmentVO bEstablishmentVO = new BEstablishmentVO();
+		
 		bEstablishmentVO.setEstid(ESTID);
 		bEstablishmentVO.setBpersonid(Bpersonid);
 		
+		
+		
+		
 		// 1. 사업장 BEstablishment 테이블에 정보 입력
+
 		int BEstablishmentResult = bEstablishmentDAO.insertSignUp(bEstablishmentVO);
 		
+
 		
+
 		// 2. 사업장 BInformation 테이블에 정보 입력
+		
 		bInformationVO.setEstid(ESTID);
 		
 		
-		
-		System.out.println(bInformationVO.getEstid());
-		System.out.println(bInformationVO.getTaxation());
-		System.out.println(bInformationVO.getCrn());
-		System.out.println(bInformationVO.getBrandnaming());
-		System.out.println(bInformationVO.getRepresentative());
-		System.out.println(bInformationVO.getMainlocation());
-		System.out.println(bInformationVO.getDetaillocation());
-		System.out.println(bInformationVO.getReportcard());
-		System.out.println(bInformationVO.getLicense());
-		System.out.println(bInformationVO.getLatitude());
-		
 		int BInformationResult = bInformationDAO.insertSignUp(bInformationVO);
 		
-		System.out.println("Binfor테이블 : " + BInformationResult);
+		
+		
 		
 		// 3. 사업장 BPayment 테이블에 정보 입력
+
 		bPaymentVO.setEstid(ESTID);
 		int BPaymentResult = bPaymentDAO.insertSignUp(bPaymentVO);
 		
-		System.out.println("BPayment 테이블: " + BPaymentResult);
 		
-		System.out.println("Bmangement default category : " + bManagementVO.getDefaultcategory());
+		bManagementVO.setDefaultcategory(bManagementVO.getDefaultcategory().replace(",", "/") + "/");
+		
+		
 		
 		// 4. 사업장 BManagement 테이블에 '기본 카테고리' 정보 입력
+
 		bManagementVO.setEstid(ESTID);
 		int BManagementResult = bManagementDAO.insertSignUp(bManagementVO);
 		
-		System.out.println("Bmangement 테이블 : " + BManagementResult);
 		
 		
 		// 5. 사업장 BScheduletime 테이블 정보 입력
 		int BScheduleTimeResult = bScheduleTimeDAO.insertSignUp(ESTID);
 		
 		
-		System.out.println("BScheduleTime 테이블 : " + BScheduleTimeResult);
+		
 		
 		// 6. 사업장 BScheduleDays 테이블 정보 입력
 		int BScheduleDaysResult = bScheduleDaysDAO.insertSignUp(ESTID);
 		
-		System.out.println("BScheduleDays 테이블 : " + BScheduleDaysResult);
 		
 		/* S3에 이미지 파일들을 저장해주기 위한 메서드이다.
 		 * 여기서 처리해주는 필드 값들은 다음과 같다.
@@ -157,7 +157,6 @@ public class BusinessContractService {
 		 * 다중 이미지 업로드이기 떄문에 multipleUpload 메서드를 호출해준다.
 		 *  
 		 */
-		bInformationVO.setEstid(ESTID);
 		aws.multipleUpload(mpf, ESTID, bInformationVO);
 		
 		

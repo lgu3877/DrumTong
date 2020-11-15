@@ -47,6 +47,8 @@ public class SerialUUID {
 	
 	// AWS S3 저장 파일명 지정용
 	@Autowired BImageDAO BeanbImageDAO;
+	@Autowired BInformationDAO BeanbInformationDAO;
+	@Autowired BPaymentDAO BeanbPaymentDAO;
 	
 	@PostConstruct
 	private void init() {
@@ -57,6 +59,8 @@ public class SerialUUID {
 		
 		// AWS S3 저장 파일명 지정용
 		this.bImageDAO = BeanbImageDAO;
+		this.bInformationDAO = BeanbInformationDAO;
+		this.bPaymentDAO = BeanbPaymentDAO;
 	}
 	
 	
