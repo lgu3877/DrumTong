@@ -69,7 +69,6 @@ public class AwsServiceImpl{
     	// count가 2일 때는 BPayment에 관한 처리를 해줍니다.
     	int count = 0;
     	
-    	System.out.println(object instanceof BInformationVO);
     	
     	List<MultipartFile> fileList = mpf.getFiles("file");
         for (MultipartFile mf : fileList) {
@@ -89,11 +88,11 @@ public class AwsServiceImpl{
      public void s3FileUpload(MultipartFile file, String folderName, Object object, int count) {
     	 
     	 
-    	 System.out.println("aws file upload 실행..");
     	 ObjectMetadata metadata = new ObjectMetadata();
     	 metadata.setContentType(MediaType.IMAGE_PNG_VALUE);
     	 metadata.setContentLength(file.getSize());
     	
+    	 
         // 파일 업로드를 위한 request 객체를 생성 하였다.
         try {
         	PutObjectRequest putObjectRequest;
@@ -184,7 +183,7 @@ public class AwsServiceImpl{
          	 */
          	else if(object instanceof BInformationVO && count == 2) {
          		subFolderName = "CONTRACT";
-         		UUID = SerialUUID.getSerialUUID("BPayment", "STOREIMG");
+         		UUID = SerialUUID.getSerialUUID("BPayment", "COPYOFBANKBOOK");
          		
          		// 1. 파일이름
             	fileName = UUID +"."+ file.getOriginalFilename().split("\\.")[1];
@@ -208,15 +207,12 @@ public class AwsServiceImpl{
         	String dir = BUCKET_NAME + "/" + folderName + "/" + subFolderName;
         	
         	
-         	// 파일이름
-//        	String fileName = UUID +"."+ file.getOriginalFilename().split("\\.")[1];
         	
         	
         	// 파일을 넣어준다.
         	putObjectRequest = new PutObjectRequest(dir, fileName, file.getInputStream(), metadata);
 			
         	
-//			putObjectRequest = new PutObjectRequest(BUCKET_NAME + "/" + folderName,file.getOriginalFilename(), file.getInputStream(), metadata);
 //			// Access List 를 설정 하는 부분이다. 공개 조회가 가능 하도록 public Read 로 설정 하였다.
 	        putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead);
 	        
@@ -227,38 +223,9 @@ public class AwsServiceImpl{
 	        
 	        
 	        
-//	    	if(object instanceof BImageVO) { 
-//	    		BImageVO vo = (BImageVO)object;
-//	    		vo.setStoreimg(folderName + "/"  + subFolderName + "/" + fileName);
-//	    	}
-//         	// 사업자 정보 테이블일 경우
-//         	else if(object instanceof BInformationVO) {
-//         		BInformationVO vo = (BInformationVO)object;
-//         	}
-//	    	
-//         	// 결제 테이블일 경우
-//         	else if(object instanceof BPaymentVO) {
-//         	}
-        	
-	        
-	        
-	        
-	        // 데이터베이스에  ESTID와 StoreIMG(저장경로)를 입력해줍니다.
-//	        bImageVO.setStoreimg(folderName + "/" + fileName);
-	        
-//	        bImageDAO.insertConstract(bImageVO);
-	        
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-                // request 객체 안에 BUCKET_NAME + "생성 될 폴더 이름", 파일 원본이름, File 바이너리 데이터 를 설정하였다.ㅏ
-//                new PutObjectRequest(BUCKET_NAME + "/" + folderName, file.getName(), file);
-
-        // Access List 를 설정 하는 부분이다. 공개 조회가 가능 하도록 public Read 로 설정 하였다.
-//        putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead);
-//
-//        // 실제로 업로드 할 액션이다.
-//        amazonS3.putObject(putObjectRequest);
     }
     
     
