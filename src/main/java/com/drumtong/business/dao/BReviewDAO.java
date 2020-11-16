@@ -16,5 +16,7 @@ public interface BReviewDAO {
 	int updateReplyConfirm(ReviewList reviewList);
 
 	int updateReportConfirm(ReviewList reviewList);
+
+	int deleteReportConfirm(ReviewList reviewList);
 	
 }
