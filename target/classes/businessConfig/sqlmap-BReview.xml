@@ -55,7 +55,7 @@
 	</update>
 	
 	<update id="updateReportConfirm" parameterType="ReviewList">
-		UPDATE BREVIEW SET REPORTBOOLEAN='Y' WHERE ESTID=#{estid} AND SALECODE=#{salecode}
+		UPDATE BREVIEW SET BLOCKBOOLEAN='Y' WHERE ESTID=#{estid} AND SALECODE=#{salecode}
 	</update>
 	
 	
