@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.drumtong.business.service.submanagement.RestBusinessSubManagementService;
 import com.drumtong.business.vo.BPaymentVO;
-import com.google.gson.Gson;
+import com.drumtong.business.vo.ReviewList;
 
 
 @RestController
@@ -61,11 +62,11 @@ public class RestBusinessSubManagementController {
 	
 		
 	// ========================= 대분류 [리뷰관리] ================================ [영경]
-	// 자세한건 추후 페이지 어떻게 구현할 지 정한 후 만들기
-	@RequestMapping("businessReviewManagement/rest/reload/{pageKind}")
-	@GetMapping(produces="application/json; charset=utf8")
-	public Gson reloadReview(HttpServletRequest req, @PathVariable("pageKind")String pageKind) {
-		return svc.reloadReview(req, pageKind);
+	// 답글 달기		// processing in ('reply', 'report')
+	@RequestMapping("businessReviewManagement/rest/{pageKind}/{processing}/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String updateReview(HttpServletRequest req, @RequestBody ReviewList reviewList, @PathVariable("pageKind")String pageKind, @PathVariable("processing")String processing) {
+		return svc.updateReview(req, reviewList, pageKind, processing);
 	}
 	
 }
