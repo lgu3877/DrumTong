@@ -53,33 +53,8 @@ public class RestBusinessSubManagementService {
 	// ========================= 대분류 [리뷰 관리] ================================ [영경]
 	// 답글 달기		// processing in ('reply', 'report')
 	// 리뷰 구분을 위해 SALECODE를 항상 같이 넘겨주어야 함
-//	@Transactional
-//	public String updateReview(HttpServletRequest req, ReviewList reviewList, String pageKind, String processing) {
-//		HttpSession Session = req.getSession();
-//		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
-//		String estid= bInformationVO.getEstid();
-//		reviewList.setEstid(estid);
-//		int result = 0;
-//		
-//		switch(processing) {
-//		case "reply":
-//			result = bReviewDAO.updateReplyConfirm(reviewList);		// estid, salecode
-//			result = bBusinessReviewDAO.updateReply(reviewList);	// content, estid, salecode
-//			break;
-//		case "report":
-//			result = bReviewDAO.updateReportConfirm(reviewList);	// estid, salecode
-//			break;
-//		}
-//		
-//		List<ReviewList> bReviewList = Review.selectList(estid, pageKind);
-//		
-//		Gson gson = new GsonBuilder().create();
-//		
-//		return gson.toJson(bReviewList);
-//	}
-
 	@Transactional
-	public ModelAndView updateReview(HttpServletRequest req, ReviewList reviewList, String pageKind, String processing) {
+	public String updateReview(HttpServletRequest req, ReviewList reviewList, String pageKind, String processing) {
 		HttpSession Session = req.getSession();
 		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
 		String estid= bInformationVO.getEstid();
@@ -98,9 +73,34 @@ public class RestBusinessSubManagementService {
 		
 		List<ReviewList> bReviewList = Review.selectList(estid, pageKind);
 		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("bReviewList",bReviewList);
-		return mav;
+		Gson gson = new GsonBuilder().create();
+		
+		return gson.toJson(bReviewList);
 	}
+
+//	@Transactional
+//	public ModelAndView updateReview(HttpServletRequest req, ReviewList reviewList, String pageKind, String processing) {
+//		HttpSession Session = req.getSession();
+//		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+//		String estid= bInformationVO.getEstid();
+//		reviewList.setEstid(estid);
+//		int result = 0;
+//		
+//		switch(processing) {
+//		case "reply":
+//			result = bReviewDAO.updateReplyConfirm(reviewList);		// estid, salecode
+//			result = bBusinessReviewDAO.updateReply(reviewList);	// content, estid, salecode
+//			break;
+//		case "report":
+//			result = bReviewDAO.updateReportConfirm(reviewList);	// estid, salecode
+//			break;
+//		}
+//		
+//		List<ReviewList> bReviewList = Review.selectList(estid, pageKind);
+//		
+//		ModelAndView mav = new ModelAndView();
+//		mav.addObject("bReviewList",bReviewList);
+//		return mav;
+//	}
 	
 }
