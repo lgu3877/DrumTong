@@ -69,10 +69,4 @@ public class RestBusinessSubManagementController {
 		return svc.updateReview(req, reviewList, pageKind, processing);
 	}
 	
-//	@RequestMapping("businessReviewManagement/rest/{pageKind}/{processing}/")
-//	@PostMapping(produces="application/json; charset=utf8")
-//	public ModelAndView updateReview(HttpServletRequest req, @RequestBody ReviewList reviewList, @PathVariable("pageKind")String pageKind, @PathVariable("processing")String processing) {
-//		return svc.updateReview(req, reviewList, pageKind, processing);
-//	}
-	
 }

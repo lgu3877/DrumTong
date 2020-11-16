@@ -62,12 +62,18 @@ public class RestBusinessSubManagementService {
 		int result = 0;
 		
 		switch(processing) {
-		case "reply":
+		case "replyAdd":	// 사장님 답글 추가
 			result = bReviewDAO.updateReplyConfirm(reviewList);		// estid, salecode
 			result = bBusinessReviewDAO.updateReply(reviewList);	// content, estid, salecode
 			break;
-		case "report":
+		case "reportAdd":	// 신고하기
 			result = bReviewDAO.updateReportConfirm(reviewList);	// estid, salecode
+			break;
+		case "replyDelete":	// 사장님 답글 삭제(단, 댓글확인은 유지)
+			result = bBusinessReviewDAO.deleteReply(reviewList);
+			break;
+		case "reportDelete":// 신고 해제
+			result = bReviewDAO.deleteReportConfirm(reviewList);
 			break;
 		}
 		
@@ -77,30 +83,5 @@ public class RestBusinessSubManagementService {
 		
 		return gson.toJson(bReviewList);
 	}
-
-//	@Transactional
-//	public ModelAndView updateReview(HttpServletRequest req, ReviewList reviewList, String pageKind, String processing) {
-//		HttpSession Session = req.getSession();
-//		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
-//		String estid= bInformationVO.getEstid();
-//		reviewList.setEstid(estid);
-//		int result = 0;
-//		
-//		switch(processing) {
-//		case "reply":
-//			result = bReviewDAO.updateReplyConfirm(reviewList);		// estid, salecode
-//			result = bBusinessReviewDAO.updateReply(reviewList);	// content, estid, salecode
-//			break;
-//		case "report":
-//			result = bReviewDAO.updateReportConfirm(reviewList);	// estid, salecode
-//			break;
-//		}
-//		
-//		List<ReviewList> bReviewList = Review.selectList(estid, pageKind);
-//		
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("bReviewList",bReviewList);
-//		return mav;
-//	}
 	
 }

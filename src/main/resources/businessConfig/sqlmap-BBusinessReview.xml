@@ -11,4 +11,10 @@
 			CONTENT=#{content}, registdate=TO_CHAR(sysdate,'YYYY-MM-DD HH24:MI:SS') 
 			WHERE ESTID=#{estid} AND SALECODE=#{salecode}
 	</update>
+	
+	<update id="deleteReply" parameterType="ReviewList">
+		UPDATE BBUSINESSREVIEW SET 
+			CONTENT='-', updatedate=TO_CHAR(sysdate,'YYYY-MM-DD HH24:MI:SS') 
+			WHERE ESTID=#{estid} AND SALECODE=#{salecode}
+	</update>
 </mapper>
