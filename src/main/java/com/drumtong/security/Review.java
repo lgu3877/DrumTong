@@ -26,9 +26,7 @@ public class Review {
 	}
 
 //	public static void reviewForBusiness(HttpServletRequest req, String estid, String pageKind, String pageNum) {
-	public static List<ReviewList> reviewForBusiness(ModelAndView mav, String estid, String pageKind) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		pageKind = pageKind == null ? "whole" : pageKind;				// 페이지 종류에 대한 정보가 없으면 "whole"
+	public static void reviewForBusiness(ModelAndView mav, String estid, String pageKind) {
 		// ----------------------------페이징부분(승원씨와 의논 후 결정)------------------------
 //		
 //		
@@ -43,12 +41,26 @@ public class Review {
 //		map.put("end", end + "");
 		// --------------------------------------------------------------------------
 		
+
 		
+		List<ReviewList> bReviewList = selectList(estid, pageKind);
+		
+		
+		
+//		mav.addObject("wholePageNum", wholePageNum);
+		
+		// 컨트롤러에서 jsp 로 JSON 넘기기 - GSON
+		Gson gson = new Gson();
+		String json = gson.toJson(bReviewList);
+		mav.addObject("bReviewList", json);
+		
+	}
+
+	public static List<ReviewList> selectList(String estid, String pageKind) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		pageKind = pageKind == null ? "whole" : pageKind;				// 페이지 종류에 대한 정보가 없으면 "whole"
 		
 		map.put("estid", estid);
-		
-		
-		
 		switch(pageKind) {
 		case "whole":	// 전체 페이지 수, 페이지 별 리스트
 			map.put("division", "whole");
@@ -61,21 +73,12 @@ public class Review {
 			break;
 		}
 		
-		// 전체 페이지 수
-		int wholePageNum = bReviewDAO.selectReviewNum(map);
+		// 전체 페이지 수(만약 페이징은 비동기식으로 처리한다면 이 부분은 필요 없음)
+//		int wholePageNum = bReviewDAO.selectReviewNum(map);
 		
 		// 페이지 번호, estid
 		// 현재 승원씨 테스트를 위해 페이징은 기능은 제외해둠
-		List<ReviewList> bReviewList = bReviewDAO.selectReview(map);
-		
-		mav.addObject("wholePageNum", wholePageNum);
-		
-		// 컨트롤러에서 jsp 로 JSON 넘기기 - GSON
-		Gson gson = new Gson();
-		String json = gson.toJson(bReviewList);
-		mav.addObject("bReviewList", json);
-		mav.addObject("bReviewList1", bReviewList);
-		
-		return bReviewList;
+		return bReviewDAO.selectReview(map);
 	}
+
 }

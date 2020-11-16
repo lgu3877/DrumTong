@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.drumtong.business.service.submanagement.RestBusinessSubManagementService;
 import com.drumtong.business.vo.BPaymentVO;
@@ -62,10 +63,16 @@ public class RestBusinessSubManagementController {
 		
 	// ========================= 대분류 [리뷰관리] ================================ [영경]
 	// 답글 달기		// processing in ('reply', 'report')
-	@RequestMapping("businessReviewManagement/rest/{processing}/")
-	@GetMapping(produces="application/json; charset=utf8")
-	public String updateReview(HttpServletRequest req, ReviewList reviewList, @PathVariable("processing")String processing) {
-		return svc.updateReview(req, reviewList, processing);
+//	@RequestMapping("businessReviewManagement/rest/{pageKind}/{processing}/")
+//	@@PostMapping(produces="application/json; charset=utf8")
+//	public String updateReview(HttpServletRequest req, @RequestBody ReviewList reviewList, @PathVariable("pageKind")String pageKind, @PathVariable("processing")String processing) {
+//		return svc.updateReview(req, reviewList, pageKind, processing);
+//	}
+	
+	@RequestMapping("businessReviewManagement/rest/{pageKind}/{processing}/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public ModelAndView updateReview(HttpServletRequest req, @RequestBody ReviewList reviewList, @PathVariable("pageKind")String pageKind, @PathVariable("processing")String processing) {
+		return svc.updateReview(req, reviewList, pageKind, processing);
 	}
 	
 }

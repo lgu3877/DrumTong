@@ -1,11 +1,14 @@
 package com.drumtong.business.service.submanagement;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.drumtong.business.dao.BBusinessReviewDAO;
 import com.drumtong.business.dao.BPaymentDAO;
@@ -13,6 +16,9 @@ import com.drumtong.business.dao.BReviewDAO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BPaymentVO;
 import com.drumtong.business.vo.ReviewList;
+import com.drumtong.security.Review;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 @Service
 public class RestBusinessSubManagementService {
@@ -47,8 +53,33 @@ public class RestBusinessSubManagementService {
 	// ========================= 대분류 [리뷰 관리] ================================ [영경]
 	// 답글 달기		// processing in ('reply', 'report')
 	// 리뷰 구분을 위해 SALECODE를 항상 같이 넘겨주어야 함
+//	@Transactional
+//	public String updateReview(HttpServletRequest req, ReviewList reviewList, String pageKind, String processing) {
+//		HttpSession Session = req.getSession();
+//		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+//		String estid= bInformationVO.getEstid();
+//		reviewList.setEstid(estid);
+//		int result = 0;
+//		
+//		switch(processing) {
+//		case "reply":
+//			result = bReviewDAO.updateReplyConfirm(reviewList);		// estid, salecode
+//			result = bBusinessReviewDAO.updateReply(reviewList);	// content, estid, salecode
+//			break;
+//		case "report":
+//			result = bReviewDAO.updateReportConfirm(reviewList);	// estid, salecode
+//			break;
+//		}
+//		
+//		List<ReviewList> bReviewList = Review.selectList(estid, pageKind);
+//		
+//		Gson gson = new GsonBuilder().create();
+//		
+//		return gson.toJson(bReviewList);
+//	}
+
 	@Transactional
-	public String updateReview(HttpServletRequest req, ReviewList reviewList, String processing) {
+	public ModelAndView updateReview(HttpServletRequest req, ReviewList reviewList, String pageKind, String processing) {
 		HttpSession Session = req.getSession();
 		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
 		String estid= bInformationVO.getEstid();
@@ -64,9 +95,12 @@ public class RestBusinessSubManagementService {
 			result = bReviewDAO.updateReportConfirm(reviewList);	// estid, salecode
 			break;
 		}
-		return result == 0? "false" : "true";
+		
+		List<ReviewList> bReviewList = Review.selectList(estid, pageKind);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("bReviewList",bReviewList);
+		return mav;
 	}
-
-
 	
 }
