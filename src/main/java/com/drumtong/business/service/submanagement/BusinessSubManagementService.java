@@ -24,7 +24,7 @@ public class BusinessSubManagementService {
 	@Autowired BCouponDAO bCouponDAO;
 
 	// 비즈니스 리뷰관리 페이지로 이동 (GET) [영경]
-	public ModelAndView reviewManagement(HttpServletRequest req, String pageKind, String pageNum) {
+	public ModelAndView reviewManagement(HttpServletRequest req, String pageKind) {
 		HttpSession Session = req.getSession();
 		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
 		
