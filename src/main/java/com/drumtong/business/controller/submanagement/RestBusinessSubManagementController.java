@@ -3,13 +3,12 @@ package com.drumtong.business.controller.submanagement;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.drumtong.business.service.submanagement.RestBusinessSubManagementService;
 import com.drumtong.business.vo.BPaymentVO;
@@ -63,10 +62,18 @@ public class RestBusinessSubManagementController {
 		
 	// ========================= 대분류 [리뷰관리] ================================ [영경]
 	// 답글 달기		// processing in ('reply', 'report')
-	@RequestMapping("businessReviewManagement/rest/{pageKind}/{processing}/")
-	@PostMapping(produces="application/json; charset=utf8")
+//	@PostMapping(produces=org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
+//	@PostMapping(produces="application/json; charset=UTF-8")
+	@RequestMapping(value="businessReviewManagement/rest/{pageKind}/{processing}/", method = RequestMethod.POST, produces =org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public String updateReview(HttpServletRequest req, @RequestBody ReviewList reviewList, @PathVariable("pageKind")String pageKind, @PathVariable("processing")String processing) {
 		return svc.updateReview(req, reviewList, pageKind, processing);
 	}
 	
+
+	// ========================= 대분류 [쿠폰관리] ================================ [영경]
+	@RequestMapping("businessCouponManagement/rest/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String updateCoupon() {
+		return null;
+	}
 }
