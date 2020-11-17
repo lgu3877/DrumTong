@@ -42,7 +42,7 @@ public class Review {
 		// --------------------------------------------------------------------------
 		
 
-		
+		pageKind = pageKind == null ? "whole" : pageKind;				// 페이지 종류에 대한 정보가 없으면 "whole"
 		List<ReviewList> bReviewList = selectList(estid, pageKind);
 		
 		
@@ -55,12 +55,11 @@ public class Review {
 		mav.addObject("bReviewList", json);
 		
 		mav.addObject("pageKind", pageKind);
-		
 	}
 
 	public static List<ReviewList> selectList(String estid, String pageKind) {
 		HashMap<String, String> map = new HashMap<String, String>();
-		pageKind = pageKind == null ? "whole" : pageKind;				// 페이지 종류에 대한 정보가 없으면 "whole"
+
 		
 		map.put("estid", estid);
 		switch(pageKind) {
