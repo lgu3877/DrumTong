@@ -29,7 +29,7 @@ public class BusinessSubManagementController {
 	
 	// 비즈니스 리뷰관리 페이지 번호 이동(GET) [영경]
 	@RequestMapping(value="businessReviewManagement/{pageKind}/", method = RequestMethod.GET)
-	public ModelAndView reviewManagement(HttpServletRequest req, @PathVariable("pageKind")String pageKind, @PathVariable("pageNum")String pageNum) {
+	public ModelAndView reviewManagement(HttpServletRequest req, @PathVariable("pageKind")String pageKind) {
 		HttpSession Session = req.getSession();
 		Session.setAttribute("pageKind", pageKind);
 		return new ModelAndView("redirect:/business/submanagement/businessReviewManagement/");
