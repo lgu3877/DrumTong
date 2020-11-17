@@ -54,6 +54,8 @@ public class Review {
 		String json = gson.toJson(bReviewList);
 		mav.addObject("bReviewList", json);
 		
+		mav.addObject("pageKind", pageKind);
+		
 	}
 
 	public static List<ReviewList> selectList(String estid, String pageKind) {
