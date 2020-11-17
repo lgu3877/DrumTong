@@ -147,3 +147,33 @@ div.extradiv img {
 #reviewpage i {
 	vertical-align: middle;
 }
+
+
+div.businessdiv {
+  	width: 100%;
+  	display: flex;
+  	margin-top: 10px; 
+  	margin-bottom: 10px;
+  	background-color: #afafaf;
+  }
+  
+div.businessdiv textarea {
+	width: 80%; 
+	height: 100px;
+	resize: none;
+	margin: 0 auto;
+	display: block;
+}
+
+.replydiv {
+	width: 70%;
+	float: right;
+	display: flex;
+	align-items: center;
+
+}
+
+.replydiv i {
+	width: 20%;
+}
+	
