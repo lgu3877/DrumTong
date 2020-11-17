@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.drumtong.business.dao.BBusinessReviewDAO;
 import com.drumtong.business.dao.BPaymentDAO;
@@ -84,4 +83,5 @@ public class RestBusinessSubManagementService {
 		return gson.toJson(bReviewList);
 	}
 	
+	// ========================= 대분류 [쿠폰관리] ================================ [영경]
 }
