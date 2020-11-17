@@ -45,11 +45,11 @@
 				매장 이름 : ${selectEST.brandnaming }
 		<div style="width: 800px;" class="marginauto">
 			<div style="display: flex; margin-bottom: 15px">
-				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/whole/1/'" value="전체 리뷰(${ReviewCount })" style="width: 33%; height: 50px" id="whole">
+				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/whole/'" value="전체 리뷰(${ReviewCount })" style="width: 33%; height: 50px" id="whole">
 				<div style="width: 0.5%"></div>
-				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/noReply/1/'" value="미답변 리뷰(${NoReplybReviewCount})"  style="width: 33%; height: 50px" id="noReply">
+				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/noReply/'" value="미답변 리뷰(${NoReplybReviewCount})"  style="width: 33%; height: 50px" id="noReply">
 				<div style="width: 0.5%"></div>
-				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/reportReply/1/'" value="차단/허위 의심 리뷰"  style="width: 33%; height: 50px"  id="reportReply">
+				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/reportReply/'" value="차단/허위 의심 리뷰"  style="width: 33%; height: 50px"  id="reportReply">
 			</div>
 			<div id="reviewDiv" style="width: 100%;">				
 			
@@ -122,14 +122,14 @@
 <script type="text/javascript">
 
 	var bReviewList =  ${bReviewList };
-//	var globalPath = null;
-	var globalPath = 'whole';
+	var globalPath = null;
 	
 	window.onload = function() {
 		reviewContents(1);
 		arrow(1);
 		paging(document.querySelector('.currentPage'));
-	//	globalPath = ${pageKind };
+		globalPath = ${pageKind };
+		console.log('globalPath : ', globalPath);
 	}
 	
 	function reviewContents(pagenum) {
