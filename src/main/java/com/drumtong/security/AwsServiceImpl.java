@@ -62,7 +62,7 @@ public class AwsServiceImpl{
      *  여기서 매개변수로 가져오는 folderName의 값은 Estid값입니다 
      *  이름 설정을 이렇게 한 이유는 여기서 사용되는 값이 folderName으로 사용되기 떄문에 변경했습니다.
      */
-    public void multipleUpload(MultipartHttpServletRequest mpf, String folderName, Object object) {
+    public int multipleUpload(MultipartHttpServletRequest mpf, String folderName, Object object) {
     	
     	// 온라인 계약에 Binforamtion 테이블과 BPayment를 구분시켜주기 위한 데이터 입니다.
     	// count가 0~1 일 때는 BInformation에 관한 처리를 해주고
@@ -79,13 +79,14 @@ public class AwsServiceImpl{
         	
             System.out.println("실행");
     		System.out.println("originFileName : " + originFileName);
-        }	
+        }
+        return 1;
     }
     
     // s3에 파일을 업로드합니다.
     // 서버에 파일을 저장하지 않고 바로 S3로 파일을 전달해줍니다.
 //    public void s3FileUpload(File file, String folderName) {
-     public void s3FileUpload(MultipartFile file, String folderName, Object object, int count) {
+     public int s3FileUpload(MultipartFile file, String folderName, Object object, int count) {
     	 
     	 
     	 ObjectMetadata metadata = new ObjectMetadata();
@@ -221,16 +222,18 @@ public class AwsServiceImpl{
 	        // 실제로 업로드 할 액션이다.
 	        amazonS3.putObject(putObjectRequest);
 	        
+	        return 1;
 	        
 	        
 		} catch (IOException e) {
 			e.printStackTrace();
+			return 0;
 		}
     }
     
     
     // s3에 파일을 삭제합니다.
-    public void s3FileDelete(String filePath) {
+    public int s3FileDelete(String filePath) {
     	
 //    	for (S3ObjectSummary file : amazonS3.listObjects(BUCKET_NAME, filePath).getObjectSummaries()){
 //    		System.out.println("파일 키 " + file.getKey());
@@ -241,7 +244,8 @@ public class AwsServiceImpl{
     	System.out.println("aws 삭제 실행");
     	// 파일을 삭제해줍니다.
     	amazonS3.deleteObject(BUCKET_NAME, filePath);
-
+    	
+    	return 1;
     	
     }
 }
