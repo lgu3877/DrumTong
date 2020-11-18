@@ -450,7 +450,7 @@
 		}
 		else {
 			let ob={
-					   'salecode': obj.parentNode.id,
+					   'salecode': obj.name,
 					   'bcontent': textarea.value,
 			      	};
 			
@@ -472,14 +472,14 @@
 	// 답변을 삭제하는 함수 -> 답변을 삭제한다고 할지라도 replyBoolean 은 'N' 으로 변경하지 않는다
 	function replyDelete(obj) {
 		var deleteConfirm = confirm('정말로 답글을 삭제하시겠습니까?');
-		console.log('답변 삭제 salecode : ', obj.parentNode.id);
+		console.log('답변 삭제 salecode : ', obj.name);
 		
 		if (deleteConfirm == false) {
 			return false;
 		}
 		else {
 			let ob={
-					   'salecode': obj.parentNode.id,
+					   'salecode': obj.name,
 			      	};
 			
 			var axiosPath = '/drumtong/business/subManagement/businessReviewManagement/rest/' + globalPath + '/replyDelete/';
