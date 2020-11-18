@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.drumtong.business.service.submanagement.RestBusinessSubManagementService;
+import com.drumtong.business.vo.BCouponVO;
 import com.drumtong.business.vo.BPaymentVO;
 import com.drumtong.business.vo.ReviewList;
 
@@ -71,9 +72,10 @@ public class RestBusinessSubManagementController {
 	
 
 	// ========================= 대분류 [쿠폰관리] ================================ [영경]
-	@RequestMapping("businessCouponManagement/rest/")
+	// processing in ('add', 'del')
+	@RequestMapping("businessCouponManagement/rest/{processing}/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String updateCoupon() {
-		return null;
+	public String updateCoupon(HttpServletRequest req, @RequestBody BCouponVO bcouponvo, @PathVariable("processing")String processing) {
+		return svc.updateCoupon(req, bcouponvo, processing);
 	}
 }
