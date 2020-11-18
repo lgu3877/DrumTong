@@ -45,56 +45,13 @@
 				매장 이름 : ${selectEST.brandnaming }
 		<div style="width: 800px;" class="marginauto">
 			<div style="display: flex; margin-bottom: 15px">
-				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/whole/1/'" value="전체 리뷰(${ReviewCount })" style="width: 33%; height: 50px">
+				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/whole/'" value="전체 리뷰(${ReviewCount })" style="width: 33%; height: 50px" id="whole">
 				<div style="width: 0.5%"></div>
-				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/noReply/1/'" value="미답변 리뷰(${NoReplybReviewCount})"  style="width: 33%; height: 50px">
+				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/noReply/'" value="미답변 리뷰(${NoReplybReviewCount})"  style="width: 33%; height: 50px" id="noReply">
 				<div style="width: 0.5%"></div>
-				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/reportReply/1/'" value="차단/허위 의심 리뷰"  style="width: 33%; height: 50px">
+				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/reportReply/'" value="차단/허위 의심 리뷰"  style="width: 33%; height: 50px"  id="reportReply">
 			</div>
-			<div id="reviewDiv" style="width: 100%;">
-			
-<%-- 				<div class="reviewflex">
-						<div class="imgdiv">
-							<img src="${cpath }/resources/business/img/category/상의.jpg">
-						</div>
-						<div class="table">
-							<div class="row">		
-								<h1 class="customerName">고객이름</h1>
-								<h1 class="cregistdate">2020-10-11 17:50:55</h1>
-							</div>
-							<div class="row">		
-								<h1 class="left10">좋아요</h1>
-								<h1 class="left15">10</h1>
-								<h1 class="left10">신고</h1>
-								<h1 class="left15">15</h1>
-								<h1 class="center15">평점</h1>
-								<div class="left35"><i class="fas fa-star-half-alt"></i><i class="fas fa-star-half-alt"></i></div>
-							</div>
-						</div>
-					<div class="btndiv">
-							<input type="button" value="답변작성">
-							<div></div>
-							<input type="button" value="차단/신고">
-					</div>			
-				</div>
-				<div class="extradiv"> <!-- 공백이 없을 때에도 줄바꿈이 가능하도록 설정 -->
-					<textarea>1111111111111111111111111111111111111111111111111111111111111111111111111111111111111</textarea>
-				</div>
-				<div class="extradiv">
-					<img src="${cpath }/resources/business/img/maincover/maincover1.jpg">								
-				</div> --%>
-
-				
-			
-<!-- 			<div style="width: 100%; height: 10%; display: flex" >
-					<h1 class="reviewName">이름</h1>
-					<h1 class="reviewContent">리뷰내용</h1>
-					<h1 class="reviewDate">작성날짜</h1>
-					<input type="button" style="width: 10%;" value="답변작성">
-					<input type="button" style="width: 10%;" value="차단/신고">
-				</div>
-				<hr>	 -->			
-			</div>
+			<div id="reviewDiv" style="width: 100%;"></div>
 			
 			<!-- 페이지 번호 넣기 -->
 			<div id = "reviewpage" class="marginauto" style="width: 60%; height: 50px; display: table;">
@@ -109,71 +66,33 @@
 				</div>
 			</div>
 		</div>	
-			
-			<c:forEach items="${bReview }" varStatus="status">
-				<span style="border:1px solid pink;">
-					좋아요 : ${bReview[status.index].mgood }, 신고횟수 : ${bReview[status.index].reportcount }
-					고객 리뷰 내용 : ${bCustomerReview[status.index].content }
-					사업자 내용 : ${bBusinessReview[status.index].content }
-				</span>
-			</c:forEach>
-			
-			<c:forEach items="${NoReplybReview }" varStatus="status">
-				<c:if test="${NoReplybReview[status.index].replyboolean == 78}">
-					<span style="border:1px solid pink;">
-						좋아요 : ${NoReplybReview[status.index].mgood }, 신고횟수 : ${NoReplybReview[status.index].reportcount }
-						고객 리뷰 내용 : ${bCustomerNoReplyReview[status.index].content }
-					</span>
-				</c:if>
-			</c:forEach>
 	
 		</div>
 	</section>
 		
-
-	
-
-	<!-- footer --> <!-- footer  -->
-	<%-- <%@ include file="../main/businessFooter.jsp" %> --%>
-
-
-<%-- <div style="display:'none';">
-	<h1>비즈니스 리뷰 관리 페이지입니다</h1>
-		매장 이름 : ${selectEST.brandnaming }
-		<h1>${Name }(${wholePageNum })</h1>
-		<c:forEach items="${bReviewList }" var="Review">
-			<span style="border:1px solid pink;">
-				좋아요 : ${Review.mgood }, 신고횟수 : ${Review.reportcount } | 
-				고객 리뷰 내용 : ${Review.ccontent }
-				고객 리뷰 날짜 : ${Review.cregistdate } | 
-				사업자 리뷰 내용 : ${Review.bcontent }
-				사업자 리뷰 날짜 : ${Review.bregistdate }
-			</span>
-	</c:forEach>
-</div> --%>
 	
 <script type="text/javascript">
 
-
-
+	var bReviewList =  ${bReviewList };		// 전역변수로 비동기로 전달받은 리스트 저장함
+	var globalPath = null;					// 전체리뷰, 미답변리뷰, 차단/신고 리뷰 확인하는 경로 -> 전역변수
+	
 	window.onload = function() {
 		reviewContents(1);
 		arrow(1);
+		paging(document.querySelector('.currentPage'));
+		globalPath = '${pageKind }';
+		console.log('globalPath : ', globalPath);
 	}
 	
-	function reviewContents(pagenum) {
+	function reviewContents(pagenum) {	// 리뷰글을 만들어주는 함수
 		
 		// controller 에서 받아오는 어떤 값을 기준으로 전체리뷰, 미답변리뷰, 차단/허위 리뷰 활성화시키기
-		
 		var reviewDiv = document.getElementById('reviewDiv');
 		reviewDiv.innerHTML = null;
 		
-		var count = 0;	// 무조건 반복문이 열번만 사용되도록
+		var count = 0;	// 무조건 반복문이 세번만 사용되도록
 		
-		var bReviewList =  ${bReviewList };
-		console.log(bReviewList.length);
-		console.log(bReviewList[0].replyboolean);	// 사업자 답글이 달려있으면 'Y', 없으면 'N'
-		
+		// 사업자 답글이 달려있으면 'Y', 없으면 'N'
 		// 페이지까지 고려해서 i 값을 변경하도록 하자 -> 리뷰 3개씩 보여주는 형식이라면 2페이지에서 i = 3이 되도록...
 		// count < 숫자 -> 에서 '숫자'만큼 한페이지에 리뷰 게시판이 표현됩니다
 		for (i = (pagenum - 1) * 3; i < bReviewList.length && count < 3; i++) {
@@ -223,10 +142,10 @@
 			gpadiv.className = 'left35';
 			
 			var gpa = bReviewList[i].gpa;
-			for(j = 1; j <= 5; j++) {
+			for(j = 0; j < 5; j++) {
 				var icon = document.createElement('i');
 				if(j <= gpa) {
-					console.log('gpa - j : ', gpa - j );	// gpa 받아오는 거 int -> float 로 수정바람
+					//console.log('gpa - j : ', gpa - j );	// gpa 받아오는 거 int -> float 로 수정바람
 					if(gpa - j == 0.5)
 						icon.className = 'fas fa-star-half-alt';
 					else						
@@ -249,16 +168,62 @@
 			
 			var btndiv = document.createElement('div');
 			btndiv.className = 'btndiv';
-			var button1 = document.createElement('input');
-			button1.setAttribute('type', 'button');
-			button1.setAttribute('value', '답변작성');				// 답변이 달려 있으면 나타나지 않도록
-			var betweendiv = document.createElement('div');
-			var button2 = document.createElement('input');
-			button2.setAttribute('type', 'button');
-			button2.setAttribute('value', '차단/신고');				// 차단/신고 란에서는 '차단/신고 해제'로...
-			btndiv.appendChild(button1);
-			btndiv.appendChild(betweendiv);
-			btndiv.appendChild(button2);
+			
+			// 사업자가 답글을 작성하는 공간 및 작성된 답글을 보여주는 공간
+			var businessdiv = document.createElement('div');
+			businessdiv.className = 'businessdiv';
+			businessdiv.setAttribute('id', bReviewList[i].salecode);			
+			
+			if(bReviewList[i].blockboolean == 'N') {
+				var button1 = document.createElement('input');
+				button1.setAttribute('type', 'button');
+				button1.setAttribute('name', bReviewList[i].salecode);
+				if(bReviewList[i].replyboolean == 'N') {
+					button1.setAttribute('value', '답변작성');		// 답변이 달려 있으면 나타나지 않도록
+					button1.setAttribute('onclick', 'replyAdd(this)');		// 답변 넘길 떄, bReviewList.salecode }랑 같이 넘겨주도록 하시오
+				}
+				else {
+					button1.setAttribute('value', '답변삭제');
+					button1.setAttribute('onclick', 'replyDelete(this)');
+					
+					var div15 = document.createElement('div');
+					div15.style.width = '15%';
+					
+					var replydiv = document.createElement('div');
+					replydiv.className = 'replydiv';
+					
+					var righthand = document.createElement('i');
+					righthand.className = 'far fa-hand-point-right fa-3x';
+					
+					var bcontent = document.createElement('h1');
+					bcontent.innerHTML =  bReviewList[i].bcontent;
+					
+					businessdiv.appendChild(div15);
+					replydiv.appendChild(righthand);
+					replydiv.appendChild(bcontent);
+					businessdiv.appendChild(replydiv);
+				}
+				var betweendiv = document.createElement('div');
+				var button2 = document.createElement('input');
+				button2.setAttribute('type', 'button');
+				button2.setAttribute('value', '차단/신고');				// 차단/신고 란에서는 '차단/신고 해제'로...
+				button2.setAttribute('name', bReviewList[i].salecode);
+				button2.setAttribute('onclick', 'blockAdd(this)');
+				button2.setAttribute('name', bReviewList[i].salecode);
+				
+				btndiv.appendChild(button1);
+				btndiv.appendChild(betweendiv);
+				btndiv.appendChild(button2);
+			}
+			else {
+				var button = document.createElement('input');
+				button.setAttribute('type', 'button');
+				button.setAttribute('value', '차단/신고 해제');
+				button.setAttribute('onclick', 'blockCancle(this)');
+				button.setAttribute('name', bReviewList[i].salecode);
+				btndiv.appendChild(button);
+			} 
+			
 			reviewflex.appendChild(btndiv);
 
 			var extradiv1 = document.createElement('div');
@@ -276,7 +241,8 @@
 			reviewDiv.appendChild(reviewflex);
 			reviewDiv.appendChild(extradiv1);
 			reviewDiv.appendChild(extradiv2);
-			
+			reviewDiv.appendChild(businessdiv);
+					
 			count++;
 		}
 	}
@@ -311,21 +277,20 @@
 	}
 	
 	function arrow(pagenum) {
-		var bReviewList = ${bReviewList };
-		var finalPage = parseInt((bReviewList.length + 1)/ 3) - 1;
+	//	var bReviewList = ${bReviewList };
+		var finalPage = parseInt((bReviewList.length)/ 3);
 		
-		if(finalPage % 3 !== 0)
+		if(bReviewList.length % 3 !== 0)
 			finalPage++;
 		
 		var prevbtn = document.getElementById('prevbtn');
 		var nextbtn = document.getElementById('nextbtn');
 		
-		console.log('pagenum : ' , pagenum);
-		console.log('finalPage : ' ,finalPage);
-
 		if(pagenum == '1') {
 			prevbtn.style.display = 'none';
 			nextbtn.style.display = '';
+			if(finalPage == 1 || finalPage == 0 )
+				nextbtn.style.display = 'none';
 		}
 		else if(pagenum == finalPage) {
 			nextbtn.style.display = 'none';
@@ -337,24 +302,33 @@
 		}
 	}
 	
+	// 화면상에 나타나는 페이지 및 현재페이지를 나타내기 위한 함수
+	// pagenum 으로 보내는 것은 정수값이 아니라 해당태그 전체이다
 	function paging(pagenum) {	//pagetag : 페이지 번호가 적힌 태그
-		var bReviewList = ${bReviewList };
-		var finalPage = parseInt((bReviewList.length + 1)/ 3) - 1;
-	
-		if(finalPage % 3 !== 0)
-			finalPage++;
-	
+	//	var bReviewList = ${bReviewList };
+		var finalPage = parseInt((bReviewList.length)/ 3);
 		var fixpagenum = pagenum.innerHTML;
 		var pagetags = document.querySelectorAll('#reviewpage div h1');
-		
+					
+		if(bReviewList.length % 3 !== 0)
+			finalPage++;
+	
+
 		if(fixpagenum <= 3) {
-			for(i = 1; i <= 5; i++) {
+			for(i = 1; i <= 5; i++) {	// 한번에 보여줄수 있는 페이지수
 				pagetags[i-1].innerHTML = i;
-				if(i > finalPage)	// 만약 리뷰글이 5개조차 되지 않을 경우에
+				if(i > finalPage) {		// 만약 리뷰글이 5개조차 되지 않을 경우에
 					pagetags[i-1].style.display = 'none';
-				
+				}
 				pagetags[i-1].className = 'notcurrentPage';
 			}
+			
+			if(finalPage == 0) {
+				pagetags[0].style.display = '';
+				pagetags[0].className = 'currentPage';
+				return false;
+			}
+			
 			arrow(fixpagenum);
 			pagetags[fixpagenum - 1].className = 'currentPage';
 			reviewContents(fixpagenum);
@@ -368,10 +342,11 @@
 				break;
 			case 0:
 				inputnum = parseInt(fixpagenum - 4);
+				if(inputnum == 0)
+					inputnum = 1;
 				break;
 			}
-			
-			
+					
 			for(i = 1; i <= 5; i++) {
 				pagetags[i-1].innerHTML = inputnum;				
 				inputnum++;				
@@ -387,7 +362,178 @@
 		}		
 	}
 	
+	
+	
+	// 리뷰글을 차단/신고하는 함수
+	function blockAdd(obj) {
+		var blockConfirm = confirm('정말로 차단/신고를 하시겠습니까?');
+		
+		if (blockConfirm == false) {
+			obj.setAttribute('onclick', 'blockCancle(this)');
+		}
+		else {
 
+			let ob={
+					   'salecode': obj.name,
+			      	};
+			
+			var axiosPath = '/drumtong/business/subManagement/businessReviewManagement/rest/' + globalPath + '/reportAdd/';
+			
+	        const axPost = async (ob) => {   // async : 비동기 실행 함수
+	            await axios.post(axiosPath, ob)
+	            // 정상
+	       		.then( (response) => {
+	            const data = response.data;
+	  			bReviewList = data;
+	  			switchArray();
+	             })
+	          }
+			return axPost(ob);
+		}
+	}
+	
+	// 차단/신고된 리뷰를 해제하는 함수 
+	function blockCancle(obj) {
+		var blockConfirm = confirm('정말로 차단/신고를 해제하시겠습니까?');
+		
+		if (blockConfirm == false) {
+			obj.setAttribute('onclick', 'blockAdd(this)');
+		}
+		else {
+
+			let ob={
+					   'salecode': obj.name,
+			      	};
+			
+	        const axPost = async (ob) => {   // async : 비동기 실행 함수
+	            await axios.post('/drumtong/business/subManagement/businessReviewManagement/rest/reportReply/reportDelete/', ob)
+	            // 정상
+	       		.then( (response) => {
+	            const data = response.data;
+	  			bReviewList = data;
+	  			switchArray();
+	             })
+	          }
+			return axPost(ob);
+		}
+	}
+	
+	// 답글 작성 함수
+	function replyAdd(obj) {
+		var salecode = document.getElementById(obj.name);
+		
+		var replyInput = document.createElement('textarea');
+		replyInput.setAttribute('name', 'bcontent');
+		replyInput.setAttribute('maxlength', '1000');
+
+		var replyButton = document.createElement('input');
+		replyButton.setAttribute('type', 'button');
+		replyButton.setAttribute('value', '답글작성');
+		replyButton.setAttribute('onclick', 'replyButton(this)');
+
+		var cancleButton = document.createElement('input');
+		cancleButton.setAttribute('type', 'button');
+		cancleButton.setAttribute('value', '답글취소');
+		cancleButton.setAttribute('onclick', 'cancleButton(this)');
+		
+		salecode.appendChild(replyInput);
+		salecode.appendChild(replyButton);
+		salecode.appendChild(cancleButton);
+	}
+	
+	// 답글 작성 함수
+	function replyButton(obj) {
+		var textarea = obj.parentNode.querySelector('textarea');
+		var replyConfirm = confirm('이대로 답글을 작성하시겠습니까?');
+		if (replyConfirm == false) {
+			return false;
+		}
+		else {
+			let ob={
+					   'salecode': obj.parentNode.id,
+					   'bcontent': textarea.value,
+			      	};
+			
+			var axiosPath = '/drumtong/business/subManagement/businessReviewManagement/rest/' + globalPath + '/replyAdd/';
+			
+	        const axPost = async (ob) => {   // async : 비동기 실행 함수
+	            await axios.post(axiosPath, ob)
+	            // 정상
+	       		.then( (response) => {
+	            const data = response.data;
+	  			bReviewList = data;
+	  			switchArray();
+	             })
+	          }
+			return axPost(ob);
+		}	
+	}
+	
+	// 답변을 삭제하는 함수 -> 답변을 삭제한다고 할지라도 replyBoolean 은 'N' 으로 변경하지 않는다
+	function replyDelete(obj) {
+		var deleteConfirm = confirm('정말로 답글을 삭제하시겠습니까?');
+		console.log('답변 삭제 salecode : ', obj.parentNode.id);
+		
+		if (deleteConfirm == false) {
+			return false;
+		}
+		else {
+			let ob={
+					   'salecode': obj.parentNode.id,
+			      	};
+			
+			var axiosPath = '/drumtong/business/subManagement/businessReviewManagement/rest/' + globalPath + '/replyDelete/';
+			
+	        const axPost = async (ob) => {   // async : 비동기 실행 함수
+	            await axios.post(axiosPath, ob)
+	            // 정상
+	       		.then( (response) => {
+	            const data = response.data;
+	  			bReviewList = data;
+	  			switchArray();	
+	             })
+	          }
+			return axPost(ob);
+		}
+	}
+	
+	// 답글작성 취소버튼
+	function cancleButton(obj) {
+		var cancleConfirm = confirm('정말로 답글 작성을 취소하시겠습니까?');
+		if(cancleConfirm == flase)
+			return false;
+		else 
+			obj.parentNode.innerHTML = null;			
+	}
+	
+	// 해당페이지에서 리뷰수가 1개일 때, 그 리뷰가 다른 리뷰란으로 이동하면 해당페이지가 삭제된다 
+	// 즉, 3페이지가 삭제되므로 2페이지로 바로 이동되어야 한다. 그런 상황을 대비하고자 만든 함수이다
+	function switchArray() {
+		var reviewflexnum = document.querySelectorAll('.reviewflex').length;
+		
+			switch(reviewflexnum) {
+			case 1:
+	  			reviewContents(document.querySelector('.currentPage').innerHTML - 1);
+	  			console.log('currentPage : ', document.querySelector('.currentPage').innerHTML - 1);
+	  			arrow(document.querySelector('.currentPage').innerHTML - 1);
+	  			var pagenums = document.querySelectorAll('#reviewpage h1');
+	  			console.log('pagenums : ', pagenums);
+	  			for(i = 0; i < pagenums.length; i++) {
+	  				if(pagenums[i].className == 'currentPage' && pagenums[i].innerHTML !== 1) {
+	  					paging(pagenums[i - 1]);
+	  					break;
+	  				}
+	  			}
+				break;
+			default:
+	  		reviewContents(document.querySelector('.currentPage').innerHTML);
+		  		arrow(document.querySelector('.currentPage').innerHTML);
+				paging(document.querySelector('.currentPage'));
+				break;
+			}
+	}
+	
+	
 </script>
 </body>
 </html>

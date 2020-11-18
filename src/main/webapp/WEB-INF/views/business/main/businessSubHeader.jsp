@@ -12,7 +12,9 @@
 		<div id="menu" class="menu">
 			<a id="link1"> 매장 선택 </a>
 			<div id="menulist" class="menulist">
-				<div onclick="location.href='${cpath}/business/selectEST/${list.estid }/'">${list.brandnaming }</div>
+				<c:forEach items="${InformationList }" var="list">
+					<div onclick="location.href='${cpath}/business/selectEST/${list.estid }/'">${list.brandnaming }</div>
+				</c:forEach>
 			</div>
 		</div>
 	</div>
