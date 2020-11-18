@@ -1,7 +1,5 @@
 package com.drumtong.security;
 
-import java.io.IOException;
-
 import org.springframework.stereotype.Service;
 
 import com.amazonaws.regions.Regions;
@@ -41,7 +39,7 @@ public class AwsServiceEmail {
 			+ "<p>이 이메일 주소와 연결된 Drumtong 계정의 인증번호 요청을 받았습니다.</p> <br>"
 			+ "<p>아래 인증번호를 확인하여서 해당 이메일을 인증해주십시요. </p>"
 			+ "<br> <br>"
-			+ "<b>이메일 인증 번호  : </b><h2></h2>"	// <- 이곳에 이메일 인증번호를 넣어주세요.
+			+ "<b>이메일 인증 번호  : </b><h2>%s</h2>"	// <- 이곳에 이메일 인증번호를 넣어주세요.
 			+ "<p>인증번호를 요청하지 않은 경우 이 이메일을 무시해주세요. </p> <br>"
 			+ "<p>Drumtong은 비밀번호, 신용카드, 은행 계좌 번호를 묻거나 확인하라는 이메일을 절대 보내지 않습니다. "
 			+ "계정 정보를 업데이트 하라는 링크가 포함된 의심스러운 이메일을 받으신 경우 절대 클릭하지마세요!"
@@ -56,7 +54,7 @@ public class AwsServiceEmail {
 	static final String TEXTBODY = "Drumtong 이메일 인증 번호" 
 								 + "이 이메일 주소와 연결된 Drumtong 계정의 인증번호 요청을 받았습니다."
 								 + "아래 인증번호를 확인하여서 해당 이메일을 인증해주십시요. "
-								 + "이메일 인증 번호  : </b><h2></h2>" // <- 이곳에 이메일 인증번호를 넣어주세요.
+								 + "이메일 인증 번호  : %s" // <- 이곳에 이메일 인증번호를 넣어주세요.
 								 + "인증번호를 요청하지 않은 경우 이 이메일을 무시해주세요. "
 								 + "Drumtong은 비밀번호, 신용카드, 은행 계좌 번호를 묻거나 확인하라는 이메일을 절대 보내지 않습니다. "
 								 + "계정 정보를 업데이트 하라는 링크가 포함된 의심스러운 이메일을 받으신 경우 절대 클릭하지마세요!"
@@ -67,7 +65,35 @@ public class AwsServiceEmail {
 	
 	
 	
-	public int useSES(String emailTO) {
+//	public int useSES(String emailTO) {
+//		try {
+//			AmazonSimpleEmailService client = AmazonSimpleEmailServiceClientBuilder.standard()
+//					// Amazon SES를 사용하는 Region을 해당 Regions에 넣어주면됩니다. 
+//					// 전 서울 Region을 사용하고 있으므로 AP_NORTHEAST_2를 넣어줍니다.
+//					.withRegion(Regions.AP_NORTHEAST_2).build();
+//			SendEmailRequest request = new SendEmailRequest().withDestination(new Destination().withToAddresses(emailTO))
+//					.withMessage(new Message()
+//							.withBody(new Body().withHtml(new Content().withCharset("UTF-8").withData(HTMLBODY))
+//									.withText(new Content().withCharset("UTF-8").withData(TEXTBODY)))
+//							.withSubject(new Content().withCharset("UTF-8").withData(SUBJECT)))
+//					.withSource(FROM);
+//					// configuration 메서드를 사용하지않으면 주석처리를 해주면 됩니다.
+//					// .withConfigurationSetName(CONFIGSET);
+//			client.sendEmail(request);
+//			System.out.println("Email sent!");
+//			return 1;
+//		} catch (Exception ex) {
+//			System.out.println("The email was not sent. Error message: " + ex.getMessage());
+//			return 0;
+//		}
+//	}
+	
+	//-----------------------------아래부터 영경 수정---------------------------------------------------
+	public static void useSES(String subject, String htmlcontent, String textcontent, String emailTO) {
+		System.out.println("메일 제목 : " + subject);
+		System.out.println("메일 내용(HTML) : " + htmlcontent);
+		System.out.println("메일 내용(text) : " + textcontent);
+		System.out.println("받는 사람 메일 : " + emailTO);
 		try {
 			AmazonSimpleEmailService client = AmazonSimpleEmailServiceClientBuilder.standard()
 					// Amazon SES를 사용하는 Region을 해당 Regions에 넣어주면됩니다. 
@@ -75,18 +101,25 @@ public class AwsServiceEmail {
 					.withRegion(Regions.AP_NORTHEAST_2).build();
 			SendEmailRequest request = new SendEmailRequest().withDestination(new Destination().withToAddresses(emailTO))
 					.withMessage(new Message()
-							.withBody(new Body().withHtml(new Content().withCharset("UTF-8").withData(HTMLBODY))
-									.withText(new Content().withCharset("UTF-8").withData(TEXTBODY)))
-							.withSubject(new Content().withCharset("UTF-8").withData(SUBJECT)))
+							.withBody(new Body().withHtml(new Content().withCharset("UTF-8").withData(htmlcontent))
+									.withText(new Content().withCharset("UTF-8").withData(textcontent)))
+							.withSubject(new Content().withCharset("UTF-8").withData(subject)))
 					.withSource(FROM);
 					// configuration 메서드를 사용하지않으면 주석처리를 해주면 됩니다.
 					// .withConfigurationSetName(CONFIGSET);
 			client.sendEmail(request);
 			System.out.println("Email sent!");
-			return 1;
 		} catch (Exception ex) {
 			System.out.println("The email was not sent. Error message: " + ex.getMessage());
-			return 0;
 		}
+	}
+	
+	// 일반 메일 보내기 sendMail(제목, HTML내용, 일반텍스트내용, 받는 사람 이메일)
+	
+	// 인증번호 메일 보내기 (받는 사람 이메일)
+	public static int sendMailTypeAuth(String toEmail) {
+		int Code = ((int)(Math.random() * 1000000)) + 1;
+		useSES(SUBJECT, String.format(HTMLBODY, Code), String.format(TEXTBODY, Code), toEmail);
+		return Code;
 	}
 }

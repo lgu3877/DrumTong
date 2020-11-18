@@ -2,17 +2,6 @@ package com.drumtong.business.service.membership;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
-import java.util.Properties;
-
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,9 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.drumtong.business.dao.BPrivateDataDAO;
 import com.drumtong.business.vo.BPrivateDataVO;
+import com.drumtong.security.AwsServiceEmail;
 import com.drumtong.security.Encrypt;
 import com.drumtong.security.Login;
-import com.drumtong.security.Mail;
 
 @Service
 public class RestBusinessMembershipService {
@@ -51,7 +40,9 @@ public class RestBusinessMembershipService {
 					:bPrivateDataDAO.pwFindPhoneNameID(bprivatedatavo);
 		if(User != null) {
 			// 이메일로 인증번호 전송하는 메서드
-			return Mail.mailSendTypeAuth(User.getEmail()) + "";
+			return AwsServiceEmail.sendMailTypeAuth(User.getEmail()) + "";
+//			return Mail.mailSendTypeAuth(User.getEmail()) + "";
+			
 		}
 		// 잘못된 입력일 땐 -1 반환
 		return "-1";
