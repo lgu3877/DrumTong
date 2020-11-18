@@ -11,4 +11,10 @@ public interface BCouponDAO {
 
 	List<BCouponVO> selectUsableCoupon(HashMap<String, String> map);
 
+	int insertCoupon(BCouponVO bcouponvo);
+
+	int confirm(String serialUUID);
+
+	int deleteCoupon(BCouponVO bcouponvo);
+
 }
