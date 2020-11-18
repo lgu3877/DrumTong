@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.drumtong.business.dao.BCouponDAO;
+import com.drumtong.business.dao.BManagementDAO;
 import com.drumtong.business.dao.BReviewDAO;
 import com.drumtong.business.dao.BSalesDAO;
 import com.drumtong.business.vo.BCouponVO;
@@ -22,6 +23,7 @@ public class BusinessSubManagementService {
 	@Autowired BSalesDAO bSalesDAO;
 	@Autowired BReviewDAO bReviewDAO;
 	@Autowired BCouponDAO bCouponDAO;
+	@Autowired BManagementDAO bManagementDAO;
 
 	// 비즈니스 리뷰관리 페이지로 이동 (GET) [영경]
 	public ModelAndView reviewManagement(HttpServletRequest req, String pageKind, String pageNum) {
@@ -89,6 +91,10 @@ public class BusinessSubManagementService {
 		// boolean의 결과 값에 따라 'FAIL'이면 business로 우회해주고 'SUCCESS'이면 서브관리 페이지들로 이동시켜준다.
 		if(bol.equals("FAIL"))
 			return new ModelAndView("redirect:/business/");
+		
+		// 매장 조회 수를 가져옵니다.
+//		bManagementDAO.selectHit(ESTID);
+		
 		
 		ModelAndView mav = new ModelAndView("business/submanagement/businessStatisticsManagement");
 		return mav;

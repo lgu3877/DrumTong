@@ -21,6 +21,8 @@ public class BusinessContractController {
 
 	@Autowired BusinessContractService svc;
 	
+	
+	
 	// 비즈니스 온라인 계약 페이지로 이동 (GET) [건욱]
 	@RequestMapping(value = "businessContract/", method = RequestMethod.GET)
 	public ModelAndView contract() {
