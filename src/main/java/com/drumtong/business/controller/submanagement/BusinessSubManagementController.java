@@ -23,18 +23,15 @@ public class BusinessSubManagementController {
 	public ModelAndView reviewManagement(HttpServletRequest req) {
 		HttpSession Session = req.getSession();
 		String pageKind = (String)Session.getAttribute("pageKind");
-		String pageNum = (String)Session.getAttribute("pageNum");
 		Session.removeAttribute("pageKind");
-		Session.removeAttribute("pageNum");
-		return svc.reviewManagement(req, pageKind, pageNum);
+		return svc.reviewManagement(req, pageKind);
 	}
 	
 	// 비즈니스 리뷰관리 페이지 번호 이동(GET) [영경]
-	@RequestMapping(value="businessReviewManagement/{pageKind}/{pageNum}/", method = RequestMethod.GET)
-	public ModelAndView reviewManagement(HttpServletRequest req, @PathVariable("pageKind")String pageKind, @PathVariable("pageNum")String pageNum) {
+	@RequestMapping(value="businessReviewManagement/{pageKind}/", method = RequestMethod.GET)
+	public ModelAndView reviewManagement(HttpServletRequest req, @PathVariable("pageKind")String pageKind) {
 		HttpSession Session = req.getSession();
 		Session.setAttribute("pageKind", pageKind);
-		Session.setAttribute("pageNum", pageNum);
 		return new ModelAndView("redirect:/business/submanagement/businessReviewManagement/");
 	}
 	
