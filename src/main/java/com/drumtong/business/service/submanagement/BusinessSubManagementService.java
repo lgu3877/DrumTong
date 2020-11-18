@@ -17,6 +17,7 @@ import com.drumtong.business.vo.BCouponVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BSalesVO;
 import com.drumtong.security.Review;
+import com.google.gson.Gson;
 
 @Service
 public class BusinessSubManagementService {
@@ -62,7 +63,8 @@ public class BusinessSubManagementService {
 		ModelAndView mav = new ModelAndView("business/submanagement/businessCouponManagement");
 		
 		List<BCouponVO> couponList = bCouponDAO.select(bInformationVO.getEstid());
-		mav.addObject("couponList", couponList);
+		
+		mav.addObject("couponList", (new Gson()).toJson(couponList));
 		
 		return mav;
 	}
