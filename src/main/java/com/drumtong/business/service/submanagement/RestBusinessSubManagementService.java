@@ -10,12 +10,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.drumtong.business.dao.BBusinessReviewDAO;
+import com.drumtong.business.dao.BCouponDAO;
 import com.drumtong.business.dao.BPaymentDAO;
 import com.drumtong.business.dao.BReviewDAO;
+import com.drumtong.business.vo.BCouponVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BPaymentVO;
 import com.drumtong.business.vo.ReviewList;
 import com.drumtong.security.Review;
+import com.drumtong.security.SerialUUID;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -25,6 +28,7 @@ public class RestBusinessSubManagementService {
 	@Autowired BPaymentDAO bPaymentDAO;
 	@Autowired BReviewDAO bReviewDAO;
 	@Autowired BBusinessReviewDAO bBusinessReviewDAO;
+	@Autowired BCouponDAO bCouponDAO;
 	
 	
 	// ========================= 대분류 [카드/계좌 관리] ================================ [건욱]
@@ -81,6 +85,26 @@ public class RestBusinessSubManagementService {
 		Gson gson = new GsonBuilder().create();
 		
 		return gson.toJson(bReviewList);
+	}
+
+
+	public String updateCoupon(HttpServletRequest req, BCouponVO bcouponvo, String processing) {
+		HttpSession Session = req.getSession();
+		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+		String estid= bInformationVO.getEstid();
+		int result = 0;
+		switch(processing) {
+		case "add":
+			bcouponvo.setCouponid(SerialUUID.getSerialUUID("BCoupon", "CouponID"));
+			result = bCouponDAO.insertCoupon(bcouponvo);
+			break;
+		case "del":
+			result = bCouponDAO.deleteCoupon(bcouponvo);
+			break;
+		}
+		
+		List<BCouponVO> couponList = bCouponDAO.select(estid);
+		return new Gson().toJson(couponList);
 	}
 	
 	// ========================= 대분류 [쿠폰관리] ================================ [영경]
