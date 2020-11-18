@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.drumtong.business.dao.BBusinessDAO;
+import com.drumtong.business.dao.BCouponDAO;
 import com.drumtong.business.dao.BEstablishmentDAO;
 import com.drumtong.business.dao.BImageDAO;
 import com.drumtong.business.dao.BInformationDAO;
@@ -23,7 +24,7 @@ public class SerialUUID {
 
 	static CCustomerDAO cCustomerDAO;
 	static BBusinessDAO bBusinessDAO;
-//	static BCouponDAO bCouponDAO;
+	static BCouponDAO bCouponDAO;
 	static BEstablishmentDAO bEstablishmentDAO;
 
 	// AWS S3 저장 파일명 지정용
@@ -42,7 +43,7 @@ public class SerialUUID {
 	
 	@Autowired CCustomerDAO BeancCustomerDAO;
 	@Autowired BBusinessDAO BeanbBusinessDAO;
-//	@Autowired BCouponDAO BeanbCouponDAO;
+	@Autowired BCouponDAO BeanbCouponDAO;
 	@Autowired BEstablishmentDAO BeanbEstablishmentDAO;
 	
 	// AWS S3 저장 파일명 지정용
@@ -54,7 +55,7 @@ public class SerialUUID {
 	private void init() {
 		this.cCustomerDAO = BeancCustomerDAO;
 		this.bBusinessDAO = BeanbBusinessDAO;
-//		this.bCouponDAO = BeanbCouponDAO;
+		this.bCouponDAO = BeanbCouponDAO;
 		this.bEstablishmentDAO = BeanbEstablishmentDAO;
 		
 		// AWS S3 저장 파일명 지정용
@@ -81,10 +82,10 @@ public class SerialUUID {
 					
 				case "BBusiness" : result = bBusinessDAO.confirm(SerialUUID);
 					break;
-//					
-//				case "BCoupon" : result = bCouponDAO.confirm(SerialUUID);
-//					break;
-//					
+					
+				case "BCoupon" : result = bCouponDAO.confirm(SerialUUID);
+					break;
+			
 				case "BEstablishment" : result = bEstablishmentDAO.confirm(SerialUUID);
 					 break;
 			

@@ -26,4 +26,19 @@
 		ON (A.COUPONID=B.COUPONID) AND DELETEBOOLEAN='N'
 	</select>
 
+	<insert id="insertCoupon" parameterType="BCouponVO">
+		INSERT INTO BCOUPON 
+			(ESTID, COUPONID, DISCOUNT, PERIOD, MINIMUMPRICE, MAXISSUENUM) 
+			VALUES (#{estid}, #{couponid}, #{discount}, #{period}, #{minimumprice}, #{maxissuenum})
+	</insert>
+	
+		<!-- 	UUID 중복검사 -->
+	<select id="confirm" resultType="int" parameterType="String">
+		SELECT COUNT(COUPONID) FROM BCOUPON WHERE COUPONID = #{couponid}
+	</select>
+	
+	<update id="deleteCoupon" parameterType="BCouponVO">
+		UPDATE BCOUPON SET DELETEBOOLEAN='Y' WHERE COUPONID = #{couponid}
+	</update>
+	
 </mapper>
