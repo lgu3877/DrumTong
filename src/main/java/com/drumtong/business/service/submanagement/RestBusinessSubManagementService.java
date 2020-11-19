@@ -88,7 +88,7 @@ public class RestBusinessSubManagementService {
 		return gson.toJson(bReviewList);
 	}
 	
-	public String CouponCount(HttpServletRequest req) {
+	public String ReviewCount(HttpServletRequest req) {
 		HttpSession Session = req.getSession();
 		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
 		String estid= bInformationVO.getEstid();
@@ -97,11 +97,12 @@ public class RestBusinessSubManagementService {
 		return new Gson().toJson(result);
 	}
 
-
+	// ========================= 대분류 [쿠폰관리] ================================ [영경]
 	public String updateCoupon(HttpServletRequest req, BCouponVO bcouponvo, String processing) {
 		HttpSession Session = req.getSession();
 		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
 		String estid= bInformationVO.getEstid();
+		bcouponvo.setEstid(estid);
 		int result = 0;
 		switch(processing) {
 		case "add":
@@ -117,5 +118,4 @@ public class RestBusinessSubManagementService {
 		return new Gson().toJson(couponList);
 	}
 	
-	// ========================= 대분류 [쿠폰관리] ================================ [영경]
 }

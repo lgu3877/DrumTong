@@ -70,10 +70,11 @@ public class RestBusinessSubManagementController {
 		return svc.updateReview(req, reviewList, pageKind, processing);
 	}
 	
+	// 전체, 미답변, 차단신고 별 개수를 갱신해주는 함수
 	@RequestMapping("businessReviewManagement/rest/pageCount/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String CouponCount(HttpServletRequest req) {
-		return svc.CouponCount(req);
+	public String ReviewCount(HttpServletRequest req) {
+		return svc.ReviewCount(req);
 	}
 	
 
