@@ -66,7 +66,7 @@
 			<div  class="radioDiv">	<!-- 체크되었을 때 옆에 입력란 활성화 -->
 				<input type="radio" name="maxissuenum" id="limitedcoupon">	<!-- 선착순도 name="maxissunum" value 값이 0이 되지 않도록 하기 -->
 				<h1>선착순</h1>
-				<input tpye="text" placeholder="숫자를 입력하세요" id="limitedcouponNum" style="width: 100%; display: none;">
+				<input tpye="text" placeholder="숫자를 입력하세요" id="limitedcouponNum" style="display: none;">
 			</div>
 		</div>
 		<div class="buttonDiv">
@@ -121,7 +121,6 @@
 	// 쿠폰 등록하는 함수
 	function couponEnrollment() {
 		var enrollconfirm = confirm('새로운 쿠폰을 등록하시겠습니까?');
-
 		
 		if(enrollconfirm == false)
 			return false;
@@ -152,7 +151,6 @@
 	            // 정상
 	       		.then( (response) => {
 	            const data = response.data;
-	            console.log('data : ', data);
 	            couponlist = data;
 				showCounpons();
 	             })
@@ -164,7 +162,27 @@
 	
 	// 쿠폰 삭제하는 함수
 	function deleteCoupon(obj) {
+		var deleteconfirm = confirm('정말로 쿠폰을 삭제하시겠습니까?');
 		
+		if(deleteconfirm == false)
+			return false;
+		else {
+			console.log('coupon id : ', obj.id);
+			let ob={
+					   'couponid': obj.id,
+			      	};
+			
+	        const axPost = async (ob) => {   // async : 비동기 실행 함수
+	            await axios.post('/drumtong/business/subManagement/businessCouponManagement/rest/del/' , ob)
+	            // 정상
+	       		.then( (response) => {
+	            const data = response.data;
+	            couponlist = data;
+				showCounpons();
+	             })
+	          }
+			return axPost(ob);		
+		}
 	}
 	
 	// 등록된 쿠폰 리스트 보여주는 함수
@@ -179,11 +197,9 @@
 		var inputdiv = document.createElement('div');
 		inputdiv.className = 'inputDiv';
 		
-//		console.log('기간1 : ', couponlist[i].period);
-// 		console.log('기간2 : ', (couponlist[i].period).split('~'));
-// 		console.log('기간3 : ', (couponlist[i].period).split('~', 0));
 		var listsplit = (couponlist[i].period).split('~');	
 		
+		// 날짜 div
 		var period = document.createElement('h1');
 		period.innerHTML = '기간';
 		var beforedate = document.createElement('input');
@@ -236,6 +252,9 @@
 		var radio1 = document.createElement('input');
 		radio1.setAttribute('type', 'radio');
 		radio1.disabled = true;
+		if(couponlist[i].maxissuenum == 0) {
+			radio1.checked = true;
+		}
 		var radioname1 = document.createElement('h1');
 		radioname1.innerHTML = '무제한';
 		radiodiv1.appendChild(radio1);
@@ -247,14 +266,21 @@
 		radiodiv2.className = 'radioDiv';
 		var radio2 = document.createElement('input');
 		radio2.setAttribute('type', 'radio');
-		radio2.checked = true;
 		radio2.disabled = true;
+
 		var radioname2 = document.createElement('h1');
 		radioname2.innerHTML = '선착순';
 		radiodiv2.appendChild(radio2);
 		radiodiv2.appendChild(radioname2);
+		if(couponlist[i].maxissuenum !== 0) {
+			radio2.checked = true;
+			var showcouponnum = document.createElement('input');
+			showcouponnum.setAttribute('type', 'text');
+			showcouponnum.value = couponlist[i].maxissuenum;
+			showcouponnum.readOnly = true;
+			radiodiv2.appendChild(showcouponnum);
+		}
 		inputdiv.appendChild(radiodiv2);
-
 		container.appendChild(inputdiv);
 		
 		
