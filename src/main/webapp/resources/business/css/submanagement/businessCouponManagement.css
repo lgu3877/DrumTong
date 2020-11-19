@@ -1,0 +1,62 @@
+
+.container {
+	width: 800px;
+	margin: 0 auto;
+	margin-top: 25px;
+}
+
+.inputDiv {
+	width: 500px; 
+	height: 275px; 
+	padding: 15px; 
+	text-align: left; 
+	border: 1px solid black;
+	margin: 0 auto;
+}
+
+.inputDiv h1 {
+	font-size: 14pt;
+}
+
+.inputDiv input[type="date"] {
+	width: 200px;
+}
+
+.costDiv {
+	width: 200px;
+	display: inline-block;
+	margin-right: 28px;
+}
+
+.costDiv input {
+	width: 100%;
+}
+
+.radioDiv {
+	width: 200px; 
+	display: inline-block;
+	float: left; 
+	margin-right: 32px; 
+	margin-top: 10px
+}
+
+.radioDiv input {
+	margin-right: 20px;
+}
+
+.radioDiv h1 {
+	display: inline-block;
+}
+
+.buttonDiv {
+	width: 530px; 
+	text-align: right;
+	margin: 0 auto;
+}
+
+.buttonDiv input[type="button"]{
+	width: 100px; 
+	height: 40px; 
+	font-size: 18pt; 
+	margin-top: 20px
+}

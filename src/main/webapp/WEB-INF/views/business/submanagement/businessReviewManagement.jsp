@@ -80,8 +80,7 @@
 		reviewContents(1);
 		arrow(1);
 		paging(document.querySelector('.currentPage'));
-		globalPath = '${pageKind }';
-		console.log('globalPath : ', globalPath);
+		globalPath = '${pageKind }';		
 	}
 	
 	function reviewContents(pagenum) {	// 리뷰글을 만들어주는 함수
