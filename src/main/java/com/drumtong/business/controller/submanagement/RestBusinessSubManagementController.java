@@ -70,6 +70,12 @@ public class RestBusinessSubManagementController {
 		return svc.updateReview(req, reviewList, pageKind, processing);
 	}
 	
+	@RequestMapping("businessReviewManagement/rest/pageCount/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String CouponCount(HttpServletRequest req) {
+		return svc.CouponCount(req);
+	}
+	
 
 	// ========================= 대분류 [쿠폰관리] ================================ [영경]
 	// processing in ('add', 'del')

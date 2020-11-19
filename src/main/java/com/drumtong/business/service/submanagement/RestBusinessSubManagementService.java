@@ -1,5 +1,6 @@
 package com.drumtong.business.service.submanagement;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -85,6 +86,15 @@ public class RestBusinessSubManagementService {
 		Gson gson = new GsonBuilder().create();
 		
 		return gson.toJson(bReviewList);
+	}
+	
+	public String CouponCount(HttpServletRequest req) {
+		HttpSession Session = req.getSession();
+		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+		String estid= bInformationVO.getEstid();
+		
+		HashMap<String, Integer> result = Review.pageList(estid);
+		return new Gson().toJson(result);
 	}
 
 

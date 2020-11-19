@@ -74,12 +74,40 @@ public class Review {
 			break;
 		}
 		
+		
+		
+		
 		// 전체 페이지 수(만약 페이징은 비동기식으로 처리한다면 이 부분은 필요 없음)
 //		int wholePageNum = bReviewDAO.selectReviewNum(map);
 		
 		// 페이지 번호, estid
 		// 현재 승원씨 테스트를 위해 페이징은 기능은 제외해둠
 		return bReviewDAO.selectReview(map);
+	}
+	
+	public static HashMap<String, Integer> pageList(String estid){
+		HashMap<String, String> map = new HashMap<String, String>();
+		HashMap<String, Integer> result = new HashMap<String, Integer>();
+		map.put("estid", estid);
+		
+		map.put("division", "whole");
+		int wholeNum = bReviewDAO.selectReviewNum(map);
+		result.put("wholeNum", wholeNum);
+		
+		map.put("division", "noReply");
+		int noReplyNum = bReviewDAO.selectReviewNum(map);
+		result.put("noReplyNum", noReplyNum);
+		
+		map.put("division", "reportReply");	
+		int reportReplyNum = bReviewDAO.selectReviewNum(map);
+		result.put("reportReplyNum", reportReplyNum);
+		
+		System.out.println("테스트");
+		System.out.println("wholeNum : " + wholeNum);
+		System.out.println("noReplyNum : " + noReplyNum);
+		System.out.println("reportReplyNum : " + reportReplyNum);
+		
+		return result;
 	}
 
 }

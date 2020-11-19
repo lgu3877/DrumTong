@@ -45,9 +45,9 @@
 				매장 이름 : ${selectEST.brandnaming }
 		<div style="width: 800px;" class="marginauto">
 			<div style="display: flex; margin-bottom: 15px">
-				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/whole/'" value="전체 리뷰(${ReviewCount })" style="width: 33%; height: 50px" id="whole">
+				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/whole/'" value="전체 리뷰" style="width: 33%; height: 50px" id="whole">
 				<div style="width: 0.5%"></div>
-				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/noReply/'" value="미답변 리뷰(${NoReplybReviewCount})"  style="width: 33%; height: 50px" id="noReply">
+				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/noReply/'" value="미답변 리뷰"  style="width: 33%; height: 50px" id="noReply">
 				<div style="width: 0.5%"></div>
 				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/reportReply/'" value="차단/허위 의심 리뷰"  style="width: 33%; height: 50px"  id="reportReply">
 			</div>
@@ -70,7 +70,30 @@
 		</div>
 	</section>
 		
-	
+<!-- 영경 추가 스크립트 -->	
+<script type="text/javascript">
+	console.log('test');
+	document.getElementById('reviewDiv').addEventListener('change', pageNum);
+
+	function pageNum(){
+		var axiosPath = '/drumtong/business/subManagement/businessReviewManagement/rest/pageCount/';
+		
+		const axPost = async () => {   // async : 비동기 실행 함수
+		    await axios.post(axiosPath)
+		    // 정상
+				.then( (response) => {
+		    const data = response.data;
+				map = data;
+				document.getElementById('whole').value="전체 리뷰(" + map['wholeNum'] + ")";
+				document.getElementById('noReply').value="미답변 리뷰(" + map['noReplyNum'] + ")";
+				document.getElementById('reportReply').value="차단/허위 의심 리뷰(" + map['reportReplyNum'] + ")";
+		     })
+		  }
+		return axPost();
+		
+	}
+	pageNum();
+</script>		
 <script type="text/javascript">
 
 	var bReviewList =  ${bReviewList };		// 전역변수로 비동기로 전달받은 리스트 저장함
