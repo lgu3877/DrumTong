@@ -48,6 +48,10 @@
 	display: inline-block;
 }
 
+.radioDiv input[type="text"] {
+	width: 100%;
+}
+
 .buttonDiv {
 	width: 530px; 
 	text-align: right;
