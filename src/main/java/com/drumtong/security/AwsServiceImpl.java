@@ -1,5 +1,9 @@
 package com.drumtong.security;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
@@ -33,10 +37,12 @@ public class AwsServiceImpl{
 	@Autowired BPaymentDAO bPaymentDAO;
 	@Autowired BInformationDAO bInformationDAO;
 	
-	
-    private static final String BUCKET_NAME = "laundrydrumtong2";
-    private static final String ACCESS_KEY = "AKIARY57UYCGCWQCGNXQ";
-    private static final String SECRET_KEY = "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";
+	private static String[] Security = Security();
+    
+    private static final String BUCKET_NAME = Security[0];
+    private static final String ACCESS_KEY = Security[1];
+    private static final String SECRET_KEY = Security[2];
+    
 
     private AmazonS3 amazonS3; // 인스턴스를 초기화한다.
 
@@ -47,7 +53,7 @@ public class AwsServiceImpl{
 
         // 인스턴스에 버킷의 정보를들 설정한다.
         // Region 의 경우 버킷의 url 에서 확인 할 수 있다.
-        // ex) https://s3.console.aws.amazon.com/s3/buckets/static.preeplus.com/?region=ap-northeast-2&tab=overview
+        // ex) https://s3.console.aws.amazon.com/s3/buckets/
         amazonS3 = AmazonS3ClientBuilder
                 .standard()
                 .withRegion(Regions.AP_NORTHEAST_2)
@@ -55,7 +61,30 @@ public class AwsServiceImpl{
                 .build(); 		
     }
     
-    // 다중으로 이미지를 업로드할 때 사용하는 메서드이다.
+    public static String[] Security() {
+		String[] Security = new String[3];
+    	File file = new File("C:\\AwsKeysBox\\Security.txt");
+    	if(file.exists()) {
+    		try {
+				BufferedReader inFile = new BufferedReader(new FileReader(file));
+				String sLine = null;
+				int i = 0;
+	    		while( (sLine = inFile.readLine()) != null) {
+						System.out.println(sLine);
+						Security[i] = sLine;
+						i++;
+						if(i == 3) break;
+					}
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    	}
+		return Security;
+	}
+
+	// 다중으로 이미지를 업로드할 때 사용하는 메서드이다.
     /*
      * 
      *  다음의 메서드는 들어오는 객체에 따라 S3에 저장될 경로를 다양하게 설정해줍니다.
