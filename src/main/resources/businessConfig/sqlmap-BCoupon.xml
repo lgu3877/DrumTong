@@ -10,8 +10,7 @@
 	<select id="select" parameterType="String" resultType="BCouponVO" >
 		SELECT * FROM BCOUPON 
 			WHERE ESTID=#{estid} AND DELETEBOOLEAN='N' AND 
-			SYSDATE BETWEEN TO_DATE(SUBSTR(PERIOD,1,11), 'YYYY-MM-DD') 
-				AND TO_DATE(SUBSTR(PERIOD,14), 'YYYY-MM-DD')
+			SYSDATE <![CDATA[<=]]> TO_DATE(SUBSTR(PERIOD,14), 'YYYY-MM-DD') 
 	</select>
 	
 <!-- 	고객이 보유하고 있는 현 사업장 쿠폰 리스트	 -->
