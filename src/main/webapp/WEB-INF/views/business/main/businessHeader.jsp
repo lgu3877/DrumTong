@@ -10,6 +10,13 @@
 		<div class="h_right_con title">
 			<div class="h_right_upper">
 				<div class="member_menu">
+				<!-- 테스트-영경 -->
+<!-- 							<span> -->
+<%-- 								Referer : ${Referer} --%>
+<!-- 							</span> -->
+<!-- 							<span> -->
+<%-- 								uri : ${uri } --%>
+<!-- 							</span> -->
 					<c:choose>
 						<c:when test="${empty bLogin }">
 							<span class="upper_options"
