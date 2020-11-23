@@ -41,38 +41,62 @@
 	
 	
 	<!-- 발급날짜 별로 자동적으로 정렬이 이루어지도록 만들자 -->
-	<div class="container">
-		<div class="inputDiv" id="enrollDiv">
-			<h1>기간</h1>
-			<input type="date" name="period" id="beforeDate">
-			<h1 style="width: 20px; display: inline-block; text-align: center;">-</h1>
-			<input type="date" name="period"  id="afterDate" readonly>
-			
-			<div class="costDiv">
-				<h1>최소주문금액</h1>
-				<input type="text" placeholder="금액을 입력하세요" id="minimumprice" name="minimumprice">
-			</div>
-			
-			<div  class="costDiv">
-				<h1>할인금액</h1>
-				<input type="text" placeholder="금액을 입력하세요" id="discount" name="discount">
-			</div>
-			
-			<div class="radioDiv">
-				<input type="radio" name="maxissuenum" value="0" id="unlimitedcoupon">
-				<h1>무제한</h1>
-			</div>
-			
-			<div  class="radioDiv">	<!-- 체크되었을 때 옆에 입력란 활성화 -->
-				<input type="radio" name="maxissuenum" id="limitedcoupon">	<!-- 선착순도 name="maxissunum" value 값이 0이 되지 않도록 하기 -->
-				<h1>선착순</h1>
-				<input tpye="text" placeholder="숫자를 입력하세요" id="limitedcouponNum" style="display: none;">
-			</div>
-		</div>
-		<div class="buttonDiv">
-			<input type="button" value="등록" onclick="couponEnrollment()">
-		</div>
-	</div>
+<div class="container">
+        <div class="inputFlex">
+        <div class="inputDivContainer">
+            <div class="inputDiv" id="enrollDiv">
+                <h1>기간</h1>
+                <input type="date" name="period" id="beforeDate">
+                <h1 style="width: 20px; display: inline-block; text-align: center;">-</h1>
+                <input type="date" name="period"  id="afterDate" readonly>
+                
+                <div class="costDiv">
+                    <h1>최소주문금액</h1>
+                    <input type="text" placeholder="금액을 입력하세요" id="minimumprice" name="minimumprice">
+                </div>
+                
+                <div  class="costDiv">
+                    <h1>할인금액</h1>
+                    <input type="text" placeholder="금액을 입력하세요" id="discount" name="discount">
+                </div>
+                
+                <div class="radioDiv">
+                    <input type="radio" name="maxissuenum" value="0" id="unlimitedcoupon">
+                    <h1>무제한</h1>
+                </div>
+                
+                <div  class="radioDiv">	<!-- 체크되었을 때 옆에 입력란 활성화 -->
+                    <input type="radio" name="maxissuenum" id="limitedcoupon">	<!-- 선착순도 name="maxissunum" value 값이 0이 되지 않도록 하기 -->
+                    <h1>선착순</h1>
+                    <input tpye="text" placeholder="숫자를 입력하세요" id="limitedcouponNum" style="display: none; ">
+                </div>
+                <div class="bottombg1"></div>
+                <div class="topbg1"></div>
+
+            </div>
+                    </div>
+            <div class="sideinputDiv">
+                <div class="sidedivborder">
+                    <div class="buttonDiv">
+                        <input type="button" value="등록" onclick="couponEnrollment()">
+                    </div>
+                        <div class="sideCircle-black" style="top: -2px"></div>
+                        <div class="sideCircle-black" style="top: 78px"></div>
+                        <div class="sideCircle-black" style="top: 158px"></div>
+                        <div class="sideCircle-black" style="top: 238px"></div>
+                        <div class="sideCIrcle-white" style="top: -1px"></div>
+                        <div class="sideCIrcle-white" style="top: 79px"></div>
+                        <div class="sideCIrcle-white" style="top: 159px"></div>
+                        <div class="sideCIrcle-white" style="top: 239px"></div>
+                        <div class="side-hr"></div>
+                        <div class="bottombg2"></div>
+                        <div class="topbg2"></div>
+                    </div>
+                </div>
+            </div>
+    
+    
+        </div>
 	
 	<hr>
 	
@@ -81,11 +105,10 @@
 	</div>
 
 	</section>
-	
-</body>
-<script type="text/javascript">
+	<script type="text/javascript">
 
 	var couponlist = null;
+	var slidenum = null;		// 화살표 누를 때마다 3개씩 쿠폰보여주기 위한 변수
 	
 	window.onload = function() {
 		var inputDate = document.querySelectorAll('input[type="date"]');
@@ -100,6 +123,7 @@
 		}
 		couponlist = ${couponList };
 		showCounpons();
+		slidenum = 3;
 	}
 	
 	document.getElementById('beforeDate').addEventListener('change', function() {
@@ -194,6 +218,10 @@
 			
 		var container = document.createElement('div');
 		container.className = 'container';
+		var inputFlex = document.createElement('div');
+		inputFlex.className = 'inputFlex';
+		var inputdivcontainer = document.createElement('div');
+		inputdivcontainer.className = 'inputDivContainer';
 		var inputdiv = document.createElement('div');
 		inputdiv.className = 'inputDiv';
 		
@@ -281,9 +309,21 @@
 			radiodiv2.appendChild(showcouponnum);
 		}
 		inputdiv.appendChild(radiodiv2);
-		container.appendChild(inputdiv);
 		
+		var bottombg1 = document.createElement('div');
+		bottombg1.className = 'bottombg1';
+		var topbg1 = document.createElement('div');
+		topbg1.className = 'topbg1';
+		inputdiv.appendChild(bottombg1);
+		inputdiv.appendChild(topbg1);
 		
+		inputdivcontainer.appendChild(inputdiv);
+		inputFlex.appendChild(inputdivcontainer);
+	
+		var sideinputDiv = document.createElement('div');
+		sideinputDiv.className = 'sideinputDiv';
+		var sidedivborder = document.createElement('div');
+		sidedivborder.className = 'sidedivborder';
 		var buttonDiv = document.createElement('div');
 		buttonDiv.className = 'buttonDiv';
 		var deleteButton = document.createElement('input');
@@ -292,7 +332,56 @@
 		deleteButton.setAttribute('id', couponlist[i].couponid);
 		deleteButton.setAttribute('onclick', 'deleteCoupon(this)');
 		buttonDiv.appendChild(deleteButton);
-		container.appendChild(buttonDiv);
+		sidedivborder.appendChild(buttonDiv);
+		
+		var black1 = document.createElement('div');
+		black1.className = 'sideCircle-black';
+		black1.style.top = '-2px';
+		sidedivborder.appendChild(black1);
+		var black2 = document.createElement('div');
+		black2.className = 'sideCircle-black';
+		black2.style.top = '78px';
+		sidedivborder.appendChild(black2);
+		var black3 = document.createElement('div');
+		black3.className = 'sideCircle-black';
+		black3.style.top = '158px';
+		sidedivborder.appendChild(black3);
+		var black4 = document.createElement('div');
+		black4.className = 'sideCircle-black';
+		black4.style.top = '238px';
+		sidedivborder.appendChild(black4);
+		
+		var white1 = document.createElement('div');
+		white1.className = 'sideCIrcle-white';
+		white1.style.top = '-1px';
+		sidedivborder.appendChild(white1);
+		var white2 = document.createElement('div');
+		white2.className = 'sideCIrcle-white';
+		white2.style.top = '79px';
+		sidedivborder.appendChild(white2);
+		var white3 = document.createElement('div');
+		white3.className = 'sideCIrcle-white';
+		white3.style.top = '159px';
+		sidedivborder.appendChild(white3);
+		var white4 = document.createElement('div');
+		white4.className = 'sideCIrcle-white';
+		white4.style.top = '239px';
+		sidedivborder.appendChild(white4);
+		
+		var sidehr = document.createElement('div');
+		sidehr.className = 'side-hr';	
+		var bottombg2 = document.createElement('div');
+		bottombg2.className = 'bottombg2';
+		var topbg2 = document.createElement('div');
+		topbg2.className = 'topbg2';
+		sidedivborder.appendChild(sidehr);
+		sidedivborder.appendChild(bottombg2);
+		sidedivborder.appendChild(topbg2);
+		
+		
+		sideinputDiv.appendChild(sidedivborder);
+		inputFlex.appendChild(sideinputDiv);
+		container.appendChild(inputFlex);
 		
 		enrollmentedDiv.appendChild(container);
 		}
@@ -323,4 +412,6 @@
 	
 
 </script>
+</body>
+
 </html>

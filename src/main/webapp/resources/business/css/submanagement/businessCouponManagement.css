@@ -1,18 +1,152 @@
 
 .container {
-	width: 800px;
+	width: 950px;
+	height: 320px;
 	margin: 0 auto;
 	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+.inputFlex {
+	display: flex;
+	width: 100%;
+	height: 100%;
+}
+
+.inputDivContainer {
+	position: relative;
+	width: 600px; 
+	height: 320px; 
+	display: inline-block;
+	box-sizing:border-box;
+    border-right: 1px solid white;
+    background: black;
+
 }
 
 .inputDiv {
-	width: 500px; 
-	height: 275px; 
-	padding: 15px; 
-	text-align: left; 
-	border: 1px solid black;
-	margin: 0 auto;
+	 position: absolute;
+     padding-left: 20px;
+     text-align: left; 
+     width: 578px;
+     height: 316px;
+     top: 2px;
+     left: 2px;
+     margin-bottom: 10px;
+     background: white;
 }
+.inputDiv:after {
+    position: absolute;
+    content: '';
+    width: 39px;
+    height: 39px;
+    top:-2px;
+    right:0;
+    clip-path: ellipse(100% 100% at 100% 0%);
+    box-sizing:border-box;
+    background: white;
+ }
+ .bottombg1 {
+    position: absolute;
+    content: '';
+    width: 40px;
+    height: 40px;
+    top:-2px;
+    right:0;
+    clip-path: ellipse(100% 100% at 100% 0%);
+    box-sizing:border-box;
+    background: black;
+ }
+ .inputDiv:before {
+    position: absolute;
+    content: '';
+    width: 40px;
+    height: 40px;
+    bottom:-2px;
+    right:0;
+    clip-path: ellipse(100% 100% at 100% 100%);
+    box-sizing:border-box;
+    background: black;
+ }
+ .topbg1 {
+    position: absolute;
+    content: '';
+    width: 39px;
+    height: 39px;
+    bottom:-2px;
+    right:0;
+    clip-path: ellipse(100% 100% at 100% 100%);
+    box-sizing:border-box;
+    background: white;
+ }
+.sideinputDiv {
+	position: relative;
+	width: 350px; 
+	height: 320px;
+	display: inline-block;
+    background: black;
+    box-sizing:border-box;
+    margin-bottom: 10px;
+}
+
+
+.sidedivborder {
+     position: absolute;
+     content: '';
+     width: 350px;
+     height: 316px;
+     left:0px;
+     top: 2px;
+     background-color: white;
+     display: table;
+     align-items: center;
+        border-left: 0;
+}
+.sidedivborder:after {
+    position: absolute;
+    content: '';
+    width: 39px;
+    height: 39px;
+    top:-2px;
+    left:0;
+    clip-path: ellipse(100% 100% at 0% 0%);
+    box-sizing:border-box;
+    background: white;
+ }
+ .topbg2 {
+    position: absolute;
+    content: '';
+    width: 40px;
+    height: 40px;
+    top:-2px;
+    left:0;
+    clip-path: ellipse(100% 100% at 0% 0%);
+    box-sizing:border-box;
+    background: black;
+ }
+ .sidedivborder:before {
+    position: absolute;
+    content: '';
+    width: 40px;
+    height: 40px;
+    bottom:-2px;
+    left:0;
+    clip-path: ellipse(100% 100% at 0% 100%);
+    box-sizing:border-box;
+    background: black;
+ }
+
+ .bottombg2 {
+    position: absolute;
+    content: '';
+    width: 39px;
+    height: 40px;
+    bottom:-3px;
+    left:0;
+    clip-path: ellipse(100% 100% at 0% 100%);
+    box-sizing:border-box;
+    background: white;
+ }
 
 .inputDiv h1 {
 	font-size: 14pt;
@@ -20,6 +154,7 @@
 
 .inputDiv input[type="date"] {
 	width: 200px;
+	height: 40px;
 }
 
 .costDiv {
@@ -30,6 +165,7 @@
 
 .costDiv input {
 	width: 100%;
+	height: 40px;
 }
 
 .radioDiv {
@@ -53,14 +189,57 @@
 }
 
 .buttonDiv {
-	width: 530px; 
-	text-align: right;
-	margin: 0 auto;
+    display: table-cell;
+	width: 80%; 
+    height: 100%;
+    vertical-align: middle;
+    text-align: center;
 }
 
 .buttonDiv input[type="button"]{
-	width: 100px; 
-	height: 40px; 
-	font-size: 18pt; 
-	margin-top: 20px
+    margin: 0 auto;
+	width: 200px; 
+	height: 200px; 
+	font-size: 32pt;
+	font-weight: bold;
+	border: 1px solid black;
+	clip-path: polygon(50% 0%, 70% 25%, 98% 35%, 83% 63%, 79% 91%, 48% 82%, 21% 91%, 18% 62%, 2% 35%, 27% 25%);
+}
+
+.buttonDiv input[type="button"]:hover{
+   margin: 0 auto;
+	width: 260px; 
+	height: 260px; 
+	font-size: 40pt;
+	font-weight: bold;
+	border: 1px solid black;
+   clip-path: polygon(50% 0%, 70% 25%, 98% 35%, 83% 63%, 79% 91%, 48% 82%, 21% 91%, 18% 62%, 2% 35%, 27% 25%);
+}
+
+.sideCircle-black {
+	position: absolute; 
+	right: 0;
+	clip-path: circle(50% at 100% 50%);   
+	width: 20%; 
+	height: 80px; 
+	background: black;
+}
+
+.sideCIrcle-white {
+	position: absolute; 
+	right: -1px;
+	clip-path: circle(50% at 100% 50%);   
+	width: 20%; 
+	height: 78px; 
+	background: white;
+}
+
+.side-hr {
+	position: absolute; 
+	left: 0; 
+	top:38px; 
+	clip-path: inset(0 0 0 0); 
+	background-color: black;
+	 width: 1px; 
+	 height: 240px;
 }
