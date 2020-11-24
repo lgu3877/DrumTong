@@ -61,7 +61,7 @@ public class AwsServiceImpl{
                 .build(); 		
     }
     
-    public static String[] Security() {
+    private static String[] Security() {
 		String[] Security = new String[3];
     	File file = new File("C:\\AwsKeysBox\\Security.txt");
     	if(file.exists()) {
