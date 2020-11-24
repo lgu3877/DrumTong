@@ -140,3 +140,37 @@ function comfirmIntro() {
 }
 
 
+// create item customizing list
+const addItemBtn = document.getElementById('add-item-btn');
+const itemCustomList = document.getElementById('add-item-list');
+
+console.log(addItemBtn);
+console.log(itemCustomList);
+
+addItemBtn.addEventListener('click', function(e) {
+	console.log("clicked");
+	
+})
+
+
+// when select direct typing
+function directType(id) {
+//	let directType = false;
+	console.log('type has just changed');
+
+//	const selectedOption = document.getElementById(id.substr(0, id.length-4) + 'selector');
+//	console.log(selectedOption);
+
+	const isSelected = document.getElementById(id.substr(0, id.length-4) + 'type').selected;
+	console.log(isSelected);
+	
+	if (isSelected) {
+		
+	} else {
+		
+	}
+	
+	
+}
+
+

@@ -10,7 +10,7 @@
 .prev {
 	text-decoration: none;
     position: absolute;
-    top: 35%;
+    top: 27%;
     left: 0.5%;
     cursor: pointer;
     font-size: 15pt;
@@ -20,7 +20,7 @@
 .next {
 	text-decoration: none;
     position: absolute;
-    top: 35%;
+    top: 27%;
     right: 0.5%;
     cursor: pointer;
     font-size: 15pt;
@@ -233,6 +233,7 @@
 .current_menu_con {
 	margin-top: 70px;
     margin-left: 3.33%;
+    margin-right: 3.33%;
 }
 
 .current_menu {
@@ -246,7 +247,7 @@
 	border-top: 1px solid #ccc;
 	border-bottom: 1px solid #ccc;
 	margin: 20px 0;
-	width: 75%;
+	width: 100%;
 }
 
 .current_menu_table thead th {
@@ -260,7 +261,7 @@
 }
 
 .current_menu_table tbody th {
-	width: 150px;
+	width: 16.6666%;
 	padding: 10px;
 }
 
@@ -281,7 +282,196 @@
 }
 
 .create_menu {
+    margin-top: 40px;
+}
+
+.add_menu_btn_con {
+	position: absolute;
+	display: flex;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    width: 130px;
+    background-color: #6495ED;
+    color: white;
+    justify-content: center;
+	height: 40px;
+    border-radius: 8px;
+    right: 5%;
+}
+
+.add_menu_btn_con:hover {
+	background-color: #3b5998;
+    transition: 0.5s;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.add_menu_icon_con i {
+	font-size: 15pt;
+    line-height: 40px;
+}
+
+.add_menu_btn_title {
+	font-size: 12pt;
+    line-height: 40px;
+    margin-left: 10px;
+}
+
+.add_item_list {
+	display: block;
+}
+
+.single_item_selector {
+	display: flex;
+	justify-content: space-between;
+    margin: 0 5% 0 0;
+}
+
+/* customizing menu header */
+.customize_menu_head {
+	list-style: none;
+	display: flex;
+	justify-content: space-between;
+    margin: 5% 5% 1.5% 0;
+}
+
+.customize_menu_head li {
+	border-top: 1.5px solid navy;
+	border-bottom: 2px solid navy;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-radius: 5px;
+}
+
+.service_main {
+	width: 15%;
+}
+
+.service_sub {
+	width: 15%;
+}
+
+.service_details {
+	width: 35%;
+}
+
+.service_price {
+	width: 10%;
+}
+
+.service_time {
+	width: 10%;
+}
+
+.service_confirm {
+	width: 5%;
+}
+
+.service_cancle {
+	width: 5%;
+}
+
+
+
+/* first property input */
+.first_item_prop {
+	width: 15%;
+}
+
+/* select */
+.service_selector {
+	width: 100%;
+	margin: 0 auto;
+	color: slateblue;
+	height: 40px;
+	cursor: pointer;
+	font-size: 11pt;
+	border-color: slateblue;
+}
+
+.service_selector:hover {
+	background-color: #f4f0ec;
+	transition: .5s;
+	opacity: 0.7;
+}
+
+.service_selector:focus {
+	outline: none;
+}
+
+.service_selector option {
+	background-color: white;
+	color: slateblue;
+	cursor: pointer;
+	font-weight: 100;
+}
+
+.service_selector option:hover {
 	
+}
+
+/* second property input */
+.second_item_prop {
+	width: 15%;
+}
+
+.second_item_prop input {
+	width: 100%;
+}
+
+
+/* third~fifth property input */
+.third_item_prop {
+	width: 35%;
+}
+
+.forth_item_prop {
+	width: 10%;
+}
+
+.fifth_item_prop {
+	width: 10%;
+}
+
+.third_item_prop input, .forth_item_prop input, .fifth_item_prop input {
+	width: 100%;
+	margin: 0 auto;
+	color: slateblue;
+	height: 38px;
+	cursor: pointer;
+	font-size: 11pt;
+	border-color: slateblue;
+	border: 1px solid;
+	text-indent: 4px;
+}
+
+.third_item_prop input:focus, .forth_item_prop input:focus, .fifth_item_prop input:focus {
+	outline: none;
+}
+
+.third_item_prop input:hover, .forth_item_prop input:hover, .fifth_item_prop input:hover {
+	background-color: #f4f0ec;
+	transition: .5s;
+	opacity: 0.7;
+}
+
+.complete_listing {
+	width: 5%;
+	cursor: pointer;
+	color: lime;
+	line-height: 35px;
+}
+
+.cancle_listing {
+	width: 5%;
+	cursor: pointer;
+	color: red;
+	line-height: 35px;
+}
+
+.complete_listing:hover, .cancle_listing:hover {
+	font-weight: 600;
+	transition: 0.5s;
 }
 
 /* Modal */
@@ -301,24 +491,24 @@
 }
 
 .intro_modal {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
+	display: none; 
+	position: fixed;
+	z-index: 1;
 	left: 0;
 	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	width: 100%; 
+	height: 100%; 
+	overflow: auto; 
+	background-color: rgb(0, 0, 0); 
+	background-color: rgba(0, 0, 0, 0.4);
 }
 
 .intro_content_con {
 	background-color: #fefefe;
-	margin: 150px auto; /* 15% from the top and centered */
+	margin: 150px auto; 
 	padding: 20px;
 	border: 1px solid #888;
-	width: 50%; /* Could be more or less, depending on screen size */
+	width: 50%;
 }
 
 .intro_content {
