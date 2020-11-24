@@ -70,7 +70,6 @@ public class AwsServiceImpl{
 				String sLine = null;
 				int i = 0;
 	    		while( (sLine = inFile.readLine()) != null) {
-						System.out.println(sLine);
 						Security[i] = sLine;
 						i++;
 						if(i == 3) break;
