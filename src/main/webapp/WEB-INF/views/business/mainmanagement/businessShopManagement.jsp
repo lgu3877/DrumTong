@@ -147,7 +147,7 @@
 			<!-- text content -->
 				<div class="shop_text_intro">
 					<p class="shop_text_view">
-						이곳은 당신이 작성한 매장 소개글을 확인할 수 있는 칸입니다. 작성한	 글이 마음에 들지 않을 경우 아래 '작성하기'버튼을 통해 기존에 작성하신 글을 수정하시거나 새로운 내용의 소개글을 작성하실 수 있습니다.
+						이곳은 당신이 작성한 매장 소개글을 확인할 수 있는 칸입니다. 작성한 글이 마음에 들지 않을 경우 아래 '작성하기'버튼을 통해 기존에 작성하신 글을 수정하시거나 새로운 내용의 소개글을 작성하실 수 있습니다.
 					</p>
 				</div>
 
@@ -179,15 +179,17 @@
 					<!-- thead -->
 					<thead>
 						<tr>
-							<th scope="cols">서비스</th>
-							<th scope="cols">대분류</th>
-							<th scope="cols">중분류</th>
-							<th scope="cols">소분류</th>
+							<th scope="cols">서비스 유형</th>
+							<th scope="cols">서비스 타입</th>
+							<th scope="cols">세부 내용</th>
+							<th scope="cols">가격</th>
+							<th scope="cols">예상 소요시간</th>
+							<th scope="cols">기타</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<th scope="row" class="even" colspan="4" style="text-align: center">
+							<th scope="row" class="even" colspan="6" style="text-align: center">
 								등록된 상품 목록이 없습니다.<br>
 								아래 [서비스 등록] 항목에서 서비스 등록이 필요합니다.	
 							</th>
@@ -200,10 +202,12 @@
 				<!-- thead -->
 					<thead>
 						<tr>
-							<th scope="cols">서비스</th>
-							<th scope="cols">대분류</th>
-							<th scope="cols">중분류</th>
-							<th scope="cols">소분류</th>
+							<th scope="cols">서비스 유형</th>
+							<th scope="cols">서비스 타입</th>
+							<th scope="cols">세부 내용</th>
+							<th scope="cols">가격</th>
+							<th scope="cols">예상 소요시간</th>
+							<th scope="cols">기타</th>
 						</tr>
 					</thead>
 					
@@ -214,24 +218,32 @@
 							<td>내용1</td>
 							<td>내용2</td>
 							<td>내용3</td>
+							<td>내용4</td>
+							<td>내용5</td>
 						</tr>
 						<tr>
 							<th scope="row" class="even">서비스2</th>
 							<td class="even">내용1</td>
 							<td class="even">내용2</td>
 							<td class="even">내용3</td>
+							<td class="even">내용4</td>
+							<td class="even">내용5</td>
 						</tr>
 						<tr>
 							<th scope="row">서비스3</th>
 							<td>내용1</td>
 							<td>내용2</td>
 							<td>내용3</td>
+							<td>내용4</td>
+							<td>내용5</td>
 						</tr>
 						<tr>
 							<th scope="row" class="even">서비스4</th>
 							<td class="even">내용1</td>
 							<td class="even">내용2</td>
 							<td class="even">내용3</td>
+							<td class="even">내용4</td>
+							<td class="even">내용5</td>
 						</tr>
 					</tbody>
 				</table>
@@ -245,10 +257,90 @@
 			<div class="shop_info_title_con">
 				<span class="shop_info_title">서비스 등록</span>
 				<i class="far fa-question-circle">도움말</i>
+				<!-- add button -->
+				<div id="add-item-btn" class="add_menu_btn_con">
+					<div class="add_menu_icon_con">
+						<i class="fas fa-plus-square"></i>
+					</div>
+					<div class="add_menu_btn_title">메뉴 추가</div>
+				</div>
 			</div>
 
 			<div class="create_menu">
 			
+			
+			<!-- item customizing -->
+				
+			<!-- head -->
+				<div style="display: block">
+					<ul class="customize_menu_head">
+						<li class="service_main">서비스 유형</li>
+						<li class="service_sub">서비스 타입</li>
+						<li class="service_details">세부 내용</li>
+						<li class="service_price">가격</li>
+						<li class="service_time">예상 소요시간</li>
+						<li class="service_confirm">확인</li>
+						<li class="service_cancle">삭제</li>
+					</ul>
+				</div>
+<!-- ----------------------------------------- -->
+				<div id="add-item-list" class="add_item_list">
+					
+					<div class="single_item_selector">
+						
+						<div class="first_item_prop">
+							<select id="first-selector" class="service_selector" name="" onchange="directType('first-type')">
+								<option hidden="true" disabled selected>서비스 타입 선택</option>
+								<option value="">type1</option>
+								<option value="">type2</option>
+								<option value="">type3</option>
+								<option value="">type4</option>
+								<option value="">type5</option>
+								<option id="first-type" value="">직접입력</option>
+							</select>
+							<input type="text" class="first_direct_input" name="">
+						</div>
+						
+						<div class="second_item_prop">
+							<select id="second-selector" class="service_selector" onchange="directType('second-type')">
+								<option hidden="true" disabled selected>세부 서비스 유형 선택</option>
+								<option value="">type1</option>
+								<option value="">type2</option>
+								<option value="">type3</option>
+								<option value="">type4</option>
+								<option value="">type5</option>
+								<option id="second-type" value="selectDirectType">직접입력</option>
+							</select>
+					<!-- <input type="text" name=""> -->
+						</div>
+						
+						<div class="third_item_prop">
+							<input type="text" name="" placeholder="세부 서비스 내용을 입력해주세요.">
+						</div>
+
+						<div class="forth_item_prop">
+							<input type="text" name="" placeholder="서비스 가격(원)">
+						</div>
+
+						<div class="fifth_item_prop">
+							<input type="text" name="" placeholder="서비스 소요시간">
+						</div>
+						
+						<div class="complete_listing">
+							<i class="fas fa-check"></i>
+							<span>확인</span>
+						</div>
+
+						<div class="cancle_listing">
+							<i class="fas fa-times"></i>
+							<span>취소</span>
+						</div>
+						
+					</div>
+					
+				</div>
+<!-- ----------------------------------------- -->
+				
 			</div>
 		</div>
 
