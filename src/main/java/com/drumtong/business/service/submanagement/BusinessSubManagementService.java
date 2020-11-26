@@ -124,15 +124,19 @@ public class BusinessSubManagementService {
 		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
 		String estid = bInformationVO.getEstid();
 			
+		// ♠ => 이 표시는 bsalesDAO의 selectBsales 메서드를 임시로 주석처리하면서 같이 주석한 코드들!
+		// -> 영경에게 물어보기
+		
+		//♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠
 		//	주문현황 페이지에 필요한 구매정보 데이터를 가져와줍니다. 
-		List<BSalesVO> bSalesList =  bSalesDAO.selectBSales(estid);
-	
+//		List<BSalesVO> bSalesList =  bSalesDAO.selectBSales(estid);
+		//♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠
 		
 		ModelAndView mav = new ModelAndView("business/submanagement/businessOrderStatusManagement");
 		
-		
-		mav.addObject("bSales", bSalesList);
-		
+		//♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠
+//		mav.addObject("bSales", bSalesList);
+		//♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠
 		
 		return mav;
 	}
