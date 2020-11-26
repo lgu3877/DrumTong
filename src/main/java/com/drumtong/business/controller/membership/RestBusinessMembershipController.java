@@ -79,7 +79,7 @@ public class RestBusinessMembershipController {
 		
 		int result = svc.updateName(bPrivateDataVO);
 		System.out.println(result + " : result 값 입니다");
-		return result == 0
+		return result == 1
 				? "true"
 				: "false";
 	}
@@ -94,7 +94,7 @@ public class RestBusinessMembershipController {
 		
 		int result = svc.updateBirth(bPrivateDataVO);
 		System.out.println(result + " : result 값 입니다");
-		return result == 0
+		return result == 1
 				? "true"
 				: "false";
 	}

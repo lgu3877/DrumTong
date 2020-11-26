@@ -61,5 +61,8 @@ public interface BPrivateDataDAO {
 
 	// (REST) 비밀번호 수정[영경]
 	int updatePW(BPrivateDataVO bPrivateDataVO);
+
+	// (REST) 비밀번호 동일한지 확인
+	int checkEncryptPW(HashMap<String, String> ob);
 	
 }

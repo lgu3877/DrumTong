@@ -24,6 +24,12 @@ public class BusinessMainController {
 		return svc.main();
 	}
 	
+	// 테스트용-이영경
+//	@RequestMapping(value = "", method = RequestMethod.GET)
+//	public ModelAndView home(HttpServletRequest req) {
+//		return svc.main(req);
+//	}
+	
 	@RequestMapping(value = "selectEST/{selectEST}/", method = RequestMethod.GET)
 	public ModelAndView selectEstMain(HttpServletRequest req, @PathVariable("selectEST")String selectEST) {
 		req.getSession().setAttribute("selectEST", binformationdao.selectEst(selectEST));

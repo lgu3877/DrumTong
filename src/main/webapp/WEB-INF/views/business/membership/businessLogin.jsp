@@ -86,13 +86,13 @@
 					<div class="input_title text-left">
 						아이디<span class="red-mark"> </span>
 					</div>
-					<input name="id" class="loginInput" type="text" required="required" placeholder="아이디를 입력해주세요.">
+					<input name="id" class="loginInput" type="text" required="required" placeholder="아이디를 입력해주세요." onkeyup="loginEnter()">
 				</div>
 				<div>	
 					<div class="input_title text-left">
 						비밀번호<span class="red-mark"> </span>
 					</div>
-					<input name="pw" class="loginInput" type="password" required="required" placeholder="비밀번호를 입력해주세요.">
+					<input name="pw" class="loginInput" type="password" required="required" placeholder="비밀번호를 입력해주세요."  onkeyup="loginEnter()">
 					<div class="single_store_id_con">
 						<label style="cursor: pointer">
 							<input type="checkbox" name="storeid">
@@ -121,6 +121,11 @@
 <!-- 영경 스크립트 -->
 <script>
 	document.getElementsByClassName('single_page_login_btn')[0].addEventListener('click', function(){ loginSubmit();});
+	  function loginEnter() {
+		  if (window.event.keyCode == 13) {
+			  loginSubmit();
+	     }
+	  }
 </script>
 </body>
 </html>

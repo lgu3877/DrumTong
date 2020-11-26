@@ -8,7 +8,17 @@ public interface BPaymentDAO {
 	int insertSignUp(BPaymentVO bPaymentVO);
 
 
-	// 프리미엄 광고 결제수단 업데이트
+	// 프리미엄 광고 결제수단 업데이트 / REST일 시에도 사용
 	int updatePremiumPay(BPaymentVO bPaymentVO);
+
+
+	// 통장사본을 업데이트 시켜줍니다. S3에 사용
+	int updateCopyOfBankBook(BPaymentVO vo);
+
+	
+	//	UUID 중복검사 aws S3에 들어가는 이미지입니다 
+	int confirm(String SerialUUID);
+
+
 
 }

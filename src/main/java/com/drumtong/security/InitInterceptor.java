@@ -1,7 +1,5 @@
 package com.drumtong.security;
 
-import java.awt.Window;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,6 +15,18 @@ import com.drumtong.system.vo.SLoginLogVO;
 
 //Customer Init Intercepter
 public class InitInterceptor extends HandlerInterceptorAdapter {
+	//▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣ AWS 도메인 변경 후 테스트 해 볼 것▣▣▣▣▣▣▣▣LoginInterceptor도 같이 확인하기▣▣▣▣▣▣▣
+	
+	// ▣▣▣▣▣▣▣▣▣▣▣▣▣1. 아래 코드 주석 처리.▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣
+	final String DOMAIN = "http://localhost:8080/drumtong/";
+	final String SUBDOMAIN = "drumtong";
+	//▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣
+	
+	//▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣2. 아래 코드 주석 해제▣▣▣▣▣▣▣▣▣▣▣
+//	final String DOMAIN = "http://www.drumtong.tk";
+//	final String SUBDOMAIN = "drumtong.dk";
+	//▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣
+	
 	// extends HandlerInterceptorAdaptor
 	// (Shift + Alt + S) + V
 	@Autowired SIPLogDAO sIPLogDAO;
@@ -26,12 +36,16 @@ public class InitInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		// ▣▣▣▣▣3. 아래 코드 주석 해제▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣
+//		System.out.println("REFERER : " + request.getHeader("REFERER"));
+//		System.out.println("현재 URI : " + request.getRequestURI());
+		// ▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣
 		HttpSession Session = request.getSession();
 		String Referer = request.getHeader("REFERER");
-		String typeOfSite = request.getRequestURI().split("drumtong")[1].contains("business") ? "b" : "c";
+		String typeOfSite = request.getRequestURI().split(SUBDOMAIN)[1].contains("business") ? "b" : "c";
 //		◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
 		// pull 하고나서 수정 : !referer.startsWith("http://본인아이피주소:본인포트번호/drumtong/"))
-		Boolean LinkInitialConnection = (Referer == null || !Referer.startsWith("http://localhost:8080/drumtong/" + (typeOfSite.equals("b") ? "business/" : "")));
+		Boolean LinkInitialConnection = (Referer == null || !Referer.startsWith(DOMAIN + (typeOfSite.equals("b") ? "business/" : "")));
 //		◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
 		boolean isLogin = Session.getAttribute(typeOfSite + "Login") != null ? true: false;
 		
