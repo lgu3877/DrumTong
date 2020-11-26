@@ -17,6 +17,7 @@ import com.drumtong.business.vo.BCouponVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BSalesVO;
 import com.drumtong.security.Review;
+import com.drumtong.security.Statistics;
 import com.google.gson.Gson;
 
 @Service
@@ -85,20 +86,24 @@ public class BusinessSubManagementService {
 
 
 
-	// 비즈니스 통계관리 페이지로 이동 (GET) [건욱]
-	public ModelAndView statisticsManagement(HttpServletRequest req) {
-		
+	// pageKind in ('Hits[조회수]', 'Sales[주문 수]', 'Price[주문 금액]')
+	// 비즈니스 통계관리 페이지로 이동 (GET) [영경]
+	public ModelAndView statisticsManagement(HttpServletRequest req, String pageKind, String option) {
+		HttpSession Session = req.getSession();
+		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
 		// Status 계약 여부 필드를 세션을 받아와준다.
-		String bol = ((BInformationVO)req.getSession().getAttribute("selectEST")).getStatus();
+		String bol = bInformationVO.getStatus();
 		// boolean의 결과 값에 따라 'FAIL'이면 business로 우회해주고 'SUCCESS'이면 서브관리 페이지들로 이동시켜준다.
 		if(bol.equals("FAIL"))
 			return new ModelAndView("redirect:/business/");
 		
-		// 매장 조회 수를 가져옵니다.
-//		bManagementDAO.selectHit(ESTID);
 		
+		// -------------------------------------------------------------------------
+		String estid = bInformationVO.getEstid();
 		
 		ModelAndView mav = new ModelAndView("business/submanagement/businessStatisticsManagement");
+		
+		mav.addObject("statisticsList", Statistics.statistics(estid, pageKind, option));
 		return mav;
 	}
 
