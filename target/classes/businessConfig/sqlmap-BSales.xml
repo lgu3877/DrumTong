@@ -8,11 +8,11 @@
 
 
 <!-- 	주문현황 페이지에 필요한 구매정보 데이터를 가져와줍니다. -->
-	<select id="selectBSales">
-		SELECT * FROM BSALES 
-			WHERE 
-				ESTID = #{estid}
-	</select>
+<!-- 	<select id="selectBSales"> -->
+<!-- 		SELECT * FROM BSALES  -->
+<!-- 			WHERE  -->
+<!-- 				ESTID = #{estid} -->
+<!-- 	</select> -->
 	
 	
 </mapper>
