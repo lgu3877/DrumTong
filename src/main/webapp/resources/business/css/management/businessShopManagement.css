@@ -324,7 +324,7 @@
 .single_item_selector {
 	display: flex;
 	justify-content: space-between;
-    margin: 0 5% 0 0;
+    margin: 0 5% 20px 0;
 }
 
 /* customizing menu header */
@@ -416,7 +416,7 @@
 }
 
 .second_item_prop input {
-	width: 100%;
+	/* width: 100%; */
 }
 
 
@@ -454,6 +454,30 @@
 	transition: .5s;
 	opacity: 0.7;
 }
+
+.direct_type_input {
+	width: 98%;
+	margin: 5px auto 0 auto;
+	color: slateblue;
+	height: 38px;
+	cursor: pointer;
+	font-size: 11pt;
+	border-color: slateblue;
+	border: 1px solid;
+	text-indent: 4px;
+}
+
+.direct_type_input:focus {
+	outline: none;
+	border: 1px solid;
+	border-color: slateblue;
+}
+
+.direct_type_input::hover {
+	background-color: #f4f0ec;
+	transition: .5s;
+	opacity: 0.7;
+}	
 
 .complete_listing {
 	width: 5%;
