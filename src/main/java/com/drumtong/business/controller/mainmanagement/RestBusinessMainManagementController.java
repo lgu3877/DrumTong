@@ -47,7 +47,7 @@ public class RestBusinessMainManagementController {
 		
 		int result = svc.updateIntroduction(bManagementVO);
 		System.out.println(result + " : result 값 입니다");
-		return result == 0
+		return result == 1
 				? "true"
 				: "false";
 	}
@@ -60,7 +60,7 @@ public class RestBusinessMainManagementController {
 		
 		int result = svc.updateDeliveryBoolean(bManagementVO);
 		System.out.println(result + " : result 값 입니다");
-		return result == 0
+		return result == 1
 				? "true"
 				: "false";
 	}
@@ -74,7 +74,7 @@ public class RestBusinessMainManagementController {
 		
 		int result = svc.updateQuickBoolean(bManagementVO);
 		System.out.println(result + " : result 값 입니다");
-		return result == 0
+		return result == 1
 				? "true"
 				: "false";
 	}
@@ -91,7 +91,7 @@ public class RestBusinessMainManagementController {
 		
 		int result = svc.updateDefaultCategory(bManagementVO);
 		System.out.println(result + " : result 값 입니다");
-		return result == 0
+		return result == 1
 				? "true"
 				: "false";
 	}	
@@ -107,7 +107,7 @@ public class RestBusinessMainManagementController {
 //		
 //		int result = svc.updateStoreIMG(file);
 //		System.out.println(result + " : result 값 입니다");
-//		return result == 0
+//		return result == 1
 //				? "true"
 //				: "false";
 //	}	
@@ -122,7 +122,7 @@ public class RestBusinessMainManagementController {
 		
 		int result = svc.insertBMenu(bMenuVO);
 		System.out.println(result + " : result 값 입니다");
-		return result == 0
+		return result == 1
 				? "true"
 				: "false";
 	}
@@ -137,7 +137,7 @@ public class RestBusinessMainManagementController {
 		
 		int result = svc.updateBMenu(bMenuVO);
 		System.out.println(result + " : result 값 입니다");
-		return result == 0
+		return result == 1
 				? "true"
 				: "false";
 	}	
@@ -149,7 +149,7 @@ public class RestBusinessMainManagementController {
 		
 		int result = svc.deleteBMenu(bMenuVO);
 		System.out.println(result + " : result 값 입니다");
-		return result == 0
+		return result == 1
 				? "true"
 				: "false";
 	}	
@@ -164,7 +164,7 @@ public class RestBusinessMainManagementController {
 		
 		int result = svc.updateBDeliveryArea(bDeliveryAreaVO);
 		System.out.println(result + " : result 값 입니다");
-		return result == 0
+		return result == 1
 				? "true"
 				: "false";
 	}
@@ -183,7 +183,7 @@ public class RestBusinessMainManagementController {
 
 		int result = svc.updateBScheduleTime(bScheduleTimeVO);
 		System.out.println(result + " : result 값 입니다");
-		return result == 0 ? "true" : "false";
+		return result == 1 ? "true" : "false";
 	}	
 	
 	
@@ -216,7 +216,7 @@ public class RestBusinessMainManagementController {
 		
 		int result = svc.deleteBScheduleDays(obj);
 		System.out.println(result + " : result 값 입니다");
-		return result == 0
+		return result == 1
 				? "true"
 				: "false";
 	}
@@ -228,7 +228,7 @@ public class RestBusinessMainManagementController {
 
 		int result = svc.insertBScheduleDays(obj);
 		System.out.println(result + " : result 값 입니다");
-		return result == 0 ? "true" : "false";
+		return result == 1 ? "true" : "false";
 	}
 	
 	
@@ -242,7 +242,7 @@ public class RestBusinessMainManagementController {
 		
 		int result = svc.updateHoliday(bScheduleDaysVO);
 		System.out.println(result + " : result 값 입니다");
-		return result == 0
+		return result == 1
 				? "true"
 				: "false";
 	}
@@ -267,7 +267,7 @@ public class RestBusinessMainManagementController {
 		
 		int result = svc.updateBTempHoliday(bTempHolidayVO);
 		System.out.println(result + " : result 값 입니다");
-		return result == 0
+		return result == 1
 				? "true"
 				: "false";
 	}
@@ -281,7 +281,7 @@ public class RestBusinessMainManagementController {
 		
 		int result = svc.deleteBTempHoliday(bTempHolidayVO);
 		System.out.println(result + " : result 값 입니다");
-		return result == 0
+		return result == 1
 				? "true"
 				: "false";
 	}
@@ -293,7 +293,7 @@ public class RestBusinessMainManagementController {
 
 		int result = svc.insertBTempHoliday(bTempHolidayVO);
 		System.out.println(result + " : result 값 입니다");
-		return result == 0 ? "true" : "false";
+		return result == 1 ? "true" : "false";
 	}
 	
 
@@ -315,7 +315,7 @@ public class RestBusinessMainManagementController {
 		
 		int result = svc.updateBTempSuspension(bTempSuspensionVO);
 		System.out.println(result + " : result 값 입니다");
-		return result == 0
+		return result == 1
 				? "true"
 				: "false";
 	}
@@ -329,7 +329,7 @@ public class RestBusinessMainManagementController {
 		
 		int result = svc.deleteBTempSuspension(bTempSuspensionVO);
 		System.out.println(result + " : result 값 입니다");
-		return result == 0
+		return result == 1
 				? "true"
 				: "false";
 	}
@@ -341,7 +341,7 @@ public class RestBusinessMainManagementController {
 
 		int result = svc.insertBTempSuspension(bTempSuspensionVO);
 		System.out.println(result + " : result 값 입니다");
-		return result == 0 ? "true" : "false";
+		return result == 1 ? "true" : "false";
 	}
 	
 	

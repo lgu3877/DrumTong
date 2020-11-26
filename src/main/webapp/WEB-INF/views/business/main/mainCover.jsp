@@ -20,17 +20,17 @@
 			font-weight: bold;
 		}
 	</style>
-	<script language="JavaScript">
-	
-	// 쿠키 만료시간 정하기
-    function setCookieTime(name, value, expiredays) {
-        var date = new Date();
-        date.setDate(date.getDate() + expiredays);
-        document.cookie = escape(name) + "=" + escape(value) + "; expires=" + date.toUTCString();
-    }
+	<script type="text/javascript">
 
-    // 쿠키를 삭제하는 명령어
-    // popupYN 쿠키에 "N" 이라는 값을 입력하고 1일 동안 유지시킨다
+	// 쿠키 만료시간 정하기
+	function setCookieTime(name, value, expiredays) {
+	    var date = new Date();
+	    date.setDate(date.getDate() + expiredays);
+	    document.cookie = escape(name) + "=" + escape(value) + "; expires=" + date.toUTCString();
+	}
+
+	// 쿠키를 삭제하는 명령어
+	// popupYN 쿠키에 "N" 이라는 값을 입력하고 1일 동안 유지시킨다
     function deletePopup() {
         if (document.getElementById("check").value) {
         	setCookieTime("cookiePause", "N", 1);
@@ -42,19 +42,19 @@
 <body id="maincover">
 
 	<div class="maincover active">
-		<img src="${cpath }/resources/business/img/maincover1.jpg" style="width: 100%;">
+		<img src="${cpath }/resources/business/img/maincover/maincover1.jpg" style="width: 100%;">
 	</div>
 	<div class="maincover">
-		<img src="${cpath }/resources/business/img/maincover2.jpg" style="width: 100%">
+		<img src="${cpath }/resources/business/img/maincover/maincover2.jpg" style="width: 100%">
 	</div>
 	<div class="maincover">
-		<img src="${cpath }/resources/business/img/maincover3.jpg" style="width: 100%">
+		<img src="${cpath }/resources/business/img/maincover/maincover3.jpg" style="width: 100%">
 	</div>
 	<div class="maincover">
-		<img src="${cpath }/resources/business/img/maincover4.jpg" style="width: 100%">
+		<img src="${cpath }/resources/business/img/maincover/maincover4.jpg" style="width: 100%">
 	</div>
 	<div class="maincover">
-		<img src="${cpath }/resources/business/img/maincover5.jpg" style="width: 100%">
+		<img src="${cpath }/resources/business/img/maincover/maincover5.jpg" style="width: 100%">
 	</div>
 	<div class="maincover" style="padding-top: 200px; text-align: center;">
 		<h1>우리 세탁소를 소개하마!</h1>
@@ -63,11 +63,13 @@
 		<h1>닥치고 동의나 하거라!</h1>
 		<input type="button" id="check" onclick="deletePopup();" value="시작하기" class="cookiebutton">	
 	</div>
-	<img id="prevBtn" style="position: absolute; top: 45%; left: 0; z-index: 9999; width: 5%; opacity: 0.6; display: none" src="${cpath }/resources/business/img/prev_button.png" onclick="prevCover()">
-	<img id="nextBtn" style="position: absolute; top: 45%; right: 0; z-index: 9999; width: 5%; opacity: 0.6; display: none" src="${cpath }/resources/business/img/next_button.png" onclick="nextCover()">
+	<img id="prevBtn" style="position: absolute; top: 45%; left: 0; z-index: 9999; width: 5%; opacity: 0.6; display: none" src="${cpath }/resources/business/img/arrow/prev_button.png" onclick="prevCover()">
+	<img id="nextBtn" style="position: absolute; top: 45%; right: 0; z-index: 9999; width: 5%; opacity: 0.6; display: none" src="${cpath }/resources/business/img/arrow/next_button.png" onclick="nextCover()">
 </body>
 
 <script type="text/javascript">
+
+
 	var maincovers = document.querySelectorAll('.maincover');
 	for(i = 1; i < maincovers.length;i++) {
 		maincovers[i].className= 'maincover none';

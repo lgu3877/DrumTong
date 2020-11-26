@@ -89,8 +89,8 @@ public class BusinessMembershipController {
 	
 	// 사업자 ID 찾기 이동 (POST) [영경]
 	@RequestMapping(value = "businessIDFind/", method = RequestMethod.POST)
-	public ModelAndView idFind(BPrivateDataVO bprivatedatavo, String option, int[] birth) {
-		return svc.idFind(bprivatedatavo, option, birth);
+	public ModelAndView idFind(BPrivateDataVO bprivatedatavo, String option) {
+		return svc.idFind(bprivatedatavo, option);
 	}
 	
 	// 사업자 PW 찾기 이동 (POST) [영경]

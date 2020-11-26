@@ -7,16 +7,48 @@
 <mapper namespace="com.drumtong.business.dao.BInformationDAO">
 	
 	
+	
+	<!-- 	UUID 중복검사 aws S3에 들어가는 이미지입니다 -->
+	<select id="ReportCardconfirm" resultType="int" parameterType="String">
+		SELECT COUNT(REPORTCARD) FROM BINFORMATION WHERE REPORTCARD LIKE '%'||#{SerialUUID}||'%'
+	</select>
+	
+	<!-- 	UUID 중복검사 aws S3에 들어가는 이미지입니다 -->
+	<select id="Licenseconfirm" resultType="int" parameterType="String">
+		SELECT COUNT(LICENSE) FROM BINFORMATION WHERE LICENSE LIKE '%'||#{SerialUUID}||'%'
+	</select>
+	
+	
+<!--  영업신고증을 업데이트 시켜줍니다. S3에 사용돕니다. -->
+	<update id="updateReportCard" parameterType="BInformationVO">
+		UPDATE BINFORMATION
+			SET
+				REPORTCARD = #{reportcard}
+			WHERE ESTID = #{estid}
+	</update>
+	
+
+<!-- 	사업자등록증을 업데이트 시켜줍니다. S3에 사용됩니다.	 -->
+	<update id="updateLicense" parameterType="BInformationVO">
+		UPDATE BINFORMATION
+			SET
+				LICENSE = #{license}
+			WHERE ESTID = #{estid}			
+	</update>
+	
+	
+	
+	
 <!-- 	신규 데이터 등록 -->
 	<insert id="insertSignUp" parameterType="BInformationVO">
 		INSERT INTO BINFORMATION 
-			(ESTID, TAXATION, CRN, BRANDNAMING, REPRESENTATIVE, MAINLOCATION,
-			 DETAILLOCATION, REPORTCARD, LICENSE, LATITUDE, LOGNITUDE) 
+			(ESTID, TAXATION, CRN, 
+			BRANDNAMING, REPRESENTATIVE, MAINLOCATION,
+			 DETAILLOCATION) 
 			VALUES
 			( #{estid}, #{taxation}, #{crn},
 			  #{brandnaming}, #{representative}, #{mainlocation},
-			  #{detaillocation}, #{reportcard}, #{license},
-			  #{latitude}, #{lognitude})
+			  #{detaillocation})
 	</insert>
 
 

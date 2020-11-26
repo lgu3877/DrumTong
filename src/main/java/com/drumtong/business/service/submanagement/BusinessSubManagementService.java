@@ -9,69 +9,64 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.drumtong.business.dao.BBusinessReviewDAO;
-import com.drumtong.business.dao.BCustomerReviewDAO;
+import com.drumtong.business.dao.BCouponDAO;
+import com.drumtong.business.dao.BManagementDAO;
 import com.drumtong.business.dao.BReviewDAO;
-import com.drumtong.business.vo.BBusinessReviewVO;
-import com.drumtong.business.vo.BCustomerReviewVO;
+import com.drumtong.business.dao.BSalesDAO;
+import com.drumtong.business.vo.BCouponVO;
 import com.drumtong.business.vo.BInformationVO;
-import com.drumtong.business.vo.BReviewVO;
+import com.drumtong.business.vo.BSalesVO;
+import com.drumtong.security.Review;
+import com.drumtong.security.Statistics;
+import com.google.gson.Gson;
 
 @Service
 public class BusinessSubManagementService {
+	@Autowired BSalesDAO bSalesDAO;
 	@Autowired BReviewDAO bReviewDAO;
-	@Autowired BCustomerReviewDAO bCustomerReviewDAO;
-	@Autowired BBusinessReviewDAO bBusinessReviewDAO;
+	@Autowired BCouponDAO bCouponDAO;
+	@Autowired BManagementDAO bManagementDAO;
 
 	// 비즈니스 리뷰관리 페이지로 이동 (GET) [영경]
-	public ModelAndView reviewManagement(HttpServletRequest req) {
-  
-  
-		// Status 계약 여부 필드를 세션을 받아와준다.
-		String bol = ((BInformationVO)req.getSession().getAttribute("selectEST")).getStatus();
-
-		// boolean의 결과 값에 따라 'SUCCESS'이면 business로 우회해주고 'FAIL'이면 서브관리 페이지들로 이동시켜준다.
-		String route = bol.equals("SUCCESS") ? "redirect:/business/" : "business/submanagement/businessReviewManagement"; 
-
-		ModelAndView mav = new ModelAndView(route);
+	public ModelAndView reviewManagement(HttpServletRequest req, String pageKind) {
 		HttpSession Session = req.getSession();
 		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+		
+		// ===================================================================================
+		// Status 계약 여부 필드를 세션을 받아와준다.
+		String bol = bInformationVO.getStatus();
+		// boolean의 결과 값에 따라 'FAIL'이면 business로 우회해주고 'SUCCESS'이면 서브관리 페이지들로 이동시켜준다.
+		if(bol.equals("FAIL"))
+			return new ModelAndView("redirect:/business/");
+		// ===================================================================================
+		
 		String estid = bInformationVO.getEstid();
+		ModelAndView mav = new ModelAndView("business/submanagement/businessReviewManagement");
+		
+//		Review.reviewForBusiness(mav, estid, pageKind, pageNum);
+		Review.reviewForBusiness(mav, estid, pageKind);
 		
 		
-		// 전체 리뷰
-		List<BReviewVO> bReviewList = bReviewDAO.selectReview(estid);
-		List<BCustomerReviewVO> bCustomerReviewList = bCustomerReviewDAO.selectReview(estid);
-		List<BBusinessReviewVO> bBusinessReviewList = bBusinessReviewDAO.selectReview(estid);
 		
-		mav.addObject("bReview", bReviewList);
-		mav.addObject("ReviewCount", bReviewList.size());
-		mav.addObject("bCustomerReview", bCustomerReviewList);
-		mav.addObject("bBusinessReview", bBusinessReviewList);
-		
-		// 미답변리뷰
-		List<BReviewVO> NoReplybReviewList = bReviewDAO.selectNoReply(estid);
-		List<BCustomerReviewVO> bCustomerNoReplyReviewList = bCustomerReviewDAO.selectNoReply(estid);
-
-		mav.addObject("NoReplybReview", NoReplybReviewList);
-		mav.addObject("NoReplybReviewCount", NoReplybReviewList.size());
-		mav.addObject("bCustomerNoReplyReview", bCustomerNoReplyReviewList);
-
-    return mav;
+		return mav;
 	}
 
 
-	// 비즈니스 쿠폰관리 페이지로 이동 (GET) [건욱]
+	// 비즈니스 쿠폰관리 페이지로 이동 (GET) [영경]
 	public ModelAndView couponManagement(HttpServletRequest req) {
-		
+		HttpSession Session = req.getSession();
+		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
 		// Status 계약 여부 필드를 세션을 받아와준다.
-		String bol = ((BInformationVO)req.getSession().getAttribute("selectEST")).getStatus();
-
-		// boolean의 결과 값에 따라 'SUCCESS'이면 business로 우회해주고 'FAIL'이면 서브관리 페이지들로 이동시켜준다.
-		String route = bol.equals("SUCCESS") ? "redirect:/business/" : "business/submanagement/businessReviewManagement"; 
-
+		String bol = bInformationVO.getStatus();
+		// boolean의 결과 값에 따라 'FAIL'이면 business로 우회해주고 'SUCCESS'이면 서브관리 페이지들로 이동시켜준다.
+		if(bol.equals("FAIL"))
+			return new ModelAndView("redirect:/business/");
+		ModelAndView mav = new ModelAndView("business/submanagement/businessCouponManagement");
 		
-		ModelAndView mav = new ModelAndView(route);
+		List<BCouponVO> couponList = bCouponDAO.select(bInformationVO.getEstid());
+		
+		mav.addObject("couponList", (new Gson()).toJson(couponList));
+		
 		return mav;
 	}
 
@@ -81,28 +76,34 @@ public class BusinessSubManagementService {
 
 		// Status 계약 여부 필드를 세션을 받아와준다.
 		String bol = ((BInformationVO)req.getSession().getAttribute("selectEST")).getStatus();
-
-		// boolean의 결과 값에 따라 'SUCCESS'이면 business로 우회해주고 'FAIL'이면 서브관리 페이지들로 이동시켜준다.
-		String route = bol.equals("SUCCESS") ? "redirect:/business/" : "business/submanagement/businessCardAccountManagement"; 
-
+		// boolean의 결과 값에 따라 'FAIL'이면 business로 우회해주고 'SUCCESS'이면 서브관리 페이지들로 이동시켜준다.
+		if(bol.equals("FAIL"))
+			return new ModelAndView("redirect:/business/");
 		
-		ModelAndView mav = new ModelAndView(route);
+		ModelAndView mav = new ModelAndView("business/submanagement/businessCardAccountManagement");
 		return mav;
 	}
 
 
 
-	// 비즈니스 통계관리 페이지로 이동 (GET) [건욱]
-	public ModelAndView statisticsManagement(HttpServletRequest req) {
-		
+	// pageKind in ('Hits[조회수]', 'Sales[주문 수]', 'Price[주문 금액]')
+	// 비즈니스 통계관리 페이지로 이동 (GET) [영경]
+	public ModelAndView statisticsManagement(HttpServletRequest req, String pageKind, String option) {
+		HttpSession Session = req.getSession();
+		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
 		// Status 계약 여부 필드를 세션을 받아와준다.
-		String bol = ((BInformationVO)req.getSession().getAttribute("selectEST")).getStatus();
-
-		// boolean의 결과 값에 따라 'SUCCESS'이면 business로 우회해주고 'FAIL'이면 서브관리 페이지들로 이동시켜준다.
-		String route = bol.equals("SUCCESS") ? "redirect:/business/" : "business/submanagement/businessStatisticsManagement"; 
-
+		String bol = bInformationVO.getStatus();
+		// boolean의 결과 값에 따라 'FAIL'이면 business로 우회해주고 'SUCCESS'이면 서브관리 페이지들로 이동시켜준다.
+		if(bol.equals("FAIL"))
+			return new ModelAndView("redirect:/business/");
 		
-		ModelAndView mav = new ModelAndView(route);
+		
+		// -------------------------------------------------------------------------
+		String estid = bInformationVO.getEstid();
+		
+		ModelAndView mav = new ModelAndView("business/submanagement/businessStatisticsManagement");
+		
+		mav.addObject("statisticsList", Statistics.statistics(estid, pageKind, option));
 		return mav;
 	}
 
@@ -112,12 +113,27 @@ public class BusinessSubManagementService {
 		
 		// Status 계약 여부 필드를 세션을 받아와준다.
 		String bol = ((BInformationVO)req.getSession().getAttribute("selectEST")).getStatus();
-
-		// boolean의 결과 값에 따라 'SUCCESS'이면 business로 우회해주고 'FAIL'이면 서브관리 페이지들로 이동시켜준다.
-		String route = bol.equals("SUCCESS") ? "redirect:/business/" : "business/submanagement/businessOrderStatusManagement"; 
-
 		
-		ModelAndView mav = new ModelAndView(route);
+				
+		// boolean의 결과 값에 따라 'FAIL'이면 business로 우회해주고 'SUCCESS'이면 서브관리 페이지들로 이동시켜준다.
+		if(bol.equals("FAIL"))
+			return new ModelAndView("redirect:/business/");
+		
+			
+		HttpSession Session = req.getSession();
+		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+		String estid = bInformationVO.getEstid();
+			
+		//	주문현황 페이지에 필요한 구매정보 데이터를 가져와줍니다. 
+		List<BSalesVO> bSalesList =  bSalesDAO.selectBSales(estid);
+	
+		
+		ModelAndView mav = new ModelAndView("business/submanagement/businessOrderStatusManagement");
+		
+		
+		mav.addObject("bSales", bSalesList);
+		
+		
 		return mav;
 	}
 

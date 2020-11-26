@@ -18,10 +18,10 @@
 	</select>
 	
 <!-- 	신규 데이터 생성 -->
-	<insert id="insertSignUp" parameterType="String">
-		INSERT INTO BESTABLISHMENT (ESTID)
+	<insert id="insertSignUp" parameterType="BEstablishmentVO">
+		INSERT INTO BESTABLISHMENT (BPERSONID, ESTID)
 			VALUES
-			(#{ESTID})
+			(#{bpersonid}, #{estid})
 	</insert>
 	
 	

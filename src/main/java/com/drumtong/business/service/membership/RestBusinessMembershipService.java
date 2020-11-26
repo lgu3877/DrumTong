@@ -2,17 +2,6 @@ package com.drumtong.business.service.membership;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
-import java.util.Properties;
-
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,9 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.drumtong.business.dao.BPrivateDataDAO;
 import com.drumtong.business.vo.BPrivateDataVO;
+import com.drumtong.security.AwsServiceEmail;
 import com.drumtong.security.Encrypt;
 import com.drumtong.security.Login;
-import com.drumtong.security.Mail;
 
 @Service
 public class RestBusinessMembershipService {
@@ -51,7 +40,9 @@ public class RestBusinessMembershipService {
 					:bPrivateDataDAO.pwFindPhoneNameID(bprivatedatavo);
 		if(User != null) {
 			// 이메일로 인증번호 전송하는 메서드
-			return Mail.mailSendTypeAuth(User.getEmail()) + "";
+			return AwsServiceEmail.sendMailTypeAuth(User.getEmail()) + "";
+//			return Mail.mailSendTypeAuth(User.getEmail()) + "";
+			
 		}
 		// 잘못된 입력일 땐 -1 반환
 		return "-1";
@@ -85,12 +76,44 @@ public class RestBusinessMembershipService {
 		for(Entry<String,String> entry : ob.entrySet()) {
 			System.out.println("key : " + entry.getKey() +  "value : " + entry.getValue());
 		}
+		int RestUpdateResult = 0;
 		
-		int RestUpdateResult = bPrivateDataDAO.restUpdate(ob);
+		// 패스워드 일 시에 다른 SQL를 불러오기 위해서 예외처리를 해준다.
+		String value = ob.get("fieldname");
 		
-		HttpSession Session = req.getSession();
-		Session.setAttribute("bLogin", bPrivateDataDAO.selectbPrivateData(ob.get("whereparam")));
-		
+		/*
+		 * 만약에 사용자가 암호 버튼을 클릭했다면 
+		 * javascript의 object에 id라는 필드를 추가해서 id 값을 히든으로 넣어줘야한다.
+		 * ex) 'id' : 'lgu3877'
+		 * 
+		 * 입력받은 아이디와 비밀번호는 암호화를 위해 전역 클래스인 Encrypt의 SecurePassword 메서드에 넣어준다.
+		 * 
+		 * 암호화된 encryptPW로 DB와 비교분석을 한 뒤 일치하면 새 비밀번호 설정할 수 있는 페이지로 이동해준다.
+		 * 
+		 */
+		if(value.equals("pw")) {
+			String id = ob.get("id");
+			String pw = ob.get("paramdata");
+			
+			// 암호화
+			String encryptPW = Encrypt.SecurePassword(id, pw);
+			
+			// 암호화된 값 hashmap에 수정해주기
+			ob.put("paramdata", encryptPW);
+			
+			
+			RestUpdateResult = bPrivateDataDAO.checkEncryptPW(ob); 
+			System.out.println(RestUpdateResult);
+		}
+		else {
+			
+			RestUpdateResult = bPrivateDataDAO.restUpdate(ob);
+			
+			
+			
+			HttpSession Session = req.getSession();
+			Session.setAttribute("bLogin", bPrivateDataDAO.selectbPrivateData(ob.get("whereparam")));
+		}
 		
 		return RestUpdateResult;
 	}
