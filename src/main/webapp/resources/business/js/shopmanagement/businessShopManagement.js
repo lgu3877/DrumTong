@@ -1,4 +1,4 @@
-// horizontal scroll movement
+// 가로 스크롤(horizontal scroll movement) > 영역 안에서 세로 스크롤 막음
 $("#image-preview").on('mousewheel',function(e) {
 	e.preventDefault();
 	const wheelDelta = e.originalEvent.wheelDelta;
@@ -24,12 +24,12 @@ $("#image-preview").on('mousewheel',function(e) {
 
 
 
-// displaying cover image section
-// elements for setting display option
+// 이미지 선택시 커버 이미지 출력(displaying cover image section)
+// div 영역(input & view)
 const imageInputForm = document.getElementById('shop-image-view');
 const imageViewCon = document.getElementById('main-image-con');
 
-// Check whether there's a cover image or not (kick off DB work)
+// 이미지 src 입력 with DB에서 이미지 가져오기(Check whether there's a cover image or not (kick off DB work))
 let img = document.getElementById('main-image');
 const imgName = '1234.jpg';
 
@@ -43,7 +43,7 @@ if (img.src) {
 // No cover image > show input from
 else {
 	imageInputForm.style.display = '';
-	imageViewCon.style.display = 'none';
+	imageViewCon.style.display = 'none';1
 }
 
 
@@ -140,37 +140,61 @@ function comfirmIntro() {
 }
 
 
-// create item customizing list
-const addItemBtn = document.getElementById('add-item-btn');
-const itemCustomList = document.getElementById('add-item-list');
-
-console.log(addItemBtn);
-console.log(itemCustomList);
-
-addItemBtn.addEventListener('click', function(e) {
-	console.log("clicked");
-	
-})
-
-
-// when select direct typing
-function directType(id) {
-//	let directType = false;
-	console.log('type has just changed');
-
-//	const selectedOption = document.getElementById(id.substr(0, id.length-4) + 'selector');
-//	console.log(selectedOption);
-
-	const isSelected = document.getElementById(id.substr(0, id.length-4) + 'type').selected;
-	console.log(isSelected);
-	
-	if (isSelected) {
-		
-	} else {
-		
+// 직접입력 > input 열기
+function directType(obj) {
+	console.log('this : ', obj);
+	console.log('this : ', obj.value);
+	if(obj.value == 'selectedDirect') {
+		obj.parentNode.querySelector('.direct_type_input').style.display = '';
 	}
-	
-	
+	else {
+		obj.parentNode.querySelector('.direct_type_input').style.display = 'none';
+		obj.parentNode.querySelector('.direct_type_input').value = '';
+	}
 }
 
+
+// 상품 입력 폼 추가하기(버튼 클릭 시)
+const addItemBtn = document.getElementById('add-item-btn');
+let singleList = document.querySelector('.single_item_selector');
+const itemlist = document.getElementById('add-item-list')
+
+addItemBtn.addEventListener('click', function() {
+	console.log("clicked");
+	singleList = singleList.cloneNode(true);
+//	const itemlist = document.getElementById('add-item-list');
+
+	itemlist.appendChild(singleList);
+});
+
+
+// 
+function completeInput(entrieNode) {
+
+}
+
+// 
+function dismissInput(entireNode) {	
+	if (itemlist.children.length === 1) {
+		console.log("목록을 지울 수 없습니다.");
+		
+		const array = entireNode.children;
+		const mainSelector = array[0]; 
+		const subSelector = array[1];
+		console.log(array);
+		console.log(mainSelector);
+		console.log(subSelector);
+		console.log(mainSelector.querySelector('selectedDirect'));
+		
+		// 첫번째 select 초기화(타입)
+		
+		// 두번째 select 초기화(유형)
+		// 세번째 input 초기화(세부내용)		
+		// 네번째 input 초기화(가격)		
+		// 다섯번째 input 초기화(시간)		
+		return;
+	}
+	entireNode.remove();
+	console.log(entireNode);	
+}
 

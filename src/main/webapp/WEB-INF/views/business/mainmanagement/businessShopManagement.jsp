@@ -289,29 +289,31 @@
 					<div class="single_item_selector">
 						
 						<div class="first_item_prop">
-							<select id="first-selector" class="service_selector" name="" onchange="directType('first-type')">
+							<select class="service_selector" name="" onchange="directType(this)">
 								<option hidden="true" disabled selected>서비스 타입 선택</option>
-								<option value="">type1</option>
-								<option value="">type2</option>
-								<option value="">type3</option>
-								<option value="">type4</option>
-								<option value="">type5</option>
-								<option id="first-type" value="">직접입력</option>
+								<option value="type1">type1</option>
+								<option value="type2">type2</option>
+								<option value="type3">type3</option>
+								<option value="type4">type4</option>
+								<option value="type5">type5</option>
+								<option value="selectedDirect" class="selectedDirect">직접입력</option>
 							</select>
-							<input type="text" class="first_direct_input" name="">
+						<!-- 직접입력 선택시 -->
+							<input type="text" class="direct_type_input" name="" placeholder="서비스 입력" style="display: none">
 						</div>
 						
 						<div class="second_item_prop">
-							<select id="second-selector" class="service_selector" onchange="directType('second-type')">
+							<select class="service_selector" onchange="directType(this)">
 								<option hidden="true" disabled selected>세부 서비스 유형 선택</option>
 								<option value="">type1</option>
 								<option value="">type2</option>
 								<option value="">type3</option>
 								<option value="">type4</option>
 								<option value="">type5</option>
-								<option id="second-type" value="selectDirectType">직접입력</option>
+								<option value="selectedDirect" class="selectedDirect">직접입력</option>
 							</select>
-					<!-- <input type="text" name=""> -->
+						<!-- 직접입력 선택시 -->
+							<input type="text" name="" class="direct_type_input" placeholder="서비스 입력" style="display: none">
 						</div>
 						
 						<div class="third_item_prop">
@@ -326,12 +328,12 @@
 							<input type="text" name="" placeholder="서비스 소요시간">
 						</div>
 						
-						<div class="complete_listing">
+						<div class="complete_listing" onclick="completeInput(this.parentNode)">
 							<i class="fas fa-check"></i>
 							<span>확인</span>
 						</div>
 
-						<div class="cancle_listing">
+						<div class="cancle_listing" onclick="dismissInput(this.parentNode)">
 							<i class="fas fa-times"></i>
 							<span>취소</span>
 						</div>
@@ -367,6 +369,6 @@
 
 
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagement.js"></script>
-
+	
 </body>
 </html>
