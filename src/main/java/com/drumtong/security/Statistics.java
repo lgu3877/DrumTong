@@ -3,7 +3,6 @@ package com.drumtong.security;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -41,6 +40,8 @@ public class Statistics {
 		String endDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
+//		calendar.add(Calendar.MONTH, -5);
+//		calendar.add(Calendar.DAY_OF_MONTH, -30);
 		calendar.add(Calendar.DAY_OF_MONTH, -6);
 		String startDate = new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime());
 		return statistics(estid, pageKind, option, startDate, endDate);
@@ -50,7 +51,11 @@ public class Statistics {
 	// option : "Day",  "Week", "Month"
 	public static String statistics(String estid, String pageKind, String option, String startDate, String endDate) {
 		List<StatisticsData> result = new ArrayList<StatisticsData>();
-		pageKind = pageKind == null? "Hits" : pageKind;	// 기본 값은 조회수 페이지
+//		pageKind = pageKind == null? "Hits" : pageKind;	// 기본 값은 조회수 페이지
+		pageKind = pageKind == null? "Orders" : pageKind;
+//		pageKind = pageKind == null? "Prices" : pageKind;
+//		option = option == null? "Month" : option;
+//		option = option == null? "Week" : option;
 		option = option == null? "Day" : option;
 		result = selectList(estid, result, pageKind, option, simpleformat(startDate), simpleformat(endDate));
 		
@@ -73,10 +78,18 @@ public class Statistics {
 	}
 	
 	// 원하는 날 이후 날짜를 출력
-	private static Date nextDay(Date today, int num) {
+	private static Date calcDay(Date today, int num) {
 		Calendar tmp = Calendar.getInstance();
 		tmp.setTime(today);
 		tmp.add(Calendar.DAY_OF_MONTH, num);
+		return tmp.getTime();
+	}
+	
+	private static Date calcMonth(Date today, int num) {
+		Calendar tmp = Calendar.getInstance();
+		tmp.setTime(today);
+		tmp.add(Calendar.MONTH, num);
+		tmp.add(Calendar.DAY_OF_WEEK, -1);
 		return tmp.getTime();
 	}
 	
@@ -99,21 +112,27 @@ public class Statistics {
 	// option : "Day",  "Week", "Month"
 	private static Date[] separateDate(String option, Date startDate, Date endDate) {
 		Date[] dayArr = new Date[3];
+		System.out.println("OPTION : " + option);
 		switch(option) {
 		case "Day":
 			dayArr[0] = dayArr[1] = startDate;
-			dayArr[2] = nextDay(startDate, 1);
-			System.out.println("♣♣♣♣♣ separateDate ♣♣♣♣♣");
-			System.out.println("dayArr : " + Arrays.deepToString(dayArr));
-			System.out.println("♣♣♣♣♣ ♣♣♣♣♣ ♣♣♣♣♣");
+			dayArr[2] = calcDay(startDate, 1);
 			return dayArr;
-		case "Week":
-			// 주 단위로 나오도록 
-			return dayArr;
-		case "Month":
-			// 월 단위로 나오도록
-			return dayArr;
+		case "Week":	// 일요일~토요일
+			Calendar ToGetADay = Calendar.getInstance();
+			ToGetADay.setTime(startDate);	// 시작 날
+			int day = ToGetADay.get(Calendar.DAY_OF_WEEK);	// 일 : 1 ~ 토 : 7
+			return calcPeriod(dayArr, startDate, calcDay(startDate, 7-day), endDate);
+		case "Month":	// 달 단위로(11월,10월)
+			return calcPeriod(dayArr, startDate, calcMonth(startDate, 1), endDate);
 		}
+		return dayArr;
+	}
+	
+	public static Date[] calcPeriod(Date[] dayArr, Date startDate, Date nextDate, Date endDate) {
+		dayArr[0] = startDate;	// 현재 주
+		dayArr[1] = nextDate.compareTo(endDate) > 0 ? endDate : nextDate;
+		dayArr[2] = calcDay(dayArr[1], 1);
 		return dayArr;
 	}
 	
@@ -121,7 +140,7 @@ public class Statistics {
 		int i = 0;
 		Date dayArr[] = null;
 		do {
-			System.out.println(++i + "번째");
+			System.out.print("■■■■■■■■■■■■■■■■■" + (++i) + "번째■■■■■■■■■■■■■■■■■■■■■■■■■");
 			// 1. 날짜를 옵션에 맞추어 먼저 분리한다.
 			dayArr = separateDate(option, startDate, endDate);
 			StatisticsData statisticsData = new StatisticsData(estid, dayArr[0], dayArr[1]);
@@ -129,13 +148,20 @@ public class Statistics {
 			// 2. 날짜에 맞는 데이터 개수를 pageKind를 통해 구분하여 구한다.
 			int value = getValue(pageKind, statisticsData);
 			statisticsData.setValue(value);
+			System.out.println("결과");
+			System.out.println("시작날 : " + statisticsData.getStart() + ", " + statisticsData.getStartdate());
+			System.out.println("끝 날 : " + statisticsData.getEnd() + ", " + statisticsData.getEnddate());
+			System.out.println("value : " + statisticsData.getValue());
+			System.out.println("다음 계산할 날 : " + dayArr[2]);
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 			result.add(statisticsData);
 			startDate = dayArr[2];
 			if(i == 10) {
 				System.out.println("시스템 오류로 10번째까지만 출력합니다.");
 				break;
 			}
-		}while(!dayArr[0].equals(endDate));
+		}while(startDate.compareTo(endDate) <= 0);
+//		}while(!dayArr[0].equals(endDate));
 		return result;
 	}
 }
