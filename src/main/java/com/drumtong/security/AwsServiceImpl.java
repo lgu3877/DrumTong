@@ -61,7 +61,7 @@ public class AwsServiceImpl{
                 .build(); 		
     }
     
-    public static String[] Security() {
+    private static String[] Security() {
 		String[] Security = new String[3];
     	File file = new File("C:\\AwsKeysBox\\Security.txt");
     	if(file.exists()) {
@@ -70,7 +70,6 @@ public class AwsServiceImpl{
 				String sLine = null;
 				int i = 0;
 	    		while( (sLine = inFile.readLine()) != null) {
-						System.out.println(sLine);
 						Security[i] = sLine;
 						i++;
 						if(i == 3) break;
