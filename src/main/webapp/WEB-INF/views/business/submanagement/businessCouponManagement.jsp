@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
    
 	<!-- title -->
-    <title>businessShopManagement :: businessReviewManagemnet</title>
+    <title>businessShopManagement :: businessCouponManagemnet</title>
 
 	<!-- global css -->	
 	<link rel="stylesheet" href="${cpath }/business/css/businessStyle.css">
@@ -225,14 +225,14 @@
 		var inputdiv = document.createElement('div');
 		inputdiv.className = 'inputDiv';
 		
-		var listsplit = (couponlist[i].period).split('~');	
+		var listsplit = (couponlist[i].period).split('~');			//	필수
 		
 		// 날짜 div
 		var period = document.createElement('h1');
 		period.innerHTML = '기간';
 		var beforedate = document.createElement('input');
 		beforedate.setAttribute('type', 'date');
-		beforedate.setAttribute('value', listsplit[0].slice(0,-1));	// 마지막 공백 한글자 제거
+		beforedate.setAttribute('value', listsplit[0].slice(0,-1));	// 마지막 공백 한글자 제거			//	필수
 		beforedate.readOnly = true;
 		var tagh1 = document.createElement('h1');
 		tagh1.style.width = '20px';
@@ -241,7 +241,7 @@
 		tagh1.innerHTML = '-';
 		var afterdate = document.createElement('input');
 		afterdate.setAttribute('type', 'date');
-		afterdate.setAttribute('value', listsplit[1].slice(1));	// 첫번째 공백 한글자 제거
+		afterdate.setAttribute('value', listsplit[1].slice(1));	// 첫번째 공백 한글자 제거			//	필수
 		afterdate.readOnly = true;
 		inputdiv.appendChild(period);
 		inputdiv.appendChild(beforedate);
@@ -255,7 +255,7 @@
 		minh1.innerHTML = '최소주문금액';
 		var mininput = document.createElement('input');
 		mininput.setAttribute('type', 'text');
-		mininput.setAttribute('value', couponlist[i].minimumprice);
+		mininput.setAttribute('value', couponlist[i].minimumprice);			//	필수
 		mininput.readOnly = true;
 		costdiv1.appendChild(minh1);
 		costdiv1.appendChild(mininput);
@@ -268,7 +268,7 @@
 		minh2.innerHTML = '할인금액';
 		var saleinput = document.createElement('input');
 		saleinput.setAttribute('type', 'text');
-		saleinput.setAttribute('value', couponlist[i].discount);
+		saleinput.setAttribute('value', couponlist[i].discount);			//	필수
 		saleinput.readOnly = true;
 		costdiv2.appendChild(minh2);
 		costdiv2.appendChild(saleinput);
@@ -300,11 +300,11 @@
 		radioname2.innerHTML = '선착순';
 		radiodiv2.appendChild(radio2);
 		radiodiv2.appendChild(radioname2);
-		if(couponlist[i].maxissuenum !== 0) {
+		if(couponlist[i].maxissuenum !== 0) {			//	필수
 			radio2.checked = true;
 			var showcouponnum = document.createElement('input');
 			showcouponnum.setAttribute('type', 'text');
-			showcouponnum.value = couponlist[i].maxissuenum;
+			showcouponnum.value = couponlist[i].maxissuenum;			//	필수
 			showcouponnum.readOnly = true;
 			radiodiv2.appendChild(showcouponnum);
 		}
@@ -329,7 +329,7 @@
 		var deleteButton = document.createElement('input');
 		deleteButton.setAttribute('type', 'button');
 		deleteButton.setAttribute('value', '삭제');
-		deleteButton.setAttribute('id', couponlist[i].couponid);
+		deleteButton.setAttribute('id', couponlist[i].couponid);			//	필수
 		deleteButton.setAttribute('onclick', 'deleteCoupon(this)');
 		buttonDiv.appendChild(deleteButton);
 		sidedivborder.appendChild(buttonDiv);
@@ -384,6 +384,7 @@
 		container.appendChild(inputFlex);
 		
 		enrollmentedDiv.appendChild(container);
+	
 		}
 	}
 	
