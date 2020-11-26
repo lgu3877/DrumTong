@@ -31,6 +31,7 @@
 		<typeAlias type="com.drumtong.business.vo.BCustomerReviewVO" alias="BCustomerReviewVO" />
 		<typeAlias type="com.drumtong.business.vo.BBusinessReviewVO" alias="BBusinessReviewVO" />
 		<typeAlias type="com.drumtong.business.vo.ReviewList" alias="ReviewList" />
+		<typeAlias type="com.drumtong.business.vo.StatisticsData" alias="StatisticsData" />
 		
 	</typeAliases>
 	

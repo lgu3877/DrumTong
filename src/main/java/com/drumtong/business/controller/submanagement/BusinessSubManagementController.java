@@ -48,10 +48,22 @@ public class BusinessSubManagementController {
 	}
 	
 
-	// 비즈니스 통계관리 페이지로 이동 (GET) [건욱]
+	// 비즈니스 통계관리 페이지로 이동 (GET) [영경]
 	@RequestMapping(value="businessStatisticsManagement/", method = RequestMethod.GET)
 	public ModelAndView statisticsManagement(HttpServletRequest req) {
-		return svc.statisticsManagement(req);
+		String pageKind = (String)req.getAttribute("pageKind");
+		String option = (String)req.getAttribute("option");
+		req.removeAttribute("pageKind");
+		req.removeAttribute("option");
+		return svc.statisticsManagement(req, pageKind, option);
+	}
+	
+	// 비즈니스 통계관리 페이지로 이동 (GET) [영경]
+	@RequestMapping(value="businessStatisticsManagement/{pageKind}/{option}/", method = RequestMethod.GET)
+	public ModelAndView statisticsManagement(HttpServletRequest req, @PathVariable("pageKind")String pageKind, @PathVariable("option")String option) {
+		req.setAttribute("pageKind", pageKind);
+		req.setAttribute("option", option);
+		return new ModelAndView("redirect:/business/submanagement/businessStatisticsManagement/");
 	}
 
 	// 비즈니스 주문관리 페이지로 이동 (GET) [건욱]

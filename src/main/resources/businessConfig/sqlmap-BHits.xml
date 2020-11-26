@@ -5,6 +5,13 @@
 
 <!-- 사업장 조회수 테이블	 -->
 <mapper namespace="com.drumtong.business.dao.BHitsDAO">
-
-
+	
+	<!-- 조회하고 싶은 날짜의 조회수를 구합니다. -->
+	<select id="CountHit" parameterType="StatisticsData" resultType="int">
+		SELECT count(*) FROM BHITS 
+			 WHERE ESTID=#{estid} AND 
+			 TO_DATE(VISITDATE, 'YYYY-MM-DD') 
+			 BETWEEN #{startdate} AND #{enddate}
+	</select>
+	
 </mapper>
