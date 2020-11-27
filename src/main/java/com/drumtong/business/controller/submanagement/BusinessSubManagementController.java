@@ -54,17 +54,24 @@ public class BusinessSubManagementController {
 		HttpSession Session = req.getSession();
 		String pageKind = (String)Session.getAttribute("pageKind");
 		String option = (String)Session.getAttribute("option");
+		String startDate = (String)Session.getAttribute("startDate");
+		String endDate = (String)Session.getAttribute("endDate");
 		Session.removeAttribute("pageKind");
 		Session.removeAttribute("option");
-		return svc.statisticsManagement(req, pageKind, option);
+		Session.removeAttribute("startDate");
+		Session.removeAttribute("endDate");
+		return svc.statisticsManagement(req, pageKind, option, startDate, endDate);
 	}
 	
 	// 비즈니스 통계관리 페이지로 이동 (GET) [영경]
-	@RequestMapping(value="businessStatisticsManagement/{pageKind}/{option}/", method = RequestMethod.GET)
-	public ModelAndView statisticsManagement(HttpServletRequest req, @PathVariable("pageKind")String pageKind, @PathVariable("option")String option) {
+	@RequestMapping(value= {"businessStatisticsManagement/{pageKind}/{option}/", "businessStatisticsManagement/{pageKind}/{option}/{startDate}/{endDate}/"}, method = RequestMethod.GET)
+	public ModelAndView statisticsManagement(HttpServletRequest req, @PathVariable("pageKind")String pageKind, @PathVariable("option")String option,
+						@PathVariable("startDate")String startDate, @PathVariable("endDate")String endDate) {
 		HttpSession Session = req.getSession();
 		Session.setAttribute("pageKind", pageKind);
 		Session.setAttribute("option", option);
+		Session.setAttribute("startDate", startDate);
+		Session.setAttribute("endDate", endDate);
 		return new ModelAndView("redirect:/business/submanagement/businessStatisticsManagement/");
 	}
 
