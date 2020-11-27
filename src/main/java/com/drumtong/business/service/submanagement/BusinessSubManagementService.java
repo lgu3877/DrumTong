@@ -43,7 +43,6 @@ public class BusinessSubManagementService {
 		String estid = bInformationVO.getEstid();
 		ModelAndView mav = new ModelAndView("business/submanagement/businessReviewManagement");
 		
-//		Review.reviewForBusiness(mav, estid, pageKind, pageNum);
 		Review.reviewForBusiness(mav, estid, pageKind);
 		
 		
@@ -102,7 +101,6 @@ public class BusinessSubManagementService {
 		String estid = bInformationVO.getEstid();
 		
 		ModelAndView mav = new ModelAndView("business/submanagement/businessStatisticsManagement");
-		
 		mav.addObject("statisticsList", Statistics.statistics(estid, pageKind, option));
 		return mav;
 	}

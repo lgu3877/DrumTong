@@ -18,14 +18,14 @@
 		SELECT NVL(SUM(AMOUNT),0) FROM BSALES 
 			WHERE 
 				ESTID=#{estid} AND 
-				(TO_DATE(PURCHASEDATE,'YYYY-MM-DD HH24-MI-SS') BETWEEN #{startdate} AND #{enddate})
+				(TO_DATE(SUBSTR(PURCHASEDATE,1,10),'YYYY-MM-DD HH24-MI-SS') BETWEEN #{startdate} AND #{enddate})
 	</select>
 	
 	<select id="CountPrice" parameterType="StatisticsData" resultType="int">
 		SELECT NVL(SUM(TOTALPRICE),0) FROM BSALES 
 			WHERE 
 				ESTID=#{estid} AND 
-				(TO_DATE(PURCHASEDATE,'YYYY-MM-DD HH24-MI-SS') BETWEEN #{startdate} AND #{enddate})
+				(TO_DATE(SUBSTR(PURCHASEDATE,1,10),'YYYY-MM-DD') BETWEEN #{startdate} AND #{enddate})
 	</select>
 	
 </mapper>

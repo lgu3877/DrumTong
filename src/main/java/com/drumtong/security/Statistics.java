@@ -51,11 +51,7 @@ public class Statistics {
 	// option : "Day",  "Week", "Month"
 	public static String statistics(String estid, String pageKind, String option, String startDate, String endDate) {
 		List<StatisticsData> result = new ArrayList<StatisticsData>();
-//		pageKind = pageKind == null? "Hits" : pageKind;	// 기본 값은 조회수 페이지
-		pageKind = pageKind == null? "Orders" : pageKind;
-//		pageKind = pageKind == null? "Prices" : pageKind;
-//		option = option == null? "Month" : option;
-//		option = option == null? "Week" : option;
+		pageKind = pageKind == null? "Hits" : pageKind;
 		option = option == null? "Day" : option;
 		result = selectList(estid, result, pageKind, option, simpleformat(startDate), simpleformat(endDate));
 		
@@ -161,7 +157,6 @@ public class Statistics {
 				break;
 			}
 		}while(startDate.compareTo(endDate) <= 0);
-//		}while(!dayArr[0].equals(endDate));
 		return result;
 	}
 }
