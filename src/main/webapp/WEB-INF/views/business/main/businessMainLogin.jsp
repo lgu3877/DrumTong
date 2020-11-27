@@ -56,12 +56,12 @@ function loginSubmit(){
 				</p>		</div>
 			<div class="login_input_con">
 				<div class="input_box">
-					<input class="input_tag" type="text" name="id" placeholder="아이디를 입력하세요." required="required">
+					<input class="input_tag" type="text" name="id" placeholder="아이디를 입력하세요." required="required"  onkeyup="loginEnter()">
 	       		<!-- incorrect id error message -->
 	        		<div class="auth_error_msg red-mark"></div>
 				</div>
 				<div class="input_box">
-					<input class="input_tag" type="password" name="pw" placeholder="비밀번호를 입력하세요." required="required">
+					<input class="input_tag" type="password" name="pw" placeholder="비밀번호를 입력하세요." required="required"  onkeyup="loginEnter()">
 	       		<!-- incorrect password error message -->
 			        <div class="auth_error_msg red-mark"></div>
 					<div class="login_bottom_con">
@@ -72,9 +72,12 @@ function loginSubmit(){
 						</label>
 					</div>
 					<div>
-						<span class="join_link" onclick="location.href='${cpath }/business/membership/businessSignUp/'">
+						<p class="join_link" onclick="location.href='${cpath }/business/membership/businessSignUp/'">
 							회원가입하기
-						</span>			
+						</p>			
+						<p class="join_link" onclick="location.href='${cpath }/business/membership/businessPWFind/'">
+							ID/PW 찾기
+						</p>			
 					</div>
 					</div>
 				</div>
@@ -207,4 +210,10 @@ function loginSubmit(){
 <!-- login regular syntax -->
 <script>
   document.getElementById('loginSubmit').addEventListener('click', function(){ loginSubmit();});
+  
+  function loginEnter() {
+	  if (window.event.keyCode == 13) {
+		  loginSubmit();
+     }
+  }
 </script>
