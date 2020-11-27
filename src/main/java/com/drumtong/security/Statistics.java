@@ -40,8 +40,14 @@ public class Statistics {
 		String endDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
-//		calendar.add(Calendar.MONTH, -5);
-//		calendar.add(Calendar.DAY_OF_MONTH, -30);
+		if(!"Day".equals(option) && option != null && !"n".equals(option)) {
+			if(option.equals("Week"))
+				calendar.add(Calendar.DAY_OF_MONTH , -30);
+			else
+				calendar.add(Calendar.DAY_OF_WEEK , -4);
+			
+			calendar.add(Calendar.DAY_OF_MONTH, 1);
+		}
 		calendar.add(Calendar.DAY_OF_MONTH, -6);
 		String startDate = new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime());
 		return statistics(estid, pageKind, option, startDate, endDate);
@@ -51,8 +57,8 @@ public class Statistics {
 	// option : "Day",  "Week", "Month"
 	public static String statistics(String estid, String pageKind, String option, String startDate, String endDate) {
 		List<StatisticsData> result = new ArrayList<StatisticsData>();
-		pageKind = pageKind == null? "Hits" : pageKind;
-		option = option == null? "Day" : option;
+		pageKind = (pageKind == null || "n".equals(pageKind))? "Hits" : pageKind;
+		option = (option == null || "n".equals(option))? "Day" : option;
 		result = selectList(estid, result, pageKind, option, simpleformat(startDate), simpleformat(endDate));
 		
 		Gson gson = new Gson();
@@ -108,7 +114,6 @@ public class Statistics {
 	// option : "Day",  "Week", "Month"
 	private static Date[] separateDate(String option, Date startDate, Date endDate) {
 		Date[] dayArr = new Date[3];
-		System.out.println("OPTION : " + option);
 		switch(option) {
 		case "Day":
 			dayArr[0] = dayArr[1] = startDate;
@@ -136,7 +141,6 @@ public class Statistics {
 		int i = 0;
 		Date dayArr[] = null;
 		do {
-			System.out.print("■■■■■■■■■■■■■■■■■" + (++i) + "번째■■■■■■■■■■■■■■■■■■■■■■■■■");
 			// 1. 날짜를 옵션에 맞추어 먼저 분리한다.
 			dayArr = separateDate(option, startDate, endDate);
 			StatisticsData statisticsData = new StatisticsData(estid, dayArr[0], dayArr[1]);
@@ -144,12 +148,6 @@ public class Statistics {
 			// 2. 날짜에 맞는 데이터 개수를 pageKind를 통해 구분하여 구한다.
 			int value = getValue(pageKind, statisticsData);
 			statisticsData.setValue(value);
-			System.out.println("결과");
-			System.out.println("시작날 : " + statisticsData.getStart() + ", " + statisticsData.getStartdate());
-			System.out.println("끝 날 : " + statisticsData.getEnd() + ", " + statisticsData.getEnddate());
-			System.out.println("value : " + statisticsData.getValue());
-			System.out.println("다음 계산할 날 : " + dayArr[2]);
-			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 			result.add(statisticsData);
 			startDate = dayArr[2];
 			if(i == 10) {
