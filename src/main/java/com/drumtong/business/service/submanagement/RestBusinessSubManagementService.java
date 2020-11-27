@@ -121,12 +121,11 @@ public class RestBusinessSubManagementService {
 	}
 
 	// ========================= 대분류 [통계관리] ================================ [영경]
-	public String selectStatistics(HttpServletRequest req, String period, String pageKind, String option) {
+	public String selectStatistics(HttpServletRequest req, String startDate, String endDate, String pageKind, String option) {
 		HttpSession Session = req.getSession();
 		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
 		String estid= bInformationVO.getEstid();
-		String[] PeriodDiv = period.split(",");
-		return Statistics.statistics(estid, pageKind, option, PeriodDiv[0], PeriodDiv[1]);
+		return Statistics.statistics(estid, pageKind, option, startDate, endDate);
 	}
 	
 }

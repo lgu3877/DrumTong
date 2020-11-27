@@ -89,9 +89,10 @@ public class RestBusinessSubManagementController {
 	// ========================= 대분류 [통계관리] ================================ [영경]
 //	pageKind -> Hits(조회수), Orders(주문수), Prices(금액)
 //	option -> Day(일), Week(주), Month(월)
-	@RequestMapping("businessStatisticsManagement/rest/{pageKind}/{option}/")
+	@RequestMapping("businessStatisticsManagement/rest/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String selectStatistics(HttpServletRequest req, @RequestBody String period,@PathVariable("pageKind")String pageKind, @PathVariable("option")String option) {
-		return svc.selectStatistics(req, period, pageKind, option);
+	public String selectStatistics(HttpServletRequest req, @RequestBody String pageKind, @RequestBody String option, 
+											@RequestBody String startDate, @RequestBody String endDate) {
+		return svc.selectStatistics(req, startDate, endDate, pageKind, option);
 	}
 }
