@@ -42,9 +42,9 @@ public class Statistics {
 		calendar.setTime(new Date());
 		if(!"Day".equals(option) && option != null && !"n".equals(option)) {
 			if(option.equals("Week"))
-				calendar.add(Calendar.DAY_OF_MONTH , -30);
+				calendar.add(Calendar.DAY_OF_MONTH , -28);
 			else
-				calendar.add(Calendar.DAY_OF_WEEK , -4);
+				calendar.add(Calendar.DAY_OF_MONTH , -120);
 			
 			calendar.add(Calendar.DAY_OF_MONTH, 1);
 		}
