@@ -72,8 +72,6 @@
 		
 <!-- 영경 추가 스크립트 -->	
 <script type="text/javascript">
-	console.log('test');
-	document.getElementById('reviewDiv').addEventListener('change', pageNum);
 
 	function pageNum(){
 		var axiosPath = '/drumtong/business/subManagement/businessReviewManagement/rest/pageCount/';
@@ -90,7 +88,6 @@
 		     })
 		  }
 		return axPost();
-		
 	}
 	pageNum();
 </script>		
@@ -103,7 +100,7 @@
 		reviewContents(1);
 		arrow(1);
 		paging(document.querySelector('.currentPage'));
-		globalPath = '${pageKind }';		
+		globalPath = '${pageKind }';
 	}
 	
 	function reviewContents(pagenum) {	// 리뷰글을 만들어주는 함수
@@ -408,6 +405,7 @@
 	            const data = response.data;
 	  			bReviewList = data;
 	  			switchArray();
+	  			pageNum();
 	             })
 	          }
 			return axPost(ob);
@@ -434,6 +432,7 @@
 	            const data = response.data;
 	  			bReviewList = data;
 	  			switchArray();
+	  			pageNum();
 	             })
 	          }
 			return axPost(ob);
@@ -485,6 +484,7 @@
 	            const data = response.data;
 	  			bReviewList = data;
 	  			switchArray();
+	  			pageNum();
 	             })
 	          }
 			return axPost(ob);
@@ -512,7 +512,8 @@
 	       		.then( (response) => {
 	            const data = response.data;
 	  			bReviewList = data;
-	  			switchArray();	
+	  			switchArray();
+	  			pageNum();
 	             })
 	          }
 			return axPost(ob);
