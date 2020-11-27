@@ -104,7 +104,7 @@ public class BusinessSubManagementService {
 		mav.addObject("statisticsList", startDate == null || "n".equals(startDate) || endDate == null || "n".equals(endDate)? 
 								Statistics.statistics(estid, pageKind, option) : 
 								Statistics.statistics(estid, pageKind, option, startDate, endDate));
-		mav.addObject("pageKind", pageKind == null || "n".equals(pageKind) ? "Hits" : pageKind);
+		mav.addObject("pageKind", pageKind == null || "n".equals(pageKind) ? "Hits/" : pageKind + "/");
 		return mav;
 	}
 
