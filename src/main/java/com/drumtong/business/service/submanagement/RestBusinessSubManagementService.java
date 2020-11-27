@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.amazonaws.services.cloudwatch.model.Statistic;
 import com.drumtong.business.dao.BBusinessReviewDAO;
 import com.drumtong.business.dao.BCouponDAO;
 import com.drumtong.business.dao.BPaymentDAO;
@@ -20,6 +21,7 @@ import com.drumtong.business.vo.BPaymentVO;
 import com.drumtong.business.vo.ReviewList;
 import com.drumtong.security.Review;
 import com.drumtong.security.SerialUUID;
+import com.drumtong.security.Statistics;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -116,6 +118,15 @@ public class RestBusinessSubManagementService {
 		
 		List<BCouponVO> couponList = bCouponDAO.select(estid);
 		return new Gson().toJson(couponList);
+	}
+
+	// ========================= 대분류 [통계관리] ================================ [영경]
+	public String selectStatistics(HttpServletRequest req, String period, String pageKind, String option) {
+		HttpSession Session = req.getSession();
+		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+		String estid= bInformationVO.getEstid();
+		String[] PeriodDiv = period.split(",");
+		return Statistics.statistics(estid, pageKind, option, PeriodDiv[0], PeriodDiv[1]);
 	}
 	
 }
