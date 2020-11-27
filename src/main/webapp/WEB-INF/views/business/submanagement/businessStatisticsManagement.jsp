@@ -18,6 +18,8 @@
 	<!-- side header css -->
 	<link rel="stylesheet" href="${cpath }/business/css/businessSideHeader.css">
 	<!-- businessStatisticsManagement css -->
+	<link rel="stylesheet" href="${cpath }/business/css/submanagement/businessStatisticsManagement.css">
+	
 	
 	<!-- Font -->
    	<link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
@@ -43,23 +45,23 @@
 
 	  <!-- <div id="myPieChart"></div> -->
 
-	<div style="width: 1100px; height: 1000px; padding: 25px; text-align: left;" class="marginauto">
+	<div class="container">
 		<h1 style="font-size: 36pt">통계</h1>
-		<div style="display: flex;">
-			<button style="font-size: 24pt; width: 33%; height: 60px; margin-right: 0.5%" onclick="location.href='${cpath }/business/submanagement/businessStatisticsManagement/Hits/'">조회수</button>
-			<button style="font-size: 24pt; width: 33%; height: 60px; margin-right: 0.5%" onclick="location.href='${cpath }/business/submanagement/businessStatisticsManagement/Sales/'">주문수</button>
-			<button style="font-size: 24pt; width: 33%; height: 60px"  onclick="location.href='${cpath }/business/submanagement/businessStatisticsManagement/Price/'">주문금액</button>
+		<div class="flex1">
+			<button onclick="contentChange(this)" name="Hits/">조회수</button>
+			<button onclick="contentChange(this)" name="Orders/">주문수</button>
+			<button style="margin-right: 0 !important;"  onclick="contentChange(this)" name="Price/">주문금액</button>
 		</div>
-		<div style="margin-top: 30px; display: flex">
-			<div style="display: inline-flex; width: 450px; margin-left: 50px; margin-right: 100px">
-				<button style="font-size: 18pt; width: 150px; height: 40px">일간</button>
-				<button style="font-size: 18pt; width: 150px; height: 40px">주간</button>
-				<button style="font-size: 18pt; width: 150px; height: 40px">월간</button>
+		<div class="flex2">
+			<div class="flex3">
+				<button class="selected" onclick="lastpath(this)" value="Day/">일간</button>
+				<button onclick="lastpath(this)" value="Week/">주간</button>
+				<button onclick="lastpath(this)" value="Month/">월간</button>
 			</div>
 			<div style="display: inline-flex; width: 500px;">
-				<input type="date" style="width: 250px; height: 40px">
+				<input type="date" style="width: 250px; height: 40px" name="startDate">
 				<span style="font-size: 18pt; margin-left: 15px; margin-right: 15px">~</span>
-				<input type="date" style="width: 250px; height: 40px">
+				<input type="date" style="width: 250px; height: 40px" name="endDate">
 			</div>
 		</div>
 		<div id="chart_div"></div>
@@ -96,14 +98,13 @@ function drawChart() {	// callback 시킬 때의 이름과 똑같은 함수여�
   chart.draw(data, null);
 } */
 
-
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawChart1);
+var statisticsList = ${statisticsList };
 
 function drawChart1() {
-	var statisticsList = ${statisticsList };
 // Create the data table.
-var data = new google.visualization.DataTable();
+const data = new google.visualization.DataTable();
 data.addColumn('string', 'LastDate');
 data.addColumn('number', 'View');
 // data.addRows 는 한번에 데이터를 입력하는 것이고, data.addRow는 하나씩 데이터를 입력하는 것이다
@@ -124,9 +125,9 @@ data.addColumn('number', 'View');
 // let day = today.getDay();  // 요일
 
 for(var i = 0; i < statisticsList.length; i++){
-// 	if(i == 0) {
-// 		data.addRow([statisticsList[i].start, 0]);
-// 	}
+ 	if(i == 0) {
+ 		data.addRow(['', 0]);
+ 	}
 	data.addRow([statisticsList[i].end, statisticsList[i].value]);
 }
 // data.setCell(2,0,'lswn');
@@ -167,13 +168,52 @@ var options = {
 
 		}
 
-
-
-// Instantiate and draw our chart, passing in some options.
-// var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+const chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
 chart.draw(data, options);
 }
+
+var startPath = null;
+var lastPath = 'Day/';
+
+window.onload = function() {
+	console.log(document.querySelector('div.flex1 button[name="' + lastPath + '"]'));
+}
+
+// 동기식으로 페이지 이동시켜주는 함수(조회수, 주문수, 주문금액)
+function contentChange(obj) {
+	location.href = window.location.href + obj.name + lastPath;
+	for(i = 0; i < obj.parentNode.children.length; i++) {
+ 		obj.parentNode.children[i].className = '';
+	}
+	obj.className = 'selected';
+}
+
+// 일간, 주간, 월간을 구분시켜주는 함수
+function lastpath(obj) {
+	lastPath = obj.value;
+	for(i = 0; i < obj.parentNode.children.length; i++) {
+ 		obj.parentNode.children[i].className = '';
+	}
+	obj.className = 'selected';
+	pageKindAxios(obj.value);
+}
+
+function pageKindAxios(path) {
+	const axiosPath = '/drumtong/business/subManagement/businessStatisticsManagement/' + 'Sales/' + path;
+	console.log('axiosPath : ', axiosPath);
+	const axPost = async () => {   // async : 비동기 실행 함수
+	    await axios.post(axiosPath)
+	    // 정상
+			.then( (response) => {
+	    const data = response.data;
+	  	statisticsList = data;
+	  	document.getElementById('chart_div') = '';
+	    drawChart1();
+	     })
+	  }
+	return axPost();
+}
+
 </script>
 </body>
 </html>
