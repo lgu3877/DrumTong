@@ -85,4 +85,13 @@ public class RestBusinessSubManagementController {
 	public String updateCoupon(HttpServletRequest req, @RequestBody BCouponVO bcouponvo, @PathVariable("processing")String processing) {
 		return svc.updateCoupon(req, bcouponvo, processing);
 	}
+	
+	// ========================= 대분류 [통계관리] ================================ [영경]
+//	pageKind -> Hits(조회수), Orders(주문수), Prices(금액)
+//	option -> Day(일), Week(주), Month(월)
+	@RequestMapping("businessStatisticsManagement/rest/{pageKind}/{option}/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String selectStatistics(HttpServletRequest req, @RequestBody String period,@PathVariable("pageKind")String pageKind, @PathVariable("option")String option) {
+		return svc.selectStatistics(req, period, pageKind, option);
+	}
 }
