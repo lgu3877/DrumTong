@@ -28,4 +28,14 @@
 				(TO_DATE(SUBSTR(PURCHASEDATE,1,10),'YYYY-MM-DD') BETWEEN #{startdate} AND #{enddate})
 	</select>
 	
+	<select id="getMainPreviewOrder" parameterType="String" resultType="Hashmap">
+		SELECT A.a AS REQUEST, B.b AS PROCESSING, C.c AS SUCCESS FROM 
+			(SELECT NVL(COUNT(*),0) AS a FROM bsales 
+				WHERE status='REQUEST' AND ESTID=#{estid}) A,
+			(SELECT NVL(COUNT(*),0) AS b FROM BSALES 
+				WHERE STATUS='PROCESSING' AND ESTID=#{estid}) B,
+			(SELECT NVL(COUNT(*),0) AS c FROM BSALES 
+				WHERE STATUS='SUCCESS' AND ESTID=#{estid}) C
+	</select>
+	
 </mapper>

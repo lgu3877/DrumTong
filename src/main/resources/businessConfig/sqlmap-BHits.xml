@@ -14,4 +14,33 @@
 			 BETWEEN #{startdate} AND #{enddate}
 	</select>
 	
+	<!-- 메인 프리뷰 (오늘, 일주일, 월) 단위로 조회수를 구한다 -->
+	<select id="getMainPreviewHits" parameterType="String" resultType="Hashmap">
+		SELECT A.a AS DAY, B.b AS WEEK, C.c AS MONTH FROM
+			(SELECT NVL(COUNT(*), 0) AS a FROM BHITS 
+				WHERE VISITDATE = TO_CHAR(SYSDATE, 'YYYY-MM-DD') 
+				AND ESTID=#{estid}) A, 
+			(SELECT NVL(COUNT(*), 0) AS b FROM BHITS 
+				WHERE TO_DATE(VISITDATE, 'YYYY-MM-DD') 
+				BETWEEN SYSDATE - 6 AND SYSDATE 
+				AND ESTID=#{estid}) B,
+			(SELECT NVL(COUNT(*), 0) AS c FROM BHITS 
+				WHERE SUBSTR(VISITDATE,6,2) = TO_CHAR(SYSDATE, 'MM') 
+				AND ESTID=#{estid}) C
+	</select>
+	
+	<select id="getMainPreviewPrice" parameterType="String" resultType="Hashmap">
+		SELECT A.a AS DAY, B.b AS WEEK, C.c AS MONTH FROM 
+			(SELECT NVL(SUM(TOTALPRICE),0) AS a FROM BSALES 
+				WHERE 
+				SUBSTR(PURCHASEDATE,1,10) = TO_CHAR(SYSDATE, 'YYYY-MM-DD') 
+				AND ESTID=#{estid}) A,
+			(SELECT NVL(SUM(TOTALPRICE),0) AS b FROM BSALES 
+				WHERE TO_DATE(SUBSTR(PURCHASEDATE,1,10), 'YYYY-MM-DD') 
+				BETWEEN TO_DATE(TO_CHAR(SYSDATE-6,'YYYY-MM-DD'),'YYYY-MM-DD') 
+				AND SYSDATE  AND ESTID=#{estid}) B,
+			(select NVL(SUM(TOTALPRICE),0) AS c FROM BSALES 
+				WHERE SUBSTR(PURCHASEDATE,6,2)=TO_CHAR(SYSDATE,'MM') 
+				AND ESTID=#{estid}) C
+	</select>
 </mapper>

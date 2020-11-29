@@ -115,16 +115,15 @@
 	        clearTimeout(this.timer);
 	    }
 	};
-
-	new numberCounter("counter1", 500);
-	new numberCounter("counter2", 5000);
-	new numberCounter("counter3", 50000);
-	new numberCounter("counter4", 600);
-	new numberCounter("counter5", 6000);
-	new numberCounter("counter6", 60000);
-	new numberCounter("counter7", 700);
-	new numberCounter("counter8", 7000);
-	new numberCounter("counter9", 70000);
+	new numberCounter("counter1", '${HitsMap.DAY}');
+	new numberCounter("counter2", '${HitsMap.WEEK}');
+	new numberCounter("counter3", '${HitsMap.MONTH}');
+	new numberCounter("counter4", '${PriceMap.DAY}');
+	new numberCounter("counter5", '${PriceMap.WEEK}');
+	new numberCounter("counter6", '${PriceMap.MONTH}');
+	new numberCounter("counter7", '${OrderMap.REQUEST}');
+	new numberCounter("counter8", '${OrderMap.PROCESSING}');
+	new numberCounter("counter9", '${OrderMap.SUCCESS}');
 	new numberCounter("counter10", 800);
 	new numberCounter("counter11", 8000);
 	new numberCounter("counter12", 80000);

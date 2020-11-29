@@ -19,9 +19,10 @@ public class BusinessMainController {
 	@Autowired BusinessMainService svc;
 	@Autowired BInformationDAO binformationdao;
 	
+	// 비즈니스 메인 페이지로 이동 (GET) [영경]
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView home() {
-		return svc.main();
+	public ModelAndView home(HttpServletRequest req) {
+		return svc.main(req);
 	}
 	
 	// 테스트용-이영경
@@ -40,15 +41,5 @@ public class BusinessMainController {
 	public ModelAndView mainCover() {
 		return svc.mainCover();
 	}
-	
-//	@GetMapping("login")
-//	public String loginView() {
-//		return "business/main/member/businessLogin";
-//	}
-//	
-//	@GetMapping("accountSearch")
-//	public String accountSearchView() {
-//		return "business/main/member/businessAccountSearch";
-//	}
 
 }
