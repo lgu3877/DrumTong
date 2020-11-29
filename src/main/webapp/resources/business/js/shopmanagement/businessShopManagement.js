@@ -154,47 +154,56 @@ function directType(obj) {
 }
 
 
-// 상품 입력 폼 추가하기(버튼 클릭 시)
+// 상품 추가 버튼
 const addItemBtn = document.getElementById('add-item-btn');
-let singleList = document.querySelector('.single_item_selector');
+// 줄을 추가할 컨테이너
 const itemlist = document.getElementById('add-item-list')
+// 입력 줄 전체
+//let singleList = document.querySelector('.single_item_selector');
+const singleList = document.querySelectorAll(".single_item_selector");
+const initialForm = JSON.parse(JSON.stringify(singleList));
 
+
+// 클릭 이벤트(1줄씩 추가)
 addItemBtn.addEventListener('click', function() {
-	console.log("clicked");
-	singleList = singleList.cloneNode(true);
-//	const itemlist = document.getElementById('add-item-list');
-
-	itemlist.appendChild(singleList);
+	
+	console.log(initialForm);
+	itemlist.appendChild(initialForm.cloneNode(true));
+//	singleList = singleList.cloneNode(true);
+//	itemlist.appendChild(singleList);
 });
 
 
-// 
-function completeInput(entrieNode) {
-
-}
-
-// 
-function dismissInput(entireNode) {	
+// 취소 버튼
+function dismissInput(entireNode) {
+	// 목록이 하나 남았을 때
 	if (itemlist.children.length === 1) {
-		console.log("목록을 지울 수 없습니다.");
 		
-		const array = entireNode.children;
-		const mainSelector = array[0]; 
-		const subSelector = array[1];
-		console.log(array);
-		console.log(mainSelector);
-		console.log(subSelector);
-		console.log(mainSelector.querySelector('selectedDirect'));
+		const directInputs = document.querySelectorAll(".direct_type_input");
+		const selector = document.querySelectorAll(".service_selector");
+		const directInputCheck = document.querySelectorAll(".selectedDirect");
 		
-		// 첫번째 select 초기화(타입)
+		// 직접입력 체크 O > input 제거 & 값 초기화
+		if(directInputCheck[0].selected === true || directInputCheck[1].selected === true) {
+			directInputs[0].value = '';
+			directInputs[1].value = '';
+			directInputs[0].style.display = 'none';
+			directInputs[1].style.display = 'none';
+		}
 		
-		// 두번째 select 초기화(유형)
-		// 세번째 input 초기화(세부내용)		
-		// 네번째 input 초기화(가격)		
-		// 다섯번째 input 초기화(시간)		
+		// 직접입력 체크 X > select 옵선 초기화
+		selector[0].children[0].selected = true;
+		selector[1].children[0].selected = true;
+		
+		// 세부내용, 가격, 시간 초기화
+		document.querySelector(".service_detail_input").value = '';
+		document.querySelector(".service_price_input").value = '';
+		document.querySelector(".service_time_input").value = '';
+		
 		return;
 	}
+	
+	// 목록이 2개 이상 > 해당 줄 삭제
 	entireNode.remove();
-	console.log(entireNode);	
 }
 
