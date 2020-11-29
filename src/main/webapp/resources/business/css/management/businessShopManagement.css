@@ -344,15 +344,15 @@
 }
 
 .service_main {
-	width: 15%;
+	width: 13%;
 }
 
 .service_sub {
-	width: 15%;
+	width: 13%;
 }
 
 .service_details {
-	width: 35%;
+	width: 43%;
 }
 
 .service_price {
@@ -363,9 +363,9 @@
 	width: 10%;
 }
 
-.service_confirm {
+/* .service_confirm {
 	width: 5%;
-}
+} */
 
 .service_cancle {
 	width: 5%;
@@ -375,7 +375,7 @@
 
 /* first property input */
 .first_item_prop {
-	width: 15%;
+	width: 13%;
 }
 
 /* select */
@@ -412,7 +412,7 @@
 
 /* second property input */
 .second_item_prop {
-	width: 15%;
+	width: 13%;
 }
 
 .second_item_prop input {
@@ -422,7 +422,7 @@
 
 /* third~fifth property input */
 .third_item_prop {
-	width: 35%;
+	width: 43%;
 }
 
 .forth_item_prop {
@@ -479,12 +479,12 @@
 	opacity: 0.7;
 }	
 
-.complete_listing {
+/* .complete_listing {
 	width: 5%;
 	cursor: pointer;
 	color: lime;
 	line-height: 35px;
-}
+} */
 
 .cancle_listing {
 	width: 5%;

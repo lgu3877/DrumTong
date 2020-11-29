@@ -277,9 +277,9 @@
 						<li class="service_main">서비스 유형</li>
 						<li class="service_sub">서비스 타입</li>
 						<li class="service_details">세부 내용</li>
-						<li class="service_price">가격</li>
+						<li class="service_price">가격(원)</li>
 						<li class="service_time">예상 소요시간</li>
-						<li class="service_confirm">확인</li>
+						<!-- <li class="service_confirm">확인</li> -->
 						<li class="service_cancle">삭제</li>
 					</ul>
 				</div>
@@ -317,21 +317,21 @@
 						</div>
 						
 						<div class="third_item_prop">
-							<input type="text" name="" placeholder="세부 서비스 내용을 입력해주세요.">
+							<input type="text" class="service_detail_input" name="" placeholder="세부 서비스 내용을 입력해주세요.">
 						</div>
 
 						<div class="forth_item_prop">
-							<input type="text" name="" placeholder="서비스 가격(원)">
+							<input type="text" class="service_price_input" name="" placeholder="서비스 가격(원)">
 						</div>
 
 						<div class="fifth_item_prop">
-							<input type="text" name="" placeholder="서비스 소요시간">
+							<input type="text" class="service_time_input" name="" placeholder="서비스 소요시간">
 						</div>
 						
-						<div class="complete_listing" onclick="completeInput(this.parentNode)">
+						<!-- <div class="complete_listing" onclick="completeInput(this.parentNode)">
 							<i class="fas fa-check"></i>
 							<span>확인</span>
-						</div>
+						</div>  -->
 
 						<div class="cancle_listing" onclick="dismissInput(this.parentNode)">
 							<i class="fas fa-times"></i>
