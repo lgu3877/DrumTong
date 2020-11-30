@@ -36,6 +36,8 @@
 }
 
 .shop_info_title_con {
+	display: flex;
+	justify-content: space-between;
 	margin: 5px 0 10px 0;
     text-align: left;
 }
@@ -279,28 +281,54 @@
 	margin-top: 70px;
     height: 650px;
     margin-left: 3.33%;
+    margin-right: 3.33%;
 }
 
 .create_menu {
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
-.add_menu_btn_con {
-	position: absolute;
+.service_button_con {
+	display: flex;
+}
+
+.update_image_btn_con, 
+.update_menu_btn_con, 
+.add_menu_btn_con, 
+.complete_menu_btn_con {
 	display: flex;
     cursor: pointer;
     border: none;
     outline: none;
-    width: 130px;
-    background-color: #6495ED;
+    width: 140px;
     color: white;
     justify-content: center;
 	height: 40px;
     border-radius: 8px;
-    right: 5%;
 }
 
-.add_menu_btn_con:hover {
+.update_image_btn_con {
+    background-color: steelblue;		
+}
+
+.update_menu_btn_con {
+    background-color: #6495ED;	
+}
+
+.add_menu_btn_con {
+    background-color: #6495ED;	
+    margin-right: 20px;	
+} 
+
+.complete_menu_btn_con {
+    background-color: steelblue;
+    /* margin-right: 15%; */	
+}
+
+.update_image_btn_con:hover, 
+.update_menu_btn_con:hover, 
+.add_menu_btn_con:hover, 
+.complete_menu_btn_con:hover {
 	background-color: #3b5998;
     transition: 0.5s;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -324,7 +352,7 @@
 .single_item_selector {
 	display: flex;
 	justify-content: space-between;
-    margin: 0 5% 20px 0;
+    margin: 0 0 20px 0;
 }
 
 /* customizing menu header */
@@ -332,7 +360,7 @@
 	list-style: none;
 	display: flex;
 	justify-content: space-between;
-    margin: 5% 5% 1.5% 0;
+    margin: 0 0 1.5% 0;
 }
 
 .customize_menu_head li {
@@ -565,4 +593,11 @@
 	background-color: #3b5998;
     transition: 0.5s;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* icon */
+.fa-question-circle {
+	font-weight: 600;	
+    font-size: 12pt;
+    color: lightslategray;
 }
