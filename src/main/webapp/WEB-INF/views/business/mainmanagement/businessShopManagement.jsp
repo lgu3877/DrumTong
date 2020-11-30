@@ -30,7 +30,7 @@
    	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
    	
    	<!-- jQuery -->
-   	<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+   	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
      
 
@@ -50,38 +50,60 @@
 				
 			<!-- title -->	
 				<div class="shop_info_title_con">
-					<span class="shop_info_title">매장 사진</span>
+					<div>
+						<span class="shop_info_title">매장 사진</span>
+						<i class="far fa-question-circle" style="font-weight: 600">도움말</i>
+					</div>
+				<!-- cover button -->
+					<div class="service_button_con">
+						<div id="add-cover-btn" class="update_image_btn_con">
+							<div class="add_menu_icon_con">
+								<i class="fas fa-check-square"></i>
+							</div>
+							<div class="add_menu_btn_title">사진 변경</div>
+						</div>
+					</div>
 				</div>
 				
 			<!-- cover-image input form -->
-				<form id="shop-image-view" class="shop_image_view">
+				<div id="shop-image-view" class="shop_image_view">
 					<div class="upload_icon_con">
+					
+					<!-- 
 						<label for="cover-img-upload" class="upload_link">
 							<i class="fas fa-upload fa-3x"></i>
 						</label>
+					 -->
 						<div class="cover_file_text_con">
-						
+
 						<!-- select cover image -->
 							<div class="cover_file_text">
-								매장 대표사진 업로드(위 아이콘 클릭)
+								<p>
+									대표사진이 등록되어 있지 않습니다.<br>
+									사진을 등록해 사장님 가게를 소개해보세요.
+								</p>
 							</div>
-						
+					
 						<!-- cover image name view -->	
-							<input id="file-name" class="upload_file_name" type="text" readonly disabled
-								onchange='return checkFile()' placeholder="현재 선택된 사진이 없습니다.">
+					
+						 		<input id="file-name" class="upload_file_name" type="text" readonly disabled
+								onchange='return checkFile()' placeholder="선택한 사진 이름이 이곳에 나타납니다.">
 								
 						<!-- cover image input -->
-							<input id="cover-img-upload" class="upload_file_input" type="file"
+					<!--
+						 		<input id="cover-img-upload" class="upload_file_input" type="file"
 								onchange="javascript:document.getElementById('file-name').value=this.value">
-						
+					-->	
 						<!-- upload cover image button for modification -->		
-							<span>
+					<!--
+					 		<span>
 								<input class="upload_button" type="button" onclick="imageCheck('file-name')" value="확인">
 							</span>
-							
+					-->
+									 		
 						</div>
 					</div>
-				</form>
+				</div>
 			
 			<!-- image viewer as long as cover image is already uploaded when you visit this page for modification -->
 				<div id="main-image-con" class="main_image_con">
@@ -126,7 +148,15 @@
        						
        			<!-- add new photo -->			
        				<div id="photo-modal-btn" class="photo_add_con">
-       					<input id="add-photo" class="add_photo_input" type="file" name="" onchange="imageCheck('add-photo')">
+       				<!-- change cover -->
+       					<input id="update-cover" class="add_photo_input" type="file" name="" onchange="imageCheck('add-photo')" style="display: none;">
+       					<label for="update-cover">
+       						<span style="margin-right: 10px">커버 사진 바꾸기
+       							<i class="far fa-images"></i>
+       						</span>
+       					</label>
+       				<!-- add store image -->	
+       					<input id="add-photo" class="add_photo_input" type="file" name="" onchange="imageCheck('add-photo')" style="display: none">
        					<label for="add-photo">
        						<span>새로운 사진 추가하기
        							<i class="far fa-images"></i>
@@ -141,7 +171,10 @@
 			
 			<!-- title -->
 				<div class="shop_info_title_con">
-					<span class="shop_info_title">매장 소개글</span>
+					<div>
+						<span class="shop_info_title">매장 소개글</span>
+						<i class="far fa-question-circle" style="font-weight: 600">도움말</i>
+					</div>
 				</div>
 			
 			<!-- text content -->
@@ -169,7 +202,26 @@
 
 			<!-- title -->
 			<div class="shop_info_title_con">
-				<span class="shop_info_title">등록된 서비스 메뉴</span>
+				<div>
+					<span class="shop_info_title">등록된 서비스 메뉴</span>
+					<i class="far fa-question-circle" style="font-weight: 600">도움말</i>
+				</div>
+				<div class="service_button_con">
+				<!-- modify button -->
+					<div id="update-list-btn" class="add_menu_btn_con">
+						<div class="add_menu_icon_con">
+							<i class="fas fa-plus-square"></i>
+						</div>
+						<div class="add_menu_btn_title">메뉴 수정</div>
+					</div>
+				<!-- complete button -->
+					<div id="complete-list-btn" class="complete_menu_btn_con">
+						<div class="add_menu_icon_con">
+							<i class="fas fa-check-square"></i>
+						</div>
+						<div class="add_menu_btn_title">수정 완료</div>
+					</div>
+				</div>
 			</div>
 
 			<div class="current_menu">
@@ -250,19 +302,31 @@
 			</div>
 		</div>
 
+
 		<!-- create menu -->
 		<div class="create_menu_con">
 
-			<!-- title -->
+		<!-- title -->
 			<div class="shop_info_title_con">
-				<span class="shop_info_title">서비스 등록</span>
-				<i class="far fa-question-circle">도움말</i>
-				<!-- add button -->
-				<div id="add-item-btn" class="add_menu_btn_con">
-					<div class="add_menu_icon_con">
-						<i class="fas fa-plus-square"></i>
+				<div>
+					<span class="shop_info_title">서비스 등록</span>
+					<i class="far fa-question-circle" style="font-weight: 600">도움말</i>
+				</div>
+			<!-- add button -->
+				<div class="service_button_con">
+					<div id="add-item-btn" class="add_menu_btn_con">
+						<div class="add_menu_icon_con">
+							<i class="fas fa-plus-square"></i>
+						</div>
+						<div class="add_menu_btn_title">메뉴 추가</div>
 					</div>
-					<div class="add_menu_btn_title">메뉴 추가</div>
+					<!-- complete button -->
+					<div id="update-item-btn" class="complete_menu_btn_con">
+						<div class="add_menu_icon_con">
+							<i class="fas fa-check-square"></i>
+						</div>
+						<div class="add_menu_btn_title">목록 추가</div>
+					</div>
 				</div>
 			</div>
 

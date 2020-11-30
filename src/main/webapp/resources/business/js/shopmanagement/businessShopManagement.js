@@ -43,7 +43,7 @@ if (img.src) {
 // No cover image > show input from
 else {
 	imageInputForm.style.display = '';
-	imageViewCon.style.display = 'none';1
+	imageViewCon.style.display = 'none';
 }
 
 
@@ -156,22 +156,26 @@ function directType(obj) {
 
 // 상품 추가 버튼
 const addItemBtn = document.getElementById('add-item-btn');
+// 상품 추가 완료 버튼
+const updateItemBtn = document.getElementById("update-item-btn");
 // 줄을 추가할 컨테이너
 const itemlist = document.getElementById('add-item-list')
 // 입력 줄 전체
-//let singleList = document.querySelector('.single_item_selector');
-const singleList = document.querySelectorAll(".single_item_selector");
-const initialForm = JSON.parse(JSON.stringify(singleList));
+let singleList = document.querySelector('.single_item_selector');
 
 
-// 클릭 이벤트(1줄씩 추가)
+
+// 취소 - 클릭 이벤트(1줄씩 추가)
 addItemBtn.addEventListener('click', function() {
-	
-	console.log(initialForm);
-	itemlist.appendChild(initialForm.cloneNode(true));
-//	singleList = singleList.cloneNode(true);
-//	itemlist.appendChild(singleList);
+	console.log('Add List');
+	singleList = singleList.cloneNode(true);
+	itemlist.appendChild(singleList);
 });
+
+// 등록 - 클릭이벤트(작성한 리스트 추가)
+updateItemBtn.addEventListener('click', function() {
+	console.log('Update List');
+})
 
 
 // 취소 버튼
