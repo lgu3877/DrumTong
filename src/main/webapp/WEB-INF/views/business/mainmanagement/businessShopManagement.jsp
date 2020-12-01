@@ -259,7 +259,6 @@
 							<th scope="cols">세부 내용</th>
 							<th scope="cols">가격</th>
 							<th scope="cols">예상 소요시간</th>
-							<th scope="cols">기타</th>
 						</tr>
 					</thead>
 					
@@ -271,7 +270,6 @@
 							<td>내용2</td>
 							<td>내용3</td>
 							<td>내용4</td>
-							<td>내용5</td>
 						</tr>
 						<tr>
 							<th scope="row" class="even">서비스2</th>
@@ -279,7 +277,6 @@
 							<td class="even">내용2</td>
 							<td class="even">내용3</td>
 							<td class="even">내용4</td>
-							<td class="even">내용5</td>
 						</tr>
 						<tr>
 							<th scope="row">서비스3</th>
@@ -287,7 +284,6 @@
 							<td>내용2</td>
 							<td>내용3</td>
 							<td>내용4</td>
-							<td>내용5</td>
 						</tr>
 						<tr>
 							<th scope="row" class="even">서비스4</th>
@@ -295,7 +291,6 @@
 							<td class="even">내용2</td>
 							<td class="even">내용3</td>
 							<td class="even">내용4</td>
-							<td class="even">내용5</td>
 						</tr>
 					</tbody>
 				</table>

@@ -270,7 +270,6 @@
 .current_menu_table td {
 	width: 350px;
 	padding: 10px;
-	vertical-align: top;
 }
 
 .current_menu_table .even {
@@ -522,6 +521,17 @@
 }
 
 .complete_listing:hover, .cancle_listing:hover {
+	font-weight: 600;
+	transition: 0.5s;
+}
+
+.delete_item {
+	cursor: pointer;
+	color: red;
+	line-height: 35px;
+}
+
+.delete_item:hover, .delete_item:hover {
 	font-weight: 600;
 	transition: 0.5s;
 }
