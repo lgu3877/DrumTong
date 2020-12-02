@@ -1,6 +1,5 @@
 package com.drumtong.business.service.main;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,6 +48,9 @@ public class BusinessMainService {
 			mav.addObject("PriceMap", PriceMap);
 			
 			// 세탁물판매(오늘, 이번주, 이번달)
+			HashMap<String, Integer> LaundryMap = bSalesDAO.getMainPreviewLaundry(estid);
+			mav.addObject("LaundryMap", LaundryMap);
+			
 		}
 		System.out.println("2 test");
 			// 매장이 등록 완료되어있는지도 체크하기
