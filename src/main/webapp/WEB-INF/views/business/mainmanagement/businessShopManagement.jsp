@@ -235,7 +235,7 @@
 							<th scope="cols">서비스 타입</th>
 							<th scope="cols">세부 내용</th>
 							<th scope="cols">가격</th>
-							<th scope="cols">예상 소요시간</th>
+							<th scope="cols">소요시간</th>
 							<th scope="cols">기타</th>
 						</tr>
 					</thead>
@@ -252,18 +252,18 @@
 			<!-- registered table -->
 				<table class="current_menu_table">
 				<!-- thead -->
-					<thead>
+					<thead id="item-list-thead">
 						<tr>
 							<th scope="cols">서비스 유형</th>
 							<th scope="cols">서비스 타입</th>
 							<th scope="cols">세부 내용</th>
 							<th scope="cols">가격</th>
-							<th scope="cols">예상 소요시간</th>
+							<th scope="cols">소요시간</th>
 						</tr>
 					</thead>
 					
 				<!-- tbody -->
-					<tbody>
+					<tbody id="item-list-tbody">
 						<tr>
 							<th scope="row">서비스1</th>
 							<td>내용1</td>
@@ -337,7 +337,7 @@
 						<li class="service_sub">서비스 타입</li>
 						<li class="service_details">세부 내용</li>
 						<li class="service_price">가격(원)</li>
-						<li class="service_time">예상 소요시간</li>
+						<li class="service_time">소요시간</li>
 						<!-- <li class="service_confirm">확인</li> -->
 						<li class="service_cancle">삭제</li>
 					</ul>
@@ -404,17 +404,64 @@
 				
 			</div>
 		</div>
+		
+	<!-- 상품 수령 방법 -->
+		<div class="return_menu_con">
+
+		<!-- 목차 -->
+			<div class="shop_info_title_con">
+				<div>
+					<span class="shop_info_title">세탁물 수령 방법</span>
+					<i class="far fa-question-circle" style="font-weight: 600">도움말</i>
+				</div>
+			<!-- 버튼 -->
+				<div class="service_button_con">
+					<div id="modify-return-option" class="add_menu_btn_con">
+						<div class="add_menu_icon_con">
+							<i class="fas fa-plus-square"></i>
+						</div>
+						<div class="add_menu_btn_title">수정 하기</div>
+					</div>
+					<div id="complete-return-option" class="complete_menu_btn_con">
+						<div class="add_menu_icon_con">
+							<i class="fas fa-check-square"></i>
+						</div>
+						<div class="add_menu_btn_title">수정 완료</div>
+					</div>
+				</div>
+			</div>
+			
+		<!-- 수취 선택 -->
+			<form class="return_menu">
+				<ul>
+					<li onclick="checkContent(this)">
+						<input class="returnOptions" type="checkbox" name="returnOptions">
+						<i class="fas fa-window-close"></i>
+						<span>배달 대행업체 이용</span>
+					</li>
+					<li onclick="checkContent(this)">
+						<input class="returnOptions" type="checkbox" name="returnOptions">
+						<i class="fas fa-window-close"></i>
+						<span>자체 배달 서비스</span>
+					</li>
+					<li onclick="checkContent(this)">
+						<input class="returnOptions" type="checkbox" name="returnOptions">
+						<i class="fas fa-window-close"></i>
+						<span>방문 수령</span>
+					</li>
+				</ul>
+			</form>
+		</div>
 
 	</section>
 		
 		
-	<!-- footer -->
+<!-- footer -->
 	<%-- <%@ include file="../main/businessFooter.jsp" %> --%>
 
-	<!-- Modal  -->
+<!-- Modal  -->
 	<div id="intro-modal" class="intro_modal">
-
-		<!-- Modal content -->
+	<!-- Modal content -->
 		<div class="intro_content_con">
 			<span class="intro_close">&times;</span>
 			<div class="intro_content">
@@ -422,12 +469,15 @@
 				<input class="store_intro_btn" type="button" value="작성완료" onclick='comfirmIntro()' >
 			</div>
 		</div>
-
 	</div>
 
 
 
-	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagement.js"></script>
+	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementMenuList.js"></script>
+	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementOnLoad.js"></script>
+	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementImage.js"></script>
+	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementIntroText.js"></script>
+	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementReturnItem.js"></script>
 	
 </body>
 </html>
