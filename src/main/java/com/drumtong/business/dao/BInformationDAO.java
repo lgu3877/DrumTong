@@ -20,6 +20,7 @@ public interface BInformationDAO {
 	// 프리미엄 광고 여부 업데이트
 	int updatePremiumBoolean(BInformationVO bInformationVO);
 
+	// 사업자가 가지고 있는 모든 매장 리스트 출력
 	List<BInformationVO> selectInformationList(String bpersonid);
 
 	// 매장 이름 출력
