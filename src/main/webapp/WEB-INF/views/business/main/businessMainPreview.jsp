@@ -115,19 +115,18 @@
 	        clearTimeout(this.timer);
 	    }
 	};
-
-	new numberCounter("counter1", 500);
-	new numberCounter("counter2", 5000);
-	new numberCounter("counter3", 50000);
-	new numberCounter("counter4", 600);
-	new numberCounter("counter5", 6000);
-	new numberCounter("counter6", 60000);
-	new numberCounter("counter7", 700);
-	new numberCounter("counter8", 7000);
-	new numberCounter("counter9", 70000);
-	new numberCounter("counter10", 800);
-	new numberCounter("counter11", 8000);
-	new numberCounter("counter12", 80000);
+	new numberCounter("counter1", '${HitsMap == null ? 5000 : HitsMap.DAY}');
+	new numberCounter("counter2", '${HitsMap == null ? 5000 : HitsMap.WEEK}');
+	new numberCounter("counter3", '${HitsMap == null ? 5000 : HitsMap.MONTH}');
+	new numberCounter("counter4", '${PriceMap == null ? 5000 : PriceMap.DAY}');
+	new numberCounter("counter5", '${PriceMap == null ? 5000 : PriceMap.WEEK}');
+	new numberCounter("counter6", '${PriceMap == null ? 5000 : PriceMap.MONTH}');
+	new numberCounter("counter7", '${OrderMap == null ? 5000 : OrderMap.REQUEST}');
+	new numberCounter("counter8", '${OrderMap == null ? 5000 : OrderMap.PROCESSING}');
+	new numberCounter("counter9", '${OrderMap == null ? 5000 : OrderMap.SUCCESS}');
+	new numberCounter("counter10", '${LaundryMap == null ? 5000 : LaundryMap.DAY}');
+	new numberCounter("counter11", '${LaundryMap == null ? 5000 : LaundryMap.WEEK}');
+	new numberCounter("counter12", '${LaundryMap == null ? 5000 : LaundryMap.MONTH}');
 </script>
 <!-- 	<div class="m_preivew_right">
 		<div id="chart_div" class="right_entire"></div>
