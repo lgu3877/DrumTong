@@ -276,14 +276,15 @@
 	background: aliceblue;
 }
 
-.create_menu_con {
+.create_menu_con,
+.return_menu_con {
 	margin-top: 70px;
-    height: 650px;
     margin-left: 3.33%;
     margin-right: 3.33%;
 }
 
-.create_menu {
+.create_menu,
+.return_menu {
     margin-top: 20px;
 }
 
@@ -529,6 +530,49 @@
 	cursor: pointer;
 	color: red;
 	line-height: 35px;
+}
+
+.return_menu {
+	height: 500px;
+}
+
+.return_menu ul {
+	list-style: none;
+	display: flex;
+}
+
+.return_menu ul li {
+	height: 50px;
+    border: 1px solid slateblue;
+    border-radius: 5px;
+    margin-right: 50px;
+    width: 200px;
+    line-height: 50px;
+    cursor: pointer;
+    color: navy;
+    
+/*     display: flex; */
+/*     justify-content: space-between; */
+}
+
+.return_menu ul li:hover {
+	transition: .5s;
+	background-color: navy;
+	color: white;
+	border-color: transparent;
+}
+
+.return_menu ul li i {
+	font-size: 15pt;
+}
+
+.return_menu ul li span {
+	font-size: 13pt;
+/* 	font-weight: 600; */
+}
+
+.returnOptions {
+	display: none;
 }
 
 .delete_item:hover, .delete_item:hover {
