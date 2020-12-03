@@ -240,11 +240,14 @@ function pageKindAxios(path) {
 	console.log(document.getElementById('endDate').value);
 	
 	let ob={
-			   'startDate': document.getElementById('startDate').value,
-			   'endDate': document.getElementById('endDate').value
+				'pagekind' : (document.querySelector('.flex1 button.selected').name).slice(0,-1),
+				'option' : path.slice(0,-1),
+				'startDate': document.getElementById('startDate').value,
+			    'endDate': document.getElementById('endDate').value,
 	      	};
 	
-	const axiosPath = '/drumtong/business/subManagement/businessStatisticsManagement/' + document.querySelector('.flex1 button.selected').name + path;
+// 	const axiosPath = '/drumtong/business/subManagement/businessStatisticsManagement/rest/' + document.querySelector('.flex1 button.selected').name + path + document.getElementById('startDate').value + '/' + document.getElementById('endDate').value + '/';
+	const axiosPath = '/drumtong/business/subManagement/businessStatisticsManagement/rest/';
 	console.log('axiosPath : ', axiosPath);
 	const axPost = async () => {   // async : 비동기 실행 함수
 	    await axios.post(axiosPath)
@@ -257,6 +260,7 @@ function pageKindAxios(path) {
 	     })
 	  }
 	return axPost(ob);
+// 	return axPost();
 }
 
 </script>
