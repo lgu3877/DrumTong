@@ -42,7 +42,7 @@
 	
 	<!-- sub-header(membership) -->
 	<%@ include file="../main/businessSubHeader.jsp" %>
-
+	
 	  <!-- <div id="myPieChart"></div> -->
 
 	<div class="container">
@@ -58,10 +58,10 @@
 				<button onclick="lastpath(this)" value="Week/">주간</button>
 				<button onclick="lastpath(this)" value="Month/">월간</button>
 			</div>
-			<div style="display: inline-flex; width: 500px;">
-				<input type="date" style="width: 250px; height: 40px" name="startDate">
-				<span style="font-size: 18pt; margin-left: 15px; margin-right: 15px">~</span>
-				<input type="date" style="width: 250px; height: 40px" name="endDate">
+			<div class="flex4">
+				<input type="date" name="startDate" id="startDate">
+				<span>~</span>
+				<input type="date" name="endDate" id="endDate">
 			</div>
 		</div>
 		<div id="chart_div"></div>
@@ -172,20 +172,54 @@ const chart = new google.visualization.AreaChart(document.getElementById('chart_
 chart.draw(data, options);
 }
 
+// 전역변수
 var startPath = null;
 var lastPath = 'Day/';
+var startdate = statisticsList[0].start + '/';
+var enddate = statisticsList[statisticsList.length - 1].end  + '/';
 
 window.onload = function() {
-	console.log(document.querySelector('div.flex1 button[name="' + lastPath + '"]'));
+	document.querySelector('div.flex1 button[name="${pageKind}"]').className = 'selected';
 }
+
+
+document.getElementById('startDate').addEventListener('change', function() {
+	console.log('vlaue1 : ', this.value);
+	const endDate = document.getElementById('endDate').value;
+	if(endDate == '') {
+		return false;
+	}
+	if(endDate < this.value ) {
+		alert('끝 날짜보다 앞선 날짜를 선택해 주십시오');
+		this.value = '';
+		return false;
+	}
+	console.log('path : ', document.querySelector('.flex button.selected').name);
+	pageKindAxios(document.querySelector('.flex3 button.selected').value);
+})
+
+document.getElementById('endDate').addEventListener('change', function() {
+	console.log('vlaue2 : ', this.value);
+	const startDate = document.getElementById('startDate').value;
+	if(startDate > this.value) {
+		alert('시작 날짜보다 지난 날짜를 선택해 주십시오');
+		this.value = '';
+		return false;
+	}
+	if(startDate == '') {
+		return false;
+	}
+	console.log('path : ', document.querySelector('.flex3 button.selected').value);
+	pageKindAxios(document.querySelector('.flex3 button.selected').value);
+})
 
 // 동기식으로 페이지 이동시켜주는 함수(조회수, 주문수, 주문금액)
 function contentChange(obj) {
-	location.href = window.location.href + obj.name + lastPath;
-	for(i = 0; i < obj.parentNode.children.length; i++) {
- 		obj.parentNode.children[i].className = '';
-	}
-	obj.className = 'selected';
+	location.href = window.location.href + obj.name + lastPath + startdate + enddate;
+// 	for(i = 0; i < obj.parentNode.children.length; i++) {
+//  		obj.parentNode.children[i].className = '';
+// 	}
+// 	obj.className = 'selected';
 }
 
 // 일간, 주간, 월간을 구분시켜주는 함수
@@ -198,20 +232,35 @@ function lastpath(obj) {
 	pageKindAxios(obj.value);
 }
 
+
+// 날짜를 선택했을 때 새로운 리스트 들고오는 함수
 function pageKindAxios(path) {
-	const axiosPath = '/drumtong/business/subManagement/businessStatisticsManagement/' + 'Sales/' + path;
+	
+	console.log(document.getElementById('startDate').value);
+	console.log(document.getElementById('endDate').value);
+	
+	let ob={
+				'pagekind' : (document.querySelector('.flex1 button.selected').name).slice(0,-1),
+				'option' : path.slice(0,-1),
+				'startDate': document.getElementById('startDate').value,
+			    'endDate': document.getElementById('endDate').value,
+	      	};
+	
+// 	const axiosPath = '/drumtong/business/subManagement/businessStatisticsManagement/rest/' + document.querySelector('.flex1 button.selected').name + path + document.getElementById('startDate').value + '/' + document.getElementById('endDate').value + '/';
+	const axiosPath = '/drumtong/business/subManagement/businessStatisticsManagement/rest/';
 	console.log('axiosPath : ', axiosPath);
 	const axPost = async () => {   // async : 비동기 실행 함수
 	    await axios.post(axiosPath)
 	    // 정상
 			.then( (response) => {
 	    const data = response.data;
-	  	statisticsList = data;
-	  	document.getElementById('chart_div') = '';
+	  	statisticsList = data;			// 반환 결과 불러오기
+	  	document.getElementById('chart_div').innerHTML = '';
 	    drawChart1();
 	     })
 	  }
-	return axPost();
+	return axPost(ob);
+// 	return axPost();
 }
 
 </script>
