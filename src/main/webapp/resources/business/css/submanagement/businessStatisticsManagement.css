@@ -1,0 +1,55 @@
+.container {
+	width: 1100px; 
+	height: 1000px; 
+	padding: 25px; 
+	text-align: left;
+	margin: 0 auto;
+}
+
+.flex1 {
+	display: flex;
+}
+
+.flex1 button {
+	font-size: 24pt; 
+	width: 33%; 
+	height: 60px;
+	margin-right: 0.5%;
+}
+
+.flex2 {
+	margin-top: 30px; 
+	display: flex;
+}
+
+.flex3 {
+	display: inline-flex; 
+	width: 450px; 
+	margin-left: 50px; 
+	margin-right: 100px
+}
+
+.flex3 button {
+	font-size: 18pt; 
+	width: 150px; 
+	height: 40px
+}
+.flex3 button.selected, .flex1 button.selected {
+	background-color: #afafaf !important;
+}
+
+.flex4 {
+	display: inline-flex; 
+	width: 500px;
+}
+
+.flex4 input[type="date"] {
+	width: 250px; 
+	height: 40px
+}
+
+.flex4 span {
+	font-size: 18pt; 
+	margin-left: 15px; 
+	margin-right: 15px
+}
