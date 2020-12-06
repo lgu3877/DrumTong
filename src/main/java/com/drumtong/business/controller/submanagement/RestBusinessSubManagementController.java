@@ -1,5 +1,7 @@
 package com.drumtong.business.controller.submanagement;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,8 +93,13 @@ public class RestBusinessSubManagementController {
 //	option -> Day(일), Week(주), Month(월)
 	@RequestMapping("businessStatisticsManagement/rest/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String selectStatistics(HttpServletRequest req, @RequestBody String pageKind, @RequestBody String option, 
-											@RequestBody String startDate, @RequestBody String endDate) {
-		return svc.selectStatistics(req, startDate, endDate, pageKind, option);
+//	public String selectStatistics(HttpServletRequest req, @RequestBody String pageKind, @RequestBody String option, 
+//											@RequestBody String startDate, @RequestBody String endDate) {
+	public String selectStatistics(HttpServletRequest req, @RequestBody HashMap<String, String> param) {
+//		System.out.println("pageKind : " + param.get("pageKind"));
+//		System.out.println("option : " + param.get("option") );
+//		System.out.println("startDate : " + param.get("startDate") );
+//		System.out.println("endDate : " + param.get("endDate") );
+		return svc.selectStatistics(req, param.get("startDate"), param.get("endDate"), param.get("pageKind"), param.get("option"));
 	}
 }
