@@ -194,7 +194,8 @@ document.getElementById('startDate').addEventListener('change', function() {
 		this.value = '';
 		return false;
 	}
-	console.log('path : ', document.querySelector('.flex button.selected').name);
+	// ■ 영경 : 아래 코드에서 에러가 나서 주석 처리함 ■
+// 	console.log('path : ', document.querySelector('.flex button.selected').name);
 	pageKindAxios(document.querySelector('.flex3 button.selected').value);
 })
 
@@ -239,18 +240,18 @@ function pageKindAxios(path) {
 	console.log(document.getElementById('startDate').value);
 	console.log(document.getElementById('endDate').value);
 	
-	let ob={
-				'pagekind' : (document.querySelector('.flex1 button.selected').name).slice(0,-1),
+	let ob={	// ■ 영경 : pagekind의 k를 대문자로 수정 ■
+				'pageKind' : (document.querySelector('.flex1 button.selected').name).slice(0,-1),
 				'option' : path.slice(0,-1),
 				'startDate': document.getElementById('startDate').value,
 			    'endDate': document.getElementById('endDate').value,
 	      	};
-	
+	console.log('ob : ',ob);
 // 	const axiosPath = '/drumtong/business/subManagement/businessStatisticsManagement/rest/' + document.querySelector('.flex1 button.selected').name + path + document.getElementById('startDate').value + '/' + document.getElementById('endDate').value + '/';
 	const axiosPath = '/drumtong/business/subManagement/businessStatisticsManagement/rest/';
 	console.log('axiosPath : ', axiosPath);
-	const axPost = async () => {   // async : 비동기 실행 함수
-	    await axios.post(axiosPath)
+	const axPost = async (ob) => { // ■ 영경 : 여기 ob를 넘겨주지 않았음! ■   // async : 비동기 실행 함수
+	    await axios.post(axiosPath, ob)	// ■ 영경 : 여기 ob를 넘겨주지 않았음! ■
 	    // 정상
 			.then( (response) => {
 	    const data = response.data;
