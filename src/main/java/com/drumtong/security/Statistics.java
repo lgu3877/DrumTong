@@ -87,11 +87,15 @@ public class Statistics {
 		return tmp.getTime();
 	}
 	
+	// 해당 날짜의 마지막 날 반환하기
 	private static Date calcMonth(Date today, int num) {
 		Calendar tmp = Calendar.getInstance();
 		tmp.setTime(today);
-		tmp.add(Calendar.MONTH, num);
-		tmp.add(Calendar.DAY_OF_WEEK, -1);
+		System.out.println(today);
+		System.out.println("마지막 날 : " + tmp.getActualMaximum(tmp.DAY_OF_MONTH));
+		tmp.set(tmp.get(Calendar.YEAR), tmp.get(Calendar.MONTH), tmp.getActualMaximum(tmp.DAY_OF_MONTH));
+//		tmp.add(Calendar.MONTH, num);
+//		tmp.add(Calendar.DAY_OF_WEEK, -1);
 		return tmp.getTime();
 	}
 	
