@@ -184,7 +184,7 @@ window.onload = function() {
 
 
 document.getElementById('startDate').addEventListener('change', function() {
-	console.log('vlaue1 : ', this.value);
+// 	console.log('vlaue1 : ', this.value);
 	const endDate = document.getElementById('endDate').value;
 	if(endDate == '') {
 		return false;
@@ -200,7 +200,7 @@ document.getElementById('startDate').addEventListener('change', function() {
 })
 
 document.getElementById('endDate').addEventListener('change', function() {
-	console.log('vlaue2 : ', this.value);
+// 	console.log('vlaue2 : ', this.value);
 	const startDate = document.getElementById('startDate').value;
 	if(startDate > this.value) {
 		alert('시작 날짜보다 지난 날짜를 선택해 주십시오');
@@ -210,7 +210,7 @@ document.getElementById('endDate').addEventListener('change', function() {
 	if(startDate == '') {
 		return false;
 	}
-	console.log('path : ', document.querySelector('.flex3 button.selected').value);
+// 	console.log('path : ', document.querySelector('.flex3 button.selected').value);
 	pageKindAxios(document.querySelector('.flex3 button.selected').value);
 })
 
@@ -236,7 +236,7 @@ function lastpath(obj) {
 
 // 날짜를 선택했을 때 새로운 리스트 들고오는 함수
 function pageKindAxios(path) {
-	
+	console.log('path : ', path);
 	console.log(document.getElementById('startDate').value);
 	console.log(document.getElementById('endDate').value);
 	
@@ -246,10 +246,41 @@ function pageKindAxios(path) {
 				'startDate': document.getElementById('startDate').value,
 			    'endDate': document.getElementById('endDate').value,
 	      	};
+
+	if(document.getElementById('endDate').value == '' && document.getElementById('startDate').value == '') {
+		let today = new Date();
+		let year = today.getFullYear(); // 년도
+		let month = today.getMonth() + 1;  // 월
+		let date = today.getDate();  // 날짜
+		let day = today.getDay();  // 요일
+// 		console.log('기본 날짜 : ', year + '-' + month + '-' + date);
+// 		console.log(today.setDate(today.getDate()  - 5));
+// 		console.log(today.getDate());
+// 		console.log(today.getDate() - 10);
+		let prevyear, prevmonth, prevdate = null;
+		switch (path) {
+		case 'Week/':
+			today.setDate(today.getDate()  - 35);
+			prevyear = today.getFullYear();
+			prevmonth = today.getMonth() + 1;
+			prevdate = today.getDate();
+			ob.endDate = year + '-' + month + '-' + date;
+			ob.startDate = prevyear + '-' + prevmonth + '-' + prevdate;
+			break;
+		case 'Month/':
+			today.setDate(today.getDate()  - 120);
+			prevyear = today.getFullYear();
+			prevmonth = today.getMonth() + 1;
+			prevdate = today.getDate();
+			ob.endDate = year + '-' + month + '-' + date;
+			ob.startDate = prevyear + '-' + prevmonth + '-' + prevdate;
+			break;
+		}
+	}
+	
 	console.log('ob : ',ob);
-// 	const axiosPath = '/drumtong/business/subManagement/businessStatisticsManagement/rest/' + document.querySelector('.flex1 button.selected').name + path + document.getElementById('startDate').value + '/' + document.getElementById('endDate').value + '/';
 	const axiosPath = '/drumtong/business/subManagement/businessStatisticsManagement/rest/';
-	console.log('axiosPath : ', axiosPath);
+// 	console.log('axiosPath : ', axiosPath);
 	const axPost = async (ob) => { // ■ 영경 : 여기 ob를 넘겨주지 않았음! ■   // async : 비동기 실행 함수
 	    await axios.post(axiosPath, ob)	// ■ 영경 : 여기 ob를 넘겨주지 않았음! ■
 	    // 정상
