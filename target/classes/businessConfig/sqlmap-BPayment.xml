@@ -46,7 +46,7 @@
 	
 <!-- 	=======================================REST======================================= -->
 <!-- 	 Bpayment 테이블 데이터를 전부 불러옵니다. -->
-	<select id="selectList" resultType="int" parameterType="String">
+	<select id="selectList" resultType="BpaymentVO" parameterType="String">
 		SELECT 
 			ACCOUNTBANK, ACCOUNTNUM, COPYOFBANKBOOK, 
 			CARDNUM, CARDBANK, CARDYEAR, CARDMONTH, CARDCVC
