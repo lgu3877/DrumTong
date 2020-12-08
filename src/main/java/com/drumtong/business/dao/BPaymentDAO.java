@@ -19,6 +19,9 @@ public interface BPaymentDAO {
 	//	UUID 중복검사 aws S3에 들어가는 이미지입니다 
 	int confirm(String SerialUUID);
 
+	// Bpayment 테이블 데이터를 전부 불러옵니다.
+	BPaymentVO selectList();
+
 
 
 }

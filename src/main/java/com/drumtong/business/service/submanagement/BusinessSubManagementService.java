@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.drumtong.business.dao.BCouponDAO;
 import com.drumtong.business.dao.BManagementDAO;
+import com.drumtong.business.dao.BPaymentDAO;
 import com.drumtong.business.dao.BReviewDAO;
 import com.drumtong.business.dao.BSalesDAO;
 import com.drumtong.business.vo.BCouponVO;
@@ -26,6 +27,7 @@ public class BusinessSubManagementService {
 	@Autowired BReviewDAO bReviewDAO;
 	@Autowired BCouponDAO bCouponDAO;
 	@Autowired BManagementDAO bManagementDAO;
+	@Autowired BPaymentDAO bPaymentDAO;
 
 	// 비즈니스 리뷰관리 페이지로 이동 (GET) [영경]
 	public ModelAndView reviewManagement(HttpServletRequest req, String pageKind) {
@@ -81,6 +83,10 @@ public class BusinessSubManagementService {
 			return new ModelAndView("redirect:/business/");
 		
 		ModelAndView mav = new ModelAndView("business/submanagement/businessCardAccountManagement");
+		
+		// BPayment 테이블의 정보가 담겨있는 객체입니다.
+		mav.addObject("paymentList", bPaymentDAO.selectList());
+		
 		return mav;
 	}
 
