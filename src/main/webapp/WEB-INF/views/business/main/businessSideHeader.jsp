@@ -13,7 +13,6 @@
 				<div class="side_menu_title">매장관리</div>
 				<div class="side_menu_icon">
 					<i class="fas fa-angle-down"></i>
-					<i class="fas fa-angle-up"></i>
 				</div>
 			</div>
 			<ul class="side_menu_dropdown">

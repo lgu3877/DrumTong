@@ -14,4 +14,20 @@
 			 BETWEEN #{startdate} AND #{enddate}
 	</select>
 	
+	<!-- 메인 프리뷰 (오늘, 일주일, 월) 단위로 조회수를 구한다 -->
+	<select id="getMainPreviewHits" parameterType="String" resultType="Hashmap">
+		SELECT A.a AS DAY, B.b AS WEEK, C.c AS MONTH FROM
+			(SELECT NVL(COUNT(*), 0) AS a FROM BHITS 
+				WHERE VISITDATE = TO_CHAR(SYSDATE, 'YYYY-MM-DD') 
+				AND ESTID=#{estid}) A, 
+			(SELECT NVL(COUNT(*), 0) AS b FROM BHITS 
+				WHERE TO_DATE(VISITDATE, 'YYYY-MM-DD') 
+				BETWEEN SYSDATE - 6 AND SYSDATE 
+				AND ESTID=#{estid}) B,
+			(SELECT NVL(COUNT(*), 0) AS c FROM BHITS 
+				WHERE SUBSTR(VISITDATE,6,2) = TO_CHAR(SYSDATE, 'MM') 
+				AND ESTID=#{estid}) C
+	</select>
+	
+
 </mapper>

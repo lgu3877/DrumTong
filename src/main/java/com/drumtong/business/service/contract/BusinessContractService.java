@@ -197,7 +197,7 @@ public class BusinessContractService {
 		// 2. 광고 결제 수단이 정상적으로 작동이 되면 프리미엄 광고 여부를 업데이트 시켜준다.
 		if(BPaymentResult == 1) {
 			bInformationVO.setEstid(estid);
-			bInformationVO.setPremiumboolean("Y");
+//			bInformationVO.setPremiumboolean("Y");
 			int BInformationResult = bInformationDAO.updatePremiumBoolean(bInformationVO);
 		}
 		

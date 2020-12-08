@@ -3,7 +3,6 @@ package com.drumtong.security;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -41,6 +40,14 @@ public class Statistics {
 		String endDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
+		if(!"Day".equals(option) && option != null && !"n".equals(option)) {
+			if(option.equals("Week"))
+				calendar.add(Calendar.DAY_OF_MONTH , -28);
+			else
+				calendar.add(Calendar.DAY_OF_MONTH , -120);
+			
+			calendar.add(Calendar.DAY_OF_MONTH, 1);
+		}
 		calendar.add(Calendar.DAY_OF_MONTH, -6);
 		String startDate = new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime());
 		return statistics(estid, pageKind, option, startDate, endDate);
@@ -50,8 +57,8 @@ public class Statistics {
 	// option : "Day",  "Week", "Month"
 	public static String statistics(String estid, String pageKind, String option, String startDate, String endDate) {
 		List<StatisticsData> result = new ArrayList<StatisticsData>();
-		pageKind = pageKind == null? "Hits" : pageKind;	// 기본 값은 조회수 페이지
-		option = option == null? "Day" : option;
+		pageKind = (pageKind == null || "n".equals(pageKind))? "Hits" : pageKind;
+		option = (option == null || "n".equals(option))? "Day" : option;
 		result = selectList(estid, result, pageKind, option, simpleformat(startDate), simpleformat(endDate));
 		
 		Gson gson = new Gson();
@@ -73,10 +80,22 @@ public class Statistics {
 	}
 	
 	// 원하는 날 이후 날짜를 출력
-	private static Date nextDay(Date today, int num) {
+	private static Date calcDay(Date today, int num) {
 		Calendar tmp = Calendar.getInstance();
 		tmp.setTime(today);
 		tmp.add(Calendar.DAY_OF_MONTH, num);
+		return tmp.getTime();
+	}
+	
+	// 해당 날짜의 마지막 날 반환하기
+	private static Date calcMonth(Date today, int num) {
+		Calendar tmp = Calendar.getInstance();
+		tmp.setTime(today);
+		System.out.println(today);
+		System.out.println("마지막 날 : " + tmp.getActualMaximum(tmp.DAY_OF_MONTH));
+		tmp.set(tmp.get(Calendar.YEAR), tmp.get(Calendar.MONTH), tmp.getActualMaximum(tmp.DAY_OF_MONTH));
+//		tmp.add(Calendar.MONTH, num);
+//		tmp.add(Calendar.DAY_OF_WEEK, -1);
 		return tmp.getTime();
 	}
 	
@@ -102,18 +121,23 @@ public class Statistics {
 		switch(option) {
 		case "Day":
 			dayArr[0] = dayArr[1] = startDate;
-			dayArr[2] = nextDay(startDate, 1);
-			System.out.println("♣♣♣♣♣ separateDate ♣♣♣♣♣");
-			System.out.println("dayArr : " + Arrays.deepToString(dayArr));
-			System.out.println("♣♣♣♣♣ ♣♣♣♣♣ ♣♣♣♣♣");
+			dayArr[2] = calcDay(startDate, 1);
 			return dayArr;
-		case "Week":
-			// 주 단위로 나오도록 
-			return dayArr;
-		case "Month":
-			// 월 단위로 나오도록
-			return dayArr;
+		case "Week":	// 일요일~토요일
+			Calendar ToGetADay = Calendar.getInstance();
+			ToGetADay.setTime(startDate);	// 시작 날
+			int day = ToGetADay.get(Calendar.DAY_OF_WEEK);	// 일 : 1 ~ 토 : 7
+			return calcPeriod(dayArr, startDate, calcDay(startDate, 7-day), endDate);
+		case "Month":	// 달 단위로(11월,10월)
+			return calcPeriod(dayArr, startDate, calcMonth(startDate, 1), endDate);
 		}
+		return dayArr;
+	}
+	
+	public static Date[] calcPeriod(Date[] dayArr, Date startDate, Date nextDate, Date endDate) {
+		dayArr[0] = startDate;	// 현재 주
+		dayArr[1] = nextDate.compareTo(endDate) > 0 ? endDate : nextDate;
+		dayArr[2] = calcDay(dayArr[1], 1);
 		return dayArr;
 	}
 	
@@ -121,7 +145,6 @@ public class Statistics {
 		int i = 0;
 		Date dayArr[] = null;
 		do {
-			System.out.println(++i + "번째");
 			// 1. 날짜를 옵션에 맞추어 먼저 분리한다.
 			dayArr = separateDate(option, startDate, endDate);
 			StatisticsData statisticsData = new StatisticsData(estid, dayArr[0], dayArr[1]);
@@ -135,7 +158,7 @@ public class Statistics {
 				System.out.println("시스템 오류로 10번째까지만 출력합니다.");
 				break;
 			}
-		}while(!dayArr[0].equals(endDate));
+		}while(startDate.compareTo(endDate) <= 0);
 		return result;
 	}
 }

@@ -45,7 +45,6 @@ public class BusinessSubManagementService {
 		String estid = bInformationVO.getEstid();
 		ModelAndView mav = new ModelAndView("business/submanagement/businessReviewManagement");
 		
-//		Review.reviewForBusiness(mav, estid, pageKind, pageNum);
 		Review.reviewForBusiness(mav, estid, pageKind);
 		
 		
@@ -94,7 +93,7 @@ public class BusinessSubManagementService {
 
 	// pageKind in ('Hits[조회수]', 'Sales[주문 수]', 'Price[주문 금액]')
 	// 비즈니스 통계관리 페이지로 이동 (GET) [영경]
-	public ModelAndView statisticsManagement(HttpServletRequest req, String pageKind, String option) {
+	public ModelAndView statisticsManagement(HttpServletRequest req, String pageKind, String option, String startDate, String endDate) {
 		HttpSession Session = req.getSession();
 		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
 		// Status 계약 여부 필드를 세션을 받아와준다.
@@ -108,8 +107,10 @@ public class BusinessSubManagementService {
 		String estid = bInformationVO.getEstid();
 		
 		ModelAndView mav = new ModelAndView("business/submanagement/businessStatisticsManagement");
-		
-		mav.addObject("statisticsList", Statistics.statistics(estid, pageKind, option));
+		mav.addObject("statisticsList", startDate == null || "n".equals(startDate) || endDate == null || "n".equals(endDate)? 
+								Statistics.statistics(estid, pageKind, option) : 
+								Statistics.statistics(estid, pageKind, option, startDate, endDate));
+		mav.addObject("pageKind", pageKind == null || "n".equals(pageKind) ? "Hits/" : pageKind + "/");
 		return mav;
 	}
 
