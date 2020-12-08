@@ -55,15 +55,15 @@ public class BusinessMembershipService {
 				}
 			}
 			
-			for(int i = 0; i < InformationList.size(); i++) {
-				String naming = InformationList.get(i).getBrandnaming();
-				if(naming.length() > 4) {
-					BInformationVO ChangeData = InformationList.get(i);
-					naming = naming.substring(0, 4) + "..";
-					ChangeData.setBrandnaming(naming);
-					InformationList.set(i, ChangeData);
-				}
-			}
+//			for(int i = 0; i < InformationList.size(); i++) {
+//				String naming = InformationList.get(i).getBrandnaming();
+//				if(naming.length() > 4) {
+//					BInformationVO ChangeData = InformationList.get(i);
+//					naming = naming.substring(0, 4) + "..";
+//					ChangeData.setBrandnaming(naming);
+//					InformationList.set(i, ChangeData);
+//				}
+//			}
 			Session.setAttribute("InformationList", InformationList);
 
 			
