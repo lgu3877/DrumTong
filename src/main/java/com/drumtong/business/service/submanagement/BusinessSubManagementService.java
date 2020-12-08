@@ -74,7 +74,9 @@ public class BusinessSubManagementService {
 
 	// 비즈니스 카드계좌관리 페이지로 이동 (GET) [건욱]
 	public ModelAndView cardAccountManagement(HttpServletRequest req) {		// Status 계약 여부 필드를 세션을 받아와준다.
-
+		
+		HttpSession Session = req.getSession();
+		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
 		// Status 계약 여부 필드를 세션을 받아와준다.
 		String bol = ((BInformationVO)req.getSession().getAttribute("selectEST")).getStatus();
 		// boolean의 결과 값에 따라 'FAIL'이면 business로 우회해주고 'SUCCESS'이면 서브관리 페이지들로 이동시켜준다.
@@ -84,7 +86,7 @@ public class BusinessSubManagementService {
 		ModelAndView mav = new ModelAndView("business/submanagement/businessCardAccountManagement");
 		
 		// BPayment 테이블의 정보가 담겨있는 객체입니다.
-		mav.addObject("paymentList", bPaymentDAO.selectList());
+		mav.addObject("paymentList", bPaymentDAO.selectList(bInformationVO.getEstid()));
 		
 		return mav;
 	}

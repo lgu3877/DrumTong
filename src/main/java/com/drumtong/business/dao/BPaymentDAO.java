@@ -20,7 +20,7 @@ public interface BPaymentDAO {
 	int confirm(String SerialUUID);
 
 	// Bpayment 테이블 데이터를 전부 불러옵니다.
-	BPaymentVO selectList();
+	BPaymentVO selectList(String estid);
 
 
 
