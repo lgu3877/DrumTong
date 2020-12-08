@@ -24,11 +24,11 @@ public class CustomerAccountController {
 	}
 	
 	@RequestMapping(value = "customerJoinChange/", method = RequestMethod.GET)
-	public String jc() {
-		return "customer/account/customerJoinChange";
+	public ModelAndView joinChange(HttpServletRequest req) {
+		return svc.joinChange(req);
 	}
 
-
+	// 북마크[영경]
 	@RequestMapping("customerBookmark/")
 	public ModelAndView bookmark(HttpServletRequest req) {
 		return svc.bookmark(req);

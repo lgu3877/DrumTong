@@ -16,6 +16,7 @@ import com.drumtong.customer.vo.CPrivateDataVO;
 public class CustomerAccountService {
 	@Autowired BInformationDAO bInformationDAO;
 	
+	// 북마크[영경]
 	public ModelAndView bookmark(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView("customer/account/customerBookmark");
 		CPrivateDataVO Login = ((CPrivateDataVO)req.getSession().getAttribute("cLogin"));
@@ -26,6 +27,15 @@ public class CustomerAccountService {
 		
 		List<BInformationVO> bookmarkList = bInformationDAO.selectBookmark(Login.getMemberid());
 		mav.addObject("bookmarkList", bookmarkList);
+		return mav;
+	}
+
+	// 회원정보 수정[영경]
+	public ModelAndView joinChange(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView("customer/account/customerJoinChange");
+		CPrivateDataVO Login = ((CPrivateDataVO)req.getSession().getAttribute("cLogin"));
+		
+		mav.addObject("member", Login);
 		return mav;
 	}
 
