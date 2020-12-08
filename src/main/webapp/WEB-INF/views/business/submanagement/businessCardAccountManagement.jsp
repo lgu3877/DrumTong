@@ -42,7 +42,22 @@
 		<!-- sub-header(membership) -->
 		<%@ include file="../main/businessSubHeader.jsp" %>
 		
-		<div>Business Shop Management Content</div>
+		<div>
+		
+		<h1 style="font-size: 32pt; text-align: left; display: block; margin: 0 auto; width: 800px">계좌관리</h1>
+		<div style="width: 800px; height: 300px; margin: 0 auto; border-radius: 15px; border: 5px double; position: relative;">
+			<label style="font-size: 24pt; display: block; margin-left: 15px; margin-top: 15px; text-align: left;">XX 은행</label>
+			<div>
+				<input type="text" value="1111" readonly="readonly" style="width: 80px; height: 30px;margin-right: 20px; text-align: center; background-color: grey">
+				<input type="text" value="1111" readonly="readonly" style="width: 80px; height: 30px;margin-right: 20px; text-align: center; background-color: grey">
+				<input type="text" value="1111" readonly="readonly" style="width: 80px; height: 30px;margin-right: 20px; text-align: center; background-color: grey">
+				<input type="text" value="1111" readonly="readonly" style="width: 80px; height: 30px;margin-right: 20px; text-align: center; background-color: grey">
+			</div>	
+			<div style="width: 1px; height: 100%; background-color: black; position: absolute; top: 0; right: 200px"></div>
+			
+		</div>
+		
+		</div>
 	</section>
 		
 	<!-- footer -->
@@ -50,11 +65,18 @@
 
 
 <script type="text/javascript">
+	window.onload = function() {
+		console.log(${paymentList});
+		let paymentList = ${paymentList};
+		for(i = 0; i < paymentList.length; i++) {
+			console.log('확인 : ', paymentList[i].cardnum);
+		}
+	}
+
 	function dropdown() {
 		
 	}
 	
-	function 
 </script>
 
 
