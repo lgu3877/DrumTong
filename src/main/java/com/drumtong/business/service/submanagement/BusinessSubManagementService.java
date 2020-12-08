@@ -86,7 +86,7 @@ public class BusinessSubManagementService {
 		ModelAndView mav = new ModelAndView("business/submanagement/businessCardAccountManagement");
 		
 		// BPayment 테이블의 정보가 담겨있는 객체입니다.
-		mav.addObject("paymentList", bPaymentDAO.selectList(bInformationVO.getEstid()));
+		mav.addObject("paymentList", (new Gson()).toJson(bPaymentDAO.selectList(bInformationVO.getEstid())));
 		
 		return mav;
 	}
