@@ -100,8 +100,32 @@ function drawChart() {	// callback 시킬 때의 이름과 똑같은 함수여�
 
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawChart1);
-var statisticsList = ${statisticsList };
 
+
+//전역변수
+var statisticsList =  ${statisticsList };
+var lastPath = 'Day/';
+var startdatepath = statisticsList[0].start + '/';
+var enddatepath = statisticsList[statisticsList.length - 1].end  + '/';
+
+window.onload = function() {
+	document.querySelector('div.flex1 button[name="${pageKind}"]').className = 'selected';
+	statisticsList = ${statisticsList };
+	console.log(statisticsList);
+	
+	document.getElementById('startDate').value = statisticsList[0].start;
+	document.getElementById('endDate').value = statisticsList[statisticsList.length - 1].end;
+}
+
+function getWeekNum(formatday) {
+	let weekday = new Date(formatday);
+    const firstDayOfYear = new Date(weekday.getFullYear(), weekday.getMonth(), 1);
+    const pastDaysOfYear = (new Date(weekday) - firstDayOfYear) / 86400000;	//60 x 60 x 24 x 1000
+	console.log('결과 : ', Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7));
+	return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+}
+
+	
 function drawChart1() {
 // Create the data table.
 const data = new google.visualization.DataTable();
@@ -118,23 +142,44 @@ data.addColumn('number', 'View');
 //   ['Pepperoni', 2]
 // ]);
 
-// let today = new Date();
-// let year = today.getFullYear(); // 년도
-// let month = today.getMonth() + 1;  // 월
-// let date = today.getDate();  // 날짜
-// let day = today.getDay();  // 요일
-
-for(var i = 0; i < statisticsList.length; i++){
- 	if(i == 0) {
- 		data.addRow(['', 0]);
- 	}
-	data.addRow([statisticsList[i].end, statisticsList[i].value]);
+// 		let today = new Date(statisticsList[2].startdate);
+// 		let year = today.getFullYear(); // 년도
+// 		let month = today.getMonth() + 1;  // 월
+// 		let date = today.getDate();  // 날짜
+// 		let day = today.getDay();  // 요일
+var i = 0;
+if (document.querySelector('.flex3 button.selected').value == 'Day/') {
+	for(i = 0; i < statisticsList.length; i++){
+ 		if(i == 0) {
+ 			data.addRow(['', 0]);
+ 		}
+		data.addRow([statisticsList[i].end, statisticsList[i].value]);
+	}
+}
+else if (document.querySelector('.flex3 button.selected').value == 'Week/') {
+	for (i = 0; i < statisticsList.length; i++){
+ 		if(i == 0) {
+ 			data.addRow(['', 0]);
+ 		}
+ 		const splitDate1 = (statisticsList[i].end).split('-');
+//  		console.log('statisticsList[i].enddate : ', statisticsList[i].enddate);
+		data.addRow([splitDate1[1] + '월 ' + getWeekNum(statisticsList[i].enddate) +  '주', statisticsList[i].value ]);
+	}
+}
+else if (document.querySelector('.flex3 button.selected').value == 'Month/') {
+	for(i = 0; i < statisticsList.length; i++){
+ 		if(i == 0) {
+ 			data.addRow(['', 0]);
+ 		}
+ 		const splitDate2 = (statisticsList[i].end).split('-');
+		data.addRow([splitDate2[0] + '년 ' + splitDate2[1] + '월', statisticsList[i].value]);
+	}
 }
 // data.setCell(2,0,'lswn');
 
 var options = {
 		  'legend': 'none',
-		  'title': 'How Much Pizza I Ate Last Night',
+		  'title': (document.querySelector('.flex1 button.selected').name).slice(0,-1) + ' / ' + (document.querySelector('.flex3 button.selected').value).slice(0,-1) + ' Graph',
 		  'is3D':true,
 		  'width': 1100,
 		  'height':800,
@@ -143,22 +188,25 @@ var options = {
 		        easing: 'out'
 		      },
 //		  'curveType': 'function',
-//		  'chartArea': {'width': '90%', 'height': '80%'},
-		  'chartArea': {right: 60, width: '85%'},
+		  'chartArea': {right: 40, width: '85%'},
 		  series: {
 			0: {lineWidth: 3,				// 선 굵기
 				pointShape: 'Circle',		// 포인트 부분 모양
 				pointSize: 18,				// 포인트 부분 굵기
 			},
 		  },
-		  
 		  hAxis: {
 			  title: 'Date',
-			  titleTextStyle: {color: 'red', fontSize: 40},
+			  textPosition: 'out',
+			  titleTextStyle: {color: 'black', fontSize: '40px'},
+// 				direction : -1, // 상하 반전
+			  "slantedText" : true,
+// 			  "slantedTextAngle" : 45,
 		  },
 		  vAxis: {
-			  'title': 'Money',
-			  'titleFontSize': 18,
+			  className:'12345',
+			  title: (document.querySelector('.flex1 button.selected').name).slice(0,-1),
+			  titleFontSize: 18,
 			  viewWindow: {
 	              min:0,
 	            },
@@ -170,22 +218,25 @@ var options = {
 
 const chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
 chart.draw(data, options);
+
+let axies = document.querySelectorAll('svg g g text[text-anchor="middle"]');
+for(k = 0; k < axies.length; k++) {
+	axies[k].style.fontSize = '20pt';
 }
 
-// 전역변수
-var startPath = null;
-var lastPath = 'Day/';
-var startdate = statisticsList[0].start + '/';
-var enddate = statisticsList[statisticsList.length - 1].end  + '/';
-
-window.onload = function() {
-	document.querySelector('div.flex1 button[name="${pageKind}"]').className = 'selected';
+console.log('startdatepath : ' , startdatepath);
+console.log('enddatepath : ' , enddatepath);
+console.log('lastPath : ' , lastPath);
+console.log('path : ', window.location.href + 'Day/' + startdatepath + enddatepath );
 }
+
+
 
 
 document.getElementById('startDate').addEventListener('change', function() {
 // 	console.log('vlaue1 : ', this.value);
 	const endDate = document.getElementById('endDate').value;
+	startdatepath = this.value + '/';
 	if(endDate == '') {
 		return false;
 	}
@@ -196,7 +247,9 @@ document.getElementById('startDate').addEventListener('change', function() {
 	}
 	// ■ 영경 : 아래 코드에서 에러가 나서 주석 처리함 ■
 // 	console.log('path : ', document.querySelector('.flex button.selected').name);
+
 	pageKindAxios(document.querySelector('.flex3 button.selected').value);
+	
 })
 
 document.getElementById('endDate').addEventListener('change', function() {
@@ -210,17 +263,13 @@ document.getElementById('endDate').addEventListener('change', function() {
 	if(startDate == '') {
 		return false;
 	}
-// 	console.log('path : ', document.querySelector('.flex3 button.selected').value);
+	enddatepath = this.value + '/';
 	pageKindAxios(document.querySelector('.flex3 button.selected').value);
 })
 
 // 동기식으로 페이지 이동시켜주는 함수(조회수, 주문수, 주문금액)
 function contentChange(obj) {
-	location.href = window.location.href + obj.name + lastPath + startdate + enddate;
-// 	for(i = 0; i < obj.parentNode.children.length; i++) {
-//  		obj.parentNode.children[i].className = '';
-// 	}
-// 	obj.className = 'selected';
+	location.href = window.location.href + obj.name + 'Day/' + startdatepath + enddatepath;
 }
 
 // 일간, 주간, 월간을 구분시켜주는 함수
@@ -236,9 +285,6 @@ function lastpath(obj) {
 
 // 날짜를 선택했을 때 새로운 리스트 들고오는 함수
 function pageKindAxios(path) {
-	console.log('path : ', path);
-	console.log(document.getElementById('startDate').value);
-	console.log(document.getElementById('endDate').value);
 	
 	let ob={	// ■ 영경 : pagekind의 k를 대문자로 수정 ■
 				'pageKind' : (document.querySelector('.flex1 button.selected').name).slice(0,-1),
@@ -253,12 +299,16 @@ function pageKindAxios(path) {
 		let month = today.getMonth() + 1;  // 월
 		let date = today.getDate();  // 날짜
 		let day = today.getDay();  // 요일
-// 		console.log('기본 날짜 : ', year + '-' + month + '-' + date);
-// 		console.log(today.setDate(today.getDate()  - 5));
-// 		console.log(today.getDate());
-// 		console.log(today.getDate() - 10);
 		let prevyear, prevmonth, prevdate = null;
 		switch (path) {
+		case 'Day/':
+			today.setDate(today.getDate()  - 6);
+			prevyear = today.getFullYear();
+			prevmonth = today.getMonth() + 1;
+			prevdate = today.getDate();
+			ob.endDate = year + '-' + month + '-' + date;
+			ob.startDate = prevyear + '-' + prevmonth + '-' + prevdate;
+			break;
 		case 'Week/':
 			today.setDate(today.getDate()  - 35);
 			prevyear = today.getFullYear();
@@ -280,19 +330,18 @@ function pageKindAxios(path) {
 	
 	console.log('ob : ',ob);
 	const axiosPath = '/drumtong/business/subManagement/businessStatisticsManagement/rest/';
-// 	console.log('axiosPath : ', axiosPath);
 	const axPost = async (ob) => { // ■ 영경 : 여기 ob를 넘겨주지 않았음! ■   // async : 비동기 실행 함수
 	    await axios.post(axiosPath, ob)	// ■ 영경 : 여기 ob를 넘겨주지 않았음! ■
 	    // 정상
 			.then( (response) => {
 	    const data = response.data;
+// 	    console.log('data : ', data);
 	  	statisticsList = data;			// 반환 결과 불러오기
 	  	document.getElementById('chart_div').innerHTML = '';
 	    drawChart1();
 	     })
 	  }
 	return axPost(ob);
-// 	return axPost();
 }
 
 </script>
