@@ -30,4 +30,8 @@
 		SELECT COUNT(*) FROM CPRIVATEDATA WHERE ID=#{id}
 	</select>
 	
+<!-- 	DB 수정 -->
+	<update id="updateChange" parameterType="hashmap">
+		UPDATE CPRIVATEDATA SET ${name}=#{value} WHERE MEMBERID=#{memberid}
+	</update>
 </mapper>
