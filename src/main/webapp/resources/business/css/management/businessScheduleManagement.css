@@ -1,115 +1,77 @@
-.calendar_btn {
-  border: none;
-  outline: none;
-  background-color: transparent;
-  width: 100%;
-  cursor: pointer;
-  font-size: 15pt;
-  height: 100%;
-  border-radius: 5px;
+* {
+	margin: 0;
+	padding: 0;
 }
 
-.calendar_btn:focus {
-  border: none;
-  outline: none;
+
+/* 제목 & 수정 버튼 */
+.content_title_con {
+	display: flex;
+	justify-content: space-between;
+	margin: 5px 0 10px 0;
+    text-align: left;
 }
 
-.calendar_btn:hover {
-  transition: 0.5s;
-  background-color: navy;
-  color: ivory;
-  cursor: pointer;
+.content_title {
+	text-align: left;
+    margin: 5px 0 10px 0;
+    font-size: 19pt;
+    font-weight: 300;
+    color: navy;
+    border-top: 1.7px solid navy;
+   	border-bottom: 2.5px solid navy;
 }
 
-.calendar {
-  width: 500px;
-  height: 1000px;
-  display: block;
+.btn_con {
+	display: flex;	
 }
 
-.calendar_selector_con,
-.calendar_day_con {
-  width: 100%;
-  margin: auto;
+.format_btn, 
+.update_btn {
+	display: flex;
+    cursor: pointer;
+    border: none;
+    width: 140px;
+    outline: none;
+    color: white;
+    justify-content: center;
+	height: 40px;
+    border-radius: 8px;
+    background-color: navy;
 }
 
-.calendar_selector_con {
-  background-color: lavender;
-  display: flex;
-  justify-content: space-between;
+.update_btn {
+	margin-left: 10px;
 }
 
-.calendar_day_con {
-  background-color: lightcoral;
+.icon_con i {
+	font-size: 15pt;
+    line-height: 40px;
 }
 
-.year_selector,
-.month_selector {
-  text-align: center;
-  font-size: 15pt;
-  font-weight: 600;
-  height: 50px;
-  width: 100px;
-  border-radius: 5px;
-  border-color: transparent;
+.btn_title {
+	font-size: 12pt;
+    line-height: 40px;
+    margin-left: 10px;
 }
 
-.year_selector {
-  background-color: chartreuse;
+/* 영업시간 */
+.working_hour_input {
+	
 }
 
-.month_selector {
-  background-color: violet;
+.radio_con {
+	
 }
 
-.day_of_week {
-  display: flex;
-  justify-content: space-between;
+.radioBtn {
+	
 }
 
-.years,
-.months {
-  background-color: white;
-  position: absolute;
-  margin-top: 20px;
-  width: 100px;
-  display: none;
+.checkbox_con {
+	
 }
 
-.dropdown_item:hover,
-.dropdown_item:hover {
-  cursor: pointer;
-  background-color: tomato;
-}
-
-.days {
-  background-color: blue;
-}
-
-.week {
-  display: flex;
-  justify-content: space-between;
-  text-align: center;
-  background-color: lightgreen;
-}
-
-.lastDays {
-  background-color: limegreen;
-  width: 100%;
-  border: 1px solid mediumslateblue;
-  border-radius: 5px;
-}
-
-.currentDays {
-  background-color: moccasin;
-  width: 100%;
-  border: 1px solid mediumslateblue;
-  border-radius: 5px;
-}
-
-.nextDays {
-  background-color: oldlace;
-  width: 100%;
-  border: 1px solid mediumslateblue;
-  border-radius: 5px;
+.checkBtn {
+	
 }
