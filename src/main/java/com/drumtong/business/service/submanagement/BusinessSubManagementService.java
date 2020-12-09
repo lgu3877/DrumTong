@@ -19,6 +19,7 @@ import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BSalesVO;
 import com.drumtong.security.Review;
 import com.drumtong.security.Statistics;
+import com.drumtong.system.dao.SImageDAO;
 import com.google.gson.Gson;
 
 @Service
@@ -28,6 +29,7 @@ public class BusinessSubManagementService {
 	@Autowired BCouponDAO bCouponDAO;
 	@Autowired BManagementDAO bManagementDAO;
 	@Autowired BPaymentDAO bPaymentDAO;
+	@Autowired SImageDAO sImageDAO;
 
 	// 비즈니스 리뷰관리 페이지로 이동 (GET) [영경]
 	public ModelAndView reviewManagement(HttpServletRequest req, String pageKind) {
@@ -87,7 +89,7 @@ public class BusinessSubManagementService {
 		
 		// BPayment 테이블의 정보가 담겨있는 객체입니다.
 		mav.addObject("paymentList", (new Gson()).toJson(bPaymentDAO.selectList(bInformationVO.getEstid())));
-		
+		mav.addObject("imagesrcList", (new Gson()).toJson(sImageDAO.selectSImageSRC("BANK")));
 		return mav;
 	}
 
