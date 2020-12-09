@@ -57,21 +57,42 @@
 
 /* 영업시간 */
 .working_hour_input {
-	
+	display: block;
+}
+
+.select_con {
+	display: block;	
 }
 
 .radio_con {
-	
+	display: flex;
+}
+
+.radio_con input {
+	display: none;		
 }
 
 .radioBtn {
-	
+	width: 100px;
+	height: 50px;
+	border: none;
+	outline: none;
+	cursor: pointer
+}
+
+.radioBtn:hover {
+	transition: .5s;
+	background-color: navy;
+	color: white;
 }
 
 .checkbox_con {
-	
+
+}
+
+.checkbox_con input {
+	display: none;	
 }
 
 .checkBtn {
-	
 }

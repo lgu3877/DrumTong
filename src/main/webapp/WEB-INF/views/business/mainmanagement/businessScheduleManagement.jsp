@@ -73,15 +73,16 @@
 				</div>
 				<!-- input -->
 				<div class="working_hour_input">
-					<div class="radio_con">
+					<div class="select_con">
 						<!-- 주말 운영 옵션 -->
-						<div onchange="filterCheckbox('weekend-also', 'checkBtn')">
-							<button class="radioBtn" onclick="radioSelect('week-only')">주말
-								휴무</button>
+						<div class="radio_con">
+							<button class="radioBtn" onclick="radioSelect('week-only')">
+								주말 휴무
+							</button>
 							<input id="week-only" type="radio" name="workingHour">
-
-							<button class="radioBtn" onclick="radioSelect('weekend-also')">주말
-								운영</button>
+							<button class="radioBtn" onclick="radioSelect('weekend-also')">
+								주말 운영
+							</button>
 							<input id="weekend-also" type="radio" name="workingHour">
 						</div>
 						<!-- 토/일 선택 체크박스 -->
