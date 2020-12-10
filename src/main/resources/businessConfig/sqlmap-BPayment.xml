@@ -20,20 +20,6 @@
 	</insert>
 
 
-
-<!-- 	프리미엄 광고 결제수단 업데이트 / (REST)일 때도 사용 -->
-	<update id="updatePremiumPay" parameterType="BPaymentVO">
-		UPDATE BPAYMENT
-			SET
-				CARDNUM = #{cardnum},
-				CARDBANK = #{cardbank},
-				CARDYEAR = #{cardyear},
-				CARDMONTH = #{cardmonth},
-				CARDCVC = #{cardcvc}				
-			WHERE
-				ESTID = #{estid}
-	</update>
-	
 	
 <!-- 	통장사본을 업데이트 시켜줍니다. S3에 사용 -->
 	<update id="updateCopyOfBankBook" parameterType="BPaymentVO">
@@ -54,6 +40,30 @@
 			WHERE 
 				ESTID = #{estid}
 	</select>
+
+<!-- 	프리미엄 광고 결제수단 업데이트 / (REST)일 때도 사용 -->
+	<update id="updatePremiumPay" parameterType="BPaymentVO">
+		UPDATE BPAYMENT
+			SET
+				CARDNUM = #{cardnum},
+				CARDBANK = #{cardbank},
+				CARDYEAR = #{cardyear},
+				CARDMONTH = #{cardmonth},
+				CARDCVC = #{cardcvc}				
+			WHERE
+				ESTID = #{estid}
+	</update>
+
+<!-- 	계좌 결제수단 업데이트 / (REST)-->
+	<update id="updateAccount" parameterType="BPaymentVO">
+		UPDATE BPAYMENT
+			SET
+				ACCOUNTBANK = #{accountbank},
+				ACCOUNTNUM = #{accountnum} 				
+			WHERE
+				ESTID = #{estid}
+	</update>
+	
 
 	
 </mapper>

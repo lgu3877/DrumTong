@@ -35,9 +35,9 @@ public class RestBusinessSubManagementController {
 	// 1. 카드를 비동기식으로 수정해주는 메서드입니다.
 	@RequestMapping("BPayment/rest/updateCard/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String updateCard(@RequestBody BPaymentVO bPaymentVO) {
+	public String updateCard(HttpServletRequest req, @RequestBody BPaymentVO bPaymentVO) {
 		
-		int result = svc.updateCard(bPaymentVO);
+		int result = svc.updateCard(bPaymentVO, req);
 		System.out.println(result + " : result 값 입니다");
 		return result == 1
 				? "true"
@@ -50,9 +50,9 @@ public class RestBusinessSubManagementController {
 	// 2. 계좌를 비동기식으로 수정해주는 메서드입니다. 계좌관리에 통장사본 수정할 수 있는 란을 추가적으로 생성해줘야합니다.
 	@RequestMapping("BPayment/rest/updateAccount/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String updateAccount(@RequestBody BPaymentVO bPaymentVO) {
+	public String updateAccount(HttpServletRequest req, @RequestBody BPaymentVO bPaymentVO) {
 		
-		int result = svc.updateAccount(bPaymentVO);
+		int result = svc.updateAccount(bPaymentVO, req);
 		System.out.println(result + " : result 값 입니다");
 		return result == 1
 				? "true"
