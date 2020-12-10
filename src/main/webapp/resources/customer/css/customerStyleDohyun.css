@@ -1086,21 +1086,23 @@ body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLi
 }
 
 body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_name {
-	width: 100px;
+	width: 140px;
 	height: auto;
-	border-right: 1px solid #EAEAEA;
+/* 	border-right: 1px solid #EAEAEA; */
+	text-align: center;
 	padding: 8px 10px;
-	display: inline-flex;
+/* 	display: inline-flex; */
 	margin: 5px 15px;
+	overflow: hidden;
 }
 
-body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_num {
-	width: 600px;
-	height: 30px;
-	display: block;
-	text-align: center;
-	margin: 10px 15px;
-}
+/* body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_num { */
+/* 	width: 600px; */
+/* 	height: 30px; */
+/* 	display: block; */
+/* 	text-align: center; */
+/* 	margin: 10px 15px; */
+/* } */
 
 .pac_payCard_save {
 	width: 90px;
