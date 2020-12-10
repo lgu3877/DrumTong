@@ -1,0 +1,94 @@
+
+h1.subtitle {
+	font-size: 32pt; 
+	text-align: left; 
+	display: block; 
+	margin: 0 auto; 
+	width: 800px; 
+	padding-bottom: 35px;
+	margin-top: 60px !important;
+}
+
+.container {
+	width: 700px; 
+	height: 200px; 
+	margin: 0 auto; 
+	border-radius: 15px; 
+	border: 5px double; 
+	position: relative; 
+	display: flex;
+}
+
+#carddiv, #accountdiv {
+	width: 75%; 
+	height: 100%
+}
+
+#cardimg, #accountimg {
+	display: block; 
+	margin-left: 45px; 
+	height: 75px; 
+	margin-bottom: 5px
+}
+
+div.flex1, div.flex3 {
+	width: 90%; 
+	height: 30%; 
+	display: flex; 
+	align-items: center; 
+	margin: 0 auto;
+}
+
+div.flex2 {
+	width: 25%; 
+	height: 100%; 
+	display: flex; 
+	align-items: center;
+}
+
+#carddiv1 input {
+	width: 80px; 
+	height: 30px;
+	margin-left: 20px; 
+	text-align: center; 
+	background-color: grey
+}
+
+#carddiv2 input {
+	width: 15%; 
+	height: 30px;
+	margin-left: 20px;
+	text-align: center; 
+	background-color: grey
+}
+
+#carddiv2 h1 {
+	 
+	height: 30px; 
+}
+
+.flex2 button {
+	width: 80%; 
+	height: 50%; 
+	font-size: 20pt; 
+	text-align: center; 
+	margin-left: 10%;
+}
+
+.flex3 input {
+	width: 80%;
+	height: 60px;
+	margin: 0 auto;
+	background-color: grey;
+	padding-left: 20px;
+	font-size: 14pt;
+}
+
+.interiorLine {
+	width: 1px; 
+	height: 100%; 
+	background-color: black; 
+	position: absolute; 
+	top: 0; 
+	right: 25%;
+}
