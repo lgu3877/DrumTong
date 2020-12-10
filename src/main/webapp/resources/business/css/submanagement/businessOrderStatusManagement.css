@@ -1,0 +1,79 @@
+.outerdiv {
+	width: 1000px; 
+	text-align: left;
+	margin: 0 auto;
+}
+
+.container {
+	width: 800px; 
+	height: 300px; 
+	margin: 0 auto; 
+	background-color: #e5e6eb; 
+	border-radius: 20px;
+	border: 6px outset #afafaf;
+}
+
+.container:hover {
+	background-color: white;
+	transform: translate(0, -20px);
+	transition: all 3s ease 0s;
+	box-shadow: 15px 30px 60px #afafaf;
+	border: 15px outset #afafaf;	
+}
+
+h1.containerName {
+	font-size: 26pt; 
+	width: 80%; 
+	height:50px; 
+	margin: 0;
+	margin-bottom: 15px !important;
+	margin-top: 15px !important;
+	margin-left: 60px !important;
+}
+
+.container .contentdiv {
+	width: 100%; 
+	height: 200px; 
+	display: flex;
+	padding-top: 15px;
+	border-top: 4px double #afafaf;
+}
+
+.container .contentdiv .halfdiv {
+	width: 50%; 
+	height: 100%; 
+	background-color: transparent;
+		position: relative;
+}
+
+.halfdiv div {
+	width: 80%; 
+	height: 50%;
+}
+
+.halfdiv div h1 {
+	width: 100%; 
+	height: 50%;
+	font-size: 20pt;
+	margin: 0;
+	margin-left: 60px !important;
+	text-align: left;
+}
+
+.halfdiv div p {
+	width: 100%; 
+	height: 50%;
+	font-size: 14pt;
+	margin: 0;
+	margin-left: 80px !important;
+	text-align: left;
+}
+
+.halfdiv div.middleBorder {
+	position: absolute;
+	left: 0;
+	top: -15px;
+	width: 0px !important;
+	height: 212px !important;
+	border: 2px double #afafaf;
+}
