@@ -53,21 +53,21 @@
             <div class="join_fo1">
                 <div class="join_fo1_1" id="join_fo1_1"></div>
                 <form method="POST" class="join_fo1_2" enctype="multipart/form-data">
-                    <input class="join_fo1_2_file" type="file" name="user">
-                    <input class="join_fo1_2_sub" type="button" id="submit" name="submit" value="추가">
+                    <input class="join_fo1_2_file" type="file" name="user" >
+                    <input class="join_fo1_2_sub" type="button" id="submit" name="submit" value="추가" >
                 </form>
             </div>
 
             <form>
                 <p class="join_name">아이디</p>
-                <input class="join_inputbox" type="text" name="id" placeholder="ID" readonly value="${member.id }">
+                <input class="join_inputbox" type="text" name="id" placeholder="ID" readonly value="${member.id }" >
             </form>
             <hr>
 
             <form id="updatePW" onsubmit="return newPwInputCreate();">
-                <p class="join_name">비밀번호</p>
-                <input id="originalPw" class="join_inputbox" type="password" name="pw" placeholder="현재 비밀번호를 입력하세요" required>
-                <button class="join_button">수정</button>
+                <p class="join_name">비밀번호 <span id="passwordSpan" style="color:grey"> 현재 비밀번호를 입력하세요 </span></p>
+                <input id="originalPw" class="join_inputbox" type="password" name="pw" placeholder="현재 비밀번호를 입력하세요" required >
+                <button id="password_ok" class="join_button">수정</button>
             </form>
             <hr>
 
@@ -89,34 +89,34 @@
 
             <form>
                 <p class="join_name">생년월일</p>
-                <input onchange="changeData('birth','birth')" class="join_inputbox" type="date" name="birthday" id="birth" placeholder="생년월일" value="${member.birth }">
+                <input onchange="changeData('birth','birth')" class="join_inputbox" type="date" name="birthday" id="birth" placeholder="생년월일" value="${member.birth }" >
             </form>
             <hr>
 
             <form onsubmit="return false;">
-                <p class="join_name">전화번호</p>
-                <input class="join_inputbox join_pnum" type="text" id="phonenum" placeholder="전화번호" value="${member.phonenum }">
-                <input class="join_button join_pum_ok" type="button" id="phonemun_ok" value="인증하기" 
-                	onclick="changeData('phonenum','phonenum')"/>
+                <p class="join_name">전화번호 <span id="phonenumSpan" style="color:grey;"> EX) 000-0000-0000</span></p>
+                <input onkeyup="checkInput('phonenum', 'phonenum')" class="join_inputbox join_pnum" type="text" id="phonenum" placeholder="전화번호" value="${member.phonenum }" >
+                <input class="join_button join_pum_ok" type="button" id="phonenum_ok" value="인증하기" 
+                	onclick="changeData('phonenum','phonenum')">
             </form>
             <hr>
 
 
             <form onsubmit="return false;">
-                <p class="join_name">이메일</p>
-                <input class="join_inputbox" type="email" name="email" id="email" placeholder="E-mail" value="${member.email }">
+                <p class="join_name">이메일  <span id="emailSpan" style="color:grey;"> EX) abc123@naver.com</span></p>
+                <input onkeyup="checkInput('email', 'email')" class="join_inputbox" type="email" name="email" id="email" placeholder="E-mail" value="${member.email }" >
                 <input class="join_button join_pum_ok" type="button" id="email_ok" value="인증하기"
-                	onclick="changeData('email','email')"/>
+                	onclick="changeData('email','email')">
             </form>
             <hr>
 
             <form onsubmit="return false;">
                 <p class="join_name">주소</p>
-                <input class="join_inputbox join_joso" type="text" id="mainAddress" name="email" placeholder="우편번호" readonly value="${member.mainaddress }">
-                <input class="join_button join_joso_ok" type="submit" name="joso_select" value="주소찾기" onclick="searchAddress()"></input>
-                <input class="join_inputbox" type="text" id="subAddress" name="joso_realjoso" placeholder="상세주소" value="${member.detailaddress }">
+                <input class="join_inputbox join_joso" type="text" id="mainAddress" name="email" placeholder="우편번호" readonly value="${member.mainaddress }" >
+                <input class="join_button join_joso_ok" type="submit" name="joso_select" value="주소찾기" onclick="searchAddress()" >
+                <input class="join_inputbox" type="text" id="subAddress" name="joso_realjoso" placeholder="상세주소" value="${member.detailaddress }" >
                 <input class="join_button join_pum_ok" type="button" id="address_ok" value="저장하기" 
-                	onclick="changeDataAddress()"/>
+                	onclick="changeDataAddress()">
             </form>
             <hr>
 
@@ -198,13 +198,16 @@
 			
 			var newPwInput = document.createElement('input');
 			newPwInput.setAttribute("class", "join_inputbox");
+			newPwInput.setAttribute("id", "passwordInput");
 			newPwInput.setAttribute("type", "password");
 			newPwInput.setAttribute("name", "pw");
 			newPwInput.setAttribute("placeholder", "새 비밀번호 입력");
 			newPwInput.setAttribute("required", "required");
+			newPwInput.setAttribute("onkeyup", "checkInput('password', 'passwordInput')");
 			
 			var newPwConfirmInput = document.createElement('input');
 			newPwConfirmInput.setAttribute("class", "join_inputbox");
+			newPwConfirmInput.setAttribute("id", "passwordInputConfirm");
 			newPwConfirmInput.setAttribute("type", "password");
 			newPwConfirmInput.setAttribute("name", "pwConfirm");
 			newPwConfirmInput.setAttribute("placeholder", "새 비밀번호 재입력");
@@ -213,7 +216,9 @@
 			pwForm.appendChild(newPwInput);
 			pwForm.appendChild(newPwConfirmInput);
 			
-			// 여기서부터 작업하기
+			console.log(document.getElementById('passwordSpan'));
+			document.getElementById('passwordSpan').innerHTML='비밀번호는 영문자 ,숫자 특수문자의 조합 7~15자리로';
+			
 			pwForm.onsubmit = function onsubmit(event) {return changePW(newPwInput, newPwConfirmInput);};
 		}
 		
@@ -263,6 +268,10 @@
 			
 			pwForm.appendChild(newPwInput);
 			pwForm.onsubmit = function onsubmit(event) {return newPwInputCreate();};
+			
+			
+			document.getElementById('passwordSpan').innerHTML=' 현재 비밀번호를 입력하세요 ';
+			document.getElementById('passwordSpan').style.color='grey';
 		}
 		
 		function changeData(typeName, InputBoxId){
@@ -293,6 +302,38 @@
 		function changeDataAddress(){
 			changeData('mainaddress', 'mainAddress');
 			changeData('detailaddress', 'subAddress');
+		}
+		
+		function checkInput(type, InputId){
+			var checkInputBox = document.getElementById(InputId);
+			var inputButton = document.getElementById(type + "_ok");
+			var boxRedSpan = document.getElementById(type + 'Span');
+			console.log(inputButton);
+			var regExp;
+			switch(type){
+				case "email":
+					regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+					break;
+				case "phonenum":
+					regExp = /^\d{3}-\d{3,4}-\d{4}$/;
+					break;
+				case "password":
+					regExp = /^.*(?=^.{7,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+					break;
+			};
+			
+			var value;
+			
+			if(regExp.test(checkInputBox.value) == false){
+				checkInputBox.style.border='2px solid red';
+				boxRedSpan.style.color='red';
+				value='none';
+			} else{
+				checkInputBox.style.border='';
+				boxRedSpan.style.color='grey';
+				value='';
+			}
+			inputButton.style.display=value;
 		}
 	</script>
 	
