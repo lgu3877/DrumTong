@@ -57,13 +57,13 @@
 					</div>
 					<!-- buttons -->
 					<div class="btn_con">
-						<div id="modify-working-hour" class="format_btn">
+						<div id="modify-working-hour" class="btn format_btn">
 							<div class="icon_con">
 								<i class="fas fa-plus-square"></i>
 							</div>
 							<div class="btn_title">시간 수정</div>
 						</div>
-						<div id="complete-working-hour" class="update_btn">
+						<div id="complete-working-hour" class="btn update_btn">
 							<div class="icon_con">
 								<i class="fas fa-check-square"></i>
 							</div>
@@ -73,29 +73,73 @@
 				</div>
 				<!-- input -->
 				<div class="working_hour_input">
+				
+					<!-- 체크 옵션 -->
 					<div class="select_con">
 						<!-- 주말 운영 옵션 -->
 						<div class="radio_con">
-							<button class="radioBtn" onclick="radioSelect('week-only')">
+							<button id="week-only-btn" class="btn radioBtn" onclick="radioSelect('week-only')">
 								주말 휴무
 							</button>
 							<input id="week-only" type="radio" name="workingHour">
-							<button class="radioBtn" onclick="radioSelect('weekend-also')">
+							<button id="weekend-also-btn" class="btn radioBtn" onclick="radioSelect('weekend-also')">
 								주말 운영
 							</button>
 							<input id="weekend-also" type="radio" name="workingHour">
 						</div>
 						<!-- 토/일 선택 체크박스 -->
 						<div class="checkbox_con">
-							<label>
-								<input id="weekday-only" type="checkbox" name="" value="">
-								<button class="checkBtn" onclick="checkOption('weekday-only')" disabled>토요일 운영</button>
-							</label>
-							<label>
-								<input id="whole-week" type="checkbox" name="" value="">
-								<button class="checkBtn" onclick="checkOption('whole-week')" disabled>일요일 운영</button>
-							</label>
+							<input id="weekday-only" type="checkbox" name="" value="">
+							<button id="weekday-only-btn" class="checkBtn" onclick="checkOption('weekday-only')" disabled>토요일 운영</button>
+							<input id="whole-week" type="checkbox" name="" value="">
+							<button id="whole-week-btn" class="checkBtn" onclick="checkOption('whole-week')" disabled>일요일 운영</button>
+						
 						</div>
+					</div>	
+					
+					<!-- 시간 입력 -->
+					<div class="input_time_form">
+						<ul class="input_title_con">
+							<li class="day_range">월 ~ 금</li>
+							<li class="day_range">토</li>
+							<li class="day_range">일</li>
+						</ul>
+						<ul class="input_time_con">
+							<li class="time_range">
+							<!-- from -->
+								<div class="time_zone_con">
+									<input class="time_zone_input" type="radio" name="timeZone" value="daytime">
+									<button class="btn time_zone_btn border_r">오전</button>
+									<input class="time_zone_input" type="radio" name="timeZone" value="nighttime">
+									<button class="btn time_zone_btn border_l">오후</button>
+								</div>
+								<input type="number" name="hour" max="12" placeholder="시">
+								<input type="number" name="minute" max="59" placeholder="분">
+								<div class="time_range_text">
+									<span>부터</span>
+								</div>
+							<!-- to -->
+								<div class="time_zone_con">
+									<input class="time_zone_input" type="radio" name="timeZone" value="daytime">
+									<button class="btn time_zone_btn border_r">오전</button>
+									<input class="time_zone_input" type="radio" name="timeZone" value="nighttime">
+									<button class="btn time_zone_btn border_l">오후</button>
+								</div>
+								<input type="number" name="hour" max="12" placeholder="시">
+								<input type="number" name="minute" max="59" placeholder="분">
+								<div class="time_range_text">
+									<span>까지</span>
+								</div>
+								<div class="all_day_con">
+									<button class="btn">
+										<i class="far fa-clock"></i>
+										<span>24시간</span>
+									</button>
+								</div>
+							</li>
+							<li class="time_range"></li>
+							<li class="time_range"></li>							
+						</ul>
 					</div>
 				</div>
 				
@@ -113,13 +157,13 @@
 					</div>
 					<!-- button -->
 					<div class="btn_con">
-						<div id="modify-holiday" class="format_btn">
+						<div id="modify-holiday" class="btn format_btn">
 							<div class="icon_con">
 								<i class="fas fa-plus-square"></i>
 							</div>
 							<div class="btn_title">일자 변경</div>
 						</div>
-						<div id="complete-holiday" class="update_btn">
+						<div id="complete-holiday" class="btn update_btn">
 							<div class="icon_con">
 								<i class="fas fa-check-square"></i>
 							</div>
