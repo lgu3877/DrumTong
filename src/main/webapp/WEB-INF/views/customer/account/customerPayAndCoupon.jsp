@@ -41,9 +41,11 @@
                 <div class="pac_coponList">
                     <p class="pac_coponText">쿠폰 목록</p>
                     <div class="pac_coponLists">
-                        <div class="pac_copon_name">쿠폰번호</div>
-                        <div class="pac_copon_num">쿠폰네임</div>
-
+                        <div class="pac_copon_name">가게이름</div>
+                        <div class="pac_copon_name">할인가격</div>
+                        <div class="pac_copon_name">사용기간</div>
+                        <div class="pac_copon_name">최소금액</div>
+                        <div class="pac_copon_name">사용여부</div>
                     </div>
                 </div>
             </div>
