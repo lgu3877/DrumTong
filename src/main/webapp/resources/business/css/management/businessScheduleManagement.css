@@ -1,115 +1,244 @@
-.calendar_btn {
-  border: none;
-  outline: none;
-  background-color: transparent;
-  width: 100%;
-  cursor: pointer;
-  font-size: 15pt;
-  height: 100%;
-  border-radius: 5px;
+* {
+	margin: 0;
+	padding: 0;
 }
 
-.calendar_btn:focus {
-  border: none;
-  outline: none;
+/* 버튼 default */
+.btn {
+	cursor: pointer;
+	border: none;
+	outline: none;
+	color: white;
+	background-color: #f38181;
 }
 
-.calendar_btn:hover {
-  transition: 0.5s;
-  background-color: navy;
-  color: ivory;
-  cursor: pointer;
+.btn:hover {
+	background-color: navy;
+	transition: .5s;
+	color: white;
 }
 
-.calendar {
-  width: 500px;
-  height: 1000px;
-  display: block;
+.btn:focus {
+	outline: none;
 }
 
-.calendar_selector_con,
-.calendar_day_con {
-  width: 100%;
-  margin: auto;
+.border_r {
+	border-radius: 1px;
+	box-shadow: 0px 0px 0px 0.5px rgba(0, 0, 0, 0.3);
 }
 
-.calendar_selector_con {
-  background-color: lavender;
-  display: flex;
-  justify-content: space-between;
+.border_l {
+	border-radius: 1px;
+	box-shadow: 0px 0px 0px 0.5px rgba(0, 0, 0, 0.3);
 }
 
-.calendar_day_con {
-  background-color: lightcoral;
+/* 그림자(hover) */
+.shadow {
+	/* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); */
+	transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
 }
 
-.year_selector,
-.month_selector {
-  text-align: center;
-  font-size: 15pt;
-  font-weight: 600;
-  height: 50px;
-  width: 100px;
-  border-radius: 5px;
-  border-color: transparent;
+.shadow:hover {
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px
+		rgba(0, 0, 0, 0.22);
 }
 
-.year_selector {
-  background-color: chartreuse;
+/* 제목 & 수정 버튼 */
+.content_title_con {
+	display: flex;
+	justify-content: space-between;
+	margin: 5px 0 10px 0;
+	text-align: left;
 }
 
-.month_selector {
-  background-color: violet;
+.content_title {
+	text-align: left;
+	margin: 5px 0 10px 0;
+	font-size: 19pt;
+	font-weight: 300;
+	color: navy;
+	border-top: 1.7px solid navy;
+	border-bottom: 2.5px solid navy;
 }
 
-.day_of_week {
-  display: flex;
-  justify-content: space-between;
+.btn_con {
+	display: flex;
 }
 
-.years,
-.months {
-  background-color: white;
-  position: absolute;
-  margin-top: 20px;
-  width: 100px;
-  display: none;
+.format_btn, .update_btn {
+	display: flex;
+	width: 140px;
+	justify-content: center;
+	height: 40px;
+	border-radius: 8px;
 }
 
-.dropdown_item:hover,
-.dropdown_item:hover {
-  cursor: pointer;
-  background-color: tomato;
+.format_btn {
+	background-color: #6495EF;
 }
 
-.days {
-  background-color: blue;
+.update_btn {
+	background-color: #3b5998;
 }
 
-.week {
-  display: flex;
-  justify-content: space-between;
-  text-align: center;
-  background-color: lightgreen;
+.format_btn:hover, .update_btn:hover {
+	background-color: navy;
 }
 
-.lastDays {
-  background-color: limegreen;
-  width: 100%;
-  border: 1px solid mediumslateblue;
-  border-radius: 5px;
+.update_btn {
+	margin-left: 10px;
 }
 
-.currentDays {
-  background-color: moccasin;
-  width: 100%;
-  border: 1px solid mediumslateblue;
-  border-radius: 5px;
+.icon_con i {
+	font-size: 15pt;
+	line-height: 40px;
 }
 
-.nextDays {
-  background-color: oldlace;
-  width: 100%;
-  border: 1px solid mediumslateblue;
-  border-radius: 5px;
+.btn_title {
+	font-size: 12pt;
+	line-height: 40px;
+	margin-left: 10px;
+}
+
+/* 영업 요일 */
+.working_hour_input {
+	display: block;
+}
+
+.select_con {
+	display: flex;
+}
+
+.radio_con {
+	display: flex;
+}
+
+.radio_con input {
+	display: none;
+}
+
+.radioBtn {
+	width: 100px;
+	height: 50px;
+	margin-right: 20px;
+}
+
+.radioBtn:hover {
+	background-color: navy;
+	transition: .5s;
+	color: white;
+}
+
+.checkbox_con {
+	display: flex;
+	margin: auto 0;
+}
+
+.checkbox_con input {
+	display: none;
+}
+
+.checkBtn {
+	width: 100px;
+	height: 30px;
+	font-size: 12pt;
+	border: none;
+	border-radius: 5px;
+	outline: none;
+	cursor: pointer;
+	margin-right: 20px;
+	background-color: #f38181;
+	color: white;
+}
+
+.checkBtn:hover {
+	background-color: navy;
+	transition: .5s;
+}
+
+.checkBtn:disabled {
+	cursor: auto;
+	background-color: inherit;
+	transition: 0.7s;
+	pointer-events: none;
+}
+
+.checkBtn:active {
+	transition: 0.7s;
+}
+
+/* 영업 시간 */
+.input_time_form {
+	display: flex;
+	margin-top: 30px;
+}
+
+.input_time_con, .input_title_con {
+	display: block;
+	list-style: none;
+}
+
+.day_range, .time_range {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	display: flex;
+	height: 40px;
+}
+
+.time_range input[type="number"] {
+	width: 70px;
+	height: 36px;
+	text-indent: 10px;
+	margin: auto 5px;
+	font-size: 14pt;
+}
+
+.time_range input[type="number"]::-webkit-outer-spin-button, .time_range input[type="number"]::-webkit-inner-spin-button
+	{
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.time_range input[type="number"]:focus {
+	outline: none;
+}
+
+.time_zone_con {
+	display: flex;
+}
+
+.time_zone_input {
+	display: none;
+}
+
+.time_zone_btn {
+	width: 50px;
+	background-color: #95e1d3;
+}
+
+.time_range_text {
+	text-align: center;
+	margin: auto 5px;
+}
+
+.input_title_con {
+	width: 15%;
+	margin-right: 20px;
+	border: 1px solid black;
+	text-align: center;
+}
+
+.input_time_con {
+	width: 60%;
+	border: 1px solid black;
+}
+
+.all_day_con {
+	width: 100px;
+}
+
+.all_day_con button {
+	width: 100px;
+	height: 100%;
+	background-color: #95e1d3;
 }
