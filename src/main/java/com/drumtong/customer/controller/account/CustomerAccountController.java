@@ -17,12 +17,14 @@ public class CustomerAccountController {
 
 	@Autowired CustomerAccountService svc;
 	
-
+	// 결제수단 및 쿠폰[영경]
 	@RequestMapping(value = "customerPayAndCoupon/", method = RequestMethod.GET)
-	public String pac() {
-		return "customer/account/customerPayAndCoupon";
+	public ModelAndView payAndCoupon(HttpServletRequest req) {
+		return svc.payAndCoupon(req);
 	}
 	
+	
+	// 회원정보 수정[영경]
 	@RequestMapping(value = "customerJoinChange/", method = RequestMethod.GET)
 	public ModelAndView joinChange(HttpServletRequest req) {
 		return svc.joinChange(req);

@@ -40,4 +40,9 @@
 		UPDATE BCOUPON SET DELETEBOOLEAN='Y' WHERE COUPONID = #{couponid}
 	</update>
 	
+	<select id="selectCouponList" parameterType="String" resultType="CouponList">
+		SELECT i.BRANDNAMING, c.DISCOUNT, c.PERIOD, 
+		c.MINIMUMPRICE, c.DUPLBOOLEAN 
+		FROM BCOUPON c INNER JOIN BINFORMATION i ON c.ESTID=i.ESTID
+	</select>
 </mapper>

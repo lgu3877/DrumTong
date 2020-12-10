@@ -1,5 +1,6 @@
 package com.drumtong.customer.service.account;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,13 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.drumtong.business.dao.BCouponDAO;
 import com.drumtong.business.dao.BInformationDAO;
+import com.drumtong.business.vo.BCouponVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.customer.vo.CPrivateDataVO;
+import com.drumtong.customer.vo.CouponList;
 
 @Service
 public class CustomerAccountService {
 	@Autowired BInformationDAO bInformationDAO;
+	@Autowired BCouponDAO bCouponDAO;
 	
 	// 북마크[영경]
 	public ModelAndView bookmark(HttpServletRequest req) {
@@ -23,7 +28,6 @@ public class CustomerAccountService {
 		// cbookmark 에서 memberid를 검색해 estid 리스트 출력
 		
 		// estid 와 일치하는 사업자 테이블 리스트 출력
-		
 		
 		List<BInformationVO> bookmarkList = bInformationDAO.selectBookmark(Login.getMemberid());
 		mav.addObject("bookmarkList", bookmarkList);
@@ -37,6 +41,19 @@ public class CustomerAccountService {
 		
 		mav.addObject("member", Login);
 		return mav;
+	}
+
+	public ModelAndView payAndCoupon(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView("customer/account/customerPayAndCoupon");
+		CPrivateDataVO Login = ((CPrivateDataVO)req.getSession().getAttribute("cLogin"));
+		HashMap<String, String> param = new HashMap<String, String>();
+		
+		// 더 수정해야함!!, 그리고 고객쪽 jsp에도 작성해야 함 -------------
+		List<CouponList> couponlist = bCouponDAO.selectCouponList(Login.getMemberid());
+		
+		mav.addObject("couponlist", couponlist);
+		// -------------------------------------------------
+		return null;
 	}
 
 }
