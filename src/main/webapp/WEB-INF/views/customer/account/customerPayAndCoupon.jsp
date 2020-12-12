@@ -27,6 +27,7 @@
                     </p>
                     <div class="pac_payLists">
                         <div class="pac_payCard_name">카드번호</div>
+                        <input class="pac_payCard_kind" type="text" value="부산은행" readonly></input>
                         <input class="pac_payCard_num1" type="text" value="123456" readonly></input>
                         -
                         <input class="pac_payCard_num2" type="text" value="123456" readonly></input>
