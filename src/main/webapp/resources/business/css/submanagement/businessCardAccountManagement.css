@@ -19,6 +19,34 @@ h1.subtitle {
 	display: flex;
 }
 
+#cardbank, #accountbank {
+	margin-left: 45px; 
+	text-align: left; 
+	font-size: 20pt;
+	margin-top: 15px !important;
+	margin-bottom: 15px;
+}
+
+#cardbanksel, #accountbanksel {
+	margin-left: 45px; 
+	margin-top: 15px !important;
+	margin-bottom: 15px;
+	float: left;
+	width: 200px;
+	height: 45px;
+	border: 1px solid #999;
+	font-family: inherit;
+	background: url('arrow.jpg') no-repeat 95% 50%;
+	border-radius: 0px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+#accountbank, #accountbanksel {
+	margin-bottom: 45px !important;
+	}
+
 #carddiv, #accountdiv {
 	width: 75%; 
 	height: 100%
