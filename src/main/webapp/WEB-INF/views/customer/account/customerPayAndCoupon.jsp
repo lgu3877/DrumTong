@@ -26,8 +26,18 @@
                         <button class="pac_payCard_add" onclick="cardup()">카드추가</button>
                     </p>
                     <div class="pac_payLists">
-                        <div class="pac_payCard_name">카드번호</div>
-                        <input class="pac_payCard_kind" type="text" value="부산은행" readonly></input>
+                        <div class="pac_payCard_name">등록</div>
+                        <select name="cardbank" class="pac_payCard_kind" disabled="disabled">
+								<option value="신한" selected="selected">신한</option>
+								<option value="현대">현대</option>
+								<option value="하나">하나</option>
+								<option value="우리">우리</option>
+								<option value="국민">국민</option>
+								<option value="농협">농협</option>
+								<option value="롯데">롯데</option>
+								<option value="기타">기타</option>
+						</select>
+<!--                         <input class="pac_payCard_kind" type="text" value="부산은행" readonly></input> -->
                         <input class="pac_payCard_num1" type="text" value="123456" readonly></input>
                         -
                         <input class="pac_payCard_num2" type="text" value="123456" readonly></input>
