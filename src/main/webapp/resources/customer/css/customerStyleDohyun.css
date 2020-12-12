@@ -1010,9 +1010,20 @@ body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac
 	/* border-right: 1px solid #EAEAEA; */
 }
 
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_kind {
+	width: 100px;
+	height: 30px;
+	display: inline-flex;
+	border: none;
+	background : #B2CCFF;
+	text-align: center;
+	/* margin-bottom: 10px; */
+	outline: 0;
+}
+
 body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_num1 {
-	width: 260px;
-	height: 45px;
+	width: 210px;
+	height: 40px;
 	display: inline-flex;
 	border: 1px solid #EAEAEA;
 	text-align: center;
@@ -1021,8 +1032,8 @@ body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac
 }
 
 body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_num2 {
-	width: 260px;
-	height: 45px;
+	width: 210px;
+	height: 40px;
 	display: inline-flex;
 	border: 1px solid #EAEAEA;
 	text-align: center;
