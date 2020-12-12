@@ -41,8 +41,14 @@
 	</update>
 	
 	<select id="selectCouponList" parameterType="String" resultType="CouponList">
-		SELECT i.BRANDNAMING, c.DISCOUNT, c.PERIOD, 
-		c.MINIMUMPRICE, c.DUPLBOOLEAN 
-		FROM BCOUPON c INNER JOIN BINFORMATION i ON c.ESTID=i.ESTID
+		SELECT * FROM 
+			(SELECT i.BRANDNAMING, bc.DISCOUNT, bc.PERIOD, 
+				bc.MINIMUMPRICE, bc.DUPLBOOLEAN, bc.COUPONID  
+			FROM BCOUPON bc 
+				INNER JOIN BINFORMATION i 
+				ON bc.ESTID=i.ESTID) a 
+				INNER JOIN CCOUPON cc 
+				ON cc.COUPONID = a.COUPONID 
+				where cc.MEMBERID=#{memberid}
 	</select>
 </mapper>
