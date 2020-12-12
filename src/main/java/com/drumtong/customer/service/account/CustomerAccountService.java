@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.drumtong.business.dao.BCouponDAO;
 import com.drumtong.business.dao.BInformationDAO;
-import com.drumtong.business.vo.BCouponVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.customer.vo.CPrivateDataVO;
 import com.drumtong.customer.vo.CouponList;
@@ -46,14 +45,12 @@ public class CustomerAccountService {
 	public ModelAndView payAndCoupon(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView("customer/account/customerPayAndCoupon");
 		CPrivateDataVO Login = ((CPrivateDataVO)req.getSession().getAttribute("cLogin"));
-		HashMap<String, String> param = new HashMap<String, String>();
 		
-		// 더 수정해야함!!, 그리고 고객쪽 jsp에도 작성해야 함 -------------
 		List<CouponList> couponlist = bCouponDAO.selectCouponList(Login.getMemberid());
 		
 		mav.addObject("couponlist", couponlist);
 		// -------------------------------------------------
-		return null;
+		return mav;
 	}
 
 }

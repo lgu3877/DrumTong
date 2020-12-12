@@ -1085,7 +1085,7 @@ body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLi
 	display: inline-flex;
 }
 
-body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_name {
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_brandnaming {
 	width: 140px;
 	height: auto;
 /* 	border-right: 1px solid #EAEAEA; */
@@ -1094,6 +1094,54 @@ body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLi
 /* 	display: inline-flex; */
 	margin: 5px 15px;
 	overflow: hidden;
+}
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_discount {
+	width: 130px;
+	height: auto;
+/* 	border-right: 1px solid #EAEAEA; */
+	text-align: center;
+	padding: 8px 10px;
+/* 	display: inline-flex; */
+	margin: 5px 15px;
+	overflow: hidden;
+}
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_period {
+	width: 230px;
+	height: auto;
+/* 	border-right: 1px solid #EAEAEA; */
+	text-align: center;
+	padding: 8px 10px;
+/* 	display: inline-flex; */
+	margin: 5px 15px;
+	overflow: hidden;
+}
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_minimumprice {
+	width: 130px;
+	height: auto;
+/* 	border-right: 1px solid #EAEAEA; */
+	text-align: center;
+	padding: 8px 10px;
+/* 	display: inline-flex; */
+	margin: 5px 15px;
+	overflow: hidden;
+}
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_duplboolean {
+	width: 70px;
+	height: auto;
+/* 	border-right: 1px solid #EAEAEA; */
+	text-align: center;
+	padding: 8px 10px;
+/* 	display: inline-flex; */
+	margin: 5px 15px;
+	overflow: hidden;
+}
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists_menu {
+	background-color : #B2CCFF;
 }
 
 /* body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_num { */
