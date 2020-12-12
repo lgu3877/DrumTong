@@ -40,17 +40,25 @@
             <div class="pac_mainCopon">
                 <div class="pac_coponList">
                     <p class="pac_coponText">쿠폰 목록</p>
-                    <div class="pac_coponLists">
-                        <div class="pac_copon_name">가게이름</div>
-                        <div class="pac_copon_name">할인가격</div>
-                        <div class="pac_copon_name">사용기간</div>
-                        <div class="pac_copon_name">최소금액</div>
-                        <div class="pac_copon_name">사용여부</div>
+                    <div class="pac_coponLists pac_coponLists_menu">
+                        <div class="pac_copon_brandnaming">가게이름</div>
+                        <div class="pac_copon_discount">할인가격</div>
+                        <div class="pac_copon_period">사용기간</div>
+                        <div class="pac_copon_minimumprice">최소금액</div>
+                        <div class="pac_copon_duplboolean">사용여부</div>
                     </div>
+                    <c:forEach items="${couponlist }" var="coupon">
+	                    <div class="pac_coponLists">
+	                        <div class="pac_copon_brandnaming">${coupon.brandnaming }</div>
+	                        <div class="pac_copon_discount">${coupon.discount }</div>
+	                        <div class="pac_copon_period">${coupon.period }</div>
+	                        <div class="pac_copon_minimumprice">${coupon.minimumprice }</div>
+	                        <div class="pac_copon_duplboolean">${coupon.duplboolean }</div>
+	                    </div>
+                    </c:forEach>
                 </div>
             </div>
         </article>
-
 
     </section>
 
