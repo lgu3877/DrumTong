@@ -27,6 +27,7 @@
                     <div class="pac_payLists">
                         <div class="pac_payCard_name">카드</div>
                         <select name="cardbank" class="pac_payCard_kind">
+                        		<option value="${cardBank }" hidden="true">${cardBank }</option>
 								<option value="신한">신한</option>
 								<option value="현대">현대</option>
 								<option value="하나">하나</option>
@@ -36,13 +37,13 @@
 								<option value="롯데">롯데</option>
 								<option value="기타">기타</option>
 						</select>
-                        <input class="pac_payCard_num" type="text" value="1234"></input>
+                        <input class="pac_payCard_num" type="text" value="${cardNum[0]}"></input>
                         -
-                        <input class="pac_payCard_num" type="text" value="2345"></input>
+                        <input class="pac_payCard_num" type="text" value="${cardNum[1]}"></input>
                         -
-                        <input class="pac_payCard_num" type="text" value="3456"></input>
+                        <input class="pac_payCard_num" type="text" value="${cardNum[2]}"></input>
                         -
-                        <input class="pac_payCard_num" type="text" value="4567"></input>
+                        <input class="pac_payCard_num" type="text" value="${cardNum[3]}"></input>
                         <button class="pac_payCard_save">저장</button>
                         <div class="pac_payList_add"></div>
                     </div>
@@ -50,6 +51,7 @@
                     <div class="pac_payLists">
                         <div class="pac_payCard_name">계좌</div>
                         <select name="cardbank" class="pac_payCard_kind">
+                        		<option value="${accountBank }" hidden="true">${accountBank }</option>
 								<option value="신한">신한</option>
 								<option value="현대">현대</option>
 								<option value="하나">하나</option>
@@ -59,7 +61,7 @@
 								<option value="롯데">롯데</option>
 								<option value="기타">기타</option>
 						</select>
-                        <input class="pac_payAccount_num" type="text" value="1234"></input>
+                        <input class="pac_payAccount_num" type="text" value="${accountNum}"></input>
                         <button class="pac_payCard_save">저장</button>
                         <div class="pac_payList_add"></div>
                     </div>

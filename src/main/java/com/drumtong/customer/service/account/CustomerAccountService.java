@@ -11,6 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.drumtong.business.dao.BCouponDAO;
 import com.drumtong.business.dao.BInformationDAO;
 import com.drumtong.business.vo.BInformationVO;
+import com.drumtong.customer.dao.CPaymentDAO;
+import com.drumtong.customer.vo.CPaymentVO;
 import com.drumtong.customer.vo.CPrivateDataVO;
 import com.drumtong.customer.vo.CouponList;
 
@@ -18,6 +20,7 @@ import com.drumtong.customer.vo.CouponList;
 public class CustomerAccountService {
 	@Autowired BInformationDAO bInformationDAO;
 	@Autowired BCouponDAO bCouponDAO;
+	@Autowired CPaymentDAO cPaymentDAO;
 	
 	// 북마크[영경]
 	public ModelAndView bookmark(HttpServletRequest req) {
@@ -44,6 +47,16 @@ public class CustomerAccountService {
 	public ModelAndView payAndCoupon(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView("customer/account/customerPayAndCoupon");
 		CPrivateDataVO Login = ((CPrivateDataVO)req.getSession().getAttribute("cLogin"));
+		
+		CPaymentVO cPaymentVO = cPaymentDAO.select(Login.getMemberid());
+		
+		String card = cPaymentVO.getCard();
+		String accountNum = cPaymentVO.getAccountnum();
+		
+		mav.addObject("cardNum", card.equals("-") ? new String[]{"","","",""} : card.split("-"));
+		mav.addObject("cardBank", cPaymentVO.getCardbank());
+		mav.addObject("accountNum", accountNum);
+		mav.addObject("accountBank", cPaymentVO.getAccountbank());
 		
 		List<CouponList> couponlist = bCouponDAO.selectCouponList(Login.getMemberid());
 		
