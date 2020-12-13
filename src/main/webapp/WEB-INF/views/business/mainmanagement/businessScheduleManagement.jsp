@@ -90,9 +90,9 @@
 						<!-- 토/일 선택 체크박스 -->
 						<div class="checkbox_con">
 							<input id="weekday-only" type="checkbox" name="" value="">
-							<button id="weekday-only-btn" class="checkBtn" onclick="checkOption('weekday-only')" disabled>토요일 운영</button>
+							<button id="weekday-only-btn" class="checkBtn transparent" onclick="checkOption('weekday-only')" disabled>토요일 운영</button>
 							<input id="whole-week" type="checkbox" name="" value="">
-							<button id="whole-week-btn" class="checkBtn" onclick="checkOption('whole-week')" disabled>일요일 운영</button>
+							<button id="whole-week-btn" class="checkBtn transparent" onclick="checkOption('whole-week')" disabled>일요일 운영</button>
 						
 						</div>
 					</div>	
@@ -102,11 +102,19 @@
 						<ul class="input_title_con">
 							<li class="day_range">
 								<div>
-									월 ~ 금
+									월 ㅡ 금
 								</div>
 							</li>
-							<li class="day_range">토</li>
-							<li class="day_range">일</li>
+							<li class="day_range">
+								<div>
+									토							
+								</div>
+							</li>
+							<li class="day_range">
+								<div>
+									일
+								</div>
+							</li>
 						</ul>
 						<ul class="input_time_con">
 						<!-- mon ~ fri -->
