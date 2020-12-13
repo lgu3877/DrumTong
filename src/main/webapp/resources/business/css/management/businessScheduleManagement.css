@@ -41,6 +41,7 @@
 .shadow:hover {
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px
 		rgba(0, 0, 0, 0.22);
+	border-radius: 3px;
 }
 
 /* 제목 & 수정 버튼 */
@@ -213,6 +214,7 @@
 
 .time_zone_btn {
 	width: 50px;
+	height: 100%;
 	background-color: #95e1d3;
 }
 
