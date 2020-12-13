@@ -97,48 +97,145 @@
 						</div>
 					</div>	
 					
-					<!-- 시간 입력 -->
+				<!-- 시간 입력 -->
 					<div class="input_time_form">
 						<ul class="input_title_con">
-							<li class="day_range">월 ~ 금</li>
+							<li class="day_range">
+								<div>
+									월 ~ 금
+								</div>
+							</li>
 							<li class="day_range">토</li>
 							<li class="day_range">일</li>
 						</ul>
 						<ul class="input_time_con">
+						<!-- mon ~ fri -->
 							<li class="time_range">
 							<!-- from -->
 								<div class="time_zone_con">
-									<input class="time_zone_input" type="radio" name="timeZone" value="daytime">
-									<button class="btn time_zone_btn border_r">오전</button>
-									<input class="time_zone_input" type="radio" name="timeZone" value="nighttime">
-									<button class="btn time_zone_btn border_l">오후</button>
+									<div>
+										<input class="time_zone_input" type="radio" name="since" value="daytime">
+										<button class="btn time_zone_btn border_r">오전</button>
+									</div>
+									<div>
+										<input class="time_zone_input" type="radio" name="since" value="nighttime">
+										<button class="btn time_zone_btn border_l">오후</button>
+									</div>
 								</div>
-								<input type="number" name="hour" max="12" placeholder="시">
-								<input type="number" name="minute" max="59" placeholder="분">
+								<input class="time_input hour" type="number" name="hour" max="12" placeholder="시">
+								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
 								<div class="time_range_text">
 									<span>부터</span>
 								</div>
 							<!-- to -->
 								<div class="time_zone_con">
-									<input class="time_zone_input" type="radio" name="timeZone" value="daytime">
-									<button class="btn time_zone_btn border_r">오전</button>
-									<input class="time_zone_input" type="radio" name="timeZone" value="nighttime">
-									<button class="btn time_zone_btn border_l">오후</button>
+									<div>
+										<input class="time_zone_input" type="radio" name="until" value="daytime">
+										<button class="btn time_zone_btn border_r">오전</button>
+									</div>
+									<div>				
+										<input class="time_zone_input" type="radio" name="until" value="nighttime">
+										<button class="btn time_zone_btn border_l">오후</button>
+									</div>
 								</div>
-								<input type="number" name="hour" max="12" placeholder="시">
-								<input type="number" name="minute" max="59" placeholder="분">
+								<input class="time_input hour" type="number" name="hour" max="12" placeholder="시">
+								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
 								<div class="time_range_text">
 									<span>까지</span>
 								</div>
 								<div class="all_day_con">
-									<button class="btn">
+									<button class="btn" onclick="clearInputs(this)">
 										<i class="far fa-clock"></i>
 										<span>24시간</span>
 									</button>
 								</div>
 							</li>
-							<li class="time_range"></li>
-							<li class="time_range"></li>							
+							
+							
+						<!-- sat -->
+							<li class="time_range">
+							<!-- from -->
+								<div class="time_zone_con">
+									<div>
+										<input class="time_zone_input" type="radio" name="since" value="daytime">
+										<button class="btn time_zone_btn border_r">오전</button>
+									</div>
+									<div>
+										<input class="time_zone_input" type="radio" name="since" value="nighttime">
+										<button class="btn time_zone_btn border_l">오후</button>
+									</div>
+								</div>
+								<input class="time_input hour" type="number" name="hour" max="12" placeholder="시">
+								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
+								<div class="time_range_text">
+									<span>부터</span>
+								</div>
+							<!-- to -->
+								<div class="time_zone_con">
+									<div>
+										<input class="time_zone_input" type="radio" name="until" value="daytime">
+										<button class="btn time_zone_btn border_r">오전</button>
+									</div>
+									<div>				
+										<input class="time_zone_input" type="radio" name="until" value="nighttime">
+										<button class="btn time_zone_btn border_l">오후</button>
+									</div>
+								</div>
+								<input class="time_input hour" type="number" name="hour" max="12" placeholder="시">
+								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
+								<div class="time_range_text">
+									<span>까지</span>
+								</div>
+								<div class="all_day_con">
+									<button class="btn" onclick="clearInputs(this)">
+										<i class="far fa-clock"></i>
+										<span>24시간</span>
+									</button>
+								</div>
+							</li>
+							
+							
+						<!-- sun -->	
+							<li class="time_range">
+								<!-- from -->
+								<div class="time_zone_con">
+									<div>
+										<input class="time_zone_input" type="radio" name="since" value="daytime">
+										<button class="btn time_zone_btn border_r">오전</button>
+									</div>
+									<div>
+										<input class="time_zone_input" type="radio" name="since" value="nighttime">
+										<button class="btn time_zone_btn border_l">오후</button>
+									</div>
+								</div>
+								<input class="time_input hour" type="number" name="hour" max="12" placeholder="시">
+								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
+								<div class="time_range_text">
+									<span>부터</span>
+								</div>
+							<!-- to -->
+								<div class="time_zone_con">
+									<div>
+										<input class="time_zone_input" type="radio" name="until" value="daytime">
+										<button class="btn time_zone_btn border_r">오전</button>
+									</div>
+									<div>				
+										<input class="time_zone_input" type="radio" name="until" value="nighttime">
+										<button class="btn time_zone_btn border_l">오후</button>
+									</div>
+								</div>
+								<input class="time_input hour" type="number" name="hour" max="12" placeholder="시">
+								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
+								<div class="time_range_text">
+									<span>까지</span>
+								</div>
+								<div class="all_day_con">
+									<button class="btn" onclick="clearInputs(this)">
+										<i class="far fa-clock"></i>
+										<span>24시간</span>
+									</button>
+								</div>
+							</li>							
 						</ul>
 					</div>
 				</div>
