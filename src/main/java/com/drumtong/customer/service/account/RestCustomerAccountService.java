@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.drumtong.customer.dao.CPrivateDataDAO;
 import com.drumtong.customer.vo.CPrivateDataVO;
@@ -27,7 +26,7 @@ public class RestCustomerAccountService {
 		return "false";
 	}
 
-	// 개인정보 수정하기
+	// 개인정보 수정하기[영경]
 	public String Change(HttpServletRequest req, String type, HashMap<String, String> param) {
 		HttpSession Session= req.getSession();
 		CPrivateDataVO Login = (CPrivateDataVO)Session.getAttribute("cLogin");
@@ -42,9 +41,6 @@ public class RestCustomerAccountService {
 		value.put("memberid", Login.getMemberid());
 		value.put("value", param.get(type));
 		value.put("name", type);
-		System.out.println("memberid : " + value.get("memberid"));
-		System.out.println("value : " + value.get("value"));
-		System.out.println("name : " + value.get("name"));
 		
 		if(cPrivateDataDAO.updateChange(value) == 1) {
 			Session.setAttribute("cLogin", cPrivateDataDAO.selectLogin(Login.getPw()));

@@ -1017,28 +1017,25 @@ body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac
 	border: none;
 	background : #B2CCFF;
 	text-align: center;
-	/* margin-bottom: 10px; */
 	outline: 0;
 }
 
-body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_num1 {
-	width: 210px;
-	height: 40px;
-	display: inline-flex;
-	border: 1px solid #EAEAEA;
-	text-align: center;
-	/* margin-bottom: 10px; */
-	outline: 0;
-}
-
-body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_num2 {
-	width: 210px;
-	height: 40px;
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payAccount_num {
+	width: 430px;
+	height: 35px;
 	display: inline-flex;
 	border: 1px solid #EAEAEA;
 	text-align: center;
 	outline: 0;
+}
 
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_num {
+	width: 95px;
+	height: 35px;
+	display: inline-flex;
+	border: 1px solid #EAEAEA;
+	text-align: center;
+	outline: 0;
 }
 
 body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payText .pac_payCard_add {
@@ -1097,7 +1094,7 @@ body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLi
 }
 
 body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_brandnaming {
-	width: 140px;
+	width: 170px;
 	height: auto;
 /* 	border-right: 1px solid #EAEAEA; */
 	text-align: center;
@@ -1108,7 +1105,7 @@ body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLi
 }
 
 body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_discount {
-	width: 130px;
+	width: 140px;
 	height: auto;
 /* 	border-right: 1px solid #EAEAEA; */
 	text-align: center;
@@ -1119,7 +1116,7 @@ body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLi
 }
 
 body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_period {
-	width: 230px;
+	width: 240px;
 	height: auto;
 /* 	border-right: 1px solid #EAEAEA; */
 	text-align: center;
@@ -1130,18 +1127,7 @@ body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLi
 }
 
 body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_minimumprice {
-	width: 130px;
-	height: auto;
-/* 	border-right: 1px solid #EAEAEA; */
-	text-align: center;
-	padding: 8px 10px;
-/* 	display: inline-flex; */
-	margin: 5px 15px;
-	overflow: hidden;
-}
-
-body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_duplboolean {
-	width: 70px;
+	width: 140px;
 	height: auto;
 /* 	border-right: 1px solid #EAEAEA; */
 	text-align: center;
