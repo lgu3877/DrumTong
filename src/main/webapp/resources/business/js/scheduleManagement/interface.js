@@ -60,13 +60,69 @@ for (let i = 0; i < radioBtns.length; i++) {
 	});
 }
 
-// 시간 입력 input > 클래스 속성 부여
-const timeInput = document.getElementsByClassName("time_range")[0].getElementsByTagName("input");
-console.log(timeInput);
-console.log(timeInput.length);
-
+// 시간 입력 input > 그림자 & 에니메이션 클래스 속성 부여
+const timeInput = document.getElementsByClassName("input_time_con")[0].getElementsByTagName("input");
 
 for (let i = 0; i < timeInput.length; i ++) {
 	if(timeInput[i].type === "number") timeInput[i].classList.add("shadow");
-	console.log(timeInput[i].type);
+}
+
+// 시간(1~12) & 분(0~59)
+const hourInput = document.getElementsByName("hour");
+const minuteInput = document.getElementsByName("minute");
+
+for (let i = 0; i < hourInput.length; i ++) {
+	hourInput[i].addEventListener("keyup", function(e) {
+		e.preventDefault();
+		if (e.target.value <= 0 || e.target.value > 12) e.target.value = ""; 
+	})
+	minuteInput[i].addEventListener("keyup", function(e) {
+		e.preventDefault();
+		if (e.target.value < 0 || e.target.value > 59) e.target.value = ""; 
+	})
+	
+}
+
+// 오전 & 오후 선택 옵션
+const allRadio = document.getElementsByClassName("time_zone_input");
+const allRadioBtn = document.getElementsByClassName("time_zone_btn");
+
+for (let i = 0; i < allRadioBtn.length; i++) {
+	allRadioBtn[i].addEventListener("click", function(e) {
+		// button > radio 체크 연결
+		const radio = e.target.parentElement.getElementsByTagName("input")[0];
+		radio.checked = true;
+		
+		// 버튼 색 기본값으로 변경
+		const buttons = e.target.parentElement.parentElement.getElementsByClassName("time_zone_btn");
+		for (let i = 0; i < buttons.length; i++) {
+			buttons[i].style.backgroundColor = "#95e1d3";
+		}
+		e.target.style.backgroundColor = "navy";
+	})
+}
+
+// 입력 초기화
+function clearInputs(obj) {
+	const form = obj.parentNode.parentNode;	
+	const inputs = form.getElementsByClassName("time_input");
+	const radios = form.getElementsByClassName("time_zone_input");
+	const buttons = form.getElementsByClassName("time_zone_btn");
+	
+	// input 초기화
+	for (let i = 0; i < inputs.length; i++) {
+		inputs[i].value = "";
+	}
+
+	// radio 초기화
+	for (let i = 0; i < radios.length; i++) {
+		if (radios[i].checked === true) {
+			radios[i].checked = false;
+		}
+	}
+	
+	// 버튼 색 초기화
+	for (let i = 0; i < buttons.length; i++) {
+		buttons[i].style.backgroundColor = "#95e1d3";
+	}	
 }
