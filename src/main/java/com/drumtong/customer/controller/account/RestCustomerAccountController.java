@@ -33,4 +33,11 @@ public class RestCustomerAccountController {
 			 @PathVariable("type")String type) {
 		return svc.Change(req, type, param);
 	}
+	
+	// 결제정보 변경[영경]
+	@RequestMapping("customerPayAndCoupon/rest/paySave/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String paySave(HttpServletRequest req, @RequestBody HashMap<String, String> param) {
+		return svc.paySave(req, param);
+	}
 }
