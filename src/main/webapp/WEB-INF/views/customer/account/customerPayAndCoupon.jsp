@@ -22,13 +22,12 @@
         <article class="pac_mainList_pay">
             <div class="pac_mainPay">
                 <div class="pac_payList" id="pac_payList">
-                    <p class="pac_payText">결제수단 관리
-                        <button class="pac_payCard_add" onclick="cardup()">카드추가</button>
-                    </p>
+                   	<p class="pac_payText">결제 수단 관리</p>
+<!--                     <p class="pac_payText">카드</p> -->
                     <div class="pac_payLists">
-                        <div class="pac_payCard_name">등록</div>
-                        <select name="cardbank" class="pac_payCard_kind" disabled="disabled">
-								<option value="신한" selected="selected">신한</option>
+                        <div class="pac_payCard_name">카드</div>
+                        <select name="cardbank" class="pac_payCard_kind">
+								<option value="신한">신한</option>
 								<option value="현대">현대</option>
 								<option value="하나">하나</option>
 								<option value="우리">우리</option>
@@ -37,10 +36,31 @@
 								<option value="롯데">롯데</option>
 								<option value="기타">기타</option>
 						</select>
-<!--                         <input class="pac_payCard_kind" type="text" value="부산은행" readonly></input> -->
-                        <input class="pac_payCard_num1" type="text" value="123456" readonly></input>
+                        <input class="pac_payCard_num" type="text" value="1234"></input>
                         -
-                        <input class="pac_payCard_num2" type="text" value="123456" readonly></input>
+                        <input class="pac_payCard_num" type="text" value="2345"></input>
+                        -
+                        <input class="pac_payCard_num" type="text" value="3456"></input>
+                        -
+                        <input class="pac_payCard_num" type="text" value="4567"></input>
+                        <button class="pac_payCard_save">저장</button>
+                        <div class="pac_payList_add"></div>
+                    </div>
+<!--                     <p class="pac_payText">계좌</p> -->
+                    <div class="pac_payLists">
+                        <div class="pac_payCard_name">계좌</div>
+                        <select name="cardbank" class="pac_payCard_kind">
+								<option value="신한">신한</option>
+								<option value="현대">현대</option>
+								<option value="하나">하나</option>
+								<option value="우리">우리</option>
+								<option value="국민">국민</option>
+								<option value="농협">농협</option>
+								<option value="롯데">롯데</option>
+								<option value="기타">기타</option>
+						</select>
+                        <input class="pac_payAccount_num" type="text" value="1234"></input>
+                        <button class="pac_payCard_save">저장</button>
                         <div class="pac_payList_add"></div>
                     </div>
                 </div>
@@ -56,7 +76,6 @@
                         <div class="pac_copon_discount">할인가격</div>
                         <div class="pac_copon_period">사용기간</div>
                         <div class="pac_copon_minimumprice">최소금액</div>
-                        <div class="pac_copon_duplboolean">사용여부</div>
                     </div>
                     <c:forEach items="${couponlist }" var="coupon">
 	                    <div class="pac_coponLists">
@@ -64,7 +83,6 @@
 	                        <div class="pac_copon_discount">${coupon.discount }</div>
 	                        <div class="pac_copon_period">${coupon.period }</div>
 	                        <div class="pac_copon_minimumprice">${coupon.minimumprice }</div>
-	                        <div class="pac_copon_duplboolean">${coupon.duplboolean }</div>
 	                    </div>
                     </c:forEach>
                 </div>
