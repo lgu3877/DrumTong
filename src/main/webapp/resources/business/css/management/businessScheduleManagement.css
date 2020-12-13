@@ -44,6 +44,11 @@
 	border-radius: 3px;
 }
 
+/* 투명도 */
+.transparent {
+	opacity: 0.7
+}
+
 /* 제목 & 수정 버튼 */
 .content_title_con {
 	display: flex;
@@ -107,7 +112,8 @@
 }
 
 .select_con {
-	display: flex;
+	/* display: flex; */
+	display: block;
 }
 
 .radio_con {
@@ -132,7 +138,7 @@
 
 .checkbox_con {
 	display: flex;
-	margin: auto 0;
+	margin: 12px 0;
 }
 
 .checkbox_con input {
@@ -171,7 +177,8 @@
 /* 영업 시간 */
 .input_time_form {
 	display: flex;
-	margin-top: 30px;
+	margin-top: 20px;
+    margin-bottom: 40px;
 }
 
 .input_time_con, .input_title_con {
@@ -184,6 +191,17 @@
 	margin-bottom: 10px;
 	display: flex;
 	height: 40px;
+}
+
+.day_range {
+	background-color: whitesmoke;	
+    border-radius: 5px;
+}
+
+.day_range div {
+	margin: auto;
+	font-weight: 500;
+    font-size: 13pt;
 }
 
 .time_range input[type="number"] {
@@ -226,13 +244,11 @@
 .input_title_con {
 	width: 15%;
 	margin-right: 20px;
-	border: 1px solid black;
 	text-align: center;
 }
 
 .input_time_con {
 	width: 60%;
-	border: 1px solid black;
 }
 
 .all_day_con {
