@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.drumtong.customer.dao.CPaymentDAO;
 import com.drumtong.customer.dao.CPrivateDataDAO;
 import com.drumtong.customer.vo.CPrivateDataVO;
 import com.drumtong.security.Encrypt;
@@ -16,6 +17,7 @@ import com.drumtong.security.Encrypt;
 public class RestCustomerAccountService {
 	
 	@Autowired CPrivateDataDAO cPrivateDataDAO;
+	@Autowired CPaymentDAO cPaymentDAO;
 	
 	// 비밀번호 수정하기 전 현재 비밀번호 체크[영경]
 	public String pwCheck(HttpServletRequest req, String pw) {
@@ -47,6 +49,29 @@ public class RestCustomerAccountService {
 			return "true";
 		}
 		return "false";
+	}
+
+	public String paySave(HttpServletRequest req, HashMap<String, String> param) {
+		HttpSession Session= req.getSession();
+		CPrivateDataVO Login = (CPrivateDataVO)Session.getAttribute("cLogin");
+		int result = 0;
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("memberid", Login.getMemberid());
+		
+		// 여기서부터 작업
+//		switch(param.get("type")) {
+//		case "account":
+//			map.put("accountBank", param.get("accountBank"));
+//			map.put("accountNum", param.get("accountNum"));
+//			result = cPaymentDAO.updateAccount(map);
+//			break;
+//		case "card":
+//			map.put
+//			result = cPaymentDAO.updateCard();
+//			break;
+//		}
+		return result == 0 ? "false" : "true";
 	}
 
 }

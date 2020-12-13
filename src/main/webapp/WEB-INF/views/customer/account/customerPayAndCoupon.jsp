@@ -26,8 +26,9 @@
 <!--                     <p class="pac_payText">카드</p> -->
                     <div class="pac_payLists">
                         <div class="pac_payCard_name">카드</div>
-                        <div class="dropdown">
-							<button class="dropdown-button">== 선택 ==</button>
+
+                        <div class="dropdown" name="cardbank">
+							<button class="dropdown-button">${cardBank }</button>
 							<div class="dropdown-content">
 								<a href="#">신한</a>
 								<a href="#">현대</a>
@@ -39,22 +40,22 @@
 								<a href="#">기타</a>
 							</div>
 						</div>
-                        <input class="pac_payCard_num" type="text" value="1234"></input>
+                        <input class="pac_payCard_num" type="text" value="${cardNum[0]}"></input>
                         -
-                        <input class="pac_payCard_num" type="text" value="2345"></input>
+                        <input class="pac_payCard_num" type="text" value="${cardNum[1]}"></input>
                         -
-                        <input class="pac_payCard_num" type="text" value="3456"></input>
+                        <input class="pac_payCard_num" type="text" value="${cardNum[2]}"></input>
                         -
-                        <input class="pac_payCard_num" type="text" value="4567"></input>
+                        <input class="pac_payCard_num" type="text" value="${cardNum[3]}"></input>
                         <button class="pac_payCard_save">저장</button>
                         <div class="pac_payList_add"></div>
                     </div>
 <!--                     <p class="pac_payText">계좌</p> -->
                     <div class="pac_payLists">
                         <div class="pac_payCard_name">계좌</div>
-                        
-                        <div class="dropdown">
-							<button class="dropdown-button">== 선택 ==</button>
+        
+                        <div class="dropdown" name="cardbank">
+							<button class="dropdown-button">${accountBank }</button>
 							<div class="dropdown-content">
 								<a href="#">신한</a>
 								<a href="#">현대</a>
@@ -66,7 +67,7 @@
 								<a href="#">기타</a>
 							</div>
 						</div>
-                        <input class="pac_payAccount_num" type="text" value="1234"></input>
+                        <input class="pac_payAccount_num" type="text" value="${accountNum}"></input>
                         <button class="pac_payCard_save">저장</button>
                         <div class="pac_payList_add"></div>
                     </div>
