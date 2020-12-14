@@ -26,17 +26,19 @@
 <!--                     <p class="pac_payText">카드</p> -->
                     <div class="pac_payLists">
                         <div class="pac_payCard_name">카드</div>
-                        <select name="cardbank" class="pac_payCard_kind">
-                        		<option value="${cardBank }" hidden="true">${cardBank }</option>
-								<option value="신한">신한</option>
-								<option value="현대">현대</option>
-								<option value="하나">하나</option>
-								<option value="우리">우리</option>
-								<option value="국민">국민</option>
-								<option value="농협">농협</option>
-								<option value="롯데">롯데</option>
-								<option value="기타">기타</option>
-						</select>
+                        <div class="dropdown" name="cardbank">
+							<button class="dropdown-button">${cardBank }</button>
+							<div class="dropdown-content">
+								<a href="#">신한</a>
+								<a href="#">현대</a>
+								<a href="#">하나</a>
+								<a href="#">우리</a>
+								<a href="#">국민</a>
+								<a href="#">농협</a>
+								<a href="#">롯데</a>
+								<a href="#">기타</a>
+							</div>
+						</div>
                         <input class="pac_payCard_num" type="text" value="${cardNum[0]}"></input>
                         -
                         <input class="pac_payCard_num" type="text" value="${cardNum[1]}"></input>
@@ -50,17 +52,20 @@
 <!--                     <p class="pac_payText">계좌</p> -->
                     <div class="pac_payLists">
                         <div class="pac_payCard_name">계좌</div>
-                        <select name="cardbank" class="pac_payCard_kind">
-                        		<option value="${accountBank }" hidden="true">${accountBank }</option>
-								<option value="신한">신한</option>
-								<option value="현대">현대</option>
-								<option value="하나">하나</option>
-								<option value="우리">우리</option>
-								<option value="국민">국민</option>
-								<option value="농협">농협</option>
-								<option value="롯데">롯데</option>
-								<option value="기타">기타</option>
-						</select>
+        
+                        <div class="dropdown" name="cardbank">
+							<button class="dropdown-button">${accountBank }</button>
+							<div class="dropdown-content">
+								<a href="#">신한</a>
+								<a href="#">현대</a>
+								<a href="#">하나</a>
+								<a href="#">우리</a>
+								<a href="#">국민</a>
+								<a href="#">농협</a>
+								<a href="#">롯데</a>
+								<a href="#">기타</a>
+							</div>
+						</div>
                         <input class="pac_payAccount_num" type="text" value="${accountNum}"></input>
                         <button class="pac_payCard_save">저장</button>
                         <div class="pac_payList_add"></div>
@@ -123,5 +128,11 @@
                 }
             });
         });
+        
+        document.querySelector('a').addEventListener('click', function() {
+        	console.log(this);
+        })	
+        
+        
     </script>
 <%@ include file="../main/customerFooter.jsp"%>
