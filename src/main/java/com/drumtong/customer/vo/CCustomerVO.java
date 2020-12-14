@@ -7,7 +7,6 @@ public class CCustomerVO {
 	private String updatedate;
 	private char deleteboolean;
 	private String deletedate;
-	
 	public String getCustomer() {
 		return customer;
 	}
@@ -32,7 +31,6 @@ public class CCustomerVO {
 	public void setUpdatedate(String updatedate) {
 		this.updatedate = updatedate;
 	}
-
 	public char getDeleteboolean() {
 		return deleteboolean;
 	}
@@ -45,5 +43,6 @@ public class CCustomerVO {
 	public void setDeletedate(String deletedate) {
 		this.deletedate = deletedate;
 	}
+	
 	
 }

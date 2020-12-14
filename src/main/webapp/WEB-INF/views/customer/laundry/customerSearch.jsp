@@ -577,7 +577,6 @@
             more.style.display = 'block';
         }
     </script>
-   </section>
    
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0c218bd435ac24618816391ea2acab62&libraries=services,clusterer,drawing"></script>
 <script>
@@ -825,7 +824,8 @@
 	    
 	    
 </script>
-   
+</body>
+</html>
    
    
 <!--    구글지도 코드 -->

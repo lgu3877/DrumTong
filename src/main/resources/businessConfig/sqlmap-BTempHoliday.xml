@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+		"-//mybatis.org//DTD Mapper 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 사업장 임시휴무 테이블	 -->
+<mapper namespace="com.drumtong.business.dao.BTempHolidayDAO">
+
+
+<!-- 	영업임시휴일관리 {임시휴일 시작일, 임시휴일 마지막일}을 업데이트 시켜준다. -->
+	<insert id="insertConstract" parameterType="BTempHolidayVO">
+		INSERT INTO BTEMPHOLIDAY
+			 VALUES
+			 (#{estid}, #{num}, #{beginday}, #{endday}) 
+	</insert>
+
+
+
+
+
+
+<!-- =====================================REST===================================== -->
+	
+	
+<!-- 	매장 임시 휴무일을 수정해주는 메서드입니다.  -->
+	<update id="updateBTempHoliday" parameterType="BTempHolidayVO">
+		UPDATE BTEMPHOLIDAY 
+			SET
+				BEGINDAY = #{beginday}, ENDDAY= #{enday}
+			WHERE ESTID = #{estid} and NUM=#{num} 
+	</update>
+	
+	
+<!-- 	매장 임시 휴무일을 삭제해주는 메서드입니다. -->
+	<delete id="deleteBTempHoliday" parameterType="BTempHolidayVO">
+		DELETE * FROM BTEMPHOLIDAY
+			WHERE ESTID = #{estid} and NUM=#{num}
+	</delete>
+
+
+<!--  매장 임시 휴무일에 새 데이터를 입력해주는 메서드입니다. -->
+	<insert id="insertBTempHoliday" parameterType="BTempHolidayVO">
+		    INSERT INTO BTEMPHOLIDAY
+			VALUES
+			(#{estid},
+				(CASE WHEN 
+					(SELECT MAX(NUM)+1 FROM 
+						BTEMPHOLIDAY 
+					WHERE ESTID=#{estid}) IS NULL THEN 1 
+					ELSE
+            (SELECT MAX(NUM)+1 FROM BTEMPHOLIDAY WHERE ESTID=#{estid}) end)
+			,#{beginday},#{endday});
+	</insert>
+
+</mapper>

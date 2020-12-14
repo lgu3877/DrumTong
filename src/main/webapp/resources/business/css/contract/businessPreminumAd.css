@@ -1,0 +1,186 @@
+.ad_contract_con {
+	width: 500px;
+	margin: 100px auto;
+}
+
+.ad_contract_title {
+	text-align: center;
+    margin: 0 auto;
+}
+
+.ad_contract_title p {
+	color: #3b5998;
+    font-size: 25pt;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.ad_contract_form {
+	background-color: #dfe3ee;
+    border-radius: 5px;
+    margin: 10px auto;
+    padding: 70px 50px 50px 50px;
+}
+.ad_contract_card_input_con i {
+	margin-right: 5px;
+}
+
+.ad_agree_con {
+	margin: 25px 0;
+}
+
+.ad_agree_context {
+	text-align: left;
+    background-color: #f7f7f7;
+    padding: 0px 18px 5px 18px;
+    height: 200px;
+    overflow: auto;
+}
+
+.ad_agree_title {
+	
+}
+
+.ad_agree_context p {
+	font-size: 10pt;
+    line-height: 27px;
+}
+
+.card_input_title {
+	text-align: left;
+	margin-bottom: 5px;
+}
+.card_agree_title {
+	text-align: right;
+	margin-top: 10px;
+	margin-bottom: 5px;
+	line-height: 16px;
+}
+
+.card_agree_title span {
+	font-size: 10pt;
+    font-weight: 600;
+    vertical-align: top;
+}
+.card_agree_chbox {
+	vertical-align: top;
+}
+
+.input_subcon {
+	display: flex;
+}
+
+.input_subcon_left {
+	width: 100%;
+}
+
+.input_subcon_right {
+	
+}
+
+input[type="text"]:focus {
+	transition: all 0.3s ease 0s;
+	transform: translate(0, -1px);
+	box-shadow: 0px 15px 20px rgba(223, 227, 238);
+}
+
+input[type=submit]:hover {
+	transition: all 0.3s ease 0s;
+	cursor: pointer;
+	box-shadow: 0px 15px 20px rgba(223, 227, 238);
+	transform: translate(0, -2px);
+}
+
+.card_company_select {
+	margin-bottom: 20px;
+    height: 40px;
+    text-indent: 15px;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+    font-family: auto;
+    font-weight: 400;
+    font-size: 11pt;
+    width: 100%;
+    border: none;
+    outline: none;
+    margin-top: 2px;
+}
+
+.card_company_select option {
+	
+}
+
+.card_number_con {
+	display: flex;
+	justify-content: space-between;	
+}
+
+.card_number_input {
+	margin-bottom: 20px;
+    height: 40px;
+    text-indent: 15px;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+    font-family: auto;
+    font-weight: 400;
+    font-size: 11pt;
+    width: 95px;
+    border: none;
+    outline: none;
+    margin-top: 2px;
+}
+
+.card_exdate_input {
+    margin: 2px 6px 20px 0;
+	text-align: left;
+    text-indent: 10px;
+    width: 95px;
+    height: 40px;
+    background-color: #f7f7f7;
+    font-family: auto;
+    font-weight: 400;
+    font-size: 11pt;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.card_ccv_input {
+	margin: 2px 0 20px 0;
+	text-align: left;
+    text-indent: 10px;
+    width: 95px;
+    height: 40px;
+    background-color: #f7f7f7;
+    font-family: auto;
+    font-weight: 400;
+    font-size: 11pt;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.ad_contract_submit_btn {
+	background-color: #3b5998;
+    height: 35px;
+    border-radius: 5px;
+    letter-spacing: 2.5px;
+    width: 100%;
+    padding: 0;
+    color: white;
+    margin: 10px auto 40px auto;
+    border: none;
+    outline: none;
+    font-size: 16pt;
+}
+
+.ad_error_msg {
+	text-align: left;
+    color: red;
+    font-size: 12pt;
+    font-weight: 600;
+}
+.ad_error_msg i {
+	margin-right: 5px;
+}

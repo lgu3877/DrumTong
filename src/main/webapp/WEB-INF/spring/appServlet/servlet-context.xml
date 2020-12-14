@@ -67,18 +67,76 @@
 		<interceptor>
 <!-- 		□■□■□■□■□■□■□■□■□■□■□■mapping 주소 확인하기(수정필요)□■□■□■□■□■□■□■□■□■□■□■ -->
 			<mapping path="/**"/>
-			<beans:bean id="CustomerInitInterceptor" class="com.drumtong.customer.interceptor.CustomerInitInterceptor" />
+			<exclude-mapping path="/customer/css/**"/>
+			<exclude-mapping path="/customer/js/**"/>
+			<exclude-mapping path="/customer/img/**"/>
+			<exclude-mapping path="/customer/json/**"/>
+			
+<!-- 			<exclude-mapping path="/customer/membership/customerLogin/rest/loginCheck/"/> -->
+<!-- 			<exclude-mapping path="/business/membership/businessLogin/rest/loginCheck/"/> -->
+			<exclude-mapping path="/**/rest/**"/>
+			
+			<exclude-mapping path="/business/css/**"/>
+			<exclude-mapping path="/business/js/**"/>
+			<exclude-mapping path="/business/img/**"/>
+			<exclude-mapping path="/business/json/**"/>
+			
+			<exclude-mapping path="/resources/**"/>
+			<exclude-mapping path="/business/main/mainCover/"/>
+			<exclude-mapping path="/business/selectEST/*/"/>
+			<exclude-mapping path="/customer/membership/customerLogin/POST/"/>
+			<exclude-mapping path="/business/membership/businessLogin/POST/"/>
+			<exclude-mapping path="/business/membership/businessLogin/POST/main/"/>
+			
+			<beans:bean id="InitInterceptor" class="com.drumtong.security.InitInterceptor" />
 		</interceptor>
 	
 <!-- 		로그인이 필요한 페이지일 때 로그인으로 이동, 로그인로그 -->
 		<interceptor>
 <!-- 		□■□■□■□■□■□■□■□■□■□■□■mapping 주소 확인하기(수정필요)□■□■□■□■□■□■□■□■□■□■□■ -->
-			<mapping path="/customer/**"/>
+			<mapping path="/**"/>
 			
 <!-- 		로그인 여부와 상관없이 이용할 수 있는 페이지 목록(수정필요) -->
-<!-- 			<exclude-mapping path="/"/> -->
+			<exclude-mapping path="/"/>
+			<exclude-mapping path="/customer/"/>
+			<exclude-mapping path="/customer/laundry/customerSearch/"/>
+			<exclude-mapping path="/customer/laundry/customerDetail/**/"/>
+			<exclude-mapping path="/customer/board/customerBoard/"/>
+			<exclude-mapping path="/customer/membership/customerSignUp/"/>
 			
-			<beans:bean id="customerLoginInterceptor" class="com.drumtong.customer.interceptor.CustomerLoginInterceptor" />
+			<exclude-mapping path="/customer/membership/customerLogin/POST/"/>
+			<exclude-mapping path="/business/membership/businessLogin/POST/"/>
+			<exclude-mapping path="/business/membership/businessLogin/POST/main/"/>
+			<exclude-mapping path="/business/membership/businessSignUp/"/>
+			<exclude-mapping path="/business/membership/businessAccountFind/"/>
+			<exclude-mapping path="/business/membership/businessIDFind/"/>
+			<exclude-mapping path="/business/membership/businessPWFind/"/>
+			<exclude-mapping path="/business/membership/businessFinishSignUp/"/>
+			<exclude-mapping path="/business/mainCover/"/>
+			<exclude-mapping path="/business/membership/businessPwChange/"/>
+			<exclude-mapping path="/business/selectEST/*/"/>
+			
+			
+<!-- 			<exclude-mapping path="/customer/membership/customerLogin/rest/loginCheck/"/> -->
+<!-- 			<exclude-mapping path="/business/membership/businessLogin/rest/loginCheck/"/> -->
+			<exclude-mapping path="/**/rest/**"/>
+			
+			<exclude-mapping path="/business/"/>
+			<exclude-mapping path="/business/selectEST/*/"/>
+			
+			<exclude-mapping path="/customer/css/**"/>
+			<exclude-mapping path="/customer/js/**"/>
+			<exclude-mapping path="/customer/img/**"/>
+			<exclude-mapping path="/customer/json/**"/>
+			
+			<exclude-mapping path="/business/css/**"/>
+			<exclude-mapping path="/business/js/**"/>
+			<exclude-mapping path="/business/img/**"/>
+			<exclude-mapping path="/business/json/**"/>
+			
+			<exclude-mapping path="/resources/**"/>
+			
+			<beans:bean id="LoginInterceptor" class="com.drumtong.security.LoginInterceptor" />
 		</interceptor>
 	</interceptors>
 	

@@ -53,42 +53,55 @@
 
 @charset "utf-8";
 
-* {
-	user-select: none;
-	font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';
-	font-size: 16px;
-	box-sizing: border-box;
-}
+/* * { */
+/* 	user-select: none; */
+/* 	font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif'; */
+/* 	font-size: 16px; */
+/* 	box-sizing: border-box; */
+/* } */
 
 
 /* body, header, nav, ul, li, section, article, div, footer { */
 
 /* } */
-html {
-	width: 100%;
-	height: auto;
-}
+/* html { */
+/* 	width: 100%; */
+/* 	height: auto; */
+/* } */
 
-body,
-header,
-section {
-	background-color: white;
-	width: 1900px;
-	box-sizing: border-box;
-}
+/* body, */
+/* header, */
+/* section { */
+/* 	background-color: white; */
+/* 	width: 1900px; */
+/* 	box-sizing: border-box; */
+/* } */
 
-body {
-	/* border: 1px solid black; */
+/* body { */
+/* 	border: 1px solid yellow; */
+/* 	margin: auto; */
+/* 	height: auto; */
+
+/* 		최대크기 */ 
+/* 	max-width: 1900px; */
+/* 	max-height: 3000px; */
+
+/* 		최소크기 */ 
+/* 	min-width : 100%; */
+/* 	min-height: 100%; */
+/* } */
+
+@media screen and (max-width : 600px) {
+	body {
+	
 	margin: auto;
 	height: auto;
 
 	/* 	최대크기 */
-	max-width: 1900px;
-	max-height: 3000px;
-
-	/* 	최소크기 */
-	/* min-width : 100%; */
-	/* min-height: 100%; */
+	max-width: 1000px;
+	max-height: 1500px;
+	
+	}
 }
 
 /* ====================섹션 CSS================================ */
@@ -531,7 +544,7 @@ body .section_Joinchange .join_change .join_pum_ok {
 }
 
 body .section_Joinchange .join_change .join_joso {
-	width: 220px;
+	width: 500px;
 	display: inline-block;
 }
 
@@ -552,7 +565,7 @@ body .section_Joinchange .join_change .join_cmp .join_complete:active {
 
 body .section_search {
 	padding-top: 70px;
-	height: 797px;
+	height: 940px;
 }
 
 body .section_search .filter {
@@ -997,24 +1010,32 @@ body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac
 	/* border-right: 1px solid #EAEAEA; */
 }
 
-body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_num1 {
-	width: 260px;
-	height: 45px;
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_kind {
+	width: 100px;
+	height: 30px;
 	display: inline-flex;
-	border: 1px solid #EAEAEA;
+	border: none;
+	background : #B2CCFF;
 	text-align: center;
-	/* margin-bottom: 10px; */
 	outline: 0;
 }
 
-body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_num2 {
-	width: 260px;
-	height: 45px;
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payAccount_num {
+	width: 430px;
+	height: 35px;
 	display: inline-flex;
 	border: 1px solid #EAEAEA;
 	text-align: center;
 	outline: 0;
+}
 
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_num {
+	width: 95px;
+	height: 35px;
+	display: inline-flex;
+	border: 1px solid #EAEAEA;
+	text-align: center;
+	outline: 0;
 }
 
 body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payText .pac_payCard_add {
@@ -1072,22 +1093,61 @@ body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLi
 	display: inline-flex;
 }
 
-body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_name {
-	width: 100px;
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_brandnaming {
+	width: 170px;
 	height: auto;
-	border-right: 1px solid #EAEAEA;
+/* 	border-right: 1px solid #EAEAEA; */
+	text-align: center;
 	padding: 8px 10px;
-	display: inline-flex;
+/* 	display: inline-flex; */
 	margin: 5px 15px;
+	overflow: hidden;
 }
 
-body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_num {
-	width: 600px;
-	height: 30px;
-	display: block;
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_discount {
+	width: 140px;
+	height: auto;
+/* 	border-right: 1px solid #EAEAEA; */
 	text-align: center;
-	margin: 10px 15px;
+	padding: 8px 10px;
+/* 	display: inline-flex; */
+	margin: 5px 15px;
+	overflow: hidden;
 }
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_period {
+	width: 240px;
+	height: auto;
+/* 	border-right: 1px solid #EAEAEA; */
+	text-align: center;
+	padding: 8px 10px;
+/* 	display: inline-flex; */
+	margin: 5px 15px;
+	overflow: hidden;
+}
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_minimumprice {
+	width: 140px;
+	height: auto;
+/* 	border-right: 1px solid #EAEAEA; */
+	text-align: center;
+	padding: 8px 10px;
+/* 	display: inline-flex; */
+	margin: 5px 15px;
+	overflow: hidden;
+}
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists_menu {
+	background-color : #B2CCFF;
+}
+
+/* body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_num { */
+/* 	width: 600px; */
+/* 	height: 30px; */
+/* 	display: block; */
+/* 	text-align: center; */
+/* 	margin: 10px 15px; */
+/* } */
 
 .pac_payCard_save {
 	width: 90px;
@@ -1434,3 +1494,42 @@ textarea {
 	/* margin-top: 10px; */
 	/* border: 0;
 	outline: 0; */
+}
+
+		.dropdown-button {
+			width: 100px;
+			background-color: #B2CCFF;
+			padding: 8px;
+			font-size: 15px;
+			border: none;
+		}
+		.dropdown-button a{
+			text-decoration: none !important;
+			color: black !important;
+		}
+		.dropdown {
+			width: 100px;
+			height: 35px;
+			position: relative;
+			display: inline-block;
+		}
+		.dropdown-content {
+			display: none;
+			position: absolute;
+			background-color: #B2CCFF;
+			text-decoration: none !important;
+			width: 100%;
+			padding: 5px;
+			box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+			z-index: 9999;
+		}
+		.dropdown-content a {
+			color: black;
+			padding: 8px;
+			text-decoration: none !important;
+			display: block;
+			z-index: 9999;
+		}
+		.dropdown-content a:hover { background-color: #00A2E8;}
+		.dropdown:hover .dropdown-content { display: block; }
+		.dropdown:hover .dropdown-button { background-color: #00A2E8; }

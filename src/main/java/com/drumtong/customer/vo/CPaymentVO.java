@@ -2,9 +2,23 @@ package com.drumtong.customer.vo;
 
 public class CPaymentVO {
 	private String memberid;
-	private String bank;
+	private String accountbank;
 	private String accountnum;
 	private String card;
+	private String cardbank;
+	
+	public String getAccountbank() {
+		return accountbank;
+	}
+	public void setAccountbank(String accountbank) {
+		this.accountbank = accountbank;
+	}
+	public String getCardbank() {
+		return cardbank;
+	}
+	public void setCardbank(String cardbank) {
+		this.cardbank = cardbank;
+	}
 	
 	
 	public String getMemberid() {
@@ -13,12 +27,7 @@ public class CPaymentVO {
 	public void setMemberid(String memberid) {
 		this.memberid = memberid;
 	}
-	public String getBank() {
-		return bank;
-	}
-	public void setBank(String bank) {
-		this.bank = bank;
-	}
+	
 	public String getAccountnum() {
 		return accountnum;
 	}

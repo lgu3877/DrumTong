@@ -11,4 +11,72 @@
 		SELECT * FROM BMANAGEMENT WHERE ESTID=#{estid}
 	</select>
 	
+	<insert id="insertSignUp" parameterType="BManagementVO">
+		INSERT INTO BMANAGEMENT (ESTID, DEFAULTCATEGORY)
+			VALUES
+			( #{estid} , #{defaultcategory})
+	</insert>
+	
+	
+<!-- 매장관리 테이블에  {소개글,배달여부,퀵여부}를 업데이트 시켜준다.  -->
+	<update id="updateConstract" >
+		UPDATE BMANAGEMENT 
+			SET
+				INTRODUCTION = #{introduction},
+				DELIVERYBOOLEAN = #{deliveryboolean},
+				QUICKBOOLEAN = #{quickboolean}
+			WHERE
+				ESTID=#{estid}				
+	</update>
+
+
+
+
+
+<!--  ======================================= REST ================================================ -->
+
+
+
+<!--  매장 관리에 매장 소개글을 비동기식으로 수정해주는 메서드입니다. [REST] -->
+	<update id="updateIntroduction" parameterType="BManagementVO">
+		UPDATE BMANAGEMENT
+			SET
+				INTRODUCTION = #{introduction}
+			WHERE
+				ESTID=#{estid}
+	</update>
+	
+	
+	
+<!-- 	매장 관리에 배달유무를 비둥기식으로 수정해주는 메서드입니다. -->
+	<update id="updateDeliveryBoolean" parameterType="BManagementVO">
+		UPDATE BMANAGEMENT
+			SET
+				DELIVERYBOOLEAN = #{deliveryboolean}
+			WHERE
+				ESTID=#{estid}
+	</update>
+	
+	
+	
+	
+<!-- 	매장 관리에 퀵여부를 비둥기식으로 수정해주는 메서드입니다. -->
+	<update id="updateQuickBoolean" parameterType="BManagementVO">
+		UPDATE BMANAGEMENT
+			SET
+				QUICKBOOLEAN = #{quickboolean}
+			WHERE
+				ESTID=#{estid}
+	</update>
+	
+	
+	<!-- 	매장 관리에 기본 카테고리를 비둥기식으로 수정해주는 메서드입니다. -->
+	<update id="updateDefaultCategory" parameterType="BManagementVO">
+		UPDATE BMANAGEMENT
+			SET
+				DEFAULTCATEGORY = #{defaultcategory}
+			WHERE
+				ESTID=#{estid}
+	</update>
+	
 </mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+		"-//mybatis.org//DTD Mapper 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 사업장 임시중지 테이블	 -->
+<mapper namespace="com.drumtong.business.dao.BTempSuspensionDAO">
+
+<!-- 영업임시중지관리 {임시중지 시작일, 임시중지 마지막일}을 업데이트 시켜준다. -->
+	<insert id="insertConstract" parameterType="BTempSuspensionVO">
+		INSERT INTO BTEMPSUSPENSION
+			VALUES
+			(#{estid},#{num}, #{beginday}, #{endday}, #{reason})
+	</insert>
+
+
+
+
+
+<!-- ==============================================REST=============================================== -->
+
+<!-- 	 매장 임시 중지을 수정해주는 메서드입니다. -->
+	<update id="updateBTempSuspension" parameterType="BTempSuspensionVO">
+	UPDATE BTEMPSUSPENSION 
+			SET
+				BEGINDAY = #{beginday}, ENDDAY= #{enday}, REASON= #{reason} 
+			WHERE ESTID = #{estid} and NUM=#{num}		
+	</update>
+
+<!-- 	매장 임시 중지을 삭제해주는 메서드입니다. -->
+	<delete id="deleteBTempSuspension" parameterType="BTempSuspensionVO">
+		DELETE * FROM BTEMPSUSPENSION
+			WHERE ESTID = #{estid} and NUM=#{num}	
+	</delete>
+
+
+<!-- 	매장 임시 중지에 새 데이터를 입력해주는 메서드입니다. -->
+	<insert id="insertBTempSuspension" parameterType="BTempSuspensionVO">
+		    INSERT INTO BTEMPSUSPENSION
+			VALUES
+			(#{estid},
+				(CASE WHEN 
+					(SELECT MAX(NUM)+1 FROM 
+						BTEMPSUSPENSION 
+					WHERE ESTID=#{estid}) IS NULL THEN 1 
+					ELSE
+            (SELECT MAX(NUM)+1 FROM BTEMPSUSPENSION WHERE ESTID=#{estid}) end)
+			,#{beginday},#{endday},#{reason});
+	
+	</insert>
+	
+
+
+</mapper>

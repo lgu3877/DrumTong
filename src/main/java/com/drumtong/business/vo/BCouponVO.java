@@ -12,7 +12,14 @@ public class BCouponVO {
 	private String updatedate;
 	private char deleteboolean;
 	private String deletedate;
+	private int maxissuenum;
 	
+	public int getMaxissuenum() {
+		return maxissuenum;
+	}
+	public void setMaxissuenum(int maxissuemnu) {
+		this.maxissuenum = maxissuemnu;
+	}
 	public String getEstid() {
 		return estid;
 	}

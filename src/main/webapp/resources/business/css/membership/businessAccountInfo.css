@@ -1,0 +1,104 @@
+.input {
+	width: 75%;
+	height: 100%;
+	float: left;
+	border: 0px;
+	padding-left: 20px;
+	background-color: #f8f8fa;
+}
+
+input.origininput {
+	width: 25%;
+	height: 100%;
+	float: right;
+	font-size: 18pt;
+	font-weight: bold;
+}
+
+input.origininput:hover {
+	transition: all 0.3s ease 0s;
+	cursor: pointer;
+	box-shadow: 0px 15px 20px rgba(223, 227, 238);
+	transform: translate(-2px, -2px);
+}
+
+
+
+.newdiv {
+	width: 25%;
+	height: 100%;
+}
+
+.newinput {
+	width: 100%;
+	height: 50%;
+}
+
+div.leftdiv {
+	display: inline-block; 
+	width: 25%; 
+	height: 100%; 
+	background-color: #afafaf
+}
+
+div.rightdiv {
+	width: 100%; 
+	height: 110px; 
+	border-radius: 15px;
+	display: flex;
+	margin-bottom: 10.5px;
+}
+
+div.tablediv {
+	width: 100%; 
+	height: 110px;
+	display: table;
+	margin-bottom: 10.5px;
+}
+div.celldiv {
+	display: table-cell; 
+	vertical-align: middle;
+	font-size: 18pt;
+	font-weight: bold;
+}
+
+
+input.mainaddress, input.phonenum {
+	width: 67%;
+	height: 40%;
+	margin-right: 10px;
+	display: inline-block;
+}
+
+input.search, input.certification {
+	width: 25%;
+	height: 40%;
+	display: inline-block;
+}
+
+input.email, input.delegatecrn {
+	width: 67%;
+	height: 100%;
+	margin-right: 10px;
+	display: inline-block;
+}
+
+input.certification2 {
+	width: 25%;
+	height: 100%;
+	display: inline-block;
+}
+
+input.detailadress {
+	width: 95%;
+	height: 40%;
+	margin-top: 5px;
+}
+
+
+ul li {
+	color:  #afafaf;
+	font-size: 10pt;
+	text-align: left;
+	margin-left: 30px;
+}

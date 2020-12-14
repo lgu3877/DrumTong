@@ -1,0 +1,164 @@
+
+label.forLabel {
+		background-color: #e5e6eb;
+		border: 1px solid black;
+}
+
+input[type="submit"], input[type="button"] {
+	background-color: #e5e6eb;
+	border: 1px solid black;
+}
+
+input[type="submit"]:hover, input[type="button"]:hover,  div label:hover{
+		transition: all 0.3s ease 0s;
+	cursor: pointer;
+	box-shadow: 0px 15px 20px rgba(223, 227, 238);
+	transform: translate(-2px, -2px);
+}
+
+div .AllPre {
+	width: 80%; 
+	height: 40px; 
+	text-align: left; 
+	margin-top: 15px; 
+	margin-bottom: 15px; 
+	display: flex; 
+	align-items: center; 
+	font-size: 18pt; 
+	font-weight: bold;
+}
+
+div.container {
+	width: 100%;
+	height: 100%;
+}
+
+div .termdiv {
+	width: 100%; height: 70%; margin-bottom: 10px
+}
+
+pre {
+	text-align: left !important;
+	overflow-y: scroll;
+	white-space: pre-wrap;
+	width: 100%;
+	height: 100%;
+	border: 1px solid #afafaf;
+	margin: auto;
+}
+
+div p i {
+	margin-right: 5px;
+}
+
+div.c2-input {
+	margin: 0 auto;
+	width: 600px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+div.c2-input input, div.c2-input select {
+	width: 400px;
+	height: 40px;
+	padding-left: 10pt;
+}
+div.c2-input input[type="button"] {
+	padding: 0 !important;
+}
+div.c2-input input[type="file"], div.c3-input input[type="file"]{
+	position: absolute;	
+	width: 0 !important;
+	height: 0 !important;
+	right: 0;
+	top: 0;
+	padding: 0 !important;
+	z-index: 0;
+}
+div.c2-input label, div.c3-input label {
+	margin-left: 200px;
+	width: 200px;
+	height: 40px;
+	z-index: 1000;
+}
+
+div.c2-input h1, div.c3-input h1 {
+	width: 200px;
+	height: 40px;
+	font-size: 14pt;
+	display: flex;
+	align-items: center;
+}
+
+div[name="address"] input {
+	width: 100% !important;
+}
+
+div.c3-input {
+	margin: 0 auto;
+	width: 600px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+
+
+
+div.message {
+	margin: 0 auto;
+	width: 600px;
+	font-size: 12pt;
+	text-align: right;
+}
+
+
+
+label i.far:hover {
+	color: grey;
+	font-family: "Font Awesome 5 Free" !important;
+	font-weight: 900 !important;
+}
+
+
+.categoryDiv {
+	display: table;
+	background-color: white; 
+	width: 100%; 
+	height: 22%
+}
+.categoryDiv {
+	display: table;
+	background-color: white; 
+	width: 100%; 
+	height: 22%
+}
+
+.categoryDiv div {
+	display: flex;
+	width: 100%; 
+	height: 100%; 
+	align-items: center;
+}
+
+.categoryDiv div input[type="checkbox"] {
+	width: 35px;
+	height: 35px;
+}
+
+.categoryDiv div h1 {
+	font-size: 28pt; 
+	width: 150px; 
+	display: inline-block;
+	text-align: center;
+}
+
+.categoryDiv div img {
+	height: 120px;
+	float: right;
+}

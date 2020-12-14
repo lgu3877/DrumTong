@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+		"-//mybatis.org//DTD Mapper 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 사업장 정기휴무일정관리 테이블	 -->
+<mapper namespace="com.drumtong.business.dao.BScheduleDaysDAO">
+
+<!-- 	신규 데이터 등록 -->
+	<insert id="insertSignUp" parameterType="String">
+		INSERT INTO BSCHEDULEDAYS
+			(ESTID) 
+			VALUES
+			( #{ESTID} )
+	</insert>
+	
+<!-- 	영업일정관리 {첫 번째 주, 두 번째 주, 세 번째 주, 네 번째 주, 다섯 번째 주, 여섯 번째 주, 공휴일 휴무 여부}를 업데이트 시켜준다.-->
+	<update id="updateConstract" parameterType="BScheduleDaysVO">
+		UPDATE BSCHEDULEDAYS
+			SET
+				FIRSTWEEK = #{firstweek}, SECONDWEEK = #{secondweek}, THIRDWEEK = #{thirdweek},
+				FOURWEEK = #{fourweek}, FIFTHWEEK = #{fifthweek}, SIXTHWEEK = #{sixthweek},
+				HOLIDAY = #{holiday} 
+			WHERE ESTID = #{estid}
+	</update>
+	
+	
+<!-- 	=======================================REST========================================= -->
+	
+	
+<!-- 	매장 일정관리를 비동기식으로 삭제해주는 메서드입니다.  -->
+	<update id="deleteBScheduleDays" parameterType="hashMap" >
+		UPDATE BSCHEDULEDAYS
+			SET
+		${wherefield} =
+			CASE WHEN
+				REPLACE(
+					SELECT a.${wherefield}
+						as acolumn
+					FROM BSCHEDULEDAYS
+						a WHERE
+					a.ESTID = #{estid}							
+				), #{changeparam})
+	    IS NULL THEN '-' END WHERE ESTID = #{estid};
+	</update>
+	
+	
+<!-- 	매장 일정관리를 비동기식으로 추가 입력해주는 메서드입니다. -->
+	<update id="insertBScheduleDays" parameterType="hashMap" >
+		UPDATE BSCHEDULEDAYS
+			SET
+				${wherefield} =
+					CASE WHEN 
+						(${wherefield}) = '-' then replace(${wherefield}, '-') else ${wherefield} end)||#{changeparam}
+			WHERE ESTID = #{estid}
+	</update>
+	
+	
+	
+<!-- 	매장 일정관리에 공휴일 휴일 여부를 수정해주는 메서드입니다. 필드  { 휴일 유무  } -->
+	<update id="updateHoliday" parameterType="BScheduleDaysVO">
+		UPDATE BSCHEDULEDAYS
+			SET
+				HOLIDAY = #{holiday}
+			WHERE ESTID = #{estid}
+	</update>
+	
+</mapper>

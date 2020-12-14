@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.drumtong.customer.service.membership.RestCustomerMembershipService;
+import com.drumtong.security.Login;
 
 @RestController
 @RequestMapping("customer/membership/")
@@ -39,6 +40,13 @@ public class RestCustomerMembershipController {
 	@PostMapping(produces="application/json; charset=utf8")
 	public String login(HttpServletRequest req, HttpServletResponse resp, @RequestBody HashMap<String, String> param) {
 		return svc.login(req, resp, param);
+	}
+	
+	// 로그인 POST로 넘기기 전 체크[영경]
+	@RequestMapping("customerLogin/rest/loginCheck/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String loginCheck(@RequestBody HashMap<String, String> param) {
+		return Login.loginCheck(param);
 	}
 }
 

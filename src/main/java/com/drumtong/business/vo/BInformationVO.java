@@ -12,7 +12,21 @@ public class BInformationVO {
 	private String license;
 	private String latitude;
 	private String longitude;
+	private String status;
+	private String premiumboolean;
 	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getPremiumboolean() {
+		return premiumboolean;
+	}
+	public void setPremiumboolean(String premiumboolean) {
+		this.premiumboolean = premiumboolean;
+	}
 	public String getEstid() {
 		return estid;
 	}

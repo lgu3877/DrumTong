@@ -1,0 +1,186 @@
+/* visible parts */
+.search_inner {
+	min-width: 800px;
+	margin: auto;
+	padding-top: 10px;	
+}
+.account_searchbox {
+	width: 700px;
+	margin: 30px auto;
+	background-color: #dfe3ee;
+	padding: 30px;
+    border-radius: 15px;
+    color: #326ada;
+}
+.search_title {
+	font-size: 20pt;
+	word-spacing: 5px;
+    letter-spacing: 2.5px;
+}
+.search_option_con {
+	text-align: left;
+}
+
+.search_option_con ul {
+	list-style: none;
+}
+
+.search_option_con ul .search_options {
+	display: flex;
+	vertical-align: middle;
+	cursor: pointer;
+	margin-top: 30px;
+    margin-bottom: 20px;
+    background-color: #d62d20;
+    border-radius: 10px;
+    color: #f7f7f7;
+    padding: 5px 0;
+    
+}
+.search_option_con ul .search_options:hover {
+	background-color: orange;
+	transition: 0.5s;
+}
+.search_option_con ul li i {
+	margin: 0 10px;
+	font-size: 20pt;
+}
+.search_option_con ul li div {
+	padding-top: 2px;
+}
+
+/* invisible parts */
+.search_input_con {
+	width: 650px;
+	margin: 7px auto 10px auto;
+	transition: 1s;
+}
+
+.search_input_con form {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+.search_input_label {
+	font-size: 11pt;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+    margin-left: 7px;
+    font-weight: 600;
+}
+.search_input_sublabel {
+	font-size: 9pt;
+	opacity: 0.8;
+}
+.search_input_con form .single_input {
+	margin: 5px auto;
+	width: 100%;
+	height: 30px;
+	border-radius: 5px;
+	border: none;
+	text-indent: 10px;
+}
+.search_input_con form .single_input[type=submit] {
+	margin: 15px auto;
+	width: 100%;
+	height: 30px;
+	border-radius: 5px;
+	border: none;
+	text-indent: 10px;
+	background-color: #326ada;
+	color: #f7f7f7;
+	letter-spacing: 8px;
+    font-size: inherit;	
+}
+.search_input_con form .submit_con {
+	margin: 15px auto;
+	width: 100%;
+	height: 30px;
+	border-radius: 5px;
+	border: none;
+	text-indent: 10px;
+}
+
+.birth_input_con {
+	text-align-last: justify;
+}
+
+.birth_input {
+	margin: 5px auto;
+	width: 200px;
+	height: 30px;
+	border-radius: 5px;
+	border: none;
+	text-indent: 10px;
+}
+.birth_input option {
+	font-size: 15pt;
+    text-indent: 10px;
+    margin: 3px 0;
+    line-height: 5px;
+}
+.search_input_con form input:focus {
+	outline: none;
+	border: none;
+}
+
+.search_gender_select {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	margin: 10px auto;
+}
+.radio_input {
+	display:none;
+}
+.gender_label {
+	line-height: 30.5px;
+}
+.radio_input + label {
+	width: 306px;
+    height: 30px;
+    margin: 5px 0 0 0;
+    color: #f7f7f7;
+    font-weight: bold;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    letter-spacing: 7px;
+}
+.male_select {
+	background-color: #01cdfe;
+}
+.female_select {
+	background-color: #ff71ce;
+}
+.radio_input + label:hover {
+    transition: 0.5s;
+    opacity: 0.4;
+}
+.phone_auth_con, .phone_auth_con {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.auth_input {
+	margin: 5px 0;
+	width: 500px;
+	height: 30px;
+	border-radius: 5px;
+	border: none;
+	text-indent: 10px;
+}
+.phone_auth_btn, .email_auth_btn {
+	margin: 5px 0;
+	width: 135px;
+	height: 30px;
+	border: none;
+	outline: none;
+	border-radius: 5px;	
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}

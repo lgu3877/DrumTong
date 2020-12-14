@@ -23,13 +23,36 @@ function logiinSubmit(type) {
 
         if (cnt !== loginInputs.length) return;
         if(type === 'synchronous'){
-        	document.getElementById('loginForm').submit();
-        } else {
-        	const axPost = async (id, pw, storeid) => {
+        	var axPost = async (id, pw, storeid) => {
         		ob={
         				'id':id,
         				'pw':pw,
         				'storeid':storeid,
+        				'type':'customer',
+        		};
+        		await axios.post('/drumtong/customer/membership/customerLogin/rest/loginCheck/', ob)
+        		
+        		.then( (response) => {
+        			if(response.data === true){
+        				console.log('로그인 성공');
+        	        	document.getElementById('loginForm').submit();
+        				
+        			} else{
+        				console.log('로그인 실패');
+        				alert('로그인에 실패하였습니다.');
+        				loginInputs[1].value = '';
+        			}
+        		})
+        	}
+        	axPost(loginInputs[0].value,loginInputs[1].value, document.getElementById('storeid').value);
+        	
+        } else {
+        	var axPost = async (id, pw, storeid) => {
+        		ob={
+        				'id':id,
+        				'pw':pw,
+        				'storeid':storeid,
+        				'type':'customer',
         		};
         		await axios.post('/drumtong/customer/membership/customerLogin/rest/login/', ob)
         		
@@ -42,6 +65,6 @@ function logiinSubmit(type) {
         		})
         	}
         	axPost(loginInputs[0].value,loginInputs[1].value, document.getElementById('storeid').value);
-        	console.log("로그인", "${Login}");
+        	console.log("로그인", "${cLogin}");
         }
       } //submit 체크 함수 종료

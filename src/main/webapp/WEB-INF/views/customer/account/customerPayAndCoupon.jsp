@@ -22,14 +22,52 @@
         <article class="pac_mainList_pay">
             <div class="pac_mainPay">
                 <div class="pac_payList" id="pac_payList">
-                    <p class="pac_payText">결제수단 관리
-                        <button class="pac_payCard_add" onclick="cardup()">카드추가</button>
-                    </p>
+                   	<p class="pac_payText">결제 수단 관리</p>
+<!--                     <p class="pac_payText">카드</p> -->
                     <div class="pac_payLists">
-                        <div class="pac_payCard_name">카드번호</div>
-                        <input class="pac_payCard_num1" type="text" value="123456" readonly></input>
+                        <div class="pac_payCard_name">카드</div>
+                        <div class="dropdown">
+							<button class="dropdown-button">== 선택 ==</button>
+							<div class="dropdown-content">
+								<a href="#" onclick="dropSelect(this)">신한</a>
+								<a href="#" onclick="dropSelect(this)">현대</a>
+								<a href="#" onclick="dropSelect(this)">하나</a>
+								<a href="#" onclick="dropSelect(this)">우리</a>
+								<a href="#" onclick="dropSelect(this)">국민</a>
+								<a href="#" onclick="dropSelect(this)">농협</a>
+								<a href="#" onclick="dropSelect(this)">롯데</a>
+								<a href="#" onclick="dropSelect(this)">기타</a>
+							</div>
+						</div>
+                        <input class="pac_payCard_num" type="text" value="1234"></input>
                         -
-                        <input class="pac_payCard_num2" type="text" value="123456" readonly></input>
+                        <input class="pac_payCard_num" type="text" value="2345"></input>
+                        -
+                        <input class="pac_payCard_num" type="text" value="3456"></input>
+                        -
+                        <input class="pac_payCard_num" type="text" value="4567"></input>
+                        <button class="pac_payCard_save">저장</button>
+                        <div class="pac_payList_add"></div>
+                    </div>
+<!--                     <p class="pac_payText">계좌</p> -->
+                    <div class="pac_payLists">
+                        <div class="pac_payCard_name">계좌</div>
+                        
+                        <div class="dropdown">
+							<button class="dropdown-button" style="text-decoration: none">== 선택 ==</button>
+							<div class="dropdown-content">
+								<a href="#" onclick="dropSelect(this)">신한</a>
+								<a href="#" onclick="dropSelect(this)">현대</a>
+								<a href="#" onclick="dropSelect(this)">하나</a>
+								<a href="#" onclick="dropSelect(this)">우리</a>
+								<a href="#" onclick="dropSelect(this)">국민</a>
+								<a href="#" onclick="dropSelect(this)">농협</a>
+								<a href="#" onclick="dropSelect(this)">롯데</a>
+								<a href="#" onclick="dropSelect(this)">기타</a>
+							</div>
+						</div>
+                        <input class="pac_payAccount_num" type="text" value="1234"></input>
+                        <button class="pac_payCard_save">저장</button>
                         <div class="pac_payList_add"></div>
                     </div>
                 </div>
@@ -40,15 +78,23 @@
             <div class="pac_mainCopon">
                 <div class="pac_coponList">
                     <p class="pac_coponText">쿠폰 목록</p>
-                    <div class="pac_coponLists">
-                        <div class="pac_copon_name">쿠폰번호</div>
-                        <div class="pac_copon_num">쿠폰네임</div>
-
+                    <div class="pac_coponLists pac_coponLists_menu">
+                        <div class="pac_copon_brandnaming">가게이름</div>
+                        <div class="pac_copon_discount">할인가격</div>
+                        <div class="pac_copon_period">사용기간</div>
+                        <div class="pac_copon_minimumprice">최소금액</div>
                     </div>
+                    <c:forEach items="${couponlist }" var="coupon">
+	                    <div class="pac_coponLists">
+	                        <div class="pac_copon_brandnaming">${coupon.brandnaming }</div>
+	                        <div class="pac_copon_discount">${coupon.discount }</div>
+	                        <div class="pac_copon_period">${coupon.period }</div>
+	                        <div class="pac_copon_minimumprice">${coupon.minimumprice }</div>
+	                    </div>
+                    </c:forEach>
                 </div>
             </div>
         </article>
-
 
     </section>
 
@@ -82,5 +128,11 @@
                 }
             });
         });
+        
+	    function dropSelect(obj) {
+	    	obj.parentNode.parentNode.querySelector('button').innerHTML = obj.outerHTML;
+	    }
+	    
+        
     </script>
 <%@ include file="../main/customerFooter.jsp"%>

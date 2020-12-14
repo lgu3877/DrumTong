@@ -110,7 +110,7 @@
 
     <script>
       function addBookmark() {
-       if('${Login}' == ''){
+       if('${cLogin}' == ''){
           LoginModalOpen();
           return;
        }  
@@ -147,8 +147,8 @@
            
         };
         
-        if('${Login}' != null && '${Login}' !='' ) { 
-           axPost('${Login.memberid}'); }
+        if('${cLogin}' != null && '${cLogin}' !='' ) { 
+           axPost('${cLogin.memberid}'); }
         
       }
     </script>
@@ -211,7 +211,7 @@
           <div class="detailview-companyIntro">
             <div class="detailview-intro-headline">
               <h1>${bInformationVO.brandnaming}</h1>
-              <c:set var="checkBookmark" value="${empty Login || Bookmark eq 'n' }" />
+              <c:set var="checkBookmark" value="${empty cLogin || Bookmark eq 'n' }" />
               <i class="fas fa-star ${checkBookmark ? 'add': 'remove' }" id="bookMarker" style="-webkit-text-stroke: 2px ${checkBookmark ? 'skyblue': 'orange' };color:${checkBookmark ? '': 'yellow' }" onclick="addBookmark()"></i>
             </div>
             <textarea readonly>${bManagementVO.introduction }</textarea>
@@ -224,14 +224,14 @@
 
             <div class="detailview-selectOptions">
            <c:forEach items="${bMenuVO }" var="menu">
-              <div class="option-row" id="choose+${menu.num }" >
+              <div class="option-row"" >
                 <div class="option-text">
-                  <div class="option-name" id="option-name">옵션 ${menu.num }</div>
+                  <div class="option-name" id="option-name">${menu.maincategory }/${menu.subcategory }</div>
                   <div class="option-context">${menu.name } / 예상시간 ${menu.ete }일</div>
                 </div>
                 <input type="number" class="quantity" id="quantity" placeholder="0" min="0" value="0" />
                 <div class="option-price">${menu.price } 원</div>
-                <input type="checkbox" id="quick" class="quickcheck ${menu.num }" value="${menu.quickprice }">
+                <input type="checkbox" id="quick" class="quickcheck" value="${menu.quickprice }">
                 <label class="quick" id="checkLabel" for="quick" title="빠른 서비스"><i class="fas fa-shipping-fast"></i>+${menu.quickprice } 원</label>
               </div>
          </c:forEach>
@@ -250,7 +250,7 @@
               <select>
                        <option>선택하기</option>
                  <c:choose>
-                    <c:when test="${Login != null }">
+                    <c:when test="${cLogin != null }">
                        <c:forEach items="${CouponList }" var="co">
                          <option value="${co.minimumprice }" disabled="disabled">${co.discount }원 할인/${co.minimumprice }원 이상[${co.period }]</option>
                        </c:forEach>
@@ -434,8 +434,8 @@
        
        // When the user clicks on the button, open the modal
        btn1.onclick = function () {
-          console.log('로그인 되어있나 ? ', '${Login}');
-            if('${Login}' == ''){
+          console.log('로그인 되어있나 ? ', '${cLogin}');
+            if('${cLogin}' == ''){
                LoginModalOpen();
                return;
             }  
@@ -448,7 +448,7 @@
          modal.style.display = 'block';
           
         //로그인이 안되있으면 이 문장을 수행
-        if('${Login}' == ''){
+        if('${cLogin}' == ''){
            modalContent3.style.display = 'flex';
         } else{
            //로그인이 되어있다면 submit 기능 수행
@@ -488,8 +488,8 @@
               })
               
            };
-           if('${Login}' != ''   ){
-              axPost('${Login.memberid}');
+           if('${cLogin}' != ''   ){
+              axPost('${cLogin.memberid}');
            } else{
               console.log("로그인 안되어 있어서 다운못해요~");
            }

@@ -13,4 +13,7 @@
 			(#{MemberID})
 	</insert>
 	
+	<select id="select" parameterType="String" resultType="CPaymentVO">
+		SELECT * FROM CPAYMENT WHERE MEMBERID=#{memberid}
+	</select>
 </mapper>

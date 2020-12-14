@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+		"-//mybatis.org//DTD Mapper 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 사업장 영업시간관리 테이블	 -->
+<mapper namespace="com.drumtong.business.dao.BScheduleTimeDAO">
+	
+	
+<!-- 	신규 데이터 등록 -->
+	<insert id="insertSignUp" parameterType="String">
+		INSERT INTO BSCHEDULETIME 
+			(ESTID) 
+			VALUES
+			( #{ESTID} )
+	</insert>
+	
+<!-- 	영업시간관리 {평일, 토요일, 일요일}시간을 업데이트 시켜준다. && REST 시에도 사용이 됩니다. -->
+	<update id="updateConstract" parameterType="BScheduleTimeVO">
+		UPDATE BSCHEDULETIME
+			SET
+			WEEKDAY = #{weekday}, SATURDAY = #{saturday}, SUNDAY = #{sunday}
+			WHERE ESTID = #{estid}
+	</update>
+	
+<!-- 	=======================================REST========================================= -->
+
+	
+
+</mapper>
