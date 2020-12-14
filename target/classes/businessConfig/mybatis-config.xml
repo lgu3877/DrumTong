@@ -35,5 +35,5 @@
 		<typeAlias type="com.drumtong.customer.vo.CouponList" alias="CouponList" />
 		
 	</typeAliases>
-	
+
 </configuration>		

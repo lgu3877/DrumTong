@@ -47,7 +47,8 @@
 			<h1 style="font-size: 36pt">주문현황</h1>
 			
 			
-			<div class="container" id="originContainer">
+
+			<div class="container" id="container">
 				<h1 class="containerName">주문번호 : AAA-154332e</h1>
 				<div class="contentdiv">
 					<div class="halfdiv">
@@ -80,8 +81,17 @@
 	
 	<script type="text/javascript">
 		
-		let clonecontainer = $('#originContainer');
-		$('.outerdiv').add(clonecontainer);
+
+		let clonecontainer = $('div.container');
+		
+		for(i = 0; i < 5; i++) {
+			$('.outerdiv').append('<div class="container">' + clonecontainer.html() + '</div>');
+			$('.outerdiv').children('div.container').eq(i + 1).attr('id', 'container' + i);
+		}
+		
+		
+		
+		console.log(clonecontainer.html());
 	</script>
 </body>
 </html>
