@@ -82,6 +82,7 @@
 								주말 휴무
 							</button>
 							<input id="week-only" type="radio" name="workingHour">
+							
 							<button id="weekend-also-btn" class="btn radioBtn" onclick="radioSelect('weekend-also')">
 								주말 운영
 							</button>
@@ -277,21 +278,69 @@
 					</div>
 				</div>
 
-				<!-- input -->
-				<div>
+			<!-- input -->
+				<div class="tmp_holiday_input_con">
+				<!-- 정기 휴무 -->
+					<div class="select_wrapper">
+					<!-- 주 선택 -->
+						<div class="select_box_con">
+							<select>
+								<option selected hidden="true" disabled>&nbsp;주 선택&nbsp;</option>
+								<option>매주</option>
+								<option>첫째 주</option>
+								<option>둘째 주</option>
+								<option>셋째 주</option>
+								<option>넷째 주</option>
+								<option>다섯째 주</option>
+								<option>여섯째 주</option>
+							</select>
+						</div>
+					<!-- 일 선택 -->
+						<div class="day_selector_con">
+							<div class="day_selector">
+								<input type="checkbox" name="restDay">
+								월
+							</div>
+							<div class="day_selector">
+								<input type="checkbox" name="restDay">
+								화
+							</div>
+							<div class="day_selector">
+								<input type="checkbox" name="restDay">
+								수
+							</div>
+							<div class="day_selector">
+								<input type="checkbox" name="restDay">
+								목
+							</div>
+							<div class="day_selector">
+								<input type="checkbox" name="restDay">
+								금
+							</div>
+							<div class="day_selector">
+								<input type="checkbox" name="restDay">
+								토
+							</div>
+							<div class="day_selector">
+								<input type="checkbox" name="restDay">
+								일
+							</div>
+						</div>
+						
+						
+					</div>
 
-
-					<!-- 달력 -->
+				<!-- 달력 -->
 					<div id="calander" class="calendar">
 						<div class="calendar_selector_con">
-							<!-- year(left) -->
+						<!-- year(left) -->
 							<div class="year_selector">
 								<button class="calendar_btn" onclick="showMenu('years')">
 									<span id="current-year"></span>
 								</button>
 								<div id="years" class="years" style="display: none;"></div>
 							</div>
-							<!-- month(right) -->
+						<!-- month(right) -->
 							<div class="month_selector">
 								<button class="calendar_btn" onclick="showMenu('months')">
 									<span id="current-month"></span>
@@ -300,9 +349,9 @@
 							</div>
 						</div>
 
-						<!-- date & day -->
+					<!-- date & day -->
 						<div class="calendar_day_con">
-							<!-- day of week -->
+						<!-- day of week -->
 							<div class="day_of_week">
 								<div class="day">일요일</div>
 								<div class="day">월요일</div>
@@ -313,11 +362,42 @@
 								<div class="day">토요일</div>
 							</div>
 
-							<!-- days -->
+						<!-- days -->
 							<div id="calendar-days" class="days"></div>
 						</div>
 					</div>
 				</div>
+			</div>
+			<!-- </form> -->
+			
+			
+		<!-- 임시시 휴무 설정 -->
+			<!-- </form> -->
+			<div class="tep_holiday">
+				<!-- title -->
+				<div class="content_title_con">
+					<div>
+						<span class="content_title">정기 휴무 설정</span> 
+						<i class="far fa-question-circle" style="font-weight: 600">도움말</i>
+					</div>
+					<!-- button -->
+					<div class="btn_con">
+						<div id="modify-holiday" class="btn format_btn">
+							<div class="icon_con">
+								<i class="fas fa-plus-square"></i>
+							</div>
+							<div class="btn_title">일자 변경</div>
+						</div>
+						<div id="complete-holiday" class="btn update_btn">
+							<div class="icon_con">
+								<i class="fas fa-check-square"></i>
+							</div>
+							<div class="btn_title">수정 완료</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- context -->
 			</div>
 			<!-- </form> -->
 		</div>

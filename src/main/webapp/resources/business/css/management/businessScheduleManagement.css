@@ -3,6 +3,18 @@
 	padding: 0;
 }
 
+/* 레이아웃 */
+.working_hour,
+.holiday,
+.tmp_holiday {
+	margin-bottom: 40px;
+}
+
+/* 선택 옵션 */
+/* .selected {
+	background-color: navy;
+} */
+
 /* 버튼 default */
 .btn {
 	cursor: pointer;
@@ -178,7 +190,6 @@
 .input_time_form {
 	display: flex;
 	margin-top: 20px;
-    margin-bottom: 40px;
 }
 
 .input_time_con, .input_title_con {
@@ -259,4 +270,63 @@
 	width: 100px;
 	height: 100%;
 	background-color: #95e1d3;
+}
+
+/* 임시휴무 설정 */
+.tmp_holiday_input_con {
+	
+}
+
+.select_wrapper {
+	display: flex;
+    height: 60px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+.select_box_con {
+	display: flex;
+}
+
+.select_box_con select {
+	height: 100%;
+    width: 100px;
+    background-color: #f38181;
+    border: none;
+    color: white;
+    margin-right: 35px;
+    margin-bottom: 30px;
+}
+
+.select_box_con select:hover {
+	cursor: pointer;
+	transition: 0.5s;
+	background-color: navy;
+}
+
+.day_selector_con {
+	display: flex;
+}
+
+.day_selector {
+	border: none;
+    cursor: pointer;
+    background-color: #95e1d3;
+    margin-left: 11px;
+    width: 90px;
+    font-size: 15pt;
+    height: 100%;
+    border-radius: 5px;
+    color: white;
+    line-height: 60px;
+    text-align: center;
+}
+
+.day_selector:hover {
+	background-color: navy;
+	transition: 0.5s ease-in-out;
+}
+
+.day_selector input {
+	display: none;
 }

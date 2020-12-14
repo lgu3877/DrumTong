@@ -126,3 +126,25 @@ function clearInputs(obj) {
 		buttons[i].style.backgroundColor = "#95e1d3";
 	}	
 }
+
+// 정기 휴무 일(day) 선택
+const selectors = document.getElementsByClassName("day_selector");
+
+for (let i = 0; i < selectors.length; i++) {
+	// 체크박스 체크 옵션
+	selectors[i].addEventListener("click", function(e) {
+		const checkbox = e.target.children[0];
+		const button = e.target;
+		
+		checkbox.checked === false ? 
+			checkbox.checked = true : 
+			checkbox.checked = false;
+		
+		checkbox.checked === true ? 
+			button.style.backgroundColor = "navy" :	
+			button.style.backgroundColor = "#95e1d3";	
+	})
+	
+	// 체크박스 컬러 옵션
+	
+}
