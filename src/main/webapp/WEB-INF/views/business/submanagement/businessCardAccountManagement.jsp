@@ -101,7 +101,7 @@
 						<option value='Busan'>부산은행</option>
 					</select>
 				<div class="flex3">
-					<input type="text" readonly placeholder="계좌번호 입력('-' 제외)" onkeyup="numck(this)">
+					<input type="text" readonly placeholder="계좌번호 입력('-' 제외)" onkeyup="numck(this)" maxlength="25">
 				</div>
 			</div>
 			<div class="flex2">
@@ -144,7 +144,7 @@
 		accountinput.val(paymentList.accountnum);
 	}
 	
-	function inputsubtitle() {
+	function inputsubtitle() {		// 은행 및 카드 종류 입력하기
 		$('#cardbank').html(paymentList.cardbank);
 		$('#accountbank').html(paymentList.accountbank);
 	}
@@ -163,6 +163,11 @@
 	}
 	
 	function cardSubmit(obj) {		// 카드번호 변경
+	
+		let cardConfirm = confirm('정말로 카드번호를 변경하시겠습니까?');
+		if (cardConfirm == false) {
+			return false;
+		}
 		
 		let exit = true;
 		let cardnumsum = '';
@@ -235,8 +240,13 @@
 	
 	function accountSubmit(obj) {	// 계좌번호 서브밋
 		
+		let acConfirm = confirm('정말로 계좌번호를 변경하시겠습니까?');
+		if (acConfirm == false) {
+			return false;
+		}
+		
 		let ob={
-				'accountbank' : paymentList.accountbank,
+				'accountbank' : $('#accountbanksel option:selected').val(),
 				'accountnum' : $('#accountdiv').find('input').val(),
 	      	};
 		
@@ -245,7 +255,6 @@
 	            // 정상
 	       		.then( (response) => {
 	            const data = response.data;
-	            console.log('data : ', data);
 	            
 	            if (data == false) {
 	            	return false;
