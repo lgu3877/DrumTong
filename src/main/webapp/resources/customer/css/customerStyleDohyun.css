@@ -1,63 +1,63 @@
 /*
-	[css 작성 규약]
-	
-	0. css 작성 순서
-	  - width, height
-	  - padding , margin
-	  % 큰단위 순서대로 내려옵니다
-	  
-	
-	1. 묶을 수 있는 것은 최대한 묶는다
-		ex) body, footer, section 배경이 하얀색이면
-		body,footer,section {
-			background-color : white;
-		}
-	
-	2. 중복되는 코드는 사용하지 않는다.
-	
-	3. 명시적인 클래스명을 사용한다.
-	
-	4. 클래스명은 카멜 표기법으로
-	
-	5. 코드에 주석 작성
-	
-	[기본 css] 
+   [css 작성 규약]
+   
+   0. css 작성 순서
+     - width, height
+     - padding , margin
+     % 큰단위 순서대로 내려옵니다
+     
+   
+   1. 묶을 수 있는 것은 최대한 묶는다
+      ex) body, footer, section 배경이 하얀색이면
+      body,footer,section {
+         background-color : white;
+      }
+   
+   2. 중복되는 코드는 사용하지 않는다.
+   
+   3. 명시적인 클래스명을 사용한다.
+   
+   4. 클래스명은 카멜 표기법으로
+   
+   5. 코드에 주석 작성
+   
+   [기본 css] 
 
 
-	(Point Color) : #009fe3 / #00acd4 / #0091e4 / #3598fe / #097ce6 / #35aefd / 
-	
-	(Main Color) : #FFFFFF
-	
-	(hr Color) : #EAEAEA
-	
-	
-	규격 : 1900 x 3000px
-	0
-	font-size : 16px
-	
-	font-family  : spoqa han sans
-	
-	
-	{Front 개발자는 서로 합의해서 규약을 정해서 개발을 할 수 있도록 한다.}
-	
-	[기본 규약]
-	
-	1. css는 클래스 이름에 설정해라
-	
-	2. html로만 모든 페이지를 구성해라
-	
-	3. 막히는게 있으면 20분 이상 고민하지말고 다음 걸로 넘어간다.
-	
-	4. 추후에 마치고 완료가 됐다고 생각하면 팀원들에게 확인을 하고 GitHub에는 최종적으로 확인이 다 된 것만 올린다.
+   (Point Color) : #009fe3 / #00acd4 / #0091e4 / #3598fe / #097ce6 / #35aefd / 
+   
+   (Main Color) : #FFFFFF
+   
+   (hr Color) : #EAEAEA
+   
+   
+   규격 : 1900 x 3000px
+   0
+   font-size : 16px
+   
+   font-family  : spoqa han sans
+   
+   
+   {Front 개발자는 서로 합의해서 규약을 정해서 개발을 할 수 있도록 한다.}
+   
+   [기본 규약]
+   
+   1. css는 클래스 이름에 설정해라
+   
+   2. html로만 모든 페이지를 구성해라
+   
+   3. 막히는게 있으면 20분 이상 고민하지말고 다음 걸로 넘어간다.
+   
+   4. 추후에 마치고 완료가 됐다고 생각하면 팀원들에게 확인을 하고 GitHub에는 최종적으로 확인이 다 된 것만 올린다.
 */
 
 @charset "utf-8";
 
 /* * { */
-/* 	user-select: none; */
-/* 	font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif'; */
-/* 	font-size: 16px; */
-/* 	box-sizing: border-box; */
+/*    user-select: none; */
+/*    font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif'; */
+/*    font-size: 16px; */
+/*    box-sizing: border-box; */
 /* } */
 
 
@@ -65,1471 +65,1471 @@
 
 /* } */
 /* html { */
-/* 	width: 100%; */
-/* 	height: auto; */
+/*    width: 100%; */
+/*    height: auto; */
 /* } */
 
 /* body, */
 /* header, */
 /* section { */
-/* 	background-color: white; */
-/* 	width: 1900px; */
-/* 	box-sizing: border-box; */
+/*    background-color: white; */
+/*    width: 1900px; */
+/*    box-sizing: border-box; */
 /* } */
 
 /* body { */
-/* 	border: 1px solid yellow; */
-/* 	margin: auto; */
-/* 	height: auto; */
+/*    border: 1px solid yellow; */
+/*    margin: auto; */
+/*    height: auto; */
 
-/* 		최대크기 */ 
-/* 	max-width: 1900px; */
-/* 	max-height: 3000px; */
+/*       최대크기 */ 
+/*    max-width: 1900px; */
+/*    max-height: 3000px; */
 
-/* 		최소크기 */ 
-/* 	min-width : 100%; */
-/* 	min-height: 100%; */
+/*       최소크기 */ 
+/*    min-width : 100%; */
+/*    min-height: 100%; */
 /* } */
 
 @media screen and (max-width : 600px) {
-	body {
-	
-	margin: auto;
-	height: auto;
+   body {
+   
+   margin: auto;
+   height: auto;
 
-	/* 	최대크기 */
-	max-width: 1000px;
-	max-height: 1500px;
-	
-	}
+   /*    최대크기 */
+   max-width: 1000px;
+   max-height: 1500px;
+   
+   }
 }
 
 /* ====================섹션 CSS================================ */
 body section {
-	width: 1900px;
-	height: auto;
-	/* 	height: 2000px; */
-	/* padding: 10px; */
-	/* margin-top: 70px; */
+   width: 1900px;
+   height: auto;
+   /*    height: 2000px; */
+   /* padding: 10px; */
+   /* margin-top: 70px; */
 }
 
 body section .fa-search-plus {
-	color: #0091e4;
+   color: #0091e4;
 }
 
 /* ====================메인 검색(search) CSS========================= */
 body .section_main .search {
-	width: auto;
-	height: 400px;
-	display: flex;
-	flex-direction: row;
-	box-sizing: border-box;
-	/* background-color: antiquewhite; */
-	background-color: #FFFFFF;
-	padding-top: 150px;
+   width: auto;
+   height: 400px;
+   display: flex;
+   flex-direction: row;
+   box-sizing: border-box;
+   /* background-color: antiquewhite; */
+   background-color: #FFFFFF;
+   padding-top: 150px;
 
 }
 
 body .section_main .search .searchs {
-	width: auto;
-	margin: 0 auto;
+   width: auto;
+   margin: 0 auto;
 }
 
 body .section_main .search .searchs .searchs_p {
-	width: auto;
-	text-align: center;
-	font-size: 35px;
-	margin: 10px;
+   width: auto;
+   text-align: center;
+   font-size: 35px;
+   margin: 10px;
 }
 body .section_main .search .searchs .searchs_p  b{
-	color: #1564F9;
-	font-size : 35px;
+   color: #1564F9;
+   font-size : 35px;
 }
 
 
 body .section_main .search .searchBox {
-	text-align: center;
-	width: 1000px;
-	height: 60px;
-	border: 1px solid black;
-	margin: 0 auto;
-	padding-top: 5px;
-	border-color: #097ce6;
-	margin-top : 20px;
+   text-align: center;
+   width: 1000px;
+   height: 60px;
+   border: 1px solid black;
+   margin: 0 auto;
+   padding-top: 5px;
+   border-color: #097ce6;
+   margin-top : 20px;
 }
 
 body .section_main .search .searchBox .fa-search-plus {
-	font-size: 20px;
+   font-size: 20px;
 }
 
 body .section_main .search .searchBox .searchLine {
-	width: 850px;
-	height: 40px;
-	border-right: 0px;
-	border-top: 0px;
-	border-left: 0px;
-	border-bottom: 0px;
-	outline: 0;
-	padding-left: 10px;
-	/* border:none; */
-	/* text-align: center; */
+   width: 850px;
+   height: 40px;
+   border-right: 0px;
+   border-top: 0px;
+   border-left: 0px;
+   border-bottom: 0px;
+   outline: 0;
+   padding-left: 10px;
+   /* border:none; */
+   /* text-align: center; */
 }
 
 body .section_main .search .searchBox .search_button {
-	width: 100px;
-	height: 41px;
-	border: 1px solid #EAEAEA;
-	background-color: #0091e4;
-	color: white;
-	outline: 0;
-	font-weight: bolder;
-	
+   width: 100px;
+   height: 41px;
+   border: 1px solid #EAEAEA;
+   background-color: #0091e4;
+   color: white;
+   outline: 0;
+   font-weight: bolder;
+   
 }
 
 body .section_main .search .searchBox .search_button:active {
-	background-color: #373737;
+   background-color: #373737;
 }
 
 body .section_main .search .searchs .filter {
-	width: auto;
-	height: 100px;
-	padding: 10px 50px;
-	margin-top: 150px;
-	border: 1px solid black;
+   width: auto;
+   height: 100px;
+   padding: 10px 50px;
+   margin-top: 150px;
+   border: 1px solid black;
 }
 
 /* ====================공지사항(notice) CSS========================== */
 body .section_main .notice {
-	box-sizing: border-box;
-	width: auto;
-	height: 350px;
-	/* background-color: aliceblue; */
-	background-color: #FFFFFF;
-	text-align: center;
+   box-sizing: border-box;
+   width: auto;
+   height: 350px;
+   /* background-color: aliceblue; */
+   background-color: #FFFFFF;
+   text-align: center;
 
 }
 
 body .section_main .notice .notice_name {
-	width: auto;
-	font-size: 27px;
-	margin: 0;
-	padding-top: 20px;
-	font-weight: bolder;
+   width: auto;
+   font-size: 27px;
+   margin: 0;
+   padding-top: 20px;
+   font-weight: bolder;
 }
 
 body .section_main .notice .notices {
-	/* border: 1px solid black; */
-	width: 1144px;
-	height: 340px;
-	margin-top: 10px;
-	margin-left: auto;
-	margin-right: auto;
+   /* border: 1px solid black; */
+   width: 1144px;
+   height: 340px;
+   margin-top: 10px;
+   margin-left: auto;
+   margin-right: auto;
 }
 body .section_main .notice .notices .notices_0 a {
-	text-decoration: none;
-	color: black;
+   text-decoration: none;
+   color: black;
 }
 
 body .section_main .notice .notices .notices_0 a {
-	text-decoration: none;
+   text-decoration: none;
 }
 
 body .section_main .notice .notices .notices_0 {
-	text-align: center;
-	margin-top: 30px;
-	margin-left: auto;
-	margin-right: auto;
-	border: 1px solid #EAEAEA;
+   text-align: center;
+   margin-top: 30px;
+   margin-left: auto;
+   margin-right: auto;
+   border: 1px solid #EAEAEA;
 }
 
 body .section_main .notice .notices .notices_1 {
-	float: left;
-	width: 570px;
-	height: 250px;
-	padding: 10px;
+   float: left;
+   width: 570px;
+   height: 250px;
+   padding: 10px;
 
 }
 
 body .section_main .notice .notices .notices_2 {
-	float: left;
-	width: 570px;
-	height: 250px;
-	padding: 10px;
+   float: left;
+   width: 570px;
+   height: 250px;
+   padding: 10px;
 }
 
 body .section_main .notice .notices .notices_1 a .notices_1_1 {
-	font-size: 18px;
-	font-weight: bolder;
-	color : #000000;
+   font-size: 18px;
+   font-weight: bolder;
+   color : #000000;
 }
 
 body .section_main .notice .notices .notices_2 a .notices_1_2 {
-	font-size: 18px;
-	font-weight: bolder;
-	color : #000000;
+   font-size: 18px;
+   font-weight: bolder;
+   color : #000000;
 }
 
 
 body .section_main .notice .notices .notices_0 .notice_hr {
-	/* border: 1px solid #EAEAEA; */
-	/* height: 1px; */
-	border: 0;
-	height: 1px;
-	background: #EAEAEA;
+   /* border: 1px solid #EAEAEA; */
+   /* height: 1px; */
+   border: 0;
+   height: 1px;
+   background: #EAEAEA;
 }
 
 body .section_main .notice .notices .notice_ul {
-	padding: 10px;
-	margin: 10px;
+   padding: 10px;
+   margin: 10px;
 }
 
 /* body .section_main .notice .notices .notice_ul .notice_li { */
-/* 	margin: 10px; */
-/* 	list-style: none; */
+/*    margin: 10px; */
+/*    list-style: none; */
 /* } */
 
 body .section_main .notice .notices .notice_ul .notice_area {
-	width : 560px;
-	height: 30px;
-/* 	background-color: red;	 */
-	float: left;
+   width : 560px;
+   height: 30px;
+/*    background-color: red;    */
+   float: left;
 }
 
 body .section_main .notice .notices .notice_ul .notice_area .notice_new {
-	width : 7%;
-	height : 100%;
-	float: left;
-	color : red;
-	font-size: 9px;
+   width : 7%;
+   height : 100%;
+   float: left;
+   color : red;
+   font-size: 9px;
 }
 
 body .section_main .notice .notices .notice_ul .notice_area .notice_area_title {
-	width : 81%;
-	height : 100%;
-	float: left;
-	font-weight: bolder;
+   width : 81%;
+   height : 100%;
+   float: left;
+   font-weight: bolder;
 }
 body .section_main .notice .notices .notice_ul .notice_area .notice_area_registdate {
-	width : 15%;
-	height : 100%;
-	float: left;
-	font-size: 12px;
-	color : #747474;
+   width : 15%;
+   height : 100%;
+   float: left;
+   font-size: 12px;
+   color : #747474;
 }
 
 body .section_main .notice .notices .notice_ul .notice_li a {
-	text-decoration: none;
-	color: #373737;
+   text-decoration: none;
+   color: #373737;
 }
 
 
 /* ====================세탁소(laundryList) 미리보기 CSS========================== */
 body .section_main .laundryList {
-	box-sizing: border-box;
-	width: 1900px;
-	height: 600px;
-	background-color: #FFFFFF;
-	text-align: center;
+   box-sizing: border-box;
+   width: 1900px;
+   height: 600px;
+   background-color: #FFFFFF;
+   text-align: center;
 }
 
 body .section_main .laundryList .laundry_p {
-	width: 1900px;
-	font-size: 25px;
-	margin: 0;
-	padding-top: 20px;
+   width: 1900px;
+   font-size: 25px;
+   margin: 0;
+   padding-top: 20px;
 }
 
 body .section_main .laundryList .laundry_p1 {
-	font-size: 17pt;
-	font-weight: bolder;
+   font-size: 17pt;
+   font-weight: bolder;
 
 }
 
 body .section_main .laundryList .laundry_p2 {
-	font-size: 11pt;
+   font-size: 11pt;
 }
 
 body .section_main .laundryList .laundryLists {
-/* 	@주석처리해라 */
-/* 	border: 1px solid black; */
-	
-	width: 1500px;
-	height: 550px;
-	text-align: center;
-	margin-top: 10px;
-	margin-left: auto;
-	margin-right: auto;	
-	margin-right: auto;
-	padding-right: 5px;
-	display: flex;
+/*    @주석처리해라 */
+/*    border: 1px solid black; */
+   
+   width: 1500px;
+   height: 550px;
+   text-align: center;
+   margin-top: 10px;
+   margin-left: auto;
+   margin-right: auto;   
+   margin-right: auto;
+   padding-right: 5px;
+   display: flex;
 }
 
 body .section_main .laundryList .laundryLists a {
-	text-decoration: none;
-	color: black;
-	width: 480px;
-	height: 550px;
+   text-decoration: none;
+   color: black;
+   width: 480px;
+   height: 550px;
 }
 
 body .section_main .laundryList .laundryLists .laundryLists_1 {
-	border: 1px solid #EAEAEA;
-	width: 480px;
-	height: 550px;
-	margin-left: 10px;
-	/* padding-top: 5px; */
-	/* text-align: center; */
+   border: 1px solid #EAEAEA;
+   width: 480px;
+   height: 550px;
+   margin-left: 10px;
+   /* padding-top: 5px; */
+   /* text-align: center; */
 
 }
 
 body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_1 {
-	/* background-color: blueviolet; */
-	width: 480px;
-	height: 400px;
-	margin: 0px;
+   /* background-color: blueviolet; */
+   width: 480px;
+   height: 400px;
+   margin: 0px;
 }
 
 body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_1 img {
-	width: 487px;
-	height: 400px;
-	margin: 0px;
-	/* margin-top: 5px; */
+   width: 487px;
+   height: 400px;
+   margin: 0px;
+   /* margin-top: 5px; */
 
 }
 
 body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_2 {
-	/* background-color: bisque; */
-	width: auto;
-	height: auto;
-	padding: 10px 15px;
-	margin: 0;
+   /* background-color: bisque; */
+   width: auto;
+   height: auto;
+   padding: 10px 15px;
+   margin: 0;
 }
 
 body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_2 p {
-	width : auto;
-	height: auto;
-	text-align: left;
-	font-size: 16px;
-	margin: 0px;
-	margin-bottom: 5px;
+   width : auto;
+   height: auto;
+   text-align: left;
+   font-size: 16px;
+   margin: 0px;
+   margin-bottom: 5px;
 }
 
 body .section_main .laundryList .laundryLists .btn {
-	width: 37px;
-	height: 50px;
-	margin: 70px 27px;
-	font-size: 25px;
-	text-align: center;
-	border-radius: 30px;
-	background-color: #FFFFFF;
-	border: 1px solid#EAEAEA;
-	outline: 0;
+   width: 37px;
+   height: 50px;
+   margin: 70px 27px;
+   font-size: 25px;
+   text-align: center;
+   border-radius: 30px;
+   background-color: #FFFFFF;
+   border: 1px solid#EAEAEA;
+   outline: 0;
 }
 
 body .section_main .laundryList .laundryLists .btn:active {
-	background-color: #EAEAEA;
+   background-color: #EAEAEA;
 }
 
 /* ====================회원정보 수정(joinchange) 미리보기 CSS========================== */
 
 body .section_Joinchange {
-	padding-top: 70px;
-	width: 1900px;
-	height: 1400px;
+   padding-top: 70px;
+   width: 1900px;
+   height: 1400px;
 }
 
 
 body .section_Joinchange .join_mainName {
-	text-align: center;
-	margin-left: auto;
-	margin-right: auto;
-	font-size: 30px;
+   text-align: center;
+   margin-left: auto;
+   margin-right: auto;
+   font-size: 30px;
 }
 
 body .section_Joinchange .join_change {
-	width: 800px;
-	height: 1050px;
-	padding: 30px;
-	border: 1px solid #EAEAEA;
-	box-shadow: 5px 5px 5px 5px #EAEAEA;
-	margin-left: auto;
-	margin-right: auto;
-	/* padding-top: 200px; */
-	/* margin-top: 200px; */
+   width: 800px;
+   height: 1050px;
+   padding: 30px;
+   border: 1px solid #EAEAEA;
+   box-shadow: 5px 5px 5px 5px #EAEAEA;
+   margin-left: auto;
+   margin-right: auto;
+   /* padding-top: 200px; */
+   /* margin-top: 200px; */
 }
 
 body .section_Joinchange .join_change .join_fo1 {
-	width: 700px;
-	/* border: 1px solid #EAEAEA; */
-	display: inline-flex;
+   width: 700px;
+   /* border: 1px solid #EAEAEA; */
+   display: inline-flex;
 }
 
 .join_fo1_1 {
-	width: 200px;
-	height: 150px;
-	border: 1px solid #EAEAEA;
-	box-shadow: 2px 2px 2px 2px #EAEAEA;
+   width: 200px;
+   height: 150px;
+   border: 1px solid #EAEAEA;
+   box-shadow: 2px 2px 2px 2px #EAEAEA;
 }
 
 .join_fo1_2 {
-	width: 500px;
-	margin-left: 10px;
-	/* margin-top: 30px; */
-	float: right;
-	border: 0;
-	outline: 0;
+   width: 500px;
+   margin-left: 10px;
+   /* margin-top: 30px; */
+   float: right;
+   border: 0;
+   outline: 0;
 }
 .join_fo1_2_file {
-	width: 500px;
-	float: right;
-	/* border: 0;
-	outline: 0; */
+   width: 500px;
+   float: right;
+   /* border: 0;
+   outline: 0; */
 }
 
 .join_fo1_2_sub {
-	width: 500px;
-	float: left;
-	margin-top: 10px;
-	/* border: 0;
-	outline: 0; */
+   width: 500px;
+   float: left;
+   margin-top: 10px;
+   /* border: 0;
+   outline: 0; */
 }
 
 body .section_Joinchange .join_change .join_button {
-	float: right;
-	width: 60px;
-	height: 40px;
-	outline: 0;
-	border-radius: 20px;
-	border-color: #EAEAEA;
-	border-style: dotted;
-	/* border: 0; */
+   float: right;
+   width: 60px;
+   height: 40px;
+   outline: 0;
+   border-radius: 20px;
+   border-color: #EAEAEA;
+   border-style: dotted;
+   /* border: 0; */
 
 }
 
 body .section_Joinchange .join_change .join_button:active {
-	border: 1px solid #35aefd;
+   border: 1px solid #35aefd;
 
 }
 
 body .section_Joinchange .join_change form .join_name {
-	margin-top: 20px;
-	margin-bottom: 5px;
-	font-weight: bold;
+   margin-top: 20px;
+   margin-bottom: 5px;
+   font-weight: bold;
 }
 
 body .section_Joinchange .join_change form .join_name .join_id_p {
-	display: inline-block;
+   display: inline-block;
 }
 
 body .section_Joinchange .join_change .join_inputbox {
-	width: 500px;
-	height: 40px;
-	outline-color: #35aefd;
-	border: 0;
-	/* margin-bottom: 15px; */
-	/* text-align: center; */
+   width: 500px;
+   height: 40px;
+   outline-color: #35aefd;
+   border: 0;
+   /* margin-bottom: 15px; */
+   /* text-align: center; */
 }
 
 body .section_Joinchange .join_change .join_pnum {
-	width: 500px;
-	display: inline-block;
+   width: 500px;
+   display: inline-block;
 }
 
 body .section_Joinchange .join_change .join_pum_ok {
-	width: 85px;
-	height: 40px;
-	float: right;
-	border: 0;
-	outline-color: #35aefd;
-	/* margin-right: 30px; */
+   width: 85px;
+   height: 40px;
+   float: right;
+   border: 0;
+   outline-color: #35aefd;
+   /* margin-right: 30px; */
 }
 
 body .section_Joinchange .join_change .join_joso {
-	width: 500px;
-	display: inline-block;
+   width: 500px;
+   display: inline-block;
 }
 
 body .section_Joinchange .join_change .join_joso_ok {
-	width: 85px;
-	height: 35px;
-	border: 0;
-	float: right;
-	outline-color: #35aefd;
-	/* margin-right: 30px; */
+   width: 85px;
+   height: 35px;
+   border: 0;
+   float: right;
+   outline-color: #35aefd;
+   /* margin-right: 30px; */
 }
 
 body .section_Joinchange .join_change .join_cmp .join_complete:active {
-	background-color: #35aefd;
+   background-color: #35aefd;
 }
 
 /* ====================검색 상세페이지 (search) CSS========================= */
 
 body .section_search {
-	padding-top: 70px;
-	height: 940px;
+   padding-top: 70px;
+   height: 940px;
 }
 
 body .section_search .filter {
-	width: 1900px;
-	height: 70px;
-	display: inline-flex;
-	border-bottom: 1px solid #EAEAEA;
+   width: 1900px;
+   height: 70px;
+   display: inline-flex;
+   border-bottom: 1px solid #EAEAEA;
 }
 
 body .section_search .filter .searchBox {
-	border-right: 1px solid #EAEAEA;
-	width: 280px;
-	height: 70px;
-	text-align: center;
-	display: flex;
-	margin: 0px;
-	margin-top: 2px;
-	padding-left: 25px;
+   border-right: 1px solid #EAEAEA;
+   width: 280px;
+   height: 70px;
+   text-align: center;
+   display: flex;
+   margin: 0px;
+   margin-top: 2px;
+   padding-left: 25px;
 
 }
 
 body .section_search .filter .searchBox .search_icon {
-	margin-top: 25px;
+   margin-top: 25px;
 }
 
 body .section_search .filter .searchBox .searchLine {
-	height: 66px;
-	border: 0;
-	outline: none;
-	padding: 10px;
+   height: 66px;
+   border: 0;
+   outline: none;
+   padding: 10px;
 }
 
 body .section_search .filter .searchBox .search_button {
-	width: 60px;
-	height: 35px;
-	margin-top: 15px;
-	margin-right: 5px;
-	border: 1px solid #EAEAEA;
-	background-color: #0091e4;
-	color: white;
-	outline: 0;
-	font-weight: bolder;
+   width: 60px;
+   height: 35px;
+   margin-top: 15px;
+   margin-right: 5px;
+   border: 1px solid #EAEAEA;
+   background-color: #0091e4;
+   color: white;
+   outline: 0;
+   font-weight: bolder;
 }
 
 body .section_search .filter .searchBox .search_button:active {
-	background-color: #35aefd;
+   background-color: #35aefd;
 }
 
 body .section_search .filter .filter_op {
-	height: 37px;
-	margin-top: 15px;
-	margin-left: 30px;
-	text-align: center;
-	padding: 0px 15px;
-	border: 1px solid #EAEAEA;
+   height: 37px;
+   margin-top: 15px;
+   margin-left: 30px;
+   text-align: center;
+   padding: 0px 15px;
+   border: 1px solid #EAEAEA;
 }
 
 body .section_search .filter .filter_op1 {
-	margin-left: 350px;
+   margin-left: 350px;
 }
 
 body .section_search .filter .filter_reset {
-	width: 800px;
-	height: auto;
-	/* border: 1px solid black; */
-	/* display: flex; */
+   width: 800px;
+   height: auto;
+   /* border: 1px solid black; */
+   /* display: flex; */
 }
 
 body .section_search .filter .filter_reset .filter_resets {
-	border-left: 1px solid #EAEAEA;
-	width: 180px;
-	height: 68px;
-	float: right;
+   border-left: 1px solid #EAEAEA;
+   width: 180px;
+   height: 68px;
+   float: right;
 }
 
 body .section_search .filter .filter_reset button {
-	width: 150px;
-	height: 50px;
-	margin: 10px 13px;
-	outline: 0;
-	float: right;
-	border: 1px solid #EAEAEA;
-	background-color: #0091e4;
-	color: white;
-	font-weight: bolder;
+   width: 150px;
+   height: 50px;
+   margin: 10px 13px;
+   outline: 0;
+   float: right;
+   border: 1px solid #EAEAEA;
+   background-color: #0091e4;
+   color: white;
+   font-weight: bolder;
 }
 
 body .section_search .filter .filter_reset button:active {
-	background-color: #35aefd;
+   background-color: #35aefd;
 }
 
 body .section_search .laundryList_main {
-	width: 1900px;
-	height: 797px;
-	/* border-bottom: 1px solid red; */
-	/* display: inline-flex; */
+   width: 1900px;
+   height: 797px;
+   /* border-bottom: 1px solid red; */
+   /* display: inline-flex; */
 }
 
 body .section_search .laundryList_main .laundryList_list {
-	width: 1100px;
-	height: 797px;
-	float: left;
-	/* border: 1px solid red; */
+   width: 1100px;
+   height: 797px;
+   float: left;
+   /* border: 1px solid red; */
 }
 
 body .section_search .laundryList_main .laundryList_map {
-	width: 800px;
-	height: 797px;
-	border: 1px solid blue;
-	float: left;
+   width: 800px;
+   height: 797px;
+   border: 1px solid blue;
+   float: left;
 }
 
 body .section_search .laundryList_main .laundryList_list .laundryList_sum {
-	width: 1100px;
-	height: 70px;
-	padding: 10px 30px;
-	/* display: inline-flex; */
-	/* border-bottom: 1px solid #EAEAEA; */
+   width: 1100px;
+   height: 70px;
+   padding: 10px 30px;
+   /* display: inline-flex; */
+   /* border-bottom: 1px solid #EAEAEA; */
 }
 
 body .section_search .laundryList_main .laundryList_list .laundryList_sum .sum_hr {
-	border: 0;
-	height: 1px;
-	background: #EAEAEA;
+   border: 0;
+   height: 1px;
+   background: #EAEAEA;
 }
 
 body .section_search .laundryList_main .laundryList_list .laundryList_child {
-	width: auto;
-	height: auto;
-	padding: 0px 5px 0px 15px;
-	/* border: 1px solid violet; */
-	/* overflow-y: scroll; */
+   width: auto;
+   height: auto;
+   padding: 0px 5px 0px 15px;
+   /* border: 1px solid violet; */
+   /* overflow-y: scroll; */
 
 }
 
 body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list {
-	height: 695px;
-	padding: 0px;
-	overflow-y: scroll;
-	/* display: inline-block; */
+   height: 695px;
+   padding: 0px;
+   overflow-y: scroll;
+   /* display: inline-block; */
 }
 
 
 .premium_nameBox {
-	width: auto;
-	height: 30px;
-	margin-left: 20px;
-	margin-right: 10px;
+   width: auto;
+   height: 30px;
+   margin-left: 20px;
+   margin-right: 10px;
 }
 
 .premium_nameBox .premium_name {
-	display: inline-block;
-	margin: 0;
-	/* border-bottom: 1px solid #EAEAEA; */
+   display: inline-block;
+   margin: 0;
+   /* border-bottom: 1px solid #EAEAEA; */
 }
 
 .premium_nameBox .premium_more {
-	width: auto;
-	height: auto;
-	float: right;
-	cursor: pointer;
-	outline: 0;
-	display: none;
-	/* border-bottom: 1px solid #EAEAEA; */
-	/* font-weight: bolder; */
-	/* color: white; */
-	/* border: 1px solid #EAEAEA;
-	background-color: #0091e4; */
+   width: auto;
+   height: auto;
+   float: right;
+   cursor: pointer;
+   outline: 0;
+   display: none;
+   /* border-bottom: 1px solid #EAEAEA; */
+   /* font-weight: bolder; */
+   /* color: white; */
+   /* border: 1px solid #EAEAEA;
+   background-color: #0091e4; */
 }
 
 .premium_hr {
-	border: 0;
-	height: 1px;
-	margin-left: 20px;
-	margin-right: 10px;
-	background: #EAEAEA;
+   border: 0;
+   height: 1px;
+   margin-left: 20px;
+   margin-right: 10px;
+   background: #EAEAEA;
 }
 
 .laundryList_premium {
-	width: auto;
-	height: auto;
-	/* border: 1px solid red; */
+   width: auto;
+   height: auto;
+   /* border: 1px solid red; */
 }
 
 .premium_list {
-	width: auto;
-	height: auto;
-	/* border: 1px solid blue; */
-	padding: 0;
+   width: auto;
+   height: auto;
+   /* border: 1px solid blue; */
+   padding: 0;
 }
 
 .premium_childs {
-	width: 320px;
-	height: 300px;
-	display: inline-flex;
-	/* border: 1px solid #EAEAEA; */
+   width: 320px;
+   height: 300px;
+   display: inline-flex;
+   /* border: 1px solid #EAEAEA; */
 }
 .premium_childs .premium_childs_info_1{
-	position: relative;
+   position: relative;
 }
 .premium_list .premium_childs a {
-	width: auto;
-	height: auto;
-	text-decoration: none;
-	color: black;
+   width: auto;
+   height: auto;
+   text-decoration: none;
+   color: black;
 }
 .premium_childs .premium_childs_info_1 img {
-	/* position: absolute; */
-	/* z-index: 0; */
-	width: 320px;
-	height: 200px;
-	margin: 0px;
-	/* top: 0; */
-	/* background: url(/laundry/src/main/webapp/resources/customer/img/펭수버럭.jpg);
-	background-size: 320px 200px; */
-	/* display: inline-flex; */
+   /* position: absolute; */
+   /* z-index: 0; */
+   width: 320px;
+   height: 200px;
+   margin: 0px;
+   /* top: 0; */
+   /* background: url(/laundry/src/main/webapp/resources/customer/img/펭수버럭.jpg);
+   background-size: 320px 200px; */
+   /* display: inline-flex; */
 }
 
 .fa-start {
-	position: absolute;
-	z-index: 1;
-	width: auto;
-	height: 30px;
-	list-style: none;
-	margin: 0px;
-	padding: 0px;
-	margin-left: 293px;
-	float: right;
-	cursor: pointer; 
-	color: white;
-	display: inline-flex;
-	font-size: x-large;
-/* 	-webkit-text-stroke: none; */
-	/* background-color: orange; */
-	/* top: 0; */
-	/* margin-top: 5px; */
+   position: absolute;
+   z-index: 1;
+   width: auto;
+   height: 30px;
+   list-style: none;
+   margin: 0px;
+   padding: 0px;
+   margin-left: 293px;
+   float: right;
+   cursor: pointer; 
+   color: white;
+   display: inline-flex;
+   font-size: x-large;
+/*    -webkit-text-stroke: none; */
+   /* background-color: orange; */
+   /* top: 0; */
+   /* margin-top: 5px; */
 }
 
 /* .fa-start:active {
-	color: yellow;
+   color: yellow;
 } */
 
 .premium_childs_info_1_1 {
-	width: auto;
-	height: auto;
-	padding: 10px 15px;
-	margin: 0;
-	/* border: 1px solid red; */
+   width: auto;
+   height: auto;
+   padding: 10px 15px;
+   margin: 0;
+   /* border: 1px solid red; */
 }
 
 .premium_childs_info_1_1 p {
-	width: auto;
-	height: auto;
-	text-align: left;
-	font-size: 16px;
-	margin: 0px;
-	margin-bottom: 5px;
+   width: auto;
+   height: auto;
+   text-align: left;
+   font-size: 16px;
+   margin: 0px;
+   margin-bottom: 5px;
 }
 
 
 body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs {
-	width: 320px;
-	height: 300px;
-	margin-left: 10px;
-	margin-top: 10px;
-	display: inline-flex;
-	/* border: 1px solid #EAEAEA; */
-	/* flex-wrap: wrap; */
+   width: 320px;
+   height: 300px;
+   margin-left: 10px;
+   margin-top: 10px;
+   display: inline-flex;
+   /* border: 1px solid #EAEAEA; */
+   /* flex-wrap: wrap; */
 }
 
 body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs a {
-	width: auto;
-	height: auto;
-	text-decoration: none;
-	color: black;
+   width: auto;
+   height: auto;
+   text-decoration: none;
+   color: black;
 }
 
 body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs .childs_info_1 {
-	position: relative;
+   position: relative;
 }
 
 body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs .childs_info_1 img {
-	width: 320px;
-	height: 200px;
-	margin: 0px;
+   width: 320px;
+   height: 200px;
+   margin: 0px;
 }
 
 body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs .childs_info_1_1 {
-	width: auto;
-	height: auto;
-	padding: 10px 15px;
-	margin: 0;
+   width: auto;
+   height: auto;
+   padding: 10px 15px;
+   margin: 0;
 }
 
 body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs .childs_info_1_1 p {
-	width: auto;
-	height: auto;
-	text-align: left;
-	font-size: 16px;
-	margin: 0px;
-	margin-bottom: 5px;
+   width: auto;
+   height: auto;
+   text-align: left;
+   font-size: 16px;
+   margin: 0px;
+   margin-bottom: 5px;
 }
 
 /* ====================결제 수단 및 쿠폰 마일리지 관리 (PayAndCopon) CSS========================= */
 
 body .section_pac {
-	padding-top: 70px;
-	width: 1900px;
-	height: 1100px;
+   padding-top: 70px;
+   width: 1900px;
+   height: 1100px;
 }
 
 body .section_pac .pac_mainName {
-	width: 1900px;
-	height: 33px;
-	text-align: center;
-	margin-left: auto;
-	margin-right: auto;
-	font-size: 25px;
+   width: 1900px;
+   height: 33px;
+   text-align: center;
+   margin-left: auto;
+   margin-right: auto;
+   font-size: 25px;
 }
 
 body .section_pac .pac_list {
-	width: 800px;
-	height: 50px;
-	margin-left: auto;
-	margin-right: auto;
-	/* text-align: center; */
+   width: 800px;
+   height: 50px;
+   margin-left: auto;
+   margin-right: auto;
+   /* text-align: center; */
 }
 
 body .section_pac .pac_list .pac_lists {
-	width: auto;
-	height: auto;
-	display: inline-flex;
-	/* border-bottom: 1px solid #EAEAEA; */
+   width: auto;
+   height: auto;
+   display: inline-flex;
+   /* border-bottom: 1px solid #EAEAEA; */
 }
 
 body .section_pac .pac_list .pac_pay {
-	width: 400px;
-	height: auto;
-	text-align: center;
-	/* border: 1px solid red; */
+   width: 400px;
+   height: auto;
+   text-align: center;
+   /* border: 1px solid red; */
 }
 
 body .section_pac .pac_list .pac_pay #pac_pay_button {
-	width: 200px;
-	height: 30px;
-	border: 0;
-	outline: 0;
-	color: white;
-	background-color: #35aefd;
-	box-shadow: 2px 2px 2px 2px #EAEAEA;
-	font-size: 20px;
+   width: 200px;
+   height: 30px;
+   border: 0;
+   outline: 0;
+   color: white;
+   background-color: #35aefd;
+   box-shadow: 2px 2px 2px 2px #EAEAEA;
+   font-size: 20px;
 }
 
 body .section_pac .pac_list .pac_copon {
-	width: 400px;
-	height: auto;
-	text-align: center;
-	/* border: 1px solid blue; */
+   width: 400px;
+   height: auto;
+   text-align: center;
+   /* border: 1px solid blue; */
 }
 
 body .section_pac .pac_list .pac_copon #pac_coupon_button {
-	width: 200px;
-	height: 30px;
-	border: 0;
-	outline: 0;
-	background-color: white;
-	box-shadow: 2px 2px 2px 2px #EAEAEA;
-	font-size: 20px;
+   width: 200px;
+   height: 30px;
+   border: 0;
+   outline: 0;
+   background-color: white;
+   box-shadow: 2px 2px 2px 2px #EAEAEA;
+   font-size: 20px;
 }
 
 body .section_pac .pac_list .pac_mileage {
-	width: 100px;
-	text-align: center;
+   width: 100px;
+   text-align: center;
 
 }
 
 body .section_pac .pac_list button {
-	outline: 0;
-	border-radius: 50px;
-	border-color: #EAEAEA;
-	/* border-style: 1px dotted; */
-	/* border: 1px dashed ; */
+   outline: 0;
+   border-radius: 50px;
+   border-color: #EAEAEA;
+   /* border-style: 1px dotted; */
+   /* border: 1px dashed ; */
 
 }
 
 body .section_pac .pac_list button:active {
-	border: 1px solid #35aefd;
-	/* border-bottom: 1px solid #35aefd; */
+   border: 1px solid #35aefd;
+   /* border-bottom: 1px solid #35aefd; */
 }
 
 body .section_pac .pac_mainList_pay {
-	width: auto;
-	height: 200px;
-	margin: 50px 100px;
-	border: 1px solid white;
-	/* display: none; */
+   width: auto;
+   height: 200px;
+   margin: 50px 100px;
+   border: 1px solid white;
+   /* display: none; */
 }
 
 body .section_pac .pac_mainList_pay .pac_mainPay:active {
-	display: flex;
+   display: flex;
 }
 
 body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList {
-	width: 1000px;
-	height: auto;
-	border: 1px solid white;
-	margin: 10px 10px;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
+   width: 1000px;
+   height: auto;
+   border: 1px solid white;
+   margin: 10px 10px;
+   margin-left: auto;
+   margin-right: auto;
+   text-align: center;
 }
 
 body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payText {
-	width: 800px;
-	height: 50px;
-	font-size: 25px;
-	margin-top: 0px;
-	margin-bottom: 0px;
-	margin-left: 120px;
+   width: 800px;
+   height: 50px;
+   font-size: 25px;
+   margin-top: 0px;
+   margin-bottom: 0px;
+   margin-left: 120px;
 }
 
 
 body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists {
-	width: 800px;
-	height: 45px;
-	border: 1px solid #EAEAEA;
-	box-shadow: 2px 2px 2px 2px #EAEAEA;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 10px;
-	text-align: left;
+   width: 800px;
+   height: 45px;
+   border: 1px solid #EAEAEA;
+   box-shadow: 2px 2px 2px 2px #EAEAEA;
+   margin-left: auto;
+   margin-right: auto;
+   margin-bottom: 10px;
+   text-align: left;
 }
 
 
 body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_name {
-	width: 100px;
-	height: auto;
-	padding: 8px 10px;
-	display: inline-flex;
-	margin: 0px;
-	margin-left: 30px;
-	/* border-right: 1px solid #EAEAEA; */
+   width: 100px;
+   height: auto;
+   padding: 8px 10px;
+   display: inline-flex;
+   margin: 0px;
+   margin-left: 30px;
+   /* border-right: 1px solid #EAEAEA; */
 }
 
 body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_kind {
-	width: 100px;
-	height: 30px;
-	display: inline-flex;
-	border: none;
-	background : #B2CCFF;
-	text-align: center;
-	outline: 0;
+   width: 100px;
+   height: 30px;
+   display: inline-flex;
+   border: none;
+   background : #B2CCFF;
+   text-align: center;
+   outline: 0;
 }
 
 body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payAccount_num {
-	width: 430px;
-	height: 35px;
-	display: inline-flex;
-	border: 1px solid #EAEAEA;
-	text-align: center;
-	outline: 0;
+   width: 430px;
+   height: 35px;
+   display: inline-flex;
+   border: 1px solid #EAEAEA;
+   text-align: center;
+   outline: 0;
 }
 
 body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_num {
-	width: 95px;
-	height: 35px;
-	display: inline-flex;
-	border: 1px solid #EAEAEA;
-	text-align: center;
-	outline: 0;
+   width: 95px;
+   height: 35px;
+   display: inline-flex;
+   border: 1px solid #EAEAEA;
+   text-align: center;
+   outline: 0;
 }
 
 body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payText .pac_payCard_add {
-	width: 100px;
-	margin: 5px 15px;
-	float: right;
-	border: 1px solid #EAEAEA;
-	border-radius: 30px;
-	background-color: #0091e4;
-	color: white;
-	outline: 0;
-	font-weight: bolder;
+   width: 100px;
+   margin: 5px 15px;
+   float: right;
+   border: 1px solid #EAEAEA;
+   border-radius: 30px;
+   background-color: #0091e4;
+   color: white;
+   outline: 0;
+   font-weight: bolder;
 }
 
 body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payText .pac_payCard_add:hover {
-	background-color: #373737;
-	transition-duration: 0.5s;
+   background-color: #373737;
+   transition-duration: 0.5s;
 }
 
 body .section_pac .pac_mainList_copon {
-	width: auto;
-	height: 200px;
-	/* border: 1px solid blue; */
-	margin: 50px 100px;
-	display: none;
+   width: auto;
+   height: 200px;
+   /* border: 1px solid blue; */
+   margin: 50px 100px;
+   display: none;
 }
 
 body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList {
-	width: 1000px;
-	height: auto;
-	margin: 10px 10px;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-	border: 1px solid white;
+   width: 1000px;
+   height: auto;
+   margin: 10px 10px;
+   margin-left: auto;
+   margin-right: auto;
+   text-align: center;
+   border: 1px solid white;
 
 }
 
 body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponText {
-	width: auto;
-	height: 45px;
-	font-size: 25px;
-	margin: 0;
-	margin-top: 15px;
+   width: auto;
+   height: 45px;
+   font-size: 25px;
+   margin: 0;
+   margin-top: 15px;
 }
 
 body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists {
-	width: 800px;
-	height: 45px;
-	border: 1px solid #EAEAEA;
-	box-shadow: 2px 2px 2px 2px #EAEAEA;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 10px;
-	display: inline-flex;
+   width: 800px;
+   height: 45px;
+   border: 1px solid #EAEAEA;
+   box-shadow: 2px 2px 2px 2px #EAEAEA;
+   margin-left: auto;
+   margin-right: auto;
+   margin-bottom: 10px;
+   display: inline-flex;
 }
 
 body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_brandnaming {
-	width: 170px;
-	height: auto;
-/* 	border-right: 1px solid #EAEAEA; */
-	text-align: center;
-	padding: 8px 10px;
-/* 	display: inline-flex; */
-	margin: 5px 15px;
-	overflow: hidden;
+   width: 170px;
+   height: auto;
+/*    border-right: 1px solid #EAEAEA; */
+   text-align: center;
+   padding: 8px 10px;
+/*    display: inline-flex; */
+   margin: 5px 15px;
+   overflow: hidden;
 }
 
 body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_discount {
-	width: 140px;
-	height: auto;
-/* 	border-right: 1px solid #EAEAEA; */
-	text-align: center;
-	padding: 8px 10px;
-/* 	display: inline-flex; */
-	margin: 5px 15px;
-	overflow: hidden;
+   width: 140px;
+   height: auto;
+/*    border-right: 1px solid #EAEAEA; */
+   text-align: center;
+   padding: 8px 10px;
+/*    display: inline-flex; */
+   margin: 5px 15px;
+   overflow: hidden;
 }
 
 body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_period {
-	width: 240px;
-	height: auto;
-/* 	border-right: 1px solid #EAEAEA; */
-	text-align: center;
-	padding: 8px 10px;
-/* 	display: inline-flex; */
-	margin: 5px 15px;
-	overflow: hidden;
+   width: 240px;
+   height: auto;
+/*    border-right: 1px solid #EAEAEA; */
+   text-align: center;
+   padding: 8px 10px;
+/*    display: inline-flex; */
+   margin: 5px 15px;
+   overflow: hidden;
 }
 
 body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_minimumprice {
-	width: 140px;
-	height: auto;
-/* 	border-right: 1px solid #EAEAEA; */
-	text-align: center;
-	padding: 8px 10px;
-/* 	display: inline-flex; */
-	margin: 5px 15px;
-	overflow: hidden;
+   width: 140px;
+   height: auto;
+/*    border-right: 1px solid #EAEAEA; */
+   text-align: center;
+   padding: 8px 10px;
+/*    display: inline-flex; */
+   margin: 5px 15px;
+   overflow: hidden;
 }
 
 body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists_menu {
-	background-color : #B2CCFF;
+   background-color : #B2CCFF;
 }
 
 /* body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_num { */
-/* 	width: 600px; */
-/* 	height: 30px; */
-/* 	display: block; */
-/* 	text-align: center; */
-/* 	margin: 10px 15px; */
+/*    width: 600px; */
+/*    height: 30px; */
+/*    display: block; */
+/*    text-align: center; */
+/*    margin: 10px 15px; */
 /* } */
 
 .pac_payCard_save {
-	width: 90px;
-	margin: 10px 5px;
-	margin-right: 12px;
-	float: right;
-	border: 1px solid #EAEAEA;
-	border-radius: 30px;
-	background-color: #0091e4;
-	color: white;
-	font-weight: bolder;
-	outline: 0;
+   width: 90px;
+   margin: 10px 5px;
+   margin-right: 12px;
+   float: right;
+   border: 1px solid #EAEAEA;
+   border-radius: 30px;
+   background-color: #0091e4;
+   color: white;
+   font-weight: bolder;
+   outline: 0;
 }
 
 .pac_payCard_save:hover {
-	background-color: #373737;
-	transition-duration: 0.5s;
+   background-color: #373737;
+   transition-duration: 0.5s;
 }
 
 
 /* ====================게시판 (board) CSS========================= */
 
 body .section_board {
-	width: auto;
-	height: 1000px;
-	border: 1px solid white;
+   width: auto;
+   height: 1000px;
+   border: 1px solid white;
 }
 
 body .section_board .board {
-	width: auto;
-	height: 700px;
-/* 	border: 1px solid red; */
-	margin: 100px 200px;
+   width: auto;
+   height: 700px;
+/*    border: 1px solid red; */
+   margin: 100px 200px;
 }
 
 body .section_board .board .board_mainName {
-	width: auto;
-	text-align: center;
-	font-size: 25px;
-	margin: 10px 700px;
-	border-bottom: 1px solid black;
+   width: auto;
+   text-align: center;
+   font-size: 25px;
+   margin: 10px 700px;
+   border-bottom: 1px solid black;
 }
 
 body .section_board .board .board_box {
-	width: auto;
-	height: 700px;
-/* 	border: 1px solid blue; */
+   width: auto;
+   height: 700px;
+/*    border: 1px solid blue; */
 }
 
 .btn {
-	width: auto;
-	height: 30px;
-	border: 1px solid #EAEAEA;
-	background-color: #0091e4;
-	color: white;
-	outline: 0;
-	font-weight: bolder;
-	/* border-radius: 15px; */
+   width: auto;
+   height: 30px;
+   border: 1px solid #EAEAEA;
+   background-color: #0091e4;
+   color: white;
+   outline: 0;
+   font-weight: bolder;
+   /* border-radius: 15px; */
 }
 
 .btn:hover {
-	background-color: #373737;
-	transition-duration: 0.5s;
+   background-color: #373737;
+   transition-duration: 0.5s;
 }
 
 /* ====================게시판 읽기 (boardRead) CSS========================= */
 .boardList {
-	margin-bottom: 20px;
+   margin-bottom: 20px;
 }
 
 .boardMenu {
-	width: 800px;
-	height: 50px;
-	margin-top: 50px;
-	margin-bottom: 20px;
-	margin-left: 340px;
-	margin-right: auto;
-	position: relative;
-	text-align: center;
-	top: 0;
-	left: 0;
+   width: 800px;
+   height: 50px;
+   margin-top: 50px;
+   margin-bottom: 20px;
+   margin-left: 340px;
+   margin-right: auto;
+   position: relative;
+   text-align: center;
+   top: 0;
+   left: 0;
 }
 
 .boardMenu .leftMenu form {
-	display: inline-block;
+   display: inline-block;
 }
 
 .boardMenu .rightMenu {
-	float: right;
+   float: right;
 }
 
 .boardMenu2 {
-	width: 1100px;
-	height: 50px;
-	margin-top: 30px;
-	margin-bottom: 20px;
-	margin-left: 200px;
-	margin-right: auto;
-	display: inline-flex;
+   width: 1100px;
+   height: 50px;
+   margin-top: 30px;
+   margin-bottom: 20px;
+   margin-left: 200px;
+   margin-right: auto;
+   display: inline-flex;
 }
 
 .boardMenu2 .leftMenu2 {
-	width: auto;
-	float: left;
+   width: auto;
+   float: left;
 }
 
 .boardMenu2 .rightMenu2 {
-	width: auto;
-	float: right;
+   width: auto;
+   float: right;
 }
 
 .boardLine {
-	width: 800px;
-	border-bottom: 1px solid #dadada;
-	margin: auto;
-	font-size: 11pt;
-	color: #5a5a5a;
-	height: 40px;
-	line-height: 35px;
+   width: 800px;
+   border-bottom: 1px solid #dadada;
+   margin: auto;
+   font-size: 11pt;
+   color: #5a5a5a;
+   height: 40px;
+   line-height: 35px;
 }
 
 .boardLine2 {
-	width: 1100px;
-	border-bottom: 1px solid #dadada;
-	margin: auto;
-	font-size: 11pt;
-	color: #5a5a5a;
-	height: 40px;
-	line-height: 35px;
+   width: 1100px;
+   border-bottom: 1px solid #dadada;
+   margin: auto;
+   font-size: 11pt;
+   color: #5a5a5a;
+   height: 40px;
+   line-height: 35px;
 }
 
 .boardLine .num {
-	width: 3%;
-	text-align: center;
+   width: 3%;
+   text-align: center;
 }
 
 .boardLine .title {
-	left: 0;
-	text-align: center;
-	padding-left: 30px;
-	width: 45%;
-	font-weight: bolder;
+   left: 0;
+   text-align: center;
+   padding-left: 30px;
+   width: 45%;
+   font-weight: bolder;
 }
 
 .boardLine .registdate {
-	width: 200px;
-	float: right;
-	margin-right: 50px;
-	text-align: center;
+   width: 200px;
+   float: right;
+   margin-right: 50px;
+   text-align: center;
 }
 
 .boardLine .num2 {
-	width: 3%;
+   width: 3%;
 }
 
 .boardLine .title2 {
-	left: 0;
-	text-align: center;
-	padding-left: 30px;
-	width: 45%;
-	font-weight: bolder;
+   left: 0;
+   text-align: center;
+   padding-left: 30px;
+   width: 45%;
+   font-weight: bolder;
 }
 
 .boardLine .registdate2 {
-	width: 200px;
-	float: right;
-	margin-right: 70px;
+   width: 200px;
+   float: right;
+   margin-right: 70px;
 }
 
 .boardLine * {
-	display: inline-block;
-	margin-left: 0px;
-	margin-right: 0px;
-	padding-left: 0px;
-	padding-right: 0px;
+   display: inline-block;
+   margin-left: 0px;
+   margin-right: 0px;
+   padding-left: 0px;
+   padding-right: 0px;
 }
 
 .boardMenu3 {
-	width: 1100px;
-	height: 50px;
-	margin-top: 30px;
-	margin-bottom: 20px;
-	margin-left: 200px;
-	margin-right: auto;
-	display: inline-flex;
+   width: 1100px;
+   height: 50px;
+   margin-top: 30px;
+   margin-bottom: 20px;
+   margin-left: 200px;
+   margin-right: auto;
+   display: inline-flex;
 }
 
 .boardMenu3 .leftMenu3 {
-	width: 550px;
+   width: 550px;
 }
 
 .boardMenu3 .leftMenu3 input {
-	width: auto;
-	float: left;
+   width: auto;
+   float: left;
 }
 
 .boardMenu3 .rightMenu3 {
-	width: 550px;
+   width: 550px;
 }
 
 .boardMenu3 .rightMenu3 input {
-	width: auto;
-	float: right;
+   width: auto;
+   float: right;
 }
 
 .boardContent {
-	text-align: left;
-	padding: 20px;
-	border: 1px solid #dadada;
-	border-top: 0px;
-	width: 1100px;
-	height: 450px;
-	margin: auto;
+   text-align: left;
+   padding: 20px;
+   border: 1px solid #dadada;
+   border-top: 0px;
+   width: 1100px;
+   height: 450px;
+   margin: auto;
 }
 
 div.boardList a {
-	display: block;
-	width: 500px;
+   display: block;
+   width: 500px;
 }
 
 div.paging {
-	width: auto;
-	height: auto;
-	text-align: center;
+   width: auto;
+   height: auto;
+   text-align: center;
 }
 
 div.paging a {
-	display: inline;
+   display: inline;
 }
 
 div.boardLine:hover {
-	background-color: #dadada;
+   background-color: #dadada;
 }
 
 div.boardMenu input[type="text"] {
-	height: 25px;
+   height: 25px;
 }
 
 div.boardMenu select {
-	width: 80px;
-	height: 30px;
+   width: 80px;
+   height: 30px;
 }
 
 div.boardLine input,
 div.boardLine input {
-	padding: 7px;
-	border: 1px solid skyblue;
+   padding: 7px;
+   border: 1px solid skyblue;
 }
 
 div.boardLine input:focus,
 div.boardLine input:focus,
 textarea:focus {
-	border: 1px solid rgb(135, 145, 235);
+   border: 1px solid rgb(135, 145, 235);
 }
 
 textarea {
-	width: 100%;
-	height: 100%;
-	margin: 0px;
-	resize: none;
-	border: none;
+   width: 100%;
+   height: 100%;
+   margin: 0px;
+   resize: none;
+   border: none;
 }
 
 /* ====================게시판 쓰기 (boardWrite) CSS========================= */
 
 .boardContent2 {
-	width: 1100px;
-	height: 450px;
-	text-align: left;
-	padding: 20px;
-	border: 1px solid #dadada;
-	margin: auto;
-	/* margin-top: 10px; */
+   width: 1100px;
+   height: 450px;
+   text-align: left;
+   padding: 20px;
+   border: 1px solid #dadada;
+   margin: auto;
+   /* margin-top: 10px; */
 }
 
 .boardLine3 {
-	width: 1100px;
-	height: 40px;
-	font-size: 11pt;
-	display: inline-flex;
-	margin-top: 5px;
-	margin-left: 200px;
-	/* line-height: 35px; */
-	/* background-color: #097ce6; */
-	/* text-align: center; */
-	/* border-bottom: 1px solid #dadada; */
+   width: 1100px;
+   height: 40px;
+   font-size: 11pt;
+   display: inline-flex;
+   margin-top: 5px;
+   margin-left: 200px;
+   /* line-height: 35px; */
+   /* background-color: #097ce6; */
+   /* text-align: center; */
+   /* border-bottom: 1px solid #dadada; */
 }
 
 .boardLine3 .title2 {
-	width: 500px;
-	padding-left: 0px;
-	text-align: center;
-	font-weight: bolder;
-	float: left;
+   width: 500px;
+   padding-left: 0px;
+   text-align: center;
+   font-weight: bolder;
+   float: left;
 }
 
 .boardLine3 .title2 .title2_name {
-	width: 1100px;
-	height: 35px;
-	outline: none;
+   width: 1100px;
+   height: 35px;
+   outline: none;
 }
 
 .boardLine3 .writer2 {
-	width: 1100px;
-	float: right;
-	/* margin-top: 5px; */
+   width: 1100px;
+   float: right;
+   /* margin-top: 5px; */
 
 }
 
 .boardLine3 .writer2 .write_name {
-	width: auto;
-	height: 35px;
-	text-align: center;
-	float: right;
-	outline: none;
+   width: auto;
+   height: 35px;
+   text-align: center;
+   float: right;
+   outline: none;
 }
 
 .board_fo1 {
-	width: 1100px;
-	height: auto;
-	/* border: 1px solid #EAEAEA; */
-	display: inline-flex;
-	margin-left: 200px;
+   width: 1100px;
+   height: auto;
+   /* border: 1px solid #EAEAEA; */
+   display: inline-flex;
+   margin-left: 200px;
 }
 
 .board_fo1_2 {
-	width: 1100px;
-	margin-left: 10px;
-	/* margin-top: 30px; */
-	float: right;
-	border: 0;
-	outline: 0;
+   width: 1100px;
+   margin-left: 10px;
+   /* margin-top: 30px; */
+   float: right;
+   border: 0;
+   outline: 0;
 }
 .board_fo1_2_file {
-	width: 1100px;
-	float: right;
-	/* border: 0;
-	outline: 0; */
+   width: 1100px;
+   float: right;
+   /* border: 0;
+   outline: 0; */
 }
 
 .board_fo1_2_sub {
-	width: 150px;
-	float: right;
-	/* margin-top: 10px; */
-	/* border: 0;
-	outline: 0; */
+   width: 150px;
+   float: right;
+   /* margin-top: 10px; */
+   /* border: 0;
+   outline: 0; */
 }
 
-		.dropdown-button {
-			width: 100px;
-			background-color: #B2CCFF;
-			padding: 8px;
-			font-size: 15px;
-			border: none;
-		}
-		.dropdown-button a{
-			text-decoration: none !important;
-			color: black !important;
-		}
-		.dropdown {
-			width: 100px;
-			height: 35px;
-			position: relative;
-			display: inline-block;
-		}
-		.dropdown-content {
-			display: none;
-			position: absolute;
-			background-color: #B2CCFF;
-			text-decoration: none !important;
-			width: 100%;
-			padding: 5px;
-			box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-			z-index: 9999;
-		}
-		.dropdown-content a {
-			color: black;
-			padding: 8px;
-			text-decoration: none !important;
-			display: block;
-			z-index: 9999;
-		}
-		.dropdown-content a:hover { background-color: #00A2E8;}
-		.dropdown:hover .dropdown-content { display: block; }
-		.dropdown:hover .dropdown-button { background-color: #00A2E8; }
+.dropdown-button {
+   width: 100px;
+   background-color: #B2CCFF;
+   padding: 8px;
+   font-size: 15px;
+   border: none;
+}
+.dropdown-button a{
+   text-decoration: none !important;
+   color: black !important;
+}
+.dropdown {
+   width: 100px;
+   height: 35px;
+   position: relative;
+   display: inline-block;
+}
+.dropdown-content {
+   display: none;
+   position: absolute;
+   background-color: #B2CCFF;
+   text-decoration: none !important;
+   width: 100%;
+   padding: 5px;
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+   z-index: 9999;
+}
+.dropdown-content a {
+   color: black;
+   padding: 8px;
+   text-decoration: none !important;
+   display: block;
+   z-index: 9999;
+}
+.dropdown-content a:hover { background-color: #00A2E8;}
+.dropdown:hover .dropdown-content { display: block; }
+.dropdown:hover .dropdown-button { background-color: #00A2E8; }

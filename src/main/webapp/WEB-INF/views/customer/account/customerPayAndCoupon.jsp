@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ include file="../main/customerHeader.jsp"%>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
@@ -22,23 +22,23 @@
         <article class="pac_mainList_pay">
             <div class="pac_mainPay">
                 <div class="pac_payList" id="pac_payList">
-                   	<p class="pac_payText">결제 수단 관리</p>
+                      <p class="pac_payText">결제 수단 관리</p>
 <!--                     <p class="pac_payText">카드</p> -->
                     <div class="pac_payLists">
                         <div class="pac_payCard_name">카드</div>
                         <div class="dropdown">
-							<button id="cardBank" class="dropdown-button">${cardBank }</button>
-							<div class="dropdown-content">
-								<a onclick="dropSelect(this)">신한</a>
-								<a onclick="dropSelect(this)">현대</a>
-								<a onclick="dropSelect(this)">하나</a>
-								<a onclick="dropSelect(this)">우리</a>
-								<a onclick="dropSelect(this)">국민</a>
-								<a onclick="dropSelect(this)">농협</a>
-								<a onclick="dropSelect(this)">롯데</a>
-								<a onclick="dropSelect(this)">기타</a>
-							</div>
-						</div>
+                     <button id="cardBank" class="dropdown-button">${cardBank }</button>
+                     <div class="dropdown-content">
+                        <a onclick="dropSelect(this)">신한</a>
+                        <a onclick="dropSelect(this)">현대</a>
+                        <a onclick="dropSelect(this)">하나</a>
+                        <a onclick="dropSelect(this)">우리</a>
+                        <a onclick="dropSelect(this)">국민</a>
+                        <a onclick="dropSelect(this)">농협</a>
+                        <a onclick="dropSelect(this)">롯데</a>
+                        <a onclick="dropSelect(this)">기타</a>
+                     </div>
+                  </div>
                         <input id="cardNum1" class="pac_payCard_num" type="text" value="${cardNum[0]}"></input>
                         -
                         <input id="cardNum2" class="pac_payCard_num" type="text" value="${cardNum[1]}"></input>
@@ -54,18 +54,18 @@
                         <div class="pac_payCard_name">계좌</div>
                         
                         <div class="dropdown">
-							<button id="accountBank" class="dropdown-button" style="text-decoration: none">${accountBank }	</button>
-							<div class="dropdown-content">
-								<a onclick="dropSelect(this)">신한</a>
-								<a onclick="dropSelect(this)">현대</a>
-								<a onclick="dropSelect(this)">하나</a>
-								<a onclick="dropSelect(this)">우리</a>
-								<a onclick="dropSelect(this)">국민</a>
-								<a onclick="dropSelect(this)">농협</a>
-								<a onclick="dropSelect(this)">롯데</a>
-								<a onclick="dropSelect(this)">기타</a>
-							</div>
-						</div>
+                     <button id="accountBank" class="dropdown-button" style="text-decoration: none">${accountBank }   </button>
+                     <div class="dropdown-content">
+                        <a onclick="dropSelect(this)">신한</a>
+                        <a onclick="dropSelect(this)">현대</a>
+                        <a onclick="dropSelect(this)">하나</a>
+                        <a onclick="dropSelect(this)">우리</a>
+                        <a onclick="dropSelect(this)">국민</a>
+                        <a onclick="dropSelect(this)">농협</a>
+                        <a onclick="dropSelect(this)">롯데</a>
+                        <a onclick="dropSelect(this)">기타</a>
+                     </div>
+                  </div>
                         <input id="accountNum" class="pac_payAccount_num" type="text" value="${accountNum}"></input>
                         <button class="pac_payCard_save" onclick="savePay('account')">저장</button>
                         <div class="pac_payList_add"></div>
@@ -85,12 +85,12 @@
                         <div class="pac_copon_minimumprice">최소금액</div>
                     </div>
                     <c:forEach items="${couponlist }" var="coupon">
-	                    <div class="pac_coponLists">
-	                        <div class="pac_copon_brandnaming">${coupon.brandnaming }</div>
-	                        <div class="pac_copon_discount">${coupon.discount }</div>
-	                        <div class="pac_copon_period">${coupon.period }</div>
-	                        <div class="pac_copon_minimumprice">${coupon.minimumprice }</div>
-	                    </div>
+                       <div class="pac_coponLists">
+                           <div class="pac_copon_brandnaming">${coupon.brandnaming }</div>
+                           <div class="pac_copon_discount">${coupon.discount }</div>
+                           <div class="pac_copon_period">${coupon.period }</div>
+                           <div class="pac_copon_minimumprice">${coupon.minimumprice }</div>
+                       </div>
                     </c:forEach>
                 </div>
             </div>
@@ -101,43 +101,43 @@
     <div id="footers"></div>
     <!-- 영경 -->
     <script>
-	    function savePay(type){
-	    	switch(type){
-	    	case 'account':
-	    		ob={
-	    			'type' : type,
-	    			'accountBank' : document.getElementById('accountBank').innerText,
-	    			'accountNum' : document.getElementById('accountNum').value,
-	    		};
-	    		break;
-	    	case 'card':
-	    		ob={
-	    			'type' : type,
-	    			'cardBank' : document.getElementById('cardBank').innerText,
-	    			'cardNum1' : document.getElementById('cardNum1').value,
-	    			'cardNum2' : document.getElementById('cardNum2').value,
-	    			'cardNum3' : document.getElementById('cardNum3').value,
-	    			'cardNum4' : document.getElementById('cardNum4').value,
-   				};
-	    		break;
-	    	}
-	    	var axPost = async (ob) => {
-	            await axios.post('/drumtong/customer/account/customerPayAndCoupon/rest/paySave/', ob)
-	            // 배포용
-// 	            await axios.post('/customer/account/customerPayAndCoupon/rest/paySave/', ob)
+       function savePay(type){
+          switch(type){
+          case 'account':
+             ob={
+                'type' : type,
+                'accountBank' : document.getElementById('accountBank').outerHTML,
+                'accountNum' : document.getElementById('accountNum').value,
+             };
+             break;
+          case 'card':
+             ob={
+                'type' : type,
+                'cardBank' : document.getElementById('cardBank').outerHTML,
+                'cardNum1' : document.getElementById('cardNum1').value,
+                'cardNum2' : document.getElementById('cardNum2').value,
+                'cardNum3' : document.getElementById('cardNum3').value,
+                'cardNum4' : document.getElementById('cardNum4').value,
+               };
+             break;
+          }
+          var axPost = async (ob) => {
+               await axios.post('/drumtong/customer/account/customerPayAndCoupon/rest/paySave/', ob)
+               // 배포용
+//                await axios.post('/customer/account/customerPayAndCoupon/rest/paySave/', ob)
 
-	            .then( (response) => {
-	              if(response.data === true){
-	            	  alert('변경되었습니다.');
-	              } else{
-		               alert('변경에 실패하였습니다');
-	              }
-	            });
-	          }
-	          axPost(ob);
-	    	
-	    	
-	    }
+               .then( (response) => {
+                 if(response.data === true){
+                    alert('변경되었습니다.');
+                 } else{
+                     alert('변경에 실패하였습니다');
+                 }
+               });
+             }
+             axPost(ob);
+          
+          
+       }
     </script>
     
     <script>
@@ -170,10 +170,10 @@
             });
         });
         
-	    function dropSelect(obj) {
-	    	obj.parentNode.parentNode.querySelector('button').innerHTML = obj.outerHTML;
-	    }
-	    
+       function dropSelect(obj) {
+          obj.parentNode.parentNode.querySelector('button').innerHTML = obj.outerHTML;
+       }
+       
         
     </script>
 <%@ include file="../main/customerFooter.jsp"%>
