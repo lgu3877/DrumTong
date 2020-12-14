@@ -11,12 +11,13 @@
 	background-color: #e5e6eb; 
 	border-radius: 20px;
 	border: 6px outset #afafaf;
+	margin-bottom: 30px;
 }
 
 .container:hover {
 	background-color: white;
 	transform: translate(0, -20px);
-	transition: all 3s ease 0s;
+	transition: all 1s ease 0s;
 	box-shadow: 15px 30px 60px #afafaf;
 	border: 15px outset #afafaf;	
 }
