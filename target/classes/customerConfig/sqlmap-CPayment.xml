@@ -16,4 +16,8 @@
 	<select id="select" parameterType="String" resultType="CPaymentVO">
 		SELECT * FROM CPAYMENT WHERE MEMBERID=#{memberid}
 	</select>
+	
+	<update id="updatePayment" parameterType="hashmap">
+		UPDATE CPAYMENT SET ${typebank}=#{bankname}, ${typenum}=#{bankNum} WHERE MEMBERID=#{memberid}
+	</update>
 </mapper>

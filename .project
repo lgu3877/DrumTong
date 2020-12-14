@@ -31,7 +31,7 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.springframework.ide.eclipse.boot.validation.springbootbuilder</name>
+			<name>org.springframework.ide.eclipse.core.springbuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
@@ -42,7 +42,6 @@
 		</buildCommand>
 	</buildSpec>
 	<natures>
-		<nature>org.eclipse.jem.workbench.JavaEMFNature</nature>
 		<nature>org.springframework.ide.eclipse.core.springnature</nature>
 		<nature>org.eclipse.jem.workbench.JavaEMFNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
