@@ -26,47 +26,47 @@
 <!--                     <p class="pac_payText">카드</p> -->
                     <div class="pac_payLists">
                         <div class="pac_payCard_name">카드</div>
-                        <div class="dropdown" name="cardbank">
-							<button class="dropdown-button">${cardBank }</button>
+                        <div class="dropdown">
+							<button class="dropdown-button">== 선택 ==</button>
 							<div class="dropdown-content">
-								<a href="#">신한</a>
-								<a href="#">현대</a>
-								<a href="#">하나</a>
-								<a href="#">우리</a>
-								<a href="#">국민</a>
-								<a href="#">농협</a>
-								<a href="#">롯데</a>
-								<a href="#">기타</a>
+								<a href="#" onclick="dropSelect(this)">신한</a>
+								<a href="#" onclick="dropSelect(this)">현대</a>
+								<a href="#" onclick="dropSelect(this)">하나</a>
+								<a href="#" onclick="dropSelect(this)">우리</a>
+								<a href="#" onclick="dropSelect(this)">국민</a>
+								<a href="#" onclick="dropSelect(this)">농협</a>
+								<a href="#" onclick="dropSelect(this)">롯데</a>
+								<a href="#" onclick="dropSelect(this)">기타</a>
 							</div>
 						</div>
-                        <input class="pac_payCard_num" type="text" value="${cardNum[0]}"></input>
+                        <input class="pac_payCard_num" type="text" value="1234"></input>
                         -
-                        <input class="pac_payCard_num" type="text" value="${cardNum[1]}"></input>
+                        <input class="pac_payCard_num" type="text" value="2345"></input>
                         -
-                        <input class="pac_payCard_num" type="text" value="${cardNum[2]}"></input>
+                        <input class="pac_payCard_num" type="text" value="3456"></input>
                         -
-                        <input class="pac_payCard_num" type="text" value="${cardNum[3]}"></input>
+                        <input class="pac_payCard_num" type="text" value="4567"></input>
                         <button class="pac_payCard_save">저장</button>
                         <div class="pac_payList_add"></div>
                     </div>
 <!--                     <p class="pac_payText">계좌</p> -->
                     <div class="pac_payLists">
                         <div class="pac_payCard_name">계좌</div>
-        
-                        <div class="dropdown" name="cardbank">
-							<button class="dropdown-button">${accountBank }</button>
+                        
+                        <div class="dropdown">
+							<button class="dropdown-button" style="text-decoration: none">== 선택 ==</button>
 							<div class="dropdown-content">
-								<a href="#">신한</a>
-								<a href="#">현대</a>
-								<a href="#">하나</a>
-								<a href="#">우리</a>
-								<a href="#">국민</a>
-								<a href="#">농협</a>
-								<a href="#">롯데</a>
-								<a href="#">기타</a>
+								<a href="#" onclick="dropSelect(this)">신한</a>
+								<a href="#" onclick="dropSelect(this)">현대</a>
+								<a href="#" onclick="dropSelect(this)">하나</a>
+								<a href="#" onclick="dropSelect(this)">우리</a>
+								<a href="#" onclick="dropSelect(this)">국민</a>
+								<a href="#" onclick="dropSelect(this)">농협</a>
+								<a href="#" onclick="dropSelect(this)">롯데</a>
+								<a href="#" onclick="dropSelect(this)">기타</a>
 							</div>
 						</div>
-                        <input class="pac_payAccount_num" type="text" value="${accountNum}"></input>
+                        <input class="pac_payAccount_num" type="text" value="1234"></input>
                         <button class="pac_payCard_save">저장</button>
                         <div class="pac_payList_add"></div>
                     </div>
@@ -129,10 +129,10 @@
             });
         });
         
-        document.querySelector('a').addEventListener('click', function() {
-        	console.log(this);
-        })	
-        
+	    function dropSelect(obj) {
+	    	obj.parentNode.parentNode.querySelector('button').innerHTML = obj.outerHTML;
+	    }
+	    
         
     </script>
 <%@ include file="../main/customerFooter.jsp"%>
