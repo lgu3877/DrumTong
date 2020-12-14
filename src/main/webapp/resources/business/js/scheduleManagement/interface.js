@@ -43,14 +43,17 @@ for (let i = 0; i < radioBtns.length; i++) {
 		const filter = document.getElementById('weekend-also').checked;
 		const checkboxs = document.getElementsByClassName("checkBtn");
 		const checkboxInput = document.getElementsByClassName("checkbox_con")[0].getElementsByTagName("input");
+		const container = document.getElementsByClassName("checkbox_con")[0];
 		
 		if (filter === true) {
+			container.style.height = "30px";
 			for (let i = 0; i < checkboxs.length; i++) {
 				checkboxs[i].removeAttribute("disabled");
 				checkboxs[i].style.backgroundColor = "#f38181";
 			}
 		} 
 		else {
+			container.style.height = "";
 			for (let i = 0; i < checkboxs.length; i++) {
 				checkboxs[i].setAttribute("disabled", "disabled");
 				checkboxInput[i].checked = false;
@@ -144,7 +147,21 @@ for (let i = 0; i < selectors.length; i++) {
 			button.style.backgroundColor = "navy" :	
 			button.style.backgroundColor = "#95e1d3";	
 	})
+}
+
+// 정기 휴일 스타일
+const holidayText = document.getElementsByClassName("scheduled_days");
+
+for (let i = 0; i < holidayText.length; i++) {
+	// week
+	const week = holidayText[i].document.getElementsByClassName("h_week")[0];
+	console.log(week);
 	
-	// 체크박스 컬러 옵션
+	const reg = \[(.*?)\];
+	
+	// day
 	
 }
+
+
+

@@ -326,9 +326,26 @@
 								일
 							</div>
 						</div>
-						
-						
 					</div>
+					
+				<!-- 저장된 정기 휴무일 표기 -->
+					<ul class="h_schedule_con">
+						<li class="h_schedule_list">
+						<!-- 내용 -->
+							<div class="h_schedule_context">
+								<p class="scheduled_days">
+									매월 
+										<span class="h_week">[첫째주]</span>
+										<span class="h_day">[일요일] [화요일]</span>
+									휴무
+								</p>
+							</div>
+						<!-- 삭제 버튼 -->
+							<div class="h_schedule_delete">
+								<p>삭제</p>
+							</div>
+						</li>
+					</ul>
 
 				<!-- 달력 -->
 					<div id="calander" class="calendar">

@@ -150,7 +150,8 @@
 
 .checkbox_con {
 	display: flex;
-	margin: 12px 0;
+	margin: 12px 0 0 0;
+	height: 0;
 }
 
 .checkbox_con input {
@@ -202,6 +203,9 @@
 	margin-bottom: 10px;
 	display: flex;
 	height: 40px;
+	background-color: antiquewhite;
+    padding: 7px 10px;
+    border-radius: 5px;
 }
 
 .day_range {
@@ -248,8 +252,9 @@
 }
 
 .time_range_text {
+    width: 50px;
 	text-align: center;
-	margin: auto 5px;
+	margin: auto 20px;
 }
 
 .input_title_con {
@@ -259,7 +264,7 @@
 }
 
 .input_time_con {
-	width: 60%;
+	
 }
 
 .all_day_con {
@@ -269,7 +274,7 @@
 .all_day_con button {
 	width: 100px;
 	height: 100%;
-	background-color: #95e1d3;
+	background-color: #6495EF;
 }
 
 /* 임시휴무 설정 */
@@ -329,4 +334,38 @@
 
 .day_selector input {
 	display: none;
+}
+
+/* 휴무 스케쥴 */
+.h_schedule_con {
+	list-style: none;
+    display: block;
+}
+
+.h_schedule_list {
+	display: flex;
+    justify-content: space-between;
+    margin: 30px 10px;
+}
+
+.h_schedule_context {
+	margin: auto 0;
+	word-spacing: 10px;
+}
+
+.h_schedule_delete {
+	background-color: red;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 15px;
+}
+
+.h_schedule_delete:hover {
+	cursor: pointer;
+}
+
+.h_schedule_delete p {
+	font-weight: 600;
+    text-decoration: underline;
+    text-underline-position: under;
 }
