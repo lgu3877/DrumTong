@@ -19,7 +19,6 @@
 	transition: all 3s ease 0s;
 	box-shadow: 15px 30px 60px #afafaf;
 	border: 15px outset #afafaf;	
-	cursor: pointer;
 }
 
 h1.containerName {
