@@ -106,14 +106,14 @@
 	    	case 'account':
 	    		ob={
 	    			'type' : type,
-	    			'accountBank' : document.getElementById('accountBank').outerHTML,
+	    			'accountBank' : document.getElementById('accountBank').innerText,
 	    			'accountNum' : document.getElementById('accountNum').value,
 	    		};
 	    		break;
 	    	case 'card':
 	    		ob={
 	    			'type' : type,
-	    			'cardBank' : document.getElementById('cardBank').outerHTML,
+	    			'cardBank' : document.getElementById('cardBank').innerText,
 	    			'cardNum1' : document.getElementById('cardNum1').value,
 	    			'cardNum2' : document.getElementById('cardNum2').value,
 	    			'cardNum3' : document.getElementById('cardNum3').value,
