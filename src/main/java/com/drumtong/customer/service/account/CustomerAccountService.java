@@ -10,7 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.drumtong.business.dao.BCouponDAO;
 import com.drumtong.business.dao.BInformationDAO;
+import com.drumtong.business.dao.BSalesDAO;
 import com.drumtong.business.vo.BInformationVO;
+import com.drumtong.business.vo.OrderList;
 import com.drumtong.customer.dao.CPaymentDAO;
 import com.drumtong.customer.vo.CPaymentVO;
 import com.drumtong.customer.vo.CPrivateDataVO;
@@ -21,6 +23,7 @@ public class CustomerAccountService {
 	@Autowired BInformationDAO bInformationDAO;
 	@Autowired BCouponDAO bCouponDAO;
 	@Autowired CPaymentDAO cPaymentDAO;
+	@Autowired BSalesDAO bSales;
 	
 	// 북마크[영경]
 	public ModelAndView bookmark(HttpServletRequest req) {
@@ -62,6 +65,16 @@ public class CustomerAccountService {
 		
 		mav.addObject("couponlist", couponlist);
 		// -------------------------------------------------
+		return mav;
+	}
+	
+	// 주문 목록 [건욱]
+	public ModelAndView orderList(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView("customer/account/customerOrderList");
+		CPrivateDataVO Login = ((CPrivateDataVO)req.getSession().getAttribute("cLogin"));
+		List<OrderList> orderList = bSales.selectOrderList(Login.getMemberid());
+		
+		mav.addObject("orderList", orderList);
 		return mav;
 	}
 

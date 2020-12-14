@@ -1,6 +1,9 @@
 package com.drumtong.business.dao;
 
 import java.util.HashMap;
+import java.util.List;
+
+import com.drumtong.business.vo.OrderList;
 import com.drumtong.business.vo.StatisticsData;
 
 public interface BSalesDAO {
@@ -22,6 +25,9 @@ public interface BSalesDAO {
 	
 	// 세탁물 판매량(오늘, 이번주, 이번달) 데이터
 	HashMap<String, Integer> getMainPreviewLaundry(String estid);
+
+	// 주문 목록 데이터 Bsales, BDetailSales, Binformation Join되어있음.
+	List<OrderList> selectOrderList(String memberid);
 	
 	
 

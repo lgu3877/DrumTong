@@ -41,9 +41,10 @@ public class CustomerAccountController {
 		return new ModelAndView("customer/account/customerMenu");
 	}
 	
+	// 고객 주문 목록 [건욱]
 	@RequestMapping("customerOrderList/")
-	public ModelAndView orderList() {
-		return new ModelAndView("customer/account/customerOrderList");
+	public ModelAndView orderList(HttpServletRequest req) {
+		return svc.orderList(req);
 	}
 }
 
