@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+		"-//mybatis.org//DTD Mapper 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 사업장 쿠폰 테이블	 -->
+<mapper namespace="com.drumtong.business.dao.BCouponDAO">
+
+<!-- 	사업장 별 쿠폰 리스트 -->
+	<select id="select" parameterType="String" resultType="BCouponVO" >
+		SELECT * FROM BCOUPON 
+			WHERE ESTID=#{estid} AND DELETEBOOLEAN='N' AND 
+			SYSDATE <![CDATA[<=]]> TO_DATE(SUBSTR(PERIOD,14), 'YYYY-MM-DD') 
+	</select>
+	
+<!-- 	고객이 보유하고 있는 현 사업장 쿠폰 리스트	 -->
+	<select id="selectUsableCoupon" parameterType="hashmap" resultType="BCouponVO">
+		SELECT B.COUPONID, DISCOUNT, PERIOD, MINIMUMPRICE FROM (SELECT COUPONID FROM CCOUPON 
+						WHERE 
+						MEMBERID=#{memberid} AND USEBOOLEAN='N') A INNER JOIN
+		(SELECT * FROM BCOUPON 
+				WHERE ESTID=#{estid} AND DELETEBOOLEAN='N' AND 
+			SYSDATE BETWEEN TO_DATE(SUBSTR(PERIOD,1,11), 'YYYY-MM-DD') 
+				AND TO_DATE(SUBSTR(PERIOD,14), 'YYYY-MM-DD')) B 
+		ON (A.COUPONID=B.COUPONID) AND DELETEBOOLEAN='N'
+	</select>
+
+	<insert id="insertCoupon" parameterType="BCouponVO">
+		INSERT INTO BCOUPON 
+			(ESTID, COUPONID, DISCOUNT, PERIOD, MINIMUMPRICE, MAXISSUENUM) 
+			VALUES (#{estid}, #{couponid}, #{discount}, #{period}, #{minimumprice}, #{maxissuenum})
+	</insert>
+	
+		<!-- 	UUID 중복검사 -->
+	<select id="confirm" resultType="int" parameterType="String">
+		SELECT COUNT(COUPONID) FROM BCOUPON WHERE COUPONID = #{couponid}
+	</select>
+	
+	<update id="deleteCoupon" parameterType="BCouponVO">
+		UPDATE BCOUPON SET DELETEBOOLEAN='Y' WHERE COUPONID = #{couponid}
+	</update>
+	
+	<select id="selectCouponList" parameterType="String" resultType="CouponList">
+		SELECT * FROM 
+			(SELECT 
+				(CASE WHEN LENGTH(BRANDNAMING) <![CDATA[>]]> 7 
+					THEN CONCAT(SUBSTR(BRANDNAMING, 1, 7), '..') 
+					ELSE BRANDNAMING END) AS BRANDNAMING, 
+				CONCAT(REGEXP_REPLACE(REVERSE(REGEXP_REPLACE(TO_CHAR(REVERSE(TO_CHAR(DISCOUNT))), '([0-9]{3})','\1,')),'^,',''),'원') AS DISCOUNT, 
+				PERIOD, 
+				CONCAT(REGEXP_REPLACE(REVERSE(REGEXP_REPLACE(TO_CHAR(REVERSE(TO_CHAR(MINIMUMPRICE))), '([0-9]{3})','\1,')),'^,',''),'원') AS MINIMUMPRICE, 
+				bc.COUPONID  
+			FROM BCOUPON bc 
+				INNER JOIN BINFORMATION i 
+				ON bc.ESTID=i.ESTID 
+				WHERE TO_DATE(SUBSTR(PERIOD,14),'YYYY-MM-DD') <![CDATA[>=]]>  TO_DATE(SYSDATE, 'YY/MM/DD')) a 
+				INNER JOIN CCOUPON cc 
+				ON cc.COUPONID = a.COUPONID 
+				WHERE cc.MEMBERID=#{memberid} AND USEBOOLEAN='Y'
+	</select>
+</mapper>

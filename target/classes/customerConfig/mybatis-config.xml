@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC 
+		"-//mybatis.org//DTD Config 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+		
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="useGeneratedKeys" value="false" />
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	
+	<typeAliases>
+		<typeAlias type="com.drumtong.customer.vo.CCustomerVO" alias="CCustomerVO" />
+		<typeAlias type="com.drumtong.customer.vo.CPrivateDataVO" alias="CPrivateDataVO" />
+		<typeAlias type="com.drumtong.customer.vo.CAlarmVO" alias="CAlarmVO" />
+		<typeAlias type="com.drumtong.customer.vo.CPaymentVO" alias="CPaymentVO" />
+		<typeAlias type="com.drumtong.customer.vo.CBookmarkVO" alias="CBookmarkVO" />
+		<typeAlias type="com.drumtong.customer.vo.CCouponVO" alias="CCouponVO" />
+		<typeAlias type="com.drumtong.customer.vo.CPointVO" alias="CPointVO" />
+	</typeAliases>
+	
+</configuration>		

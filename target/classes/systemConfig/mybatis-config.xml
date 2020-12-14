@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC 
+		"-//mybatis.org//DTD Config 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+		
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="useGeneratedKeys" value="false" />
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	
+	<typeAliases>
+		<typeAlias type="com.drumtong.system.vo.SIPLogVO" alias="SIPLogVO" />
+		<typeAlias type="com.drumtong.system.vo.SLoginLogVO" alias="SLoginLogVO" />
+		<typeAlias type="com.drumtong.system.vo.SBoardVO" alias="SBoardVO" />
+		<typeAlias type="com.drumtong.system.vo.SVirtualAccoutVO" alias="SVirtualAccoutVO" />
+		<typeAlias type="com.drumtong.system.vo.SImageVO" alias="SImageVO" />
+	</typeAliases>
+	
+</configuration>		

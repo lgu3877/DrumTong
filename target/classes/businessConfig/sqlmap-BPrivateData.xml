@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+		"-//mybatis.org//DTD Mapper 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 사업장 개인정보 테이블	 -->
+<mapper namespace="com.drumtong.business.dao.BPrivateDataDAO">
+
+	
+<!-- 	신규 데이터 입력 -->
+	<insert id="insertSignUp" parameterType="BPrivateDataVO">
+		INSERT INTO BPRIVATEDATA 
+			VALUES
+			(#{bpersonid}, #{id}, #{pw}, #{name}, #{birth},
+			 #{genderboolean}, #{phonenum}, #{mainaddress}, #{detailaddress},
+			 #{email}, #{delegatecrn} )
+	</insert>
+	
+<!-- 	아이디,비밀번호와 일치하는 로그인 객체 반환 -->
+	<select id="selectLogin" parameterType="String" resultType="BPrivateDataVO">
+		SELECT * FROM BPRIVATEDATA WHERE PW=#{pw}
+	</select>
+	
+<!-- 	로그인 로그에 남길 아이디 반환 -->
+	<select id="selectID" parameterType="String" resultType="String">
+		SELECT ID FROM BPRIVATEDATA WHERE BPERSONID=#{BPersonID}
+	</select>
+	
+	
+	<!-- 아이디찾기(이름/휴대폰) -->
+	<select id="idFindNamePhoneNum" parameterType="BPrivateDataVO" resultType="String">
+		SELECT ID FROM BPRIVATEDATA WHERE NAME=#{name} AND PHONENUM=#{phonenum}
+	</select>
+	
+	<!-- 아이디찾기(이름/생년월일/성별) -->
+	<select id="idFindNameBirth" parameterType="BPrivateDataVO" resultType="String">
+		SELECT ID FROM BPRIVATEDATA WHERE NAME=#{name} AND BIRTH=#{birth} AND GENDERBOOLEAN=#{genderboolean}
+	</select>
+	
+	<!-- 아이디찾기(이름/이메일) -->
+	<select id="idFindNameEmail" parameterType="BPrivateDataVO" resultType="String">
+		SELECT ID FROM BPRIVATEDATA WHERE NAME=#{name} AND EMAIL=#{email}
+	</select>
+	
+	<!-- 아이디찾기(사업자번호/이메일) -->
+	<select id="idFindCRNEmail" parameterType="BPrivateDataVO" resultType="String">
+		SELECT ID FROM BPRIVATEDATA WHERE DELEGATECRN=#{delegatecrn} AND EMAIL=#{email}
+	</select>
+	
+	<!-- 아이디찾기(사업자번호/휴대폰) -->
+	<select id="idFindCRNPhone" parameterType="BPrivateDataVO" resultType="String">
+		SELECT ID FROM BPRIVATEDATA WHERE DELEGATECRN=#{delegatecrn} AND PHONENUM=#{phonenum} 
+	</select>
+	
+	<!-- 비밀번호찾기(전화번호/이름/아이디) -->
+	<select id="pwFindPhoneNameID" parameterType="BPrivateDataVO" resultType="BPrivateDataVO">
+		SELECT * FROM BPRIVATEDATA WHERE PHONENUM=#{phonenum} AND NAME=#{name} AND ID=#{id}
+	</select>
+	
+	<!-- 비밀번호찾기(이메일/아이디) -->
+	<select id="pwFindEmailID" parameterType="BPrivateDataVO" resultType="BPrivateDataVO">
+		SELECT * FROM BPRIVATEDATA WHERE EMAIL=#{email} AND ID=#{id}
+	</select>
+
+	
+	<!-- 	개인정보 businessAccountInfo 데이터 페이지로 넘겨주기. -->
+	<select id="selectbPrivateData" parameterType="String" resultType="BPrivateDataVO">
+		SELECT * FROM BPRIVATEDATA 
+				WHERE 
+				BPERSONID=#{bpersonid}
+	</select>
+	
+	
+	
+		
+<!-- 	=============================REST============================================== -->
+	
+	<!-- (REST)	아이디 중복 검사 -->
+	<select id="useridDupl" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM BPRIVATEDATA WHERE ID=#{id}
+	</select>
+	
+	
+<!-- 	(REST) 사업자 계정관리에 이름을 비동기식으로 수정해주는 메서드입니다. -->
+	<update id="updateName" parameterType="BPrivateDataVO">
+		UPDATE BPRIVATEDATA
+			SET
+				NAME = #{name}
+			WHERE
+				BPERSONID=#{bpersonid}
+	</update>
+	
+	
+<!-- 	(REST) 사업자 계정관리에 생년월일을 비동기식으로 수정해주는 메서드입니다. -->
+	<update id="updateBirth" parameterType="BPrivateDataVO">
+		UPDATE BPRIVATEDATA
+			SET
+				BIRTH = #{birth}
+			WHERE
+				BPERSONID=#{bpersonid}
+	</update>
+	
+	<update id="restUpdate" parameterType="hashmap">
+		UPDATE BPRIVATEDATA
+			SET
+				${fieldname} = #{paramdata}
+			WHERE
+				${wheredata} = #{whereparam}
+	</update>
+	
+	<!-- (REST)비밀번호 수정[영경] -->
+	<update id="updatePW" parameterType="BPrivateDataVO">
+		UPDATE BPRIVATEDATA SET PW=#{pw} WHERE ID=#{id}
+	</update>
+	
+<!-- 	(REST) 비밀번호 동일한지 확인 -->
+	<select id="checkEncryptPW" parameterType="hashMap" resultType="int">
+		SELECT CASE WHEN PW = #{paramdata} THEN 1 ELSE 0 END 
+			FROM BPRIVATEDATA
+			WHERE ${wheredata} = #{whereparam}
+	</select>
+</mapper>

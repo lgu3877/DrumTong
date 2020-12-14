@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+		"-//mybatis.org//DTD Mapper 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 사업장 매출 테이블	 -->
+<mapper namespace="com.drumtong.business.dao.BSalesDAO">
+
+
+<!-- 	주문현황 페이지에 필요한 구매정보 데이터를 가져와줍니다. -->
+<!-- 	<select id="selectBSales"> -->
+<!-- 		SELECT * FROM BSALES  -->
+<!-- 			WHERE  -->
+<!-- 				ESTID = #{estid} -->
+<!-- 	</select> -->
+<!--  주문수 통계 -->
+	<select id="CountOrder" parameterType="StatisticsData" resultType="int">
+		SELECT NVL(SUM(AMOUNT),0) FROM BSALES 
+			WHERE 
+				ESTID=#{estid} AND 
+				(TO_DATE(SUBSTR(PURCHASEDATE,1,10),'YYYY-MM-DD HH24-MI-SS') BETWEEN #{startdate} AND #{enddate})
+	</select>
+	
+<!-- 	주문금액 통계 -->
+	<select id="CountPrice" parameterType="StatisticsData" resultType="int">
+		SELECT NVL(SUM(TOTALPRICE),0) FROM BSALES 
+			WHERE 
+				ESTID=#{estid} AND 
+				(TO_DATE(SUBSTR(PURCHASEDATE,1,10),'YYYY-MM-DD') BETWEEN #{startdate} AND #{enddate})
+	</select>
+	
+<!-- 	메인 프리뷰 주문 수(요청, 처리중, 완료) 데이터 -->
+	<select id="getMainPreviewOrder" parameterType="String" resultType="Hashmap">
+		SELECT A.a AS REQUEST, B.b AS PROCESSING, C.c AS SUCCESS FROM 
+			(SELECT NVL(COUNT(*),0) AS a FROM bsales 
+				WHERE status='REQUEST' AND ESTID=#{estid}) A,
+			(SELECT NVL(COUNT(*),0) AS b FROM BSALES 
+				WHERE STATUS='PROCESSING' AND ESTID=#{estid}) B,
+			(SELECT NVL(COUNT(*),0) AS c FROM BSALES 
+				WHERE STATUS='SUCCESS' AND ESTID=#{estid}) C
+	</select>
+	
+<!-- 	메인 프리뷰 매출(오늘, 이번주, 이번달) 데이터 -->
+	<select id="getMainPreviewPrice" parameterType="String" resultType="Hashmap">
+		SELECT A.a AS DAY, B.b AS WEEK, C.c AS MONTH FROM 
+			(SELECT NVL(SUM(TOTALPRICE),0) AS a FROM BSALES 
+				WHERE 
+				SUBSTR(PURCHASEDATE,1,10) = TO_CHAR(SYSDATE, 'YYYY-MM-DD') 
+				AND ESTID=#{estid}) A,
+			(SELECT NVL(SUM(TOTALPRICE),0) AS b FROM BSALES 
+				WHERE TO_DATE(SUBSTR(PURCHASEDATE,1,10), 'YYYY-MM-DD') 
+				BETWEEN TO_DATE(TO_CHAR(SYSDATE-6,'YYYY-MM-DD'),'YYYY-MM-DD') 
+				AND SYSDATE  AND ESTID=#{estid}) B,
+			(select NVL(SUM(TOTALPRICE),0) AS c FROM BSALES 
+				WHERE SUBSTR(PURCHASEDATE,6,2)=TO_CHAR(SYSDATE,'MM') 
+				AND ESTID=#{estid}) C
+	</select>
+	
+<!-- 	세탁물 판매량(오늘, 이번주, 이번달) 데이터 -->
+	<select id="getMainPreviewLaundry" parameterType="String" resultType="Hashmap">
+		SELECT A.a AS DAY, B.b AS WEEK, C.c AS MONTH FROM 
+			(SELECT NVL(SUM(AMOUNT),0) AS a FROM BSALES 
+				WHERE 
+				SUBSTR(PURCHASEDATE,1,10) = TO_CHAR(SYSDATE, 'YYYY-MM-DD') 
+				AND ESTID=#{estid}) A,
+			(SELECT NVL(SUM(AMOUNT),0) AS b FROM BSALES 
+				WHERE TO_DATE(SUBSTR(PURCHASEDATE,1,10), 'YYYY-MM-DD') 
+				BETWEEN TO_DATE(TO_CHAR(SYSDATE-6,'YYYY-MM-DD'),'YYYY-MM-DD') 
+				AND SYSDATE  AND ESTID=#{estid}) B,
+			(select NVL(SUM(AMOUNT),0) AS c FROM BSALES 
+				WHERE SUBSTR(PURCHASEDATE,6,2)=TO_CHAR(SYSDATE,'MM') 
+				AND ESTID=#{estid}) C
+	</select>
+	
+	
+<!-- 	주문 목록 데이터 Bsales, BDetailSales, Binformation Join되어있음. -->
+	<select id="selectOrderList" parameterType="String" resultType="OrderList">
+	SELECT
+        BSALES.ESTID,
+		BSALES.SALECODE, BSALES.PURCHASEDATE, BSALES.AMOUNT,
+		BSALES.ORIGINALPRICE, BSALES.DISCOUNTPRICE, BSALES.TOTALPRICE,
+		BSALES.ABLEDAY, BSALES.STATUS, BSALES.PICKUPDATE,
+		BSALES.DELIVERYDATE, BSALES.REQUESTTYPE, BSALES.REQUESTS,
+        
+        BDETAILSALES.MAINCATEGORY, BDETAILSALES.SUBCATEGORY, BDETAILSALES.NAME, BDETAILSALES.AMOUNT,
+        
+        BINFORMATION.BRANDNAMING
+	FROM BSALES  
+		INNER JOIN BDETAILSALES 
+	    ON BSALES.SALECODE = BDETAILSALES.SALECODE
+	    INNER JOIN BINFORMATION
+		ON BINFORMATION.ESTID = BSALES.ESTID
+	WHERE MEMBERID = #{memberid}
+	</select>
+</mapper>
