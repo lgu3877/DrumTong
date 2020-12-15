@@ -331,12 +331,32 @@
 				<!-- 저장된 정기 휴무일 표기 -->
 					<ul class="h_schedule_con">
 						<li class="h_schedule_list">
-						<!-- 내용 -->
+					<!-- 내용 -->
+					<!-- 1 -->
 							<div class="h_schedule_context">
 								<p class="scheduled_days">
 									매월 
 										<span class="h_week">[첫째주]</span>
-										<span class="h_day">[일요일] [화요일]</span>
+										<span class="h_day">[일요일]</span>
+										<span class="h_day">[화요일]</span>
+									휴무
+								</p>						
+							</div>
+						<!-- 삭제 버튼 -->
+							<div class="h_schedule_delete">
+								<p>삭제</p>
+							</div>
+						</li>
+					<!-- 2 -->
+						<li>
+							<div class="h_schedule_context">
+								<p class="scheduled_days">
+									매월 
+										<span class="h_week">[셋째주]</span>
+										<span class="h_day">[월요일]</span>
+										<span class="h_day">[목요일]</span>
+										<span class="h_day">[금요일]</span>
+										<span class="h_day">[토요일]</span>
 									휴무
 								</p>
 							</div>
