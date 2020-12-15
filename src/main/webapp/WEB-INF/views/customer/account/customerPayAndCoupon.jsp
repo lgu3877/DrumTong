@@ -54,7 +54,7 @@
                         <div class="pac_payCard_name">계좌</div>
                         
                         <div class="dropdown">
-                     <button id="accountBank" class="dropdown-button" style="text-decoration: none">${accountBank }   </button>
+                     <button id="accountBank" class="dropdown-button" style="text-decoration: none">${accountBank }</button>
                      <div class="dropdown-content">
                         <a onclick="dropSelect(this)">신한</a>
                         <a onclick="dropSelect(this)">현대</a>
@@ -106,14 +106,14 @@
           case 'account':
              ob={
                 'type' : type,
-                'accountBank' : document.getElementById('accountBank').outerHTML,
+                'accountBank' : document.querySelector('#accountBank').innerHTML,
                 'accountNum' : document.getElementById('accountNum').value,
              };
              break;
           case 'card':
              ob={
                 'type' : type,
-                'cardBank' : document.getElementById('cardBank').outerHTML,
+                'cardBank' : document.querySelector('#cardBank').innerHTML,
                 'cardNum1' : document.getElementById('cardNum1').value,
                 'cardNum2' : document.getElementById('cardNum2').value,
                 'cardNum3' : document.getElementById('cardNum3').value,
@@ -171,7 +171,7 @@
         });
         
        function dropSelect(obj) {
-          obj.parentNode.parentNode.querySelector('button').innerHTML = obj.outerHTML;
+          obj.parentNode.parentNode.querySelector('button').innerHTML = obj.innerHTML;
        }
        
         
