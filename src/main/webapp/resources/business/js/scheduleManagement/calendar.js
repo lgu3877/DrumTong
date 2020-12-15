@@ -29,8 +29,31 @@ document.getElementById(
 
 // 현재 월 설정
 document.getElementById(
-  "current-month"
+		"current-month"
 ).innerHTML = `<span id="month-value">${currentMonth}</span> <i class="fas fa-angle-down"></i>`;
+
+// 달력 년-월 선택 디자인
+const yearSelector = document.getElementById("current-year");
+const monthSelector = document.getElementById("current-month");
+
+for (let i = 0; i < 2; i++) {
+	console.log(yearSelector.children[i]);
+	console.log(monthSelector.children[i]);
+	switch(i) {
+	// 년 & 월
+	case 0:
+		yearSelector.children[i].style.fontSize = "15pt";		
+		monthSelector.children[i].style.fontSize = "15pt";	
+		break;
+	// 아이콘
+	case 1:
+		yearSelector.children[i].style.fontSize = "15pt";		
+		monthSelector.children[i].style.fontSize = "15pt";	
+		yearSelector.children[i].style.marginLeft = "5px";	
+		monthSelector.children[i].style.marginLeft = "5px";	
+		break;
+	}
+}
 
 // dropdown years
 function createYears() {
@@ -155,6 +178,9 @@ function loadDays(year, month, day) {
   }
 }
 
+
+
+// 달력 렌더링
 createYears();
 createMonths();
 loadDays(currentYear, currentMonth, currentDate);
