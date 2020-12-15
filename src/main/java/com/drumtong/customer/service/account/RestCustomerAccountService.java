@@ -1,5 +1,6 @@
 package com.drumtong.customer.service.account;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,18 +60,27 @@ public class RestCustomerAccountService {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("memberid", Login.getMemberid());
 		
-		// 여기서부터 작업
-//		switch(param.get("type")) {
-//		case "account":
-//			map.put("accountBank", param.get("accountBank"));
-//			map.put("accountNum", param.get("accountNum"));
-//			result = cPaymentDAO.updateAccount(map);
-//			break;
-//		case "card":
-//			map.put
-//			result = cPaymentDAO.updateCard();
-//			break;
-//		}
+		System.out.println("테스트코드");
+		System.out.println("type : " + param.get("type"));
+		
+		switch(param.get("type")) {
+		case "account":
+			map.put("typebank", "ACCOUNTBANK");
+			map.put("bankname", param.get("accountBank"));
+			map.put("typenum", "ACCOUNTNUM");
+			map.put("bankNum", param.get("accountNum"));
+			break;
+		case "card":
+			map.put("typebank", "CARDBANK");
+			map.put("bankname", param.get("cardBank"));
+			map.put("typenum", "CARD");
+			map.put("bankNum", param.get("cardNum1") + "-" + param.get("cardNum2") + "-" + param.get("cardNum3") + "-" + param.get("cardNum4"));
+			break;
+		}
+		
+		System.out.println("map : " + map.toString());
+		
+		result = cPaymentDAO.updatePayment(map);
 		return result == 0 ? "false" : "true";
 	}
 

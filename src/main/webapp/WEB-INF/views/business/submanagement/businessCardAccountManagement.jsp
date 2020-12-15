@@ -166,7 +166,7 @@
 	
 		let cardConfirm = confirm('정말로 카드번호를 변경하시겠습니까?');
 		if (cardConfirm == false) {
-			return false;
+			retrun false;
 		}
 		
 		let exit = true;
@@ -242,7 +242,7 @@
 		
 		let acConfirm = confirm('정말로 계좌번호를 변경하시겠습니까?');
 		if (acConfirm == false) {
-			return false;
+			retrun false;
 		}
 		
 		let ob={
