@@ -14,7 +14,7 @@ function appendYear(targetSelect){
 }
 
 
-//radio input selected
+// radio input selected
 function radioCheck(gender) {
 	switch (gender) {
 	case 'male':
@@ -31,7 +31,7 @@ function radioCheck(gender) {
 }	
 
 
-//Search Option Selectors
+// Search Option Selectors
 function openForm(target) {
 	const displayOption = document.getElementById(target).style.display;
 	document.getElementById(target).style.display = displayOption === 'none' ? '' : 'none';
@@ -68,7 +68,7 @@ function afterSendAuth(target, targetDiv, number){	// number : 인증번호
 	
 }
 
-//Create Auth Input
+// Create Auth Input
 function authInput(target) {
 	const authInfo = document.getElementById(target + '_input').value;
 	const targetDiv = document.getElementById(target + '_div');
@@ -102,7 +102,7 @@ function authInput(target) {
 	
 	    .then( (response) => {
 	      if(response.data !== -1){
-//	    	  계정이 일치한다면 이 함수를 실행합니당(영경)
+// 계정이 일치한다면 이 함수를 실행합니당(영경)
 	    	console.log('이 텍스트는 resources/business/js/businessAccountSearch.js 의 authInput 함수 내에 있음');
 	    	console.log('인증번호는 ', response.data);
 	    	afterSendAuth(target, targetDiv, response.data);
@@ -115,7 +115,7 @@ function authInput(target) {
 	  
 }
 
-//Phone Number syntax
+// Phone Number syntax
 function phoneNumCheck(accountSearchType) {
 	const phoneSyntax = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
 	const errorMessage = "잘못된 전화번호 형식입니다.";
