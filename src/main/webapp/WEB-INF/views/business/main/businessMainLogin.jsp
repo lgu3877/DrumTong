@@ -75,7 +75,7 @@ function loginSubmit(){
 						<p class="join_link" onclick="location.href='${cpath }/business/membership/businessSignUp/'">
 							회원가입하기
 						</p>			
-						<p class="join_link" onclick="location.href='${cpath }/business/membership/businessPWFind/'">
+						<p class="join_link" onclick="location.href='${cpath }/business/membership/businessAccountFind/'">
 							ID/PW 찾기
 						</p>			
 					</div>
