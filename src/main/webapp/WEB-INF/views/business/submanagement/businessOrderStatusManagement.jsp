@@ -29,8 +29,12 @@
    	<!-- Axios -->
    	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
    	
-   		<!-- jQuery CDN -->   	
+   	<!-- jQuery CDN -->   	
    	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	
+	<!-- jQuery Modal -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
 </head>
 <body>
@@ -47,7 +51,7 @@
 			<h1 style="font-size: 36pt">주문현황</h1>
 			
 			
-			<div class="container" id="container">
+			<div class="container" id="container" onclick="openDetail(this)">
 				<h1 class="containerName">주문번호 : AAA-154332e</h1>
 				<div class="contentdiv">
 					<div class="halfdiv">
@@ -78,16 +82,22 @@
 
 	</section>
 	
+	<div id="modalcontainer" style="position: fixed; width: 600px; height: 300px; left: 25%; top: 25%; background:rgba(0,0,0,0.3); display: none">
+		22222
+	</div>
+	
 	<script type="text/javascript">
 		
 		let clonecontainer = $('div.container');
 		
-		for(i = 0; i < 5; i++) {
-			$('.outerdiv').append('<div class="container">' + clonecontainer.html() + '</div>');
-			$('.outerdiv').children('div.container').eq(i + 1).attr('id', 'container' + i);
+// 		for(i = 0; i < 5; i++) {
+// 			$('.outerdiv').append('<div class="container">' + clonecontainer.html() + '</div>');
+// 			$('.outerdiv').children('div.container').eq(i + 1).attr('id', 'container' + i);
+// 		}
+		
+		function openDetail(obj) {
+			$('#modal' + obj.id).fadeIn(300);
 		}
-		
-		
 		
 		console.log(clonecontainer.html());
 	</script>
