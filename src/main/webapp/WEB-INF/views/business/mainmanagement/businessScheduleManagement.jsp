@@ -279,7 +279,7 @@
 				</div>
 
 			<!-- input -->
-				<div class="tmp_holiday_input_con">
+				<div class="holiday_input_con">
 				<!-- 정기 휴무 -->
 					<div class="select_wrapper">
 					<!-- 주 선택 -->
@@ -421,9 +421,9 @@
 			<!-- </form> -->
 			
 			
-		<!-- 임시시 휴무 설정 -->
+		<!-- 임시 휴무 설정 -->
 			<!-- </form> -->
-			<div class="tep_holiday">
+			<div class="tmp_holiday">
 				<!-- title -->
 				<div class="content_title_con">
 					<div>
@@ -447,7 +447,49 @@
 					</div>
 				</div>
 				
-				<!-- context -->
+			<!-- context -->
+				<div class="tmp_holiday_input_con">
+				
+				<!-- 기간 설정 -->
+					<div class="set_day_range_con">
+					
+					<!-- from -->
+						<input id="startDay" type="date" name="startDay" pattern="\d{4}-\d{2}-\d{2}">
+						<!-- <label for="startDay">시작 일</label> -->
+						
+					<!-- 화살표 -->
+						<div class="date_arrow">
+							<i class="fas fa-long-arrow-alt-right"></i>
+						</div>					
+					<!-- to -->
+						<input id="endDay" type="date" name="endDay" pattern="\d{4}-\d{2}-\d{2}">
+						<!-- <label for="endDay">마지막 일</label> -->
+
+					</div>
+					<div id="date-error-msg" class="error_msg text_red"></div>
+					
+				<!-- 사유 작성 -->
+					<div>
+					
+					<!-- 사유 -->
+						<div>
+						
+						</div>
+						
+					<!-- 버튼 -->
+						<button>
+						
+						</button>
+						
+					</div>
+					
+				<!-- 임시 영업 중지 목록 -->
+					<div>
+					
+					</div>
+					
+						
+				</div>
 			</div>
 			<!-- </form> -->
 		</div>

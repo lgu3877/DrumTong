@@ -37,8 +37,6 @@ const yearSelector = document.getElementById("current-year");
 const monthSelector = document.getElementById("current-month");
 
 for (let i = 0; i < 2; i++) {
-	console.log(yearSelector.children[i]);
-	console.log(monthSelector.children[i]);
 	switch(i) {
 	// 년 & 월
 	case 0:
@@ -142,6 +140,8 @@ function loadDays(year, month, day) {
       for (let day = startDay - 1; day >= 0; day--) {
         const date = document.createElement("div");
         date.classList.add("lastDays");
+        
+        // 날짜 입력 > DB 스케쥴 추가 가능
         date.innerHTML = prevLastDate - day;
 
         weekDiv.appendChild(date);
@@ -150,6 +150,8 @@ function loadDays(year, month, day) {
       for (let day = startDay; day < 7; day++) {
         const date = document.createElement("div");
         date.classList.add("currentDays");
+
+        // 날짜 입력 > DB 스케쥴 추가 가능
         date.innerHTML = ++currentCount;
 
         weekDiv.appendChild(date);
@@ -162,13 +164,18 @@ function loadDays(year, month, day) {
         if (currentCount < lastDate) {
           const date = document.createElement("div");
           date.classList.add("currentDays");
+
+          // 날짜 입력 > DB 스케쥴 추가 가능
           date.innerHTML = ++currentCount;
 
           weekDiv.appendChild(date);
         } else {
           const date = document.createElement("div");
           date.classList.add("nextDays");
+
+          // 날짜 입력 > DB 스케쥴 추가 가능
           date.innerHTML = ++lastCount;
+
           weekDiv.appendChild(date);
         }
       }
@@ -184,6 +191,8 @@ function loadDays(year, month, day) {
 createYears();
 createMonths();
 loadDays(currentYear, currentMonth, currentDate);
+
+
 
 // 요일
 // function swipeDay(dayIndex) {

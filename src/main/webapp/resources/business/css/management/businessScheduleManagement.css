@@ -15,6 +15,14 @@
 	background-color: navy;
 } */
 
+/* 에러메세지 */
+.error_msg {
+	text-align: left;
+    margin-top: 10px;
+    font-weight: 600;
+	
+}
+
 /* 폰트 옵션 */
 .text_blue {
 	color: #3b5998;
@@ -294,8 +302,8 @@
 	background-color: #6495EF;
 }
 
-/* 임시휴무 설정 */
-.tmp_holiday_input_con {
+/* 정기 휴무 설정 */
+.holiday_input_con {
 	
 }
 
@@ -401,4 +409,51 @@
 .h_day {
 	background-color: beige;
     border-radius: 20px;
+}
+
+.tmp_holiday_input_con {
+	margin-top: 20px;
+}
+
+.set_day_range_con {
+	height: 50px;
+    display: flex;
+}
+
+.set_day_range_con input {
+	margin-right: 30px;
+    border: none;
+    background-color: #f38181;
+    border-radius: 5px;
+    padding: 0 15px;
+    font-size: 12pt;
+    color: white;
+}
+
+.set_day_range_con i:hover {
+	cursor: pointer;	
+}
+
+.set_day_range_con input:hover {
+	cursor: pointer;
+}
+
+.set_day_range_con input:focus {
+	outline: none;
+}
+
+.set_day_range_con input:invalid + div::after {
+  /* content: '✖'; */
+}
+
+.set_day_range_con input:valid + div::after {
+  /* content: '✓'; */
+}
+	
+.date_arrow {
+	margin: auto 30px auto 0;
+}
+
+.date_arrow i {
+	font-size: 20pt;
 }
