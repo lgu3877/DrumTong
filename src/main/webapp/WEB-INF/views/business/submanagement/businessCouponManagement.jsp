@@ -59,12 +59,12 @@
                     <h1>할인금액</h1>
                     <input type="text" placeholder="금액을 입력하세요" id="discount" name="discount">
                 </div>
+
                 
-                <div class="radioDiv">
-                    <input type="radio" name="maxissuenum" value="0" id="unlimitedcoupon">
+                <div  class="radioDiv">	<!-- 체크되었을 때 옆에 입력란 활성화 -->
+                    <input type="radio" name="maxissuenum" id="unlimitedcoupon">	<!-- 선착순도 name="maxissunum" value 값이 0이 되지 않도록 하기 -->
                     <h1>무제한</h1>
                 </div>
-                
                 <div  class="radioDiv">	<!-- 체크되었을 때 옆에 입력란 활성화 -->
                     <input type="radio" name="maxissuenum" id="limitedcoupon">	<!-- 선착순도 name="maxissunum" value 값이 0이 되지 않도록 하기 -->
                     <h1>선착순</h1>
