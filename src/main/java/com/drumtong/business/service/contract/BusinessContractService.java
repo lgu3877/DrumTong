@@ -190,15 +190,19 @@ public class BusinessContractService {
 		bPaymentVO.setEstid(estid);
 		bPaymentVO.setCardnum(bPaymentVO.getCardnum().replace(",", "-"));
 		
+		
+		
 		// 1. 프리미엄 광고 결제 수단 정보를 업데이트 시켜준다.
 		int BPaymentResult = bPaymentDAO.updatePremiumPay(bPaymentVO);
 		
+		System.out.println("BPaymentResult : " + BPaymentResult);
 		
 		// 2. 광고 결제 수단이 정상적으로 작동이 되면 프리미엄 광고 여부를 업데이트 시켜준다.
 		if(BPaymentResult == 1) {
 			bInformationVO.setEstid(estid);
-//			bInformationVO.setPremiumboolean("Y");
+			bInformationVO.setPremiumboolean("Y");
 			int BInformationResult = bInformationDAO.updatePremiumBoolean(bInformationVO);
+			System.out.println("BInformationResult : " + BInformationResult);
 		}
 		
 		
