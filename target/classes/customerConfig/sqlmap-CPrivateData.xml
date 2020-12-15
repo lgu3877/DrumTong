@@ -9,6 +9,9 @@
 <!-- 	신규 데이터 입력 -->
 	<insert id="insertSignUp" parameterType="CPrivateDataVO">
 		INSERT INTO CPRIVATEDATA 
+			(MEMBERID, ID, PW, NAME, BIRTH, GENDERBOOLEAN, PHONENUM,
+			MAINADDRESS, DETAILADDRESS, MAINRECEIPTADDRESS, 
+			DETAILRECEIPTADDRESS, EMAIL)
 			VALUES
 			(#{memberid}, #{id}, #{pw}, #{name}, #{birth},
 			 #{genderboolean}, #{phonenum}, #{mainaddress}, #{detailaddress},

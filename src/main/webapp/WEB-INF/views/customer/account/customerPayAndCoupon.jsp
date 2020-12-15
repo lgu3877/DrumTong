@@ -39,13 +39,13 @@
                         <a onclick="dropSelect(this)">기타</a>
                      </div>
                   </div>
-                        <input id="cardNum1" class="pac_payCard_num" type="text" value="${cardNum[0]}"></input>
+                        <input id="cardNum1" onkeyup="onlyNum(this)" maxlength="4" class="pac_payCard_num" type="text" value="${cardNum[0]}"></input>
                         -
-                        <input id="cardNum2" class="pac_payCard_num" type="text" value="${cardNum[1]}"></input>
+                        <input id="cardNum2" onkeyup="onlyNum(this)" maxlength="4" class="pac_payCard_num" type="text" value="${cardNum[1]}"></input>
                         -
-                        <input id="cardNum3" class="pac_payCard_num" type="text" value="${cardNum[2]}"></input>
+                        <input id="cardNum3" onkeyup="onlyNum(this)" maxlength="4" class="pac_payCard_num" type="text" value="${cardNum[2]}"></input>
                         -
-                        <input id="cardNum4" class="pac_payCard_num" type="text" value="${cardNum[3]}"></input>
+                        <input id="cardNum4" onkeyup="onlyNum(this)" maxlength="4" class="pac_payCard_num" type="text" value="${cardNum[3]}"></input>
                         <button class="pac_payCard_save" onclick="savePay('card')">저장</button>
                         <div class="pac_payList_add"></div>
                     </div>
@@ -66,7 +66,7 @@
                         <a onclick="dropSelect(this)">기타</a>
                      </div>
                   </div>
-                        <input id="accountNum" class="pac_payAccount_num" type="text" value="${accountNum}"></input>
+                        <input id="accountNum" onkeyup="onlyNum(this)" maxlength="20" class="pac_payAccount_num" type="text" value="${accountNum}"></input>
                         <button class="pac_payCard_save" onclick="savePay('account')">저장</button>
                         <div class="pac_payList_add"></div>
                     </div>
@@ -137,6 +137,15 @@
              axPost(ob);
           
           
+       }
+       function onlyNum(obj){
+    	   var regexp = /^[0-9]*$/;
+// //     	   var regexp = /^[0-9]ㅎgi;
+    	   if(!regexp.test(obj.value)){
+    		   alert("숫자만 입력할 수 있습니다!");
+    		   obj.value = obj.value.replaceAll(/[^0-9]/g, '');
+// //     		   obj.value = obj.value.substr(0,obj.value.length-1);
+    	   }
        }
     </script>
     
