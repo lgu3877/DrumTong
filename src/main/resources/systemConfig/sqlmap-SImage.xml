@@ -3,13 +3,16 @@
 		"-//mybatis.org//DTD Mapper 3.0//EN" 
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
+<!-- 건욱 -->
 <!-- 시스템 정적 이미지 경로 테이블	 -->
 <mapper namespace="com.drumtong.system.dao.SImageDAO">
 
 <!-- 	정적 이미지 list를 카테고리의 값에 따라 불러옵니다 -->
-	<select id="selectSImageSRC" parameterType="SImageVO">
-		SELECT * FROM SIMAGE
-			WHERE CATEGORYNAME = #{categoryname}
+	<select id="selectSImageSRC" parameterType="String" resultType="SImageVO">
+		SELECT 
+			CATEGORYNAME, STOREIMG
+		 FROM SIMAGE
+			WHERE 
+				CATEGORYNAME = #{categoryname}
 	</select>
 </mapper>

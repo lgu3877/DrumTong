@@ -114,7 +114,7 @@
 	</update>
 	
 <!-- 	(REST) 비밀번호 동일한지 확인 -->
-	<select id="checkEncryptPW" parameterType="hashMap">
+	<select id="checkEncryptPW" parameterType="hashMap" resultType="int">
 		SELECT CASE WHEN PW = #{paramdata} THEN 1 ELSE 0 END 
 			FROM BPRIVATEDATA
 			WHERE ${wheredata} = #{whereparam}

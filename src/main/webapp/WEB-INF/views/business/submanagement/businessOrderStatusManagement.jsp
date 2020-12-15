@@ -18,6 +18,7 @@
 	<!-- side header css -->
 	<link rel="stylesheet" href="${cpath }/business/css/businessSideHeader.css">
 	<!-- businessStatisticsManagement css -->
+	<link rel="stylesheet" href="${cpath }/business/css/submanagement/businessOrderStatusManagement.css">
 	
 	<!-- Font -->
    	<link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
@@ -28,8 +29,9 @@
    	<!-- Axios -->
    	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
    	
-   	<!-- Google Chart -->
-   	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   		<!-- jQuery CDN -->   	
+   	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
 </head>
 <body>
 	<!-- side-header(navbar) -->
@@ -41,19 +43,53 @@
 	<!-- sub-header(membership) -->
 	<%@ include file="../main/businessSubHeader.jsp" %>
 		
-		<div style="width: 1000px; text-align: left" class="marginauto">
+		<div class="outerdiv">
 			<h1 style="font-size: 36pt">주문현황</h1>
 			
-			<div style="width: 800px; height: 300px; margin: 0 auto; background-color: grey; border-radius: 20px">
-				<h1 style="background: white; font-size: 24pt; width: 200px; height:50px; text-align: center; padding-top: 15px; margin-left: 15px">주문번호</h1>
-				<div style="width: 100%; height: 220px; display: flex">
-					<div style="width: 50%; height: 100%; background-color: red"></div>
-					<div style="width: 50%; height: 100%; background-color: blue"></div>
+			
+			<div class="container" id="container">
+				<h1 class="containerName">주문번호 : AAA-154332e</h1>
+				<div class="contentdiv">
+					<div class="halfdiv">
+						<div>
+							<h1>구매날짜</h1>
+							<p>2020-11-18</p>
+						</div>
+						<div>
+							<h1>유형</h1>
+							<p>런닝화</p>
+						</div>
+					</div>
+					<div class="halfdiv">
+						<div>
+							<h1>배송날짜</h1>
+							<p>2020-11-28</p>
+						</div>
+						<div>
+							<h1>주문금액</h1>
+							<p>28,000원</p>
+						</div>
+						<div class="middleBorder"></div>			
+					</div>
 				</div>
 			</div>
 		
 		</div>
 
 	</section>
+	
+	<script type="text/javascript">
+		
+		let clonecontainer = $('div.container');
+		
+		for(i = 0; i < 5; i++) {
+			$('.outerdiv').append('<div class="container">' + clonecontainer.html() + '</div>');
+			$('.outerdiv').children('div.container').eq(i + 1).attr('id', 'container' + i);
+		}
+		
+		
+		
+		console.log(clonecontainer.html());
+	</script>
 </body>
 </html>

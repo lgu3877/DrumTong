@@ -42,7 +42,11 @@ public class RestBusinessSubManagementService {
 
 	// === 소분류 [ CARD ] 필드 {CARDNUM, CARDBAMK, CARDYEAR, CARDMONTH, CVC} == [건욱]
 	// 1. 카드를 비동기식으로 수정해주는 메서드입니다.
-	public int updateCard(BPaymentVO bPaymentVO) {
+	public int updateCard(BPaymentVO bPaymentVO, HttpServletRequest req) {
+		HttpSession Session = req.getSession();
+		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+		String estid= bInformationVO.getEstid();
+		bPaymentVO.setEstid(estid);
 		int RestUpdateCardReuslt = bPaymentDAO.updatePremiumPay(bPaymentVO);
 		return RestUpdateCardReuslt;
 	}
@@ -50,8 +54,12 @@ public class RestBusinessSubManagementService {
 
 	// === 소분류 [ ACCOUNT ] 필드 {ACCOUNTBANK, ACCOUNTNUM, CARDYEAR, CARDMONTH, CVC} == [건욱]
 	// 2. 계좌를 비동기식으로 수정해주는 메서드입니다. 계좌관리에 통장사본 수정할 수 있는 란을 추가적으로 생성해줘야합니다.
-	public int updateAccount(BPaymentVO bPaymentVO) {
-		int RestUpdateAccountReuslt = bPaymentDAO.updatePremiumPay(bPaymentVO);
+	public int updateAccount(BPaymentVO bPaymentVO, HttpServletRequest req) {
+		HttpSession Session = req.getSession();
+		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+		String estid= bInformationVO.getEstid();
+		bPaymentVO.setEstid(estid);
+		int RestUpdateAccountReuslt = bPaymentDAO.updateAccount(bPaymentVO);
 		return RestUpdateAccountReuslt;
 	}
 
