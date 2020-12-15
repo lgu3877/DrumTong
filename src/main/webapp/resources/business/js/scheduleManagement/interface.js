@@ -178,10 +178,29 @@ for (let i = 0; i < holidayText.length; i++) {
 	//	const reg = \[(.*?)\];
 }
 
-// 문자열 [ ] 안 text 가져오기
+// 문자열 [ ] 내부 text 가져오기
 function subString(text) {
 	return text.substring(1, text.length - 1);
 }
 
+
+// 정기 휴무 삭제 버튼 이벤트
+const deleteBtns = document.getElementsByClassName("h_schedule_delete");
+
+for (let i = 0; i < deleteBtns.length; i++) {
+	deleteBtns[i].addEventListener("click", function() {
+		const agree = confirm("삭제하시겠습니까?");
+	
+		// 삭제 > 페이지 reload
+		if (agree === true) {
+			deleteBtns[i].parentElement.remove();
+			
+			// DB 작업
+			// ...
+			
+			window.location.reload();
+		}
+	})
+}
 
 
