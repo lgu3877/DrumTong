@@ -15,6 +15,23 @@
 	background-color: navy;
 } */
 
+/* 폰트 옵션 */
+.text_blue {
+	color: #3b5998;
+}
+
+.text_skyblue {
+	color: #6495EF;
+}
+
+.text_red {
+	color: red;
+}
+
+.text_thick {
+	font-weight: bold;
+}
+
 /* 버튼 default */
 .btn {
 	cursor: pointer;
@@ -368,4 +385,18 @@
 	font-weight: 600;
     text-decoration: underline;
     text-underline-position: under;
+}
+
+.scheduled_days {
+	font-weight: 600;	
+}
+
+.h_week {
+	background-color: beige;
+    border-radius: 20px;
+}
+
+.h_day {
+	background-color: beige;
+    border-radius: 20px;
 }
