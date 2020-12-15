@@ -154,13 +154,33 @@ const holidayText = document.getElementsByClassName("scheduled_days");
 
 for (let i = 0; i < holidayText.length; i++) {
 	// week
-	const week = holidayText[i].document.getElementsByClassName("h_week")[0];
-	console.log(week);
+	let week = holidayText[i].getElementsByClassName("h_week")[0].innerHTML;
 	
-	const reg = \[(.*?)\];
+	holidayText[i].getElementsByClassName("h_week")[0].innerHTML
+		= `[<span class="text_red text_thick">
+				${subString(week)}
+			</span>]`;
+	
 	
 	// day
+	const days = holidayText[i].getElementsByClassName("h_day");
 	
+	for (let j = 0; j < days.length; j++) {
+		let day = days[j].innerHTML;
+	
+		holidayText[i].getElementsByClassName("h_day")[j].innerHTML
+			= `[<span class="text_skyblue text_thick">
+					${subString(day)}
+				</span>]`;
+	
+	}
+	
+	//	const reg = \[(.*?)\];
+}
+
+// 문자열 [ ] 안 text 가져오기
+function subString(text) {
+	return text.substring(1, text.length - 1);
 }
 
 
