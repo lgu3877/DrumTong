@@ -58,7 +58,7 @@ public class CustomerAccountService {
 		
 		mav.addObject("cardNum", card.equals("-") ? new String[]{"","","",""} : card.split("-"));
 		mav.addObject("cardBank", cPaymentVO.getCardbank());
-		mav.addObject("accountNum", accountNum);
+		mav.addObject("accountNum", accountNum.equals("-") ? "" : accountNum);
 		mav.addObject("accountBank", cPaymentVO.getAccountbank());
 		
 		List<CouponList> couponlist = bCouponDAO.selectCouponList(Login.getMemberid());

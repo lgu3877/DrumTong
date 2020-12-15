@@ -1,6 +1,5 @@
 package com.drumtong.customer.service.account;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
