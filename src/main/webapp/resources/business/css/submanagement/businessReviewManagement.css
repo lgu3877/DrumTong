@@ -1,3 +1,10 @@
+.container {
+	margin: 0 auto;
+	width: 800px; 
+	height: 80%;
+	margin-top: 100px !important;
+}
+
 .customerReview {
 	width: 100%;  
 	display: flex
@@ -18,6 +25,37 @@
 	display: inline-block;
 }
 
+div.subSelect {
+	display: flex; 
+	margin-bottom: 15px;
+}
+
+.subSelect input {
+	width: 33%; 
+	height: 50px;
+}
+
+.subSelect div {
+	width: 0.5%;
+}
+
+input[type="button"] {
+	background-color : white; 
+	color : #3088F9; 
+	height: 50px; 
+	font-weight : bold;
+	border: 1px solid #3088F9;
+	border-radius: 10px;
+}
+input[type="button"]:hover {
+ background-color : navy; 
+ color : white; 
+ font-weight : bold; 
+ border-color : navy;
+ transform: translate(0, -3px);
+ transition: all 1s ease 0s;
+ cursor: pointer;
+}
 
 
 div.reviewflex {
@@ -94,7 +132,6 @@ div.reviewflex .table .row {
 .btndiv input[type="button"] {
  	width: 100%;
  	height: 45%;
-
  }
  
 .btndiv div {
@@ -131,7 +168,10 @@ div.extradiv img {
 	height: 48px; 
 	font-size: 24pt; 
 	display: inline-block; 
-	background-color: grey
+	background-color : #4BC0BE; 
+	color : white; 
+	font-weight : bold; 
+	border-color : white;
 }
 
 #reviewpage .notcurrentPage {
@@ -142,10 +182,27 @@ div.extradiv img {
 	height: 48px; 
 	font-size: 24pt; 
 	display: inline-block; 
+	background-color : white; 
+	color : #4BC0BE; 
+	font-weight : bold; 
+	border-color : #4BC0BE;
+}
+
+#reviewpage .currentPage:hover, #reviewpage .notcurrentPage:hover {
+	transform: translate(0, -3px);
+ 	transition: all 1s ease 0s;
+	cursor: pointer;
 }
 
 #reviewpage i {
 	vertical-align: middle;
+	color: #4BC0BE !important;
+}
+
+#reviewpage i:hover {
+	 transform: translate(0, -3px);
+	 transition: all 1s ease 0s;
+ 	 cursor: pointer;
 }
 
 
@@ -154,7 +211,7 @@ div.businessdiv {
   	display: flex;
   	margin-top: 10px; 
   	margin-bottom: 40px;
-  	background-color: #afafaf;
+  	background-color: #3088F9;
   }
   
 div.businessdiv textarea {
@@ -166,6 +223,7 @@ div.businessdiv textarea {
 }
 
 .replydiv {
+	color:white;
 	width: 70%;
 	float: right;
 	display: flex;
@@ -175,5 +233,10 @@ div.businessdiv textarea {
 
 .replydiv i {
 	width: 20%;
+}
+
+.replydiv h1 {
+	font-weight: bold;
+	font-size: 14pt;	
 }
 	
