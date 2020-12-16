@@ -37,4 +37,9 @@
 	<update id="updateChange" parameterType="hashmap">
 		UPDATE CPRIVATEDATA SET ${name}=#{value} WHERE MEMBERID=#{memberid}
 	</update>
+	
+<!-- 	이메일 중복 검사 -->
+	<select id="userEmailDupl" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM CPRIVATEDATA WHERE EMAIL=#{email}
+	</select>
 </mapper>

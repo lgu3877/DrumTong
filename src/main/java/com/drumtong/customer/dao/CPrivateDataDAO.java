@@ -20,6 +20,9 @@ public interface CPrivateDataDAO {
 //	(REST) 비밀번호 수정
 	int updateChange(HashMap<String, String> value);
 
+//	(REST) 이메일 중복 검사
+	int userEmailDupl(String email);
+
 
 	
 }

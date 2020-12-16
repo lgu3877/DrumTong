@@ -31,5 +31,11 @@ public class RestCustomerMembershipService {
 		return LoginResult ? "true": "false";
 	}
 
+	// 이메일 중복 검사[영경]
+	public String emailCheck(String email) {
+		int CheckResult = cPrivateDataDAO.userEmailDupl(email);
+		return CheckResult == 1 ? "false" : "true";
+	}
+
 	
 }
