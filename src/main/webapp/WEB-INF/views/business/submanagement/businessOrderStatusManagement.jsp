@@ -111,7 +111,6 @@
 		})
 		
 		
-		
 		$(document).ready(function() {
     	$(window).scroll( function(){
         $('.container').each( function(i){
