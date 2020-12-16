@@ -105,20 +105,30 @@
           switch(type){
           case 'account':
              ob={
-                'type' : type,
-                'accountBank' : document.querySelector('#accountBank').innerHTML,
-                'accountNum' : document.getElementById('accountNum').value,
+                type : type,
+                accountBank : document.querySelector('#accountBank').innerHTML,
+                accountNum : document.getElementById('accountNum').value,
              };
+             if(ob['accountNum'].length < 10){
+            	 alert('계좌번호가 너무 짧습니다.');
+            	 return false;
+             }
              break;
           case 'card':
              ob={
-                'type' : type,
-                'cardBank' : document.querySelector('#cardBank').innerHTML,
-                'cardNum1' : document.getElementById('cardNum1').value,
-                'cardNum2' : document.getElementById('cardNum2').value,
-                'cardNum3' : document.getElementById('cardNum3').value,
-                'cardNum4' : document.getElementById('cardNum4').value,
+                type : type,
+                cardBank : document.querySelector('#cardBank').innerHTML,
+                cardNum1 : document.getElementById('cardNum1').value,
+                cardNum2 : document.getElementById('cardNum2').value,
+                cardNum3 : document.getElementById('cardNum3').value,
+                cardNum4 : document.getElementById('cardNum4').value,
                };
+             for(i = 1; i <=4; i++){
+            	 if(ob['cardNum' + i].length != 4){
+            		 alert(i + '번째 카드 번호가 4자리가 아닙니다.');
+            		 return false;
+            	 }
+             }
              break;
           }
           var axPost = async (ob) => {

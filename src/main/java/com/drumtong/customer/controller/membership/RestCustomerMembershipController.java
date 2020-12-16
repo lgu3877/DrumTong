@@ -48,6 +48,14 @@ public class RestCustomerMembershipController {
 	public String loginCheck(@RequestBody HashMap<String, String> param) {
 		return Login.loginCheck(param);
 	}
+	
+	//이메일 중복 검사 POST[영경]
+	@RequestMapping("customerSignUp/rest/emailCheck/{param}/")
+	@GetMapping(produces="application/json; charset=utf8")
+	public String emailCheck(@PathVariable("param")String email) {
+		return svc.emailCheck(email);
+	}
+	
 }
 
 

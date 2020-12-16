@@ -164,10 +164,28 @@ function searchAddress() {
           
           return false;
         } else {
-          emailmsg.innerHTML = '이메일 인증 완료';
-          emailmsg.style.color = 'blue';
+        	var axGet = async (email) => {
+        		await axios.get('/drumtong/customer/membership/customerSignUp/rest/emailCheck/' + email + '/')
+        		
+        		.then( (response) => {
+        			if(response.data === true){
+        				console.log('중복X');
+        				emailmsg.innerHTML = '이메일 인증 완료';
+        				emailmsg.style.color = 'blue';
+        				document.querySelector('#email').border='1px solid black';
+        			} else{
+        				console.log('중복O');
+        				emailmsg.innerHTML = '이메일이 중복됩니다.';
+        		        emailmsg.style.color = 'red';
+        		        document.querySelector('#email').border='1px solid red';
+        				return false;
+        			}
+        		})
+        	}
+        	axGet(email);
           return true;
         }
+
       }
   
       function submit() {
