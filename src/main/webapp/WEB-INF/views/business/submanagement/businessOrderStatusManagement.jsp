@@ -47,35 +47,42 @@
 	<!-- sub-header(membership) -->
 	<%@ include file="../main/businessSubHeader.jsp" %>
 		
-		<div class="outerdiv">
+		<div class="outerdiv" >
 			<h1 style="font-size: 36pt">주문현황</h1>
 			
+			<div class="clonediv" id="clonediv0">
 			
-			<div class="container" id="container" onclick="openDetail(this)">
-				<h1 class="containerName">주문번호 : AAA-154332e</h1>
+			<div class="outerstatus1"></div>
+			<div class="outerstatus2"><h1></h1></div>
+			<div class="nulldiv" style=""></div>
+			
+			<div class="container" onclick="openDetail(this)">
+				<h1 class="containerName"></h1>
+				<h1 class="requesttype"></h1>
 				<div class="contentdiv">
 					<div class="halfdiv">
 						<div>
-							<h1>구매날짜</h1>
-							<p>2020-11-18</p>
+							<h1>주문일</h1>
+							<p class="purchasedate"></p>
 						</div>
 						<div>
-							<h1>유형</h1>
-							<p>런닝화</p>
+							<h1>주문유형</h1>
+							<p></p>
 						</div>
 					</div>
 					<div class="halfdiv">
 						<div>
-							<h1>배송날짜</h1>
-							<p>2020-11-28</p>
+							<h1>배송일</h1>
+							<p  class="deliverydate"></p>
 						</div>
 						<div>
 							<h1>주문금액</h1>
-							<p>28,000원</p>
+							<p  class="totalprice"></p>
 						</div>
 						<div class="middleBorder"></div>			
 					</div>
 				</div>
+			</div>
 			</div>
 		
 		</div>
@@ -88,19 +95,41 @@
 	</div>
 	
 	<script type="text/javascript">
+	
+	    console.log(${orderList});
 		
-		let clonecontainer = $('div.container');
+		let clonecontainer = $('#clonediv0');
+		let orderList = ${orderList};
+		console.log('요청타입 : ', orderList[0].requesttype);
+		console.log('요청사항 : ', orderList[0].request);
 		
- 		for(i = 0; i < 5; i++) {
- 			$('.outerdiv').append('<div class="container"  onclick="openDetail(this)">' + clonecontainer.html() + '</div>');
- 			$('.outerdiv').children('div.container').eq(i + 1).attr('id', 'container' + i);
- 			if(i % 2 == 0) {
- 				$('.outerdiv').children('div.container').eq(i + 1).css({'marginRight': '0', 'marginLeft': '500px'});
+ 		window.onload = function() {
+ 			$('#clonediv0').children('.outerstatus2').children('h1').html(orderList[0].status);
+ 			$('#clonediv0').find('.containerName').html('주문번호 : ' + orderList[0].salecode);
+ 			$('#clonediv0').find('.requesttype').html(orderList[0].requesttype);
+ 			$('#clonediv0').find('p.purchasedate').html(orderList[0].purchasedate);
+ 			$('#clonediv0').find('p.deliverydate').html(orderList[0].deliverydate);
+ 			$('#clonediv0').find('p.totalprice').html(orderList[0].totalprice);
+ 		}
+		
+ 		for(i = 1; i < orderList.length; i++) {
+ 			$('.outerdiv').append('<div class="clonediv" id="clonediv' + i + '">' + clonecontainer.html() + '</div>');
+ 			
+ 			$('#clonediv' + i).children('.outerstatus2').children('h1').html(orderList[i].status);
+ 			$('#clonediv' + i).find('.containerName').html('주문번호 : ' + orderList[i].salecode);
+ 			$('#clonediv' + i).find('.requesttype').html(orderList[0].requesttype);
+ 			$('#clonediv' + i).find('p.purchasedate').html(orderList[0].purchasedate);
+ 			$('#clonediv' + i).find('p.deliverydate').html(orderList[0].deliverydate);
+ 			$('#clonediv' + i).find('p.totalprice').html(orderList[0].totalprice);
+ 			
+ 			for(i = 0; i < (orderList[0].bDetailSalesVOList).length; i++) {
+ 				
  			}
+ 			
+ 			
  		}
 		
 		function openDetail(obj) {
-// 			$('#modal').html('333333');
 			$('#modal').fadeIn(300);
 			$('#modalback').fadeIn(300);
 		}
@@ -113,13 +142,13 @@
 		
 		$(document).ready(function() {
     	$(window).scroll( function(){
-        $('.container').each( function(i){
+        $('.clonediv').each( function(i){
             var bottom_of_object = $(this).offset().top + $(this).outerHeight();
             var bottom_of_window = $(window).scrollTop() + $(window).height();
-            console.log('$(this).offset().top : ', $(this).offset().top);
-            console.log('$(this).outerHeight() : ', $(this).outerHeight());	// 고정
-            console.log('$(window).scrollTop() : ', $(window).scrollTop());
-            console.log('$(window).height() : ', $(window).height());		// 고정
+//             console.log('$(this).offset().top : ', $(this).offset().top);
+//             console.log('$(this).outerHeight() : ', $(this).outerHeight());	// 고정
+//             console.log('$(window).scrollTop() : ', $(window).scrollTop());
+//             console.log('$(window).height() : ', $(window).height());		// 고정
             if( bottom_of_window > bottom_of_object ){
                 $(this).animate({'opacity':'1'},500);
             }
