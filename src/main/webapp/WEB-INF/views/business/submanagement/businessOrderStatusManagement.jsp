@@ -87,6 +87,10 @@
 	</div>
 	
 	<script type="text/javascript">
+			
+		let cg = ${orderList};
+		
+		console.log(cg);
 		
 		let clonecontainer = $('div.container');
 		

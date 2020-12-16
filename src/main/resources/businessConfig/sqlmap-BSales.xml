@@ -73,7 +73,16 @@
 	</select>
 	
 	
-<!-- 	주문 목록 데이터 Bsales, BDetailSales, Binformation Join되어있음. -->
+	<!-- 	주문 목록 데이터 Bsales에 Binformation brandnaming이 Join되어있음.
+			
+			해당 SQL문은 Business 주문 현황에도 사용되고
+					 Customer 주문 목록에도 사용됩니다.
+			
+			데이터를 출력하면은 한 개의 주문에 대한 정보가 List형식으로 묶여져서 출력ㅇ됩니다.
+			
+			따라서 Business 주문현황에서 호출될 때는 Where 조건문을 ESTID로 데이터를 호출하고
+			 	Customer 주문목록에서 호출될 때는 Where 조건문을 MemberId로 호출해서 각기 다른 데이터를 호출할 수 있게 도와줍니다.
+	 -->
 	<select id="selectOrderList" parameterType="String" resultType="OrderList">
 	SELECT
         BSALES.ESTID,
@@ -82,15 +91,37 @@
 		BSALES.ABLEDAY, BSALES.STATUS, BSALES.PICKUPDATE,
 		BSALES.DELIVERYDATE, BSALES.REQUESTTYPE, BSALES.REQUESTS,
         
-        BDETAILSALES.MAINCATEGORY, BDETAILSALES.SUBCATEGORY, BDETAILSALES.NAME, BDETAILSALES.AMOUNT,
-        BDETAILSALES.MENUPRICE, BDETAILSALES.SUMPRICE,
-        
         BINFORMATION.BRANDNAMING
+        
 	FROM BSALES  
-		INNER JOIN BDETAILSALES 
-	    ON BSALES.SALECODE = BDETAILSALES.SALECODE
 	    INNER JOIN BINFORMATION
 		ON BINFORMATION.ESTID = BSALES.ESTID
-	WHERE MEMBERID = #{memberid}
+	WHERE 
+		CASE WHEN  #{memberidORestid} LIKE '%'||'ESTID'||'%' THEN  BSALES.ESTID
+             WHEN  #{memberidORestid} LIKE '%'||'MEMBERID'||'%' THEN BSALES.MEMBERID
+             END =#{memberidORestid}
+             
 	</select>
+	
+<!-- 	주문 목록 데이터 Bsales, BDetailSales, Binformation Join되어있음. -->
+<!-- 	<select id="selectOrderList" parameterType="String" resultType="OrderList"> -->
+<!-- 	SELECT -->
+<!--         BSALES.ESTID, -->
+<!-- 		BSALES.SALECODE, BSALES.PURCHASEDATE, BSALES.TOTALAMOUNT, -->
+<!-- 		BSALES.ORIGINALPRICE, BSALES.DISCOUNTPRICE, BSALES.TOTALPRICE, -->
+<!-- 		BSALES.ABLEDAY, BSALES.STATUS, BSALES.PICKUPDATE, -->
+<!-- 		BSALES.DELIVERYDATE, BSALES.REQUESTTYPE, BSALES.REQUESTS, -->
+        
+<!--         BDETAILSALES.MAINCATEGORY, BDETAILSALES.SUBCATEGORY, BDETAILSALES.NAME, BDETAILSALES.AMOUNT, -->
+<!--         BDETAILSALES.MENUPRICE, BDETAILSALES.SUMPRICE, -->
+        
+<!--         BINFORMATION.BRANDNAMING -->
+<!-- 	FROM BSALES   -->
+<!-- 		INNER JOIN BDETAILSALES  -->
+<!-- 	    ON BSALES.SALECODE = BDETAILSALES.SALECODE -->
+<!-- 	    INNER JOIN BINFORMATION -->
+<!-- 		ON BINFORMATION.ESTID = BSALES.ESTID -->
+<!-- 	WHERE MEMBERID = #{memberid} -->
+<!-- 	</select> -->
+
 </mapper>

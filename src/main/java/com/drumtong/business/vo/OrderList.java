@@ -18,62 +18,19 @@ public class OrderList extends BSalesVO{
 //	private String deliverydate;	// 배송 날짜
 //	private String requesttype;		// 요청 타입 	[DELIVERY] 배달, [VISIT] 매장방문
 //	private String requests;		// 요청 사항
-
-
-	private String maincategory;	// 메인 카테고리 	 ex) 일반 의류
-	private String subcategory;		// 서브 카테고리   ex) 상의
-	private String name;			// 메뉴 이름        ex) T-shirt
-	private int amount;				// 요구한 개수
-	private int menuprice;			// 메뉴 가격 
-	private int sumprice;			// 합계 가격
 	
 	private String brandnaming; 	// BInformation 테이블의 매장명
 	
-	private List<BDetailSalesVO> bDetailSalesVOList;
+	private List<BDetailSalesVO> bDetailSalesVOList;	// BDetailSales의 vo list
 	
 	
-	public String getMaincategory() {
-		return maincategory;
-	}
-	public void setMaincategory(String maincategory) {
-		this.maincategory = maincategory;
-	}
-	public String getSubcategory() {
-		return subcategory;
-	}
-	public void setSubcategory(String subcategory) {
-		this.subcategory = subcategory;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getAmount() {
-		return amount;
-	}
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
 	public String getBrandnaming() {
 		return brandnaming;
 	}
 	public void setBrandnaming(String brandnaming) {
 		this.brandnaming = brandnaming;
 	}
-	public int getMenuprice() {
-		return menuprice;
-	}
-	public void setMenuprice(int menuprice) {
-		this.menuprice = menuprice;
-	}
-	public int getSumprice() {
-		return sumprice;
-	}
-	public void setSumprice(int sumprice) {
-		this.sumprice = sumprice;
-	}
+	
 	public List<BDetailSalesVO> getbDetailSalesVOList() {
 		return bDetailSalesVOList;
 	}
