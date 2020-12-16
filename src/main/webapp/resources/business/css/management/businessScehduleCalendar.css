@@ -25,7 +25,7 @@
 .calendar {
 	width: 800px;
 	display: block;
-	margin-top: 30px;
+	margin: 30px 0;
 }
 
 .calendar_selector_con, .calendar_day_con {
@@ -67,15 +67,22 @@
     background-color: #6495EF;
     color: white;
     border-radius: 5px;
-    margin: 10px 0px;
+	margin: 10px 0px 1px 0;
 }
 
 .years, .months {
 	background-color: white;
 	position: absolute;
-	margin-top: 20px;
-	width: 100px;
+	margin-left: -1px;
+    width: 150px;
 	display: none;
+	border: 1px solid transparent;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.dropdown_item {
+	height: 30px;
+    line-height: 30px;
 }
 
 .dropdown_item:hover, .dropdown_item:hover {
@@ -106,6 +113,7 @@
     margin: 1px 3px;
     text-align: end;
     padding: 0 3px 0 0;
+    background-color: lightgrey;
 }
 
 .currentDays {
@@ -118,13 +126,23 @@
 }
 
 .nextDays {
-	background-color: oldlace;
     width: 100%;
     border: 1px solid transparent;
     border-radius: 5px;
     margin: 1px 3px;
     text-align: end;
     padding: 0 3px 0 0;
+    background-color: lightgrey;
+}
+
+.lastDays:hover,
+.currentDays:hover,
+.nextDays:hover {
+	cursor: pointer;
+	background-color: navy;
+	transition: 0.5s;
+	color: white;
+	border-color: transparent;
 }
 
 .calendar_selector_value {

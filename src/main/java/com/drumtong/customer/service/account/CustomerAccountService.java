@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.drumtong.business.dao.BCouponDAO;
+import com.drumtong.business.dao.BDetailSalesDAO;
 import com.drumtong.business.dao.BInformationDAO;
 import com.drumtong.business.dao.BSalesDAO;
+import com.drumtong.business.vo.BDetailSalesVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.OrderList;
 import com.drumtong.customer.dao.CPaymentDAO;
@@ -24,6 +26,7 @@ public class CustomerAccountService {
 	@Autowired BCouponDAO bCouponDAO;
 	@Autowired CPaymentDAO cPaymentDAO;
 	@Autowired BSalesDAO bSales;
+	@Autowired BDetailSalesDAO bDetailSalesDAO;
 	
 	// 북마크[영경]
 	public ModelAndView bookmark(HttpServletRequest req) {
@@ -73,6 +76,7 @@ public class CustomerAccountService {
 		ModelAndView mav = new ModelAndView("customer/account/customerOrderList");
 		CPrivateDataVO Login = ((CPrivateDataVO)req.getSession().getAttribute("cLogin"));
 		List<OrderList> orderList = bSales.selectOrderList(Login.getMemberid());
+		List<BDetailSalesVO> bDetailSalesList = bDetailSalesDAO;
 		
 		mav.addObject("orderList", orderList);
 		return mav;

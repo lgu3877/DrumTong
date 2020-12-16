@@ -75,7 +75,7 @@ public class BusinessSubManagementController {
 		return new ModelAndView("redirect:/business/submanagement/businessStatisticsManagement/");
 	}
 
-	// 비즈니스 주문관리 페이지로 이동 (GET) [건욱]
+	// 비즈니스 주문현황 페이지로 이동 (GET) [건욱]
 	@RequestMapping(value="businessOrderStatusManagement/", method = RequestMethod.GET)
 	public ModelAndView orderStatusManagement(HttpServletRequest req) {
 		return svc.orderStatusManagement(req);

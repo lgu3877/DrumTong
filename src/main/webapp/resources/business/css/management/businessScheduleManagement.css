@@ -15,6 +15,14 @@
 	background-color: navy;
 } */
 
+/* 에러메세지 */
+.error_msg {
+	text-align: left;
+    margin-top: 10px;
+    font-weight: 600;
+	
+}
+
 /* 폰트 옵션 */
 .text_blue {
 	color: #3b5998;
@@ -71,6 +79,19 @@
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px
 		rgba(0, 0, 0, 0.22);
 	border-radius: 3px;
+}
+
+.form {
+	background-color: whitesmoke;
+	padding: 20px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3)
+		0px 1px 3px -1px;
+}
+
+.form:hover {
+	transition: 0.5s;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 10px 5px -1px, rgba(0, 0, 0, 0.3)
+		0px 10px 15px 3px;
 }
 
 /* 투명도 */
@@ -185,7 +206,7 @@
 	cursor: pointer;
 	margin-right: 20px;
 	background-color: #f38181;
-	color: white;
+	color: whitesmoke;
 }
 
 .checkBtn:hover {
@@ -220,14 +241,18 @@
 	margin-bottom: 10px;
 	display: flex;
 	height: 40px;
-	background-color: antiquewhite;
     padding: 7px 10px;
-    border-radius: 5px;
+    border-bottom: 1px solid black;
+    border-bottom-style: groove;
+}
+    
+/* 	background-color: antiquewhite;
+    border-radius: 5px; */
 }
 
 .day_range {
-	background-color: whitesmoke;	
-    border-radius: 5px;
+	/* background-color: whitesmoke;	
+    border-radius: 5px; */
 }
 
 .day_range div {
@@ -294,8 +319,8 @@
 	background-color: #6495EF;
 }
 
-/* 임시휴무 설정 */
-.tmp_holiday_input_con {
+/* 정기 휴무 설정 */
+.holiday_input_con {
 	
 }
 
@@ -401,4 +426,100 @@
 .h_day {
 	background-color: beige;
     border-radius: 20px;
+}
+
+.tmp_holiday_input_con {
+	margin-top: 20px;
+}
+
+.set_day_range_con {
+	height: 50px;
+    display: flex;
+}
+
+.set_day_range_con input {
+	margin-right: 30px;
+    border: none;
+    background-color: #f38181;
+    border-radius: 5px;
+    padding: 0 15px;
+    font-size: 12pt;
+    color: white;
+}
+
+.set_day_range_con i:hover {
+	cursor: pointer;	
+}
+
+.set_day_range_con input:hover {
+	cursor: pointer;
+}
+
+.set_day_range_con input:focus {
+	outline: none;
+}
+
+.set_day_range_con input:invalid + div::after {
+  /* content: '✖'; */
+}
+
+.set_day_range_con input:valid + div::after {
+  /* content: '✓'; */
+}
+	
+.date_arrow {
+	margin: auto 30px auto 0;
+}
+
+.date_arrow i {
+	font-size: 20pt;
+}
+
+/* 임시 휴무 설정 & 사유 */
+
+.tmp_holiday_reason_con {
+	display: block;
+    height: 500px;
+    text-align: left;
+}
+
+.reason_form {
+	padding: 20px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3)
+		0px 1px 3px -1px;		
+}
+
+.reason_form:hover {
+	transition: 0.5s;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 10px 5px -1px, rgba(0, 0, 0, 0.3)
+		0px 10px 15px 3px;		
+}
+
+.reason_title,
+.set_day_range_con,
+.text_area_con,
+.reason_btn,
+.error_msg {
+	margin-bottom: 20px;
+}
+
+.reason_title {
+	padding: 10px 0 0 0;
+}
+
+.text_area {
+	resize: none;
+	width: calc(100% - 20px);
+    height: 100px;
+    font-size: 15pt;
+    text-indent: 10px;
+    padding: 10px;	
+    line-height: 30px;
+}
+
+.tmp_holiday_reason_con button {
+	background-color: #6495EF;
+	width: 150px;
+    height: 50px;
+    border-radius: 5px;
 }
