@@ -436,7 +436,7 @@
 							<div class="icon_con">
 								<i class="fas fa-plus-square"></i>
 							</div>
-							<div class="btn_title">일자 변경</div>
+							<div class="btn_title">휴무 수정</div>
 						</div>
 						<div id="complete-holiday" class="btn update_btn">
 							<div class="icon_con">
@@ -469,17 +469,19 @@
 					<div id="date-error-msg" class="error_msg text_red"></div>
 					
 				<!-- 사유 작성 -->
-					<div>
+					<div class="tmp_holiday_reason_con">
 					
+					<!-- 제목 & 유형 -->
+						<div class="reason_title">
+							
+						</div>
 					<!-- 사유 -->
 						<div>
-						
+							<textarea class="text_area" cols="100" rows="30" resize="none"></textarea>
 						</div>
 						
 					<!-- 버튼 -->
-						<button>
-						
-						</button>
+						<button>작성 완료</button>
 						
 					</div>
 					

@@ -457,3 +457,22 @@
 .date_arrow i {
 	font-size: 20pt;
 }
+
+/* 임시 휴무 설정 & 사유 */
+.reason_title {
+	
+}
+
+.tmp_holiday_reason_con {
+	display: block;
+    height: 500px;
+}
+
+.text_area {
+	width: 600px;
+    height: 300px;
+    font-size: 15pt;
+    text-indent: 10px;
+    padding: 10px;	
+    line-height: 30px;
+}
