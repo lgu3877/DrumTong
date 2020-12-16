@@ -152,13 +152,10 @@ public class BusinessSubManagementService {
 		
 		for (OrderList ol : orderList) {
 			map.put("salecode", ol.getSalecode());
-			List<BDetailSalesVO> bDetailSalesList = bDetailSalesDAO.selectBDetailSalesList(map);
+			List<BDetailSalesVO> bDetailSalesList = bDetailSalesDAO.selectBDetailSalesListBusiness(map);
 			ol.setbDetailSalesVOList(bDetailSalesList);
 		}
 		
-		System.out.println("sysout1 : " + orderList.get(0).getSalecode());
-		System.out.println("sysout2 : " + orderList.get(0).getBrandnaming());
-		System.out.println("sysout3 : " + orderList.get(0).getbDetailSalesVOList().get(0).getName());
 		//♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠
 		
 		ModelAndView mav = new ModelAndView("business/submanagement/businessOrderStatusManagement");

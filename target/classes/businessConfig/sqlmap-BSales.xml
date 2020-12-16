@@ -98,7 +98,7 @@
 		ON BINFORMATION.ESTID = BSALES.ESTID
 	WHERE 
 		CASE WHEN  #{memberidORestid} LIKE '%ESTID%' THEN  BSALES.ESTID
-             WHEN  #{memberidORestid} LIKE '%MEMBERID%' THEN BSALES.MEMBERID
+             WHEN  #{memberidORestid} LIKE '%MemberID%' THEN BSALES.MEMBERID
              END =#{memberidORestid}
              
 	</select>
