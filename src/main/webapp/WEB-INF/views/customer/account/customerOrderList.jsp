@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../main/customerHeader.jsp" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <!-- 스크립트 영역 -->
 <script></script>
@@ -26,7 +28,7 @@
         <div class="orderData-options">
           <div class="orderData-options-head">주문옵션</div>
           <ul>
-            <li>옵션 1 1,000원 ${ol.name } </li>
+            <li>옵션 1 1,000원 <fmt:formatNumber value="${price }" pattern="#,###" /> ${ol.name } </li>
             <li>옵션 2 1,000원</li>
             <li>옵션 3 1,000원</li>
             <li>옵션 1 1,000원</li>
