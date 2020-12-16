@@ -97,8 +97,8 @@
 	    INNER JOIN BINFORMATION
 		ON BINFORMATION.ESTID = BSALES.ESTID
 	WHERE 
-		CASE WHEN  #{memberidORestid} LIKE '%ESTID%' THEN  BSALES.ESTID
-             WHEN  #{memberidORestid} LIKE '%MEMBERID%' THEN BSALES.MEMBERID
+		CASE WHEN  #{memberidORestid} LIKE '%'||'ESTID'||'%' THEN  BSALES.ESTID
+             WHEN  #{memberidORestid} LIKE '%'||'MEMBERID'||'%' THEN BSALES.MEMBERID
              END =#{memberidORestid}
              
 	</select>

@@ -7,7 +7,7 @@
 <mapper namespace="com.drumtong.business.dao.BDetailSalesDAO">
 	
 <!-- 	BDetailSales의 List를 가져오는 select 문 -->
-	<select id="selectBDetailSalesList" parameterType="hashmap" resultType="BDetailSalesVO">
+	<select id="selectBDetailSalesListBusiness" parameterType="hashmap" resultType="BDetailSalesVO">
 		SELECT 
 			ESTID, SALECODE, MAINCATEGORY, 
 			SUBCATEGORY, NAME, AMOUNT,
@@ -17,5 +17,15 @@
 			AND 
 			SALECODE =#{salecode} 
 	</select>
-
+	
+	<select id="selectBDetailSalesListCustomer" parameterType="String" resultType="BDetailSalesVO">
+		SELECT 
+			ESTID, SALECODE, MAINCATEGORY, 
+			SUBCATEGORY, NAME, AMOUNT,
+			MENUPRICE, SUMPRICE
+		FROM BDETAILSALES
+			WHERE 
+			SALECODE =#{salecode} 
+	</select>
+	
 </mapper>
