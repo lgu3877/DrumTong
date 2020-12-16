@@ -152,8 +152,10 @@
 	function cardChange(obj) {		// 카드번호 변경 폼 활성화
  		cardclone = $('#carddiv').find('input').clone();
  		
+ 		$('#carddiv').find('select').css('border', '3px solid #3088F9');
 		$('#carddiv').find('input').removeAttr('readonly');
 		$('#carddiv').find('input').css('backgroundColor', 'white');
+		$('#carddiv').find('input').css('border', '3px solid #3088F9');
 		obj.setAttribute('onclick', 'cardSubmit(this)');
 		obj.innerHTML = '전송';
 		$('#carddiv').find('input').val('');
@@ -212,7 +214,9 @@
             	return false;
             }
             else {
-	    		$('#carddiv').find('input').css('backgroundColor', 'grey');
+            	$('#carddiv').find('select').css('border', '');
+	    		$('#carddiv').find('input').css('backgroundColor', '#adb8c0');
+	    		$('#carddiv').find('input').css('border', '');
     			obj.setAttribute('onclick', 'cardChange(this)');
     			obj.innerHTML = '변경';
     			$('#cardbank').css('display', '');
@@ -228,8 +232,10 @@
 	function accountChange(obj) {	// 계좌번호 번호 폼 활성화
 		accountclone = $('#accountdiv').find('input').clone();
  		
+		$('#accountdiv').find('select').css('border', '3px solid #3088F9');
 		$('#accountdiv').find('input').removeAttr('readonly');
 		$('#accountdiv').find('input').css('backgroundColor', 'white');
+		$('#accountdiv').find('input').css('border', '3px solid #3088F9');
 		obj.setAttribute('onclick', 'accountSubmit(this)');
 		obj.innerHTML = '전송';
 		$('#accountdiv').find('input').val('');
@@ -260,7 +266,9 @@
 	            	return false;
 	            }
 	            else {
-	        		$('#accountdiv').find('input').css('backgroundColor', 'grey');
+	            	$('#accountdiv').find('select').css('border', '');
+	        		$('#accountdiv').find('input').css('backgroundColor', '#adb8c0');
+	        		$('#accountdiv').find('input').css('border', '');
 	        		obj.setAttribute('onclick', 'accountChange(this)');
 	        		obj.innerHTML = '변경';
 	        		

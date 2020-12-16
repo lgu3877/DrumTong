@@ -1,3 +1,10 @@
+input {
+	border-radius: 10px;
+}
+
+input:focus {
+	outline: none;
+}
 
 h1.subtitle {
 	font-size: 32pt; 
@@ -28,6 +35,7 @@ h1.subtitle {
 }
 
 #cardbanksel, #accountbanksel {
+	padding-left:8px;
 	margin-left: 45px; 
 	margin-top: 15px !important;
 	margin-bottom: 15px;
@@ -37,10 +45,15 @@ h1.subtitle {
 	border: 1px solid #999;
 	font-family: inherit;
 	background: url('arrow.jpg') no-repeat 95% 50%;
-	border-radius: 0px;
+	border-radius: 10px;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
+		outline: none;
+}
+
+#cardbanksel:focus, #accountbanksel:focus {
+	outline: none;
 }
 
 #accountbank, #accountbanksel {
@@ -79,7 +92,7 @@ div.flex2 {
 	height: 30px;
 	margin-left: 20px; 
 	text-align: center; 
-	background-color: grey
+	background-color: #adb8c0
 }
 
 #carddiv2 input {
@@ -87,7 +100,7 @@ div.flex2 {
 	height: 30px;
 	margin-left: 20px;
 	text-align: center; 
-	background-color: grey
+	background-color: #adb8c0
 }
 
 #carddiv2 h1 {
@@ -101,15 +114,32 @@ div.flex2 {
 	font-size: 20pt; 
 	text-align: center; 
 	margin-left: 10%;
+	border-radius: 10px;
 }
 
 .flex3 input {
 	width: 80%;
 	height: 60px;
 	margin: 0 auto;
-	background-color: grey;
+	background-color: #adb8c0;
 	padding-left: 20px;
 	font-size: 14pt;
+}
+
+button {
+	background-color: #3088F9;
+	color: white;
+	cursor: pointer;
+	border: 0px;
+}
+
+button:hover {
+	background-color: navy;
+	color: white;
+	cursor: pointer;
+	font-weight: bold;
+	border: 0px;
+	font-size: 24pt;
 }
 
 .interiorLine {
