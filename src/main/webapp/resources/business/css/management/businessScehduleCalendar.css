@@ -25,7 +25,7 @@
 .calendar {
 	width: 800px;
 	display: block;
-	margin-top: 30px;
+	margin: 30px 0;
 }
 
 .calendar_selector_con, .calendar_day_con {
@@ -113,6 +113,7 @@
     margin: 1px 3px;
     text-align: end;
     padding: 0 3px 0 0;
+    background-color: lightgrey;
 }
 
 .currentDays {
@@ -125,13 +126,13 @@
 }
 
 .nextDays {
-	background-color: oldlace;
     width: 100%;
     border: 1px solid transparent;
     border-radius: 5px;
     margin: 1px 3px;
     text-align: end;
     padding: 0 3px 0 0;
+    background-color: lightgrey;
 }
 
 .lastDays:hover,

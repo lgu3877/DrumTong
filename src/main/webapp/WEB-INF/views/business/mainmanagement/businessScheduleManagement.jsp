@@ -72,7 +72,7 @@
 					</div>
 				</div>
 				<!-- input -->
-				<div class="working_hour_input">
+				<div class="working_hour_input form">
 				
 					<!-- 체크 옵션 -->
 					<div class="select_con">
@@ -281,7 +281,7 @@
 			<!-- input -->
 				<div class="holiday_input_con">
 				<!-- 정기 휴무 -->
-					<div class="select_wrapper">
+					<div class="select_wrapper form">
 					<!-- 주 선택 -->
 						<div class="select_box_con">
 							<select>
@@ -329,7 +329,7 @@
 					</div>
 					
 				<!-- 저장된 정기 휴무일 표기 -->
-					<ul class="h_schedule_con">
+					<ul class="h_schedule_con form">
 						<li class="h_schedule_list">
 					<!-- 내용 -->
 					<!-- 1 -->
@@ -381,7 +381,7 @@
 					</ul>
 
 				<!-- 달력 -->
-					<div id="calander" class="calendar">
+					<div id="calander" class="calendar form">
 						<div class="calendar_selector_con">
 						<!-- year(left) -->
 							<div class="year_selector">
@@ -427,7 +427,7 @@
 				<!-- title -->
 				<div class="content_title_con">
 					<div>
-						<span class="content_title">정기 휴무 설정</span> 
+						<span class="content_title">임시 휴무 설정</span> 
 						<i class="far fa-question-circle" style="font-weight: 600">도움말</i>
 					</div>
 					<!-- button -->
@@ -451,40 +451,39 @@
 				<div class="tmp_holiday_input_con">
 				
 				<!-- 기간 설정 -->
-					<div class="set_day_range_con">
-					
-					<!-- from -->
-						<input id="startDay" type="date" name="startDay" pattern="\d{4}-\d{2}-\d{2}">
-						<!-- <label for="startDay">시작 일</label> -->
-						
-					<!-- 화살표 -->
-						<div class="date_arrow">
-							<i class="fas fa-long-arrow-alt-right"></i>
-						</div>					
-					<!-- to -->
-						<input id="endDay" type="date" name="endDay" pattern="\d{4}-\d{2}-\d{2}">
-						<!-- <label for="endDay">마지막 일</label> -->
-
-					</div>
-					<div id="date-error-msg" class="error_msg text_red"></div>
-					
 				<!-- 사유 작성 -->
 					<div class="tmp_holiday_reason_con">
-					
-					<!-- 제목 & 유형 -->
-						<div class="reason_title">
-							
+
+					<!-- <form> -->
+						<div class="form">
+							<!-- 제목 & 유형 -->
+							<div class="reason_title">임시 휴무 기간 선택 및 사유 작성</div>
+
+							<div class="set_day_range_con">
+								<input id="startDay" type="date" name="startDay" pattern="\d{4}-\d{2}-\d{2}">
+								<!-- <label for="startDay">시작 일</label> -->
+
+								<!-- 화살표 -->
+								<div class="date_arrow">
+									<i class="fas fa-long-arrow-alt-right"></i>
+								</div>
+								<!-- to -->
+								<input id="endDay" type="date" name="endDay" pattern="\d{4}-\d{2}-\d{2}">
+								<!-- <label for="endDay">마지막 일</label> -->
+							</div>
+							<div id="date-error-msg" class="error_msg text_red"></div>
+
+						<!-- 사유 -->
+							<div class="text_area_con">
+								<textarea class="text_area" cols="100" rows="30"></textarea>
+							</div>
+						<!-- 버튼 -->
+							<button class="reason_btn btn">작성 완료</button>
 						</div>
-					<!-- 사유 -->
-						<div>
-							<textarea class="text_area" cols="100" rows="30" resize="none"></textarea>
-						</div>
-						
-					<!-- 버튼 -->
-						<button>작성 완료</button>
+					<!-- </form> -->	
 						
 					</div>
-					
+									
 				<!-- 임시 영업 중지 목록 -->
 					<div>
 					
