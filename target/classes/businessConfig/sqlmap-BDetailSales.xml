@@ -5,6 +5,17 @@
 
 <!-- 사업장 상세매출 테이블	 -->
 <mapper namespace="com.drumtong.business.dao.BDetailSalesDAO">
-
+	
+<!-- 	BDetailSales의 List를 가져오는 select 문 -->
+	<select id="selectBDetailSalesList" parameterType="hashmap" resultType="BDetailSalesVO">
+		SELECT 
+			ESTID, SALECODE, MAINCATEGORY, 
+			SUBCATEGORY, NAME, AMOUNT,
+			MENUPRICE, SUMPRICE
+		FROM BDETAILSALES
+			WHERE ESTID =#{estid} 
+			AND 
+			SALECODE =#{salecode} 
+	</select>
 
 </mapper>
