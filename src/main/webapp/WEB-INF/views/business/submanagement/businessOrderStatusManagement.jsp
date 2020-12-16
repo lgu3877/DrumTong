@@ -82,28 +82,51 @@
 
 	</section>
 	
-	<div id="modalcontainer" style="position: fixed; width: 600px; height: 300px; left: 25%; top: 25%; background:rgba(0,0,0,0.3); display: none">
-		22222
+	<div id="modalback" style="position: fixed; width: 100%; height: 100%; left: 0; top: 0; background:rgba(0,0,0,0.5); display: none"></div>
+	<div id="modal" style="position: fixed; width: 50%; height: 50%; left: 25%; top: 25%; display: none; background: white">
+		<a href="#" class="close">X</a>
 	</div>
 	
 	<script type="text/javascript">
-			
-		let cg = ${orderList};
-		
-		console.log(cg);
 		
 		let clonecontainer = $('div.container');
 		
-// 		for(i = 0; i < 5; i++) {
-// 			$('.outerdiv').append('<div class="container">' + clonecontainer.html() + '</div>');
-// 			$('.outerdiv').children('div.container').eq(i + 1).attr('id', 'container' + i);
-// 		}
+ 		for(i = 0; i < 5; i++) {
+ 			$('.outerdiv').append('<div class="container"  onclick="openDetail(this)">' + clonecontainer.html() + '</div>');
+ 			$('.outerdiv').children('div.container').eq(i + 1).attr('id', 'container' + i);
+ 			if(i % 2 == 0) {
+ 				$('.outerdiv').children('div.container').eq(i + 1).css({'marginRight': '0', 'marginLeft': '500px'});
+ 			}
+ 		}
 		
 		function openDetail(obj) {
-			$('#modal' + obj.id).fadeIn(300);
+// 			$('#modal').html('333333');
+			$('#modal').fadeIn(300);
+			$('#modalback').fadeIn(300);
 		}
 		
-		console.log(clonecontainer.html());
+		$('#modal, .close').on('click', function() {
+			$('#modal').fadeOut(300);
+			$('#modalback').fadeOut(300);
+		})
+		
+		
+		$(document).ready(function() {
+    	$(window).scroll( function(){
+        $('.container').each( function(i){
+            var bottom_of_object = $(this).offset().top + $(this).outerHeight();
+            var bottom_of_window = $(window).scrollTop() + $(window).height();
+            console.log('$(this).offset().top : ', $(this).offset().top);
+            console.log('$(this).outerHeight() : ', $(this).outerHeight());	// 고정
+            console.log('$(window).scrollTop() : ', $(window).scrollTop());
+            console.log('$(window).height() : ', $(window).height());		// 고정
+            if( bottom_of_window > bottom_of_object ){
+                $(this).animate({'opacity':'1'},500);
+            }
+        }); 
+    });
+});
+
 	</script>
 </body>
 </html>
