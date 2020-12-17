@@ -129,3 +129,29 @@ h1.requesttype {
 	height: 212px !important;
 	border: 2px double #afafaf;
 }
+
+#modalback {
+	position: fixed;
+	width: 100%; 
+	height: 100%; 
+	left: 0; 
+	top: 0; 
+	background:rgba(0,0,0,0.5); 
+	display: none;
+}
+
+#modal {
+	position: fixed; 
+	width: 50%; 
+	height: 50%; 
+	left: 25%; 
+	top: 25%; 
+	display: none; 
+	background: white;
+}
+
+#modal .close {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
