@@ -20,55 +20,55 @@
 <!--                         </div> -->
 <%--                     </c:if> --%>
                     
-<%--                     <c:forEach var="vo" items="${list }"> --%>
+                    <c:forEach var="vo" items="${List }">
+                        <div class="boardLine">
+                            <div class="num">${vo.num }</div>
+                            <div class="title">
+                                <a href="${cpath }/customer/board/customerBoardRead/${vo.num }/">${vo.title }</a>
+                            </div>
+                            <div class="registdate">${vo.registdate }</div>
+                        </div>
+                    </c:forEach>
 <!--                         <div class="boardLine"> -->
-<%--                             <div class="num">${vo.num }</div> --%>
+<!--                             <div class="num">1</div> -->
 <!--                             <div class="title"> -->
-<%--                                 <a href="${cpath }/board/read/${vo.num }/">${vo.title }</a> --%>
+<!--                                 <a>타이틀</a> -->
 <!--                             </div> -->
-<%--                             <div class="registdate">${vo.registdate }</div> --%>
+<!--                             <div class="registdate">작성날짜</div> -->
 <!--                         </div> -->
-<%--                     </c:forEach> --%>
-                        <div class="boardLine">
-                            <div class="num">1</div>
-                            <div class="title">
-                                <a>타이틀</a>
-                            </div>
-                            <div class="registdate">작성날짜</div>
-                        </div>
                         
-                         <div class="boardLine">
-                            <div class="num">2</div>
-                            <div class="title">
-                                <a>타이틀</a>
-                            </div>
-                            <div class="registdate">작성날짜</div>
-                        </div>
+<!--                          <div class="boardLine"> -->
+<!--                             <div class="num">2</div> -->
+<!--                             <div class="title"> -->
+<!--                                 <a>타이틀</a> -->
+<!--                             </div> -->
+<!--                             <div class="registdate">작성날짜</div> -->
+<!--                         </div> -->
                         
-                        <div class="boardLine">
-                            <div class="num">3</div>
-                            <div class="title">
-                                <a>타이틀</a>
-                            </div>
-                            <div class="registdate">작성날짜</div>
-                        </div>
+<!--                         <div class="boardLine"> -->
+<!--                             <div class="num">3</div> -->
+<!--                             <div class="title"> -->
+<!--                                 <a>타이틀</a> -->
+<!--                             </div> -->
+<!--                             <div class="registdate">작성날짜</div> -->
+<!--                         </div> -->
                          
                 </div>
 
                 <div class="paging">
                     <c:if test="${prev }">
-                        <a href="${cpath }/board/${begin - 1}/">◀ </a>
+                        <a href="${cpath }/customer/board/customerBoard1/${begin - 1}/">◀ </a>
                     </c:if>
                     <c:forEach var="i" begin="${begin}" end="${end}">
                         <c:if test="${i == page }">
                             <strong>[${i }]</strong>
                         </c:if>
                         <c:if test="${i != page }">
-                            <a href="${cpath }/board/${i }/"> [${i }] </a>
+                            <a href="${cpath }/customer/board/customerBoard1/${i }/"> [${i }] </a>
                         </c:if>
                     </c:forEach>
                     <c:if test="${next }">
-                        <a href="${cpath }/board/${end + 1}/">▶</a>
+                        <a href="${cpath }/customer/board/customerBoard1/${end + 1}/">▶</a>
                     </c:if>
                 </div>
 

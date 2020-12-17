@@ -34,7 +34,7 @@
 		<div class="notices">
 
 			<div class="notices_0 notices_1">
-				<a href="${cpath }/customer/board/customerBoard/">
+				<a href="${cpath }/customer/board/customerBoard1/">
 					<div class="notices_1_1">공지사항 게시판</div>
 				</a>
 				<hr class="notice_hr">
@@ -56,7 +56,7 @@
 			</div>
 
 			<div class="notices_0 notices_2">
-				<a href="#">
+				<a href="${cpath }/customer/board/customerBoard2/">
 					<div class="notices_1_2">이벤트 게시판</div>
 				</a>
 				<hr class="notice_hr">

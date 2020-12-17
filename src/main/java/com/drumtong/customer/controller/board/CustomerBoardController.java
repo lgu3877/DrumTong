@@ -1,7 +1,11 @@
 package com.drumtong.customer.controller.board;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -17,13 +21,28 @@ public class CustomerBoardController {
 
 	@Autowired CustomerBoardService svc;
 	
-
-	@RequestMapping(value = "customerBoard/", method = RequestMethod.GET)
-	public String board() {
-		return "customer/board/customerBoard";
+	// 게시판1 이동
+	@RequestMapping(value = "customerBoard1/{page}/", method = RequestMethod.GET)
+	public ModelAndView boardOneMove(HttpServletRequest req, @PathVariable("page")String page) {
+		req.getSession().setAttribute("page", page);
+		return new ModelAndView("redirect:/customer/board/customerBoard1/");
 	}
 	
+	// 게시판1 이동
+	@RequestMapping(value = "customerBoard1/", method = RequestMethod.GET)
+	public ModelAndView boardOne(HttpServletRequest req) {
+		HttpSession Session = req.getSession();
+		String page = (String)Session.getAttribute("page");
+		Session.removeAttribute("page");
+		return svc.boardOne(page);
+	}
 	
+	// 게시판2 이동
+	@RequestMapping(value = "customerBoard2/", method = RequestMethod.GET)
+	public ModelAndView boardTwo() {
+		return svc.boardTwo();
+	}
+
 	@RequestMapping(value = "customerBoardRead/", method = RequestMethod.GET)
 	public String read() {
 		return "customer/board/customerBoardRead";
@@ -34,15 +53,4 @@ public class CustomerBoardController {
 		return "customer/board/customerBoardWrite";	
 	}
 
-	// 게시판1 이동
-	@RequestMapping(value = "customerBoard1/", method = RequestMethod.GET)
-	public ModelAndView boardOne() {
-		return svc.boardOne();
-	}
-	// 게시판2 이동
-	@RequestMapping(value = "customerBoard2/", method = RequestMethod.GET)
-	public ModelAndView boardTwo() {
-		return svc.boardTwo();
-
-	}
 }

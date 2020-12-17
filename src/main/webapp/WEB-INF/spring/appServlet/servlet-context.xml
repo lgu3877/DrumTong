@@ -101,7 +101,10 @@
 			<exclude-mapping path="/customer/"/>
 			<exclude-mapping path="/customer/laundry/customerSearch/"/>
 			<exclude-mapping path="/customer/laundry/customerDetail/**/"/>
-			<exclude-mapping path="/customer/board/customerBoard/"/>
+			<exclude-mapping path="/customer/board/customerBoard1/"/>
+			<exclude-mapping path="/customer/board/customerBoard1/*/"/>
+			<exclude-mapping path="/customer/board/customerBoard2/"/>
+			<exclude-mapping path="/customer/board/customerBoard2/*/"/>
 			<exclude-mapping path="/customer/membership/customerSignUp/"/>
 			
 			<exclude-mapping path="/customer/membership/customerLogin/POST/"/>

@@ -15,5 +15,21 @@
 			ORDER BY NUM DESC
 	</select>
 	
+	<select id="selectAllPage" resultType="int">
+		SELECT COUNT(*) FROM SCUSTOMERBOARD1
+	</select>
+	
+	<select id="selectPageSection" parameterType="hashmap" resultType="SBoardVO">
+		SELECT * FROM 
+			(SELECT ROWNUM AS AROWNUM, A.* 
+			FROM 
+        		(SELECT * 
+					FROM SCUSTOMERBOARD1 
+						ORDER BY REGISTDATE DESC) A)
+  		WHERE 
+  			AROWNUM <![CDATA[>=]]> #{IndexBegin} AND 
+  			AROWNUM <![CDATA[<=]]> #{IndexEnd}  
+  			ORDER BY REGISTDATE DESC
+	</select>
 </mapper>
 
