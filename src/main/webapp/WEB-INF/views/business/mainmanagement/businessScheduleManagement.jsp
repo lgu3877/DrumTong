@@ -515,17 +515,27 @@
 								<li class="list_content_con">
 									<ul class="list_content">
 										<li class="period_con">
-											<div class="list_start_day">2020-10-05</div>
-											<div> ~ </div>
-											<div class="list_end_day">2020-11-06</div>
+											<div class="period_view_default">
+												<div class="list_start_day">2020-10-05</div>
+												<div class="arrow">~</div>
+												<div class="list_end_day">2020-11-06</div>
+											</div>
+											<div class="period_view_input">
+												<input type="date" name="updateStartDay" pattern="\d{4}-\d{2}-\d{2}">
+												<div class="arrow">~</div>
+												<input type="date" name="updateEndDay" pattern="\d{4}-\d{2}-\d{2}">
+											</div>
 										</li>
 										<li class="reason_con">
 											<div>
 												사업자 생일 파티로 임시 휴무합니다.
 											</div>
 										</li>
-										<li>
+										<li class="update_icon_con">
 											<i class="fas fa-pen-square" onclick="updateSchedule(this)"></i>
+										</li>
+										<li class="cancle_icon_con">
+											<i class="fas fa-times" onclick="cancleUpdate(this)"></i>
 										</li>
 										<li>
 											<i class="fas fa-trash-alt" onclick="deleteSchedule(this)"></i>
