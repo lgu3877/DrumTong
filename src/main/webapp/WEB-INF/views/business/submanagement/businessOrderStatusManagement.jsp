@@ -67,7 +67,7 @@
 						</div>
 						<div>
 							<h1>주문유형</h1>
-							<p></p>
+							<p class="maincategory"></p>
 						</div>
 					</div>
 					<div class="halfdiv">
@@ -89,19 +89,18 @@
 
 	</section>
 	
-	<div id="modalback" style="position: fixed; width: 100%; height: 100%; left: 0; top: 0; background:rgba(0,0,0,0.5); display: none"></div>
-	<div id="modal" style="position: fixed; width: 50%; height: 50%; left: 25%; top: 25%; display: none; background: white">
-		<a href="#" class="close">X</a>
+	<div id="modalback"></div>
+	<div id="modal">
+		<a href="#" class="close"><i class="far fa-times-circle fa-3x"></i></a>
 	</div>
 	
 	<script type="text/javascript">
-	
+		
+		console.log()
 	    console.log(${orderList});
 		
 		let clonecontainer = $('#clonediv0');
 		let orderList = ${orderList};
-		console.log('요청타입 : ', orderList[0].requesttype);
-		console.log('요청사항 : ', orderList[0].request);
 		
  		window.onload = function() {
  			$('#clonediv0').children('.outerstatus2').children('h1').html(orderList[0].status);
@@ -110,25 +109,47 @@
  			$('#clonediv0').find('p.purchasedate').html(orderList[0].purchasedate);
  			$('#clonediv0').find('p.deliverydate').html(orderList[0].deliverydate);
  			$('#clonediv0').find('p.totalprice').html(orderList[0].totalprice);
+ 			
+			const array = [];
+			for(j = 0; j < (orderList[0].bDetailSalesVOList).length; j++) {
+				array.push((orderList[0].bDetailSalesVOList)[j].maincategory);
+			}			
+			const setarray0 = [];
+			for (k = 0; k < Array.from(new Set(array)).length; k++) {
+				setarray0.push(Array.from(new Set(array))[k]);
+				if (k > 0)
+					setarray0.push(' / ');
+			}			
+  			$('#clonediv0').find('p.maincategory').html(setarray0);
+  			insertDiv();
  		}
 		
- 		for(i = 1; i < orderList.length; i++) {
- 			$('.outerdiv').append('<div class="clonediv" id="clonediv' + i + '">' + clonecontainer.html() + '</div>');
+ 		
+ 		function insertDiv() {	// 클론 div를 이용하여 다른 명세서들 출력
+ 			for(i = 1; i < orderList.length; i++) {
  			
- 			$('#clonediv' + i).children('.outerstatus2').children('h1').html(orderList[i].status);
- 			$('#clonediv' + i).find('.containerName').html('주문번호 : ' + orderList[i].salecode);
- 			$('#clonediv' + i).find('.requesttype').html(orderList[0].requesttype);
- 			$('#clonediv' + i).find('p.purchasedate').html(orderList[0].purchasedate);
- 			$('#clonediv' + i).find('p.deliverydate').html(orderList[0].deliverydate);
- 			$('#clonediv' + i).find('p.totalprice').html(orderList[0].totalprice);
- 			
- 			for(i = 0; i < (orderList[0].bDetailSalesVOList).length; i++) {
- 				
+ 				$('.outerdiv').append('<div class="clonediv" id="clonediv' + i + '">' + clonecontainer.html() + '</div>');
+ 				$('#clonediv' + i).children('.outerstatus2').children('h1').html(orderList[i].status);
+ 				$('#clonediv' + i).find('.containerName').html('주문번호 : ' + orderList[i].salecode);
+ 				$('#clonediv' + i).find('.requesttype').html(orderList[i].requesttype);
+ 				$('#clonediv' + i).find('p.purchasedate').html(orderList[i].purchasedate);
+ 				$('#clonediv' + i).find('p.deliverydate').html(orderList[i].deliverydate);
+ 				$('#clonediv' + i).find('p.totalprice').html(orderList[i].totalprice);
+			
+				const array = [];
+				for(j = 0; j < (orderList[i].bDetailSalesVOList).length; j++) {
+					array.push((orderList[i].bDetailSalesVOList)[j].maincategory);
+				}			
+				const setarray = [];
+				for (k = 0; k < Array.from(new Set(array)).length; k++) {
+					setarray.push(Array.from(new Set(array))[k]);
+					if (k > 0)
+						setarray.push(' / ');
+				}			
+ 	 			$('#clonediv' + i).find('p.maincategory').html(setarray);
  			}
- 			
- 			
  		}
-		
+ 		
 		function openDetail(obj) {
 			$('#modal').fadeIn(300);
 			$('#modalback').fadeIn(300);
