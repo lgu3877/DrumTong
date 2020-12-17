@@ -523,3 +523,82 @@
     height: 50px;
     border-radius: 5px;
 }
+
+/* 임시 휴무 리스트 */
+.tmp_holiday_list_con {
+	height: 500px;
+}
+
+.tmp_holiday_list {
+	width: 1000px;
+}
+
+.list_con,
+.list_filter_content,
+.list_content {
+	list-style: none;
+}
+
+.list_con {
+	display: block;
+}
+
+.list_filter {
+	margin: 10px 0 20px 0;
+}
+
+.list_filter_content {
+	display: flex;
+	padding-bottom: 8px;
+	border-bottom: 1px solid navy;
+	font-weight: 600;
+}
+
+.list_filter_content li {
+	cursor: pointer;
+	margin-right: 20px;
+	padding: 5px 10px;
+    border-radius: 5px;
+    display: flex;
+}
+
+.list_filter_content li:hover {
+	transition: 0.5s;
+	background-color: #f38181;
+	color:white;
+}
+
+.list_filter_content li i {
+	line-height: 22px;
+	margin-left: 3px;
+}
+
+.list_content_con {
+	padding: 5px 10px;
+}
+
+.list_content {
+	display: flex;	
+	justify-content: space-between;	
+}
+
+.list_content i {
+	cursor: pointer;
+}
+
+.list_content li {
+	display: flex;
+}
+
+.list_content li div {
+	/* font-size: 15pt; */
+}
+
+.period_con {
+	width: 200px;
+    justify-content: space-between;
+}
+
+.reason_con {
+	width: 600px;
+}
