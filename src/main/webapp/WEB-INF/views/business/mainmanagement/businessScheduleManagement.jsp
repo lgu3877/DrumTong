@@ -483,10 +483,64 @@
 					<!-- </form> -->	
 						
 					</div>
-									
-				<!-- 임시 영업 중지 목록 -->
-					<div>
 					
+				<!-- 임시 영업 중지 목록 -->
+					<div class="tmp_holiday_list_con">
+					<!-- <form> -->
+						<div class="tmp_holiday_list form">
+							
+							<ul class="list_con">
+							<!-- 필터링 -->
+								<li class="list_filter">
+									<ul class="list_filter_content">
+										<li id="view_all">
+											전체보기
+											<i class="fas fa-caret-down"></i>
+										</li>
+										<li id="view_recent">
+											가까운 날짜 순
+											<i class="fas fa-caret-down"></i>
+										</li>
+										<li id="view_old">
+											먼 날짜 순
+											<i class="fas fa-caret-down"></i>
+										</li>
+										<li id="view_month">
+											월 검색
+											<i class="fas fa-calendar-alt"></i>
+										</li>
+									</ul>
+								</li>
+							<!-- 리스트 -->
+								<li class="list_content_con">
+									<ul class="list_content">
+										<li class="period_con">
+											<div class="list_start_day">2020-10-05</div>
+											<div> ~ </div>
+											<div class="list_end_day">2020-11-06</div>
+										</li>
+										<li class="reason_con">
+											<div>
+												사업자 생일 파티로 임시 휴무합니다.
+											</div>
+										</li>
+										<li>
+											<i class="fas fa-pen-square" onclick="updateSchedule(this)"></i>
+										</li>
+										<li>
+											<i class="fas fa-trash-alt" onclick="deleteSchedule(this)"></i>
+										</li>
+										<li>
+											<i class="fas fa-check-square" onclick="postSchedule(this)"></i>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							
+							
+							
+						</div>
+					<!-- </form> -->
 					</div>
 					
 						

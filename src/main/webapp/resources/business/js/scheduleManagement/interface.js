@@ -221,7 +221,7 @@ endDay.setAttribute("min", minDate);
 endDay.setAttribute("max", maxDate);
 
 
-//임시 휴무 기간 input 유효성 검사
+// 임시 휴무 기간 input 유효성 검사
 endDay.addEventListener("change", function(e) {
 	if (startDay.value !== null) {		
 		const inputDate = e.target.value;
@@ -240,3 +240,33 @@ endDay.addEventListener("change", function(e) {
 
 const dateIcon = document.getElementsByClassName("input-group-text");
 console.log(dateIcon);
+
+// 임시 휴무 리스트 수정 버튼
+function updateSchedule(obj) {
+	console.log("수정");
+}
+
+// 임시 휴무 리스트 삭제 버튼
+function deleteSchedule(obj) {
+	console.log("삭제");
+	
+}
+
+// 임시 휴무 리스트 확인 버튼
+function postSchedule(obj) {
+	console.log("완료");
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
