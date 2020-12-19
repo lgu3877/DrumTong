@@ -1,3 +1,51 @@
+div.upperbtn {
+	position: fixed; 
+	bottom: 30px; 
+	right: 30px; 
+	border-radius: 50%; 
+	width: 60px; 
+	height: 60px; 
+	display: flex; 
+	justify-content: center; 
+	align-items: center;
+}
+
+div.upperbtn i {
+	color: #afafaf;
+	cursor: pointer;
+}
+
+div.typeSelect {
+	width: 700px; 
+	height: 100px; 
+	margin: 0 auto; 
+	display: flex; 
+	align-items: center;
+}
+
+div.typeSelect div {
+	width: 2%;
+}
+
+div.typeSelect button {
+	width: 32%;
+	height: 70%;
+	border: 3px solid #3088F9;
+	background-color: white;
+	color: #3088F9;
+	cursor: pointer;
+	outline: none;
+	font-size: 28pt;
+	font-weight: bold;
+}
+
+button:hover {
+	background-color: #3088F9 !important;
+	color: white !important;
+	transform: translate(0, -5px);
+	transition: all 1s ease 0s;
+}
+
 .outerdiv {
 	width: 1000px; 
 	text-align: left;
@@ -5,12 +53,12 @@
 }
 
 .clonediv {
-	width: 800px; height: 450px; margin: 0 auto; position: relative; opacity: 0;
+	width: 700px; height: 450px; margin: 0 auto; position: relative; opacity: 0;
 }
 .outerstatus1 {
 	width: 270px; 
 	height: 80px; 
-	background-color: black; 
+	background-color: #3088F9; 
 	clip-path: polygon(79% 0, 100% 50%, 79% 100%, 0 92%, 17% 50%, 0 8%); 
 	position: absolute;  
 	left: 10px; 
@@ -45,24 +93,25 @@
 	width: 100%; 
 	height: 300px; 
 	margin: 0 auto; 
-	background-color: #e5e6eb; 
+	background-color: white; 
 	border-radius: 20px;
-	border: 6px outset #afafaf;
+	border: 6px outset #3088F9;
 	margin-bottom: 30px;
 	margin-right: 500px;
 }
 
 .container:hover {
-	background-color: white;
+	color: white;
+	background-color: #3088F9;
 	transform: translate(0, -20px);
 	transition: all 1s ease 0s;
 	box-shadow: 15px 30px 60px #afafaf;
-	border: 15px outset #afafaf;	
+	border: 15px outset #3088F9;	
 	cursor: pointer;
 }
 
 h1.containerName {
-	font-size: 26pt; 
+	font-size: 24pt; 
 	width: 65%; 
 	height:50px; 
 	margin: 0;
@@ -74,7 +123,7 @@ h1.containerName {
 
 h1.requesttype {
 	text-align: right;
-	font-size: 22pt;
+	font-size: 20pt;
 	width: 25%;
 	height: 50px;
 	margin: 0;
@@ -143,11 +192,12 @@ h1.requesttype {
 #modal {
 	position: fixed; 
 	width: 50%; 
-	height: 50%; 
+	height: 80%; 
 	left: 25%; 
-	top: 25%; 
+	top: 10%; 
 	display: none; 
 	background: white;
+	overflow: scroll;
 }
 
 #modal .close {
@@ -155,3 +205,54 @@ h1.requesttype {
 	top: 5px;
 	right: 5px;
 }
+
+#modal h1 {
+	text-align: center; 
+	font-size: 28pt; 
+	margin-top: 25px !important; 
+	margin: 0
+}
+
+#modal h2 {
+	text-align: center; 
+	font-size: 22pt; 
+	margin-top: 8px !important; 
+	margin-bottom: 15px; 
+	color: #cacece;
+}
+
+#modal div {
+	position: relative; 
+	text-align: left; 
+	width: 60%; 
+	height: 25px; 
+	margin: 0 auto; 
+	font-size: 16pt;
+	padding-left: 15px;
+	padding-right: 15px;
+	color:  #cacece;
+	font-weight: bold;
+}
+
+#modal div span {
+	position: absolute; 
+	right: 0; 
+	font-size: 16pt;
+	color:  black;
+}
+
+#modal hr{
+	border-top: 1px dotted; 
+	width: 70%; 
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#modal .titlehr {
+	border-left: none !important;
+	border-right: none !important;
+	border-bottom: 1px solid black !important; 
+	border-top:  1px solid black !important; 
+	height: 2px;
+} 

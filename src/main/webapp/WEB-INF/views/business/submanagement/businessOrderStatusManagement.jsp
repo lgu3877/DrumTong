@@ -47,14 +47,28 @@
 	<!-- sub-header(membership) -->
 	<%@ include file="../main/businessSubHeader.jsp" %>
 		
+		
 		<div class="outerdiv" >
+			
+			<div class="upperbtn">
+				<i class="fas fa-chevron-circle-up fa-4x" onclick="upperbtn()"></i>
+			</div>
+			
 			<h1 style="font-size: 36pt">주문현황</h1>
+			
+			<div class="typeSelect">
+				<button>요청</button>
+				<div></div>
+				<button>처리중</button>
+				<div></div>
+				<button>완료</button>
+			</div>
 			
 			<div class="clonediv" id="clonediv0">
 			
 			<div class="outerstatus1"></div>
 			<div class="outerstatus2"><h1></h1></div>
-			<div class="nulldiv" style=""></div>
+			<div class="nulldiv"></div>
 			
 			<div class="container" onclick="openDetail(this)">
 				<h1 class="containerName"></h1>
@@ -62,7 +76,7 @@
 				<div class="contentdiv">
 					<div class="halfdiv">
 						<div>
-							<h1>주문일</h1>
+							<h1>주문일시</h1>
 							<p class="purchasedate"></p>
 						</div>
 						<div>
@@ -72,7 +86,7 @@
 					</div>
 					<div class="halfdiv">
 						<div>
-							<h1>배송일</h1>
+							<h1>배송일시</h1>
 							<p  class="deliverydate"></p>
 						</div>
 						<div>
@@ -92,17 +106,66 @@
 	<div id="modalback"></div>
 	<div id="modal">
 		<a href="#" class="close"><i class="far fa-times-circle fa-3x"></i></a>
+		<h1>가게 이름</h1>
+		<h2>주문 번호</h2>
+		<hr class="titlehr">
+			<div>완료 예정<span id="ableday"></span></div>
+			<div>배송 일시<span id="deliverydate"></span></div>
+			<div>받은 날짜<span id="pickupdate"></span></div>
+		<hr>
+			<div>메인 카테고리<span id="maincategory"></span></div>
+			<div>서브 카테고리<span  id="subcategory"></span></div>
+		<hr>
+			<div>메뉴명<span  id="menuname"></span></div>
+			<div>구매 개수<span id="menuamount"></span></div>
+			<div>메뉴 금액<span  id="menuprice"></span></div>
+			<div>메뉴 총금액<span  id="sumprice"></span></div>
+		<hr>
+			<div>요청 사항<span id="requests"></span></div>
+		<hr>
+			<div>원래 금액<span id="originalprice"></span></div>
+			<div>쿠폰 금액<span id="discountprice"></span></div>
+			<div>배달 금액<span id="quickprice"></span></div>
+		<hr>
+			<div>총 금액<span  id="totalprice"></span></div>
+			<div>총요청 개수<span id="totalamount"></span></div>
+		<hr>
 	</div>
 	
 	<script type="text/javascript">
 		
-		console.log()
-	    console.log(${orderList});
 		
-		let clonecontainer = $('#clonediv0');
 		let orderList = ${orderList};
+		let clonecontainer = $('#clonediv0');
+		let modalexitkey = '';
 		
  		window.onload = function() {
+ 			originclone();
+  			insertDiv();
+  			
+  			$('div.outerdiv').find('.container').each(function(index, item) {
+  				$(item).hover(function() {
+  					$(item).parent().find('.outerstatus1').css('transform', 'translate(0, -20px)');
+  					$(item).parent().find('.outerstatus1').css('transition', 'all 1s ease 0s');
+  					$(item).parent().find('.outerstatus1').css('backgroundColor', '#3088F9');
+  					$(item).parent().find('.outerstatus2').css('transform', 'translate(0, -20px)');
+  					$(item).parent().find('.outerstatus2').css('transition', 'all 1s ease 0s');
+  					$(item).parent().find('.outerstatus2').css('backgroundColor', '#3088F9');
+  					$(item).parent().find('.outerstatus2 h1').css('color', 'white');
+  					
+  				}, function() {
+  					$(item).parent().find('.outerstatus1').css('transform', '');
+  					$(item).parent().find('.outerstatus1').css('transition', 'all 0s ease 0s');
+  					$(item).parent().find('.outerstatus2').css('transform', '');
+  					$(item).parent().find('.outerstatus2').css('transition', 'all 0s ease 0s');
+  					$(item).parent().find('.outerstatus2').css('backgroundColor', 'white');
+  					$(item).parent().find('.outerstatus2 h1').css('color', '');
+  				})
+  			})
+  		}
+ 		
+ 		function originclone() {
+ 			
  			$('#clonediv0').children('.outerstatus2').children('h1').html(orderList[0].status);
  			$('#clonediv0').find('.containerName').html('주문번호 : ' + orderList[0].salecode);
  			$('#clonediv0').find('.requesttype').html(orderList[0].requesttype);
@@ -121,7 +184,6 @@
 					setarray0.push(' / ');
 			}			
   			$('#clonediv0').find('p.maincategory').html(setarray0);
-  			insertDiv();
  		}
 		
  		
@@ -150,16 +212,48 @@
  			}
  		}
  		
-		function openDetail(obj) {
+		function openDetail(obj) {		// 모달 활성화
+// 			console.log('아이디 : ', obj.parentNode.id);
+// 			console.log('replace : ', (obj.parentNode.id).replace('clonediv',''));
+			modalexitkey = obj.parentNode.id;
+			let detailob = orderList[(obj.parentNode.id).replace('clonediv','')];
+			
+			$('#modal').find('#ableday').html(detailob.ableday);
+			$('#modal').find('#deliverydate').html(detailob.deliverydate);
+			$('#modal').find('#pickupdate').html(detailob.pickupdate);
+			$('#modal').find('#requests').html(detailob.requests);
+			$('#modal').find('#originalprice').html(detailob.originalprice);
+			$('#modal').find('#totalprice').html(detailob.totalprice);
+			$('#modal').find('#totalamount').html(detailob.totalamount);
+			
+			// bDetailSalesVOList 는 volist 수정 후 작업재개!!
+				$('#modal').find('#maincategory').html(detailob.bDetailSalesVOList[0].maincategory);
+				$('#modal').find('#subcategory').html(detailob.bDetailSalesVOList[0].subcategory);
+				$('#modal').find('#menuname').html(detailob.bDetailSalesVOList[0].name);				// vo 속성이랑 이름 다르게 했음
+				$('#modal').find('#menuamount').html(detailob.bDetailSalesVOList[0].amount);				// vo 속성이랑 이름 다르게 했음
+				$('#modal').find('#menuprice').html(detailob.bDetailSalesVOList[0].menuprice);
+				$('#modal').find('#sumprice').html(detailob.bDetailSalesVOList[0].sumprice);
+
+			
 			$('#modal').fadeIn(300);
 			$('#modalback').fadeIn(300);
 		}
 		
-		$('#modal, .close').on('click', function() {
-			$('#modal').fadeOut(300);
-			$('#modalback').fadeOut(300);
+		$('#modal, .close').on('click', function() {	// 모달 비활성화
+			modaleixt();
+			console.log($('#clonediv0').focus());
+			$('#' + modalexitkey).focus();
 		})
 		
+		function modaleixt() {
+			$('#modal').fadeOut(300);
+			$('#modalback').fadeOut(300);
+		}
+		
+		
+		function upperbtn() {
+			$('html').scrollTop(0);
+		}
 		
 		$(document).ready(function() {
     	$(window).scroll( function(){
