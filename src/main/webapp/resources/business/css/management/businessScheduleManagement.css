@@ -447,6 +447,10 @@
     color: white;
 }
 
+.set_day_range_con input[type="date"]::-webkit-calendar-picker-indicator {
+	cursor: pointer	
+}
+
 .set_day_range_con i:hover {
 	cursor: pointer;	
 }
@@ -479,8 +483,8 @@
 
 .tmp_holiday_reason_con {
 	display: block;
-    height: 500px;
     text-align: left;
+	margin-bottom: 50px;
 }
 
 .reason_form {
@@ -530,7 +534,7 @@
 }
 
 .tmp_holiday_list {
-	width: 1000px;
+	/* width: 100%; */
 }
 
 .list_con,
@@ -544,13 +548,13 @@
 }
 
 .list_filter {
-	margin: 10px 0 20px 0;
+	margin: 10px 0;
 }
 
 .list_filter_content {
 	display: flex;
 	padding-bottom: 8px;
-	border-bottom: 1px solid navy;
+	border-bottom: 2.5px solid navy;
 	font-weight: 600;
 }
 
@@ -579,11 +583,16 @@
 
 .list_content {
 	display: flex;	
-	justify-content: space-between;	
+	justify-content: space-between;
+	margin: 30px auto;
+    padding-bottom: 10px;
+    border-bottom: 1px solid navy;
 }
 
 .list_content i {
 	cursor: pointer;
+	line-height: 22px;
+	margin: 0 0 0 30px;
 }
 
 .list_content li {
@@ -595,10 +604,46 @@
 }
 
 .period_con {
-	width: 200px;
+	width: 250px;
     justify-content: space-between;
 }
 
+.period_view_default,
+.period_view_input {
+	display: flex;
+    justify-content: space-between;
+}
+
+.period_view_default {
+	width: 200px;
+}
+
+.period_view_input {
+	display: none;
+	/* width: 250px; */
+}
+
+.period_view_input div {
+	margin: 0 10px;
+}
+
+.period_view_input input[type="date"] {
+    width: 110px;	
+}
+
+.period_view_input input[type="date"]::-webkit-calendar-picker-indicator {
+	cursor: pointer;
+	padding: 0;
+	margin: 0;
+}
+	
 .reason_con {
-	width: 600px;
+	width: 800px;
+	margin-left: 20px;
+}
+
+.reason_view_input {
+	display: none;
+	width: 100%;
+	text-indent: 5px;
 }
