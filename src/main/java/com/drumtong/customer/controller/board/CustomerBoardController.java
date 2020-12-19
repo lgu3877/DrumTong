@@ -21,31 +21,35 @@ public class CustomerBoardController {
 
 	@Autowired CustomerBoardService svc;
 	
-	// 게시판1 이동
-	@RequestMapping(value = "customerBoard1/{page}/", method = RequestMethod.GET)
-	public ModelAndView boardOneMove(HttpServletRequest req, @PathVariable("page")String page) {
+	// 게시판 이동(type : notice, event)
+	@RequestMapping(value = "customerBoard/{type}/{page}/", method = RequestMethod.GET)
+	public ModelAndView boardMove(HttpServletRequest req, @PathVariable("type")String type, 
+								@PathVariable("page")String page) {
 		req.getSession().setAttribute("page", page);
-		return new ModelAndView("redirect:/customer/board/customerBoard1/");
+		return new ModelAndView("redirect:/customer/board/customerBoard/" + type + "/");
 	}
 	
-	// 게시판1 이동
-	@RequestMapping(value = "customerBoard1/", method = RequestMethod.GET)
-	public ModelAndView boardOne(HttpServletRequest req) {
+	// 게시판 이동
+	@RequestMapping(value = "customerBoard/{type}/", method = RequestMethod.GET)
+	public ModelAndView board(HttpServletRequest req, @PathVariable("type")String type) {
 		HttpSession Session = req.getSession();
 		String page = (String)Session.getAttribute("page");
 		Session.removeAttribute("page");
-		return svc.boardOne(page);
+		return svc.board(page, type);
 	}
 	
-	// 게시판2 이동
-	@RequestMapping(value = "customerBoard2/", method = RequestMethod.GET)
-	public ModelAndView boardTwo() {
-		return svc.boardTwo();
+	@RequestMapping(value = "customerBoardRead/{type}/{num}/", method = RequestMethod.GET)
+	public ModelAndView read(HttpServletRequest req, @PathVariable("type")String type, @PathVariable("num")int num) {
+		req.getSession().setAttribute("num", num);
+		return new ModelAndView("redirect:/customer/board/customerBoardRead/" + type + "/");
 	}
-
-	@RequestMapping(value = "customerBoardRead/", method = RequestMethod.GET)
-	public String read() {
-		return "customer/board/customerBoardRead";
+	
+	@RequestMapping(value = "customerBoardRead/{type}/", method = RequestMethod.GET)
+	public ModelAndView read(HttpServletRequest req, @PathVariable("type")String type) {
+		HttpSession Session = req.getSession();
+		int num = (int)Session.getAttribute("num");
+		Session.removeAttribute("num");
+		return svc.read(type, num);
 	}
 		
 	@RequestMapping(value = "customerBoardWrite/", method = RequestMethod.GET)

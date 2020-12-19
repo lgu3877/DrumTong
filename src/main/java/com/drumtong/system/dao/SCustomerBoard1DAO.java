@@ -16,4 +16,7 @@ public interface SCustomerBoard1DAO {
 	// 인덱스 A 부터 B 까지의 게시글을 들고 옴[영경]
 	List<SBoardVO> selectPageSection(HashMap<String, Integer> map);
 
+	// 게시판 글 하나를 보여준다.
+	SBoardVO read(int num);
+
 }

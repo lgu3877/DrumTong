@@ -31,5 +31,9 @@
   			AROWNUM <![CDATA[<=]]> #{IndexEnd}  
   			ORDER BY REGISTDATE DESC
 	</select>
+	
+	<select id="read" parameterType="int" resultType="SBoardVO">
+		SELECT * FROM SCUSTOMERBOARD1 WHERE NUM=#{num}
+	</select>
 </mapper>
 

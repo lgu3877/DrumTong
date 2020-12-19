@@ -19,7 +19,8 @@ public class CustomerBoardService {
 	@Autowired SCustomerBoard2DAO sCustomerBoard2DAO;
 	
 	// 공지사항1 이동 [GET]
-	public ModelAndView boardOne(String page) {
+	public ModelAndView board(String page, String type) {
+		boolean Type = type.equals("notice");
 		ModelAndView mav = new ModelAndView("customer/board/customerBoard");
 		// 현재 페이지 값이 없다면 무조건 1블럭 1페이지(받아오는 값)
 		int NowPage = page == null ? 1 : Integer.parseInt(page);
@@ -27,7 +28,9 @@ public class CustomerBoardService {
 		int IndexPaging = 4;
 		int BoxPaging = 3;
 		// 1. 전체 게시글 개수를 구한다.
-		int WholePage = sCustomerBoard1DAO.selectAllPage();	//
+		int WholePage = Type ?
+				sCustomerBoard1DAO.selectAllPage()
+				: sCustomerBoard2DAO.selectAllPage();
 		
 		// 2. 현재 페이지에 보여줄 게시글 Index 시작과 끝을 구한다
 		int IndexBegin = (NowPage-1) * IndexPaging + 1 ;
@@ -40,7 +43,9 @@ public class CustomerBoardService {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("IndexBegin", IndexBegin);
 		map.put("IndexEnd", IndexEnd);
-		List<SBoardVO> List = sCustomerBoard1DAO.selectPageSection(map);
+		List<SBoardVO> List = Type ? 
+						sCustomerBoard1DAO.selectPageSection(map)
+						: sCustomerBoard2DAO.selectPageSection(map);
 
 		// 4. 전체 페이징 개수를 구한다.
 		int MaxPaging = WholePage / IndexPaging + (WholePage % IndexPaging == 0 ? 0 : 1);
@@ -80,12 +85,22 @@ public class CustomerBoardService {
 		mav.addObject("begin", BoxBegin);
 		mav.addObject("end", BoxEnd); 
 		
+		mav.addObject("type", type);
 		
 		return mav;
 	}
-	// 공지사항2 이동 [GET]
-	public ModelAndView boardTwo() {
-		ModelAndView mav = new ModelAndView("customer/board/customerBoard");
+	
+	public ModelAndView read(String type, int num) {
+		ModelAndView mav = new ModelAndView("customer/board/customerBoardRead");
+		boolean Type = type.equals("notice");
+		
+		SBoardVO board = Type ?
+					sCustomerBoard1DAO.read(num) :
+					sCustomerBoard2DAO.read(num);
+					
+		mav.addObject("board", board);
+
+		mav.addObject("type", type);
 		return mav;
 	}
 	
