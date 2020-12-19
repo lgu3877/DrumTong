@@ -244,22 +244,26 @@ endDay.addEventListener("change", function(e) {
 
 // 임시 휴무 수정 취소 버튼 숨기기
 const cancleIcons = document.getElementsByClassName("cancle_icon_con");
+const completeIcons = document.getElementsByClassName("complete_icon_con");
 for (let i = 0; i < cancleIcons.length; i++) {
 	cancleIcons[i].style.display = "none";
+	cancleIcons[i].style.color = "red";
+	completeIcons[i].style.display = "none";
+	completeIcons[i].style.color = "lawngreen";
 }
 
 // 임시 휴무 리스트 수정 버튼
 function updateSchedule(obj) {
-	const list = obj.parentElement.parentElement.parentElement;
+	const list = obj.parentElement.parentElement;
 	
 	const viewCon = list.getElementsByClassName("period_view_default")[0];
-	const timeInputCon = list.getElementsByClassName("period_view_input")[0];
-	
-	const viewReasonCon = list.getElementsByClassName("reason_view_default")[0];
-	const inputReasonCon = list.getElementsByClassName("reason_view_input")[0];
-	
 	const updateIcon = list.getElementsByClassName("update_icon_con")[0];
+	const viewReasonCon = list.getElementsByClassName("reason_view_default")[0];
+		
+	const timeInputCon = list.getElementsByClassName("period_view_input")[0];
+	const inputReasonCon = list.getElementsByClassName("reason_view_input")[0];
 	const cancleIcon = list.getElementsByClassName("cancle_icon_con")[0];
+	const completeIcon = list.getElementsByClassName("complete_icon_con")[0]
 	
 	viewCon.style.display = "none";
 	viewReasonCon.style.display = "none"; 
@@ -268,6 +272,7 @@ function updateSchedule(obj) {
 	timeInputCon.style.display = "flex";
 	inputReasonCon.style.display = "block";
 	cancleIcon.style.display = "block";
+	completeIcon.style.display = "block";
 }
 
 // 임시 휴무 리스트 수정 취소 버튼
@@ -275,13 +280,13 @@ function cancleUpdate(obj) {
 	const list = obj.parentElement.parentElement.parentElement;
 	
 	const viewCon = list.getElementsByClassName("period_view_default")[0];
-	const timeInputCon = list.getElementsByClassName("period_view_input")[0];
-	
-	const viewReasonCon = list.getElementsByClassName("reason_view_default")[0];
-	const inputReasonCon = list.getElementsByClassName("reason_view_input")[0];
-	
 	const updateIcon = list.getElementsByClassName("update_icon_con")[0];
+	const viewReasonCon = list.getElementsByClassName("reason_view_default")[0];
+		
+	const timeInputCon = list.getElementsByClassName("period_view_input")[0];
+	const inputReasonCon = list.getElementsByClassName("reason_view_input")[0];
 	const cancleIcon = list.getElementsByClassName("cancle_icon_con")[0];
+	const completeIcon = list.getElementsByClassName("complete_icon_con")[0]
 	
 	viewCon.style.display = "flex";
 	updateIcon.style.display = "block";
@@ -290,6 +295,7 @@ function cancleUpdate(obj) {
 	inputReasonCon.style.display = "none";	
 	timeInputCon.style.display = "none";
 	cancleIcon.style.display = "none";
+	completeIcon.style.display = "none";
 	
 	
 }
@@ -311,7 +317,7 @@ function deleteSchedule(obj) {
 
 // 임시 휴무 리스트 확인 버튼
 function postSchedule(obj) {
-	const agree = confrim("수정하신 내용을 반영하시겠습니까?");
+	const agree = confirm("수정하신 내용을 반영하시겠습니까?");
 	
 	if (agree) {
 		// DB에 리스트 추가 > rediect
@@ -373,6 +379,20 @@ function sortInDesc() {
 	}
 }
 
+function openCalendar(id) {
+	const calendar = document.getElementById(id);
+	calendar.addEventListener("datepicker", function(e) {
+		console.log("!23");
+	})
+	if (calendar.onfocus) {
+		return calendar.onfocus = false;
+	}
+	return calendar.onfocus = true;
+}
+
+
+    $( "#datepicker" ).datepicker({
+    });
 
 
 
