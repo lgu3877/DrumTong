@@ -548,13 +548,13 @@
 }
 
 .list_filter {
-	margin: 10px 0 20px 0;
+	margin: 10px 0;
 }
 
 .list_filter_content {
 	display: flex;
 	padding-bottom: 8px;
-	border-bottom: 1px solid navy;
+	border-bottom: 2.5px solid navy;
 	font-weight: 600;
 }
 
@@ -583,7 +583,10 @@
 
 .list_content {
 	display: flex;	
-	justify-content: space-between;	
+	justify-content: space-between;
+	margin: 30px auto;
+    padding-bottom: 10px;
+    border-bottom: 1px solid navy;
 }
 
 .list_content i {
@@ -637,4 +640,10 @@
 .reason_con {
 	width: 800px;
 	margin-left: 20px;
+}
+
+.reason_view_input {
+	display: none;
+	width: 100%;
+	text-indent: 5px;
 }

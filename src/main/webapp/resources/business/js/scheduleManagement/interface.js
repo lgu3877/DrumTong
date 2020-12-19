@@ -253,13 +253,20 @@ function updateSchedule(obj) {
 	const list = obj.parentElement.parentElement.parentElement;
 	
 	const viewCon = list.getElementsByClassName("period_view_default")[0];
-	const inputCon = list.getElementsByClassName("period_view_input")[0];
+	const timeInputCon = list.getElementsByClassName("period_view_input")[0];
+	
+	const viewReasonCon = list.getElementsByClassName("reason_view_default")[0];
+	const inputReasonCon = list.getElementsByClassName("reason_view_input")[0];
+	
 	const updateIcon = list.getElementsByClassName("update_icon_con")[0];
 	const cancleIcon = list.getElementsByClassName("cancle_icon_con")[0];
 	
 	viewCon.style.display = "none";
+	viewReasonCon.style.display = "none"; 
 	updateIcon.style.display = "none";
-	inputCon.style.display = "flex";
+
+	timeInputCon.style.display = "flex";
+	inputReasonCon.style.display = "block";
 	cancleIcon.style.display = "block";
 }
 
@@ -268,13 +275,20 @@ function cancleUpdate(obj) {
 	const list = obj.parentElement.parentElement.parentElement;
 	
 	const viewCon = list.getElementsByClassName("period_view_default")[0];
-	const inputCon = list.getElementsByClassName("period_view_input")[0];
+	const timeInputCon = list.getElementsByClassName("period_view_input")[0];
+	
+	const viewReasonCon = list.getElementsByClassName("reason_view_default")[0];
+	const inputReasonCon = list.getElementsByClassName("reason_view_input")[0];
+	
 	const updateIcon = list.getElementsByClassName("update_icon_con")[0];
 	const cancleIcon = list.getElementsByClassName("cancle_icon_con")[0];
 	
 	viewCon.style.display = "flex";
 	updateIcon.style.display = "block";
-	inputCon.style.display = "none";
+	viewReasonCon.style.display = "block"; 
+	
+	inputReasonCon.style.display = "none";	
+	timeInputCon.style.display = "none";
 	cancleIcon.style.display = "none";
 	
 	
@@ -305,6 +319,70 @@ function postSchedule(obj) {
 	}
 	
 }
+
+// 필터링
+
+// 전체보기 > page reload
+function pageReload() {
+	window.location.reload();
+}
+
+// 가까운 날짜 순
+function sortInAcs() {
+	const startDays = document.getElementsByClassName("list_start_day");
+	const lists = document.getElementsByClassName("list_content");
+	
+	let arr = [];
+	for (let i = 0; i < lists.length; i++) {
+		const obj = {
+			day: startDays[i].innerHTML,
+			list: lists[i],
+		}
+		arr.push(obj);
+	}
+	
+	arr.sort((a, b) => parseInt(a.day) - parseInt(b.day));
+	
+	const container = document.getElementById("schedule-container");
+	
+	for (let i = 0; i < lists.length; i++) {
+		container.append(arr[i].list);
+	}
+}
+
+// 먼 날짜 순
+function sortInDesc() {
+	const startDays = document.getElementsByClassName("list_start_day");
+	const lists = document.getElementsByClassName("list_content");
+	
+	let arr = [];
+	for (let i = 0; i < lists.length; i++) {
+		const obj = {
+			day: startDays[i].innerHTML,
+			list: lists[i],
+		}
+		arr.push(obj);
+	}
+	
+	arr.sort((a, b) => parseInt(b.day) - parseInt(a.day));
+	
+	const container = document.getElementById("schedule-container");
+	
+	for (let i = 0; i < lists.length; i++) {
+		container.append(arr[i].list);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
