@@ -65,19 +65,6 @@ public class CustomerBoardService {
 		// 7. 페이지 끝 번호가 마지막 번호면 next를 숨겨야하니 false
 		boolean next = BoxEnd != MaxPaging;
 		
-		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-		System.out.println("페이징 계산 확인");
-		System.out.println("현재 페이지 : " + NowPage);
-		System.out.println("전체 인덱스 수 : " + WholePage);
-		System.out.println("시작 인덱스 : " + IndexBegin);
-		System.out.println("끝 인덱스 : " + IndexEnd);
-		System.out.println("전체 페이징 수 : " + MaxPaging);
-		System.out.println("페이징 시작 : " + BoxBegin);
-		System.out.println("페이징 끝 : " + BoxEnd);
-		System.out.println("prev : " + (prev ? "◀" : ""));
-		System.out.println("next : " + (next ? "▶" : ""));
-		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-		
 		mav.addObject("List", List);
 		mav.addObject("prev", prev);
 		mav.addObject("next", next);
