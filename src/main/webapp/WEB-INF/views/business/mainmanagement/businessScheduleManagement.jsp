@@ -493,31 +493,27 @@
 							<!-- 필터링 -->
 								<li class="list_filter">
 									<ul class="list_filter_content">
-										<li id="view_all" onclick="pageReload()">
+										<li id="view_all" class="list_filter_content_item" onclick="pageReload()">
 											전체보기
 											<i class="fas fa-caret-down"></i>
 										</li>
-										<li id="view_recent" onclick="sortInAcs()">
+										<li id="view_recent" class="list_filter_content_item" onclick="sortInAcs()">
 											가까운 날짜 순
 											<i class="fas fa-caret-down"></i>
 										</li>
-										<li id="view_old" onclick="sortInDesc()">
+										<li id="view_old" class="list_filter_content_item" onclick="sortInDesc()">
 											먼 날짜 순
 											<i class="fas fa-caret-down"></i>
 										</li>
-										<li id="view_month" onclick="openCalendar('datepicker')">
+										<li id="view_month" class="list_filter_content_item" onclick="openCalendar()">
 											월 검색
 											<i class="fas fa-calendar-alt"></i>
 										</li>
-									</ul>
-									<!--  
-									<ul>
+									<!-- 월 선택 드랍다운 -->
 										<li>
-											<div><</div>
-											<div>></div>
-										</li>
+											<div id="month-selector" class="month_selector"></div>
+										<li>
 									</ul>
-									-->
 								</li>
 							<!-- 리스트 -->
 								<li id="schedule-container" class="list_content_con">
