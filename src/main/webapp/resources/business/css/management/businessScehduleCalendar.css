@@ -153,11 +153,13 @@
 /* 일정관리 > 임시 휴무 설정 > 월 검색 > 서브 캘린더 */
 .month_selector {
 	position: absolute;
+	margin-left: -109px;
+    margin-top: 35px;
 }
 
 .s_calendar_con {
 	display: block;
-    background-color: #95e1d3;
+    background-color: antiquewhite;
     width: 270px;
     border-radius: 5px;
     height: 205px;
@@ -170,7 +172,8 @@
     list-style: none;
     height: 15%;
     justify-content: space-evenly;
-    padding: 15px 20px;
+    padding: 10px 20px 5px 20px;
+    border-bottom: 1px solid navy;
 }
 
 .s_calendar_year_con li,
@@ -191,6 +194,7 @@
 .s_calendar_month_con {
 	display: block;
     list-style: none;
+    margin-top: 8px;
 }
 
 .s_calendar_month_row {
@@ -201,7 +205,7 @@
     width: 60px;
     height: 40px;
     text-align: center;
-    border: 1px solid #eee;
+    border: 1px solid navy;
     margin: 3px auto;
     line-height: 40.5px;
 }
