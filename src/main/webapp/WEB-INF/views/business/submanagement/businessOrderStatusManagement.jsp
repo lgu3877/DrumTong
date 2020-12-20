@@ -50,7 +50,7 @@
 		<i id="searchlogo" class="fas fa-list-ul fa-3x"></i>
 		<div id="searchdiv">
 			<input type="text">
-			<button>검색</button>
+			<button onclick="searching(this)">검색</button>
 		</div>
 		<div class="outerdiv" >
 			
@@ -152,32 +152,52 @@
  			originclone();
   			insertDiv();
   			
-  			$('div.outerdiv').find('.container').each(function(index, item) {
+  			$('div.outerdiv').find('.container').each(function(index, item) {	// 메인 주문내역(=container) 위의 라벨에도 똑같이 :hover 효과주기 위해서 
   				$(item).hover(function() {
   					$(item).parent().find('.outerstatus1').css('transform', 'translate(0, -20px)');
   					$(item).parent().find('.outerstatus1').css('transition', 'all 1s ease 0s');
-  					$(item).parent().find('.outerstatus1').css('backgroundColor', '#3088F9');
+//   					$(item).parent().find('.outerstatus1').css('backgroundColor', '#3088F9');
   					$(item).parent().find('.outerstatus2').css('transform', 'translate(0, -20px)');
   					$(item).parent().find('.outerstatus2').css('transition', 'all 1s ease 0s');
-  					$(item).parent().find('.outerstatus2').css('backgroundColor', '#3088F9');
-  					$(item).parent().find('.outerstatus2 h1').css('color', 'white');
+//   					$(item).parent().find('.outerstatus2').css('backgroundColor', '#3088F9');
+//   					$(item).parent().find('.outerstatus2 h1').css('color', 'white');
   					
   				}, function() {
   					$(item).parent().find('.outerstatus1').css('transform', '');
   					$(item).parent().find('.outerstatus1').css('transition', 'all 0s ease 0s');
   					$(item).parent().find('.outerstatus2').css('transform', '');
   					$(item).parent().find('.outerstatus2').css('transition', 'all 0s ease 0s');
-  					$(item).parent().find('.outerstatus2').css('backgroundColor', 'white');
-  					$(item).parent().find('.outerstatus2 h1').css('color', '');
+//   					$(item).parent().find('.outerstatus2').css('backgroundColor', 'white');
+//   					$(item).parent().find('.outerstatus2 h1').css('color', '');
   				})
   			})
   		}
  		
- 		function originclone() {
+ 		function originclone() {	// 복사(=clone)한 html을 이용하여 모든 주문내역 반복문으로 생성
  			
- 			$('#clonediv0').children('.outerstatus2').children('h1').html(orderList[0].status);
  			$('#clonediv0').find('.containerName').html('주문번호 : ' + orderList[0].salecode);
- 			$('#clonediv0').find('.requesttype').html(orderList[0].requesttype);
+ 			
+			switch (orderList[0].status) {
+			case 'REQUEST':
+				$('#clonediv0').children('.outerstatus2').children('h1').html('요청');
+				break;
+			case 'PROCESSING':
+				$('#clonediv0').children('.outerstatus2').children('h1').html('처리중');
+				break;
+			case 'SUCCESS':
+				$('#clonediv0').children('.outerstatus2').children('h1').html('완료');
+				break;
+			}
+ 			
+ 			switch (orderList[0].requesttype) {
+			case 'VISIT':
+				$('#clonediv0').find('.requesttype').html('매장방문');	
+				break;
+			default:
+				$('#clonediv0').find('.requesttype').html('배달');
+				break;
+			}
+ 			
  			$('#clonediv0').find('p.purchasedate').html(orderList[0].purchasedate);
  			$('#clonediv0').find('p.deliverydate').html(orderList[0].deliverydate);
  			$('#clonediv0').find('p.totalprice').html(orderList[0].totalprice);
@@ -200,9 +220,29 @@
  			for(i = 1; i < orderList.length; i++) {
  			
  				$('.outerdiv').append('<div class="clonediv" id="clonediv' + i + '">' + clonecontainer.html() + '</div>');
- 				$('#clonediv' + i).children('.outerstatus2').children('h1').html(orderList[i].status);
  				$('#clonediv' + i).find('.containerName').html('주문번호 : ' + orderList[i].salecode);
- 				$('#clonediv' + i).find('.requesttype').html(orderList[i].requesttype);
+ 				$('#clonediv' + i).children('.outerstatus2').children('h1').html(orderList[i].status);
+ 				switch (orderList[i].status) {
+ 				case 'REQUEST':
+ 					$('#clonediv' + i).children('.outerstatus2').children('h1').html('요청');
+ 					break;
+ 				case 'PROCESSING':
+ 					$('#clonediv' + i).children('.outerstatus2').children('h1').html('처리중');
+ 					break;
+ 				case 'SUCCESS':
+ 					$('#clonediv' + i).children('.outerstatus2').children('h1').html('완료');
+ 					break;
+ 				}
+ 				
+ 	 			switch (orderList[i].requesttype) {
+ 				case 'VISIT':
+ 					$('#clonediv' + i).find('.requesttype').html('매장방문');	
+ 					break;
+ 				default:
+ 					$('#clonediv' + i).find('.requesttype').html('배달');
+ 					break;
+ 				}
+ 				
  				$('#clonediv' + i).find('p.purchasedate').html(orderList[i].purchasedate);
  				$('#clonediv' + i).find('p.deliverydate').html(orderList[i].deliverydate);
  				$('#clonediv' + i).find('p.totalprice').html(orderList[i].totalprice);
@@ -274,6 +314,10 @@
 			
 			obj.className = '';
 			obj.setAttribute("onclick", "chStatus(this, '" + filter + "')")
+		}
+		
+		function searching(obj) {
+			
 		}
 		
 		$('#searchlogo').on('click', function() {
