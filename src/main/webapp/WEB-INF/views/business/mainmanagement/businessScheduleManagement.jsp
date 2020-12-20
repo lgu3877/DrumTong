@@ -511,7 +511,7 @@
 										</li>
 									<!-- 월 선택 드랍다운 -->
 										<li>
-											<div id="month-selector" class="month_selector"></div>
+											<div id="month-selector" class="s_month_selector"></div>
 										<li>
 									</ul>
 								</li>

@@ -414,12 +414,17 @@ function openCalendar() {
 		if (i === 0) {
 			const leftArrowCon = document.createElement("li");
 			leftArrowCon.innerHTML += `<i class="fas fa-chevron-left"></i>`;
-			yearContainer.appendChild(leftArrowCon)
+			yearContainer.appendChild(leftArrowCon);
 		}
 		
 		const year = document.createElement("li");
+		year.classList.add("s_years");
 		year.innerHTML = calendarObject.years[i];
 		yearContainer.appendChild(year);
+		
+		// 클릭 이벤트
+		year.addEventListener("click", (e) => checkYear(e));
+		
 		
 		if (i === calendarObject.years.length - 1) {
 			const rightArrowCon = document.createElement("li");
@@ -447,8 +452,44 @@ function openCalendar() {
 	}
 	
 	calendar.appendChild(container);
+	
+	// 년도 인터페이스
+	const yearArray = document.getElementsByClassName("s_years");
+	
+	// 현재 년도 표시
+	for (let i = 0; i < yearArray.length; i++) {
+		if (today.getFullYear() === parseInt(yearArray[i].innerHTML)) {			
+			yearArray[i].style.textDecoration = "underline";
+			yearArray[i].style.color = "#f38181";
+			yearArray[i].classList.add("year_checked");
+		}
+		else {
+			yearArray[i].style.textDecoration = "";
+			yearArray[i].style.color = "navy";
+			yearArray[i].classList.remove("year_checked");
+		}
+	}
 }
 
+// 년도 체크 이벤트 > 체크시 클래스 "year_checked" 부여 & 체크안된 항목 클래스 제거 & 디자인 수정
+function checkYear(e) {
+	const yearArray = document.getElementsByClassName("s_years");
+	
+	for (let i = 0; i < yearArray.length; i++) {		
+		if (e.target.innerHTML === yearArray[i].innerHTML) {
+			e.target.style.textDecoration = "underline";
+			e.target.style.color = "#f38181";
+			e.target.classList.add("year_checked");
+		}
+		else {
+			yearArray[i].style.textDecoration = "";
+			yearArray[i].style.color = "navy";
+			yearArray[i].classList.remove("year_checked");
+		}
+	}
+}
+
+// 월 체크 이벤트 > 체크시 선택된 연도 + 선택한 월 > 분류 (따로 정렬 X)
 
 
 

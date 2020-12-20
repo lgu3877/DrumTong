@@ -151,7 +151,7 @@
 }
 
 /* 일정관리 > 임시 휴무 설정 > 월 검색 > 서브 캘린더 */
-.month_selector {
+.s_month_selector {
 	position: absolute;
 	margin-left: -109px;
     margin-top: 35px;
