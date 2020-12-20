@@ -43,6 +43,7 @@
 	<select id="selectCouponList" parameterType="String" resultType="CouponList">
 		SELECT * FROM 
 			(SELECT 
+				bc.ESTID,
 				(CASE WHEN LENGTH(BRANDNAMING) <![CDATA[>]]> 7 
 					THEN CONCAT(SUBSTR(BRANDNAMING, 1, 7), '..') 
 					ELSE BRANDNAMING END) AS BRANDNAMING, 
