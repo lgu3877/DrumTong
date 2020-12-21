@@ -7,7 +7,11 @@
 <mapper namespace="com.drumtong.customer.dao.CPointDAO">
 
 	<select id="selectAll" parameterType="String" resultType="CPointVO">
-		SELECT * FROM CPOINT WHERE MEMBERID=#{memberid} ORDER BY REGISTDATE DESC
+		SELECT * FROM CPOINT 
+			WHERE 
+				MEMBERID=#{memberid} 
+				AND TO_DATE(SUBSTR(REGISTDATE,1,10), 'YYYY-MM-DD') <![CDATA[>=]]> ADD_MONTHS(SYSDATE,-6) 
+				ORDER BY REGISTDATE DESC
 	</select>
 	
 	<insert id="insertPoint" parameterType="CPointVO">

@@ -1082,9 +1082,15 @@ body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLi
    margin: 5px 15px;
    overflow: hidden;
 }
-body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_brandnaming_link:active {
-	color: red;
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_brandnaming_link:hover {
+	color:white;
 	font-weight: bold;
+	background-color: #0091e4;
+	cursor: pointer;
+}
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_brandnaming_link:active {
+	font-weight: bold;
+	background-color: #373737; 
 }
 
 body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_discount {
