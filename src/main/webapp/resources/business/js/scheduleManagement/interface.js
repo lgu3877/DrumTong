@@ -379,20 +379,117 @@ function sortInDesc() {
 	}
 }
 
-function openCalendar(id) {
-	const calendar = document.getElementById(id);
-	calendar.addEventListener("datepicker", function(e) {
-		console.log("!23");
-	})
-	if (calendar.onfocus) {
-		return calendar.onfocus = false;
+function openCalendar() {
+	const calendar = document.getElementById("month-selector");
+	
+	if (calendar.innerHTML) {
+		calendar.innerHTML = "";
+		return;
 	}
-	return calendar.onfocus = true;
+
+	// 구조 생성 & 클래스부여 
+	const container = document.createElement("div");
+	const yearContainer = document.createElement("ul");
+	const monthContainer = document.createElement("ul");
+	
+	container.classList.add("s_calendar_con");
+	container.classList.add("form");
+	yearContainer.classList.add("s_calendar_year_con");
+	monthContainer.classList.add("s_calendar_month_con");	
+	
+	container.appendChild(yearContainer);
+	container.appendChild(monthContainer);
+	
+	// 달력 오브젝트	
+	const today = new Date();
+	const months = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
+	
+	const calendarObject = {
+		years: [today.getFullYear(), today.getFullYear() + 1, today.getFullYear() + 2],
+		months: [...months]
+	}
+	
+	// 년 생성
+	for (let i = 0; i < calendarObject.years.length; i++) {
+		if (i === 0) {
+			const leftArrowCon = document.createElement("li");
+			leftArrowCon.innerHTML += `<i class="fas fa-chevron-left"></i>`;
+			yearContainer.appendChild(leftArrowCon);
+		}
+		
+		const year = document.createElement("li");
+		year.classList.add("s_years");
+		year.innerHTML = calendarObject.years[i];
+		yearContainer.appendChild(year);
+		
+		// 클릭 이벤트
+		year.addEventListener("click", (e) => checkYear(e));
+		
+		
+		if (i === calendarObject.years.length - 1) {
+			const rightArrowCon = document.createElement("li");
+			rightArrowCon.innerHTML += `<i class="fas fa-chevron-right"></i>`;
+			yearContainer.appendChild(rightArrowCon);
+		}
+	}
+
+	// 월 생성
+	let index = 0;
+	
+	for (let i = 0; i < 3; i++) {
+		const row = document.createElement("li");
+		row.classList.add("s_calendar_month_row");
+		monthContainer.appendChild(row);
+		
+		for (let j = 0; j < 4; j++) {
+			const month = document.createElement("div");
+			month.innerHTML = calendarObject.months[index];
+			
+			row.appendChild(month);
+
+			index += 1;
+		}
+	}
+	
+	calendar.appendChild(container);
+	
+	// 년도 인터페이스
+	const yearArray = document.getElementsByClassName("s_years");
+	
+	// 현재 년도 표시
+	for (let i = 0; i < yearArray.length; i++) {
+		if (today.getFullYear() === parseInt(yearArray[i].innerHTML)) {			
+			yearArray[i].style.textDecoration = "underline";
+			yearArray[i].style.color = "#f38181";
+			yearArray[i].classList.add("year_checked");
+		}
+		else {
+			yearArray[i].style.textDecoration = "";
+			yearArray[i].style.color = "navy";
+			yearArray[i].classList.remove("year_checked");
+		}
+	}
 }
 
+// 년도 체크 이벤트 > 체크시 클래스 "year_checked" 부여 & 체크안된 항목 클래스 제거 & 디자인 수정
+function checkYear(e) {
+	const yearArray = document.getElementsByClassName("s_years");
+	
+	for (let i = 0; i < yearArray.length; i++) {		
+		if (e.target.innerHTML === yearArray[i].innerHTML) {
+			e.target.style.textDecoration = "underline";
+			e.target.style.color = "#f38181";
+			e.target.classList.add("year_checked");
+		}
+		else {
+			yearArray[i].style.textDecoration = "";
+			yearArray[i].style.color = "navy";
+			yearArray[i].classList.remove("year_checked");
+		}
+	}
+}
 
-    $( "#datepicker" ).datepicker({
-    });
+// 월 체크 이벤트 > 체크시 선택된 연도 + 선택한 월 > 분류 (따로 정렬 X)
 
 
 

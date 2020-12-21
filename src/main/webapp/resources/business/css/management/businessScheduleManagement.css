@@ -558,7 +558,7 @@
 	font-weight: 600;
 }
 
-.list_filter_content li {
+.list_filter_content_item {
 	cursor: pointer;
 	margin-right: 20px;
 	padding: 5px 10px;
@@ -566,13 +566,13 @@
     display: flex;
 }
 
-.list_filter_content li:hover {
+.list_filter_content_item:hover {
 	transition: 0.5s;
 	background-color: #f38181;
 	color:white;
 }
 
-.list_filter_content li i {
+.list_filter_content_item i {
 	line-height: 22px;
 	margin-left: 3px;
 }
