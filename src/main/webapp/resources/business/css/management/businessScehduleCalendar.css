@@ -1,3 +1,4 @@
+/* 일정관리 > 정기 휴무 설정 > 메인 캘린더 */
 .calendar_btn {
 	border: none;
 	outline: none;
@@ -147,4 +148,70 @@
 
 .calendar_selector_value {
 	
+}
+
+/* 일정관리 > 임시 휴무 설정 > 월 검색 > 서브 캘린더 */
+.s_month_selector {
+	position: absolute;
+	margin-left: -109px;
+    margin-top: 35px;
+}
+
+.s_calendar_con {
+	display: block;
+    background-color: antiquewhite;
+    width: 270px;
+    border-radius: 5px;
+    height: 205px;
+    padding: 3px;
+}
+
+.s_calendar_year_con {
+	position: relative;
+    display: flex;
+    list-style: none;
+    height: 15%;
+    justify-content: space-evenly;
+    padding: 10px 20px 5px 20px;
+    border-bottom: 1px solid navy;
+}
+
+.s_calendar_year_con li,
+.s_calendar_year_con li i {
+	font-size: 18pt;
+	line-height: 30px;
+}
+
+.s_calendar_year_con li:hover {
+	color: white;
+}
+
+.s_calendar_year_con li:hover {
+	cursor: pointer;
+	transition: 0.5s;
+}
+	
+.s_calendar_month_con {
+	display: block;
+    list-style: none;
+    margin-top: 8px;
+}
+
+.s_calendar_month_row {
+	display: flex;
+}
+
+.s_calendar_month_row div {
+    width: 60px;
+    height: 40px;
+    text-align: center;
+    border: 1px solid navy;
+    margin: 3px auto;
+    line-height: 40.5px;
+}
+
+.s_calendar_month_row div:hover {
+	cursor: pointer;
+	background-color: white;
+	transition: 0.5s;
 }

@@ -18,6 +18,7 @@
 			SALECODE =#{salecode} 
 	</select>
 	
+<!-- 주문목록 페이지에 필요한 구매정보 데이터를 가져와줍니다. ( 고객 주문 목록) -->
 	<select id="selectBDetailSalesListCustomer" parameterType="String" resultType="BDetailSalesVO">
 		SELECT 
 			ESTID, SALECODE, MAINCATEGORY, 
@@ -26,6 +27,44 @@
 		FROM BDETAILSALES
 			WHERE 
 			SALECODE =#{salecode} 
+	</select>
+	
+	<!-- 	 중복제거한 서브메뉴와 메인메뉴를 가져와줍니다. 
+			category의 값이 서브메뉴이면 메인메뉴를 포함한 조건문 검사를해줍니다.
+			category의 값이 메인메뉴이면 세일코드만 조건문 검사를 해줍니다.
+	-->
+	<select id="selectDistinctCategory" parameterType="hashmap" resultType="String">
+	    SELECT DISTINCT ${category}  
+		FROM BDETAILSALES 
+	        WHERE 
+                (
+                    (#{category}  = 'subcategory'
+                        AND
+                        MAINCATEGORY =#{maincategoryname}
+                        AND
+                        SALECODE = #{salecode} )
+                    OR
+                    (#{category}  = 'maincategory'
+                        AND
+                        SALECODE = #{salecode} )
+                )
+	        ORDER BY ${category}
+	</select>
+	
+	
+	
+	<select id="selectBDetailSalesMenu" parameterType="hashmap" resultType="BDetailSalesVO">
+		SELECT 
+			ESTID, SALECODE, MAINCATEGORY, 
+			SUBCATEGORY, NAME, AMOUNT,
+			MENUPRICE, SUMPRICE
+		FROM BDETAILSALES
+			WHERE 
+				SALECODE =#{salecode} 
+				AND
+				MAINCATEGORY = #{maincategoryname}
+				AND
+				SUBCATEGORY = #{subcategoryname}
 	</select>
 	
 </mapper>

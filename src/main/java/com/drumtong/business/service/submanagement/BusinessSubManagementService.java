@@ -21,6 +21,7 @@ import com.drumtong.business.vo.BDetailSalesVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BSalesVO;
 import com.drumtong.business.vo.OrderList;
+import com.drumtong.security.OrderListSetting;
 import com.drumtong.security.Review;
 import com.drumtong.security.Statistics;
 import com.drumtong.system.dao.SImageDAO;
@@ -140,29 +141,20 @@ public class BusinessSubManagementService {
 		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
 		String estid = bInformationVO.getEstid();
 		
-		// ♠ => 이 표시는 bsalesDAO의 selectBsales 메서드를 임시로 주석처리하면서 같이 주석한 코드들!
-		// -> 영경에게 물어보기
-		
-		//♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠
 		//	주문현황 페이지에 필요한 구매정보 데이터를 가져와줍니다. 
 		List<OrderList> orderList =  bSalesDAO.selectOrderList(estid);
 		
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("estid", estid);
-		
-		for (OrderList ol : orderList) {
-			map.put("salecode", ol.getSalecode());
-			List<BDetailSalesVO> bDetailSalesList = bDetailSalesDAO.selectBDetailSalesListBusiness(map);
-			ol.setbDetailSalesVOList(bDetailSalesList);
-		}
-		
-		//♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠
 		
 		ModelAndView mav = new ModelAndView("business/submanagement/businessOrderStatusManagement");
 		
-		//♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠
-		mav.addObject("orderList", (new Gson()).toJson(orderList));
-		//♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠
+		
+		
+		// OrderListSetting 클래스는 static으로 구성이되어 있다. [사업자 주문목록 / 고객 주문목록 ] 둘 다 사용 가능
+		// setOrderList 함수는 orderList의 메인 메뉴, 서브메뉴, 메뉴들을 Tree구조로 중첩되지 않게 구성시켜즈는 역할을 한다.
+		// orderList에 maincategory의 구조는 다음과 같다.
+//				 		  메인                                            서브                       VO
+//				HashMap<String, List<HashMap<String,List<BDetailSalesVO>>>>
+		mav.addObject("orderList", (new Gson()).toJson(OrderListSetting.setOrderList(orderList)));
 		
 		return mav;
 	}
