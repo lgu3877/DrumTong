@@ -522,7 +522,7 @@
 									<ul class="list_content">
 										<li class="period_con">
 											<div class="period_view_default">
-												<div class="list_start_day">2019-03-05</div>
+												<div class="list_start_day">2020-10-07</div>
 												<div class="arrow">~</div>
 												<div class="list_end_day">2019-04-06</div>
 											</div>
@@ -646,6 +646,8 @@
 
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/interface.js"></script>
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/calendar.js"></script>
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/tmpHolidayButtons.js"></script>
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/filter.js"></script>
 
 
 </body>
