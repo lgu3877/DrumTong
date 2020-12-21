@@ -16,7 +16,9 @@ import com.drumtong.business.vo.BDetailSalesVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.OrderList;
 import com.drumtong.customer.dao.CPaymentDAO;
+import com.drumtong.customer.dao.CPointDAO;
 import com.drumtong.customer.vo.CPaymentVO;
+import com.drumtong.customer.vo.CPointVO;
 import com.drumtong.customer.vo.CPrivateDataVO;
 import com.drumtong.customer.vo.CouponList;
 
@@ -27,6 +29,7 @@ public class CustomerAccountService {
 	@Autowired CPaymentDAO cPaymentDAO;
 	@Autowired BSalesDAO bSales;
 	@Autowired BDetailSalesDAO bDetailSalesDAO;
+	@Autowired CPointDAO cPointDAO;
 	
 	// 북마크[영경]
 	public ModelAndView bookmark(HttpServletRequest req) {
@@ -67,6 +70,12 @@ public class CustomerAccountService {
 		List<CouponList> couponlist = bCouponDAO.selectCouponList(Login.getMemberid());
 		
 		mav.addObject("couponlist", couponlist);
+		
+		// 충전 금액
+		mav.addObject("myPoint", cPaymentVO.getPoint());
+		// 충전내역
+		List<CPointVO> pointlist = cPointDAO.selectAll(Login.getMemberid());
+		mav.addObject("pointlist", pointlist);
 		// -------------------------------------------------
 		return mav;
 	}
@@ -76,7 +85,7 @@ public class CustomerAccountService {
 		ModelAndView mav = new ModelAndView("customer/account/customerOrderList");
 		CPrivateDataVO Login = ((CPrivateDataVO)req.getSession().getAttribute("cLogin"));
 		List<OrderList> orderList = bSales.selectOrderList(Login.getMemberid());
-		List<BDetailSalesVO> bDetailSalesList = bDetailSalesDAO;
+//		List<BDetailSalesVO> bDetailSalesList = bDetailSalesDAO;
 		
 		mav.addObject("orderList", orderList);
 		return mav;

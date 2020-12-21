@@ -6,7 +6,14 @@ public class CPaymentVO {
 	private String accountnum;
 	private String card;
 	private String cardbank;
+	private int point;
 	
+	public int getPoint() {
+		return point;
+	}
+	public void setPoint(int point) {
+		this.point = point;
+	}
 	public String getAccountbank() {
 		return accountbank;
 	}
