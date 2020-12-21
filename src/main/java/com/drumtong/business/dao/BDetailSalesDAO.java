@@ -12,5 +12,10 @@ public interface BDetailSalesDAO {
 	
 	//	주문목록 페이지에 필요한 구매정보 데이터를 가져와줍니다. ( 고객 주문 목록)
 	List<BDetailSalesVO> selectBDetailSalesListCustomer(String salecode);
-
+	
+	
+	// 중복제거한 서브메뉴와 메인메뉴를 가져와줍니다.
+	List<String> selectDistinctCategory(HashMap<String, String> map);
+	
+	List<BDetailSalesVO> selectBDetailSalesMenu(HashMap<String, String> map);
 }

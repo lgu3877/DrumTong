@@ -505,11 +505,19 @@
 											먼 날짜 순
 											<i class="fas fa-caret-down"></i>
 										</li>
-										<li id="view_month">
+										<li id="view_month" onclick="openCalendar('datepicker')">
 											월 검색
 											<i class="fas fa-calendar-alt"></i>
 										</li>
 									</ul>
+									<!--  
+									<ul>
+										<li>
+											<div><</div>
+											<div>></div>
+										</li>
+									</ul>
+									-->
 								</li>
 							<!-- 리스트 -->
 								<li id="schedule-container" class="list_content_con">
@@ -530,7 +538,7 @@
 										</li>
 										<li class="reason_con">
 											<div class="reason_view_default">
-												사업자 생일 파티로 임시 휴무합니다.
+												회장님 돌잔치합니다. 돌잡이 피죤 잡음
 											</div>
 											<input class="reason_view_input" type="text" name="updateReason" placeholder="휴무 사유를 적어주세요." maxlength="300">												
 										</li>
@@ -543,7 +551,7 @@
 										<li>
 											<i class="fas fa-trash-alt" onclick="deleteSchedule(this)"></i>
 										</li>
-										<li>
+										<li class="complete_icon_con">
 											<i class="fas fa-check-square" onclick="postSchedule(this)"></i>
 										</li>
 									</ul>
@@ -579,7 +587,7 @@
 										<li>
 											<i class="fas fa-trash-alt" onclick="deleteSchedule(this)"></i>
 										</li>
-										<li>
+										<li class="complete_icon_con">
 											<i class="fas fa-check-square" onclick="postSchedule(this)"></i>
 										</li>
 									</ul>
@@ -601,7 +609,7 @@
 										</li>
 										<li class="reason_con">
 											<div class="reason_view_default">
-												사업자 생일 파티로 임시 휴무합니다.
+												사장님이 돌아가셨습니다.
 											</div>
 											<input class="reason_view_input" type="text" name="updateReason" placeholder="휴무 사유를 적어주세요." maxlength="300">												
 										</li>
@@ -614,7 +622,7 @@
 										<li>
 											<i class="fas fa-trash-alt" onclick="deleteSchedule(this)"></i>
 										</li>
-										<li>
+										<li class="complete_icon_con">
 											<i class="fas fa-check-square" onclick="postSchedule(this)"></i>
 										</li>
 									</ul>
