@@ -237,6 +237,10 @@ h1.requesttype {
 	color: #cacece;
 }
 
+#modal span {
+	text-align: right;
+}
+
 #modal div {
 	position: relative; 
 	text-align: left; 
