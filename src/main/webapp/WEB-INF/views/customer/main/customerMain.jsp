@@ -34,7 +34,7 @@
 		<div class="notices">
 
 			<div class="notices_0 notices_1">
-				<a href="${cpath }/customer/board/customerBoard/">
+				<a href="${cpath }/customer/board/customerBoard/notice/">
 					<div class="notices_1_1">공지사항 게시판</div>
 				</a>
 				<hr class="notice_hr">
@@ -45,7 +45,7 @@
 									<div class="notice_new">
 										<c:if test="${bList.registdate eq todayDate }">new</c:if>
 									</div>
-									[공지] ${bList.title } 
+									<a href="${cpath }/customer/board/customerBoardRead/notice/${bList.num }/">[공지] ${bList.title } </a>
 								</div>
 								<div class="notice_area_registdate">
 									${bList.registdate }
@@ -56,7 +56,7 @@
 			</div>
 
 			<div class="notices_0 notices_2">
-				<a href="#">
+				<a href="${cpath }/customer/board/customerBoard/event/">
 					<div class="notices_1_2">이벤트 게시판</div>
 				</a>
 				<hr class="notice_hr">
@@ -67,7 +67,7 @@
 									<div class="notice_new">
 										<c:if test="${eList.registdate eq todayDate }">new</c:if>
 									</div>
-									[event] ${eList.title } 
+									<a href="${cpath }/customer/board/customerBoardRead/event/${eList.num }/">[event] ${eList.title } </a>
 								</div>
 								<div class="notice_area_registdate">
 									${eList.registdate }

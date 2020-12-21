@@ -9,11 +9,31 @@
 
 	<!-- 	최근 공지사항 데이터 5개를 Main으로 보내준다. -->
 	<select id="selectRecentData1" parameterType="int" resultType="SBoardVO">
-		SELECT TITLE, SUBSTR(REGISTDATE,1,10)  as registdate FROM SCUSTOMERBOARD1  
+		SELECT TITLE, NUM, SUBSTR(REGISTDATE,1,10) as registdate FROM SCUSTOMERBOARD1  
 			WHERE  
 			NUM <![CDATA[ >= ]]> (SELECT MAX(NUM) FROM SCUSTOMERBOARD1) - #{NumberOfData}
 			ORDER BY NUM DESC
 	</select>
 	
+	<select id="selectAllPage" resultType="int">
+		SELECT COUNT(*) FROM SCUSTOMERBOARD1
+	</select>
+	
+	<select id="selectPageSection" parameterType="hashmap" resultType="SBoardVO">
+		SELECT * FROM 
+			(SELECT ROWNUM AS AROWNUM, A.* 
+			FROM 
+        		(SELECT * 
+					FROM SCUSTOMERBOARD1 
+						ORDER BY REGISTDATE DESC) A)
+  		WHERE 
+  			AROWNUM <![CDATA[>=]]> #{IndexBegin} AND 
+  			AROWNUM <![CDATA[<=]]> #{IndexEnd}  
+  			ORDER BY REGISTDATE DESC
+	</select>
+	
+	<select id="read" parameterType="int" resultType="SBoardVO">
+		SELECT * FROM SCUSTOMERBOARD1 WHERE NUM=#{num}
+	</select>
 </mapper>
 

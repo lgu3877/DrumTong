@@ -47,14 +47,38 @@
 	<!-- sub-header(membership) -->
 	<%@ include file="../main/businessSubHeader.jsp" %>
 		
+		<i id="searchlogo" class="fas fa-list-ul fa-3x"></i>
+		<div id="searchdiv">
+			<input type="text">
+			<button>검색</button>
+		</div>
 		<div class="outerdiv" >
+			
+			<div class="upperbtn">
+				<i class="fas fa-chevron-circle-up fa-4x" onclick="upperbtn()"></i>
+			</div>
+			
 			<h1 style="font-size: 36pt">주문현황</h1>
+			
+			<div class="typeSelect">
+				<button onclick="chStatus(this, 'r')">요청</button>
+				<div></div>
+				<button onclick="chStatus(this, 'p')">처리중</button>
+				<div></div>
+				<button onclick="chStatus(this, 's')">완료</button>
+			</div>
+			
+			<div style="width: 700px; height: 30px; margin: 0 auto; display: flex; align-items: center; margin-bottom: 25px; margin-top: 10px">
+				<input type="date" style="width: 40%; height: 100%; font-size: 14pt; text-align: center; border: 3px solid #3088F9; font-weight: bold">
+				<div style="width: 20%"></div>
+				<input type="date" style="width: 40%; height: 100%; font-size: 14pt; text-align: center; border: 3px solid #3088F9; font-weight: bold">
+			</div>
 			
 			<div class="clonediv" id="clonediv0">
 			
 			<div class="outerstatus1"></div>
 			<div class="outerstatus2"><h1></h1></div>
-			<div class="nulldiv" style=""></div>
+			<div class="nulldiv"></div>
 			
 			<div class="container" onclick="openDetail(this)">
 				<h1 class="containerName"></h1>
@@ -62,7 +86,7 @@
 				<div class="contentdiv">
 					<div class="halfdiv">
 						<div>
-							<h1>주문일</h1>
+							<h1>주문일시</h1>
 							<p class="purchasedate"></p>
 						</div>
 						<div>
@@ -72,7 +96,7 @@
 					</div>
 					<div class="halfdiv">
 						<div>
-							<h1>배송일</h1>
+							<h1>배송일시</h1>
 							<p  class="deliverydate"></p>
 						</div>
 						<div>
@@ -91,18 +115,66 @@
 	
 	<div id="modalback"></div>
 	<div id="modal">
-		<a href="#" class="close"><i class="far fa-times-circle fa-3x"></i></a>
+		<h1>가게 이름<a class="close"><i class="far fa-times-circle fa-3x"></i></a></h1>
+		<h2>주문 번호</h2>
+		<hr class="titlehr">
+			<div>완료 예정<span id="ableday"></span></div>
+			<div>배송 일시<span id="deliverydate"></span></div>
+			<div>받은 날짜<span id="pickupdate"></span></div>
+		<hr>
+			<div>메인 카테고리<span id="maincategory"></span></div>
+			<div>서브 카테고리<span  id="subcategory"></span></div>
+		<hr>
+			<div>메뉴명<span  id="menuname"></span></div>
+			<div>구매 개수<span id="menuamount"></span></div>
+			<div>메뉴 금액<span  id="menuprice"></span></div>
+			<div>메뉴 총금액<span  id="sumprice"></span></div>
+		<hr>
+			<div>요청 사항<span id="requests"></span></div>
+		<hr>
+			<div>기본 금액<span id="originalprice"></span></div>
+			<div>쿠폰 금액<span id="discountprice"></span></div>
+			<div>배달 금액<span id="quickprice"></span></div>
+		<hr>
+			<div>총 개수<span id="totalamount"></span></div>
+			<div>총 금액<span  id="totalprice"></span></div>
+		<hr>
 	</div>
 	
 	<script type="text/javascript">
 		
-		console.log()
-	    console.log(${orderList});
 		
-		let clonecontainer = $('#clonediv0');
 		let orderList = ${orderList};
+		let clonecontainer = $('#clonediv0');
+		let pageFilter = '';
 		
  		window.onload = function() {
+ 			originclone();
+  			insertDiv();
+  			
+  			$('div.outerdiv').find('.container').each(function(index, item) {
+  				$(item).hover(function() {
+  					$(item).parent().find('.outerstatus1').css('transform', 'translate(0, -20px)');
+  					$(item).parent().find('.outerstatus1').css('transition', 'all 1s ease 0s');
+  					$(item).parent().find('.outerstatus1').css('backgroundColor', '#3088F9');
+  					$(item).parent().find('.outerstatus2').css('transform', 'translate(0, -20px)');
+  					$(item).parent().find('.outerstatus2').css('transition', 'all 1s ease 0s');
+  					$(item).parent().find('.outerstatus2').css('backgroundColor', '#3088F9');
+  					$(item).parent().find('.outerstatus2 h1').css('color', 'white');
+  					
+  				}, function() {
+  					$(item).parent().find('.outerstatus1').css('transform', '');
+  					$(item).parent().find('.outerstatus1').css('transition', 'all 0s ease 0s');
+  					$(item).parent().find('.outerstatus2').css('transform', '');
+  					$(item).parent().find('.outerstatus2').css('transition', 'all 0s ease 0s');
+  					$(item).parent().find('.outerstatus2').css('backgroundColor', 'white');
+  					$(item).parent().find('.outerstatus2 h1').css('color', '');
+  				})
+  			})
+  		}
+ 		
+ 		function originclone() {
+ 			
  			$('#clonediv0').children('.outerstatus2').children('h1').html(orderList[0].status);
  			$('#clonediv0').find('.containerName').html('주문번호 : ' + orderList[0].salecode);
  			$('#clonediv0').find('.requesttype').html(orderList[0].requesttype);
@@ -121,7 +193,6 @@
 					setarray0.push(' / ');
 			}			
   			$('#clonediv0').find('p.maincategory').html(setarray0);
-  			insertDiv();
  		}
 		
  		
@@ -150,16 +221,79 @@
  			}
  		}
  		
-		function openDetail(obj) {
+
+		function openDetail(obj) {		// 모달 활성화
+// 			console.log('아이디 : ', obj.parentNode.id);
+// 			console.log('replace : ', (obj.parentNode.id).replace('clonediv',''));
+			modalexitkey = obj.parentNode.id;
+			let detailob = orderList[(obj.parentNode.id).replace('clonediv','')];
+			
+			$('#modal').find('#ableday').html(detailob.ableday);
+			$('#modal').find('#deliverydate').html(detailob.deliverydate);
+			$('#modal').find('#pickupdate').html(detailob.pickupdate);
+			$('#modal').find('#requests').html(detailob.requests);
+			$('#modal').find('#originalprice').html(detailob.originalprice + '원');
+			$('#modal').find('#totalprice').html(detailob.totalprice + '원');
+			$('#modal').find('#totalamount').html(detailob.totalamount + '개');
+			$('#modal').find('#discountprice').html('(-) ' + detailob.discountprice + '개');
+			$('#modal').find('#quickprice').html('(+) ' + detailob.quickprice + '개');
+			
+			// bDetailSalesVOList 는 volist 수정 후 작업재개!!
+				$('#modal').find('#maincategory').html(detailob.bDetailSalesVOList[0].maincategory);
+				$('#modal').find('#subcategory').html(detailob.bDetailSalesVOList[0].subcategory);
+				$('#modal').find('#menuname').html(detailob.bDetailSalesVOList[0].name);				// vo 속성이랑 이름 다르게 했음
+				$('#modal').find('#menuamount').html(detailob.bDetailSalesVOList[0].amount + '개');				// vo 속성이랑 이름 다르게 했음
+				$('#modal').find('#menuprice').html(detailob.bDetailSalesVOList[0].menuprice + '원');
+				$('#modal').find('#sumprice').html(detailob.bDetailSalesVOList[0].sumprice + '원');
+
+			
 			$('#modal').fadeIn(300);
 			$('#modalback').fadeIn(300);
+			
 		}
 		
-		$('#modal, .close').on('click', function() {
-			$('#modal').fadeOut(300);
-			$('#modalback').fadeOut(300);
-		})
+		function upperbtn() {	// 맨 위로 이동하는 버튼
+			$('html, body').animate({scrollTop : 0},800);
+		}
 		
+		function chStatus(obj, filter) {	// 필터 버튼
+
+			if(pageFilter.indexOf(filter) == -1)
+				pageFilter += filter;
+
+			obj.className = 'selectedStatus';
+			obj.setAttribute("onclick", "deleteStatus(this,'"  + filter + "')");
+		}
+		
+		function deleteStatus(obj, filter) {
+			console.log('obj : ', obj);
+			console.log('filter : ', filter);
+			
+			if(pageFilter.indexOf(filter) == -1)
+				pageFilter.replace(filter, '');
+			
+			obj.className = '';
+			obj.setAttribute("onclick", "chStatus(this, '" + filter + "')")
+		}
+		
+		$('#searchlogo').on('click', function() {
+				if($('#searchdiv').css('visibility') == 'hidden')
+					$('#searchdiv').css('visibility', 'visible');
+				else
+					$('#searchdiv').css('visibility', 'hidden');
+		});
+		
+ 		$('.close').on('click', function() {	// 모달 비활성화
+				$('#modal').fadeOut(300);
+				$('#modalback').fadeOut(300);
+		});
+		
+		$(document).keyup(function(e) {		// esc 키 누르면 모달 비할성화
+		   if (e.keyCode == 27 || e.which == 27 ) {
+				$('#modal').fadeOut(300);
+				$('#modalback').fadeOut(300);
+		   }
+		});
 		
 		$(document).ready(function() {
     	$(window).scroll( function(){
