@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.drumtong.customer.service.account.RestCustomerAccountService;
+import com.drumtong.customer.vo.CPointVO;
 
 @RestController
 @RequestMapping("customer/account/")
@@ -39,5 +40,12 @@ public class RestCustomerAccountController {
 	@PostMapping(produces="application/json; charset=utf8")
 	public String paySave(HttpServletRequest req, @RequestBody HashMap<String, String> param) {
 		return svc.paySave(req, param);
+	}
+	
+	// 포인트 충전[영경]
+	@RequestMapping("customerPayAndCoupon/rest/pointSave/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String pointSave(HttpServletRequest req, @RequestBody CPointVO newPoint) {
+		return svc.pointSave(req, newPoint);
 	}
 }

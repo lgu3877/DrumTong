@@ -9,7 +9,7 @@ public class BSalesVO {
 	private int originalprice;		// 원래 금액
 	private int discountprice;		// 세일 금액
 	private int totalprice;			// 총 금액
-	private String ableday;			// 요청 일자
+	private String ableday;			// 완료예정 일자 (사장->고객) 
 	private String status;			// 현재 상태	[REQUEST] 요청  , [PROCESSING] 처리중 , [SUCCESS] 완료
 	private String pickupdate;		// 받은 날짜
 	private String deliverydate;	// 배송 날짜
@@ -21,7 +21,7 @@ public class BSalesVO {
 		return memberid;
 	}
 	public void setMemberid(String memberid) {
-		this.memberid = memberid;
+		this.memberid = memberid;	
 	}
 	public String getEstid() {
 		return estid;

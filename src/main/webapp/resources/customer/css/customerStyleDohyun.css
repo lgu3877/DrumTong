@@ -901,15 +901,14 @@ body .section_pac .pac_list .pac_lists {
    /* border-bottom: 1px solid #EAEAEA; */
 }
 
-body .section_pac .pac_list .pac_pay {
-   width: 400px;
+body .section_pac .pac_list .pac_list {
+   width: 265px;
    height: auto;
    text-align: center;
-   /* border: 1px solid red; */
 }
 
-body .section_pac .pac_list .pac_pay #pac_pay_button {
-   width: 200px;
+body .section_pac .pac_list .pac_list #pac_point_button {
+   width: 190px;
    height: 30px;
    border: 0;
    outline: 0;
@@ -919,15 +918,9 @@ body .section_pac .pac_list .pac_pay #pac_pay_button {
    font-size: 20px;
 }
 
-body .section_pac .pac_list .pac_copon {
-   width: 400px;
-   height: auto;
-   text-align: center;
-   /* border: 1px solid blue; */
-}
-
-body .section_pac .pac_list .pac_copon #pac_coupon_button {
-   width: 200px;
+body .section_pac .pac_list .pac_list #pac_pay_button,
+body .section_pac .pac_list .pac_list #pac_coupon_button {
+   width: 190px;
    height: 30px;
    border: 0;
    outline: 0;
@@ -956,33 +949,47 @@ body .section_pac .pac_list button:active {
    /* border-bottom: 1px solid #35aefd; */
 }
 
-body .section_pac .pac_mainList_pay {
+body .section_pac .pac_mainList_point {
    width: auto;
    height: 200px;
    margin: 50px 100px;
-   border: 1px solid white;
+/*    border: 1px solid white; */
    /* display: none; */
 }
 
-body .section_pac .pac_mainList_pay .pac_mainPay:active {
-   display: flex;
+body .section_pac .pac_mainList_pay,
+body .section_pac .pac_mainList_copon {
+   width: auto;
+   height: 200px;
+   /* border: 1px solid blue; */
+   margin: 50px 100px;
+   display: none;
 }
 
-body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList {
+body .section_pac .pac_mainList_point .pac_mainPoint .pac_pointList,
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList,
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList {
    width: 1000px;
    height: auto;
-   border: 1px solid white;
    margin: 10px 10px;
    margin-left: auto;
    margin-right: auto;
    text-align: center;
 }
 
+body .section_pac .pac_mainList_point .pac_mainPoint .pac_pointList .pac_pointText {
+   width: auto;
+   height: 45px;
+   font-size: 25px;
+   margin: 0;
+   margin-top: 15px;
+}
+
 body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payText {
    width: 800px;
    height: 50px;
    font-size: 25px;
-   margin-top: 0px;
+   margin-top: 15px;
    margin-bottom: 0px;
    margin-left: 120px;
 }
@@ -1038,40 +1045,12 @@ body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac
    outline: 0;
 }
 
-body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payText .pac_payCard_add {
-   width: 100px;
-   margin: 5px 15px;
-   float: right;
-   border: 1px solid #EAEAEA;
-   border-radius: 30px;
-   background-color: #0091e4;
-   color: white;
-   outline: 0;
-   font-weight: bolder;
-}
-
-body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payText .pac_payCard_add:hover {
-   background-color: #373737;
-   transition-duration: 0.5s;
-}
-
 body .section_pac .pac_mainList_copon {
    width: auto;
    height: 200px;
    /* border: 1px solid blue; */
    margin: 50px 100px;
    display: none;
-}
-
-body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList {
-   width: 1000px;
-   height: auto;
-   margin: 10px 10px;
-   margin-left: auto;
-   margin-right: auto;
-   text-align: center;
-   border: 1px solid white;
-
 }
 
 body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponText {
@@ -1102,6 +1081,16 @@ body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLi
 /*    display: inline-flex; */
    margin: 5px 15px;
    overflow: hidden;
+}
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_brandnaming_link:hover {
+	color:white;
+	font-weight: bold;
+	background-color: #0091e4;
+	cursor: pointer;
+}
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_brandnaming_link:active {
+	font-weight: bold;
+	background-color: #373737; 
 }
 
 body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_discount {

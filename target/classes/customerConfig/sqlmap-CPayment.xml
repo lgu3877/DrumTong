@@ -20,4 +20,10 @@
 	<update id="updatePayment" parameterType="hashmap">
 		UPDATE CPAYMENT SET ${typebank}=#{bankname}, ${typenum}=#{bankNum} WHERE MEMBERID=#{memberid}
 	</update>
+	
+	<update id="updatePoint" parameterType="CPointVO">
+		UPDATE CPAYMENT SET 
+			POINT=POINT+#{point} 
+				WHERE MEMBERID=#{memberid}
+	</update>
 </mapper>
