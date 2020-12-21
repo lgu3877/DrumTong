@@ -9,7 +9,7 @@
 
 	<!-- 	최근 공지사항 데이터 5개를 Main으로 보내준다. -->
 	<select id="selectRecentData1" parameterType="int" resultType="SBoardVO">
-		SELECT TITLE, SUBSTR(REGISTDATE,1,10)  as registdate FROM SCUSTOMERBOARD1  
+		SELECT TITLE, NUM, SUBSTR(REGISTDATE,1,10) as registdate FROM SCUSTOMERBOARD1  
 			WHERE  
 			NUM <![CDATA[ >= ]]> (SELECT MAX(NUM) FROM SCUSTOMERBOARD1) - #{NumberOfData}
 			ORDER BY NUM DESC
