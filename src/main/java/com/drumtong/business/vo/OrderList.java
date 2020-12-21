@@ -1,5 +1,6 @@
 package com.drumtong.business.vo;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class OrderList extends BSalesVO{
@@ -12,7 +13,7 @@ public class OrderList extends BSalesVO{
 //	private int originalprice;		// 원래 금액
 //	private int discountprice;		// 세일 금액
 //	private int totalprice;			// 총 금액
-//	private String ableday;			// 요청 일자
+//	private String ableday;			// 완료예정 일자 (사장->고객)
 //	private String status;			// 현재 상태	[REQUEST] 요청  , [PROCESSING] 처리중 , [SUCCESS] 완료
 //	private String pickupdate;		// 받은 날짜
 //	private String deliverydate;	// 배송 날짜
@@ -21,7 +22,10 @@ public class OrderList extends BSalesVO{
 	
 	private String brandnaming; 	// BInformation 테이블의 매장명
 	
-	private List<BDetailSalesVO> bDetailSalesVOList;	// BDetailSales의 vo list
+//	private List<BDetailSalesVO> bDetailSalesVOList;	// BDetailSales의 vo list
+	private HashMap<String, List<HashMap<String,List<BDetailSalesVO>>>> maincategory;
+	
+		
 	
 	
 	public String getBrandnaming() {
@@ -31,13 +35,21 @@ public class OrderList extends BSalesVO{
 		this.brandnaming = brandnaming;
 	}
 	
-	public List<BDetailSalesVO> getbDetailSalesVOList() {
-		return bDetailSalesVOList;
+	public HashMap<String, List<HashMap<String,List<BDetailSalesVO>>>> getMaincategory() {
+		return maincategory;
 	}
-	public void setbDetailSalesVOList(List<BDetailSalesVO> bDetailSalesVOList) {
-		this.bDetailSalesVOList = bDetailSalesVOList;
+	public void setMaincategory(HashMap<String, List<HashMap<String,List<BDetailSalesVO>>>> maincategory) {
+		this.maincategory = maincategory;
 	}
 	
+	
+	
+//	public List<BDetailSalesVO> getbDetailSalesVOList() {
+//		return bDetailSalesVOList;
+//	}
+//	public void setbDetailSalesVOList(List<BDetailSalesVO> bDetailSalesVOList) {
+//		this.bDetailSalesVOList = bDetailSalesVOList;
+//	}
 	
 	
 }
