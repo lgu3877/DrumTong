@@ -18,9 +18,13 @@ function sortInAcs() {
 		}
 		arr.push(obj);
 	}
-	
-	arr.sort((a, b) => parseInt(a.day) - parseInt(b.day));
-	
+
+	arr.sort((a, b) => {
+		a = a.day.replace("-", "").replace("-", "");
+		b = b.day.replace("-", "").replace("-", "");
+		return parseInt(a) - parseInt(b);
+	});
+
 	const container = document.getElementById("schedule-container");
 	container.innerHTML = "";
 	
@@ -43,8 +47,12 @@ function sortInDesc() {
 		arr.push(obj);
 	}
 	
-	arr.sort((a, b) => parseInt(b.day) - parseInt(a.day));
-	
+	arr.sort((a, b) => {
+		a = a.day.replace("-", "").replace("-", "");
+		b = b.day.replace("-", "").replace("-", "");
+		return (parseInt(b) - parseInt(a));
+	});
+
 	const container = document.getElementById("schedule-container");
 	container.innerHTML = "";
 	
@@ -151,6 +159,8 @@ function openCalendar() {
 	}
 }
 
+
+
 // 년도 체크 이벤트 > 체크시 클래스 "year_checked" 부여 & 체크안된 항목 클래스 제거 & 디자인 수정
 function checkYear(e) {
 	const yearArray = document.getElementsByClassName("s_years");
@@ -168,6 +178,8 @@ function checkYear(e) {
 		}
 	}
 }
+
+
 
 // 월 체크 이벤트 > 체크시 선택된 연도 + 선택한 월 > 분류 (따로 정렬 X)
 function checkMonth(e) {

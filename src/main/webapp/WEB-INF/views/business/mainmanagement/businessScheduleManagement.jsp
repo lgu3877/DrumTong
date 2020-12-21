@@ -593,9 +593,9 @@
 									<ul class="list_content">
 										<li class="period_con">
 											<div class="period_view_default">
-												<div class="list_start_day">2017-08-05</div>
+												<div class="list_start_day">2021-08-05</div>
 												<div class="arrow">~</div>
-												<div class="list_end_day">2017-08-06</div>
+												<div class="list_end_day">2021-08-06</div>
 											</div>
 											<div class="period_view_input">
 												<input type="date" name="updateStartDay" pattern="\d{4}-\d{2}-\d{2}">
