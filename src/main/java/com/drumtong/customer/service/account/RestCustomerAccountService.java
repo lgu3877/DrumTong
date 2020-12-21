@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.drumtong.customer.dao.CPaymentDAO;
+import com.drumtong.customer.dao.CPointDAO;
 import com.drumtong.customer.dao.CPrivateDataDAO;
+import com.drumtong.customer.vo.CPointVO;
 import com.drumtong.customer.vo.CPrivateDataVO;
 import com.drumtong.security.Encrypt;
 
@@ -18,6 +20,7 @@ public class RestCustomerAccountService {
 	
 	@Autowired CPrivateDataDAO cPrivateDataDAO;
 	@Autowired CPaymentDAO cPaymentDAO;
+	@Autowired CPointDAO cPointDAO;
 	
 	// 비밀번호 수정하기 전 현재 비밀번호 체크[영경]
 	public String pwCheck(HttpServletRequest req, String pw) {
@@ -80,6 +83,17 @@ public class RestCustomerAccountService {
 		System.out.println("map : " + map.toString());
 		
 		result = cPaymentDAO.updatePayment(map);
+		return result == 0 ? "false" : "true";
+	}
+
+	// 포인트 충전
+	public String pointSave(HttpServletRequest req, CPointVO cPointvo) {
+		CPrivateDataVO Login = (CPrivateDataVO)req.getSession().getAttribute("cLogin");
+		
+		cPointvo.setMemberid(Login.getMemberid());
+		
+		int result = cPointDAO.insertPoint(cPointvo);
+		result = cPaymentDAO.updatePoint(cPointvo);
 		return result == 0 ? "false" : "true";
 	}
 

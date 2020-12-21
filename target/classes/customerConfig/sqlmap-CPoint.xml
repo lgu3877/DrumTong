@@ -6,7 +6,17 @@
 <!-- 고객 포인트 테이블 -->
 <mapper namespace="com.drumtong.customer.dao.CPointDAO">
 
-<!-- 	신규 데이터 입력 -->
-
+	<select id="selectAll" parameterType="String" resultType="CPointVO">
+		SELECT * FROM CPOINT 
+			WHERE 
+				MEMBERID=#{memberid} 
+				AND TO_DATE(SUBSTR(REGISTDATE,1,10), 'YYYY-MM-DD') <![CDATA[>=]]> ADD_MONTHS(SYSDATE,-6) 
+				ORDER BY REGISTDATE DESC
+	</select>
 	
+	<insert id="insertPoint" parameterType="CPointVO">
+		INSERT INTO CPOINT (MEMBERID, POINT, PAYMENTTYPE) 
+			VALUES 
+				(#{memberid}, #{point}, #{paymenttype})	
+	</insert>
 </mapper>

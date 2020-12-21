@@ -971,14 +971,13 @@ body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList,
 body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList {
    width: 1000px;
    height: auto;
-   border: 1px solid red;
    margin: 10px 10px;
    margin-left: auto;
    margin-right: auto;
    text-align: center;
 }
 
-body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_pointText {
+body .section_pac .pac_mainList_point .pac_mainPoint .pac_pointList .pac_pointText {
    width: auto;
    height: 45px;
    font-size: 25px;
@@ -990,7 +989,7 @@ body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payText {
    width: 800px;
    height: 50px;
    font-size: 25px;
-   margin-top: 0px;
+   margin-top: 15px;
    margin-bottom: 0px;
    margin-left: 120px;
 }
@@ -1083,9 +1082,15 @@ body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLi
    margin: 5px 15px;
    overflow: hidden;
 }
-body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_brandnaming_link:active {
-	color: red;
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_brandnaming_link:hover {
+	color:white;
 	font-weight: bold;
+	background-color: #0091e4;
+	cursor: pointer;
+}
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_brandnaming_link:active {
+	font-weight: bold;
+	background-color: #373737; 
 }
 
 body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_discount {

@@ -16,7 +16,9 @@ import com.drumtong.business.vo.BDetailSalesVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.OrderList;
 import com.drumtong.customer.dao.CPaymentDAO;
+import com.drumtong.customer.dao.CPointDAO;
 import com.drumtong.customer.vo.CPaymentVO;
+import com.drumtong.customer.vo.CPointVO;
 import com.drumtong.customer.vo.CPrivateDataVO;
 import com.drumtong.customer.vo.CouponList;
 import com.drumtong.security.OrderListSetting;
@@ -29,6 +31,7 @@ public class CustomerAccountService {
 	@Autowired CPaymentDAO cPaymentDAO;
 	@Autowired BSalesDAO bSalesDAO;
 	@Autowired BDetailSalesDAO bDetailSalesDAO;
+	@Autowired CPointDAO cPointDAO;
 	
 	
 	
@@ -72,6 +75,12 @@ public class CustomerAccountService {
 		List<CouponList> couponlist = bCouponDAO.selectCouponList(Login.getMemberid());
 		
 		mav.addObject("couponlist", couponlist);
+		
+		// 충전 금액
+		mav.addObject("myPoint", cPaymentVO.getPoint());
+		// 충전내역
+		List<CPointVO> pointlist = cPointDAO.selectAll(Login.getMemberid());
+		mav.addObject("pointlist", pointlist);
 		// -------------------------------------------------
 		return mav;
 	}
