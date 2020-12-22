@@ -45,9 +45,9 @@
 		<!-- top-header(membership) -->
 		<%@ include file="../main/businessSubHeader.jsp" %>
 		
-		<div class="shop_introduction">
+		<!-- 매장 소개(사진 & 글 -->
+		<div class="shop_introduction">					
 			<div class="shop_image_con">
-				
 			<!-- title -->	
 				<div class="shop_info_title_con">
 					<div>
@@ -114,28 +114,28 @@
 				<div style="position: relative;">
 					<ul id="image-preview" class="shop_image_slider">
 						<li class="shop_picture">
-							<img src="${cpath }/resources/business/img/laundry1_02.jpg" alt="">
+							<img src="${cpath }/resources/business/img/slide/laundry1_01.jpg" alt="">
 							<i class="fas fa-times"></i>
 							<i class="fas fa-star"><span>대표사진</span></i>
 						</li>
 						<li class="shop_picture">
-							<img src="${cpath }/resources/business/img/laundry1_03.jpg" alt="">
+							<img src="${cpath }/resources/business/img/slide/laundry1_02.jpg" alt="">
 							<i class="fas fa-times"></i>
 						</li>
 						<li class="shop_picture">
-							<img src="${cpath }/resources/business/img/laundry1_04.jpg" alt="">
+							<img src="${cpath }/resources/business/img/slide/laundry1_03.jpg" alt="">
 							<i class="fas fa-times"></i>
 						</li>
 						<li class="shop_picture">
-							<img src="${cpath }/resources/business/img/laundry1_02.jpg" alt="">
+							<img src="${cpath }/resources/business/img/slide/laundry1_04.jpg" alt="">
 							<i class="fas fa-times"></i>
 						</li>
 						<li class="shop_picture">
-							<img src="${cpath }/resources/business/img/laundry1_03.jpg" alt="">
+							<img src="${cpath }/resources/business/img/slide/laundry1_05.jpg" alt="">
 							<i class="fas fa-times"></i>
 						</li>
 						<li class="shop_picture">
-							<img src="${cpath }/resources/business/img/laundry1_04.jpg" alt="">
+							<img src="${cpath }/resources/business/img/slide/laundry1_06.jpg" alt="">
 							<i class="fas fa-times"></i>
 						</li>
 					</ul>
@@ -146,24 +146,25 @@
        	    			<a class="next">&#10095;</a>
        				</div>	
        						
-       			<!-- add new photo -->			
-       				<div id="photo-modal-btn" class="photo_add_con">
-       				<!-- change cover -->
-       					<input id="update-cover" class="add_photo_input" type="file" name="" onchange="imageCheck('add-photo')" style="display: none;">
-       					<label for="update-cover">
-       						<span style="margin-right: 10px">커버 사진 바꾸기
-       							<i class="far fa-images"></i>
-       						</span>
-       					</label>
-       				<!-- add store image -->	
-       					<input id="add-photo" class="add_photo_input" type="file" name="" onchange="imageCheck('add-photo')" style="display: none">
-       					<label for="add-photo">
-       						<span>새로운 사진 추가하기
-       							<i class="far fa-images"></i>
-       						</span>
-       					</label>
-       				</div>
         		</div>
+        		
+			<!-- add new photo -->
+				<div id="photo-modal-btn" class="photo_add_con">
+					<!-- change cover -->
+					<input id="update-cover" class="add_photo_input" type="file"
+						name="" onchange="imageCheck('add-photo')" style="display: none;">
+					<label for="update-cover"> <span style="margin-right: 10px">커버
+							사진 바꾸기 <i class="far fa-images"></i>
+					</span>
+					</label>
+					<!-- add store image -->
+					<input id="add-photo" class="add_photo_input" type="file" name=""
+						onchange="imageCheck('add-photo')" style="display: none">
+					<label for="add-photo"> <span>새로운 사진 추가하기 <i
+							class="far fa-images"></i>
+					</span>
+					</label>
+				</div>
 			</div>
 			
 		<!-- Text Introduction -->
@@ -192,12 +193,10 @@
        			</div>
 			
 			</div>
-			
-		 	
 		</div>
 
 
-		<!-- menu table -->
+		<!-- 서비스 메뉴 뷰 -->
 		<div class="current_menu_con">
 
 			<!-- title -->
@@ -227,7 +226,7 @@
 			<div class="current_menu">
 
 			<!-- empty table -->
-				<table class="current_menu_table">
+				<table class="current_menu_table form">
 					<!-- thead -->
 					<thead>
 						<tr>
@@ -250,7 +249,7 @@
 				</table>
 				
 			<!-- registered table -->
-				<table class="current_menu_table">
+				<table class="current_menu_table form">
 				<!-- thead -->
 					<thead id="item-list-thead">
 						<tr>
@@ -298,7 +297,7 @@
 		</div>
 
 
-		<!-- create menu -->
+		<!-- 서비스 메뉴 생성 -->
 		<div class="create_menu_con">
 
 		<!-- title -->
@@ -325,7 +324,7 @@
 				</div>
 			</div>
 
-			<div class="create_menu">
+			<div class="create_menu form">
 			
 			
 			<!-- item customizing -->
@@ -404,8 +403,9 @@
 				
 			</div>
 		</div>
+
 		
-	<!-- 상품 수령 방법 -->
+		<!-- 상품 수령 방법 -->
 		<div class="return_menu_con">
 
 		<!-- 목차 -->
@@ -432,7 +432,7 @@
 			</div>
 			
 		<!-- 수취 선택 -->
-			<form class="return_menu">
+			<form class="return_menu form">
 				<ul>
 					<li onclick="checkContent(this)">
 						<input class="returnOptions" type="checkbox" name="returnOptions">

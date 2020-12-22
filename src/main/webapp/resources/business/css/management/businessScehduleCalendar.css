@@ -183,12 +183,9 @@
 }
 
 .s_calendar_year_con li:hover {
-	color: white;
-}
-
-.s_calendar_year_con li:hover {
 	cursor: pointer;
 	transition: 0.5s;
+	color: white;
 }
 	
 .s_calendar_month_con {
@@ -208,10 +205,12 @@
     border: 1px solid navy;
     margin: 3px auto;
     line-height: 40.5px;
+    border-radius: 5px;
 }
 
 .s_calendar_month_row div:hover {
 	cursor: pointer;
-	background-color: white;
+	background-color: navy;
+	color: white;
 	transition: 0.5s;
 }
