@@ -38,63 +38,34 @@ function imageShow() {
 function sliderEvent() {	
 	const subImageList = document.getElementsByClassName('shop_picture');
 	for (let i = 0; i < subImageList.length; i++) {
-		// 슬라이드 사진 클릭
-		subImageList[i].children[0].addEventListener('click', function(e) {
-			imageInputForm.style.display = 'none';
-			imageViewCon.style.display = '';
-			img.src = subImageList[i].children[0].src;
-			clickedPhoto = subImageList[i].children[0].src;
+		const clickedPhoto = subImageList[i].children[0].src
 		
-			zoomInPhoto(clickedPhoto);
-		});
+		// 슬라이드 사진 클릭
+		subImageList[i].children[0].addEventListener('click', () => zoomInPhoto(clickedPhoto));
 	
 		// 슬라이드 사진 지우기(X 아이콘 클릭)
-		subImageList[i].children[1].addEventListener('click', function(e) {
-			const result = confirm("사진을 삭제하시겠습니까?");
-			if (result) {
-				// 선택된 사진 지우기 > 임시로 JS로 처리 > DB 작업 필요
-				clickedPhoto = subImageList[i].children[0].src;
-				deletePhoto(clickedPhoto);
-			}
-	});
+		subImageList[i].children[1].addEventListener('click', () => deletePhoto(clickedPhoto));
 	}
 }
 
-// 이벤트 초기화를 위한 삭제
-function removeSliderEvent() {	
-	const subImageList = document.getElementsByClassName('shop_picture');
-	for (let i = 0; i < subImageList.length; i++) {
-		// 슬라이드 사진 클릭
-		subImageList[i].children[0].removeEventListener('click', function(e) {
-			imageInputForm.style.display = 'none';
-			imageViewCon.style.display = '';
-			img.src = subImageList[i].children[0].src;
-			clickedPhoto = subImageList[i].children[0].src;
-		
-			zoomInPhoto(clickedPhoto);
-		});
-	
-		// 슬라이드 사진 지우기(X 아이콘 클릭)
-		subImageList[i].children[1].removeEventListener('click', function(e) {
-			const result = confirm("사진을 삭제하시겠습니까?");
-			if (result) {
-				// 선택된 사진 지우기 > 임시로 JS로 처리 > DB 작업 필요
-				clickedPhoto = subImageList[i].children[0].src;
-				deletePhoto(clickedPhoto);
-			}
-	});
-	}
-}
+//function inject
 
 // 슬라이드 사진 클릭 > 줌인
 function zoomInPhoto(clickedPhoto) {
 	const photoSlideCon = document.getElementById("image-preview");
 	const photoList = [...document.getElementsByClassName("shop_picture")];
 	
+	const imageInputForm = document.getElementById('shop-image-view');
+	const imageViewCon = document.getElementById('main-image-con');
+	let img = document.getElementById('main-image');
+	
+	imageInputForm.style.display = 'none';
+	imageViewCon.style.display = '';
+	img.src = clickedPhoto;
+	
 	// 줌인
 	for (let index = 0; index < photoList.length; index++) {
 		if (photoList[index].children[0].src === clickedPhoto) {
-			console.log(photoList[index].children[0]);
 			photoList[index].children[0].style.transform = "scale(1.08)";
 			photoList[index].children[0].style.border = "1px solid black";
 			photoList[index].children[0].style.opacity = "1";
@@ -109,24 +80,29 @@ function zoomInPhoto(clickedPhoto) {
 
 // 슬라이드 사진 지우기(X 아이콘 클릭)
 function deletePhoto(clickedPhoto) {
-	const photoSlideCon = document.getElementById("image-preview");
-	let photoList = [...document.getElementsByClassName("shop_picture")];
-	
-	// 삭제 > DB작업 필요
-	for (let index = 0; index < photoList.length; index++) {
-		if (photoList[index].children[0].src === clickedPhoto) {
-			photoList.splice(index, 1);
-			console.log(photoList.length);
-			break;
+	const result = confirm("사진을 삭제하시겠습니까?");
+	// 선택된 사진 지우기 > 임시로 JS로 처리 > DB 작업 필요
+	if (result) {		
+		const photoSlideCon = document.getElementById("image-preview");
+		let photoList = [...document.getElementsByClassName("shop_picture")];
+		
+		// 삭제 > DB작업 필요
+		for (let index = 0; index < photoList.length; index++) {
+			if (photoList[index].children[0].src === clickedPhoto) {
+				photoList.splice(index, 1);
+				console.log(photoList.length);
+				break;
+			}
 		}
-	}
-	
-	// 리스트 초기화
-	photoSlideCon.innerHTML = "";
-	
-	// 리스트 재구성
-	for (let i = 0; i < photoList.length; i++) {
-		photoSlideCon.appendChild(photoList[i]);
+		
+		// 리스트 초기화
+		photoSlideCon.innerHTML = "";
+		
+		// 리스트 재구성
+		for (let i = 0; i < photoList.length; i++) {
+			photoSlideCon.appendChild(photoList[i]);
+		}
+		
 	}
 }
 
@@ -159,5 +135,5 @@ function imageCheck(id) {
 }
 
 // 초기 실행
-sliderEvent();
 imageShow();
+sliderEvent();
