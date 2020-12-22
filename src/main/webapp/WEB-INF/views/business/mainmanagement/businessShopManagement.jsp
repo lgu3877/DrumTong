@@ -68,14 +68,7 @@
 			<!-- cover-image input form -->
 				<div id="shop-image-view" class="shop_image_view">
 					<div class="upload_icon_con">
-					
-					<!-- 
-						<label for="cover-img-upload" class="upload_link">
-							<i class="fas fa-upload fa-3x"></i>
-						</label>
-					 -->
 						<div class="cover_file_text_con">
-
 						<!-- select cover image -->
 							<div class="cover_file_text">
 								<p>
@@ -83,24 +76,8 @@
 									사진을 등록해 사장님 가게를 소개해보세요.
 								</p>
 							</div>
-					
 						<!-- cover image name view -->	
-					
-						 		<input id="file-name" class="upload_file_name" type="text" readonly disabled
-								onchange='return checkFile()' placeholder="선택한 사진 이름이 이곳에 나타납니다.">
-								
-						<!-- cover image input -->
-					<!--
-						 		<input id="cover-img-upload" class="upload_file_input" type="file"
-								onchange="javascript:document.getElementById('file-name').value=this.value">
-					-->	
-						<!-- upload cover image button for modification -->		
-					<!--
-					 		<span>
-								<input class="upload_button" type="button" onclick="imageCheck('file-name')" value="확인">
-							</span>
-					-->
-									 		
+							<input id="file-name" class="upload_file_name" type="text" readonly disabled onchange='return checkFile()' placeholder="선택한 사진 이름이 이곳에 나타납니다.">						 		
 						</div>
 					</div>
 				</div>
@@ -187,11 +164,10 @@
 
 			<!-- add store introduction -->
 				<div id="intro-modal-btn" class="intro_add_con">
-       				<span>매장 소개글 등록 & 수정
+       				<span>매장 소개글 등록 및 수정
        					<i class="far fa-file-alt"></i>
        				</span>
        			</div>
-			
 			</div>
 		</div>
 
@@ -202,18 +178,18 @@
 			<!-- title -->
 			<div class="shop_info_title_con">
 				<div>
-					<span class="shop_info_title">등록된 서비스 메뉴</span>
-					<i class="far fa-question-circle" style="font-weight: 600">도움말</i>
+					<span class="shop_info_title">등록된 서비스 메뉴</span> <i
+						class="far fa-question-circle" style="font-weight: 600">도움말</i>
 				</div>
 				<div class="service_button_con">
-				<!-- modify button -->
+					<!-- modify button -->
 					<div id="update-list-btn" class="add_menu_btn_con">
 						<div class="add_menu_icon_con">
 							<i class="fas fa-plus-square"></i>
 						</div>
 						<div class="add_menu_btn_title">메뉴 수정</div>
 					</div>
-				<!-- complete button -->
+					<!-- complete button -->
 					<div id="complete-list-btn" class="complete_menu_btn_con">
 						<div class="add_menu_icon_con">
 							<i class="fas fa-check-square"></i>

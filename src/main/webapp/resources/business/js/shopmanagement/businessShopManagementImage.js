@@ -48,7 +48,6 @@ function sliderEvent() {
 	}
 }
 
-//function inject
 
 // 슬라이드 사진 클릭 > 줌인
 function zoomInPhoto(clickedPhoto) {

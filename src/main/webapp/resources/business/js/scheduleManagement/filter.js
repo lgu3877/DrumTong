@@ -1,40 +1,18 @@
 // 필터링
 
+// 초기 데이터 저장
+const originalSchedule = document.querySelector("#schedule-container");
+
+const cloneOriginalSchedule = originalSchedule.cloneNode(true);
+console.log(cloneOriginalSchedule);
+
 // 전체보기 > page reload
 function pageReload() {
 	window.location.reload();
 }
 
-// 가까운 날짜 순
-function sortInAcs() {
-	const startDays = document.getElementsByClassName("list_start_day");
-	const lists = document.getElementsByClassName("list_content");
-	
-	let arr = [];
-	for (let i = 0; i < lists.length; i++) {
-		const obj = {
-			day: startDays[i].innerHTML,
-			list: lists[i],
-		}
-		arr.push(obj);
-	}
-
-	arr.sort((a, b) => {
-		a = a.day.replace("-", "").replace("-", "");
-		b = b.day.replace("-", "").replace("-", "");
-		return parseInt(a) - parseInt(b);
-	});
-
-	const container = document.getElementById("schedule-container");
-	container.innerHTML = "";
-	
-	for (let i = 0; i < arr.length; i++) {
-		container.appendChild(arr[i].list);
-	}
-}
-
-// 먼 날짜 순
-function sortInDesc() {
+// 날짜 순 정렬 (가까운 날짜 순 > recent & 먼 날짜 순 > late)
+function sort(option) {
 	const startDays = document.getElementsByClassName("list_start_day");
 	const lists = document.getElementsByClassName("list_content");
 	
@@ -47,11 +25,22 @@ function sortInDesc() {
 		arr.push(obj);
 	}
 	
-	arr.sort((a, b) => {
-		a = a.day.replace("-", "").replace("-", "");
-		b = b.day.replace("-", "").replace("-", "");
-		return (parseInt(b) - parseInt(a));
-	});
+	switch(option) {
+	case "recent":
+		arr.sort((a, b) => {
+			a = a.day.replace("-", "").replace("-", "");
+			b = b.day.replace("-", "").replace("-", "");
+			return (parseInt(a) - parseInt(b));
+		});
+		break;
+	case "late":
+		arr.sort((a, b) => {
+			a = a.day.replace("-", "").replace("-", "");
+			b = b.day.replace("-", "").replace("-", "");
+			return (parseInt(b) - parseInt(a));
+		});
+		break;
+	}
 
 	const container = document.getElementById("schedule-container");
 	container.innerHTML = "";
@@ -60,7 +49,6 @@ function sortInDesc() {
 		container.appendChild(arr[i].list);
 	}
 }
-
 
 // 월검색 캘린더 생성
 function openCalendar() {
@@ -191,8 +179,8 @@ function checkMonth(e) {
 		e.target.innerHTML.split("월")[0]; 
 	
 	// 필터링	
-	const startDates = document.getElementsByClassName("list_start_day");
-	const lists = document.getElementsByClassName("list_content");
+	const startDates = cloneOriginalSchedule.getElementsByClassName("list_start_day");
+	const lists = cloneOriginalSchedule.getElementsByClassName("list_content");
 
 	
 	// 정렬 (내림차순 default)
@@ -222,7 +210,8 @@ function checkMonth(e) {
 	// 초기화
 	const calendar = document.getElementById("month-selector");
 	calendar.innerHTML = "";
-
+	
+	console.log(cloneOriginalSchedule);
 	// 월선택 초기화
 	// document.getElementsByClassName("year_checked")[0].classList.remove("year_chekced");
 }
