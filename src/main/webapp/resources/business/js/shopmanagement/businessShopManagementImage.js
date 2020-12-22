@@ -40,7 +40,7 @@ function sliderEvent() {
 	for (let i = 0; i < subImageList.length; i++) {
 		const clickedPhoto = subImageList[i].children[0].src
 		
-		// 슬라이드 사진 클릭
+			// 슬라이드 사진 클릭
 		subImageList[i].children[0].addEventListener('click', () => zoomInPhoto(clickedPhoto));
 	
 		// 슬라이드 사진 지우기(X 아이콘 클릭)
