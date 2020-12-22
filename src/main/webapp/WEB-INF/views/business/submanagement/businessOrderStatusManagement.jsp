@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="cpath">${pageContext.request.contextPath }</c:set>
 <!DOCTYPE html>
@@ -118,26 +117,62 @@
 		<h1>가게 이름<a class="close"><i class="far fa-times-circle fa-3x"></i></a></h1>
 		<h2>주문 번호</h2>
 		<hr class="titlehr">
-			<div>완료 예정<span id="ableday"></span></div>
-			<div>배송 일시<span id="deliverydate"></span></div>
-			<div>받은 날짜<span id="pickupdate"></span></div>
+			<div class="in-modal">완료 예정<span id="ableday"></span></div>
+			<div class="in-modal">배송 일시<span id="deliverydate"></span></div>
+			<div class="in-modal">받은 날짜<span id="pickupdate"></span></div>
 		<hr>
-			<div>메인 카테고리<span id="maincategory"></span></div>
-			<div>서브 카테고리<span  id="subcategory"></span></div>
+<!-- 			<div class="in-modal">메인 카테고리<span id="maincategory"></span></div> -->
+<!-- 			<div class="in-modal">서브 카테고리<span  id="subcategory"></span></div> -->
+<!-- 		<hr> -->
+<!-- 			<div class="in-modal">메뉴명<span id="menuname"></span></div> -->
+<!-- 			<div class="in-modal">구매 개수<span id="menuamount"></span></div> -->
+<!-- 			<div class="in-modal">메뉴 금액<span  id="menuprice"></span></div> -->
+<!-- 			<div class="in-modal">메뉴 총금액<span  id="sumprice"></span></div> -->
+<!-- 		<hr> -->
+<!-- 		<div class="detailmenus"> -->
+<!-- 			<div class="clonedetail" id="clonedetail0"> -->
+<!-- 				<p class="pmain"></p> -->
+<!-- 				<p class="psubmain"></p> -->
+<!-- 				<div class="outerdetail"> -->
+<!-- 					<div class="innerdetail"> -->
+<!-- 						<h3>메뉴명</h3> -->
+<!-- 						<h3>가격</h3> -->
+<!-- 						<h3>수량</h3> -->
+<!-- 						<h3>부분합계</h3> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+		
+		<div class="detailattr">
+			<h1 style="width: 25%; color: #cacece; font-size: 16pt; text-align: center;border-right: 1px solid #afafaf; border-left: 1px solid #afafaf">메뉴</h1>
+			<h1 style="width: 25%; color: #cacece; font-size: 16pt; text-align: center;border-right: 1px solid #afafaf">단일 가격</h1>
+			<h1 style="width: 25%; color: #cacece; font-size: 16pt; text-align: center;border-right: 1px solid #afafaf">수량</h1>
+			<h1 style="width: 25%; color: #cacece; font-size: 16pt; text-align: center;border-right: 1px solid #afafaf">합계 가격</h1>
+		</div>
+		<div class="detailmenus" id="detailmenus">
+			<div class="clonedetail" id="clonedetail0">
+				<p class="pmain"><span class="psubmain"></span></p>
+	
+				<div class="outerdetail">
+					<div class="innerdetail">
+						<h3>메뉴명</h3>
+						<h3>가격</h3>
+						<h3>수량</h3>
+						<h3>부분합계</h3>
+					</div>
+				</div>
+			</div>
+		</div>
 		<hr>
-			<div>메뉴명<span id="menuname"></span></div>
-			<div>구매 개수<span id="menuamount"></span></div>
-			<div>메뉴 금액<span  id="menuprice"></span></div>
-			<div>메뉴 총금액<span  id="sumprice"></span></div>
+			<div class="in-modal">요청 사항<span id="requests"></span></div>
 		<hr>
-			<div>요청 사항<span id="requests"></span></div>
+			<div class="in-modal">기본 금액<span id="originalprice"></span></div>
+			<div class="in-modal">쿠폰 금액<span id="discountprice"></span></div>
+			<div class="in-modal">배달 금액<span id="quickprice"></span></div>
 		<hr>
-			<div>기본 금액<span id="originalprice"></span></div>
-			<div>쿠폰 금액<span id="discountprice"></span></div>
-			<div>배달 금액<span id="quickprice"></span></div>
-		<hr>
-			<div>총 개수<span id="totalamount"></span></div>
-			<div>총 금액<span  id="totalprice"></span></div>
+			<div class="in-modal">총 개수<span id="totalamount"></span></div>
+			<div class="in-modal">총 금액<span  id="totalprice"></span></div>
 		<hr>
 	</div>
 	
@@ -145,8 +180,11 @@
 		
 		let orderList = ${orderList};
 		let clonecontainer = $('#clonediv0');
-		console.log(orderList);
+		let detailmenus = $('#detailmenus').clone();
+	 	let innerclone = $('#detailmenus').find('.outerdetail').clone();
 		let pageFilter = '';
+		
+		console.log(orderList);
 		
  		window.onload = function() {
  			originclone();
@@ -156,19 +194,14 @@
   				$(item).hover(function() {
   					$(item).parent().find('.outerstatus1').css('transform', 'translate(0, -20px)');
   					$(item).parent().find('.outerstatus1').css('transition', 'all 1s ease 0s');
-//   					$(item).parent().find('.outerstatus1').css('backgroundColor', '#3088F9');
   					$(item).parent().find('.outerstatus2').css('transform', 'translate(0, -20px)');
   					$(item).parent().find('.outerstatus2').css('transition', 'all 1s ease 0s');
-//   					$(item).parent().find('.outerstatus2').css('backgroundColor', '#3088F9');
-//   					$(item).parent().find('.outerstatus2 h1').css('color', 'white');
   					
   				}, function() {
   					$(item).parent().find('.outerstatus1').css('transform', '');
   					$(item).parent().find('.outerstatus1').css('transition', 'all 0s ease 0s');
   					$(item).parent().find('.outerstatus2').css('transform', '');
   					$(item).parent().find('.outerstatus2').css('transition', 'all 0s ease 0s');
-//   					$(item).parent().find('.outerstatus2').css('backgroundColor', 'white');
-//   					$(item).parent().find('.outerstatus2 h1').css('color', '');
   				})
   			})
   		}
@@ -202,11 +235,6 @@
  			$('#clonediv0').find('p.deliverydate').html(orderList[0].deliverydate);
  			$('#clonediv0').find('p.totalprice').html(orderList[0].totalprice);
  			
-			const array = [];
-// 			for(j = 0; j < (orderList[0].bDetailSalesVOList).length; j++) {
-// 				array.push((orderList[0].bDetailSalesVOList)[j].maincategory);
-// 			}			
-			
 			let inputmcategory = '';
 			let mcategoryorigin = '';
 			for(key in Object.keys(orderList[0].maincategory)) {
@@ -272,17 +300,6 @@
  					mcategoryclone += Object.keys(orderList[i].maincategory)[key] + ' / ';
  				}
  				$('#clonediv' + i).find('p.maincategory').html(mcategoryclone.slice(0, -2));
-// 				const array = [];
-// 				for(j = 0; j < (orderList[i].bDetailSalesVOList).length; j++) {
-// 					array.push((orderList[i].bDetailSalesVOList)[j].maincategory);
-// 				}			
-// 				const setarray = [];
-// 				for (k = 0; k < Array.from(new Set(array)).length; k++) {
-// 					setarray.push(Array.from(new Set(array))[k]);
-// 					if (k > 0)
-// 						setarray.push(' / ');
-// 				}			
-//  	 			$('#clonediv' + i).find('p.maincategory').html(setarray);
  			}
  		}
  		
@@ -315,26 +332,78 @@
 			let subcategorymodal = '';
 			let subcatespan = 0;
 
-// 			console.log(detailob.maincategory[Object.keys(detailob.maincategory)[0]]);
-// 			console.log(detailob.maincategory[Object.keys(detailob.maincategory)[1]]);
-// 			console.log(detailob.maincategory[Object.keys(detailob.maincategory)[1]][0]));
-// 			console.log(Object.keys(detailob.maincategory[Object.keys(detailob.maincategory)[1]][0]));
-// 			console.log(Object.keys(detailob.maincategory[Object.keys(detailob.maincategory)[1]][0]).length);
 			
-			let subpath1 = Object.keys(detailob.maincategory);
-			for(i = 0; i < Object.keys(detailob.maincategory).length; i++) {	// 선택한 클론div로부터 메인 카테고리들 들고오기
-// 				console.log('반복문1 : ' , subpath1[i]);	// 메인카테고리 출력
-// 				console.log('반복문2 : ' , detailob.maincategory[subpath1[i]][0]);	// 메인카테고리의 키값 가져와서 메인카테고리 안의 value 가져오기
-																					// 서브메뉴 가져오기
-				console.log('길이 : ' , Object.keys(detailob.maincategory[subpath1[i]][0]).length);	// 서부메뉴 키값 길이 가져오기
-				for(j = 0; j < Object.keys(detailob.maincategory[subpath1[i]][0]).length; j++) {
-					console.log('반복문3 : ', Object.keys(detailob.maincategory[subpath1[i]][0]));
-					subcategorymodal += Object.keys(detailob.maincategory[subpath1[i]][0])[j] + '(' + subpath1[i] + ')' + '<br>';
-					subcatespan++;
-				}
-			}
+			let subpath1 = Object.keys(detailob.maincategory);			// 맵 경로 저장
+			
+// 			for(i = 0; i < Object.keys(detailob.maincategory).length; i++) {	// 선택한 클론div로부터 메인 카테고리들 들고오기
+// // 				console.log('반복문1 : ' , subpath1[i]);	// 메인카테고리 출력
+// // 				console.log('반복문2 : ' , detailob.maincategory[subpath1[i]][0]);	// 메인카테고리의 키값 가져와서 메인카테고리 안의 value 가져오기
+// 																					// 서브메뉴 가져오기
+// // 				console.log('길이 : ' , Object.keys(detailob.maincategory[subpath1[i]][0]).length);	// 서부메뉴 키값 길이 가져오기
+// 				for(j = 0; j < Object.keys(detailob.maincategory[subpath1[i]][0]).length; j++) {
+// // 					console.log('반복문3 : ', Object.keys(detailob.maincategory[subpath1[i]][0]));
+// 					subcategorymodal += Object.keys(detailob.maincategory[subpath1[i]][0])[j] + '(' + subpath1[i] + ')' + '<br>';
+// 					subcatespan++;
+// 				}
+// 			}
 			$('#modal').find('#subcategory').html(subcategorymodal);
 			$('#modal').find('#subcategory').parent('div').css('height', (30 * subcatespan) + 'px');
+			
+			let count = 0;
+			for(i = 0; i < Object.keys(detailob.maincategory).length; i++) {
+				for(j = 0; j < Object.keys(detailob.maincategory[subpath1[i]][0]).length; j++) {
+					if(i != 0 || j != 0) {
+						detailmenus.find('.clonedetail').attr('id', 'clonedetail' + (count + 1));	//삭제하는 것도 맡들어야 함
+						$('#clonedetail' + count).after(detailmenus.html()); 
+						count++;
+					}
+// 					$('#clonedetail' + count).find('.pmain').html(subpath1[i]);
+					$('#clonedetail' + count).find('.pmain').html(subpath1[i] + '<span class="psubmain"></span>');
+					$('#clonedetail' + count).find('.psubmain').html('(' + Object.keys(detailob.maincategory[subpath1[i]][0])[j] + ')');
+// 					console.log('확인1 : ', detailob.maincategory[subpath1[i]][0]);
+//  					console.log('확인2 : ', detailob.maincategory[subpath1[i]][0][Object.keys(detailob.maincategory[subpath1[i]][0])[j]][0].name);
+  					console.log('서브메뉴 길이확인 : ', detailob.maincategory[subpath1[i]][0][Object.keys(detailob.maincategory[subpath1[i]][0])[j]].length);
+
+  					//   						$('#clonedetail' + count).find('.innerdetail').children('h3').each(function(index) {
+// 							switch (index) {
+// 							case 0:
+// 								$('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(k).children('h3').eq(index).html(detailob.maincategory[subpath1[i]][0][Object.keys(detailob.maincategory[subpath1[i]][0])[j]][0].name);
+// 								break;
+// 							case 1:
+// 								$('#clonedetail' + count).find('.innerdetail').children('h3').eq(index).html(detailob.maincategory[subpath1[i]][0][Object.keys(detailob.maincategory[subpath1[i]][0])[j]][0].menuprice + '원');
+// 								break;
+// 							case 2:
+// 								$('#clonedetail' + count).find('.innerdetail').children('h3').eq(index).html(detailob.maincategory[subpath1[i]][0][Object.keys(detailob.maincategory[subpath1[i]][0])[j]][0].amount + '개');
+// 								break;
+// 							case 3:
+// 								$('#clonedetail' + count).find('.innerdetail').children('h3').eq(index).html(detailob.maincategory[subpath1[i]][0][Object.keys(detailob.maincategory[subpath1[i]][0])[j]][0].sumprice + '원');
+// 								break;
+// 							}
+// 						});
+  					
+  					for(k = 0; k < detailob.maincategory[subpath1[i]][0][Object.keys(detailob.maincategory[subpath1[i]][0])[j]].length ; k++) {
+  						if(k > 0)
+	  						$('#clonedetail' + count).find('.outerdetail').append(innerclone.html());
+
+  						$('#clonedetail' + count).find('.innerdetail').children('h3').each(function(index) {
+							switch (index) {
+							case 0:
+								$('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(k).children('h3').eq(index).html(detailob.maincategory[subpath1[i]][0][Object.keys(detailob.maincategory[subpath1[i]][0])[j]][k].name);
+								break;
+							case 1:
+								$('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(k).children('h3').eq(index).html(detailob.maincategory[subpath1[i]][0][Object.keys(detailob.maincategory[subpath1[i]][0])[j]][k].menuprice + '원');
+								break;
+							case 2:
+								$('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(k).children('h3').eq(index).html(detailob.maincategory[subpath1[i]][0][Object.keys(detailob.maincategory[subpath1[i]][0])[j]][k].amount + '개');
+								break;
+							case 3:
+								$('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(k).children('h3').eq(index).html(detailob.maincategory[subpath1[i]][0][Object.keys(detailob.maincategory[subpath1[i]][0])[j]][k].sumprice + '원');
+								break;
+							}
+						});
+  					}
+				}
+			}
 			
 // 			   for(mainkey in Object.keys(orderList[1].maincategory)) {
 				      
@@ -376,6 +445,7 @@
 			
 		}
 		
+		
 		function upperbtn() {	// 맨 위로 이동하는 버튼
 			$('html, body').animate({scrollTop : 0},800);
 		}
@@ -400,7 +470,7 @@
 			obj.setAttribute("onclick", "chStatus(this, '" + filter + "')")
 		}
 		
-		function searching(obj) {
+		function searching(obj) {	// 주문번호 검색 기능
 			
 		}
 		
@@ -414,6 +484,10 @@
  		$('.close').on('click', function() {	// 모달 비활성화
 				$('#modal').fadeOut(300);
 				$('#modalback').fadeOut(300);
+				for(i = $('#detailmenus').children('.clonedetail').length; 1 < i; i--) {
+					console.log($('#detailmenus').children('.clonedetail').eq(i - 1).html());
+					$('#detailmenus').children('.clonedetail').eq(i - 1).remove();
+				}
 		});
 		
 		$(document).keyup(function(e) {		// esc 키 누르면 모달 비할성화
@@ -422,6 +496,7 @@
 				$('#modalback').fadeOut(300);
 		   }
 		});
+	
 		
 		// offset	: 페이지 상단으로부터 선택된 요소가 보이는 절대위치를 나타내주는 함수
 		// positio	: 부모 객체로부터 떨어진 상대값을 리턴한다
@@ -438,7 +513,7 @@
 //             console.log('$(window).height() : ', $(window).height());		// 브라우저 높이 길이 : 고정
 //             if( bottom_of_window > bottom_of_object ){
             if( bottom_of_window > $(this).offset().top ){
-                $(this).animate({'opacity':'1'},500);
+                $(this).animate({'opacity':'1'},3000);
             }
         }); 
     });

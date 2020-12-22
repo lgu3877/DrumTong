@@ -241,7 +241,7 @@ h1.requesttype {
 	text-align: right;
 }
 
-#modal div {
+#modal .in-modal {
 	position: relative; 
 	text-align: left; 
 	width: 60%; 
@@ -254,7 +254,7 @@ h1.requesttype {
 	font-weight: bold;
 }
 
-#modal div span {
+#modal .in-modal span {
 	position: absolute; 
 	right: 0; 
 	font-size: 16pt;
@@ -315,4 +315,57 @@ h1.requesttype {
 	height: 100%;
 	background-color: white;
 	font-weight: bold;
+}
+
+div.detailmenus, div.detailattr {
+	width: 60%; 
+	height: auto !important; 
+	margin: 0 auto; 
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+ div.detailattr {
+ 	display: flex;
+ }
+
+div.detailmenus .clonedetail {
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+div.detailmenus .pmain{
+	text-align: left;
+	font-size: 16pt; 
+	margin-top: 5px !important; 
+	margin-bottom: 5px !important;
+}
+
+div.detailmenus .psubmain{
+	text-align: right;
+/* 	padding-left: 15px;  */
+	font-size: 16pt;  
+/* 	margin-top: 5px !important;  */
+/* 	margin-bottom: 5px !important; */
+}
+
+div.detailmenus .outerdetail {
+	width: 100% !important; 
+	height: auto !important;  
+	margin-top: 5px !important; 
+	margin-bottom: 25px !important;
+}
+
+div.detailmenus .innerdetail {
+	width: 100%; 
+	height: 30px; 
+	align-items: center; 
+	display: flex;
+}
+
+div.detailmenus .innerdetail h3 {
+	width: 25%; 
+	height: 25px; 
+	font-size: 12pt;
+	text-align: center;
 }
