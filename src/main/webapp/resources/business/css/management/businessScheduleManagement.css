@@ -18,6 +18,11 @@
 	
 }
 
+/* 숨기기(hide) */
+.hide {
+	display: none;
+}
+
 /* 폰트 옵션 */
 .text_blue {
 	color: #3b5998;
@@ -239,6 +244,7 @@
     padding: 7px 10px;
     border-bottom: 1px solid black;
     border-bottom-style: groove;
+    justify-content: space-between;
 }
     
 /* 	background-color: antiquewhite;
@@ -295,13 +301,13 @@
 }
 
 .input_title_con {
-	width: 15%;
+	width: 200px;
 	margin-right: 20px;
 	text-align: center;
 }
 
 .input_time_con {
-	
+	width: calc(100% - 200px);	
 }
 
 .all_day_con {
@@ -324,20 +330,24 @@
     height: 60px;
     margin-bottom: 30px;
     margin-top: 20px;
+    justify-content: space-between;
 }
 
 .select_box_con {
 	display: flex;
+	margin: auto 0;
 }
 
 .select_box_con select {
-	height: 100%;
+	height: 40px;
     width: 100px;
     background-color: #f38181;
     border: none;
     color: white;
     margin-right: 35px;
     margin-bottom: 30px;
+    text-indent: 3px;
+    margin: auto 0;
 }
 
 .select_box_con select:hover {
@@ -348,6 +358,8 @@
 
 .day_selector_con {
 	display: flex;
+	margin: auto 0;
+	width: calc(100% - 300px);
 }
 
 .day_selector {
@@ -358,10 +370,10 @@
     width: 90px;
     font-size: 15pt;
     height: 100%;
-    border-radius: 5px;
     color: white;
-    line-height: 60px;
+    line-height: 45px;
     text-align: center;
+    height: 40px;
 }
 
 .day_selector:hover {
@@ -371,6 +383,21 @@
 
 .day_selector input {
 	display: none;
+}
+
+.day_select_btn {
+	margin: auto 0;
+	border: none;
+    background-color: #6495EF;
+    margin-left: 11px;
+    width: 100px;
+    font-size: 15pt;
+    height: 100%;
+    border-radius: 5px;
+    color: white;
+    line-height: 45px;
+    text-align: center;
+    height: 40px;
 }
 
 /* 휴무 스케쥴 */
@@ -396,7 +423,7 @@
 	background-color: red;
     color: white;
     padding: 8px 14px;
-    border-radius: 15px;
+    border-radius: 8px;
 }
 
 .h_schedule_delete:hover {

@@ -57,12 +57,14 @@
 					</div>
 					<!-- buttons -->
 					<div class="btn_con">
+					<!-- 
 						<div id="modify-working-hour" class="btn format_btn">
 							<div class="icon_con">
 								<i class="fas fa-plus-square"></i>
 							</div>
 							<div class="btn_title">시간 수정</div>
 						</div>
+					 -->
 						<div id="complete-working-hour" class="btn update_btn">
 							<div class="icon_con">
 								<i class="fas fa-check-square"></i>
@@ -263,12 +265,14 @@
 					</div>
 					<!-- button -->
 					<div class="btn_con">
+					<!-- 
 						<div id="modify-holiday" class="btn format_btn">
 							<div class="icon_con">
 								<i class="fas fa-plus-square"></i>
 							</div>
 							<div class="btn_title">일자 변경</div>
 						</div>
+					-->	
 						<div id="complete-holiday" class="btn update_btn">
 							<div class="icon_con">
 								<i class="fas fa-check-square"></i>
@@ -325,6 +329,10 @@
 								<input type="checkbox" name="restDay">
 								일
 							</div>
+						</div>
+						
+						<div class="day_select_btn btn">
+							휴무 등록
 						</div>
 					</div>
 					
@@ -432,17 +440,19 @@
 					</div>
 					<!-- button -->
 					<div class="btn_con">
+					<!-- 
 						<div id="modify-holiday" class="btn format_btn">
 							<div class="icon_con">
 								<i class="fas fa-plus-square"></i>
 							</div>
 							<div class="btn_title">휴무 수정</div>
 						</div>
+					 -->
 						<div id="complete-holiday" class="btn update_btn">
 							<div class="icon_con">
 								<i class="fas fa-check-square"></i>
 							</div>
-							<div class="btn_title">수정 완료</div>
+							<div class="btn_title">휴무 등록</div>
 						</div>
 					</div>
 				</div>
