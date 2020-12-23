@@ -4,11 +4,15 @@
 const originalSchedule = document.querySelector("#schedule-container");
 
 const cloneOriginalSchedule = originalSchedule.cloneNode(true);
-console.log(cloneOriginalSchedule);
 
 // 전체보기 > page reload
 function pageReload() {
-	window.location.reload();
+	const lists = document.getElementsByClassName("list_content");
+	
+	for (let i = 0; i < lists.length; i++) {
+		lists[i].style.display = "flex";
+	}
+//	window.location.reload();
 }
 
 // 날짜 순 정렬 (가까운 날짜 순 > recent & 먼 날짜 순 > late)
@@ -179,39 +183,26 @@ function checkMonth(e) {
 		e.target.innerHTML.split("월")[0]; 
 	
 	// 필터링	
-	const startDates = cloneOriginalSchedule.getElementsByClassName("list_start_day");
-	const lists = cloneOriginalSchedule.getElementsByClassName("list_content");
+	const startDates = document.getElementsByClassName("list_start_day");
+	const lists = document.getElementsByClassName("list_content");
 
 	
 	// 정렬 (내림차순 default)
-	let arr = [];
 	for (let i = 0; i < lists.length; i++) {	
 		if (startDates[i].innerHTML.split("-")[0] === selectedYear
 				&& startDates[i].innerHTML.split("-")[1] === selectedMonth) {
-			
-			const obj = {
-				day: startDates[i].innerHTML,
-				list: lists[i],
-			}
-			arr.push(obj);
+
+			lists[i].style.display = "flex";
 		}
-	}
-	
-	arr.sort((a, b) => parseInt(b.day) - parseInt(a.day));
-	
-	// 결과 출력
-	const container = document.getElementById("schedule-container");
-	container.innerHTML = "";
-	
-	for (let i = 0; i < arr.length; i++) {
-		container.append(arr[i].list);
+		else {
+			lists[i].style.display = "none";
+		}
 	}
 		
 	// 초기화
 	const calendar = document.getElementById("month-selector");
 	calendar.innerHTML = "";
 	
-	console.log(cloneOriginalSchedule);
-	// 월선택 초기화
-	// document.getElementsByClassName("year_checked")[0].classList.remove("year_chekced");
+	// 가까운 날짜 순 정렬
+	sort("recent");
 }
