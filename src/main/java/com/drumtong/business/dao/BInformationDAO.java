@@ -3,6 +3,7 @@ package com.drumtong.business.dao;
 import java.util.List;
 
 import com.drumtong.business.vo.BInformationVO;
+import com.drumtong.customer.vo.EstablishmentList;
 
 public interface BInformationDAO {
 
@@ -42,6 +43,9 @@ public interface BInformationDAO {
 	
 	// 사업자등록증을 업데이트 시켜줍니다. S3에 사용됩니다.
 	int updateLicense(BInformationVO vo);
+
+	// 조건에 맞는 사업장 리스트를 들고온다.
+	List<EstablishmentList> selectEstablishmentList(String MainAddress);
 
 
 

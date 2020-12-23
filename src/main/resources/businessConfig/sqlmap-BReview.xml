@@ -10,13 +10,13 @@
 	<select id="selectReviewNum" parameterType="hashmap" resultType="int">
 		SELECT count(*) FROM BREVIEW WHERE ESTID=#{estid}
 			<choose>
-				<when test="division eq 'whole'.toString()">
+				<when test='division.equals("whole")'>
 					AND BLOCKBOOLEAN = 'N'
 				</when>
-				<when test="division eq 'noReply'.toString()">
+				<when test='division.equals("noReply")'>
 					AND REPLYBOOLEAN = 'N' AND BLOCKBOOLEAN = 'N' 
 				</when>
-				<when test="division eq 'reportReply'.toString()">
+				<when test='division.equals("reportReply")'>
 					AND BLOCKBOOLEAN = 'Y'
 				</when>
 			</choose>
