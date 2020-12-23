@@ -32,76 +32,6 @@ document.getElementById(
 		"current-month"
 ).innerHTML = `<span id="month-value">${currentMonth}</span> <i class="fas fa-angle-down"></i>`;
 
-// 주(week) 변환 > object key
-function weekConvert(value) {
-	switch(value) {
-	case "첫째 주":
-		return "firstWeek";
-	case "둘째 주":
-		return "secondWeek";
-	case "셋째 주":
-		return "thridWeek";
-	case "넷째 주":
-		return "forthWeek";
-	case "다섯째 주":
-		return "fifthWeek";
-	case "여섯째 주":
-		return "sixthWeek";
-	}
-}
-
-// 일(변환) > index
-function dayConvert(value) {
-	switch(value) {
-	case "일요일":
-		return 0;
-	case "월요일":
-		return 1;
-	case "화요일":
-		return 2;
-	case "수요일":
-		return 3;
-	case "목요일":
-		return 4;
-	case "금요일":
-		return 5;
-	case "토요일":
-		return 6;
-	}
-}
-
-// 정기 휴무 일정 달력 출력
-function markRegHolidays() {
-	// 정기 휴무 일정 object
-	const obj = {
-		firstWeek: [],
-		secondWeek: [],
-		thridWeek: [],
-		forthWeek: [],
-		fifthWeek: [],
-		sixthWeek: [],
-	};
-	
-	const lists = document.getElementsByClassName("h_schedule_list");
-
-	for (let i = 0; i < lists.length; i++) {
-		// 주(week)
-		let week = lists[i].getElementsByClassName("h_week")[0].getElementsByTagName("span")[0].innerHTML;
-		week = weekConvert(week.trim());
-		
-		// 일(days)
-		const days = lists[i].getElementsByClassName("h_day");
-		
-		for (let j = 0; j < days.length; j++) {
-			let day = days[j].getElementsByTagName("span")[0].innerHTML;
-			day = dayConvert(day.trim());
-			
-			obj[week].push(day);
-		}
-	}
-	console.log(obj);
-}
-
 // 달력 년-월 선택 디자인
 function yearMonthSelector() {
 	const yearSelector = document.getElementById("current-year");
@@ -122,7 +52,7 @@ function yearMonthSelector() {
 			monthSelector.children[i].style.marginLeft = "5px";	
 			break;
 		}
-	}	
+	}
 }
 
 // dropdown years
@@ -255,41 +185,118 @@ function loadDays(year, month, day) {
 
     document.getElementById("calendar-days").appendChild(weekDiv);
   }
+  
+  markRegHolidays();
 }
 
+//주(week) 변환 > object key
+function weekConvert(value) {
+	switch(value) {
+	case "첫째 주":
+		return "firstWeek";
+	case "둘째 주":
+		return "secondWeek";
+	case "셋째 주":
+		return "thirdWeek";
+	case "넷째 주":
+		return "forthWeek";
+	case "다섯째 주":
+		return "fifthWeek";
+	case "여섯째 주":
+		return "sixthWeek";
+	}
+}
 
+// 일(변환) > index
+function dayConvert(value) {
+	switch(value) {
+	case "일요일":
+		return 0;
+	case "월요일":
+		return 1;
+	case "화요일":
+		return 2;
+	case "수요일":
+		return 3;
+	case "목요일":
+		return 4;
+	case "금요일":
+		return 5;
+	case "토요일":
+		return 6;
+	}
+}
+
+// 정기 휴무 일정 달력 출력
+function markRegHolidays() {
+	// 정기 휴무 일정 object
+	const obj = {
+		firstWeek: [],
+		secondWeek: [],
+		thirdWeek: [],
+		forthWeek: [],
+		fifthWeek: [],
+		sixthWeek: [],
+	};
+	
+	// 값 가져오기 > object 설정
+	const lists = document.getElementsByClassName("h_schedule_list");
+	for (let i = 0; i < lists.length; i++) {
+		// 주(week)
+		let week = lists[i].getElementsByClassName("h_week")[0].getElementsByTagName("span")[0].innerHTML;
+		week = weekConvert(week.trim());
+		
+		// 일(days)
+		const days = lists[i].getElementsByClassName("h_day");
+		
+		for (let j = 0; j < days.length; j++) {
+			let day = days[j].getElementsByTagName("span")[0].innerHTML;
+			day = dayConvert(day.trim());
+			
+			obj[week].push(day);
+		}
+	}
+	
+	// 달력 container & 주(week) 
+	const calendar = document.getElementById("calendar-days");
+	const weeks = calendar.getElementsByClassName("week");
+	
+	// 디자인 변경 함수
+	const markDay = (dayArray, holidayArray) => {
+		for (let col = 0; col < holidayArray.length; col++) {
+			dayArray[holidayArray[col]].classList.add("reg_holiday");
+			dayArray[holidayArray[col]].innerHTML += `<h4>정기휴무</h4>`;
+		} 		
+	}
+	
+	// 달력에 표시
+	for (let row = 0; row < weeks.length; row++) {
+		let dayArray = [...weeks[row].childNodes];
+		switch(row) {
+		case 0:
+			obj.firstWeek.length !== 0 ? markDay(dayArray, obj.firstWeek) : null;
+			break;
+		case 1:
+			obj.secondWeek.length !== 0 ? markDay(dayArray, obj.secondWeek) : null;
+			break;
+		case 2:
+			obj.thirdWeek.length !== 0 ? markDay(dayArray, obj.thirdWeek) : null;
+			break;
+		case 3:
+			obj.forthWeek.length !== 0 ? markDay(dayArray, obj.forthWeek) : null;
+			break;
+		case 4:
+			obj.fifthWeek.length !== 0 ? markDay(dayArray, obj.fifthWeek) : null;
+			break;
+		case 5:
+			obj.sixthWeek.length !== 0 ? markDay(dayArray, obj.sixthWeek) : null;
+			break;
+		}
+	}	
+}
 
 // 달력 렌더링
 yearMonthSelector();
 createYears();
 createMonths();
 loadDays(currentYear, currentMonth, currentDate);
-
-markRegHolidays();
-
-// 요일
-// function swipeDay(dayIndex) {
-//   switch (dayIndex) {
-//     case 0:
-//       return "일요일";
-//     case 1:
-//       return "월요일";
-//     case 2:
-//       return "화요일";
-//     case 3:
-//       return "수요일";
-//     case 4:
-//       return "목요일";
-//     case 5:
-//       return "금요일";
-//     case 6:
-//       return "토요일";
-//     default:
-//       alert("잘못된 입력");
-//   }
-// }
-
-// 마지막 날짜 반환
-// function getLastDate(year, month) {
-//   return new Date(year, month + 1).getDate();
-// }
