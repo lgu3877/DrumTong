@@ -123,10 +123,11 @@
 		<hr>
 		
 		<div class="detailattr">
-			<h1 style="width: 25%; color: #cacece; font-size: 16pt; text-align: center;border-right: 1px solid #afafaf; border-left: 1px solid #afafaf">메뉴</h1>
-			<h1 style="width: 25%; color: #cacece; font-size: 16pt; text-align: center;border-right: 1px solid #afafaf">단일 가격</h1>
-			<h1 style="width: 25%; color: #cacece; font-size: 16pt; text-align: center;border-right: 1px solid #afafaf">수량</h1>
-			<h1 style="width: 25%; color: #cacece; font-size: 16pt; text-align: center;border-right: 1px solid #afafaf">합계 가격</h1>
+			<h1 style="width: 20%; color: #cacece; font-size: 12pt; text-align: center;border-right: 1px solid #afafaf; border-left: 1px solid #afafaf">메뉴</h1>
+			<h1 style="width: 20%; color: #cacece; font-size: 12pt; text-align: center;border-right: 1px solid #afafaf">수량</h1>
+			<h1 style="width: 20%; color: #cacece; font-size: 12pt; text-align: center;border-right: 1px solid #afafaf">배달 가격</h1>
+			<h1 style="width: 20%; color: #cacece; font-size: 12pt; text-align: center;border-right: 1px solid #afafaf">단일 가격</h1>
+			<h1 style="width: 20%; color: #cacece; font-size: 12pt; text-align: center;border-right: 1px solid #afafaf">합계 가격</h1>
 		</div>
 		<div class="detailmenus" id="detailmenus">
 			<div class="clonedetail" id="clonedetail0">
@@ -136,8 +137,9 @@
 					<div class="innerdetail">
 						<h3></h3>
 						<h3></h3>
-						<h3></h3>
-						<h3></h3>
+						<h3 style="text-align: right"></h3>
+						<h3 style="text-align: right"></h3>
+						<h3 style="text-align: right"></h3>
 					</div>
 				</div>
 			</div>
@@ -271,6 +273,7 @@
  	         // 메인 주문형황 카드를 클릭했을 때, 그 카드가 가지고 있는 id 값에서 마지막 숫자값만 가지고 옴
  	         // 그 숫자를 이용해서 orderList[] 를 가지고 온다
  	         
+ 	         let totalquickprice = 0;	// 전체 배달가격 객체 
  	         let count = 0;
  	         let i = 0;
  	         // 1차 메인카테고리 HashMap array
@@ -308,34 +311,28 @@
  	                  $('#clonedetail' + count).find('.psubmain').html('(' + inputSubKey + ')');
  	                  
  	                  for ( z = 0; z < mainmenus.length; z++ ) {
- 	                     
- 	                     console.log('12세부메뉴 단일 값 : ' + z);
- 	                     console.log(mainmenus[z].name);
- 	                     console.log(mainmenus[z]);
- 	                     
- 	                     console.log(mainmenus[z].quickprice);
- 	                     let quickprice = ( mainmenus[z].quickprice === 0 ) ? '' : mainmenus[z].quickprice + '원';
- 	                     console.log('quick : ' + quickprice);
- 	                     
- 	                    if(z > 0)
+ 	                	totalquickprice += mainmenus[z].quickprice;	// 총 배달가격 계산
+ 	                	  
+ 	                    if(z > 0)	// 만약 서브카테고리에 저장된 메뉴가 1개보다 많을 때 사용
 	  						$('#clonedetail' + count).find('.outerdetail').append(innerclone.html());
  	                     
  	                     $('#clonedetail' + count).find('.innerdetail').children('h3').each(function(index) {
  	                        switch (index) {
  	                           case 0:
  	                              $('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(z).children('h3').eq(index).html(mainmenus[z].name);
- 	                              break;
+ 	                              	break;
  	                              
  	                           case 1:
- 	                              $('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(z).children('h3').eq(index).html(mainmenus[z].menuprice + '원');
- 	                           break;
- 	                           
- 	                           case 2:
  	                              $('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(z).children('h3').eq(index).html(mainmenus[z].amount + '개');
- 	                           break;
- 	                           
+ 	                       		    break;
+ 	                           case 2:
+ 	                        	  $('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(z).children('h3').eq(index).html(numberWithCommas(mainmenus[z].quickprice) + '원');
+ 		                           break;
  	                           case 3:
- 	                              $('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(z).children('h3').eq(index).html(mainmenus[z].sumprice + '원');
+ 	                              $('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(z).children('h3').eq(index).html(numberWithCommas(mainmenus[z].menuprice) + '원');
+ 		                           break;
+ 	                           case 4:
+ 	                              $('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(z).children('h3').eq(index).html(numberWithCommas(mainmenus[z].sumprice + mainmenus[z].quickprice) + '원');
  	                              break;
  	                        }
  	                  });
@@ -349,16 +346,21 @@
  	         $('#modal').find('#deliverydate').html(detailob.deliverydate);
  	         $('#modal').find('#pickupdate').html(detailob.pickupdate);
  	         $('#modal').find('#requests').html(detailob.requests);
- 	         $('#modal').find('#originalprice').html(detailob.originalprice + '원');
- 	         $('#modal').find('#totalprice').html(detailob.totalprice + '원');
+ 	         $('#modal').find('#originalprice').html(numberWithCommas(detailob.originalprice) + '원');
+ 	         $('#modal').find('#discountprice').html('(-) ' + numberWithCommas(detailob.discountprice) + '원');
+ 	         $('#modal').find('#quickprice').html('(+) ' + numberWithCommas(totalquickprice) + '원');
+ 	         $('#modal').find('#totalprice').html(numberWithCommas(detailob.totalprice) + '원');
  	         $('#modal').find('#totalamount').html(detailob.totalamount + '개');
- 	         $('#modal').find('#discountprice').html('(-) ' + detailob.discountprice + '개');
- 	         $('#modal').find('#quickprice').html('(+) ' + detailob.quickprice + '개');
  	         
  	         $('#modal').fadeIn(300);
  	         $('#modalback').fadeIn(300);
  	         
  	      }
+
+ 	  	function numberWithCommas(x) {		// 천단위 콤마
+ 			return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	 	}
+
 
 		function upperbtn() {	// 맨 위로 이동하는 버튼
 			$('html, body').animate({scrollTop : 0},2000);
