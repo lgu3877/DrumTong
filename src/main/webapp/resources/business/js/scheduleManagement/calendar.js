@@ -32,25 +32,97 @@ document.getElementById(
 		"current-month"
 ).innerHTML = `<span id="month-value">${currentMonth}</span> <i class="fas fa-angle-down"></i>`;
 
-// 달력 년-월 선택 디자인
-const yearSelector = document.getElementById("current-year");
-const monthSelector = document.getElementById("current-month");
-
-for (let i = 0; i < 2; i++) {
-	switch(i) {
-	// 년 & 월
-	case 0:
-		yearSelector.children[i].style.fontSize = "15pt";		
-		monthSelector.children[i].style.fontSize = "15pt";	
-		break;
-	// 아이콘
-	case 1:
-		yearSelector.children[i].style.fontSize = "15pt";		
-		monthSelector.children[i].style.fontSize = "15pt";	
-		yearSelector.children[i].style.marginLeft = "5px";	
-		monthSelector.children[i].style.marginLeft = "5px";	
-		break;
+// 주(week) 변환 > object key
+function weekConvert(value) {
+	switch(value) {
+	case "첫째 주":
+		return "firstWeek";
+	case "둘째 주":
+		return "secondWeek";
+	case "셋째 주":
+		return "thridWeek";
+	case "넷째 주":
+		return "forthWeek";
+	case "다섯째 주":
+		return "fifthWeek";
+	case "여섯째 주":
+		return "sixthWeek";
 	}
+}
+
+// 일(변환) > index
+function dayConvert(value) {
+	switch(value) {
+	case "일요일":
+		return 0;
+	case "월요일":
+		return 1;
+	case "화요일":
+		return 2;
+	case "수요일":
+		return 3;
+	case "목요일":
+		return 4;
+	case "금요일":
+		return 5;
+	case "토요일":
+		return 6;
+	}
+}
+
+// 정기 휴무 일정 달력 출력
+function markRegHolidays() {
+	// 정기 휴무 일정 object
+	const obj = {
+		firstWeek: [],
+		secondWeek: [],
+		thridWeek: [],
+		forthWeek: [],
+		fifthWeek: [],
+		sixthWeek: [],
+	};
+	
+	const lists = document.getElementsByClassName("h_schedule_list");
+
+	for (let i = 0; i < lists.length; i++) {
+		// 주(week)
+		let week = lists[i].getElementsByClassName("h_week")[0].getElementsByTagName("span")[0].innerHTML;
+		week = weekConvert(week.trim());
+		
+		// 일(days)
+		const days = lists[i].getElementsByClassName("h_day");
+		
+		for (let j = 0; j < days.length; j++) {
+			let day = days[j].getElementsByTagName("span")[0].innerHTML;
+			day = dayConvert(day.trim());
+			
+			obj[week].push(day);
+		}
+	}
+	console.log(obj);
+}
+
+// 달력 년-월 선택 디자인
+function yearMonthSelector() {
+	const yearSelector = document.getElementById("current-year");
+	const monthSelector = document.getElementById("current-month");
+	
+	for (let i = 0; i < 2; i++) {
+		switch(i) {
+		// 년 & 월
+		case 0:
+			yearSelector.children[i].style.fontSize = "15pt";		
+			monthSelector.children[i].style.fontSize = "15pt";	
+			break;
+			// 아이콘
+		case 1:
+			yearSelector.children[i].style.fontSize = "15pt";		
+			monthSelector.children[i].style.fontSize = "15pt";	
+			yearSelector.children[i].style.marginLeft = "5px";	
+			monthSelector.children[i].style.marginLeft = "5px";	
+			break;
+		}
+	}	
 }
 
 // dropdown years
@@ -188,11 +260,12 @@ function loadDays(year, month, day) {
 
 
 // 달력 렌더링
+yearMonthSelector();
 createYears();
 createMonths();
 loadDays(currentYear, currentMonth, currentDate);
 
-
+markRegHolidays();
 
 // 요일
 // function swipeDay(dayIndex) {
