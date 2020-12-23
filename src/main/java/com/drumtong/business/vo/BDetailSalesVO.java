@@ -10,6 +10,7 @@ public class BDetailSalesVO {
 	private String amount;			// 요구한 개수
 	private int menuprice;			// 메뉴 가격
 	private int sumprice;			// 합계 가격
+	private int quickprice;
 	
 	public String getEstid() {
 		return estid;
@@ -58,6 +59,12 @@ public class BDetailSalesVO {
 	}
 	public void setSumprice(int sumprice) {
 		this.sumprice = sumprice;
+	}
+	public int getQuickprice() {
+		return quickprice;
+	}
+	public void setQuickprice(int quickprice) {
+		this.quickprice = quickprice;
 	}
 	
 	

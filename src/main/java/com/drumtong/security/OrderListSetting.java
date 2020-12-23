@@ -68,7 +68,6 @@ public class OrderListSetting {
 					// [Maincategory]를 Oracle의 Distinct(중복제거)로 데이터를 가져와준다. (Order by로 가나다 순임)
 					List<String> maincategoryList = bDetailSalesDAO.selectDistinctCategory(map);
 					
-					System.out.println(maincategoryList.size());
 					
 
 //							  메인                                            서브                       VO
