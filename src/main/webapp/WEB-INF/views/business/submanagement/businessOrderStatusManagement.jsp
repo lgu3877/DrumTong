@@ -310,6 +310,112 @@
 			modalexitkey = obj.parentNode.id;
 			let detailob = orderList[(obj.parentNode.id).replace('clonediv','')];
 			
+			console.log('디테일 오비');
+			console.log(detailob);
+			
+			let count = 0;
+			let i = 0;
+			// 1차 메인카테고리 HashMap array
+		      for(mainkey in Object.keys(detailob.maincategory)) {
+		         
+		    	 
+		    	 
+		         
+		    	 
+		         // HashMap [maincategory]를  단일 객체로 분리시켜줍니다.
+		         let inputMainKey = Object.keys(orderList[1].maincategory)[mainkey];
+		         
+		         
+		         console.log();
+		         console.log('메인카테고리 단일 값');
+		         console.log(inputMainKey);
+		         console.log();
+		         
+		         
+		         
+		         // 서브 카테고리들
+		         let subcategories = orderList[1].maincategory[inputMainKey][0];
+		         
+		         
+		         console.log();
+		         console.log('서브카테고리 배열의 값');
+		         console.log(subcategories)
+		         console.log();
+		         
+		         
+		         let j = 0; 
+		         // 2차 서브카테고리 HashMap 해제
+		         for(subkey in Object.keys(subcategories)){
+		         	  
+		            
+		         	if(i != 0 || j != 0) {
+			            // HashMap [subcategory]를  단일 객체로 분리시켜줍니
+			           
+			          detailmenus.find('.clonedetail').attr('id', 'clonedetail' + (count + 1));   //삭제하는 것도 맡들어야 함
+                  	  $('#clonedetail' + count).after(detailmenus.html()); 
+			            
+			          count++;
+		         	}
+		         	
+		            let inputSubKey = Object.keys(subcategories)[subkey];
+			            
+			            
+			        console.log();
+			        console.log('서브카테고리 단일의 값');
+			        console.log(inputSubKey);
+			        console.log();
+			            
+					
+			            
+			        let mainmenus = subcategories[inputSubKey];
+		         		
+			     	// after은 선택한 영역 뒤에 추가시켜줍니다.
+			        // 메인 메뉴 이름  <div> 영역에 추가하기  
+			        $('#clonedetail' + count).find('.pmain').html(inputMainKey + '<span class="psubmain"></span>');
+			         	
+		        	// 서브값 넣기
+		            $('#clonedetail' + count).find('.psubmain').html('(' + inputSubKey + ')');
+		         	
+		            for ( z = 0; z < mainmenus.length; z++ ) {
+		               
+		               console.log('12세부메뉴 단일 값 : ' + z);
+		               console.log(mainmenus[z].name);
+		               console.log(mainmenus[z]);
+		               
+		               console.log(mainmenus[z].quickprice);
+		               let quickprice = ( mainmenus[z].quickprice === 0 ) ? '' : mainmenus[z].quickprice + '원';
+		               console.log('quick : ' + quickprice);
+		               
+		               
+		               
+		               $('#clonedetail' + count).find('.innerdetail').children('h3').each(function(index) {
+		            	   switch (index) {
+		                     case 0:
+		               			$('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(z).children('h3').eq(index).html(mainmenus[z].name);
+		               			break;
+		               			
+		                     case 1:
+		               			$('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(z).children('h3').eq(index).html(mainmenus[z].menuprice + '원');
+					   			break;
+					   			
+		                     case 2:
+		               			$('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(z).children('h3').eq(index).html(mainmenus[z].amount + '개');
+					   			break;
+					   			
+		                     case 3:
+		               			$('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(z).children('h3').eq(index).html(mainmenus[z].sumprice + '원');
+		               			break;
+		            	   }
+		               
+		            });
+		            j++;
+		         }
+		       i++;  
+		      }
+		    }
+			
+			
+			
 			$('#modal').find('#ableday').html(detailob.ableday);
 			$('#modal').find('#deliverydate').html(detailob.deliverydate);
 			$('#modal').find('#pickupdate').html(detailob.pickupdate);
@@ -349,87 +455,7 @@
 			$('#modal').find('#subcategory').html(subcategorymodal);
 			$('#modal').find('#subcategory').parent('div').css('height', (30 * subcatespan) + 'px');
 			
-			let count = 0;
-			for(i = 0; i < Object.keys(detailob.maincategory).length; i++) {
-				for(j = 0; j < Object.keys(detailob.maincategory[subpath1[i]][0]).length; j++) {
-					if(i != 0 || j != 0) {
-						detailmenus.find('.clonedetail').attr('id', 'clonedetail' + (count + 1));	//삭제하는 것도 맡들어야 함
-						$('#clonedetail' + count).after(detailmenus.html()); 
-						count++;
-					}
-// 					$('#clonedetail' + count).find('.pmain').html(subpath1[i]);
-					$('#clonedetail' + count).find('.pmain').html(subpath1[i] + '<span class="psubmain"></span>');
-					$('#clonedetail' + count).find('.psubmain').html('(' + Object.keys(detailob.maincategory[subpath1[i]][0])[j] + ')');
-// 					console.log('확인1 : ', detailob.maincategory[subpath1[i]][0]);
-//  					console.log('확인2 : ', detailob.maincategory[subpath1[i]][0][Object.keys(detailob.maincategory[subpath1[i]][0])[j]][0].name);
-  					console.log('서브메뉴 길이확인 : ', detailob.maincategory[subpath1[i]][0][Object.keys(detailob.maincategory[subpath1[i]][0])[j]].length);
-
-  					//   						$('#clonedetail' + count).find('.innerdetail').children('h3').each(function(index) {
-// 							switch (index) {
-// 							case 0:
-// 								$('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(k).children('h3').eq(index).html(detailob.maincategory[subpath1[i]][0][Object.keys(detailob.maincategory[subpath1[i]][0])[j]][0].name);
-// 								break;
-// 							case 1:
-// 								$('#clonedetail' + count).find('.innerdetail').children('h3').eq(index).html(detailob.maincategory[subpath1[i]][0][Object.keys(detailob.maincategory[subpath1[i]][0])[j]][0].menuprice + '원');
-// 								break;
-// 							case 2:
-// 								$('#clonedetail' + count).find('.innerdetail').children('h3').eq(index).html(detailob.maincategory[subpath1[i]][0][Object.keys(detailob.maincategory[subpath1[i]][0])[j]][0].amount + '개');
-// 								break;
-// 							case 3:
-// 								$('#clonedetail' + count).find('.innerdetail').children('h3').eq(index).html(detailob.maincategory[subpath1[i]][0][Object.keys(detailob.maincategory[subpath1[i]][0])[j]][0].sumprice + '원');
-// 								break;
-// 							}
-// 						});
-  					
-  					for(k = 0; k < detailob.maincategory[subpath1[i]][0][Object.keys(detailob.maincategory[subpath1[i]][0])[j]].length ; k++) {
-  						if(k > 0)
-	  						$('#clonedetail' + count).find('.outerdetail').append(innerclone.html());
-
-  						$('#clonedetail' + count).find('.innerdetail').children('h3').each(function(index) {
-							switch (index) {
-							case 0:
-								$('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(k).children('h3').eq(index).html(detailob.maincategory[subpath1[i]][0][Object.keys(detailob.maincategory[subpath1[i]][0])[j]][k].name);
-								break;
-							case 1:
-								$('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(k).children('h3').eq(index).html(detailob.maincategory[subpath1[i]][0][Object.keys(detailob.maincategory[subpath1[i]][0])[j]][k].menuprice + '원');
-								break;
-							case 2:
-								$('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(k).children('h3').eq(index).html(detailob.maincategory[subpath1[i]][0][Object.keys(detailob.maincategory[subpath1[i]][0])[j]][k].amount + '개');
-								break;
-							case 3:
-								$('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(k).children('h3').eq(index).html(detailob.maincategory[subpath1[i]][0][Object.keys(detailob.maincategory[subpath1[i]][0])[j]][k].sumprice + '원');
-								break;
-							}
-						});
-  					}
-				}
-			}
 			
-// 			   for(mainkey in Object.keys(orderList[1].maincategory)) {
-				      
-// 				      let inputMainKey = Object.keys(orderList[1].maincategory)[mainkey];
-// 				      console.log(orderList[1].maincategory[inputMainKey]);
-				      
-				      
-// 				      // 서브 카테고리들
-// 				      let subcategories = orderList[1].maincategory[inputMainKey][0];
-				      
-// 				      // 2차 서브카테고리 HashMap 해제
-// 				      for(subkey in Object.keys(subcategories)){
-// 				         let inputSubKey = Object.keys(subcategories)[subkey];
-				         
-				         
-// 				         let mainmenus = subcategories[inputSubKey];
-				         
-				         
-// 				         for ( i = 0; i < mainmenus.length; i++ ) {
-// 				            console.log('세부메뉴 단일 값 : ' + i);
-// 				            console.log(mainmenus[i].name);
-// 				            console.log(mainmenus[i]);
-// 				         }
-// 				      }
-				      
-// 				   }
 			   
 			// bDetailSalesVOList 는 volist 수정 후 작업재개!!
 // 				$('#modal').find('#maincategory').html(detailob.bDetailSalesVOList[0].maincategory);
