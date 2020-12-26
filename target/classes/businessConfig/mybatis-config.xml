@@ -34,6 +34,7 @@
 		<typeAlias type="com.drumtong.business.vo.StatisticsData" alias="StatisticsData" />
 		<typeAlias type="com.drumtong.business.vo.OrderList" alias="OrderList" />
 		<typeAlias type="com.drumtong.customer.vo.CouponList" alias="CouponList" />
+		<typeAlias type="com.drumtong.customer.vo.EstablishmentList" alias="EstablishmentList" />
 		
 	</typeAliases>
 	

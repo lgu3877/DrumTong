@@ -1,6 +1,8 @@
 package com.drumtong.customer.controller.main;
 
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +18,8 @@ public class CustomerMainController {
 	@Autowired CustomerMainService svc;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView main() {
-		return svc.main();
+	public ModelAndView main(HttpServletRequest req) {
+		return svc.main(req);
 	}
 
 	
