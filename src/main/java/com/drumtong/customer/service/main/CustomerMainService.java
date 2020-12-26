@@ -51,6 +51,19 @@ public class CustomerMainService {
 		// 랜덤으로 10개의 매장을 들고 옴[영경]
 		List<EstablishmentList> RandomList = randomList(req);
 		
+		// 만약 10개가 아니라면 갯수를 맞춰주기
+		if(RandomList.size() != 10) {
+			List<EstablishmentList> tmp = new ArrayList<EstablishmentList>();
+			int i = 0;
+			int lastNum = RandomList.size();
+			while(tmp.size() != 10) {
+				tmp.add(RandomList.get(i));
+				if(++i == lastNum) i = 0;
+			}
+			RandomList = tmp;
+		}
+		
+		
 		mav.addObject("RandomList", RandomList);
 		
 		return mav;
@@ -58,7 +71,6 @@ public class CustomerMainService {
 	
 	// 랜덤으로 10개 매장을 들고 오는 메서드[영경]
 	private List<EstablishmentList> randomList(HttpServletRequest req){
-		System.out.println("randomList 메서드 실행");
 		CPrivateDataVO Login = (CPrivateDataVO)req.getSession().getAttribute("cLogin");
 		boolean isUser = Login != null;
 		// 로그인 했을 땐 수령지 주소 기준(메인 주소만)으로 안했을 땐 기본 주소로
@@ -106,33 +118,23 @@ public class CustomerMainService {
 	
 	// 검색할 리스트, 결과 리스트 [영경]
 	private Set<EstablishmentList> randomSearch(List<EstablishmentList> list, Set<EstablishmentList> result){
-		System.out.println("randomSearch 메서드 실행");
 		Set<Integer> randomNums = new HashSet<Integer>();
 		int maxNum = list.size();
 		boolean checkList = true;
 		
-//		System.out.println("■■■ 리스트 테스트 ■■■");
-//		for(EstablishmentList rlist : list) {
-//			System.out.println(rlist.getEstid() + " : " + rlist.getBrandnaming() + ", " + rlist.getGpa());
-//		}
-//		System.out.println("■■■ size : " + result.size() + "개 ■■■");
-		
-		//1. 처음 리스트
+		//1. list 와 set을 중복없이 합친다.
 		if(maxNum < 10) {
 			if((result.size() + maxNum) <= 10) {
-				// 두 리스트 합치기■■■■■■■■■■■■■■■■■■■■■■■
-				
-				// 중복된 값은 지우고(removeAll : 차집합)
-				list.removeAll(result);
-				
-//				리스트 추가해주기(addAll : 합집합)
-				result.addAll(list);
-				
-//				System.out.println("■■■ 랜덤 리스트 테스트 ■■■");
-//				for(EstablishmentList rlist : result) {
-//					System.out.println(rlist.getEstid() + " : " + rlist.getBrandnaming() + ", " + rlist.getGpa());
-//				}
-//				System.out.println("■■■ size : " + result.size() + "개 ■■■");
+				for(EstablishmentList li : list) {
+					boolean Exist = true;
+					for(EstablishmentList re : result) {
+						if(li.getEstid().equals(re.getEstid()) ) {
+							Exist = !Exist;
+							break;
+						}
+					}
+					if(Exist) result.add(li);
+				}
 				
 				return result;
 			}
@@ -149,12 +151,6 @@ public class CustomerMainService {
 				}
 			}
 		}
-		
-//		System.out.println("■■■ 랜덤 리스트 테스트 ■■■");
-//		for(EstablishmentList rlist : result) {
-//			System.out.println(rlist.getEstid() + " : " + rlist.getBrandnaming() + ", " + rlist.getGpa());
-//		}
-//		System.out.println("■■■ size : " + result.size() + "개 ■■■");
 		
 		return result;
 	}

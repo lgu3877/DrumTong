@@ -84,126 +84,138 @@
 		<p class="laundry_p laundry_p1">간편한 세탁소 찾기</p>
 		<p class="laundry_p laundry_p2">쉽게 세탁소를 찾기 위한 솔루션!</p>
 		<div class="laundryLists">
+				<c:forEach items="${RandomList }" var="li">
+					<div class="laundryLists_1">
+						<a href="${cpath }/customer/laundry/customerDetail/${li.estid}/">
+							<div class="laundryLists_1_1">
+								<img src="${cpath }/resources/customer/img/펭수버럭.jpg">
+							</div>
+							<div class="laundryLists_1_2">
+								<p>${li.brandnaming }</p>
+								<p>${li.mainlocation }</p>
+							</div>
+						</a>
+					</div>
+				</c:forEach>
+<!-- 			<div class="laundryLists_1"> -->
+<!-- 				<a href="#"> -->
+<!-- 					<div class="laundryLists_1_1"> -->
+<%-- 						<img src="${cpath }/resources/customer/img/펭수버럭.jpg"> --%>
+<!-- 					</div> -->
+<!-- 					<div class="laundryLists_1_2"> -->
+<!-- 						<p>펭수에욤</p> -->
+<!-- 						<p>버럭!</p> -->
+<!-- 					</div> -->
+<!-- 				</a> -->
+<!-- 			</div> -->
 
-			<div class="laundryLists_1">
-				<a href="#">
-					<div class="laundryLists_1_1">
-						<img src="${cpath }/resources/customer/img/펭수버럭.jpg">
-					</div>
-					<div class="laundryLists_1_2">
-						<p>펭수에욤</p>
-						<p>버럭!</p>
-					</div>
-				</a>
-			</div>
+<!-- 			<div class="laundryLists_1"> -->
+<!-- 				<a href="#"> -->
+<!-- 					<div class="laundryLists_1_1"> -->
+<%-- 						<img src="${cpath }/resources/customer/img/시크도시.jpg"> --%>
+<!-- 					</div> -->
+<!-- 					<div class="laundryLists_1_2"> -->
+<!-- 						<p>펭수에욤</p> -->
+<!-- 						<p>버럭!</p> -->
+<!-- 					</div> -->
+<!-- 				</a> -->
+<!-- 			</div> -->
 
-			<div class="laundryLists_1">
-				<a href="#">
-					<div class="laundryLists_1_1">
-						<img src="${cpath }/resources/customer/img/시크도시.jpg">
-					</div>
-					<div class="laundryLists_1_2">
-						<p>펭수에욤</p>
-						<p>버럭!</p>
-					</div>
-				</a>
-			</div>
+<!-- 			<div class="laundryLists_1"> -->
+<!-- 				<a href="#"> -->
+<!-- 					<div class="laundryLists_1_1"> -->
+<%-- 						<img src="${cpath }/resources/customer/img/펭수귀염.jpg"> --%>
+<!-- 					</div> -->
+<!-- 					<div class="laundryLists_1_2"> -->
+<!-- 						<p>펭수에욤</p> -->
+<!-- 						<p>버럭!</p> -->
+<!-- 					</div> -->
+<!-- 				</a> -->
+<!-- 			</div> -->
 
-			<div class="laundryLists_1">
-				<a href="#">
-					<div class="laundryLists_1_1">
-						<img src="${cpath }/resources/customer/img/펭수귀염.jpg">
-					</div>
-					<div class="laundryLists_1_2">
-						<p>펭수에욤</p>
-						<p>버럭!</p>
-					</div>
-				</a>
-			</div>
+<!-- 			<div class="laundryLists_1"> -->
+<!-- 				<a href="#"> -->
+<!-- 					<div class="laundryLists_1_1"> -->
+<%-- 						<img src="${cpath }/resources/customer/img/파란하늘.jpg"> --%>
+<!-- 					</div> -->
+<!-- 					<div class="laundryLists_1_2"> -->
+<!-- 						<p>펭수에욤</p> -->
+<!-- 						<p>버럭!</p> -->
+<!-- 					</div> -->
+<!-- 				</a> -->
+<!-- 			</div> -->
 
-			<div class="laundryLists_1">
-				<a href="#">
-					<div class="laundryLists_1_1">
-						<img src="${cpath }/resources/customer/img/파란하늘.jpg">
-					</div>
-					<div class="laundryLists_1_2">
-						<p>펭수에욤</p>
-						<p>버럭!</p>
-					</div>
-				</a>
-			</div>
-
-			<div class="laundryLists_1">
-				<a href="#">
-					<div class="laundryLists_1_1">
-						<img src="${cpath }/resources/customer/img/펭수버럭.jpg">
-					</div>
-					<div class="laundryLists_1_2">
-						<p>펭수에욤</p>
-						<p>버럭!</p>
-					</div>
-				</a>
-			</div>
+<!-- 			<div class="laundryLists_1"> -->
+<!-- 				<a href="#"> -->
+<!-- 					<div class="laundryLists_1_1"> -->
+<%-- 						<img src="${cpath }/resources/customer/img/펭수버럭.jpg"> --%>
+<!-- 					</div> -->
+<!-- 					<div class="laundryLists_1_2"> -->
+<!-- 						<p>펭수에욤</p> -->
+<!-- 						<p>버럭!</p> -->
+<!-- 					</div> -->
+<!-- 				</a> -->
+<!-- 			</div> -->
 			
-			<div class="laundryLists_1">
-				<a href="#">
-					<div class="laundryLists_1_1">
-						<img src="${cpath }/resources/customer/img/펭수버럭.jpg">
-					</div>
-					<div class="laundryLists_1_2">
-						<p>펭수에욤</p>
-						<p>버럭!</p>
-					</div>
-				</a>
-			</div>
+<!-- 			<div class="laundryLists_1"> -->
+<!-- 				<a href="#"> -->
+<!-- 					<div class="laundryLists_1_1"> -->
+<%-- 						<img src="${cpath }/resources/customer/img/펭수버럭.jpg"> --%>
+<!-- 					</div> -->
+<!-- 					<div class="laundryLists_1_2"> -->
+<!-- 						<p>펭수에욤</p> -->
+<!-- 						<p>버럭!</p> -->
+<!-- 					</div> -->
+<!-- 				</a> -->
+<!-- 			</div> -->
 
-			<div class="laundryLists_1">
-				<a href="#">
-					<div class="laundryLists_1_1">
-						<img src="${cpath }/resources/customer/img/시크도시.jpg">
-					</div>
-					<div class="laundryLists_1_2">
-						<p>펭수에욤</p>
-						<p>버럭!</p>
-					</div>
-				</a>
-			</div>
+<!-- 			<div class="laundryLists_1"> -->
+<!-- 				<a href="#"> -->
+<!-- 					<div class="laundryLists_1_1"> -->
+<%-- 						<img src="${cpath }/resources/customer/img/시크도시.jpg"> --%>
+<!-- 					</div> -->
+<!-- 					<div class="laundryLists_1_2"> -->
+<!-- 						<p>펭수에욤</p> -->
+<!-- 						<p>버럭!</p> -->
+<!-- 					</div> -->
+<!-- 				</a> -->
+<!-- 			</div> -->
 
-			<div class="laundryLists_1">
-				<a href="#">
-					<div class="laundryLists_1_1">
-						<img src="${cpath }/resources/customer/img/펭수귀염.jpg">
-					</div>
-					<div class="laundryLists_1_2">
-						<p>펭수에욤</p>
-						<p>버럭!</p>
-					</div>
-				</a>
-			</div>
+<!-- 			<div class="laundryLists_1"> -->
+<!-- 				<a href="#"> -->
+<!-- 					<div class="laundryLists_1_1"> -->
+<%-- 						<img src="${cpath }/resources/customer/img/펭수귀염.jpg"> --%>
+<!-- 					</div> -->
+<!-- 					<div class="laundryLists_1_2"> -->
+<!-- 						<p>펭수에욤</p> -->
+<!-- 						<p>버럭!</p> -->
+<!-- 					</div> -->
+<!-- 				</a> -->
+<!-- 			</div> -->
 
-			<div class="laundryLists_1">
-				<a href="#">
-					<div class="laundryLists_1_1">
-						<img src="${cpath }/resources/customer/img/파란하늘.jpg">
-					</div>
-					<div class="laundryLists_1_2">
-						<p>펭수에욤</p>
-						<p>버럭!</p>
-					</div>
-				</a>
-			</div>
+<!-- 			<div class="laundryLists_1"> -->
+<!-- 				<a href="#"> -->
+<!-- 					<div class="laundryLists_1_1"> -->
+<%-- 						<img src="${cpath }/resources/customer/img/파란하늘.jpg"> --%>
+<!-- 					</div> -->
+<!-- 					<div class="laundryLists_1_2"> -->
+<!-- 						<p>펭수에욤</p> -->
+<!-- 						<p>버럭!</p> -->
+<!-- 					</div> -->
+<!-- 				</a> -->
+<!-- 			</div> -->
 
-			<div class="laundryLists_1">
-				<a href="#">
-					<div class="laundryLists_1_1">
-						<img src="${cpath }/resources/customer/img/펭수버럭.jpg">
-					</div>
-					<div class="laundryLists_1_2">
-						<p>펭수에욤</p>
-						<p>버럭!</p>
-					</div>
-				</a>
-			</div>
+<!-- 			<div class="laundryLists_1"> -->
+<!-- 				<a href="#"> -->
+<!-- 					<div class="laundryLists_1_1"> -->
+<%-- 						<img src="${cpath }/resources/customer/img/펭수버럭.jpg"> --%>
+<!-- 					</div> -->
+<!-- 					<div class="laundryLists_1_2"> -->
+<!-- 						<p>펭수에욤</p> -->
+<!-- 						<p>버럭!</p> -->
+<!-- 					</div> -->
+<!-- 				</a> -->
+<!-- 			</div> -->
 
 <!-- 			<button class="fa fa-arrow-circle-right btn" aria-hidden="true"></button> -->
 			<!-- <button class="btn" aria-hidden="true">></button> -->
