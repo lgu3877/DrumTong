@@ -94,4 +94,28 @@
 	<select id="selectEst" parameterType="String" resultType="BInformationVO">
 		SELECT * FROM BINFORMATION WHERE ESTID=#{estid}
 	</select>
+	
+	<!-- 주소에  -->
+	<select id="selectEstablishmentList" parameterType="hashmap" resultType="EstablishmentList">
+		SELECT B.ESTID, NVL(I.STOREIMG, '-') AS MAINIMG, B.BRANDNAMING, M.DEFAULTCATEGORY, 
+			B.MAINLOCATION, B.DETAILLOCATION, NVL(R.GPA,0) AS GPA, M.DELIVERYBOOLEAN FROM BINFORMATION B 
+		<if test='MainAddress != "All"'>
+		  INNER JOIN 
+		  	(SELECT ESTID, REPLACE(ADDRESSA || ' ' || ADDRESSB || ' ' || ADDRESSC || ' ' || ADDRESSD || ' ' || ADDRESSE || ' ' || ADDRESSE, ' -', '') 
+		  		AS COMPARE FROM BDELIVERYAREA) D 
+		  			ON B.ESTID=D.ESTID 
+		</if>
+		  LEFT OUTER JOIN 
+		  	(SELECT AVG(GPA) AS GPA, ESTID FROM BREVIEW GROUP BY ESTID) R 
+		  		ON B.ESTID = R.ESTID 
+		  LEFT OUTER JOIN BMANAGEMENT M ON B.ESTID = M.ESTID
+		  LEFT OUTER JOIN 
+		  	(SELECT * FROM BIMAGE WHERE DELEGATEPHOTOBOOLEAN='Y') I 
+		  		ON B.ESTID=I.ESTID
+      	  WHERE B.STATUS='SUCCESS' 
+		<if test='MainAddress != "All"'>
+		  AND COMPARE=#{MainAddress} 
+		</if>  
+		  ORDER BY GPA
+	</select>
 </mapper>
