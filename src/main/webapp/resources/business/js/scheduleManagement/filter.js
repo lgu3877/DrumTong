@@ -1,10 +1,5 @@
 // 필터링
 
-// 초기 데이터 저장
-const originalSchedule = document.querySelector("#schedule-container");
-
-const cloneOriginalSchedule = originalSchedule.cloneNode(true);
-
 // 전체보기 > page reload
 function pageReload() {
 	const lists = document.getElementsByClassName("list_content");
@@ -29,6 +24,7 @@ function sort(option) {
 		arr.push(obj);
 	}
 	
+	// 오름차순 & 내림 차순 스위치
 	switch(option) {
 	case "recent":
 		arr.sort((a, b) => {
