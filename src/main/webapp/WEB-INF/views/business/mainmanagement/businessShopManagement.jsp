@@ -47,7 +47,7 @@
 		
 	<!-- 전체 폼 -->
 	<form method="POST">
-	
+	<!-- <div> -->
 		<!-- 매장 소개(사진 & 글 -->
 		<div class="shop_introduction">
 			<!-- <form class="shop_image_con" method="POST"> -->					
@@ -56,9 +56,10 @@
 				<div class="shop_info_title_con">
 					<div>
 						<span class="shop_info_title">매장 사진</span>
-						<i class="far fa-question-circle" style="font-weight: 600">도움말</i>
+						<i id="photo-help" class="far fa-question-circle" style="font-weight: 600">도움말</i>
+						<div id="photo-help-msg"></div>
 					</div>
-				<!-- cover button -->
+				<!-- 사진 변경 버튼 -->
 					<div class="service_button_con">
 						<div id="add-cover-btn" class="update_image_btn_con">
 							<div class="add_menu_icon_con">
@@ -149,7 +150,7 @@
 			</div>
 			<!-- </form> -->
 			
-		<!-- Text Introduction -->
+		<!-- 매장 소개글 -->
 			<!-- <form class="shop_text_intro_con" method="POST"> -->
 			<div class="shop_text_intro_con">
 			
@@ -157,7 +158,7 @@
 				<div class="shop_info_title_con">
 					<div>
 						<span class="shop_info_title">매장 소개글</span>
-						<i class="far fa-question-circle" style="font-weight: 600">도움말</i>
+						<i id="intro-help" class="far fa-question-circle" style="font-weight: 600">도움말</i>
 					</div>
 				</div>
 			
@@ -186,8 +187,8 @@
 			<!-- title -->
 			<div class="shop_info_title_con">
 				<div>
-					<span class="shop_info_title">등록된 서비스 메뉴</span> <i
-						class="far fa-question-circle" style="font-weight: 600">도움말</i>
+					<span class="shop_info_title">등록된 서비스 메뉴</span> 
+					<i id="update-help" class="far fa-question-circle" style="font-weight: 600">도움말</i>
 				</div>
 				<div class="service_button_con">
 					<!-- modify button -->
@@ -290,7 +291,7 @@
 			<div class="shop_info_title_con">
 				<div>
 					<span class="shop_info_title">서비스 등록</span>
-					<i class="far fa-question-circle" style="font-weight: 600">도움말</i>
+					<i id="post-help" class="far fa-question-circle" style="font-weight: 600">도움말</i>
 				</div>
 			<!-- add button -->
 				<div class="service_button_con">
@@ -399,7 +400,7 @@
 			<div class="shop_info_title_con">
 				<div>
 					<span class="shop_info_title">세탁물 수령 방법</span>
-					<i class="far fa-question-circle" style="font-weight: 600">도움말</i>
+					<i id="return-help" class="far fa-question-circle" style="font-weight: 600">도움말</i>
 				</div>
 			<!-- 버튼 -->
 				<div class="service_button_con">
@@ -474,6 +475,7 @@
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementImage.js"></script>
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementIntroText.js"></script>
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementReturnItem.js"></script>
+	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementHelpMsg.js"></script>
 	
 </body>
 </html>
