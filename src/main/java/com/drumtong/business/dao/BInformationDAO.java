@@ -1,5 +1,6 @@
 package com.drumtong.business.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.drumtong.business.vo.BInformationVO;
@@ -45,7 +46,7 @@ public interface BInformationDAO {
 	int updateLicense(BInformationVO vo);
 
 	// 조건에 맞는 사업장 리스트를 들고온다.
-	List<EstablishmentList> selectEstablishmentList(String MainAddress);
+	List<EstablishmentList> selectEstablishmentList(HashMap<String, String> param);
 
 
 
