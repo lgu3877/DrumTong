@@ -578,9 +578,6 @@
     line-height: 50px;
     cursor: pointer;
     color: navy;
-    
-/*     display: flex; */
-/*     justify-content: space-between; */
 }
 
 .return_menu ul li:hover {
