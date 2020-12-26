@@ -7,7 +7,7 @@
 	
 }
 
-/* */
+/* 폼 그림자 */
 .form {
 	background-color: whitesmoke;
 	padding: 20px;
@@ -19,6 +19,33 @@
 	transition: 0.5s;
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 10px 5px -1px, rgba(0, 0, 0, 0.3)
 		0px 10px 15px 3px;
+}
+
+/* 도움말 말풍선 */
+.help_msg {
+	transition: all 1s;
+	/* transition-property: opacity;
+	transition-duration: 0.5s; 
+	opacity: 1;
+ */	position: absolute;
+	/* margin: 50px; */
+	margin: 10px 110px;
+	width: 400px;
+	height: 50px;
+	background: pink;
+	border-radius: 10px;
+}
+
+.help_msg:after {
+	transition-duration: 0.5s; 
+	border-top: 10px solid pink;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 0px solid transparent;
+	content: "";
+	position: absolute;
+	bottom: -10px;
+	left: 50px;
 }
 
 .prev {
