@@ -23,6 +23,11 @@
 	display: none;
 }
 
+/* 정기 휴무 캘린더 배경색 */
+.reg_holiday {
+	background-color: #f38181 !important;
+}
+
 /* 폰트 옵션 */
 .text_blue {
 	color: #3b5998;

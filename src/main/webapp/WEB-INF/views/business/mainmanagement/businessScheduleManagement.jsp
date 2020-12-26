@@ -344,7 +344,7 @@
 							<div class="h_schedule_context">
 								<p class="scheduled_days">
 									매월 
-										<span class="h_week">[첫째주]</span> |
+										<span class="h_week">[첫째 주]</span> |
 										<span class="h_day">[일요일]</span>
 										<span class="h_day">[화요일]</span>
 									휴무
@@ -359,7 +359,7 @@
 							<div class="h_schedule_context">
 								<p class="scheduled_days">
 									매월 
-										<span class="h_week">[셋째주]</span> |
+										<span class="h_week">[셋째 주]</span> |
 										<span class="h_day">[월요일]</span>
 										<span class="h_day">[목요일]</span>
 										<span class="h_day">[금요일]</span>
@@ -376,7 +376,7 @@
 							<div class="h_schedule_context">
 								<p class="scheduled_days">
 									매월 
-										<span class="h_week">[다섯째주]</span> |
+										<span class="h_week">[다섯째 주]</span> |
 										<span class="h_day">[월요일]</span>
 										<span class="h_day">[토요일]</span>
 									휴무

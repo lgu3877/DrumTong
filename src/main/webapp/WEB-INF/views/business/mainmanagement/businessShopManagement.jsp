@@ -40,13 +40,17 @@
 	<!-- side-header(navbar) -->
 	<%@ include file="../main/businessSideHeader.jsp" %>
 	
-	<!-- section -->
+	<!-- 섹션 -->
 	<section>
 		<!-- top-header(membership) -->
 		<%@ include file="../main/businessSubHeader.jsp" %>
 		
+	<!-- 전체 폼 -->
+	<form method="POST">
+	
 		<!-- 매장 소개(사진 & 글 -->
-		<div class="shop_introduction">					
+		<div class="shop_introduction">
+			<!-- <form class="shop_image_con" method="POST"> -->					
 			<div class="shop_image_con">
 			<!-- title -->	
 				<div class="shop_info_title_con">
@@ -143,8 +147,10 @@
 					</label>
 				</div>
 			</div>
+			<!-- </form> -->
 			
 		<!-- Text Introduction -->
+			<!-- <form class="shop_text_intro_con" method="POST"> -->
 			<div class="shop_text_intro_con">
 			
 			<!-- title -->
@@ -169,10 +175,12 @@
        				</span>
        			</div>
 			</div>
+			<!-- </form> -->
 		</div>
 
 
-		<!-- 서비스 메뉴 뷰 -->
+		<!-- 서비스 메뉴 뷰(등록된 서비스 메뉴) -->
+		<!-- <form class="current_menu_con" method="POST"> -->	
 		<div class="current_menu_con">
 
 			<!-- title -->
@@ -271,9 +279,11 @@
 				</table>
 			</div>
 		</div>
+		<!-- </form> -->
 
 
-		<!-- 서비스 메뉴 생성 -->
+		<!-- 서비스 메뉴 생성(서비스 등록) -->
+		<!-- <form class="create_menu_con" method="POST"> -->	
 		<div class="create_menu_con">
 
 		<!-- title -->
@@ -379,9 +389,10 @@
 				
 			</div>
 		</div>
-
+		<!-- </form> -->
 		
-		<!-- 상품 수령 방법 -->
+		<!-- 상품 수령 방법(세탁물 수령 방법) -->
+		<!-- <form class="return_menu_con" method="POST"> -->
 		<div class="return_menu_con">
 
 		<!-- 목차 -->
@@ -408,10 +419,11 @@
 			</div>
 			
 		<!-- 수취 선택 -->
-			<form class="return_menu form">
+			<!-- <form class="return_menu"> -->
+			<div class="return_menu">
 				<ul>
 					<li onclick="checkContent(this)">
-						<input class="returnOptions" type="checkbox" name="returnOptions">
+						<input class="returnOptions" type="checkbox" name="returnOptions"> 
 						<i class="fas fa-window-close"></i>
 						<span>배달 대행업체 이용</span>
 					</li>
@@ -426,9 +438,17 @@
 						<span>방문 수령</span>
 					</li>
 				</ul>
-			</form>
+			</div>
+			<!-- </form> -->
 		</div>
-
+		<!-- </form> -->
+		
+		<!-- 전체 form submit -->
+		<div>
+			<input type="submit" value="입력 완료">
+		</div>
+		
+	</form>
 	</section>
 		
 		
