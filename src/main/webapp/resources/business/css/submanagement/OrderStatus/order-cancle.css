@@ -1,0 +1,38 @@
+body {
+	width: 800px;
+}
+
+.container {
+	width: 700px; 
+	border: 2px solid black; 
+	margin: 0 auto; 
+	margin-top: 60px; 
+	padding: 15px;
+	padding-bottom: 40px;
+	text-align: center
+}
+
+.subcontainer {
+	width: 300px; 
+	height: 350px;
+	display: inline-block;
+}
+
+.subcontainer div {
+	width: 280px; 
+	height: 80px;
+	padding: 10px;
+	color: #cacece;
+	font-size: 16pt;
+	font-weight: bold;
+	border: 3px solid #3088F9;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.subcontainer div.selected {
+	border: 3px solid white;
+	background-color: #3088F9;
+}
