@@ -21,8 +21,14 @@ public class EstablishmentList extends BInformationVO{
 	private String[] maincategory;	// 메인 카테고리 아이콘
 	private double gpa;				// 좋아요 평균
 	private char deliveryboolean;	// 배달 여부 'Y' or 'N'
-	
-	
+	private int reviewnum;			// 리뷰 개수
+
+	public int getReviewnum() {
+		return reviewnum;
+	}
+	public void setReviewnum(int reviewnum) {
+		this.reviewnum = reviewnum;
+	}
 	public String getDefaultcategory() {
 		return defaultcategory;
 	}
@@ -46,7 +52,12 @@ public class EstablishmentList extends BInformationVO{
 		return gpa;
 	}
 	public void setGpa(double gpa) {
-		this.gpa = gpa;
+		// 1. 소수 첫째자리까지 끊어준 후 2를 곱한다
+		gpa = Math.round((gpa * 1.0) / 1.0) * 2.0;
+		// 2. 1의 자리를 반올림 해준다.
+		double tmp = gpa % 10;
+		gpa = gpa + -tmp + (tmp < 5 ? 0 : (10));
+		this.gpa = gpa / 2.0;
 	}
 	public char getDeliveryboolean() {
 		return deliveryboolean;
