@@ -106,6 +106,16 @@
 					</div>
 				</div>
 			</div>
+			
+			<div class="sidecontainer">
+				<div>
+					<button onclick="checkrequest(this)">처&nbsp&nbsp리</button>
+				</div>
+				<div>
+					<button onclick="checkcancle(this)">취&nbsp&nbsp소</button>
+				</div>
+			</div>
+			
 			</div>
 		
 		</div>
@@ -153,6 +163,12 @@
 		<hr>
 			<div class="in-modal">총 개수<span id="totalamount"></span></div>
 			<div class="in-modal">총 금액<span  id="totalprice"></span></div>
+		<hr>
+		    <div style="display: flex; width: 65%; height:50px;margin: 0 auto; justify-content: center; align-items: center;">
+		    	<button style="width: 40%; height: 100%; font-size: 16pt; font-weight: bold" onclick="checkcancle(this)">취소</button>
+		    	<div style="width: 20%"></div>
+		    	<button style="width: 40%; height: 100%; font-size: 16pt; font-weight: bold" onclick="checkrequest(this)">처리</button>
+		    </div>
 		<hr>
 	</div>
 	
@@ -216,14 +232,21 @@
  			
  			$('#clonediv0').find('p.purchasedate').html(orderList[0].purchasedate);		// 주문일자
  			$('#clonediv0').find('p.deliverydate').html(orderList[0].deliverydate);		// 배송일자
- 			$('#clonediv0').find('p.totalprice').html(orderList[0].totalprice);			// 총가격
+ 			$('#clonediv0').find('p.totalprice').html(numberWithCommas(orderList[0].totalprice) + '원');			// 총가격
  			
 			let mcategoryorigin = '';		// 메인 카테고리
 			for(key in Object.keys(orderList[0].maincategory)) {
 				mcategoryorigin += Object.keys(orderList[0].maincategory)[key] + ' / '; 	// '메인A / 메인B / 메인C / ' 
 			}
-			$('#clonediv0').find('p.maincategory').html(mcategoryorigin.slice(0, -2));		// '메인A / 메인B / 메인C'
 			
+			if(mcategoryorigin.slice(0, -2).length < 10)
+				$('#clonediv0').find('p.maincategory').html(mcategoryorigin.slice(0, -2));		// '메인A / 메인B / 메인C'
+			else
+				$('#clonediv0').find('p.maincategory').html(mcategoryorigin.substring(0, 10) + '...');
+			
+			$('#clonediv0').find('.sidecontainer').find('button').each(function(index, item) {
+				$(item).attr('name', orderList[0].salecode);
+			});
  		}
 		
  		
@@ -256,14 +279,22 @@
  				
  				$('#clonediv' + i).find('p.purchasedate').html(orderList[i].purchasedate);
  				$('#clonediv' + i).find('p.deliverydate').html(orderList[i].deliverydate);
- 				$('#clonediv' + i).find('p.totalprice').html(orderList[i].totalprice);
+ 				$('#clonediv' + i).find('p.totalprice').html(numberWithCommas(orderList[i].totalprice) + '원');
 			
  				
  				let mcategoryclone = '';
  				for(key in Object.keys(orderList[i].maincategory)) {
  					mcategoryclone += Object.keys(orderList[i].maincategory)[key] + ' / ';
  				}
- 				$('#clonediv' + i).find('p.maincategory').html(mcategoryclone.slice(0, -2));
+ 				
+ 				if(mcategoryclone.slice(0, -2).length < 10)
+	 				$('#clonediv' + i).find('p.maincategory').html(mcategoryclone.slice(0, -2));
+ 				else
+ 					$('#clonediv' + i).find('p.maincategory').html(mcategoryclone.substring(0, 10) + '...');
+ 				
+ 				$('#clonediv' + i).find('.sidecontainer').find('button').each(function(index, item) {
+ 					$(item).attr('name', orderList[i].salecode);
+ 				});
  			}
  		}
  		
@@ -422,6 +453,23 @@
 					if(index != 0)
 						$(item).remove();
 				});
+			}
+		}
+		
+		function checkcancle(obj) {			// 주문취소 confirm 실행문
+			let checkcancle = confirm('주문을 취소하시겠습니까?');
+			if(checkcancle == true) {
+				console.log('응! 취소할거야!');
+				console.log('주문번호 : ', obj.name);
+			}
+		}
+		
+		function checkrequest(obj) {		// 주문처리 confirm 실행문
+			let checkrequest = confirm('주문을 수락하시겠습니까?');
+			if(checkrequest == true) {
+				console.log('응! 수락할거야!');
+				console.log('주문번호 : ', obj.name);
+				window.open('./PopUpWindow/process/' + obj.name + '/', '주문처리팝업', 'width=700px,height=620px,scrollbars=yes');
 			}
 		}
 		
