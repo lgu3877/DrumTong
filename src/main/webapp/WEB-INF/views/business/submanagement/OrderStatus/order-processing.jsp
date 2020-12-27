@@ -47,7 +47,12 @@
 			<i class="far fa-square" onclick="typeSelect(this, 'ete')"></i>ETE를 활용한 자동 일자
 		</h1>
 			<div>
-				<input type="text" value="ETE" readonly><i class="far fa-question-circle fa-2x"></i>
+				<input type="text" value="ETE" readonly><i class="far fa-question-circle fa-2x" id="etehelp"></i>
+				<div class="ete-bubble" id="ete-bubble" style="display: none">
+					ETE 설명에 대해서 취급하고 있습니다
+					ETE 설명에 대해서 취급하고 있습니다
+					ETE 설명에 대해서 취급하고 있습니다
+				</div>
 			</div>
 		</div>
 
@@ -69,7 +74,10 @@
 		</div>
 	</div>
 	<div class="submitdiv">
-		<button>
+		<button onclick="popupExit()">
+			취소
+		</button>
+		<button onclick="popupSubmit()">
 			확인
 		</button>
 	</div>
@@ -128,7 +136,7 @@
 				$('#deleverydate').html('');
 			break;
 		case "ete":
-			
+			$('#deleverydate').html($('.etediv').find('input').val());
 			break;
 		case "input":
 			if(document.getElementById('inputdate').value != null)
@@ -138,25 +146,47 @@
 		}
 	}
 	
+	function popupExit() {	// 팝업창 종료
+		let popupexit = confirm('주문처리를 취소하시겠습니까?');
+		if(popupexit == true)
+			close();
+	}
+	
+	function popupSubmit() {  // 처리중 -> 요청 으로 제출
+		let popupsubmit = confirm('주문처리를 수락하시겠습니까?');
+		// 밑에 axios
+	}
+	
+	// 윈도우 창이 열리면서 시작하는 명령어
+	// window.onload 보다 빨리 시작함
+	// 시스템에서 제공하는 일자의 날짜 입력
     let dateCount = 0;
     $('#systemdiv').find('button').each(function(index, item) {
+
+    	dateCount++;
+
         var date = new Date();
-        if(index != 0) {
-        	date.setDate(date.getDate() + dateCount);
-        }
+        date.setDate(date.getDate() + dateCount);
         var year = date.getFullYear();
         var month = ("0" + (1 + date.getMonth())).slice(-2);
         var day = ("0" + date.getDate()).slice(-2);
     	$(item).children('.year').html(year + '년');
     	$(item).children('.mon-day').html(month + ' / ' + day);
-    	
-    	dateCount++;
     });
     
     document.getElementById('inputdate').addEventListener('change', function() {		// inputdiv의 아이콘이 체크되었을 때, showdiv에 배송날짜 입력
     	if(document.querySelector('.inputdiv i').className == 'far fa-check-square') {
     		$('#deleverydate').html(this.value);
     	}
+    });
+    
+    $('#etehelp').mouseover(function() {
+    	console.log('마우스 오버');
+    	$('#ete-bubble').css('display', '');
+    });
+    $('#etehelp').mouseleave(function() {
+    	console.log('마우스 리브');
+    	$('#ete-bubble').css('display', 'none');
     });
     
 	$('#inputdate').change(function() {
