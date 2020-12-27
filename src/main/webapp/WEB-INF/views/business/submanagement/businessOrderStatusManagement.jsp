@@ -67,10 +67,10 @@
 				<button onclick="chStatus(this, 's')">완료</button>
 			</div>
 			
-			<div style="width: 700px; height: 30px; margin: 0 auto; display: flex; align-items: center; margin-bottom: 25px; margin-top: 10px">
-				<input type="date" style="width: 40%; height: 100%; font-size: 14pt; text-align: center; border: 3px solid #3088F9; font-weight: bold">
+			<div class="topdatediv">
+				<input type="date">
 				<div style="width: 20%"></div>
-				<input type="date" style="width: 40%; height: 100%; font-size: 14pt; text-align: center; border: 3px solid #3088F9; font-weight: bold">
+				<input type="date">
 			</div>
 			
 			<div class="clonediv" id="clonediv0">
@@ -133,11 +133,11 @@
 		<hr>
 		
 		<div class="detailattr">
-			<h1 style="width: 20%; color: #cacece; font-size: 12pt; text-align: center;border-right: 1px solid #afafaf; border-left: 1px solid #afafaf">메뉴</h1>
-			<h1 style="width: 20%; color: #cacece; font-size: 12pt; text-align: center;border-right: 1px solid #afafaf">수량</h1>
-			<h1 style="width: 20%; color: #cacece; font-size: 12pt; text-align: center;border-right: 1px solid #afafaf">배달 가격</h1>
-			<h1 style="width: 20%; color: #cacece; font-size: 12pt; text-align: center;border-right: 1px solid #afafaf">단일 가격</h1>
-			<h1 style="width: 20%; color: #cacece; font-size: 12pt; text-align: center;border-right: 1px solid #afafaf">합계 가격</h1>
+			<h1 style="border-left: 1px solid #afafaf">메뉴</h1>
+			<h1>수량</h1>
+			<h1>배달 가격</h1>
+			<h1>단일 가격</h1>
+			<h1>합계 가격</h1>
 		</div>
 		<div class="detailmenus" id="detailmenus">
 			<div class="clonedetail" id="clonedetail0">
@@ -164,10 +164,10 @@
 			<div class="in-modal">총 개수<span id="totalamount"></span></div>
 			<div class="in-modal">총 금액<span  id="totalprice"></span></div>
 		<hr>
-		    <div style="display: flex; width: 65%; height:50px;margin: 0 auto; justify-content: center; align-items: center;">
-		    	<button style="width: 40%; height: 100%; font-size: 16pt; font-weight: bold" onclick="checkcancle(this)">취소</button>
+		    <div class="popupactive" id="popupactive">
+		    	<button onclick="checkcancle(this)">취소</button>
 		    	<div style="width: 20%"></div>
-		    	<button style="width: 40%; height: 100%; font-size: 16pt; font-weight: bold" onclick="checkrequest(this)">처리</button>
+		    	<button onclick="checkrequest(this)">처리</button>
 		    </div>
 		<hr>
 	</div>
@@ -307,6 +307,11 @@
  	         let totalquickprice = 0;	// 전체 배달가격 객체 
  	         let count = 0;
  	         let i = 0;
+ 	         
+ 	         $('#popupactive').children('button').each(function(index, item) {
+ 	        	 $(item).attr('name', detailob.salecode);
+ 	         });
+ 	         
  	         // 1차 메인카테고리 HashMap array
  	            for(mainkey in Object.keys(detailob.maincategory)) {
  	              
@@ -458,19 +463,14 @@
 		
 		function checkcancle(obj) {			// 주문취소 confirm 실행문
 			let checkcancle = confirm('주문을 취소하시겠습니까?');
-			if(checkcancle == true) {
-				console.log('응! 취소할거야!');
-				console.log('주문번호 : ', obj.name);
-			}
+			if(checkcancle == true)
+				window.open('./PopUpWindow/cancle/' + obj.name + '/', '주문취소팝업', 'width=700px,height=620px,scrollbars=yes');
 		}
 		
 		function checkrequest(obj) {		// 주문처리 confirm 실행문
 			let checkrequest = confirm('주문을 수락하시겠습니까?');
-			if(checkrequest == true) {
-				console.log('응! 수락할거야!');
-				console.log('주문번호 : ', obj.name);
+			if(checkrequest == true)
 				window.open('./PopUpWindow/process/' + obj.name + '/', '주문처리팝업', 'width=700px,height=620px,scrollbars=yes');
-			}
 		}
 		
 		// offset	: 페이지 상단으로부터 선택된 요소가 보이는 절대위치를 나타내주는 함수
