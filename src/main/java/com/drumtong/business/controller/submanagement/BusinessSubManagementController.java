@@ -81,9 +81,19 @@ public class BusinessSubManagementController {
 		return svc.orderStatusManagement(req);
 	}
 	
-	
-	
-
-
+	// 비즈니스 주문현황 처리 및 취소 페이지(팝업)로 이동 (GET) [승원]
+	@RequestMapping(value="businessOrderStatusManagement/PopUpWindow/{path}/{param}/", method = RequestMethod.GET)
+	public ModelAndView orderStatusManagementPopUpWindow(@PathVariable("path") String path,@PathVariable("param") String param) {
+		ModelAndView mav = null;
+		if(path.equals("process")) {
+			mav = new ModelAndView("business/submanagement/OrderStatus/order-processing");
+			mav.addObject("salecode", param);
+		}
+		else {
+			mav = new ModelAndView("business/submanagement/OrderStatus/order-cancle");
+			mav.addObject("salecode", param);
+		}
+		return mav;
+	}
 
 }
