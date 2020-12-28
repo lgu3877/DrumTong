@@ -211,7 +211,7 @@
 			<div class="current_menu">
 
 			<!-- empty table -->
-				<table class="current_menu_table form">
+				 <table class="current_menu_table form">
 					<!-- thead -->
 					<thead>
 						<tr>
@@ -324,17 +324,15 @@
 						<li class="service_details">세부 내용</li>
 						<li class="service_price">가격(원)</li>
 						<li class="service_time">소요시간</li>
-						<!-- <li class="service_confirm">확인</li> -->
 						<li class="service_cancle">삭제</li>
 					</ul>
 				</div>
-<!-- ----------------------------------------- -->
+
 				<div id="add-item-list" class="add_item_list">
-					
 					<div class="single_item_selector">
-						
 						<div class="first_item_prop">
-							<select class="service_selector" name="" onchange="directType(this)">
+						<!-- BManagementVO > maincategory -->
+							<select class="service_selector" name="maincategory" onchange="directType(this)">
 								<option hidden="true" disabled selected>서비스 타입 선택</option>
 								<option value="type1">type1</option>
 								<option value="type2">type2</option>
@@ -343,12 +341,13 @@
 								<option value="type5">type5</option>
 								<option value="selectedDirect" class="selectedDirect">직접입력</option>
 							</select>
-						<!-- 직접입력 선택시 -->
-							<input type="text" class="direct_type_input" name="" placeholder="서비스 입력" style="display: none">
+							<!-- 직접입력 선택시 -->
+							<input type="text" class="direct_type_input" name="maincategory" placeholder="서비스 입력" style="display: none">
 						</div>
 						
 						<div class="second_item_prop">
-							<select class="service_selector" onchange="directType(this)">
+						<!-- BManagementVO > subcategory -->
+							<select class="service_selector" name="subcategory" onchange="directType(this)">
 								<option hidden="true" disabled selected>세부 서비스 유형 선택</option>
 								<option value="">type1</option>
 								<option value="">type2</option>
@@ -357,26 +356,24 @@
 								<option value="">type5</option>
 								<option value="selectedDirect" class="selectedDirect">직접입력</option>
 							</select>
-						<!-- 직접입력 선택시 -->
-							<input type="text" name="" class="direct_type_input" placeholder="서비스 입력" style="display: none">
+							<!-- 직접입력 선택시 -->
+							<input type="text" name="subcategory" class="direct_type_input" placeholder="서비스 입력" style="display: none">
 						</div>
 						
 						<div class="third_item_prop">
-							<input type="text" class="service_detail_input" name="" placeholder="세부 서비스 내용을 입력해주세요.">
+						<!-- BManagementVO > name -->
+							<input type="text" class="service_detail_input" name="name" placeholder="세부 서비스 내용을 입력해주세요.">
 						</div>
 
 						<div class="forth_item_prop">
-							<input type="text" class="service_price_input" name="" placeholder="서비스 가격(원)">
+						<!-- BManagementVO > price -->
+							<input type="text" class="service_price_input" name="price" placeholder="서비스 가격(원)">
 						</div>
 
 						<div class="fifth_item_prop">
-							<input type="text" class="service_time_input" name="" placeholder="서비스 소요시간">
+						<!-- BManagementVO > ete -->
+							<input type="text" class="service_time_input" name="ete" placeholder="서비스 소요시간">
 						</div>
-						
-						<!-- <div class="complete_listing" onclick="completeInput(this.parentNode)">
-							<i class="fas fa-check"></i>
-							<span>확인</span>
-						</div>  -->
 
 						<div class="cancle_listing" onclick="dismissInput(this.parentNode)">
 							<i class="fas fa-times"></i>
@@ -386,7 +383,6 @@
 					</div>
 					
 				</div>
-<!-- ----------------------------------------- -->
 				
 			</div>
 		</div>
@@ -424,19 +420,16 @@
 			<div class="return_menu">
 				<ul>
 					<li onclick="checkContent(this)">
-						<input class="returnOptions" type="checkbox" name="returnOptions"> 
+					<!-- BManagementVO > deliveryboolean -->
+						<input class="returnOptions" type="checkbox" name="quickboolean"> 
 						<i class="fas fa-window-close"></i>
 						<span>배달 대행업체 이용</span>
 					</li>
+					<!-- BManagementVO > quickboolean -->
 					<li onclick="checkContent(this)">
-						<input class="returnOptions" type="checkbox" name="returnOptions">
+						<input class="returnOptions" type="checkbox" name="deliveryboolean">
 						<i class="fas fa-window-close"></i>
-						<span>자체 배달 서비스</span>
-					</li>
-					<li onclick="checkContent(this)">
-						<input class="returnOptions" type="checkbox" name="returnOptions">
-						<i class="fas fa-window-close"></i>
-						<span>방문 수령</span>
+						<span>배달 서비스 제공</span>
 					</li>
 				</ul>
 			</div>
@@ -462,7 +455,8 @@
 		<div class="intro_content_con">
 			<span class="intro_close">&times;</span>
 			<div class="intro_content">
-				<textarea class="store_intro_input" name="" maxlength="500" placeholder="매장 소개글을 적어주세요." autofocus resizable="false"></textarea>
+			<!-- BManagementVO > introduction -->
+				<textarea class="store_intro_input" name="introduction" maxlength="500" placeholder="매장 소개글을 적어주세요." autofocus style="resize: none;"></textarea>
 				<input class="store_intro_btn" type="button" value="작성완료" onclick='comfirmIntro()' >
 			</div>
 		</div>
