@@ -49,6 +49,7 @@
    <!-- css -->
    <link rel="stylesheet" href="${cpath }/business/css/businessMainPreview.css">
    <link rel="stylesheet" href="${cpath }/business/css/businessInnerNav.css">
+   <link rel="stylesheet" href="${cpath }/business/css/businessModal.css">
    
    <!-- Axios -->
    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -113,13 +114,37 @@
 		<%@ include file="businessMainLogin.jsp" %> 
 		
 		</div>
+
+		<!-- 모달 버튼 -->
+		<button id="myBtn">Open Modal</button>
+
 	</section>
 		
 	<!-- footer -->
 	<%@ include file="businessFooter.jsp" %>
 	
+	<!-- 온라인 계약 모달(다시 쓰기, 어서쓰기) -->
+
+	<div id="myModal" class="modal">
+		<!-- Modal content -->
+		<div class="modal-content">
+			<div class="modal-header">
+				<span class="close">&times;</span>
+			</div>
+			<div class="modal-body">
+				<p>전에 작성하신 입력 정보(매장관리)가 남아있습니다.</p>
+				<p>입력하신 정보를 저장하고, 매장 일정관리 페이지에서 이서서 작성하시겠습니까?</p>
+			</div>
+			<div class="modal-footer">
+				<button class="btn_blue">처음부터 다시 작성하기</button>
+				<button class="btn_red">이어서 작성하기</button>				
+			</div>
+		</div>
+	</div>
+
 	<!-- main cover(slider) -->
 	<script type="text/javascript" src="${cpath }/business/js/main.js"></script>
+	<script type="text/javascript" src="${cpath }/business/js/modal.js"></script>
 
 </body>
 </html>
