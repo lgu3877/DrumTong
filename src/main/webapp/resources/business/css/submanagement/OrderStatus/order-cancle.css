@@ -14,7 +14,7 @@ body {
 
 .subcontainer {
 	width: 300px; 
-	height: 350px;
+	height: 335px;
 	display: inline-block;
 }
 
@@ -35,4 +35,13 @@ body {
 .subcontainer div.selected {
 	border: 3px solid white;
 	background-color: #3088F9;
+}
+
+textarea.etxbox {
+	width: 560px;  
+	outline: none; 
+	resize: none; 
+	padding: 20px; 
+	font-size: 12pt;
+	margin-bottom: 15px;
 }

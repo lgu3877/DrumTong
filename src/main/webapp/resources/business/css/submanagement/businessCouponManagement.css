@@ -17,6 +17,11 @@ input:focus {
 	margin-bottom: 25px;
 }
 
+.title {
+	width: 950px;
+	margin: 0 auto;
+}
+
 .inputFlex {
 	display: flex;
 	width: 100%;
@@ -34,6 +39,9 @@ input:focus {
 
 }
 
+.bookmark {
+	font-size: 26pt; position: absolute; left: -125px; top: 20px; color: white;font-family: cursive;
+}
 .inputDiv {
 	 position: absolute;
      padding-left: 20px;

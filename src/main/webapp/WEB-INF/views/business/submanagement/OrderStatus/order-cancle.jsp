@@ -34,7 +34,7 @@
 			<div>고객정보 부정확</div>
 			<div id="etc">기타</div>
 		</div>
-			<textarea id="etxbox" rows="6" cols="6" maxlength="200" style="width: 560px;  outline: none; resize: none; display: none; padding: 20px; font-size: 12pt" placeholder="자세한 사정을 입력바랍니다">
+			<textarea class="etxbox" style="display: none;" id="etxbox" rows="6" cols="6" maxlength="200" placeholder="자세한 사정을 입력바랍니다">
 		
 			</textarea>
 			
