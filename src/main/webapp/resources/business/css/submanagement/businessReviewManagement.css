@@ -1,8 +1,33 @@
+input[type="button"] {
+	outline: none;	
+}
+
 .container {
 	margin: 0 auto;
 	width: 800px; 
 	height: 80%;
 	margin-top: 100px !important;
+}
+
+.container .title {
+	text-align: left; font-size: 28pt; display: flex; align-items: center
+}
+
+.title span {
+	font-size: 22pt;
+}
+
+.optiondiv {
+	display: flex; margin-bottom: 15px
+}
+
+.optiondiv input[type="button"]{
+	width: 33% !important;
+	height: 50px !important;
+}
+
+.optiondiv div {
+	width: 0.5% !important;
 }
 
 .customerReview {
@@ -148,6 +173,9 @@ div.extradiv textarea {
 	resize: none;
 	outline: none;
 	margin: 0 auto;
+	font-size: 12pt;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 div.extradiv img {
@@ -212,6 +240,7 @@ div.businessdiv {
   	margin-top: 10px; 
   	margin-bottom: 40px;
   	background-color: #3088F9;
+  	align-items: center;
   }
   
 div.businessdiv textarea {
