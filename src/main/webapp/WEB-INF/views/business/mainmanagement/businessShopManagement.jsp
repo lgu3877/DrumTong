@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath">${pageContext.request.contextPath }</c:set>
+<c:set var = "status" value="${selectEST.status}" />
+
 <!DOCTYPE html>
  
 <html lang="ko">
@@ -36,7 +38,7 @@
 
 <!-- body -->
 <body>
-	
+	${status eq 'FAIL'} 1212
 	<!-- side-header(navbar) -->
 	<%@ include file="../main/businessSideHeader.jsp" %>
 	
@@ -46,12 +48,23 @@
 		<%@ include file="../main/businessSubHeader.jsp" %>
 		
 	<!-- 전체 폼 -->
-	<form method="POST">
 	
-		<!-- 매장 소개(사진 & 글 -->
+<!-- 	[479줄] 닫는 태그 세션의 상태가 FAIL이면 POST 형식   -->
+<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
+<!-- 	[전체 폼]에 대한 c:if문 -->
+
+	<c:if test="${status eq 'FAIL' }">
+			<form method="POST">
+	</c:if>
+		
+		
+		<!-- 매장 소개(사진 & 글) -->
+		
 		<div class="shop_introduction">
-			<!-- <form class="shop_image_con" method="POST"> -->					
+		
+				
 			<div class="shop_image_con">
+			
 			<!-- title -->	
 				<div class="shop_info_title_con">
 					<div>
@@ -126,8 +139,9 @@
    	        			<a class="prev">&#10094;</a>
        	    			<a class="next">&#10095;</a>
        				</div>	
-       						
-        		</div>
+       			
+       			</div>
+        		
         		
 			<!-- add new photo -->
 				<div id="photo-modal-btn" class="photo_add_con">
@@ -146,12 +160,11 @@
 					</span>
 					</label>
 				</div>
+				
 			</div>
-			<!-- </form> -->
-			
 		<!-- Text Introduction -->
-			<!-- <form class="shop_text_intro_con" method="POST"> -->
-			<div class="shop_text_intro_con">
+		
+		<div class="shop_text_intro_con">
 			
 			<!-- title -->
 				<div class="shop_info_title_con">
@@ -174,13 +187,15 @@
        					<i class="far fa-file-alt"></i>
        				</span>
        			</div>
+       			
+       			
 			</div>
-			<!-- </form> -->
+			
 		</div>
 
 
 		<!-- 서비스 메뉴 뷰(등록된 서비스 메뉴) -->
-		<!-- <form class="current_menu_con" method="POST"> -->	
+		
 		<div class="current_menu_con">
 
 			<!-- title -->
@@ -279,12 +294,12 @@
 				</table>
 			</div>
 		</div>
-		<!-- </form> -->
 
 
 		<!-- 서비스 메뉴 생성(서비스 등록) -->
-		<!-- <form class="create_menu_con" method="POST"> -->	
+		
 		<div class="create_menu_con">
+		
 
 		<!-- title -->
 			<div class="shop_info_title_con">
@@ -323,7 +338,12 @@
 						<li class="service_details">세부 내용</li>
 						<li class="service_price">가격(원)</li>
 						<li class="service_time">소요시간</li>
-						<!-- <li class="service_confirm">확인</li> -->
+						
+						<!-- POST 형식일 때만 확인 버튼을 활성화 시켜준다.	-->
+						<c:if test="${status eq 'FAIL' }">
+							<li class="service_confirm">확인</li>
+						</c:if>
+						
 						<li class="service_cancle">삭제</li>
 					</ul>
 				</div>
@@ -388,12 +408,18 @@
 <!-- ----------------------------------------- -->
 				
 			</div>
+		
+			
 		</div>
-		<!-- </form> -->
+		
+		
+		
 		
 		<!-- 상품 수령 방법(세탁물 수령 방법) -->
-		<!-- <form class="return_menu_con" method="POST"> -->
+		
+		
 		<div class="return_menu_con">
+		
 
 		<!-- 목차 -->
 			<div class="shop_info_title_con">
@@ -418,9 +444,13 @@
 				</div>
 			</div>
 			
+			
 		<!-- 수취 선택 -->
-			<!-- <form class="return_menu"> -->
+			
+			
+			
 			<div class="return_menu">
+			
 				<ul>
 					<li onclick="checkContent(this)">
 						<input class="returnOptions" type="checkbox" name="returnOptions"> 
@@ -439,16 +469,28 @@
 					</li>
 				</ul>
 			</div>
-			<!-- </form> -->
 		</div>
-		<!-- </form> -->
 		
-		<!-- 전체 form submit -->
+		
+		
+		
+		
+		
+	<!-- [50줄] 여는 태그  세션의 상태가 FAIL이면 POST 형식   -->
+	<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
+	<!-- 	[전체 폼]에 대한 c:if문 -->
+	<c:if test="${status eq 'FAIL' }">
+	
+	<!-- 전체 form submit -->
 		<div>
 			<input type="submit" value="입력 완료">
 		</div>
+			</form>
+			
+	</c:if>
 		
-	</form>
+		
+	
 	</section>
 		
 		

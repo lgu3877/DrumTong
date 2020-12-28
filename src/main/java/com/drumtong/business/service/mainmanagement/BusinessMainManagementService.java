@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.drumtong.business.dao.BDeliveryAreaDAO;
 import com.drumtong.business.dao.BImageDAO;
+import com.drumtong.business.dao.BInformationDAO;
 import com.drumtong.business.dao.BManagementDAO;
 import com.drumtong.business.dao.BMenuDAO;
 import com.drumtong.business.dao.BScheduleDaysDAO;
@@ -41,6 +42,7 @@ public class BusinessMainManagementService {
 	@Autowired BImageDAO bImageDAO;
 	@Autowired BMenuDAO bMenuDAO;
 	@Autowired BDeliveryAreaDAO bDeliveryAreaDAO;
+	@Autowired BInformationDAO bInformationDAO;
 	
 	// 일정관리 DAO
 	@Autowired BScheduleTimeDAO bScheduleTimeDAO;
