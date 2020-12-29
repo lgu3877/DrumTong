@@ -293,15 +293,23 @@
 					<span class="shop_info_title">서비스 등록</span>
 					<i id="post-help" class="far fa-question-circle" style="font-weight: 600">도움말</i>
 				</div>
-			<!-- add button -->
+			<!-- 버튼 -->
 				<div class="service_button_con">
+				<!-- 배달 서비스 활성화 -->
+					<div id="delivery-btn" class="delivery_menu_btn_con" onclick="activateDelivery()">
+						<div class="add_menu_icon_con">
+							<i id="delivery-icon" class="fas fa-toggle-off"></i>
+						</div>
+						<div class="add_menu_btn_title">배달 서비스</div>
+					</div>
+				<!-- 메뉴 추가 -->	
 					<div id="add-item-btn" class="add_menu_btn_con">
 						<div class="add_menu_icon_con">
 							<i class="fas fa-plus-square"></i>
 						</div>
 						<div class="add_menu_btn_title">메뉴 추가</div>
 					</div>
-					<!-- complete button -->
+				<!-- 완료 -->
 					<div id="update-item-btn" class="complete_menu_btn_con">
 						<div class="add_menu_icon_con">
 							<i class="fas fa-check-square"></i>
