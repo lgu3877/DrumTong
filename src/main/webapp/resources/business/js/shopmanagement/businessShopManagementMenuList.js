@@ -21,9 +21,6 @@ function activateDelivery() {
 	const priceCon = itemInputList.getElementsByClassName("forth_item_prop");		
 	deliveryToggle = !deliveryToggle;
 
-	console.log(itemInputList);
-	console.log(priceCon.length);
-	
 	if(deliveryToggle === true) {
 		const priceCon = document.getElementsByClassName("forth_item_prop");		
 		// 아이콘 변경(활성화)
