@@ -22,7 +22,8 @@ function activateDelivery() {
 	deliveryToggle = !deliveryToggle;
 
 	if(deliveryToggle === true) {
-		const priceCon = document.getElementsByClassName("forth_item_prop");		
+		const priceCon = document.getElementsByClassName("forth_item_prop");	
+		deliveryBtn.style.backgroundColor = "navy";
 		// 아이콘 변경(활성화)
 		toggleIcon.className = "fas fa-toggle-on";
 		
@@ -43,6 +44,7 @@ function activateDelivery() {
 		}
 	}
 	else {
+		deliveryBtn.style.backgroundColor = "#bedcfa";
 		// 아이콘 변경(비활성화)
 		toggleIcon.className = "fas fa-toggle-off";
 		

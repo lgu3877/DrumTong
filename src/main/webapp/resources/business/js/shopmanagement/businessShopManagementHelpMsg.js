@@ -28,14 +28,18 @@ const helpMessages = [
 
 function helpMsg(idArray) {
 	helpMessages.forEach((element) => {
+		// 마우스 이벤트 영역설정
+		document.getElementById(element.id).style.width = "150px";
+		document.getElementById(element.id).style.height = "20px";
+		
 		// 도움말 보임
-		document.getElementById(element.id).addEventListener("mouseover", () => {
+		document.getElementById(element.id).addEventListener("mouseenter", () => {
 			document.getElementById(`${element.id}-msg`).classList.add(element.className);
 			document.getElementById(`${element.id}-msg`).innerHTML = `<p>${element.content}</p>`;
 		});	
 		
 		// 도움말 사라짐
-		document.getElementById(element.id).addEventListener("mouseout", () => {
+		document.getElementById(element.id).addEventListener("mouseleave", () => {
 			document.getElementById(`${element.id}-msg`).classList.remove(element.className);
 			document.getElementById(`${element.id}-msg`).innerHTML = "";
 		});

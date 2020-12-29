@@ -24,7 +24,7 @@
 /* 도움말 말풍선 */
 .help_msg_top,
 .help_msg_down {
-	transition: width 1s;
+	transition: 1s;
     position: absolute;
     border-radius: 10px;
     padding: 10px;
@@ -35,33 +35,32 @@
 }
 
 .help_msg_top {
-	margin: 10px 110px;
-	width: 350px;
+	margin: -150px 180px;
+    width: 400px;
 }
 
 .help_msg_down {
 	margin: 10px 110px;
-	width: 400px;
+	width: 350px;
 }
 
 .help_msg_top:after,
 .help_msg_down:after {
-	transition-duration: 0.5s; 
 	border-left: 10px solid transparent;
 	border-right: 10px solid transparent;
 	position: absolute;
-	bottom: -10px;
-	left: 50px;
+	bottom: -15px;
+	left: 20px;
 }
 
 .help_msg_top:after {
-	border-bottom: 0px solid transparent;
+	border-bottom: 5px solid transparent;
 	border-top: 10px solid navy;
 }
 
 .help_msg_down:after {
 	border-bottom: 10px solid navy;
-	border-top: 0px solid transparent;	
+	border-top: 5px solid transparent;	
 }
 
 /* 매장 사진 슬라이드 좌우 화살표 */
