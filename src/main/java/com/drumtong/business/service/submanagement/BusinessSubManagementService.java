@@ -43,9 +43,7 @@ public class BusinessSubManagementService {
 		
 		ModelAndView mav = new ModelAndView("business/submanagement/businessReviewManagement");
 		
-		String estid = bInformationVO.getEstid();
-		
-		Review.reviewForBusiness(mav, estid, pageKind);
+		Review.reviewForBusiness(mav, bInformationVO.getEstid(), pageKind);
 		
 		return mav;
 	}
@@ -107,10 +105,8 @@ public class BusinessSubManagementService {
 		
 		if(checkEstStatus(bInformationVO)) return mainMove;
 		
-		String estid = bInformationVO.getEstid();
-		
 		//	주문현황 페이지에 필요한 구매정보 데이터를 가져와줍니다. 
-		List<OrderList> orderList =  bSalesDAO.selectOrderList(estid);
+		List<OrderList> orderList =  bSalesDAO.selectOrderList(bInformationVO.getEstid());
 		
 		ModelAndView mav = new ModelAndView("business/submanagement/businessOrderStatusManagement");
 		
