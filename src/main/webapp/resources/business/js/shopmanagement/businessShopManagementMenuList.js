@@ -10,11 +10,55 @@ let singleList = document.querySelector('.single_item_selector');
 const modifyListBtn = document.getElementById("update-list-btn");
 // 테이블 내부 행 삭제 버튼
 const deleteBtn = document.getElementsByClassName("delete_item");
+// 배달 서비스 버튼
+const deliveryBtn = document.getElementById("delivery-btn");
+const toggleIcon = document.getElementById("delivery-icon");
+let deliveryToggle = false;
 
+// 배달 서비스 활성화 이벤트
+function activateDelivery() {
+	const itemInputList = document.getElementById("add-item-list");
+	const priceCon = itemInputList.getElementsByClassName("forth_item_prop");		
+	deliveryToggle = !deliveryToggle;
 
-// 취소 - 클릭 이벤트(1줄씩 추가)
+	if(deliveryToggle === true) {
+		const priceCon = document.getElementsByClassName("forth_item_prop");	
+		deliveryBtn.style.backgroundColor = "navy";
+		// 아이콘 변경(활성화)
+		toggleIcon.className = "fas fa-toggle-on";
+		
+		
+		// input(quickprice) 추가
+		for (let i = 0; i < priceCon.length; i++) {
+			// input(quickprice) 생성
+			const quickPriceInput = document.createElement("input");
+			quickPriceInput.type = "text";
+			quickPriceInput.name = "quickprice";
+			quickPriceInput.className = "service_quickprice_input";
+			quickPriceInput.placeholder = "배달 가격";
+			quickPriceInput.style.marginTop = "5px";
+
+			if (priceCon[i].children.length === 1) {
+				priceCon[i].appendChild(quickPriceInput);				
+			}
+		}
+	}
+	else {
+		deliveryBtn.style.backgroundColor = "#bedcfa";
+		// 아이콘 변경(비활성화)
+		toggleIcon.className = "fas fa-toggle-off";
+		
+		// input(quickprice) 삭제
+		for (let i = 0; i < priceCon.length; i++) {
+			if (priceCon[i].children.length !== 1) {
+				priceCon[i].removeChild(priceCon[i].children[1]);
+			}
+		}	
+	}
+}
+
+// 추가 - 클릭 이벤트(1줄씩 추가)
 addItemBtn.addEventListener('click', function() {
-	console.log('Add List');
 	singleList = singleList.cloneNode(true);
 	itemlist.appendChild(singleList);
 });

@@ -134,13 +134,13 @@
 				<div id="photo-modal-btn" class="photo_add_con">
 					<!-- change cover -->
 					<input id="update-cover" class="add_photo_input" type="file"
-						name="" onchange="imageCheck('add-photo')" style="display: none;">
+						name="delegatephotoboolean" onchange="imageCheck('add-photo')" style="display: none;">
 					<label for="update-cover"> <span style="margin-right: 10px">커버
 							사진 바꾸기 <i class="far fa-images"></i>
 					</span>
 					</label>
 					<!-- add store image -->
-					<input id="add-photo" class="add_photo_input" type="file" name=""
+					<input id="add-photo" class="add_photo_input" type="file" name="storeimg"
 						onchange="imageCheck('add-photo')" style="display: none">
 					<label for="add-photo"> <span>새로운 사진 추가하기 <i
 							class="far fa-images"></i>
@@ -159,6 +159,7 @@
 					<div>
 						<span class="shop_info_title">매장 소개글</span>
 						<i id="intro-help" class="far fa-question-circle" style="font-weight: 600">도움말</i>
+						<div id="intro-help-msg"></div>
 					</div>
 				</div>
 			
@@ -189,6 +190,7 @@
 				<div>
 					<span class="shop_info_title">등록된 서비스 메뉴</span> 
 					<i id="update-help" class="far fa-question-circle" style="font-weight: 600">도움말</i>
+					<div id="update-help-msg"></div>
 				</div>
 				<div class="service_button_con">
 					<!-- modify button -->
@@ -292,16 +294,25 @@
 				<div>
 					<span class="shop_info_title">서비스 등록</span>
 					<i id="post-help" class="far fa-question-circle" style="font-weight: 600">도움말</i>
+					<div id="post-help-msg"></div>
 				</div>
-			<!-- add button -->
+			<!-- 버튼 -->
 				<div class="service_button_con">
+				<!-- 배달 서비스 활성화 -->
+					<div id="delivery-btn" class="delivery_menu_btn_con" onclick="activateDelivery()">
+						<div class="add_menu_icon_con">
+							<i id="delivery-icon" class="fas fa-toggle-off"></i>
+						</div>
+						<div class="add_menu_btn_title">배달 서비스</div>
+					</div>
+				<!-- 메뉴 추가 -->	
 					<div id="add-item-btn" class="add_menu_btn_con">
 						<div class="add_menu_icon_con">
 							<i class="fas fa-plus-square"></i>
 						</div>
 						<div class="add_menu_btn_title">메뉴 추가</div>
 					</div>
-					<!-- complete button -->
+				<!-- 완료 -->
 					<div id="update-item-btn" class="complete_menu_btn_con">
 						<div class="add_menu_icon_con">
 							<i class="fas fa-check-square"></i>
@@ -397,6 +408,7 @@
 				<div>
 					<span class="shop_info_title">세탁물 수령 방법</span>
 					<i id="return-help" class="far fa-question-circle" style="font-weight: 600">도움말</i>
+					<div id="return-help-msg"></div>
 				</div>
 			<!-- 버튼 -->
 				<div class="service_button_con">
