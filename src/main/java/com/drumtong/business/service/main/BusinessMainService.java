@@ -14,12 +14,8 @@ import com.drumtong.business.dao.BSalesDAO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.security.AwsServiceImpl;
 
-//import com.drumtong.business.dao.BusinessDAO;
-
-
 @Service
 public class BusinessMainService {
-//	@Autowired BusinessDAO dao;
 	@Autowired AwsServiceImpl aws;
 	@Autowired BHitsDAO bHitsDAO;
 	@Autowired BSalesDAO bSalesDAO;
@@ -30,10 +26,8 @@ public class BusinessMainService {
 		HttpSession Session = req.getSession();
 		
 		BInformationVO selectEST = (BInformationVO)Session.getAttribute("selectEST");
-		// 로그인 되어있고 등록된 매장까지 있을 경우
-		System.out.println("1 test");
+		// 로그인 되어있고 등록된 매장까지 있을 경우 매장의 프리뷰를 보여준다.
 		if(Session.getAttribute("bLogin") != null && selectEST != null && "SUCCESS".equals(selectEST.getStatus())) {
-			System.out.println("로그인 되어있고 매장 등록이 완료된 상태일 때");
 			String estid = selectEST.getEstid();
 			// 방문량(오늘, 이번주, 이번달)
 			HashMap<String, Integer> HitsMap = bHitsDAO.getMainPreviewHits(estid);
@@ -52,22 +46,8 @@ public class BusinessMainService {
 			mav.addObject("LaundryMap", LaundryMap);
 			
 		}
-		System.out.println("2 test");
-			// 매장이 등록 완료되어있는지도 체크하기
-		// 매장의 프리뷰를 보여준다.
 		return mav;
 	}
-	
-	// 테스트용-이영경
-//	public ModelAndView main(HttpServletRequest req) {
-//		ModelAndView mav = new ModelAndView("business/main/businessMain");
-//		String Referer = req.getHeader("REFERER");
-//		String uri = req.getRequestURI();
-//		
-//		mav.addObject("Referer", Referer);
-//		mav.addObject("uri", uri);
-//		return mav;
-//	}
 
 	public ModelAndView mainCover() {
 		ModelAndView mav = new ModelAndView("business/main/mainCover");

@@ -39,31 +39,20 @@ public class BusinessMembershipService {
 		String AddressToMove = (String)Session.getAttribute("AddressToMove");		// 인터셉터 들어가기 전 이동하려던 주소
 		if(AddressToMove == null) 	AddressToMove = "/business/";
 		
-		
 		boolean LoginResult = Login.login(Session, resp, bPrivateDatavo, storeid);		// 로그인 성공여부
 
 		BPrivateDataVO User = ((BPrivateDataVO)Session.getAttribute("bLogin"));
+		
 		// 사업장 정보 들고오기
 		if(User != null) {
 			List<BInformationVO> InformationList = bInformationDAO.selectInformationList(User.getBpersonid());
 			
 			BInformationVO selectEST = (BInformationVO)Session.getAttribute("selectEST");
 			if(InformationList != null && InformationList.size() != 0) {
-				if(selectEST == null) {
-					selectEST = bInformationDAO.selectEst(InformationList.get(0).getEstid());
-					Session.setAttribute("selectEST", selectEST);
-				}
+				selectEST = bInformationDAO.selectEst(InformationList.get(0).getEstid());
+				Session.setAttribute("selectEST", selectEST);
 			}
 			
-//			for(int i = 0; i < InformationList.size(); i++) {
-//				String naming = InformationList.get(i).getBrandnaming();
-//				if(naming.length() > 4) {
-//					BInformationVO ChangeData = InformationList.get(i);
-//					naming = naming.substring(0, 4) + "..";
-//					ChangeData.setBrandnaming(naming);
-//					InformationList.set(i, ChangeData);
-//				}
-//			}
 			Session.setAttribute("InformationList", InformationList);
 
 			
