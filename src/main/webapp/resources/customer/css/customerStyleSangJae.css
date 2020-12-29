@@ -164,11 +164,17 @@
 	width: 100%;
 }
 
-.userMenu-row,
-.bookmark-row {
+.userMenu-row{
   display: flex;
   justify-content: center;
   width: 100%;
+  height: auto;
+}
+
+.bookmark-row {
+  display: inline-block;
+  justify-content: center;
+  width: 1300px;
   height: auto;
 }
 
@@ -212,6 +218,7 @@
 
 /* Bookmark */
 .bookmark {
+  display: inline-block;
   position: relative;
   width: 600px;
   height: 300px;
@@ -861,7 +868,9 @@ check .option-name,
 	height:1200px;
 }
 .section-menu,
-.section-bookmark,
 .section-orderlist{
 	height:600px;
+}
+.section-bookmark{
+	height:auto;
 }
