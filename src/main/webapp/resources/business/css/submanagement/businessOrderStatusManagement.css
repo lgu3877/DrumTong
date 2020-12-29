@@ -454,6 +454,7 @@ div.detailmenus .innerdetail {
 	height: 30px; 
 	align-items: center; 
 	display: flex;
+	position: relative;
 }
 
 div.detailmenus .innerdetail h3 {
@@ -461,4 +462,8 @@ div.detailmenus .innerdetail h3 {
 	height: 25px; 
 	font-size: 12pt;
 	text-align: center;
+}
+
+div.detailmenus .innerdetail i {
+	position: absolute !important; left: -20px !important; top: 5px !important;
 }
