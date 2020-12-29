@@ -12,7 +12,7 @@
     <title>businessShopManagement :: businessStatisticsManagement</title>
 
 	<!-- global css -->	
-	<link rel="stylesheet" href="${cpath }/business/css/businessStyle.css">
+<%-- 	<link rel="stylesheet" href="${cpath }/business/css/businessStyle.css"> --%>
 	<!-- sub header css -->
 	<link rel="stylesheet" href="${cpath }/business/css/businessSubHeader.css">
 	<!-- side header css -->
@@ -111,7 +111,6 @@ var enddatepath = statisticsList[statisticsList.length - 1].end  + '/';
 window.onload = function() {
 	document.querySelector('div.flex1 button[name="${pageKind}"]').className = 'selected';
 	statisticsList = ${statisticsList };
-	console.log(statisticsList);
 	
 	document.getElementById('startDate').value = statisticsList[0].start;
 	document.getElementById('endDate').value = statisticsList[statisticsList.length - 1].end;
@@ -121,7 +120,6 @@ function getWeekNum(formatday) {
 	let weekday = new Date(formatday);
     const firstDayOfYear = new Date(weekday.getFullYear(), weekday.getMonth(), 1);
     const pastDaysOfYear = (new Date(weekday) - firstDayOfYear) / 86400000;	//60 x 60 x 24 x 1000
-	console.log('결과 : ', Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7));
 	return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
 }
 
@@ -129,8 +127,17 @@ function getWeekNum(formatday) {
 function drawChart1() {
 // Create the data table.
 const data = new google.visualization.DataTable();
-data.addColumn('string', 'LastDate');
-data.addColumn('number', 'View');
+data.addColumn('string', '일시');
+data.addColumn('number', returnContent((document.querySelector('.flex1 button.selected').name).slice(0,-1)));
+
+if((document.querySelector('.flex1 button.selected').name).slice(0,-1) == 'Price') {
+	let formatter = new google.visualization.NumberFormat({	// 가격은 돈으로 단위를 표현해야 함
+	    prefix: '$',
+	    negativeParens: true
+	  });
+
+	  formatter.format(data, 1);
+}
 // data.addRows 는 한번에 데이터를 입력하는 것이고, data.addRow는 하나씩 데이터를 입력하는 것이다
 // 즉, Json 형태로 받아온 녀석을 바로 입력하려면 data.addRows 를 사용하고
 // 반복문을 통하여 어떤 작업을 수행하고 싶다면 data.addRow를 사용하시오
@@ -142,11 +149,6 @@ data.addColumn('number', 'View');
 //   ['Pepperoni', 2]
 // ]);
 
-// 		let today = new Date(statisticsList[2].startdate);
-// 		let year = today.getFullYear(); // 년도
-// 		let month = today.getMonth() + 1;  // 월
-// 		let date = today.getDate();  // 날짜
-// 		let day = today.getDay();  // 요일
 var i = 0;
 if (document.querySelector('.flex3 button.selected').value == 'Day/') {
 	for(i = 0; i < statisticsList.length; i++){
@@ -177,60 +179,92 @@ else if (document.querySelector('.flex3 button.selected').value == 'Month/') {
 }
 // data.setCell(2,0,'lswn');
 
-var options = {
-		  'legend': 'none',
-		  'title': (document.querySelector('.flex1 button.selected').name).slice(0,-1) + ' / ' + (document.querySelector('.flex3 button.selected').value).slice(0,-1) + ' Graph',
-		  'is3D':true,
-		  'width': 1100,
-		  'height':800,
+var options = {		// 그래프의 옵션을 세팅하는 부분
+		  legend: 'none',
+		  backgroundColor: 'whitesmoke',
+		  title: '',
+		  titleTextStyle: {
+			fontSize: 28,
+		  },
+		  is3D:true,
+		  width: 1100,
+		  height:800,
 		  animation:{
 		        duration: 1000,
 		        easing: 'out'
 		      },
 //		  'curveType': 'function',
-		  'chartArea': {right: 40, width: '85%'},
+		  chartArea: {right: 40, width: '85%',},
 		  series: {
 			0: {lineWidth: 3,				// 선 굵기
 				pointShape: 'Circle',		// 포인트 부분 모양
-				pointSize: 18,				// 포인트 부분 굵기
+				pointSize: 12,				// 포인트 부분 굵기
 			},
 		  },
 		  hAxis: {
-			  title: 'Date',
+			  title: '',
 			  textPosition: 'out',
-			  titleTextStyle: {color: 'black', fontSize: '40px'},
+			  titleTextStyle: {color: 'black', fontSize: 20},
 // 				direction : -1, // 상하 반전
 			  "slantedText" : true,
 // 			  "slantedTextAngle" : 45,
 		  },
 		  vAxis: {
 			  className:'12345',
-			  title: (document.querySelector('.flex1 button.selected').name).slice(0,-1),
-			  titleFontSize: 18,
+			  title: '',
+			  titleFontSize: 20,
 			  viewWindow: {
 	              min:0,
 	            },
 	          baselineColor: 'none',	// 밑줄친 부분 색상
 		  },
 		  colors: ['black'],
-
 		}
+if ((document.querySelector('.flex1 button.selected').name).slice(0,-1) == 'Price') {
+	options.vAxis.format = '$#,##0.00;($#,##0.00)';	// 가격을 표현해야 할 때에는 $ 표시를 붙인다
+  }
+  
+let graphtitle = returnContent((document.querySelector('.flex1 button.selected').name).slice(0,-1)) + ' / ';
+switch ((document.querySelector('.flex3 button.selected').value).slice(0,-1)) {
+	case 'Day':
+		graphtitle += '일간 그래프';
+		options.hAxis.title = '일간';
+		break;
+	case 'Week':
+		graphtitle += '주간 그래프';
+		options.hAxis.title = '주간';
+		break;
+	case 'Month':
+		graphtitle += '월간 그래프';
+		options.hAxis.title = '월간';
+		break;
+	}
+	options.vAxis.title = returnContent((document.querySelector('.flex1 button.selected').name).slice(0,-1));
+	options.title = graphtitle;
 
-const chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
-chart.draw(data, options);
+	const chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+	chart.draw(data, options);
 
-let axies = document.querySelectorAll('svg g g text[text-anchor="middle"]');
-for(k = 0; k < axies.length; k++) {
-	axies[k].style.fontSize = '20pt';
+	let axies = document.querySelectorAll('svg g g text[text-anchor="middle"]');
+	for(k = 0; k < axies.length; k++) {
+		axies[k].style.fontSize = '20pt';
+	}
+
 }
 
-console.log('startdatepath : ' , startdatepath);
-console.log('enddatepath : ' , enddatepath);
-console.log('lastPath : ' , lastPath);
-console.log('path : ', window.location.href + 'Day/' + startdatepath + enddatepath );
+function returnContent(content) {
+	switch (content) {
+	case 'Hits':
+		return '조회수';
+		break;
+	case 'Orders':
+		return '주문수';
+		break;
+	case 'Price':
+		return '가격';
+		break;
+	}
 }
-
-
 
 
 document.getElementById('startDate').addEventListener('change', function() {
@@ -245,15 +279,10 @@ document.getElementById('startDate').addEventListener('change', function() {
 		this.value = '';
 		return false;
 	}
-	// ■ 영경 : 아래 코드에서 에러가 나서 주석 처리함 ■
-// 	console.log('path : ', document.querySelector('.flex button.selected').name);
-
 	pageKindAxios(document.querySelector('.flex3 button.selected').value);
-	
 })
 
 document.getElementById('endDate').addEventListener('change', function() {
-// 	console.log('vlaue2 : ', this.value);
 	const startDate = document.getElementById('startDate').value;
 	if(startDate > this.value) {
 		alert('시작 날짜보다 지난 날짜를 선택해 주십시오');

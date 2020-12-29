@@ -77,6 +77,7 @@
 		<button onclick="popupExit()">
 			취소
 		</button>
+		<div></div>
 		<button onclick="popupSubmit()">
 			확인
 		</button>
