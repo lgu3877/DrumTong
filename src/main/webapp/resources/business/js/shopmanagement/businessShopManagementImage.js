@@ -10,8 +10,6 @@ $("#image-preview").on('mousewheel',function(e) {
 	}
 });
 
-//let photoAdded = false;
-
 // 이미지 선택시 커버 이미지 출력
 function imageShow() {
 	const imageInputForm = document.getElementById('shop-image-view');
