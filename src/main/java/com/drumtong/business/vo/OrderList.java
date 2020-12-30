@@ -22,9 +22,7 @@ public class OrderList extends BSalesVO{
 	
 	private String brandnaming; 	// BInformation 테이블의 매장명
 	
-//	private List<BDetailSalesVO> bDetailSalesVOList;	// BDetailSales의 vo list
 	private HashMap<String, HashMap<String,List<BDetailSalesVO>>> maincategory;
-	// 				메인메뉴이름 |서브메뉴리스트|	서브메뉴이름|메뉴리스트 |메뉴
 		
 	
 	
@@ -41,17 +39,5 @@ public class OrderList extends BSalesVO{
 	public void setMaincategory(HashMap<String, HashMap<String, List<BDetailSalesVO>>> maincategory) {
 		this.maincategory = maincategory;
 	}
-	
-
-	
-	
-	
-//	public List<BDetailSalesVO> getbDetailSalesVOList() {
-//		return bDetailSalesVOList;
-//	}
-//	public void setbDetailSalesVOList(List<BDetailSalesVO> bDetailSalesVOList) {
-//		this.bDetailSalesVOList = bDetailSalesVOList;
-//	}
-	
 	
 }
