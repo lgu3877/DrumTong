@@ -1,5 +1,6 @@
 package com.drumtong.customer.service.account;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +13,6 @@ import com.drumtong.business.dao.BCouponDAO;
 import com.drumtong.business.dao.BDetailSalesDAO;
 import com.drumtong.business.dao.BInformationDAO;
 import com.drumtong.business.dao.BSalesDAO;
-import com.drumtong.business.vo.BDetailSalesVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.OrderList;
 import com.drumtong.customer.dao.CPaymentDAO;
@@ -90,8 +90,11 @@ public class CustomerAccountService {
 		ModelAndView mav = new ModelAndView("customer/account/customerOrderList");
 		CPrivateDataVO Login = ((CPrivateDataVO)req.getSession().getAttribute("cLogin"));
 		
+		HashMap<String, String> param = new HashMap<String, String>();
+		param.put("memberidORestid", Login.getMemberid());
+		
 		//	주문 목록 페이지에 필요한 구매정보 데이터를 가져와줍니다
-		List<OrderList> orderList = bSalesDAO.selectOrderList(Login.getMemberid());
+		List<OrderList> orderList = bSalesDAO.selectOrderList(param);
 		
 		
 		// OrderListSetting 클래스는 static으로 구성이되어 있다. [사업자 주문목록 / 고객 주문목록 ] 둘 다 사용 가능
