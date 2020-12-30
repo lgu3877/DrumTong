@@ -1,5 +1,7 @@
 package com.drumtong.business.controller.mainmanagement;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,16 +27,17 @@ public class BusinessMainManagementController {
 	
 	// 비즈니스 매장관리 페이지로 이동 (GET) [건욱]
 	@RequestMapping(value="businessShopManagement/", method = RequestMethod.GET)
-	public ModelAndView shopManagement() {
-		return svc.shopManagement();
+	public ModelAndView shopManagement(HttpServletRequest req) {
+		return svc.shopManagement(req);
 	}
 	
 	// 비즈니스 온라인계약 {신규매장관리} 데이터 등록  (POST) [건욱]
+	// Status = FAIL 일 시에 작동이 됩니다. ( 온라인 계약에 포함됨 )
 	// AWS S3에 다중 이미지 업로드를 해줍니다.
 	@RequestMapping(value="businessShopManagement/", method = RequestMethod.POST)
-	public ModelAndView shopManagement(MultipartHttpServletRequest mpf,BManagementVO bManagementVO,
-									   BImageVO bImageVO, BMenuVO bMenuVO,
-									   BDeliveryAreaVO bDeliveryAreaVO) {
+	public ModelAndView shopManagement( HttpServletRequest req,MultipartHttpServletRequest mpf,
+									   BManagementVO bManagementVO, BImageVO bImageVO, 
+									   BMenuVO bMenuVO, BDeliveryAreaVO bDeliveryAreaVO) {
 		return svc.shopManagement(mpf,bManagementVO, bImageVO, bMenuVO, bDeliveryAreaVO);
 	}
 	

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath">${pageContext.request.contextPath }</c:set>
+<!-- selectEST.status 값을 status에 c:set 해줍니다 -->
+<c:set var = "status" value="${selectEST.status}" />
+
 <!DOCTYPE html>
  
 <html lang="ko">
@@ -13,6 +16,8 @@
 
 	<!-- global css -->	
 	<link rel="stylesheet" href="${cpath }/business/css/businessStyle.css">
+	<!-- header css 처음 등록할 때 쓸 헤더입니다. ( status eq 'FAIL' )-->
+    <link rel="stylesheet" href="${cpath }/business/css/businessHeader.css">
 	<!-- sub header css -->
 	<link rel="stylesheet" href="${cpath }/business/css/businessSubHeader.css">
 	<!-- side header css -->
@@ -37,21 +42,48 @@
 <!-- body -->
 <body>
 	
+	
+	<!-- 	온라인 계약이 진행 중인 상태이면은 기본 헤더를 보여준다 -->
+	<c:if test="${status eq 'FAIL' }">
+		<%@ include file="../main/businessHeader.jsp" %>
+	</c:if>
+	
 	<!-- side-header(navbar) -->
-	<%@ include file="../main/businessSideHeader.jsp" %>
+	<!-- 	온라인 계약이 수행되었다면 관리헤더와 관리서브메뉴를 보여준다. -->
+	<c:if test="${status eq 'SUCCESS' }">
+		<%@ include file="../main/businessSideHeader.jsp" %>
+	</c:if>
 	
 	<!-- 섹션 -->
 	<section>
-		<!-- top-header(membership) -->
-		<%@ include file="../main/businessSubHeader.jsp" %>
+	
 		
+
+	
+	
+		<!-- top-header(membership) -->
+<!-- 	온라인 계약이 수행되었다면 관리헤더와 관리서브메뉴를 보여준다. -->
+	<c:if test="${status eq 'SUCCESS' }">
+		<%@ include file="../main/businessSubHeader.jsp" %>
+	</c:if>
+	
 	<!-- 전체 폼 -->
-	<form method="POST">
-	<!-- <div> -->
-		<!-- 매장 소개(사진 & 글 -->
+	
+<!-- 	[479줄] 닫는 태그 세션의 상태가 FAIL이면 POST 형식   -->
+<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
+<!-- 	[전체 폼]에 대한 c:if문 -->
+
+	<c:if test="${status eq 'FAIL' }">
+			<form method="POST" enctype="multipart/form-data">
+	</c:if>
+		
+		<!-- 매장 소개(사진 & 글) -->
+		
 		<div class="shop_introduction">
-			<!-- <form class="shop_image_con" method="POST"> -->					
+		
+				
 			<div class="shop_image_con">
+			
 			<!-- title -->	
 				<div class="shop_info_title_con">
 					<div>
@@ -59,7 +91,10 @@
 						<i id="photo-help" class="far fa-question-circle" style="font-weight: 600">도움말</i>
 						<div id="photo-help-msg"></div>
 					</div>
-				<!-- 사진 변경 버튼 -->
+					
+				<!-- cover button -->
+				<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
+				<c:if test="${status eq 'SUCCESS' }">
 					<div class="service_button_con">
 						<div id="add-cover-btn" class="update_image_btn_con">
 							<div class="add_menu_icon_con">
@@ -68,6 +103,8 @@
 							<div class="add_menu_btn_title">사진 변경</div>
 						</div>
 					</div>
+				</c:if>
+				
 				</div>
 				
 			<!-- cover-image input form -->
@@ -122,43 +159,40 @@
 						</li>
 					</ul>
 
+
 				<!-- Slide Move Button -->
 					<div class="slide_btn">
    	        			<a class="prev">&#10094;</a>
        	    			<a class="next">&#10095;</a>
        				</div>	
-       						
-        		</div>
+       			
+       			</div>
         		
-			<!-- add new photo > accept='.png, .jpg, .jpeg' /  onchange="imageCheck('add-photo' || 'add-photo')" -->
+        		
+			<!-- add new photo -->
 				<div id="photo-modal-btn" class="photo_add_con">
 					<!-- change cover -->
 					<input id="update-cover" class="add_photo_input" type="file" 
 						name="delegatephotoboolean" onchange="imageCheck(event)"
 						style="display: none;" accept=".png, .jpg, .jpeg">
-					<label for="update-cover"> 
-						<span style="margin-right: 10px">
-							커버 사진 바꾸기 
-							<i class="far fa-images"></i>
-						</span>
+					<label for="update-cover"> <span style="margin-right: 10px">커버
+							사진 바꾸기 <i class="far fa-images"></i>
+					</span>
 					</label>
 					<!-- add store image -->
 					<input id="add-photo" class="add_photo_input" type="file" 
 						name="storeimg" onchange="imageCheck(event, 'add-photo')"
 						style="display: none" accept=".png, .jpg, .jpeg" multiple="multiple">
-					<label for="add-photo">
-						<span>
-							새로운 사진 추가하기 
-							<i class="far fa-images"></i>
-						</span>
+					<label for="add-photo"> <span>새로운 사진 추가하기 <i
+							class="far fa-images"></i>
+					</span>
 					</label>
 				</div>
+				
 			</div>
-			<!-- </form> -->
-			
-		<!-- 매장 소개글 -->
-			<!-- <form class="shop_text_intro_con" method="POST"> -->
-			<div class="shop_text_intro_con">
+		<!-- Text Introduction -->
+		
+		<div class="shop_text_intro_con">
 			
 			<!-- title -->
 				<div class="shop_info_title_con">
@@ -182,13 +216,16 @@
        					<i class="far fa-file-alt"></i>
        				</span>
        			</div>
+       			
+       			
 			</div>
-			<!-- </form> -->
+			
 		</div>
 
 
 		<!-- 서비스 메뉴 뷰(등록된 서비스 메뉴) -->
-		<!-- <form class="current_menu_con" method="POST"> -->	
+	<!-- status 가 SUCCESS일때만 등록된 서비스메뉴 영역이 생성된다. ( Rest를 위한 영역 ) -->
+	<c:if test="${status eq 'SUCCESS' }">
 		<div class="current_menu_con">
 
 			<!-- title -->
@@ -207,15 +244,18 @@
 						<div class="add_menu_btn_title">메뉴 수정</div>
 					</div>
 					<!-- complete button -->
+					
 					<div id="complete-list-btn" class="complete_menu_btn_con">
 						<div class="add_menu_icon_con">
 							<i class="fas fa-check-square"></i>
 						</div>
 						<div class="add_menu_btn_title">수정 완료</div>
 					</div>
+					
 				</div>
 			</div>
-
+	
+	
 			<div class="current_menu">
 
 			<!-- empty table -->
@@ -287,13 +327,14 @@
 					</tbody>
 				</table>
 			</div>
+		</c:if>
 		</div>
-		<!-- </form> -->
-
+	
 
 		<!-- 서비스 메뉴 생성(서비스 등록) -->
-		<!-- <form class="create_menu_con" method="POST"> -->	
+		
 		<div class="create_menu_con">
+		
 
 		<!-- title -->
 			<div class="shop_info_title_con">
@@ -318,13 +359,17 @@
 						</div>
 						<div class="add_menu_btn_title">메뉴 추가</div>
 					</div>
-				<!-- 완료 -->
+					
+					<!-- complete button -->
+					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
+					<c:if test="${status eq 'SUCCESS' }">
 					<div id="update-item-btn" class="complete_menu_btn_con">
 						<div class="add_menu_icon_con">
 							<i class="fas fa-check-square"></i>
 						</div>
 						<div class="add_menu_btn_title">목록 추가</div>
 					</div>
+					</c:if>
 				</div>
 			</div>
 
@@ -341,6 +386,11 @@
 						<li class="service_details">세부 내용</li>
 						<li class="service_price">가격(원)</li>
 						<li class="service_time">소요시간</li>
+						<!-- POST 형식일 때만 확인 버튼을 활성화 시켜준다.	-->
+						<c:if test="${status eq 'FAIL' }">
+							<li class="service_confirm">확인</li>
+						</c:if>
+						
 						<li class="service_cancle">삭제</li>
 					</ul>
 				</div>
@@ -402,12 +452,18 @@
 				</div>
 				
 			</div>
+		
+			
 		</div>
-		<!-- </form> -->
+		
+		
+		
 		
 		<!-- 상품 수령 방법(세탁물 수령 방법) -->
-		<!-- <form class="return_menu_con" method="POST"> -->
+		
+		
 		<div class="return_menu_con">
+		
 
 		<!-- 목차 -->
 			<div class="shop_info_title_con">
@@ -424,18 +480,26 @@
 						</div>
 						<div class="add_menu_btn_title">수정 하기</div>
 					</div>
+					
+					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
+					<c:if test="${status eq 'SUCCESS' }">
 					<div id="complete-return-option" class="complete_menu_btn_con">
 						<div class="add_menu_icon_con">
 							<i class="fas fa-check-square"></i>
 						</div>
 						<div class="add_menu_btn_title">수정 완료</div>
 					</div>
+					</c:if>
 				</div>
 			</div>
 			
+			
 		<!-- 수취 선택 -->
-			<!-- <form class="return_menu"> -->
+			
+			
+			
 			<div class="return_menu">
+			
 				<ul>
 					<li onclick="checkContent(this)">
 					<!-- BManagementVO > deliveryboolean -->
@@ -451,16 +515,28 @@
 					</li>
 				</ul>
 			</div>
-			<!-- </form> -->
 		</div>
-		<!-- </form> -->
 		
-		<!-- 전체 form submit -->
+		
+		
+		
+		
+		
+	<!-- [50줄] 여는 태그  세션의 상태가 FAIL이면 POST 형식   -->
+	<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
+	<!-- 	[전체 폼]에 대한 c:if문 -->
+	<c:if test="${status eq 'FAIL' }">
+	
+	<!-- 전체 form submit -->
 		<div>
 			<input type="submit" value="입력 완료">
 		</div>
+			</form>
+			
+	</c:if>
 		
-	</form>
+		
+	
 	</section>
 		
 		
@@ -481,7 +557,10 @@
 	</div>
 
 
-
+	<script type="text/javascript">
+		// DB에서 받아오는 Defaultcategory List<String> 배열
+		let defaultCategory = ${defaultcategory};
+	</script>
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementMenuList.js"></script>
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementOnLoad.js"></script>
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementImage.js"></script>

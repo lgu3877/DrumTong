@@ -24,6 +24,7 @@ h1.subtitle {
 	border: 5px double; 
 	position: relative; 
 	display: flex;
+	background-color: whitesmoke;
 }
 
 #cardbank, #accountbank {
@@ -49,7 +50,8 @@ h1.subtitle {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-		outline: none;
+	outline: none;
+	cursor: pointer;
 }
 
 #cardbanksel:focus, #accountbanksel:focus {
@@ -115,6 +117,7 @@ div.flex2 {
 	text-align: center; 
 	margin-left: 10%;
 	border-radius: 10px;
+	outline: none !important;
 }
 
 .flex3 input {

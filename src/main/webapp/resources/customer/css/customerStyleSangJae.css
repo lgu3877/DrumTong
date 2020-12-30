@@ -164,11 +164,17 @@
 	width: 100%;
 }
 
-.userMenu-row,
-.bookmark-row {
+.userMenu-row{
   display: flex;
   justify-content: center;
   width: 100%;
+  height: auto;
+}
+
+.bookmark-row {
+  display: inline-block;
+  justify-content: center;
+  width: 1300px;
   height: auto;
 }
 
@@ -212,6 +218,7 @@
 
 /* Bookmark */
 .bookmark {
+  display: inline-block;
   position: relative;
   width: 600px;
   height: 300px;
@@ -246,8 +253,9 @@
 }
 
 .orderlist-card {
-  width: 800px;
-  height: 300px;
+  width: 900px;
+/*   height: 300px; */
+  height : 370px;
   border: 1px solid #eaeaea;
   border-radius: 20px;
   box-shadow: 5px 5px 5px 5px #eaeaea;
@@ -288,7 +296,8 @@
 
 .orderData2 {
   width: 100%;
-  height: 200px;
+/*   height: 200px; */
+  height: 270px;
   border-bottom: 1px solid grey;
 }
 
@@ -296,20 +305,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 200px;
-  height: 200px;
+/*   width: 200px; */
+/*   height: 200px; */
+  width : 340px;
+  height : 270px;
   float: left;
 }
 
 .orderData-onGoing img {
-  height: 150px;
+/*   height: 150px; */
+  height: 220;
   width: auto;
 }
 
 .orderData-options {
+  font-weight : bold;
   float: right;
   border-left: 1px solid grey;
-  height: 200px;
+/*   height: 200px; */
+  height : 270px;
   width: 558px;
   overflow-y: scroll;
 }
@@ -333,28 +347,116 @@
 }
 
 .orderData-options-head {
+  font-size : 23px;
+  height: 43px;
   background-color: #eaeaea;
+  width: 100%;
+  
+  padding: 5px 10px;
+}
+[id*='orderData-option-main-'] {
+	margin-top : 5px;
+	border-top : solid;
+	border-bottom : solid;
+	padding-bottom : 10px;
+/* background-color: #0100FF; */
+  font-size : 20px;
+  width: 100%;
+  height: 40px;
+  padding: 5px 10px;
+  color : #000000;
+  font-weight : bold;
+}
+
+[id*='orderData-option-sub-'] {
+  margin-top : 5px;
+  font-size : 18px;
   width: 100%;
   height: 30px;
   padding: 5px 10px;
+  color : #5A5A5A;
+  font-weight : bold;
+  padding-left: 14px;
 }
 
+
+
+.orderData-options-head-originalprice {
+	
+  background-color: #eaeaea;
+  width: 100%;
+/*   height: 30px; */
+  font-size : 19px;
+  height: 35px;
+  padding: 5px 10px;
+}
+
+.orderData-options-head-coupon {
+  background-color: #eaeaea;
+  width: 100%;
+/*   height: 30px; */
+  font-size : 19px;
+  height: 35px;
+  padding: 5px 10px;
+}
+
+.orderData-options-head-requests {
+  background-color: #eaeaea;
+  width: 100%;
+/*   height: 30px; */
+  font-size : 19px;
+  height: 35px;
+  padding: 5px 10px;
+}
+
+
+
 .orderData-options ul {
+  color : #A2A2A2;
+  font-size : 15px;
   list-style: none;
   padding: 5px;
   margin: 5px 5px;
+  padding-left : 13px;
   font-style: normal;
+  font-weight: bold;
 }
 
+
 .orderData-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   text-align: right;
   width: 100%;
   height: 50px;
   line-height: 40px;
-  font-size: x-large;
-  font-weight: bold;
+  
   font-style: normal;
   padding-right: 30px;
+}
+
+.orderData-total-purchasedate {
+	padding-left : 20px;
+	display :inline-block; 
+	text-align: left;
+	width : 50%;
+	float : right;
+}
+
+.orderData-total-totalamount {
+	float : right;
+	width : auto;
+/* 	font-size: x-large; */
+	font-weight: bold;
+	
+}
+.orderData-total-totalprice {
+	width : auto;
+	font-weight: bold;
+	font-size: x-large;
+	float : right;
 }
 
 /*detail*/
@@ -861,7 +963,9 @@ check .option-name,
 	height:1200px;
 }
 .section-menu,
-.section-bookmark,
 .section-orderlist{
 	height:600px;
+}
+.section-bookmark{
+	height:auto;
 }

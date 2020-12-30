@@ -323,7 +323,7 @@ function dismissInput(entireNode) {
 //직접입력 > input 열기
 function directType(obj) {
 	if(obj.value === 'selectedDirect') {
-		obj.parentNode.querySelector('.direct_type_input').style.display = '';s
+		obj.parentNode.querySelector('.direct_type_input').style.display = '';
 	}
 	else {
 		obj.parentNode.querySelector('.direct_type_input').style.display = 'none';

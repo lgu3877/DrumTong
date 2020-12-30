@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath">${pageContext.request.contextPath }</c:set>
+<!-- selectEST.status 값을 status에 c:set 해줍니다 -->
+<c:set var = "status" value="${selectEST.status}" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +14,8 @@
 
 	<!-- global css -->	
 	<link rel="stylesheet" href="${cpath }/business/css/businessStyle.css">
+	<!-- header css 처음 등록할 때 쓸 헤더입니다. ( status eq 'FAIL' )-->
+    <link rel="stylesheet" href="${cpath }/business/css/businessHeader.css">
 	<!-- sub header css -->
 	<link rel="stylesheet" href="${cpath }/business/css/businessSubHeader.css">
 	<!-- side header css -->
@@ -35,14 +40,38 @@
 </head>
 <body>
 
-	<!-- side-header(navbar) -->
-	<%@ include file="../main/businessSideHeader.jsp"%>
 
+	<!-- 	온라인 계약이 진행 중인 상태이면은 기본 헤더를 보여준다 -->
+	<c:if test="${status eq 'FAIL' }">
+		<%@ include file="../main/businessHeader.jsp" %>
+	</c:if>
+	
+	<!-- side-header(navbar) -->
+	<!-- 	온라인 계약이 수행되었다면 관리헤더와 관리서브메뉴를 보여준다. -->
+	<c:if test="${status eq 'SUCCESS' }">
+		<%@ include file="../main/businessSideHeader.jsp" %>
+	</c:if>
+	
+	
 	<!-- section -->
 	<section>
-		<!-- top-header(membership) -->
-		<%@ include file="../main/businessSubHeader.jsp"%>
+	
+	<!-- top-header(membership) -->
+	<!-- 온라인 계약이 수행되었다면 관리헤더와 관리서브메뉴를 보여준다. -->
+	<c:if test="${status eq 'SUCCESS' }">
+		<%@ include file="../main/businessSubHeader.jsp" %>
+	</c:if>
+	
+	
+<!-- 	[750줄] 닫는 태그 세션의 상태가 FAIL이면 POST 형식   -->
+<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
+<!-- 	[전체 폼]에 대한 c:if문 -->
 
+	<c:if test="${status eq 'FAIL' }">
+			<form method="POST">
+	</c:if>
+		
+	
 		<!-- 일정관리 -->	
 		<!-- <form class="content_wrapper"> -->
 		<div class="content_wrapper">
@@ -65,12 +94,17 @@
 							<div class="btn_title">시간 수정</div>
 						</div>
 					 -->
+					
+					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
+					<c:if test="${status eq 'SUCCESS' }">
 						<div id="complete-working-hour" class="btn update_btn">
 							<div class="icon_con">
 								<i class="fas fa-check-square"></i>
 							</div>
 							<div class="btn_title">수정 완료</div>
 						</div>
+					</c:if>
+					
 					</div>
 				</div>
 				<!-- input -->
@@ -273,12 +307,15 @@
 							<div class="btn_title">일자 변경</div>
 						</div>
 					-->	
+					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
+					<c:if test="${status eq 'SUCCESS' }">
 						<div id="complete-holiday" class="btn update_btn">
 							<div class="icon_con">
 								<i class="fas fa-check-square"></i>
 							</div>
 							<div class="btn_title">수정 완료</div>
 						</div>
+					</c:if>
 					</div>
 				</div>
 
@@ -448,12 +485,16 @@
 							<div class="btn_title">휴무 수정</div>
 						</div>
 					 -->
+					 
+					 <!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
+					<c:if test="${status eq 'SUCCESS' }">
 						<div id="complete-holiday" class="btn update_btn">
 							<div class="icon_con">
 								<i class="fas fa-check-square"></i>
 							</div>
 							<div class="btn_title">휴무 등록</div>
 						</div>
+					</c:if>
 					</div>
 				</div>
 				
@@ -649,11 +690,26 @@
 			<!-- </form> -->
 		</div>
 		<!-- </form> -->
+		
+	<!-- [66줄] 여는 태그  세션의 상태가 FAIL이면 POST 형식   -->
+	<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
+	<!-- 	[전체 폼]에 대한 c:if문 -->
+	<c:if test="${status eq 'FAIL' }">
+	
+	<!-- 전체 form submit -->
+		<div>
+			<input type="submit" value="계약 완료">
+		</div>
+	
+	</form>
+			
+	</c:if>
+		
+		
 	</section>
 
 <!-- footer -->
 	<%-- <%@ include file="../main/businessFooter.jsp" %> --%>
-
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/interface.js"></script>
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/calendar.js"></script>
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/tmpHolidayButtons.js"></script>
