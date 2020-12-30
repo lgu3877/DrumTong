@@ -159,6 +159,7 @@
 						</li>
 					</ul>
 
+
 				<!-- Slide Move Button -->
 					<div class="slide_btn">
    	        			<a class="prev">&#10094;</a>
@@ -171,15 +172,17 @@
 			<!-- add new photo -->
 				<div id="photo-modal-btn" class="photo_add_con">
 					<!-- change cover -->
-					<input id="update-cover" class="add_photo_input" type="file"
-						name="delegatephotoboolean" onchange="imageCheck('add-photo')" style="display: none;">
+					<input id="update-cover" class="add_photo_input" type="file" 
+						name="delegatephotoboolean" onchange="imageCheck(event)"
+						style="display: none;" accept=".png, .jpg, .jpeg">
 					<label for="update-cover"> <span style="margin-right: 10px">커버
 							사진 바꾸기 <i class="far fa-images"></i>
 					</span>
 					</label>
 					<!-- add store image -->
-					<input id="add-photo" class="add_photo_input" type="file" name="storeimg"
-						onchange="imageCheck('add-photo')" style="display: none">
+					<input id="add-photo" class="add_photo_input" type="file" 
+						name="storeimg" onchange="imageCheck(event, 'add-photo')"
+						style="display: none" accept=".png, .jpg, .jpeg" multiple="multiple">
 					<label for="add-photo"> <span>새로운 사진 추가하기 <i
 							class="far fa-images"></i>
 					</span>

@@ -10,6 +10,7 @@ $("#image-preview").on('mousewheel',function(e) {
 	}
 });
 
+//let photoAdded = false;
 
 // 이미지 선택시 커버 이미지 출력
 function imageShow() {
@@ -39,12 +40,14 @@ function sliderEvent() {
 	const subImageList = document.getElementsByClassName('shop_picture');
 	for (let i = 0; i < subImageList.length; i++) {
 		const clickedPhoto = subImageList[i].children[0].src
-		
-			// 슬라이드 사진 클릭
+				
+		// 슬라이드 사진 클릭
 		subImageList[i].children[0].addEventListener('click', () => zoomInPhoto(clickedPhoto));
 	
 		// 슬라이드 사진 지우기(X 아이콘 클릭)
 		subImageList[i].children[1].addEventListener('click', () => deletePhoto(clickedPhoto));
+		
+//		console.log(subImageList[i].children[0].removeEventListener);
 	}
 }
 
@@ -106,32 +109,88 @@ function deletePhoto(clickedPhoto) {
 }
 
 
-// 이미지 업로드 시 확장자 확인
-function imageCheck(id) {
-	let imageFileName = document.getElementById(id).value;
-	const imageType = imageFileName.substr(imageFileName.length - 3, imageFileName.length);
+// 이미지 업로드 (feat. ghrw
+function imageCheck(e) {
+	const input = e.target;
+	const imageType = input.value.substr(input.value.length - 3, input.value.length).toLocaleLowerCase();
+
 	let isImage = false;
 
+	// 이미지 확장자 검사 (jpg, png, jpng)
 	if (imageType === 'jpg' || imageType === 'png' || imageType === 'jpeg') {
 		isImage = true;
 	}
-	
-	if (isImage) {
-		const answer = confirm("등록하신 사진을 매장 메인 사진으로 사용하시겠습니까?");
-		if (answer) {
-			// pass to DB for upload
+
+	// 커버 사진 업로드
+	if (isImage && e.target.id === "update-cover") {
+		// 미리보기
+		const reader = new FileReader();
+
+		reader.onload = (e) => {
+			// 태그 생성
+			const li = document.createElement("li");
+			li.className = "shop_picture";
+			const icon = document.createElement("i");
+			icon.className = "fas fa-times";
+			const repIcon = document.createElement("i");
+			repIcon.className = "fas fa-star";
+			repIcon.innerHTML = "<span>대표사진</span>";
+			const img = document.createElement("img");
+			img.setAttribute("src", e.target.result);
+			img.setAttribute("alt", "");
+				
+			// 추가
+			li.appendChild(img);
+			li.appendChild(icon);
+			li.appendChild(repIcon);
+			document.getElementById("image-preview").prepend(li);
+		
 		}
-		else {
-			// hang the request
-		}
-	}	
+		reader.readAsDataURL(e.target.files[0]);	
+		
+		imageShow();
+		sliderEvent();
+	}
+	// 일반 소개 사진 업로드 (복수 선택 가능)
+	else if (isImage && e.target.id === "add-photo") {
+		// 복수 사진 업로드 ( 1 ~ 여러장 )
+		for (let img of e.target.files) {
+			// 미리보기
+			const reader = new FileReader();
+			
+			reader.onload = (e) => {
+				// 태그 생성
+				const li = document.createElement("li");
+				li.className = "shop_picture";
+				const icon = document.createElement("i");
+				icon.className = "fas fa-times";
+				const img = document.createElement("img");
+				img.setAttribute("src", e.target.result);
+				img.setAttribute("alt", "");
+				
+				// 추가
+				li.appendChild(img);
+				li.appendChild(icon);
+				document.getElementById("image-preview").appendChild(li);
+			}
+			reader.readAsDataURL(img);			
+		}	
+		imageShow();
+		sliderEvent();
+	}
+	// 잘못된 사진 업로드(확장자)
 	else {
 		// deny uploading request
-		alert("선택하신 파일은 이미지 파일이 아닙니다.\n" +
-			  "(jpg, png 형식의 파일을 등록해주세요.)");
+		alert("선택하신 파일은 적합한 이미지 파일이 아닙니다.\n" +
+			  "(jpg, png, jpng 형식의 파일을 등록해주세요.)");
 		document.getElementById(id).value = '';
 	}
 }
+
+
+
+
+
 
 // 초기 실행
 imageShow();
