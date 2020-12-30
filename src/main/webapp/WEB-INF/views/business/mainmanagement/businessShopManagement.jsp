@@ -95,7 +95,7 @@
 			<!-- Sub Slider -->
 				<div style="position: relative;">
 					<ul id="image-preview" class="shop_image_slider">
-						<li class="shop_picture">
+						<li id="cover-image" class="shop_picture">
 							<img src="${cpath }/resources/business/img/slide/laundry1_01.jpg" alt="">
 							<i class="fas fa-times"></i>
 							<i class="fas fa-star"><span>대표사진</span></i>

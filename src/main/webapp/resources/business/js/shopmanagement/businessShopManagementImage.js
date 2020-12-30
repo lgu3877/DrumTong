@@ -126,10 +126,15 @@ function imageCheck(e) {
 		// 미리보기
 		const reader = new FileReader();
 
+		// 대표사진이 있을 경우 삭제
+		document.getElementById("cover-image") ? document.getElementById("cover-image").remove() : null;
+		
+		// 이미지 주입
 		reader.onload = (e) => {
 			// 태그 생성
 			const li = document.createElement("li");
 			li.className = "shop_picture";
+			li.id = "cover-image";
 			const icon = document.createElement("i");
 			icon.className = "fas fa-times";
 			const repIcon = document.createElement("i");
@@ -139,17 +144,21 @@ function imageCheck(e) {
 			img.setAttribute("src", e.target.result);
 			img.setAttribute("alt", "");
 				
+
 			// 추가
 			li.appendChild(img);
 			li.appendChild(icon);
 			li.appendChild(repIcon);
+
+			// 이벤트 주입
+			li.children[0].addEventListener('click', () => zoomInPhoto(e.target.result));
+			li.children[1].addEventListener('click', () => deletePhoto(e.target.result));
+			
+			// 전체 폼 삽입
 			document.getElementById("image-preview").prepend(li);
 		
 		}
-		reader.readAsDataURL(e.target.files[0]);	
-		
-		imageShow();
-		sliderEvent();
+		reader.readAsDataURL(e.target.files[0]);
 	}
 	// 일반 소개 사진 업로드 (복수 선택 가능)
 	else if (isImage && e.target.id === "add-photo") {
@@ -171,12 +180,14 @@ function imageCheck(e) {
 				// 추가
 				li.appendChild(img);
 				li.appendChild(icon);
+
+				li.children[0].addEventListener('click', () => zoomInPhoto(e.target.result));
+				li.children[1].addEventListener('click', () => deletePhoto(e.target.result));
+				
 				document.getElementById("image-preview").appendChild(li);
 			}
 			reader.readAsDataURL(img);			
 		}	
-		imageShow();
-		sliderEvent();
 	}
 	// 잘못된 사진 업로드(확장자)
 	else {
