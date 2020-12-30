@@ -27,7 +27,7 @@ public interface BSalesDAO {
 	HashMap<String, Integer> getMainPreviewLaundry(String estid);
 
 	// 주문 목록 데이터 Bsales, BDetailSales, Binformation Join되어있음. (business 쪽에서는 estid로 호출 customer쪽에서는 memberid로 호출합니다.)
-	List<OrderList> selectOrderList(String memberidORestid);
+	List<OrderList> selectOrderList(HashMap<String, String> param);
 	
 	
 
