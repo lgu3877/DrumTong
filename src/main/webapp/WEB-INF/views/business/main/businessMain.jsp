@@ -53,43 +53,18 @@
    
    <!-- Axios -->
    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-   
-   <!-- main cover cookie -->
-   <script type="text/javascript"> 
-     function getCookie(name) { 
-        var cookie = document.cookie;
-        
-        // 하루동안 보지 않기를 선택하면 cookiePause = N 으로 출력된다
-        if (document.cookie !== "") { 
-           var cookie_array = cookie.split("; ");
-           for ( var index in cookie_array) { 
-              var cookie_name = cookie_array[index].split("=");
-              if (cookie_name[0] == "cookiePause") { 
-                 return cookie_name[1]; 
-                 } 
-           }
-        }
-     } 
-     
-     function openPopup(url) { 
-        var cookieCheck = getCookie("cookiePause");
-        
-        // mainCover.jsp - closePopup 명령어 참조
-        if (cookieCheck != "N")
-           window.open(url, '', 'width=960,height=640,left=0,top=0'); 
-        }
-     </script>
+
 </head>     
      
 
 
 
 <!-- body -->
-<body onload="javascript:openPopup('${cpath}/business/mainCover/')">
+<body onload="javascript:openPopup('${cpath}/business/mainCover/')">	<!-- popup(1) 팝업 동작순서 -->
 	
 	<!-- header(navbar) -->
 	<%@ include file="businessHeader.jsp" %>
-	
+	<input type="hidden" style="display: none" id="bpersonid" value="${bLogin.bpersonid }">
 	<!-- section -->
 	<section>
 		<!-- Preview -->
@@ -145,6 +120,34 @@
 	<!-- main cover(slider) -->
 	<script type="text/javascript" src="${cpath }/business/js/main.js"></script>
 	<script type="text/javascript" src="${cpath }/business/js/modal.js"></script>
+	   <!-- main cover cookie -->
+   <script type="text/javascript"> 
+   
+	 console.log('estid : ', document.querySelector('#bpersonid').value);
+   	 
+     function getCookie(name) { 
+        var cookie = document.cookie;
+        
+        // 하루동안 보지 않기를 선택하면 cookiePause = N 으로 출력된다
+        if (cookie !== "") { 
+           var cookie_array = cookie.split("; ");
+           for ( var index in cookie_array) { 
+              var cookie_name = cookie_array[index].split("=");
+              if (cookie_name[0] == "cookiePause") { 
+                 return cookie_name[1]; 
+                 } 
+           }
+        }
+     } 
 
+
+     function openPopup(url) { // popup(2) : 팝업 동작순서
+        var cookieCheck = getCookie("cookiePause");
+        
+        // mainCover.jsp - closePopup 명령어 참조
+        if (cookieCheck != "N" && document.querySelector('#bpersonid').value != '')	// 쿠키에 값이 "N"이라고 들어가 있지 않을때와 로그인이 안되었을 때에는 비활성화
+           window.open(url, '', 'width=960,height=640,left=0,top=0'); // 팝업창을 윈도우에서 열어주는 명령어	-> url :  popup(1) 팝업 동작순서
+        }
+     </script>
 </body>
 </html>
