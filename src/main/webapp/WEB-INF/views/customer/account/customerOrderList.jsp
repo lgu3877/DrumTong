@@ -159,7 +159,7 @@
 			
 			
 			// 서브 카테고리들
-			let subcategories = orderList[value].maincategory[inputMainKey][0];
+			let subcategories = orderList[value].maincategory[inputMainKey];
 			
 			
 			console.log();

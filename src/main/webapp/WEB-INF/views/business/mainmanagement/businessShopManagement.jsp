@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath">${pageContext.request.contextPath }</c:set>
+<!-- selectEST.status 값을 status에 c:set 해줍니다 -->
 <c:set var = "status" value="${selectEST.status}" />
 
 <!DOCTYPE html>
@@ -15,6 +16,8 @@
 
 	<!-- global css -->	
 	<link rel="stylesheet" href="${cpath }/business/css/businessStyle.css">
+	<!-- header css 처음 등록할 때 쓸 헤더입니다. ( status eq 'FAIL' )-->
+    <link rel="stylesheet" href="${cpath }/business/css/businessHeader.css">
 	<!-- sub header css -->
 	<link rel="stylesheet" href="${cpath }/business/css/businessSubHeader.css">
 	<!-- side header css -->
@@ -38,15 +41,32 @@
 
 <!-- body -->
 <body>
-	${status eq 'FAIL'} 1212
+	
+	
+	<!-- 	온라인 계약이 진행 중인 상태이면은 기본 헤더를 보여준다 -->
+	<c:if test="${status eq 'FAIL' }">
+		<%@ include file="../main/businessHeader.jsp" %>
+	</c:if>
+	
 	<!-- side-header(navbar) -->
-	<%@ include file="../main/businessSideHeader.jsp" %>
+	<!-- 	온라인 계약이 수행되었다면 관리헤더와 관리서브메뉴를 보여준다. -->
+	<c:if test="${status eq 'SUCCESS' }">
+		<%@ include file="../main/businessSideHeader.jsp" %>
+	</c:if>
 	
 	<!-- 섹션 -->
 	<section>
-		<!-- top-header(membership) -->
-		<%@ include file="../main/businessSubHeader.jsp" %>
+	
 		
+
+	
+	
+		<!-- top-header(membership) -->
+<!-- 	온라인 계약이 수행되었다면 관리헤더와 관리서브메뉴를 보여준다. -->
+	<c:if test="${status eq 'SUCCESS' }">
+		<%@ include file="../main/businessSubHeader.jsp" %>
+	</c:if>
+	
 	<!-- 전체 폼 -->
 	
 <!-- 	[479줄] 닫는 태그 세션의 상태가 FAIL이면 POST 형식   -->
@@ -54,9 +74,8 @@
 <!-- 	[전체 폼]에 대한 c:if문 -->
 
 	<c:if test="${status eq 'FAIL' }">
-			<form method="POST">
+			<form method="POST" enctype="multipart/form-data">
 	</c:if>
-		
 		
 		<!-- 매장 소개(사진 & 글) -->
 		
@@ -71,7 +90,10 @@
 						<span class="shop_info_title">매장 사진</span>
 						<i class="far fa-question-circle" style="font-weight: 600">도움말</i>
 					</div>
+					
 				<!-- cover button -->
+				<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
+				<c:if test="${status eq 'SUCCESS' }">
 					<div class="service_button_con">
 						<div id="add-cover-btn" class="update_image_btn_con">
 							<div class="add_menu_icon_con">
@@ -80,6 +102,8 @@
 							<div class="add_menu_btn_title">사진 변경</div>
 						</div>
 					</div>
+				</c:if>
+				
 				</div>
 				
 			<!-- cover-image input form -->
@@ -153,7 +177,7 @@
 					</span>
 					</label>
 					<!-- add store image -->
-					<input id="add-photo" class="add_photo_input" type="file" name=""
+					<input multiple="multiple" id="add-photo" class="add_photo_input" type="file" name=""
 						onchange="imageCheck('add-photo')" style="display: none">
 					<label for="add-photo"> <span>새로운 사진 추가하기 <i
 							class="far fa-images"></i>
@@ -195,7 +219,8 @@
 
 
 		<!-- 서비스 메뉴 뷰(등록된 서비스 메뉴) -->
-		
+	<!-- status 가 SUCCESS일때만 등록된 서비스메뉴 영역이 생성된다. ( Rest를 위한 영역 ) -->
+	<c:if test="${status eq 'SUCCESS' }">
 		<div class="current_menu_con">
 
 			<!-- title -->
@@ -213,15 +238,18 @@
 						<div class="add_menu_btn_title">메뉴 수정</div>
 					</div>
 					<!-- complete button -->
+					
 					<div id="complete-list-btn" class="complete_menu_btn_con">
 						<div class="add_menu_icon_con">
 							<i class="fas fa-check-square"></i>
 						</div>
 						<div class="add_menu_btn_title">수정 완료</div>
 					</div>
+					
 				</div>
 			</div>
-
+	
+	
 			<div class="current_menu">
 
 			<!-- empty table -->
@@ -293,8 +321,9 @@
 					</tbody>
 				</table>
 			</div>
+		</c:if>
 		</div>
-
+	
 
 		<!-- 서비스 메뉴 생성(서비스 등록) -->
 		
@@ -315,13 +344,17 @@
 						</div>
 						<div class="add_menu_btn_title">메뉴 추가</div>
 					</div>
+					
 					<!-- complete button -->
+					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
+					<c:if test="${status eq 'SUCCESS' }">
 					<div id="update-item-btn" class="complete_menu_btn_con">
 						<div class="add_menu_icon_con">
 							<i class="fas fa-check-square"></i>
 						</div>
 						<div class="add_menu_btn_title">목록 추가</div>
 					</div>
+					</c:if>
 				</div>
 			</div>
 
@@ -435,12 +468,16 @@
 						</div>
 						<div class="add_menu_btn_title">수정 하기</div>
 					</div>
+					
+					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
+					<c:if test="${status eq 'SUCCESS' }">
 					<div id="complete-return-option" class="complete_menu_btn_con">
 						<div class="add_menu_icon_con">
 							<i class="fas fa-check-square"></i>
 						</div>
 						<div class="add_menu_btn_title">수정 완료</div>
 					</div>
+					</c:if>
 				</div>
 			</div>
 			
@@ -510,7 +547,10 @@
 	</div>
 
 
-
+	<script type="text/javascript">
+		// DB에서 받아오는 Defaultcategory List<String> 배열
+		let defaultCategory = ${defaultcategory};
+	</script>
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementMenuList.js"></script>
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementOnLoad.js"></script>
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementImage.js"></script>

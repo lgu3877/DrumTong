@@ -27,8 +27,8 @@ public class BusinessMainManagementController {
 	
 	// 비즈니스 매장관리 페이지로 이동 (GET) [건욱]
 	@RequestMapping(value="businessShopManagement/", method = RequestMethod.GET)
-	public ModelAndView shopManagement() {
-		return svc.shopManagement();
+	public ModelAndView shopManagement(HttpServletRequest req) {
+		return svc.shopManagement(req);
 	}
 	
 	// 비즈니스 온라인계약 {신규매장관리} 데이터 등록  (POST) [건욱]
