@@ -1,5 +1,6 @@
 package com.drumtong.business.service.submanagement;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -100,13 +101,18 @@ public class BusinessSubManagementService {
 
 
 	// 비즈니스 주문현황 관리 페이지로 이동 (GET) [건욱]
-	public ModelAndView orderStatusManagement(HttpServletRequest req) {
+	public ModelAndView orderStatusManagement(HttpServletRequest req, String status) {
+		status = status == null ? "REQUEST" : status;
 		BInformationVO bInformationVO = (BInformationVO)req.getSession().getAttribute("selectEST");
 		
 		if(checkEstStatus(bInformationVO)) return mainMove;
 		
+		HashMap<String, String> param = new HashMap<String, String>();
+		param.put("memberidORestid", bInformationVO.getEstid());
+		param.put("status", status);
+		
 		//	주문현황 페이지에 필요한 구매정보 데이터를 가져와줍니다. 
-		List<OrderList> orderList =  bSalesDAO.selectOrderList(bInformationVO.getEstid());
+		List<OrderList> orderList =  bSalesDAO.selectOrderList(param);
 		
 		ModelAndView mav = new ModelAndView("business/submanagement/businessOrderStatusManagement");
 		

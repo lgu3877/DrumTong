@@ -83,7 +83,7 @@
 			따라서 Business 주문현황에서 호출될 때는 Where 조건문을 ESTID로 데이터를 호출하고
 			 	Customer 주문목록에서 호출될 때는 Where 조건문을 MemberId로 호출해서 각기 다른 데이터를 호출할 수 있게 도와줍니다.
 	 -->
-	<select id="selectOrderList" parameterType="String" resultType="OrderList">
+	<select id="selectOrderList" parameterType="hashmap" resultType="OrderList">
 	SELECT
         BSALES.ESTID,
 		BSALES.SALECODE, BSALES.PURCHASEDATE, BSALES.TOTALAMOUNT,
@@ -97,10 +97,15 @@
 	    INNER JOIN BINFORMATION
 		ON BINFORMATION.ESTID = BSALES.ESTID
 	WHERE 
-		CASE WHEN  #{memberidORestid} LIKE '%ESTID%' THEN  BSALES.ESTID
-             WHEN  #{memberidORestid} LIKE '%MemberID%' THEN BSALES.MEMBERID
-             END =#{memberidORestid}
-             
+        <choose>
+        	<when test='memberidORestid.contains("ESTID")'>
+        		BSALES.STATUS=#{status} AND BSALES.ESTID=
+        	</when>
+        	<otherwise>
+        		BSALES.MEMBERID=
+        	</otherwise>
+        </choose>
+        #{memberidORestid}     
 	</select>
 	
 <!-- 	주문 목록 데이터 Bsales, BDetailSales, Binformation Join되어있음. -->
