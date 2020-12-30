@@ -1,0 +1,77 @@
+body {
+	width: 800px;
+}
+
+.container {
+	width: 700px; 
+	border: 2px solid black; 
+	margin: 0 auto; 
+	margin-top: 60px; 
+	padding: 15px;
+	padding-bottom: 40px;
+	text-align: center;
+	background-color: whitesmoke;
+}
+
+.subcontainer {
+	width: 300px; 
+	height: 310px;
+	display: inline-block;
+}
+
+.subcontainer div {
+	width: 90%; 
+	height: 70px;
+	padding: 10px;
+	color: #cacece;
+	font-size: 16pt;
+	font-weight: bold;
+	border: 2px solid #3088F9;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	margin: 0 auto;
+	margin-bottom: 5px !important;
+	background-color: white !important;
+}
+
+.subcontainer div.selected {
+	border: 3px solid white;
+	background-color: #3088F9 !important;
+}
+
+textarea.etxbox {
+	width: 560px;  
+	outline: none; 
+	resize: none; 
+	padding: 20px; 
+	font-size: 12pt;
+	margin-bottom: 15px;
+}
+
+.btndiv {
+	width: 600px; margin: 0 auto; display: flex;
+}
+
+.btndiv button {
+	width: 45%;
+	height: 40px;
+	background-color: #6495EF !important;
+	border-radius: 10px !important;
+    border: 0px !important;
+    color: white !important;
+    outline: none !important;
+    cursor: pointer;
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+.btndiv button:hover {
+	transform: translate(0, -5px);
+	transition: all 1s ease 0s;
+}
+
+.btndiv div {
+	width: 10% !important;
+}

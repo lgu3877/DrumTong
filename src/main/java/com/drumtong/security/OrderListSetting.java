@@ -40,7 +40,7 @@ public class OrderListSetting {
 					String saleCode = ol.getSalecode();
 					
 					
-					HashMap<String, List<HashMap<String,List<BDetailSalesVO>>>> maincategoriesMap = new HashMap<String, List<HashMap<String,List<BDetailSalesVO>>>>();
+					HashMap<String, HashMap<String,List<BDetailSalesVO>>> maincategoriesMap = new HashMap<String, HashMap<String,List<BDetailSalesVO>>>();
 					
 					
 					// HashMap을 선언해준다. 
@@ -71,7 +71,7 @@ public class OrderListSetting {
 					
 
 //							  메인                                            서브                       VO
-//					HashMap<String, List<HashMap<String,List<BDetailSalesVO>>>>
+//					HashMap<String, <HashMap<String,List<BDetailSalesVO>>>
 					
 					// [Maincategory]의 길이만큼 반복문을 실행시켜준다.
 					for ( int i = 0; i < maincategoryList.size(); i++ ) {
@@ -90,9 +90,6 @@ public class OrderListSetting {
 						hashmap.put("maincategoryname", maincategoryName);
 						hashmap.put("salecode", saleCode);
 						
-						
-						// 서브카테고리들의 List
-						List<HashMap<String,List<BDetailSalesVO>>> subcategoriesList = new ArrayList<HashMap<String,List<BDetailSalesVO>>>();
 						
 						// 서브카테고리와 vo
 						HashMap<String,List<BDetailSalesVO>> subcategoryANDvo = new HashMap<String,List<BDetailSalesVO>>();
@@ -128,10 +125,8 @@ public class OrderListSetting {
 							
 						});
 						// 서브메뉴들에 서브카테고리와 vo를 넣어준다.
-						subcategoriesList.add(subcategoryANDvo);
-						
 						// 메인메뉴카테고리들에 메인메뉴의 이름과 서브카테고리의 리스트들을 넣어준다.
-						maincategoriesMap.put(maincategoryName, subcategoriesList);
+						maincategoriesMap.put(maincategoryName, subcategoryANDvo);
 							
 						
 					}
@@ -139,6 +134,7 @@ public class OrderListSetting {
 					ol.setMaincategory(maincategoriesMap);
 					
 				}
+				
 				
 				// 반복문을 모두 수행한 orderList 리스트를 반환해준다.
 				return orderList;

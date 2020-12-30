@@ -31,8 +31,13 @@
 		function pwChange(bpersonid){
 			password = document.getElementsByName('password')[0].value;
 			confrimPassword = document.getElementsByName('confrimPassword')[0].value;
-			console.log(password);
-			console.log(confrimPassword);
+			
+			var regExp = /^.*(?=^.{7,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+			
+			if(!regExp.test(password)){
+				alert('최소 7자리에서 15자리까지의 영문, 숫자, 특수문자 조합으로 구성해주세요');
+				return false;
+			}
 		      var axPost = async () => {
 		        ob={
 		        	'bpersonid' : bpersonid,
@@ -74,7 +79,7 @@
 			<form class="pw_reset_view" method="${AccountPage == 'AccountPage' ? 'GET' : 'POST'}" action="/drumtong/business/membership/${AccountPage == 'AccountPage' ? 'businessAccountInfo/' : 'businessPwChange/'}" onsubmit="return pwChange('${User.bpersonid}');">
 				<div class="pw_reset_title title">비밀번호 재설정</div>
 				<div class="pw_reset_content">
-					<p>기존의 비밀번호를 변경합니다. 보안을 위해 최소 10자리에서 20자리까지의 영문, 숫자의 조합으로
+					<p>기존의 비밀번호를 변경합니다. 보안을 위해 최소 7자리에서 15자리까지의 영문, 숫자, 특수문자 조합으로
 						구성해주세요.</p>
 					<div class="pw_reset_input_con">
 						<div class="pw_reset_input_con">

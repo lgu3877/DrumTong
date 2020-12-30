@@ -67,10 +67,10 @@
 				<button onclick="chStatus(this, 's')">완료</button>
 			</div>
 			
-			<div style="width: 700px; height: 30px; margin: 0 auto; display: flex; align-items: center; margin-bottom: 25px; margin-top: 10px">
-				<input type="date" style="width: 40%; height: 100%; font-size: 14pt; text-align: center; border: 3px solid #3088F9; font-weight: bold">
+			<div class="topdatediv">
+				<input type="date">
 				<div style="width: 20%"></div>
-				<input type="date" style="width: 40%; height: 100%; font-size: 14pt; text-align: center; border: 3px solid #3088F9; font-weight: bold">
+				<input type="date">
 			</div>
 			
 			<div class="clonediv" id="clonediv0">
@@ -106,6 +106,16 @@
 					</div>
 				</div>
 			</div>
+			
+			<div class="sidecontainer">
+				<div>
+					<button onclick="checkrequest(this)">처&nbsp&nbsp리</button>
+				</div>
+				<div>
+					<button onclick="checkcancle(this)">취&nbsp&nbsp소</button>
+				</div>
+			</div>
+			
 			</div>
 		
 		</div>
@@ -123,18 +133,18 @@
 		<hr>
 		
 		<div class="detailattr">
-			<h1 style="width: 20%; color: #cacece; font-size: 12pt; text-align: center;border-right: 1px solid #afafaf; border-left: 1px solid #afafaf">메뉴</h1>
-			<h1 style="width: 20%; color: #cacece; font-size: 12pt; text-align: center;border-right: 1px solid #afafaf">수량</h1>
-			<h1 style="width: 20%; color: #cacece; font-size: 12pt; text-align: center;border-right: 1px solid #afafaf">배달 가격</h1>
-			<h1 style="width: 20%; color: #cacece; font-size: 12pt; text-align: center;border-right: 1px solid #afafaf">단일 가격</h1>
-			<h1 style="width: 20%; color: #cacece; font-size: 12pt; text-align: center;border-right: 1px solid #afafaf">합계 가격</h1>
+			<h1 style="border-left: 1px solid #afafaf">메뉴</h1>
+			<h1>수량</h1>
+			<h1>배달 가격</h1>
+			<h1>단일 가격</h1>
+			<h1>합계 가격</h1>
 		</div>
 		<div class="detailmenus" id="detailmenus">
 			<div class="clonedetail" id="clonedetail0">
 				<p class="pmain"><span class="psubmain"></span></p>
-	
 				<div class="outerdetail">
 					<div class="innerdetail">
+					<i class="fas fa-motorcycle fa-x"></i>
 						<h3></h3>
 						<h3></h3>
 						<h3 style="text-align: right"></h3>
@@ -153,6 +163,12 @@
 		<hr>
 			<div class="in-modal">총 개수<span id="totalamount"></span></div>
 			<div class="in-modal">총 금액<span  id="totalprice"></span></div>
+		<hr>
+		    <div class="popupactive" id="popupactive">
+		    	<button onclick="checkcancle(this)">취소</button>
+		    	<div style="width: 20%"></div>
+		    	<button onclick="checkrequest(this)">처리</button>
+		    </div>
 		<hr>
 	</div>
 	
@@ -216,14 +232,21 @@
  			
  			$('#clonediv0').find('p.purchasedate').html(orderList[0].purchasedate);		// 주문일자
  			$('#clonediv0').find('p.deliverydate').html(orderList[0].deliverydate);		// 배송일자
- 			$('#clonediv0').find('p.totalprice').html(orderList[0].totalprice);			// 총가격
+ 			$('#clonediv0').find('p.totalprice').html(numberWithCommas(orderList[0].totalprice) + '원');			// 총가격
  			
 			let mcategoryorigin = '';		// 메인 카테고리
 			for(key in Object.keys(orderList[0].maincategory)) {
 				mcategoryorigin += Object.keys(orderList[0].maincategory)[key] + ' / '; 	// '메인A / 메인B / 메인C / ' 
 			}
-			$('#clonediv0').find('p.maincategory').html(mcategoryorigin.slice(0, -2));		// '메인A / 메인B / 메인C'
 			
+			if(mcategoryorigin.slice(0, -2).length < 10)
+				$('#clonediv0').find('p.maincategory').html(mcategoryorigin.slice(0, -2));		// '메인A / 메인B / 메인C'
+			else
+				$('#clonediv0').find('p.maincategory').html(mcategoryorigin.substring(0, 10) + '...');
+			
+			$('#clonediv0').find('.sidecontainer').find('button').each(function(index, item) {
+				$(item).attr('name', orderList[0].salecode);
+			});
  		}
 		
  		
@@ -256,14 +279,22 @@
  				
  				$('#clonediv' + i).find('p.purchasedate').html(orderList[i].purchasedate);
  				$('#clonediv' + i).find('p.deliverydate').html(orderList[i].deliverydate);
- 				$('#clonediv' + i).find('p.totalprice').html(orderList[i].totalprice);
+ 				$('#clonediv' + i).find('p.totalprice').html(numberWithCommas(orderList[i].totalprice) + '원');
 			
  				
  				let mcategoryclone = '';
  				for(key in Object.keys(orderList[i].maincategory)) {
  					mcategoryclone += Object.keys(orderList[i].maincategory)[key] + ' / ';
  				}
- 				$('#clonediv' + i).find('p.maincategory').html(mcategoryclone.slice(0, -2));
+ 				
+ 				if(mcategoryclone.slice(0, -2).length < 10)
+	 				$('#clonediv' + i).find('p.maincategory').html(mcategoryclone.slice(0, -2));
+ 				else
+ 					$('#clonediv' + i).find('p.maincategory').html(mcategoryclone.substring(0, 10) + '...');
+ 				
+ 				$('#clonediv' + i).find('.sidecontainer').find('button').each(function(index, item) {
+ 					$(item).attr('name', orderList[i].salecode);
+ 				});
  			}
  		}
  		
@@ -276,6 +307,11 @@
  	         let totalquickprice = 0;	// 전체 배달가격 객체 
  	         let count = 0;
  	         let i = 0;
+ 	         
+ 	         $('#popupactive').children('button').each(function(index, item) {
+ 	        	 $(item).attr('name', detailob.salecode);
+ 	         });
+ 	         
  	         // 1차 메인카테고리 HashMap array
  	            for(mainkey in Object.keys(detailob.maincategory)) {
  	              
@@ -285,7 +321,7 @@
  	               // 그래서, Object.keys()로 키값을 가지고 온 후, 키값을 사용하여 .maincategory의 값을 호출함
  	               
  	               // 서브 카테고리들
- 	               let subcategories = detailob.maincategory[inputMainKey][0];	// 서브메뉴
+ 	               let subcategories = detailob.maincategory[inputMainKey];	// 서브메뉴
  	               // 위에서 호출한 값을 키값으로 사용하여 배열형태의 서브카테고리를 가지고 온다
  	               // 즉, 메인카테고리(1) / 서브카테고리(n)	-> 1:n의 관계가 성립되고 있음
  	               
@@ -316,7 +352,10 @@
  	                    if(z > 0)	// 만약 서브카테고리에 저장된 메뉴가 1개보다 많을 때 사용
 	  						$('#clonedetail' + count).find('.outerdetail').append(innerclone.html());
  	                     
- 	                     $('#clonedetail' + count).find('.innerdetail').children('h3').each(function(index) {
+ 	                     $('#clonedetail' + count).find('.innerdetail').children('h3').each(function(index, item) {
+ 	                    	 if(mainmenus[z].quickprice == 0)	// 배달가격이 0원이면 오토바이 안보이기
+ 	                    		$('#clonedetail' + count).find('i').css('display', 'none');
+ 	                    	 
  	                        switch (index) {
  	                           case 0:
  	                              $('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(z).children('h3').eq(index).html(mainmenus[z].name);
@@ -423,6 +462,18 @@
 						$(item).remove();
 				});
 			}
+		}
+		
+		function checkcancle(obj) {			// 주문취소 confirm 실행문
+			let checkcancle = confirm('주문을 취소하시겠습니까?');
+			if(checkcancle == true)
+				window.open('./PopUpWindow/cancle/' + obj.name + '/', '주문취소팝업', 'width=700px,height=620px,scrollbars=yes');
+		}
+		
+		function checkrequest(obj) {		// 주문처리 confirm 실행문
+			let checkrequest = confirm('주문을 수락하시겠습니까?');
+			if(checkrequest == true)
+				window.open('./PopUpWindow/process/' + obj.name + '/', '주문처리팝업', 'width=700px,height=620px,scrollbars=yes');
 		}
 		
 		// offset	: 페이지 상단으로부터 선택된 요소가 보이는 절대위치를 나타내주는 함수

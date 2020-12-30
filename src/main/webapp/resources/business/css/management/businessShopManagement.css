@@ -7,7 +7,7 @@
 	
 }
 
-/* */
+/* 폼 그림자 */
 .form {
 	background-color: whitesmoke;
 	padding: 20px;
@@ -21,6 +21,49 @@
 		0px 10px 15px 3px;
 }
 
+/* 도움말 말풍선 */
+.help_msg_top,
+.help_msg_down {
+	transition: 1s;
+    position: absolute;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: navy;
+    color: white;
+    line-height: 25px;
+    text-align: justify;
+}
+
+.help_msg_top {
+	margin: -150px 180px;
+    width: 400px;
+}
+
+.help_msg_down {
+	margin: 10px 110px;
+	width: 350px;
+}
+
+.help_msg_top:after,
+.help_msg_down:after {
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	position: absolute;
+	bottom: -15px;
+	left: 20px;
+}
+
+.help_msg_top:after {
+	border-bottom: 5px solid transparent;
+	border-top: 10px solid navy;
+}
+
+.help_msg_down:after {
+	border-bottom: 10px solid navy;
+	border-top: 5px solid transparent;	
+}
+
+/* 매장 사진 슬라이드 좌우 화살표 */
 .prev {
 	text-decoration: none;
     position: absolute;
@@ -323,7 +366,8 @@
 .update_image_btn_con, 
 .update_menu_btn_con, 
 .add_menu_btn_con, 
-.complete_menu_btn_con {
+.complete_menu_btn_con,
+.delivery_menu_btn_con {
 	display: flex;
     cursor: pointer;
     border: none;
@@ -353,10 +397,18 @@
     /* margin-right: 15%; */	
 }
 
+.delivery_menu_btn_con {
+	width: 150px !important;	
+	background-color: #bedcfa;
+	margin-right: 20px;	
+    color: white;
+}
+
 .update_image_btn_con:hover, 
 .update_menu_btn_con:hover, 
 .add_menu_btn_con:hover, 
-.complete_menu_btn_con:hover {
+.complete_menu_btn_con:hover,
+.delivery_menu_btn_con:hover {
 	background-color: #3b5998;
     transition: 0.5s;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -578,9 +630,6 @@
     line-height: 50px;
     cursor: pointer;
     color: navy;
-    
-/*     display: flex; */
-/*     justify-content: space-between; */
 }
 
 .return_menu ul li:hover {

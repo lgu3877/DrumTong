@@ -39,7 +39,6 @@ public class Login {
 		Cookie SessionID = new Cookie("JSESSIONID", session.getId());
 		String ID = privateData.getId();	// 아이디
 		String PW = privateData.getPw();	// 비밀번호
-		System.out.println("ID : " + ID + ", PW : " + PW);
 		PrivateData Login = null;	// User의  MemberID와 일치하는 객체 저장
 		// CustomerLoginInterceptor 에서 만들어 세션에 저장해두었던 LoginLogVO 객체 불러오기
 		SLoginLogVO sLoginLogVO = (SLoginLogVO)session.getAttribute("sLoginLogVO");	// 인터셉터에서 받아온 loginlogo불러오기
@@ -55,9 +54,7 @@ public class Login {
 				
 		// 2. 일치하는 계정 있다면 Login 계정 생성하고 세션에 저장!(세션 시간은 3시간)
 		if(Login != null) {
-			System.out.println("로그인 성공 ? " + Login.getName());
 			session.setAttribute(typeOfSite ? "cLogin" : "bLogin", Login);
-//			System.out.println("로그인 객체 : " + session.getAttribute("Login"));
 			session.setMaxInactiveInterval(60 * 60 * 3);
 			LoginResult = true;
 			
@@ -119,7 +116,6 @@ public class Login {
 		PrivateData Login = TypeOfSite ? 
 				cPrivateDataDAO.selectLogin(Encrypt.SecurePassword(ID, PW)):
 				bPrivateDataDAO.selectLogin(Encrypt.SecurePassword(ID, PW));
-		System.out.println("로그인 성공 ? " + ID + ", " + PW + ", " + Login);
 		return Login != null ? "true" : "false";
 	}
 }

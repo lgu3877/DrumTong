@@ -15,6 +15,12 @@
 	width: 33%; 
 	height: 60px;
 	margin-right: 0.5%;
+	outline: none;
+	background-color: #3088F9;
+	color: white;
+	border: 0;
+	cursor: pointer;
+	font-weight: bold;
 }
 
 .flex2 {
@@ -32,10 +38,31 @@
 .flex3 button {
 	font-size: 18pt; 
 	width: 150px; 
-	height: 40px
+	height: 40px;
+	outline: none;
+	background-color: #3088F9;
+	color: white;
+	border: 1px solid white;
+	cursor: pointer;
 }
 .flex3 button.selected, .flex1 button.selected {
-	background-color: #afafaf !important;
+	background-color: #3b5998 !important;
+}
+
+.flex1 button:hover, .flex3 button:hover {
+	color: #3088F9;
+	border: 2px solid #3088F9; 
+	background-color: white;
+	transform: translate(0, -5px);
+	transition: all 1s ease 0s;
+}
+
+.flex1 button.selected:hover, .flex3 button.selected:hover {
+	color: #3b5998 !important;
+	border: 2px solid #3b5998 !important; 
+	background-color: white !important;
+	transform: translate(0, -5px);
+	transition: all 1s ease 0s;
 }
 
 .flex4 {
@@ -45,7 +72,10 @@
 
 .flex4 input[type="date"] {
 	width: 250px; 
-	height: 40px
+	height: 40px;
+	text-align: center;
+	background-color: whitesmoke;
+	font-size: 14pt;
 }
 
 .flex4 span {

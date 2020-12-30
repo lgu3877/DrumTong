@@ -40,16 +40,16 @@
 		<!-- sub-header(membership) -->
 	<%@ include file="../main/businessSubHeader.jsp" %>
 		
-		<div class="marginauto" style="width: 800px; height: 80%; margin-top: 100px;">	
-			<h1 style="text-align: left; font-size: 28pt">리뷰 관리</h1>
-				매장 이름 : ${selectEST.brandnaming }
+		<div class="container">	
+			<h1 class="title">리뷰 관리<span>(${selectEST.brandnaming })</span></h1>
+				
 		<div style="width: 800px;" class="marginauto">
-			<div style="display: flex; margin-bottom: 15px">
-				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/whole/'" value="전체 리뷰" style="width: 33%; height: 50px" id="whole">
-				<div style="width: 0.5%"></div>
-				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/noReply/'" value="미답변 리뷰"  style="width: 33%; height: 50px" id="noReply">
-				<div style="width: 0.5%"></div>
-				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/reportReply/'" value="차단/허위 의심 리뷰"  style="width: 33%; height: 50px"  id="reportReply">
+			<div class="optiondiv">
+				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/whole/'" value="전체 리뷰" id="whole">
+				<div></div>
+				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/noReply/'" value="미답변 리뷰"  id="noReply">
+				<div></div>
+				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/reportReply/'" value="차단/허위 의심 리뷰" id="reportReply">
 			</div>
 			<div id="reviewDiv" style="width: 100%;"></div>
 			
@@ -449,17 +449,19 @@
 
 		var replyButton = document.createElement('input');
 		replyButton.setAttribute('type', 'button');
-		replyButton.setAttribute('value', '답글작성');
+		replyButton.setAttribute('value', '작성');
 		replyButton.setAttribute('onclick', 'replyButton(this)');
 
 		var cancleButton = document.createElement('input');
 		cancleButton.setAttribute('type', 'button');
-		cancleButton.setAttribute('value', '답글취소');
+		cancleButton.setAttribute('value', '취소');
 		cancleButton.setAttribute('onclick', 'cancleButton(this)');
 		
 		salecode.appendChild(replyInput);
 		salecode.appendChild(replyButton);
 		salecode.appendChild(cancleButton);
+		console.log('배경색 : ', salecode);
+		salecode.style.backgroundColor = 'whitesmoke';
 	}
 	
 	// 답글 작성 함수
@@ -485,6 +487,7 @@
 	  			bReviewList = data;
 	  			switchArray();
 	  			pageNum();
+	  			obj.parentNode.style.backgroundColor = '#3088F9';
 	             })
 	          }
 			return axPost(ob);
@@ -514,6 +517,7 @@
 	  			bReviewList = data;
 	  			switchArray();
 	  			pageNum();
+	  			obj.parentNode.style.backgroundColor = '#3088F9';
 	             })
 	          }
 			return axPost(ob);
@@ -523,10 +527,12 @@
 	// 답글작성 취소버튼
 	function cancleButton(obj) {
 		var cancleConfirm = confirm('정말로 답글 작성을 취소하시겠습니까?');
-		if(cancleConfirm == flase)
+		if(cancleConfirm == false)
 			return false;
-		else 
+		else  {
 			obj.parentNode.innerHTML = null;			
+			obj.parentNode.backgroundColor = '#3088F9';
+		}
 	}
 	
 	// 해당페이지에서 리뷰수가 1개일 때, 그 리뷰가 다른 리뷰란으로 이동하면 해당페이지가 삭제된다 

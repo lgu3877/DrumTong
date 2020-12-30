@@ -14,6 +14,12 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	
+	<!-- error Page -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/errorPages/404error.jsp</location>
+	</error-page>
+	
 	<!-- encodingFilter -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -44,5 +50,5 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-
+	
 </web-app>
