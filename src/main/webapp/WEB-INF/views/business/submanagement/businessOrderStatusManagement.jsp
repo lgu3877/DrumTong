@@ -321,7 +321,7 @@
  	               // 그래서, Object.keys()로 키값을 가지고 온 후, 키값을 사용하여 .maincategory의 값을 호출함
  	               
  	               // 서브 카테고리들
- 	               let subcategories = detailob.maincategory[inputMainKey][0];	// 서브메뉴
+ 	               let subcategories = detailob.maincategory[inputMainKey];	// 서브메뉴
  	               // 위에서 호출한 값을 키값으로 사용하여 배열형태의 서브카테고리를 가지고 온다
  	               // 즉, 메인카테고리(1) / 서브카테고리(n)	-> 1:n의 관계가 성립되고 있음
  	               
