@@ -40,7 +40,7 @@ public class OrderListSetting {
 					String saleCode = ol.getSalecode();
 					
 					
-					HashMap<String, List<HashMap<String,List<BDetailSalesVO>>>> maincategoriesMap = new HashMap<String, List<HashMap<String,List<BDetailSalesVO>>>>();
+					HashMap<String, HashMap<String,List<BDetailSalesVO>>> maincategoriesMap = new HashMap<String, HashMap<String,List<BDetailSalesVO>>>();
 					
 					
 					// HashMap을 선언해준다. 
@@ -127,18 +127,25 @@ public class OrderListSetting {
 							
 							
 						});
+//						// 서브메뉴들에 서브카테고리와 vo를 넣어준다.
+//						subcategoriesList.add(subcategoryANDvo);
+//						
+//						// 메인메뉴카테고리들에 메인메뉴의 이름과 서브카테고리의 리스트들을 넣어준다.
+//						maincategoriesMap.put(maincategoryName, subcategoriesList);
 						// 서브메뉴들에 서브카테고리와 vo를 넣어준다.
-						subcategoriesList.add(subcategoryANDvo);
 						
 						// 메인메뉴카테고리들에 메인메뉴의 이름과 서브카테고리의 리스트들을 넣어준다.
-						maincategoriesMap.put(maincategoryName, subcategoriesList);
+						maincategoriesMap.put(maincategoryName, subcategoryANDvo);
 							
 						
 					}
 					// ol에 Tree구조의 메인카테고리와 서브카테고리 메뉴들을 넣어준다.
 					ol.setMaincategory(maincategoriesMap);
 					
+					
+					System.out.println("■■■■■■■■■■■■■■■ 영경 테스트 ■■■■■■■■■■■■■■■");
 				}
+				
 				
 				// 반복문을 모두 수행한 orderList 리스트를 반환해준다.
 				return orderList;
