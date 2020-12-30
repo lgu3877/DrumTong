@@ -3,48 +3,7 @@
 <!-- 영경 스크립트 -->
 <!-- Axios script -->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script>
-function loginSubmit(){
-    loginInputs = document.querySelectorAll('input.input_tag');
-    redmarks = document.querySelectorAll('div.red-mark');
-    cnt = 0;
-    
-    for(i = 0; i < loginInputs.length; i++){
-    	if(loginInputs[i].value === ''){
-    		redmarks[i].innerHTML = ((i == 0 ? '아이디' : '비밀번호') + '를 입력해주세요');
-    	} else{
-    		redmarks[i].innerHTML = '';
-    		cnt++;
-    	}
-    }
-    
 
-    if(cnt == loginInputs.length){
-		var axPost = async (id, pw, storeid) => {
-			ob={
-					'id':id,
-					'pw':pw,
-					'storeid':storeid,
-					'type':'business',
-			};
-			await axios.post('/drumtong/business/membership/businessLogin/rest/loginCheck/', ob)
-			
-			.then( (response) => {
-				if(response.data === true){
-					console.log('true 실행');
-		        	document.getElementsByClassName('login_wrapper')[0].submit();
-				} else{
-					console.log('false 실행');
-					alert('로그인에 실패하였습니다.');
-					document.getElementsByName('pw')[0].value ='';
-				}
-			})
-		};
-		axPost(document.getElementsByName('id')[0].value,document.getElementsByName('pw')[0].value, document.getElementsByName('storeid')[0].value);	
-    }
-}
-	
-</script>
 <!-- inner login form in main page -->
 <c:choose>
 
@@ -209,11 +168,53 @@ function loginSubmit(){
 
 <!-- login regular syntax -->
 <script>
-  document.getElementById('loginSubmit').addEventListener('click', function(){ loginSubmit();});
+   document.getElementById('loginSubmit').addEventListener('click', function(){ 
+	 	  loginSubmit();
+   });
   
   function loginEnter() {
 	  if (window.event.keyCode == 13) {
 		  loginSubmit();
      }
   }
+  
+  function loginSubmit(){
+	    loginInputs = document.querySelectorAll('input.input_tag');
+	    redmarks = document.querySelectorAll('div.red-mark');
+	    cnt = 0;
+	    
+	    for(i = 0; i < loginInputs.length; i++){
+	    	if(loginInputs[i].value === ''){
+	    		redmarks[i].innerHTML = ((i == 0 ? '아이디' : '비밀번호') + '를 입력해주세요');
+	    	} else{
+	    		redmarks[i].innerHTML = '';
+	    		cnt++;
+	    	}
+	    }
+	    
+
+	    if(cnt == loginInputs.length){
+			var axPost = async (id, pw, storeid) => {
+				ob={
+						'id':id,
+						'pw':pw,
+						'storeid':storeid,
+						'type':'business',
+				};
+				await axios.post('/drumtong/business/membership/businessLogin/rest/loginCheck/', ob)
+				
+				.then( (response) => {
+					if(response.data === true){
+						console.log('true 실행');
+			        	document.getElementsByClassName('login_wrapper')[0].submit();
+					} else{
+						console.log('false 실행');
+						alert('로그인에 실패하였습니다.');
+						document.getElementsByName('pw')[0].value ='';
+					}
+				})
+			};
+			axPost(document.getElementsByName('id')[0].value,document.getElementsByName('pw')[0].value, document.getElementsByName('storeid')[0].value);	
+	    }
+	}
 </script>
