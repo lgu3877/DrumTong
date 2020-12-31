@@ -150,8 +150,7 @@ public class RestBusinessSubManagementService {
 
 	// status : 'REQUEST'(요청), 'PROCESSING'(처리중), 'SUCCESS'(완료)
 	// startDate : 시작 날짜 없으면 맨 처음부터, endDate : 끝 날짜 없으면 맨 마지막 날까지
-	public String orderStatusManagementDate(HttpServletRequest req, String status, String startDate, String endDate,
-			HashMap<String, String> param) {
+	public String orderStatusManagementDate(HttpServletRequest req, String status, String startDate, String endDate) {
 		String memberidORestid = ((BInformationVO)req.getSession().getAttribute("selectEST")).getEstid();
 		// 날짜와 status를 기준으로 구분하여 데이터를 가져와 준다.
 		List<OrderList> orderlist = OrderListSetting.selectBusinessDate(startDate, endDate, memberidORestid, status);

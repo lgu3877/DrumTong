@@ -115,9 +115,8 @@ public class RestBusinessSubManagementController {
 	// status : 'REQUEST'(요청), 'PROCESSING'(처리중), 'SUCCESS'(완료)
 	// startDate : 시작 날짜 없으면 맨 처음부터, endDate : 끝 날짜 없으면 맨 마지막 날까지
 	@RequestMapping(value="businessOrderStatusManagement/rest/{status}/{startDate}/{endDate}/", method = RequestMethod.POST, produces =org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public String orderStatusManagementDate(HttpServletRequest req, @PathVariable("status")String status, @PathVariable("startDate")String startDate, 
-											@PathVariable("endDate")String endDate, HashMap<String, String> param) {
-		return svc.orderStatusManagementDate(req, status, startDate, endDate, param);
+	public String orderStatusManagementDate(HttpServletRequest req, @PathVariable("status")String status, @PathVariable("startDate")String startDate, @PathVariable("endDate")String endDate) {
+		return svc.orderStatusManagementDate(req, status, startDate, endDate);
 	}
 	
 }
