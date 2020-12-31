@@ -1,6 +1,5 @@
 package com.drumtong.business.service.submanagement;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -107,12 +106,8 @@ public class BusinessSubManagementService {
 		
 		if(checkEstStatus(bInformationVO)) return mainMove;
 		
-		HashMap<String, String> param = new HashMap<String, String>();
-		param.put("memberidORestid", bInformationVO.getEstid());
-		param.put("status", status);
-		
 		//	주문현황 페이지에 필요한 구매정보 데이터를 가져와줍니다. 
-		List<OrderList> orderList =  bSalesDAO.selectOrderList(param);
+		List<OrderList> orderList =  OrderListSetting.selectBusiness(bInformationVO.getEstid(), status);
 		
 		ModelAndView mav = new ModelAndView("business/submanagement/businessOrderStatusManagement");
 		
@@ -120,8 +115,8 @@ public class BusinessSubManagementService {
 		// setOrderList 함수는 orderList의 메인 메뉴, 서브메뉴, 메뉴들을 Tree구조로 중첩되지 않게 구성시켜즈는 역할을 한다.
 		// orderList에 maincategory의 구조는 다음과 같다.
 //				 		  메인                                            서브                       VO
-//				HashMap<String, List<HashMap<String,List<BDetailSalesVO>>>>
-		mav.addObject("orderList", (new Gson()).toJson(OrderListSetting.setOrderList(orderList)));
+//				HashMap<String, HashMap<String,List<BDetailSalesVO>>>
+		mav.addObject("orderList", (new Gson()).toJson(orderList));
 		
 		return mav;
 	}

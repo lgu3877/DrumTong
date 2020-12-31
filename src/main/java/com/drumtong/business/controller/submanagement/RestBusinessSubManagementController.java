@@ -102,4 +102,23 @@ public class RestBusinessSubManagementController {
 //		System.out.println("endDate : " + param.get("endDate") );
 		return svc.selectStatistics(req, param.get("startDate"), param.get("endDate"), param.get("pageKind"), param.get("option"));
 	}
+	
+	// ========================= 대분류 [주문현황] ================================ [영경]
+	// type : 'Accept'(수락), 'Decline'(거절)
+	@RequestMapping("businessOrderStatusManagement/rest/{status}/{type}/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String orderStatusManagementAnswer(@PathVariable("type")String type, HashMap<String, String> param) {
+		return svc.orderStatusManagementAnswer(type, param);
+	}
+	
+
+	// status : 'REQUEST'(요청), 'PROCESSING'(처리중), 'SUCCESS'(완료)
+	// startDate : 시작 날짜 없으면 맨 처음부터, endDate : 끝 날짜 없으면 맨 마지막 날까지
+	@RequestMapping("businessOrderStatusManagement/rest/{status}/{startDate}/{endDate}/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String orderStatusManagementDate(@PathVariable("status")String status, @PathVariable("startDate")String startDate, 
+											@PathVariable("endDate")String endDate, HashMap<String, String> param) {
+		return svc.orderStatusManagementDate(status, startDate, endDate, param);
+	}
+	
 }

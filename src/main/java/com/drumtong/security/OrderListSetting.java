@@ -9,24 +9,53 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.drumtong.business.dao.BDetailSalesDAO;
+import com.drumtong.business.dao.BSalesDAO;
 import com.drumtong.business.vo.BDetailSalesVO;
 import com.drumtong.business.vo.OrderList;
 
 @Component	// [건욱]
 public class OrderListSetting {
-	
+	static BSalesDAO bSalesDAO;
 	static BDetailSalesDAO bDetailSalesDAO;
 	
+	@Autowired BSalesDAO BeanbSalesDAO;
 	@Autowired BDetailSalesDAO BeanbDetailSalesDAO;
+	static HashMap<String, String> param;
 	
 	@PostConstruct
 	private void init() {
-		
+		this.bSalesDAO = BeanbSalesDAO;
 		this.bDetailSalesDAO = BeanbDetailSalesDAO;
+		param = new HashMap<String, String>();
+	}
+	
+	public static List<OrderList> selectCustomer(String memberidORestid) {
+		param.clear();
+		param.put("memberidORestid", memberidORestid);
+		return setOrderList();
 		
 	}
 	
-	public static List<OrderList> setOrderList(List<OrderList> orderList){
+	public static List<OrderList> selectBusiness(String memberidORestid, String status) {
+		param.clear();
+		param.put("memberidORestid", memberidORestid);
+		param.put("status", status);
+		return setOrderList();
+	}
+	
+	public static List<OrderList> selectBusinessDate(String startDate, String endDate, String memberidORestid, String status) {
+		param.clear();
+		param.put("memberidORestid", memberidORestid);
+		param.put("status", status);
+		param.put("startDate", startDate);
+		param.put("endDate", endDate);
+		return setOrderList();
+	}
+	
+	
+	public static List<OrderList> setOrderList(){
+			List<OrderList> orderList =  bSalesDAO.selectOrderList(param);
+		
 				// OrderList에 Foreach문을 돌려준다
 				/*
 				 * List의 뭉치인 orderList를 forEach문으로 한 객체씩 분리시켜주어서
@@ -138,4 +167,5 @@ public class OrderListSetting {
 				// 반복문을 모두 수행한 orderList 리스트를 반환해준다.
 				return orderList;
 	}
+
 }

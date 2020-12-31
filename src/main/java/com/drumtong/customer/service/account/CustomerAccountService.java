@@ -1,6 +1,5 @@
 package com.drumtong.customer.service.account;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -90,19 +89,16 @@ public class CustomerAccountService {
 		ModelAndView mav = new ModelAndView("customer/account/customerOrderList");
 		CPrivateDataVO Login = ((CPrivateDataVO)req.getSession().getAttribute("cLogin"));
 		
-		HashMap<String, String> param = new HashMap<String, String>();
-		param.put("memberidORestid", Login.getMemberid());
-		
 		//	주문 목록 페이지에 필요한 구매정보 데이터를 가져와줍니다
-		List<OrderList> orderList = bSalesDAO.selectOrderList(param);
+		List<OrderList> orderList = OrderListSetting.selectCustomer(Login.getMemberid());
 		
 		
 		// OrderListSetting 클래스는 static으로 구성이되어 있다. [사업자 주문목록 / 고객 주문목록 ] 둘 다 사용 가능
 		// setOrderList 함수는 orderList의 메인 메뉴, 서브메뉴, 메뉴들을 Tree구조로 중첩되지 않게 구성시켜즈는 역할을 한다.
 		// orderList에 maincategory의 구조는 다음과 같다.
 //		 		  메인                                            서브                       VO
-//		HashMap<String, List<HashMap<String,List<BDetailSalesVO>>>>
-		mav.addObject("orderList", (new Gson()).toJson(OrderListSetting.setOrderList(orderList)));
+//		HashMap<String, HashMap<String,List<BDetailSalesVO>>>
+		mav.addObject("orderList", (new Gson()).toJson(orderList));
 		return mav;
 	}
 
