@@ -1,5 +1,12 @@
 package com.drumtong.business.service.mainmanagement;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -8,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.drumtong.business.dao.BDeliveryAreaDAO;
 import com.drumtong.business.dao.BImageDAO;
+import com.drumtong.business.dao.BInformationDAO;
 import com.drumtong.business.dao.BManagementDAO;
 import com.drumtong.business.dao.BMenuDAO;
 import com.drumtong.business.dao.BScheduleDaysDAO;
@@ -16,6 +24,7 @@ import com.drumtong.business.dao.BTempHolidayDAO;
 import com.drumtong.business.dao.BTempSuspensionDAO;
 import com.drumtong.business.vo.BDeliveryAreaVO;
 import com.drumtong.business.vo.BImageVO;
+import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BManagementVO;
 import com.drumtong.business.vo.BMenuVO;
 import com.drumtong.business.vo.BScheduleDaysVO;
@@ -23,6 +32,7 @@ import com.drumtong.business.vo.BScheduleTimeVO;
 import com.drumtong.business.vo.BTempHolidayVO;
 import com.drumtong.business.vo.BTempSuspensionVO;
 import com.drumtong.security.AwsServiceImpl;
+import com.google.gson.Gson;
 
 @Service
 public class BusinessMainManagementService {
@@ -41,6 +51,7 @@ public class BusinessMainManagementService {
 	@Autowired BImageDAO bImageDAO;
 	@Autowired BMenuDAO bMenuDAO;
 	@Autowired BDeliveryAreaDAO bDeliveryAreaDAO;
+	@Autowired BInformationDAO bInformationDAO;
 	
 	// 일정관리 DAO
 	@Autowired BScheduleTimeDAO bScheduleTimeDAO;
@@ -51,10 +62,27 @@ public class BusinessMainManagementService {
 	
 	
 	// 비즈니스 매장관리 페이지로 이동 (GET) [건욱]
-	public ModelAndView shopManagement() {
+	public ModelAndView shopManagement(HttpServletRequest req) {
  		ModelAndView mav = new ModelAndView("business/mainmanagement/businessShopManagement");
 //		ModelAndView mav = new ModelAndView("business/test"); //test 용임 지울 시 위에 코드 활성화 시켜줄 것
 		
+ 		/*
+ 		 * status 값이 FAIL이면 DefaultCategory 값을 BManagement 테이블에서 가져온다.
+ 		 * 초기 메뉴 등록을 할 때 기본 템플릿으로 제공해준다.
+ 		 * 
+ 		 * status 값이 SUCCESS이면 .
+ 		 */
+ 		HttpSession Session = req.getSession();
+ 	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+ 	    String estid = bInformationVO.getEstid();
+ 		
+ 	    
+ 	    if( bInformationVO.getStatus().equals("FAIL") ) {
+ 	    	// defaultcategory 의 데이터형식이 'top/pants/suit/hat/underwear/cutton/'
+ 	    	List<String> defaultcategory = Arrays.asList((bManagementDAO.selectDefaultCategory(estid).split("/")));
+ 	    	mav.addObject("defaultcategory", (new Gson()).toJson(defaultcategory));
+ 	    
+ 	    }
 		// MultipartFile mpf = new MultipartFile();
 //		aws.s3FileUpload(file, folderName);
 		return mav;
@@ -65,6 +93,7 @@ public class BusinessMainManagementService {
 	// 비즈니스 일정관리 페이지로 이동 (GET) [건욱]
 	public ModelAndView scheduleManagement() {
 		ModelAndView mav = new ModelAndView("business/mainmanagement/businessScheduleManagement");
+		
 		return mav;
 	}
 

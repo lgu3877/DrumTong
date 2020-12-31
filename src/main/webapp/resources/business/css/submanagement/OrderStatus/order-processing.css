@@ -100,6 +100,7 @@ h1 i {
 	width: 200px; 
 	height: 200px; 
 	border: 2px solid red;
+	background-color: #adb8c0;
 }
 
 .showdiv div {
@@ -112,14 +113,30 @@ h1 i {
 
 
 .showdiv p {
-	text-align: right; height: 15%; margin: 0; padding-right: 5px;
+	text-align: right; height: 15%; margin: 0; padding-right: 5px; font-family: cursive;
 }
 .submitdiv {
 	width: 600px; margin: 0 auto; text-align: center; display: flex; justify-content: center; margin-top: 15px;
 }
 
 .submitdiv button {
-	width: 50%; height: 40px; cursor: pointer;
+	width: 45%; height: 40px; cursor: pointer;
+	background-color: #6495EF !important;
+	border-radius: 10px !important;
+    border: 0px !important;
+    color: white !important;
+    outline: none !important;
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+.submitdiv div {
+	width: 10% !important;
+}
+
+.submitdiv button:hover {
+	transform: translate(0, -5px);
+	transition: all 1s ease 0s;
 }
 
 .ete-bubble {

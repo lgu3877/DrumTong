@@ -75,10 +75,18 @@ public class BusinessSubManagementController {
 		return new ModelAndView("redirect:/business/submanagement/businessStatisticsManagement/");
 	}
 
+	// 비즈니스 주문현황 페이지로 이동 (GET) [영경]
+	@RequestMapping(value="businessOrderStatusManagement/{status}/", method = RequestMethod.GET)
+	public ModelAndView orderStatusManagementStatus(HttpServletRequest req, @PathVariable("status")String status) {
+		req.getSession().setAttribute("status", status);
+		return orderStatusManagement(req);
+	}
+	
 	// 비즈니스 주문현황 페이지로 이동 (GET) [건욱]
 	@RequestMapping(value="businessOrderStatusManagement/", method = RequestMethod.GET)
 	public ModelAndView orderStatusManagement(HttpServletRequest req) {
-		return svc.orderStatusManagement(req);
+		String status = (String)req.getSession().getAttribute("status");
+		return svc.orderStatusManagement(req, status);
 	}
 	
 	// 비즈니스 주문현황 처리 및 취소 페이지(팝업)로 이동 (GET) [승원]

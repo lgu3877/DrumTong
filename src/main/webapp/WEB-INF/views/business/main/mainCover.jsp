@@ -22,21 +22,25 @@
 	</style>
 	<script type="text/javascript">
 
+	 
 	// 쿠키 만료시간 정하기
-	function setCookieTime(name, value, expiredays) {
+	function setCookieTime(name, value) {
 	    var date = new Date();
-	    date.setDate(date.getDate() + expiredays);
-	    document.cookie = escape(name) + "=" + escape(value) + "; expires=" + date.toUTCString();
+	    date.setHours(23);
+	    document.cookie = name + "=" + escape(value) + "; path=/; expires=" + date.toGMTString() + ";";
+	    // 쿠키 이름(name)과 value 값을 연결짓기
+	    // path 로 쿠키가 사용될 범위 지정해주기
+	    // expires 로 만료시간 설정하기
+	    // 나중에 domain 까지 완료되면 domail도 쿠키속성에 넣도록 하자
 	}
 
 	// 쿠키를 삭제하는 명령어
 	// popupYN 쿠키에 "N" 이라는 값을 입력하고 1일 동안 유지시킨다
-    function deletePopup() {
-        if (document.getElementById("check").value) {
-        	setCookieTime("cookiePause", "N", 1);
+    function deletePopup() { //  popup(4) 팝업 동작순서
+        	setCookieTime("cookiePause", "N");	// 쿠키생성하기
             self.close();
-        }
     }
+	
 	</script>
 </head>
 <body id="maincover">
@@ -61,7 +65,7 @@
 		<h1>닥치고 잘 읽어보거라!</h1>
 		<h1>근데 아직 공지사항 없으니까!</h1>
 		<h1>닥치고 동의나 하거라!</h1>
-		<input type="button" id="check" onclick="deletePopup();" value="시작하기" class="cookiebutton">	
+		<input type="button" id="check" onclick="deletePopup()" value="시작하기" class="cookiebutton">	<!--  popup(3) 팝업 동작순서 : 쿠키 생성하는 명령어 활성화 -->
 	</div>
 	<img id="prevBtn" style="position: absolute; top: 45%; left: 0; z-index: 9999; width: 5%; opacity: 0.6; display: none" src="${cpath }/resources/business/img/arrow/prev_button.png" onclick="prevCover()">
 	<img id="nextBtn" style="position: absolute; top: 45%; right: 0; z-index: 9999; width: 5%; opacity: 0.6; display: none" src="${cpath }/resources/business/img/arrow/next_button.png" onclick="nextCover()">

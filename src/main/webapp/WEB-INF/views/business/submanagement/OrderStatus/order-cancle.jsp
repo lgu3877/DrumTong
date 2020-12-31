@@ -38,10 +38,10 @@
 		
 			</textarea>
 			
-		<div style="width: 600px; margin: 0 auto; display: flex;">
-			<button style="width: 40%; height: 40px;">취소</button>
-			<div style="width: 20%"></div>
-			<button style="width: 40%; height: 40px;">확인</button>
+		<div class="btndiv">
+			<button onclick="popupExit()">취소</button>
+			<div></div>
+			<button onclick="popupSubmit()">확인</button>
 		</div>
 	</div>
 
@@ -56,6 +56,18 @@
 	$('#etc').on('click', function() {
 		$('#etxbox').css('display', '');
 	});
+	
+	function popupExit() {	// 팝업창 종료
+		let popupexit = confirm('주문취소를 취소하시겠습니까?');
+		if(popupexit == true)
+			close();
+	}
+	
+	function popupSubmit() {  // 처리중 -> 요청 으로 제출
+		let popupsubmit = confirm('주문취소를 처리하시겠습니까?');
+		// 밑에 axios
+	}
+	
 </script>
 </body>
 </html>

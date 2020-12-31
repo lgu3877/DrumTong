@@ -142,9 +142,9 @@
 		<div class="detailmenus" id="detailmenus">
 			<div class="clonedetail" id="clonedetail0">
 				<p class="pmain"><span class="psubmain"></span></p>
-	
 				<div class="outerdetail">
 					<div class="innerdetail">
+					<i class="fas fa-motorcycle fa-x"></i>
 						<h3></h3>
 						<h3></h3>
 						<h3 style="text-align: right"></h3>
@@ -321,7 +321,7 @@
  	               // 그래서, Object.keys()로 키값을 가지고 온 후, 키값을 사용하여 .maincategory의 값을 호출함
  	               
  	               // 서브 카테고리들
- 	               let subcategories = detailob.maincategory[inputMainKey][0];	// 서브메뉴
+ 	               let subcategories = detailob.maincategory[inputMainKey];	// 서브메뉴
  	               // 위에서 호출한 값을 키값으로 사용하여 배열형태의 서브카테고리를 가지고 온다
  	               // 즉, 메인카테고리(1) / 서브카테고리(n)	-> 1:n의 관계가 성립되고 있음
  	               
@@ -352,7 +352,10 @@
  	                    if(z > 0)	// 만약 서브카테고리에 저장된 메뉴가 1개보다 많을 때 사용
 	  						$('#clonedetail' + count).find('.outerdetail').append(innerclone.html());
  	                     
- 	                     $('#clonedetail' + count).find('.innerdetail').children('h3').each(function(index) {
+ 	                     $('#clonedetail' + count).find('.innerdetail').children('h3').each(function(index, item) {
+ 	                    	 if(mainmenus[z].quickprice == 0)	// 배달가격이 0원이면 오토바이 안보이기
+ 	                    		$('#clonedetail' + count).find('i').css('display', 'none');
+ 	                    	 
  	                        switch (index) {
  	                           case 0:
  	                              $('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(z).children('h3').eq(index).html(mainmenus[z].name);

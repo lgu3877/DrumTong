@@ -13,7 +13,8 @@ public interface BManagementDAO {
 	// 매장관리 테이블에  {소개글,배달여부,퀵여부}를 업데이트 시켜준다. 
 	int updateConstract(BManagementVO bManagementVO);
 
-	
+	// 매장 관리의 기본 템플릿을 제공해주는데 사용하는 Deafaultcategory입니다.
+	String selectDefaultCategory(String estid);
 	
 	
 	
@@ -35,5 +36,8 @@ public interface BManagementDAO {
 	
 	// 매장 관리에 기본 카테고리를 비둥기식으로 수정해주는 메서드입니다.	[REST]
 	int updateDefaultCategory(BManagementVO bManagementVO);
+
+	
+	
 
 }

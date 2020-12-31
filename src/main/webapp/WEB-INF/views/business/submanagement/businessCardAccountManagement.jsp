@@ -190,7 +190,6 @@
 			}
 		})	
 		
-		console.log('exit : ', exit);
 		
 		if(!exit)
 			return false;
@@ -208,7 +207,6 @@
             // 정상
        		.then( (response) => {
             const data = response.data;
-            console.log('data : ', data);
             
             if (data == false) {
             	return false;

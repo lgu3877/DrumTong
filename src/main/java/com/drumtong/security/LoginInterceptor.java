@@ -39,7 +39,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		// ■□■□■□■□■□방금 로그아웃 했고 이전 페이지가 로그인 해야하는 페이지일 경우 메인으로!■□■□■□■□■□
 		if("firstPage".equals(Session.getAttribute(typeOfSite ? "cLogout" : "bLogout"))) {
-			System.out.println("[로그인인터셉터] 방금 로그아웃&이동할 페이지가 로그인 해야하는 페이지");
+//			System.out.println("[로그인인터셉터] 방금 로그아웃&이동할 페이지가 로그인 해야하는 페이지");
 			Session.removeAttribute(typeOfSite? "cLogout" : "bLogout");
 			response.sendRedirect(request.getContextPath() + MainPageName);
 			return false;
@@ -48,15 +48,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		// ■□■□■□■□■□■□■□■□■□■□■로그인이 안되어있다면□■□■□■□■□■□■□■□■□■□■□
 		// 1. 이동할 주소 session에 저장
 		if(NotChangeAddressConfirm) {
-			System.out.println("[로그인 인터셉터] ① 로그인 페이지로 이동 중, 아래 문장 실행 안됌");
+//			System.out.println("[로그인 인터셉터] ① 로그인 페이지로 이동 중, 아래 문장 실행 안됌");
 			return true;
 		}
-		System.out.println("[로그인 인터셉터] ② 첫 로그인인터셉터!, 아래 문장 실행 됌");
+//		System.out.println("[로그인 인터셉터] ② 첫 로그인인터셉터!, 아래 문장 실행 됌");
 		
 		// 다음 인터셉터에서 이동할주소가 그대로 유지되게 해주는 객체
 		AddressToMove = MoveBeforeLogin(Session, LoginPageName, MainPageName, AddressToMove, request);
 		
-		System.out.println("[로그인 인터셉터] 맨마지막 줄 > 로그인 페이지로 redirect 수행 직전");
+//		System.out.println("[로그인 인터셉터] 맨마지막 줄 > 로그인 페이지로 redirect 수행 직전");
 		response.sendRedirect(request.getContextPath() + LoginPageName);
 		return false;
 //		return true;
@@ -86,20 +86,20 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 				
 		session.setAttribute("AddressToMove", addressToMove);
-		System.out.println("최종 AddressToMove 는'" + addressToMove + "'로 로 되었고 sloginlog 생성함");
+//		System.out.println("최종 AddressToMove 는'" + addressToMove + "'로 로 되었고 sloginlog 생성함");
 		CreateNewSLoginLog(request, session, addressToMove);
 		return addressToMove;
 	}
 
 	public void CreateNewSLoginLog(HttpServletRequest request, HttpSession session, String addressToMove) {
-		System.out.println("[로그인 인터셉터] CreateNewSLoginLog > 이 메서드는 로그인를 생성하는 메서드 입니다.");
+//		System.out.println("[로그인 인터셉터] CreateNewSLoginLog > 이 메서드는 로그인를 생성하는 메서드 입니다.");
 		SLoginLogVO sLoginLogVO = new SLoginLogVO();
 		String Referer = request.getHeader("Referer");
 		Referer = Referer == null ? addressToMove : Referer;
 		
 		sLoginLogVO.setLoginip(GetIPAddress.getIP(request));
 		sLoginLogVO.setLoginurl(Referer);
-		System.out.println("Referer : " + Referer);
+//		System.out.println("Referer : " + Referer);
 		session.setAttribute("sLoginLogVO", sLoginLogVO);
 		
 	}
@@ -107,9 +107,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	// 로그인 되어있을 때 이동할 페이지
 	private boolean MoveAfterLogin(HttpSession session, String loginPageName, String mainPageName, String addressToMove, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		session.removeAttribute("AddressToMove");
-		System.out.println("AddressToMove 삭제");
+//		System.out.println("AddressToMove 삭제");
 		if(addressToMove.endsWith(loginPageName) ) {
-			System.out.println("[로그인 인터셉터] MoveAfterLogin > 로그인 되어있는데 주소창에 로그인 주소를 입력해 이동하려는 경우 메인으로 강제 이동");
+//			System.out.println("[로그인 인터셉터] MoveAfterLogin > 로그인 되어있는데 주소창에 로그인 주소를 입력해 이동하려는 경우 메인으로 강제 이동");
 			response.sendRedirect(request.getContextPath() + mainPageName);
 			return false;
 		}
@@ -124,7 +124,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		} else {
 			AddressToMove = request.getRequestURI();
 			AddressToMove = AddressToMove.substring(request.getContextPath().length(),AddressToMove.length());
-			System.out.println("로그인 인터셉터 : AddressToMove : " + AddressToMove);
+//			System.out.println("로그인 인터셉터 : AddressToMove : " + AddressToMove);
 		}
 		return AddressToMove;
 	}
