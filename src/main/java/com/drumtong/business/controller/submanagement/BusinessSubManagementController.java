@@ -79,13 +79,15 @@ public class BusinessSubManagementController {
 	@RequestMapping(value="businessOrderStatusManagement/{status}/", method = RequestMethod.GET)
 	public ModelAndView orderStatusManagementStatus(HttpServletRequest req, @PathVariable("status")String status) {
 		req.getSession().setAttribute("status", status);
-		return orderStatusManagement(req);
+		return new ModelAndView("redirect:/business/submanagement/businessOrderStatusManagement/");
 	}
 	
 	// 비즈니스 주문현황 페이지로 이동 (GET) [건욱]
 	@RequestMapping(value="businessOrderStatusManagement/", method = RequestMethod.GET)
 	public ModelAndView orderStatusManagement(HttpServletRequest req) {
-		String status = (String)req.getSession().getAttribute("status");
+		HttpSession Session = req.getSession();
+		String status = (String)Session .getAttribute("status");
+		Session.removeAttribute("status");
 		return svc.orderStatusManagement(req, status);
 	}
 	
