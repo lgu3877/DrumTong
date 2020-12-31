@@ -16,17 +16,18 @@ function imageShow() {
    const imageViewCon = document.getElementById('main-image-con');
    
    // 이미지 src 입력 > DB에서 이미지 가져오기
-   const postedMainImage = document.getElementById("cover-image");
-   const img = document.getElementById('main-image').src;
+   const postedMainImage = document.getElementById("cover-image").src;
+   let img = document.getElementById('main-image');
    
-   // set cover-image here
-   
-   // Cover image exists > view image
-   if (img.src) {
+   // 대표사진이 있을 경우 > 해당 사진 미리보기
+   if (postedMainImage && !img.src) {
       imageInputForm.style.display = 'none';
       imageViewCon.style.display = '';
+      
+      img.src = postedMainImage;
+      zoomInPhoto(img.src);
    }
-   // No cover image > show input from
+   // 없을 경우 > default
    else {
       imageInputForm.style.display = '';
       imageViewCon.style.display = 'none';
