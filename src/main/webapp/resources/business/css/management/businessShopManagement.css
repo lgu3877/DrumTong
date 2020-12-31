@@ -122,7 +122,7 @@
 }
 
 .upload_icon_con {
-	padding-top: 150px;
+	padding-top: 250px;
 }
 
 .upload_link i {
@@ -164,6 +164,14 @@
     letter-spacing: 1px;
 }
 
+.cover_file_text p {	
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+    line-height: 30px;
+    font-weight: 500;
+}
+
 .shop_image_con {
 	position: relative;
 	overflow: hidden;
@@ -174,7 +182,10 @@
 .shop_image_view {
 	height: 400px;
     margin-bottom: 1px;
-    background-color: beige;
+    background-color: transparent;
+    background-image: url("/drumtong/resources/business/img/management/noimage.png");
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .shop_image_view img {
@@ -195,7 +206,6 @@
 	width: 100%;
 	height: 400px;
 }
-
 
 .shop_picture {
 	position: relative;

@@ -16,8 +16,8 @@ function imageShow() {
    const imageViewCon = document.getElementById('main-image-con');
    
    // 이미지 src 입력 > DB에서 이미지 가져오기
-   let img = document.getElementById('main-image');
-   const imgName = '1234.jpg';
+   const postedMainImage = document.getElementById("cover-image");
+   const img = document.getElementById('main-image').src;
    
    // set cover-image here
    
@@ -90,7 +90,6 @@ function deletePhoto(clickedPhoto) {
       for (let index = 0; index < photoList.length; index++) {
          if (photoList[index].children[0].src === clickedPhoto) {
             photoList.splice(index, 1);
-            console.log(photoList.length);
             break;
          }
       }
@@ -101,6 +100,14 @@ function deletePhoto(clickedPhoto) {
       // 리스트 재구성
       for (let i = 0; i < photoList.length; i++) {
          photoSlideCon.appendChild(photoList[i]);
+      }
+      
+      console.log(document.getElementById("main-image").src === clickedPhoto);
+      console.log(document.getElementById("main-image").src);
+      console.log(clickedPhoto);
+      // 화면 초기화(삭제하는 사진과 메인에 보여지는 미리보기 사진이 동일한 경우)
+      if (document.getElementById("main-image").src === clickedPhoto) {
+    	  document.getElementById("main-image").removeAttribute("src");
       }
       
    }
@@ -124,14 +131,14 @@ function imageCheck(e) {
       // 미리보기
       const reader = new FileReader();
       // 대표사진이 있을 경우 삭제
-      document.getElementById("cover-image") ? document.getElementById("cover-image").remove() : null;
+      document.getElementById("cover-image-con") ? document.getElementById("cover-image-con").remove() : null;
       
       // 이미지 주입
       reader.onload = (e) => {
          // 태그 생성
          const li = document.createElement("li");
          li.className = "shop_picture";
-         li.id = "cover-image";
+         li.id = "cover-image-con";
          const icon = document.createElement("i");
          icon.className = "fas fa-times";
          const repIcon = document.createElement("i");
@@ -140,6 +147,7 @@ function imageCheck(e) {
          const img = document.createElement("img");
          img.setAttribute("src", e.target.result);
          img.setAttribute("alt", "");
+         img.setAttribute("id", "cover-image");
             
 
          // 추가
@@ -153,13 +161,18 @@ function imageCheck(e) {
          
          // 전체 폼 삽입
          document.getElementById("image-preview").prepend(li);
-      
+         
+         // 미리보기
+         const clickedImage = document.getElementById("cover-image").src;
+         zoomInPhoto(clickedImage);
       }
       reader.readAsDataURL(e.target.files[0]);
    }
    // 일반 소개 사진 업로드 (복수 선택 가능)
    else if (isImage && e.target.id === "add-photo") {
       // 복수 사진 업로드 ( 1 ~ 여러장 )
+	  let count = 0;
+	  
       for (let img of e.target.files) {
          // 미리보기
          const reader = new FileReader();
@@ -174,18 +187,26 @@ function imageCheck(e) {
             img.setAttribute("src", e.target.result);
             img.setAttribute("alt", "");
             
-            // 추가
+            // 구성
             li.appendChild(img);
             li.appendChild(icon);
 
+            // 이벤트 주입
             li.children[0].addEventListener('click', () => zoomInPhoto(e.target.result));
             li.children[1].addEventListener('click', () => deletePhoto(e.target.result));
             
+            // 삽입
             document.getElementById("image-preview").appendChild(li);
+            
+            count++;
+            if (count === 1) {
+            	zoomInPhoto(e.target.result);
+            }
          }
          reader.readAsDataURL(img);         
       }   
    }
+   
    // 잘못된 사진 업로드(확장자)
    else {
       // deny uploading request

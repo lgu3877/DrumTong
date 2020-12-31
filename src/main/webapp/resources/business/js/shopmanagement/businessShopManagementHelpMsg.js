@@ -28,8 +28,6 @@ const helpMessages = [
 
 function helpMsg(idArray) {
    helpMessages.forEach((element) => {
-	console.log('실행');
-	console.log(element);
       // 마우스 이벤트 영역설정
       document.getElementById(element.id).style.width = "150px";
       document.getElementById(element.id).style.height = "20px";

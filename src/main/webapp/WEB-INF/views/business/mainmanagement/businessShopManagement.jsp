@@ -111,29 +111,28 @@
 				<div id="shop-image-view" class="shop_image_view">
 					<div class="upload_icon_con">
 						<div class="cover_file_text_con">
-						<!-- select cover image -->
 							<div class="cover_file_text">
 								<p>
-									대표사진이 등록되어 있지 않습니다.<br>
-									사진을 등록해 사장님 가게를 소개해보세요.
+									기존에 등록된 사진이 있다면, <br>
+									클릭 후 미리보기로 확대해 볼 수 있습니다.<br>
+									사진을등록하지 않으셨다면, <br>
+									아래 추가하기 버튼을 통해 사진을 추가해주세요.
 								</p>
 							</div>
-						<!-- cover image name view -->	
-							<input id="file-name" class="upload_file_name" type="text" readonly disabled onchange='return checkFile()' placeholder="선택한 사진 이름이 이곳에 나타납니다.">						 		
 						</div>
 					</div>
 				</div>
-			
+				
 			<!-- image viewer as long as cover image is already uploaded when you visit this page for modification -->
 				<div id="main-image-con" class="main_image_con">
-					<img id="main-image">
+					<img id="main-image" class="shop_image_view">	
 				</div>
 				
 			<!-- Sub Slider -->
 				<div style="position: relative;">
 					<ul id="image-preview" class="shop_image_slider">
-						<li class="shop_picture">
-							<img src="${cpath }/resources/business/img/slide/laundry1_01.jpg" alt="">
+						<li id="cover-image-con" class="shop_picture">
+							<img id="cover-image" src="${cpath }/resources/business/img/slide/laundry1_01.jpg" alt="">
 							<i class="fas fa-times"></i>
 							<i class="fas fa-star"><span>대표사진</span></i>
 						</li>
