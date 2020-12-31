@@ -48,7 +48,7 @@
 		
 		<i id="searchlogo" class="fas fa-list-ul fa-3x"></i>
 		<div id="searchdiv">
-			<input type="text">
+			<input type="text" onkeyup="enterkey(this)">
 			<button onclick="searching(this)">검색</button>
 		</div>
 		<div class="outerdiv" >
@@ -59,18 +59,18 @@
 			
 			<h1 style="font-size: 36pt">주문현황</h1>
 			
-			<div class="typeSelect">
-				<button onclick="chStatus(this, 'r')">요청</button>
+			<div class="typeSelect" id="typeSelect">
+				<button onclick="chStatus(this)" name="REQUEST">요청</button>
 				<div></div>
-				<button onclick="chStatus(this, 'p')">처리중</button>
+				<button onclick="chStatus(this)" name="PROCESSING">처리중</button>
 				<div></div>
-				<button onclick="chStatus(this, 's')">완료</button>
+				<button onclick="chStatus(this)" name="SUCCESS">완료</button>
 			</div>
 			
 			<div class="topdatediv">
-				<input type="date">
+				<input type="date" onchange="dateChange()" id="startDate">
 				<div style="width: 20%"></div>
-				<input type="date">
+				<input type="date" onchange="dateChange()" id="endDate">
 			</div>
 			
 			<div class="clonediv" id="clonediv0">
@@ -180,29 +180,49 @@
 		let detailmenus = $('#detailmenus').clone();			
 	 	let innerclone = $('#detailmenus').find('.outerdetail').clone();	// 모달 -> 상세주문(=메뉴명, 가격, 개수 등등) 폼의 오리지널을 복사
 																			// 복사한 개체를 이용하여 모달에서 상세주문 부분들을 자동으로 형성함
-		let pageFilter = '';		// 아직 미구현
 		
 		console.log(orderList);
 		
  		window.onload = function() {
- 			originclone();	// 메인화면에서 나타나는 메인 주문형황 카드들의 오리지날이 되는 폼에 들어가야할 값을 입력함
-  			insertDiv();	// 오리지널 메인 주문현황 카드를 복사하여 나머지 메인 주문현황 카드들을 생성함
-  			
-  			$('div.outerdiv').find('.container').each(function(index, item) {	// 메인 주문내역(=container) 위의 라벨에도 똑같이 :hover 효과주기 위해서 
-  				$(item).hover(function() {	// 메인 주문현황 카드에 마우스를 올릴때 애니메이션 효과
-  					$(item).parent().find('.outerstatus1').css('transform', 'translate(0, -20px)');
-  					$(item).parent().find('.outerstatus1').css('transition', 'all 1s ease 0s');
-  					$(item).parent().find('.outerstatus2').css('transform', 'translate(0, -20px)');
-  					$(item).parent().find('.outerstatus2').css('transition', 'all 1s ease 0s');
-  					
-  				}, function() {
-  					$(item).parent().find('.outerstatus1').css('transform', '');
-  					$(item).parent().find('.outerstatus1').css('transition', 'all 0s ease 0s');
-  					$(item).parent().find('.outerstatus2').css('transform', '');
-  					$(item).parent().find('.outerstatus2').css('transition', 'all 0s ease 0s');
-  				})
-  			})
+ 			zerodiv();
   		}
+ 		
+ 		function zerodiv() {
+ 			let status = '${status }';
+			$('#typeSelect').children('button[name=' + status + ']').attr('class', 'selectedStatus');
+ 			
+ 			if(orderList.length != 0) {
+ 				
+ 				if(document.querySelector('.zeroList') != null)
+ 					document.querySelector('.zeroList').remove();
+ 				
+	 			originclone();	// 메인화면에서 나타나는 메인 주문형황 카드들의 오리지날이 되는 폼에 들어가야할 값을 입력함
+  				insertDiv();	// 오리지널 메인 주문현황 카드를 복사하여 나머지 메인 주문현황 카드들을 생성함
+  			
+	  			$('div.outerdiv').find('.container').each(function(index, item) {	// 메인 주문내역(=container) 위의 라벨에도 똑같이 :hover 효과주기 위해서 
+  					$(item).hover(function() {	// 메인 주문현황 카드에 마우스를 올릴때 애니메이션 효과
+  						$(item).parent().find('.outerstatus1').css('transform', 'translate(0, -20px)');
+  						$(item).parent().find('.outerstatus1').css('transition', 'all 1s ease 0s');
+  						$(item).parent().find('.outerstatus2').css('transform', 'translate(0, -20px)');
+  						$(item).parent().find('.outerstatus2').css('transition', 'all 1s ease 0s');
+  					
+	  				}, function() {
+  						$(item).parent().find('.outerstatus1').css('transform', '');
+  						$(item).parent().find('.outerstatus1').css('transition', 'all 0s ease 0s');
+  						$(item).parent().find('.outerstatus2').css('transform', '');
+  						$(item).parent().find('.outerstatus2').css('transition', 'all 0s ease 0s');
+  					})
+	  			});
+ 			}
+ 			else {
+ 				$('#clonediv0').css('display', 'none');
+ 				let outerdiv = document.querySelector('.outerdiv');
+ 				let zerolist = document.createElement('h1');
+ 				zerolist.innerHTML = '리스트가 존재하지 않습니다'
+				zerolist.className = 'zeroList';
+ 				outerdiv.appendChild(zerolist);
+ 			}
+ 		}
  		
  		function originclone() {	// 메인 주문현황 카드 중에서 오리지널에 해당하는 하나의 카드에 들어갈 값을 입력
  									// 따라서, orderList[0] 의 값들만을 사용함
@@ -405,36 +425,40 @@
 			$('html, body').animate({scrollTop : 0},2000);
 		}
 		
-		function chStatus(obj, filter) {	// 필터 버튼
+		function chStatus(obj) {	// 필터 버튼
 											// 상단의 처리, 요청중, 완료 버튼을 클릭하면 배경색이 하늘색으로 변함
-			if(pageFilter.indexOf(filter) == -1)
-				pageFilter += filter;
+			location.href = window.location.href + obj.name + '/';
+		}
+		
+		function enterkey(obj) {	// 검색 input 에서 엔터키 누르면 주문번호 검색
+			if(window.event.keyCode == 13) {
+				searching($(obj).next());
+			}
+		}
 
-			obj.className = 'selectedStatus';
-			obj.setAttribute("onclick", "deleteStatus(this,'"  + filter + "')");
-		}
-		
-		function deleteStatus(obj, filter) {	// 필터 버튼
-												// 상단의 처리, 요청중, 완료 버튼을 클릭하면 배경색이 흰색으로 변함
-			console.log('obj : ', obj);
-			console.log('filter : ', filter);
-			
-			if(pageFilter.indexOf(filter) == -1)
-				pageFilter.replace(filter, '');
-			
-			obj.className = '';
-			obj.setAttribute("onclick", "chStatus(this, '" + filter + "')")
-		}
-		
 		function searching(obj) {	// 주문번호 검색 기능
+			if(orderList.length == 0)	// 주문현황 리스트가 아예 없을 경우엔 함수가 작동하지 않도록 제한을 걸었음
+				return false;
 			
+			$('.containerName').each(function(index, item) {
+				
+				if($(item).html().indexOf($(obj).prev().val()) == '-1') {	// 검색값이 일부분이라도 들어가 있지 않은 경우 : -1 
+					$(item).parents('.clonediv').hide();
+				}
+				else if($(item).html().indexOf($(obj).prev().val()) == '0') {		// 검색값이 공백일 경우 : 0
+					$(item).parents('.clonediv').show();
+				}
+			});
 		}
 		
 		$('#searchlogo').on('click', function() {
 				if($('#searchdiv').css('visibility') == 'hidden')
 					$('#searchdiv').css('visibility', 'visible');
-				else
+				else {
 					$('#searchdiv').css('visibility', 'hidden');
+					$('#searchdiv').children('input').val('');		// 검색란을 비활성화시킬 때, 검색값이 들어가는 input 태그를 초기화한다
+					searching($('#searchdiv').children('button'));	// 검색란을 비활성화시킬 때, 검색결과를 초기화하고 전체 리스트를 보여준다
+				}
 		});
 		
  		$('.close').on('click', function() {	// 모달 비활성화
@@ -474,6 +498,39 @@
 			let checkrequest = confirm('주문을 수락하시겠습니까?');
 			if(checkrequest == true)
 				window.open('./PopUpWindow/process/' + obj.name + '/', '주문처리팝업', 'width=700px,height=620px,scrollbars=yes');
+		}
+		
+		function dateChange() {
+			let startDate = $('#startDate').val();
+			let endDate = $('#endDate').val();
+			
+			console.log('startDate : ', startDate);
+			console.log('endDate : ', endDate);
+			if(startDate == '' || endDate == '')
+				return false;
+			
+			const axiosPath = '/drumtong/business/subManagement/businessOrderStatusManagement/rest/' + '${status }/' + startDate + '/' + endDate + '/';
+			console.log('axiosPath : ', axiosPath);
+			const axGet = async () => { // ■ 영경 : 여기 ob를 넘겨주지 않았음! ■   // async : 비동기 실행 함수
+			    await axios.get(axiosPath)	// ■ 영경 : 여기 ob를 넘겨주지 않았음! ■
+			    // 정상
+					.then( (response) => {
+			    const data = response.data;
+			    console.log('data : ', data);
+			    orderList = data;
+			    removeNodes();
+ 			    zerodiv();
+ 			   insertDiv();
+			     })
+			  }
+			return axGet();
+		}
+		
+		function removeNodes() {
+			$('.clonediv').each(function(index, item) {
+				if(index != 0)
+					 $(item).remove();
+			});
 		}
 		
 		// offset	: 페이지 상단으로부터 선택된 요소가 보이는 절대위치를 나타내주는 함수
