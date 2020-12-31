@@ -123,7 +123,6 @@ function imageCheck(e) {
    if (isImage && e.target.id === "update-cover") {
       // 미리보기
       const reader = new FileReader();
-
       // 대표사진이 있을 경우 삭제
       document.getElementById("cover-image") ? document.getElementById("cover-image").remove() : null;
       
