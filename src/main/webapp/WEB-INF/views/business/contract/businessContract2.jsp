@@ -60,5 +60,5 @@
     	<img id="img-space" width="600px">
     </div>
 	
-	<input type="button" class="marginauto" style="width: 200px; height: 70px; font-size: 24pt" onclick="contract2Check(this)" value=" N E X T ">	
+	<input type="button" class="next" onclick="contract2Check(this)" value=" N E X T ">	
 </div>
