@@ -1,22 +1,91 @@
-
-label.forLabel {
-		background-color: #e5e6eb;
-		border: 1px solid black;
+#contractTitle {
+	height: 15%; text-align: left; display: flex; align-items: center; margin: 0 auto;
+}
+#contractTitle h1 {
+	text-align: left !important;
+    margin: 5px 0 10px 0 !important;
+    font-size: 19pt !important;
+    font-weight: 300 !important;
+    color: navy !important;
+    border-top: 1.7px solid navy !important;
+    border-bottom: 2.5px solid navy !important;
 }
 
-input[type="submit"], input[type="button"] {
-	background-color: #e5e6eb;
-	border: 1px solid black;
+#allcheck {
+	margin-right: 10px;
 }
 
-input[type="submit"]:hover, input[type="button"]:hover,  div label:hover{
-		transition: all 0.3s ease 0s;
+input[type="text"] {
+		padding-left: 10pt;
+}
+
+input[type="button"], input[type="submit"], label.forLabel {
+	background-color: white;
+	border: 3px solid #3088F9;
+	color: #3088F9;
+	outline: none;
+	border-radius: 10px;
+}
+
+input.next {
+	border: 3px solid navy !important;
+	color: navy !important;
+	width: 200px !important; height: 70px !important; font-size: 24pt !important; margin: 0 auto !important; margin-top: 15px !important;
+}
+
+input[type="submit"]:hover, input[type="button"]:hover,  label.forLabel:hover{
+	transition: all 0.3s ease 0s;
 	cursor: pointer;
 	box-shadow: 0px 15px 20px rgba(223, 227, 238);
 	transform: translate(-2px, -2px);
+	color: white !important;
+	background-color: #3088F9;
+	border: 1px solid white;
+	font-weight: bold;
 }
 
+input.next:hover {
+	background-color: navy !important;
+}
+
+
+#iconDiv i {
+	color: #3088F9;
+	text-shadow: 2px 2px 2px #afafaf;
+}
+
+#prevBtn {
+	position: fixed; width: 70px; top: 45%; left: 0; z-index: 9999;
+}
+
+#nextBtn {
+	position: fixed; width: 70px; top: 45%; right: 0; z-index: 9999;
+}
+
+.c1div {
+	text-align: left; width: 80%; height: 45%; margin: 0 auto; position: relative;
+}
+
+.c1div label {
+	position: absolute;
+	bottom: 0;
+	color: #0080ff !important;
+	font-family: cursive;
+}
+
+.c1div p {
+	display: flex;
+	align-items: center;
+	font-size: 14pt;
+}
+
+.c1div label input {
+	margin-right: 10px;
+} 
+
+
 div .AllPre {
+	margin: 0 auto;
 	width: 80%; 
 	height: 40px; 
 	text-align: left; 
@@ -26,6 +95,8 @@ div .AllPre {
 	align-items: center; 
 	font-size: 18pt; 
 	font-weight: bold;
+	color: navy;
+	font-family: cursive;
 }
 
 div.container {
@@ -37,7 +108,7 @@ div .termdiv {
 	width: 100%; height: 70%; margin-bottom: 10px
 }
 
-pre {
+.termdiv pre {
 	text-align: left !important;
 	overflow-y: scroll;
 	white-space: pre-wrap;
@@ -45,6 +116,8 @@ pre {
 	height: 100%;
 	border: 1px solid #afafaf;
 	margin: auto;
+	padding: 10px;
+	color: grey;
 }
 
 div p i {
@@ -64,7 +137,6 @@ div.c2-input {
 div.c2-input input, div.c2-input select {
 	width: 400px;
 	height: 40px;
-	padding-left: 10pt;
 }
 div.c2-input input[type="button"] {
 	padding: 0 !important;
@@ -125,6 +197,17 @@ label i.far:hover {
 	font-weight: 900 !important;
 }
 
+.c4-title {
+	font-size: 36pt; margin: 0 auto; color: navy;
+}
+
+.c4-Div {
+	width: 800px; height: 600px;  margin: 0 auto; margin-bottom: 15px;
+}
+
+.c4-sideDiv {
+	width: 50%; height: 100%; display: inline-block; 
+}
 
 .categoryDiv {
 	display: table;

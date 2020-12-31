@@ -6,13 +6,13 @@
     <div class="c3-input">
     	<h1>은행사</h1>
 		<input type="text" placeholder="은행사를 입력하세요" name="accountbank" id="accountbank" required readonly style="height: 40px; width: 300px;">
-		<input type="button" id="bank-modal-button" value="은행 찾기" style="height: 40px; width: 100px;">
+		<input type="button" id="bank-modal-button" value="은행 찾기" style="height: 46px; width: 100px; margin-left: 10px">
     </div>    
 
     <div class="c3-input">
     	<h1>계좌번호</h1>
     	<input type="text" placeholder="계좌번호를 입력하세요" name="accountnum" id="accountnum" 
-    	maxlength="20" required style="height: 40px; width: 400px">
+    	maxlength="20" required style="height: 40px; width: 410px">
     </div>
     
     <div  class="c3-input">
@@ -38,5 +38,5 @@
     </div>
     
 
-	<input type="button" class="marginauto" style="width: 200px; height: 70px; font-size: 24pt" onclick="contract3Check(this)" value=" N E X T ">
+	<input type="button" class="next" onclick="contract3Check(this)" value=" N E X T ">
 </div>
