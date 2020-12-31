@@ -117,6 +117,7 @@ public class BusinessSubManagementService {
 //				 		  메인                                            서브                       VO
 //				HashMap<String, HashMap<String,List<BDetailSalesVO>>>
 		mav.addObject("orderList", (new Gson()).toJson(orderList));
+		mav.addObject("status", status);
 		
 		return mav;
 	}
