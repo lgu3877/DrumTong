@@ -154,7 +154,6 @@ public class RestBusinessSubManagementService {
 		String memberidORestid = ((BInformationVO)req.getSession().getAttribute("selectEST")).getEstid();
 		// 날짜와 status를 기준으로 구분하여 데이터를 가져와 준다.
 		List<OrderList> orderlist = OrderListSetting.selectBusinessDate(startDate, endDate, memberidORestid, status);
-		System.out.println(startDate + ", " + endDate);
 		// gson으로 반환한다.
 		return new Gson().toJson(orderlist);
 	}
