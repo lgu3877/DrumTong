@@ -133,7 +133,7 @@
 <!-- 	</select> -->
 	
 	<update id="updateOrderList">
-		UPDATE BSALES SET STATUS='PROCESSING'  
+		UPDATE BSALES SET STATUS='PROCESSING',  
 			<choose>
 				<when test='requesttype.equals("DELIVERY")'>
 					DELIVERYDATE
