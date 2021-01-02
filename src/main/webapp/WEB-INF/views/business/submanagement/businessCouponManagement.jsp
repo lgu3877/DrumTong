@@ -41,10 +41,9 @@
 	
 	
 	<!-- 발급날짜 별로 자동적으로 정렬이 이루어지도록 만들자 -->
-<div class="title">
-	<h1 style="font-size: 36pt; text-align: left">쿠폰</h1>
+<div class="pagetitlediv">
+	<h1>쿠폰</h1>
 </div>
-<hr>
 <div class="container">
         <div class="inputFlex">
         <div class="inputDivContainer">

@@ -1,3 +1,22 @@
+.pagetitlediv {
+	width: 700px;
+	height: 60px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.pagetitlediv h1 {
+	text-align: left !important;
+    margin: 5px 0 10px 0 !important;
+    font-size: 24pt !important;
+    font-weight: 300 !important;
+    color: navy !important;
+    border-top: 1.7px solid navy !important;
+    border-bottom: 2.5px solid navy !important;
+}
+
 h1.zeroList {
 	text-align: center;
 	margin-top: 150px;
@@ -89,6 +108,7 @@ div.topdatediv input[type="date"] {
 	text-align: left;
 	margin: 0 auto;
 }
+
 
 .clonediv {
 	width: 700px; height: 450px; margin: 0 auto; position: relative; opacity: 0;
@@ -296,6 +316,7 @@ h1.requesttype {
 	position: absolute;
 	top: 0;
 	right: 15%;
+	cursor: pointer;
 }
 
 #modal h2 {
