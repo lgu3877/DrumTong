@@ -26,9 +26,8 @@
 
 	<div class="marginauto" style="width: 900px; height: 1000px; border: 1px">
 	
-	<div class="marginauto" style="height: 15%; text-align: left;">
-		<h1 style="font-size: 32pt; margin-left: 20px;">온라인 계약</h1>
-	<hr>
+	<div id="contractTitle">
+		<h1>온라인 계약</h1>
 	</div>	
 	<div  class="marginauto" style="height: 85%; width: 100%">	
 		<div style="text-align: left;" id="iconDiv">
@@ -38,8 +37,8 @@
 			<i class="far fa-circle fa-3x"></i>
 			<i class="far fa-circle fa-3x"></i>
 		</div>
-    	<img id="prevBtn" style="position: fixed; width: 70px; top: 45%; left: 0; z-index: 9999;" src="${cpath }/resources/business/img/arrow/prev_button.png" onclick="prevButton()">
-    	<img id="nextBtn" style="position: fixed; width: 70px; top: 45%; right: 0; z-index: 9999;" src="${cpath }/resources/business/img/arrow/next_button.png" onclick="nextButton()">
+    	<img id="prevBtn" src="${cpath }/resources/business/img/arrow/prev_button.png" onclick="prevButton()">
+    	<img id="nextBtn" src="${cpath }/resources/business/img/arrow/next_button.png" onclick="nextButton()">
     	<form action="" method="post" class="marginauto" style="width: 800px; height: 800px;" onsubmit="contract4Check()"
     		enctype="multipart/form-data">
         	<%@ include file="./businessContract1.jsp" %>

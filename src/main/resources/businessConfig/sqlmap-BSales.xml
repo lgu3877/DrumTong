@@ -99,13 +99,16 @@
 	WHERE 
         <choose>
         	<when test='memberidORestid.contains("ESTID")'>
+        		<if test='startDate != null and endDate != null'>
+        			(TO_DATE(PURCHASEDATE, 'YYYY-MM-DD HH24:MI:SS') BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD') AND TO_DATE(#{endDate}, 'YYYY-MM-DD')+0.99999) AND
+        		</if>
         		BSALES.STATUS=#{status} AND BSALES.ESTID=
         	</when>
         	<otherwise>
         		BSALES.MEMBERID=
         	</otherwise>
         </choose>
-        #{memberidORestid}     
+        #{memberidORestid}      ORDER BY PURCHASEDATE DESC
 	</select>
 	
 <!-- 	주문 목록 데이터 Bsales, BDetailSales, Binformation Join되어있음. -->

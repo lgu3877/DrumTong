@@ -18,7 +18,9 @@ import com.drumtong.business.dao.BReviewDAO;
 import com.drumtong.business.vo.BCouponVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BPaymentVO;
+import com.drumtong.business.vo.OrderList;
 import com.drumtong.business.vo.ReviewList;
+import com.drumtong.security.OrderListSetting;
 import com.drumtong.security.Review;
 import com.drumtong.security.SerialUUID;
 import com.drumtong.security.Statistics;
@@ -135,5 +137,27 @@ public class RestBusinessSubManagementService {
 		String estid= bInformationVO.getEstid();
 		return Statistics.statistics(estid, pageKind, option, startDate, endDate);
 	}
+
+
+	// ========================= 대분류 [주문현황] ================================ [영경]
+	// type : 'Accept'(수락), 'Decline'(거절)
+	public String orderStatusManagementAnswer(HttpServletRequest req, String type, HashMap<String, String> param) {
+		// 수락을 누른 경우 DB에 status를 processing 으로 바꾸어준다.
+		
+		// 거절을 누를 경우 DB 데이터를 삭제해 준다. 
+		return null;
+	}
+
+	// status : 'REQUEST'(요청), 'PROCESSING'(처리중), 'SUCCESS'(완료)
+	// startDate : 시작 날짜 없으면 맨 처음부터, endDate : 끝 날짜 없으면 맨 마지막 날까지
+	public String orderStatusManagementDate(HttpServletRequest req, String status, String startDate, String endDate) {
+		String memberidORestid = ((BInformationVO)req.getSession().getAttribute("selectEST")).getEstid();
+		// 날짜와 status를 기준으로 구분하여 데이터를 가져와 준다.
+		List<OrderList> orderlist = OrderListSetting.selectBusinessDate(startDate, endDate, memberidORestid, status);
+		// gson으로 반환한다.
+		return new Gson().toJson(orderlist);
+	}
+
+
 	
 }
