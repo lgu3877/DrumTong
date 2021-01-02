@@ -1,9 +1,12 @@
 // 업로드로 추가된 사진 > 업로드 할 파일 임시 저장
-let uploadPhotoList = {
+const uploadPhotoList = {
 	originalCover: document.getElementById("cover-image") ? document.getElementById("cover-image").src : "",
 	uploadCover: "",
 	uploadPhoto: [],
 }
+
+// 업로드 과정 중 삭제된 사진 이름 배열 > DB에서 이름 비교 후 저장 권장
+const deletedUploadFileNames = [];
 
 // 가로 스크롤(horizontal scroll movement) > 영역 안에서 세로 스크롤 막음
 $("#image-preview").on('mousewheel',function(e) {
@@ -94,22 +97,46 @@ function deletePhoto(clickedPhoto) {
       const photoSlideCon = document.getElementById("image-preview");
       let photoList = [...document.getElementsByClassName("shop_picture")];
       
-      // 삭제 > DB작업 필요
+      // 삭제 > DB작업 적용 가능
       for (let index = 0; index < photoList.length; index++) {
          if (photoList[index].children[0].src === clickedPhoto) {
         	
-        	// 선택된 사진이 input(커버 or 일반)의 value에 속해 있을 경우
-        	// 커버 > 덮어씌워진 경우 원래 사진 & 아닌 경우 
+        	// 커버 사진 삭제 > input value 제거
         	if (clickedPhoto === uploadPhotoList.uploadCover) {
-        		console.log("123");
         		// 커버사진 input value 초기화
-        		document.getElementById("update-cover").value = "";      		
-//        		photoList[index].children[0].src = uploadPhotoList.originalCover;
-        		
+        		document.getElementById("update-cover").value = "";        		
         	}
             
-        	// 일반
+        	// 일반 사진 삭제 > input value 제거
+//        	else if (uploadPhotoList.uploadPhoto.includes(clickedPhoto)) {
+        	else if (uploadPhotoList.uploadPhoto.filter((file) => {
+        					file === clickedPhoto && deleted === false
+        				})
+        			) {
+        			console.log(uploadPhotoList.uploadPhoto);
 
+        		const deletedUploadFileNameInput = document.getElementById("deleted-photos");
+//        		const fileList = Array.from(document.getElementById("add-photo").files);
+//        		const fileList = uploadPhotoList.uploadPhoto.filter((file) => file.name);
+        		
+        		for (let i = 0; i < uploadPhotoList.uploadPhoto.length; i++) {
+	        		if (uploadPhotoList.uploadPhoto[i].deleted === false 
+	        				&& uploadPhotoList.uploadPhoto[i].file  === clickedPhoto) 
+	        		{
+	        			// 업로드된 사진 중 사용자가 삭제한 사진 이름 > 배열에 추가 > DB에서 이름 비교 후 삭제 권장
+	        			console.log(fileList);
+	        			console.log(fileList[i].name);
+	        			
+	        			deletedUploadFileNameInput.value += fileList[i].name + "&";
+	        			
+	        			console.log(deletedUploadFileNameInput.value);
+	        			
+	        			uploadPhotoList.uploadPhoto[i].deleted = true;
+	        			
+	        		}
+	        	}
+        		console.log(uploadPhotoList.uploadPhoto);
+        	}
         	
         	// 삭제
         	photoList.splice(index, 1);
@@ -218,7 +245,7 @@ function imageCheck(e) {
             img.setAttribute("alt", "");
             
             // 임시 저장 > 업로드 목록에서 제거할 경우 재사용
-            uploadPhotoList.uploadPhoto.push(e.target.result); // array
+            uploadPhotoList.uploadPhoto.push({file: e.target.result, deleted: false}); // array
             console.log(uploadPhotoList);
             
             // 구성
