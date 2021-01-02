@@ -107,7 +107,7 @@ public class RestBusinessSubManagementController {
 	// type : 'Accept'(수락), 'Decline'(거절)
 	@RequestMapping("businessOrderStatusManagement/rest/{status}/{type}/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String orderStatusManagementAnswer(HttpServletRequest req, @PathVariable("type")String type, HashMap<String, String> param) {
+	public String orderStatusManagementAnswer(HttpServletRequest req, @PathVariable("type")String type, @RequestBody HashMap<String, String> param) {
 		return svc.orderStatusManagementAnswer(req, type, param);
 	}
 	
