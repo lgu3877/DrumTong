@@ -1,3 +1,10 @@
+// 업로드로 추가된 사진 > 업로드 할 파일 임시 저장
+let uploadPhotoList = {
+	originalCover: document.getElementById("cover-image") ? document.getElementById("cover-image").src : "",
+	uploadCover: "",
+	uploadPhoto: [],
+}
+
 // 가로 스크롤(horizontal scroll movement) > 영역 안에서 세로 스크롤 막음
 $("#image-preview").on('mousewheel',function(e) {
    e.preventDefault();
@@ -16,17 +23,18 @@ function imageShow() {
    const imageViewCon = document.getElementById('main-image-con');
    
    // 이미지 src 입력 > DB에서 이미지 가져오기
-   const postedMainImage = document.getElementById("cover-image");
-   const img = document.getElementById('main-image').src;
+   const postedMainImage = document.getElementById("cover-image").src;
+   let img = document.getElementById('main-image');
    
-   // set cover-image here
-   
-   // Cover image exists > view image
-   if (img.src) {
+   // 대표사진이 있을 경우 > 해당 사진 미리보기
+   if (postedMainImage && !img.src) {
       imageInputForm.style.display = 'none';
       imageViewCon.style.display = '';
+      
+      img.src = postedMainImage;
+      zoomInPhoto(img.src);
    }
-   // No cover image > show input from
+   // 없을 경우 > default
    else {
       imageInputForm.style.display = '';
       imageViewCon.style.display = 'none';
@@ -89,7 +97,29 @@ function deletePhoto(clickedPhoto) {
       // 삭제 > DB작업 필요
       for (let index = 0; index < photoList.length; index++) {
          if (photoList[index].children[0].src === clickedPhoto) {
-            photoList.splice(index, 1);
+        	
+        	// 선택된 사진이 input(커버 or 일반)의 value에 속해 있을 경우
+        	// 커버 > 덮어씌워진 경우 원래 사진 & 아닌 경우 
+        	if (clickedPhoto === uploadPhotoList.uploadCover) {
+        		console.log("123");
+        		// 커버사진 input value 초기화
+        		document.getElementById("update-cover").value = "";      		
+//        		photoList[index].children[0].src = uploadPhotoList.originalCover;
+        		
+        	}
+            
+        	// 일반
+
+        	
+        	// 삭제
+        	photoList.splice(index, 1);
+        	
+        	// 삭제 후 다음 사진 미리보기
+        	zoomInPhoto(photoList[index % photoList.length].children[0].src);
+        	
+            // DB에서 바로 삭제 가능
+            // ...
+            
             break;
          }
       }
@@ -102,9 +132,6 @@ function deletePhoto(clickedPhoto) {
          photoSlideCon.appendChild(photoList[i]);
       }
       
-      console.log(document.getElementById("main-image").src === clickedPhoto);
-      console.log(document.getElementById("main-image").src);
-      console.log(clickedPhoto);
       // 화면 초기화(삭제하는 사진과 메인에 보여지는 미리보기 사진이 동일한 경우)
       if (document.getElementById("main-image").src === clickedPhoto) {
     	  document.getElementById("main-image").removeAttribute("src");
@@ -114,7 +141,7 @@ function deletePhoto(clickedPhoto) {
 }
 
 
-// 이미지 업로드 (feat. ghrw
+// 이미지 업로드
 function imageCheck(e) {
    const input = e.target;
    const imageType = input.value.substr(input.value.length - 3, input.value.length).toLocaleLowerCase();
@@ -148,8 +175,11 @@ function imageCheck(e) {
          img.setAttribute("src", e.target.result);
          img.setAttribute("alt", "");
          img.setAttribute("id", "cover-image");
-            
 
+         // 업로드한 '커버'사진 src 저장 > 삭제 시 비교 > value에서 삭제
+         uploadPhotoList.uploadCover = e.target.result; // string
+         console.log(uploadPhotoList);
+         
          // 추가
          li.appendChild(img);
          li.appendChild(icon);
@@ -187,6 +217,10 @@ function imageCheck(e) {
             img.setAttribute("src", e.target.result);
             img.setAttribute("alt", "");
             
+            // 임시 저장 > 업로드 목록에서 제거할 경우 재사용
+            uploadPhotoList.uploadPhoto.push(e.target.result); // array
+            console.log(uploadPhotoList);
+            
             // 구성
             li.appendChild(img);
             li.appendChild(icon);
@@ -206,7 +240,6 @@ function imageCheck(e) {
          reader.readAsDataURL(img);         
       }   
    }
-   
    // 잘못된 사진 업로드(확장자)
    else {
       // deny uploading request
