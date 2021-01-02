@@ -46,7 +46,9 @@
 	  <!-- <div id="myPieChart"></div> -->
 
 	<div class="container">
-		<h1 style="font-size: 36pt">통계</h1>
+		<div class="pagetitlediv">
+			<h1>통계</h1>
+		</div>
 		<div class="flex1">
 			<button onclick="contentChange(this)" name="Hits/">조회수</button>
 			<button onclick="contentChange(this)" name="Orders/">주문수</button>

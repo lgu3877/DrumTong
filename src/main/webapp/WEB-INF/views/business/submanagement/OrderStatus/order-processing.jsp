@@ -156,6 +156,25 @@
 	function popupSubmit() {  // 처리중 -> 요청 으로 제출
 		let popupsubmit = confirm('주문처리를 수락하시겠습니까?');
 		// 밑에 axios
+		
+		let ob={
+				   'salecode': '${salecode}',
+				   'requesttype': '${requesttype}',
+				   'orderDate': $('#deleverydate').html(),
+		      	};
+		
+		console.log('날짜 : ', $('#deleverydate').html());
+		
+		var axiosPath = '/drumtong/business/subManagement/businessOrderStatusManagement/rest/REQUEST/Accept/';
+        const axPost = async (ob) => {   // async : 비동기 실행 함수
+            await axios.post(axiosPath, ob)
+            // 정상
+       		.then( (response) => {
+            const data = response.data;
+            console.log('data : ', data);
+             })
+          }
+		return axPost(ob);
 	}
 	
 	// 윈도우 창이 열리면서 시작하는 명령어

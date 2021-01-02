@@ -6,6 +6,24 @@
 	margin: 0 auto;
 }
 
+.pagetitlediv {
+	height: 60px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.pagetitlediv h1 {
+	text-align: left !important;
+    margin: 5px 0 10px 0 !important;
+    font-size: 24pt !important;
+    font-weight: 300 !important;
+    color: navy !important;
+    border-top: 1.7px solid navy !important;
+    border-bottom: 2.5px solid navy !important;
+}
+
 .flex1 {
 	display: flex;
 }

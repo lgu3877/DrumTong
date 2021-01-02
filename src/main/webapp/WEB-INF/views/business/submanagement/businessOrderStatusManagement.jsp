@@ -57,7 +57,9 @@
 				<i class="fas fa-chevron-circle-up fa-4x" onclick="upperbtn()"></i>
 			</div>
 			
-			<h1 style="font-size: 36pt">주문현황</h1>
+			<div class="pagetitlediv">
+				<h1>주문현황</h1>
+			</div>
 			
 			<div class="typeSelect" id="typeSelect">
 				<button onclick="chStatus(this)" name="REQUEST">요청</button>
@@ -109,9 +111,11 @@
 			
 			<div class="sidecontainer">
 				<div>
+					<input type="hidden">
 					<button onclick="checkrequest(this)">처&nbsp&nbsp리</button>
 				</div>
 				<div>
+					<input type="hidden">
 					<button onclick="checkcancle(this)">취&nbsp&nbsp소</button>
 				</div>
 			</div>
@@ -144,7 +148,7 @@
 				<p class="pmain"><span class="psubmain"></span></p>
 				<div class="outerdetail">
 					<div class="innerdetail">
-					<i class="fas fa-motorcycle fa-x"></i>
+					<i class="fas fa-motorcycle fa-x" style="display: none"></i>
 						<h3></h3>
 						<h3></h3>
 						<h3 style="text-align: right"></h3>
@@ -165,8 +169,10 @@
 			<div class="in-modal">총 금액<span  id="totalprice"></span></div>
 		<hr>
 		    <div class="popupactive" id="popupactive">
+		    	<input type="hidden">
 		    	<button onclick="checkcancle(this)">취소</button>
 		    	<div style="width: 20%"></div>
+		    	<input type="hidden">
 		    	<button onclick="checkrequest(this)">처리</button>
 		    </div>
 		<hr>
@@ -267,6 +273,9 @@
 			$('#clonediv0').find('.sidecontainer').find('button').each(function(index, item) {
 				$(item).attr('name', orderList[0].salecode);
 			});
+			$('#clonediv0').find('.sidecontainer').find('input').each(function(index, item) {
+				$(item).attr('name', orderList[0].requesttype);
+			});
  		}
 		
  		
@@ -315,11 +324,15 @@
  				$('#clonediv' + i).find('.sidecontainer').find('button').each(function(index, item) {
  					$(item).attr('name', orderList[i].salecode);
  				});
+ 				$('#clonediv' + i).find('.sidecontainer').find('input').each(function(index, item) {
+ 					$(item).attr('name', orderList[i].requesttype);
+ 				});
  			}
  		}
  		
  	    function openDetail(obj) {      // 상세한 주문현황 정보를 제공하는 모달 활성화
- 	    	  				
+ 	    	 
+ 	    	console.log('function 반응 속도가 더 빠릅니다');
  	         let detailob = orderList[(obj.parentNode.id).replace('clonediv','')];
  	         // 메인 주문형황 카드를 클릭했을 때, 그 카드가 가지고 있는 id 값에서 마지막 숫자값만 가지고 옴
  	         // 그 숫자를 이용해서 orderList[] 를 가지고 온다
@@ -330,6 +343,9 @@
  	         
  	         $('#popupactive').children('button').each(function(index, item) {
  	        	 $(item).attr('name', detailob.salecode);
+ 	         });
+ 	         $('#popupactive').children('input').each(function(index, item) {
+ 	        	 $(item).attr('name', detailob.requesttype);
  	         });
  	         
  	         // 1차 메인카테고리 HashMap array
@@ -372,10 +388,12 @@
  	                    if(z > 0)	// 만약 서브카테고리에 저장된 메뉴가 1개보다 많을 때 사용
 	  						$('#clonedetail' + count).find('.outerdetail').append(innerclone.html());
  	                     
+ 	                    	 console.log('z : ', z);
+ 	                    	 console.log('배달가격 : ', mainmenus[z].quickprice );
  	                     $('#clonedetail' + count).find('.innerdetail').children('h3').each(function(index, item) {
- 	                    	 if(mainmenus[z].quickprice == 0)	// 배달가격이 0원이면 오토바이 안보이기
- 	                    		$('#clonedetail' + count).find('i').css('display', 'none');
- 	                    	 
+ 	                    	if(mainmenus[z].quickprice != 0)	// 배달가격이 0원이면 오토바이 안보이기
+ 	                    		$('#clonedetail' + count).find('i').css('display', '');	// 수정 필요함!!
+ 	                    		
  	                        switch (index) {
  	                           case 0:
  	                              $('#clonedetail' + count).find('.outerdetail').children('.innerdetail').eq(z).children('h3').eq(index).html(mainmenus[z].name);
@@ -413,7 +431,6 @@
  	         
  	         $('#modal').fadeIn(300);
  	         $('#modalback').fadeIn(300);
- 	         
  	      }
 
  	  	function numberWithCommas(x) {		// 천단위 콤마
@@ -439,7 +456,9 @@
 		function searching(obj) {	// 주문번호 검색 기능
 			if(orderList.length == 0)	// 주문현황 리스트가 아예 없을 경우엔 함수가 작동하지 않도록 제한을 걸었음
 				return false;
-			
+			$('.clonediv').show();	// show() 되어 있는 상태에서 검색이 가능함
+									// 즉, 14로 검색해서 다른 값들이 숨겨지면 그 값을 찾지 못하기에 다시 show()로 활성화시킴
+				
 			$('.containerName').each(function(index, item) {
 				
 				if($(item).html().indexOf($(obj).prev().val()) == '-1') {	// 검색값이 일부분이라도 들어가 있지 않은 경우 : -1 
@@ -448,6 +467,62 @@
 				else if($(item).html().indexOf($(obj).prev().val()) == '0') {		// 검색값이 공백일 경우 : 0
 					$(item).parents('.clonediv').show();
 				}
+			});
+		}
+		
+		function exitremove() {	// 모달 비활성화 할때에 모달에 있는 내용들 지워주는 역할
+			for(i = $('#detailmenus').children('.clonedetail').length; 1 < i; i--) {
+				// 메인 카테고리가 여러가지 있다면, clonedetail 이라는 이름을 가진 				
+				$('#detailmenus').children('.clonedetail').eq(i - 1).remove();
+			}
+			if(1 < $('#detailmenus').children('.clonedetail').find('.innerdetail').length) {
+				$('#detailmenus').children('.clonedetail').find('.innerdetail').each(function(index, item) {
+					if(index != 0)
+						$(item).remove();
+				});
+			}
+		}
+		
+		
+		function checkcancle(obj) {			// 주문취소 confirm 실행문
+			let checkcancle = confirm('주문을 취소하시겠습니까?');
+			if(checkcancle == true)
+				window.open('./PopUpWindow/cancle/' + obj.name + '/' + $(obj).prev().attr('name') + '/', '주문취소팝업', 'width=700px,height=620px,scrollbars=yes');
+		}
+		
+		function checkrequest(obj) {		// 주문처리 confirm 실행문
+			let checkrequest = confirm('주문을 수락하시겠습니까?');
+			if(checkrequest == true)
+				window.open('./PopUpWindow/process/' + obj.name + '/' + $(obj).prev().attr('name') + '/', '주문처리팝업', 'width=700px,height=620px,scrollbars=yes');
+		}
+		
+		function dateChange() {
+			let startDate = $('#startDate').val();
+			let endDate = $('#endDate').val();
+			
+// 			console.log('startDate : ', startDate);
+// 			console.log('endDate : ', endDate);
+			if(startDate == '' || endDate == '')
+				return false;
+			
+			const axiosPath = '/drumtong/business/subManagement/businessOrderStatusManagement/rest/' + '${status }/' + startDate + '/' + endDate + '/';
+			const axGet = async () => { // ■ 영경 : 여기 ob를 넘겨주지 않았음! ■   // async : 비동기 실행 함수
+			    await axios.get(axiosPath)	// ■ 영경 : 여기 ob를 넘겨주지 않았음! ■
+			    // 정상
+					.then( (response) => {
+			    const data = response.data;
+			    orderList = data;
+			    removeNodes();
+ 			    zerodiv();
+			     })
+			  }
+			return axGet();
+		}
+		
+		function removeNodes() {
+			$('.clonediv').each(function(index, item) {
+				if(index != 0)
+					 $(item).remove();
 			});
 		}
 		
@@ -466,6 +541,12 @@
 				$('#modalback').fadeOut(300);
 				exitremove();
 		});
+ 		
+ 		$('#modalback').on('click', function() {
+			$('#modal').fadeOut(300);
+			$('#modalback').fadeOut(300);
+			exitremove();
+ 		});
 		
 		$(document).keyup(function(e) {		// esc 키 누르면 모달 비할성화
 		   if (e.keyCode == 27 || e.which == 27 ) {
@@ -475,63 +556,7 @@
 		   }
 		});
 		
-		function exitremove() {	// 모달 비활성화 할때에 모달에 있는 내용들 지워주는 역할
-			for(i = $('#detailmenus').children('.clonedetail').length; 1 < i; i--) {
-				// 메인 카테고리가 여러가지 있다면, clonedetail 이라는 이름을 가진 				
-				$('#detailmenus').children('.clonedetail').eq(i - 1).remove();
-			}
-			if(1 < $('#detailmenus').children('.clonedetail').find('.innerdetail').length) {
-				$('#detailmenus').children('.clonedetail').find('.innerdetail').each(function(index, item) {
-					if(index != 0)
-						$(item).remove();
-				});
-			}
-		}
-		
-		function checkcancle(obj) {			// 주문취소 confirm 실행문
-			let checkcancle = confirm('주문을 취소하시겠습니까?');
-			if(checkcancle == true)
-				window.open('./PopUpWindow/cancle/' + obj.name + '/', '주문취소팝업', 'width=700px,height=620px,scrollbars=yes');
-		}
-		
-		function checkrequest(obj) {		// 주문처리 confirm 실행문
-			let checkrequest = confirm('주문을 수락하시겠습니까?');
-			if(checkrequest == true)
-				window.open('./PopUpWindow/process/' + obj.name + '/', '주문처리팝업', 'width=700px,height=620px,scrollbars=yes');
-		}
-		
-		function dateChange() {
-			let startDate = $('#startDate').val();
-			let endDate = $('#endDate').val();
-			
-// 			console.log('startDate : ', startDate);
-// 			console.log('endDate : ', endDate);
-			if(startDate == '' || endDate == '')
-				return false;
-			
-			const axiosPath = '/drumtong/business/subManagement/businessOrderStatusManagement/rest/' + '${status }/' + startDate + '/' + endDate + '/';
-			console.log('axiosPath : ', axiosPath);
-			const axGet = async () => { // ■ 영경 : 여기 ob를 넘겨주지 않았음! ■   // async : 비동기 실행 함수
-			    await axios.get(axiosPath)	// ■ 영경 : 여기 ob를 넘겨주지 않았음! ■
-			    // 정상
-					.then( (response) => {
-			    const data = response.data;
-			    console.log('data : ', data);
-			    orderList = data;
-			    removeNodes();
- 			    zerodiv();
-			     })
-			  }
-			return axGet();
-		}
-		
-		function removeNodes() {
-			$('.clonediv').each(function(index, item) {
-				console.log('item : ', $(item).html());
-				if(index != 0)
-					 $(item).remove();
-			});
-		}
+
 		
 		// offset	: 페이지 상단으로부터 선택된 요소가 보이는 절대위치를 나타내주는 함수
 		// positio	: 부모 객체로부터 떨어진 상대값을 리턴한다

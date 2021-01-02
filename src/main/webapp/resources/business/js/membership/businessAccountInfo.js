@@ -4,7 +4,7 @@
    
   for (i = 0; i < origininput.length; i++) {
           origininput[i].setAttribute("type", "button");
-          origininput[i].setAttribute("value", "수정");
+          origininput[i].setAttribute("value", "수      정");
           origininput[i].setAttribute("onclick", "changeInput(this)");
   }
 
@@ -25,7 +25,7 @@
       
       var submit = document.createElement('input');
       submit.setAttribute("type", "button");
-      submit.setAttribute("value", "입력");
+      submit.setAttribute("value", "입      력");
       submit.setAttribute("class", "newinput");
       submit.setAttribute("name", inputid)
       submit.setAttribute("onclick", "inputData(this)");
@@ -34,8 +34,8 @@
 
       var cancle = document.createElement('input');
       cancle.setAttribute("type", "button");
-      cancle.setAttribute("value", "취소");
-      cancle.setAttribute("class", "newinput");
+      cancle.setAttribute("value", "취      소");
+      cancle.setAttribute("class", "newcancle");
       cancle.setAttribute("name", inputdiv.children[1].value);		// hidden 이 가지고 있는 value 값을 'name' 으로 저장 -> 취소 누르면 이 name 값을 원래 자리로 반환
       cancle.setAttribute("onclick", "cancle(this)");
       newdiv.appendChild(cancle);
@@ -157,7 +157,7 @@
       
       var origininput = document.createElement('input');
       origininput.setAttribute("type", "button");
-      origininput.setAttribute("value", "수정");
+      origininput.setAttribute("value", "수      정");
       origininput.setAttribute("onclick", "changeInput(this)");
       origininput.setAttribute("class", "origininput");
       
@@ -195,7 +195,7 @@
       
       var origininput = document.createElement('input');
       origininput.setAttribute("type", "button");
-      origininput.setAttribute("value", "수정");
+      origininput.setAttribute("value", "수      정");
       origininput.setAttribute("onclick", "changeInput(this)");
       origininput.setAttribute("class", "origininput");
       
