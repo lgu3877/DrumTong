@@ -191,10 +191,10 @@
  			let status = '${status }';
 			$('#typeSelect').children('button[name=' + status + ']').attr('class', 'selectedStatus');
  			
- 			if(orderList.length != 0) {
+ 			if(document.querySelector('.zeroList') != null)
+ 				document.querySelector('.zeroList').remove();
  				
- 				if(document.querySelector('.zeroList') != null)
- 					document.querySelector('.zeroList').remove();
+ 			if(orderList.length != 0) {
  				
 	 			originclone();	// 메인화면에서 나타나는 메인 주문형황 카드들의 오리지날이 되는 폼에 들어가야할 값을 입력함
   				insertDiv();	// 오리지널 메인 주문현황 카드를 복사하여 나머지 메인 주문현황 카드들을 생성함
@@ -504,8 +504,8 @@
 			let startDate = $('#startDate').val();
 			let endDate = $('#endDate').val();
 			
-			console.log('startDate : ', startDate);
-			console.log('endDate : ', endDate);
+// 			console.log('startDate : ', startDate);
+// 			console.log('endDate : ', endDate);
 			if(startDate == '' || endDate == '')
 				return false;
 			
@@ -520,7 +520,6 @@
 			    orderList = data;
 			    removeNodes();
  			    zerodiv();
- 			   insertDiv();
 			     })
 			  }
 			return axGet();
@@ -528,6 +527,7 @@
 		
 		function removeNodes() {
 			$('.clonediv').each(function(index, item) {
+				console.log('item : ', $(item).html());
 				if(index != 0)
 					 $(item).remove();
 			});
