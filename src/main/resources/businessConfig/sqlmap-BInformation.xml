@@ -118,4 +118,13 @@
 		</if>  
 		  ORDER BY GPA
 	</select>
+	
+	
+	
+	<update id="updateStatus" parameterType="hashmap">
+		UPDATE BINFORMATION 
+			SET
+				STATUS = #{status}
+			WHERE ESTID = #{estid}
+	</update>
 </mapper>

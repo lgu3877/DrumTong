@@ -8,7 +8,10 @@
 
 <!-- 사업장 정보 가져오기 -->
 	<select id="selectCustomerDetail" parameterType="String" resultType="BManagementVO" >
-		SELECT * FROM BMANAGEMENT WHERE ESTID=#{estid}
+		SELECT 
+			INTRODUCTION, DELIVERYBOOLEAN, QUICKBOOLEAN, 
+			HITS, DEFAULTCATEGORY 
+		FROM BMANAGEMENT WHERE ESTID=#{value}
 	</select>
 	
 	<insert id="insertSignUp" parameterType="BManagementVO">
