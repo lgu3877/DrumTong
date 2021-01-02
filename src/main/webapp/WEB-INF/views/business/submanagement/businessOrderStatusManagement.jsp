@@ -483,6 +483,7 @@
 			}
 		}
 		
+		
 		function checkcancle(obj) {			// 주문취소 confirm 실행문
 			let checkcancle = confirm('주문을 취소하시겠습니까?');
 			if(checkcancle == true)
