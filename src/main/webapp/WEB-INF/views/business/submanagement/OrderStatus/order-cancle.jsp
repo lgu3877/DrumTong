@@ -65,7 +65,22 @@
 	
 	function popupSubmit() {  // 처리중 -> 요청 으로 제출
 		let popupsubmit = confirm('주문취소를 처리하시겠습니까?');
-		// 밑에 axios
+		
+		let ob={
+				   'salecode': '${salecode}',
+		      	};
+		
+		var axiosPath = '/drumtong/business/subManagement/businessOrderStatusManagement/rest/REQUEST/Decline/';
+        const axPost = async (ob) => {   // async : 비동기 실행 함수
+            await axios.post(axiosPath, ob)
+            // 정상
+       		.then( (response) => {
+            const data = response.data;
+            opener.location.reload();
+            close();
+            })
+        }
+		return axPost(ob);
 	}
 	
 </script>
