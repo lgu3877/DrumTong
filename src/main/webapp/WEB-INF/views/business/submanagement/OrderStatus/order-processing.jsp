@@ -85,7 +85,6 @@
 	
 	<script type="text/javascript">
 	
-	console.log('주문코드 : ', '${salecode}' );
 // 	console.log('현재 url : ', window.location.href);
 // 	console.log('현재 url1 : ', (window.location.href).split('/'));
 // 	console.log('현재 url2 : ', (window.location.href).split('/').length);
@@ -106,7 +105,6 @@
 			sysbtns[i].className = '';
 		}
 		obj.className = 'selected';
-		console.log('클래스 이름 : ', document.querySelector('#systemdiv i').className);
 		if(document.querySelector('#systemdiv i').className == 'far fa-check-square') {
 			$('#deleverydate').html(sysdateReplace());
 		}
@@ -163,7 +161,6 @@
 				   'orderDate': $('#deleverydate').html(),
 		      	};
 		
-		console.log('날짜 : ', $('#deleverydate').html());
 		
 		var axiosPath = '/drumtong/business/subManagement/businessOrderStatusManagement/rest/REQUEST/Accept/';
         const axPost = async (ob) => {   // async : 비동기 실행 함수
@@ -171,9 +168,10 @@
             // 정상
        		.then( (response) => {
             const data = response.data;
-            console.log('data : ', data);
-             })
-          }
+            opener.location.reload();
+            close();
+            })
+        }
 		return axPost(ob);
 	}
 	
@@ -201,11 +199,9 @@
     });
     
     $('#etehelp').mouseover(function() {
-    	console.log('마우스 오버');
     	$('#ete-bubble').css('display', '');
     });
     $('#etehelp').mouseleave(function() {
-    	console.log('마우스 리브');
     	$('#ete-bubble').css('display', 'none');
     });
     
