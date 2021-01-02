@@ -28,6 +28,12 @@ public interface BSalesDAO {
 
 	// 주문 목록 데이터 Bsales, BDetailSales, Binformation Join되어있음. (business 쪽에서는 estid로 호출 customer쪽에서는 memberid로 호출합니다.)
 	List<OrderList> selectOrderList(HashMap<String, String> param);
+
+	// 주문목록 업데이트
+	int updateOrderList(HashMap<String, String> map);
+
+	//주문목록 삭제
+	int deleteOrderList(HashMap<String, String> map);
 	
 	
 

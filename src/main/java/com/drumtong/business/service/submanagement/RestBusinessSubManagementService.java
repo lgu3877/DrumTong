@@ -142,10 +142,19 @@ public class RestBusinessSubManagementService {
 	// ========================= 대분류 [주문현황] ================================ [영경]
 	// type : 'Accept'(수락), 'Decline'(거절)
 	public String orderStatusManagementAnswer(HttpServletRequest req, String type, HashMap<String, String> param) {
-		// 수락을 누른 경우 DB에 status를 processing 으로 바꾸어준다.
-		
-		// 거절을 누를 경우 DB 데이터를 삭제해 준다. 
-		return null;
+		String estid = ((BInformationVO)req.getSession().getAttribute("selectEST")).getEstid();
+		int result = 0;
+		switch (type) {
+		case "Accept":
+			// 수락을 누른 경우 DB에 status를 processing 으로 바꾸어준다.
+			result = OrderListSetting.requestAccept(estid, param);
+			break;
+		case "Decline":
+			// 거절을 누를 경우 DB 데이터를 삭제해 준다. 
+			result = OrderListSetting.Decline(estid, param);
+			break;
+		}
+		return result == 0? "false" : "true";
 	}
 
 	// status : 'REQUEST'(요청), 'PROCESSING'(처리중), 'SUCCESS'(완료)
