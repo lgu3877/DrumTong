@@ -295,7 +295,7 @@ function createInputFile() {
 	input.setAttribute("onchange", "imageCheck(event)");
 	input.setAttribute("style", "display: none");
 //	input.setAttribute("accept", ".png, .jpg, .jpeg");
-	input.setAttribute("multiple", "multiple");
+//	input.setAttribute("multiple", "multiple");
 
 	
 	document.getElementById("photo-modal-btn").appendChild(input);
