@@ -108,24 +108,19 @@ function deletePhoto(clickedPhoto) {
         	}
             
         	// 일반 사진 삭제 > input value 제거
-//        	else if (uploadPhotoList.uploadPhoto.includes(clickedPhoto)) {
-        	else if (uploadPhotoList.uploadPhoto.filter((file) => {
-        					file === clickedPhoto && deleted === false
-        				})
-        			) {
-        			console.log(uploadPhotoList.uploadPhoto);
-
-        		const deletedUploadFileNameInput = document.getElementById("deleted-photos");
+        	else if (uploadPhotoList.uploadPhoto.includes(clickedPhoto)) {
+        		console.log("초기상태 : " + uploadPhotoList.uploadPhoto);
+        		
+//        		const deletedUploadFileNameInput = document.getElementById("deleted-photos");
 //        		const fileList = Array.from(document.getElementById("add-photo").files);
 //        		const fileList = uploadPhotoList.uploadPhoto.filter((file) => file.name);
+        		const uploadValue = document.getElementById(add-photo).value;
         		
         		for (let i = 0; i < uploadPhotoList.uploadPhoto.length; i++) {
-	        		if (uploadPhotoList.uploadPhoto[i].deleted === false 
-	        				&& uploadPhotoList.uploadPhoto[i].file  === clickedPhoto) 
-	        		{
+	        		if (uploadPhotoList.uploadPhoto[i] === clickedPhoto) {
+	        			console.log("일치\n" + uploadPhotoList.uploadPhoto[i] + "\n"+ clickedPhoto)
+	        			
 	        			// 업로드된 사진 중 사용자가 삭제한 사진 이름 > 배열에 추가 > DB에서 이름 비교 후 삭제 권장
-	        			console.log(fileList);
-	        			console.log(fileList[i].name);
 	        			
 	        			deletedUploadFileNameInput.value += fileList[i].name + "&";
 	        			
@@ -172,12 +167,16 @@ function deletePhoto(clickedPhoto) {
 function imageCheck(e) {
    const input = e.target;
    const imageType = input.value.substr(input.value.length - 3, input.value.length).toLocaleLowerCase();
-
-   let isImage = false;
+	
+	const isImage = imageType === 'jpg' 
+				|| imageType === 'png' 
+				|| imageType === 'jpeg' ? true : false
 
    // 이미지 확장자 검사 (jpg, png, jpng)
-   if (imageType === 'jpg' || imageType === 'png' || imageType === 'jpeg') {
-      isImage = true;
+   if (!isImage) {   
+      alert("선택하신 파일은 적합한 이미지 파일이 아닙니다.\n" + "(jpg, png, jpng 형식의 파일을 등록해주세요.)");
+      e.target.clear; // input value(file) 초기화
+      return;
    }
 
    // 커버 사진 업로드
@@ -225,58 +224,104 @@ function imageCheck(e) {
       }
       reader.readAsDataURL(e.target.files[0]);
    }
-   // 일반 소개 사진 업로드 (복수 선택 가능)
-   else if (isImage && e.target.id === "add-photo") {
-      // 복수 사진 업로드 ( 1 ~ 여러장 )
-	  let count = 0;
-	  
-      for (let img of e.target.files) {
-         // 미리보기
-         const reader = new FileReader();
-         
-         reader.onload = (e) => {
-            // 태그 생성
-            const li = document.createElement("li");
-            li.className = "shop_picture";
-            const icon = document.createElement("i");
-            icon.className = "fas fa-times";
-            const img = document.createElement("img");
-            img.setAttribute("src", e.target.result);
-            img.setAttribute("alt", "");
-            
-            // 임시 저장 > 업로드 목록에서 제거할 경우 재사용
-            uploadPhotoList.uploadPhoto.push({file: e.target.result, deleted: false}); // array
-            console.log(uploadPhotoList);
-            
-            // 구성
-            li.appendChild(img);
-            li.appendChild(icon);
-
-            // 이벤트 주입
-            li.children[0].addEventListener('click', () => zoomInPhoto(e.target.result));
-            li.children[1].addEventListener('click', () => deletePhoto(e.target.result));
-            
-            // 삽입
-            document.getElementById("image-preview").appendChild(li);
-            
-            count++;
-            if (count === 1) {
-            	zoomInPhoto(e.target.result);
-            }
-         }
-         reader.readAsDataURL(img);         
-      }   
-   }
-   // 잘못된 사진 업로드(확장자)
+   // 일반 사진 업로드
    else {
-      // deny uploading request
-      alert("선택하신 파일은 적합한 이미지 파일이 아닙니다.\n" +
-           "(jpg, png, jpng 형식의 파일을 등록해주세요.)");
-      document.getElementById(id).value = '';
+	   let count = 0;
+	   
+	   for (let img of e.target.files) {
+		   // 미리보기
+		   const reader = new FileReader();
+		   
+		   reader.onload = (e) => {
+			   // 태그 생성
+			   const li = document.createElement("li");
+			   li.className = "shop_picture";
+			   const icon = document.createElement("i");
+			   icon.className = "fas fa-times";
+			   const img = document.createElement("img");
+			   img.setAttribute("src", e.target.result);
+			   img.setAttribute("alt", "");
+			   
+			   // 임시 저장 > 업로드 목록에서 제거할 경우 재사용
+			   
+			   // 구성
+			   li.appendChild(img);
+			   li.appendChild(icon);
+			   
+			   // 이벤트 주입
+			   li.children[0].addEventListener('click', () => zoomInPhoto(e.target.result));
+			   li.children[1].addEventListener('click', () => deletePhoto(e.target.result));
+			   
+			   // 삽입
+			   document.getElementById("image-preview").appendChild(li);
+			   
+			   count++;
+			   if (count === 1) {
+				   zoomInPhoto(e.target.result);
+			   }
+		   }
+		   reader.readAsDataURL(img);         
+	   }
+	   // label & input 숨기기(display: none) > 새로운 label & input 생성
+	   hideLabel(e.target.id + "a");
    }
 }
 
 
+
+
+// 랜덤 String 생성
+function generateReandomString(length) {
+	let result = "";
+	const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+	const charArray = characters.split("");
+		
+	for (let i = 0; i < length; i++) {
+		result += charArray[Math.ceil(Math.random() * characters.length)];
+	}
+	
+	return result;
+}
+
+// input file & label 생성
+function createInputFile() {
+	const randomId = generateReandomString(15);
+	
+	const input = document.createElement("input");
+	input.setAttribute("id", randomId);
+	input.setAttribute("className", "add_photo_input");
+	input.setAttribute("type", "file");
+	input.setAttribute("name", "delegatephotoboolean");
+	input.setAttribute("onchange", "imageCheck(event)");
+	input.setAttribute("style", "display: none");
+//	input.setAttribute("accept", ".png, .jpg, .jpeg");
+//	input.setAttribute("multiple", "multiple");
+
+	
+	document.getElementById("photo-modal-btn").appendChild(input);
+	document.getElementById("photo-modal-btn").appendChild(createLabelForInputFile(randomId));
+
+
+	console.log(document.getElementById(randomId));
+}
+
+// input label 생성
+function createLabelForInputFile(inputId) {
+	
+	const label = document.createElement("label");
+	label.setAttribute("id", inputId + "label");
+	label.setAttribute("for", inputId);
+	label.innerHTML = "<span>새로운 사진 추가하기 <i class='far fa-images'></i>";
+		
+	return label;
+}
+
+function hideLabel(labelId) {	
+	document.getElementById(labelId).style.display = "none";
+	
+	// 새로운 input & label 생성
+	createInputFile();
+}
 
 
 
@@ -284,3 +329,7 @@ function imageCheck(e) {
 // 초기 실행
 imageShow();
 sliderEvent();
+
+createInputFile();
+
+

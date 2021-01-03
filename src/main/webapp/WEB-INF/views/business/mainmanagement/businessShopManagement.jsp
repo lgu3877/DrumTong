@@ -170,6 +170,7 @@
         		
 			<!-- add new photo -->
 				<div id="photo-modal-btn" class="photo_add_con">
+				
 					<!-- change cover -->
 					<input id="update-cover" class="add_photo_input" type="file" 
 						name="delegatephotoboolean" onchange="imageCheck(event)"
@@ -178,16 +179,9 @@
 							사진 바꾸기 <i class="far fa-images"></i>
 					</span>
 					</label>
-					<!-- add store image -->
-					<input id="add-photo" class="add_photo_input" type="file" 
-						name="storeimg" onchange="imageCheck(event, 'add-photo')"
-						style="display: none" accept=".png, .jpg, .jpeg" multiple="multiple">
-					<!-- 업로드 사진 중 삭제한 파일 이름 보내는 input -->
-					<input id="deleted-photos" type="text" name="deletedPhotoNames" style="display: none" >
-					<label for="add-photo"> <span>새로운 사진 추가하기 <i
-							class="far fa-images"></i>
-					</span>
-					</label>
+					
+					<!-- 이곳에 자동 input & label 생성 -->
+					
 				</div>
 				
 			</div>
