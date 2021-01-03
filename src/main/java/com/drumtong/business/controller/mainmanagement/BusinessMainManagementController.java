@@ -38,7 +38,7 @@ public class BusinessMainManagementController {
 	public ModelAndView shopManagement( HttpServletRequest req,MultipartHttpServletRequest mpf,
 									   BManagementVO bManagementVO, BImageVO bImageVO, 
 									   BMenuVO bMenuVO, BDeliveryAreaVO bDeliveryAreaVO) {
-		return svc.shopManagement(mpf,bManagementVO, bImageVO, bMenuVO, bDeliveryAreaVO);
+		return svc.shopManagement(req,mpf,bManagementVO, bImageVO, bMenuVO, bDeliveryAreaVO);
 	}
 	
 	
@@ -57,8 +57,9 @@ public class BusinessMainManagementController {
 	// 비즈니스 온라인계약 {신규일정관리} 데이터 등록 (POST) [건욱]
 	@RequestMapping(value="businessScheduleManagement/", method = RequestMethod.POST)
 	public ModelAndView scheduleManagement(BScheduleDaysVO bScheduleDaysVO, BScheduleTimeVO bScheduleTimeVO,
-										   BTempHolidayVO bTempHolidayVO, BTempSuspensionVO bTempSuspensionVO){
-		return svc.scheduleManagement(bScheduleDaysVO, bScheduleTimeVO, bTempHolidayVO, bTempSuspensionVO);
+										   BTempHolidayVO bTempHolidayVO, BTempSuspensionVO bTempSuspensionVO,
+										   HttpServletRequest req){
+		return svc.scheduleManagement(bScheduleDaysVO, bScheduleTimeVO, bTempHolidayVO, bTempSuspensionVO,req);
 	}
 	
 	
