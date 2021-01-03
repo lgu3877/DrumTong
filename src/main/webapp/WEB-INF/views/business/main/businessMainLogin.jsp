@@ -41,7 +41,7 @@
 					</div>
 				</div>
 				<div class="login_button_con">
-					<input type="button" id="loginSubmit" value="Login" style="float: left">		
+					<input type="button" id="loginSubmitButton" value="Login" style="float: left">		
 				</div>
 			</div>
 		</form>
@@ -168,9 +168,12 @@
 
 <!-- login regular syntax -->
 <script>
-   document.getElementById('loginSubmit').addEventListener('click', function(){ 
-	 	  loginSubmit();
-   });
+	user = `${bLogin}`;
+	if(user == null || user == ''){
+	   document.getElementById('loginSubmitButton').addEventListener('click', function(){ 
+		 	  loginSubmit();
+	   });
+	}
   
   function loginEnter() {
 	  if (window.event.keyCode == 13) {
