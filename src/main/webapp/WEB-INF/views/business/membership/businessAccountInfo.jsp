@@ -30,15 +30,22 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
    
 
-<div style="width: 70%; height: 100%; min-width: 900px; background-color: #d2d4dc;" class="marginauto">
+<div class="container">
    
 
    <div style="text-align: left; margin-bottom: 25px">
-      <h1 style="font-size: 32pt; margin-left: 20px;">비즈니스 계정 관리</h1>
+      <h1 style="font-size: 32pt; margin-left: 20px;">사업자 계정 관리</h1>
       <hr>
    </div>
    
-   <div style="width: 80%; height: 80%; display: flex; margin-top: 8%" class="marginauto">
+   <div class="AccountInputDiv">
+   	  <hr style="position: absolute; top: 110px; width: 100%">
+   	  <hr style="position: absolute; top: 230px; width: 100%">
+   	  <hr style="position: absolute; top: 350px; width: 100%">
+   	  <hr style="position: absolute; top: 470px; width: 100%">
+   	  <hr style="position: absolute; top: 590px; width: 100%">
+   	  <hr style="position: absolute; top: 710px; width: 100%">
+   	  <hr style="position: absolute; top: 830px; width: 100%">
       <div class="leftdiv">   
          <div class="tablediv">
             <div class="celldiv">
@@ -137,7 +144,6 @@
 </div>
 <script src="${cpath }/business/js/membership/businessAccountInfo.js"></script>
 
-<%@ include file="../main/businessFooter.jsp"%>
 
 </body>
 </html>

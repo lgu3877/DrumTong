@@ -108,7 +108,7 @@
         		BSALES.MEMBERID=
         	</otherwise>
         </choose>
-        #{memberidORestid}      ORDER BY PURCHASEDATE DESC
+        #{memberidORestid}      ORDER BY SALECODE DESC
 	</select>
 	
 <!-- 	주문 목록 데이터 Bsales, BDetailSales, Binformation Join되어있음. -->
@@ -131,5 +131,23 @@
 <!-- 		ON BINFORMATION.ESTID = BSALES.ESTID -->
 <!-- 	WHERE MEMBERID = #{memberid} -->
 <!-- 	</select> -->
-
+	
+	<update id="updateOrderList">
+		UPDATE BSALES SET STATUS='PROCESSING',  
+			<choose>
+				<when test='requesttype.equals("DELIVERY")'>
+					DELIVERYDATE
+				</when>
+				<otherwise>
+					PICKUPDATE
+				</otherwise>
+			</choose>
+			= #{orderDate} 
+			WHERE ESTID=#{estid} AND SALECODE=#{salecode}
+	</update>
+	
+	<delete id="deleteOrderList">
+		DELETE FROM BSALES WHERE ESTID=#{estid} AND SALECODE=#{salecode}
+	</delete>
+	
 </mapper>

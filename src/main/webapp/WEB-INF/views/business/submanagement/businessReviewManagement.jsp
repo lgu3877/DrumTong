@@ -41,8 +41,9 @@
 	<%@ include file="../main/businessSubHeader.jsp" %>
 		
 		<div class="container">	
-			<h1 class="title">리뷰 관리<span>(${selectEST.brandnaming })</span></h1>
-				
+		<div class="pagetitlediv">
+			<h1>리뷰 관리<span>(${selectEST.brandnaming })</span></h1>
+		</div>		
 		<div style="width: 800px;" class="marginauto">
 			<div class="optiondiv">
 				<input type="button" onclick="location.href='${cpath }/business/submanagement/businessReviewManagement/whole/'" value="전체 리뷰" id="whole">

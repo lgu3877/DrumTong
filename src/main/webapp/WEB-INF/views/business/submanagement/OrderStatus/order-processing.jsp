@@ -85,7 +85,6 @@
 	
 	<script type="text/javascript">
 	
-	console.log('주문코드 : ', '${salecode}' );
 // 	console.log('현재 url : ', window.location.href);
 // 	console.log('현재 url1 : ', (window.location.href).split('/'));
 // 	console.log('현재 url2 : ', (window.location.href).split('/').length);
@@ -106,7 +105,6 @@
 			sysbtns[i].className = '';
 		}
 		obj.className = 'selected';
-		console.log('클래스 이름 : ', document.querySelector('#systemdiv i').className);
 		if(document.querySelector('#systemdiv i').className == 'far fa-check-square') {
 			$('#deleverydate').html(sysdateReplace());
 		}
@@ -156,6 +154,25 @@
 	function popupSubmit() {  // 처리중 -> 요청 으로 제출
 		let popupsubmit = confirm('주문처리를 수락하시겠습니까?');
 		// 밑에 axios
+		
+		let ob={
+				   'salecode': '${salecode}',
+				   'requesttype': '${requesttype}',
+				   'orderDate': $('#deleverydate').html(),
+		      	};
+		
+		
+		var axiosPath = '/drumtong/business/subManagement/businessOrderStatusManagement/rest/REQUEST/Accept/';
+        const axPost = async (ob) => {   // async : 비동기 실행 함수
+            await axios.post(axiosPath, ob)
+            // 정상
+       		.then( (response) => {
+            const data = response.data;
+            opener.location.reload();
+            close();
+            })
+        }
+		return axPost(ob);
 	}
 	
 	// 윈도우 창이 열리면서 시작하는 명령어
@@ -182,11 +199,9 @@
     });
     
     $('#etehelp').mouseover(function() {
-    	console.log('마우스 오버');
     	$('#ete-bubble').css('display', '');
     });
     $('#etehelp').mouseleave(function() {
-    	console.log('마우스 리브');
     	$('#ete-bubble').css('display', 'none');
     });
     
