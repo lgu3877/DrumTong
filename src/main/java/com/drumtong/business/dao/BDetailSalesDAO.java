@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.drumtong.business.vo.BDetailSalesVO;
+import com.drumtong.business.vo.EteNums;
 
 public interface BDetailSalesDAO {
 	
@@ -18,4 +19,6 @@ public interface BDetailSalesDAO {
 	List<String> selectDistinctCategory(HashMap<String, String> map);
 	
 	List<BDetailSalesVO> selectBDetailSalesMenu(HashMap<String, String> map);
+
+	List<EteNums> calcEte(HashMap<String, String> map);
 }
