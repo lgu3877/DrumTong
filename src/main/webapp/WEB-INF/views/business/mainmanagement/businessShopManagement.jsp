@@ -96,7 +96,7 @@
 				<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
 				<c:if test="${status eq 'SUCCESS' }">
 					<div class="service_button_con">
-						<div id="add-cover-btn" class="update_image_btn_con">
+						<div id="update-intro-btn" class="update_image_btn_con" onclick="submitIntro()">
 							<div class="add_menu_icon_con">
 								<i class="fas fa-check-square"></i>
 							</div>
@@ -174,7 +174,7 @@
 					<!-- change cover -->
 					<input id="update-cover" class="add_photo_input" type="file" 
 						name="delegatephotoboolean" onchange="imageCheck(event)"
-						style="display: none;" accept=".png, .jpg, .jpeg">
+						style="display: none;" accept=".png, .jpg, .jpeg" >
 					<label for="update-cover"> <span style="margin-right: 10px">커버
 							사진 바꾸기 <i class="far fa-images"></i>
 					</span>
@@ -191,11 +191,22 @@
 			
 			<!-- title -->
 				<div class="shop_info_title_con">
-					<div>
-						<span class="shop_info_title">매장 소개글</span>
+					<div style="display: flex;">
+						<span class="shop_info_title">소개글</span>
 						<i id="intro-help" class="far fa-question-circle" style="font-weight: 600">도움말</i>
 						<div id="intro-help-msg"></div>
 					</div>
+					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
+				<c:if test="${status eq 'SUCCESS' }">
+					<div class="service_button_con">
+						<div id="add-cover-btn" class="update_image_btn_con" onclick="submitPhoto()">
+							<div class="add_menu_icon_con">
+								<i class="fas fa-check-square"></i>
+							</div>
+							<div class="add_menu_btn_title">사진 변경</div>
+						</div>
+					</div>
+				</c:if>
 				</div>
 			
 			<!-- text content -->
@@ -230,6 +241,7 @@
 					<i id="update-help" class="far fa-question-circle" style="font-weight: 600">도움말</i>
 					<div id="update-help-msg"></div>
 				</div>
+				
 				<div class="service_button_con">
 					<!-- modify button -->
 					<div id="update-list-btn" class="add_menu_btn_con">
