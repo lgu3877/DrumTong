@@ -2,8 +2,12 @@ package com.drumtong.business.service.mainmanagement;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.drumtong.business.dao.BDeliveryAreaDAO;
 import com.drumtong.business.dao.BManagementDAO;
@@ -13,12 +17,15 @@ import com.drumtong.business.dao.BScheduleTimeDAO;
 import com.drumtong.business.dao.BTempHolidayDAO;
 import com.drumtong.business.dao.BTempSuspensionDAO;
 import com.drumtong.business.vo.BDeliveryAreaVO;
+import com.drumtong.business.vo.BImageVO;
+import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BManagementVO;
 import com.drumtong.business.vo.BMenuVO;
 import com.drumtong.business.vo.BScheduleDaysVO;
 import com.drumtong.business.vo.BScheduleTimeVO;
 import com.drumtong.business.vo.BTempHolidayVO;
 import com.drumtong.business.vo.BTempSuspensionVO;
+import com.drumtong.security.AwsServiceImpl;
 
 @Service
 public class RestBusinessMainManagementService {
@@ -28,6 +35,7 @@ public class RestBusinessMainManagementService {
 	@Autowired BManagementDAO bManagementDAO;
 	@Autowired BMenuDAO	bMenuDAO;
 	@Autowired BDeliveryAreaDAO bDeliveryAreaDAO;
+	@Autowired AwsServiceImpl aws;
 	
 	
 	// 일정관리 테이블
@@ -37,6 +45,24 @@ public class RestBusinessMainManagementService {
 	@Autowired BTempSuspensionDAO bTempSuspensionDAO;
 	
 	// ========================= 대분류 [매장관리] ================================
+	
+	
+	// ===== 중분류 [BImage] 테이블 ====
+	
+	
+	// 1. 매장 관리에 매장 사진을 비동기식으로 수정해주는 메서드입니다.
+	public int updateBImage(MultipartHttpServletRequest mpf, HttpServletRequest req, BImageVO bImageVO) {
+		
+		HttpSession Session = req.getSession();
+ 	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+ 	    String estid = bInformationVO.getEstid();
+ 	    
+ 	    
+		int RestUpdateBImageResult = aws.multipleUpload(mpf, estid, bImageVO);
+		return RestUpdateBImageResult;
+				
+	}
+	
 	
 	
 	// ===== 중분류 [BManagement] 테이블 ====

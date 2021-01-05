@@ -53,13 +53,13 @@ public class BusinessMainManagementService {
 	@Autowired BMenuDAO bMenuDAO;
 	@Autowired BDeliveryAreaDAO bDeliveryAreaDAO;
 	@Autowired BInformationDAO bInformationDAO;
+	@Autowired AwsServiceImpl aws;
 	
 	// 일정관리 DAO
 	@Autowired BScheduleTimeDAO bScheduleTimeDAO;
 	@Autowired BScheduleDaysDAO bScheduleDaysDAO;
 	@Autowired BTempHolidayDAO bTempHolidayDAO;
 	@Autowired BTempSuspensionDAO bTempSuspensionDAO;
-	@Autowired AwsServiceImpl aws;
 	
 	
 	// 비즈니스 매장관리 페이지로 이동 (GET) [건욱]
