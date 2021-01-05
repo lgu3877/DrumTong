@@ -71,168 +71,432 @@
 /*     padding:0; */
 /* } */
 
-html {
-	width: 1900px;
-	height: auto;
-	margin: 0;
-	padding: 0;
+@media (min-width:1400px) {
+	html {
+		max-width: 1900px;
+		min-width: 1400px;
+		height: auto;
+		margin: 0;
+		padding: 0;
+	}
+	body, header, section {
+		background-color: white;
+	}
+	body {
+		/* 	border: 1px solid yellow; */
+		/* 	border: 1px solid black; */
+		margin: auto;
+		height: auto;
+		/*     padding: 20px 0px 0px 0px; */
+		/* 	최대크기 */
+		max-width: 1900px;
+		/* 최소크기 */
+		min-width: 1400px;
+		/* 	max-height: 1500px; */
+		max-height: 3000px;
+		/* 	최소크기 */
+		min-height: 100%;
+	}
+
+	/* ====================헤더(Header) CSS========================= */
+	header {
+		max-width: 1900px;
+		min-width: 1400px;
+		height: 70px;
+		padding-left: 30px;
+		padding-right: 30px;
+		border-bottom: 1px solid #EAEAEA;
+		position: absolute;
+	}
+	header .fa-cloud {
+		margin-top: 5px;
+		font-size: 60px;
+		color: #009fe3;
+	}
+	header a:hover {
+		font-weight: bold;
+	}
+	header .logo {
+		width: 200px;
+		height: 63px;
+		margin: 0px;
+		display: flex;
+		float: left;
+		margin-top: 5px;
+		/* 	padding: 10; */
+		/* 	background-color: aqua; */
+	}
+	header .mainMenu {
+		display: flex;
+		float: right;
+		margin-right: 10%;
+		margin-top: 5px;
+		text-align: center;
+		/* background-color: antiquewhite; */
+	}
+	header .mainMenu .menu {
+		width: 105px;
+		height: 30px;
+	}
+	header .mainMenu .menu li {
+		list-style: none;
+	}
+	header .mainMenu .menu .mypage {
+		display: none;
+		flex-direction: column;
+	}
+	header .mainMenu .menu .headerLogin {
+		white-space: nowrap;
+		width: 80px;
+	}
+	header .mainMenu .menu .headerLogin:hover .mypage {
+		display: contents;
+	}
+	header .mainMenu .menu .headerLogin .mypage .listButtons {
+		margin-top: 10px;
+	}
+	header .mainMenu .menu .headerLogin .mypage .listButtons .mypageList {
+		margin-top: 10px;
+	}
+	header .mainMenu .menu .headerLogin .mypage .listButtons .mypageList .listButton
+		{
+		color: #373737;
+		font-size: 10pt;
+		text-decoration: none;
+	}
+	header .mainMenu .menu .mypage .listButtons .mypageList:hover {
+		background-color: cornsilk;
+	}
+	header .middleMenu {
+		color: #000000;
+		text-decoration: none;
+	}
+	header .mainMenu .middleMenu:hover {
+		color: #3185F8;
+		font-weight: normal;
+	}
+	header .middleMenu2 {
+		color: #000000;
+	}
+
+	/* ====================푸터(Footer) CSS========================== */
+	footer {
+		max-width: 1900px;
+		min-width: 1400px;
+		height: 70px;
+		margin-top: 100px;
+		margin-left: 0;
+		margin-right: 0;
+		background-color: gray;
+		position: sticky;
+		/* 	bottom: 0; */
+		/* background-color: #373737; */
+		/* border: 1px solid black; */
+	}
+	footer .footer_main {
+		max-width: 1500px;
+		min-width: 1000px;
+		height: 55px;
+		color: #EAEAEA;
+		padding: 5px 5px;
+		margin-top: 7px;
+		margin-left: 199px;
+		margin-right: auto;
+		/* border: 1px solid red; */
+		/* text-align: center; */
+	}
+	footer .footer_p {
+		max-width: 1480px;
+		min-width: 980px;
+		height: auto;
+		margin: 0;
+		font-size: 15px;
+	}
 }
 
-body,
-header,
-section {
-	background-color: white;
+/* 1400px 이하 css */
+@media (max-width:1400px) {
+	html {
+ 	    max-width: 1400px;
+ 	    min-width: 1200px;
+		height: auto;
+		margin: 0;
+		padding: 0;
+	}
+	body, header, section {
+		background-color: white;
+	}
+	body {
+		/* 	border: 1px solid yellow; */
+		/* 	border: 1px solid black; */
+		margin: auto;
+		height: auto;
+		/*     padding: 20px 0px 0px 0px; */
+		/* 	최대크기 */
+ 	    max-width: 1400px;
+    	min-width: 1200px;
+		/* 	max-height: 1500px; */
+		max-height: 3000px;
+		/* 	최소크기 */
+		min-height: 100%;
+	}
+
+	/* ====================헤더(Header) CSS========================= */
+	header {
+	   	max-width: 1400px;
+   		min-width: 1200px;
+		height: 70px;
+		padding-left: 30px;
+		padding-right: 30px;
+		border-bottom: 1px solid #EAEAEA;
+		position: absolute;
+	}
+	header .fa-cloud {
+		margin-top: 5px;
+		font-size: 60px;
+		color: #009fe3;
+	}
+	header a:hover {
+		font-weight: bold;
+	}
+	header .logo {
+		width: 200px;
+		height: 63px;
+		margin: 0px;
+		display: flex;
+		float: left;
+		margin-top: 5px;
+		/* 	padding: 10; */
+		/* 	background-color: aqua; */
+	}
+	header .mainMenu {
+		display: flex;
+		float: right;
+		margin-right: 10%;
+		margin-top: 5px;
+		text-align: center;
+		/* background-color: antiquewhite; */
+	}
+	header .mainMenu .menu {
+		width: 105px;
+		height: 30px;
+	}
+	header .mainMenu .menu li {
+		list-style: none;
+	}
+	header .mainMenu .menu .mypage {
+		display: none;
+		flex-direction: column;
+	}
+	header .mainMenu .menu .headerLogin {
+		white-space: nowrap;
+		width: 80px;
+	}
+	header .mainMenu .menu .headerLogin:hover .mypage {
+		display: contents;
+	}
+	header .mainMenu .menu .headerLogin .mypage .listButtons {
+		margin-top: 10px;
+	}
+	header .mainMenu .menu .headerLogin .mypage .listButtons .mypageList {
+		margin-top: 10px;
+	}
+	header .mainMenu .menu .headerLogin .mypage .listButtons .mypageList .listButton
+		{
+		color: #373737;
+		font-size: 10pt;
+		text-decoration: none;
+	}
+	header .mainMenu .menu .mypage .listButtons .mypageList:hover {
+		background-color: cornsilk;
+	}
+	header .middleMenu {
+		color: #000000;
+		text-decoration: none;
+	}
+	header .mainMenu .middleMenu:hover {
+		color: #3185F8;
+		font-weight: normal;
+	}
+	header .middleMenu2 {
+		color: #000000;
+	}
+
+	/* ====================푸터(Footer) CSS========================== */
+	footer {
+    	max-width: 1400px;
+    	min-width: 1200px;
+   		height: 70px;
+		margin-top: 100px;
+		margin-left: 0;
+		margin-right: 0;
+		background-color: gray;
+		position: sticky;
+		/* 	bottom: 0; */
+		/* background-color: #373737; */
+		/* border: 1px solid black; */
+	}
+	footer .footer_main {
+	    max-width: 1100px;
+	    min-width: 900px;
+		height: 55px;
+		color: #EAEAEA;
+		padding: 5px 5px;
+		margin-top: 7px;
+		margin-left: 199px;
+		margin-right: auto;
+		/* border: 1px solid red; */
+		/* text-align: center; */
+	}
+	footer .footer_p {
+    max-width: 1080px;
+    min-width: 880px;
+		height: auto;
+		margin: 0;
+		font-size: 15px;
+	}
 }
 
-body {
-/* 	border: 1px solid yellow; */
-	/* 	border: 1px solid black; */
-	margin: auto;
-	height: auto;
-	/*     padding: 20px 0px 0px 0px; */
 
-	/* 	최대크기 */
-	max-width: 1900px;
-/* 	max-height: 1500px; */
-	max-height: 3000px;
-	/* 	최소크기 */
-	min-width: 100%;
-	min-height: 100%;
+/* 1200px 이하 css */
+@media (max-width:1200px) {
+	html {
+	    max-width: 1200px;
+	    min-width: 1000px;
+		height: auto;
+		margin: 0;
+		padding: 0;
+	}
+	body, header, section {
+		background-color: white;
+	}
+	body {
+		/* 	border: 1px solid yellow; */
+		/* 	border: 1px solid black; */
+		margin: auto;
+		height: auto;
+		/*     padding: 20px 0px 0px 0px; */
+		/* 	최대크기 */
+	    min-width: 1000px;
+		max-width: 1200px;
+		/* 	max-height: 1500px; */
+		max-height: 3000px;
+		/* 	최소크기 */
+		min-height: 100%;
+	}
 
-}
+	/* ====================헤더(Header) CSS========================= */
+	header {
+	    min-width: 1000px;
+		max-width: 1200px;
+		height: 70px;
+		padding-left: 30px;
+		padding-right: 30px;
+		border-bottom: 1px solid #EAEAEA;
+		position: absolute;
+	}
+	header .fa-cloud {
+		margin-top: 5px;
+		font-size: 60px;
+		color: #009fe3;
+	}
+	header a:hover {
+		font-weight: bold;
+	}
+	header .logo {
+		width: 200px;
+		height: 63px;
+		margin: 0px;
+		display: flex;
+		float: left;
+		margin-top: 5px;
+		/* 	padding: 10; */
+		/* 	background-color: aqua; */
+	}
+	header .mainMenu {
+		display: flex;
+		float: right;
+		margin-right: 10%;
+		margin-top: 5px;
+		text-align: center;
+		/* background-color: antiquewhite; */
+	}
+	header .mainMenu .menu {
+		width: 105px;
+		height: 30px;
+	}
+	header .mainMenu .menu li {
+		list-style: none;
+	}
+	header .mainMenu .menu .mypage {
+		display: none;
+		flex-direction: column;
+	}
+	header .mainMenu .menu .headerLogin {
+		white-space: nowrap;
+		width: 80px;
+	}
+	header .mainMenu .menu .headerLogin:hover .mypage {
+		display: contents;
+	}
+	header .mainMenu .menu .headerLogin .mypage .listButtons {
+		margin-top: 10px;
+	}
+	header .mainMenu .menu .headerLogin .mypage .listButtons .mypageList {
+		margin-top: 10px;
+	}
+	header .mainMenu .menu .headerLogin .mypage .listButtons .mypageList .listButton
+		{
+		color: #373737;
+		font-size: 10pt;
+		text-decoration: none;
+	}
+	header .mainMenu .menu .mypage .listButtons .mypageList:hover {
+		background-color: cornsilk;
+	}
+	header .middleMenu {
+		color: #000000;
+		text-decoration: none;
+	}
+	header .mainMenu .middleMenu:hover {
+		color: #3185F8;
+		font-weight: normal;
+	}
+	header .middleMenu2 {
+		color: #000000;
+	}
 
-/* ====================헤더(Header) CSS========================= */
-header {
-	width: 1900px;
-	height: 70px;
-	padding-left: 30px;
-	padding-right: 30px;
-	border-bottom: 1px solid #EAEAEA;
-	position: absolute;
-}
-
-header .fa-cloud {
-	margin-top: 5px;
-	font-size: 60px;
-	color: #009fe3;
-}
-
-header a:hover {
-	font-weight: bold;
-}
-
-header .logo {
-	width: 200px;
-	height: 63px;
-	margin: 0px;
-	display: flex;
-	float: left;
-	margin-top: 5px;
-/* 	padding: 10; */
-/* 	background-color: aqua; */
-}
-
-header .mainMenu {
-	display: flex;
-	float: right;
-	margin-right: 10%;
-	margin-top: 5px;
-	text-align: center;
-	/* background-color: antiquewhite; */
-}
-
-header .mainMenu .menu {
-	width: 105px;
-	height: 30px;
-	
-}
-
-header .mainMenu .menu li {
-	list-style: none;
-	
-}
-
-header .mainMenu .menu .mypage {
-	display: none;
-	flex-direction: column;
-}
-
-header .mainMenu .menu .headerLogin {
-	white-space: nowrap;
-	width: 80px;
-
-}
-
-header .mainMenu .menu .headerLogin:hover .mypage {
-	display: contents;
-}
-
-header .mainMenu .menu .headerLogin .mypage .listButtons {
-	margin-top: 10px;
-}
-
-header .mainMenu .menu .headerLogin .mypage .listButtons .mypageList {
-	margin-top: 10px;
-
-}
-
-header .mainMenu .menu .headerLogin .mypage .listButtons .mypageList .listButton {
-	color: #373737;
-	font-size: 10pt;
-	text-decoration: none;
-
-}
-
-header .mainMenu .menu .mypage .listButtons .mypageList:hover {
-	background-color: cornsilk;
-}
-
-header .middleMenu {
-	color: #000000;
-	text-decoration: none;
-
-}
-
-header .mainMenu .middleMenu:hover {
-	color: #3185F8;
-	font-weight: normal;
-}
-
-header .middleMenu2 {
-	color: #000000;
-}
-
-
-
-/* ====================푸터(Footer) CSS========================== */
-footer {
-	width: 1900px;
-	height: 70px;
-	margin-top: 100px;
-	margin-left: 0;
-	margin-right: 0;
-	background-color: gray;
-	position: sticky;
-/* 	bottom: 0; */
-	/* background-color: #373737; */
-	/* border: 1px solid black; */
-}
-
-footer .footer_main {
-	width: 1500px;
-	height: 55px;
-	color: #EAEAEA;
-	padding: 5px 5px;
-	margin-top: 7px;
-	margin-left: 199px;
-	margin-right: auto;
-	/* border: 1px solid red; */
-	/* text-align: center; */
-}
-
-footer .footer_p {
-	width: 1480px;
-	height: auto;
-	margin: 0;
-	font-size: 15px;
+	/* ====================푸터(Footer) CSS========================== */
+	footer {
+		min-width: 1000px;
+		max-width: 1200px;
+		height: 70px;
+		margin-top: 100px;
+		margin-left: 0;
+		margin-right: 0;
+		background-color: gray;
+		position: sticky;
+		/* 	bottom: 0; */
+		/* background-color: #373737; */
+		/* border: 1px solid black; */
+	}
+	footer .footer_main {
+		max-width: 900px;
+	    min-width: 700px;
+		height: 55px;
+		color: #EAEAEA;
+		padding: 5px 5px;
+		margin-top: 7px;
+		margin-left: 199px;
+		margin-right: auto;
+		/* border: 1px solid red; */
+		/* text-align: center; */
+	}
+	footer .footer_p {
+		max-width: 880px;
+	    min-width: 680px;
+		height: auto;
+		margin: 0;
+		font-size: 15px;
+	}
 }

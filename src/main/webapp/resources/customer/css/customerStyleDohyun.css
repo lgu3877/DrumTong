@@ -105,12 +105,37 @@
 }
 
 /* ====================섹션 CSS================================ */
-body section {
-   width: 1900px;
-   height: auto;
-   /*    height: 2000px; */
-   /* padding: 10px; */
-   /* margin-top: 70px; */
+@media (min-width:1400px) {
+	body section {
+	   max-width: 1900px;
+	   min-width: 1400px;
+	   height: auto;
+ 	  /*    height: 2000px; */
+  	 /* padding: 10px; */
+  	 /* margin-top: 70px; */
+	}
+}
+/* ====================섹션 CSS================================ */
+@media (max-width:1400px) {
+	body section {
+	   max-width: 1400px;
+	   min-width: 1200px;
+	   height: auto;
+ 	  /*    height: 2000px; */
+  	 /* padding: 10px; */
+  	 /* margin-top: 70px; */
+	}
+}
+/* ====================섹션 CSS================================ */
+@media (max-width:1200px) {
+	body section {
+	   max-width: 1200px;
+	   min-width: 1000px;
+	   height: auto;
+ 	  /*    height: 2000px; */
+  	 /* padding: 10px; */
+  	 /* margin-top: 70px; */
+	}
 }
 
 body section .fa-search-plus {
@@ -146,35 +171,63 @@ body .section_main .search .searchs .searchs_p  b{
    font-size : 35px;
 }
 
-
-body .section_main .search .searchBox {
-   text-align: center;
-   width: 1000px;
-   height: 60px;
-   border: 1px solid black;
-   margin: 0 auto;
-   padding-top: 5px;
-   border-color: #097ce6;
-   margin-top : 20px;
+@media (min-width:1200px) {
+	body .section_main .search .searchBox {
+		text-align: center;
+		width: 1000px;
+		height: 60px;
+		border: 1px solid black;
+		margin: 0 auto;
+		padding-top: 5px;
+		border-color: #097ce6;
+		margin-top: 20px;
+	}
+}
+@media (max-width:1200px) {
+	body .section_main .search .searchBox {
+		text-align: center;
+		width: 800px;
+		height: 60px;
+		border: 1px solid black;
+		margin: 0 auto;
+		padding-top: 5px;
+		border-color: #097ce6;
+		margin-top: 20px;
+	}
 }
 
 body .section_main .search .searchBox .fa-search-plus {
    font-size: 20px;
 }
 
-body .section_main .search .searchBox .searchLine {
-   width: 850px;
-   height: 40px;
-   border-right: 0px;
-   border-top: 0px;
-   border-left: 0px;
-   border-bottom: 0px;
-   outline: 0;
-   padding-left: 10px;
-   /* border:none; */
-   /* text-align: center; */
+@media ( min-width :1200px) {
+	body .section_main .search .searchBox .searchLine {
+		width: 850px;
+		height: 40px;
+		border-right: 0px;
+		border-top: 0px;
+		border-left: 0px;
+		border-bottom: 0px;
+		outline: 0;
+		padding-left: 10px;
+		/* border:none; */
+		/* text-align: center; */
+	}
 }
-
+@media ( max-width :1200px) {
+	body .section_main .search .searchBox .searchLine {
+		width: 650px;
+		height: 40px;
+		border-right: 0px;
+		border-top: 0px;
+		border-left: 0px;
+		border-bottom: 0px;
+		outline: 0;
+		padding-left: 10px;
+		/* border:none; */
+		/* text-align: center; */
+	}
+}
 body .section_main .search .searchBox .search_button {
    width: 100px;
    height: 41px;
@@ -244,7 +297,7 @@ body .section_main .notice .notices .notices_0 {
 
 body .section_main .notice .notices .notices_1 {
    float: left;
-   width: 570px;
+   width: 50%;
    height: 250px;
    padding: 10px;
 
@@ -252,7 +305,7 @@ body .section_main .notice .notices .notices_1 {
 
 body .section_main .notice .notices .notices_2 {
    float: left;
-   width: 570px;
+   width: 50%;
    height: 250px;
    padding: 10px;
 }
@@ -289,7 +342,7 @@ body .section_main .notice .notices .notice_ul {
 /* } */
 
 body .section_main .notice .notices .notice_ul .notice_area {
-   width : 560px;
+   width : 100%;
    height: 30px;
 /*    background-color: red;    */
    float: left;
@@ -323,118 +376,319 @@ body .section_main .notice .notices .notice_ul .notice_li a {
 }
 
 
-/* ====================세탁소(laundryList) 미리보기 CSS========================== */
-body .section_main .laundryList {
-   box-sizing: border-box;
-   width: 1900px;
-   height: 600px;
-   background-color: #FFFFFF;
-   text-align: center;
-}
-
-body .section_main .laundryList .laundry_p {
-   width: 1900px;
-   font-size: 25px;
-   margin: 0;
-   padding-top: 20px;
-}
-
-body .section_main .laundryList .laundry_p1 {
-   font-size: 17pt;
-   font-weight: bolder;
-
-}
-
-body .section_main .laundryList .laundry_p2 {
-   font-size: 11pt;
-}
-
-body .section_main .laundryList .laundryLists {
-/*    @주석처리해라 */
-/*    border: 1px solid black; */
-   
-   width: 1500px;
-   height: 550px;
-   text-align: center;
-   margin-top: 10px;
-   margin-left: auto;
-   margin-right: auto;   
-   margin-right: auto;
-   padding-right: 5px;
-   display: flex;
-}
-
-body .section_main .laundryList .laundryLists a {
-   text-decoration: none;
-   color: black;
-   width: 480px;
-   height: 550px;
-}
-
-body .section_main .laundryList .laundryLists .laundryLists_1 {
-   border: 1px solid #EAEAEA;
-   width: 480px;
-   height: 550px;
-   margin-left: 10px;
-   /* padding-top: 5px; */
-   /* text-align: center; */
-
-}
-
-body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_1 {
-   /* background-color: blueviolet; */
-   width: 480px;
-   height: 400px;
-   margin: 0px;
-}
-
-body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_1 img {
-   width: 487px;
-   height: 400px;
-   margin: 0px;
-   /* margin-top: 5px; */
-
-}
-
-body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_2 {
-   /* background-color: bisque; */
-   width: auto;
-   height: auto;
-   padding: 10px 15px;
-   margin: 0;
-}
-
-body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_2 p {
-   width : auto;
-   height: auto;
-   text-align: left;
-   font-size: 16px;
-   margin: 0px;
-   margin-bottom: 5px;
-}
-
-body .section_main .laundryList .laundryLists .btn {
-   width: 37px;
-   height: 50px;
-   margin: 70px 27px;
-   font-size: 25px;
-   text-align: center;
-   border-radius: 30px;
-   background-color: #FFFFFF;
-   border: 1px solid#EAEAEA;
-   outline: 0;
-}
-
-body .section_main .laundryList .laundryLists .btn:active {
-   background-color: #EAEAEA;
-}
+@media ( min-width :1400px) {
+	/* ====================세탁소(laundryList) 미리보기 CSS========================== */
+	body .section_main .laundryList {
+		box-sizing: border-box;
+		width: 1900px;
+		height: 600px;
+		background-color: #FFFFFF;
+		text-align: center;
+	}
+	body .section_main .laundryList .laundry_p {
+		width: 1900px;
+		font-size: 25px;
+		margin: 0;
+		padding-top: 20px;
+	}
+	body .section_main .laundryList .laundry_p1 {
+		font-size: 17pt;
+		font-weight: bolder;
+	}
+	body .section_main .laundryList .laundry_p2 {
+		font-size: 11pt;
+	}
+	body .section_main .laundryList .laundryLists {
+		/*    @주석처리해라 */
+		/*    border: 1px solid black; */
+		width: 1500px;
+		height: 550px;
+		text-align: center;
+		margin-top: 10px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-right: auto;
+		padding-right: 5px;
+		display: flex;
+	}
+	body .section_main .laundryList .laundryLists a {
+		text-decoration: none;
+		color: black;
+		width: 480px;
+		height: 550px;
+	}
+	body .section_main .laundryList .laundryLists .laundryLists_1 {
+		border: 1px solid #EAEAEA;
+		width: 480px;
+		height: 550px;
+		margin-left: 10px;
+		/* padding-top: 5px; */
+		/* text-align: center; */
+	}
+	body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_1
+		{
+		/* background-color: blueviolet; */
+		width: 480px;
+		height: 400px;
+		margin: 0px;
+	}
+	body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_1 img
+		{
+		width: 487px;
+		height: 400px;
+		margin: 0px;
+		/* margin-top: 5px; */
+	}
+	body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_2
+		{
+		/* background-color: bisque; */
+		width: auto;
+		height: auto;
+		padding: 10px 15px;
+		margin: 0;
+	}
+	body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_2 p
+		{
+		width: auto;
+		height: auto;
+		text-align: left;
+		font-size: 16px;
+		margin: 0px;
+		margin-bottom: 5px;
+	}
+	body .section_main .laundryList .laundryLists .btn {
+		width: 37px;
+		height: 50px;
+		margin: 70px 27px;
+		font-size: 25px;
+		text-align: center;
+		border-radius: 30px;
+		background-color: #FFFFFF;
+		border: 1px solid #EAEAEA;
+		outline: 0;
+	}
+	body .section_main .laundryList .laundryLists .btn:active {
+		background-color: #EAEAEA;
+	}}
+	
+@media ( max-width :1400px) {
+	/* ====================세탁소(laundryList) 미리보기 CSS========================== */
+	body .section_main .laundryList {
+		box-sizing: border-box;
+		max-width: 1400px;
+		min-width: 1200px;
+		height: 600px;
+		background-color: #FFFFFF;
+		text-align: center;
+	}
+	body .section_main .laundryList .laundry_p {
+		width:100%;
+		font-size: 25px;
+		margin: 0;
+		padding-top: 20px;
+	}
+	body .section_main .laundryList .laundry_p1 {
+		font-size: 17pt;
+		font-weight: bolder;
+	}
+	body .section_main .laundryList .laundry_p2 {
+		font-size: 11pt;
+	}
+	body .section_main .laundryList .laundryLists {
+		/*    @주석처리해라 */
+		/*    border: 1px solid black; */
+		max-width: 1300px;
+		min-width: 1100px;
+		height: 550px;
+		text-align: center;
+		margin-top: 10px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-right: auto;
+		padding-right: 5px;
+		display: flex;
+	}
+	body .section_main .laundryList .laundryLists a {
+		text-decoration: none;
+		color: black;
+		width: 280px;
+		height: 550px;
+	}
+	body .section_main .laundryList .laundryLists .laundryLists_1 {
+		border: 1px solid #EAEAEA;
+		width: 33%;
+		height: 550px;
+		margin-left: 10px;
+		/* padding-top: 5px; */
+		/* text-align: center; */
+	}
+	body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_1
+		{
+		/* background-color: blueviolet; */
+		width: 100%;
+		height: 400px;
+		margin: 0px;
+	}
+	body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_1 img
+		{
+		width: 100%;
+		height: 400px;
+		margin: 0px;
+		/* margin-top: 5px; */
+	}
+	body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_2
+		{
+		/* background-color: bisque; */
+		width: auto;
+		height: auto;
+		padding: 10px 15px;
+		margin: 0;
+	}
+	body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_2 p
+		{
+		width: auto;
+		height: auto;
+		text-align: left;
+		font-size: 16px;
+		margin: 0px;
+		margin-bottom: 5px;
+	}
+	body .section_main .laundryList .laundryLists .btn {
+		width: 37px;
+		height: 50px;
+		margin: 70px 27px;
+		font-size: 25px;
+		text-align: center;
+		border-radius: 30px;
+		background-color: #FFFFFF;
+		border: 1px solid #EAEAEA;
+		outline: 0;
+	}
+	body .section_main .laundryList .laundryLists .btn:active {
+		background-color: #EAEAEA;
+	}}
+@media ( max-width :1200px) {
+	/* ====================세탁소(laundryList) 미리보기 CSS========================== */
+	body .section_main .laundryList {
+		box-sizing: border-box;
+		max-width: 1200px;
+		min-width: 1000px;
+		height: 600px;
+		background-color: #FFFFFF;
+		text-align: center;
+	}
+	body .section_main .laundryList .laundry_p {
+		width:100%;
+		font-size: 25px;
+		margin: 0;
+		padding-top: 20px;
+	}
+	body .section_main .laundryList .laundry_p1 {
+		font-size: 17pt;
+		font-weight: bolder;
+	}
+	body .section_main .laundryList .laundry_p2 {
+		font-size: 11pt;
+	}
+	body .section_main .laundryList .laundryLists {
+		/*    @주석처리해라 */
+		/*    border: 1px solid black; */
+		max-width: 1100px;
+		min-width: 900px;
+		height: 550px;
+		text-align: center;
+		margin-top: 10px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-right: auto;
+		padding-right: 5px;
+		display: flex;
+	}
+	body .section_main .laundryList .laundryLists a {
+		text-decoration: none;
+		color: black;
+		width: 280px;
+		height: 550px;
+	}
+	body .section_main .laundryList .laundryLists .laundryLists_1 {
+		border: 1px solid #EAEAEA;
+		width: 33%;
+		height: 550px;
+		margin-left: 10px;
+		/* padding-top: 5px; */
+		/* text-align: center; */
+	}
+	body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_1
+		{
+		/* background-color: blueviolet; */
+		width: 100%;
+		height: 400px;
+		margin: 0px;
+	}
+	body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_1 img
+		{
+		width: 100%;
+		height: 400px;
+		margin: 0px;
+		/* margin-top: 5px; */
+	}
+	body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_2
+		{
+		/* background-color: bisque; */
+		width: auto;
+		height: auto;
+		padding: 10px 15px;
+		margin: 0;
+	}
+	body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_2 p
+		{
+		width: auto;
+		height: auto;
+		text-align: left;
+		font-size: 16px;
+		margin: 0px;
+		margin-bottom: 5px;
+	}
+	body .section_main .laundryList .laundryLists .btn {
+		width: 37px;
+		height: 50px;
+		margin: 70px 27px;
+		font-size: 25px;
+		text-align: center;
+		border-radius: 30px;
+		background-color: #FFFFFF;
+		border: 1px solid #EAEAEA;
+		outline: 0;
+	}
+	body .section_main .laundryList .laundryLists .btn:active {
+		background-color: #EAEAEA;
+	}}
 
 /* ====================회원정보 수정(joinchange) 미리보기 CSS========================== */
 
-body .section_Joinchange {
-   padding-top: 70px;
-   width: 1900px;
-   height: 1400px;
+@media (min-width:1400px) {
+	body .section_Joinchange {
+  		padding-top: 70px;
+   		max-width: 1900px;
+   		min-width: 1400px;
+   		height: 1400px;
+	}
+}
+@media (max-width:1400px) {
+	body .section_Joinchange {
+  		padding-top: 70px;
+   		max-width: 1400px;
+   		min-width: 1200px;
+   		height: 1400px;
+	}
+}
+@media (max-width:1200px) {
+	body .section_Joinchange {
+  		padding-top: 70px;
+   		max-width: 1200px;
+   		min-width: 1100px;
+   		height: 1400px;
+	}
 }
 
 
@@ -1166,22 +1420,27 @@ body .section_board {
 }
 
 body .section_board .board {
-   width: auto;
+   width: 60%;
    height: 700px;
 /*    border: 1px solid red; */
-   margin: 100px 200px;
+   margin: 0 auto;
+   margin-top: 100px;	
 }
 
 body .section_board .board .board_mainName {
-   width: auto;
+   width: 200px;
+   margin: 0 auto;
    text-align: center;
    font-size: 25px;
-   margin: 10px 700px;
    border-bottom: 1px solid black;
 }
 
+.board_mainName span {
+  font-size: 25px;	
+}
+
 body .section_board .board .board_box {
-   width: auto;
+   width: 100%;
    height: 700px;
 /*    border: 1px solid blue; */
 }
@@ -1204,6 +1463,7 @@ body .section_board .board .board_box {
 
 /* ====================게시판 읽기 (boardRead) CSS========================= */
 .boardList {
+   width: 100%;
    margin-bottom: 20px;
 }
 
@@ -1315,11 +1575,10 @@ body .section_board .board .board_box {
 }
 
 .boardMenu3 {
-   width: 1100px;
+   width: 100%;
    height: 50px;
    margin-top: 30px;
    margin-bottom: 20px;
-   margin-left: 200px;
    margin-right: auto;
    display: inline-flex;
 }
@@ -1403,22 +1662,24 @@ textarea {
 /* ====================게시판 쓰기 (boardWrite) CSS========================= */
 
 .boardContent2 {
-   width: 1100px;
+   width: 100%;
    height: 450px;
    text-align: left;
-   padding: 20px;
    border: 1px solid #dadada;
    margin: auto;
    /* margin-top: 10px; */
 }
 
+.boardContent2 textarea {
+	padding: 20px;
+}
+
 .boardLine3 {
-   width: 1100px;
+   width: 100%;
    height: 40px;
    font-size: 11pt;
    display: inline-flex;
    margin-top: 5px;
-   margin-left: 200px;
    /* line-height: 35px; */
    /* background-color: #097ce6; */
    /* text-align: center; */
@@ -1426,7 +1687,7 @@ textarea {
 }
 
 .boardLine3 .title2 {
-   width: 500px;
+   width: 100%;
    padding-left: 0px;
    text-align: center;
    font-weight: bolder;
@@ -1434,19 +1695,17 @@ textarea {
 }
 
 .boardLine3 .title2 .title2_name {
-   width: 1100px;
+   width: 100%;
    height: 35px;
    outline: none;
+   padding-left: 20px;
 }
 
-.boardLine3 .writer2 {
-   width: 1100px;
-   float: right;
-   /* margin-top: 5px; */
-
+.writer2 {
+	float: right;
 }
 
-.boardLine3 .writer2 .write_name {
+.write_name {
    width: auto;
    height: 35px;
    text-align: center;
@@ -1455,15 +1714,12 @@ textarea {
 }
 
 .board_fo1 {
-   width: 1100px;
+   width: 100%;
    height: auto;
    /* border: 1px solid #EAEAEA; */
-   display: inline-flex;
-   margin-left: 200px;
 }
 
 .board_fo1_2 {
-   width: 1100px;
    margin-left: 10px;
    /* margin-top: 30px; */
    float: right;
@@ -1471,8 +1727,7 @@ textarea {
    outline: 0;
 }
 .board_fo1_2_file {
-   width: 1100px;
-   float: right;
+   float: left;
    /* border: 0;
    outline: 0; */
 }
