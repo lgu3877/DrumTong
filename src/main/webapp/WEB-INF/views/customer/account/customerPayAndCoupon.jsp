@@ -28,29 +28,39 @@
         	<div class="pac_mainPoint">
         		<div class="pac_pointList">
         			<p class="pac_pointText">포인트</p>
-        			<div>
-        				<div>현재 포인트 : ${myPoint }</div>
-        				<div>포인트 충전 ) 1000단위로 충전이 가능합니다.</div>
-        				<input id="point" type="number" min="0" placeholder="금액 입력">
-	        			<select id="paymenttype">
-	        				<option value="CARD">카드결제</option>
-	        				<option value="CASH">계좌이체</option>
-	        			</select>
-	        			<button onclick="addPoint()">충전하기</button>
+        			<div style="width: 800px; height: 80px; margin: 0 auto; display: flex">
+        				<div style="width: 50%; height: 100%">
+							<p style="height: 50%; display: flex; align-items: center; margin: 0" id="currentPoint">
+	        				</p>
+							<p style="height: 50%; display: flex; align-items: center; margin: 0">
+	        					포인트 충전 ) 1,000단위로 충전이 가능합니다
+	        				</p>
+        				</div>
+        				<div class="searchdiv">
+        					<input id="point" type="number" min="0" placeholder="금액 입력" >
+	        				<select id="paymenttype">
+	        					<option value="CARD">카드결제</option>
+	        					<option value="CASH">계좌이체</option>
+	        				</select>
+	        				<button onclick="addPoint()">충전하기</button>
+	        			</div>
         			</div>
-        			<div>
-        				<div>충전 내역(최근 6개월)</div>
-        				<div style="display: inline-flex;">
-        					<div>날짜</div>
-        					<div>금액</div>
-        					<div>결제방식</div>
+        			<div id="pointsDiv">
+        				<div  class="pointChanrName">
+	        				<div class="firstdiv">
+	        					<div style="height: 50%; width: auto;">충전 내역</div>
+	        					<div style="height: 50%; width: auto;">(최근 6개월)</div>
+	        				</div>
+        					<div class="default" style="width: 40%;">날짜</div>
+        					<div class="default" style="width: 20%;">결제방식</div>
+        					<div class="default" style="width: 20%;">금액</div>
         				</div>
         				<c:forEach items="${pointlist }" var="po">
         				<br>
-        					<div style="display: inline-flex;">
-	        					<div>${po.registdate }</div>
-	        					<div>${po.point }</div>
-	        					<div>${po.paymenttype }</div>
+        					<div class="pointChanrContents">
+	        					<div class="registdate">${po.registdate }</div>
+	        					<div class="paymenttype">${po.paymenttype }</div>
+	        					<div class="point">${po.point }</div>
         					</div>
         				</c:forEach>
         			</div>
@@ -262,6 +272,16 @@
           obj.parentNode.parentNode.querySelector('button').innerHTML = obj.innerHTML;
        }
        
+       // 승원
+       // 1000자리 콤마
+       function numberWithCommas(x) {		// 천단위 콤마
+			return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	 	} 
+       //승원 
+        $('#pointsDiv').find('.pointChanrContents .point').each(function(index, item) {
+        	$(item).html(numberWithCommas($(item).html()) + '원');
+        })
         
+        $('#currentPoint').html('현재 포인트 : ' +  numberWithCommas('${myPoint }') + '원');
     </script>
 <%@ include file="../main/customerFooter.jsp"%>

@@ -984,14 +984,45 @@ body .section_search .laundryList_main .laundryList_list .laundryList_child .lau
 
 /* ====================결제 수단 및 쿠폰 마일리지 관리 (PayAndCopon) CSS========================= */
 
-body .section_pac {
-   padding-top: 70px;
-   width: 1900px;
-   height: 1100px;
+@media (min-width:1400px) {
+	body .section_pac {
+   		padding-top: 70px;
+   		max-width: 1900px;
+   		min-width: 1400px;
+   		height: 1100px;
+	}
+	body .section_pac .pac_mainName {
+		max-width: 1900px;
+   		min-width: 1400px;
+	}
+}
+@media (max-width:1400px) {
+	body .section_pac {
+   		padding-top: 70px;
+   		max-width: 1400px;
+   		min-width: 1200px;
+   		height: 1100px;
+	}
+	body .section_pac .pac_mainName {
+		max-width: 1400px;
+   		min-width: 1200px;
+	}
+}
+@media (max-width:1200px) {
+	body .section_pac {
+   		padding-top: 70px;
+   		max-width: 1200px;
+   		min-width: 1000px;
+   		height: 1100px;
+	}
+	body .section_pac .pac_mainName {
+		max-width: 1200px;
+   		min-width: 1000px;
+	}
 }
 
+
 body .section_pac .pac_mainName {
-   width: 1900px;
    height: 33px;
    text-align: center;
    margin-left: auto;
@@ -1676,3 +1707,57 @@ textarea {
 .dropdown-content a:hover { background-color: #00A2E8;}
 .dropdown:hover .dropdown-content { display: block; }
 .dropdown:hover .dropdown-button { background-color: #00A2E8; }
+
+
+.pointChanrName {
+	width: 800px; height: 45px; border: 1px solid #EAEAEA; box-shadow: 2px 2px 2px 2px #EAEAEA; margin-bottom: 10px;  display: inline-flex; background-color: #B2CCFF; font-weight: bold;
+}
+
+.pointChanrName .firstdiv {
+	width: 20%; font-size: 14pt; font-weight: border; text-align: center
+}
+
+.pointChanrName .default {
+ font-size: 14pt; display: flex; align-items: center; justify-content: center; 
+}
+
+.pointChanrContents {
+	width: 800px; height: 45px; border: 1px solid #EAEAEA; box-shadow: 2px 2px 2px 2px #EAEAEA; margin-bottom: 10px;  display: inline-flex;
+}
+
+
+.pointChanrContents div {
+	font-size: 14pt; display: flex; align-items: center;
+}
+
+.pointChanrContents:hover {
+	background-color: #dadada;
+}
+
+.pointChanrContents div.registdate {
+	width: 40%;  margin-left: 20%; justify-content: center;
+}
+
+.pointChanrContents div.paymenttype {
+	width: 20%; justify-content: center;
+}
+
+.pointChanrContents div.point {
+	width: 20%; justify-content: flex-end; padding-right: 40px;
+}
+
+.searchdiv {
+	width: 50%; height: 100%; display: flex; align-items: center;
+}
+
+.searchdiv #point {
+	width: 50%; height: 80%;
+}
+
+.searchdiv #paymenttype {
+	width: 25%; height: 80%;    background-color: #dadada;
+}
+
+.searchdiv button {
+	width: 25%; height: 82%; font-weight: bold;background-color: #35aefd; color: white; outline: none; border: 1px solid white; cursor: pointer;
+}
