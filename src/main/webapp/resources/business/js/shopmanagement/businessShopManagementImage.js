@@ -54,9 +54,7 @@ function sliderEvent() {
       subImageList[i].children[0].addEventListener('click', () => zoomInPhoto(clickedPhoto));
    
       // 슬라이드 사진 지우기(X 아이콘 클릭)
-      subImageList[i].children[1].addEventListener('click', () => deletePhoto(clickedPhoto));
-      
-//      console.log(subImageList[i].children[0].removeEventListener);
+      subImageList[i].children[1].addEventListener('click', () => deletePhoto(clickedPhoto));      
    }
 }
 
@@ -89,9 +87,124 @@ function zoomInPhoto(clickedPhoto) {
    }
 }
 
+
+
+//이미지 업로드
+function imageCheck(e) {
+	const input = e.target;
+	const imageType = input.value.substr(input.value.length - 3, input.value.length).toLocaleLowerCase();
+	
+	const isImage = imageType === 'jpg' 
+			|| imageType === 'png' 
+			|| imageType === 'jpeg' ? true : false
+					
+// 이미지 확장자 검사 (jpg, png, jpng)
+	if (!isImage) {   
+		alert("선택하신 파일은 적합한 이미지 파일이 아닙니다.\n" + "(jpg, png, jpng 형식의 파일을 등록해주세요.)");
+		e.target.clear; // input value(file) 초기화
+		return;
+	}
+	
+// 커버 사진 업로드
+	if (isImage && e.target.id === "update-cover") {
+		// 미리보기
+		const reader = new FileReader();
+		// 대표사진이 있을 경우 삭제
+		document.getElementById("cover-image-con") ? document.getElementById("cover-image-con").remove() : null;
+		
+		// 이미지 주입
+		reader.onload = (e) => {
+			// 태그 생성
+			const li = document.createElement("li");
+			li.className = "shop_picture";
+			li.id = "cover-image-con";
+			const icon = document.createElement("i");
+			icon.className = "fas fa-times";
+			const repIcon = document.createElement("i");
+			repIcon.className = "fas fa-star";
+			repIcon.innerHTML = "<span>대표사진</span>";
+			const img = document.createElement("img");
+			img.setAttribute("src", e.target.result);
+			img.setAttribute("alt", "");
+			img.setAttribute("id", "cover-image");
+			
+			// 업로드한 '커버'사진 src 저장 > 삭제 시 비교 > value에서 삭제
+			uploadPhotoList.uploadCover = e.target.result; // string
+			
+			// 추가
+			li.appendChild(img);
+			li.appendChild(icon);
+			li.appendChild(repIcon);
+			
+			// 이벤트 주입
+			li.children[0].addEventListener('click', () => zoomInPhoto(e.target.result));
+			li.children[1].addEventListener('click', () => deletePhoto(e.target.result));
+			
+			// 전체 폼 삽입
+			document.getElementById("image-preview").prepend(li);
+			
+			// 미리보기
+			const clickedImage = document.getElementById("cover-image").src;
+			zoomInPhoto(clickedImage);
+		}
+		reader.readAsDataURL(e.target.files[0]);
+	}
+// 일반 사진 업로드
+	else {
+		let count = 0;
+		
+		for (let img of e.target.files) {
+			// 미리보기
+			const reader = new FileReader();
+			
+			reader.onload = (e) => {
+				// 태그 생성
+				const li = document.createElement("li");
+				li.className = "shop_picture";
+				const icon = document.createElement("i");
+				icon.className = "fas fa-times";
+				const img = document.createElement("img");
+				img.setAttribute("src", e.target.result);
+				img.setAttribute("alt", "");
+				
+				// 임시 저장
+				obj = {
+					id: input.id,
+					src: e.target.result,
+				}
+//				uploadPhotoList.uploadPhoto.push(e.target.result);
+				uploadPhotoList.uploadPhoto.push(obj);
+				
+				
+				// 구성
+				li.appendChild(img);
+				li.appendChild(icon);
+				
+				// 이벤트 주입
+				li.children[0].addEventListener('click', () => zoomInPhoto(e.target.result));
+				li.children[1].addEventListener('click', () => deletePhoto(e.target.result));
+				
+				// 삽입
+				document.getElementById("image-preview").appendChild(li);
+				
+				count++;
+				if (count === 1) {
+					zoomInPhoto(e.target.result);
+				}
+			}
+			reader.readAsDataURL(img);         
+		}
+		// label & input 숨기기(display: none) > 새로운 label & input 생성
+		hideLabel(e.target.id + "label");
+	}
+}
+
+
+
 // 슬라이드 사진 지우기(X 아이콘 클릭)
 function deletePhoto(clickedPhoto) {
    const result = confirm("사진을 삭제하시겠습니까?");
+   
    // 선택된 사진 지우기 > 임시로 JS로 처리 > DB 작업 필요
    if (result) {      
       const photoSlideCon = document.getElementById("image-preview");
@@ -101,36 +214,18 @@ function deletePhoto(clickedPhoto) {
       for (let index = 0; index < photoList.length; index++) {
          if (photoList[index].children[0].src === clickedPhoto) {
         	
-        	// 커버 사진 삭제 > input value 제거
+        	// (업로드)커버 사진 삭제 > input value 제거
         	if (clickedPhoto === uploadPhotoList.uploadCover) {
         		// 커버사진 input value 초기화
         		document.getElementById("update-cover").value = "";        		
         	}
             
-        	// 일반 사진 삭제 > input value 제거
-        	else if (uploadPhotoList.uploadPhoto.includes(clickedPhoto)) {
-        		console.log("초기상태 : " + uploadPhotoList.uploadPhoto);
+        	// (업로드)일반 사진 삭제 > input value 제거
+        	else if (uploadPhotoList.uploadPhoto.map((obj) => obj.src).includes(clickedPhoto)) {        		
+        		const index = uploadPhotoList.uploadPhoto.map((obj) => obj.src).indexOf(clickedPhoto);
+        		const id = uploadPhotoList.uploadPhoto[index].id;
         		
-//        		const deletedUploadFileNameInput = document.getElementById("deleted-photos");
-//        		const fileList = Array.from(document.getElementById("add-photo").files);
-//        		const fileList = uploadPhotoList.uploadPhoto.filter((file) => file.name);
-        		const uploadValue = document.getElementById(add-photo).value;
-        		
-        		for (let i = 0; i < uploadPhotoList.uploadPhoto.length; i++) {
-	        		if (uploadPhotoList.uploadPhoto[i] === clickedPhoto) {
-	        			console.log("일치\n" + uploadPhotoList.uploadPhoto[i] + "\n"+ clickedPhoto)
-	        			
-	        			// 업로드된 사진 중 사용자가 삭제한 사진 이름 > 배열에 추가 > DB에서 이름 비교 후 삭제 권장
-	        			
-	        			deletedUploadFileNameInput.value += fileList[i].name + "&";
-	        			
-	        			console.log(deletedUploadFileNameInput.value);
-	        			
-	        			uploadPhotoList.uploadPhoto[i].deleted = true;
-	        			
-	        		}
-	        	}
-        		console.log(uploadPhotoList.uploadPhoto);
+        		document.getElementById(id).value = "";  		
         	}
         	
         	// 삭제
@@ -163,110 +258,6 @@ function deletePhoto(clickedPhoto) {
 }
 
 
-// 이미지 업로드
-function imageCheck(e) {
-   const input = e.target;
-   const imageType = input.value.substr(input.value.length - 3, input.value.length).toLocaleLowerCase();
-	
-	const isImage = imageType === 'jpg' 
-				|| imageType === 'png' 
-				|| imageType === 'jpeg' ? true : false
-
-   // 이미지 확장자 검사 (jpg, png, jpng)
-   if (!isImage) {   
-      alert("선택하신 파일은 적합한 이미지 파일이 아닙니다.\n" + "(jpg, png, jpng 형식의 파일을 등록해주세요.)");
-      e.target.clear; // input value(file) 초기화
-      return;
-   }
-
-   // 커버 사진 업로드
-   if (isImage && e.target.id === "update-cover") {
-      // 미리보기
-      const reader = new FileReader();
-      // 대표사진이 있을 경우 삭제
-      document.getElementById("cover-image-con") ? document.getElementById("cover-image-con").remove() : null;
-      
-      // 이미지 주입
-      reader.onload = (e) => {
-         // 태그 생성
-         const li = document.createElement("li");
-         li.className = "shop_picture";
-         li.id = "cover-image-con";
-         const icon = document.createElement("i");
-         icon.className = "fas fa-times";
-         const repIcon = document.createElement("i");
-         repIcon.className = "fas fa-star";
-         repIcon.innerHTML = "<span>대표사진</span>";
-         const img = document.createElement("img");
-         img.setAttribute("src", e.target.result);
-         img.setAttribute("alt", "");
-         img.setAttribute("id", "cover-image");
-
-         // 업로드한 '커버'사진 src 저장 > 삭제 시 비교 > value에서 삭제
-         uploadPhotoList.uploadCover = e.target.result; // string
-         console.log(uploadPhotoList);
-         
-         // 추가
-         li.appendChild(img);
-         li.appendChild(icon);
-         li.appendChild(repIcon);
-
-         // 이벤트 주입
-         li.children[0].addEventListener('click', () => zoomInPhoto(e.target.result));
-         li.children[1].addEventListener('click', () => deletePhoto(e.target.result));
-         
-         // 전체 폼 삽입
-         document.getElementById("image-preview").prepend(li);
-         
-         // 미리보기
-         const clickedImage = document.getElementById("cover-image").src;
-         zoomInPhoto(clickedImage);
-      }
-      reader.readAsDataURL(e.target.files[0]);
-   }
-   // 일반 사진 업로드
-   else {
-	   let count = 0;
-	   
-	   for (let img of e.target.files) {
-		   // 미리보기
-		   const reader = new FileReader();
-		   
-		   reader.onload = (e) => {
-			   // 태그 생성
-			   const li = document.createElement("li");
-			   li.className = "shop_picture";
-			   const icon = document.createElement("i");
-			   icon.className = "fas fa-times";
-			   const img = document.createElement("img");
-			   img.setAttribute("src", e.target.result);
-			   img.setAttribute("alt", "");
-			   
-			   // 임시 저장 > 업로드 목록에서 제거할 경우 재사용
-			   
-			   // 구성
-			   li.appendChild(img);
-			   li.appendChild(icon);
-			   
-			   // 이벤트 주입
-			   li.children[0].addEventListener('click', () => zoomInPhoto(e.target.result));
-			   li.children[1].addEventListener('click', () => deletePhoto(e.target.result));
-			   
-			   // 삽입
-			   document.getElementById("image-preview").appendChild(li);
-			   
-			   count++;
-			   if (count === 1) {
-				   zoomInPhoto(e.target.result);
-			   }
-		   }
-		   reader.readAsDataURL(img);         
-	   }
-	   // label & input 숨기기(display: none) > 새로운 label & input 생성
-	   hideLabel(e.target.id + "a");
-   }
-}
-
 
 
 
@@ -278,6 +269,13 @@ function generateReandomString(length) {
 		
 	for (let i = 0; i < length; i++) {
 		result += charArray[Math.ceil(Math.random() * characters.length)];
+	}
+	
+	// 동일한 난수가 생성되엇을 경우(로또 맞을 확률)
+	if (document.getElementById(result)) {
+		alert("축하드립니다. 17,067,655,527,413,216e+89의 확률을 뚫으셨습니다.");
+		location.reload();
+		return;
 	}
 	
 	return result;
@@ -294,15 +292,12 @@ function createInputFile() {
 	input.setAttribute("name", "delegatephotoboolean");
 	input.setAttribute("onchange", "imageCheck(event)");
 	input.setAttribute("style", "display: none");
-//	input.setAttribute("accept", ".png, .jpg, .jpeg");
+	input.setAttribute("accept", ".png, .jpg, .jpeg");
 //	input.setAttribute("multiple", "multiple");
-
 	
 	document.getElementById("photo-modal-btn").appendChild(input);
 	document.getElementById("photo-modal-btn").appendChild(createLabelForInputFile(randomId));
 
-
-	console.log(document.getElementById(randomId));
 }
 
 // input label 생성
@@ -333,3 +328,20 @@ sliderEvent();
 createInputFile();
 
 
+
+
+// 사진 속 input value 확인
+//function checkValues() {
+//const names = document.getElementsByName("delegatephotoboolean");
+//const ids = [];
+//
+//for (let i = 0; i < names.length; i++) {
+//	ids.push(names[i].id);
+//}
+//console.log(ids);
+//
+//for (let i = 0; i < ids.length; i++) {
+//	console.log(document.getElementById(ids[i]).value);
+//}
+//
+//}
