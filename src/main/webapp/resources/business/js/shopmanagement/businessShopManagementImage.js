@@ -345,36 +345,3 @@ createInputFile();
 //
 //}
 
-
-// 사진 업데이트
-async function updatePhoto() {
-	const coverImage = document.getElementById("update-cover");
-	const photoInputs = document.getElementsByName("storeimg");
-	const fileList = [];
-	
-	for (let i = 0; i < photoInputs.length; i++) {
-		if (photoInputs[i].files[0] !== undefined) {
-			fileList.push(photoInputs[i].files[0]);
-		}
-	}	
-
-	const object = {
-		"delegatephotoboolean" : coverImage.files[0],
-		"storeimg" : fileList,
-	};
-	
-	// result.data (es6 > obejct destructuring)
-	const { data } = await axios.post("/drumtong/business/mainmanagement/businessShopManagement/", object);
-	
-	console.log(data);
-}
-
-async function updateIntro() {
-	const text = "";
-	
-	const { data } = await axios.post("/drumtong/business/mainmanagement/businessShopManagement/", text);
-	
-	console.log(data);
-}
-
-//submitPhoto();

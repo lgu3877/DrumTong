@@ -3,10 +3,10 @@ const returnModifyBtn =  document.getElementById("modify-return-option");
 // 수령 방법 수정 완료
 const returnCompleteBtn = document.getElementById("complete-return-option");
 
-// 수령 방법 수정 클릭 이벤트
-returnModifyBtn.addEventListener("onclick", function() {
-	console.log("modify options");
-})
+// 수령 방법 수정 클릭 이벤트 > 제거 (2021-01-15)
+//returnModifyBtn.addEventListener("onclick", function() {
+//	console.log("modify options");
+//})
 
 // 수령 방법 수정 완료 클릭 이벤트
 returnCompleteBtn.addEventListener("onclick", function() {

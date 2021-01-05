@@ -203,7 +203,7 @@
 							<div class="add_menu_icon_con">
 								<i class="fas fa-check-square"></i>
 							</div>
-							<div class="add_menu_btn_title">사진 변경</div>
+							<div class="add_menu_btn_title">작성 완료</div>
 						</div>
 					</div>
 				</c:if>
@@ -211,7 +211,7 @@
 			
 			<!-- text content -->
 				<div class="shop_text_intro">
-					<p class="shop_text_view">
+					<p id="intro-text" class="shop_text_view">
 						이곳은 당신이 작성한 매장 소개글을 확인할 수 있는 칸입니다. 작성한 글이 마음에 들지 않을 경우 아래 '작성하기'버튼을 통해 기존에 작성하신 글을 수정하시거나 새로운 내용의 소개글을 작성하실 수 있습니다.
 					</p>
 				</div>
@@ -370,11 +370,11 @@
 					<!-- complete button -->
 					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
 					<c:if test="${status eq 'SUCCESS' }">
-					<div id="update-item-btn" class="complete_menu_btn_con">
+					<div id="update-item-btn" class="complete_menu_btn_con" onclick="addService()">
 						<div class="add_menu_icon_con">
 							<i class="fas fa-check-square"></i>
 						</div>
-						<div class="add_menu_btn_title">목록 추가</div>
+						<div class="add_menu_btn_title">등록 완료</div>
 					</div>
 					</c:if>
 				</div>
@@ -481,16 +481,9 @@
 				</div>
 			<!-- 버튼 -->
 				<div class="service_button_con">
-					<div id="modify-return-option" class="add_menu_btn_con">
-						<div class="add_menu_icon_con">
-							<i class="fas fa-plus-square"></i>
-						</div>
-						<div class="add_menu_btn_title">수정 하기</div>
-					</div>
-					
 					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
 					<c:if test="${status eq 'SUCCESS' }">
-					<div id="complete-return-option" class="complete_menu_btn_con">
+					<div id="complete-return-option" class="complete_menu_btn_con"  onclick="updateDelivery()">
 						<div class="add_menu_icon_con">
 							<i class="fas fa-check-square"></i>
 						</div>
@@ -523,7 +516,6 @@
 				</ul>
 			</div>
 		</div>
-		
 		
 		
 		
@@ -568,12 +560,27 @@
 		// DB에서 받아오는 Defaultcategory List<String> 배열
 		let defaultCategory = ${defaultcategory};
 	</script>
-	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementMenuList.js"></script>
+		
+	<!-- 초기 셋팅 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementOnLoad.js"></script>
+	
+	<!-- 이미지 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementImage.js"></script>
+
+	<!-- 소개글 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementIntroText.js"></script>
+
+	<!-- 서비스 매뉴 -->
+	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementMenuList.js"></script>
+
+	<!-- 배달 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementReturnItem.js"></script>
+	
+	<!-- 도움말 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementHelpMsg.js"></script>
+	
+	<!-- 비동기 update (Axios) -->
+	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementUpdate.js"></script>
 	
 </body>
 </html>
