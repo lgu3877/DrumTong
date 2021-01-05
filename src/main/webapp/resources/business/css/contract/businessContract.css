@@ -70,7 +70,6 @@ input.next:hover {
 	position: absolute;
 	bottom: 0;
 	color: #0080ff !important;
-	font-family: cursive;
 }
 
 .c1div p {
@@ -96,7 +95,6 @@ div .AllPre {
 	font-size: 18pt; 
 	font-weight: bold;
 	color: navy;
-	font-family: cursive;
 }
 
 div.container {

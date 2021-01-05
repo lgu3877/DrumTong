@@ -6,7 +6,7 @@
 
 <section class="section_board">
 	<article class="board">
-		<h1 class="board_mainName">게 시 판</h1>
+        <h1 class="board_mainName"><span style="float: left">게</span> 시 <span style="float: right">판</span></h1>
 		<div class="board_box">
 
 			<div class="boardList">
