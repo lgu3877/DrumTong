@@ -19,8 +19,8 @@ async function updatePhoto() {
 //	};
 	
 	const object = {
-		"delegatephotoboolean" : formDate.append("delegatephotoboolean", coverImage.files[0]),
-		"storeimg" : fileList,
+		"mainImage" : formDate.append("delegatephotoboolean", coverImage.files[0]),
+		"subImage" : fileList,
 	};
 	
 	// result.data (es6 > obejct destructuring)
