@@ -64,9 +64,9 @@ addItemBtn.addEventListener('click', function() {
 });
 
 // 등록 - 클릭이벤트(작성한 리스트 추가)
-updateItemBtn.addEventListener('click', function() {
-	console.log('Update List');
-})
+//updateItemBtn.addEventListener('click', function() {
+//	console.log('Update List');
+//})
 
 // 메뉴 수정 버튼(th & td > input + 삭제 버튼)
 modifyListBtn.addEventListener('click', function() {
