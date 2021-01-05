@@ -144,5 +144,12 @@ public class BusinessSubManagementService {
 		// Status 계약 여부 필드를 세션에서 받아와 status가 'FAIL'이면 business로 우회해주고 'SUCCESS'이면 서브관리 페이지들로 이동시키기 위해 boolean을 반환한다.
 		return false;
 	}
+
+
+	public int calcEte(HttpServletRequest req, String salecode) {
+		String estid = ((BInformationVO)req.getSession().getAttribute("selectEST")).getEstid();
+		
+		return OrderListSetting.calcEte(estid, salecode);
+	}
 	
 }
