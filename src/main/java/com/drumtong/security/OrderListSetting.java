@@ -170,21 +170,22 @@ public class OrderListSetting {
 	}
 
 	// 요청을 수락해 처리중으로 넘어가는 과정
-	public static int requestAccept(String estid, HashMap<String, String> map) {
+	public static int requestAccept(HashMap<String, String> map) {
 		// 필요한 것
 		// 승원씨한테 얘기할 것
 		// ob에 salecode, requesttype={'DELIVERY','VISIT'}, orderDate='YYYY-MM-DD' 넣어주기
 		// estid, salecode, REQUESTTYPE='DELIVERY','VISIT', 배송일자(orderDate)
-		map.put("estid", estid);
 		return bSalesDAO.updateOrderList(map);
 		
 	}
 	
 	// 요청을 거절했을 때
-	public static int Decline(String estid, HashMap<String, String> map) {
+	public static int Decline(HashMap<String, String> map) {
 		// 필요한 것
 		// estid, salecode
-		map.put("estid", estid);
+		
+		// map 과 sale코드 정보로 고객의 이메일 주소를 가져온다.
+		
 		return bSalesDAO.deleteOrderList(map);
 	}
 	
