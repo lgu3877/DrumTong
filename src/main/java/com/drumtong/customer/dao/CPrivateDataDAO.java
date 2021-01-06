@@ -23,6 +23,8 @@ public interface CPrivateDataDAO {
 //	(REST) 이메일 중복 검사
 	int userEmailDupl(String email);
 
+	String selectEmail(HashMap<String, String> param);
+
 
 	
 }
