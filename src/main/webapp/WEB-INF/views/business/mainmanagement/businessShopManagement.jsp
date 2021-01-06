@@ -353,7 +353,7 @@
 			<!-- 버튼 -->
 				<div class="service_button_con">
 				<!-- 배달 서비스 활성화 -->
-					<div id="delivery-btn" class="delivery_menu_btn_con" onclick="activateDelivery()">
+					<div id="delivery-btn" class="delivery_menu_btn_con" onclick="activateVisualization()">
 						<div class="add_menu_icon_con">
 							<i id="delivery-icon" class="fas fa-toggle-off"></i>
 						</div>

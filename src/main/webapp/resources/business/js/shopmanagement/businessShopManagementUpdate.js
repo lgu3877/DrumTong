@@ -103,13 +103,20 @@ function addService() {
 		object.push(element);
 //		console.log(object);
 	}
+	
+	// 배달 서비스 옵션 설정
+	activateDelivery();
+	// 
+//	const { data } = await axios.post("/drumtong/business/mainmanagement/businessShopManagement/", object);
+//	
+//	console.log(data);
 }
 
 // 배달 서비스 활성화 < 서비스 등록
 async function activateDelivery() {
-	activateVisualization(); // MenuList > 스위치 디자인 변경 & input 생성
+//	activateVisualization(); // MenuList > 스위치 디자인 변경 & input 생성
 	
-	const result= deliveryToggle  ? "y" : "n"; // js > MenuList
+	const result = deliveryToggle  ? "y" : "n"; // js > MenuList
 
 	console.log(result);
 
