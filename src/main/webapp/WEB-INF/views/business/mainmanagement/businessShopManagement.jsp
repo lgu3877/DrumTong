@@ -353,7 +353,7 @@
 			<!-- 버튼 -->
 				<div class="service_button_con">
 				<!-- 배달 서비스 활성화 -->
-					<div id="delivery-btn" class="delivery_menu_btn_con" onclick="activateDelivery()">
+					<div id="delivery-btn" class="delivery_menu_btn_con" onclick="activateVisualization()">
 						<div class="add_menu_icon_con">
 							<i id="delivery-icon" class="fas fa-toggle-off"></i>
 						</div>
@@ -408,12 +408,12 @@
 						<!-- BManagementVO > maincategory -->
 							<select class="service_selector" name="maincategory" onchange="directType(this)">
 								<option hidden="true" disabled selected>서비스 타입 선택</option>
-								<option class="main_type" value="type1">type1</option>
-								<option class="main_type" value="type2">type2</option>
-								<option class="main-type" value="type3">type3</option>
-								<option class="main_type" value="type4">type4</option>
-								<option class="main_type" value="type5">type5</option>
-								<option class="main_type" value="selectedDirect" class="selectedDirect">직접입력</option>
+								<option value="type1">type1</option>
+								<option value="type2">type2</option>
+								<option value="type3">type3</option>
+								<option value="type4">type4</option>
+								<option value="type5">type5</option>
+								<option value="selectedDirect" class="selectedDirect">직접입력</option>
 							</select>
 							<!-- 직접입력 선택시 -->
 							<input type="text" class="direct_type_input" name="maincategory" placeholder="서비스 입력" style="display: none">
@@ -558,7 +558,21 @@
 
 	<script type="text/javascript">
 		// DB에서 받아오는 Defaultcategory List<String> 배열
-		let defaultCategory = ${defaultcategory};
+		const defaultCategory = [...${defaultcategory}];
+		const subCategory = {
+			"top": ["1", "2", "3"],
+			"pants": ["4", "5", "6"],
+			"suit": ["7", "8", "9"],
+			"hat": ["10", "11", "12"],
+			"underwear": ["13", "14", "15"],
+			"cutton": ["16", "17", "18"],
+		}
+		
+		
+// 		const category = defaultCategory.map((mainCategory, index) => {
+//			mainCategory[index]: subCategory[mainCategory];
+//		});
+		const category = defaultCategory.map((cate) => console.log(cate) );
 	</script>
 		
 	<!-- 초기 셋팅 -->

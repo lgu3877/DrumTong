@@ -566,6 +566,8 @@
 }
 
 .third_item_prop input:focus, .forth_item_prop input:focus, .fifth_item_prop input:focus {
+	background-color: #f4f0ec;
+	border: 1.5px solid navy;
 	outline: none;
 }
 
