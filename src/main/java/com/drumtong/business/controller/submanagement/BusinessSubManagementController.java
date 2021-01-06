@@ -64,7 +64,7 @@ public class BusinessSubManagementController {
 	}
 	
 	// 비즈니스 통계관리 페이지로 이동 (GET) [영경]
-	@RequestMapping(value= {"businessStatisticsManagement/{pageKind}/{option}/", "businessStatisticsManagement/{pageKind}/{option}/{startDate}/{endDate}/"}, method = RequestMethod.GET)
+	@RequestMapping(value="businessStatisticsManagement/{pageKind}/{option}/{startDate}/{endDate}/", method = RequestMethod.GET)
 	public ModelAndView statisticsManagement(HttpServletRequest req, @PathVariable("pageKind")String pageKind, @PathVariable("option")String option,
 						@PathVariable("startDate")String startDate, @PathVariable("endDate")String endDate) {
 		HttpSession Session = req.getSession();
@@ -97,18 +97,15 @@ public class BusinessSubManagementController {
 		
 		ModelAndView mav = null;
 		if(path.equals("process")) {
-			int eteNum = svc.calcEte(req, param);
 			mav = new ModelAndView("business/submanagement/OrderStatus/order-processing");
-			mav.addObject("salecode", param);
-			mav.addObject("requesttype", requesttype);
 			//영경(추천일자 보내기)
-			mav.addObject("eteNum", eteNum);
+			mav.addObject("eteNum", svc.calcEte(req, param));
 		}
 		else {
 			mav = new ModelAndView("business/submanagement/OrderStatus/order-cancle");
-			mav.addObject("salecode", param);
-			mav.addObject("requesttype", requesttype);
 		}
+		mav.addObject("salecode", param);
+		mav.addObject("requesttype", requesttype);
 		return mav;
 	}
 	

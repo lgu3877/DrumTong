@@ -56,9 +56,10 @@
 		</div>
 		<div class="flex2">
 			<div class="flex3">
-				<button class="selected" onclick="lastpath(this)" value="Day/">일간</button>
-				<button onclick="lastpath(this)" value="Week/">주간</button>
-				<button onclick="lastpath(this)" value="Month/">월간</button>
+							<!-- ▶▶▶option에 따라 선택되어있는 블럭 다르게 수정-->
+				<button class="${option == 'Day/' ? 'selected' : ''}" onclick="lastpath(this)" value="Day/">일간</button>
+				<button class="${option == 'Week/' ? 'selected' : ''}" onclick="lastpath(this)" value="Week/">주간</button>
+				<button class="${option == 'Month/' ? 'selected' : ''}" onclick="lastpath(this)" value="Month/">월간</button>
 			</div>
 			<div class="flex4">
 				<input type="date" name="startDate" id="startDate">
@@ -106,7 +107,8 @@ google.charts.setOnLoadCallback(drawChart1);
 
 //전역변수
 var statisticsList =  ${statisticsList };
-var lastPath = 'Day/';
+// ▶▶▶'Day/ 에서 optoin으로 수정'
+var lastPath = '${option}';
 var startdatepath = statisticsList[0].start + '/';
 var enddatepath = statisticsList[statisticsList.length - 1].end  + '/';
 
@@ -300,7 +302,8 @@ document.getElementById('endDate').addEventListener('change', function() {
 
 // 동기식으로 페이지 이동시켜주는 함수(조회수, 주문수, 주문금액)
 function contentChange(obj) {
-	location.href = window.location.href + obj.name + 'Day/' + startdatepath + enddatepath;
+								<!-- ▶▶▶ 'Day/' -> lastPath -->
+	location.href = window.location.href + obj.name + lastPath + startdatepath + enddatepath;
 }
 
 // 일간, 주간, 월간을 구분시켜주는 함수
