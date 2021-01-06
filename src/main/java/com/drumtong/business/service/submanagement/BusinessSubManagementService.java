@@ -83,7 +83,8 @@ public class BusinessSubManagementService {
 
 
 
-	// pageKind in ('Hits[조회수]', 'Sales[주문 수]', 'Price[주문 금액]')
+	// pageKind in ('Hits[조회수]', 'Orders[주문 수]', 'Price[주문 금액]')
+	// option : "Day",  "Week", "Month"
 	// 비즈니스 통계관리 페이지로 이동 (GET) [영경]
 	public ModelAndView statisticsManagement(HttpServletRequest req, String pageKind, String option, String startDate, String endDate) {
 		BInformationVO bInformationVO = (BInformationVO)req.getSession().getAttribute("selectEST");
@@ -97,10 +98,12 @@ public class BusinessSubManagementService {
 								Statistics.statistics(estid, pageKind, option) : 
 								Statistics.statistics(estid, pageKind, option, startDate, endDate));
 		mav.addObject("pageKind", pageKind == null || "n".equals(pageKind) ? "Hits/" : pageKind + "/");
+		mav.addObject("option", option == null || "n".equals(option) ? "Day/" : option + "/");
 		return mav;
 	}
 
 
+	// status in ('REQUEST', 'PROCESSING', 'SUCCESS')
 	// 비즈니스 주문현황 관리 페이지로 이동 (GET) [건욱]
 	public ModelAndView orderStatusManagement(HttpServletRequest req, String status) {
 		status = status == null ? "REQUEST" : status;
