@@ -408,12 +408,12 @@
 						<!-- BManagementVO > maincategory -->
 							<select class="service_selector" name="maincategory" onchange="directType(this)">
 								<option hidden="true" disabled selected>서비스 타입 선택</option>
-								<option class="main_type" value="type1">type1</option>
-								<option class="main_type" value="type2">type2</option>
-								<option class="main-type" value="type3">type3</option>
-								<option class="main_type" value="type4">type4</option>
-								<option class="main_type" value="type5">type5</option>
-								<option class="main_type" value="selectedDirect" class="selectedDirect">직접입력</option>
+								<option value="type1">type1</option>
+								<option value="type2">type2</option>
+								<option value="type3">type3</option>
+								<option value="type4">type4</option>
+								<option value="type5">type5</option>
+								<option value="selectedDirect" class="selectedDirect">직접입력</option>
 							</select>
 							<!-- 직접입력 선택시 -->
 							<input type="text" class="direct_type_input" name="maincategory" placeholder="서비스 입력" style="display: none">
