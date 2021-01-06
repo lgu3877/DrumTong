@@ -558,7 +558,21 @@
 
 	<script type="text/javascript">
 		// DB에서 받아오는 Defaultcategory List<String> 배열
-		let defaultCategory = ${defaultcategory};
+		const defaultCategory = [...${defaultcategory}];
+		const subCategory = {
+			"top": ["1", "2", "3"],
+			"pants": ["4", "5", "6"],
+			"suit": ["7", "8", "9"],
+			"hat": ["10", "11", "12"],
+			"underwear": ["13", "14", "15"],
+			"cutton": ["16", "17", "18"],
+		}
+		
+		
+// 		const category = defaultCategory.map((mainCategory, index) => {
+//			mainCategory[index]: subCategory[mainCategory];
+//		});
+		const category = defaultCategory.map((cate) => console.log(cate) );
 	</script>
 		
 	<!-- 초기 셋팅 -->

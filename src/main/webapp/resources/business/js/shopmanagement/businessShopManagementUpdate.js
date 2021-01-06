@@ -25,7 +25,7 @@ async function updatePhoto() {
 	
 	// result.data (es6 > obejct destructuring)
 	const { data } = await axios.post(
-		"/drumtong/business/mainmanagement/businessShopManagement/", 
+		"/drumtong/business/BImage/rest/updateStoreIMG/", 
 		object, 
 		{
 			headers: {
@@ -40,14 +40,13 @@ async function updatePhoto() {
 async function updateIntro() {
 	const text = document.getElementById("intro-text").innerText;
 	
-	const { data } = await axios.post("/drumtong/business/mainmanagement/businessShopManagement/", text);
+	const { data } = await axios.post("/drumtong/business/mainmanagement/BManagement/rest/updateDeliveryBoolean/", text);
 	
 	console.log(data);
 }
 
 
 // 서비스 등록 업데이트
-
 function addService() {
 	const list = document.getElementsByClassName("single_item_selector");
 	const object = [];
@@ -58,9 +57,7 @@ function addService() {
 		let element = {}; // 상품 등록 객체
 		// 상품 등록 속성 5개 > 객체 생성 (대분류, 중분류, 세부내용, 가격, 시간) + 배달
 		for (let j = 0; j < classPrefix.length; j++) {
-			const eachInput = list[i].getElementsByClassName(classPrefix[j] + '_item_prop')[0];
-			// select (2) & input (3) || direct (2)
-			console.log(eachInput);
+			const eachInput = list[i].getElementsByClassName(classPrefix[j] + '_item_prop')[0]; // select (2) & input (3) || direct (2)
 			
 			// select & direct input
 			if (j === 0 || j === 1) {
@@ -104,13 +101,14 @@ function addService() {
 //		console.log(object);
 	}
 	
-	// 배달 서비스 옵션 설정
+	// 퀵 서비스 옵션 설정
 	activateDelivery();
-	// 
-//	const { data } = await axios.post("/drumtong/business/mainmanagement/businessShopManagement/", object);
-//	
-//	console.log(data);
+	
+	// 서비스 등록
+	//	const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/insertBMenu/", object);
+	//	console.log(data);
 }
+
 
 // 배달 서비스 활성화 < 서비스 등록
 async function activateDelivery() {
@@ -120,7 +118,25 @@ async function activateDelivery() {
 
 	console.log(result);
 
-//	const { data } = await axios.post("/drumtong/business/mainmanagement/businessShopManagement/", result);
+//	const { data } = await axios.post("/drumtong/business/mainmanagement/BManagement/rest/updateQuickBoolean/", result);
+//	
+//	console.log(data);
+}
+
+
+// 메뉴 수정
+async function deleteMenu() {
+	
+//	const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/updateBMenu/", result);
+//	
+//	console.log(data);
+}
+
+
+// 메뉴 삭제
+async function deleteMenu() {
+	
+//	const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/deleteBMenu/", result);
 //	
 //	console.log(data);
 }
@@ -133,11 +149,7 @@ async function updateDelivery() {
 	
 	console.log(options);
 	
-	const { data } = await axios.post("/drumtong/business/mainmanagement/businessShopManagement/", options);
+	const { data } = await axios.post("/drumtong/business/mainmanagement/businessShopManagement/BManagement/rest/updateDeliveryBoolean/", options);
 	
 	console.log(data);
-}
-
-function exit() {
-	return;
 }

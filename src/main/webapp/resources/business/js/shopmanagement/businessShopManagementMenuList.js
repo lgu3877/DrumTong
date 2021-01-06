@@ -15,6 +15,19 @@ const deliveryBtn = document.getElementById("delivery-btn");
 const toggleIcon = document.getElementById("delivery-icon");
 let deliveryToggle = false;
 
+
+// 옵션 생성
+//let defaultCategory = ${defaultcategory};
+
+function createOptions() {
+console.log(defaultCategory);
+console.log(subCategory);
+console.log(category);
+
+//	await axios.get("");
+}
+createOptions();
+
 // 배달 서비스 활성화 이벤트
 function activateVisualization() {
 	const itemInputList = document.getElementById("add-item-list");
