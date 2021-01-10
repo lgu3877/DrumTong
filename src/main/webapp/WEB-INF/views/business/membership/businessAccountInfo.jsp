@@ -90,7 +90,7 @@
       </div>
       
       <div style="display: inline-block; width: 75%; height: 100%; background-color:    #f8f8fa">
-      <form action="${cpath }/business/membership/businessPWFind/" method="post" style="width: 100%; height: 100%;" onsubmit="return newpw();">
+      <form action="${cpath }/business/membership/businessPWFind/" method="post" style="width: 100%; height: 100%;" id="formtag">
          <input type="hidden" value="${bLogin.bpersonid}" id="BPERSONID" name="bpersonid">
          <input type="hidden" value="${bLogin.id}" id="id" name="id">
    
