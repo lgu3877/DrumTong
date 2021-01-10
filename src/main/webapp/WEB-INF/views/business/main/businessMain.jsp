@@ -91,7 +91,7 @@
 		</div>
 
 		<!-- 모달 버튼 -->
-		<button id="myBtn">Open Modal</button>
+		<button id="myBtn2">Open Modal</button>
 
 	</section>
 		
@@ -107,22 +107,32 @@
 				<span class="close">&times;</span>
 			</div>
 			<div class="modal-body">
-				<p>전에 작성하신 입력 정보(매장관리)가 남아있습니다.</p>
-				<p>입력하신 정보를 저장하고, 매장 일정관리 페이지에서 이서서 작성하시겠습니까?</p>
+<!-- 				<p>전에 작성하신 입력 정보(매장관리)가 남아있습니다.</p> -->
+<!-- 				<p>입력하신 정보를 저장하고, 매장 일정관리 페이지에서 이서서 작성하시겠습니까?</p> -->
 			</div>
 			<div class="modal-footer">
-				<button class="btn_blue">처음부터 다시 작성하기</button>
-				<button class="btn_red">이어서 작성하기</button>				
+				<button class="btn_blue">
+<!-- 				처음부터 다시 작성하기 -->
+				</button>
+				<button class="btn_red">
+<!-- 				이어서 작성하기 -->
+				</button>				
 			</div>
 		</div>
 	</div>
-
+	<script type="text/javascript">
+		 // 로그인 여부
+  		let login = "<c:out value='${bLogin}'/>";
+  	 
+  	 	// 계약 진행 여부
+  		 let contract = "<c:out value='${selectEST.status}'/>";
+	</script>
 	<!-- main cover(slider) -->
 	<script type="text/javascript" src="${cpath }/business/js/main.js"></script>
 	<script type="text/javascript" src="${cpath }/business/js/modal.js"></script>
 	   <!-- main cover cookie -->
-   <script type="text/javascript"> 
    
+   <script type="text/javascript"> 
 	 console.log('estid : ', document.querySelector('#bpersonid').value);
    	 
      function getCookie(name) { 

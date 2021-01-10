@@ -2,6 +2,8 @@ package com.drumtong.business.controller.mainmanagement;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.drumtong.business.service.mainmanagement.RestBusinessMainManagementService;
 import com.drumtong.business.vo.BDeliveryAreaVO;
+import com.drumtong.business.vo.BImageVO;
 import com.drumtong.business.vo.BManagementVO;
 import com.drumtong.business.vo.BMenuVO;
 import com.drumtong.business.vo.BScheduleDaysVO;
@@ -41,11 +45,11 @@ public class RestBusinessMainManagementController {
 	
 	// === 소분류 [ Introduction ] 필드 {매장소개글} ==	[건욱]
 	// 1. 매장 관리에 매장 소개글을 비동기식으로 수정해주는 메서드입니다.
-	@RequestMapping("BManagement/rest/updateIntroduction/{param}")
-	@GetMapping(produces="application/json; charset=utf8")
-	public String updateIntroduction(@PathVariable("param")BManagementVO bManagementVO) {
+	@RequestMapping("BManagement/rest/updateIntroduction/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String updateIntroduction(HttpServletRequest req, @RequestBody BManagementVO bManagementVO) {
 		
-		int result = svc.updateIntroduction(bManagementVO);
+		int result = svc.updateIntroduction(req,bManagementVO);
 		System.out.println(result + " : result 값 입니다");
 		return result == 1
 				? "true"
@@ -54,11 +58,11 @@ public class RestBusinessMainManagementController {
 	
 	// === 소분류 [ DeliveryBoolean ] 필드 {배달유무} ==	[건욱]
 	// 2. 매장 관리에 배달유무를 비둥기식으로 수정해주는 메서드입니다.
-	@RequestMapping("BManagement/rest/updateDeliveryBoolean/{param}")
-	@GetMapping(produces="application/json; charset=utf8")
-	public String updateDeliveryBoolean(@PathVariable("param")BManagementVO bManagementVO) {
+	@RequestMapping("BManagement/rest/updateDeliveryBoolean/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String updateDeliveryBoolean(HttpServletRequest req, @RequestBody BManagementVO bManagementVO) {
 		
-		int result = svc.updateDeliveryBoolean(bManagementVO);
+		int result = svc.updateDeliveryBoolean(req,bManagementVO);
 		System.out.println(result + " : result 값 입니다");
 		return result == 1
 				? "true"
@@ -68,11 +72,11 @@ public class RestBusinessMainManagementController {
 
 	// === 소분류 [ QuickBoolean ] 필드 {퀵유무} ==
 	// 3. 매장 관리에 퀵여부를 비둥기식으로 수정해주는 메서드입니다.
-	@RequestMapping("BManagement/rest/updateQuickBoolean/{param}")
-	@GetMapping(produces="application/json; charset=utf8")
-	public String updateQuickBoolean(@PathVariable("param")BManagementVO bManagementVO) {
+	@RequestMapping("BManagement/rest/updateQuickBoolean/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String updateQuickBoolean(HttpServletRequest req, @RequestBody BManagementVO bManagementVO) {
 		
-		int result = svc.updateQuickBoolean(bManagementVO);
+		int result = svc.updateQuickBoolean(req,bManagementVO);
 		System.out.println(result + " : result 값 입니다");
 		return result == 1
 				? "true"
@@ -85,11 +89,11 @@ public class RestBusinessMainManagementController {
 	// 받아오는 데이터 타입이 어떻게 되는지 보고 결정하도록한다.
 	// === 소분류 [ DEFAULTCATEGORY ] 필드 {퀵유무} ==
 	// 4. 매장 관리에 카테고리를 비둥기식으로 수정해주는 메서드입니다.
-	@RequestMapping("BManagement/rest/updateDefaultCategory/{param}")
-	@GetMapping(produces="application/json; charset=utf8")
-	public String updateDefaultCategory(@PathVariable("param")BManagementVO bManagementVO) {
+	@RequestMapping("BManagement/rest/updateDefaultCategory/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String updateDefaultCategory(HttpServletRequest req, @RequestBody BManagementVO bManagementVO) {
 		
-		int result = svc.updateDefaultCategory(bManagementVO);
+		int result = svc.updateDefaultCategory(req,bManagementVO);
 		System.out.println(result + " : result 값 입니다");
 		return result == 1
 				? "true"
@@ -101,26 +105,26 @@ public class RestBusinessMainManagementController {
 	// ===== 중분류 [BImage] 테이블 ====
 	// 1. 매장 이미지를 비둥기식으로 수정해주는 메서드입니다.
 	// 추후에 결정 JS 파일을 보고
-//	@RequestMapping("StoreIMG/rest/updateStoreIMG/")
-//	@PostMapping(produces="application/json; charset=utf8")
-//	public String updateStoreIMG(@RequestBody MultipartFile file, HashMap<String,String>) {
-//		
-//		int result = svc.updateStoreIMG(file);
-//		System.out.println(result + " : result 값 입니다");
-//		return result == 1
-//				? "true"
-//				: "false";
-//	}	
+	@RequestMapping("BImage/rest/updateStoreIMG/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String updateStoreIMG(HttpServletRequest req,@RequestBody MultipartHttpServletRequest mpf, @RequestBody BImageVO bImageVO) {
+		
+		int result = svc.updateBImage(mpf,req,bImageVO);
+		System.out.println(result + " : result 값 입니다");
+		return result == 1
+				? "true"
+				: "false";
+	}	
 	
 	
 	// ===== 중분류 [BMenu] 테이블 ====	
 
 	// 0. 메장 메뉴를 비동기식으로 새로이 입력해주는 메서드입니다.
-	@RequestMapping("BMenu/rest/insertBMenu/{param}")
-	@GetMapping(produces="application/json; charset=utf8")
-	public String insertBMenu(@PathVariable("param")BMenuVO bMenuVO) {
+	@RequestMapping("BMenu/rest/insertBMenu/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String insertBMenu(HttpServletRequest req, @RequestBody BMenuVO bMenuVO) {
 		
-		int result = svc.insertBMenu(bMenuVO);
+		int result = svc.insertBMenu(req,bMenuVO);
 		System.out.println(result + " : result 값 입니다");
 		return result == 1
 				? "true"
@@ -131,11 +135,11 @@ public class RestBusinessMainManagementController {
 	
 	
 	// 1. 매장 메뉴를 비둥기식으로 수정해주는 메서드입니다.
-	@RequestMapping("BMenu/rest/updateBMenu/{param}")
-	@GetMapping(produces="application/json; charset=utf8")
-	public String updateBMenu(@PathVariable("param")BMenuVO bMenuVO) {
+	@RequestMapping("BMenu/rest/updateBMenu/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String updateBMenu(HttpServletRequest req, @RequestBody BMenuVO bMenuVO) {
 		
-		int result = svc.updateBMenu(bMenuVO);
+		int result = svc.updateBMenu(req, bMenuVO);
 		System.out.println(result + " : result 값 입니다");
 		return result == 1
 				? "true"
@@ -143,11 +147,11 @@ public class RestBusinessMainManagementController {
 	}	
 	
 	// 2. 매장 메뉴를 비둥기식으로 수정해주는 메서드입니다.
-	@RequestMapping("BMenu/rest/deleteBMenu/{param}")
-	@GetMapping(produces="application/json; charset=utf8")
-	public String deleteBMenu(@PathVariable("param")BMenuVO bMenuVO) {
+	@RequestMapping("BMenu/rest/deleteBMenu/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String deleteBMenu(HttpServletRequest req, @RequestBody BMenuVO bMenuVO) {
 		
-		int result = svc.deleteBMenu(bMenuVO);
+		int result = svc.deleteBMenu(req,bMenuVO);
 		System.out.println(result + " : result 값 입니다");
 		return result == 1
 				? "true"
@@ -158,11 +162,11 @@ public class RestBusinessMainManagementController {
 	// ===== 중분류 [BDELIVERYAREA] 테이블 ====	
 	
 	// 1. 배달 지역을 비동기식으로 수정해주는 메서드입니다.
-	@RequestMapping("BDeliveryArea/rest/updateBDeliveryArea/{param}")
-	@GetMapping(produces="application/json; charset=utf8")
-	public String updateBDeliveryArea(@PathVariable("param")BDeliveryAreaVO bDeliveryAreaVO) {
+	@RequestMapping("BDeliveryArea/rest/updateBDeliveryArea/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String updateBDeliveryArea(HttpServletRequest req, @RequestBody BDeliveryAreaVO bDeliveryAreaVO) {
 		
-		int result = svc.updateBDeliveryArea(bDeliveryAreaVO);
+		int result = svc.updateBDeliveryArea(req,bDeliveryAreaVO);
 		System.out.println(result + " : result 값 입니다");
 		return result == 1
 				? "true"

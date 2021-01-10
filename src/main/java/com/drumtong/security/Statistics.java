@@ -40,15 +40,18 @@ public class Statistics {
 		String endDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
-		if(!"Day".equals(option) && option != null && !"n".equals(option)) {
-			if(option.equals("Week"))
-				calendar.add(Calendar.DAY_OF_MONTH , -28);
-			else
-				calendar.add(Calendar.DAY_OF_MONTH , -120);
-			
-			calendar.add(Calendar.DAY_OF_MONTH, 1);
+		option = option == null ? "Day" : option;
+		switch (option) {
+		case "Week":
+			calendar.add(Calendar.DAY_OF_MONTH, -27);
+			break;
+		case "Month":
+			calendar.add(Calendar.DAY_OF_MONTH, -119);
+			break;
+		default:
+			calendar.add(Calendar.DAY_OF_MONTH, -6);
+			break;
 		}
-		calendar.add(Calendar.DAY_OF_MONTH, -6);
 		String startDate = new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime());
 		return statistics(estid, pageKind, option, startDate, endDate);
 	}

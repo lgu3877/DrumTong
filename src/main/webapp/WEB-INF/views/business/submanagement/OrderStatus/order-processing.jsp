@@ -47,7 +47,7 @@
 			<i class="far fa-square" onclick="typeSelect(this, 'ete')"></i>ETE를 활용한 자동 일자
 		</h1>
 			<div>
-				<input type="text" value="ETE" readonly><i class="far fa-question-circle fa-2x" id="etehelp"></i>
+				<input type="text" value="${eteNum }" readonly><i class="far fa-question-circle fa-2x" id="etehelp"></i>
 				<div class="ete-bubble" id="ete-bubble" style="display: none">
 					ETE 설명에 대해서 취급하고 있습니다
 					ETE 설명에 대해서 취급하고 있습니다

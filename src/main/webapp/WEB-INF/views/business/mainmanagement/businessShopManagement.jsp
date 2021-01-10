@@ -36,6 +36,10 @@
    	
    	<!-- jQuery -->
    	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+   	
+   	<!-- Daum Map API -->
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
 </head>
      
 
@@ -96,7 +100,7 @@
 				<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
 				<c:if test="${status eq 'SUCCESS' }">
 					<div class="service_button_con">
-						<div id="add-cover-btn" class="update_image_btn_con">
+						<div id="update-intro-btn" class="update_image_btn_con" onclick="updatePhoto()">
 							<div class="add_menu_icon_con">
 								<i class="fas fa-check-square"></i>
 							</div>
@@ -170,24 +174,18 @@
         		
 			<!-- add new photo -->
 				<div id="photo-modal-btn" class="photo_add_con">
+				
 					<!-- change cover -->
 					<input id="update-cover" class="add_photo_input" type="file" 
 						name="delegatephotoboolean" onchange="imageCheck(event)"
-						style="display: none;" accept=".png, .jpg, .jpeg">
+						style="display: none;" accept=".png, .jpg, .jpeg" >
 					<label for="update-cover"> <span style="margin-right: 10px">커버
 							사진 바꾸기 <i class="far fa-images"></i>
 					</span>
 					</label>
-					<!-- add store image -->
-					<input id="add-photo" class="add_photo_input" type="file" 
-						name="storeimg" onchange="imageCheck(event, 'add-photo')"
-						style="display: none" accept=".png, .jpg, .jpeg" multiple="multiple">
-					<!-- 업로드 사진 중 삭제한 파일 이름 보내는 input -->
-					<input id="deleted-photos" type="text" name="deletedPhotoNames" style="display: none" >
-					<label for="add-photo"> <span>새로운 사진 추가하기 <i
-							class="far fa-images"></i>
-					</span>
-					</label>
+					
+					<!-- 이곳에 자동 input & label 생성 -->
+					
 				</div>
 				
 			</div>
@@ -197,16 +195,27 @@
 			
 			<!-- title -->
 				<div class="shop_info_title_con">
-					<div>
-						<span class="shop_info_title">매장 소개글</span>
+					<div style="display: flex;">
+						<span class="shop_info_title">소개글</span>
 						<i id="intro-help" class="far fa-question-circle" style="font-weight: 600">도움말</i>
 						<div id="intro-help-msg"></div>
 					</div>
+					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
+				<c:if test="${status eq 'SUCCESS' }">
+					<div class="service_button_con">
+						<div id="add-cover-btn" class="update_image_btn_con" onclick="updateIntro()">
+							<div class="add_menu_icon_con">
+								<i class="fas fa-check-square"></i>
+							</div>
+							<div class="add_menu_btn_title">작성 완료</div>
+						</div>
+					</div>
+				</c:if>
 				</div>
 			
 			<!-- text content -->
 				<div class="shop_text_intro">
-					<p class="shop_text_view">
+					<p id="intro-text" class="shop_text_view">
 						이곳은 당신이 작성한 매장 소개글을 확인할 수 있는 칸입니다. 작성한 글이 마음에 들지 않을 경우 아래 '작성하기'버튼을 통해 기존에 작성하신 글을 수정하시거나 새로운 내용의 소개글을 작성하실 수 있습니다.
 					</p>
 				</div>
@@ -236,6 +245,7 @@
 					<i id="update-help" class="far fa-question-circle" style="font-weight: 600">도움말</i>
 					<div id="update-help-msg"></div>
 				</div>
+				
 				<div class="service_button_con">
 					<!-- modify button -->
 					<div id="update-list-btn" class="add_menu_btn_con">
@@ -347,11 +357,11 @@
 			<!-- 버튼 -->
 				<div class="service_button_con">
 				<!-- 배달 서비스 활성화 -->
-					<div id="delivery-btn" class="delivery_menu_btn_con" onclick="activateDelivery()">
+					<div id="delivery-btn" class="delivery_menu_btn_con" onclick="activateVisualization()">
 						<div class="add_menu_icon_con">
 							<i id="delivery-icon" class="fas fa-toggle-off"></i>
 						</div>
-						<div class="add_menu_btn_title">배달 서비스</div>
+						<div class="add_menu_btn_title">퀵 서비스</div>
 					</div>
 				<!-- 메뉴 추가 -->	
 					<div id="add-item-btn" class="add_menu_btn_con">
@@ -364,11 +374,11 @@
 					<!-- complete button -->
 					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
 					<c:if test="${status eq 'SUCCESS' }">
-					<div id="update-item-btn" class="complete_menu_btn_con">
+					<div id="update-item-btn" class="complete_menu_btn_con" onclick="addService()">
 						<div class="add_menu_icon_con">
 							<i class="fas fa-check-square"></i>
 						</div>
-						<div class="add_menu_btn_title">목록 추가</div>
+						<div class="add_menu_btn_title">등록 완료</div>
 					</div>
 					</c:if>
 				</div>
@@ -475,16 +485,9 @@
 				</div>
 			<!-- 버튼 -->
 				<div class="service_button_con">
-					<div id="modify-return-option" class="add_menu_btn_con">
-						<div class="add_menu_icon_con">
-							<i class="fas fa-plus-square"></i>
-						</div>
-						<div class="add_menu_btn_title">수정 하기</div>
-					</div>
-					
 					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
 					<c:if test="${status eq 'SUCCESS' }">
-					<div id="complete-return-option" class="complete_menu_btn_con">
+					<div id="complete-return-option" class="complete_menu_btn_con"  onclick="updateDelivery()">
 						<div class="add_menu_icon_con">
 							<i class="fas fa-check-square"></i>
 						</div>
@@ -496,9 +499,6 @@
 			
 			
 		<!-- 수취 선택 -->
-			
-			
-			
 			<div class="return_menu">
 			
 				<ul>
@@ -516,10 +516,39 @@
 					</li>
 				</ul>
 			</div>
+
+
 		</div>
 		
-		
-		
+	
+	<!-- 주소 확인 & 변경 -->
+		<div class="address_update_con">		
+			<div class="shop_info_title_con">
+				<div>
+					<span class="shop_info_title">매장 주소</span>
+					<i id="address-help" class="far fa-question-circle" style="font-weight: 600">도움말</i>
+					<div id="address-help-msg"></div>
+				</div>
+			<!-- 버튼 -->
+				<div class="service_button_con">
+					<div id="complete-address-option" class="complete_menu_btn_con"  onclick="updateAddress()">
+						<div class="add_menu_icon_con">
+							<i class="fas fa-check-square"></i>
+						</div>
+						<div class="add_menu_btn_title">변경 완료</div>
+					</div>
+				</div>
+			</div>
+			
+		<!-- 주소지 변경 -->
+			<div>
+				<h1>등록된 매장 주소</h1>
+				<div id="registerd-address">
+					[주소불러호기 > 확인]
+				</div>
+				<input type="button" value="주소 찾기" onclick="openAddressSearch()" />
+			</div>
+		</div>
 		
 		
 		
@@ -556,18 +585,58 @@
 			</div>
 		</div>
 	</div>
+		
+	<!-- 초기 셋팅 -->
+	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementOnLoad.js"></script>
+	
+	<!-- 이미지 -->
+	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementImage.js"></script>
 
+	<!-- 소개글 -->
+	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementIntroText.js"></script>
 
+	<!-- 서비스 매뉴 -->
+	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementMenuList.js"></script>
+
+	<!-- 서비스 메뉴 옵션 -->
 	<script type="text/javascript">
 		// DB에서 받아오는 Defaultcategory List<String> 배열
-		let defaultCategory = ${defaultcategory};
+		const defaultCategory = ${defaultcategory};
+		
+		// 세부 서비스 
+		const subCategory = {
+			"top": ["1", "2", "3"],
+			"pants": ["4", "5", "6"],
+			"suit": ["7", "8", "9"],
+			"hat": ["10", "11", "12"],
+			"underwear": ["13", "14", "15"],
+			"cutton": ["16", "17", "18"],
+		};
+		
+		const object = new Object();
+		for (let i = 0; i < defaultCategory.length; i++) {
+			const mainOption = defaultCategory[i];
+			const subOption = subCategory[defaultCategory[i]];
+			
+			// object 정의
+			object[mainOption] = subOption !== undefined ? subOption : "값 없음";		
+		}
+		
+		// MenuList > Dropdown category
+		createOptions(object);
 	</script>
-	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementMenuList.js"></script>
-	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementOnLoad.js"></script>
-	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementImage.js"></script>
-	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementIntroText.js"></script>
+
+	<!-- 배달 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementReturnItem.js"></script>
+	
+	<!-- 도움말 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementHelpMsg.js"></script>
+	
+	<!-- 주소 -->
+	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementAddress.js"></script>	
+	
+	<!-- 비동기 update (Axios) -->
+	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementUpdate.js"></script>
 	
 </body>
 </html>

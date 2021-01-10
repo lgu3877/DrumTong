@@ -15,8 +15,17 @@ const deliveryBtn = document.getElementById("delivery-btn");
 const toggleIcon = document.getElementById("delivery-icon");
 let deliveryToggle = false;
 
+
+
+// 옵션 생성
+function createOptions(categoryObject) {
+	console.log(categoryObject);
+
+//	await axios.get("");
+}
+
 // 배달 서비스 활성화 이벤트
-function activateDelivery() {
+function activateVisualization() {
 	const itemInputList = document.getElementById("add-item-list");
 	const priceCon = itemInputList.getElementsByClassName("forth_item_prop");		
 	deliveryToggle = !deliveryToggle;
@@ -64,9 +73,9 @@ addItemBtn.addEventListener('click', function() {
 });
 
 // 등록 - 클릭이벤트(작성한 리스트 추가)
-updateItemBtn.addEventListener('click', function() {
-	console.log('Update List');
-})
+//updateItemBtn.addEventListener('click', function() {
+//	console.log('Update List');
+//})
 
 // 메뉴 수정 버튼(th & td > input + 삭제 버튼)
 modifyListBtn.addEventListener('click', function() {

@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.amazonaws.services.cloudwatch.model.Statistic;
 import com.drumtong.business.dao.BBusinessReviewDAO;
 import com.drumtong.business.dao.BCouponDAO;
 import com.drumtong.business.dao.BPaymentDAO;
@@ -20,6 +19,8 @@ import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BPaymentVO;
 import com.drumtong.business.vo.OrderList;
 import com.drumtong.business.vo.ReviewList;
+import com.drumtong.customer.dao.CPrivateDataDAO;
+import com.drumtong.security.AwsServiceEmail;
 import com.drumtong.security.OrderListSetting;
 import com.drumtong.security.Review;
 import com.drumtong.security.SerialUUID;
@@ -34,7 +35,7 @@ public class RestBusinessSubManagementService {
 	@Autowired BReviewDAO bReviewDAO;
 	@Autowired BBusinessReviewDAO bBusinessReviewDAO;
 	@Autowired BCouponDAO bCouponDAO;
-	
+	@Autowired CPrivateDataDAO cPrivateDataDAO;
 	
 	// ========================= 대분류 [카드/계좌 관리] ================================ [건욱]
 	
@@ -142,16 +143,21 @@ public class RestBusinessSubManagementService {
 	// ========================= 대분류 [주문현황] ================================ [영경]
 	// type : 'Accept'(수락), 'Decline'(거절)
 	public String orderStatusManagementAnswer(HttpServletRequest req, String type, HashMap<String, String> param) {
-		String estid = ((BInformationVO)req.getSession().getAttribute("selectEST")).getEstid();
+		BInformationVO binformation = ((BInformationVO)req.getSession().getAttribute("selectEST"));
+		String estid = binformation.getEstid();
+		param.put("estid", estid);
 		int result = 0;
 		switch (type) {
 		case "Accept":
 			// 수락을 누른 경우 DB에 status를 processing 으로 바꾸어준다.
-			result = OrderListSetting.requestAccept(estid, param);
+			result = OrderListSetting.requestAccept(param);
 			break;
 		case "Decline":
 			// 거절을 누를 경우 DB 데이터를 삭제해 준다. 
-			result = OrderListSetting.Decline(estid, param);
+			String reason = param.get("reason");
+			String toEmail = cPrivateDataDAO.selectEmail(param);
+			AwsServiceEmail.sendMailTypeOrderCancle(binformation.getBrandnaming(), reason, toEmail);
+			result = OrderListSetting.Decline(param);
 			break;
 		}
 		return result == 0? "false" : "true";
