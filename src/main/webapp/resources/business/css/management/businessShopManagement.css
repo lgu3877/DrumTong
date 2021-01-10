@@ -360,7 +360,8 @@
 }
 
 .create_menu_con,
-.return_menu_con {
+.return_menu_con,
+.address_update_con {
 	margin-top: 70px;
     margin-left: 3.33%;
     margin-right: 3.33%;
@@ -627,7 +628,7 @@
 }
 
 .return_menu {
-	height: 100px;
+	/* height: 50px; */
 }
 
 .return_menu ul {
@@ -746,3 +747,6 @@
     font-size: 12pt;
     color: lightslategray;
 }
+
+
+/* 매장 주소 */

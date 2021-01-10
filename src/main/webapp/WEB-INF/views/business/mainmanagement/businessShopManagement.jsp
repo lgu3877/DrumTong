@@ -36,6 +36,10 @@
    	
    	<!-- jQuery -->
    	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+   	
+   	<!-- Daum Map API -->
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
 </head>
      
 
@@ -513,18 +517,38 @@
 				</ul>
 			</div>
 
+
+		</div>
+		
+	
+	<!-- 주소 확인 & 변경 -->
+		<div class="address_update_con">		
+			<div class="shop_info_title_con">
+				<div>
+					<span class="shop_info_title">매장 주소</span>
+					<i id="address-help" class="far fa-question-circle" style="font-weight: 600">도움말</i>
+					<div id="address-help-msg"></div>
+				</div>
+			<!-- 버튼 -->
+				<div class="service_button_con">
+					<div id="complete-address-option" class="complete_menu_btn_con"  onclick="updateAddress()">
+						<div class="add_menu_icon_con">
+							<i class="fas fa-check-square"></i>
+						</div>
+						<div class="add_menu_btn_title">변경 완료</div>
+					</div>
+				</div>
+			</div>
+			
 		<!-- 주소지 변경 -->
 			<div>
 				<h1>등록된 매장 주소</h1>
 				<div id="registerd-address">
-					주소불러오기
+					[주소불러호기 > 확인]
 				</div>
-				<input type="button" value="주소찾기" onclick="searchAddress()" />
+				<input type="button" value="주소 찾기" onclick="openAddressSearch()" />
 			</div>
-
 		</div>
-		
-		
 		
 		
 		
