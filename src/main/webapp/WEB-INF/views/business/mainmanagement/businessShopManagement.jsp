@@ -3,6 +3,8 @@
 <c:set var="cpath">${pageContext.request.contextPath }</c:set>
 <!-- selectEST.status 값을 status에 c:set 해줍니다 -->
 <c:set var = "status" value="${selectEST.status}" />
+<c:set var = "mainAddress" value="${selectEST.mainlocation}" />
+<c:set var = "detailAddress" value="${selectEST.detaillocation}" />
 
 <!DOCTYPE html>
  
@@ -39,7 +41,6 @@
    	
    	<!-- Daum Map API -->
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	
 </head>
      
 
@@ -542,11 +543,13 @@
 			
 		<!-- 주소지 변경 -->
 			<div>
-				<h1>등록된 매장 주소</h1>
-				<div id="registerd-address">
-					[주소불러호기 > 확인]
+				<div>
+					<input id="main-address" type="text" name="mainlocation" value="${mainAddress }" onfocus="openAddressSearch()">
+					<input type="button" value="주소 찾기" onclick="openAddressSearch()" />
 				</div>
-				<input type="button" value="주소 찾기" onclick="openAddressSearch()" />
+				<div>
+					<input id="detail-address" type="text" name="detaillocation" value="${detailAddress }">
+				</div>
 			</div>
 		</div>
 		
@@ -555,15 +558,15 @@
 	<!-- [50줄] 여는 태그  세션의 상태가 FAIL이면 POST 형식   -->
 	<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
 	<!-- 	[전체 폼]에 대한 c:if문 -->
-	<c:if test="${status eq 'FAIL' }">
 	
+		<c:if test="${status eq 'FAIL' }">
 	<!-- 전체 form submit -->
-		<div>
-			<input type="submit" value="입력 완료">
-		</div>
+			<div>
+				<input type="submit" value="입력 완료">
+			</div>
 			</form>
-			
-	</c:if>
+
+		</c:if>
 		
 		
 	
