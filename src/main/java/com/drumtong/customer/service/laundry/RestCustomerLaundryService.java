@@ -21,7 +21,7 @@ public class RestCustomerLaundryService {
 	@Autowired BInformationDAO bInformationDAO;		
 	
 	
-	public List<BInformationVO> BusinessMapInfo(){
+	public List<BInformationVO> BusinessMapInfo(String address){
 		
 		// 사업장의 위도와 경도를 받아온다.
 		return bInformationDAO.selectBusinessMapInfo();

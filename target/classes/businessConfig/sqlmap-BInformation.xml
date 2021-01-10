@@ -116,6 +116,12 @@
 		<if test='MainAddress != "All"'>
 		  AND COMPARE=#{MainAddress} 
 		</if>  
+		<if test='premium == "yes"'>
+          AND PREMIUMBOOLEAN='Y' 
+		</if>
+		<if test='premium == "no"'>
+          AND PREMIUMBOOLEAN='N' 
+		</if>
 		  ORDER BY GPA
 	</select>
 	
