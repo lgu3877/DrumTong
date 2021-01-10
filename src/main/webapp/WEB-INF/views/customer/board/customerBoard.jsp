@@ -41,7 +41,7 @@
                 <div class="boardMenu">
                    <div class="rightMenu">
                         <input class="btn" type="button" value="새 글 쓰기"
-                        	onclick="location.replace('${pageContext.request.contextPath}/customer/board/customerBoardWrite/')">
+                        	onclick="location.replace('${pageContext.request.contextPath}/customer/board/customerBoardWrite/${type }/')">
                    </div>
                 </div>
 

@@ -35,5 +35,9 @@
 	<select id="read" parameterType="int" resultType="SBoardVO">
 		SELECT * FROM SCUSTOMERBOARD1 WHERE NUM=#{num}
 	</select>
+	
+	<insert id="write" parameterType="sboardvo">
+		INSERT INTO SCUSTOMERBOARD1 (TITLE, CONTENT) VALUES (#{title}, #{content})
+	</insert>
 </mapper>
 
