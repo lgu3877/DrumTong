@@ -97,6 +97,11 @@ function imageCheck(e) {
 	const isImage = imageType === 'jpg' 
 			|| imageType === 'png' 
 			|| imageType === 'jpeg' ? true : false
+	
+	console.log('input');
+	console.log(input);
+	console.log('imageType', imageType);
+	console.log('isImage', isImage);
 					
 // 이미지 확장자 검사 (jpg, png, jpng)
 	if (!isImage) {   
@@ -104,9 +109,9 @@ function imageCheck(e) {
 		e.target.clear; // input value(file) 초기화
 		return;
 	}
-	
 // 커버 사진 업로드
 	if (isImage && e.target.id === "update-cover") {
+		console.log('커버사진 업로드 실행');
 		// 미리보기
 		const reader = new FileReader();
 		// 대표사진이 있을 경우 삭제
@@ -151,6 +156,7 @@ function imageCheck(e) {
 	}
 // 일반 사진 업로드
 	else {
+		console.log('일반사진업로드');
 		let count = 0;
 		
 		for (let img of e.target.files) {

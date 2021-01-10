@@ -96,7 +96,7 @@
 				<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
 				<c:if test="${status eq 'SUCCESS' }">
 					<div class="service_button_con">
-						<div id="update-intro-btn" class="update_image_btn_con" onclick="updateIntro()">
+						<div id="update-intro-btn" class="update_image_btn_con" onclick="updatePhoto()">
 							<div class="add_menu_icon_con">
 								<i class="fas fa-check-square"></i>
 							</div>
@@ -180,7 +180,7 @@
 					</span>
 					</label>
 					
-					<!-- 이곳에 자동 input & label 생성 -->
+					<!-- 이곳에 자동 input & label 생성 --> 
 					
 				</div>
 				
@@ -199,7 +199,7 @@
 					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
 				<c:if test="${status eq 'SUCCESS' }">
 					<div class="service_button_con">
-						<div id="add-cover-btn" class="update_image_btn_con" onclick="submitPhoto()">
+						<div id="add-cover-btn" class="update_image_btn_con" onclick="updateIntro()">
 							<div class="add_menu_icon_con">
 								<i class="fas fa-check-square"></i>
 							</div>
@@ -357,7 +357,7 @@
 						<div class="add_menu_icon_con">
 							<i id="delivery-icon" class="fas fa-toggle-off"></i>
 						</div>
-						<div class="add_menu_btn_title">배달 서비스</div>
+						<div class="add_menu_btn_title">퀵 서비스</div>
 					</div>
 				<!-- 메뉴 추가 -->	
 					<div id="add-item-btn" class="add_menu_btn_con">
@@ -408,12 +408,12 @@
 						<!-- BManagementVO > maincategory -->
 							<select class="service_selector" name="maincategory" onchange="directType(this)">
 								<option hidden="true" disabled selected>서비스 타입 선택</option>
-								<option value="type1">type1</option>
-								<option value="type2">type2</option>
-								<option value="type3">type3</option>
-								<option value="type4">type4</option>
-								<option value="type5">type5</option>
-								<option value="selectedDirect" class="selectedDirect">직접입력</option>
+								<option class="main_type" value="type1">type1</option>
+								<option class="main_type" value="type2">type2</option>
+								<option class="main-type" value="type3">type3</option>
+								<option class="main_type" value="type4">type4</option>
+								<option class="main_type" value="type5">type5</option>
+								<option class="main_type" value="selectedDirect" class="selectedDirect">직접입력</option>
 							</select>
 							<!-- 직접입력 선택시 -->
 							<input type="text" class="direct_type_input" name="maincategory" placeholder="서비스 입력" style="display: none">

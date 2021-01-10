@@ -67,4 +67,13 @@
 				SUBCATEGORY = #{subcategoryname}
 	</select>
 	
+	<select id="calcEte" parameterType="hashmap" resultType="EteNums">
+		  SELECT ETE, COUNT(ETE) AS COUNT, SUM(AMOUNT) AS AMOUNT 
+		  FROM BDETAILSALES D 
+		  INNER JOIN BMENU M 
+		  ON D.ESTID=M.ESTID AND M.MAINCATEGORY = D.MAINCATEGORY 
+		  AND M.SUBCATEGORY = D.SUBCATEGORY AND M.NAME = D.NAME 
+		  WHERE D.ESTID=#{estid} 
+		  AND SALECODE=#{salecode} GROUP BY ETE
+	</select>
 </mapper>
