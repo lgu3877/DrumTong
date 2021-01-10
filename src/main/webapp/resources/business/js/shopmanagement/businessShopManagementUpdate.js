@@ -153,3 +153,10 @@ async function updateDelivery() {
 	
 	console.log(data);
 }
+
+// 주소 업데이트
+function updateAddress() {
+	const address = "123";
+	
+	console.log(address);
+}
