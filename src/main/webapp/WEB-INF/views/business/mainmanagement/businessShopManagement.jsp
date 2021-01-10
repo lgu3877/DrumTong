@@ -96,7 +96,7 @@
 				<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
 				<c:if test="${status eq 'SUCCESS' }">
 					<div class="service_button_con">
-						<div id="update-intro-btn" class="update_image_btn_con" onclick="updateIntro()">
+						<div id="update-intro-btn" class="update_image_btn_con" onclick="updatePhoto()">
 							<div class="add_menu_icon_con">
 								<i class="fas fa-check-square"></i>
 							</div>
@@ -199,7 +199,7 @@
 					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
 				<c:if test="${status eq 'SUCCESS' }">
 					<div class="service_button_con">
-						<div id="add-cover-btn" class="update_image_btn_con" onclick="submitPhoto()">
+						<div id="add-cover-btn" class="update_image_btn_con" onclick="updateIntro()">
 							<div class="add_menu_icon_con">
 								<i class="fas fa-check-square"></i>
 							</div>
@@ -353,11 +353,11 @@
 			<!-- 버튼 -->
 				<div class="service_button_con">
 				<!-- 배달 서비스 활성화 -->
-					<div id="delivery-btn" class="delivery_menu_btn_con" onclick="activateDelivery()">
+					<div id="delivery-btn" class="delivery_menu_btn_con" onclick="activateVisualization()">
 						<div class="add_menu_icon_con">
 							<i id="delivery-icon" class="fas fa-toggle-off"></i>
 						</div>
-						<div class="add_menu_btn_title">배달 서비스</div>
+						<div class="add_menu_btn_title">퀵 서비스</div>
 					</div>
 				<!-- 메뉴 추가 -->	
 					<div id="add-item-btn" class="add_menu_btn_con">
@@ -558,7 +558,21 @@
 
 	<script type="text/javascript">
 		// DB에서 받아오는 Defaultcategory List<String> 배열
-		let defaultCategory = ${defaultcategory};
+		const defaultCategory = [...${defaultcategory}];
+		const subCategory = {
+			"top": ["1", "2", "3"],
+			"pants": ["4", "5", "6"],
+			"suit": ["7", "8", "9"],
+			"hat": ["10", "11", "12"],
+			"underwear": ["13", "14", "15"],
+			"cutton": ["16", "17", "18"],
+		}
+		
+		
+// 		const category = defaultCategory.map((mainCategory, index) => {
+//			mainCategory[index]: subCategory[mainCategory];
+//		});
+		const category = defaultCategory.map((cate) => console.log(cate) );
 	</script>
 		
 	<!-- 초기 셋팅 -->
