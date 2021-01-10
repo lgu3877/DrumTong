@@ -98,6 +98,25 @@ public class CustomerLaundryService {
 		}
 		return list;
 	}
+
+	// 검색어 입력[영경]
+	public ModelAndView search(String searchWord) {
+		ModelAndView mav = new ModelAndView("customer/laundry/customerSearch");
+		mav.addObject("searchWord", searchWord);
+		
+//		HashMap<String, String> param = new HashMap<String, String>();
+//		param.put("MainAddress", searchWord);
+//		
+//		param.put("premium", "no");
+//		List<EstablishmentList> list = bInformationDAO.selectEstablishmentList(param);
+//		mav.addObject("list", list);
+//		
+//		param.put("premium", "yes");
+//		List<EstablishmentList> plist = bInformationDAO.selectEstablishmentList(param);
+//		mav.addObject("plist", plist);
+		
+		return mav;
+	}
 	
 }
 

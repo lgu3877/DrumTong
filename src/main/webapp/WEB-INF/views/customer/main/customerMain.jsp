@@ -23,7 +23,7 @@
 					name="search" 
 					id="search" 
 					value="검색"
-					onclick="location.href='${cpath}/customer/laundry/customerSearch/'"/>
+					onclick="mainSearch()"/>
 			</div>
 		</form>
 	</article>
@@ -116,5 +116,9 @@
 	</article>
 
 </section>
-
+<script>
+	function mainSearch(){
+		location.href='${cpath}/customer/laundry/customerSearch/' + document.getElementById('search').value + '/';
+	}
+</script>
 <%@ include file="customerFooter.jsp"%>
