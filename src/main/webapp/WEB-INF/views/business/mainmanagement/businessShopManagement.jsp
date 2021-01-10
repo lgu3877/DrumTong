@@ -495,9 +495,6 @@
 			
 			
 		<!-- 수취 선택 -->
-			
-			
-			
 			<div class="return_menu">
 			
 				<ul>
@@ -515,6 +512,16 @@
 					</li>
 				</ul>
 			</div>
+
+		<!-- 주소지 변경 -->
+			<div>
+				<h1>등록된 매장 주소</h1>
+				<div id="registerd-address">
+					주소불러오기
+				</div>
+				<input type="button" value="주소찾기" onclick="searchAddress()" />
+			</div>
+
 		</div>
 		
 		
@@ -554,26 +561,6 @@
 			</div>
 		</div>
 	</div>
-
-
-	<script type="text/javascript">
-		// DB에서 받아오는 Defaultcategory List<String> 배열
-		const defaultCategory = [...${defaultcategory}];
-		const subCategory = {
-			"top": ["1", "2", "3"],
-			"pants": ["4", "5", "6"],
-			"suit": ["7", "8", "9"],
-			"hat": ["10", "11", "12"],
-			"underwear": ["13", "14", "15"],
-			"cutton": ["16", "17", "18"],
-		}
-		
-		
-// 		const category = defaultCategory.map((mainCategory, index) => {
-//			mainCategory[index]: subCategory[mainCategory];
-//		});
-		const category = defaultCategory.map((cate) => console.log(cate) );
-	</script>
 		
 	<!-- 초기 셋팅 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementOnLoad.js"></script>
@@ -587,11 +574,42 @@
 	<!-- 서비스 매뉴 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementMenuList.js"></script>
 
+	<!-- 서비스 메뉴 옵션 -->
+	<script type="text/javascript">
+		// DB에서 받아오는 Defaultcategory List<String> 배열
+		const defaultCategory = ${defaultcategory};
+		
+		// 세부 서비스 
+		const subCategory = {
+			"top": ["1", "2", "3"],
+			"pants": ["4", "5", "6"],
+			"suit": ["7", "8", "9"],
+			"hat": ["10", "11", "12"],
+			"underwear": ["13", "14", "15"],
+			"cutton": ["16", "17", "18"],
+		};
+		
+		const object = new Object();
+		for (let i = 0; i < defaultCategory.length; i++) {
+			const mainOption = defaultCategory[i];
+			const subOption = subCategory[defaultCategory[i]];
+			
+			// object 정의
+			object[mainOption] = subOption !== undefined ? subOption : "값 없음";		
+		}
+		
+		// MenuList > Dropdown category
+		createOptions(object);
+	</script>
+
 	<!-- 배달 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementReturnItem.js"></script>
 	
 	<!-- 도움말 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementHelpMsg.js"></script>
+	
+	<!-- 주소 -->
+	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementAddress.js"></script>	
 	
 	<!-- 비동기 update (Axios) -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementUpdate.js"></script>
