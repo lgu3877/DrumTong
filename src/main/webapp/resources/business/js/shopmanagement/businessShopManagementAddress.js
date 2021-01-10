@@ -4,29 +4,34 @@ function openAddressSearch() {
 	new daum.Postcode({
 		
 		oncomplete : (data) => {
-			const fullRoadAddr = data.roadAddress;
-			const extraRoadAddr = '';
+//			const fullRoadAddr = data.roadAddress;
+//			const extraRoadAddr = '';
 			
-			if (data.bname !== ''
-				&& /[동|로|가]$/g.test(data.bname)) {
-				extraRoadAddr += data.bname;
-			}
-
-			if (data.buildingName !== ''
-				&& data.apartment === 'Y') {
-				extraRoadAddr += (extraRoadAddr !== '' ? ', '
-						+ data.buildingName : data.buildingName);
-			}
-
-			if (extraRoadAddr !== '') {
-				extraRoadAddr = ' (' + extraRoadAddr + ')';
-			}
-
-			if (fullRoadAddr !== '') {
-				fullRoadAddr += extraRoadAddr;
-			}
+//			if (data.bname !== ''
+//				&& /[동|로|가]$/g.test(data.bname)) {
+//				extraRoadAddr += data.bname;
+//			}
+//
+//			if (data.buildingName !== ''
+//				&& data.apartment === 'Y') {
+//				extraRoadAddr += (extraRoadAddr !== '' ? ', '
+//						+ data.buildingName : data.buildingName);
+//			}
+//
+//			if (extraRoadAddr !== '') {
+//				extraRoadAddr = ' (' + extraRoadAddr + ')';
+//			}
+//
+//			if (fullRoadAddr !== '') {
+//				fullRoadAddr += extraRoadAddr;
+//			}
 			
-			document.getElementById('').value = fullRoadAddr;
+			let addr = '';
+			
+//			if(data.selectedType) 
+			
+			document.getElementById('main-address').value = fullRoadAddr;
+			document.getElementById('detail-address').focus();
 		}
 		
 	}).open();

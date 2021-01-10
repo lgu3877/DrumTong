@@ -16,7 +16,6 @@ const toggleIcon = document.getElementById("delivery-icon");
 let deliveryToggle = false;
 
 
-
 // 옵션 생성
 function createOptions(categoryObject) {
 	console.log(categoryObject);
