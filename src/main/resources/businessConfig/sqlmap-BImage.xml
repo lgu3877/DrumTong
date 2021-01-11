@@ -20,8 +20,9 @@
 <!-- 	매장사진 테이블에  {저장이미지}를 업데이트 시켜준다. -->
 	<insert id="insertConstract" parameterType="BImageVO">
 		INSERT INTO BIMAGE
+			(ESTID, STOREIMG)
 			VALUES
-			( #{estid}, #{storeimg}, #{registdate}, #{delegatephotoboolean} )
+			( #{estid}, #{storeimg} )
 	</insert>
 
 

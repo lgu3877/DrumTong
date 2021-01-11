@@ -45,10 +45,10 @@ async function updatePhoto() {
 	
 	// result.data (es6 > obejct destructuring)
 //	const { data } = await axios.post("/drumtong/business/mainmanagement/businessShopManagement/", object);
-		
+	
 	const { data } = await axios.post(
-		"/drumtong/business/mainmanagement/BImage/rest/updateStoreIMG/", 
-		formData,
+		"/drumtong/business/mainmanagement/BImage/rest/updateStoreIMG/",formData
+		,
 		{
 			headers: {
 				"Content-Type": `multipart/form-data`,

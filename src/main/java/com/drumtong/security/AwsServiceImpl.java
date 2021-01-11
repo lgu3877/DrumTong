@@ -95,10 +95,15 @@ public class AwsServiceImpl{
     	// 온라인 계약에 Binforamtion 테이블과 BPayment를 구분시켜주기 위한 데이터 입니다.
     	// count가 0~1 일 때는 BInformation에 관한 처리를 해주고
     	// count가 2일 때는 BPayment에 관한 처리를 해줍니다.
+    	// 매장 관리 이미지 
+    	// 메인이미지 "delegatephotoboolean"  서브 이미지들 "storeimg"
+    	
     	int count = 0;
     	
     	try {
-    		List<MultipartFile> fileList = mpf.getFiles("file");
+    		System.out.println("multipleupload 실행");
+//    		List<MultipartFile> fileList = mpf.getFiles("file");
+    		List<MultipartFile> fileList = mpf.getFiles("storeimg");
             for (MultipartFile mf : fileList) {
             	String originFileName = mf.getOriginalFilename(); // 원본 파일 명
 //                s3FileUpload(mf, object.getEstid(), object);
@@ -108,6 +113,9 @@ public class AwsServiceImpl{
                 System.out.println("실행");
         		System.out.println("originFileName : " + originFileName);
             }
+            
+            MultipartFile delegate = mpf.getFile("delegatephotoboolean");
+            s3FileUpload(delegate, folderName, object, count);
             return 1;
     	}
     	catch(Exception e) {
@@ -151,6 +159,7 @@ public class AwsServiceImpl{
         	 * 매장사진의 경우에는 서비스에서 1차적으로 insert를 하지않고 여기서 종합적으로 신규 데이터를 만들어준다.
         	 */
          	if(object instanceof BImageVO) { 
+         		System.out.println("BimageVO 실행에엥");
 //         		BImageVO vo = (BImageVO)object;
          		
          		// 서브폴더 이름은 매장사진이다.
@@ -251,7 +260,7 @@ public class AwsServiceImpl{
 	        putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead);
 	        
 	        
-	        
+	        System.out.println("S3 업로드 액션 취한다....");
 	        // 실제로 업로드 할 액션이다.
 	        amazonS3.putObject(putObjectRequest);
 	        
