@@ -41,6 +41,9 @@
    	
    	<!-- Daum Map API -->
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
+	<!-- Kakao Map API -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${KakaoKey }&libraries=services,clusterer,drawing"></script>
 </head>
      
 
@@ -542,13 +545,22 @@
 			</div>
 			
 		<!-- 주소지 변경 -->
-			<div>
-				<div>
-					<input id="main-address" type="text" name="mainlocation" value="${mainAddress }" onfocus="openAddressSearch()">
-					<input type="button" value="주소 찾기" onclick="openAddressSearch()" />
+			<div class="address_input_con form">
+				<div class="address_wrapper">
+					<h3>주소</h3>
+					<div class="main_address_input_wrapper">
+						<input id="main-address" class="main_address_input" type="text" name="mainlocation" value="${mainAddress }" 
+							onfocus="openAddressSearch()">
+						<input id="main-location" type="hidden" name="maplocation">
+						<button class="address_search_button" onclick="openAddressSearch()">주소 찾기</button>
+					</div>
+					<h3>상세주소</h3>
+					<div class="detail_address_input_wrapper">
+						<input id="detail-address" class="detail_address_input" type="text" name="detaillocation" value="${detailAddress }">
+					</div>
 				</div>
-				<div>
-					<input id="detail-address" type="text" name="detaillocation" value="${detailAddress }">
+				<div class="location_preview">
+					preview
 				</div>
 			</div>
 		</div>
@@ -625,8 +637,7 @@
 			object[mainOption] = subOption !== undefined ? subOption : "값 없음";		
 		}
 		
-		// MenuList > Dropdown category
-		createOptions(object);
+		createOptions(object); // MenuList > Dropdown category
 	</script>
 
 	<!-- 배달 -->
