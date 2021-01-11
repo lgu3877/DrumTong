@@ -37,6 +37,9 @@
     </div>
     <div class="c2-input" name="address">
     	<input type="text" placeholder="메인소재지를 입력하세요" name="mainlocation"  id="mainlocation" required readonly>
+    	<!-- 위도, 경도 값 저장 -->
+    	<input type="hidden" name="latitude" id="latitude">
+    	<input type="hidden" name="longitude" id="longitude">
     </div>
         <div class="c2-input" name="address">
     	<input type="text" placeholder="상세소세지를 입력하세요" name="detaillocation" id="detaillocation" required maxlength="24" >
