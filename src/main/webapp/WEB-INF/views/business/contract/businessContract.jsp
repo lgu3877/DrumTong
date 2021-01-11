@@ -20,6 +20,8 @@
 	<!-- 스크립트 영역 -->
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
+	<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a8f343b25889960b1fdf777c9a2a57c&libraries=services,clusterer,drawing"></script>
 </head>
 <body>
     <%@ include file="../main/businessHeader.jsp" %>
@@ -52,7 +54,6 @@
 
     
 	</div>
-	
 <script>
 	var iconDiv = document.getElementById('iconDiv');
 	document.getElementById('crn').addEventListener('blur', checkBusinessNumber);
@@ -115,7 +116,6 @@
 
 	// businessContract2.jsp -> Next 버튼
     function contract2Check(obj) {
-    	
     	var str_space = /\s/;               // 공백 체크
     	
     	var checkItem = obj.parentNode.querySelectorAll('div.c2-input input[type="text"]');
@@ -280,16 +280,41 @@
                         if (extraRoadAddr !== '') {
                             extraRoadAddr = ' (' + extraRoadAddr + ')';
                         }
+                        
+                        // 영경 추가(주소의 위도, 경도값을 저장하는 함수)
+                        kakaoFunc(fullRoadAddr);
+                        
                         // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
                         if (fullRoadAddr !== '') {
                             fullRoadAddr += extraRoadAddr;
                         }
-
+                        
                         // 우편번호와 주소 정보를 해당 필드에 넣는다.
                         document.getElementById('mainlocation').value = fullRoadAddr; //5자리 새우편번호 사용
+                        
                     }
                 }).open();
     }
+	
+	// 영경 스크립트(주소의 좌표값을 DB에 저장하는 부분)
+	function kakaoFunc(address){
+		console.log("address : ", address);
+		//주소-좌표 변환 객체를 생성합니다
+    	var geocoder = new kakao.maps.services.Geocoder();
+    	
+    	//주소로 좌표를 검색합니다
+    	geocoder.addressSearch(address, function(result, status) {
+
+    		// 정상적으로 검색이 완료됐으면 
+    	     if (status === kakao.maps.services.Status.OK) {
+//     	    	 console.log(result[0].y, result[0].x);
+    	    	 document.getElementById('latitude').value = result[0].y;
+    	    	 document.getElementById('longitude').value = result[0].x;
+    	    } else {
+    	    	alert("주소가 잘못되었습니다. 다시 시도해주세요");
+    	    }
+    	});    
+	}
 	
 	
 	

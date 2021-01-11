@@ -39,16 +39,16 @@
 	
 	
 	
-<!-- 	신규 데이터 등록 -->
+<!-- 	신규 데이터 등록 (영경 수정, 위도 경도 값 추가적으로 등록되게 하기)-->
 	<insert id="insertSignUp" parameterType="BInformationVO">
 		INSERT INTO BINFORMATION 
 			(ESTID, TAXATION, CRN, 
 			BRANDNAMING, REPRESENTATIVE, MAINLOCATION,
-			 DETAILLOCATION) 
+			 DETAILLOCATION, LATITUDE, LONGITUDE) 
 			VALUES
 			( #{estid}, #{taxation}, #{crn},
 			  #{brandnaming}, #{representative}, #{mainlocation},
-			  #{detaillocation})
+			  #{detaillocation}, #{latitude}, #{longitude})
 	</insert>
 
 
@@ -86,7 +86,7 @@
 				ELSE BRANDNAMING END AS BRANDNAMING, 
        			B.REPRESENTATIVE, B.MAINLOCATION, B.DETAILLOCATION, 
        			B.REPORTCARD, B.LICENSE, B.LATITUDE, 
-       			B.LOGNITUDE, B.STATUS, B.PREMIUMBOOLEAN 
+       			B.LONGITUDE, B.STATUS, B.PREMIUMBOOLEAN 
        			FROM BINFORMATION B,(SELECT * FROM BESTABLISHMENT WHERE BPERSONID=#{bpersonid}) A 
 			WHERE B.ESTID=A.ESTID
 	</select>
