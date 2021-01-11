@@ -2,8 +2,12 @@ package com.drumtong.business.service.mainmanagement;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.drumtong.business.dao.BDeliveryAreaDAO;
 import com.drumtong.business.dao.BManagementDAO;
@@ -13,12 +17,15 @@ import com.drumtong.business.dao.BScheduleTimeDAO;
 import com.drumtong.business.dao.BTempHolidayDAO;
 import com.drumtong.business.dao.BTempSuspensionDAO;
 import com.drumtong.business.vo.BDeliveryAreaVO;
+import com.drumtong.business.vo.BImageVO;
+import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BManagementVO;
 import com.drumtong.business.vo.BMenuVO;
 import com.drumtong.business.vo.BScheduleDaysVO;
 import com.drumtong.business.vo.BScheduleTimeVO;
 import com.drumtong.business.vo.BTempHolidayVO;
 import com.drumtong.business.vo.BTempSuspensionVO;
+import com.drumtong.security.AwsServiceImpl;
 
 @Service
 public class RestBusinessMainManagementService {
@@ -28,6 +35,7 @@ public class RestBusinessMainManagementService {
 	@Autowired BManagementDAO bManagementDAO;
 	@Autowired BMenuDAO	bMenuDAO;
 	@Autowired BDeliveryAreaDAO bDeliveryAreaDAO;
+	@Autowired AwsServiceImpl aws;
 	
 	
 	// 일정관리 테이블
@@ -39,12 +47,34 @@ public class RestBusinessMainManagementService {
 	// ========================= 대분류 [매장관리] ================================
 	
 	
+	// ===== 중분류 [BImage] 테이블 ====
+	
+	
+	// 1. 매장 관리에 매장 사진을 비동기식으로 수정해주는 메서드입니다.
+	public int updateBImage(MultipartHttpServletRequest mpf, HttpServletRequest req, BImageVO bImageVO) {
+		
+		HttpSession Session = req.getSession();
+ 	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+ 	    String estid = bInformationVO.getEstid();
+ 	    
+ 	    
+		int RestUpdateBImageResult = aws.multipleUpload(mpf, estid, bImageVO);
+		return RestUpdateBImageResult;
+				
+	}
+	
+	
+	
 	// ===== 중분류 [BManagement] 테이블 ====
 	
 	
 	// === 소분류 [ Introduction ] 필드 {매장소개글} ==
 	// 1. 매장 관리에 매장 소개글을 비동기식으로 수정해주는 메서드입니다.
-	public int updateIntroduction(BManagementVO bManagementVO) {
+	public int updateIntroduction(HttpServletRequest req, BManagementVO bManagementVO) {
+		HttpSession Session = req.getSession();
+		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+		String estid= bInformationVO.getEstid();
+		bManagementVO.setEstid(estid);
 		
 		int RestUpdateIntroductionReuslt = bManagementDAO.updateIntroduction(bManagementVO);
 		
@@ -54,7 +84,11 @@ public class RestBusinessMainManagementService {
 
 	// === 소분류 [ DeliveryBoolean ] 필드 {배달유무} ==
 	// 2. 매장 관리에 배달유무를 비둥기식으로 수정해주는 메서드입니다.
-	public int updateDeliveryBoolean(BManagementVO bManagementVO) {
+	public int updateDeliveryBoolean(HttpServletRequest req, BManagementVO bManagementVO) {
+		HttpSession Session = req.getSession();
+		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+		String estid= bInformationVO.getEstid();
+		bManagementVO.setEstid(estid);
 		
 		int RestUpdateDeliveryBooleanReuslt = bManagementDAO.updateDeliveryBoolean(bManagementVO);
 		
@@ -64,7 +98,11 @@ public class RestBusinessMainManagementService {
 
 	// === 소분류 [ QuickBoolean ] 필드 {퀵유무} ==
 	// 3. 매장 관리에 퀵여부를 비둥기식으로 수정해주는 메서드입니다.
-	public int updateQuickBoolean(BManagementVO bManagementVO) {
+	public int updateQuickBoolean(HttpServletRequest req, BManagementVO bManagementVO) {
+		HttpSession Session = req.getSession();
+		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+		String estid= bInformationVO.getEstid();
+		bManagementVO.setEstid(estid);
 		
 		int RestUpdateDeliveryBooleanReuslt = bManagementDAO.updateQuickBoolean(bManagementVO);
 		
@@ -73,8 +111,12 @@ public class RestBusinessMainManagementService {
 
 	// === 소분류 [ DEFAULTCATEGORY ] 필드 {퀵유무} ==
 	// 4. 매장 관리에 기본 카테고리를 비둥기식으로 수정해주는 메서드입니다.
-	public int updateDefaultCategory(BManagementVO bManagementVO) {
-
+	public int updateDefaultCategory(HttpServletRequest req, BManagementVO bManagementVO) {
+		HttpSession Session = req.getSession();
+		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+		String estid= bInformationVO.getEstid();
+		bManagementVO.setEstid(estid);
+		
 		int RestUpdateDefaultCategoryReuslt = bManagementDAO.updateDefaultCategory(bManagementVO);
 		
 		return RestUpdateDefaultCategoryReuslt;
@@ -86,21 +128,36 @@ public class RestBusinessMainManagementService {
 	// ===== 중분류 [BManagement] 테이블 ====
 
 	// 0. 메장 메뉴를 비동기식으로 새로이 입력해주는 메서드입니다.
-	public int insertBMenu(BMenuVO bMenuVO) {
+	public int insertBMenu(HttpServletRequest req, BMenuVO bMenuVO) {
+		HttpSession Session = req.getSession();
+		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+		String estid= bInformationVO.getEstid();
+		bMenuVO.setEstid(estid);
+		
 		int RestInsertBMenuReuslt = bMenuDAO.insertBMenu(bMenuVO);
 		return RestInsertBMenuReuslt;
 	}
 	
 	
 	// 1. 매장 메뉴를 비둥기식으로 수정해주는 메서드입니다.
-	public int updateBMenu(BMenuVO bMenuVO) {
+	public int updateBMenu(HttpServletRequest req, BMenuVO bMenuVO) {
+		HttpSession Session = req.getSession();
+		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+		String estid= bInformationVO.getEstid();
+		bMenuVO.setEstid(estid);
+		
 		int RestUpdateBMenuReuslt = bMenuDAO.updateBMenu(bMenuVO);
 		 
 		return RestUpdateBMenuReuslt;
 	}
 
 	// 2. 매장 메뉴를 비동기식으로 삭제해주는 메서드입니다.
-	public int deleteBMenu(BMenuVO bMenuVO) {
+	public int deleteBMenu(HttpServletRequest req, BMenuVO bMenuVO) {
+		HttpSession Session = req.getSession();
+		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+		String estid= bInformationVO.getEstid();
+		
+		bMenuVO.setEstid(estid);
 		
 		int RestDeleteBMenuReuslt = bMenuDAO.deleteBMenu(bMenuVO);
 		
@@ -115,8 +172,12 @@ public class RestBusinessMainManagementService {
 	// ===== 중분류 [BDELIVERYAREA] 테이블 ====	
 	
 	// 1. 배달 지역을 비동기식으로 수정해주는 메서드입니다.
-	public int updateBDeliveryArea(BDeliveryAreaVO bDeliveryAreaVO) {
-
+	public int updateBDeliveryArea(HttpServletRequest req, BDeliveryAreaVO bDeliveryAreaVO) {
+		HttpSession Session = req.getSession();
+		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+		String estid= bInformationVO.getEstid();
+		bDeliveryAreaVO.setEstid(estid);
+		
 		int RestUpdateBDeliveryAreaReuslt = bDeliveryAreaDAO.updateBDeliveryArea(bDeliveryAreaVO);
 		
 		return RestUpdateBDeliveryAreaReuslt;

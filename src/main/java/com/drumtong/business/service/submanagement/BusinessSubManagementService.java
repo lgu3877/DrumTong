@@ -16,6 +16,7 @@ import com.drumtong.business.dao.BReviewDAO;
 import com.drumtong.business.dao.BSalesDAO;
 import com.drumtong.business.vo.BCouponVO;
 import com.drumtong.business.vo.BInformationVO;
+import com.drumtong.business.vo.BPrivateDataVO;
 import com.drumtong.business.vo.OrderList;
 import com.drumtong.security.OrderListSetting;
 import com.drumtong.security.Review;
@@ -35,11 +36,12 @@ public class BusinessSubManagementService {
 	
 	private ModelAndView mainMove = new ModelAndView("redirect:/business/");
 	
+	
 	// 비즈니스 리뷰관리 페이지로 이동 (GET) [영경]
 	public ModelAndView reviewManagement(HttpServletRequest req, String pageKind) {
 		BInformationVO bInformationVO = (BInformationVO)req.getSession().getAttribute("selectEST");
 		
-		if(checkEstStatus(bInformationVO)) return mainMove;
+		if(checkEstStatus(req)) return mainMove;
 		
 		ModelAndView mav = new ModelAndView("business/submanagement/businessReviewManagement");
 		
@@ -53,7 +55,7 @@ public class BusinessSubManagementService {
 	public ModelAndView couponManagement(HttpServletRequest req) {
 		BInformationVO bInformationVO = (BInformationVO)req.getSession().getAttribute("selectEST");
 		
-		if(checkEstStatus(bInformationVO)) return mainMove;
+		if(checkEstStatus(req)) return mainMove;
 		
 		ModelAndView mav = new ModelAndView("business/submanagement/businessCouponManagement");
 		
@@ -68,7 +70,7 @@ public class BusinessSubManagementService {
 	public ModelAndView cardAccountManagement(HttpServletRequest req) {		// Status 계약 여부 필드를 세션을 받아와준다.
 		BInformationVO bInformationVO = (BInformationVO)req.getSession().getAttribute("selectEST");
 
-		if(checkEstStatus(bInformationVO)) return mainMove;
+		if(checkEstStatus(req)) return mainMove;
 		
 		
 		ModelAndView mav = new ModelAndView("business/submanagement/businessCardAccountManagement");
@@ -81,12 +83,13 @@ public class BusinessSubManagementService {
 
 
 
-	// pageKind in ('Hits[조회수]', 'Sales[주문 수]', 'Price[주문 금액]')
+	// pageKind in ('Hits[조회수]', 'Orders[주문 수]', 'Price[주문 금액]')
+	// option : "Day",  "Week", "Month"
 	// 비즈니스 통계관리 페이지로 이동 (GET) [영경]
 	public ModelAndView statisticsManagement(HttpServletRequest req, String pageKind, String option, String startDate, String endDate) {
 		BInformationVO bInformationVO = (BInformationVO)req.getSession().getAttribute("selectEST");
 		
-		if(checkEstStatus(bInformationVO)) return mainMove;
+		if(checkEstStatus(req)) return mainMove;
 
 		String estid = bInformationVO.getEstid();
 		
@@ -95,16 +98,18 @@ public class BusinessSubManagementService {
 								Statistics.statistics(estid, pageKind, option) : 
 								Statistics.statistics(estid, pageKind, option, startDate, endDate));
 		mav.addObject("pageKind", pageKind == null || "n".equals(pageKind) ? "Hits/" : pageKind + "/");
+		mav.addObject("option", option == null || "n".equals(option) ? "Day/" : option + "/");
 		return mav;
 	}
 
 
+	// status in ('REQUEST', 'PROCESSING', 'SUCCESS')
 	// 비즈니스 주문현황 관리 페이지로 이동 (GET) [건욱]
 	public ModelAndView orderStatusManagement(HttpServletRequest req, String status) {
 		status = status == null ? "REQUEST" : status;
 		BInformationVO bInformationVO = (BInformationVO)req.getSession().getAttribute("selectEST");
 		
-		if(checkEstStatus(bInformationVO)) return mainMove;
+		if(checkEstStatus(req)) return mainMove;
 		
 		//	주문현황 페이지에 필요한 구매정보 데이터를 가져와줍니다. 
 		List<OrderList> orderList =  OrderListSetting.selectBusiness(bInformationVO.getEstid(), status);
@@ -123,9 +128,31 @@ public class BusinessSubManagementService {
 	}
 
 	// 매장이 완성되어있는지 체크[영경]
-	private boolean checkEstStatus(BInformationVO bInformationVO) {
+	private boolean checkEstStatus(HttpServletRequest req) {
+		BPrivateDataVO bPrivateDataVO = (BPrivateDataVO)req.getSession().getAttribute("bLogin");
+		BInformationVO bInformationVO =(BInformationVO)req.getSession().getAttribute("selectEST");
+		if(bPrivateDataVO == null) {
+			mainMove.addObject("contract" , "null");
+			return true;
+		}
+		else if(bInformationVO.getStatus().equals("FAIL")) {
+			mainMove.addObject("contract" , "1step");
+			return true;
+		}
+		else if(bInformationVO.getStatus().equals("PROCESS")) {
+			mainMove.addObject("contract" , "2step");
+			return true;
+		}
+		
 		// Status 계약 여부 필드를 세션에서 받아와 status가 'FAIL'이면 business로 우회해주고 'SUCCESS'이면 서브관리 페이지들로 이동시키기 위해 boolean을 반환한다.
-		return bInformationVO.getStatus().equals("FAIL");
+		return false;
+	}
+
+
+	public int calcEte(HttpServletRequest req, String salecode) {
+		String estid = ((BInformationVO)req.getSession().getAttribute("selectEST")).getEstid();
+		
+		return OrderListSetting.calcEte(estid, salecode);
 	}
 	
 }

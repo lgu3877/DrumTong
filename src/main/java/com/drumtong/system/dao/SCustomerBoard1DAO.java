@@ -19,4 +19,6 @@ public interface SCustomerBoard1DAO {
 	// 게시판 글 하나를 보여준다.
 	SBoardVO read(int num);
 
+	int write(SBoardVO sboardvo);
+
 }

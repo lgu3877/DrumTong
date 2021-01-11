@@ -97,18 +97,23 @@ public class AwsServiceImpl{
     	// count가 2일 때는 BPayment에 관한 처리를 해줍니다.
     	int count = 0;
     	
+    	try {
+    		List<MultipartFile> fileList = mpf.getFiles("file");
+            for (MultipartFile mf : fileList) {
+            	String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+//                s3FileUpload(mf, object.getEstid(), object);
+            	s3FileUpload(mf, folderName, object, count);
+            	count++;
+            	
+                System.out.println("실행");
+        		System.out.println("originFileName : " + originFileName);
+            }
+            return 1;
+    	}
+    	catch(Exception e) {
+    		return 0;
+    	}
     	
-    	List<MultipartFile> fileList = mpf.getFiles("file");
-        for (MultipartFile mf : fileList) {
-        	String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-//            s3FileUpload(mf, object.getEstid(), object);
-        	s3FileUpload(mf, folderName, object, count);
-        	count++;
-        	
-            System.out.println("실행");
-    		System.out.println("originFileName : " + originFileName);
-        }
-        return 1;
     }
     
     // s3에 파일을 업로드합니다.

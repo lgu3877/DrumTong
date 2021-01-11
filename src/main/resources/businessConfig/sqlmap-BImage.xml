@@ -8,12 +8,12 @@
 
 	<!-- 	UUID 중복검사 aws S3에 들어가는 이미지입니다 -->
 	<select id="confirm" resultType="int" parameterType="String">
-		SELECT COUNT(STOREIMG) FROM BIMAGE WHERE STOREIMG LIKE '%'||#{SerialUUID}||'%'
+		SELECT COUNT(STOREIMG) FROM BIMAGE WHERE STOREIMG LIKE '%'||#{value}||'%'
 	</select>
 
 <!-- 사업장 이미지 반환 -->
 	<select id="selectImageList" parameterType="String" resultType="BImageVO" >
-		SELECT * FROM BIMAGE WHERE ESTID=#{estid}
+		SELECT * FROM BIMAGE WHERE ESTID=#{value}
 	</select>
 	
 	

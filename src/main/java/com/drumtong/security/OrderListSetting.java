@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import com.drumtong.business.dao.BDetailSalesDAO;
 import com.drumtong.business.dao.BSalesDAO;
 import com.drumtong.business.vo.BDetailSalesVO;
+import com.drumtong.business.vo.EteNums;
 import com.drumtong.business.vo.OrderList;
 
 @Component	// [건욱]
@@ -169,21 +170,45 @@ public class OrderListSetting {
 	}
 
 	// 요청을 수락해 처리중으로 넘어가는 과정
-	public static int requestAccept(String estid, HashMap<String, String> map) {
+	public static int requestAccept(HashMap<String, String> map) {
 		// 필요한 것
 		// 승원씨한테 얘기할 것
 		// ob에 salecode, requesttype={'DELIVERY','VISIT'}, orderDate='YYYY-MM-DD' 넣어주기
 		// estid, salecode, REQUESTTYPE='DELIVERY','VISIT', 배송일자(orderDate)
-		map.put("estid", estid);
 		return bSalesDAO.updateOrderList(map);
 		
 	}
 	
-	public static int Decline(String estid, HashMap<String, String> map) {
+	// 요청을 거절했을 때
+	public static int Decline(HashMap<String, String> map) {
 		// 필요한 것
 		// estid, salecode
-		map.put("estid", estid);
+		
+		// map 과 sale코드 정보로 고객의 이메일 주소를 가져온다.
+		
 		return bSalesDAO.deleteOrderList(map);
 	}
-
+	
+	// ete 날짜를 계산하는 메서드[영경]
+	public static int calcEte(String estid, String salecode) {
+		// 1. 하루에 한 손님에게서 받은 빨래를 처리할 수 있는 개수
+		final int LIMIT = 5;
+		// 2. 각 빨래 ete 참고해서 추천일자 계산
+		HashMap<String, String> param = new HashMap<String, String>();
+		param.put("estid", estid);
+		param.put("salecode", salecode);
+		List<EteNums> eteList = bDetailSalesDAO.calcEte(param);
+		int sum = 0;
+		int max = 1;
+		int result = 0;
+		for(EteNums e : eteList) {
+			int ete = e.getEte();
+			sum += ete * e.getAmount();
+			max = max < ete ? ete : max;
+		}
+		result = sum / LIMIT + (sum % LIMIT != 0 ? 1 : 0);
+		if(result < max) result = max;
+		return result;
+	}
+	
 }

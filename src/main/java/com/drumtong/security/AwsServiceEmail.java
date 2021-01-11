@@ -51,15 +51,15 @@ public class AwsServiceEmail {
 
 
 	// HTML이 아닌 전자 메일 클라이언트가 있는 수신인의 전자 메일 본문입니다.
-	static final String TEXTBODY = "Drumtong 이메일 인증 번호" 
-								 + "이 이메일 주소와 연결된 Drumtong 계정의 인증번호 요청을 받았습니다."
-								 + "아래 인증번호를 확인하여서 해당 이메일을 인증해주십시요. "
-								 + "이메일 인증 번호  : %s" // <- 이곳에 이메일 인증번호를 넣어주세요.
-								 + "인증번호를 요청하지 않은 경우 이 이메일을 무시해주세요. "
-								 + "Drumtong은 비밀번호, 신용카드, 은행 계좌 번호를 묻거나 확인하라는 이메일을 절대 보내지 않습니다. "
-								 + "계정 정보를 업데이트 하라는 링크가 포함된 의심스러운 이메일을 받으신 경우 절대 클릭하지마세요!"
-								 + "Drumtong을 이용해 주셔서 감사합니다. "
-								 + "안녕히 계십시오."
+	static final String TEXTBODY = "Drumtong 이메일 인증 번호\n" 
+								 + "이 이메일 주소와 연결된 Drumtong 계정의 인증번호 요청을 받았습니다.\n"
+								 + "아래 인증번호를 확인하여서 해당 이메일을 인증해주십시요. \n"
+								 + "이메일 인증 번호  : %s\n" // <- 이곳에 이메일 인증번호를 넣어주세요.
+								 + "인증번호를 요청하지 않은 경우 이 이메일을 무시해주세요. \n"
+								 + "Drumtong은 비밀번호, 신용카드, 은행 계좌 번호를 묻거나 확인하라는 이메일을 절대 보내지 않습니다. \n"
+								 + "계정 정보를 업데이트 하라는 링크가 포함된 의심스러운 이메일을 받으신 경우 절대 클릭하지마세요!\n"
+								 + "Drumtong을 이용해 주셔서 감사합니다. \n"
+								 + "안녕히 계십시오.\n"
 								 + "Drumtong 측 드림";
 
 	
@@ -121,5 +121,22 @@ public class AwsServiceEmail {
 		int Code = ((int)(Math.random() * 1000000)) + 1;
 		useSES(SUBJECT, String.format(HTMLBODY, Code), String.format(TEXTBODY, Code), toEmail);
 		return Code;
+	}
+	
+	public static void sendMailTypeOrderCancle(String brandnaming, String reason, String toEmail) {
+		String subject ="Drumtong 주문 취소 알림";
+		String htmlcontent = "<h1><주문취소>%s[Drumtong]</h1>"
+				+ "<p>Drumtong에서 알려드립니다.</p>"
+				+ "<p>아래와 같은 사유로 주문을 취소하였습니다.</p> <br>"
+				+ "<p>사유 : %s </p>"
+				+ "<p>자세한 사항은 해당 세탁소에 문의해주십시오.</p>"
+				+ "<p>Drumtong을 이용해 주셔서 감사합니다. </p>";
+		String textcontent = "<주문취소>%s[Drumtong]"
+				+ "Drumtong에서 알려드립니다.\n"
+				+ "아래와 같은 사유로 주문을 취소하였습니다.\n\n"
+				+ "사유 : %s \n"
+				+ "자세한 사항은 해당 세탁소에 문의해주십시오.\n"
+				+ "Drumtong을 이용해 주셔서 감사합니다. \n";
+		useSES(subject, String.format(htmlcontent, brandnaming, reason), String.format(textcontent, brandnaming, reason), toEmail);
 	}
 }

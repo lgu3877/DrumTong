@@ -58,7 +58,7 @@
 	});
 	
 	function popupExit() {	// 팝업창 종료
-		let popupexit = confirm('주문취소를 취소하시겠습니까?');
+		let popupexit = confirm('창을 닫으시겠습니까?');
 		if(popupexit == true)
 			close();
 	}
@@ -68,6 +68,7 @@
 		
 		let ob={
 				   'salecode': '${salecode}',
+				   'reason' : '개인적인 사정',
 		      	};
 		
 		var axiosPath = '/drumtong/business/subManagement/businessOrderStatusManagement/rest/REQUEST/Decline/';

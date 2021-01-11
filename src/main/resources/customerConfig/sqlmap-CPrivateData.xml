@@ -42,4 +42,11 @@
 	<select id="userEmailDupl" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM CPRIVATEDATA WHERE EMAIL=#{email}
 	</select>
+	
+	<select id="selectEmail" parameterType="hashmap" resultType="String">
+		SELECT EMAIL FROM CPRIVATEDATA c 
+			INNER JOIN BSALES b 
+			ON c.MEMBERID=b.MEMBERID 
+			WHERE ESTID=#{estid} AND SALECODE=#{salecode}
+	</select>
 </mapper>

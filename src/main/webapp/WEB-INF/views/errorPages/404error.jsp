@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="cpath">${pageContext.request.contextPath }</c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,9 +16,9 @@
 		<p>궁금한 점이 있으시면 언제든 고객센터를 통해 문의해 주시기 바랍니다.</p>
 		<p>감사합니다.</p>
 		<p>
-			<button>[고객]메인으로</button>
-			<button>[사장님]메인으로</button>
-			<button>이전 페이지로</button>
+			<button onclick="location.href='${cpath}/customer/'">[고객]메인으로</button>
+			<button onclick="location.href='${cpath}/business/'">[사장님]메인으로</button>
+			<button onclick="history.go(-1)">이전 페이지로</button>
 		</p>
 	</section>
 </body>
