@@ -43,7 +43,7 @@
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
 	<!-- Kakao Map API -->
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${KakaoKey }&libraries=services,clusterer,drawing"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a8f343b25889960b1fdf777c9a2a57c&libraries=services,clusterer,drawing"></script>
 </head>
      
 
@@ -559,7 +559,7 @@
 						<input id="detail-address" class="detail_address_input" type="text" name="detaillocation" value="${detailAddress }">
 					</div>
 				</div>
-				<div class="location_preview">
+				<div id="preview-map" class="location_preview">
 					preview
 				</div>
 			</div>
