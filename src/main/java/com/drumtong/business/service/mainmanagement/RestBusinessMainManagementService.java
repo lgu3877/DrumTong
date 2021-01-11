@@ -27,6 +27,7 @@ import com.drumtong.business.vo.BTempHolidayVO;
 import com.drumtong.business.vo.BTempSuspensionVO;
 import com.drumtong.security.AwsServiceImpl;
 
+// [건욱]
 @Service
 public class RestBusinessMainManagementService {
 	
@@ -47,16 +48,46 @@ public class RestBusinessMainManagementService {
 	// ========================= 대분류 [매장관리] ================================
 	
 	
+	// 통합 메뉴 업데이트
+	public int bManagementRestProcessing(HttpServletRequest req, BManagementVO bManagementVO, String processing) {
+		HttpSession Session = req.getSession();
+ 	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+ 	    String estid = bInformationVO.getEstid();
+ 	    bManagementVO.setEstid(estid);
+ 	    int result = 0;
+ 	    switch(processing) {
+ 	    	case "updateIntroduction" :
+ 	    		result = bManagementDAO.updateIntroduction(bManagementVO);
+ 	    		break;
+ 	    	
+ 	    	case "updateDeliveryBoolean" :
+ 	    		result = bManagementDAO.updateDeliveryBoolean(bManagementVO);	
+ 	    		break;
+ 	    	
+ 	    	case "updateQuickBoolean" :
+ 	    		result = bManagementDAO.updateQuickBoolean(bManagementVO);
+ 	    		break;
+ 	    	
+ 	    	case "updateDefaultCategory" :
+ 	    		result = bManagementDAO.updateDefaultCategory(bManagementVO);
+ 	    		break;
+ 	    }
+		return result;
+	}
+
+	
 	// ===== 중분류 [BImage] 테이블 ====
 	
 	
 	// 1. 매장 관리에 매장 사진을 비동기식으로 수정해주는 메서드입니다.
-	public int updateBImage(MultipartHttpServletRequest mpf, HttpServletRequest req, BImageVO bImageVO) {
-		
+	public int updateBImage(MultipartHttpServletRequest mpf, HttpServletRequest req) {
+		System.out.println("Bimage Rest Service 실행...");
 		HttpSession Session = req.getSession();
  	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
  	    String estid = bInformationVO.getEstid();
  	    
+ 	    BImageVO bImageVO = new BImageVO();
+ 	    bImageVO.setEstid(estid);
  	    
 		int RestUpdateBImageResult = aws.multipleUpload(mpf, estid, bImageVO);
 		return RestUpdateBImageResult;
@@ -125,8 +156,34 @@ public class RestBusinessMainManagementService {
 	
 	
 	
-	// ===== 중분류 [BManagement] 테이블 ====
+	// ===== 중분류 [BMenu] 테이블 ====
+	
+	// 통합
+	public int bMenuRestProcessing(HttpServletRequest req, BMenuVO bMenuVO, String processing) {
+		HttpSession Session = req.getSession();
+ 	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+ 	    String estid = bInformationVO.getEstid();
+ 	    bMenuVO.setEstid(estid);
+		
+ 	    int result = 0;
+ 	    switch(processing) {
+ 	    	
+ 	    	case "insertBMenu" :
+ 	    		result = bMenuDAO.insertBMenu(bMenuVO);
+ 	    		break;
+ 	    	
+ 	    	case "updateBMenu" :
+ 	    		result = bMenuDAO.updateBMenu(bMenuVO);
+ 	    		break;
+ 	    		
+ 	    	case "deleteBMenu" :
+ 	    		result = bMenuDAO.deleteBMenu(bMenuVO);
+ 	    		break;
+ 	    }
+		return result;
+	}
 
+	
 	// 0. 메장 메뉴를 비동기식으로 새로이 입력해주는 메서드입니다.
 	public int insertBMenu(HttpServletRequest req, BMenuVO bMenuVO) {
 		HttpSession Session = req.getSession();
@@ -317,6 +374,10 @@ public class RestBusinessMainManagementService {
 
 		return RestInsertBTempSuspensionReuslt;
 	}
+
+
+
+
 	
 	
 

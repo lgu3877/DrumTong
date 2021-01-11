@@ -6,10 +6,10 @@
 <c:set var="cpath">${pageContext.request.contextPath }</c:set>
 <section class="section_board">
         <article class="board">
-            <h1 class="board_mainName"><span style="float: left">게</span> 시 <span style="float: right">판</span></h1>
+            <div class="board_mainName"><span></span></div>
             <div class="board_box">
 
-                <form method="GET" action="${cpath }/customer/board/customerBoardSaveWriting/${type}/">
+                <form method="GET" action="${cpath }/customer/board/customerBoardSaveWriting/${type}/" class="writeform">
                     <div class="boardList">
                         <div class="boardLine3">
                             <div class="title2">
@@ -36,7 +36,7 @@
                     </div>
                     <div class="boardMenu3">
                         <div class="leftMenu3">
-                            <input class="btn" type="button" value="돌아가기" onclick="history.go(-1)">
+                            <input class="btn" type="button" value="돌아가기" onclick="location.replace('${pageContext.request.contextPath}/customer/board/customerBoard/${type }/')">
                         </div>
 
                         <div class="rightMenu3">
@@ -48,6 +48,12 @@
             </div>
         </article>
     </section>
-
+    
+	<script type="text/javascript">
+    	if('${type }' == 'notice')
+    		$('.board_mainName').children('span').html('공지사항 게시판');
+    	else if('${type }' == 'event')
+    		$('.board_mainName').children('span').html('이벤트 게시판');
+    </script>
 
 <%@ include file="../main/customerFooter.jsp"%>

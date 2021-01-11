@@ -5,6 +5,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,13 +32,44 @@ import com.drumtong.business.vo.BTempSuspensionVO;
  *  모든 관리는 비동기식으로 수정되며 획기적이면서 빠르게 사용자는 수정할 수 있습니다.
  */
 @RestController
-@RequestMapping("business/mainManagement/")
+@RequestMapping("business/mainmanagement/")
 public class RestBusinessMainManagementController {
 	
 	@Autowired RestBusinessMainManagementService svc;
 	
 	
 	// ========================= 대분류 [매장관리] ================================
+	
+	
+	// 통합 
+	@RequestMapping("BManagement/rest/{processing}/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String bManagementRestProcessing(HttpServletRequest req, @RequestBody BManagementVO bManagementVO,
+									 @PathVariable String processing) {
+		int result = svc.bManagementRestProcessing(req, bManagementVO, processing);
+		return result == 1
+				? "true"
+				: "false";
+
+	}
+	
+	// ===== 중분류 [BImage] 테이블 ====
+	// 1. 매장 이미지를 비둥기식으로 수정해주는 메서드입니다.
+	// 추후에 결정 JS 파일을 보고
+	@RequestMapping("BImage/rest/updateStoreIMG/")
+	@PostMapping(produces="charset=utf8", consumes =  { "multipart/form-data" } )
+//	@PostMapping(produces="application/json; charset=utf8", consumes = MediaType.MULTIPART_FORM_DATA_VALUE )
+//	@PostMapping(produces="charset=utf8")
+	public String updateStoreIMG(HttpServletRequest req, MultipartHttpServletRequest mpf) {
+		System.out.println("Bimage Rest Controller 실행...");
+		int result = svc.updateBImage(mpf,req);
+		System.out.println(result + " : result 값 입니다");
+		return result == 1
+				? "true"
+				: "false";
+	}	
+		
+		
 	
 	
 	// ===== 중분류 [BManagement] 테이블 ====
@@ -102,22 +134,20 @@ public class RestBusinessMainManagementController {
 	
 	
 	
-	// ===== 중분류 [BImage] 테이블 ====
-	// 1. 매장 이미지를 비둥기식으로 수정해주는 메서드입니다.
-	// 추후에 결정 JS 파일을 보고
-	@RequestMapping("BImage/rest/updateStoreIMG/")
+	
+	// ===== 중분류 [BMenu] 테이블 ====	
+	
+	//통합
+	@RequestMapping("BMenu/rest/{processing}/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String updateStoreIMG(HttpServletRequest req,@RequestBody MultipartHttpServletRequest mpf, @RequestBody BImageVO bImageVO) {
-		
-		int result = svc.updateBImage(mpf,req,bImageVO);
-		System.out.println(result + " : result 값 입니다");
+	public String bMenuRestProcessing(HttpServletRequest req, @RequestBody BMenuVO bMenuVO, 
+							  @PathVariable String processing) {
+		int result = svc.bMenuRestProcessing(req, bMenuVO, processing);
 		return result == 1
 				? "true"
 				: "false";
-	}	
+	}
 	
-	
-	// ===== 중분류 [BMenu] 테이블 ====	
 
 	// 0. 메장 메뉴를 비동기식으로 새로이 입력해주는 메서드입니다.
 	@RequestMapping("BMenu/rest/insertBMenu/")

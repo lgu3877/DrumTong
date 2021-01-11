@@ -95,6 +95,13 @@ public class BusinessMainManagementService {
  	    	mav.addObject("bManagement", (new Gson()).toJson(bManagementDAO.selectCustomerDetail(estid)));
  	    	
  	    }
+ 	    
+ 	    // 대분류 중분류 카테고리를 셋팅해주는 함수입니다.
+	    HashMap<String, ArrayList<String>> menuCategories = menuCategoriesSetting(estid);
+	    	
+	    //  대분류, 중분류 카테고리 모음
+	    mav.addObject("menuCategories", (new Gson()).toJson(menuCategories));
+	    	
 		// MultipartFile mpf = new MultipartFile();
  	    // aws.s3FileUpload(file, folderName);
  	    
@@ -223,6 +230,43 @@ public class BusinessMainManagementService {
 		
 		return mav;
 	}
-
+	
+	// 대분류 중분류를 셋팅해주는 함수입니다. 
+	private HashMap<String, ArrayList<String>> menuCategoriesSetting(String estid) {
+		// 대분류와 중분류를 HashMap으로 매장관리에 보내준다.
+	    	/*
+	    	 * 이 데이터의 구조
+	    	 * {
+	    	 * 
+	    	 * 		"일반상의" : ["티셔츠","스포츠", "면티"],
+	    	 * 		"하의"    : ["청바지", "수면바지"], 
+	    	 * 			..
+	    	 * 			..
+	    	 * 			..
+	    	 * 			..
+	    	 * 			..
+	    	 * }
+	    	 */
+	    	// 대분류/중분류 자료 구조를 선언해준다.
+	    	HashMap<String, ArrayList<String>> menuCategories = new HashMap<String, ArrayList<String>>();
+	    	
+	    	// 새 메뉴VO를 선언해준다. estid값을 셋팅해준다.
+	    	BMenuVO bMenuVO = new BMenuVO();
+	    	bMenuVO.setEstid(estid);
+	    	
+	    	// 메인카테고리들을 DAO에서 받아와준다.
+	    	ArrayList<String> mainCategories = bMenuDAO.selectMaincategories(estid);
+	    	
+	    	// ForEach문으로 데이터를 분리시켜준다.
+	    	for(String mainCategory : mainCategories) {
+	    		
+	    		// 분리한 데이터를 VO에 maincategory를 셋팅해준다.
+	    		bMenuVO.setMaincategory(mainCategory);
+	    		// 설정한 값으로 메인카테고리에 해당하는 서브카테고리들을 불러와주고 해당 값을 menucategories에 셋팅해준다.
+	    		menuCategories.put( mainCategory , bMenuDAO.selectSubcategories(bMenuVO));
+	    	}
+	    	
+	    	return menuCategories;
+	}
 	
 }
