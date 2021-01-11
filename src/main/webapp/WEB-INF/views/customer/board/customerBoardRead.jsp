@@ -22,7 +22,6 @@
 			</div>
 
 			<div class="boardMenu2">
-				
 				<div class="rightMenu2">
 					<input class="btn" type="button" value="목록보기"	
 					onclick="location.replace('${pageContext.request.contextPath}/customer/board/customerBoard/${type }/')">

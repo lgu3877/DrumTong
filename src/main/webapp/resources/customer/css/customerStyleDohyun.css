@@ -1348,6 +1348,7 @@ body .section_board .board .board_mainName {
 body .section_board .board .board_box {
    width: 100%;
    height: 700px;
+   margin-top: 25px;
 /*    border: 1px solid blue; */
 }
 
