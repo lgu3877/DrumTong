@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import com.drumtong.customer.service.board.CustomerBoardService;
+import com.drumtong.system.vo.SBoardVO;
 
 @Controller
 @RequestMapping("customer/board/")
@@ -40,21 +41,17 @@ public class CustomerBoardController {
 	
 	@RequestMapping(value = "customerBoardRead/{type}/{num}/", method = RequestMethod.GET)
 	public ModelAndView read(HttpServletRequest req, @PathVariable("type")String type, @PathVariable("num")int num) {
-		req.getSession().setAttribute("num", num);
-		return new ModelAndView("redirect:/customer/board/customerBoardRead/" + type + "/");
-	}
-	
-	@RequestMapping(value = "customerBoardRead/{type}/", method = RequestMethod.GET)
-	public ModelAndView read(HttpServletRequest req, @PathVariable("type")String type) {
-		HttpSession Session = req.getSession();
-		int num = (int)Session.getAttribute("num");
-		Session.removeAttribute("num");
 		return svc.read(type, num);
 	}
-		
-	@RequestMapping(value = "customerBoardWrite/", method = RequestMethod.GET)
-	public String write() {
-		return "customer/board/customerBoardWrite";	
+	
+	@RequestMapping(value = "customerBoardWrite/{type}/", method = RequestMethod.GET)
+	public ModelAndView write(@PathVariable("type")String type) {
+		return svc.write(type);
+	}
+	
+	@RequestMapping(value = "customerBoardSaveWriting/{type}/", method = RequestMethod.GET)
+	public ModelAndView saveWriting(HttpServletRequest req, SBoardVO sboardvo, @PathVariable("type")String type) {
+		return svc.saveWriting(req, sboardvo, type);
 	}
 
 }

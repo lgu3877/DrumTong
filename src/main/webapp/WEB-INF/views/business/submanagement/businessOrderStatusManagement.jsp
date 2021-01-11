@@ -182,53 +182,70 @@
 		
 		let orderList = ${orderList};							// 서버에서 가져오는 주문현황 리스트
 		let clonecontainer = $('#clonediv0');					// id="clonediv0" 복사 -> 오리지널 주문현황 카드
-																// 이 복사한 개체를 이용하여 다른 카드들의 폼을 자동으로 형성함
-		let detailmenus = $('#detailmenus').clone();			
-	 	let innerclone = $('#detailmenus').find('.outerdetail').clone();	// 모달 -> 상세주문(=메뉴명, 가격, 개수 등등) 폼의 오리지널을 복사
-																			// 복사한 개체를 이용하여 모달에서 상세주문 부분들을 자동으로 형성함
-		
-		console.log(orderList);
-		
- 		window.onload = function() {
- 			zerodiv();
-  		}
- 		
- 		function zerodiv() {
- 			let status = '${status }';
-			$('#typeSelect').children('button[name=' + status + ']').attr('class', 'selectedStatus');
- 			
- 			if(document.querySelector('.zeroList') != null)
- 				document.querySelector('.zeroList').remove();
- 				
- 			if(orderList.length != 0) {
- 				
-	 			originclone();	// 메인화면에서 나타나는 메인 주문형황 카드들의 오리지날이 되는 폼에 들어가야할 값을 입력함
-  				insertDiv();	// 오리지널 메인 주문현황 카드를 복사하여 나머지 메인 주문현황 카드들을 생성함
-  			
-	  			$('div.outerdiv').find('.container').each(function(index, item) {	// 메인 주문내역(=container) 위의 라벨에도 똑같이 :hover 효과주기 위해서 
-  					$(item).hover(function() {	// 메인 주문현황 카드에 마우스를 올릴때 애니메이션 효과
-  						$(item).parent().find('.outerstatus1').css('transform', 'translate(0, -20px)');
-  						$(item).parent().find('.outerstatus1').css('transition', 'all 1s ease 0s');
-  						$(item).parent().find('.outerstatus2').css('transform', 'translate(0, -20px)');
-  						$(item).parent().find('.outerstatus2').css('transition', 'all 1s ease 0s');
-  					
-	  				}, function() {
-  						$(item).parent().find('.outerstatus1').css('transform', '');
-  						$(item).parent().find('.outerstatus1').css('transition', 'all 0s ease 0s');
-  						$(item).parent().find('.outerstatus2').css('transform', '');
-  						$(item).parent().find('.outerstatus2').css('transition', 'all 0s ease 0s');
-  					})
-	  			});
- 			}
- 			else {
- 				$('#clonediv0').css('display', 'none');
- 				let outerdiv = document.querySelector('.outerdiv');
- 				let zerolist = document.createElement('h1');
- 				zerolist.innerHTML = '리스트가 존재하지 않습니다'
+		// 이 복사한 개체를 이용하여 다른 카드들의 폼을 자동으로 형성함
+
+		let detailmenus = $('#detailmenus').clone();
+		let innerclone = $('#detailmenus').find('.outerdetail').clone(); // 모달 -> 상세주문(=메뉴명, 가격, 개수 등등) 폼의 오리지널을 복사
+		// 복사한 개체를 이용하여 모달에서 상세주문 부분들을 자동으로 형성함
+		window.onload = function() {
+			zerodiv();
+			$('#clonediv0').css('opacity', '1');
+		}
+
+		function zerodiv() {
+			let status = '${status }';
+			$('#typeSelect').children('button[name=' + status + ']').attr(
+					'class', 'selectedStatus');
+
+			if (document.querySelector('.zeroList') != null)
+				document.querySelector('.zeroList').remove();
+
+			if (orderList.length != 0) {
+
+				originclone(); // 메인화면에서 나타나는 메인 주문형황 카드들의 오리지날이 되는 폼에 들어가야할 값을 입력함
+				insertDiv(); // 오리지널 메인 주문현황 카드를 복사하여 나머지 메인 주문현황 카드들을 생성함
+
+				$('div.outerdiv').find('.container').each(
+						function(index, item) { // 메인 주문내역(=container) 위의 라벨에도 똑같이 :hover 효과주기 위해서 
+							$(item).hover(
+									function() { // 메인 주문현황 카드에 마우스를 올릴때 애니메이션 효과
+										$(item).parent().find('.outerstatus1')
+												.css('transform',
+														'translate(0, -20px)');
+										$(item).parent().find('.outerstatus1')
+												.css('transition',
+														'all 1s ease 0s');
+										$(item).parent().find('.outerstatus2')
+												.css('transform',
+														'translate(0, -20px)');
+										$(item).parent().find('.outerstatus2')
+												.css('transition',
+														'all 1s ease 0s');
+
+									},
+									function() {
+										$(item).parent().find('.outerstatus1')
+												.css('transform', '');
+										$(item).parent().find('.outerstatus1')
+												.css('transition',
+														'all 0s ease 0s');
+										$(item).parent().find('.outerstatus2')
+												.css('transform', '');
+										$(item).parent().find('.outerstatus2')
+												.css('transition',
+														'all 0s ease 0s');
+									})
+						});
+			} else {
+				$('#clonediv0').css('display', 'none');
+				let outerdiv = document.querySelector('.outerdiv');
+				let zerolist = document.createElement('h1');
+				zerolist.innerHTML = '리스트가 존재하지 않습니다'
 				zerolist.className = 'zeroList';
- 				outerdiv.appendChild(zerolist);
- 			}
- 		}
+				outerdiv.appendChild(zerolist);
+			}
+		}
+	
  		
  		function originclone() {	// 메인 주문현황 카드 중에서 오리지널에 해당하는 하나의 카드에 들어갈 값을 입력
  									// 따라서, orderList[0] 의 값들만을 사용함
@@ -578,7 +595,6 @@
         }); 
     });
 });
-
 	</script>
 </body>
 </html>

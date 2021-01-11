@@ -7,8 +7,13 @@
         <article class="board">
             <h1 class="board_mainName"><span style="float: left">게</span> 시 <span style="float: right">판</span></h1>
             <div class="board_box">
-
-
+            	<div class="boardList" style="margin-bottom: 0px;">
+            		<div class="boardLine">
+            			<div class="num">NO</div>
+                        <div class="title"><a>제목</a></div>
+                        <div class="registdate">등록일</div>
+            		</div>
+            	</div>
                 <div class="boardList">
                     <c:forEach var="vo" items="${List }">
                         <div class="boardLine">
@@ -41,7 +46,7 @@
                 <div class="boardMenu">
                    <div class="rightMenu">
                         <input class="btn" type="button" value="새 글 쓰기"
-                        	onclick="location.replace('${pageContext.request.contextPath}/customer/board/customerBoardWrite/')">
+                        	onclick="location.replace('${pageContext.request.contextPath}/customer/board/customerBoardWrite/${type }/')">
                    </div>
                 </div>
 

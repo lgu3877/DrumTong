@@ -13,8 +13,8 @@
           <img src="${cpath }/resources/customer/img/logo4.png" class="login-logo" />
           <div class="login-alert">메세지</div>
           <div class="login-input">
-            <input type="text" name="id" id="userid" class="login-input-boxs" />
-            <input type="password" name="pw" id="userpw" class="login-input-boxs" />
+            <input type="text" name="id" id="userid" class="login-input-boxs" onkeyup="loginEnter()"/>
+            <input type="password" name="pw" id="userpw" class="login-input-boxs"  onkeyup="loginEnter()"/>
 
             <div class="login-check">
               <label><input type="checkbox" name="storeid" id="storeid" class="login-storeid" />자동 로그인</label>
@@ -33,6 +33,11 @@
     <!-- 스크립트 영역 -->
     <script>
      	document.getElementById('loginSubmit').addEventListener('click', function(){ logiinSubmit('synchronous');});
+     	
+     	function loginEnter() {
+  		  if (window.event.keyCode == 13)
+  			logiinSubmit('synchronous');
+     	}
   	</script> 
     
        	</body>

@@ -100,6 +100,7 @@
 			<exclude-mapping path="/"/>
 			<exclude-mapping path="/customer/"/>
 			<exclude-mapping path="/customer/laundry/customerSearch/"/>
+			<exclude-mapping path="/customer/laundry/customerSearch/*/"/>
 			<exclude-mapping path="/customer/laundry/customerDetail/**/"/>
 			<exclude-mapping path="/customer/board/**/"/>
 			<exclude-mapping path="/customer/membership/customerSignUp/"/>

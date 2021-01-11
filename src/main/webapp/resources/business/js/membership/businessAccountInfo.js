@@ -60,9 +60,14 @@
          delegatecrnCreate(inputdiv);
          submit.setAttribute('onclick', '');
        break;
+//      case 'pw':
+//         submit.setAttribute('type', 'submit');
+//         submit.setAttribute('onclick', '');
+//		 inputdiv.children[0].placeholder = '비밀번호를 입력바랍니다';
+//         break;
       case 'pw':
-         submit.setAttribute('type', 'submit');
-         submit.setAttribute('onclick', '');
+         submit.setAttribute('type', 'button');
+         submit.setAttribute('onclick', 'newpw()');
 		 inputdiv.children[0].placeholder = '비밀번호를 입력바랍니다';
          break;
       default:
@@ -512,15 +517,13 @@
           // 정상
      		.then( (response) => {
             const data = response.data;
-			console.log(data);
-            if(data === true){  
-           		return true;
-            }
-            else if(data === false){ 
+            if(data === true)  
+           		document.getElementById('formtag').submit();
+            else 
 				alert('비밀번호가 틀렸습니다');
-				return false;
-			}            
+			        
            })
         }
-		return axPost(ob);
+
+		return axPost(ob);		
 	}

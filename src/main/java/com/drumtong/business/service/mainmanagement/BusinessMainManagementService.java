@@ -78,14 +78,15 @@ public class BusinessMainManagementService {
  	    String estid = bInformationVO.getEstid();
  		
  	    // 2차 온라인 계약이 처음이면 밑에 구문을 실행시켜준다. (기본 템플릿을 전달시켜줌)
- 	    if( bInformationVO.getStatus().equals("FAIL") ) {
- 	    	// defaultcategory 의 데이터형식이 'top/pants/suit/hat/underwear/cutton/'
- 	    	List<String> defaultcategory = Arrays.asList((bManagementDAO.selectDefaultCategory(estid).split("/")));
- 	    	mav.addObject("defaultcategory", (new Gson()).toJson(defaultcategory));
- 	    
- 	    }
+// 	    if( bInformationVO.getStatus().equals("FAIL") ) {
+// 	    	// defaultcategory 의 데이터형식이 'top/pants/suit/hat/underwear/cutton/'
+// 	    	List<String> defaultcategory = Arrays.asList((bManagementDAO.selectDefaultCategory(estid).split("/")));
+// 	    	mav.addObject("defaultcategory", (new Gson()).toJson(defaultcategory));
+// 	    
+// 	    }
  	    // 2차 온라인 계약에 매장관리를 완료했다면 전에 입력했던 데이터를 불러와준다.
- 	    else if ( bInformationVO.getStatus().equals("PROCESS")) {
+ 	    // else 지움
+ 	    if ( bInformationVO.getStatus().equals("PROCESS")) {
  	    	
  	    	// 매장 사진 데이터
  	    	mav.addObject("bImageList",(new Gson()).toJson(bImageDAO.selectImageList(estid)));
@@ -102,8 +103,13 @@ public class BusinessMainManagementService {
 	    mav.addObject("menuCategories", (new Gson()).toJson(menuCategories));
 	    	
 		// MultipartFile mpf = new MultipartFile();
-//		aws.s3FileUpload(file, folderName);
-		return mav;
+ 	    // aws.s3FileUpload(file, folderName);
+ 	    
+// 추가 	    
+ 	    List<String> defaultcategory = Arrays.asList((bManagementDAO.selectDefaultCategory(estid).split("/")));
+    	mav.addObject("defaultcategory", (new Gson()).toJson(defaultcategory));
+		
+    	return mav;
 	}
 
 	

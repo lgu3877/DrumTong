@@ -3,6 +3,8 @@ package com.drumtong.customer.service.board;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -90,7 +92,24 @@ public class CustomerBoardService {
 		mav.addObject("type", type);
 		return mav;
 	}
+
+	public ModelAndView write(String type) {
+		ModelAndView mav = new ModelAndView("customer/board/customerBoardWrite");
+		mav.addObject("type", type);
+		
+		return mav;
+	}
+
+	public ModelAndView saveWriting(HttpServletRequest req, SBoardVO sboardvo, String type) {
+		boolean Type = type.equals("notice");
+		int result = 0;
+		
+		result = Type ? sCustomerBoard1DAO.write(sboardvo) : sCustomerBoard2DAO.write(sboardvo);
+
+		return new ModelAndView("redirect: " + req.getContextPath() + "/customer/board/customerBoard/" + type + "/");
+	}
 	
 
 
 }
+ 

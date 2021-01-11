@@ -102,10 +102,10 @@ public class Review {
 		int reportReplyNum = bReviewDAO.selectReviewNum(map);
 		result.put("reportReplyNum", reportReplyNum);
 		
-		System.out.println("테스트");
-		System.out.println("wholeNum : " + wholeNum);
-		System.out.println("noReplyNum : " + noReplyNum);
-		System.out.println("reportReplyNum : " + reportReplyNum);
+//		System.out.println("테스트");
+//		System.out.println("wholeNum : " + wholeNum);
+//		System.out.println("noReplyNum : " + noReplyNum);
+//		System.out.println("reportReplyNum : " + reportReplyNum);
 		
 		return result;
 	}

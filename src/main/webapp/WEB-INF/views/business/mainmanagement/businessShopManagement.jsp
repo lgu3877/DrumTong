@@ -3,6 +3,8 @@
 <c:set var="cpath">${pageContext.request.contextPath }</c:set>
 <!-- selectEST.status 값을 status에 c:set 해줍니다 -->
 <c:set var = "status" value="${selectEST.status}" />
+<c:set var = "mainAddress" value="${selectEST.mainlocation}" />
+<c:set var = "detailAddress" value="${selectEST.detaillocation}" />
 
 <!DOCTYPE html>
  
@@ -36,6 +38,12 @@
    	
    	<!-- jQuery -->
    	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+   	
+   	<!-- Daum Map API -->
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
+	<!-- Kakao Map API -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a8f343b25889960b1fdf777c9a2a57c&libraries=services,clusterer,drawing"></script>
 </head>
      
 
@@ -353,7 +361,7 @@
 			<!-- 버튼 -->
 				<div class="service_button_con">
 				<!-- 배달 서비스 활성화 -->
-					<div id="delivery-btn" class="delivery_menu_btn_con" onclick="activateDelivery()">
+					<div id="delivery-btn" class="delivery_menu_btn_con" onclick="activateVisualization()">
 						<div class="add_menu_icon_con">
 							<i id="delivery-icon" class="fas fa-toggle-off"></i>
 						</div>
@@ -408,12 +416,12 @@
 						<!-- BManagementVO > maincategory -->
 							<select class="service_selector" name="maincategory" onchange="directType(this)">
 								<option hidden="true" disabled selected>서비스 타입 선택</option>
-								<option class="main_type" value="type1">type1</option>
-								<option class="main_type" value="type2">type2</option>
-								<option class="main-type" value="type3">type3</option>
-								<option class="main_type" value="type4">type4</option>
-								<option class="main_type" value="type5">type5</option>
-								<option class="main_type" value="selectedDirect" class="selectedDirect">직접입력</option>
+								<option value="type1">type1</option>
+								<option value="type2">type2</option>
+								<option value="type3">type3</option>
+								<option value="type4">type4</option>
+								<option value="type5">type5</option>
+								<option value="selectedDirect" class="selectedDirect">직접입력</option>
 							</select>
 							<!-- 직접입력 선택시 -->
 							<input type="text" class="direct_type_input" name="maincategory" placeholder="서비스 입력" style="display: none">
@@ -495,9 +503,6 @@
 			
 			
 		<!-- 수취 선택 -->
-			
-			
-			
 			<div class="return_menu">
 			
 				<ul>
@@ -515,24 +520,65 @@
 					</li>
 				</ul>
 			</div>
+
+
 		</div>
 		
-		
+	
+	<!-- 주소 확인 & 변경 -->
+		<div class="address_update_con">		
+			<div class="shop_info_title_con">
+				<div>
+					<span class="shop_info_title">매장 주소</span>
+					<i id="address-help" class="far fa-question-circle" style="font-weight: 600">도움말</i>
+					<div id="address-help-msg"></div>
+				</div>
+			<!-- 버튼 -->
+				<div class="service_button_con">
+					<div id="complete-address-option" class="complete_menu_btn_con"  onclick="updateAddress()">
+						<div class="add_menu_icon_con">
+							<i class="fas fa-check-square"></i>
+						</div>
+						<div class="add_menu_btn_title">변경 완료</div>
+					</div>
+				</div>
+			</div>
+			
+		<!-- 주소지 변경 -->
+			<div class="address_input_con form">
+				<div class="address_wrapper">
+					<h3>주소</h3>
+					<div class="main_address_input_wrapper">
+						<input id="main-address" class="main_address_input" type="text" name="mainlocation" value="${mainAddress }" 
+							onfocus="openAddressSearch()">
+						<input id="main-location" type="hidden" name="maplocation">
+						<button class="address_search_button" onclick="openAddressSearch()">주소 찾기</button>
+					</div>
+					<h3>상세주소</h3>
+					<div class="detail_address_input_wrapper">
+						<input id="detail-address" class="detail_address_input" type="text" name="detaillocation" value="${detailAddress }">
+					</div>
+				</div>
+				<div id="preview-map" class="location_preview">
+					preview
+				</div>
+			</div>
+		</div>
 		
 		
 		
 	<!-- [50줄] 여는 태그  세션의 상태가 FAIL이면 POST 형식   -->
 	<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
 	<!-- 	[전체 폼]에 대한 c:if문 -->
-	<c:if test="${status eq 'FAIL' }">
 	
+		<c:if test="${status eq 'FAIL' }">
 	<!-- 전체 form submit -->
-		<div>
-			<input type="submit" value="입력 완료">
-		</div>
+			<div>
+				<input type="submit" value="입력 완료">
+			</div>
 			</form>
-			
-	</c:if>
+
+		</c:if>
 		
 		
 	
@@ -561,7 +607,6 @@
 		let defaultCategory = ${defaultcategory};
 		let menuCategories = ${menuCategories};
 	</script>
-		
 	<!-- 초기 셋팅 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementOnLoad.js"></script>
 	
@@ -574,11 +619,41 @@
 	<!-- 서비스 매뉴 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementMenuList.js"></script>
 
+	<!-- 서비스 메뉴 옵션 -->
+	<script type="text/javascript">
+		// DB에서 받아오는 Defaultcategory List<String> 배열
+		const defaultCategory = ${defaultcategory};
+		
+		// 세부 서비스 
+		const subCategory = {
+			"top": ["1", "2", "3"],
+			"pants": ["4", "5", "6"],
+			"suit": ["7", "8", "9"],
+			"hat": ["10", "11", "12"],
+			"underwear": ["13", "14", "15"],
+			"cutton": ["16", "17", "18"],
+		};
+		
+		const object = new Object();
+		for (let i = 0; i < defaultCategory.length; i++) {
+			const mainOption = defaultCategory[i];
+			const subOption = subCategory[defaultCategory[i]];
+			
+			// object 정의
+			object[mainOption] = subOption !== undefined ? subOption : "값 없음";		
+		}
+		
+		createOptions(object); // MenuList > Dropdown category
+	</script>
+
 	<!-- 배달 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementReturnItem.js"></script>
 	
 	<!-- 도움말 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementHelpMsg.js"></script>
+	
+	<!-- 주소 -->
+	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementAddress.js"></script>	
 	
 	<!-- 비동기 update (Axios) -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementUpdate.js"></script>
