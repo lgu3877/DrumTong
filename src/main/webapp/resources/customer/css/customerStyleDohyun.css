@@ -1334,15 +1334,17 @@ body .section_board .board {
 }
 
 body .section_board .board .board_mainName {
-   width: 200px;
+   width: 75%;
    margin: 0 auto;
-   text-align: center;
    font-size: 25px;
-   border-bottom: 1px solid black;
 }
 
 .board_mainName span {
-  font-size: 25px;	
+  font-weight: bold;	
+  text-align: left;
+  font-size: 25px;
+  letter-spacing: 3px;
+  border-bottom: 1px solid black;
 }
 
 body .section_board .board .board_box {
@@ -1352,19 +1354,25 @@ body .section_board .board .board_box {
 /*    border: 1px solid blue; */
 }
 
+.board_box .writeform {
+	width: 75%;
+	margin: 0 auto;
+}
+
 .btn {
    width: auto;
-   height: 30px;
+   height: 40px;
    border: 1px solid #EAEAEA;
    background-color: #0091e4;
    color: white;
    outline: 0;
    font-weight: bolder;
+   cursor: pointer;
    /* border-radius: 15px; */
 }
 
 .btn:hover {
-   background-color: #373737;
+   background-color: navy;
    transition-duration: 0.5s;
 }
 
@@ -1415,7 +1423,7 @@ body .section_board .board .board_box {
 }
 
 .boardMenu2 .rightMenu2 {
-   width: 80%;
+   width: 75%;
    margin: 0 auto;
 }
 
@@ -1429,9 +1437,22 @@ body .section_board .board .board_box {
    margin: auto;
    font-size: 11pt;
    color: #5a5a5a;
-   height: 40px;
+   height: 60px;
    line-height: 35px;
    display: flex;
+   align-items: center;
+}
+
+.boardLine * {
+	font-size: 14pt;
+}
+
+.boarlineTitle {
+	border-bottom: 3px double grey !important;	
+}
+
+.boarlineTitle * {
+	font-weight: bold !important;
 }
 
 .boardLine2 {
@@ -1446,34 +1467,27 @@ body .section_board .board .board_box {
 }
 
 .boardLine .num {
-   width: 5%;
+   width: 10%;
    text-align: left;
 }
 
 .boardLine .title {
    left: 0;
-   text-align: center;
-   width: 70%;
+   text-align: left;
+   width: 60%;
    font-weight: bolder;
 }
 
 
 .boardLine .title a {
 	width: 100% !important;
+	text-decoration: none;
+	color: black;
+	font-weight: normal;
 }
 
-@media (min-width:1400px) {
-	.boardLine .title a {
-		padding-left: 200px;
-	}
-}
-@media (max-width:1200px) {
-	.boardLine .title a {
-		padding-left: 150px;
-	}
-}
 .boardLine .registdate {
-   width: 25%;
+   width: 30%;
    float: right;
    margin-right: 10px;
    text-align: right;
@@ -1537,7 +1551,7 @@ body .section_board .board .board_box {
    padding: 20px;
    border: 1px solid #dadada;
    border-top: 0px;
-   width: 80%;
+   width: 75%;
    height: 450px;
    margin: auto;
 }
@@ -1553,8 +1567,20 @@ div.paging {
    text-align: center;
 }
 
-div.paging a {
-   display: inline;
+div.paging div {
+	width: 25px;
+	height: 25px;
+   	border: 1px solid #dadada;
+   	display: inline-block;
+}
+
+div.paging div a {
+   color: #dadada !important;
+   text-decoration: none;
+}
+
+div.paging div strong {
+   color: black !important;
 }
 
 div.boardLine:hover {
