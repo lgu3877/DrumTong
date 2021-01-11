@@ -559,8 +559,9 @@
 						<input id="detail-address" class="detail_address_input" type="text" name="detaillocation" value="${detailAddress }">
 					</div>
 				</div>
-				<div id="preview-map" class="location_preview">
-					preview
+				<div class="preview_wrapper">
+					<h3>입력한 주소</h3>
+					<div id="preview-map" class="location_preview"></div>
 				</div>
 			</div>
 		</div>
