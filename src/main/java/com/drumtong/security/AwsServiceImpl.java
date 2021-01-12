@@ -174,6 +174,9 @@ public class AwsServiceImpl{
             	BImageVO vo = (BImageVO)object;
             	// 3. vo에 setStoreimg로 현재 파일 경로를 입력해준다.
 	    		vo.setStoreimg(folderName + "/"  + subFolderName + "/" + fileName);
+	    		System.out.println("vo data est : "  + vo.getEstid());
+	    		System.out.println("vo data store : "  + vo.getStoreimg());
+	    		
 	    		// 4. 데이터를 입력해준다.
 	    		bImageDAO.insertConstract(vo);
          	}
