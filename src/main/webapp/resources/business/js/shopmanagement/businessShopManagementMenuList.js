@@ -23,6 +23,7 @@ function createOptions(categoryObject) {
 		
 	// placeholder
 	let option = document.createElement("option");
+	option.id = "main-category-default";
 	option.hidden = true;
 	option.disabled = true;
 	option.selected = true;
@@ -34,6 +35,7 @@ function createOptions(categoryObject) {
 	const sortedKeys = Object.keys(categoryObject).sort(); // key 정렬
 	for (let i = 0; i < sortedKeys.length; i++) {
 		option = document.createElement("option");
+		option.className = "main_option";
 		option.value = sortedKeys[i];
 		option.innerHTML = sortedKeys[i];
 		
@@ -56,6 +58,17 @@ function selectOption(obj) {
 	// 직접 입력 선택
 	if(obj.value === 'selectedDirect') {
 		obj.parentNode.querySelector('.direct_type_input').style.display = '';
+		
+		clearSubOptions();
+		
+		// 직접입력
+		const option = document.createElement("option");
+		option.value = "selectedDirect";
+		option.className = "selectedDirect";
+		option.innerHTML = "직접입력";
+		option.style.fontWeight = "600";
+		
+		document.getElementById("sub-category").appendChild(option);
 	}
 	// 그 외 값 선택
 	else {
@@ -63,42 +76,53 @@ function selectOption(obj) {
 		obj.parentNode.querySelector('.direct_type_input').value = '';
 		
 		// main > sub 카테고리 생성
-		if (obj.name === "maincategory") 
+		if (obj.name === "maincategory") {
+			clearSubOptions();
 			populateSubOptions(obj.value);
+		} 
 	}
 }
 
+// 서브 옵션 변경 > 초기화
+function clearSubOptions() {
+	const subOptions = document.getElementsByClassName("sub_option");
+	const directOption = document.getElementsByClassName("selectedDirect")[1];
+	directOption !== undefined ? directOption.remove() : null;
+	
+	const count = subOptions.length;
+	if (subOptions !== 0) {
+		for (let i = 0; i < count; i++) {
+			subOptions[0].remove();
+		}		
+	}
+}
 
 // 서브 옵션 생성
 function populateSubOptions(key) {
 	const subSelect = document.getElementById("sub-category");
-	subSelect.getElementsByClassName("selectedDirect")[0].style.fontWeight = "600";	
-
-	// 초기화 (option 생성 전)
-	const previousOptions = subSelect.getElementsByClassName("sub_option");
-	console.log(previousOptions);
-	console.log(previousOptions.length);
 	
-	if (previousOptions.length !== 0) {
-		for (let i = 0; i < previousOptions.length; i++) {
-			console.log(i);
-			console.log(previousOptions[i]);
-			previousOptions[i].remove();
-		}
-	}
-	
-	// 정렬
-	const sotredMenu = menuCategories[key].sort();	
-	
-	// option 생성
+	// 하부 카테고리
+	const sotredMenu = menuCategories[key].sort(); 	// value 정렬	
 	for (let i = 0; i < sotredMenu.length; i++) {
-		const option = document.createElement("option");
+		option = document.createElement("option");
 		option.className = "sub_option";
 		option.innerHTML = menuCategories[key][i];
 		option.value = menuCategories[key][i];
 		
-		subSelect.prepend(option);
+		subSelect.appendChild(option);
 	}
+	
+	// 직접입력
+	option = document.createElement("option");
+	option.value = "selectedDirect";
+	option.className = "selectedDirect";
+	option.innerHTML = "직접입력";
+	option.style.fontWeight = "600";
+	
+	subSelect.appendChild(option);
+	
+	// default option
+	document.getElementById("sub-category-default").selected = true;
 }
 
 

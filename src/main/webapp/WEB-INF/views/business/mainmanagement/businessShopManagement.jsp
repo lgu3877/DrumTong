@@ -414,8 +414,7 @@
 					<div class="single_item_selector">
 						<div class="first_item_prop">
 					<!-- BManagementVO > maincategory -->
-							<select id="main-category" class="service_selector" name="maincategory" onchange="selectOption(this)">
-							</select>
+							<select id="main-category" class="service_selector" name="maincategory" onchange="selectOption(this)"></select>
 							<!-- 직접입력 선택시 -->
 							<input type="text" class="direct_type_input" name="maincategory" placeholder="서비스 입력" style="display: none">
 						</div>
@@ -423,8 +422,7 @@
 						<div class="second_item_prop">
 					<!-- BManagementVO > subcategory -->
 							<select id="sub-category" class="service_selector" name="subcategory" onchange="selectOption(this)">
-								<option hidden="true" disabled selected>세부 서비스 유형 선택</option>
-								<option value="selectedDirect" class="selectedDirect">직접입력</option>
+								<option id="sub-category-default" hidden="true" disabled selected>세부 서비스 유형 선택</option>
 							</select>
 							<!-- 직접입력 선택시 -->
 							<input type="text" name="subcategory" class="direct_type_input" placeholder="서비스 입력" style="display: none">
