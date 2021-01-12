@@ -602,12 +602,6 @@
 		</div>
 	</div>
 
-
-	<script type="text/javascript">
-		// DB에서 받아오는 Defaultcategory List<String> 배열
-		let defaultCategory = ${defaultcategory};
-		let menuCategories = ${menuCategories};
-	</script>
 	<!-- 초기 셋팅 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementOnLoad.js"></script>
 	
@@ -624,6 +618,10 @@
 	<script type="text/javascript">
 		// DB에서 받아오는 Defaultcategory List<String> 배열
 		const defaultCategory = ${defaultcategory};
+		const menucategories = ${menuCategories};
+		
+		console.log(defaultCategory);
+		console.log(menucategories);
 		
 		// 세부 서비스 
 		const subCategory = {
