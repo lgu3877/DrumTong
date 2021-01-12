@@ -822,9 +822,22 @@
 	outline: none;
 }
 
+.preview_wrapper {
+	width: 30%;
+	display: block;
+}
+
+.preview_wrapper h3 {
+    text-align: left;
+    margin-bottom: 10px;
+    text-indent: 5px;
+    letter-spacing: 5px;
+    color: navy;
+}
 
 .location_preview {
-	width: 30%;
+	border-radius: 10px;
+    height: 200px;
 }
 
 .address_update_con {
