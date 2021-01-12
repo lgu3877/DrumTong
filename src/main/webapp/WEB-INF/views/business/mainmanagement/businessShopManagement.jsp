@@ -559,8 +559,9 @@
 						<input id="detail-address" class="detail_address_input" type="text" name="detaillocation" value="${detailAddress }">
 					</div>
 				</div>
-				<div id="preview-map" class="location_preview">
-					preview
+				<div class="preview_wrapper">
+					<h3>입력한 주소</h3>
+					<div id="preview-map" class="location_preview"></div>
 				</div>
 			</div>
 		</div>
@@ -601,6 +602,8 @@
 		</div>
 	</div>
 
+<<<<<<< HEAD
+=======
 
 	<script type="text/javascript">
 		// DB에서 받아오는 Defaultcategory List<String> 배열
@@ -608,6 +611,7 @@
 		let menuCategories = ${menuCategories};
 		console.log(menuCategories);
 	</script>
+>>>>>>> branch 'master' of https://github.com/lgu3877/DrumTong
 	<!-- 초기 셋팅 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementOnLoad.js"></script>
 	
@@ -624,6 +628,10 @@
 	<script type="text/javascript">
 		// DB에서 받아오는 Defaultcategory List<String> 배열
 		const defaultCategory = ${defaultcategory};
+		const menucategories = ${menuCategories};
+		
+		console.log(defaultCategory);
+		console.log(menucategories);
 		
 		// 세부 서비스 
 		const subCategory = {
