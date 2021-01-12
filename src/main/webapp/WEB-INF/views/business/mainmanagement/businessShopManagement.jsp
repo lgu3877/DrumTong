@@ -413,29 +413,18 @@
 				<div id="add-item-list" class="add_item_list">
 					<div class="single_item_selector">
 						<div class="first_item_prop">
-						<!-- BManagementVO > maincategory -->
+					<!-- BManagementVO > maincategory -->
 							<select id="main-category" class="service_selector" name="maincategory" onchange="selectOption(this)">
-								<option hidden="true" disabled selected>서비스 타입 선택</option>
-								<option value="selectedDirect" class="selectedDirect">직접입력</option>
 							</select>
 							<!-- 직접입력 선택시 -->
 							<input type="text" class="direct_type_input" name="maincategory" placeholder="서비스 입력" style="display: none">
 						</div>
 						
 						<div class="second_item_prop">
-						<!-- BManagementVO > subcategory -->
+					<!-- BManagementVO > subcategory -->
 							<select id="sub-category" class="service_selector" name="subcategory" onchange="selectOption(this)">
 								<option hidden="true" disabled selected>세부 서비스 유형 선택</option>
-								
-							<!--	
-								<option value="">type1</option>
-								<option value="">type2</option>
-								<option value="">type3</option>
-								<option value="">type4</option>
-								<option value="">type5</option>
-							-->
 								<option value="selectedDirect" class="selectedDirect">직접입력</option>
-							
 							</select>
 							<!-- 직접입력 선택시 -->
 							<input type="text" name="subcategory" class="direct_type_input" placeholder="서비스 입력" style="display: none">
@@ -618,8 +607,8 @@
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
 		
-		console.log(defaultCategory);
-		console.log(menuCategories);
+		// console.log(defaultCategory);
+		// console.log(menuCategories);
 		
 		
 		/* const object = new Object();

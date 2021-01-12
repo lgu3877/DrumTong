@@ -18,43 +18,87 @@ let deliveryToggle = false;
 
 // 메인 옵션 생성
 function createOptions(categoryObject) {
-	console.log(categoryObject);
-	
 	const mainSelect = document.getElementById("main-category");
-	mainSelect.getElementsByClassName("selectedDirect")[0].style.fontWeight = "600";
-//	const subSlect = document.getElementById("sub-category");
-//	subSelect.getElementsByClassName("selectedDirect")[0].style.fontWeight = "600";
-	
-	for (let key in categoryObject) {
-		const option = document.createElement("option");
-		option.value = key;
-		option.innerHTML = key;
-//		option.selected = populateSubCategories(key);
+	// mainSelect.getElementsByClassName("selectedDirect")[0].style.fontWeight = "600";
 		
-		mainSelect.prepend(option);
+	// placeholder
+	let option = document.createElement("option");
+	option.hidden = true;
+	option.disabled = true;
+	option.selected = true;
+	option.innerHTML = "서비스 타입 선택";
+	
+	mainSelect.appendChild(option);
+	
+	// 메뉴
+	const sortedKeys = Object.keys(categoryObject).sort(); // key 정렬
+	for (let i = 0; i < sortedKeys.length; i++) {
+		option = document.createElement("option");
+		option.value = sortedKeys[i];
+		option.innerHTML = sortedKeys[i];
+		
+		mainSelect.appendChild(option);
 	}
-
 	
-	// console.log(mainCategory);
+	// 직접입력
+	option = document.createElement("option");
+	option.value = "selectedDirect";
+	option.className = "selectedDirect";
+	option.innerHTML = "직접입력";
+	option.style.fontWeight = "600";
 	
+	mainSelect.appendChild(option);
 }
+
 
 //select > option 선택
 function selectOption(obj) {
-	
-	// 직접 입력
+	// 직접 입력 선택
 	if(obj.value === 'selectedDirect') {
 		obj.parentNode.querySelector('.direct_type_input').style.display = '';
 	}
+	// 그 외 값 선택
 	else {
 		obj.parentNode.querySelector('.direct_type_input').style.display = 'none';
 		obj.parentNode.querySelector('.direct_type_input').value = '';
+		
+		// main > sub 카테고리 생성
+		if (obj.name === "maincategory") 
+			populateSubOptions(obj.value);
 	}
 }
 
+
 // 서브 옵션 생성
-function populateSubCategories(key) {
-	console.log(key);
+function populateSubOptions(key) {
+	const subSelect = document.getElementById("sub-category");
+	subSelect.getElementsByClassName("selectedDirect")[0].style.fontWeight = "600";	
+
+	// 초기화 (option 생성 전)
+	const previousOptions = subSelect.getElementsByClassName("sub_option");
+	console.log(previousOptions);
+	console.log(previousOptions.length);
+	
+	if (previousOptions.length !== 0) {
+		for (let i = 0; i < previousOptions.length; i++) {
+			console.log(i);
+			console.log(previousOptions[i]);
+			previousOptions[i].remove();
+		}
+	}
+	
+	// 정렬
+	const sotredMenu = menuCategories[key].sort();	
+	
+	// option 생성
+	for (let i = 0; i < sotredMenu.length; i++) {
+		const option = document.createElement("option");
+		option.className = "sub_option";
+		option.innerHTML = menuCategories[key][i];
+		option.value = menuCategories[key][i];
+		
+		subSelect.prepend(option);
+	}
 }
 
 
