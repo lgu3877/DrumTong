@@ -414,13 +414,8 @@
 					<div class="single_item_selector">
 						<div class="first_item_prop">
 						<!-- BManagementVO > maincategory -->
-							<select class="service_selector" name="maincategory" onchange="directType(this)">
+							<select id="main-category" class="service_selector" name="maincategory" onchange="selectOption(this)">
 								<option hidden="true" disabled selected>서비스 타입 선택</option>
-								<option value="type1">type1</option>
-								<option value="type2">type2</option>
-								<option value="type3">type3</option>
-								<option value="type4">type4</option>
-								<option value="type5">type5</option>
 								<option value="selectedDirect" class="selectedDirect">직접입력</option>
 							</select>
 							<!-- 직접입력 선택시 -->
@@ -429,14 +424,18 @@
 						
 						<div class="second_item_prop">
 						<!-- BManagementVO > subcategory -->
-							<select class="service_selector" name="subcategory" onchange="directType(this)">
+							<select id="sub-category" class="service_selector" name="subcategory" onchange="selectOption(this)">
 								<option hidden="true" disabled selected>세부 서비스 유형 선택</option>
+								
+							<!--	
 								<option value="">type1</option>
 								<option value="">type2</option>
 								<option value="">type3</option>
 								<option value="">type4</option>
 								<option value="">type5</option>
+							-->
 								<option value="selectedDirect" class="selectedDirect">직접입력</option>
+							
 							</select>
 							<!-- 직접입력 선택시 -->
 							<input type="text" name="subcategory" class="direct_type_input" placeholder="서비스 입력" style="display: none">
@@ -601,17 +600,6 @@
 			</div>
 		</div>
 	</div>
-
-<<<<<<< HEAD
-=======
-
-	<script type="text/javascript">
-		// DB에서 받아오는 Defaultcategory List<String> 배열
-		let defaultCategory = ${defaultcategory};
-		let menuCategories = ${menuCategories};
-		console.log(menuCategories);
-	</script>
->>>>>>> branch 'master' of https://github.com/lgu3877/DrumTong
 	<!-- 초기 셋팅 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementOnLoad.js"></script>
 	
@@ -628,31 +616,22 @@
 	<script type="text/javascript">
 		// DB에서 받아오는 Defaultcategory List<String> 배열
 		const defaultCategory = ${defaultcategory};
-		const menucategories = ${menuCategories};
+		const menuCategories = ${menuCategories};
 		
 		console.log(defaultCategory);
-		console.log(menucategories);
+		console.log(menuCategories);
 		
-		// 세부 서비스 
-		const subCategory = {
-			"top": ["1", "2", "3"],
-			"pants": ["4", "5", "6"],
-			"suit": ["7", "8", "9"],
-			"hat": ["10", "11", "12"],
-			"underwear": ["13", "14", "15"],
-			"cutton": ["16", "17", "18"],
-		};
 		
-		const object = new Object();
+		/* const object = new Object();
 		for (let i = 0; i < defaultCategory.length; i++) {
 			const mainOption = defaultCategory[i];
 			const subOption = subCategory[defaultCategory[i]];
 			
 			// object 정의
 			object[mainOption] = subOption !== undefined ? subOption : "값 없음";		
-		}
+		} */
 		
-		createOptions(object); // MenuList > Dropdown category
+		createOptions(menuCategories); // MenuList > Dropdown category
 	</script>
 
 	<!-- 배달 -->
