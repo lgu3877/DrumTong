@@ -44,7 +44,7 @@
 		
 		<div class="etediv">
 		<h1>
-			<i class="far fa-square" onclick="typeSelect(this, 'ete')"></i>ETE를 활용한 자동 일자
+			<i class="far fa-square" onclick="typeSelect(this, 'ete')"></i>ETE를 활용한 자동 일자(${eteNum } day)
 		</h1>
 			<div>
 				<input id="eteinput" type="text" readonly><i class="far fa-question-circle fa-2x" id="etehelp"></i>
@@ -173,7 +173,12 @@
             close();
             })
         }
-		return axPost(ob);
+        if(window.opener == null) {	// 부모 창이 닫혔는지 아닌지를 확인합니다
+        	close();		// 만약, 부모창이 닫혀 있다면 axpost를 실행하지 않고 종료합니다
+        	return false;
+        }
+        else
+			return axPost(ob);
 	}
 	
 	// 윈도우 창이 열리면서 시작하는 명령어
