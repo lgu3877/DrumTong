@@ -5,22 +5,32 @@
 	<c:when test="${empty bLogin }">
 		<c:set var="preLink" value="membership/businessLogin/"/>
 		<c:set var="preBtName" value="로그인하기" />
+		<c:set var="preStatus" value="isNotLogin"/>
 	</c:when>
 	<c:when test="${selectEST == '' || empty selectEST}">
 		<c:set var="preLink" value="contract/businessContract/"/>
 		<c:set var="preBtName" value="온라인 계약하기" />
+		<c:set var="preStatus" value="isNotContract"/>
 	</c:when>
 	<c:when test="${selectEST.status=='FAIL' }">
 		<c:set var="preLink" value="mainmanagement/businessShopManagement/"/>
 		<c:set var="preBtName" value="매장 등록" />
+		<c:set var="preStatus" value="${selectEST.status }"/>
+	</c:when>
+	<c:when test="${selectEST.status=='PROCESS' }">
+		<c:set var="preLink" value="mainmanagement/businessScheduleManagement/"/>
+		<c:set var="preBtName" value="일정 등록" />
+		<c:set var="preStatus" value="${selectEST.status }"/>
 	</c:when>
 	<c:when test="${selectEST.premiumboolean=='N' }">
 		<c:set var="preLink" value="contract/businessPremiumAd/"/>
 		<c:set var="preBtName" value="프리미엄 광고" />
+		<c:set var="preStatus" value="${selectEST.status }"/>
 	</c:when>
 	<c:otherwise>
 		<c:set var="preLink" value=""/>
 		<c:set var="preBtName" value="Finish" />
+		<c:set var="preStatus" value="${selectEST.status }"/>
 	</c:otherwise>
 </c:choose>
 <!DOCTYPE html>
@@ -121,14 +131,13 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		 // 로그인 여부
-  		let login = "<c:out value='${bLogin}'/>";
-  	 
-  	 	// 계약 진행 여부
-  		 let contract = "<c:out value='${selectEST.status}'/>";
+  		 let preLink = '${preLink}';
+  		 let preBtName = '${preBtName}';
+  		 let preStatus = '${preStatus}';
 	</script>
 	<!-- main cover(slider) -->
 	<script type="text/javascript" src="${cpath }/business/js/main.js"></script>
+<!-- 	모달창 띄우기(영경&건욱) -->
 	<script type="text/javascript" src="${cpath }/business/js/modal.js"></script>
 	   <!-- main cover cookie -->
    

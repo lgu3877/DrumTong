@@ -7,7 +7,7 @@
 <!-- inner login form in main page -->
 <c:choose>
 
-	<c:when test="${preBtName == '로그인하기' }">
+	<c:when test="${preStatus == 'isNotLogin' }">
 		<form class="login_wrapper" method="POST" action="${cpath }/business/membership/businessLogin/POST/main/" onsubmit="return false;">
 			<div class="login_title">
 				<p>
@@ -50,7 +50,7 @@
 	<c:otherwise>
 		<div class="after_loign_con">
 			<c:choose>
-				<c:when test="${preBtName == '온라인 계약하기'}">
+				<c:when test="${preStatus == 'isNotContract'}">
 	<!-- 			'온라인 계약한게 하나도 없을 때' -->
 					<div class="welcome_box_first">
 						<span class="owner_name">${bLogin.name }</span>환영합니다. 사장님 어서오세요.
@@ -63,7 +63,7 @@
 								자세한 내용은 아래 링크를 클릭해주세요.
 							</p>
 							<div>
-								<button class="store_register_sign_up_btn" onclick='location.href="${cpath}/business/${preLink }"'>광고
+								<button class="store_register_sign_up_btn" onclick='location.href="${cpath}/business/${preLink }"'>
 									온라인 계약 하러가기
 								</button>
 							</div>
@@ -71,7 +71,7 @@
 					</div>
 				</c:when>
 				
-				<c:when test="${preBtName == '매장 등록'}">
+				<c:when test="${preStatus != 'SUCCESS'}">
 	<!-- 			'온라인 계약만 하고 매장 메인 관리 등록 안했을 때' -->
 					<div class="welcome_box_first">
 						<span class="owner_name">${bLogin.name }</span> [ ${selectEST.brandnaming } ] 사장님 어서오세요.
@@ -79,13 +79,13 @@
 					<div class="store_register_box">
 						<div class="store_register_guide_con">
 							<p>
-								매장 등록을 완료하지 않았습니다.<br>
-								<span class="store_register_link" onclick='location.href="${cpath}/business/${preLink }"'>매장 등록</span>을 통해 저희가 제공하는 많은 서비스를 이용하실 수 있습니다.<br>
-								매장 등록을 완료하면 영업이 시작됩니다
+								${preBtName }을 완료하지 않았습니다.<br>
+								<span class="store_register_link" onclick='location.href="${cpath}/business/${preLink }"'>${preBtName }</span>을 통해 저희가 제공하는 많은 서비스를 이용하실 수 있습니다.<br>
+								${preBtName }을 완료하면 영업이 시작됩니다
 							</p>
 							<div>
-								<button class="store_register_sign_up_btn" onclick='location.href="${cpath}/business/${preLink }"'>광고
-									매장 등록 하러가기
+								<button class="store_register_sign_up_btn" onclick='location.href="${cpath}/business/${preLink }"'>
+									${preBtName } 하러가기
 								</button>
 							</div>
 						</div>
