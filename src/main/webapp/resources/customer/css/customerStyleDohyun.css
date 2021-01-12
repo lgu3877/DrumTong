@@ -1568,10 +1568,13 @@ div.paging {
 }
 
 div.paging div {
-	width: 25px;
-	height: 25px;
+	width: 35px;
+	height: 35px;
    	border: 1px solid #dadada;
-   	display: inline-block;
+   	display: inline-flex;
+   	text-align: center;
+   	align-items: center;
+   	justify-content: center;
 }
 
 div.paging div a {

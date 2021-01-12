@@ -29,16 +29,16 @@
 			<i class="far fa-square" onclick="typeSelect(this, 'system')"></i>시스템에서 제공하는 일자
 		</h1>
 			<div>
-				<button onclick="selectSystem(this)"><span class="year"></span><span class="mon-day"></span></button>
-				<button onclick="selectSystem(this)"><span class="year"></span><span class="mon-day"></span></button>
-				<button onclick="selectSystem(this)"><span class="year"></span><span class="mon-day"></span></button>
-				<button onclick="selectSystem(this)"><span class="year"></span><span class="mon-day"></span></button>
+				<button onclick="selectSystem(this)"><span class="hidden"></span><span class="year"></span><span class="mon-day"></span></button>
+				<button onclick="selectSystem(this)"><span class="hidden"></span><span class="year"></span><span class="mon-day"></span></button>
+				<button onclick="selectSystem(this)"><span class="hidden"></span><span class="year"></span><span class="mon-day"></span></button>
+				<button onclick="selectSystem(this)"><span class="hidden"></span><span class="year"></span><span class="mon-day"></span></button>
 			</div>
 			<div>
-				<button onclick="selectSystem(this)"><span class="year"></span><span class="mon-day"></span></button>
-				<button onclick="selectSystem(this)"><span class="year"></span><span class="mon-day"></span></button>
-				<button onclick="selectSystem(this)"><span class="year"></span><span class="mon-day"></span></button>
-				<button onclick="selectSystem(this)"><span class="year"></span><span class="mon-day"></span></button>
+				<button onclick="selectSystem(this)"><span class="hidden"></span><span class="year"></span><span class="mon-day"></span></button>
+				<button onclick="selectSystem(this)"><span class="hidden"></span><span class="year"></span><span class="mon-day"></span></button>
+				<button onclick="selectSystem(this)"><span class="hidden"></span><span class="year"></span><span class="mon-day"></span></button>
+				<button onclick="selectSystem(this)"><span class="hidden"></span><span class="year"></span><span class="mon-day"></span></button>
 			</div>
 		</div>
 		
@@ -47,7 +47,7 @@
 			<i class="far fa-square" onclick="typeSelect(this, 'ete')"></i>ETE를 활용한 자동 일자
 		</h1>
 			<div>
-				<input type="text" value="${eteNum }" readonly><i class="far fa-question-circle fa-2x" id="etehelp"></i>
+				<input id="eteinput" type="text" readonly><i class="far fa-question-circle fa-2x" id="etehelp"></i>
 				<div class="ete-bubble" id="ete-bubble" style="display: none">
 					ETE 설명에 대해서 취급하고 있습니다
 					ETE 설명에 대해서 취급하고 있습니다
@@ -113,7 +113,8 @@
 	function sysdateReplace() {		// 시스템으로 일정 보내기가 활성화되어 있다면, 시스템 일정을 showdiv에 출력한다
 		let systemdate = '';
 		let selectedBtn = document.querySelector('#systemdiv .selected');
-		systemdate = (selectedBtn.querySelector('.year').innerHTML).replace('년','') + '-';
+		systemdate = (selectedBtn.querySelector('.hidden').innerHTML).replace('년','') + '-';	// 수정
+// 		systemdate = (selectedBtn.querySelector('.year').innerHTML).replace('년','') + '-';		// 원본
 // 		systemdate += (selectedBtn.querySelector('.mon-day').innerHTML).replace(/(\s*)/g,'');	// 모든 공백 제거
 		systemdate += (selectedBtn.querySelector('.mon-day').innerHTML).replace(' / ','-');	// 모든 공백 제거
 		return systemdate;
@@ -188,9 +189,24 @@
         var year = date.getFullYear();
         var month = ("0" + (1 + date.getMonth())).slice(-2);
         var day = ("0" + date.getDate()).slice(-2);
-    	$(item).children('.year').html(year + '년');
+    	$(item).children('.year').html((index + 1) + 'Day');			// 수정
+    	$(item).children('.hidden').html(year + '년');					// 수정
+//     	$(item).children('.year').html(year + '년');						// 원본
     	$(item).children('.mon-day').html(month + ' / ' + day);
     });
+    
+	// id="eteinput"에 날짜 넣기    
+    let etenum = parseInt('${eteNum }');
+    
+    let etedate = new Date();
+    etedate.setDate(etedate.getDate() + etenum);
+    let eteyear = etedate.getFullYear();
+    let etemonth = ("0" + (1 + etedate.getMonth())).slice(-2);
+    let eteday = ("0" + etedate.getDate()).slice(-2);
+    
+    $('#eteinput').val(eteyear + '-' + etemonth + '-' + eteday);
+    // 여기까지...
+    
     
     document.getElementById('inputdate').addEventListener('change', function() {		// inputdiv의 아이콘이 체크되었을 때, showdiv에 배송날짜 입력
     	if(document.querySelector('.inputdiv i').className == 'far fa-check-square') {
