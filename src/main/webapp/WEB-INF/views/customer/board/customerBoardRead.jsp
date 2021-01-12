@@ -6,11 +6,11 @@
 
 <section class="section_board">
 	<article class="board">
-        <h1 class="board_mainName"><span style="float: left">게</span> 시 <span style="float: right">판</span></h1>
+        <div class="board_mainName"><span></span></div>
 		<div class="board_box">
 
 			<div class="boardList">
-				<div class="boardLine boardLine2" style="border: 0;">
+				<div class="boardLine" style="border: 0;">
 					<div class="num num2">${board.num }</div>
 					<div class="title title2">${board.title }</div>
 					<div class="registdate registdate2">${board.registdate }</div>
@@ -31,5 +31,12 @@
 		</div>
 	</article>
 </section>
+
+    <script type="text/javascript">
+    	if('${type }' == 'notice')
+    		$('.board_mainName').children('span').html('공지사항 게시판');
+    	else if('${type }' == 'event')
+    		$('.board_mainName').children('span').html('이벤트 게시판');
+    </script>
 
 <%@ include file="../main/customerFooter.jsp"%>
