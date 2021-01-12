@@ -16,12 +16,47 @@ const toggleIcon = document.getElementById("delivery-icon");
 let deliveryToggle = false;
 
 
-// 옵션 생성
+// 메인 옵션 생성
 function createOptions(categoryObject) {
 	console.log(categoryObject);
+	
+	const mainSelect = document.getElementById("main-category");
+	mainSelect.getElementsByClassName("selectedDirect")[0].style.fontWeight = "600";
+//	const subSlect = document.getElementById("sub-category");
+//	subSelect.getElementsByClassName("selectedDirect")[0].style.fontWeight = "600";
+	
+	for (let key in categoryObject) {
+		const option = document.createElement("option");
+		option.value = key;
+		option.innerHTML = key;
+//		option.selected = populateSubCategories(key);
+		
+		mainSelect.prepend(option);
+	}
 
-//	await axios.get("");
+	
+	// console.log(mainCategory);
+	
 }
+
+//select > option 선택
+function selectOption(obj) {
+	
+	// 직접 입력
+	if(obj.value === 'selectedDirect') {
+		obj.parentNode.querySelector('.direct_type_input').style.display = '';
+	}
+	else {
+		obj.parentNode.querySelector('.direct_type_input').style.display = 'none';
+		obj.parentNode.querySelector('.direct_type_input').value = '';
+	}
+}
+
+// 서브 옵션 생성
+function populateSubCategories(key) {
+	console.log(key);
+}
+
 
 // 배달 서비스 활성화 이벤트
 function activateVisualization() {
@@ -326,16 +361,5 @@ function dismissInput(entireNode) {
 	
 	// 목록이 2개 이상 > 해당 줄 삭제
 	entireNode.remove();
-}
-
-//직접입력 > input 열기
-function directType(obj) {
-	if(obj.value === 'selectedDirect') {
-		obj.parentNode.querySelector('.direct_type_input').style.display = '';
-	}
-	else {
-		obj.parentNode.querySelector('.direct_type_input').style.display = 'none';
-		obj.parentNode.querySelector('.direct_type_input').value = '';
-	}
 }
 
