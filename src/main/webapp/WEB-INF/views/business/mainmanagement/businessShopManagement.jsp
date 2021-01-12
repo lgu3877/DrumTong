@@ -606,6 +606,7 @@
 		// DB에서 받아오는 Defaultcategory List<String> 배열
 		let defaultCategory = ${defaultcategory};
 		let menuCategories = ${menuCategories};
+		console.log(menuCategories);
 	</script>
 	<!-- 초기 셋팅 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementOnLoad.js"></script>

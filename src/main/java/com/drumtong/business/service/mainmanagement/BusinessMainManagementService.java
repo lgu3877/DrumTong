@@ -96,19 +96,28 @@ public class BusinessMainManagementService {
  	    	
  	    }
  	    
- 	    // 대분류 중분류 카테고리를 셋팅해주는 함수입니다.
-	    HashMap<String, ArrayList<String>> menuCategories = menuCategoriesSetting(estid);
-	    	
-	    //  대분류, 중분류 카테고리 모음
-	    mav.addObject("menuCategories", (new Gson()).toJson(menuCategories));
-	    	
-		// MultipartFile mpf = new MultipartFile();
- 	    // aws.s3FileUpload(file, folderName);
- 	    
-// 추가 	    
+ 	    // 추가 	    
  	    List<String> defaultcategory = Arrays.asList((bManagementDAO.selectDefaultCategory(estid).split("/")));
     	mav.addObject("defaultcategory", (new Gson()).toJson(defaultcategory));
 		
+ 	    
+ 	    // 대분류 중분류 카테고리를 셋팅해주는 함수입니다.
+	    HashMap<String, ArrayList<String>> menuCategories = menuCategoriesSetting(estid);
+	    
+	    // 선택한 기본카테고리도 같이 셋팅해줍니다.
+	    for(String category : defaultcategory) {
+	    	ArrayList<String> tmp = new ArrayList<String>();
+	    	menuCategories.put(category, tmp);
+	    }
+	    
+	    
+	    //  대분류, 중분류 카테고리 모음
+	    mav.addObject("menuCategories", (new Gson()).toJson(menuCategories));
+	    
+		// MultipartFile mpf = new MultipartFile();
+ 	    // aws.s3FileUpload(file, folderName);
+ 	    
+	    
     	return mav;
 	}
 
