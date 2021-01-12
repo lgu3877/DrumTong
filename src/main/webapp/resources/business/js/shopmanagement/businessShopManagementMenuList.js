@@ -79,6 +79,8 @@ function selectOption(obj) {
 		if (obj.name === "maincategory") {
 			clearSubOptions();
 			populateSubOptions(obj.value);
+			
+			document.getElementsByClassName("direct_type_input")[1].style.display = "none";
 		} 
 	}
 }
