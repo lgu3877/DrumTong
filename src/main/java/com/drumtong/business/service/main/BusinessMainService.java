@@ -25,6 +25,9 @@ public class BusinessMainService {
 		ModelAndView mav = new ModelAndView("business/main/businessMain");
 		HttpSession Session = req.getSession();
 		
+		mav.addObject("ModalCheck", Session.getAttribute("ModalCheck"));
+		Session.removeAttribute("ModalCheck");
+		
 		BInformationVO selectEST = (BInformationVO)Session.getAttribute("selectEST");
 		// 로그인 되어있고 등록된 매장까지 있을 경우 매장의 프리뷰를 보여준다.
 		if(Session.getAttribute("bLogin") != null && selectEST != null && "SUCCESS".equals(selectEST.getStatus())) {

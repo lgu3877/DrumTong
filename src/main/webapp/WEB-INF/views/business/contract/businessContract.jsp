@@ -298,7 +298,6 @@
 	
 	// 영경 스크립트(주소의 좌표값을 DB에 저장하는 부분)
 	function kakaoFunc(address){
-		console.log("address : ", address);
 		//주소-좌표 변환 객체를 생성합니다
     	var geocoder = new kakao.maps.services.Geocoder();
     	

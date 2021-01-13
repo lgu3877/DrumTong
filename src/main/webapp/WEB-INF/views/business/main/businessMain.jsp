@@ -134,6 +134,9 @@
   		 let preLink = '${preLink}';
   		 let preBtName = '${preBtName}';
   		 let preStatus = '${preStatus}';
+  		 
+  		 let ModalCheck = '${ModalCheck}';
+  		 
 	</script>
 	<!-- main cover(slider) -->
 	<script type="text/javascript" src="${cpath }/business/js/main.js"></script>
@@ -142,7 +145,7 @@
 	   <!-- main cover cookie -->
    
    <script type="text/javascript"> 
-	 console.log('estid : ', document.querySelector('#bpersonid').value);
+// 	 console.log('estid : ', document.querySelector('#bpersonid').value);s
    	 
      function getCookie(name) { 
         var cookie = document.cookie;

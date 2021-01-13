@@ -34,14 +34,12 @@ public class BusinessSubManagementService {
 	@Autowired BPaymentDAO bPaymentDAO;
 	@Autowired SImageDAO sImageDAO;
 	
-	private ModelAndView mainMove = new ModelAndView("redirect:/business/");
-	
 	
 	// 비즈니스 리뷰관리 페이지로 이동 (GET) [영경]
 	public ModelAndView reviewManagement(HttpServletRequest req, String pageKind) {
 		BInformationVO bInformationVO = (BInformationVO)req.getSession().getAttribute("selectEST");
 		
-		if(checkEstStatus(req)) return mainMove;
+		if(checkEstStatus(req)) return mainMove(req, "ReviewManagement");
 		
 		ModelAndView mav = new ModelAndView("business/submanagement/businessReviewManagement");
 		
@@ -55,7 +53,7 @@ public class BusinessSubManagementService {
 	public ModelAndView couponManagement(HttpServletRequest req) {
 		BInformationVO bInformationVO = (BInformationVO)req.getSession().getAttribute("selectEST");
 		
-		if(checkEstStatus(req)) return mainMove;
+		if(checkEstStatus(req)) return mainMove(req, "ReviewManagement");
 		
 		ModelAndView mav = new ModelAndView("business/submanagement/businessCouponManagement");
 		
@@ -70,7 +68,7 @@ public class BusinessSubManagementService {
 	public ModelAndView cardAccountManagement(HttpServletRequest req) {		// Status 계약 여부 필드를 세션을 받아와준다.
 		BInformationVO bInformationVO = (BInformationVO)req.getSession().getAttribute("selectEST");
 
-		if(checkEstStatus(req)) return mainMove;
+		if(checkEstStatus(req)) return mainMove(req, "CardAccountManagement");
 		
 		
 		ModelAndView mav = new ModelAndView("business/submanagement/businessCardAccountManagement");
@@ -89,7 +87,7 @@ public class BusinessSubManagementService {
 	public ModelAndView statisticsManagement(HttpServletRequest req, String pageKind, String option, String startDate, String endDate) {
 		BInformationVO bInformationVO = (BInformationVO)req.getSession().getAttribute("selectEST");
 		
-		if(checkEstStatus(req)) return mainMove;
+		if(checkEstStatus(req)) return mainMove(req, "StatisticsManagement");
 
 		String estid = bInformationVO.getEstid();
 		
@@ -109,7 +107,7 @@ public class BusinessSubManagementService {
 		status = status == null ? "REQUEST" : status;
 		BInformationVO bInformationVO = (BInformationVO)req.getSession().getAttribute("selectEST");
 		
-		if(checkEstStatus(req)) return mainMove;
+		if(checkEstStatus(req)) return mainMove(req, "OrderStatusManagement");
 		
 		//	주문현황 페이지에 필요한 구매정보 데이터를 가져와줍니다. 
 		List<OrderList> orderList =  OrderListSetting.selectBusiness(bInformationVO.getEstid(), status);
@@ -131,28 +129,27 @@ public class BusinessSubManagementService {
 	private boolean checkEstStatus(HttpServletRequest req) {
 		BPrivateDataVO bPrivateDataVO = (BPrivateDataVO)req.getSession().getAttribute("bLogin");
 		BInformationVO bInformationVO =(BInformationVO)req.getSession().getAttribute("selectEST");
-		if(bPrivateDataVO == null) {
-			mainMove.addObject("contract" , "null");
-			return true;
-		}
-		else if(bInformationVO.getStatus().equals("FAIL")) {
-			mainMove.addObject("contract" , "1step");
-			return true;
-		}
-		else if(bInformationVO.getStatus().equals("PROCESS")) {
-			mainMove.addObject("contract" , "2step");
-			return true;
-		}
 		
-		// Status 계약 여부 필드를 세션에서 받아와 status가 'FAIL'이면 business로 우회해주고 'SUCCESS'이면 서브관리 페이지들로 이동시키기 위해 boolean을 반환한다.
+		if(bPrivateDataVO == null || bInformationVO == null || !bInformationVO.getStatus().equals("SUCCESS")) {
+			return true;
+		}
+		// Status 계약 여부 필드를 세션에서 받아와 status가 'FAIL', 'PROCESS' 이면 business로 우회해주고 'SUCCESS'이면 서브관리 페이지들로 이동시키기 위해 boolean을 반환한다.
 		return false;
 	}
 
+	
+	private ModelAndView mainMove(HttpServletRequest req, String type) {
+		ModelAndView mav = new ModelAndView("redirect:/business/");
+		
+		req.getSession().setAttribute("ModalCheck", type);
+		
+		return mav;
+	}
+	
 
 	public int calcEte(HttpServletRequest req, String salecode) {
 		String estid = ((BInformationVO)req.getSession().getAttribute("selectEST")).getEstid();
 		
 		return OrderListSetting.calcEte(estid, salecode);
 	}
-	
 }
