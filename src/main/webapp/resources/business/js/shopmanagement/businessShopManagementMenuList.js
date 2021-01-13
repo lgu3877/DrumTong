@@ -61,6 +61,8 @@ function selectOption(obj) {
 		
 		clearSubOptions();
 		
+		// if > 하위 항목 직접 입력 시
+		
 		// 직접입력
 		const option = document.createElement("option");
 		option.value = "selectedDirect";
@@ -433,3 +435,37 @@ function dismissInput(entireNode) {
 	entireNode.remove();
 }
 
+
+function openCategoryModal() {
+	// 모달 visibility
+	const display = document.getElementById("category_modal").style.display;
+	console.log(display);
+	display === "none" ? 
+		document.getElementById("category_modal").style.display = "block" : 
+		document.getElementById("category_modal").style.display = "none";
+	
+}
+
+// checkbox list 생성
+function createCategoryList() {
+	// 닫기 버튼
+	document.getElementById("category-close").addEventListener("click", function(e) {
+		document.getElementById("category_modal").style.display = "none";
+	})
+	
+	const container = document.getElementById("category-list");
+	
+	console.log(defaultCategory);
+	for (let i = 0; i < defaultCategory.length; i++) {
+		const checkbox = document.createElement("input");
+		checkbox.name = "mainCategory";
+		checkbox.type = "checkbox";
+		checkbox.value = defaultCategory[i];
+		checkbox.className = "category_checkbox";
+		
+		container.appendChild(checkbox);
+	}
+}
+
+createOptions(menuCategories);
+createCategoryList();

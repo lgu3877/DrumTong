@@ -44,6 +44,12 @@
 	
 	<!-- Kakao Map API -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a8f343b25889960b1fdf777c9a2a57c&libraries=services,clusterer,drawing"></script>
+	
+	<script type="text/javascript">
+		// DB에서 받아오는 Defaultcategory List<String> 배열
+		const defaultCategory = ${defaultcategory};
+		const menuCategories = ${menuCategories};
+	</script>
 </head>
      
 
@@ -388,11 +394,10 @@
 				</div>
 			</div>
 
-			<div class="create_menu form">
-			
-			
-			<!-- item customizing -->
+			<!-- 메뉴 수정 모달 -->
+			<div class="category_modal_btn" onclick="openCategoryModal()">카테고리 수정</div>
 				
+			<div class="create_menu form">
 			<!-- head -->
 				<div style="display: block">
 					<ul class="customize_menu_head">
@@ -575,7 +580,7 @@
 <!-- footer -->
 	<%-- <%@ include file="../main/businessFooter.jsp" %> --%>
 
-<!-- Modal  -->
+<!-- Intro Modal  -->
 	<div id="intro-modal" class="intro_modal">
 	<!-- Modal content -->
 		<div class="intro_content_con">
@@ -587,6 +592,17 @@
 			</div>
 		</div>
 	</div>
+
+<!-- Category Modal  -->
+	<div id="category_modal" class="category_modal" style="display: none;">
+		<div class="category_modal_content">
+			<span id="category-close">&times;</span>
+			<div id="category-list" class="category_content">
+				
+			</div>
+		</div>
+	</div>
+
 	<!-- 초기 셋팅 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementOnLoad.js"></script>
 	
@@ -598,28 +614,6 @@
 
 	<!-- 서비스 매뉴 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementMenuList.js"></script>
-
-	<!-- 서비스 메뉴 옵션 -->
-	<script type="text/javascript">
-		// DB에서 받아오는 Defaultcategory List<String> 배열
-		const defaultCategory = ${defaultcategory};
-		const menuCategories = ${menuCategories};
-		
-		// console.log(defaultCategory);
-		// console.log(menuCategories);
-		
-		
-		/* const object = new Object();
-		for (let i = 0; i < defaultCategory.length; i++) {
-			const mainOption = defaultCategory[i];
-			const subOption = subCategory[defaultCategory[i]];
-			
-			// object 정의
-			object[mainOption] = subOption !== undefined ? subOption : "값 없음";		
-		} */
-		
-		createOptions(menuCategories); // MenuList > Dropdown category
-	</script>
 
 	<!-- 배달 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementReturnItem.js"></script>
