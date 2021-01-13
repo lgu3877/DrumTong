@@ -453,19 +453,47 @@ function createCategoryList() {
 		document.getElementById("category_modal").style.display = "none";
 	})
 	
-	const container = document.getElementById("category-list");
-	
-	console.log(defaultCategory);
+	// checkbox & label 생성 > Node 추가
 	for (let i = 0; i < defaultCategory.length; i++) {
-		const checkbox = document.createElement("input");
+		// random string id
+		const randomId = generateReandomString(10);
+
+		// key array
+		const userMenu = Object.keys(menuCategories);
+		
+		// checkbox
+		const checkbox = document.createElement("input");		
+		checkbox.id = randomId;
 		checkbox.name = "mainCategory";
 		checkbox.type = "checkbox";
-		checkbox.value = defaultCategory[i];
-		checkbox.className = "category_checkbox";
+		checkbox.value = userMenu.includes(defaultCategory[i]);
+//		checkbox.style.display = "none";
+		checkbox.checked = (defaultCategory[i]);
+		checkbox.onclick = () => checkbox.checked = !checkbox.checked;
+
+		// label
+		const label = document.createElement("label");
+		label.htmlFor = randomId;
+		label.innerHTML = defaultCategory[i]; 
+		label.className = "category_checkbox_label"; 
 		
-		container.appendChild(checkbox);
+		// 등록된 메뉴 & 등록하지 않은 메뉴 비교 > 체크 
+		checkbox.checked ? label.classList.add("category_checked") : label.classList.remove("category_checked");
+		
+		
+		// Node 추가
+		label.appendChild(checkbox);
+		document.getElementById("category-list").appendChild(label);
 	}
 }
 
-createOptions(menuCategories);
-createCategoryList();
+function checkboxVisibility(id) {
+	const checkbox = document.getElementById(id);
+	console.log(checkbox);
+	console.log(checkbox.checked);
+}
+
+
+// 서비스 등록 관련 초기 실행
+createOptions(menuCategories); // select > option 드랍다운 동적 구현
+createCategoryList(); // 메뉴수정 관련 Modal
