@@ -49,8 +49,8 @@ public class BusinessMainManagementController {
 	
 	// 비즈니스 일정관리 페이지로 이동 (GET) [건욱]
 	@RequestMapping(value="businessScheduleManagement/", method = RequestMethod.GET)
-	public ModelAndView scheduleManagement() {
-		return svc.scheduleManagement();
+	public ModelAndView scheduleManagement(HttpServletRequest req) {
+		return svc.scheduleManagement(req);
 	}
 
 	
