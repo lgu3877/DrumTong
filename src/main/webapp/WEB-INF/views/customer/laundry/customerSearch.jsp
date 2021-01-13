@@ -572,74 +572,41 @@
         let more = document.querySelector('.premium_more');
         let counts = document.querySelectorAll('.premium_childs');
 
-        console.log("펭수 몇마리? = " + counts.length);
+//         console.log("펭수 몇마리? = " + counts.length);
 
         if(counts.length > 6){
             more.style.display = 'block';
         }
     </script>
     <script>
-	    const axGet = async (address) => {	// async : 비동기 실행 함수
-			move = '${pageContext.request.contextPath}/customer/laundry/customerSearch/rest/clusterer/' + address + '/';
-	    	console.log(move);
-// 			실제 코드 동작 시
-	        await axios.get(move)
+// 	    const axGet = async (move, map) => {	// async : 비동기 실행 함수
+// 			move = '${pageContext.request.contextPath}/customer/laundry/customerSearch/rest/clusterer/' + move + '/';
+// // 			실제 코드 동작 시
+// 	        await axios.get(move)
 	
-	//			테스트 코드 동작 시
-	//			await axios.get('${pageContext.request.contextPath}/customer/js/laundry/MapTestData.json')
-		        // 정상 통신 시에..
-		        .then( (response) => {
-		        	console.log('실행', address);
-		        	console.log(response.data);
-	        	
-	        	
-		        	// 마커들의 저장 함수
-		        	let markers = response.data.positions.map(function(i, position) {
-	
-		        		// 마커 생성
-		        		let marker = new kakao.maps.Marker({
-			                position : new kakao.maps.LatLng(i.lat, i.lng),
-			                clickable : true
-			            });
+// 	//			테스트 코드 동작 시
+// 	//			await axios.get('${pageContext.request.contextPath}/customer/js/laundry/MapTestData.json')
+// 		        // 정상 통신 시에..
+// 		        .then( (response) => {
+// 	        		console.log(response.data);
+// 		        	// 마커들의 저장 함수
+// 		        	let markers = response.data.forEach(function(i, position) {
+// 		        		// 마커 생성
+// 		        		let marker = new kakao.maps.Marker({
+// 			                position : new kakao.maps.LatLng(i.latitude, i.longitude),
+// 			                clickable : true
+// 			            });
 		           
-		        		// 띄울 Info css 정의
-	        		
+// 	                //생성된 마커를 반환
+// 	                return marker;
 		            
-		        		// 인포윈도우를 생성합니다
-	        		
-	//                     var infowindow = new kakao.maps.InfoWindow({
-	//                         content : iwContent,
-	//                         removable : iwRemoveable
-	//                     });
-	        		
-	              	// 마커에 클릭이벤트 처리
-	//                     kakao.maps.event.addListener(marker, 'click', function() {
-	                	
-	//                           // 마커 위에 인포윈도우를 표시합니다
-	//                           infowindow.open(map, marker);    
-	                      
-	//                     });
-	               
-	                //생성된 마커를 반환
-	                return marker;
-		            
-			        });
+// 			        }); // 마커들 저장 함수 종료
 	        	
+// 			    });
 	        	
-		        	// 클러스터 클릭 시에 실행할 함수
-	// 	        	kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
-		             
-	// 	            });
-		          	clusterer.addMarkers(markers);
-			    });
-// 		        ,error : function(xhr, status, error){
-// 		            //요청에 실패하면 에러코드 출력  
-// 		            alert("에러코드 : " + xhr.status);
-// 		       }
-	        	
-		    };
+// 		    };
 		    
-	    function searchAddress(){
+	    function searchAddress(map){
 	    	address = document.getElementById('searchText').value;
 	    	//주소-좌표 변환 객체를 생성합니다
 	    	var geocoder = new kakao.maps.services.Geocoder();
@@ -652,7 +619,7 @@
 	    	
 	    	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-// 	    			axGet(address);
+// 	    			axGet(address, map);
 	    	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 	    	        map.setCenter(coords);
 	    	    } else {
@@ -672,120 +639,11 @@
  		
 		let map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
  		
-		searchAddress();
+		searchAddress(map);
 		
     </script>
-<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0c218bd435ac24618816391ea2acab62&libraries=services,clusterer,drawing"></script> -->
 <script>
-// 	// 지도 초기화 함수
-// // 	function initMap() {
-		
-// 		let container = document.getElementsByClassName('laundryList_map')[0]; //지도를 담을 영역의 DOM 레퍼런스
-// 		let options = { //지도를 생성할 때 필요한 기본 옵션
-// 			center: new kakao.maps.LatLng(37.553505, 126.969641), //지도의 중심좌표.
-// 			level: 7, //지도의 레벨(확대, 축소 정도)
-// 			maxLevel: 11,
-// 			minLevel : 0,
-// 		};
-		
-// 		let map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-		
-		
-// 		let clusterer = new kakao.maps.MarkerClusterer({
-// 	        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
-// 	        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-// 	        minLevel: 0, // 클러스터 할 최소 지도 레벨 
-	        
-// 		});
-		
-		
-// 		console.log('실행');
-// 		// ============================ 비동기 실행  =================================
-// 		const axGet = async () => {	// async : 비동기 실행 함수
-			
-// // 			실제 코드 동작 시
-// // 	        await axios.get('${pageContext.request.contextPath}/customer/laundry/customerSearch/rest/clusterer/')
 
-// //			테스트 코드 동작 시
-// 			await axios.get('${pageContext.request.contextPath}/customer/js/laundry/MapTestData.json')
-// 	        // 정상 통신 시에..
-// 	        .then( (response) => {
-// 	        	console.log('실행');
-// 	        	console.log(response.data.positions);
-	        	
-	        	
-// 	        	// 마커들의 저장 함수
-// 	        	let markers = response.data.positions.map(function(i, position) {
-
-// 	        		// 마커 생성
-// 	        		let marker = new kakao.maps.Marker({
-// 		                position : new kakao.maps.LatLng(i.lat, i.lng),
-// 		                clickable : true
-// 		            });
-		           
-// 	        		// 띄울 Info css 정의
-	        		
-		            
-// 	        		// 인포윈도우를 생성합니다
-	        		
-// //                     var infowindow = new kakao.maps.InfoWindow({
-// //                         content : iwContent,
-// //                         removable : iwRemoveable
-// //                     });
-	        		
-//                  	// 마커에 클릭이벤트 처리
-// //                     kakao.maps.event.addListener(marker, 'click', function() {
-                    	
-// //                           // 마커 위에 인포윈도우를 표시합니다
-// //                           infowindow.open(map, marker);    
-                          
-// //                     });
-                   
-//                    //생성된 마커를 반환
-//                    return marker;
-		            
-// 		        });
-	        	
-	        	
-// 	        	// 클러스터 클릭 시에 실행할 함수
-// // 	        	kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
-		             
-// // 	            });
-// 	          	clusterer.addMarkers(markers);
-// 		    });
-// // 	        ,error : function(xhr, status, error){
-// // 	            //요청에 실패하면 에러코드 출력  
-// // 	            alert("에러코드 : " + xhr.status);
-// // 	       }
-	        	
-// 	    };
-// 	    axGet();
-// // 	 }
-	
-	
-	 
-	
-	
-    
-	
-// 	    // 데이터를 가져오기 위해 jQuery를 사용합니다
-// 	    // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
-// // 	    $.get("${pageContext.request.contextPath}/customer/js/MapTestData.json", function(data) {
-// // 	        // 데이터에서 좌표 값을 가지고 마커를 표시합니다
-// // 	        // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
-// // 	        var markers = $(data.positions).map(function(i, position) {
-// // 	            return new kakao.maps.Marker({
-// // 	                position : new kakao.maps.LatLng(position.lat, position.lng),
-// // 	                clickable : true
-// // 	            });
-// // 	        });
-
-// // 	        // 클러스터러에 마커들을 추가합니다
-// // 	        clusterer.addMarkers(markers);
-// // 	    });
-	
-
-	    
 // // 			폴리곤 생성 코드
 
 // 	    	const axGet2 = async () => {	// async : 비동기 실행 함수
@@ -923,22 +781,3 @@
 </script>
 </body>
 </html>
-   
-   
-<!--    구글지도 코드 -->
-<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDE5_jQ_oM9pWCsESsbufZ89-L7lQScoAU&callback=initMap&region=kr" -->
-<!--   	type="text/javascript"> -->
-<!-- </script> -->
-<!-- <script> -->
-<!--  	function initMap() { -->
-<!--  		var seoul = { -->
-<!--  			lat : 37.5642135, -->
-<!--  			lng : 127.0016985 -->
-<!--  		}; -->
-<!--  		var map = new google.maps.Map( -->
-<!--  				document.getElementsByClassName('laundryList_map')[0], { -->
-<!--  			zoom : 12, -->
-<!--  			center : seoul -->
-<!--  		}); -->
-<!--  	} -->
-<!-- </script> -->

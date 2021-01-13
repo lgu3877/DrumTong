@@ -34,24 +34,9 @@ public class RestCustomerLaundryController {
 		return svc.setCoupon(param);
 	}
 	
-	@RequestMapping("customerSearch/rest/clusterer/${address}/")
-	@GetMapping(produces="application/json; charset=utf8")	
-	public String clusterer(@PathVariable("address")String address){
-//		
-////		테스트코드
-//		
-//		return;
-//		
-		System.out.println("addresss : " + address);
-	    // 실제 코드
-		List<BInformationVO> list = svc.BusinessMapInfo(address);
-		try {
-			return list != null
-					? new ObjectMapper().writeValueAsString(list):null;
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
+//	@RequestMapping("customerSearch/rest/clusterer/{address}/")
+//	@GetMapping(produces="application/json; charset=utf8")	
+//	public String clusterer(@PathVariable("address")String address){
+//		return svc.clusterer(address);
+//	}
 }
