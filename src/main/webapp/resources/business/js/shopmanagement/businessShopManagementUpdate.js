@@ -29,12 +29,21 @@ async function updatePhoto() {
 
 	
 	// 이미지 삭제
-	for (let i = 0; i < deletePhotoList.length; i++) {
-		if (photoInputs[i].files[0] !== undefined) 
-			formData.append("businessStoreImage", photoInputs[i].files[0]);
-	}	
+	const formDataDelete = new FormData();
 	
-	await axios.delete("/drumtong/business/mainmanagement/BImage/rest/...", deletePhotoList);
+	for (let i = 0; i < deletePhotoList.length; i++) {
+		formDataDelete.append("deleteUploadImage", deletePhotoList[i]);
+	}
+	
+	await axios.delete(
+		"/drumtong/business/mainmanagement/BImage/rest/...", 
+		formDataDelete, 
+		{
+			headers: {
+				"Content-Type": `multipart/form-data`,
+			}, 
+		}
+	);
 }
 
 

@@ -290,20 +290,15 @@ function deletePhoto(clickedPhoto) {
         	photoList.splice(index, 1);
         	
         	// 삭제 후 다음 사진 미리보기
-        	zoomInPhoto(photoList[index % photoList.length].children[0].src);
+        	if (photoList.length !== 0 ) {
+        		zoomInPhoto(photoList[index % photoList.length].children[0].src);        		
+        	}
         	
         	
-            // DB에서 삭제
-        	const isUploaded = clickedPhoto.includes("https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/");
-        	console.log(clickedPhoto.substr(55));
-        	
-        	deletePhotoList.push(clickedPhoto.substr(55));
-        	
-//        	console.log(clickedPhoto.toString().substr("https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/"));
-        	
-//        	deleteImage(clickedPhoto);
-            
-        	
+            // DB에서 삭제 > 기존에 등록된 사진일 경우에만 진행
+        	const isUploaded = clickedPhoto.includes("https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/");        	
+        	isUploaded ? deletePhotoList.push(clickedPhoto.substr(55)) : null;
+          
             break;
          }
       }
