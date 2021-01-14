@@ -501,7 +501,7 @@
 
 .category_checkbox_label:hover {
 	transition: 0.5s;
-	background-color: navy;
+	background-color: steelblue;
 }
 
 .category_checked {

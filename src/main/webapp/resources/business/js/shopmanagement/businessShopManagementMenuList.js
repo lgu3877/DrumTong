@@ -466,16 +466,18 @@ function createCategoryList() {
 		checkbox.id = randomId;
 		checkbox.name = "mainCategory";
 		checkbox.type = "checkbox";
-		checkbox.value = userMenu.includes(defaultCategory[i]);
-//		checkbox.style.display = "none";
-		checkbox.checked = (defaultCategory[i]);
-		checkbox.onclick = () => checkbox.checked = !checkbox.checked;
+		checkbox.value = defaultCategory[i];
+		checkbox.style.display = "none";
+		checkbox.checked = userMenu.includes(defaultCategory[i]);
 
 		// label
 		const label = document.createElement("label");
 		label.htmlFor = randomId;
-		label.innerHTML = defaultCategory[i]; 
+		label.innerHTML = 
+			`<i class="${checkbox.checked ? "fas fa-check-square" : "fas fa-window-close"}"></i>
+			${defaultCategory[i]}`; 
 		label.className = "category_checkbox_label"; 
+		label.onclick = () => checkboxVisibility(randomId);
 		
 		// 등록된 메뉴 & 등록하지 않은 메뉴 비교 > 체크 
 		checkbox.checked ? label.classList.add("category_checked") : label.classList.remove("category_checked");
@@ -489,8 +491,15 @@ function createCategoryList() {
 
 function checkboxVisibility(id) {
 	const checkbox = document.getElementById(id);
-	console.log(checkbox);
-	console.log(checkbox.checked);
+	
+	if (checkbox.checked) {
+		checkbox.parentElement.classList.add("category_checked");
+		checkbox.parentElement.getElementsByTagName("i")[0].className = "fas fa-check-square";
+	}
+	else {
+		checkbox.parentElement.classList.remove("category_checked");		
+		checkbox.parentElement.getElementsByTagName("i")[0].className = "fas fa-window-close";
+	}
 }
 
 

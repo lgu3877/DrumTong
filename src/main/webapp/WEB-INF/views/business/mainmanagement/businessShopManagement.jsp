@@ -593,21 +593,6 @@
 	<!-- 서비스 매뉴 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementMenuList.js"></script>
 
-	<!-- 서비스 메뉴 옵션 -->
-	<script type="text/javascript">
-		
-		/* const object = new Object();
-		for (let i = 0; i < defaultCategory.length; i++) {
-			const mainOption = defaultCategory[i];
-			const subOption = subCategory[defaultCategory[i]];
-			
-			// object 정의
-			object[mainOption] = subOption !== undefined ? subOption : "값 없음";		
-		} */
-		
-		createOptions(menuCategories); // MenuList > Dropdown category
-	</script>
-
 	<!-- 배달 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementReturnItem.js"></script>
 	
