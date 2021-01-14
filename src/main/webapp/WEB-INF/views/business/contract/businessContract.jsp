@@ -298,7 +298,6 @@
 	
 	// 영경 스크립트(주소의 좌표값을 DB에 저장하는 부분)
 	function kakaoFunc(address){
-		console.log("address : ", address);
 		//주소-좌표 변환 객체를 생성합니다
     	var geocoder = new kakao.maps.services.Geocoder();
     	
@@ -396,16 +395,10 @@
 //    			console.log(window.location.pathname);		// 현재 페이지의 경로와 파일 이름 반환
 //    			console.log(window.location.protocol);		// 사용하는 웹 프로토콜 반환 (http:// 혹은 https://)
     			var imgsrc = this.parentNode.querySelector('img').src;
-      			console.log(imgsrc);
-    			
-    			var replace1 = imgsrc.replace(window.location.protocol + "//" + window.location.host,"");
-      			console.log(replace1);
-    			var replace2 = replace1.replace(path,"");
-    			console.log(replace2);
-    			var replace3 = replace2.split('.');
-    			console.log(replace3);
-    			console.log(replace3[0]);
-    			hiddenCategory.setAttribute('value', replace3[0]);
+//     			var replace1 = imgsrc.replace(window.location.protocol + "//" + window.location.host,"");
+//     			var replace2 = replace1.replace(path,"");
+//     			var replace3 = replace2.split('.');
+    			hiddenCategory.setAttribute('value', this.parentNode.querySelector('h1').innerHTML);
     			
     			this.parentNode.appendChild(hiddenCategory);
     		}
