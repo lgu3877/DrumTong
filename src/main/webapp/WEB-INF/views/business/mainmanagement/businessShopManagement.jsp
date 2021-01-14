@@ -600,16 +600,17 @@
 			</div>
 		</div>
 	</div>
-<<<<<<< HEAD
 
 	<script type="text/javascript">
 		// DB에서 받아오는 Defaultcategory List<String> 배열
-		let defaultCategory = ${defaultcategory};
-		let menuCategories = ${menuCategories};
+		const defaultCategory = ${defaultcategory};
+		const menucategories = ${menuCategories};
+		const bImageList = ${bImageList};
+		console.log(bImageList);
+		console.log(defaultCategory);
 		console.log(menuCategories);
+
 	</script>
-=======
->>>>>>> branch 'master' of https://github.com/lgu3877/DrumTong/
 	<!-- 초기 셋팅 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementOnLoad.js"></script>
 	
@@ -624,14 +625,6 @@
 
 	<!-- 서비스 메뉴 옵션 -->
 	<script type="text/javascript">
-		// DB에서 받아오는 Defaultcategory List<String> 배열
-		const defaultCategory = ${defaultcategory};
-		const menucategories = ${menuCategories};
-		const bImageList = ${bImageList};
-		console.log(bImageList);
-		console.log(defaultCategory);
-		console.log(menuCategories);
-		
 		
 		/* const object = new Object();
 		for (let i = 0; i < defaultCategory.length; i++) {
