@@ -28,6 +28,7 @@ import com.drumtong.business.vo.BImageVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BManagementVO;
 import com.drumtong.business.vo.BMenuVO;
+import com.drumtong.business.vo.BPrivateDataVO;
 import com.drumtong.business.vo.BScheduleDaysVO;
 import com.drumtong.business.vo.BScheduleTimeVO;
 import com.drumtong.business.vo.BTempHolidayVO;
@@ -67,6 +68,9 @@ public class BusinessMainManagementService {
  		ModelAndView mav = new ModelAndView("business/mainmanagement/businessShopManagement");
 //		ModelAndView mav = new ModelAndView("business/test"); //test 용임 지울 시 위에 코드 활성화 시켜줄 것
 		
+
+		if(checkEstStatus(req, "ShopManagement")) return mainMove(req, "ShopManagement");
+ 		
  		/*
  		 * status 값이 FAIL이면 DefaultCategory 값을 BManagement 테이블에서 가져온다.
  		 * 초기 메뉴 등록을 할 때 기본 템플릿으로 제공해준다.
@@ -86,7 +90,7 @@ public class BusinessMainManagementService {
 // 	    }
  	    // 2차 온라인 계약에 매장관리를 완료했다면 전에 입력했던 데이터를 불러와준다.
  	    // else 지움
- 	    if ( bInformationVO.getStatus().equals("PROCESS")) {
+ 	    if ( bInformationVO.getStatus().equals("PROCESS") || bInformationVO.getStatus().equals("SUCCESS") ) {
  	    	
  	    	// 매장 사진 데이터
  	    	mav.addObject("bImageList",(new Gson()).toJson(bImageDAO.selectImageList(estid)));
@@ -94,7 +98,7 @@ public class BusinessMainManagementService {
  	    	// bManagement 테이블 [매장 소개글] [매장 메뉴] [세탁물 수령방법]
  	    	mav.addObject("bManagement", (new Gson()).toJson(bManagementDAO.selectCustomerDetail(estid)));
  	    	
- 	    }
+  	    }
  	    
  	    // 추가 	    
  	    List<String> defaultcategory = Arrays.asList((bManagementDAO.selectDefaultCategory(estid).split("/")));
@@ -124,8 +128,10 @@ public class BusinessMainManagementService {
 	
 	
 	// 비즈니스 일정관리 페이지로 이동 (GET) [건욱]
-	public ModelAndView scheduleManagement() {
+	public ModelAndView scheduleManagement(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView("business/mainmanagement/businessScheduleManagement");
+		
+		if(checkEstStatus(req, "ScheduleManagement")) return mainMove(req, "ScheduleManagement");
 		
 		return mav;
 	}
@@ -277,5 +283,29 @@ public class BusinessMainManagementService {
 	    	
 	    	return menuCategories;
 	}
+	
+	// 매장이 완성되어있는지 체크[영경]
+	private boolean checkEstStatus(HttpServletRequest req, String type) {
+		BPrivateDataVO bPrivateDataVO = (BPrivateDataVO)req.getSession().getAttribute("bLogin");
+		BInformationVO bInformationVO =(BInformationVO)req.getSession().getAttribute("selectEST");
+		
+		// main management의 경우 status가 FAIL 일 때만 일정관리에 접근할 수 없다.
+		if(bPrivateDataVO == null || bInformationVO == null) {
+			return true;
+		}
+		if(type.equals("ScheduleManagement") && bInformationVO.getStatus().equals("FAIL")) return true;
+		// Status 계약 여부 필드를 세션에서 받아와 status가 'FAIL', 'PROCESS' 이면 business로 우회해주고 'SUCCESS'이면 서브관리 페이지들로 이동시키기 위해 boolean을 반환한다.
+		return false;
+	}
+
+	
+	private ModelAndView mainMove(HttpServletRequest req, String type) {
+		ModelAndView mav = new ModelAndView("redirect:/business/");
+		
+		req.getSession().setAttribute("ModalCheck", type);
+		
+		return mav;
+	}
+	
 	
 }

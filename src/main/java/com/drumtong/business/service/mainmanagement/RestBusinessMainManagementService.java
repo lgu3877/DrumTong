@@ -80,7 +80,7 @@ public class RestBusinessMainManagementService {
 	
 	
 	// 1. 매장 관리에 매장 사진을 비동기식으로 수정해주는 메서드입니다.
-	public int updateBImage(MultipartHttpServletRequest mpf, HttpServletRequest req) {
+	public int updateBImage(MultipartHttpServletRequest mpf, HttpServletRequest req, String saveType) {
 		System.out.println("Bimage Rest Service 실행...");
 		HttpSession Session = req.getSession();
  	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
@@ -89,7 +89,7 @@ public class RestBusinessMainManagementService {
  	    BImageVO bImageVO = new BImageVO();
  	    bImageVO.setEstid(estid);
  	    
-		int RestUpdateBImageResult = aws.multipleUpload(mpf, estid, bImageVO);
+		int RestUpdateBImageResult = aws.multipleUpload(mpf, estid, bImageVO, saveType);
 		return RestUpdateBImageResult;
 				
 	}

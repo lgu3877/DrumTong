@@ -603,6 +603,16 @@
 		</div>
 	</div>
 
+	<script type="text/javascript">
+		// DB에서 받아오는 Defaultcategory List<String> 배열
+		const defaultCategory = ${defaultcategory};
+		const menucategories = ${menuCategories};
+		const bImageList = ${bImageList};
+		console.log(bImageList);
+		console.log(defaultCategory);
+		console.log(menuCategories);
+
+	</script>
 	<!-- 초기 셋팅 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementOnLoad.js"></script>
 	
@@ -614,6 +624,21 @@
 
 	<!-- 서비스 매뉴 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementMenuList.js"></script>
+
+	<!-- 서비스 메뉴 옵션 -->
+	<script type="text/javascript">
+		
+		/* const object = new Object();
+		for (let i = 0; i < defaultCategory.length; i++) {
+			const mainOption = defaultCategory[i];
+			const subOption = subCategory[defaultCategory[i]];
+			
+			// object 정의
+			object[mainOption] = subOption !== undefined ? subOption : "값 없음";		
+		} */
+		
+		createOptions(menuCategories); // MenuList > Dropdown category
+	</script>
 
 	<!-- 배달 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementReturnItem.js"></script>

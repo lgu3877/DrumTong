@@ -65,6 +65,9 @@ h1 i {
 	font-size: 16pt;
 	font-weight: bold;
 }
+.systemdiv div button .hidden {
+	visibility: hidden;
+}
 
 .systemdiv div button .mon-day {
 	position: absolute;
@@ -86,7 +89,7 @@ h1 i {
 }
 
 .inputdiv input, .etediv div input{
-	width: 200px; height: 30px; text-align: center; font-size: 18pt
+	width: 200px; height: 30px; text-align: left; font-size: 18pt
 }
 
 .etediv div i {
