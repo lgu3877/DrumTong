@@ -1,15 +1,11 @@
 // 사진 업데이트
 async function updatePhoto() {
-	console.log('updatePhoto 실행');
 	const formData = new FormData();
 	
 	const coverImage = document.getElementById("update-cover");
 	const photoInputs = document.getElementsByName("storeimg");
 	const fileList = [];
 	
-	console.log('coverImage' ,coverImage);
-	console.log('photoInputs' ,photoInputs);
-	console.log('test', formData.append("storeimg", photoInputs[0].files[0]));
 	for (let i = 0; i < photoInputs.length; i++) {
 		if (photoInputs[i].files[0] !== undefined) 
 			formData.append("businessStoreImage", photoInputs[i].files[0]);
@@ -17,26 +13,8 @@ async function updatePhoto() {
 
 	formData.append("delegatephotoboolean", coverImage.files[0]);
 	
-//	formData.append("businessStoreImage" , fileList);
-	
 	formData.append("saveType", "businessStoreImage")
 
-	console.log('fileList', fileList);	
-	console.log("커버이미지",coverImage.files[0]);
-	console.log('coverImage.files', coverImage.files);	
-	console.log('coverImage.files[0]', coverImage.files[0]);	
-	console.log('formData', formData);
-	console.log('formData[coverimage]', formData.get("delegatephotoboolean"));
-	console.log('formData[fileList]', formData.get("businessStoreImage"));
-//	console.log('formData[file]', formData.get("businessStoreImage")[0]);
-//	console.log('formData[file]', formData.get("businessStoreImage")[1]);
-//	console.log('formData[file]', formData.get("businessStoreImage")[2]);
-//	console.log('formData[file]', formData.getAll("businessStoreImage"));
-//	
-	
-	// result.data (es6 > obejct destructuring)
-//	const { data } = await axios.post("/drumtong/business/mainmanagement/businessShopManagement/", object);
-	
 	const { data } = await axios.post(
 		"/drumtong/business/mainmanagement/BImage/rest/updateStoreIMG/",formData
 		,
@@ -48,8 +26,17 @@ async function updatePhoto() {
 		);
 	
 	console.log(data);
-	console.log(data);
+
+	
+	// 이미지 삭제
+	for (let i = 0; i < deletePhotoList.length; i++) {
+		if (photoInputs[i].files[0] !== undefined) 
+			formData.append("businessStoreImage", photoInputs[i].files[0]);
+	}	
+	
+	await axios.delete("/drumtong/business/mainmanagement/BImage/rest/...", deletePhotoList);
 }
+
 
 //매장 소개글 업데이트
 async function updateIntro() {
@@ -113,7 +100,6 @@ function addService() {
 			}
 		}
 		object.push(element);
-//		console.log(object);
 	}
 	
 	// 퀵 서비스 옵션 설정
@@ -129,7 +115,7 @@ function addService() {
 async function activateDelivery() {
 //	activateVisualization(); // MenuList > 스위치 디자인 변경 & input 생성
 	
-	const result = deliveryToggle  ? "y" : "n"; // js > MenuList
+	const result = deliveryToggle  ? "Y" : "N"; // js > MenuList
 
 	console.log(result);
 
