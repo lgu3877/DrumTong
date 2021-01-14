@@ -46,7 +46,8 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a8f343b25889960b1fdf777c9a2a57c&libraries=services,clusterer,drawing"></script>
 	
 	<script type="text/javascript">
-		// DB에서 받아오는 Defaultcategory List<String> 배열
+		const bImageList = ${bImageList};
+
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
 	</script>
@@ -144,33 +145,9 @@
 				
 			<!-- Sub Slider -->
 				<div style="position: relative;">
-					<ul id="image-preview" class="shop_image_slider">
-						<li id="cover-image-con" class="shop_picture">
-							<img id="cover-image" src="${cpath }/resources/business/img/slide/laundry1_01.jpg" alt="">
-							<i class="fas fa-times"></i>
-							<i class="fas fa-star"><span>대표사진</span></i>
-						</li>
-						<li class="shop_picture">
-							<img src="${cpath }/resources/business/img/slide/laundry1_02.jpg" alt="">
-							<i class="fas fa-times"></i>
-						</li>
-						<li class="shop_picture">
-							<img src="${cpath }/resources/business/img/slide/laundry1_03.jpg" alt="">
-							<i class="fas fa-times"></i>
-						</li>
-						<li class="shop_picture">
-							<img src="${cpath }/resources/business/img/slide/laundry1_04.jpg" alt="">
-							<i class="fas fa-times"></i>
-						</li>
-						<li class="shop_picture">
-							<img src="${cpath }/resources/business/img/slide/laundry1_05.jpg" alt="">
-							<i class="fas fa-times"></i>
-						</li>
-						<li class="shop_picture">
-							<img src="${cpath }/resources/business/img/slide/laundry1_06.jpg" alt="">
-							<i class="fas fa-times"></i>
-						</li>
-					</ul>
+				
+				<!-- 이미지 슬라이더 -->
+					<ul id="image-preview" class="shop_image_slider"></ul>
 
 
 				<!-- Slide Move Button -->
@@ -603,16 +580,7 @@
 		</div>
 	</div>
 
-	<script type="text/javascript">
-		// DB에서 받아오는 Defaultcategory List<String> 배열
-		const defaultCategory = ${defaultcategory};
-		const menucategories = ${menuCategories};
-		const bImageList = ${bImageList};
-		console.log(bImageList);
-		console.log(defaultCategory);
-		console.log(menuCategories);
 
-	</script>
 	<!-- 초기 셋팅 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementOnLoad.js"></script>
 	
@@ -624,21 +592,6 @@
 
 	<!-- 서비스 매뉴 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementMenuList.js"></script>
-
-	<!-- 서비스 메뉴 옵션 -->
-	<script type="text/javascript">
-		
-		/* const object = new Object();
-		for (let i = 0; i < defaultCategory.length; i++) {
-			const mainOption = defaultCategory[i];
-			const subOption = subCategory[defaultCategory[i]];
-			
-			// object 정의
-			object[mainOption] = subOption !== undefined ? subOption : "값 없음";		
-		} */
-		
-		createOptions(menuCategories); // MenuList > Dropdown category
-	</script>
 
 	<!-- 배달 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementReturnItem.js"></script>
