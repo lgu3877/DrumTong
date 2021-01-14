@@ -57,6 +57,7 @@ async function updatePhoto() {
 		);
 	
 	console.log(data);
+	console.log(data);
 }
 
 //매장 소개글 업데이트
