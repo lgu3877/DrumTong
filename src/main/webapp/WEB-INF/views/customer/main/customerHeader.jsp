@@ -24,7 +24,9 @@
     <script type="text/javascript" src="${cpath }/customer/js/account/customerPayAndCoupon.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/account/customerJoinChange.js"></script>
     <script src="https://kit.fontawesome.com/7522a35233.js" crossorigin="anonymous"></script>
-	
+	   	
+   	<!-- Google Chart -->
+   	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
 	
