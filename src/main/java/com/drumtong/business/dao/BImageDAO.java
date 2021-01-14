@@ -12,7 +12,10 @@ public interface BImageDAO {
 
 	// 매장사진 테이블에  {저장이미지}를 업데이트 시켜준다.
 	int insertConstract(BImageVO bImageVO);
-
+	
+	// 매장사진테이블에서 {매장 대표 사진}을 업데이트 시켜줍니다.
+	int insertDelegatePhoto(BImageVO bImageVO);
+	
 	//	UUID 중복검사 aws S3에 들어가는 이미지입니다 
 	int confirm(String SerialUUID);
 

@@ -60,9 +60,10 @@ public class RestBusinessMainManagementController {
 	@PostMapping(produces="charset=utf8", consumes =  { "multipart/form-data" } )
 //	@PostMapping(produces="application/json; charset=utf8", consumes = MediaType.MULTIPART_FORM_DATA_VALUE )
 //	@PostMapping(produces="charset=utf8")
-	public String updateStoreIMG(HttpServletRequest req, MultipartHttpServletRequest mpf) {
+	public String updateStoreIMG(HttpServletRequest req, MultipartHttpServletRequest mpf, String saveType) {
+		System.out.println("savetype : " + saveType);
 		System.out.println("Bimage Rest Controller 실행...");
-		int result = svc.updateBImage(mpf,req);
+		int result = svc.updateBImage(mpf,req, saveType);
 		System.out.println(result + " : result 값 입니다");
 		return result == 1
 				? "true"
