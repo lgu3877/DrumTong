@@ -44,6 +44,12 @@
 	
 	<!-- Kakao Map API -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a8f343b25889960b1fdf777c9a2a57c&libraries=services,clusterer,drawing"></script>
+	
+	<script type="text/javascript">
+		// DB에서 받아오는 Defaultcategory List<String> 배열
+		const defaultCategory = ${defaultcategory};
+		const menuCategories = ${menuCategories};
+	</script>
 </head>
      
 
@@ -388,11 +394,10 @@
 				</div>
 			</div>
 
-			<div class="create_menu form">
-			
-			
-			<!-- item customizing -->
+			<!-- 메뉴 수정 모달 -->
+			<div class="category_modal_btn" onclick="openCategoryModal()">카테고리 수정</div>
 				
+			<div class="create_menu form">
 			<!-- head -->
 				<div style="display: block">
 					<ul class="customize_menu_head">
@@ -413,29 +418,16 @@
 				<div id="add-item-list" class="add_item_list">
 					<div class="single_item_selector">
 						<div class="first_item_prop">
-						<!-- BManagementVO > maincategory -->
-							<select id="main-category" class="service_selector" name="maincategory" onchange="selectOption(this)">
-								<option hidden="true" disabled selected>서비스 타입 선택</option>
-								<option value="selectedDirect" class="selectedDirect">직접입력</option>
-							</select>
+					<!-- BManagementVO > maincategory -->
+							<select id="main-category" class="service_selector" name="maincategory" onchange="selectOption(this)"></select>
 							<!-- 직접입력 선택시 -->
 							<input type="text" class="direct_type_input" name="maincategory" placeholder="서비스 입력" style="display: none">
 						</div>
 						
 						<div class="second_item_prop">
-						<!-- BManagementVO > subcategory -->
+					<!-- BManagementVO > subcategory -->
 							<select id="sub-category" class="service_selector" name="subcategory" onchange="selectOption(this)">
-								<option hidden="true" disabled selected>세부 서비스 유형 선택</option>
-								
-							<!--	
-								<option value="">type1</option>
-								<option value="">type2</option>
-								<option value="">type3</option>
-								<option value="">type4</option>
-								<option value="">type5</option>
-							-->
-								<option value="selectedDirect" class="selectedDirect">직접입력</option>
-							
+								<option id="sub-category-default" hidden="true" disabled selected>세부 서비스 유형 선택</option>
 							</select>
 							<!-- 직접입력 선택시 -->
 							<input type="text" name="subcategory" class="direct_type_input" placeholder="서비스 입력" style="display: none">
@@ -588,7 +580,7 @@
 <!-- footer -->
 	<%-- <%@ include file="../main/businessFooter.jsp" %> --%>
 
-<!-- Modal  -->
+<!-- Intro Modal  -->
 	<div id="intro-modal" class="intro_modal">
 	<!-- Modal content -->
 		<div class="intro_content_con">
@@ -597,6 +589,16 @@
 			<!-- BManagementVO > introduction -->
 				<textarea class="store_intro_input" name="introduction" maxlength="500" placeholder="매장 소개글을 적어주세요." autofocus style="resize: none;"></textarea>
 				<input class="store_intro_btn" type="button" value="작성완료" onclick='comfirmIntro()' >
+			</div>
+		</div>
+	</div>
+
+<!-- Category Modal  -->
+	<div id="category_modal" class="category_modal" style="display: none;">
+		<div class="category_modal_content">
+			<span id="category-close">&times;</span>
+			<div id="category-list" class="category_content">
+				
 			</div>
 		</div>
 	</div>

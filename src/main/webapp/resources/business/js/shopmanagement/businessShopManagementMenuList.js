@@ -18,43 +18,115 @@ let deliveryToggle = false;
 
 // 메인 옵션 생성
 function createOptions(categoryObject) {
-	console.log(categoryObject);
-	
 	const mainSelect = document.getElementById("main-category");
-	mainSelect.getElementsByClassName("selectedDirect")[0].style.fontWeight = "600";
-//	const subSlect = document.getElementById("sub-category");
-//	subSelect.getElementsByClassName("selectedDirect")[0].style.fontWeight = "600";
-	
-	for (let key in categoryObject) {
-		const option = document.createElement("option");
-		option.value = key;
-		option.innerHTML = key;
-//		option.selected = populateSubCategories(key);
+	// mainSelect.getElementsByClassName("selectedDirect")[0].style.fontWeight = "600";
 		
-		mainSelect.prepend(option);
+	// placeholder
+	let option = document.createElement("option");
+	option.id = "main-category-default";
+	option.hidden = true;
+	option.disabled = true;
+	option.selected = true;
+	option.innerHTML = "서비스 타입 선택";
+	
+	mainSelect.appendChild(option);
+	
+	// 메뉴
+	const sortedKeys = Object.keys(categoryObject).sort(); // key 정렬
+	for (let i = 0; i < sortedKeys.length; i++) {
+		option = document.createElement("option");
+		option.className = "main_option";
+		option.value = sortedKeys[i];
+		option.innerHTML = sortedKeys[i];
+		
+		mainSelect.appendChild(option);
 	}
-
 	
-	// console.log(mainCategory);
+	// 직접입력
+	option = document.createElement("option");
+	option.value = "selectedDirect";
+	option.className = "selectedDirect";
+	option.innerHTML = "직접입력";
+	option.style.fontWeight = "600";
 	
+	mainSelect.appendChild(option);
 }
+
 
 //select > option 선택
 function selectOption(obj) {
-	
-	// 직접 입력
+	// 직접 입력 선택
 	if(obj.value === 'selectedDirect') {
 		obj.parentNode.querySelector('.direct_type_input').style.display = '';
+		
+		clearSubOptions();
+		
+		// if > 하위 항목 직접 입력 시
+		
+		// 직접입력
+		const option = document.createElement("option");
+		option.value = "selectedDirect";
+		option.className = "selectedDirect";
+		option.innerHTML = "직접입력";
+		option.style.fontWeight = "600";
+		
+		document.getElementById("sub-category").appendChild(option);
 	}
+	// 그 외 값 선택
 	else {
 		obj.parentNode.querySelector('.direct_type_input').style.display = 'none';
 		obj.parentNode.querySelector('.direct_type_input').value = '';
+		
+		// main > sub 카테고리 생성
+		if (obj.name === "maincategory") {
+			clearSubOptions();
+			populateSubOptions(obj.value);
+			
+			document.getElementsByClassName("direct_type_input")[1].style.display = "none";
+		} 
+	}
+}
+
+// 서브 옵션 변경 > 초기화
+function clearSubOptions() {
+	const subOptions = document.getElementsByClassName("sub_option");
+	const directOption = document.getElementsByClassName("selectedDirect")[1];
+	directOption !== undefined ? directOption.remove() : null;
+	
+	const count = subOptions.length;
+	if (subOptions !== 0) {
+		for (let i = 0; i < count; i++) {
+			subOptions[0].remove();
+		}		
 	}
 }
 
 // 서브 옵션 생성
-function populateSubCategories(key) {
-	console.log(key);
+function populateSubOptions(key) {
+	const subSelect = document.getElementById("sub-category");
+	
+	// 하부 카테고리
+	const sotredMenu = menuCategories[key].sort(); 	// value 정렬	
+	for (let i = 0; i < sotredMenu.length; i++) {
+		option = document.createElement("option");
+		option.className = "sub_option";
+		option.innerHTML = menuCategories[key][i];
+		option.value = menuCategories[key][i];
+		
+		subSelect.appendChild(option);
+	}
+	
+	// 직접입력
+	option = document.createElement("option");
+	option.value = "selectedDirect";
+	option.className = "selectedDirect";
+	option.innerHTML = "직접입력";
+	option.style.fontWeight = "600";
+	
+	subSelect.appendChild(option);
+	
+	// default option
+	document.getElementById("sub-category-default").selected = true;
 }
 
 
@@ -363,3 +435,65 @@ function dismissInput(entireNode) {
 	entireNode.remove();
 }
 
+
+function openCategoryModal() {
+	// 모달 visibility
+	const display = document.getElementById("category_modal").style.display;
+	console.log(display);
+	display === "none" ? 
+		document.getElementById("category_modal").style.display = "block" : 
+		document.getElementById("category_modal").style.display = "none";
+	
+}
+
+// checkbox list 생성
+function createCategoryList() {
+	// 닫기 버튼
+	document.getElementById("category-close").addEventListener("click", function(e) {
+		document.getElementById("category_modal").style.display = "none";
+	})
+	
+	// checkbox & label 생성 > Node 추가
+	for (let i = 0; i < defaultCategory.length; i++) {
+		// random string id
+		const randomId = generateReandomString(10);
+
+		// key array
+		const userMenu = Object.keys(menuCategories);
+		
+		// checkbox
+		const checkbox = document.createElement("input");		
+		checkbox.id = randomId;
+		checkbox.name = "mainCategory";
+		checkbox.type = "checkbox";
+		checkbox.value = userMenu.includes(defaultCategory[i]);
+//		checkbox.style.display = "none";
+		checkbox.checked = (defaultCategory[i]);
+		checkbox.onclick = () => checkbox.checked = !checkbox.checked;
+
+		// label
+		const label = document.createElement("label");
+		label.htmlFor = randomId;
+		label.innerHTML = defaultCategory[i]; 
+		label.className = "category_checkbox_label"; 
+		
+		// 등록된 메뉴 & 등록하지 않은 메뉴 비교 > 체크 
+		checkbox.checked ? label.classList.add("category_checked") : label.classList.remove("category_checked");
+		
+		
+		// Node 추가
+		label.appendChild(checkbox);
+		document.getElementById("category-list").appendChild(label);
+	}
+}
+
+function checkboxVisibility(id) {
+	const checkbox = document.getElementById(id);
+	console.log(checkbox);
+	console.log(checkbox.checked);
+}
+
+
+// 서비스 등록 관련 초기 실행
+createOptions(menuCategories); // select > option 드랍다운 동적 구현
+createCategoryList(); // 메뉴수정 관련 Modal

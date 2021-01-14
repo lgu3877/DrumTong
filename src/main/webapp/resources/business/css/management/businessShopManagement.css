@@ -448,6 +448,66 @@
     margin: 0 0 20px 0;
 }
 
+/* 카테고리 모달 */
+.category_modal_btn {
+	text-align: right;
+    margin-bottom: -10px;
+    margin-right: 5px;
+    text-underline-position: under;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.category_modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.category_modal_content {
+	position: relative;
+	display: inline-block;
+	background-color: #fefefe;
+    margin: 200px auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    min-width: 800px;
+}
+
+#category-close {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    font-size: 20pt;
+    font-weight: 700;
+	cursor: pointer;
+}
+
+.category_checkbox_label {
+	background-color: #6495ED;
+    color: white;
+    margin-right: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 15pt;
+    cursor: pointer;
+}
+
+.category_checkbox_label:hover {
+	transition: 0.5s;
+	background-color: navy;
+}
+
+.category_checked {
+	background-color: navy;
+}
+
 /* customizing menu header */
 .customize_menu_head {
 	list-style: none;
