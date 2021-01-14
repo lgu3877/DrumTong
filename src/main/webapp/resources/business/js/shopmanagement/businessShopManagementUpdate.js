@@ -11,37 +11,28 @@ async function updatePhoto() {
 	console.log('photoInputs' ,photoInputs);
 	console.log('test', formData.append("storeimg", photoInputs[0].files[0]));
 	for (let i = 0; i < photoInputs.length; i++) {
-		if (photoInputs[i].files[0] !== undefined) {
-			
-			fileList.push(photoInputs[i].files[0]);
-			
-//			formData.append("storeimg", photoInputs[i].files[0]);
-//			fileList.push(photoInputs[i].files[0]);
-//			
-//			fileList.push(formData.append("storeimg", photoInputs[i].files[0]));
+		if (photoInputs[i].files[0] !== undefined) 
+			formData.append("businessStoreImage", photoInputs[i].files[0]);
+	}	
 
-		}
-	}
-	
-	formData.append("storeimg" , fileList);
-	
-	console.log('fileList', fileList);	
-
-//	const object = {
-//		"delegatephotoboolean" : coverImage.files[0],
-//		"storeimg" : fileList,
-//	};
 	formData.append("delegatephotoboolean", coverImage.files[0]);
 	
-//	const object = {
-//		"mainImage" : formData,
-//		"subImage" : fileList,
-//	};
-//	console.log(object);
+//	formData.append("businessStoreImage" , fileList);
 	
+	formData.append("saveType", "businessStoreImage")
+
+	console.log('fileList', fileList);	
+	console.log("커버이미지",coverImage.files[0]);
 	console.log('coverImage.files', coverImage.files);	
 	console.log('coverImage.files[0]', coverImage.files[0]);	
 	console.log('formData', formData);
+	console.log('formData[coverimage]', formData.get("delegatephotoboolean"));
+	console.log('formData[fileList]', formData.get("businessStoreImage"));
+//	console.log('formData[file]', formData.get("businessStoreImage")[0]);
+//	console.log('formData[file]', formData.get("businessStoreImage")[1]);
+//	console.log('formData[file]', formData.get("businessStoreImage")[2]);
+//	console.log('formData[file]', formData.getAll("businessStoreImage"));
+//	
 	
 	// result.data (es6 > obejct destructuring)
 //	const { data } = await axios.post("/drumtong/business/mainmanagement/businessShopManagement/", object);

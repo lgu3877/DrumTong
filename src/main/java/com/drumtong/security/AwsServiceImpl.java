@@ -89,8 +89,13 @@ public class AwsServiceImpl{
      *  다음의 메서드는 들어오는 객체에 따라 S3에 저장될 경로를 다양하게 설정해줍니다.
      *  여기서 매개변수로 가져오는 folderName의 값은 Estid값입니다 
      *  이름 설정을 이렇게 한 이유는 여기서 사용되는 값이 folderName으로 사용되기 떄문에 변경했습니다.
+     *  
+     *  saveType 세가지 종류가 있습니다.
+     *  "businessStoreImage" "customerProfileImage" "businessInformationImage"
+     *     [사업자 매장사진]					[고객 프로필 사진]		[사업자 정보 사진]
      */
-    public int multipleUpload(MultipartHttpServletRequest mpf, String folderName, Object object) {
+    public int multipleUpload(MultipartHttpServletRequest mpf, String folderName, 
+    						  Object object, String saveType) {
     	
     	// 온라인 계약에 Binforamtion 테이블과 BPayment를 구분시켜주기 위한 데이터 입니다.
     	// count가 0~1 일 때는 BInformation에 관한 처리를 해주고
@@ -101,24 +106,40 @@ public class AwsServiceImpl{
     	int count = 0;
     	
     	try {
-    		System.out.println("multipleupload 실행");
-//    		List<MultipartFile> fileList = mpf.getFiles("file");
-    		List<MultipartFile> fileList = mpf.getFiles("storeimg");
-            for (MultipartFile mf : fileList) {
-            	String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-//                s3FileUpload(mf, object.getEstid(), object);
-            	s3FileUpload(mf, folderName, object, count);
-            	count++;
-            	
-                System.out.println("실행");
-        		System.out.println("originFileName : " + originFileName);
+    		
+    		// 타입에 따라서  fileList를 처리해줍니다.
+    		List<MultipartFile> fileList = mpf.getFiles(saveType);
+    		List<MultipartFile> fileList2 = mpf.getFiles("businessStoreImage");
+    		
+    		// 파일리스트가 비어있지 않다면 작업을 실행시킬 수 있도록 한다.
+            if(fileList != null ) {
+            	for (MultipartFile mf : fileList) {
+                	String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+                	s3FileUpload(mf, folderName, object, count);
+                	count++;
+                	
+            		System.out.println("originFileName : " + originFileName);
+                }
             }
+    		
             
-            MultipartFile delegate = mpf.getFile("delegatephotoboolean");
-            s3FileUpload(delegate, folderName, object, count);
+    		
+            // 만약 saveType이 매장사진이면 대표사진 저장은 따로 처리해준다.
+            if(saveType.equals("businessStoreImage")) {
+
+            	MultipartFile delegate = mpf.getFile("delegatephotoboolean");
+            	
+            	// 받아온 파일이 비어있지 않다면 작업을 실행시켜준다.
+            	if(delegate != null) {
+            		BImageVO vo = (BImageVO)object;
+                	vo.setDelegatephotoboolean("Y");
+                    s3FileUpload(delegate, folderName, object, count);
+            	}
+            }
             return 1;
     	}
     	catch(Exception e) {
+    		System.out.println("Exception 발생 " + e);
     		return 0;
     	}
     	
@@ -170,15 +191,20 @@ public class AwsServiceImpl{
          		
          		// 1. 파일이름
             	fileName = UUID +"."+ file.getOriginalFilename().split("\\.")[1];
+            	
             	// 2. 매게변수로 받은 object를 BImageVO로 변환시켜준다.
             	BImageVO vo = (BImageVO)object;
+            	
             	// 3. vo에 setStoreimg로 현재 파일 경로를 입력해준다.
 	    		vo.setStoreimg(folderName + "/"  + subFolderName + "/" + fileName);
 	    		System.out.println("vo data est : "  + vo.getEstid());
 	    		System.out.println("vo data store : "  + vo.getStoreimg());
-	    		
+	    		System.out.println("vo data delegateboolean" + vo.getDelegatephotoboolean());
 	    		// 4. 데이터를 입력해준다.
-	    		bImageDAO.insertConstract(vo);
+	    		// 대표 매장 사진의 값이 Y이면 
+	    		int b = vo.getDelegatephotoboolean() != null ? 
+	    				bImageDAO.insertDelegatePhoto(vo) : bImageDAO.insertConstract(vo);
+	    		System.out.println("bresult ; " + b);
          	}
          	// 사업자 정보 테이블일 경우
          	/*

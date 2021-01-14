@@ -17,13 +17,22 @@
 	</select>
 	
 	
-<!-- 	매장사진 테이블에  {저장이미지}를 업데이트 시켜준다. -->
+<!-- 	매장사진 테이블에  {저장이미지}를 업데이트 시켜준다.  -->
 	<insert id="insertConstract" parameterType="BImageVO">
 		INSERT INTO BIMAGE
-			(ESTID, STOREIMG)
+			( ESTID, STOREIMG )
 			VALUES
 			( #{estid}, #{storeimg} )
 	</insert>
+
+<!-- 	매장사진 테이블에  {저장이미지}를 업데이트 시켜준다.  -->
+	<insert id="insertDelegatePhoto" parameterType="BImageVO">
+		INSERT INTO BIMAGE
+			(ESTID, STOREIMG, DELEGATEPHOTOBOOLEAN )
+			VALUES
+			( #{estid}, #{storeimg}, #{delegatephotoboolean} )
+	</insert>
+
 
 
 <!--  ======================================= REST ================================================ -->
