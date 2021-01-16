@@ -133,4 +133,20 @@
 				STATUS = #{status}
 			WHERE ESTID = #{estid}
 	</update>
+	
+	
+	
+<!-- 	======================REST============================ -->
+<!--  1.매장 정보에 [매장 주소]를 변경해주는 함수입니다. -->
+	<update id="updateLocation" parameterType="BInformationVO">
+		UPDATE BINFORMATION
+			SET
+				MAINLOCATION = #{mainlocation},
+				DETAILLOCATION = #{detaillocation},
+				LATITUDE = #{latitude},
+				LONGITUDE = #{longitude}
+			WHERE ESTID = #{estid}
+	</update>
+	
+	
 </mapper>

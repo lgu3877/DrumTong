@@ -605,7 +605,7 @@
 
 	<script type="text/javascript">
 		// DB에서 받아오는 Defaultcategory List<String> 배열
-		const defaultCategory = ${defaultcategory};
+// 		const defaultCategory = ${defaultcategory};
 		const menucategories = ${menuCategories};
 		const bImageList = ${bImageList};
 		console.log(bImageList);
