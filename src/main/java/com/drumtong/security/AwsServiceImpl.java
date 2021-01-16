@@ -28,6 +28,7 @@ import com.drumtong.business.dao.BPaymentDAO;
 import com.drumtong.business.vo.BImageVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BPaymentVO;
+import com.drumtong.customer.vo.CPrivateDataVO;
 
 // [건욱]
 @Service 
@@ -124,7 +125,7 @@ public class AwsServiceImpl{
     		
             
     		
-            // 만약 saveType이 매장사진이면 대표사진 저장은 따로 처리해준다.
+            // 만약 이 매장사진이면 대표사진 저장은 따로 처리해준다.
             if(saveType.equals("businessStoreImage")) {
 
             	MultipartFile delegate = mpf.getFile("delegatephotoboolean");
@@ -133,7 +134,8 @@ public class AwsServiceImpl{
             	if(delegate != null) {
             		BImageVO vo = (BImageVO)object;
                 	vo.setDelegatephotoboolean("Y");
-                    s3FileUpload(delegate, folderName, object, count);
+                	// 영경 object => vo로 바꿈
+                    s3FileUpload(delegate, folderName, vo, count);
             	}
             }
             return 1;
@@ -274,6 +276,12 @@ public class AwsServiceImpl{
 	    		bPaymentDAO.updateCopyOfBankBook(vo);
          	
          	}
+         	// ======================= 영경 =============================
+         	// 고객 프로필 사진 등록
+         	else if(object instanceof CPrivateDataVO) {
+         		
+         	}
+         	// ========================================================
          	
          	// aws에 들어가는 디렉토리 경로입니다.
         	String dir = BUCKET_NAME + "/" + folderName + "/" + subFolderName;
