@@ -574,13 +574,26 @@
 	<div id="category_modal" class="category_modal" style="display: none;">
 		<div class="category_modal_content">
 			<span id="category-close">&times;</span>
+			<div class="category_modal_title">
+				메뉴를 수정하실 수 있습니다.
+			</div>
 			<div id="category-list" class="category_content">
 				
 			</div>
 		</div>
 	</div>
 
-
+	<script type="text/javascript">
+		// DB에서 받아오는 Defaultcategory List<String> 배열
+// 		const defaultCategory = ${defaultcategory};
+		const menucategories = ${menuCategories};
+		const bImageList = ${bImageList};
+		console.log(bImageList);
+		console.log(defaultCategory);
+		console.log(menuCategories);
+	</script>
+	
+	
 	<!-- 초기 셋팅 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementOnLoad.js"></script>
 	

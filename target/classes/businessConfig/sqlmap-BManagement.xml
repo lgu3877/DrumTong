@@ -9,7 +9,7 @@
 <!-- 사업장 정보 가져오기 -->
 	<select id="selectCustomerDetail" parameterType="String" resultType="BManagementVO" >
 		SELECT 
-			INTRODUCTION, DELIVERYBOOLEAN, QUICKBOOLEAN, 
+			INTRODUCTION, DELIVERYBOOLEAN,
 			HITS, DEFAULTCATEGORY 
 		FROM BMANAGEMENT WHERE ESTID=#{value}
 	</select>
@@ -21,13 +21,12 @@
 	</insert>
 	
 	
-<!-- 매장관리 테이블에  {소개글,배달여부,퀵여부}를 업데이트 시켜준다.  -->
+<!-- 매장관리 테이블에  {소개글,배달여부}를 업데이트 시켜준다.  -->
 	<update id="updateConstract" parameterType="BManagementVO" >
 		UPDATE BMANAGEMENT 
 			SET
 				INTRODUCTION = #{introduction},
-				DELIVERYBOOLEAN = #{deliveryboolean},
-				QUICKBOOLEAN = #{quickboolean}
+				DELIVERYBOOLEAN = #{deliveryboolean}
 			WHERE
 				ESTID=#{estid}				
 	</update>
@@ -70,14 +69,6 @@
 	
 	
 	
-<!-- 	매장 관리에 퀵여부를 비둥기식으로 수정해주는 메서드입니다. -->
-	<update id="updateQuickBoolean" parameterType="BManagementVO">
-		UPDATE BMANAGEMENT
-			SET
-				QUICKBOOLEAN = #{quickboolean}
-			WHERE
-				ESTID=#{estid}
-	</update>
 	
 	
 	<!-- 	매장 관리에 기본 카테고리를 비둥기식으로 수정해주는 메서드입니다. -->

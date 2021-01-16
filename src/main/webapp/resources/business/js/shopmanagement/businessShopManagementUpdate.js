@@ -49,9 +49,18 @@ async function updatePhoto() {
 
 //매장 소개글 업데이트
 async function updateIntro() {
+	
 	const text = document.getElementById("intro-text").innerText;
 	
-	const { data } = await axios.post("/drumtong/business/mainmanagement/BManagement/rest/updateDeliveryBoolean/", text);
+	const object = {
+		"processing" : "updateIntroduction",
+		"introduction" : text,
+	}
+	
+	console.log('object', object.processing);
+	console.log('introduction' , object.introduction);
+	
+	const { data } = await axios.post("/drumtong/business/mainmanagement/BManagement/rest/" + object.processing + "/", object);
 	
 	console.log(data);
 }
@@ -109,18 +118,19 @@ function addService() {
 			}
 		}
 		object.push(element);
+		console.log(object);
 	}
 	
 	// 퀵 서비스 옵션 설정
 	activateDelivery();
 	
 	// 서비스 등록
-	//	const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/insertBMenu/", object);
-	//	console.log(data);
+		const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/insertBMenu/", object);
+		console.log(data);
 }
 
 
-// 배달 서비스 활성화 < 서비스 등록
+// 퀵 서비스 활성화 < 서비스 등록
 async function activateDelivery() {
 //	activateVisualization(); // MenuList > 스위치 디자인 변경 & input 생성
 	
@@ -159,14 +169,56 @@ async function updateDelivery() {
 	
 	console.log(options);
 	
-	const { data } = await axios.post("/drumtong/business/mainmanagement/businessShopManagement/BManagement/rest/updateDeliveryBoolean/", options);
+	const result = options[0] === "quickboolean" ? "Y" : "N";
+	console.log(result);
+	
+//	const object = {
+//		"processing" : "updateDeliveryBoolean",
+//		"deliveryboolean" : result ,
+//	}
+//	
+//	console.log('object', object.processing);
+//	console.log('introduction' , object.introduction);
+//	
+//	const { data } = await axios.post("/drumtong/business/mainmanagement/BManagement/rest/" + object.processing + "/", object);
+//	
+	
 	
 	console.log(data);
 }
 
 // 주소 업데이트
-function updateAddress() {
-	const address = "123";
+async function updateAddress() {
+
 	
+
+	const mainAddress = document.getElementById("main-address").value;
+	const detailAddress = document.getElementById("detail-address").value;
+	const LaMa = document.getElementById("main-location").value;
+	const address = mainAddress + detailAddress;
+	console.log(mainAddress);
+	console.log(detailAddress);
 	console.log(address);
+	console.log(LaMa);
+	const tmp = LaMa.replace(/\(/,'').replace(/\)/,'').replace(/\,/,'');
+	console.log('lama2', tmp);
+	const la = tmp.split(" ")[0];
+	const ma = tmp.split(" ")[1];
+	console.log('la',la);
+	console.log('ma',ma);
+	
+	const object = {
+		"mainlocation" : mainAddress ,
+		"detaillocation" : detailAddress,
+		"latitude" : la,
+		"longitude" : ma,
+	}
+	const { data } = await axios.post("/drumtong/business/mainmanagement/BInformation/rest/updateLocation/", object);
+
+	
 }
+
+
+
+
+

@@ -4,7 +4,6 @@ public class BManagementVO {
 	private String estid;
 	private String introduction;
 	private char deliveryboolean;
-	private char quickboolean;
 	private int hits;
 	private String defaultcategory;
 	
@@ -31,12 +30,6 @@ public class BManagementVO {
 	}
 	public void setDeliveryboolean(char deliveryboolean) {
 		this.deliveryboolean = deliveryboolean;
-	}
-	public char getQuickboolean() {
-		return quickboolean;
-	}
-	public void setQuickboolean(char quickboolean) {
-		this.quickboolean = quickboolean;
 	}
 	public int getHits() {
 		return hits;
