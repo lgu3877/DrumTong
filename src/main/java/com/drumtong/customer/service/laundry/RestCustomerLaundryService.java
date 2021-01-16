@@ -12,6 +12,8 @@ import com.drumtong.customer.dao.CBookmarkDAO;
 import com.drumtong.customer.dao.CCouponDAO;
 import com.drumtong.customer.vo.CBookmarkVO;
 import com.drumtong.customer.vo.CCouponVO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class RestCustomerLaundryService {
@@ -19,14 +21,6 @@ public class RestCustomerLaundryService {
 	@Autowired CBookmarkDAO cBookmarkDAO;
 	@Autowired CCouponDAO cCouponDAO;
 	@Autowired BInformationDAO bInformationDAO;		
-	
-	
-	public List<BInformationVO> BusinessMapInfo(String address){
-		
-		// 사업장의 위도와 경도를 받아온다.
-		return bInformationDAO.selectBusinessMapInfo();
-	}
-	
 	
 	public String setBookmark(HashMap<String, String> param) {
 		String result = param.get("result");
@@ -72,4 +66,17 @@ public class RestCustomerLaundryService {
 		
 		return insertResult == 1 ? "true" : "false";
 	}
+
+
+//	public String clusterer(String address) {
+//		// address에 따라 관련 세탁소 가지고 오도록 수정해야함!
+//		List<BInformationVO> list = bInformationDAO.selectBusinessMapInfo();
+//		try {
+//			return list != null
+//					? new ObjectMapper().writeValueAsString(list):null;
+//		} catch (JsonProcessingException e) {
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
 }
