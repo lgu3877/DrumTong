@@ -439,7 +439,6 @@ function dismissInput(entireNode) {
 function openCategoryModal() {
 	// 모달 visibility
 	const display = document.getElementById("category_modal").style.display;
-	console.log(display);
 	display === "none" ? 
 		document.getElementById("category_modal").style.display = "block" : 
 		document.getElementById("category_modal").style.display = "none";
@@ -482,12 +481,21 @@ function createCategoryList() {
 		// 등록된 메뉴 & 등록하지 않은 메뉴 비교 > 체크 
 		checkbox.checked ? label.classList.add("category_checked") : label.classList.remove("category_checked");
 		
+		// label(checkbox) wrapper
+		const div = document.createElement("div");
+		div.classList.add("category_label_wrapper");
 		
 		// Node 추가
 		label.appendChild(checkbox);
-		document.getElementById("category-list").appendChild(label);
+		div.appendChild(label);
+		document.getElementById("category-list").appendChild(div);
+
+		// 서브카테고리 삽입
+		const subMenus = attachSubCategories(defaultCategory[i]);
+		div.appendChild(subMenus);
 	}
 }
+
 
 function checkboxVisibility(id) {
 	const checkbox = document.getElementById(id);
@@ -500,6 +508,39 @@ function checkboxVisibility(id) {
 		checkbox.parentElement.classList.remove("category_checked");		
 		checkbox.parentElement.getElementsByTagName("i")[0].className = "fas fa-window-close";
 	}
+}
+
+function attachSubCategories(subCategory) {
+	
+//	const subMenus = [...menuCategories[subCategory]];
+	const subMenus = ["service1", "service2", "service3", "service4"];
+	console.log(subMenus);
+	
+	
+	const subMenuContainer = document.createElement("div");
+	
+	for (let i = 0; i < subMenus.length; i++) {
+		const randomId = generateReandomString(7);
+		
+		const checkbox = document.createElement("input");
+		checkbox.id = randomId;
+		checkbox.name = menuCategories[subCategory];
+		checkbox.type = "checkbox";
+		checkbox.selected = true;
+		
+		const label = document.createElement("label");
+		label.htmlFor = randomId;
+		label.classList.add("sub_category_label");
+		label.innerHTML = subMenus[i];
+		
+		const wrapper = document.createElement("div");
+		
+		label.appendChild(checkbox);
+		wrapper.appendChild(label);
+		subMenuContainer.appendChild(wrapper);
+	}
+	
+	return subMenuContainer;
 }
 
 

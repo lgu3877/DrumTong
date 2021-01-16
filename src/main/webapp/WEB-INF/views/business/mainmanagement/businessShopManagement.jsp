@@ -574,6 +574,9 @@
 	<div id="category_modal" class="category_modal" style="display: none;">
 		<div class="category_modal_content">
 			<span id="category-close">&times;</span>
+			<div class="category_modal_title">
+				메뉴를 수정하실 수 있습니다.
+			</div>
 			<div id="category-list" class="category_content">
 				
 			</div>
