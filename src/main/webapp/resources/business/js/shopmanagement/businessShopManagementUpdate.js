@@ -128,8 +128,8 @@ function addService() {
 	activateDelivery();
 	
 	// 서비스 등록
-	//	const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/insertBMenu/", object);
-	//	console.log(data);
+		const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/insertBMenu/", object);
+		console.log(data);
 }
 
 
