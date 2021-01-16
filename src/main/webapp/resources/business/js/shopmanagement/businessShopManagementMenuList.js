@@ -455,7 +455,7 @@ function createCategoryList() {
 	// checkbox & label 생성 > Node 추가
 	for (let i = 0; i < defaultCategory.length; i++) {
 		// random string id
-		const randomId = generateReandomString(10);
+		const randomId = generateRandomString(10);
 
 		// key array
 		const userMenu = Object.keys(menuCategories);
@@ -514,13 +514,14 @@ function attachSubCategories(subCategory) {
 	
 //	const subMenus = [...menuCategories[subCategory]];
 	const subMenus = ["service1", "service2", "service3", "service4"];
-	console.log(subMenus);
+//	console.log(subMenus);
 	
 	
 	const subMenuContainer = document.createElement("div");
+	subMenuContainer.style.display = "flex";
 	
 	for (let i = 0; i < subMenus.length; i++) {
-		const randomId = generateReandomString(7);
+		const randomId = generateRandomString(10);
 		
 		const checkbox = document.createElement("input");
 		checkbox.id = randomId;
@@ -535,7 +536,7 @@ function attachSubCategories(subCategory) {
 		
 		const wrapper = document.createElement("div");
 		
-		label.appendChild(checkbox);
+		label.prepend(checkbox);
 		wrapper.appendChild(label);
 		subMenuContainer.appendChild(wrapper);
 	}
