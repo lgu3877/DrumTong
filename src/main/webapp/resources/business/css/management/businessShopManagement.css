@@ -469,9 +469,19 @@
     background-color: rgba(0, 0, 0, 0.4);
 }
 
+.category_modal_title {
+	text-align: left;
+    font-size: 15pt;
+}
+
+.category_content {
+	padding: 30px 0;
+	display: block;
+}
+
 .category_modal_content {
 	position: relative;
-	display: inline-block;
+	/* display: inline-block; */
 	background-color: #fefefe;
     margin: 200px auto;
     padding: 20px;
@@ -489,14 +499,24 @@
 	cursor: pointer;
 }
 
+.category_label_wrapper {
+	display: flex;
+	padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+
 .category_checkbox_label {
 	background-color: #6495ED;
     color: white;
     margin-right: 20px;
+    margin-bottom: 10px;
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 15pt;
     cursor: pointer;
+    text-align: left;
+    width: 100px;
 }
 
 .category_checkbox_label:hover {
