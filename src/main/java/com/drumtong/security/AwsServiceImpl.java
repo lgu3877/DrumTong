@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -95,7 +97,7 @@ public class AwsServiceImpl{
      *     [사업자 매장사진]					[고객 프로필 사진]		[사업자 정보 사진]
      */
     public int multipleUpload(MultipartHttpServletRequest mpf, String folderName, 
-    						  Object object, String saveType) {
+    						  Object object, HttpServletRequest req) {
     	
     	// 온라인 계약에 Binforamtion 테이블과 BPayment를 구분시켜주기 위한 데이터 입니다.
     	// count가 0~1 일 때는 BInformation에 관한 처리를 해주고
@@ -105,9 +107,15 @@ public class AwsServiceImpl{
     	
     	int count = 0;
     	
+    	
+    	
+    	
     	try {
     		
     		// 타입에 따라서  fileList를 처리해줍니다.
+    		String saveType = req.getParameter("saveType");
+    		
+    		
     		List<MultipartFile> fileList = mpf.getFiles(saveType);
     		List<MultipartFile> fileList2 = mpf.getFiles("businessStoreImage");
     		
@@ -128,13 +136,25 @@ public class AwsServiceImpl{
             if(saveType.equals("businessStoreImage")) {
 
             	MultipartFile delegate = mpf.getFile("delegatephotoboolean");
+            	BImageVO vo = (BImageVO)object;
             	
             	// 받아온 파일이 비어있지 않다면 작업을 실행시켜준다.
             	if(delegate != null) {
-            		BImageVO vo = (BImageVO)object;
                 	vo.setDelegatephotoboolean("Y");
                     s3FileUpload(delegate, folderName, object, count);
             	}
+            	
+            	// 삭제 리스트를 받아옵니다.
+        		String deleteList[] = req.getParameterValues("deleteUploadImage");
+        		
+            	if( deleteList.length > 0 ) {
+            		for(String deleteValue : deleteList) {
+            			vo.setStoreimg(deleteValue);
+            			s3FileDelete(vo);
+            		}
+            		
+            	}
+            	
             }
             return 1;
     	}
@@ -304,16 +324,27 @@ public class AwsServiceImpl{
     
     
     // s3에 파일을 삭제합니다.
-    public int s3FileDelete(String filePath) {
+    public int s3FileDelete(Object object) {
     	
 //    	for (S3ObjectSummary file : amazonS3.listObjects(BUCKET_NAME, filePath).getObjectSummaries()){
 //    		System.out.println("파일 키 " + file.getKey());
 //    	   amazonS3.deleteObject(BUCKET_NAME, file.getKey());
 //    	}
 //    	DeleteObjectRequest deleteRequest = new DeleteObjectRequest(BUCKET_NAME);
-
+    	
+    	// DB에 존재하는 파일 경로를 삭제해줍니다.
+    	
+    	String filePath ="";
+    	
+    	if(object instanceof BImageVO) { 
+    		BImageVO vo = (BImageVO)object;
+    		bImageDAO.deleteBImage(vo);
+    		filePath = vo.getStoreimg();
+    	}
+    	
     	System.out.println("aws 삭제 실행");
-    	// 파일을 삭제해줍니다.
+    	
+    	// S3 내부에 존재하는 파일을 삭제해줍니다.
     	amazonS3.deleteObject(BUCKET_NAME, filePath);
     	
     	return 1;

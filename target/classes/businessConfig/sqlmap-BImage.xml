@@ -36,7 +36,11 @@
 
 
 <!--  ======================================= REST ================================================ -->
-
+	
+	<delete id="deleteBImage" parameterType="BImageVO">
+		DELETE FROM BIMAGE 
+			WHERE
+	</delete>
 
 
 </mapper>
