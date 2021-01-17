@@ -1,6 +1,7 @@
 package com.drumtong.business.service.mainmanagement;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.drumtong.business.dao.BDeliveryAreaDAO;
+import com.drumtong.business.dao.BInformationDAO;
 import com.drumtong.business.dao.BManagementDAO;
 import com.drumtong.business.dao.BMenuDAO;
 import com.drumtong.business.dao.BScheduleDaysDAO;
@@ -36,7 +38,9 @@ public class RestBusinessMainManagementService {
 	@Autowired BManagementDAO bManagementDAO;
 	@Autowired BMenuDAO	bMenuDAO;
 	@Autowired BDeliveryAreaDAO bDeliveryAreaDAO;
+	@Autowired BInformationDAO bInformationDAO;
 	@Autowired AwsServiceImpl aws;
+	
 	
 	
 	// 일정관리 테이블
@@ -49,28 +53,37 @@ public class RestBusinessMainManagementService {
 	
 	
 	// 통합 메뉴 업데이트
-	public int bManagementRestProcessing(HttpServletRequest req, BManagementVO bManagementVO, String processing) {
+	public int bManagementRestProcessing(HttpServletRequest req, BManagementVO bManagementVO, 
+										String processing) {
 		HttpSession Session = req.getSession();
  	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
  	    String estid = bInformationVO.getEstid();
  	    bManagementVO.setEstid(estid);
  	    int result = 0;
+
+ 	    
  	    switch(processing) {
+ 	    	
+ 	    	// ===== 중분류 [BManagement] 테이블 ====
+ 		 	    
+ 			// === 소분류 [ Introduction ] 필드 {매장소개글} ==
+ 			// 1. 매장 관리에 매장 소개글을 비동기식으로 수정해주는 메서드입니다.
  	    	case "updateIntroduction" :
  	    		result = bManagementDAO.updateIntroduction(bManagementVO);
  	    		break;
  	    	
+
+ 	    	// === 소분류 [ DeliveryBoolean ] 필드 {배달유무} ==
+ 	    	// 2. 매장 관리에 배달유무를 비둥기식으로 수정해주는 메서드입니다.
  	    	case "updateDeliveryBoolean" :
  	    		result = bManagementDAO.updateDeliveryBoolean(bManagementVO);	
  	    		break;
  	    	
- 	    	case "updateQuickBoolean" :
- 	    		result = bManagementDAO.updateQuickBoolean(bManagementVO);
- 	    		break;
  	    	
  	    	case "updateDefaultCategory" :
  	    		result = bManagementDAO.updateDefaultCategory(bManagementVO);
  	    		break;
+ 	    	
  	    }
 		return result;
 	}
@@ -127,18 +140,6 @@ public class RestBusinessMainManagementService {
 	}
 
 
-	// === 소분류 [ QuickBoolean ] 필드 {퀵유무} ==
-	// 3. 매장 관리에 퀵여부를 비둥기식으로 수정해주는 메서드입니다.
-	public int updateQuickBoolean(HttpServletRequest req, BManagementVO bManagementVO) {
-		HttpSession Session = req.getSession();
-		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
-		String estid= bInformationVO.getEstid();
-		bManagementVO.setEstid(estid);
-		
-		int RestUpdateDeliveryBooleanReuslt = bManagementDAO.updateQuickBoolean(bManagementVO);
-		
-		return RestUpdateDeliveryBooleanReuslt;
-	}
 
 	// === 소분류 [ DEFAULTCATEGORY ] 필드 {퀵유무} ==
 	// 4. 매장 관리에 기본 카테고리를 비둥기식으로 수정해주는 메서드입니다.
@@ -159,14 +160,18 @@ public class RestBusinessMainManagementService {
 	// ===== 중분류 [BMenu] 테이블 ====
 	
 	// 통합
-	public int bMenuRestProcessing(HttpServletRequest req, BMenuVO bMenuVO, String processing) {
+	public int bMenuRestProcessing(HttpServletRequest req, List<BMenuVO> ListBMenuVO, String processing) {
 		HttpSession Session = req.getSession();
  	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
  	    String estid = bInformationVO.getEstid();
- 	    bMenuVO.setEstid(estid);
 		
  	    int result = 0;
- 	    switch(processing) {
+ 	    
+ 	    
+ 	    for ( BMenuVO bMenuVO : ListBMenuVO ) {
+ 	    	bMenuVO.setEstid(estid);
+ 	    	
+ 	    	switch(processing) {
  	    	
  	    	case "insertBMenu" :
  	    		result = bMenuDAO.insertBMenu(bMenuVO);
@@ -180,9 +185,31 @@ public class RestBusinessMainManagementService {
  	    		result = bMenuDAO.deleteBMenu(bMenuVO);
  	    		break;
  	    }
+ 	    	
+ 	    }
+ 	    
 		return result;
 	}
 
+	
+	
+
+ 	// ===== 중분류 [BInformation] 테이블 ====
+	 	    
+	// === 소분류 [ MainLocation, DetailLocation ] 필드 {매장소개글} ==
+	// 1.매장 정보에 [매장 주소]를 변경해주는 함수입니다.
+	public int updateLocation(HttpServletRequest req, BInformationVO bInformationVO) {
+		HttpSession Session = req.getSession();
+		BInformationVO vo= (BInformationVO)Session.getAttribute("selectEST");
+		String estid= vo.getEstid();
+		bInformationVO.setEstid(estid);
+		
+		
+		int RestInsertBMenuReuslt = bInformationDAO.updateLocation(bInformationVO);
+		return RestInsertBMenuReuslt;
+	}
+	
+	
 	
 	// 0. 메장 메뉴를 비동기식으로 새로이 입력해주는 메서드입니다.
 	public int insertBMenu(HttpServletRequest req, BMenuVO bMenuVO) {

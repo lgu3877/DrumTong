@@ -1,6 +1,7 @@
 package com.drumtong.business.controller.mainmanagement;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.drumtong.business.service.mainmanagement.RestBusinessMainManagementService;
 import com.drumtong.business.vo.BDeliveryAreaVO;
 import com.drumtong.business.vo.BImageVO;
+import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BManagementVO;
 import com.drumtong.business.vo.BMenuVO;
 import com.drumtong.business.vo.BScheduleDaysVO;
@@ -41,11 +43,12 @@ public class RestBusinessMainManagementController {
 	// ========================= 대분류 [매장관리] ================================
 	
 	
-	// 통합 
+	// BManagement 테이블 통합 실행 함수 
 	@RequestMapping("BManagement/rest/{processing}/")
 	@PostMapping(produces="application/json; charset=utf8")
 	public String bManagementRestProcessing(HttpServletRequest req, @RequestBody BManagementVO bManagementVO,
-									 @PathVariable String processing) {
+											@PathVariable("processing")String processing) {
+		System.out.println("통합함수 실행..");
 		int result = svc.bManagementRestProcessing(req, bManagementVO, processing);
 		return result == 1
 				? "true"
@@ -102,19 +105,6 @@ public class RestBusinessMainManagementController {
 				: "false";
 	}
 	
-
-	// === 소분류 [ QuickBoolean ] 필드 {퀵유무} ==
-	// 3. 매장 관리에 퀵여부를 비둥기식으로 수정해주는 메서드입니다.
-	@RequestMapping("BManagement/rest/updateQuickBoolean/")
-	@PostMapping(produces="application/json; charset=utf8")
-	public String updateQuickBoolean(HttpServletRequest req, @RequestBody BManagementVO bManagementVO) {
-		
-		int result = svc.updateQuickBoolean(req,bManagementVO);
-		System.out.println(result + " : result 값 입니다");
-		return result == 1
-				? "true"
-				: "false";
-	}
 	
 		
 		
@@ -133,6 +123,21 @@ public class RestBusinessMainManagementController {
 				: "false";
 	}	
 	
+	// ===== 중분류 [BInformation] 테이블 ====
+	    
+	// === 소분류 [ MainLocation, DetailLocation ] 필드 {매장소개글} ==
+	// 1.매장 정보에 [매장 주소]를 변경해주는 함수입니다. (위도 경도도 같이 수정해줍니다)
+	@RequestMapping("BInformation/rest/updateLocation/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String updateLocation(HttpServletRequest req, @RequestBody BInformationVO bInformationVO) {
+		int result = svc.updateLocation(req,bInformationVO);
+		System.out.println(result + " : result 값 입니다");
+		return result == 1
+				? "true"
+				: "false";
+	}	
+	
+	
 	
 	
 	
@@ -141,9 +146,9 @@ public class RestBusinessMainManagementController {
 	//통합
 	@RequestMapping("BMenu/rest/{processing}/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String bMenuRestProcessing(HttpServletRequest req, @RequestBody BMenuVO bMenuVO, 
-							  @PathVariable String processing) {
-		int result = svc.bMenuRestProcessing(req, bMenuVO, processing);
+	public String bMenuRestProcessing(HttpServletRequest req, @RequestBody List<BMenuVO> ListBMenuVO, 
+									  @PathVariable("processing")String processing) {
+		int result = svc.bMenuRestProcessing(req, ListBMenuVO, processing);
 		return result == 1
 				? "true"
 				: "false";

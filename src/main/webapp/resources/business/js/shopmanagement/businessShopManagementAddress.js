@@ -50,6 +50,9 @@ function createMap() {
 		if (status === kakao.maps.services.Status.OK) {
 			// 좌표
 			const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+			console.log('좌표값 : ', coords);
+			console.log('좌표값1 : ', coords.La);
+			console.log('좌표값 : ', coords.Ma);
 			// 좌표값 input value로 설정
 			document.getElementById("main-location").value = coords;
 			

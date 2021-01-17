@@ -51,6 +51,9 @@ public interface BInformationDAO {
 	// 온라인 계약의 절차 여부에 따라 status 값을 변경시켜준다.
 	int updateStatus(HashMap<String, String> map);
 
+	// 1.매장 정보에 [매장 주소]를 변경해주는 함수입니다.
+	int updateLocation(BInformationVO bInformationVO);
+
 
 
 }

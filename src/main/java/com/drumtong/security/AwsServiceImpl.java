@@ -273,7 +273,7 @@ public class AwsServiceImpl{
             	// 4. 통장사본 데이터를 입력해준다.
 	    		bPaymentDAO.updateCopyOfBankBook(vo);
          	
-         	}
+         	}	
          	
          	// aws에 들어가는 디렉토리 경로입니다.
         	String dir = BUCKET_NAME + "/" + folderName + "/" + subFolderName;
