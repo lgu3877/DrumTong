@@ -28,6 +28,7 @@ import com.drumtong.business.dao.BPaymentDAO;
 import com.drumtong.business.vo.BImageVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BPaymentVO;
+import com.drumtong.customer.dao.CPrivateDataDAO;
 import com.drumtong.customer.vo.CPrivateDataVO;
 
 // [건욱]
@@ -37,6 +38,7 @@ public class AwsServiceImpl{
 	@Autowired BImageDAO bImageDAO;
 	@Autowired BPaymentDAO bPaymentDAO;
 	@Autowired BInformationDAO bInformationDAO;
+	@Autowired CPrivateDataDAO cPrivateDataDAO;
 	
 	private static String[] Security = Security();
     
@@ -279,7 +281,27 @@ public class AwsServiceImpl{
          	// ======================= 영경 =============================
          	// 고객 프로필 사진 등록
          	else if(object instanceof CPrivateDataVO) {
+//         		System.out.println("aws 고객 프로필 사진 등록 메서드 실행(영경)");
+         		CPrivateDataVO cPrivateDataVO = (CPrivateDataVO)object;
          		
+         		// subFolderName 폴더명 지정
+         		subFolderName = "PhotoID";
+//         		System.out.println("subFolderName : " + subFolderName);
+         		
+         		// UUID 가져오기
+         		UUID = SerialUUID.getSerialUUID("CPhotoID", "PhotoID");
+//         		System.out.println("UUID : " + UUID);
+         		
+         		// 1. 파일이름
+            	fileName = UUID +"."+ file.getOriginalFilename().split("\\.")[1];
+//            	System.out.println("fileName : " + fileName);
+            	
+            	cPrivateDataVO.setProfileimg(folderName + "/"  + subFolderName + "/" + fileName);
+//            	System.out.println("setProfileimg : " + cPrivateDataVO.getProfileimg());
+            	
+            	// DB애 이미지 주소 넣고 return 1 지우기
+            	int result = cPrivateDataDAO.updateImg(cPrivateDataVO);
+//            	System.out.println("result : " + (result == 1 ? "입력 완료" : "입력 실패"));
          	}
          	// ========================================================
          	
