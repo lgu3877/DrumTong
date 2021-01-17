@@ -16,31 +16,6 @@ const toggleIcon = document.getElementById("delivery-icon");
 let deliveryToggle = false;
 
 
-function createAddService() {
-	const container = document.getElementById("add-item-list");
-	
-	const singleServiceInputCon = document.createElement("div"); // 단일 서비스 입력폼
-	const serviceRandomId = generateRandomString(11);
-	singleServiceInputCon.id = serviceRandomId; // single container ID
-	singleServiceInputCon.className = "single_item_selector";
-	
-	const firstInputCon = document.createElement("div");
-	firstInputCon.className = "first_item_prop";
-	
-	// 추가(appending)
-	container.appendChild(singleServiceInputCon);
-	
-	
-}
-
-
-
-
-
-
-
-
-
 // 메인 옵션 생성
 function createOptions(categoryObject) {
 	const mainSelect = document.getElementById("main-category");
@@ -577,6 +552,5 @@ function attachSubCategories(subCategory) {
 
 
 // 서비스 등록 관련 초기 실행
-createAddService();
 createOptions(menuCategories); // select > option 드랍다운 동적 구현
 createCategoryList(); // 메뉴수정 관련 Modal
