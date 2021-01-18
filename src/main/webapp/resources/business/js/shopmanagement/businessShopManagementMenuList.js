@@ -40,6 +40,8 @@ function createAddService() {
 		mainSelector.addEventListener("change", (e) => selectOption(e, directRandomId));
 //		mainSelector.onchange = "selectOption(this)";
 		
+		// 하위 선택 항목 생성
+		createOptions(mainSelector); 
 		
 		const mainSelectorDirectInput = document.createElement("input");
 		mainSelectorDirectInput.id = directRandomId;
@@ -53,8 +55,6 @@ function createAddService() {
 			firstInputCon.appendChild(mainSelector);
 			firstInputCon.appendChild(mainSelectorDirectInput);
 			
-			createOptions(mainSelector); // 하위 선택 항목 생성 
-	
 			
 			
 	// sub service category selector (두번째)
@@ -62,14 +62,18 @@ function createAddService() {
 	secondInputCon.className = "second_item_prop";
 	
 	const subSelectorRandomId = generateRandomString(12);
+	const subDirectRandomId = generateRandomString(12);
 	
+		// sub selector
 		const subSelector = document.createElement("select");
 		subSelector.id = subSelectorRandomId;
 		subSelector.className = "service_selector";
 		subSelector.name = "subcategory"
 		subSelector.addEventListener("chnage", (e) => selectOption(e));
-	
+		
+		// sub direct input
 		const subDirectInput = document.createElement("input");
+		subDirectInput.id = subDirectRandomId;
 		subDirectInput.type = "text";
 		subDirectInput.name = "subcategory";
 		subDirectInput.className = "direct_type_input";
@@ -81,26 +85,73 @@ function createAddService() {
 		secondInputCon.appendChild(subSelector);
 		secondInputCon.appendChild(subDirectInput);
 
+		
+		
+	// 세부내용 (세번째)
 	const thirdInputCon = document.createElement("div");
+	thirdInputCon.className = "third_item_prop";
 	
+		const detailContextInput = document.createElement("input");
+		detailContextInput.type = "text";
+		detailContextInput.className = "service_detail_input";
+		detailContextInput.name = "name";
+		detailContextInput.placeholder = "세부 서비스 내용을 입력해주세요.";
+	
+		// 추가
+		thirdInputCon.appendChild(detailContextInput);
+		
+		
+		
+	// 가격 (네번째)
 	const forthInputCon = document.createElement("div");
+	forthInputCon.className = "forth_item_prop";
 	
+		const priceInput = document.createElement("input");
+		priceInput.type = "text";
+		priceInput.className = "service_price_input";
+		priceInput.name = "price";
+		priceInput.placeholder = "서비스 가격(원)";
+	
+		
+		// 추가
+		forthInputCon.appendChild(priceInput);
+		
+		
+		
+	// 시간 (다섯번째)
 	const fifthInputCon = document.createElement("div");
+	fifthInputCon.className = "fifth_item_prop";
 	
+		const timeInput = document.createElement("input");
+		timeInput.type = "text";
+		timeInput.className = "service_time_input";
+		timeInput.name = "ete";
+		timeInput.placeholder = "서비스 소요시간";
+
+
+		// 추가
+		fifthInputCon.appendChild(timeInput);
+		
+		
+		
+	// 입력 취소 버튼
 	const cancleBtnCon = document.createElement("div");
-	
-	// 추가(appending)
-	singleServiceInputCon.appendChild(firstInputCon);
-	singleServiceInputCon.appendChild(secondInputCon);
-	
-	singleServiceInputCon.appendChild(thirdInputCon);
-	singleServiceInputCon.appendChild(forthInputCon);
-	singleServiceInputCon.appendChild(fifthInputCon);
-	singleServiceInputCon.appendChild(cancleBtnCon);
-	
-	container.appendChild(singleServiceInputCon);
+	cancleBtnCon.className = "cancle_listing";
+	cancleBtnCon.addEventListener("click", () => dismissInput(serviceRandomId));
+	cancleBtnCon.innerHTML = `<i class="fas fa-times"></i><span>취소</span>`;
 	
 	
+	
+		// 추가(appending)
+		singleServiceInputCon.appendChild(firstInputCon);
+		singleServiceInputCon.appendChild(secondInputCon);
+	
+		singleServiceInputCon.appendChild(thirdInputCon);
+		singleServiceInputCon.appendChild(forthInputCon);
+		singleServiceInputCon.appendChild(fifthInputCon);
+		singleServiceInputCon.appendChild(cancleBtnCon);
+	
+			container.appendChild(singleServiceInputCon);
 }
 
 
@@ -493,7 +544,7 @@ function deleteList(tr) {
 }
 
 // 취소 버튼
-function dismissInput(entireNode) {
+function dismissInput(id) {
 	// 목록이 하나 남았을 때
 	if (itemlist.children.length === 1) {
 		
@@ -522,8 +573,7 @@ function dismissInput(entireNode) {
 		return;
 	}
 	
-	// 목록이 2개 이상 > 해당 줄 삭제
-	entireNode.remove();
+	document.getElementById(id).remove(); // 목록이 2개 이상 > 해당 줄 삭제
 }
 
 
