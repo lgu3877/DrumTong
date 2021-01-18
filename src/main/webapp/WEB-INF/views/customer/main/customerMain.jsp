@@ -85,8 +85,7 @@
 		<p class="laundry_p laundry_p2">쉽게 세탁소를 찾기 위한 솔루션!</p>
 		<div class="laundryLists">
 				<c:forEach items="${RandomList }" var="li">
-					<div class="laundryLists_1">
-						<a href="${cpath }/customer/laundry/customerDetail/${li.estid}/">
+					<div class="laundryLists_1" style="cursor: pointer" onclick="location.href='${cpath }/customer/laundry/customerDetail/${li.estid}/'">
 							<div class="laundryLists_1_1">
 								<c:choose>
 									<c:when test="${li.mainimg == '-'}">
@@ -110,9 +109,8 @@
 							<!-- 아이콘 나타내는 공간 -->
 							<c:forEach items="${li.maincategory }" var="cate">
 								<img style="width:40px;height:40px;" src="${cpath }/resources/business/img/category/${cate }.jpg">
-							</c:forEach>s
+							</c:forEach>
 							</div>
-						</a>
 					</div>
 				</c:forEach>
 
