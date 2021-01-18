@@ -88,7 +88,14 @@
 					<div class="laundryLists_1">
 						<a href="${cpath }/customer/laundry/customerDetail/${li.estid}/">
 							<div class="laundryLists_1_1">
-								<img src="${cpath }/resources/customer/img/펭수버럭.jpg">
+								<c:choose>
+									<c:when test="${li.mainimg == '-'}">
+										<img src="${cpath }/resources/customer/img/펭수버럭.jpg">
+									</c:when>
+									<c:otherwise>
+										<img src="https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/${li.mainimg }">
+									</c:otherwise>
+								</c:choose>
 							</div>
 							<div class="laundryLists_1_2">
 								<p style="display:inline-block;width:70%;font-size: 20px;font-weight:bold;">${li.brandnaming } (${li.reviewnum })</p>
@@ -103,7 +110,7 @@
 							<!-- 아이콘 나타내는 공간 -->
 							<c:forEach items="${li.maincategory }" var="cate">
 								<img style="width:40px;height:40px;" src="${cpath }/resources/business/img/category/${cate }.jpg">
-							</c:forEach>
+							</c:forEach>s
 							</div>
 						</a>
 					</div>
@@ -117,6 +124,7 @@
 
 </section>
 <script>
+// 	영경스크립트
 	function mainSearch(){
 		location.href='${cpath}/customer/laundry/customerSearch/' + document.getElementById('search').value + '/';
 	}
