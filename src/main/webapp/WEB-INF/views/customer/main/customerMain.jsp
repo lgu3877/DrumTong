@@ -85,10 +85,16 @@
 		<p class="laundry_p laundry_p2">쉽게 세탁소를 찾기 위한 솔루션!</p>
 		<div class="laundryLists">
 				<c:forEach items="${RandomList }" var="li">
-					<div class="laundryLists_1">
-						<a href="${cpath }/customer/laundry/customerDetail/${li.estid}/">
+					<div class="laundryLists_1" style="cursor: pointer" onclick="location.href='${cpath }/customer/laundry/customerDetail/${li.estid}/'">
 							<div class="laundryLists_1_1">
-								<img src="${cpath }/resources/customer/img/펭수버럭.jpg">
+								<c:choose>
+									<c:when test="${li.mainimg == '-'}">
+										<img src="${cpath }/resources/customer/img/펭수버럭.jpg">
+									</c:when>
+									<c:otherwise>
+										<img src="https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/${li.mainimg }">
+									</c:otherwise>
+								</c:choose>
 							</div>
 							<div class="laundryLists_1_2">
 								<p style="display:inline-block;width:70%;font-size: 20px;font-weight:bold;">${li.brandnaming } (${li.reviewnum })</p>
@@ -105,7 +111,6 @@
 								<img style="width:40px;height:40px;" src="${cpath }/resources/business/img/category/${cate }.jpg">
 							</c:forEach>
 							</div>
-						</a>
 					</div>
 				</c:forEach>
 
@@ -117,6 +122,7 @@
 
 </section>
 <script>
+// 	영경스크립트
 	function mainSearch(){
 		location.href='${cpath}/customer/laundry/customerSearch/' + document.getElementById('search').value + '/';
 	}

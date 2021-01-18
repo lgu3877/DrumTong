@@ -16,7 +16,7 @@ public class EstablishmentList extends BInformationVO{
 //	private String longitude;		// 경도
 //	private String status;			// 메뉴, 일정관리 등록 시 SUCCESS/ FAIL
 //	private String premiumboolean;	// 프리미엄 'Y', or 'N'
-	private String mainimage;		// 가게 대표 사진
+	private String mainimg;		// 가게 대표 사진
 	private String defaultcategory;
 	private String[] maincategory;	// 메인 카테고리 아이콘
 	private double gpa;				// 좋아요 평균
@@ -36,11 +36,11 @@ public class EstablishmentList extends BInformationVO{
 		maincategory = defaultcategory.split("/");
 		this.defaultcategory = defaultcategory;
 	}
-	public String getMainimage() {
-		return mainimage;
+	public String getMainimg() {
+		return mainimg;
 	}
-	public void setMainimage(String mainimage) {
-		this.mainimage = mainimage;
+	public void setMainimg(String mainimg) {
+		this.mainimg = mainimg;
 	}
 	public String[] getMaincategory() {
 		return maincategory;
