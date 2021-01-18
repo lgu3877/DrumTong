@@ -29,16 +29,18 @@ function createAddService() {
 	// main service category selector (첫번째)
 	const firstInputCon = document.createElement("div");
 	firstInputCon.className = "first_item_prop";
-	
+
+	// random IDs
 	const selectorRandomId = generateRandomString(11); 
 	const directRandomId = generateRandomString(12);
+	const subSelectorRandomId = generateRandomString(12);
+	const subDirectRandomId = generateRandomString(12);
 	
 		const mainSelector = document.createElement("select");
 		mainSelector.id = selectorRandomId;
 		mainSelector.className = "service_selector";
 		mainSelector.name = "maincategory";
-		mainSelector.addEventListener("change", (e) => selectOption(e, directRandomId));
-//		mainSelector.onchange = "selectOption(this)";
+		mainSelector.addEventListener("change", (e) => selectMainOption(e, directRandomId, subSelectorRandomId, subDirectRandomId));
 		
 		// 하위 선택 항목 생성
 		createOptions(mainSelector); 
@@ -61,15 +63,17 @@ function createAddService() {
 	const secondInputCon = document.createElement("div");
 	secondInputCon.className = "second_item_prop";
 	
-	const subSelectorRandomId = generateRandomString(12);
-	const subDirectRandomId = generateRandomString(12);
-	
 		// sub selector
 		const subSelector = document.createElement("select");
 		subSelector.id = subSelectorRandomId;
 		subSelector.className = "service_selector";
 		subSelector.name = "subcategory"
-		subSelector.addEventListener("chnage", (e) => selectOption(e));
+		subSelector.addEventListener("change", (e) => selectSubOption(e, subDirectRandomId));
+		
+		const option = document.createElement("option");
+		option.hidden = true;
+		option.selected = true;
+		option.innerHTML = "세부 서비스 선택";
 		
 		// sub direct input
 		const subDirectInput = document.createElement("input");
@@ -78,10 +82,11 @@ function createAddService() {
 		subDirectInput.name = "subcategory";
 		subDirectInput.className = "direct_type_input";
 		subDirectInput.placeholder = "서비스 입력";
-		subDirectInput.style.display = "none;";
+		subDirectInput.style.display = "none";
 		
 		
 		// 추가
+		subSelector.appendChild(option);
 		secondInputCon.appendChild(subSelector);
 		secondInputCon.appendChild(subDirectInput);
 
@@ -190,61 +195,77 @@ function createOptions(mainSelector) {
 
 
 //select > option 선택
-function selectOption(e, directInputId, subCategoryId) {
-	console.log(e.target.id);
-	const obj = e.target;
-		
+function selectMainOption(e, directInputId, subCategoryId, subDirectRandomId) {
+	// 초기화
+	clearSubOptions(subCategoryId);
+
 	// 직접 입력 선택
-	if(obj.value === 'selectedDirect') {
-		obj.parentNode.querySelector('.direct_type_input').style.display = '';
+	if(e.target.value === 'selectedDirect') {
+		document.getElementById(directInputId).style.display = "";
+		document.getElementById(directInputId).value = "";
+		document.getElementById(subDirectRandomId).style.display = "";
+		document.getElementById(subDirectRandomId).value = "";
 		
-		clearSubOptions();
-		
-		// if > 하위 항목 직접 입력 시
-		
-		// 직접입력
+		// 직접입력 > 자동선택 > input 활성화
 		const option = document.createElement("option");
 		option.value = "selectedDirect";
 		option.className = "selectedDirect";
+		option.selected = true;
 		option.innerHTML = "직접입력";
 		option.style.fontWeight = "600";
 		
-		document.getElementById("sub-category").appendChild(option);
+		document.getElementById(subCategoryId).appendChild(option);
 	}
 	
 	// 그 외 값 선택
 	else {
-		obj.parentNode.querySelector('.direct_type_input').style.display = 'none';
-		obj.parentNode.querySelector('.direct_type_input').value = '';
-		
-		// main > sub 카테고리 생성
-		if (obj.name === "maincategory") {
-			clearSubOptions();
-			populateSubOptions(obj.value);
-			
-			document.getElementsByClassName("direct_type_input")[1].style.display = "none";
-		} 
+		document.getElementById(directInputId).style.display = "none";
+		document.getElementById(directInputId).value = "";
+		document.getElementById(subDirectRandomId).style.display = "none";
+		document.getElementById(subDirectRandomId).value = "";
+				
+		// 하위 항목 생성
+		populateSubOptions(e.target.value, subCategoryId);
+	}
+}
+
+
+// 세부 서비스 선택
+function selectSubOption(e, subDirectId) {
+	const subDirectInput = document.getElementById(subDirectId); 
+	
+	if (e.target.value === "selectedDirect") {
+		subDirectInput.style.display = "";
+		subDirectInput.value = "";
+	}
+	else {
+		subDirectInput.style.display = "none";
+		subDirectInput.value = "";
 	}
 }
 
 
 // 서브 옵션 변경 > 초기화
-function clearSubOptions() {
-	const subOptions = document.getElementsByClassName("sub_option");
-	const directOption = document.getElementsByClassName("selectedDirect")[1];
-	directOption !== undefined ? directOption.remove() : null;
-	
-	const count = subOptions.length;
-	if (subOptions !== 0) {
-		for (let i = 0; i < count; i++) {
-			subOptions[0].remove();
-		}		
+function clearSubOptions(subCategoryId) {
+	const subOptions = document.getElementById(subCategoryId).children;
+	console.log(subOptions);
+	console.log(subOptions.length);
+//	const directOption = document.getElementsByClassName("selectedDirect")[1];
+//	
+//	const subOptions = document.getElementsByClassName("sub_option");
+//	const directOption = document.getElementsByClassName("selectedDirect")[1];
+//	directOption !== undefined ? directOption.remove() : null;
+	 	
+
+	for (let i = 0; i < subOptions.length; i++) {
+		console.log(subOptions[i]);
+//		subOptions[0].remove();
 	}
 }
 
 // 서브 옵션 생성
-function populateSubOptions(key) {
-	const subSelect = document.getElementById("sub-category");
+function populateSubOptions(key, subCategoryId) {
+	const subSelect = document.getElementById(subCategoryId);
 	
 	// 하부 카테고리
 	const sotredMenu = menuCategories[key].sort(); 	// value 정렬	
@@ -267,8 +288,9 @@ function populateSubOptions(key) {
 	subSelect.appendChild(option);
 	
 	// default option
-	document.getElementById("sub-category-default").selected = true;
+	document.getElementById(subCategoryId).selected = true;
 }
+
 
 
 // 배달 서비스 활성화 이벤트
