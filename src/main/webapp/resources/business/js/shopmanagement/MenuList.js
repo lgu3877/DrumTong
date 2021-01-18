@@ -16,96 +16,11 @@ const toggleIcon = document.getElementById("delivery-icon");
 let deliveryToggle = false;
 
 
-// 서비스 등록 > 입력 input & select 생성
-function createAddService() {
-	const container = document.getElementById("add-item-list");
-	
-	const singleServiceInputCon = document.createElement("div"); // 단일 서비스 입력폼
-	const serviceRandomId = generateRandomString(11);
-	singleServiceInputCon.id = serviceRandomId; // single container ID
-	singleServiceInputCon.className = "single_item_selector";
-	
-	
-	// main service category selector (첫번째)
-	const firstInputCon = document.createElement("div");
-	firstInputCon.className = "first_item_prop";
-	
-	const selectorRandomId = generateRandomString(11); 
-	const directRandomId = generateRandomString(12);
-	
-		const mainSelector = document.createElement("select");
-		mainSelector.id = selectorRandomId;
-		mainSelector.className = "service_selector";
-		mainSelector.name = "maincategory";
-		mainSelector.addEventListener("change", (e) => selectOption(e, directRandomId));
-//		mainSelector.onchange = "selectOption(this)";
-		
-		
-		const mainSelectorDirectInput = document.createElement("input");
-		mainSelectorDirectInput.id = directRandomId;
-		mainSelectorDirectInput.type = "text";
-		mainSelectorDirectInput.className = "direct_type_input";
-		mainSelectorDirectInput.name = "maincategory";
-		mainSelectorDirectInput.placeholder = "서비스 입력";
-		mainSelectorDirectInput.style.display = "none";
-	
-			// 추가
-			firstInputCon.appendChild(mainSelector);
-			firstInputCon.appendChild(mainSelectorDirectInput);
-			
-			createOptions(mainSelector); // 하위 선택 항목 생성 
-	
-			
-			
-	// sub service category selector (두번째)
-	const secondInputCon = document.createElement("div");
-	secondInputCon.className = "second_item_prop";
-	
-	const subSelectorRandomId = generateRandomString(12);
-	
-		const subSelector = document.createElement("select");
-		subSelector.id = subSelectorRandomId;
-		subSelector.className = "service_selector";
-		subSelector.name = "subcategory"
-		subSelector.addEventListener("chnage", (e) => selectOption(e));
-	
-		const subDirectInput = document.createElement("input");
-		subDirectInput.type = "text";
-		subDirectInput.name = "subcategory";
-		subDirectInput.className = "direct_type_input";
-		subDirectInput.placeholder = "서비스 입력";
-		subDirectInput.style.display = "none;";
-		
-		
-		// 추가
-		secondInputCon.appendChild(subSelector);
-		secondInputCon.appendChild(subDirectInput);
-
-	const thirdInputCon = document.createElement("div");
-	
-	const forthInputCon = document.createElement("div");
-	
-	const fifthInputCon = document.createElement("div");
-	
-	const cancleBtnCon = document.createElement("div");
-	
-	// 추가(appending)
-	singleServiceInputCon.appendChild(firstInputCon);
-	singleServiceInputCon.appendChild(secondInputCon);
-	
-	singleServiceInputCon.appendChild(thirdInputCon);
-	singleServiceInputCon.appendChild(forthInputCon);
-	singleServiceInputCon.appendChild(fifthInputCon);
-	singleServiceInputCon.appendChild(cancleBtnCon);
-	
-	container.appendChild(singleServiceInputCon);
-	
-	
-}
-
-
 // 메인 옵션 생성
-function createOptions(mainSelector) {
+function createOptions(categoryObject) {
+	const mainSelect = document.getElementById("main-category");
+	// mainSelect.getElementsByClassName("selectedDirect")[0].style.fontWeight = "600";
+		
 	// placeholder
 	let option = document.createElement("option");
 	option.className = "main-category-default";
@@ -114,17 +29,17 @@ function createOptions(mainSelector) {
 	option.selected = true;
 	option.innerHTML = "서비스 타입 선택";
 	
-	mainSelector.appendChild(option); // 추가
+	mainSelect.appendChild(option);
 	
 	// 메뉴
-	const sortedKeys = Object.keys(menuCategories).sort(); // key 정렬
+	const sortedKeys = Object.keys(categoryObject).sort(); // key 정렬
 	for (let i = 0; i < sortedKeys.length; i++) {
 		option = document.createElement("option");
 		option.className = "main_option";
 		option.value = sortedKeys[i];
 		option.innerHTML = sortedKeys[i];
 		
-		mainSelector.appendChild(option); // 추가
+		mainSelect.appendChild(option);
 	}
 	
 	// 직접입력
@@ -134,15 +49,12 @@ function createOptions(mainSelector) {
 	option.innerHTML = "직접입력";
 	option.style.fontWeight = "600";
 	
-	mainSelector.appendChild(option); // 추가
+	mainSelect.appendChild(option);
 }
 
 
 //select > option 선택
-function selectOption(e, directInputId, subCategoryId) {
-	console.log(e.target.id);
-	const obj = e.target;
-		
+function selectOption(obj) {
 	// 직접 입력 선택
 	if(obj.value === 'selectedDirect') {
 		obj.parentNode.querySelector('.direct_type_input').style.display = '';
@@ -160,7 +72,6 @@ function selectOption(e, directInputId, subCategoryId) {
 		
 		document.getElementById("sub-category").appendChild(option);
 	}
-	
 	// 그 외 값 선택
 	else {
 		obj.parentNode.querySelector('.direct_type_input').style.display = 'none';
@@ -175,7 +86,6 @@ function selectOption(e, directInputId, subCategoryId) {
 		} 
 	}
 }
-
 
 // 서브 옵션 변경 > 초기화
 function clearSubOptions() {
@@ -642,6 +552,5 @@ function attachSubCategories(subCategory) {
 
 
 // 서비스 등록 관련 초기 실행
-createAddService();
-//createOptions(menuCategories); // select > option 드랍다운 동적 구현
+createOptions(menuCategories); // select > option 드랍다운 동적 구현
 createCategoryList(); // 메뉴수정 관련 Modal
