@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.drumtong.customer.service.account.RestCustomerAccountService;
 import com.drumtong.customer.vo.CPointVO;
@@ -33,6 +34,13 @@ public class RestCustomerAccountController {
 	public String Change(HttpServletRequest req, @RequestBody HashMap<String, String> param,
 			 @PathVariable("type")String type) {
 		return svc.Change(req, type, param);
+	}
+	
+	// 개인정보 중 고객 프로필 사진 업데이트[영경]
+	@RequestMapping("customerJoinChange/rest/phontoID/")
+	@PostMapping(produces="charset=utf-8", consumes = {"multipart/form-data"})
+	public String changePhotoId(HttpServletRequest req, MultipartHttpServletRequest file) {
+		return svc.changePhotoId(req, file);
 	}
 	
 	// 결제정보 변경[영경]

@@ -30,6 +30,8 @@ import com.drumtong.business.dao.BPaymentDAO;
 import com.drumtong.business.vo.BImageVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BPaymentVO;
+import com.drumtong.customer.dao.CPrivateDataDAO;
+import com.drumtong.customer.vo.CPrivateDataVO;
 
 // [건욱]
 @Service 
@@ -38,6 +40,7 @@ public class AwsServiceImpl{
 	@Autowired BImageDAO bImageDAO;
 	@Autowired BPaymentDAO bPaymentDAO;
 	@Autowired BInformationDAO bInformationDAO;
+	@Autowired CPrivateDataDAO cPrivateDataDAO;
 	
 	
 	// AWS Key를 가져옵니다.
@@ -234,6 +237,101 @@ public class AwsServiceImpl{
 		// 파일이름
 		String fileName = "";
 		
+		// UUID를 생성할 때 필요한 매개변수 값이다.
+		String tableFieldName = "";
+		
+		// UUID의 타입이며 databaseFileUplaod의 switch 구분자 역할을 해준다.
+		String UUIDType = "";
+		
+//		databaseFileUplaod(file, object, folderName, subFolderName, tablefieldname, uuidtype);
+		
+		
+		// 매장사진 테이블일 경우 ( 제일 많이 사용될 가능성이 높기 떄문에 최상단에 배치해주었다.)
+				/*
+				 * 매장사진의 경우에는 서비스에서 1차적으로 insert를 하지않고 여기서 종합적으로 신규 데이터를 만들어준다.
+				 */
+				if(object instanceof BImageVO) { 
+					
+					// 서브폴더 이름은 매장사진이다.
+					subFolderName = "BIMAGE";
+					
+					tableFieldName = "BImage";
+					
+					UUIDType = "STOREIMG";
+					
+					databaseFileUplaod(file, object, folderName, subFolderName, tableFieldName, UUIDType);
+					
+					
+				}
+				// 사업자 정보 테이블일 경우	
+				/*
+				 * 사업자 정보 테이블의 경우에는 Service에서 1차적으로 데이터를 입력해준 다음 여기에서 DAO작업은 저장된 파일경로와 파일명을 update시켜주는 역할만 해준다.
+				 * 이렇게 하는 이유는 두 개의 테이블안에 데이터를 각각 처리해주어야하는데
+				 * BInformation에서는 한꺼번에 처리하기가 힘들기 때문에 1차 입력 2차수정으로 동작시켜준다.
+				 */
+				else if(object instanceof BInformationVO && count < 2) {
+					
+					subFolderName = "CONTRACT";
+					
+					// 첫 번째 저장일 때는 영업신고증에 관련한 처리를 해줍니다.영업신고증 SerialUUID 생성
+					if(count == 0) {
+						
+						tableFieldName = "BInformationAboutReportCard";
+						
+						UUIDType = "REPORTCARD";
+						
+						databaseFileUplaod(file, object, folderName, subFolderName, tableFieldName, UUIDType);
+					
+					}
+					
+					// 두 번째 저장일 시에는 사업자 등록증에 관련한 처리를 해줍니다 사업자 등록증 SerialUUID 생성
+					else {
+						
+						
+						tableFieldName = "BInformationAboutLicense";
+						
+						UUIDType = "LICENSE";
+						
+						databaseFileUplaod(file, object, folderName, subFolderName, tableFieldName, UUIDType);
+
+					}
+				}
+				
+				// 결제 테이블일 경우
+				/*
+				 * 
+				 * 사업자 정보 테이블의 경우에는 Service에서 1차적으로 데이터를 입력해준 다음 여기에서 DAO작업은 저장된 파일경로와 파일명을 update시켜주는 역할만 해준다.
+				 * 이렇게 하는 이유는 두 개의 테이블안에 데이터를 각각 처리해주어야하는데
+				 * 전에 BImage에서 한꺼번에 처리하기가 힘들기 때문에 1차 입력 2차수정으로 바꾸어준다.
+				 */
+				else if(object instanceof BInformationVO && count == 2) {
+					
+					subFolderName = "CONTRACT";
+					
+					tableFieldName = "BPayment";
+					
+					UUIDType = "COPYOFBANKBOOK";
+					
+					databaseFileUplaod(file, object, folderName, subFolderName, tableFieldName, UUIDType);
+					
+				}    	
+				// ======================= 영경 =============================
+		     	// 고객 프로필 사진 등록
+		     	else if(object instanceof CPrivateDataVO) {
+		     		
+		     		subFolderName = "PhotoID";
+					
+					tableFieldName = "CPhotoID";
+					
+					UUIDType = "PhotoID";
+					
+					databaseFileUplaod(file, object, folderName, subFolderName, tableFieldName, UUIDType);
+					
+		     	}
+		     	// ========================================================
+		 
+				
+		
 		
 		
 		
@@ -268,7 +366,7 @@ public class AwsServiceImpl{
 					bImageDAO.insertDelegatePhoto(vo) : bImageDAO.insertConstract(vo);
 			System.out.println("bresult ; " + b);
 		}
-		// 사업자 정보 테이블일 경우
+		// 사업자 정보 테이블일 경우	
 		/*
 		 * 사업자 정보 테이블의 경우에는 Service에서 1차적으로 데이터를 입력해준 다음 여기에서 DAO작업은 저장된 파일경로와 파일명을 update시켜주는 역할만 해준다.
 		 * 이렇게 하는 이유는 두 개의 테이블안에 데이터를 각각 처리해주어야하는데
@@ -336,7 +434,35 @@ public class AwsServiceImpl{
 			// 4. 통장사본 데이터를 입력해준다.
 			bPaymentDAO.updateCopyOfBankBook(vo);
 		
-		}	
+		}    	
+		// ======================= 영경 =============================
+     	// 고객 프로필 사진 등록
+     	else if(object instanceof CPrivateDataVO) {
+//     		System.out.println("aws 고객 프로필 사진 등록 메서드 실행(영경)");
+     		CPrivateDataVO cPrivateDataVO = (CPrivateDataVO)object;
+     		
+     		// subFolderName 폴더명 지정
+     		subFolderName = "PhotoID";
+//     		System.out.println("subFolderName : " + subFolderName);
+     		
+     		// UUID 가져오기
+     		UUID = SerialUUID.getSerialUUID("CPhotoID", "PhotoID");
+//     		System.out.println("UUID : " + UUID);
+     		
+     		// 1. 파일이름
+        	fileName = UUID +"."+ file.getOriginalFilename().split("\\.")[1];
+//        	System.out.println("fileName : " + fileName);
+        	
+        	cPrivateDataVO.setProfileimg(folderName + "/"  + subFolderName + "/" + fileName);
+//        	System.out.println("setProfileimg : " + cPrivateDataVO.getProfileimg());
+        	
+        	// DB애 이미지 주소 넣고 return 1 지우기
+        	int result = cPrivateDataDAO.updateImg(cPrivateDataVO);
+//        	System.out.println("result : " + (result == 1 ? "입력 완료" : "입력 실패"));
+     	}
+     	// ========================================================
+ 
+		
 		
 		// aws에 들어가는 디렉토리 경로입니다.
 		String dir = BUCKET_NAME + "/" + folderName + "/" + subFolderName;
@@ -364,7 +490,7 @@ public class AwsServiceImpl{
      		
      		// 객체를 넣기 위한 요청 객체이다.
      		putObjectRequest = new PutObjectRequest(dir, fileName, file.getInputStream(), metadata);
-			
+
 			// Access List 를 설정 하는 부분이다. 공개 조회가 가능 하도록 public Read 로 설정 하였다.
 		    putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead);
 		        
@@ -419,5 +545,78 @@ public class AwsServiceImpl{
     	// 파일경로를 반환시켜줍니다.
     	return filePath;
     }
+    
+
+    private int databaseFileUplaod(MultipartFile file, Object object, String folderName,
+			  						String subFolderName, String tableFieldName, String UUIDType ) {	
+    	
+    	int result = 0;
+    	
+    	// UUID를 가져온다.
+		String UUID = SerialUUID.getSerialUUID(tableFieldName, UUIDType);
+//											  ("BImage", "STOREIMG");
+		String fileName = UUID +"."+ file.getOriginalFilename().split("\\.")[1];
+    	
+		
+    	
+		switch (UUIDType) {
+			case "STOREIMG" : 
+				BImageVO bImageVO = (BImageVO)object;
+				bImageVO.setStoreimg(folderName + "/"  + subFolderName + "/" + fileName);
+				result = bImageVO.getDelegatephotoboolean() != null ? 
+						bImageDAO.insertDelegatePhoto(bImageVO) : bImageDAO.insertConstract(bImageVO);
+				break;
+				
+				
+			case "REPORTCARD":
+				BInformationVO bInformationVO = (BInformationVO)object;
+				bInformationVO.setReportcard(folderName + "/"  + subFolderName + "/" + fileName);
+				result = bInformationDAO.updateReportCard(bInformationVO);
+				break;
+
+			case "LICENSE" :
+				BInformationVO bInformationVO2 = (BInformationVO)object;
+				bInformationVO2.setLicense(folderName + "/"  + subFolderName + "/" + fileName);
+				result = bInformationDAO.updateLicense(bInformationVO2);
+				break;
+				
+			case "COPYOFBANKBOOK" :
+				BPaymentVO bPaymentVO = new BPaymentVO();	
+				bPaymentVO.setCopyofbankbook(folderName + "/"  + subFolderName + "/" + fileName);
+				bPaymentVO.setEstid(folderName);
+				result = bPaymentDAO.updateCopyOfBankBook(bPaymentVO);
+				break;
+			case "PhotoID" :
+				CPrivateDataVO cPrivateDataVO = (CPrivateDataVO)object;
+				cPrivateDataVO.setProfileimg(folderName + "/"  + subFolderName + "/" + fileName);
+				result = cPrivateDataDAO.updateImg(cPrivateDataVO);
+				break;
+	
+		}
+		
+		return result;
+		
+		
+	
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
 

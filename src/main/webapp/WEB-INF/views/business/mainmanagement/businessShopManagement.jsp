@@ -586,11 +586,11 @@
 	<script type="text/javascript">
 		// DB에서 받아오는 Defaultcategory List<String> 배열
 // 		const defaultCategory = ${defaultcategory};
-		const menucategories = ${menuCategories};
+		/* const menucategories = ${menuCategories};
 		const bImageList = ${bImageList};
 		console.log(bImageList);
 		console.log(defaultCategory);
-		console.log(menuCategories);
+		sconsole.log(menuCategories); */
 	</script>
 	
 	
