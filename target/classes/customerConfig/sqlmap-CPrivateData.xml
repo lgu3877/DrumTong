@@ -49,4 +49,14 @@
 			ON c.MEMBERID=b.MEMBERID 
 			WHERE ESTID=#{estid} AND SALECODE=#{salecode}
 	</select>
+	
+	<!-- 	UUID 중복검사 aws S3에 들어가는 이미지입니다 -->
+	<select id="confirm" resultType="int" parameterType="String">
+		SELECT COUNT(PROFILEIMG) FROM CPRIVATEDATA WHERE PROFILEIMG LIKE '%'||#{SerialUUID}||'%'
+	</select>
+	
+<!-- 	고객 프로필 사진 주소 업데이트 -->
+	<update id="updateImg" parameterType="CPrivateDataVO">
+		UPDATE CPRIVATEDATA SET PROFILEIMG=#{profileimg} WHERE MEMBERID=#{memberid}
+	</update>
 </mapper>

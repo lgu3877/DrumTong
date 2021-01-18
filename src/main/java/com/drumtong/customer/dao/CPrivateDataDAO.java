@@ -25,6 +25,12 @@ public interface CPrivateDataDAO {
 
 	String selectEmail(HashMap<String, String> param);
 
+	// 고객 프로필 사진 UUID 검사
+	int confirm(String serialUUID);
+
+	// 고객 이미지 주소 업데이트
+	int updateImg(CPrivateDataVO cPrivateDataVO);
+
 
 	
 }

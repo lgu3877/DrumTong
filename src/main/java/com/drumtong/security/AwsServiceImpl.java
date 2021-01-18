@@ -28,6 +28,8 @@ import com.drumtong.business.dao.BPaymentDAO;
 import com.drumtong.business.vo.BImageVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BPaymentVO;
+import com.drumtong.customer.dao.CPrivateDataDAO;
+import com.drumtong.customer.vo.CPrivateDataVO;
 
 // [건욱]
 @Service 
@@ -36,6 +38,7 @@ public class AwsServiceImpl{
 	@Autowired BImageDAO bImageDAO;
 	@Autowired BPaymentDAO bPaymentDAO;
 	@Autowired BInformationDAO bInformationDAO;
+	@Autowired CPrivateDataDAO cPrivateDataDAO;
 	
 	private static String[] Security = Security();
     
@@ -124,7 +127,7 @@ public class AwsServiceImpl{
     		
             
     		
-            // 만약 saveType이 매장사진이면 대표사진 저장은 따로 처리해준다.
+            // 만약 이 매장사진이면 대표사진 저장은 따로 처리해준다.
             if(saveType.equals("businessStoreImage")) {
 
             	MultipartFile delegate = mpf.getFile("delegatephotoboolean");
@@ -133,7 +136,8 @@ public class AwsServiceImpl{
             	if(delegate != null) {
             		BImageVO vo = (BImageVO)object;
                 	vo.setDelegatephotoboolean("Y");
-                    s3FileUpload(delegate, folderName, object, count);
+                	// 영경 object => vo로 바꿈
+                    s3FileUpload(delegate, folderName, vo, count);
             	}
             }
             return 1;
@@ -273,7 +277,33 @@ public class AwsServiceImpl{
             	// 4. 통장사본 데이터를 입력해준다.
 	    		bPaymentDAO.updateCopyOfBankBook(vo);
          	
-         	}	
+         	}
+         	// ======================= 영경 =============================
+         	// 고객 프로필 사진 등록
+         	else if(object instanceof CPrivateDataVO) {
+//         		System.out.println("aws 고객 프로필 사진 등록 메서드 실행(영경)");
+         		CPrivateDataVO cPrivateDataVO = (CPrivateDataVO)object;
+         		
+         		// subFolderName 폴더명 지정
+         		subFolderName = "PhotoID";
+//         		System.out.println("subFolderName : " + subFolderName);
+         		
+         		// UUID 가져오기
+         		UUID = SerialUUID.getSerialUUID("CPhotoID", "PhotoID");
+//         		System.out.println("UUID : " + UUID);
+         		
+         		// 1. 파일이름
+            	fileName = UUID +"."+ file.getOriginalFilename().split("\\.")[1];
+//            	System.out.println("fileName : " + fileName);
+            	
+            	cPrivateDataVO.setProfileimg(folderName + "/"  + subFolderName + "/" + fileName);
+//            	System.out.println("setProfileimg : " + cPrivateDataVO.getProfileimg());
+            	
+            	// DB애 이미지 주소 넣고 return 1 지우기
+            	int result = cPrivateDataDAO.updateImg(cPrivateDataVO);
+//            	System.out.println("result : " + (result == 1 ? "입력 완료" : "입력 실패"));
+         	}
+         	// ========================================================
          	
          	// aws에 들어가는 디렉토리 경로입니다.
         	String dir = BUCKET_NAME + "/" + folderName + "/" + subFolderName;

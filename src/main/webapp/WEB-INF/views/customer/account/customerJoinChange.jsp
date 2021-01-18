@@ -51,10 +51,10 @@
 
         <article class="join_change">
             <div class="join_fo1">
-                <div class="join_fo1_1" id="join_fo1_1"></div>
+                <div class="join_fo1_1" id="join_fo1_1"><img style="width: 200px; height: 150px;"></div>
                 <form method="POST" class="join_fo1_2" enctype="multipart/form-data">
-                    <input class="join_fo1_2_file" type="file" name="user" >
-                    <input class="join_fo1_2_sub" type="button" id="submit" name="submit" value="추가" >
+                    <input class="join_fo1_2_file" type="file" id="photoID" name="user" >
+                    <input class="join_fo1_2_sub" type="button" id="submit" name="submit" value="저장" >
                 </form>
             </div>
 
@@ -128,39 +128,81 @@
     </section>
 
     <script>
+    	function imgView(address){
+    		img = document.querySelectorAll('div.join_fo1_1 img')[0];
+    		img.src = address;
+    	}
         function FileSubmit(event) {
             if (event.type === 'keypress' && event.key !== 'Enter') {
                 return;
             }
             form = document.forms[0]; // 폼 안의 input3개 다 가져옴
             console.log(form);
-
-            const request = new XMLHttpRequest();
-            request.open("POST", cpath + "/customer/account/customerJoinChange/", true); // 비동기식 처리(true)
+            console.log(form.children[0]);
             
-            formData = new FormData(document.forms[0]);
-            request.onreadystatechange = ajaxFileEvent;
-            request.send(formData);
+        	 formData = new FormData(form);
+            
+            var axPost = async (form) => {
+		        await axios.post(cpath + "/customer/account/customerJoinChange/rest/phontoID/", formData, {
+					headers: {"Content-Type": `multipart/form-data`,}, 
+				})
+	
+		        .then( (response) => {
+		          if(response.data === true){
+		                // 새 비밀번호, 새 비밀번호 확인을 입력하는 input 박스 2개 만들기
+		            alert('정상적으로 변경되었습니다.');
+		          } else{
+		            alert('비밀번호가 정상적으로 변경되지 않았습니다. 다시 시도해주세요');
+		          }
+		          return false;
+		        });
+		      }
+		      axPost(form);
+
+//             const request = new XMLHttpRequest();
+//             request.open("POST", cpath + "/customer/account/customerJoinChange/rest/phontoID/", true); // 비동기식 처리(true)
+            
+//             formData = new FormData(form);
+//             request.onreadystatechange = ajaxFileEvent;
+//             request.send(formData);
         }
 
-        function ajaxFileEvent() {
-            if (this.readyState === 4 && this.status === 200) {
-                resultData = JSON.parse(this.response);
-                h3 = document.createElement('h3');
-                h3.innerHTML = resultData.name; // 이름 불러오는 코드
-                img = document.createElement('img');
-                img.src = cpath + "/img/" + resultData.image;
+//         function ajaxFileEvent() {
+//             if (this.readyState === 4 && this.status === 200) {
+//                 resultData = JSON.parse(this.response);
+//                 h3 = document.createElement('h3');
+//                 h3.innerHTML = resultData.name; // 이름 불러오는 코드
+//                 img = document.createElement('img');
+//                 img.src = cpath + "/img/" + resultData.image;
 
-                document.getElementById('join_fo1_1').appendChild(h3);
-                document.getElementById('join_fo1_1').appendChild(img);
-            }
-        }
+//                 document.getElementById('join_fo1_1').appendChild(h3);
+//                 document.getElementById('join_fo1_1').appendChild(img);
+//             }
+//         }
     </script>
 
     <script type="text/javascript">
         // 문서가 불러와지면 곧바로 실행 (onload="")
         cpath = '${pageContext.request.contextPath}';
         document.getElementById('submit').addEventListener('click', FileSubmit);
+        
+        document.getElementById('photoID').addEventListener('change', Preview);
+        
+        function Preview(){
+        	photo = document.getElementById('photoID');
+        	priview = document.getElementById('join_fo1_1').children[0];
+        	
+        	var img = new Image();		
+    		img.src = URL.createObjectURL(photo.files[0]);
+        	
+    		img.onload = function() {
+    			priview.setAttribute('src', img.src);
+    		}
+    		
+    		
+        }
+
+
     </script>
 
 	<script>	// 영경 스크립트
@@ -335,6 +377,8 @@
 			}
 			inputButton.style.display=value;
 		}
+
+    	imgView('https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + '${cLogin.profileimg}');
 	</script>
 	
 <%@ include file="../main/customerFooter.jsp"%>
