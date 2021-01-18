@@ -128,6 +128,10 @@
     </section>
 
     <script>
+    	function imgView(address){
+    		img = document.querySelectorAll('div.join_fo1_1 img')[0];
+    		img.src = address;
+    	}
         function FileSubmit(event) {
             if (event.type === 'keypress' && event.key !== 'Enter') {
                 return;
@@ -373,6 +377,8 @@
 			}
 			inputButton.style.display=value;
 		}
+
+    	imgView('https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + '${cLogin.profileimg}');
 	</script>
 	
 <%@ include file="../main/customerFooter.jsp"%>

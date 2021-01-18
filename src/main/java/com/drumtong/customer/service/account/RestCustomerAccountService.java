@@ -105,14 +105,24 @@ public class RestCustomerAccountService {
 	public String changePhotoId(HttpServletRequest req, MultipartHttpServletRequest mpf) {
 		HttpSession Session= req.getSession();
 		CPrivateDataVO Login = (CPrivateDataVO)Session.getAttribute("cLogin");
+		
+		// 이전에 업데이터 한 이미지가 있다면 삭제하도록
+		if(Login.getProfileimg() != null) {
+			aws.s3FileDelete(Login.getProfileimg());
+		}
+		
 		String memberid = Login.getMemberid();
 		CPrivateDataVO cprivatedata = new CPrivateDataVO();
 		cprivatedata.setMemberid(memberid);
 		
 		MultipartFile file = mpf.getFiles("user").get(0);
 		
-		aws.s3FileUpload(file, memberid, cprivatedata, -1);
-		return null;
+		int result = aws.s3FileUpload(file, memberid, cprivatedata, -1);
+		
+		if(result == 1) {
+			Session.setAttribute("cLogin", cPrivateDataDAO.selectLogin(Login.getPw()));
+		}
+		return result == 1 ? "true" : "false";
 	}
 
 }
