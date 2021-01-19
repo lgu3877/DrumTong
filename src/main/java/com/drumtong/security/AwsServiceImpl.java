@@ -243,6 +243,9 @@ public class AwsServiceImpl{
 		// UUID의 타입이며 databaseFileUplaod의 switch 구분자 역할을 해준다.
 		String UUIDType = "";
 		
+		/*
+		 *  databaseFileUpload 함수에 요구되는 매개 변수는 다음과 같습니다.
+		 */
 //		databaseFileUplaod(file, object, folderName, subFolderName, tablefieldname, uuidtype);
 		
 		
