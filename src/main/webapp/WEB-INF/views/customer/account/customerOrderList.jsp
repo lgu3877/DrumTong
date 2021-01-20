@@ -121,19 +121,12 @@
 		document.querySelectorAll('#writeReviewButton')[0].style.display="block";
 		
        // When the user clicks anywhere outside of the modal, close it
-       window.onclick = function (event) {
-         if (event.target == modal) {
-           modal.style.display = 'none';
-           modalContent1.style.display = 'none';
-           modalContent2.style.display = 'none';
-           modalContent3.style.display = 'none';
-           modalContent4.style.display = 'none';
+       document.querySelectorAll('#writeReviewButton')[0].onclick = function (event) {
+         if (event.target == this) {
+        	 this.style.display="none";
          }
        };
 		
-		document.querySelector('.modal').addEventListener('click', function(e){
-			document.querySelectorAll('#writeReviewButton')[0].style.display="none";
-		})
 	}
 </script>
 <!-- 스크립트 영역 [건욱 작업] -->
