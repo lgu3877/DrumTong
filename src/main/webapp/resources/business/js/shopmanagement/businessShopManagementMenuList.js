@@ -549,8 +549,8 @@ function deleteList(tr) {
 
 // 취소 버튼
 function dismissInput(id) {
-	const con = document.getElementById(id);
-	console.log(document.getElementById(id));
+//	const con = document.getElementById(id);
+//	console.log(document.getElementById(id));
 //	clearSubOptions(subCategoryId)
 	
 	// 목록이 하나 남았을 때
@@ -562,14 +562,13 @@ function dismissInput(id) {
 		const quickpriceInput = document.querySelectorAll(".service_quickprice_input");
 		
 		// 직접입력 체크 O > input 제거 & 값 초기화
-		if(directInputCheck[0].selected === true || directInputCheck[1].selected === true) {
-			directInputs[0].value = '';
-			directInputs[1].value = '';
-			directInputs[0].style.display = 'none';
-			directInputs[1].style.display = 'none';
-		    
+		for (let i = 0; i < directInputCheck.length; i++) {
+			if (directInputCheck[i].selected === true) {
+				directInputs[i].value = '';
+				directInputs[i].style.display = 'none';
+			}
 		}
-		
+				
 		// 직접입력 체크 X > select 옵선 초기화
 		selector[0].children[0].selected = true;
 		selector[1].children[0].selected = true;
@@ -580,14 +579,17 @@ function dismissInput(id) {
 		document.querySelector(".service_time_input").value = '';
 		
 		// 퀵서비스 가격 추가
-		quickpriceInput[0].style.display !== "none"?
-			quickpriceInput[0].style.display === "none" : 
-			quickpriceInput[0].style.display === "";
+		if (quickpriceInput.length !== 0) {
+			quickpriceInput[0].style.display !== "none" ?
+				quickpriceInput[0].style.display = "none" : 
+				quickpriceInput[0].style.display = "";
+		}
 
 		return;
 	}
 	
-	document.getElementById(id).remove(); // 목록이 2개 이상 > 해당 줄 삭제
+	// 목록이 2개 이상 > 해당 줄 삭제
+	document.getElementById(id).remove();
 }
 
 
