@@ -914,7 +914,6 @@ check .option-name,
 .modal-content1,
 .modal-content2,
 .modal-content3,
-.modal-content4,
 .modal-box {
   display: none;
   justify-content: space-between;
@@ -939,9 +938,15 @@ check .option-name,
 }
 
 .modal-content4 {
-  display: none;
-  width: 1000px;
-  height: auto;
+  min-width: 40%;
+  max-width: 600px;
+  min-height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  justify-content: space-between;
+  background-color: #fefefe;
+  overflow: scroll;
 }
 /* The Close Button */
 .close {

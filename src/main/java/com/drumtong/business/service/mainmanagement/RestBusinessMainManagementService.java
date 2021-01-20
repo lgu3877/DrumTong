@@ -1,5 +1,7 @@
 package com.drumtong.business.service.mainmanagement;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -93,18 +95,17 @@ public class RestBusinessMainManagementService {
 	
 	
 	// 1. 매장 관리에 매장 사진을 비동기식으로 수정해주는 메서드입니다.
-	public int updateBImage(MultipartHttpServletRequest mpf, HttpServletRequest req, String saveType) {
+	public int updateBImage(MultipartHttpServletRequest mpf, HttpServletRequest req) {
 		System.out.println("Bimage Rest Service 실행...");
 		HttpSession Session = req.getSession();
  	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
  	    String estid = bInformationVO.getEstid();
- 	    
+ 	   
  	    BImageVO bImageVO = new BImageVO();
  	    bImageVO.setEstid(estid);
  	    
-		int RestUpdateBImageResult = aws.multipleUpload(mpf, estid, bImageVO, saveType);
+		int RestUpdateBImageResult = aws.multipleUpload(mpf,estid,bImageVO, req);
 		return RestUpdateBImageResult;
-				
 	}
 	
 	
@@ -168,8 +169,10 @@ public class RestBusinessMainManagementService {
  	    int result = 0;
  	    
  	    
+ 	    
  	    for ( BMenuVO bMenuVO : ListBMenuVO ) {
  	    	bMenuVO.setEstid(estid);
+ 	    	System.out.println(bMenuVO.getQuickprice());
  	    	
  	    	switch(processing) {
  	    	
@@ -184,7 +187,7 @@ public class RestBusinessMainManagementService {
  	    	case "deleteBMenu" :
  	    		result = bMenuDAO.deleteBMenu(bMenuVO);
  	    		break;
- 	    }
+ 	    	}
  	    	
  	    }
  	    

@@ -324,7 +324,7 @@ function deletePhoto(clickedPhoto) {
 
 
 // 랜덤 String 생성
-function generateReandomString(length) {
+function generateRandomString(length) {
 	let result = "";
 	const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 	const charArray = characters.split("");
@@ -345,7 +345,7 @@ function generateReandomString(length) {
 
 // input file & label 생성
 function createInputFile() {
-	const randomId = generateReandomString(15);
+	const randomId = generateRandomString(15);
 	
 	const input = document.createElement("input");
 	input.setAttribute("id", randomId);

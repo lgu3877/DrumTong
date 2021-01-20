@@ -351,7 +351,7 @@
 						<div class="add_menu_btn_title">퀵 서비스</div>
 					</div>
 				<!-- 메뉴 추가 -->	
-					<div id="add-item-btn" class="add_menu_btn_con">
+					<div id="add-item-btn" class="add_menu_btn_con" onclick="createAddService()">
 						<div class="add_menu_icon_con">
 							<i class="fas fa-plus-square"></i>
 						</div>
@@ -387,50 +387,12 @@
 						<c:if test="${status eq 'FAIL' }">
 							<li class="service_confirm">확인</li>
 						</c:if>
-						
 						<li class="service_cancle">삭제</li>
 					</ul>
 				</div>
 
-				<div id="add-item-list" class="add_item_list">
-					<div class="single_item_selector">
-						<div class="first_item_prop">
-					<!-- BManagementVO > maincategory -->
-							<select id="main-category" class="service_selector" name="maincategory" onchange="selectOption(this)"></select>
-							<!-- 직접입력 선택시 -->
-							<input type="text" class="direct_type_input" name="maincategory" placeholder="서비스 입력" style="display: none">
-						</div>
-						
-						<div class="second_item_prop">
-					<!-- BManagementVO > subcategory -->
-							<select id="sub-category" class="service_selector" name="subcategory" onchange="selectOption(this)">
-								<option id="sub-category-default" hidden="true" disabled selected>세부 서비스 유형 선택</option>
-							</select>
-							<!-- 직접입력 선택시 -->
-							<input type="text" name="subcategory" class="direct_type_input" placeholder="서비스 입력" style="display: none">
-						</div>
-						
-						<div class="third_item_prop">
-						<!-- BManagementVO > name -->
-							<input type="text" class="service_detail_input" name="name" placeholder="세부 서비스 내용을 입력해주세요.">
-						</div>
-
-						<div class="forth_item_prop">
-						<!-- BManagementVO > price -->
-							<input type="text" class="service_price_input" name="price" placeholder="서비스 가격(원)">
-						</div>
-
-						<div class="fifth_item_prop">
-						<!-- BManagementVO > ete -->
-							<input type="text" class="service_time_input" name="ete" placeholder="서비스 소요시간">
-						</div>
-
-						<div class="cancle_listing" onclick="dismissInput(this.parentNode)">
-							<i class="fas fa-times"></i>
-							<span>취소</span>
-						</div>
-						
-					</div>
+			<!-- 서비스 등록 input -->
+				<div id="add-item-list" class="add_item_list"></div>
 					
 				</div>
 				
@@ -586,11 +548,11 @@
 	<script type="text/javascript">
 		// DB에서 받아오는 Defaultcategory List<String> 배열
 // 		const defaultCategory = ${defaultcategory};
-		const menucategories = ${menuCategories};
+		/* const menucategories = ${menuCategories};
 		const bImageList = ${bImageList};
 		console.log(bImageList);
 		console.log(defaultCategory);
-		console.log(menuCategories);
+		sconsole.log(menuCategories); */
 	</script>
 	
 	

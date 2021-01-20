@@ -63,10 +63,9 @@ public class RestBusinessMainManagementController {
 	@PostMapping(produces="charset=utf8", consumes =  { "multipart/form-data" } )
 //	@PostMapping(produces="application/json; charset=utf8", consumes = MediaType.MULTIPART_FORM_DATA_VALUE )
 //	@PostMapping(produces="charset=utf8")
-	public String updateStoreIMG(HttpServletRequest req, MultipartHttpServletRequest mpf, String saveType) {
-		System.out.println("savetype : " + saveType);
+	public String updateStoreIMG(HttpServletRequest req, MultipartHttpServletRequest mpf ) {
 		System.out.println("Bimage Rest Controller 실행...");
-		int result = svc.updateBImage(mpf,req, saveType);
+		int result = svc.updateBImage(mpf,req);
 		System.out.println(result + " : result 값 입니다");
 		return result == 1
 				? "true"
@@ -144,6 +143,21 @@ public class RestBusinessMainManagementController {
 	// ===== 중분류 [BMenu] 테이블 ====	
 	
 	//통합
+//	@RequestMapping("BMenu/rest/{processing}/")
+//	@PostMapping(produces="application/json; charset=utf8")
+//	public String bMenuRestProcessing(HttpServletRequest req, @RequestBody HashMap<String,List<BMenuVO>> ListBMenuVO, 
+//									  @PathVariable("processing")String processing) {
+//		System.out.println(ListBMenuVO);
+//		System.out.println(ListBMenuVO.get("list").size());
+//		System.out.println(ListBMenuVO.get("list").get(0).getMaincategory());
+//		return "";
+		//		int result = svc.bMenuRestProcessing(req, ListBMenuVO, processing);
+//		return result == 1
+//				? "true"
+//				: "false";
+//	}
+	
+	//통합
 	@RequestMapping("BMenu/rest/{processing}/")
 	@PostMapping(produces="application/json; charset=utf8")
 	public String bMenuRestProcessing(HttpServletRequest req, @RequestBody List<BMenuVO> ListBMenuVO, 
@@ -153,20 +167,8 @@ public class RestBusinessMainManagementController {
 				? "true"
 				: "false";
 	}
-	
 
-	// 0. 메장 메뉴를 비동기식으로 새로이 입력해주는 메서드입니다.
-	@RequestMapping("BMenu/rest/insertBMenu/")
-	@PostMapping(produces="application/json; charset=utf8")
-	public String insertBMenu(HttpServletRequest req, @RequestBody BMenuVO bMenuVO) {
-		
-		int result = svc.insertBMenu(req,bMenuVO);
-		System.out.println(result + " : result 값 입니다");
-		return result == 1
-				? "true"
-				: "false";
-	}
-	
+
 	
 	
 	

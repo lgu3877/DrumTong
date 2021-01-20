@@ -46,12 +46,14 @@
 	
 <!--  ======================================= REST ================================================ -->
 
-<!-- 	매장 메뉴를 비동기식으로 새 데이터를 입력해주는 메서드입니다. -->
+<!-- 	매장 메뉴를 비동기식으로 새 데이터를 입력해주는 메서드입니다.
+		jdbcType은 Null 값 허용입니다. -->
 <insert id="insertBMenu" parameterType="BMenuVO">
 	INSERT INTO BMENU
 		VALUES
 		( #{estid}, #{name},
-		  #{price}, #{quickprice}, #{ete},
+		  #{price}, #{quickprice, jdbcType=INTEGER},
+		   #{ete},
 		  #{maincategory}, #{subcategory}
 		)
 </insert>

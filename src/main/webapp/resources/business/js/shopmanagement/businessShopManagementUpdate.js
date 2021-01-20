@@ -6,15 +6,29 @@ async function updatePhoto() {
 	const photoInputs = document.getElementsByName("storeimg");
 	const fileList = [];
 	
+	
+	// 이미지 저장 타입 
+	formData.append("saveType", "businessStoreImage");
+	
+	// 대표 사진
+	formData.append("delegatephotoboolean", coverImage.files[0]);
+	
+	
+	
+	// 사이드 이미지 리스트
 	for (let i = 0; i < photoInputs.length; i++) {
 		if (photoInputs[i].files[0] !== undefined) 
 			formData.append("businessStoreImage", photoInputs[i].files[0]);
 	}	
-
-	formData.append("delegatephotoboolean", coverImage.files[0]);
 	
-	formData.append("saveType", "businessStoreImage")
+	
+	// 이미지 삭제 리스트
+	for (let i = 0; i < deletePhotoList.length; i++) {
+		console.log('삭제리스트', deletePhotoList[i]);
+		formData.append("deleteUploadImage", deletePhotoList[i]);
+	}
 
+	
 	const { data } = await axios.post(
 		"/drumtong/business/mainmanagement/BImage/rest/updateStoreIMG/",formData
 		,
@@ -23,27 +37,9 @@ async function updatePhoto() {
 				"Content-Type": `multipart/form-data`,
 			}, 
 		}
-		);
+	);
 	
 	console.log(data);
-
-	
-	// 이미지 삭제
-	const formDataDelete = new FormData();
-	
-	for (let i = 0; i < deletePhotoList.length; i++) {
-		formDataDelete.append("deleteUploadImage", deletePhotoList[i]);
-	}
-	
-	await axios.delete(
-		"/drumtong/business/mainmanagement/BImage/rest/...", 
-		formDataDelete, 
-		{
-			headers: {
-				"Content-Type": `multipart/form-data`,
-			}, 
-		}
-	);
 }
 
 
@@ -67,7 +63,7 @@ async function updateIntro() {
 
 
 // 서비스 등록 업데이트
-function addService() {
+async function addService() {
 	const list = document.getElementsByClassName("single_item_selector");
 	const object = [];
 	const classPrefix = ["first", "second", "third", "forth", "fifth"]
@@ -124,9 +120,10 @@ function addService() {
 	// 퀵 서비스 옵션 설정
 	activateDelivery();
 	
+	const processing = "insertBMenu";
 	// 서비스 등록
-		const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/insertBMenu/", object);
-		console.log(data);
+	const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/" + processing + "/", object);
+	console.log(data);
 }
 
 
