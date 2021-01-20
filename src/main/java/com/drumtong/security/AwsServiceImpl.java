@@ -187,15 +187,13 @@ public class AwsServiceImpl{
 		// 서브 폴더 경로를 지정해줄 폴더명이다.
 		String subFolderName = "";
 		
-		// 파일이름
-		String fileName = "";
-		
 		// UUID를 생성할 때 필요한 매개변수 값이다.
 		String tableFieldName = "";
 		
 		// UUID의 타입이며 databaseFileUplaod의 switch 구분자 역할을 해준다.
 		String UUIDType = "";
 		
+		int result = 0;
 		
 		/*
 		 *  databaseFileUpload 함수에 요구되는 매개 변수는 다음과 같습니다.
@@ -210,6 +208,7 @@ public class AwsServiceImpl{
 				 */
 				if(object instanceof BImageVO) { 
 					
+					
 					// 서브폴더 이름은 매장사진이다.
 					subFolderName = "BIMAGE";
 					
@@ -219,11 +218,8 @@ public class AwsServiceImpl{
 					// UUIDType은 STOREIMG이다.
 					UUIDType = "STOREIMG";
 					
-					// 실질적으로 저장될 파일 이름을 선언해준다.
-					fileName = createFileName(file, tableFieldName, UUIDType);
-					
-					// databaseFileUpload를 실행시킨다.
-					databaseFileUplaod(file, object, folderName, fileName, subFolderName, UUIDType);
+					// 파일 업로드를 준비시켜주는 함수입니다.
+					result = exeFileUpload( file, object, folderName, subFolderName, UUIDType , tableFieldName);
 					
 					
 				}
@@ -248,13 +244,9 @@ public class AwsServiceImpl{
 						UUIDType = "REPORTCARD";
 						
 						
-						// 실질적으로 저장될 파일 이름을 선언해준다.
-						fileName = createFileName(file, tableFieldName, UUIDType);
+						// 파일 업로드를 준비시켜주는 함수입니다.
+						result = exeFileUpload( file, object, folderName, subFolderName, UUIDType , tableFieldName);
 						
-						
-						// databaseFileUpload를 실행시킨다.
-						databaseFileUplaod(file, object, folderName, fileName, subFolderName, UUIDType);
-					
 					}
 					
 					// 두 번째 저장일 시에는 사업자 등록증에 관련한 처리를 해줍니다 사업자 등록증 SerialUUID 생성
@@ -266,12 +258,9 @@ public class AwsServiceImpl{
 						// UUIDType이다.
 						UUIDType = "LICENSE";
 						
-						// 실질적으로 저장될 파일 이름을 선언해준다.
-						fileName = createFileName(file, tableFieldName, UUIDType);
+						// 파일 업로드를 준비시켜주는 함수입니다.
+						result = exeFileUpload( file, object, folderName, subFolderName, UUIDType , tableFieldName);
 						
-						// databaseFileUpload를 실행시킨다.
-						databaseFileUplaod(file, object, folderName, fileName, subFolderName, UUIDType);
-
 					}
 				}
 				
@@ -293,11 +282,8 @@ public class AwsServiceImpl{
 					// UUIDTYPE이다.
 					UUIDType = "COPYOFBANKBOOK";
 					
-					// 실질적으로 저장될 파일 이름을 선언해준다.
-					fileName = createFileName(file, tableFieldName, UUIDType);
-					
-					// databaseFileUpload를 실행시킨다.
-					databaseFileUplaod(file, object, folderName, fileName, subFolderName, UUIDType);
+					// 파일 업로드를 준비시켜주는 함수입니다.
+					result = exeFileUpload( file, object, folderName, subFolderName, UUIDType , tableFieldName);
 					
 				}    	
 				// ======================= 영경 =============================
@@ -310,11 +296,8 @@ public class AwsServiceImpl{
 					
 					UUIDType = "PhotoID";
 					
-					// 실질적으로 저장될 파일 이름을 선언해준다.
-					fileName = createFileName(file, tableFieldName, UUIDType);
-					
-					// databaseFileUpload를 실행시킨다.
-					databaseFileUplaod(file, object, folderName, fileName, subFolderName, UUIDType);
+					// 파일 업로드를 준비시켜주는 함수입니다.
+					result = exeFileUpload( file, object, folderName, subFolderName, UUIDType , tableFieldName);
 					
 		     	}
 		     	// ========================================================
@@ -451,14 +434,34 @@ public class AwsServiceImpl{
 //     	}
 //     	// ========================================================
 // 
+				
+				
 		
-		
-		// aws에 들어가는 디렉토리 경로입니다.
-		String dir = BUCKET_NAME + "/" + folderName + "/" + subFolderName;
-		
-		
-		// AWS에 file을 추가시켜주는 함수입니다.
-		return addFileS3(dir, fileName, file);
+		// 결과값을 반환시켜준다.
+		return result;
+
+     }
+     
+     // 파일 업로드를 실행준비시켜주는 함수이다.
+     private int exeFileUpload (MultipartFile file, Object object, 
+		       String folderName, String subFolderName, 
+		       String UUIDType , String tableFieldName){
+    	 	
+    	 	int result = 0;
+			
+			// 실질적으로 저장될 파일 이름을 선언해준다.
+			String fileName = createFileName(file, tableFieldName, UUIDType);
+			
+			// databaseFileUpload를 실행시킨다.
+			result = databaseFileUplaod(file, object, folderName, fileName, subFolderName, UUIDType);
+			
+			
+			// S3에 저장시킬 경로를 저장해준다.
+			String dir = BUCKET_NAME + "/" + folderName + "/" + subFolderName;
+			
+			
+			// 데이터베이스에 성공적으로 입력이 되었다면 S3에도 파일을 추가시켜준다.
+			return  (result == 1) ? addFileS3(dir,fileName, file) : 0;
 
      }
     
@@ -539,16 +542,19 @@ public class AwsServiceImpl{
     	return filePath;
     }
     
-    // [내부함수] 데이터 베이스에 파일 경로를 업로드 시켜주는 함수입니다.
+    // [내부함수] 데이터 베이스에 파일 경로를 업로드 시켜주는 함수입니다. 
     private int databaseFileUplaod(MultipartFile file, Object object, String folderName,
 			  						String fileName, String subFolderName, String UUIDType ) {	
     	
     	int result = 0;
     	
+    	// DB에 저장될 파일경로입니다. 이것을 이용해서 view상에서 그림을 S3에서 호출해서 불러옵니다.
+    	String src =  folderName + "/"  + subFolderName + "/" + fileName ;
+    	
 		switch (UUIDType) {
 			case "STOREIMG" : 
 				BImageVO bImageVO = (BImageVO)object;
-				bImageVO.setStoreimg(folderName + "/"  + subFolderName + "/" + fileName);
+				bImageVO.setStoreimg(src);
 				result = bImageVO.getDelegatephotoboolean() != null ? 
 						bImageDAO.insertDelegatePhoto(bImageVO) : bImageDAO.insertConstract(bImageVO);
 				break;
@@ -556,29 +562,30 @@ public class AwsServiceImpl{
 				
 			case "REPORTCARD":
 				BInformationVO bInformationVO = (BInformationVO)object;
-				bInformationVO.setReportcard(folderName + "/"  + subFolderName + "/" + fileName);
+				bInformationVO.setReportcard(src);
 				result = bInformationDAO.updateReportCard(bInformationVO);
 				break;
 
 			case "LICENSE" :
 				BInformationVO bInformationVO2 = (BInformationVO)object;
-				bInformationVO2.setLicense(folderName + "/"  + subFolderName + "/" + fileName);
+				bInformationVO2.setLicense(src);
 				result = bInformationDAO.updateLicense(bInformationVO2);
 				break;
 				
 			case "COPYOFBANKBOOK" :
 				BPaymentVO bPaymentVO = new BPaymentVO();	
-				bPaymentVO.setCopyofbankbook(folderName + "/"  + subFolderName + "/" + fileName);
+				bPaymentVO.setCopyofbankbook(src);
 				bPaymentVO.setEstid(folderName);
 				result = bPaymentDAO.updateCopyOfBankBook(bPaymentVO);
 				break;
 			case "PhotoID" :
 				CPrivateDataVO cPrivateDataVO = (CPrivateDataVO)object;
-				cPrivateDataVO.setProfileimg(folderName + "/"  + subFolderName + "/" + fileName);
+				cPrivateDataVO.setProfileimg(src);
 				result = cPrivateDataDAO.updateImg(cPrivateDataVO);
 				break;
 	
 		}
+		
 		
 		return result;
 		
