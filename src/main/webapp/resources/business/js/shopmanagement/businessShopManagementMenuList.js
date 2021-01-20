@@ -6,6 +6,7 @@ const updateItemBtn = document.getElementById("update-item-btn");
 const itemlist = document.getElementById('add-item-list')
 // 입력 줄 전체
 let singleList = document.querySelector('.single_item_selector');
+let copiedList;
 // 메뉴 테이블 수정 버튼
 const modifyListBtn = document.getElementById("update-list-btn");
 // 테이블 내부 행 삭제 버튼
@@ -155,7 +156,8 @@ function createAddService() {
 		singleServiceInputCon.appendChild(forthInputCon);
 		singleServiceInputCon.appendChild(fifthInputCon);
 		singleServiceInputCon.appendChild(cancleBtnCon);
-	
+		
+//			copiedList = singleServiceInputCon.cloneNode(true); // 초기 상태 저장 
 			container.appendChild(singleServiceInputCon);
 }
 
@@ -248,18 +250,10 @@ function selectSubOption(e, subDirectId) {
 // 서브 옵션 변경 > 초기화
 function clearSubOptions(subCategoryId) {
 	const subOptions = document.getElementById(subCategoryId).children;
-	console.log(subOptions);
-	console.log(subOptions.length);
-//	const directOption = document.getElementsByClassName("selectedDirect")[1];
-//	
-//	const subOptions = document.getElementsByClassName("sub_option");
-//	const directOption = document.getElementsByClassName("selectedDirect")[1];
-//	directOption !== undefined ? directOption.remove() : null;
-	 	
-
-	for (let i = 0; i < subOptions.length; i++) {
-		console.log(subOptions[i]);
-//		subOptions[0].remove();
+	
+	const count = subOptions.length;
+	for (let i = 0; i < count - 1; i++) {
+		subOptions[1].remove();
 	}
 }
 
@@ -290,7 +284,6 @@ function populateSubOptions(key, subCategoryId) {
 	// default option
 	document.getElementById(subCategoryId).selected = true;
 }
-
 
 
 // 배달 서비스 활성화 이벤트
@@ -334,17 +327,6 @@ function activateVisualization() {
 		}	
 	}
 }
-
-// 추가 - 클릭 이벤트(1줄씩 추가)
-addItemBtn.addEventListener('click', function() {
-	const copiedList = singleList.cloneNode(true);
-	itemlist.appendChild(copiedList);
-
-	console.log(copiedList.getElementsByClassName("main-category-default")[0]);
-	
-	document.getElementById("main-category").getElessmentsByClassName("main-category-default")[0].setAttribute("selected", true);
-
-});
 
 
 // 메뉴 수정 버튼(th & td > input + 삭제 버튼)
@@ -567,12 +549,17 @@ function deleteList(tr) {
 
 // 취소 버튼
 function dismissInput(id) {
+	const con = document.getElementById(id);
+	console.log(document.getElementById(id));
+//	clearSubOptions(subCategoryId)
+	
 	// 목록이 하나 남았을 때
 	if (itemlist.children.length === 1) {
 		
 		const directInputs = document.querySelectorAll(".direct_type_input");
 		const selector = document.querySelectorAll(".service_selector");
 		const directInputCheck = document.querySelectorAll(".selectedDirect");
+		const quickpriceInput = document.querySelectorAll(".service_quickprice_input");
 		
 		// 직접입력 체크 O > input 제거 & 값 초기화
 		if(directInputCheck[0].selected === true || directInputCheck[1].selected === true) {
@@ -591,6 +578,11 @@ function dismissInput(id) {
 		document.querySelector(".service_detail_input").value = '';
 		document.querySelector(".service_price_input").value = '';
 		document.querySelector(".service_time_input").value = '';
+		
+		// 퀵서비스 가격 추가
+		quickpriceInput[0].style.display !== "none"?
+			quickpriceInput[0].style.display === "none" : 
+			quickpriceInput[0].style.display === "";
 
 		return;
 	}

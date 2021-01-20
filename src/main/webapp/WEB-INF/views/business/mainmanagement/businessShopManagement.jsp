@@ -351,7 +351,7 @@
 						<div class="add_menu_btn_title">퀵 서비스</div>
 					</div>
 				<!-- 메뉴 추가 -->	
-					<div id="add-item-btn" class="add_menu_btn_con">
+					<div id="add-item-btn" class="add_menu_btn_con" onclick="createAddService()">
 						<div class="add_menu_icon_con">
 							<i class="fas fa-plus-square"></i>
 						</div>
@@ -387,7 +387,6 @@
 						<c:if test="${status eq 'FAIL' }">
 							<li class="service_confirm">확인</li>
 						</c:if>
-						
 						<li class="service_cancle">삭제</li>
 					</ul>
 				</div>
