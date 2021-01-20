@@ -108,6 +108,7 @@
 			</div>
 			<div>
 				<input type="file">
+				<label>별점 </label><span><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></span>
 			</div>
 			<div style="text-align: center;">
 				<input style="width:100px;height:50px;" type="submit">	
