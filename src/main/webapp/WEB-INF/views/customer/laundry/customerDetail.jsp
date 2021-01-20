@@ -348,7 +348,10 @@
         </form>
       </div>
 
-      <div class="modal-content4" id="modal-content4">
+      <div class="modal-content4" id="modal-content4" style="display: none">
+      	<div style="background: #35aefd; color: white; height: 60px; display: flex; align-items: center; ">
+      		<h2 style="margin: 0; font-size: 13pt;">리뷰게시판</h2>
+      	</div>
         <div class="modal-grade">
           <i class="fas fa-star"></i>
         </div>
@@ -420,7 +423,8 @@
 
        btn3.onclick = function () {
          modal.style.display = 'block';
-         modalContent4.style.display = 'flex';
+//          modalContent4.style.display = 'flex';
+         modalContent4.style.display = '';
        };
        
        btn4.onclick = function () {
@@ -498,7 +502,6 @@
          // ★★★★★★★★미완성★★★★★★★★★
          imgbox = document.getElementById('detailview-imgBlock').querySelectorAll('img');
          imgList = '${bImageVO}';
-         console.log('123');
          console.log(imgList.size);
          
          document.getElementById('loginSubmit').addEventListener('click', function(){ logiinSubmit('asynchronous');});
