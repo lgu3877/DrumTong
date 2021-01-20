@@ -16,11 +16,11 @@
     <div class="orderlist-card">
       <div class="orderData1">
         <div class="orderData-company">
-<!--           <div class="orderData-circle"></div> -->
+          <div class="orderData-circle"></div>세탁소
 <%--          	 ${orderList.brandnaming } --%>
         </div>
         <div class="orderData-date"> 
-<!--         	<b>주문코드</b>  -->
+        	<b>주문코드</b> 12341234
 <%--         	${orderList.salecode } --%>
         </div>
       </div>
@@ -64,16 +64,21 @@
 		      </div>
 		      <div class="orderData-total">
 		      	<div class="orderData-total-purchasedate">
+		      		  <b>주문일자</b>  2021-01-20 
 <%-- 		      		  <b>주문일자</b>  ${orderList.purchasedate }  --%>
 		      	</div>
 		      	<div class="orderData-total-totalamount">
+		      		총 요청 개수 : 5
 <%-- 		      		총 요청 개수 : ${orderList.totalamount } --%>
 		      	</div>
 		      	<div class="orderData-total-totalprice">
+		      		Total <fmt:formatNumber value="50000" pattern="#,###" />원
 <%-- 		      		Total <fmt:formatNumber value="${orderList.totalprice }" pattern="#,###" />원 --%>
 		      	</div>
+		      	<div class="orderData-total-reviewButton">
+		      		<button onclick="modalOpen()">리뷰 쓰기</button>
+		      	</div>
 		      </div>
-		      
 		      
 		    </div>
 
@@ -89,7 +94,48 @@
     
   </div>
 </section>
-
+<div id="writeReviewButton" style="display:none;" class="order_review_modal modal">
+	<div style="display:block;padding:10px;" class="modal-box">
+		<div style="font-weight:bold;font-size: 25pt;text-align: center;">ㅇㅇㅇ 세탁소에 리뷰 작성하기</div>
+		<form>
+			<div style="text-align:center;">
+				<input style="border: none;font-size: 17pt;;" type="text" value="20210102-00004" readonly>
+				<label style="font-size: 17pt;;">티셔츠 외 3개...</label>
+			</div>
+			<div>
+				<img style="width:200px;height:200px" src="${cpath }/resources/customer/img/펭수버럭.jpg" alt="리뷰이미지">
+				<textarea style="width:300px;height:200px;border: 2px dotted grey;" rows="2" cols="4" placeholder="내용을 작성하세요"></textarea>
+			</div>
+			<div>
+				<input type="file">
+			</div>
+			<div style="text-align: center;">
+				<input style="width:100px;height:50px;" type="submit">	
+			</div>
+		</form>
+	</div>
+</div>
+<!-- 영경 스크립트 -->
+<script>
+	function modalOpen(){
+		document.querySelectorAll('#writeReviewButton')[0].style.display="block";
+		
+       // When the user clicks anywhere outside of the modal, close it
+       window.onclick = function (event) {
+         if (event.target == modal) {
+           modal.style.display = 'none';
+           modalContent1.style.display = 'none';
+           modalContent2.style.display = 'none';
+           modalContent3.style.display = 'none';
+           modalContent4.style.display = 'none';
+         }
+       };
+		
+		document.querySelector('.modal').addEventListener('click', function(e){
+			document.querySelectorAll('#writeReviewButton')[0].style.display="none";
+		})
+	}
+</script>
 <!-- 스크립트 영역 [건욱 작업] -->
 <script type="text/javascript">
 	
@@ -112,9 +158,9 @@
 	// 처음 화면을 로드했을 시에 Sample Clone을 생성해준다. (orderList[0]에 대한 값)
 	window.onload = function() {
 		
-		insertCloneDiv();
+// 		insertCloneDiv();
 		console.log("클론 콘테이너 ");
-		console.log(clonecontainer);
+// 		console.log(clonecontainer);
 		
 	}
 	

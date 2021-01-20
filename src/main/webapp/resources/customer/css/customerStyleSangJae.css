@@ -914,7 +914,8 @@ check .option-name,
 .modal-content1,
 .modal-content2,
 .modal-content3,
-.modal-content4 {
+.modal-content4,
+.modal-box {
   display: none;
   justify-content: space-between;
   background-color: #fefefe;
