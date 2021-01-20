@@ -7,7 +7,6 @@ const uploadPhotoList = {
 
 // 업로드 과정 중 삭제된 사진 이름 배열 > DB에서 이름 비교 후 저장 권장
 const deletePhotoList = [];
-
 function displayImages() {
 	const imageList = document.getElementById("image-preview");
 	
@@ -74,6 +73,7 @@ $("#image-preview").on('mousewheel',function(e) {
       $(this).scrollLeft(-wheelDelta + $(this).scrollLeft());
    }
 });
+
 
 // 이미지 선택시 커버 이미지 출력
 function imageShow() {
@@ -143,8 +143,7 @@ function zoomInPhoto(clickedPhoto) {
 }
 
 
-
-//이미지 업로드
+// 이미지 업로드
 function imageCheck(e) {
 	const input = e.target;
 	const imageType = input.value.substr(input.value.length - 3, input.value.length).toLocaleLowerCase();
@@ -152,7 +151,6 @@ function imageCheck(e) {
 	const isImage = imageType === 'jpg' 
 			|| imageType === 'png' 
 			|| imageType === 'jpeg' ? true : false
-	
 					
 // 이미지 확장자 검사 (jpg, png, jpng)
 	if (!isImage) {   
@@ -320,29 +318,6 @@ function deletePhoto(clickedPhoto) {
 }
 
 
-
-
-
-// 랜덤 String 생성
-function generateRandomString(length) {
-	let result = "";
-	const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-	const charArray = characters.split("");
-		
-	for (let i = 0; i < length; i++) {
-		result += charArray[Math.ceil(Math.random() * characters.length)];
-	}
-	
-	// 동일한 난수가 생성되엇을 경우(로또 맞을 확률)
-	if (document.getElementById(result)) {
-		alert("축하드립니다. 17,067,655,527,413,216e+89의 확률을 뚫으셨습니다.");
-		location.reload();
-		return;
-	}
-	
-	return result;
-}
-
 // input file & label 생성
 function createInputFile() {
 	const randomId = generateRandomString(15);
@@ -373,6 +348,7 @@ function createLabelForInputFile(inputId) {
 	return label;
 }
 
+// input label 숨기기
 function hideLabel(labelId) {	
 	document.getElementById(labelId).style.display = "none";
 	

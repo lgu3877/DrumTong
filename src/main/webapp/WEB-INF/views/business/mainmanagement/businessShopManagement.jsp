@@ -235,7 +235,7 @@
 				
 				<div class="service_button_con">
 					<!-- modify button -->
-					<div id="update-list-btn" class="add_menu_btn_con">
+					<div id="update-list-btn" class="add_menu_btn_con" onclick="modifyMenuService()">
 						<div class="add_menu_icon_con">
 							<i class="fas fa-plus-square"></i>
 						</div>
@@ -555,6 +555,28 @@
 		sconsole.log(menuCategories); */
 	</script>
 	
+	
+	<script type="text/javascript">
+		//랜덤 String 생성
+		function generateRandomString(length) {
+			let result = "";
+			const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+			const charArray = characters.split("");
+				
+			for (let i = 0; i < length; i++) {
+				result += charArray[Math.ceil(Math.random() * characters.length)];
+			}
+			
+			// 동일한 난수가 생성되엇을 경우(로또 맞을 확률)
+			if (document.getElementById(result)) {
+				alert("축하드립니다. 17,067,655,527,413,216e+89의 확률을 뚫으셨습니다.");
+				location.reload();
+				return;
+			}
+			
+			return result;
+		}
+	</script>
 	
 	<!-- 초기 셋팅 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementOnLoad.js"></script>

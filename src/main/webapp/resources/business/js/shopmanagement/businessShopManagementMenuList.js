@@ -1,20 +1,10 @@
 // 상품 추가 버튼
 const addItemBtn = document.getElementById('add-item-btn');
-// 상품 추가 완료 버튼
-const updateItemBtn = document.getElementById("update-item-btn");
 // 줄을 추가할 컨테이너
 const itemlist = document.getElementById('add-item-list')
 // 입력 줄 전체
 let singleList = document.querySelector('.single_item_selector');
 let copiedList;
-// 메뉴 테이블 수정 버튼
-const modifyListBtn = document.getElementById("update-list-btn");
-// 테이블 내부 행 삭제 버튼
-const deleteBtn = document.getElementsByClassName("delete_item");
-// 배달 서비스 버튼
-const deliveryBtn = document.getElementById("delivery-btn");
-const toggleIcon = document.getElementById("delivery-icon");
-let deliveryToggle = false;
 
 
 // 서비스 등록 > 입력 input & select 생성
@@ -287,6 +277,7 @@ function populateSubOptions(key, subCategoryId) {
 
 
 // 배달 서비스 활성화 이벤트
+let deliveryToggle = false;
 function activateVisualization() {
 	const itemInputList = document.getElementById("add-item-list");
 	const priceCon = itemInputList.getElementsByClassName("forth_item_prop");		
@@ -294,9 +285,9 @@ function activateVisualization() {
 
 	if(deliveryToggle === true) {
 		const priceCon = document.getElementsByClassName("forth_item_prop");	
-		deliveryBtn.style.backgroundColor = "navy";
+		document.getElementById("delivery-btn").style.backgroundColor = "navy";
 		// 아이콘 변경(활성화)
-		toggleIcon.className = "fas fa-toggle-on";
+		document.getElementById("delivery-icon").className = "fas fa-toggle-on";
 		
 		
 		// input(quickprice) 추가
@@ -315,9 +306,9 @@ function activateVisualization() {
 		}
 	}
 	else {
-		deliveryBtn.style.backgroundColor = "#bedcfa";
+		document.getElementById("delivery-btn").style.backgroundColor = "#bedcfa";
 		// 아이콘 변경(비활성화)
-		toggleIcon.className = "fas fa-toggle-off";
+		document.getElementById("delivery-icon").className = "fas fa-toggle-off";
 		
 		// input(quickprice) 삭제
 		for (let i = 0; i < priceCon.length; i++) {
@@ -330,8 +321,7 @@ function activateVisualization() {
 
 
 // 메뉴 수정 버튼(th & td > input + 삭제 버튼)
-modifyListBtn.addEventListener('click', function() {
-	
+function modifyMenuService() {
 	// 삭제 활성화가 되어 있을 시(폼 변경 후), 작동안함
 	if(document.getElementById("delete_title")) {
 		return;
@@ -537,7 +527,7 @@ modifyListBtn.addEventListener('click', function() {
 		tr[i].appendChild(td);						
 		
 	}
-});
+};
 
 // 상품 리스트 삭제
 function deleteList(tr) {
@@ -549,10 +539,6 @@ function deleteList(tr) {
 
 // 취소 버튼
 function dismissInput(id) {
-//	const con = document.getElementById(id);
-//	console.log(document.getElementById(id));
-//	clearSubOptions(subCategoryId)
-	
 	// 목록이 하나 남았을 때
 	if (itemlist.children.length === 1) {
 		
