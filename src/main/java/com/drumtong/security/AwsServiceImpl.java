@@ -121,22 +121,26 @@ public class AwsServiceImpl{
     		// 타입에 따라서  fileList를 처리해줍니다.
     		String saveType = req.getParameter("saveType");
     		
+    		
     		// saveType으로 파일 리스트를 가져옵니다.
     		List<MultipartFile> fileList = mpf.getFiles(saveType);
+    		
     		
     		// 파일리스트가 비어있지 않다면 작업을 실행시킬 수 있도록 한다.
             if(fileList != null ) {
             	for (MultipartFile mf : fileList) {
-                	String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-                	s3FileUpload(mf, folderName, object, count);
+            		
+            		// 파일 업로드를 시켜주는 함수를 실행시켜줍니다.
+            		// 매개 변수 [ file, 폴더 이름으로 쓸 ESTID, VO객체, count ]
+                	fileUpload(mf, folderName, object, count);
+                	
+                	// for문이 한 번씩 돌아갈 때마다 count를 증가시켜줍니다.
                 	count++;
                 	
-            		System.out.println("originFileName : " + originFileName);
                 }
             }
     		
-            
-    		
+    		// saveTypeBoolean 함수를 호출해서 해당 타입에 조건이 부합하는지 boolean 형태로 반환시켜줍니다.
             // 만약 saveType이 매장사진이면 밑에 요청을 처리해줍니다.
             if(saveTypeBoolean(saveType)) {
             	
@@ -157,6 +161,7 @@ public class AwsServiceImpl{
             	
             	
             }
+            // 모든게 완벽하게 실행이 완료되면 참의 값인 1을 반환해줍니다.
             return 1;
     	}
     	catch(Exception e) {
@@ -166,62 +171,13 @@ public class AwsServiceImpl{
     	
     }
     
-//    saveType의 boolean을 리턴해줍니다.
-    public boolean saveTypeBoolean(String saveType) {
-    	switch(saveType) {
-    		
-    		// saveType이 매장 사진이면 true를 반환시켜줍니다.
-    		case "businessStoreImage" : return true;
-    			
-    		
-    	}
-    	
-    	return false;
-    }
+
     
-    // MultipleUpload에 대표사진이 있을 경우 추가적으로 업로드를 해주는 함수입니다.
-    private int addStoreDelegatePhoto(MultipartFile delegate, Object object) {
-    	
-    	// 받아온 파일이 비어있다면 함수를 종료시킨다.
-    	if(delegate == null) 
-    		return 0;
-    	
-    	
-    	BImageVO vo = (BImageVO)object;
-    	
-    	// 대표사진 유무를 'Y' 로 설정해준다.
-        vo.setDelegatephotoboolean("Y");
-        
-       
-        // S3의 파일 업로드를 시켜준다.
-        // 결과 값을 반환시켜준다. 
-    	return s3FileUpload(delegate, vo.getEstid(), object, 0);
-    }
-    
-    
-    // MultipleUpload에 삭제 요청이 있을 경우 추가적으로 삭제를 해주는 함수입니다.
-    private int multipleDelete(String deleteList[], Object object) {
-    	// deleteList가 존재하지 않으면 함수를 종료시켜준다.
-    	if( deleteList.length == 0 ) 
-    		return 0;
-    	
-    	BImageVO vo = (BImageVO)object;
-    	
-    	// deleteList의 배열의 길이만큼 S3애 존재하는 파일을 삭제 시켜준다.
-    	for(String deleteValue : deleteList) {
-    		vo.setStoreimg(deleteValue);
-    		
-    		// DB와 S3의 데이터를 삭제시켜주는 함수입니다.
-    		fileDelete(vo);
-    	}
-    	
-    	return 0;
-    }
     
     // s3에 파일을 업로드합니다.
     // 서버에 파일을 저장하지 않고 바로 S3로 파일을 전달해줍니다.
-    // public void s3FileUpload(File file, String folderName) {
-     public int s3FileUpload(MultipartFile file, String folderName, Object object, int count) {
+    // public void fileUpload(File file, String folderName) {
+     public int fileUpload(MultipartFile file, String folderName, Object object, int count) {
     	 
 		// AWS S3에 저장될 파일 이름을 UUID 형식으로 다시 지정해준다.
 		// ESTID가 필요하므로 SerialUUID에 ESTID값을 보내준다.
@@ -230,9 +186,6 @@ public class AwsServiceImpl{
 		
 		// 서브 폴더 경로를 지정해줄 폴더명이다.
 		String subFolderName = "";
-		
-		// UUID를 담는 변수이다.
-		String UUID = "";
 		
 		// 파일이름
 		String fileName = "";
@@ -243,13 +196,15 @@ public class AwsServiceImpl{
 		// UUID의 타입이며 databaseFileUplaod의 switch 구분자 역할을 해준다.
 		String UUIDType = "";
 		
+		
 		/*
 		 *  databaseFileUpload 함수에 요구되는 매개 변수는 다음과 같습니다.
+		 *  [file 정보, VO 객체, folderName으로 사용될 ESTID, 변경된 파일 이름, 서브폴더명, UUIDType]
 		 */
-//		databaseFileUplaod(file, object, folderName, subFolderName, tablefieldname, uuidtype);
+		//		databaseFileUplaod(file, object, folderName, fileName, subFolderName, UUIDType);
 		
 		
-		// 매장사진 테이블일 경우 ( 제일 많이 사용될 가능성이 높기 떄문에 최상단에 배치해주었다.)
+				// 매장사진 테이블일 경우 ( 제일 많이 사용될 가능성이 높기 떄문에 최상단에 배치해주었다.)
 				/*
 				 * 매장사진의 경우에는 서비스에서 1차적으로 insert를 하지않고 여기서 종합적으로 신규 데이터를 만들어준다.
 				 */
@@ -258,11 +213,17 @@ public class AwsServiceImpl{
 					// 서브폴더 이름은 매장사진이다.
 					subFolderName = "BIMAGE";
 					
+					// 테이블 필드명은 BImage이다.
 					tableFieldName = "BImage";
 					
+					// UUIDType은 STOREIMG이다.
 					UUIDType = "STOREIMG";
 					
-					databaseFileUplaod(file, object, folderName, subFolderName, tableFieldName, UUIDType);
+					// 실질적으로 저장될 파일 이름을 선언해준다.
+					fileName = createFileName(file, tableFieldName, UUIDType);
+					
+					// databaseFileUpload를 실행시킨다.
+					databaseFileUplaod(file, object, folderName, fileName, subFolderName, UUIDType);
 					
 					
 				}
@@ -274,28 +235,42 @@ public class AwsServiceImpl{
 				 */
 				else if(object instanceof BInformationVO && count < 2) {
 					
+					// 서브 폴더 명이다.
 					subFolderName = "CONTRACT";
 					
 					// 첫 번째 저장일 때는 영업신고증에 관련한 처리를 해줍니다.영업신고증 SerialUUID 생성
 					if(count == 0) {
 						
+						// 테이블 필드명이다.
 						tableFieldName = "BInformationAboutReportCard";
 						
+						// UUIDType이다.
 						UUIDType = "REPORTCARD";
 						
-						databaseFileUplaod(file, object, folderName, subFolderName, tableFieldName, UUIDType);
+						
+						// 실질적으로 저장될 파일 이름을 선언해준다.
+						fileName = createFileName(file, tableFieldName, UUIDType);
+						
+						
+						// databaseFileUpload를 실행시킨다.
+						databaseFileUplaod(file, object, folderName, fileName, subFolderName, UUIDType);
 					
 					}
 					
 					// 두 번째 저장일 시에는 사업자 등록증에 관련한 처리를 해줍니다 사업자 등록증 SerialUUID 생성
 					else {
 						
-						
+						// 테이블 필드명이다.
 						tableFieldName = "BInformationAboutLicense";
 						
+						// UUIDType이다.
 						UUIDType = "LICENSE";
 						
-						databaseFileUplaod(file, object, folderName, subFolderName, tableFieldName, UUIDType);
+						// 실질적으로 저장될 파일 이름을 선언해준다.
+						fileName = createFileName(file, tableFieldName, UUIDType);
+						
+						// databaseFileUpload를 실행시킨다.
+						databaseFileUplaod(file, object, folderName, fileName, subFolderName, UUIDType);
 
 					}
 				}
@@ -309,13 +284,20 @@ public class AwsServiceImpl{
 				 */
 				else if(object instanceof BInformationVO && count == 2) {
 					
+					// 서브 폴더 명이다.
 					subFolderName = "CONTRACT";
 					
+					// 테이블 필드 이름이다.
 					tableFieldName = "BPayment";
 					
+					// UUIDTYPE이다.
 					UUIDType = "COPYOFBANKBOOK";
 					
-					databaseFileUplaod(file, object, folderName, subFolderName, tableFieldName, UUIDType);
+					// 실질적으로 저장될 파일 이름을 선언해준다.
+					fileName = createFileName(file, tableFieldName, UUIDType);
+					
+					// databaseFileUpload를 실행시킨다.
+					databaseFileUplaod(file, object, folderName, fileName, subFolderName, UUIDType);
 					
 				}    	
 				// ======================= 영경 =============================
@@ -328,7 +310,11 @@ public class AwsServiceImpl{
 					
 					UUIDType = "PhotoID";
 					
-					databaseFileUplaod(file, object, folderName, subFolderName, tableFieldName, UUIDType);
+					// 실질적으로 저장될 파일 이름을 선언해준다.
+					fileName = createFileName(file, tableFieldName, UUIDType);
+					
+					// databaseFileUpload를 실행시킨다.
+					databaseFileUplaod(file, object, folderName, fileName, subFolderName, UUIDType);
 					
 		     	}
 		     	// ========================================================
@@ -338,133 +324,133 @@ public class AwsServiceImpl{
 		
 		
 		
-		// 매장사진 테이블일 경우 ( 제일 많이 사용될 가능성이 높기 떄문에 최상단에 배치해주었다.)
-		/*
-		 * 매장사진의 경우에는 서비스에서 1차적으로 insert를 하지않고 여기서 종합적으로 신규 데이터를 만들어준다.
-		 */
-		if(object instanceof BImageVO) { 
-			
-			// 서브폴더 이름은 매장사진이다.
-			subFolderName = "BIMAGE";
-			
-			// UUID를 가져온다.
-			UUID = SerialUUID.getSerialUUID("BImage", "STOREIMG");
-			
-			// 1. 파일이름
-			fileName = UUID +"."+ file.getOriginalFilename().split("\\.")[1];
-			
-			// 2. 매게변수로 받은 object를 BImageVO로 변환시켜준다.
-			BImageVO vo = (BImageVO)object;
-			
-			// 3. vo에 setStoreimg로 현재 파일 경로를 입력해준다.
-			vo.setStoreimg(folderName + "/"  + subFolderName + "/" + fileName);
-
-			
-			// 4. 데이터를 입력해준다.
-			// 대표 매장 사진의 값이 존재한다면 DelegatePhoto 함수를 불러오고 그렇지 않다면 insertConstract 함수를 불러온다.
-			// DelegatePhoto 함수 -> 대표 매장 사진 DB에 등록
-			// insertConstract -> 일반 매장 사진 DB에 등록
-			
-			int b = vo.getDelegatephotoboolean() != null ? 
-					bImageDAO.insertDelegatePhoto(vo) : bImageDAO.insertConstract(vo);
-			System.out.println("bresult ; " + b);
-		}
-		// 사업자 정보 테이블일 경우	
-		/*
-		 * 사업자 정보 테이블의 경우에는 Service에서 1차적으로 데이터를 입력해준 다음 여기에서 DAO작업은 저장된 파일경로와 파일명을 update시켜주는 역할만 해준다.
-		 * 이렇게 하는 이유는 두 개의 테이블안에 데이터를 각각 처리해주어야하는데
-		 * BInformation에서는 한꺼번에 처리하기가 힘들기 때문에 1차 입력 2차수정으로 동작시켜준다.
-		 */
-		else if(object instanceof BInformationVO && count < 2) {
-			System.out.println("BInformationVO 동작 합니다 [count] : " + count);
-
-			subFolderName = "CONTRACT";
-			
-			// 매게변수로 받은 object를 BInformationVO로 변환시켜준다.
-			BInformationVO vo = (BInformationVO)object;
-			
-			// 첫 번째 저장일 때는 영업신고증에 관련한 처리를 해줍니다.영업신고증 SerialUUID 생성
-			if(count == 0) {
-				UUID = SerialUUID.getSerialUUID("BInformationAboutReportCard", "REPORTCARD");
-
-		 		// 1. 파일이름
-		    	fileName = UUID +"."+ file.getOriginalFilename().split("\\.")[1];
-		    	// 2. vo에 Reportcard 현재 파일 경로를 입력해준다.
-				vo.setReportcard(folderName + "/"  + subFolderName + "/" + fileName);
-				// 3. Reportcard를 업데이트 시켜준다. 
-				bInformationDAO.updateReportCard(vo);
-			}
-			
-			// 두 번째 저장일 시에는 사업자 등록증에 관련한 처리를 해줍니다 사업자 등록증 SerialUUID 생성
-			else {
-				UUID = SerialUUID.getSerialUUID("BInformationAboutLicense", "LICENSE");
-
-		 		// 1. 파일이름
-		    	fileName = UUID +"."+ file.getOriginalFilename().split("\\.")[1];
-		    	
-		    	// 2. vo에 License의 현재 파일 경로를 입력해준다.
-				vo.setLicense(folderName + "/"  + subFolderName + "/" + fileName);
-				
-				// 3. License를 업데이트 시켜준다.
-				bInformationDAO.updateLicense(vo);
-			}
-		}
-		
-		// 결제 테이블일 경우
-		/*
-		 * 
-		 * 사업자 정보 테이블의 경우에는 Service에서 1차적으로 데이터를 입력해준 다음 여기에서 DAO작업은 저장된 파일경로와 파일명을 update시켜주는 역할만 해준다.
-		 * 이렇게 하는 이유는 두 개의 테이블안에 데이터를 각각 처리해주어야하는데
-		 * 전에 BImage에서 한꺼번에 처리하기가 힘들기 때문에 1차 입력 2차수정으로 바꾸어준다.
-		 */
-		else if(object instanceof BInformationVO && count == 2) {
-			subFolderName = "CONTRACT";
-			UUID = SerialUUID.getSerialUUID("BPayment", "COPYOFBANKBOOK");
-			
-			// 1. 파일이름
-			fileName = UUID +"."+ file.getOriginalFilename().split("\\.")[1];
-			
-			// 2. BPayment는 mpf에서 따로 Name을 구분 시킬 수 없으므로 새로운 VO를 생성시켜줘서 데이터를 업데이트 시켜준다.
-			BPaymentVO vo = new BPaymentVO();
-			
-			
-			// 3. vo에 관한 데이터를 set시켜준다. 
-			vo.setCopyofbankbook(folderName + "/"  + subFolderName + "/" + fileName);
-			
-			// 여기서 folderName은 estid이기 떄문에 estid를 설정해준다고 생각하면 되겠다.
-			vo.setEstid(folderName);
-			
-			// 4. 통장사본 데이터를 입력해준다.
-			bPaymentDAO.updateCopyOfBankBook(vo);
-		
-		}    	
-		// ======================= 영경 =============================
-     	// 고객 프로필 사진 등록
-     	else if(object instanceof CPrivateDataVO) {
-//     		System.out.println("aws 고객 프로필 사진 등록 메서드 실행(영경)");
-     		CPrivateDataVO cPrivateDataVO = (CPrivateDataVO)object;
-     		
-     		// subFolderName 폴더명 지정
-     		subFolderName = "PhotoID";
-//     		System.out.println("subFolderName : " + subFolderName);
-     		
-     		// UUID 가져오기
-     		UUID = SerialUUID.getSerialUUID("CPhotoID", "PhotoID");
-//     		System.out.println("UUID : " + UUID);
-     		
-     		// 1. 파일이름
-        	fileName = UUID +"."+ file.getOriginalFilename().split("\\.")[1];
-//        	System.out.println("fileName : " + fileName);
-        	
-        	cPrivateDataVO.setProfileimg(folderName + "/"  + subFolderName + "/" + fileName);
-//        	System.out.println("setProfileimg : " + cPrivateDataVO.getProfileimg());
-        	
-        	// DB애 이미지 주소 넣고 return 1 지우기
-        	int result = cPrivateDataDAO.updateImg(cPrivateDataVO);
-//        	System.out.println("result : " + (result == 1 ? "입력 완료" : "입력 실패"));
-     	}
-     	// ========================================================
- 
+//		// 매장사진 테이블일 경우 ( 제일 많이 사용될 가능성이 높기 떄문에 최상단에 배치해주었다.)
+//		/*
+//		 * 매장사진의 경우에는 서비스에서 1차적으로 insert를 하지않고 여기서 종합적으로 신규 데이터를 만들어준다.
+//		 */
+//		if(object instanceof BImageVO) { 
+//			
+//			// 서브폴더 이름은 매장사진이다.
+//			subFolderName = "BIMAGE";
+//			
+//			// UUID를 가져온다.
+//			UUID = SerialUUID.getSerialUUID("BImage", "STOREIMG");
+//			
+//			// 1. 파일이름
+//			fileName = UUID +"."+ file.getOriginalFilename().split("\\.")[1];
+//			
+//			// 2. 매게변수로 받은 object를 BImageVO로 변환시켜준다.
+//			BImageVO vo = (BImageVO)object;
+//			
+//			// 3. vo에 setStoreimg로 현재 파일 경로를 입력해준다.
+//			vo.setStoreimg(folderName + "/"  + subFolderName + "/" + fileName);
+//
+//			
+//			// 4. 데이터를 입력해준다.
+//			// 대표 매장 사진의 값이 존재한다면 DelegatePhoto 함수를 불러오고 그렇지 않다면 insertConstract 함수를 불러온다.
+//			// DelegatePhoto 함수 -> 대표 매장 사진 DB에 등록
+//			// insertConstract -> 일반 매장 사진 DB에 등록
+//			
+//			int b = vo.getDelegatephotoboolean() != null ? 
+//					bImageDAO.insertDelegatePhoto(vo) : bImageDAO.insertConstract(vo);
+//			System.out.println("bresult ; " + b);
+//		}
+//		// 사업자 정보 테이블일 경우	
+//		/*
+//		 * 사업자 정보 테이블의 경우에는 Service에서 1차적으로 데이터를 입력해준 다음 여기에서 DAO작업은 저장된 파일경로와 파일명을 update시켜주는 역할만 해준다.
+//		 * 이렇게 하는 이유는 두 개의 테이블안에 데이터를 각각 처리해주어야하는데
+//		 * BInformation에서는 한꺼번에 처리하기가 힘들기 때문에 1차 입력 2차수정으로 동작시켜준다.
+//		 */
+//		else if(object instanceof BInformationVO && count < 2) {
+//			System.out.println("BInformationVO 동작 합니다 [count] : " + count);
+//
+//			subFolderName = "CONTRACT";
+//			
+//			// 매게변수로 받은 object를 BInformationVO로 변환시켜준다.
+//			BInformationVO vo = (BInformationVO)object;
+//			
+//			// 첫 번째 저장일 때는 영업신고증에 관련한 처리를 해줍니다.영업신고증 SerialUUID 생성
+//			if(count == 0) {
+//				UUID = SerialUUID.getSerialUUID("BInformationAboutReportCard", "REPORTCARD");
+//
+//		 		// 1. 파일이름
+//		    	fileName = UUID +"."+ file.getOriginalFilename().split("\\.")[1];
+//		    	// 2. vo에 Reportcard 현재 파일 경로를 입력해준다.
+//				vo.setReportcard(folderName + "/"  + subFolderName + "/" + fileName);
+//				// 3. Reportcard를 업데이트 시켜준다. 
+//				bInformationDAO.updateReportCard(vo);
+//			}
+//			
+//			// 두 번째 저장일 시에는 사업자 등록증에 관련한 처리를 해줍니다 사업자 등록증 SerialUUID 생성
+//			else {
+//				UUID = SerialUUID.getSerialUUID("BInformationAboutLicense", "LICENSE");
+//
+//		 		// 1. 파일이름
+//		    	fileName = UUID +"."+ file.getOriginalFilename().split("\\.")[1];
+//		    	
+//		    	// 2. vo에 License의 현재 파일 경로를 입력해준다.
+//				vo.setLicense(folderName + "/"  + subFolderName + "/" + fileName);
+//				
+//				// 3. License를 업데이트 시켜준다.
+//				bInformationDAO.updateLicense(vo);
+//			}
+//		}
+//		
+//		// 결제 테이블일 경우
+//		/*
+//		 * 
+//		 * 사업자 정보 테이블의 경우에는 Service에서 1차적으로 데이터를 입력해준 다음 여기에서 DAO작업은 저장된 파일경로와 파일명을 update시켜주는 역할만 해준다.
+//		 * 이렇게 하는 이유는 두 개의 테이블안에 데이터를 각각 처리해주어야하는데
+//		 * 전에 BImage에서 한꺼번에 처리하기가 힘들기 때문에 1차 입력 2차수정으로 바꾸어준다.
+//		 */
+//		else if(object instanceof BInformationVO && count == 2) {
+//			subFolderName = "CONTRACT";
+//			UUID = SerialUUID.getSerialUUID("BPayment", "COPYOFBANKBOOK");
+//			
+//			// 1. 파일이름
+//			fileName = UUID +"."+ file.getOriginalFilename().split("\\.")[1];
+//			
+//			// 2. BPayment는 mpf에서 따로 Name을 구분 시킬 수 없으므로 새로운 VO를 생성시켜줘서 데이터를 업데이트 시켜준다.
+//			BPaymentVO vo = new BPaymentVO();
+//			
+//			
+//			// 3. vo에 관한 데이터를 set시켜준다. 
+//			vo.setCopyofbankbook(folderName + "/"  + subFolderName + "/" + fileName);
+//			
+//			// 여기서 folderName은 estid이기 떄문에 estid를 설정해준다고 생각하면 되겠다.
+//			vo.setEstid(folderName);
+//			
+//			// 4. 통장사본 데이터를 입력해준다.
+//			bPaymentDAO.updateCopyOfBankBook(vo);
+//		
+//		}    	
+//		// ======================= 영경 =============================
+//     	// 고객 프로필 사진 등록
+//     	else if(object instanceof CPrivateDataVO) {
+////     		System.out.println("aws 고객 프로필 사진 등록 메서드 실행(영경)");
+//     		CPrivateDataVO cPrivateDataVO = (CPrivateDataVO)object;
+//     		
+//     		// subFolderName 폴더명 지정
+//     		subFolderName = "PhotoID";
+////     		System.out.println("subFolderName : " + subFolderName);
+//     		
+//     		// UUID 가져오기
+//     		UUID = SerialUUID.getSerialUUID("CPhotoID", "PhotoID");
+////     		System.out.println("UUID : " + UUID);
+//     		
+//     		// 1. 파일이름
+//        	fileName = UUID +"."+ file.getOriginalFilename().split("\\.")[1];
+////        	System.out.println("fileName : " + fileName);
+//        	
+//        	cPrivateDataVO.setProfileimg(folderName + "/"  + subFolderName + "/" + fileName);
+////        	System.out.println("setProfileimg : " + cPrivateDataVO.getProfileimg());
+//        	
+//        	// DB애 이미지 주소 넣고 return 1 지우기
+//        	int result = cPrivateDataDAO.updateImg(cPrivateDataVO);
+////        	System.out.println("result : " + (result == 1 ? "입력 완료" : "입력 실패"));
+//     	}
+//     	// ========================================================
+// 
 		
 		
 		// aws에 들어가는 디렉토리 경로입니다.
@@ -478,8 +464,8 @@ public class AwsServiceImpl{
     
      
      
-     // AWS에 File을 추가시켜주는 함수입니다.
-    public int addFileS3(String dir, String fileName, MultipartFile file) {
+     // [내부함수] AWS에 File을 추가시켜주는 함수입니다.
+    private int addFileS3(String dir, String fileName, MultipartFile file) {
     	 
          PutObjectRequest putObjectRequest;
     	
@@ -487,6 +473,10 @@ public class AwsServiceImpl{
     	 metadata.setContentType(MediaType.IMAGE_PNG_VALUE);
     	 metadata.setContentLength(file.getSize());
     	 
+    	 System.out.println(dir);
+    	 System.out.println(fileName);
+    	 System.out.println(file.getName());
+    	 System.out.println("s3 파일 추가 함수 실행");
      	
      	// 파일을 넣어준다.
      	try {
@@ -512,7 +502,7 @@ public class AwsServiceImpl{
     	return 1;
     }
      
-    // 파일 삭제시켜주는 함수입니다.
+    // [내부함수] 파일 삭제시켜주는 함수입니다.
     public void fileDelete(Object object) {
     	
     	// DB 내부에 파일을 삭제시켜주는 함수입니다
@@ -523,16 +513,16 @@ public class AwsServiceImpl{
     	
     }
     
-    // s3에 파일을 삭제합니다.
-    public void s3FileDelete(String filePath) {
+    // [내부함수] s3에 파일을 삭제합니다.
+    private void s3FileDelete(String filePath) {
     	
     	// S3 내부에 존재하는 파일을 삭제해줍니다.
     	amazonS3.deleteObject(BUCKET_NAME, filePath);
     	
     }
     
-    // db에 있는 파일들을 삭제 시켜줍니다.
-    public String databaseFileDelete(Object object) {
+    // [내부함수] db에 있는 파일들을 삭제 시켜줍니다.
+    private String databaseFileDelete(Object object) {
     	
     	// s3FileDelete에 사용될 파일 경로입니다.
     	String filePath = "";
@@ -549,18 +539,11 @@ public class AwsServiceImpl{
     	return filePath;
     }
     
-
+    // [내부함수] 데이터 베이스에 파일 경로를 업로드 시켜주는 함수입니다.
     private int databaseFileUplaod(MultipartFile file, Object object, String folderName,
-			  						String subFolderName, String tableFieldName, String UUIDType ) {	
+			  						String fileName, String subFolderName, String UUIDType ) {	
     	
     	int result = 0;
-    	
-    	// UUID를 가져온다.
-		String UUID = SerialUUID.getSerialUUID(tableFieldName, UUIDType);
-//											  ("BImage", "STOREIMG");
-		String fileName = UUID +"."+ file.getOriginalFilename().split("\\.")[1];
-    	
-		
     	
 		switch (UUIDType) {
 			case "STOREIMG" : 
@@ -604,7 +587,75 @@ public class AwsServiceImpl{
 	}
 
 
-
+//  [내부함수] saveType의 boolean을 리턴해줍니다.
+   private boolean saveTypeBoolean(String saveType) {
+   	switch(saveType) {
+   		
+   		// saveType이 매장 사진이면 true를 반환시켜줍니다.
+   		case "businessStoreImage" : return true;
+   			
+   		
+   	}
+   	
+   	return false;
+   }
+   
+   
+   // [내부함수] MultipleUpload에 대표사진이 있을 경우 추가적으로 업로드를 해주는 함수입니다.
+   private int addStoreDelegatePhoto(MultipartFile delegate, Object object) {
+   	
+	   	// 받아온 파일이 비어있다면 함수를 종료시킨다.
+	   	if(delegate == null || delegate.isEmpty() ) 
+	   		return 0;
+	   	
+	   	
+	   	BImageVO vo = (BImageVO)object;
+	   	
+	   	// 대표사진 유무를 'Y' 로 설정해준다.
+	    vo.setDelegatephotoboolean("Y");
+	       
+	      
+	    // S3의 파일 업로드를 시켜준다.
+	    // 결과 값을 반환시켜준다. 
+	   	return fileUpload(delegate, vo.getEstid(), object, 0);
+   }
+   
+   
+   // [내부함수] MultipleUpload에 삭제 요청이 있을 경우 추가적으로 삭제를 해주는 함수입니다.
+   private int multipleDelete(String deleteList[], Object object) {
+	   
+	   // deleteList가 존재하지 않으면 함수를 종료시켜준다.
+	   	if( deleteList == null || deleteList.length == 0 ) 
+	   		return 0;
+	   	
+	   	BImageVO vo = (BImageVO)object;
+	   	
+	   	
+	   	// deleteList의 배열의 길이만큼 S3애 존재하는 파일을 삭제 시켜준다.
+	   	for(String deleteValue : deleteList) {
+	   		
+	   		vo.setStoreimg(deleteValue);
+	   		
+	   		// DB와 S3의 데이터를 삭제시켜주는 함수입니다.
+	   		fileDelete(vo);
+	   	}
+   	
+   	return 0;
+   }
+   
+   
+   //  [내부함수] 파일명을 새롭게 정의시켜줍니다. 필드 값과 요청 타입에 따라 앞에붙은 문자열은 다르게 처리됩니다.
+   // ex) STOREIMG_b5aa52d9fddd483f88610b05f4f63c8a.png
+   private String createFileName(MultipartFile file, String tableFieldName, String UUIDType) {
+	   
+	   // UUID를 가져온다.
+		String UUID = SerialUUID.getSerialUUID(tableFieldName, UUIDType);
+		
+		// 실질적으로 저장될 파일 이름을 선언해준다.
+		String fileName = UUID +"."+ file.getOriginalFilename().split("\\.")[1];
+		
+		return fileName;
+   }
 
 
 
