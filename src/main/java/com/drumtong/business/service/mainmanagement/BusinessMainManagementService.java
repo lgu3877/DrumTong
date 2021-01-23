@@ -182,7 +182,7 @@ public class BusinessMainManagementService {
 		// 계약을 위한 매장사진 등록이기 떄문에 POST를 염두하고 작업해준다.
 		// 다중 이미지 업로드이기 떄문에 multipleUpload 메서드를 호출해준다.
 		bImageVO.setEstid(estid);	// ESTID를 세팅하는 이유는 S3 저장방식이 ESTID(폴더명)/ESTID + UUID로 저장되기 때문에 sql문에 필요하다.
-		aws.multipleUpload(mpf, estid, bImageVO);
+		aws.multipleUpload(mpf, estid, bImageVO, req);
 		
 		
 
