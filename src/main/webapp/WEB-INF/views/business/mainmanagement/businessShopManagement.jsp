@@ -479,9 +479,16 @@
 				</div>
 				
 				<div class="delivery_area_set_con">
-					<select name="majorArea"></select>
-					<select name="minorArea"></select>
-					<div id="detailArea"></div>
+				<!-- 시/도 선택 -->
+					<select id="major-area-selector" name="majorArea" onchange="createMinorOptions()">
+						<option hidden selected>시/도 선택</option>
+					</select>
+				<!-- 시/군/구 선택 -->
+					<select id="minor-area-selector" name="minorArea" onchange="createDetailOptions()">
+						<option hidden selected>시/군/구 선택</option>
+					</select>
+				<!-- 읍/면/동 선택 -->
+					<div id="detail-area-selector"></div>
 				</div>
 		
 			</div>
