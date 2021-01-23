@@ -30,6 +30,14 @@ function createMinorOptions() {
 	const majorValue = document.getElementById("major-area-selector").value;
 	
 	// 옵션 초기화
+	document.getElementById("detail-area-selector").innerHTML = "";
+	const createdOptions = minorAreaCon.children;
+		
+	if (createdOptions.length > 1) {
+		for (let i = 0; i < createdOptions.length; i++) {
+			createdOptions[1].remove();
+		}
+	}
 	
 	// 생성
 	for (let key in dummyObject[majorValue]) {
@@ -48,17 +56,16 @@ function createDetailOptions() {
 	const majorValue = document.getElementById("major-area-selector").value;
 	const minorValue = document.getElementById("minor-area-selector").value;
 	
-	const areaArray = dummyObject[majorValue][minorValue];
+	// 초기화
+	detailAreaCon.innerHTML = "";
 	
+	// 생성
+	const areaArray = dummyObject[majorValue][minorValue];
 	for (let i = 0; i < areaArray.length; i++) {
-		console.log(areaArray[i]);
-		
 		const checkboxId = generateRandomString(13);
-		
 		
 		const label = document.createElement("label");
 		label.htmlFor = checkboxId;
-		
 		
 		const input = document.createElement("input");
 		input.id = checkboxId;
@@ -71,7 +78,6 @@ function createDetailOptions() {
 		label.innerHTML = areaArray[i];
 		detailAreaCon.appendChild(label);
 	}
-	
 }
 
 // 폼 업데이트
