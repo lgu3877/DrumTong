@@ -95,24 +95,34 @@
     
   </div>
 </section>
-<div id="writeReviewButton" style="display:none;" class="order_review_modal modal">
-	<div style="display:block;padding:10px;" class="modal-box">
-		<div style="font-weight:bold;font-size: 25pt;text-align: center;">ㅇㅇㅇ 세탁소에 리뷰 작성하기</div>
+<!-- 영경 모달 -->
+<div id="writeReviewButton" class="order_review_modal modal">
+	<div class="modal_box">
+		<div class="modal_title">ㅇㅇㅇ 세탁소에 리뷰 작성하기</div>
 		<form>
-			<div style="text-align:center;">
-				<input style="border: none;font-size: 17pt;;" type="text" value="20210102-00004" readonly>
-				<label style="font-size: 17pt;;">티셔츠 외 3개...</label>
+			<div class="modal_menu_1">
+				<input type="text" value="20210102-00004" readonly>
+				<label >티셔츠 외 3개...</label>
 			</div>
-			<div>
-				<img style="width:200px;height:200px" src="${cpath }/resources/customer/img/펭수버럭.jpg" alt="리뷰이미지">
-				<textarea style="width:300px;height:200px;border: 2px dotted grey;" rows="2" cols="4" placeholder="내용을 작성하세요"></textarea>
+			<div class="modal_menu_2">
+				<img src="${cpath }/resources/customer/img/펭수버럭.jpg" alt="리뷰이미지">
+				<textarea rows="2" cols="4" placeholder="내용을 작성하세요"></textarea>
 			</div>
-			<div>
+			<div class="modal_menu_3">
 				<input type="file">
-				<label>별점 </label><span><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></span>
+				<label>별점 </label>
+				<span>
+					<i id="star_1" class="far fa-star"></i>
+					<i id="star_2" class="far fa-star"></i>
+					<i id="star_3" class="far fa-star"></i>
+					<i id="star_4" class="far fa-star"></i>
+					<i id="star_5" class="far fa-star"></i>
+<!-- 					<i class="fas fa-star"></i> -->
+<!-- 					<i class="fas fa-star-half-alt"></i> -->
+				</span>
 			</div>
-			<div style="text-align: center;">
-				<input style="width:100px;height:50px;" type="submit">	
+			<div class="modal_menu_4">
+				<input type="submit">	
 			</div>
 		</form>
 	</div>
@@ -128,8 +138,40 @@
         	 this.style.display="none";
          }
        };
-		
 	}
+	
+	function checkStar(click_id){
+		changeClassName = "fas fa-star";
+		document.querySelectorAll('.modal_menu_3 i').forEach(star =>{
+			if(star.id !== click_id){
+				star.className = changeClassName;
+			} else {
+				changeClassName = "far fa-star";
+			}
+		})
+	}
+	
+	document.querySelectorAll('.modal_menu_3 i').forEach(star => 
+		star.addEventListener('click', function(){
+			// 1. 클릭한 별이 빈 칸이면, 맨 처음부터 i-1 까지의 별 색깔을 칠하고 자기자신은 반개 칠한다.
+			// 2. 클릭한 별이 반 개면, 1칸 전체 칠한 별로 바꾼다.
+			// 3. 클릭한 별이 색이 다 칠해져있으면 빈칸으로 바꾼다.
+			// 4. 결과값을 input type=hidden 값으로 넣는다
+			switch(this.className){
+			case "far fa-star":	// 비어있다면
+				this.className = "fas fa-star";	// 다 채우고
+				checkStar(this.id);
+				break;
+			case "fas fa-star-half-alt": // 반만 채워져 있다면
+				this.className = "far fa-star"; // 비운다.
+				break;
+			case "fas fa-star": // 다 채워져있다면
+				this.className = "fas fa-star-half-alt";	// 반만 채우고
+				checkStar(this.id);
+				break;
+			}
+		})
+	);
 </script>
 <!-- 스크립트 영역 [건욱 작업] -->
 <script type="text/javascript">
