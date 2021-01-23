@@ -404,12 +404,8 @@
 		
 		
 		
-		<!-- 상품 수령 방법(세탁물 수령 방법) -->
-		
-		
+	<!-- 상품 수령 방법(세탁물 수령 방법) -->
 		<div class="return_menu_con">
-		
-
 		<!-- 목차 -->
 			<div class="shop_info_title_con">
 				<div>
@@ -431,10 +427,8 @@
 				</div>
 			</div>
 			
-			
 		<!-- 수취 선택 -->
 			<div class="return_menu">
-			
 				<ul>
 					<li onclick="checkContent(this)">
 					<!-- BManagementVO > deliveryboolean -->
@@ -450,10 +444,53 @@
 					</li>
 				</ul>
 			</div>
+		</div>
+		
+
+
+	<!-- 배달 지역 설정 및 수정 -->
+		<div class="delivery_menu_con">
+		<!-- 목차 -->
+			<div class="shop_info_title_con">
+				<div>
+					<span class="shop_info_title">배달 지역 관리</span>
+					<i id="delivery-help" class="far fa-question-circle" style="font-weight: 600">도움말</i>
+					<div id="delivery-help-msg"></div>
+				</div>
+			<!-- 버튼 -->
+				<div class="service_button_con">
+					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
+					<c:if test="${status eq 'SUCCESS' }">
+					<div class="complete_menu_btn_con"  onclick="updateDeliveryArea()">
+						<div class="add_menu_icon_con">
+							<i class="fas fa-check-square"></i>
+						</div>
+						<div class="add_menu_btn_title">수정 완료</div>
+					</div>
+					</c:if>
+				</div>
+			</div>
+			
+			
+		<!-- 설정된 배달 가능지역 보기  & 배달 지역 설정  -->
+			<div class="delivery_menu">
+				<div class="delivery_area_view_con">
+				
+				</div>
+				
+				<div class="delivery_area_set_con">
+					<select name="majorArea"></select>
+					<select name="minorArea"></select>
+					<div id="detailArea"></div>
+				</div>
+		
+			</div>
 
 
 		</div>
-		
+
+
+
 	
 	<!-- 주소 확인 & 변경 -->
 		<div class="address_update_con">		
@@ -592,6 +629,9 @@
 
 	<!-- 배달 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementReturnItem.js"></script>
+
+	<!-- 배달 지역 설정 -->
+	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementDeliveryArea.js"></script>
 	
 	<!-- 도움말 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementHelpMsg.js"></script>
