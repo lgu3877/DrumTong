@@ -360,8 +360,14 @@
             <div class="review-head">
               <div class="review-profilePic"></div>
               <div class="review-writer">
+              <div style="display: table-row; vertical-align: middle;">
                 <p>김상재</p>
-                <p>2020-08-04</p>
+                <div style="display: flex;">
+	                <p>좋아요 2 · </p>
+	                <p>사진 1 · </p>
+	                <p>평점 4 </p>
+                </div>
+                </div>
               </div>
             </div>
             <div class="review-context">this laundrry shop is sooooo awesome!!!</div>
