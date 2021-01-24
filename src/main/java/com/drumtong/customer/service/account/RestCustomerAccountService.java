@@ -108,7 +108,7 @@ public class RestCustomerAccountService {
 		
 		// 이전에 업데이터 한 이미지가 있다면 삭제하도록
 		if(Login.getProfileimg() != null) {
-			aws.s3FileDelete(Login.getProfileimg());
+			aws.fileDelete(Login.getProfileimg());
 		}
 		
 		String memberid = Login.getMemberid();
@@ -117,7 +117,9 @@ public class RestCustomerAccountService {
 		
 		MultipartFile file = mpf.getFiles("user").get(0);
 		
-		int result = aws.s3FileUpload(file, memberid, cprivatedata, -1);
+		String folderName = "customer/" + "memberid";
+		
+		int result = aws.fileUpload(file, folderName, cprivatedata, -1);
 		
 		if(result == 1) {
 			Session.setAttribute("cLogin", cPrivateDataDAO.selectLogin(Login.getPw()));
@@ -126,3 +128,4 @@ public class RestCustomerAccountService {
 	}
 
 }
+ 
