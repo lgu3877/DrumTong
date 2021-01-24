@@ -82,14 +82,6 @@
 		      
 		    </div>
 
-
-
-
-
-
-
-
-
 <%--     </c:forEach> --%>
 <%--     </c:if> --%>
     
@@ -99,7 +91,7 @@
 <div id="writeReviewButton" class="order_review_modal modal">
 	<div class="modal_box">
 		<div class="modal_title">ㅇㅇㅇ 세탁소에 리뷰 작성하기</div>
-		<form>
+		<form onsubmit="clacStarCsore();" action="${cpath }/">
 			<div class="modal_menu_1">
 				<input type="text" value="20210102-00004" readonly>
 				<label >티셔츠 외 3개...</label>
@@ -111,6 +103,7 @@
 			<div class="modal_menu_3">
 				<input type="file">
 				<label>별점 </label>
+				<input type="hidden" id="starScore">
 				<span>
 					<i id="star_1" class="far fa-star"></i>
 					<i id="star_2" class="far fa-star"></i>
@@ -127,6 +120,22 @@
 </div>
 <!-- 영경 스크립트 -->
 <script>
+	function clacStarCsore(){
+		score = 0;
+		document.querySelectorAll('.modal_menu_3 i').forEach(i => {
+			switch(i.className){
+			case "fas fa-star-half-alt": // 반만 채워져 있다면
+				score += 0.5;
+				break;
+			case "fas fa-star": // 다 채워져있다면
+				score += 1;
+				break;
+			}
+		});
+		document.getElementById('starScore').value = score;
+		return true;
+	}
+	
 	function modalOpen(){
 		document.querySelectorAll('#writeReviewButton')[0].style.display="block";
 		

@@ -217,7 +217,6 @@
 	<script>	// 영경 스크립트
 		function newPwInputCreate(){
 			pw = document.getElementById('originalPw').value;
-			console.log("현재 비밀번호 : ", pw);
 			// 비밀번호가 일치하는지 체크하는 메서드 만들기
 			
 			var axPost = async (pw) => {
