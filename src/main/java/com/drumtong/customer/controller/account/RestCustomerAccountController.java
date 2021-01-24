@@ -5,6 +5,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,6 +42,13 @@ public class RestCustomerAccountController {
 	@PostMapping(produces="charset=utf-8", consumes = {"multipart/form-data"})
 	public String changePhotoId(HttpServletRequest req, MultipartHttpServletRequest file) {
 		return svc.changePhotoId(req, file);
+	}
+	
+	// 개인정보 중 고객 프로필 사진 삭제[영경]
+	@RequestMapping("customerJoinChange/rest/deletePhontoID/")
+	@GetMapping(produces="application/json; charset=utf8")
+	public String deletePhotoId(HttpServletRequest req) {
+		return svc.deletePhotoId(req);
 	}
 	
 	// 결제정보 변경[영경]

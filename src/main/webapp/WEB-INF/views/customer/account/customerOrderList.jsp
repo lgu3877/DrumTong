@@ -117,8 +117,6 @@
 					<i id="star_3" class="far fa-star"></i>
 					<i id="star_4" class="far fa-star"></i>
 					<i id="star_5" class="far fa-star"></i>
-<!-- 					<i class="fas fa-star"></i> -->
-<!-- 					<i class="fas fa-star-half-alt"></i> -->
 				</span>
 			</div>
 			<div class="modal_menu_4">
