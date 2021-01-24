@@ -143,9 +143,7 @@
             }
             form = document.forms[0]; // 폼 안의 input3개 다 가져옴
             
-        	 formData = new FormData(form);
-            console.log(form.children[0].files);
-            console.log(form.children[0].files.length);
+        	formData = new FormData(form);
 			if(form.children[0].files.length === 0){
 				alert('새로운 이미지 파일이 없습니다.');
 				return false;
