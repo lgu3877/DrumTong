@@ -55,7 +55,7 @@
                 <form method="POST" class="join_fo1_2" enctype="multipart/form-data">
                     <input class="join_fo1_2_file" type="file" id="photoID" name="user" >
                     <input class="join_fo1_2_sub" type="button" id="submit" name="submit" value="저장" >
-                    <input class="join_fo1_2_sub" type="button" id="delete" name="submit" value="삭제" >
+                    <input class="join_fo1_2_sub" type="button" id="delete" name="delete" value="삭제" >
                 </form>
             </div>
 
@@ -130,9 +130,11 @@
 
     <script>
     	function imgView(address){
+    		img = document.querySelectorAll('div.join_fo1_1 img')[0];
     		if(address !== ''){
-	    		img = document.querySelectorAll('div.join_fo1_1 img')[0];
 	    		img.src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + address;
+    		} else {
+	    		img.src = address;
     		}
     	}
         function FileSubmit(event) {
@@ -142,7 +144,13 @@
             form = document.forms[0]; // 폼 안의 input3개 다 가져옴
             
         	 formData = new FormData(form);
-            
+            console.log(form.children[0].files);
+            console.log(form.children[0].files.length);
+			if(form.children[0].files.length === 0){
+				alert('새로운 이미지 파일이 없습니다.');
+				return false;
+			}
+            console.log(form.children[0].files[0]);
             var axPost = async (form) => {
 		        await axios.post(cpath + "/customer/account/customerJoinChange/rest/phontoID/", formData, {
 					headers: {"Content-Type": `multipart/form-data`,}, 
@@ -151,6 +159,7 @@
 		        .then( (response) => {
 		          if(response.data === true){
 		                // 새 비밀번호, 새 비밀번호 확인을 입력하는 input 박스 2개 만들기
+		            form.reset();
 		            alert('정상적으로 변경되었습니다.');
 		          } else{
 		            alert('이미지가가 정상적으로 변경되지 않았습니다. 다시 시도해주세요');
@@ -165,19 +174,19 @@
         	if (event.type === 'keypress' && event.key !== 'Enter') {
                 return;
             }
-        	console.log('test');
-        	var axGet = asysc () => {
-        		await axios.get(cpath + '/customerJoinChange/rest/deletePhontoID/')
+        	var axGet = async () => {
+        		await axios.get(cpath + '/customer/account/customerJoinChange/rest/deletePhontoID/')
         		
         		.then( (response) => {
         			if(response.data === true){
-        				alert('프로필 이미지가 삭제되었습니다.');
         				imgView('');
+        				alert('프로필 이미지가 삭제되었습니다.');
         			} else{
         				alert('이미지가 정상적으로 삭제되지 않았습니다. 새로고침(F5) 후 다시 시도해주세요');
         			}
-        		})
+        		});
         	}
+        	axGet();
         }
 
     </script>
@@ -187,7 +196,7 @@
         cpath = '${pageContext.request.contextPath}';
         document.getElementById('submit').addEventListener('click', FileSubmit);
         document.getElementById('delete').addEventListener('click', FileDelete);
-        
+
         document.getElementById('photoID').addEventListener('change', Preview);
         
         function Preview(){

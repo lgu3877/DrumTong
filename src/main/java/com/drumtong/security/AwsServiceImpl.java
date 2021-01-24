@@ -411,6 +411,14 @@ public class AwsServiceImpl{
     		bImageDAO.deleteBImage(vo);
     		filePath = vo.getStoreimg(); 
     	}
+    	else if(object instanceof CPrivateDataVO) {
+    		CPrivateDataVO vo = (CPrivateDataVO)object;
+    		filePath = new String(vo.getProfileimg());
+    		System.out.println("filePath : " + filePath);
+    		vo.setProfileimg("");
+    		System.out.println("filePath : " + filePath);
+    		cPrivateDataDAO.updateImg(vo);
+    	}
     	
     	// 파일경로를 반환시켜줍니다.
     	return filePath;

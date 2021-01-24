@@ -107,8 +107,8 @@ public class RestCustomerAccountService {
 		CPrivateDataVO Login = (CPrivateDataVO)Session.getAttribute("cLogin");
 		
 		// 이전에 업데이터 한 이미지가 있다면 삭제하도록
-		if(Login.getProfileimg() != null) {
-			aws.fileDelete(Login.getProfileimg());
+		if(Login.getProfileimg() != null && !Login.getProfileimg().equals("")) {
+			aws.fileDelete(Login);
 		}
 		
 		String memberid = Login.getMemberid();
@@ -131,9 +131,10 @@ public class RestCustomerAccountService {
 		HttpSession Session= req.getSession();
 		CPrivateDataVO Login = (CPrivateDataVO)Session.getAttribute("cLogin");
 		
+		System.out.println(Login.getProfileimg());
 		// 이전에 업데이터 한 이미지가 있다면 삭제하도록
-		if(Login.getProfileimg() != null) {
-			aws.fileDelete(Login.getProfileimg());
+		if(Login.getProfileimg() != null && !Login.getProfileimg().equals("")) {
+			aws.fileDelete(Login);
 		}
 		
 		return "true";
