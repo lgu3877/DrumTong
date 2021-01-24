@@ -449,7 +449,7 @@ public class AwsServiceImpl{
 			case "COPYOFBANKBOOK" :
 				BPaymentVO bPaymentVO = new BPaymentVO();	
 				bPaymentVO.setCopyofbankbook(src);
-				bPaymentVO.setEstid(folderName.split("/")[1]);
+				bPaymentVO.setEstid(folderName.split("/")[2]);
 				result = bPaymentDAO.updateCopyOfBankBook(bPaymentVO);
 				break;
 			case "PhotoID" :
