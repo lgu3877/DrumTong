@@ -25,6 +25,7 @@ import com.drumtong.business.vo.BImageVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BManagementVO;
 import com.drumtong.business.vo.BMenuVO;
+import com.drumtong.business.vo.BPrivateDataVO;
 import com.drumtong.business.vo.BScheduleDaysVO;
 import com.drumtong.business.vo.BScheduleTimeVO;
 import com.drumtong.business.vo.BTempHolidayVO;
@@ -100,11 +101,21 @@ public class RestBusinessMainManagementService {
 		HttpSession Session = req.getSession();
  	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
  	    String estid = bInformationVO.getEstid();
- 	   
+ 	    
  	    BImageVO bImageVO = new BImageVO();
  	    bImageVO.setEstid(estid);
  	    
-		int RestUpdateBImageResult = aws.multipleUpload(mpf,estid,bImageVO, req);
+ 	    
+ 	   // S3와 DB에 경로를 나타낼 bpersonid입니다. 
+ 	    // 저장될 때는 다음과 같이 저장됩니다.
+ 	    // ex) bpersonid 값 / estid 값 / 저장 형식 타입 (3가지로 나뉨) / 파일이름 (estid형식) 
+ 	    BPrivateDataVO bPrivateDataVO = (BPrivateDataVO)Session.getAttribute("bLogin");
+ 	    String bpersonid = bPrivateDataVO.getBpersonid();
+ 	    
+ 	    
+ 	    String folderName = "business/" + bpersonid + "/" + estid; 
+ 	    
+		int RestUpdateBImageResult = aws.multipleUpload(mpf,folderName,bImageVO, req);
 		return RestUpdateBImageResult;
 	}
 	
