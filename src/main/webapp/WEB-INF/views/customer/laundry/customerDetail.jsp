@@ -197,7 +197,7 @@
 		imgBoxs = document.querySelectorAll('detailview-imgBlock');
 		
 		imgList.forEach(img =>{
-			imgBoxs[i++].src = img.storeimg;
+			imgBoxs[i++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + img.storeimg;
 		})
 		
 		reviewList = ${ReviewList};
