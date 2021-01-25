@@ -123,7 +123,7 @@
 				</div>
 				
 			<!-- cover-image input form -->
-				<div id="shop-image-view" class="shop_image_view">
+			<!-- 	<div id="shop-image-view" class="shop_image_view">
 					<div class="upload_icon_con">
 						<div class="cover_file_text_con">
 							<div class="cover_file_text">
@@ -136,7 +136,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				
 			<!-- image viewer as long as cover image is already uploaded when you visit this page for modification -->
 				<div id="main-image-con" class="main_image_con">
