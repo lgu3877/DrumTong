@@ -2,18 +2,23 @@
 async function updatePhoto() {
 	const formData = new FormData();
 	
-	const coverImage = document.getElementById("update-cover");
+//	const coverImage = document.getElementById("update-cover");
 	const photoInputs = document.getElementsByName("storeimg");
 	const fileList = [];
 	
+	formData.append("saveType", "businessStoreImage")
+//	formData.append("delegatephotoboolean", coverImage.files[0]);
+
+	// 추가 사진
 	for (let i = 0; i < photoInputs.length; i++) {
 		if (photoInputs[i].files[0] !== undefined) 
 			formData.append("businessStoreImage", photoInputs[i].files[0]);
 	}	
 
-	formData.append("delegatephotoboolean", coverImage.files[0]);
-	
-	formData.append("saveType", "businessStoreImage")
+	// 삭제 사진
+	for (let i = 0; i < deletePhotoList.length; i++) {
+		formData.append("deleteUploadImage", deletePhotoList[i]);
+	}
 
 	const { data } = await axios.post(
 		"/drumtong/business/mainmanagement/BImage/rest/updateStoreIMG/",formData
@@ -26,24 +31,6 @@ async function updatePhoto() {
 		);
 	
 	console.log(data);
-
-	
-	// 이미지 삭제
-	const formDataDelete = new FormData();
-	
-	for (let i = 0; i < deletePhotoList.length; i++) {
-		formDataDelete.append("deleteUploadImage", deletePhotoList[i]);
-	}
-	
-	await axios.delete(
-		"/drumtong/business/mainmanagement/BImage/rest/...", 
-		formDataDelete, 
-		{
-			headers: {
-				"Content-Type": `multipart/form-data`,
-			}, 
-		}
-	);
 }
 
 

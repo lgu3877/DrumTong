@@ -292,8 +292,12 @@ function deletePhoto(clickedPhoto) {
         	
         	
             // DB에서 삭제 > 기존에 등록된 사진일 경우에만 진행
-        	const isUploaded = clickedPhoto.includes("https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/");        	
-        	isUploaded ? deletePhotoList.push(clickedPhoto.substr(55)) : null;
+        	const isUploaded = clickedPhoto.includes("https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/");
+        	console.log(isUploaded);
+        	if (isUploaded) {
+        		deletePhotoList.push(clickedPhoto.substr(55));
+        	}
+        	console.log(deletePhotoList);
           
             break;
          }
