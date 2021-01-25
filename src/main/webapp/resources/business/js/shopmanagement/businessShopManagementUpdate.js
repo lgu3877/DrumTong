@@ -67,7 +67,7 @@ async function updateIntro() {
 
 
 // 서비스 등록 업데이트
-function addService() {
+async function addService() {
 	const list = document.getElementsByClassName("single_item_selector");
 	const object = [];
 	const classPrefix = ["first", "second", "third", "forth", "fifth"]
@@ -189,9 +189,6 @@ async function updateDelivery() {
 
 // 주소 업데이트
 async function updateAddress() {
-
-	
-
 	const mainAddress = document.getElementById("main-address").value;
 	const detailAddress = document.getElementById("detail-address").value;
 	const LaMa = document.getElementById("main-location").value;
@@ -217,8 +214,4 @@ async function updateAddress() {
 
 	
 }
-
-
-
-
 
