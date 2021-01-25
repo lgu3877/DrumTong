@@ -48,6 +48,12 @@
         	<%@ include file="./businessContract3.jsp" %>
         	<%@ include file="./businessContract4.jsp" %>
         	<%@ include file="./businessContract5.jsp" %>	<!-- 뺄지 말지 정하도록 합시다 -->
+        	
+<!--         	      saveType 세가지 종류가 있습니다. -->
+<!--       "businessStoreImage" "customerProfileImage" "businessInformationImage" -->
+<!--           [사업자 매장사진]					[고객 프로필 사진]		[사업자 정보 사진] -->
+     
+        	<input type="hidden" value="businessInformationImage" name="saveType"/>
     	</form>
     </div>
     
@@ -120,6 +126,10 @@
     	
     	var checkItem = obj.parentNode.querySelectorAll('div.c2-input input[type="text"]');
     	var checkFile = obj.parentNode.querySelectorAll('div.c2-input input[type="file"]');
+    	
+    	
+    	console.log(checkFile);
+    	
     	var texation = obj.parentNode.querySelector('#texation');
     	
     	//input 태그에 공백이거나 공백이 포함됐을 때 그쪽으로 focus
@@ -151,6 +161,9 @@
     	
     	var checkItem = obj.parentNode.querySelectorAll('div.c3-input input[type="text"]');
     	var checkFile = obj.parentNode.querySelector('div.c3-input input[type="file"]');
+
+    	
+    	console.log(checkFile);
     	
     	//input 태그에 공백이거나 공백이 포함됐을 때 그쪽으로 focus
 		for(i = 0; i < checkItem.length; i++) {

@@ -6,10 +6,16 @@ async function updatePhoto() {
 	const photoInputs = document.getElementsByName("storeimg");
 	const fileList = [];
 	
-	formData.append("saveType", "businessStoreImage")
-//	formData.append("delegatephotoboolean", coverImage.files[0]);
-
-	// 추가 사진
+	
+	// 이미지 저장 타입 
+	formData.append("saveType", "businessStoreImage");
+	
+	// 대표 사진
+	formData.append("delegatephotoboolean", coverImage.files[0]);
+	
+	
+	
+	// 사이드 이미지 리스트
 	for (let i = 0; i < photoInputs.length; i++) {
 		if (photoInputs[i].files[0] !== undefined) 
 			formData.append("businessStoreImage", photoInputs[i].files[0]);
@@ -20,6 +26,7 @@ async function updatePhoto() {
 		formData.append("deleteUploadImage", deletePhotoList[i]);
 	}
 
+	
 	const { data } = await axios.post(
 		"/drumtong/business/mainmanagement/BImage/rest/updateStoreIMG/",formData
 		,
@@ -28,7 +35,7 @@ async function updatePhoto() {
 				"Content-Type": `multipart/form-data`,
 			}, 
 		}
-		);
+	);
 	
 	console.log(data);
 }
@@ -111,9 +118,10 @@ async function addService() {
 	// 퀵 서비스 옵션 설정
 	activateDelivery();
 	
+	const processing = "insertBMenu";
 	// 서비스 등록
-		const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/insertBMenu/", object);
-		console.log(data);
+	const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/" + processing + "/", object);
+	console.log(data);
 }
 
 

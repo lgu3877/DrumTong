@@ -40,6 +40,8 @@ public class SerialUUID {
 	static BPaymentDAO bPaymentDAO;
 	static BPaymentVO bPaymentVO;
 	
+	// 고객 프로필사진 저장용
+	static CPrivateDataDAO cPrivateDataDAO;
 	
 	@Autowired CCustomerDAO BeancCustomerDAO;
 	@Autowired BBusinessDAO BeanbBusinessDAO;
@@ -50,6 +52,7 @@ public class SerialUUID {
 	@Autowired BImageDAO BeanbImageDAO;
 	@Autowired BInformationDAO BeanbInformationDAO;
 	@Autowired BPaymentDAO BeanbPaymentDAO;
+	@Autowired CPrivateDataDAO beancPrivatedataDAO;
 	
 	@PostConstruct
 	private void init() {
@@ -62,6 +65,7 @@ public class SerialUUID {
 		this.bImageDAO = BeanbImageDAO;
 		this.bInformationDAO = BeanbInformationDAO;
 		this.bPaymentDAO = BeanbPaymentDAO;
+		this.cPrivateDataDAO = beancPrivatedataDAO;
 	}
 	
 	
@@ -102,11 +106,13 @@ public class SerialUUID {
 				
 				case "BPayment" : result = bPaymentDAO.confirm(SerialUUID);
 					break;
-				
+				case "CPhotoID" : result = cPrivateDataDAO.confirm(SerialUUID);
+					break;
 				
 			}
 		}
 		
+//		return (TableName.startsWith("C") ? "Customer/" : "Business/") + SerialUUID;
 		return SerialUUID;
 		
 	}

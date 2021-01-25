@@ -66,7 +66,6 @@ public class BusinessMainManagementService {
 	// 비즈니스 매장관리 페이지로 이동 (GET) [건욱]
 	public ModelAndView shopManagement(HttpServletRequest req) {
  		ModelAndView mav = new ModelAndView("business/mainmanagement/businessShopManagement");
-//		ModelAndView mav = new ModelAndView("business/test"); //test 용임 지울 시 위에 코드 활성화 시켜줄 것
 		
 
 		if(checkEstStatus(req, "ShopManagement")) return mainMove(req, "ShopManagement");
@@ -81,13 +80,6 @@ public class BusinessMainManagementService {
  	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
  	    String estid = bInformationVO.getEstid();
  		
- 	    // 2차 온라인 계약이 처음이면 밑에 구문을 실행시켜준다. (기본 템플릿을 전달시켜줌)
-// 	    if( bInformationVO.getStatus().equals("FAIL") ) {
-// 	    	// defaultcategory 의 데이터형식이 'top/pants/suit/hat/underwear/cutton/'
-// 	    	List<String> defaultcategory = Arrays.asList((bManagementDAO.selectDefaultCategory(estid).split("/")));
-// 	    	mav.addObject("defaultcategory", (new Gson()).toJson(defaultcategory));
-// 	    
-// 	    }
  	    // 2차 온라인 계약에 매장관리를 완료했다면 전에 입력했던 데이터를 불러와준다.
  	    // else 지움
  	    if ( bInformationVO.getStatus().equals("PROCESS") || bInformationVO.getStatus().equals("SUCCESS") ) {
@@ -97,6 +89,7 @@ public class BusinessMainManagementService {
  	    	
  	    	// bManagement 테이블 [매장 소개글] [매장 메뉴] [세탁물 수령방법]
  	    	mav.addObject("bManagement", (new Gson()).toJson(bManagementDAO.selectCustomerDetail(estid)));
+ 	    	
  	    	
   	    }
  	    
@@ -181,6 +174,13 @@ public class BusinessMainManagementService {
  	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
  	    String estid = bInformationVO.getEstid();
  	    
+ 	    BPrivateDataVO bPrivateDataVO = (BPrivateDataVO)Session.getAttribute("bLogin");
+	    String bpersonid = bPrivateDataVO.getBpersonid();
+	    
+	    
+	    String folderName = "business/"+ bpersonid + "/" + estid; 
+	    
+ 	    
  	    
 		// 1. 매장관리 테이블에  {소개글,배달여부,퀵여부}를 업데이트 시켜준다. 
 		int BManagementResult = bManagementDAO.updateConstract(bManagementVO);
@@ -189,7 +189,7 @@ public class BusinessMainManagementService {
 		// 계약을 위한 매장사진 등록이기 떄문에 POST를 염두하고 작업해준다.
 		// 다중 이미지 업로드이기 떄문에 multipleUpload 메서드를 호출해준다.
 		bImageVO.setEstid(estid);	// ESTID를 세팅하는 이유는 S3 저장방식이 ESTID(폴더명)/ESTID + UUID로 저장되기 때문에 sql문에 필요하다.
-		aws.multipleUpload(mpf, estid, bImageVO);
+		aws.multipleUpload(mpf, folderName, bImageVO, req);
 		
 		
 

@@ -1,5 +1,7 @@
 package com.drumtong.business.service.mainmanagement;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,6 +25,7 @@ import com.drumtong.business.vo.BImageVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BManagementVO;
 import com.drumtong.business.vo.BMenuVO;
+import com.drumtong.business.vo.BPrivateDataVO;
 import com.drumtong.business.vo.BScheduleDaysVO;
 import com.drumtong.business.vo.BScheduleTimeVO;
 import com.drumtong.business.vo.BTempHolidayVO;
@@ -93,7 +96,7 @@ public class RestBusinessMainManagementService {
 	
 	
 	// 1. 매장 관리에 매장 사진을 비동기식으로 수정해주는 메서드입니다.
-	public int updateBImage(MultipartHttpServletRequest mpf, HttpServletRequest req, String saveType) {
+	public int updateBImage(MultipartHttpServletRequest mpf, HttpServletRequest req) {
 		System.out.println("Bimage Rest Service 실행...");
 		HttpSession Session = req.getSession();
  	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
@@ -102,9 +105,18 @@ public class RestBusinessMainManagementService {
  	    BImageVO bImageVO = new BImageVO();
  	    bImageVO.setEstid(estid);
  	    
-		int RestUpdateBImageResult = aws.multipleUpload(mpf, estid, bImageVO, saveType);
+ 	    
+ 	   // S3와 DB에 경로를 나타낼 bpersonid입니다. 
+ 	    // 저장될 때는 다음과 같이 저장됩니다.
+ 	    // ex) bpersonid 값 / estid 값 / 저장 형식 타입 (3가지로 나뉨) / 파일이름 (estid형식) 
+ 	    BPrivateDataVO bPrivateDataVO = (BPrivateDataVO)Session.getAttribute("bLogin");
+ 	    String bpersonid = bPrivateDataVO.getBpersonid();
+ 	    
+ 	    
+ 	    String folderName = "business/" + bpersonid + "/" + estid; 
+ 	    
+		int RestUpdateBImageResult = aws.multipleUpload(mpf,folderName,bImageVO, req);
 		return RestUpdateBImageResult;
-				
 	}
 	
 	
@@ -168,8 +180,10 @@ public class RestBusinessMainManagementService {
  	    int result = 0;
  	    
  	    
+ 	    
  	    for ( BMenuVO bMenuVO : ListBMenuVO ) {
  	    	bMenuVO.setEstid(estid);
+ 	    	System.out.println(bMenuVO.getQuickprice());
  	    	
  	    	switch(processing) {
  	    	
@@ -184,7 +198,7 @@ public class RestBusinessMainManagementService {
  	    	case "deleteBMenu" :
  	    		result = bMenuDAO.deleteBMenu(bMenuVO);
  	    		break;
- 	    }
+ 	    	}
  	    	
  	    }
  	    

@@ -19,4 +19,7 @@ public interface BImageDAO {
 	//	UUID 중복검사 aws S3에 들어가는 이미지입니다 
 	int confirm(String SerialUUID);
 
+	// 매장 사진을 삭제 요청해줍니다.
+	int deleteBImage(BImageVO vo);
+
 }

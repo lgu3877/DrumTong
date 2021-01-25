@@ -68,8 +68,10 @@ public class RestCustomerLaundryService {
 	}
 
 
-//	public String clusterer(String address) {
-//		// address에 따라 관련 세탁소 가지고 오도록 수정해야함!
+//	public String clusterer(String address, int level, String type) {
+//		// address에 따라 관련 세탁소 가지고 오도록!
+//		// level에 따라 주소를 비교하기
+//		// type에 따라 개수를 가지고올지, 리스트를 통째로 가지고 올지 정하기
 //		List<BInformationVO> list = bInformationDAO.selectBusinessMapInfo();
 //		try {
 //			return list != null
