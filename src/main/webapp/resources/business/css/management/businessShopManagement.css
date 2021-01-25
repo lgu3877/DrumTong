@@ -361,6 +361,7 @@
 
 .create_menu_con,
 .return_menu_con,
+.delivery_menu_con,
 .address_update_con {
 	margin-top: 70px;
     margin-left: 3.33%;
@@ -368,7 +369,8 @@
 }
 
 .create_menu,
-.return_menu {
+.return_menu,
+.delivery_menu {
     margin-top: 20px;
 }
 
@@ -923,4 +925,14 @@
 
 .address_update_con {
 	height: 700px;
+}
+
+
+/* 배달 가능 지역 */
+.delivery_area_view_con {
+	
+}
+
+.delivery_area_set_con {
+	
 }

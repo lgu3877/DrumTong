@@ -2,7 +2,7 @@
 async function updatePhoto() {
 	const formData = new FormData();
 	
-	const coverImage = document.getElementById("update-cover");
+//	const coverImage = document.getElementById("update-cover");
 	const photoInputs = document.getElementsByName("storeimg");
 	const fileList = [];
 	
@@ -20,11 +20,9 @@ async function updatePhoto() {
 		if (photoInputs[i].files[0] !== undefined) 
 			formData.append("businessStoreImage", photoInputs[i].files[0]);
 	}	
-	
-	
-	// 이미지 삭제 리스트
+
+	// 삭제 사진
 	for (let i = 0; i < deletePhotoList.length; i++) {
-		console.log('삭제리스트', deletePhotoList[i]);
 		formData.append("deleteUploadImage", deletePhotoList[i]);
 	}
 
@@ -186,9 +184,6 @@ async function updateDelivery() {
 
 // 주소 업데이트
 async function updateAddress() {
-
-	
-
 	const mainAddress = document.getElementById("main-address").value;
 	const detailAddress = document.getElementById("detail-address").value;
 	const LaMa = document.getElementById("main-location").value;
@@ -214,8 +209,4 @@ async function updateAddress() {
 
 	
 }
-
-
-
-
 
