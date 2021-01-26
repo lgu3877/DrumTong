@@ -47,6 +47,7 @@
 	
 	<script type="text/javascript">
 		const bImageList = ${bImageList};
+		const bManagement = ${bManagement};
 
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
@@ -208,7 +209,7 @@
 				</div>
 
 			<!-- add store introduction -->
-				<div id="intro-modal-btn" class="intro_add_con">
+				<div id="intro-modal-btn" class="intro_add_con" onclick="openIntroModal()">
        				<span>매장 소개글 등록 및 수정
        					<i class="far fa-file-alt"></i>
        				</span>
@@ -566,10 +567,10 @@
 	<div id="intro-modal" class="intro_modal">
 	<!-- Modal content -->
 		<div class="intro_content_con">
-			<span class="intro_close">&times;</span>
+			<span class="intro_close" onclick="closeIntroModal()">&times;</span>
 			<div class="intro_content">
 			<!-- BManagementVO > introduction -->
-				<textarea class="store_intro_input" name="introduction" maxlength="500" placeholder="매장 소개글을 적어주세요." autofocus style="resize: none;"></textarea>
+				<textarea id="intro-modal-textarea" class="store_intro_input" name="introduction" maxlength="500" placeholder="매장 소개글을 적어주세요." autofocus style="resize: none;"></textarea>
 				<input class="store_intro_btn" type="button" value="작성완료" onclick='comfirmIntro()' >
 			</div>
 		</div>
@@ -588,15 +589,6 @@
 		</div>
 	</div>
 
-	<script type="text/javascript">
-		// DB에서 받아오는 Defaultcategory List<String> 배열
-// 		const defaultCategory = ${defaultcategory};
-		/* const menucategories = ${menuCategories};
-		const bImageList = ${bImageList};
-		console.log(bImageList);
-		console.log(defaultCategory);
-		sconsole.log(menuCategories); */
-	</script>
 	
 	
 	<script type="text/javascript">

@@ -5,7 +5,7 @@ const itemlist = document.getElementById('add-item-list')
 // 입력 줄 전체
 let singleList = document.querySelector('.single_item_selector');
 let copiedList;
-
+console.log(bManagement);
 
 // 서비스 등록 > 입력 input & select 생성
 function createAddService() {
