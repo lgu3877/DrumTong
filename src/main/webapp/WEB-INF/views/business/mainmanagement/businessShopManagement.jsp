@@ -541,15 +541,14 @@
 		</div>
 		
 		
-		
 	<!-- [50줄] 여는 태그  세션의 상태가 FAIL이면 POST 형식   -->
 	<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
 	<!-- 	[전체 폼]에 대한 c:if문 -->
 	
 		<c:if test="${status eq 'FAIL' }">
 	<!-- 전체 form submit -->
-			<div>
-				<input type="submit" value="입력 완료">
+			<div class="submit_con">
+				<input class="submit_btn" type="submit" value="입력완료">
 			</div>
 			</form>
 

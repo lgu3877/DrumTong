@@ -924,7 +924,7 @@
 }
 
 .address_update_con {
-	height: 700px;
+	height: 370px;
 }
 
 
@@ -935,4 +935,29 @@
 
 .delivery_area_set_con {
 	
+}
+
+/* Submit Button */
+.submit_con {
+    height: 100px;
+    text-align: right;
+	margin-left: 3.33%;
+    margin-right: 3.33%;
+}
+
+.submit_btn {
+	cursor: pointer;
+    border: none;
+    outline: none;
+    width: 140px;
+    background-color: navy;
+    color: white;
+    justify-content: center;
+    height: 40px;
+    border-radius: 8px;
+}
+
+.submit_btn:hover {
+	transition: 0.5s;
+	font-weight: 600;
 }
