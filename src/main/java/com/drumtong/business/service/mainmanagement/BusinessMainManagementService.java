@@ -90,7 +90,7 @@ public class BusinessMainManagementService {
  	    	// bManagement 테이블 [매장 소개글] [매장 메뉴] [세탁물 수령방법]
  	    	mav.addObject("bManagement", (new Gson()).toJson(bManagementDAO.selectCustomerDetail(estid)));
  	    	
- 	    	
+ 	    	mav.addObject("bMenu", (new Gson()).toJson(bMenuDAO.select(estid)));
   	    }
  	    
  	    // 추가 	    
