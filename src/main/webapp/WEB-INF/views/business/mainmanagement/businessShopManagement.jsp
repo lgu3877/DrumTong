@@ -587,6 +587,13 @@
 			
 			return result;
 		}
+		
+		// 가격에 콤마(,) 삽입
+		function insertComma(string) {
+			const reversedString = string.split("").reverse().join("");
+			const commaAttached = reversedString.replace(/(.{3})/g,"$1,");
+			return commaAttached.split("").reverse().join("");
+		}
 	</script>
 	
 	<!-- 초기 셋팅 -->

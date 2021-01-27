@@ -18,7 +18,7 @@ function displayMenu() {
 			"C": "c",
 			"D": "d",
 			"E": "e",
-			"deliveryFee": "1000원"
+			"deliveryFee": "1000"
 		},
 		{
 			"A": "a",
@@ -96,12 +96,13 @@ function displayMenu() {
 				
 				// 배달료
 				if (bMenues[item].hasOwnProperty("deliveryFee")) {
-					console.log(bMenues[item]["deliveryFee"]);
-					const deliveryFee = document.createElement("div");
-					deliveryFee.innerHTML = "(" + bMenues[item]["deliveryFee"] + ")";
+					const deliveryFeeCon = document.createElement("div");
+					
+					const deliveryFee = bMenues[item]["deliveryFee"];
+					deliveryFeeCon.innerHTML = "(" + insertComma(deliveryFee) + " 원)";
 					
 					// 삽입 (배달료)
-					wrapper.appendChild(deliveryFee);
+					wrapper.appendChild(deliveryFeeCon);
 				}
 				
 				// 짝수 줄 > 하이라이트
@@ -130,7 +131,6 @@ function displayMenu() {
 		tbody.appendChild(tr);
 	}
 }
-
 
 // 서비스 등록 > 입력 input & select 생성
 function createAddService() {
@@ -817,3 +817,23 @@ function attachSubCategories(subCategory) {
 	
 	return subMenuContainer;
 }
+
+
+
+
+//function insertComma(string) {
+//const reversedString = string.split("").reverse().join("");
+//const commaAttached = reversedString.replace(/(.{3})/g,"$1,");
+//return commaAttached.split("").reverse().join("");
+//
+//메모
+//const length = string.length;
+//const numberOfZero = 
+//	length <= 3 ?
+//		0 : 
+//		length % 3 === 0 ? (length / 3) -1 : (length / 3);
+//
+//	for (let i = numberOfZero; i > 0; i--) {
+//	reversedString[numberOfZero * 3]
+//}
+//}
