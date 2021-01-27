@@ -1,3 +1,12 @@
+// 업로드로 추가된 사진 > 업로드 할 파일 임시 저장
+const uploadPhotoList = {
+		originalCover: document.getElementById("cover-image") ? document.getElementById("cover-image").src : "",
+				uploadCover: "",
+				uploadPhoto: [],
+}
+const deletePhotoList = [];
+
+
 // 초기 실행
 displayImages();
 imageShow();
@@ -5,16 +14,7 @@ sliderEvent();
 createInputFile();
 
 
-
-// 업로드로 추가된 사진 > 업로드 할 파일 임시 저장
-const uploadPhotoList = {
-	originalCover: document.getElementById("cover-image") ? document.getElementById("cover-image").src : "",
-	uploadCover: "",
-	uploadPhoto: [],
-}
-
 // 업로드 과정 중 삭제된 사진 이름 배열 > DB에서 이름 비교 후 저장 권장
-const deletePhotoList = [];
 function displayImages() {
 	const imageList = document.getElementById("image-preview");
 	
