@@ -49,6 +49,10 @@
 		const bImageList = ${bImageList};
 		const bManagement = ${bManagement};
 
+		const mainAddress = "${mainAddress}";
+		/* const detailAddress = ${detailAddress}; */
+		console.log(mainAddress);
+
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
 	</script>
@@ -294,36 +298,8 @@
 					</thead>
 					
 				<!-- tbody -->
-					<tbody id="item-list-tbody">
-						<tr>
-							<th scope="row">서비스1</th>
-							<td>내용1</td>
-							<td>내용2</td>
-							<td>내용3</td>
-							<td>내용4</td>
-						</tr>
-						<tr>
-							<th scope="row" class="even">서비스2</th>
-							<td class="even">내용1</td>
-							<td class="even">내용2</td>
-							<td class="even">내용3</td>
-							<td class="even">내용4</td>
-						</tr>
-						<tr>
-							<th scope="row">서비스3</th>
-							<td>내용1</td>
-							<td>내용2</td>
-							<td>내용3</td>
-							<td>내용4</td>
-						</tr>
-						<tr>
-							<th scope="row" class="even">서비스4</th>
-							<td class="even">내용1</td>
-							<td class="even">내용2</td>
-							<td class="even">내용3</td>
-							<td class="even">내용4</td>
-						</tr>
-					</tbody>
+					<tbody id="item-list-tbody"></tbody>
+					
 				</table>
 			</div>
 		</c:if>

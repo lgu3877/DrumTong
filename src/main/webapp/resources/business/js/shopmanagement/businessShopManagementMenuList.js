@@ -1,11 +1,136 @@
-// 상품 추가 버튼
-const addItemBtn = document.getElementById('add-item-btn');
-// 줄을 추가할 컨테이너
-const itemlist = document.getElementById('add-item-list')
 // 입력 줄 전체
 let singleList = document.querySelector('.single_item_selector');
 let copiedList;
-console.log(bManagement);
+
+
+// 초기 실행
+displayMenu();
+createAddService();
+createCategoryList(); // 메뉴수정 관련 Modal
+
+// 메뉴 생성
+function displayMenu() {
+	// 더미 데이터
+	const bMenues = [
+		{
+			"A": "a",
+			"B": "b",
+			"C": "c",
+			"D": "d",
+			"E": "e",
+			"deliveryFee": "1000원"
+		},
+		{
+			"A": "a",
+			"B": "b",
+			"C": "c",
+			"D": "d",
+			"E": "e"
+		}
+	]
+		
+	
+	const tbody = document.getElementById("item-list-tbody");
+	
+	// 테이플 행 카운트 > 짝수 번째 하이라이트
+	let row = 0;
+	for (let item = 0; item < bMenues.length; item++) {
+		const randomId = generateRandomString(9);
+		const tr = document.createElement("tr");
+		tr.id = randomId;
+		
+		row++;
+		
+		for (let key in bMenues[item]) {
+			
+		// switch
+			switch(key) {
+			// 서비스 유형(main-category)
+			case "A":
+				const mainCategory = document.createElement("th");
+				mainCategory.scope = "row";
+				mainCategory.innerHTML = bMenues[item][key];
+				
+				// 짝수 줄 > 하이라이트
+				if (row % 2 == 0) mainCategory.className = "even";
+				
+				// 삽입
+				tr.appendChild(mainCategory);
+				break;
+			
+			// 서비스 타입(sub-category)
+			case "B":
+				const subCategory = document.createElement("td");
+				subCategory.innerHTML = bMenues[item][key];
+				
+				// 짝수 줄 > 하이라이트
+				if (row % 2 == 0) subCategory.className = "even";
+				
+				// 삽입
+				tr.appendChild(subCategory);
+				break;
+				
+			// 세부 내용
+			case "C":
+				const detailInfo = document.createElement("td");
+				detailInfo.innerHTML = bMenues[item][key];
+				
+				// 짝수 줄 > 하이라이트
+				if (row % 2 == 0) detailInfo.className = "even";
+				
+				// 삽입
+				tr.appendChild(detailInfo);
+				break;
+				
+			// 가격 & 배달료
+			case "D":
+				const wrapper = document.createElement("td");
+				wrapper.style.display = "block";
+				
+				// 가격
+				const serviceFee = document.createElement("div");
+				serviceFee.innerHTML = bMenues[item][key];
+				
+				// 삽입 (가격)
+				wrapper.appendChild(serviceFee);
+				
+				// 배달료
+				if (bMenues[item].hasOwnProperty("deliveryFee")) {
+					console.log(bMenues[item]["deliveryFee"]);
+					const deliveryFee = document.createElement("div");
+					deliveryFee.innerHTML = "(" + bMenues[item]["deliveryFee"] + ")";
+					
+					// 삽입 (배달료)
+					wrapper.appendChild(deliveryFee);
+				}
+				
+				// 짝수 줄 > 하이라이트
+				if (row % 2 == 0) wrapper.className = "even";
+				
+				// 삽입 (td)
+				tr.appendChild(wrapper);
+				break;
+				
+			// 소요 시간
+			case "E":
+				const estimatedTime = document.createElement("td");
+				estimatedTime.innerHTML = bMenues[item][key];
+				
+				// 짝수 줄 > 하이라이트
+				if (row % 2 == 0) estimatedTime.className = "even";
+				
+				// 삽입
+				tr.appendChild(estimatedTime);
+				break;
+			default:
+				break;
+			}
+		}
+		
+		tbody.appendChild(tr);
+	}
+}
+
 
 // 서비스 등록 > 입력 input & select 생성
 function createAddService() {
@@ -539,6 +664,7 @@ function deleteList(tr) {
 
 // 취소 버튼
 function dismissInput(id) {
+	const itemlist = document.getElementById('add-item-list');
 	// 목록이 하나 남았을 때
 	if (itemlist.children.length === 1) {
 		
@@ -691,9 +817,3 @@ function attachSubCategories(subCategory) {
 	
 	return subMenuContainer;
 }
-
-
-// 서비스 등록 관련 초기 실행
-createAddService();
-//createOptions(menuCategories); // select > option 드랍다운 동적 구현
-createCategoryList(); // 메뉴수정 관련 Modal
