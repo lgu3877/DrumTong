@@ -28,18 +28,18 @@
 
                 <div class="paging">
                     <c:if test="${prev }">
-                        <div><a href="${cpath }/customer/board/customerBoard/${type }/${begin - 1}/">◀ </a></div>
+                        <div class="onclick" onclick="location.href='${cpath }/customer/board/customerBoard/${type }/${begin - 1}/'"><a>◀ </a></div>
                     </c:if>
                     <c:forEach var="i" begin="${begin}" end="${end}">
                         <c:if test="${i == page }">
                            <div><strong>${i }</strong></div>
                         </c:if>
                         <c:if test="${i != page }">
-                            <div><a href="${cpath }/customer/board/customerBoard/${type }/${i }/"> ${i } </a></div>
+                            <div class="onclick" onclick="location.href='${cpath }/customer/board/customerBoard/${type }/${i }/'"><a> ${i } </a></div>
                         </c:if>
                     </c:forEach>
                     <c:if test="${next }">
-                        <div><a href="${cpath }/customer/board/customerBoard/${type }/${end + 1}/">▶</a></div>
+                        <div class="onclick" onclick="location.href='${cpath }/customer/board/customerBoard/${type }/${end + 1}/'"><a>▶</a></div>
                     </c:if>
                 </div>
 

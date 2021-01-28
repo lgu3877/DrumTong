@@ -43,8 +43,6 @@
     <script>
       function calTotal() {
         orders = document.querySelectorAll('.selected-row');
-        console.log(orders);
-
         quickText = document.getElementById('select-quick');
         totalText = document.getElementById('select-total');
 
@@ -95,7 +93,6 @@
     	  event.stopPropagation()
         check = event.target;
         row = check.parentNode;
-       	console.log(check);
 
         if(check.checked){
           row.style.backgroundRepeat = "no-repeat";
@@ -117,7 +114,6 @@
          
         icon = event.target;
         className = icon.className;
-        console.log(event.target.className.search(/add/));
       
         if (className.search(/add/) > 0) {
           icon.style['-webkit-text-stroke'] = '2px orange';
@@ -175,8 +171,6 @@
           cnt++;
         }
 
-        console.log(orderMap);
-
         if (cnt !== selecteds.length) return;
 
         $.ajax({
@@ -196,9 +190,9 @@
 		i = 0;
 		imgBoxs = document.querySelectorAll('detailview-imgBlock');
 		
-		imgList.forEach(img =>{
-			imgBoxs[i++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + img.storeimg;
-		})
+// 		imgList.forEach(img =>{
+// 			imgBoxs[i++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + img.storeimg;
+// 		})
 		
 		reviewList = ${ReviewList};
 		reviewList.forEach(rv =>{
@@ -366,18 +360,25 @@
       	<div style="background: #35aefd; color: white; height: 60px; display: flex; align-items: center; ">
       		<h2 style="margin: 0; font-size: 13pt;">리뷰게시판</h2>
       	</div>
-        <div class="modal-grade">
-          <i class="fas fa-star"></i>
-        </div>
+
         <div class="modal-reiview">
           <div class="detailview-review-row">
             <div class="review-head">
               <div class="review-profilePic"></div>
               <div class="review-writer">
+              <div style="display: table-row; vertical-align: middle;">
                 <p>김상재</p>
-                <p>2020-08-04</p>
+                <div style="display: flex;">
+	                <p>좋아요 2 · </p>
+	                <p>사진 1 · </p>
+	                <p>평점 4 </p>
+                </div>
+                </div>
               </div>
             </div>
+            <div class="modal-grade">
+    			 <i class="fas fa-star fa-2x"></i>3.5
+	        </div>
             <div class="review-context">this laundrry shop is sooooo awesome!!!</div>
           </div>
         </div>
@@ -386,8 +387,6 @@
 
     <!-- 스크립트 영역 -->
     <script type="text/javascript">
-      console.log('작동 테스트');
-      
       // Get the modal
        var modal = document.getElementById('myModal');
 

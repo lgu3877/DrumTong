@@ -48,9 +48,14 @@
 	<script type="text/javascript">
 		const bImageList = ${bImageList};
 		const bManagement = ${bManagement};
+<<<<<<< HEAD
 		
 		
 
+=======
+		const bMenu = ${bMenu};
+		
+>>>>>>> branch 'master' of https://github.com/lgu3877/DrumTong/
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
 	</script>
@@ -296,36 +301,8 @@
 					</thead>
 					
 				<!-- tbody -->
-					<tbody id="item-list-tbody">
-						<tr>
-							<th scope="row">서비스1</th>
-							<td>내용1</td>
-							<td>내용2</td>
-							<td>내용3</td>
-							<td>내용4</td>
-						</tr>
-						<tr>
-							<th scope="row" class="even">서비스2</th>
-							<td class="even">내용1</td>
-							<td class="even">내용2</td>
-							<td class="even">내용3</td>
-							<td class="even">내용4</td>
-						</tr>
-						<tr>
-							<th scope="row">서비스3</th>
-							<td>내용1</td>
-							<td>내용2</td>
-							<td>내용3</td>
-							<td>내용4</td>
-						</tr>
-						<tr>
-							<th scope="row" class="even">서비스4</th>
-							<td class="even">내용1</td>
-							<td class="even">내용2</td>
-							<td class="even">내용3</td>
-							<td class="even">내용4</td>
-						</tr>
-					</tbody>
+					<tbody id="item-list-tbody"></tbody>
+					
 				</table>
 			</div>
 		</c:if>
@@ -551,7 +528,7 @@
 		<c:if test="${status eq 'FAIL' }">
 	<!-- 전체 form submit -->
 			<div class="submit_con">
-				<input class="submit_btn" type="submit" value="입력완료">
+				<input class="submit_btn" type="submit" value="다음 단계로">
 			</div>
 			</form>
 
@@ -612,6 +589,13 @@
 			}
 			
 			return result;
+		}
+		
+		// 가격에 콤마(,) 삽입
+		function insertComma(string) {
+			const reversedString = string.split("").reverse().join("");
+			const commaAttached = reversedString.replace(/(.{3})/g,"$1,");
+			return commaAttached.split("").reverse().join("");
 		}
 	</script>
 	
