@@ -157,7 +157,13 @@ public class BusinessContractService {
 		 * 다중 이미지 업로드이기 떄문에 multipleUpload 메서드를 호출해준다.
 		 *  
 		 */
-		aws.multipleUpload(mpf, ESTID, bInformationVO);
+		BPrivateDataVO bPrivateDataVO = (BPrivateDataVO)Session.getAttribute("bLogin");
+ 	    String bpersonid = bPrivateDataVO.getBpersonid();
+ 	    
+ 	    
+ 	    String folderName = "business/" + bpersonid + "/" + ESTID; 
+ 	    
+		aws.multipleUpload(mpf, folderName, bInformationVO, req);
 		
 		
 		return mav;

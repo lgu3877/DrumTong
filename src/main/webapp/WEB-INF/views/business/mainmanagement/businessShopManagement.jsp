@@ -47,6 +47,7 @@
 	
 	<script type="text/javascript">
 		const bImageList = ${bImageList};
+		const bManagement = ${bManagement};
 
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
@@ -123,7 +124,7 @@
 				</div>
 				
 			<!-- cover-image input form -->
-				<div id="shop-image-view" class="shop_image_view">
+			<!-- 	<div id="shop-image-view" class="shop_image_view">
 					<div class="upload_icon_con">
 						<div class="cover_file_text_con">
 							<div class="cover_file_text">
@@ -136,7 +137,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				
 			<!-- image viewer as long as cover image is already uploaded when you visit this page for modification -->
 				<div id="main-image-con" class="main_image_con">
@@ -208,7 +209,7 @@
 				</div>
 
 			<!-- add store introduction -->
-				<div id="intro-modal-btn" class="intro_add_con">
+				<div id="intro-modal-btn" class="intro_add_con" onclick="openIntroModal()">
        				<span>매장 소개글 등록 및 수정
        					<i class="far fa-file-alt"></i>
        				</span>
@@ -404,12 +405,8 @@
 		
 		
 		
-		<!-- 상품 수령 방법(세탁물 수령 방법) -->
-		
-		
+	<!-- 상품 수령 방법(세탁물 수령 방법) -->
 		<div class="return_menu_con">
-		
-
 		<!-- 목차 -->
 			<div class="shop_info_title_con">
 				<div>
@@ -431,10 +428,8 @@
 				</div>
 			</div>
 			
-			
 		<!-- 수취 선택 -->
 			<div class="return_menu">
-			
 				<ul>
 					<li onclick="checkContent(this)">
 					<!-- BManagementVO > deliveryboolean -->
@@ -450,10 +445,60 @@
 					</li>
 				</ul>
 			</div>
+		</div>
+		
+
+
+	<!-- 배달 지역 설정 및 수정 -->
+		<div class="delivery_menu_con">
+		<!-- 목차 -->
+			<div class="shop_info_title_con">
+				<div>
+					<span class="shop_info_title">배달 지역 관리</span>
+					<i id="delivery-help" class="far fa-question-circle" style="font-weight: 600">도움말</i>
+					<div id="delivery-help-msg"></div>
+				</div>
+			<!-- 버튼 -->
+				<div class="service_button_con">
+					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
+					<c:if test="${status eq 'SUCCESS' }">
+					<div class="complete_menu_btn_con"  onclick="updateDeliveryArea()">
+						<div class="add_menu_icon_con">
+							<i class="fas fa-check-square"></i>
+						</div>
+						<div class="add_menu_btn_title">수정 완료</div>
+					</div>
+					</c:if>
+				</div>
+			</div>
+			
+			
+		<!-- 설정된 배달 가능지역 보기  & 배달 지역 설정  -->
+			<div class="delivery_menu">
+				<div class="delivery_area_view_con">
+				
+				</div>
+				
+				<div class="delivery_area_set_con">
+				<!-- 시/도 선택 -->
+					<select id="major-area-selector" name="majorArea" onchange="createMinorOptions()">
+						<option hidden selected>시/도 선택</option>
+					</select>
+				<!-- 시/군/구 선택 -->
+					<select id="minor-area-selector" name="minorArea" onchange="createDetailOptions()">
+						<option hidden selected>시/군/구 선택</option>
+					</select>
+				<!-- 읍/면/동 선택 -->
+					<div id="detail-area-selector"></div>
+				</div>
+		
+			</div>
 
 
 		</div>
-		
+
+
+
 	
 	<!-- 주소 확인 & 변경 -->
 		<div class="address_update_con">		
@@ -497,15 +542,14 @@
 		</div>
 		
 		
-		
 	<!-- [50줄] 여는 태그  세션의 상태가 FAIL이면 POST 형식   -->
 	<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
 	<!-- 	[전체 폼]에 대한 c:if문 -->
 	
 		<c:if test="${status eq 'FAIL' }">
 	<!-- 전체 form submit -->
-			<div>
-				<input type="submit" value="입력 완료">
+			<div class="submit_con">
+				<input class="submit_btn" type="submit" value="입력완료">
 			</div>
 			</form>
 
@@ -523,10 +567,10 @@
 	<div id="intro-modal" class="intro_modal">
 	<!-- Modal content -->
 		<div class="intro_content_con">
-			<span class="intro_close">&times;</span>
+			<span class="intro_close" onclick="closeIntroModal()">&times;</span>
 			<div class="intro_content">
 			<!-- BManagementVO > introduction -->
-				<textarea class="store_intro_input" name="introduction" maxlength="500" placeholder="매장 소개글을 적어주세요." autofocus style="resize: none;"></textarea>
+				<textarea id="intro-modal-textarea" class="store_intro_input" name="introduction" maxlength="500" placeholder="매장 소개글을 적어주세요." autofocus style="resize: none;"></textarea>
 				<input class="store_intro_btn" type="button" value="작성완료" onclick='comfirmIntro()' >
 			</div>
 		</div>
@@ -545,15 +589,6 @@
 		</div>
 	</div>
 
-	<script type="text/javascript">
-		// DB에서 받아오는 Defaultcategory List<String> 배열
-// 		const defaultCategory = ${defaultcategory};
-		/* const menucategories = ${menuCategories};
-		const bImageList = ${bImageList};
-		console.log(bImageList);
-		console.log(defaultCategory);
-		sconsole.log(menuCategories); */
-	</script>
 	
 	
 	<script type="text/javascript">
@@ -592,6 +627,9 @@
 
 	<!-- 배달 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementReturnItem.js"></script>
+
+	<!-- 배달 지역 설정 -->
+	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementDeliveryArea.js"></script>
 	
 	<!-- 도움말 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementHelpMsg.js"></script>

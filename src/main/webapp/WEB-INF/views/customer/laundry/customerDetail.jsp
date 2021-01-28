@@ -190,7 +190,21 @@
         });
       } //submit 체크 함수 종료
     </script>
-
+<!-- 	영경 스크립트 -->
+	<script>
+		imgList = ${bImageVO};
+		i = 0;
+		imgBoxs = document.querySelectorAll('detailview-imgBlock');
+		
+		imgList.forEach(img =>{
+			imgBoxs[i++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + img.storeimg;
+		})
+		
+		reviewList = ${ReviewList};
+		reviewList.forEach(rv =>{
+			console.log(rv);
+		})
+	</script>
     <!-- 본문 영역 -->
 <!--     <header>헤더셈</header> -->
     <section class="section-SangJae">
@@ -198,14 +212,14 @@
         <div class="detailview-top">
           <div class="detailview-imgBlock" id="detailview-imgBlock">
             <div class="detailview-imgBlock-main">
-              <img src="${cpath }/resources/business/img/laundry1_01.jpg" />
+              <img src="" />
             </div>
             <div class="detailview-imgBlock-subRow">
-              <img src="${cpath }/resources/business/img/laundry1_02.jpg" />
-              <img src="${cpath }/resources/business/img/laundry1_03.jpg" />
-              <img src="${cpath }/resources/business/img/laundry1_04.jpg" />
-              <img src="${cpath }/resources/business/img/laundry1_05.jpg" />
-              <img src="${cpath }/resources/business/img/laundry1_06.jpg" />
+              <img src="" />
+              <img src="" />
+              <img src="" />
+              <img src="" />
+              <img src="" />
             </div>
           </div>
           <div class="detailview-companyIntro">
@@ -506,9 +520,9 @@
            })
          
          // ★★★★★★★★미완성★★★★★★★★★
-         imgbox = document.getElementById('detailview-imgBlock').querySelectorAll('img');
-         imgList = '${bImageVO}';
-         console.log(imgList.size);
+//          imgbox = document.getElementById('detailview-imgBlock').querySelectorAll('img');
+//          imgList = '${bImageVO}';
+//          console.log(imgList.size);
          
          document.getElementById('loginSubmit').addEventListener('click', function(){ logiinSubmit('asynchronous');});
 
