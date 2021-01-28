@@ -29,13 +29,16 @@
 							B.CONTENT as bcontent, B.REGISTDATE as bregistdate 
 					FROM (SELECT * FROM BREVIEW WHERE 
 						<choose>
-							<when test="division eq 'whole'.toString()">
+							<when test='division eq "whole"'>
 								BLOCKBOOLEAN = 'N'
 							</when>
-							<when test="division eq 'noReply'.toString()">
+							<when test='division eq "noReply"'>
 								REPLYBOOLEAN = 'N' AND BLOCKBOOLEAN = 'N' 
 							</when>
-							<when test="division eq 'reportReply'.toString()">
+							<when test='division eq "reportReply"'>
+								BLOCKBOOLEAN = 'Y'
+							</when>
+							<when test='division eq "wholeAndNoReport"'>
 								BLOCKBOOLEAN = 'Y'
 							</when>
 						</choose>

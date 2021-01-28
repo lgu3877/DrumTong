@@ -505,11 +505,11 @@ public class AwsServiceImpl{
 	   	
 	   	// 대표사진 유무를 'Y' 로 설정해준다.
 	    vo.setDelegatephotoboolean("Y");
-	       
+	    String folderName = "business/" + vo.getEstid();
 	      
 	    // S3의 파일 업로드를 시켜준다.
 	    // 결과 값을 반환시켜준다. 
-	   	return fileUpload(delegate, vo.getEstid(), object, 0);
+	   	return fileUpload(delegate, folderName, object, 0);
    }
    
    
