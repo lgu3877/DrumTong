@@ -1376,6 +1376,10 @@ body .section_board .board .board_box {
    transition-duration: 0.5s;
 }
 
+section.section_board div.paging div.onclick{
+	cursor: pointer;
+}
+
 /* ====================게시판 읽기 (boardRead) CSS========================= */
 .boardList {
    width: 100%;
