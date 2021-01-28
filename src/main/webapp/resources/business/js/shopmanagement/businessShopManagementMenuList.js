@@ -10,46 +10,80 @@ createCategoryList(); // 메뉴수정 관련 Modal
 
 // 메뉴 생성
 function displayMenu() {
-	// 더미 데이터
-	const bMenues = [
-		{
-			"A": "a",
-			"B": "b",
-			"C": "c",
-			"D": "d",
-			"E": "e",
-			"deliveryFee": "1000"
-		},
-		{
-			"A": "a",
-			"B": "b",
-			"C": "c",
-			"D": "d",
-			"E": "e"
-		}
-	]
+//	ete: 1
+//	maincategory: "일반의류"
+//	name: "T-셔츠"
+
 		
 	
 	const tbody = document.getElementById("item-list-tbody");
 	
 	// 테이플 행 카운트 > 짝수 번째 하이라이트
 	let row = 0;
-	for (let item = 0; item < bMenues.length; item++) {
+	for (let index = 0; index < bMenu.length; index++) {
 		const randomId = generateRandomString(9);
 		const tr = document.createElement("tr");
 		tr.id = randomId;
 		
 		row++;
 		
-		for (let key in bMenues[item]) {
-			
+		// 출력 순서를 위한 오브젝트 정렬
+		const sortedMenu = {};
+		const count = Object.keys(bMenu[index]).length;
+		let size = 0;
+//		while(true) {
+		for (let i = 0; i < count; i++) {
+			if (bMenu[index].maincategory && sortedMenu.maincategory === undefined) {
+				for (let key in bMenu[index]) {
+					key === "maincategory" ? sortedMenu.maincategory = bMenu[index][key] : null; 
+				}
+				size++;
+			}
+			else if (bMenu[index].subcategory && sortedMenu.subcategory === undefined) {
+				for (let key in bMenu[index]) {
+					key === "subcategory" ? sortedMenu.subcategory = bMenu[index][key] : null; 
+				}
+				size++;
+			}
+			else if (bMenu[index].name && sortedMenu.name === undefined) {
+				for (let key in bMenu[index]) {
+					key === "name" ? sortedMenu.name = bMenu[index][key] : null; 
+				}
+				size++;
+			}
+			else if (bMenu[index].price && sortedMenu.price === undefined) {
+				for (let key in bMenu[index]) {
+					key === "price" ? sortedMenu.price = bMenu[index][key] : null; 
+				}
+				size++;
+			}
+			else if (bMenu[index].ete && sortedMenu.ete === undefined) {
+				for (let key in bMenu[index]) {
+					key === "ete" ? sortedMenu.ete = bMenu[index][key] : null; 
+				}
+				size++;
+			}
+			else if (bMenu[index].quickprice && sortedMenu.quickprice === undefined) {
+				for (let key in bMenu[index]) {
+					key === "quickprice" ? sortedMenu.ete = bMenu[index][key] : null; 
+				}
+				size++;
+			}
+			else if (size === count - 1) break;
+		}
+		
+		console.log(sortedMenu);
+		console.log(bMenu[index]);
+		
+		
+		for (let key in bMenu[index]) {
 		// switch
 			switch(key) {
 			// 서비스 유형(main-category)
-			case "A":
+			case "maincategory":
 				const mainCategory = document.createElement("th");
 				mainCategory.scope = "row";
-				mainCategory.innerHTML = bMenues[item][key];
+				mainCategory.innerHTML = bMenu[index][key];
 				
 				// 짝수 줄 > 하이라이트
 				if (row % 2 == 0) mainCategory.className = "even";
@@ -59,9 +93,9 @@ function displayMenu() {
 				break;
 			
 			// 서비스 타입(sub-category)
-			case "B":
+			case "subcategory":
 				const subCategory = document.createElement("td");
-				subCategory.innerHTML = bMenues[item][key];
+				subCategory.innerHTML = bMenu[index][key];
 				
 				// 짝수 줄 > 하이라이트
 				if (row % 2 == 0) subCategory.className = "even";
@@ -71,9 +105,9 @@ function displayMenu() {
 				break;
 				
 			// 세부 내용
-			case "C":
+			case "name":
 				const detailInfo = document.createElement("td");
-				detailInfo.innerHTML = bMenues[item][key];
+				detailInfo.innerHTML = bMenu[index][key];
 				
 				// 짝수 줄 > 하이라이트
 				if (row % 2 == 0) detailInfo.className = "even";
@@ -83,22 +117,22 @@ function displayMenu() {
 				break;
 				
 			// 가격 & 배달료
-			case "D":
+			case "price":
 				const wrapper = document.createElement("td");
 				wrapper.style.display = "block";
 				
 				// 가격
 				const serviceFee = document.createElement("div");
-				serviceFee.innerHTML = bMenues[item][key];
+				serviceFee.innerHTML = insertComma(bMenu[index][key].toString()) + " 원";
 				
 				// 삽입 (가격)
 				wrapper.appendChild(serviceFee);
 				
 				// 배달료
-				if (bMenues[item].hasOwnProperty("deliveryFee")) {
+				if (bMenu[index].hasOwnProperty("quickprice")) {
 					const deliveryFeeCon = document.createElement("div");
 					
-					const deliveryFee = bMenues[item]["deliveryFee"];
+					const deliveryFee = bMenu[index]["quickprice"].toString();
 					deliveryFeeCon.innerHTML = "(" + insertComma(deliveryFee) + " 원)";
 					
 					// 삽입 (배달료)
@@ -108,14 +142,14 @@ function displayMenu() {
 				// 짝수 줄 > 하이라이트
 				if (row % 2 == 0) wrapper.className = "even";
 				
-				// 삽입 (td)
+				// 삽입
 				tr.appendChild(wrapper);
 				break;
 				
 			// 소요 시간
-			case "E":
+			case "ete":
 				const estimatedTime = document.createElement("td");
-				estimatedTime.innerHTML = bMenues[item][key];
+				estimatedTime.innerHTML = bMenu[index][key];
 				
 				// 짝수 줄 > 하이라이트
 				if (row % 2 == 0) estimatedTime.className = "even";
@@ -125,9 +159,8 @@ function displayMenu() {
 				break;
 			default:
 				break;
-			}
+			}			
 		}
-		
 		tbody.appendChild(tr);
 	}
 }

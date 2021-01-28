@@ -48,11 +48,8 @@
 	<script type="text/javascript">
 		const bImageList = ${bImageList};
 		const bManagement = ${bManagement};
-
-		const mainAddress = "${mainAddress}";
-		/* const detailAddress = ${detailAddress}; */
-		console.log(mainAddress);
-
+		const bMenu = ${bMenu};
+		
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
 	</script>
@@ -525,7 +522,7 @@
 		<c:if test="${status eq 'FAIL' }">
 	<!-- 전체 form submit -->
 			<div class="submit_con">
-				<input class="submit_btn" type="submit" value="입력완료">
+				<input class="submit_btn" type="submit" value="다음 단계로">
 			</div>
 			</form>
 
