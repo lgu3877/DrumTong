@@ -1,11 +1,169 @@
-// 상품 추가 버튼
-const addItemBtn = document.getElementById('add-item-btn');
-// 줄을 추가할 컨테이너
-const itemlist = document.getElementById('add-item-list')
 // 입력 줄 전체
 let singleList = document.querySelector('.single_item_selector');
 let copiedList;
-console.log(bManagement);
+
+
+// 초기 실행
+displayMenu();
+createAddService();
+createCategoryList(); // 메뉴수정 관련 Modal
+
+// 메뉴 생성
+function displayMenu() {
+//	ete: 1
+//	maincategory: "일반의류"
+//	name: "T-셔츠"
+
+		
+	
+	const tbody = document.getElementById("item-list-tbody");
+	
+	// 테이플 행 카운트 > 짝수 번째 하이라이트
+	let row = 0;
+	for (let index = 0; index < bMenu.length; index++) {
+		const randomId = generateRandomString(9);
+		const tr = document.createElement("tr");
+		tr.id = randomId;
+		
+		row++;
+		
+		// 출력 순서를 위한 오브젝트 정렬
+		const sortedMenu = {};
+		const count = Object.keys(bMenu[index]).length;
+		let size = 0;
+//		while(true) {
+		for (let i = 0; i < count; i++) {
+			if (bMenu[index].maincategory && sortedMenu.maincategory === undefined) {
+				for (let key in bMenu[index]) {
+					key === "maincategory" ? sortedMenu.maincategory = bMenu[index][key] : null; 
+				}
+				size++;
+			}
+			else if (bMenu[index].subcategory && sortedMenu.subcategory === undefined) {
+				for (let key in bMenu[index]) {
+					key === "subcategory" ? sortedMenu.subcategory = bMenu[index][key] : null; 
+				}
+				size++;
+			}
+			else if (bMenu[index].name && sortedMenu.name === undefined) {
+				for (let key in bMenu[index]) {
+					key === "name" ? sortedMenu.name = bMenu[index][key] : null; 
+				}
+				size++;
+			}
+			else if (bMenu[index].price && sortedMenu.price === undefined) {
+				for (let key in bMenu[index]) {
+					key === "price" ? sortedMenu.price = bMenu[index][key] : null; 
+				}
+				size++;
+			}
+			else if (bMenu[index].ete && sortedMenu.ete === undefined) {
+				for (let key in bMenu[index]) {
+					key === "ete" ? sortedMenu.ete = bMenu[index][key] : null; 
+				}
+				size++;
+			}
+			else if (bMenu[index].quickprice && sortedMenu.quickprice === undefined) {
+				for (let key in bMenu[index]) {
+					key === "quickprice" ? sortedMenu.ete = bMenu[index][key] : null; 
+				}
+				size++;
+			}
+			else if (size === count - 1) break;
+		}
+		
+		console.log(sortedMenu);
+		console.log(bMenu[index]);
+		
+		
+		for (let key in bMenu[index]) {
+		// switch
+			switch(key) {
+			// 서비스 유형(main-category)
+			case "maincategory":
+				const mainCategory = document.createElement("th");
+				mainCategory.scope = "row";
+				mainCategory.innerHTML = bMenu[index][key];
+				
+				// 짝수 줄 > 하이라이트
+				if (row % 2 == 0) mainCategory.className = "even";
+				
+				// 삽입
+				tr.appendChild(mainCategory);
+				break;
+			
+			// 서비스 타입(sub-category)
+			case "subcategory":
+				const subCategory = document.createElement("td");
+				subCategory.innerHTML = bMenu[index][key];
+				
+				// 짝수 줄 > 하이라이트
+				if (row % 2 == 0) subCategory.className = "even";
+				
+				// 삽입
+				tr.appendChild(subCategory);
+				break;
+				
+			// 세부 내용
+			case "name":
+				const detailInfo = document.createElement("td");
+				detailInfo.innerHTML = bMenu[index][key];
+				
+				// 짝수 줄 > 하이라이트
+				if (row % 2 == 0) detailInfo.className = "even";
+				
+				// 삽입
+				tr.appendChild(detailInfo);
+				break;
+				
+			// 가격 & 배달료
+			case "price":
+				const wrapper = document.createElement("td");
+				wrapper.style.display = "block";
+				
+				// 가격
+				const serviceFee = document.createElement("div");
+				serviceFee.innerHTML = insertComma(bMenu[index][key].toString()) + " 원";
+				
+				// 삽입 (가격)
+				wrapper.appendChild(serviceFee);
+				
+				// 배달료
+				if (bMenu[index].hasOwnProperty("quickprice")) {
+					const deliveryFeeCon = document.createElement("div");
+					
+					const deliveryFee = bMenu[index]["quickprice"].toString();
+					deliveryFeeCon.innerHTML = "(" + insertComma(deliveryFee) + " 원)";
+					
+					// 삽입 (배달료)
+					wrapper.appendChild(deliveryFeeCon);
+				}
+				
+				// 짝수 줄 > 하이라이트
+				if (row % 2 == 0) wrapper.className = "even";
+				
+				// 삽입
+				tr.appendChild(wrapper);
+				break;
+				
+			// 소요 시간
+			case "ete":
+				const estimatedTime = document.createElement("td");
+				estimatedTime.innerHTML = bMenu[index][key];
+				
+				// 짝수 줄 > 하이라이트
+				if (row % 2 == 0) estimatedTime.className = "even";
+				
+				// 삽입
+				tr.appendChild(estimatedTime);
+				break;
+			default:
+				break;
+			}			
+		}
+		tbody.appendChild(tr);
+	}
+}
 
 // 서비스 등록 > 입력 input & select 생성
 function createAddService() {
@@ -539,6 +697,7 @@ function deleteList(tr) {
 
 // 취소 버튼
 function dismissInput(id) {
+	const itemlist = document.getElementById('add-item-list');
 	// 목록이 하나 남았을 때
 	if (itemlist.children.length === 1) {
 		
@@ -693,7 +852,21 @@ function attachSubCategories(subCategory) {
 }
 
 
-// 서비스 등록 관련 초기 실행
-createAddService();
-//createOptions(menuCategories); // select > option 드랍다운 동적 구현
-createCategoryList(); // 메뉴수정 관련 Modal
+
+
+//function insertComma(string) {
+//const reversedString = string.split("").reverse().join("");
+//const commaAttached = reversedString.replace(/(.{3})/g,"$1,");
+//return commaAttached.split("").reverse().join("");
+//
+//메모
+//const length = string.length;
+//const numberOfZero = 
+//	length <= 3 ?
+//		0 : 
+//		length % 3 === 0 ? (length / 3) -1 : (length / 3);
+//
+//	for (let i = numberOfZero; i > 0; i--) {
+//	reversedString[numberOfZero * 3]
+//}
+//}
