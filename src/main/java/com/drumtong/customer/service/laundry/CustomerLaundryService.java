@@ -64,7 +64,7 @@ public class CustomerLaundryService {
 		// 메뉴 정보(메뉴이름, 가격, 퀵 가격, 예상소요시간)를 저장한 객체(오름차순)
 		List<BMenuVO> bMenuVO = bMenuDAO.select(estid);
 		
-		List<ReviewList> ReviewList = Review.selectList(estid, "detailReview");
+		List<ReviewList> ReviewList = Review.selectList(estid, "whole");
 		
 		mav.addObject("bInformationVO", bInformationVO);
 		mav.addObject("bManagementVO", bManagementVO);

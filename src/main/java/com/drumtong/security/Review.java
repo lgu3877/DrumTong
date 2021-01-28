@@ -43,20 +43,17 @@ public class Review {
 		
 		map.put("estid", estid);
 		switch(pageKind) {
-		case "whole":	// 전체 페이지 수, 페이지 별 리스트
+		case "whole":	// 전체 페이지 수
 			map.put("division", "whole");
 			break;
-		case "noReply": // 미답변 페이지 수, 페이지 별 리스트
+		case "noReply": // 미답변 페이지 수
 			map.put("division", "noReply");
 			break;
-		case "reportReply": // 신고한리뷰 페이지 수, 페이지 별 리스트
+		case "reportReply": // 신고한리뷰 페이지 수
 			map.put("division", "reportReply");	//	10개 이상일 때 신고로 이동
 			break;
-		case "detailReview":
-			map.put("division", "wholeAndNoReport");
-			break;
 		}
-		System.out.println("pageKind : " + pageKind);
+//		System.out.println("pageKind : " + pageKind);
 		return bReviewDAO.selectReview(map);
 	}
 	
