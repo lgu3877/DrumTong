@@ -190,9 +190,9 @@
 		i = 0;
 		imgBoxs = document.querySelectorAll('detailview-imgBlock');
 		
-		imgList.forEach(img =>{
-			imgBoxs[i++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + img.storeimg;
-		})
+// 		imgList.forEach(img =>{
+// 			imgBoxs[i++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + img.storeimg;
+// 		})
 		
 		reviewList = ${ReviewList};
 		reviewList.forEach(rv =>{
@@ -387,7 +387,6 @@
 
     <!-- 스크립트 영역 -->
     <script type="text/javascript">
-      
       // Get the modal
        var modal = document.getElementById('myModal');
 
