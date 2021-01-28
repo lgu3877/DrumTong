@@ -48,6 +48,8 @@
 	<script type="text/javascript">
 		const bImageList = ${bImageList};
 		const bManagement = ${bManagement};
+		
+		
 
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
