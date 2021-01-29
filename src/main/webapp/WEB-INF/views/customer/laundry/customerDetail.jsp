@@ -186,18 +186,18 @@
     </script>
 <!-- 	영경 스크립트 -->
 	<script>
-		imgList = ${bImageVO};
-		i = 0;
-		imgBoxs = document.querySelectorAll('detailview-imgBlock');
+// 		imgList = ${bImageVO};
+// 		i = 0;
+// 		imgBoxs = document.querySelectorAll('detailview-imgBlock');
 		
 // 		imgList.forEach(img =>{
 // 			imgBoxs[i++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + img.storeimg;
 // 		})
 		
-		reviewList = ${ReviewList};
-		reviewList.forEach(rv =>{
-			console.log(rv);
-		})
+// 		reviewList = ${ReviewList};
+// 		reviewList.forEach(rv =>{
+// 			console.log(rv);
+// 		})
 	</script>
     <!-- 본문 영역 -->
 <!--     <header>헤더셈</header> -->
@@ -291,7 +291,7 @@
 	          	<div id="donut_single" style="height: 70%"></div>
        		</div>
         </div>
-          <button class="review-more" id="review-more">Open Modal</button>
+          <button class="review-more" id="review-more">리뷰 더보기</button>
       </div>
     </section>
 
@@ -367,7 +367,7 @@
               <div class="review-profilePic"></div>
               <div class="review-writer">
               <div style="display: table-row; vertical-align: middle;">
-                <p>김상재</p>
+                <p class="customerName"></p>
                 <div style="display: flex;">
 	                <p>좋아요 2 · </p>
 	                <p>사진 1 · </p>
@@ -377,9 +377,9 @@
               </div>
             </div>
             <div class="modal-grade">
-    			 <i class="fas fa-star fa-2x"></i>3.5
+    			 <i class="fas fa-star fa-2x"></i><span>3.5</span>
 	        </div>
-            <div class="review-context">this laundrry shop is sooooo awesome!!!</div>
+            <div class="review-context"></div>
           </div>
         </div>
       </div>
@@ -438,6 +438,7 @@
          modal.style.display = 'block';
 //          modalContent4.style.display = 'flex';
          modalContent4.style.display = '';
+         reviewMore();
        };
        
        btn4.onclick = function () {
@@ -522,7 +523,7 @@
       
     </script>
     
-    <script type="text/javascript">	// 승원 작업
+    <script type="text/javascript">	// 승원 작업 - 구글 차트
     // 구글 부분 스크립트
     // 이번엔 gson 받아올 때 단순하게  가아니라 .js 에서도 사용될 수 있도록 받아오자
     google.charts.load("current", {packages:['corechart']});
@@ -603,6 +604,43 @@
       var chart2 = new google.visualization.PieChart(document.getElementById('donut_single'));
       chart2.draw(data2, options2);
     }
+    </script>
+    
+    <script type="text/javascript">	// 승원 작업 - 모달
+    
+    const imgList = ${bImageVO};
+	i = 0;
+	imgBoxs = document.querySelectorAll('detailview-imgBlock');
+	
+// 	imgList.forEach(img =>{
+// 		imgBoxs[i++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + img.storeimg;
+// 	})
+	
+	const reviewList = ${ReviewList};
+	reviewList.forEach(rv =>{
+		console.log(rv);
+	})
+	
+	const reviewform = $('.modal-reiview');
+	
+	function reviewMore() {
+// 		console.log('리뷰 더보기');
+		for(i = 0; i < reviewList.length; i++) {
+			if(i == 0) {
+				$('.detailview-review-row').attr('id', 'review' + i);
+				$('.detailview-review-row').find('.customerName').html(reviewList[i].customerName);
+				$('.detailview-review-row').find('.review-context').html(reviewList[i].ccontent);
+			}
+			else {
+				const beforerow = $('#review' + (i - 1));
+				beforerow.after('<div class="detailview-review-row">' + beforerow.html() + '</div>');
+				console.log('beforerow : ', beforerow.next().html());
+				beforerow.next().attr('id', 'review' + i);
+				beforerow.next().find('.customerName').html(reviewList[i].customerName);
+				beforerow.next().find('.review-context').html(reviewList[i].ccontent);
+			}			
+		}
+	}
     </script>
 
 <%@ include file="../main/customerFooter.jsp" %>    

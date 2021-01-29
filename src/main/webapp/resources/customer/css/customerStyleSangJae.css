@@ -826,6 +826,7 @@ check .option-name,
 .detailview-review-row {
   margin-bottom: 10px;
   width: 560px;
+  padding-left: 15px;
 }
 
 .review-head {
@@ -941,7 +942,18 @@ check .option-name,
 .modal-grade {
   width: 400px;
   padding: 10px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  
+}
+
+.modal-grade span {
+	font-size: 16pt;
+}
+
+.modal-grade i {
+	color: rgb(51, 102, 204);
+	margin-right: 15px;
 }
 
 /* The Modal (background) */
