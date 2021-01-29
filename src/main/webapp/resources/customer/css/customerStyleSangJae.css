@@ -1015,10 +1015,10 @@ check .option-name,
 .section-join{
 	height:1200px;
 }
-.section-menu,
-.section-orderlist{
+.section-menu{
 	height:600px;
 }
-.section-bookmark{
+.section-bookmark,{
+.section-orderlist
 	height:auto;
 }
