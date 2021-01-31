@@ -81,17 +81,14 @@ public class BusinessMainManagementService {
  	    String estid = bInformationVO.getEstid();
  		
  	    // 2차 온라인 계약에 매장관리를 완료했다면 전에 입력했던 데이터를 불러와준다.
- 	    // else 지움
- 	    if ( bInformationVO.getStatus().equals("PROCESS") || bInformationVO.getStatus().equals("SUCCESS") ) {
  	    	
- 	    	// 매장 사진 데이터
- 	    	mav.addObject("bImageList",(new Gson()).toJson(bImageDAO.selectImageList(estid)));
- 	    	
- 	    	// bManagement 테이블 [매장 소개글] [매장 메뉴] [세탁물 수령방법]
- 	    	mav.addObject("bManagement", (new Gson()).toJson(bManagementDAO.selectCustomerDetail(estid)));
- 	    	
- 	    	mav.addObject("bMenu", (new Gson()).toJson(bMenuDAO.select(estid)));
-  	    }
+ 	    // 매장 사진 데이터
+ 	   	mav.addObject("bImageList",(new Gson()).toJson(bImageDAO.selectImageList(estid)));
+ 	   	
+ 	   	// bManagement 테이블 [매장 소개글] [매장 메뉴] [세탁물 수령방법]
+ 	   	mav.addObject("bManagement", (new Gson()).toJson(bManagementDAO.selectCustomerDetail(estid)));
+ 	   	
+ 	   	mav.addObject("bMenu", (new Gson()).toJson(bMenuDAO.select(estid)));
  	    
  	    // 추가 	    
  	    List<String> defaultcategory = Arrays.asList((bManagementDAO.selectDefaultCategory(estid).split("/")));
