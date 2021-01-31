@@ -21,9 +21,10 @@ public class OrderList extends BSalesVO{
 //	private String requests;		// 요청 사항
 	
 	private String brandnaming; 	// BInformation 테이블의 매장명
-	
 	private HashMap<String, HashMap<String,List<BDetailSalesVO>>> maincategory;
 		
+	// 영경 추가 // 리뷰를 썼는지 안썼는지 체크하는 부분
+	private String reviewCheck;
 	
 	
 	public String getBrandnaming() {
