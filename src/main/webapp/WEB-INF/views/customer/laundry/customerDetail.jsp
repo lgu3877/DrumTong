@@ -361,7 +361,7 @@
       		<h2 style="margin: 0; font-size: 13pt;">리뷰게시판</h2>
       	</div>
 
-        <div class="modal-reiview">
+        <div class="modal-reiview" id="modal-reiview">
           <div class="detailview-review-row">
             <div class="review-head">
               <div class="review-profilePic"></div>
@@ -369,16 +369,14 @@
               <div style="display: table-row; vertical-align: middle;">
                 <p class="customerName"></p>
                 <div style="display: flex;">
-	                <p>좋아요 2 · </p>
+	                <p class="mgood">좋아요 2 · </p>
 	                <p>사진 1 · </p>
-	                <p>평점 4 </p>
+	                <p >평점 4 </p>
                 </div>
                 </div>
               </div>
             </div>
-            <div class="modal-grade">
-    			 <i class="fas fa-star fa-2x"></i><span>3.5</span>
-	        </div>
+            <div class="modal-grade"></div>
             <div class="review-context"></div>
           </div>
         </div>
@@ -483,6 +481,12 @@
          modalContent2.style.display = 'none';
          modalContent3.style.display = 'none';
          modalContent4.style.display = 'none';
+         
+         $('#modal-reiview').find('.detailview-review-row').each(function(index, item) {
+        	 if(index != 0) {
+        		 $(item).remove();
+        	 }
+         });
        };
 
        // When the user clicks anywhere outside of the modal, close it
@@ -493,6 +497,19 @@
            modalContent2.style.display = 'none';
            modalContent3.style.display = 'none';
            modalContent4.style.display = 'none';
+           
+//            $('#modal-reiview').find('.detailview-review-row').each(function(index, item) {
+//           	 if(index != '0') {
+//  	         	console.log('index : ', index);
+// 	        	$(item).remove();
+//           	 }
+//            });
+           
+           const reviewModals = document.getElementById('modal-reiview').querySelectorAll('.detailview-review-row');
+           for(i = 1; i < reviewModals.length; i++) {
+        	   console.log(i + ' : ' + reviewModals[i]);
+        	   reviewModals[i].remove();
+           }
          }
        };
        
@@ -608,39 +625,45 @@
     
     <script type="text/javascript">	// 승원 작업 - 모달
     
-    const imgList = ${bImageVO};
-	i = 0;
-	imgBoxs = document.querySelectorAll('detailview-imgBlock');
-	
-// 	imgList.forEach(img =>{
-// 		imgBoxs[i++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + img.storeimg;
-// 	})
-	
 	const reviewList = ${ReviewList};
-	reviewList.forEach(rv =>{
-		console.log(rv);
-	})
-	
-	const reviewform = $('.modal-reiview');
+	const reviewform = $('.modal-reiview').clone();
 	
 	function reviewMore() {
-// 		console.log('리뷰 더보기');
 		for(i = 0; i < reviewList.length; i++) {
 			if(i == 0) {
 				$('.detailview-review-row').attr('id', 'review' + i);
 				$('.detailview-review-row').find('.customerName').html(reviewList[i].customerName);
 				$('.detailview-review-row').find('.review-context').html(reviewList[i].ccontent);
+				
+				for(j = 0; j < reviewList[i].gpa; j++) {
+					if((reviewList[i].gpa - j).toFixed(1) != 0.5) {
+						const star = document.createElement('i');
+						star.className = 'fas fa-star fa-2x';
+		 				$('#review0').find('.modal-grade').append(star);
+					}
+					else {
+						const halfstar = document.createElement('i');
+						halfstar.className = 'fas fa-star fa-2x';
+		 				$('#review0').find('.modal-grade').append(halfstar);
+					}
+				}
+				
+				const gpaspan = document.createElement('span');
+				gpaspan.innerHTML = reviewList[i].gpa;
+		 		$('.detailview-review-row').find('.modal-grade').append(gpaspan);
+				
 			}
 			else {
 				const beforerow = $('#review' + (i - 1));
 				beforerow.after('<div class="detailview-review-row">' + beforerow.html() + '</div>');
-				console.log('beforerow : ', beforerow.next().html());
 				beforerow.next().attr('id', 'review' + i);
 				beforerow.next().find('.customerName').html(reviewList[i].customerName);
 				beforerow.next().find('.review-context').html(reviewList[i].ccontent);
+				
 			}			
 		}
 	}
+	
     </script>
 
 <%@ include file="../main/customerFooter.jsp" %>    

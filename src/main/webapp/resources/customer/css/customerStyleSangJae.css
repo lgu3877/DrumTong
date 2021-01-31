@@ -824,6 +824,7 @@ check .option-name,
 }
 
 .detailview-review-row {
+  margin-top: 10px;
   margin-bottom: 10px;
   width: 560px;
   padding-left: 15px;
@@ -861,7 +862,7 @@ check .option-name,
 }
 .review-context {
   width: 100%;
-  min-height: 100px;
+  height: auto;
   padding: 10px;
 }
 
@@ -1033,4 +1034,20 @@ check .option-name,
 }
 .section-bookmark{
 	height:auto;
+}
+
+.grade-star {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	background: rgb(51, 102, 204);
+	clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.grade-halfstar {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	background: rgb(51, 102, 204);
+	clip-path: polygon(50% 0%, 51% 50%, 51% 50%, 51% 51%, 50% 51%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }
