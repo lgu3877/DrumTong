@@ -27,6 +27,12 @@ public class OrderList extends BSalesVO{
 	private String reviewCheck;
 	
 	
+	public String getReviewCheck() {
+		return reviewCheck;
+	}
+	public void setReviewCheck(String reviewCheck) {
+		this.reviewCheck = reviewCheck;
+	}
 	public String getBrandnaming() {
 		return brandnaming;
 	}

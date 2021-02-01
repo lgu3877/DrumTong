@@ -61,5 +61,8 @@
 		UPDATE BREVIEW SET BLOCKBOOLEAN='N' WHERE ESTID=#{estid} AND SALECODE=#{salecode}
 	</delete>
 	
+	<select id="checkReview" parameterType="OrderList" resultType="int">
+		SELECT COUNT(*) FROM BREVIEW WHERE ESTID=#{estid} AND SALECODE=#{salecode}
+	</select>
 	
 </mapper>
