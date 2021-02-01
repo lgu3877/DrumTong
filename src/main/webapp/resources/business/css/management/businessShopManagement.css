@@ -515,10 +515,11 @@
     margin-bottom: 10px;
     padding: 10px 20px;
     border-radius: 5px;
-    font-size: 15pt;
+    font-size: 14pt;
     cursor: pointer;
     text-align: left;
     width: 100px;
+    margin: auto 0;
 }
 
 .category_checkbox_label:hover {
@@ -529,6 +530,20 @@
 .category_checked {
 	background-color: navy;
 }
+
+.sub_category_label {
+	padding: 5px 10px;
+	cursor: pointer;
+	font-size: 13pt;
+}
+
+.sub_category_label:hover {
+	transition: .5s;
+	background-color: cornflowerblue;
+	color: white;
+	border-radius: 5px;
+}
+
 
 /* customizing menu header */
 .customize_menu_head {
