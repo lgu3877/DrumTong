@@ -835,6 +835,7 @@ check .option-name,
   justify-content: flex-start;
   border-collapse: collapse;
   padding: 5px;
+  height: 100px; 
 }
 
 .review-profilePic {
@@ -849,12 +850,26 @@ check .option-name,
 
 .review-writer {
   width: 400px;
+  height: 100%;
   text-align: left;
   display: table;
 }
 
+.right-row {
+	display: table-row;
+}
+
+.review-writer .right-row div {
+	display: flex;
+	height: 50%;
+	align-items: center;
+}
+
 .review-writer p {
-  margin: 5px 5px;
+  margin: 0;
+  height: 50%;
+  display: flex;
+  align-items: center;
 }
 
 .review-writer p strong {
