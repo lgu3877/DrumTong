@@ -10,12 +10,6 @@ createCategoryList(); // 메뉴수정 관련 Modal
 
 // 메뉴 생성
 function displayMenu() {
-//	ete: 1
-//	maincategory: "일반의류"
-//	name: "T-셔츠"
-
-		
-	
 	const tbody = document.getElementById("item-list-tbody");
 	
 	// 테이플 행 카운트 > 짝수 번째 하이라이트
@@ -28,62 +22,29 @@ function displayMenu() {
 		row++;
 		
 		// 출력 순서를 위한 오브젝트 정렬
-		const sortedMenu = {};
+		const sortedMenu = {
+			"maincategory": undefined,
+			"subcategory": undefined,
+			"name": undefined,
+			"price": undefined,
+			"ete": undefined,
+			"quickprice": undefined,
+		};
 		const count = Object.keys(bMenu[index]).length;
 		let size = 0;
-//		while(true) {
-		for (let i = 0; i < count; i++) {
-			if (bMenu[index].maincategory && sortedMenu.maincategory === undefined) {
-				for (let key in bMenu[index]) {
-					key === "maincategory" ? sortedMenu.maincategory = bMenu[index][key] : null; 
-				}
-				size++;
-			}
-			else if (bMenu[index].subcategory && sortedMenu.subcategory === undefined) {
-				for (let key in bMenu[index]) {
-					key === "subcategory" ? sortedMenu.subcategory = bMenu[index][key] : null; 
-				}
-				size++;
-			}
-			else if (bMenu[index].name && sortedMenu.name === undefined) {
-				for (let key in bMenu[index]) {
-					key === "name" ? sortedMenu.name = bMenu[index][key] : null; 
-				}
-				size++;
-			}
-			else if (bMenu[index].price && sortedMenu.price === undefined) {
-				for (let key in bMenu[index]) {
-					key === "price" ? sortedMenu.price = bMenu[index][key] : null; 
-				}
-				size++;
-			}
-			else if (bMenu[index].ete && sortedMenu.ete === undefined) {
-				for (let key in bMenu[index]) {
-					key === "ete" ? sortedMenu.ete = bMenu[index][key] : null; 
-				}
-				size++;
-			}
-			else if (bMenu[index].quickprice && sortedMenu.quickprice === undefined) {
-				for (let key in bMenu[index]) {
-					key === "quickprice" ? sortedMenu.ete = bMenu[index][key] : null; 
-				}
-				size++;
-			}
-			else if (size === count - 1) break;
+		for (let key in sortedMenu) {
+			sortedMenu[key] = bMenu[index][key];
 		}
 		
-		console.log(sortedMenu);
-		console.log(bMenu[index]);
-		
-		
-		for (let key in bMenu[index]) {
+
+		for (let key in sortedMenu) {
 		// switch
 			switch(key) {
 			// 서비스 유형(main-category)
 			case "maincategory":
 				const mainCategory = document.createElement("th");
 				mainCategory.scope = "row";
-				mainCategory.innerHTML = bMenu[index][key];
+				mainCategory.innerHTML = sortedMenu[key];
 				
 				// 짝수 줄 > 하이라이트
 				if (row % 2 == 0) mainCategory.className = "even";
@@ -95,7 +56,7 @@ function displayMenu() {
 			// 서비스 타입(sub-category)
 			case "subcategory":
 				const subCategory = document.createElement("td");
-				subCategory.innerHTML = bMenu[index][key];
+				subCategory.innerHTML = sortedMenu[key];
 				
 				// 짝수 줄 > 하이라이트
 				if (row % 2 == 0) subCategory.className = "even";
@@ -107,7 +68,7 @@ function displayMenu() {
 			// 세부 내용
 			case "name":
 				const detailInfo = document.createElement("td");
-				detailInfo.innerHTML = bMenu[index][key];
+				detailInfo.innerHTML = sortedMenu[key];
 				
 				// 짝수 줄 > 하이라이트
 				if (row % 2 == 0) detailInfo.className = "even";
@@ -123,7 +84,7 @@ function displayMenu() {
 				
 				// 가격
 				const serviceFee = document.createElement("div");
-				serviceFee.innerHTML = insertComma(bMenu[index][key].toString()) + " 원";
+				serviceFee.innerHTML = insertComma(sortedMenu[key].toString()) + " 원";
 				
 				// 삽입 (가격)
 				wrapper.appendChild(serviceFee);
@@ -132,7 +93,7 @@ function displayMenu() {
 				if (bMenu[index].hasOwnProperty("quickprice")) {
 					const deliveryFeeCon = document.createElement("div");
 					
-					const deliveryFee = bMenu[index]["quickprice"].toString();
+					const deliveryFee = sortedMenu["quickprice"].toString();
 					deliveryFeeCon.innerHTML = "(" + insertComma(deliveryFee) + " 원)";
 					
 					// 삽입 (배달료)
@@ -149,7 +110,7 @@ function displayMenu() {
 			// 소요 시간
 			case "ete":
 				const estimatedTime = document.createElement("td");
-				estimatedTime.innerHTML = bMenu[index][key];
+				estimatedTime.innerHTML = sortedMenu[key];
 				
 				// 짝수 줄 > 하이라이트
 				if (row % 2 == 0) estimatedTime.className = "even";
@@ -759,8 +720,11 @@ function createCategoryList() {
 		document.getElementById("category_modal").style.display = "none";
 	})
 	
+	const allMainCategories = Object.keys(menuCategories).concat(defaultCategory).sort();
+	const filtered = allMainCategories.filter((element, index) => allMainCategories.indexOf(element) === index);
+	
 	// checkbox & label 생성 > Node 추가
-	for (let i = 0; i < defaultCategory.length; i++) {
+	for (let i = 0; i < filtered.length; i++) {
 		// random string id
 		const randomId = generateRandomString(10);
 
@@ -772,16 +736,16 @@ function createCategoryList() {
 		checkbox.id = randomId;
 		checkbox.name = "mainCategory";
 		checkbox.type = "checkbox";
-		checkbox.value = defaultCategory[i];
+		checkbox.value = filtered[i];
 		checkbox.style.display = "none";
-		checkbox.checked = userMenu.includes(defaultCategory[i]);
+		checkbox.checked = userMenu.includes(filtered[i]);
 
 		// label
 		const label = document.createElement("label");
 		label.htmlFor = randomId;
 		label.innerHTML = 
 			`<i class="${checkbox.checked ? "fas fa-check-square" : "fas fa-window-close"}"></i>
-			${defaultCategory[i]}`; 
+			${filtered[i]}`; 
 		label.className = "category_checkbox_label"; 
 		label.onclick = () => checkboxVisibility(randomId);
 		
@@ -798,7 +762,7 @@ function createCategoryList() {
 		document.getElementById("category-list").appendChild(div);
 
 		// 서브카테고리 삽입
-		const subMenus = attachSubCategories(defaultCategory[i]);
+		const subMenus = attachSubCategories(filtered[i]);
 		div.appendChild(subMenus);
 	}
 }
@@ -818,34 +782,44 @@ function checkboxVisibility(id) {
 }
 
 function attachSubCategories(subCategory) {
-	
-//	const subMenus = [...menuCategories[subCategory]];
-	const subMenus = ["service1", "service2", "service3", "service4"];
-//	console.log(subMenus);
-	
+
+	const subMenus = [...menuCategories[subCategory]];
+	console.log(subMenus);
 	
 	const subMenuContainer = document.createElement("div");
 	subMenuContainer.style.display = "flex";
-	
-	for (let i = 0; i < subMenus.length; i++) {
-		const randomId = generateRandomString(10);
+	subMenuContainer.style.margin = "auto";
+
+	if (subMenus.length === 0) {
+		const h = document.createElement("h3");
+		h.innerHTML = "등록된 메뉴가 없습니다.";
+		h.style.color = "red";
 		
-		const checkbox = document.createElement("input");
-		checkbox.id = randomId;
-		checkbox.name = menuCategories[subCategory];
-		checkbox.type = "checkbox";
-		checkbox.selected = true;
-		
-		const label = document.createElement("label");
-		label.htmlFor = randomId;
-		label.classList.add("sub_category_label");
-		label.innerHTML = subMenus[i];
-		
-		const wrapper = document.createElement("div");
-		
-		label.prepend(checkbox);
-		wrapper.appendChild(label);
-		subMenuContainer.appendChild(wrapper);
+		subMenuContainer.appendChild(h);
+	}
+	else {
+		for (let i = 0; i < subMenus.length; i++) {
+			const randomId = generateRandomString(10);
+			
+			const checkbox = document.createElement("input");
+			checkbox.id = randomId;
+			checkbox.name = menuCategories[subCategory];
+			checkbox.type = "checkbox";
+			checkbox.checked = "checked";
+//			checkbox.style.display = "none";
+			checkbox.style.marginRight = "5px";
+			
+			const label = document.createElement("label");
+			label.htmlFor = randomId;
+			label.classList.add("sub_category_label");
+			label.innerHTML = "&nbsp;" + subMenus[i];
+			
+			const wrapper = document.createElement("div");
+			
+			label.prepend(checkbox);
+			wrapper.appendChild(label);
+			subMenuContainer.appendChild(wrapper);
+		}
 	}
 	
 	return subMenuContainer;
