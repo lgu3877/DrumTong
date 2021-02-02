@@ -26,7 +26,6 @@ import com.drumtong.customer.vo.CPaymentVO;
 import com.drumtong.customer.vo.CPointVO;
 import com.drumtong.customer.vo.CPrivateDataVO;
 import com.drumtong.customer.vo.CouponList;
-import com.drumtong.security.AwsServiceEmail;
 import com.drumtong.security.AwsServiceImpl;
 import com.drumtong.security.OrderListSetting;
 import com.google.gson.Gson;
