@@ -534,24 +534,49 @@
     </script>
     
     <script type="text/javascript">	// 승원 작업 - 구글 차트
+    
+	var reviewList = ${ReviewList};
+	console.log(reviewList);
+    
     // 구글 부분 스크립트
     // 이번엔 gson 받아올 때 단순하게  가아니라 .js 에서도 사용될 수 있도록 받아오자
     google.charts.load("current", {packages:['corechart']});
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
-      var data = google.visualization.arrayToDataTable([
+//       var data = google.visualization.arrayToDataTable([
+//         ["score", "number", "total",  { role: 'annotation' }],
+//         [" ", 5, 100 - 5, ''],
+//         ["1.0", 25, 100 - 25, ''],
+//         [" ", 10, 100 - 10, ''],
+//         ["2.0", 15, 100 - 15, ''],
+//         [" ", 18, 100 - 18, ''],
+//         ["3.0", 2, 100 - 2, ''],
+//         [" ", 0, 100 - 0, ''],
+//         ["4.0", 15, 100 - 15, ''],
+//         [" ", 0,  100 - 0, ''],
+//         ["5.0", 10,  100 - 10, ''],
+//       ]);
+
+	var data = google.visualization.arrayToDataTable([
         ["score", "number", "total",  { role: 'annotation' }],
-        [" ", 5, 100 - 5, ''],
-        ["1.0", 25, 100 - 25, ''],
-        [" ", 10, 100 - 10, ''],
-        ["2.0", 15, 100 - 15, ''],
-        [" ", 18, 100 - 18, ''],
-        ["3.0", 2, 100 - 2, ''],
-        [" ", 0, 100 - 0, ''],
-        ["4.0", 15, 100 - 15, ''],
-        [" ", 0,  100 - 0, ''],
-        ["5.0", 10,  100 - 10, ''],
+        [" ", 0, reviewList.length, ''],
+        ["1.0", 0, reviewList.length, ''],
+        [" ", 0, reviewList.length, ''],
+        ["2.0", 0, reviewList.length, ''],
+        [" ", 0, reviewList.length, ''],
+        ["3.0", 0, reviewList.length, ''],
+        [" ", 0, reviewList.length, ''],
+        ["4.0", 0, reviewList.length, ''],
+        [" ", 0, reviewList.length, ''],
+        ["5.0", 0,  reviewList.length, ''],
       ]);
+      
+      
+      for(i = 0; i < reviewList.length; i++) {		// 구글 차트 그래프에 점수 넣는 기능
+		data.setCell((reviewList[i].gpa * 2) - 1, 1, data.getValue((reviewList[i].gpa * 2) - 1, 1) + 1);
+		data.setCell((reviewList[i].gpa * 2) - 1, 2, data.getValue((reviewList[i].gpa * 2) - 1, 2) - 1);
+      }
+      
 
       var view = new google.visualization.DataView(data);
       view.setColumns([0, 1,
@@ -617,9 +642,6 @@
     </script>
     
     <script type="text/javascript">	// 승원 작업 - 모달
-    
-	const reviewList = ${ReviewList};
-	console.log(reviewList);
 	
 	function reviewMore() {	// 리뷰 더보기를 클릭했을 때
 		for(i = 0; i < reviewList.length; i++) {
