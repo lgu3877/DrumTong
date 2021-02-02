@@ -6,11 +6,16 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.drumtong.business.dao.BBusinessReviewDAO;
 import com.drumtong.business.dao.BCouponDAO;
+import com.drumtong.business.dao.BCustomerReviewDAO;
 import com.drumtong.business.dao.BDetailSalesDAO;
 import com.drumtong.business.dao.BInformationDAO;
+import com.drumtong.business.dao.BReviewDAO;
 import com.drumtong.business.dao.BSalesDAO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.OrderList;
@@ -21,6 +26,8 @@ import com.drumtong.customer.vo.CPaymentVO;
 import com.drumtong.customer.vo.CPointVO;
 import com.drumtong.customer.vo.CPrivateDataVO;
 import com.drumtong.customer.vo.CouponList;
+import com.drumtong.security.AwsServiceEmail;
+import com.drumtong.security.AwsServiceImpl;
 import com.drumtong.security.OrderListSetting;
 import com.google.gson.Gson;
 
@@ -32,7 +39,10 @@ public class CustomerAccountService {
 	@Autowired BSalesDAO bSalesDAO;
 	@Autowired BDetailSalesDAO bDetailSalesDAO;
 	@Autowired CPointDAO cPointDAO;
-	
+	@Autowired BReviewDAO bReviewDAO;
+	@Autowired BCustomerReviewDAO bCustomerReviewDAO;
+	@Autowired BBusinessReviewDAO bBusinessReviewDAO;
+	@Autowired AwsServiceImpl awsServiceImpl;
 	
 	
 	
@@ -103,8 +113,29 @@ public class CustomerAccountService {
 		return mav;
 	}
 
-	public ModelAndView newReview(HttpServletRequest req, ReviewList review) {
+	public ModelAndView newReview(HttpServletRequest req, MultipartHttpServletRequest mpf, ReviewList review) {
 		ModelAndView mav = new ModelAndView("redirect:/customer/account/customerOrderList/");
+		String memberid = ((CPrivateDataVO)req.getSession().getAttribute("cLogin")).getMemberid();
+		review.setMemberid(memberid);
+		
+		int result = 0;
+		// 1. BReview 생성 - memberid,estid,salecode,gpa
+		result = bReviewDAO.insertNewReview(review);
+		
+		// 2. Review 이미지 올리기(aws)
+		MultipartFile file = mpf.getFile("reviewimgbox");
+		System.out.println("file : " + file.isEmpty());
+		if(!file.isEmpty()) {
+			String folderName = "business/" + review.getEstid();
+			result = awsServiceImpl.fileUpload(file, folderName, review, -1);
+		}
+		
+		// 2. BCustomerReview 생성 - memberid, estid, salecode, content
+		result = bCustomerReviewDAO.insertNewReview(review);
+		
+		// 3. BBusinessReview 생성 - memberid, estid, salecode
+		result = bBusinessReviewDAO.insertNewReview(review);
+		
 		return mav;
 	}
 

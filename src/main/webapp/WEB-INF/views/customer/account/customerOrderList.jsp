@@ -92,7 +92,7 @@
 <div id="writeReviewButton" class="order_review_modal modal">
 	<div class="modal_box">
 		<div class="modal_title">세탁소 이름</div>
-		<form onsubmit="clacStarCsore();" action="${cpath }/customer/account/customerNewReview/">
+		<form onsubmit="clacStarCsore();" action="${cpath }/customer/account/customerNewReview/" enctype="multipart/form-data" method="post">
 			<div class="modal_menu_1">
 				<input type="hidden" value="estid" name="estid">
 				<input type="text" value="salecode" name="salecode" readonly>
@@ -103,7 +103,7 @@
 				<textarea name="ccontent" rows="2" cols="4" placeholder="내용을 작성하세요" required></textarea>
 			</div>
 			<div class="modal_menu_3">
-				<input type="file" id="reviewImgFile" name="reviewimg">
+				<input type="file" id="reviewImgFile" name="reviewimgbox">
 				<label>별점 </label>
 				<input type="hidden" id="starScore" name="gpa">
 				<span>
