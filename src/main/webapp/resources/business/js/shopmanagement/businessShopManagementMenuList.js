@@ -193,6 +193,7 @@ function createAddService() {
 		subDirectInput.className = "direct_type_input";
 		subDirectInput.placeholder = "서비스 입력";
 		subDirectInput.style.display = "none";
+		subDirectInput.maxlength = "10";
 		
 		
 		// 추가
@@ -210,7 +211,8 @@ function createAddService() {
 		detailContextInput.type = "text";
 		detailContextInput.className = "service_detail_input";
 		detailContextInput.name = "name";
-		detailContextInput.placeholder = "세부 서비스 내용을 입력해주세요.";
+		detailContextInput.placeholder = "메뉴 이름 입력";
+		detailContextInput.maxlength = "10";
 	
 		// 추가
 		thirdInputCon.appendChild(detailContextInput);
@@ -226,6 +228,8 @@ function createAddService() {
 		priceInput.className = "service_price_input";
 		priceInput.name = "price";
 		priceInput.placeholder = "서비스 가격(원)";
+		priceInput.pattern = "[0-9]+";
+		priceInput.maxlength = "5";
 	
 		
 		// 추가
@@ -502,7 +506,7 @@ function modifyMenuService() {
 			case 0:	
 				// 초기화(default 값 지정 가능)
 				tr[i].children[j].innerHTML = "";
-				tr[i].children[j].style.width = "13%";
+				tr[i].children[j].style.width = "16%";
 				tr[i].children[j].style.padding = "5px";
 
 				select.className = "service_selector";
@@ -547,7 +551,7 @@ function modifyMenuService() {
 			case 1:
 				// 초기화(default 값 지정 가능)
 				tr[i].children[j].innerHTML = "";
-				tr[i].children[j].style.width = "13%";
+				tr[i].children[j].style.width = "16%";
 				tr[i].children[j].style.padding = "5px";
 				
 				select.className = "service_selector";
@@ -592,7 +596,7 @@ function modifyMenuService() {
 				// 초기화(default 값 지정 가능)
 				tr[i].children[j].innerHTML = "";
 				tr[i].children[j].className += " third_item_prop";
-				tr[i].children[j].style.width = "43%";
+				tr[i].children[j].style.width = "21%";
 				tr[i].children[j].style.padding = "5px";
 				
 				detailInput.type = "text";
@@ -608,7 +612,7 @@ function modifyMenuService() {
 				// 초기화(default 값 지정 가능)
 				tr[i].children[j].innerHTML = "";
 				tr[i].children[j].className += " forth_item_prop";
-				tr[i].children[j].style.width = "10%";
+				tr[i].children[j].style.width = "16%";
 				tr[i].children[j].style.padding = "5px";
 				
 				priceInput.type = "text";
@@ -624,7 +628,7 @@ function modifyMenuService() {
 				// 초기화(default 값 지정 가능)
 				tr[i].children[j].innerHTML = "";
 				tr[i].children[j].className += " fifth_item_prop";
-				tr[i].children[j].style.width = "10%";
+				tr[i].children[j].style.width = "16%";
 				tr[i].children[j].style.padding = "5px";
 				
 				timeInput.type = "text";
@@ -697,8 +701,6 @@ function dismissInput(id) {
 	// 목록이 2개 이상 > 해당 줄 삭제
 	document.getElementById(id).remove();
 }
-
-
 
 
 
@@ -784,7 +786,6 @@ function checkboxVisibility(id) {
 function attachSubCategories(subCategory) {
 
 	const subMenus = [...menuCategories[subCategory]];
-	console.log(subMenus);
 	
 	const subMenuContainer = document.createElement("div");
 	subMenuContainer.style.display = "flex";
