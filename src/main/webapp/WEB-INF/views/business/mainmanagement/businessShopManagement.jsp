@@ -48,8 +48,14 @@
 	<script type="text/javascript">
 		const bImageList = ${bImageList};
 		const bManagement = ${bManagement};
+<<<<<<< HEAD
+		
+		
+
+=======
 		const bMenu = ${bMenu};
 		
+>>>>>>> branch 'master' of https://github.com/lgu3877/DrumTong/
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
 	</script>
