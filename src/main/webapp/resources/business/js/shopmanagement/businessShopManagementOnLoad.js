@@ -6,21 +6,24 @@ const ths = thead.getElementsByTagName("th");
 for (let i = 0; i < ths.length; i++) {
 	switch(i) {
 	case 0:
-		ths[i].style.width = "13%";
+		ths[i].style.width = "18%";
 		break;
 	case 1:
-		ths[i].style.width = "13%";
+		ths[i].style.width = "18%";
 		break;
 	case 2:
-		ths[i].style.width = "48%";
+		ths[i].style.width = "18%";
 		break;
 	case 3:
-		ths[i].style.width = "10%";
+		ths[i].style.width = "18%";
 		break;
 	case 4:
+		ths[i].style.width = "18%";
+		break;
+	case 5:
 		ths[i].style.width = "10%";
 		break;
 	default:
-		alert("설정된 항목 5개 초과");
+		alert("설정된 항목 6개 초과");
 	}
 }

@@ -2,7 +2,7 @@
 async function updatePhoto() {
 	const formData = new FormData();
 	
-//	const coverImage = document.getElementById("update-cover");
+	const coverImage = document.getElementById("update-cover");
 	const photoInputs = document.getElementsByName("storeimg");
 	const fileList = [];
 	
@@ -38,13 +38,22 @@ async function updatePhoto() {
 	);
 	
 	console.log(data);
+	
+	if (data) {
+		alert("사진이 성공정으로 수정되었습니다.");
+	}
 }
 
 
 //매장 소개글 업데이트
+const initialText = document.getElementById("intro-text").innerText;
 async function updateIntro() {
 	
 	const text = document.getElementById("intro-text").innerText;
+	
+	if (initialText === text) {
+		return alert("변경된 내용이 확인되지 않았습니다.");
+	}
 	
 	const object = {
 		"processing" : "updateIntroduction",

@@ -47,15 +47,10 @@
 	
 	<script type="text/javascript">
 		const bImageList = ${bImageList};
+		console.log(bImageList);
 		const bManagement = ${bManagement};
-<<<<<<< HEAD
-		
-		
-
-=======
 		const bMenu = ${bMenu};
 		
->>>>>>> branch 'master' of https://github.com/lgu3877/DrumTong/
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
 	</script>
@@ -271,10 +266,9 @@
 						<tr>
 							<th scope="cols">서비스 유형</th>
 							<th scope="cols">서비스 타입</th>
-							<th scope="cols">세부 내용</th>
-							<th scope="cols">가격</th>
-							<th scope="cols">소요시간</th>
-							<th scope="cols">기타</th>
+							<th scope="cols">메뉴 이름</th>
+							<th scope="cols">가격(배달비)</th>
+							<th scope="cols">소요시간(시간)</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -294,9 +288,10 @@
 						<tr>
 							<th scope="cols">서비스 유형</th>
 							<th scope="cols">서비스 타입</th>
-							<th scope="cols">세부 내용</th>
-							<th scope="cols">가격</th>
+							<th scope="cols">메뉴 이름</th>
+							<th scope="cols">가격(배달비)</th>
 							<th scope="cols">소요시간</th>
+							<th scope="cols">수정/삭제</th>
 						</tr>
 					</thead>
 					
@@ -360,9 +355,9 @@
 					<ul class="customize_menu_head">
 						<li class="service_main">서비스 유형</li>
 						<li class="service_sub">서비스 타입</li>
-						<li class="service_details">세부 내용</li>
-						<li class="service_price">가격(원)</li>
-						<li class="service_time">소요시간</li>
+						<li class="service_details">메뉴 이름</li>
+						<li class="service_price">가격(배달비)</li>
+						<li class="service_time">소요시간(시간)</li>
 						<!-- POST 형식일 때만 확인 버튼을 활성화 시켜준다.	-->
 						<c:if test="${status eq 'FAIL' }">
 							<li class="service_confirm">확인</li>
@@ -549,7 +544,7 @@
 			<span class="intro_close" onclick="closeIntroModal()">&times;</span>
 			<div class="intro_content">
 			<!-- BManagementVO > introduction -->
-				<textarea id="intro-modal-textarea" class="store_intro_input" name="introduction" maxlength="500" placeholder="매장 소개글을 적어주세요." autofocus style="resize: none;"></textarea>
+				<textarea id="intro-modal-textarea" class="store_intro_input" name="introduction" maxlength="500" placeholder="매장 소개글을 적어주세요." autofocus style="resize: none;" maxlength="300"></textarea>
 				<input class="store_intro_btn" type="button" value="작성완료" onclick='comfirmIntro()' >
 			</div>
 		</div>
@@ -578,7 +573,7 @@
 			const charArray = characters.split("");
 				
 			for (let i = 0; i < length; i++) {
-				result += charArray[Math.ceil(Math.random() * characters.length)];
+				result += charArray[Math.ceil(Math.random() * (characters.length - 1))];
 			}
 			
 			// 동일한 난수가 생성되엇을 경우(로또 맞을 확률)
