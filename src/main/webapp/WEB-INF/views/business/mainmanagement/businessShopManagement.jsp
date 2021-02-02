@@ -47,7 +47,6 @@
 	
 	<script type="text/javascript">
 		const bImageList = ${bImageList};
-		console.log(bImageList);
 		const bManagement = ${bManagement};
 		const bMenu = ${bMenu};
 		const defaultCategory = ${defaultcategory};
