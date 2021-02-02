@@ -49,9 +49,10 @@
 		const bImageList = ${bImageList};
 		const bManagement = ${bManagement};
 		const bMenu = ${bMenu};
-		
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
+		const sido = ${sido};
+		console.log(sido);
 	</script>
 </head>
      

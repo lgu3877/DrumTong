@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.drumtong.business.dao.BDetailSalesDAO;
+import com.drumtong.business.dao.BReviewDAO;
 import com.drumtong.business.dao.BSalesDAO;
 import com.drumtong.business.vo.BDetailSalesVO;
 import com.drumtong.business.vo.EteNums;
@@ -18,23 +19,38 @@ import com.drumtong.business.vo.OrderList;
 public class OrderListSetting {
 	static BSalesDAO bSalesDAO;
 	static BDetailSalesDAO bDetailSalesDAO;
+	static BReviewDAO bReviewDAO;
 	
 	@Autowired BSalesDAO BeanbSalesDAO;
 	@Autowired BDetailSalesDAO BeanbDetailSalesDAO;
+	@Autowired BReviewDAO BeanbBReviewDAO;
 	static HashMap<String, String> param;
 	
 	@PostConstruct
 	private void init() {
 		this.bSalesDAO = BeanbSalesDAO;
 		this.bDetailSalesDAO = BeanbDetailSalesDAO;
+		this.bReviewDAO = BeanbBReviewDAO;
 		param = new HashMap<String, String>();
 	}
 	
+	// 고객 주문현황 페이지에 사용되는 메서드
 	public static List<OrderList> selectCustomer(String memberidORestid) {
 		param.clear();
 		param.put("memberidORestid", memberidORestid);
-		return setOrderList();
+		// 리뷰 작성 여부를 반영해주기
+		return checkReview(setOrderList());
 		
+	}
+	
+	// 고객 주문현황 페이지에서 리뷰 작성 여부를 반영해주는 메서드
+	public static List<OrderList> checkReview(List<OrderList> list){
+		for(OrderList li : list) {
+			// 리뷰를 작성했는지 체크
+			int result = bReviewDAO.checkReview(li);
+			li.setReviewCheck(result == 0 ? "N" : "Y");
+		}
+		return list;
 	}
 	
 	public static List<OrderList> selectBusiness(String memberidORestid, String status) {
@@ -169,7 +185,7 @@ public class OrderListSetting {
 				return orderList;
 	}
 
-	// 요청을 수락해 처리중으로 넘어가는 과정
+	// 요청을 수락해 처리중으로 넘어가는 과정[영경]
 	public static int requestAccept(HashMap<String, String> map) {
 		// 필요한 것
 		// 승원씨한테 얘기할 것
@@ -179,7 +195,7 @@ public class OrderListSetting {
 		
 	}
 	
-	// 요청을 거절했을 때
+	// 요청을 거절했을 때[영경]
 	public static int Decline(HashMap<String, String> map) {
 		// 필요한 것
 		// estid, salecode

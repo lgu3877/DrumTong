@@ -3,6 +3,7 @@ package com.drumtong.business.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import com.drumtong.business.vo.OrderList;
 import com.drumtong.business.vo.ReviewList;
 
 public interface BReviewDAO {
@@ -18,5 +19,12 @@ public interface BReviewDAO {
 	int updateReportConfirm(ReviewList reviewList);
 
 	int deleteReportConfirm(ReviewList reviewList);
-	
+
+	int checkReview(OrderList li);
+
+	int insertNewReview(ReviewList review);
+
+	int confirm(String serialUUID);
+
+	int updateImg(ReviewList reviewList);
 }

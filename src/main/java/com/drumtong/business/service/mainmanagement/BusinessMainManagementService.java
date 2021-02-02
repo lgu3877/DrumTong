@@ -33,6 +33,8 @@ import com.drumtong.business.vo.BScheduleDaysVO;
 import com.drumtong.business.vo.BScheduleTimeVO;
 import com.drumtong.business.vo.BTempHolidayVO;
 import com.drumtong.business.vo.BTempSuspensionVO;
+import com.drumtong.map.dao.MMapAddressListDAO;
+import com.drumtong.security.AddressListSetting;
 import com.drumtong.security.AwsServiceImpl;
 import com.google.gson.Gson;
 
@@ -63,6 +65,11 @@ public class BusinessMainManagementService {
 	@Autowired BTempSuspensionDAO bTempSuspensionDAO;
 	
 	
+	// 지역 데이터 DAO
+	@Autowired MMapAddressListDAO mMapAddressListDAO;
+	
+	
+	
 	// 비즈니스 매장관리 페이지로 이동 (GET) [건욱]
 	public ModelAndView shopManagement(HttpServletRequest req) {
  		ModelAndView mav = new ModelAndView("business/mainmanagement/businessShopManagement");
@@ -88,13 +95,21 @@ public class BusinessMainManagementService {
  	   	// bManagement 테이블 [매장 소개글] [매장 메뉴] [세탁물 수령방법]
  	   	mav.addObject("bManagement", (new Gson()).toJson(bManagementDAO.selectCustomerDetail(estid)));
  	   	
+ 	   	// Menu에 대한 데이터를 보내줍니다.
  	   	mav.addObject("bMenu", (new Gson()).toJson(bMenuDAO.select(estid)));
  	    
- 	    // 추가 	    
+ 	    // 기본 카테고리 데이터 	    
  	    List<String> defaultcategory = Arrays.asList((bManagementDAO.selectDefaultCategory(estid).split("/")));
     	mav.addObject("defaultcategory", (new Gson()).toJson(defaultcategory));
 		
- 	    
+    	
+    	// 지역 데이터 리스트 (시도 데이터) 
+    	// 밑에 소스 바꾼 이유 : 원래는 한꺼번에 지역데이터를 전달했으나 리소스를 너무 많이 잡아먹어서 시도 데이터만 먼저보내고 
+    	// 나머지 시군구 / 읍면동은 REST로 처리하기로 맘먹음.
+//    	HashMap<String, HashMap<String , ArrayList<String>>> addressList = AddressListSetting.getAddressList();
+    	mav.addObject("sido", (new Gson()).toJson(mMapAddressListDAO.selectMMapAddressA()));
+    	
+    	
  	    // 대분류 중분류 카테고리를 셋팅해주는 함수입니다.
 	    HashMap<String, ArrayList<String>> menuCategories = menuCategoriesSetting(estid);
 	    
@@ -115,7 +130,6 @@ public class BusinessMainManagementService {
     	return mav;
 	}
 
-	
 	
 	// 비즈니스 일정관리 페이지로 이동 (GET) [건욱]
 	public ModelAndView scheduleManagement(HttpServletRequest req) {
@@ -175,6 +189,7 @@ public class BusinessMainManagementService {
 	    String bpersonid = bPrivateDataVO.getBpersonid();
 	    
 	    
+	    // S3에 저장된 폴더 이름을 정의해줍니다.
 	    String folderName = "business/"+ bpersonid + "/" + estid; 
 	    
  	    

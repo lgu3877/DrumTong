@@ -13,6 +13,7 @@ import com.drumtong.business.dao.BEstablishmentDAO;
 import com.drumtong.business.dao.BImageDAO;
 import com.drumtong.business.dao.BInformationDAO;
 import com.drumtong.business.dao.BPaymentDAO;
+import com.drumtong.business.dao.BReviewDAO;
 import com.drumtong.business.vo.BImageVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BPaymentVO;
@@ -43,6 +44,9 @@ public class SerialUUID {
 	// 고객 프로필사진 저장용
 	static CPrivateDataDAO cPrivateDataDAO;
 	
+	// 리뷰 사진 저장용
+	static BReviewDAO bReviewDAO; 
+	
 	@Autowired CCustomerDAO BeancCustomerDAO;
 	@Autowired BBusinessDAO BeanbBusinessDAO;
 	@Autowired BCouponDAO BeanbCouponDAO;
@@ -53,6 +57,7 @@ public class SerialUUID {
 	@Autowired BInformationDAO BeanbInformationDAO;
 	@Autowired BPaymentDAO BeanbPaymentDAO;
 	@Autowired CPrivateDataDAO beancPrivatedataDAO;
+	@Autowired BReviewDAO beanbReviewDAO;
 	
 	@PostConstruct
 	private void init() {
@@ -66,6 +71,7 @@ public class SerialUUID {
 		this.bInformationDAO = BeanbInformationDAO;
 		this.bPaymentDAO = BeanbPaymentDAO;
 		this.cPrivateDataDAO = beancPrivatedataDAO;
+		this.bReviewDAO = beanbReviewDAO;
 	}
 	
 	
@@ -107,6 +113,8 @@ public class SerialUUID {
 				case "BPayment" : result = bPaymentDAO.confirm(SerialUUID);
 					break;
 				case "CPhotoID" : result = cPrivateDataDAO.confirm(SerialUUID);
+					break;
+				case "BReview": result = bReviewDAO.confirm(SerialUUID);
 					break;
 				
 			}
