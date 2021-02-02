@@ -6,6 +6,7 @@ const uploadPhotoList = {
 }
 const deletePhotoList = [];
 
+let imageCount = bImageList.filter((file) => file.delegatephotoboolean === "N").length;
 
 // 초기 실행
 displayImages();
@@ -143,6 +144,9 @@ function zoomInPhoto(clickedPhoto) {
 
 // 이미지 업로드
 function imageCheck(e) {
+// 사진 업로드 제한(5장)
+	imageCount >= 5 ? alert("업로드 할 수 있는 매장 사진은 최대 5장까지 입니다.") : null;
+	
 	const input = e.target;
 	const imageType = input.value.substr(input.value.length - 3, input.value.length).toLocaleLowerCase();
 	
@@ -250,6 +254,9 @@ function imageCheck(e) {
 		}
 		// label & input 숨기기(display: none) > 새로운 label & input 생성
 		hideLabel(e.target.id + "label");
+		// 업로드 사진 계산
+		imageCount++;
+		console.log(imageCount);
 	}
 }
 
@@ -297,7 +304,6 @@ function deletePhoto(clickedPhoto) {
         	if (isUploaded) {
         		deletePhotoList.push(clickedPhoto.substr(55));
         	}
-        	console.log(deletePhotoList);
           
             break;
          }

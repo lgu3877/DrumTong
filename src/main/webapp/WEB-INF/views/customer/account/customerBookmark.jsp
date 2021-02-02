@@ -11,6 +11,7 @@
 <!-- 본문 영역 -->
 <section class="section-SangJae section-bookmark">
   <div class="bookmark-row">
+  <h1 class="bookmark_mainName">즐겨찾기</h1>
   <c:if test="${not empty bookmarkList}">
 	  <c:forEach items="${bookmarkList }" var="bo">
 	  	<div class="bookmark" onclick="location.href='${pageContext.request.contextPath}/customer/laundry/customerDetail/${bo.estid }/'">

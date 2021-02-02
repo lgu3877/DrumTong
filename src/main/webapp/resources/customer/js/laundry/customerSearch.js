@@ -17,12 +17,10 @@ function bookmark() {
 
 function laundryList_paging(totalData, dataPerPage, pageCount, currentPage) {
 
-            console.log("currentPage : " + currentPage);
 
             var totalPage = Math.ceil(totalData / dataPerPage); // 총 페이지 수
             var pageGroup = Math.ceil(currentPage / pageCount); // 페이지 그룹
 
-            console.log("pageGroup : " + pageGroup);
 
             var last = pageGroup * pageCount; // 화면에 보여질 마지막 페이지 번호
             if (last > totalPage)
@@ -30,11 +28,6 @@ function laundryList_paging(totalData, dataPerPage, pageCount, currentPage) {
             var first = last - (pageCount - 1); // 화면에 보여질 첫번째 페이지 번호
             var next = last + 1;
             var prev = first - 1;
-
-            console.log("last : " + last);
-            console.log("first : " + first);
-            console.log("next : " + next);
-            console.log("prev : " + prev);
 
             var $pingingView = $(".laundryList_paging");
 

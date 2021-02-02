@@ -361,24 +361,23 @@
       		<h2 style="margin: 0; font-size: 13pt;">리뷰게시판</h2>
       	</div>
 
-        <div class="modal-reiview">
+        <div class="modal-reiview" id="modal-reiview">
           <div class="detailview-review-row">
             <div class="review-head">
               <div class="review-profilePic"></div>
               <div class="review-writer">
-              <div style="display: table-row; vertical-align: middle;">
-                <p class="customerName"></p>
-                <div style="display: flex;">
-	                <p>좋아요 2 · </p>
-	                <p>사진 1 · </p>
-	                <p>평점 4 </p>
-                </div>
+              	<div class="right-row">
+                	<p class="customerName"></p>
+            	    <div>
+	            	   <p class="mgood"></p>
+	             	   <p class="visit"> 방문수 1 · </p>
+	               	   <p class="gpa"></p>
+	                </div>
                 </div>
               </div>
             </div>
-            <div class="modal-grade">
-    			 <i class="fas fa-star fa-2x"></i><span>3.5</span>
-	        </div>
+            <div style="height: 30px; background: grey; color: white;">추가 확보 공간</div>            
+            <div class="modal-grade"><span></span></div>
             <div class="review-context"></div>
           </div>
         </div>
@@ -412,7 +411,6 @@
        
        // When the user clicks on the button, open the modal
        btn1.onclick = function () {
-          console.log('로그인 되어있나 ? ', '${cLogin}');
             if('${cLogin}' == ''){
                LoginModalOpen();
                return;
@@ -478,16 +476,35 @@
 
        // When the user clicks on <span> (x), close the modal
        span.onclick = function () {
-         modal.style.display = 'none';
+
+         const reviewModals = document.querySelector('#modal-reiview').querySelectorAll('.detailview-review-row');
+         for(i = reviewModals.length; i > 0; i--) {
+      	   if(i == 1)
+      		   reviewModals[i - 1].querySelector('.modal-grade').innerHTML = '';
+      	   else
+		 		   reviewModals[i - 1].remove();
+         }
+         
+    	 modal.style.display = 'none';
          modalContent1.style.display = 'none';
          modalContent2.style.display = 'none';
          modalContent3.style.display = 'none';
          modalContent4.style.display = 'none';
+         
        };
 
        // When the user clicks anywhere outside of the modal, close it
        window.onclick = function (event) {
          if (event.target == modal) {
+           
+           const reviewModals = document.querySelector('#modal-reiview').querySelectorAll('.detailview-review-row');
+           for(i = reviewModals.length; i > 0; i--) {
+        	   if(i == 1)
+        		   reviewModals[i - 1].querySelector('.modal-grade').innerHTML = '';
+        	   else
+		 		   reviewModals[i - 1].remove();
+           }
+
            modal.style.display = 'none';
            modalContent1.style.display = 'none';
            modalContent2.style.display = 'none';
@@ -498,25 +515,18 @@
        
          // 수정한 부분(메뉴에 모두 클릭이벤트 적용)★★★★★★
          document.querySelectorAll('.option-row').forEach(function(element){
-            console.log('test');
             element.addEventListener('click', listUp);
          });
          
          document.querySelectorAll('.quickcheck').forEach(function(element){
-             console.log('test');
              element.addEventListener('change', quickMark);
           });
 
            document.querySelectorAll('.remove-button').forEach(function(element){
              if (element.target !== element.currentTarget) return; 
-              console.log('test');
               element.addEventListener('click', removeOption);
            })
          
-         // ★★★★★★★★미완성★★★★★★★★★
-//          imgbox = document.getElementById('detailview-imgBlock').querySelectorAll('img');
-//          imgList = '${bImageVO}';
-//          console.log(imgList.size);
          
          document.getElementById('loginSubmit').addEventListener('click', function(){ logiinSubmit('asynchronous');});
 
@@ -524,24 +534,49 @@
     </script>
     
     <script type="text/javascript">	// 승원 작업 - 구글 차트
+    
+	var reviewList = ${ReviewList};
+	console.log(reviewList);
+    
     // 구글 부분 스크립트
     // 이번엔 gson 받아올 때 단순하게  가아니라 .js 에서도 사용될 수 있도록 받아오자
     google.charts.load("current", {packages:['corechart']});
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
-      var data = google.visualization.arrayToDataTable([
+//       var data = google.visualization.arrayToDataTable([
+//         ["score", "number", "total",  { role: 'annotation' }],
+//         [" ", 5, 100 - 5, ''],
+//         ["1.0", 25, 100 - 25, ''],
+//         [" ", 10, 100 - 10, ''],
+//         ["2.0", 15, 100 - 15, ''],
+//         [" ", 18, 100 - 18, ''],
+//         ["3.0", 2, 100 - 2, ''],
+//         [" ", 0, 100 - 0, ''],
+//         ["4.0", 15, 100 - 15, ''],
+//         [" ", 0,  100 - 0, ''],
+//         ["5.0", 10,  100 - 10, ''],
+//       ]);
+
+	var data = google.visualization.arrayToDataTable([
         ["score", "number", "total",  { role: 'annotation' }],
-        [" ", 5, 100 - 5, ''],
-        ["1.0", 25, 100 - 25, ''],
-        [" ", 10, 100 - 10, ''],
-        ["2.0", 15, 100 - 15, ''],
-        [" ", 18, 100 - 18, ''],
-        ["3.0", 2, 100 - 2, ''],
-        [" ", 0, 100 - 0, ''],
-        ["4.0", 15, 100 - 15, ''],
-        [" ", 0,  100 - 0, ''],
-        ["5.0", 10,  100 - 10, ''],
+        [" ", 0, reviewList.length, ''],
+        ["1.0", 0, reviewList.length, ''],
+        [" ", 0, reviewList.length, ''],
+        ["2.0", 0, reviewList.length, ''],
+        [" ", 0, reviewList.length, ''],
+        ["3.0", 0, reviewList.length, ''],
+        [" ", 0, reviewList.length, ''],
+        ["4.0", 0, reviewList.length, ''],
+        [" ", 0, reviewList.length, ''],
+        ["5.0", 0,  reviewList.length, ''],
       ]);
+      
+      
+      for(i = 0; i < reviewList.length; i++) {		// 구글 차트 그래프에 점수 넣는 기능
+		data.setCell((reviewList[i].gpa * 2) - 1, 1, data.getValue((reviewList[i].gpa * 2) - 1, 1) + 1);
+		data.setCell((reviewList[i].gpa * 2) - 1, 2, data.getValue((reviewList[i].gpa * 2) - 1, 2) - 1);
+      }
+      
 
       var view = new google.visualization.DataView(data);
       view.setColumns([0, 1,
@@ -580,9 +615,9 @@
 // 	  var chart = new google.charts.Bar(document.getElementById("columnchart_values"));
 	  var chart = new google.visualization.ComboChart(document.getElementById("columnchart_values"));
       chart.draw(data, options);
-      
   } 
-    
+
+   
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawPie);
 
@@ -607,24 +642,8 @@
     </script>
     
     <script type="text/javascript">	// 승원 작업 - 모달
-    
-    const imgList = ${bImageVO};
-	i = 0;
-	imgBoxs = document.querySelectorAll('detailview-imgBlock');
 	
-// 	imgList.forEach(img =>{
-// 		imgBoxs[i++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + img.storeimg;
-// 	})
-	
-	const reviewList = ${ReviewList};
-	reviewList.forEach(rv =>{
-		console.log(rv);
-	})
-	
-	const reviewform = $('.modal-reiview');
-	
-	function reviewMore() {
-// 		console.log('리뷰 더보기');
+	function reviewMore() {	// 리뷰 더보기를 클릭했을 때
 		for(i = 0; i < reviewList.length; i++) {
 			if(i == 0) {
 				$('.detailview-review-row').attr('id', 'review' + i);
@@ -634,13 +653,50 @@
 			else {
 				const beforerow = $('#review' + (i - 1));
 				beforerow.after('<div class="detailview-review-row">' + beforerow.html() + '</div>');
-				console.log('beforerow : ', beforerow.next().html());
 				beforerow.next().attr('id', 'review' + i);
 				beforerow.next().find('.customerName').html(reviewList[i].customerName);
 				beforerow.next().find('.review-context').html(reviewList[i].ccontent);
-			}			
+			}
+			
+			$('#review' + i).find('.modal-grade').html('');	// 평점 안의 내용 초기화
+			
+			// 별자리를 만들어주는 반복문
+			for(j = 0; j < reviewList[i].gpa; j++) {
+				switch ((reviewList[i].gpa - j).toFixed(1)) {
+				case '0.5':
+					const halfstar = document.createElement('i');
+					halfstar.className = 'fas fa-star-half-alt fa-2x';
+	 				$('#review' + i).find('.modal-grade').append(halfstar);
+					break;
+				default:
+					const star = document.createElement('i');
+					star.className = 'fas fa-star fa-2x';
+	 				$('#review' + i).find('.modal-grade').append(star);
+	 				break;
+				}
+			}
+			
+			// 빈별자리를 만들어주는 반복문 -> 0.5 이면 4개의 별은 빈별이어야 한다
+			for(k = 5 - (reviewList[i].gpa).toFixed(0); k > 0; k--) {	// 반올림
+					const nullstar = document.createElement('i');
+					nullstar.className = 'far fa-star fa-2x';
+					$('#review' + i).find('.modal-grade').append(nullstar);
+			}
+			
+			// 별자리 옆에 평점 표시			
+			const gpaspan = document.createElement('span');
+			gpaspan.innerHTML = reviewList[i].gpa;
+ 	 		$('#review' + i).find('.modal-grade').append(gpaspan);
+	 		
+ 	 		$('#review' + i).find('.mgood').html('좋아요 ' + reviewList[i].mgood + ' ·&nbsp');
+ 	 		$('#review' + i).find('.gpa').html('&nbsp평점 ' + reviewList[i].gpa);
+ 	 		
+	 		if(reviewList[i].bcontent != '-') {
+	 			console.log('사장님 댓글이 달려있습니다.');
+	 		}
 		}
 	}
+	
     </script>
 
 <%@ include file="../main/customerFooter.jsp" %>    
