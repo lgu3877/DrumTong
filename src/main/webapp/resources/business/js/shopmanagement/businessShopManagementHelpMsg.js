@@ -28,7 +28,13 @@ const helpMessages = [
 	   id: "address-help",
 	   content: "등록하셨던 매장주소를 수정합니다. '주소찾기'를 통해 바뀐 주소지를 입력하시고 '변경완료'버튼을 클릭해주세요.",
 	   className: "help_msg_down"      
+   },   
+   {
+	   id: "delivery-help",
+	   content: "배달 가능 지역을 설정합니다. 서비스 가능 지역을 선택 옵션에서 체크하시면 배달 서비스 지역이 업데이트됩니다.",
+	   className: "help_msg_down"      
    },
+   
 ];
 
 function helpMsg(idArray) {

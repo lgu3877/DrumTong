@@ -29,25 +29,24 @@
 							B.CONTENT as bcontent, B.REGISTDATE as bregistdate 
 					FROM (SELECT * FROM BREVIEW WHERE 
 						<choose>
-							<when test="division eq 'whole'.toString()">
+							<when test='division eq "whole"'>
 								BLOCKBOOLEAN = 'N'
 							</when>
-							<when test="division eq 'noReply'.toString()">
+							<when test='division eq "noReply"'>
 								REPLYBOOLEAN = 'N' AND BLOCKBOOLEAN = 'N' 
 							</when>
-							<when test="division eq 'reportReply'.toString()">
+							<when test='division eq "reportReply"'>
 								BLOCKBOOLEAN = 'Y'
 							</when>
 						</choose>
 					) R 
 					left outer join bcustomerreview C
-					 on R.estid=#{estid} and R.estid=C.estid and R.memberid=C.memberid and R.salecode=C.salecode
+					 on C.estid=#{estid} and R.estid=C.estid and R.memberid=C.memberid and R.salecode=C.salecode
   					left outer join bbusinessreview B
-  					 on R.estid=B.estid and R.memberid=B.memberid and R.salecode=B.salecode
-
-					ORDER BY R.SALECODE DESC) A
+  					 on B.estid=#{estid} and R.estid=B.estid and R.memberid=B.memberid and R.salecode=B.salecode
+					WHERE R.estid=#{estid} 
+					ORDER BY R.SALECODE DESC ) A
 			on P.MEMBERID=A.MEMBERID
-<!-- 		AND ROWNUM <![CDATA[>=]]> #{start} AND ROWNUM <![CDATA[<=]]> #{end} -->
 	</select>
 	
 	<update id="updateReplyConfirm" parameterType="ReviewList">

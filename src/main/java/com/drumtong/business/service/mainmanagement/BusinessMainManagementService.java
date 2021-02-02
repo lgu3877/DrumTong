@@ -81,17 +81,14 @@ public class BusinessMainManagementService {
  	    String estid = bInformationVO.getEstid();
  		
  	    // 2차 온라인 계약에 매장관리를 완료했다면 전에 입력했던 데이터를 불러와준다.
- 	    // else 지움
- 	    if ( bInformationVO.getStatus().equals("PROCESS") || bInformationVO.getStatus().equals("SUCCESS") ) {
  	    	
- 	    	// 매장 사진 데이터
- 	    	mav.addObject("bImageList",(new Gson()).toJson(bImageDAO.selectImageList(estid)));
- 	    	
- 	    	// bManagement 테이블 [매장 소개글] [매장 메뉴] [세탁물 수령방법]
- 	    	mav.addObject("bManagement", (new Gson()).toJson(bManagementDAO.selectCustomerDetail(estid)));
- 	    	
- 	    	
-  	    }
+ 	    // 매장 사진 데이터
+ 	   	mav.addObject("bImageList",(new Gson()).toJson(bImageDAO.selectImageList(estid)));
+ 	   	
+ 	   	// bManagement 테이블 [매장 소개글] [매장 메뉴] [세탁물 수령방법]
+ 	   	mav.addObject("bManagement", (new Gson()).toJson(bManagementDAO.selectCustomerDetail(estid)));
+ 	   	
+ 	   	mav.addObject("bMenu", (new Gson()).toJson(bMenuDAO.select(estid)));
  	    
  	    // 추가 	    
  	    List<String> defaultcategory = Arrays.asList((bManagementDAO.selectDefaultCategory(estid).split("/")));
@@ -174,6 +171,13 @@ public class BusinessMainManagementService {
  	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
  	    String estid = bInformationVO.getEstid();
  	    
+ 	    BPrivateDataVO bPrivateDataVO = (BPrivateDataVO)Session.getAttribute("bLogin");
+	    String bpersonid = bPrivateDataVO.getBpersonid();
+	    
+	    
+	    String folderName = "business/"+ bpersonid + "/" + estid; 
+	    
+ 	    
  	    
 		// 1. 매장관리 테이블에  {소개글,배달여부,퀵여부}를 업데이트 시켜준다. 
 		int BManagementResult = bManagementDAO.updateConstract(bManagementVO);
@@ -182,7 +186,7 @@ public class BusinessMainManagementService {
 		// 계약을 위한 매장사진 등록이기 떄문에 POST를 염두하고 작업해준다.
 		// 다중 이미지 업로드이기 떄문에 multipleUpload 메서드를 호출해준다.
 		bImageVO.setEstid(estid);	// ESTID를 세팅하는 이유는 S3 저장방식이 ESTID(폴더명)/ESTID + UUID로 저장되기 때문에 sql문에 필요하다.
-		aws.multipleUpload(mpf, estid, bImageVO, req);
+		aws.multipleUpload(mpf, folderName, bImageVO, req);
 		
 		
 

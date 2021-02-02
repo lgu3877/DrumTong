@@ -75,52 +75,7 @@ public class RestBusinessMainManagementController {
 		
 	
 	
-	// ===== 중분류 [BManagement] 테이블 ====
-	
-	
-	// === 소분류 [ Introduction ] 필드 {매장소개글} ==	[건욱]
-	// 1. 매장 관리에 매장 소개글을 비동기식으로 수정해주는 메서드입니다.
-	@RequestMapping("BManagement/rest/updateIntroduction/")
-	@PostMapping(produces="application/json; charset=utf8")
-	public String updateIntroduction(HttpServletRequest req, @RequestBody BManagementVO bManagementVO) {
 		
-		int result = svc.updateIntroduction(req,bManagementVO);
-		System.out.println(result + " : result 값 입니다");
-		return result == 1
-				? "true"
-				: "false";
-	}
-	
-	// === 소분류 [ DeliveryBoolean ] 필드 {배달유무} ==	[건욱]
-	// 2. 매장 관리에 배달유무를 비둥기식으로 수정해주는 메서드입니다.
-	@RequestMapping("BManagement/rest/updateDeliveryBoolean/")
-	@PostMapping(produces="application/json; charset=utf8")
-	public String updateDeliveryBoolean(HttpServletRequest req, @RequestBody BManagementVO bManagementVO) {
-		
-		int result = svc.updateDeliveryBoolean(req,bManagementVO);
-		System.out.println(result + " : result 값 입니다");
-		return result == 1
-				? "true"
-				: "false";
-	}
-	
-	
-		
-		
-	// DetailCategory는 추후에 작성하도록 
-	// 받아오는 데이터 타입이 어떻게 되는지 보고 결정하도록한다.
-	// === 소분류 [ DEFAULTCATEGORY ] 필드 {퀵유무} ==
-	// 4. 매장 관리에 카테고리를 비둥기식으로 수정해주는 메서드입니다.
-	@RequestMapping("BManagement/rest/updateDefaultCategory/")
-	@PostMapping(produces="application/json; charset=utf8")
-	public String updateDefaultCategory(HttpServletRequest req, @RequestBody BManagementVO bManagementVO) {
-		
-		int result = svc.updateDefaultCategory(req,bManagementVO);
-		System.out.println(result + " : result 값 입니다");
-		return result == 1
-				? "true"
-				: "false";
-	}	
 	
 	// ===== 중분류 [BInformation] 테이블 ====
 	    
@@ -142,20 +97,6 @@ public class RestBusinessMainManagementController {
 	
 	// ===== 중분류 [BMenu] 테이블 ====	
 	
-	//통합
-//	@RequestMapping("BMenu/rest/{processing}/")
-//	@PostMapping(produces="application/json; charset=utf8")
-//	public String bMenuRestProcessing(HttpServletRequest req, @RequestBody HashMap<String,List<BMenuVO>> ListBMenuVO, 
-//									  @PathVariable("processing")String processing) {
-//		System.out.println(ListBMenuVO);
-//		System.out.println(ListBMenuVO.get("list").size());
-//		System.out.println(ListBMenuVO.get("list").get(0).getMaincategory());
-//		return "";
-		//		int result = svc.bMenuRestProcessing(req, ListBMenuVO, processing);
-//		return result == 1
-//				? "true"
-//				: "false";
-//	}
 	
 	//통합
 	@RequestMapping("BMenu/rest/{processing}/")
@@ -171,31 +112,6 @@ public class RestBusinessMainManagementController {
 
 	
 	
-	
-	// 1. 매장 메뉴를 비둥기식으로 수정해주는 메서드입니다.
-	@RequestMapping("BMenu/rest/updateBMenu/")
-	@PostMapping(produces="application/json; charset=utf8")
-	public String updateBMenu(HttpServletRequest req, @RequestBody BMenuVO bMenuVO) {
-		
-		int result = svc.updateBMenu(req, bMenuVO);
-		System.out.println(result + " : result 값 입니다");
-		return result == 1
-				? "true"
-				: "false";
-	}	
-	
-	// 2. 매장 메뉴를 비둥기식으로 수정해주는 메서드입니다.
-	@RequestMapping("BMenu/rest/deleteBMenu/")
-	@PostMapping(produces="application/json; charset=utf8")
-	public String deleteBMenu(HttpServletRequest req, @RequestBody BMenuVO bMenuVO) {
-		
-		int result = svc.deleteBMenu(req,bMenuVO);
-		System.out.println(result + " : result 값 입니다");
-		return result == 1
-				? "true"
-				: "false";
-	}	
-	
 
 	// ===== 중분류 [BDELIVERYAREA] 테이블 ====	
 	
@@ -210,6 +126,10 @@ public class RestBusinessMainManagementController {
 				? "true"
 				: "false";
 	}
+	
+	
+	
+	
 	
 	
 	// ========================= 대분류 [일정관리] ================================

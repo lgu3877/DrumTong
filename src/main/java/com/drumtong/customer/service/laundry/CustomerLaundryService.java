@@ -22,8 +22,11 @@ import com.drumtong.business.vo.BImageVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BManagementVO;
 import com.drumtong.business.vo.BMenuVO;
+import com.drumtong.business.vo.ReviewList;
 import com.drumtong.customer.dao.CBookmarkDAO;
 import com.drumtong.customer.vo.CPrivateDataVO;
+import com.drumtong.security.Review;
+import com.google.gson.Gson;
 
 @Service
 public class CustomerLaundryService {
@@ -54,7 +57,6 @@ public class CustomerLaundryService {
 		
 		// ★★★★★★★★미완성★★★★★★★★★
 		List<BImageVO> bImageVO = bImageDAO.selectImageList(estid);
-		if(bImageVO != null) mav.addObject("bImageVO", bImageVO);
 		
 		// 쿠폰(할인가격, 기간, 최소금액, 중복가능여부) 객체를 유효기간에 해당하는 리스트만 불러왔음
 		List<BCouponVO> bCouponVO = comparePeriod(bCouponDAO.select(estid));
@@ -62,10 +64,14 @@ public class CustomerLaundryService {
 		// 메뉴 정보(메뉴이름, 가격, 퀵 가격, 예상소요시간)를 저장한 객체(오름차순)
 		List<BMenuVO> bMenuVO = bMenuDAO.select(estid);
 		
+		List<ReviewList> ReviewList = Review.selectList(estid, "whole");
+		
 		mav.addObject("bInformationVO", bInformationVO);
 		mav.addObject("bManagementVO", bManagementVO);
+		if(bImageVO != null) mav.addObject("bImageVO", new Gson().toJson(bImageVO));
 		mav.addObject("bCouponVO", bCouponVO);
 		mav.addObject("bMenuVO", bMenuVO);
+		mav.addObject("ReviewList", new Gson().toJson(ReviewList));
 		
 		// 로그인 되어있을 때 쿠폰 정보, 북마크 체크 여부
 		CPrivateDataVO Login = (CPrivateDataVO)req.getSession().getAttribute("cLogin");

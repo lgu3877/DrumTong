@@ -1,64 +1,79 @@
 // 업로드로 추가된 사진 > 업로드 할 파일 임시 저장
 const uploadPhotoList = {
-	originalCover: document.getElementById("cover-image") ? document.getElementById("cover-image").src : "",
-	uploadCover: "",
-	uploadPhoto: [],
+		originalCover: document.getElementById("cover-image") ? document.getElementById("cover-image").src : "",
+				uploadCover: "",
+				uploadPhoto: [],
 }
-
-// 업로드 과정 중 삭제된 사진 이름 배열 > DB에서 이름 비교 후 저장 권장
 const deletePhotoList = [];
 
+
+// 초기 실행
+displayImages();
+imageShow();
+sliderEvent();
+createInputFile();
+
+
+// 업로드 과정 중 삭제된 사진 이름 배열 > DB에서 이름 비교 후 저장 권장
 function displayImages() {
 	const imageList = document.getElementById("image-preview");
 	
 	const coverImage = bImageList.filter((image) => image.delegatephotoboolean === "Y");
 	const otherImages = bImageList.filter((image) => image.delegatephotoboolean === "N");
 	
-	// image container
-	const li = document.createElement("li");
-	li.id = "cover-image-con";
-	li.className = "shop_picture";
-	
-	// image
-	const coverImg = document.createElement("img");
-	coverImg.id = "cover-image";
-	coverImg.src = 
-		"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + 
-		coverImage[0].storeimg;
-	coverImg.alt = ""; 
-	
-	// 삭제 아이콘 (X)
-	const deleteIcon = document.createElement("i");
-	deleteIcon.className = "fas fa-times";
-	
-	// 대표 사진 아이콘 (별)
-	const coverIcon = document.createElement("i");
-	coverIcon.className = "fas fa-star";
-	coverIcon.innerHTML = "<span>대표사진</span>";
-	
-	// 추가
-	li.appendChild(coverImg);
-	li.appendChild(deleteIcon);
-	li.appendChild(coverIcon);
-	imageList.prepend(li);
-	
-	
-	// 기타 매장 사진
-	for (let i = 0; i < otherImages.length; i++) {
-		// container
+	// 커버 사진이 있을 경우
+	if (coverImage.length !== 0) {
+		// 이미지 슬라이더 container
 		const li = document.createElement("li");
+		li.id = "cover-image-con";
 		li.className = "shop_picture";
 		
-		// image
-		const otherImg = document.createElement("img");
-		otherImg.src = 
+		// 이미지 슬라이더
+		const coverImg = document.createElement("img");
+		coverImg.id = "cover-image";
+		coverImg.src = 
 			"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + 
-			otherImages[i].storeimg;
-		otherImg.alt = "";
+			coverImage[0].storeimg;
+		coverImg.alt = ""; 
 		
-		li.appendChild(otherImg);
-		li.appendChild(deleteIcon.cloneNode(true));
-		imageList.appendChild(li);
+		// 삭제 아이콘 (X)
+		const deleteIcon = document.createElement("i");
+		deleteIcon.className = "fas fa-times";
+		
+		// 대표 사진 아이콘 (별)
+		const coverIcon = document.createElement("i");
+		coverIcon.className = "fas fa-star";
+		coverIcon.innerHTML = "<span>대표사진</span>";
+		
+		// 추가
+		li.appendChild(coverImg);
+		li.appendChild(deleteIcon);
+		li.appendChild(coverIcon);
+		imageList.prepend(li);
+	}
+	
+	// 기타 매장 사진(일반 매장소개 사진이 있을 경우)
+	if (otherImages.length !== 0) {
+		for (let i = 0; i < otherImages.length; i++) {
+			// container
+			const li = document.createElement("li");
+			li.className = "shop_picture";
+			
+			// image
+			const otherImg = document.createElement("img");
+			otherImg.src = 
+				"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + 
+				otherImages[i].storeimg;
+			otherImg.alt = "";
+			
+			// 삭제 아이콘 (X)
+			const deleteIcon = document.createElement("i");
+			deleteIcon.className = "fas fa-times";
+			
+			li.appendChild(otherImg);
+			li.appendChild(deleteIcon.cloneNode(true));
+			imageList.appendChild(li);
+		}
 	}
 }
 
@@ -75,28 +90,16 @@ $("#image-preview").on('mousewheel',function(e) {
    }
 });
 
+
 // 이미지 선택시 커버 이미지 출력
 function imageShow() {
-   const imageInputForm = document.getElementById('shop-image-view');
-   const imageViewCon = document.getElementById('main-image-con');
-   
-   // 이미지 src 입력 > DB에서 이미지 가져오기
-   const postedMainImage = document.getElementById("cover-image").src;
-   let img = document.getElementById('main-image');
-   
-   // 대표사진이 있을 경우 > 해당 사진 미리보기
-   if (postedMainImage && !img.src) {
-      imageInputForm.style.display = 'none';
-      imageViewCon.style.display = '';
-      
-      img.src = postedMainImage;
-      zoomInPhoto(img.src);
-   }
-   // 없을 경우 > default
-   else {
-      imageInputForm.style.display = '';
-      imageViewCon.style.display = 'none';
-   }   
+	// 대표사진이 있을 경우 > 해당 사진 미리보기
+	const coverImage = document.getElementById("cover-image").src;
+	
+	if (coverImage) {
+		document.getElementById("main-image").src = coverImage;
+		zoomInPhoto(coverImage);
+	}
 }
 
 // 매장 사진 슬라이드 인터페이스   >   swipe cover image view > swipeViewImage()
@@ -119,12 +122,7 @@ function zoomInPhoto(clickedPhoto) {
    const photoSlideCon = document.getElementById("image-preview");
    const photoList = [...document.getElementsByClassName("shop_picture")];
    
-   const imageInputForm = document.getElementById('shop-image-view');
-   const imageViewCon = document.getElementById('main-image-con');
    let img = document.getElementById('main-image');
-   
-   imageInputForm.style.display = 'none';
-   imageViewCon.style.display = '';
    img.src = clickedPhoto;
    
    // 줌인
@@ -143,8 +141,7 @@ function zoomInPhoto(clickedPhoto) {
 }
 
 
-
-//이미지 업로드
+// 이미지 업로드
 function imageCheck(e) {
 	const input = e.target;
 	const imageType = input.value.substr(input.value.length - 3, input.value.length).toLocaleLowerCase();
@@ -152,7 +149,6 @@ function imageCheck(e) {
 	const isImage = imageType === 'jpg' 
 			|| imageType === 'png' 
 			|| imageType === 'jpeg' ? true : false
-	
 					
 // 이미지 확장자 검사 (jpg, png, jpng)
 	if (!isImage) {   
@@ -230,7 +226,7 @@ function imageCheck(e) {
 					id: input.id,
 					src: e.target.result,
 				}
-//				uploadPhotoList.uploadPhoto.push(e.target.result);
+				// uploadPhotoList.uploadPhoto.push(e.target.result);
 				uploadPhotoList.uploadPhoto.push(obj);
 				
 				
@@ -296,8 +292,12 @@ function deletePhoto(clickedPhoto) {
         	
         	
             // DB에서 삭제 > 기존에 등록된 사진일 경우에만 진행
-        	const isUploaded = clickedPhoto.includes("https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/");        	
-        	isUploaded ? deletePhotoList.push(clickedPhoto.substr(55)) : null;
+        	const isUploaded = clickedPhoto.includes("https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/");
+        	console.log(isUploaded);
+        	if (isUploaded) {
+        		deletePhotoList.push(clickedPhoto.substr(55));
+        	}
+        	console.log(deletePhotoList);
           
             break;
          }
@@ -320,31 +320,9 @@ function deletePhoto(clickedPhoto) {
 }
 
 
-
-
-
-// 랜덤 String 생성
-function generateRandomString(length) {
-	let result = "";
-	const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-	const charArray = characters.split("");
-		
-	for (let i = 0; i < length; i++) {
-		result += charArray[Math.ceil(Math.random() * characters.length)];
-	}
-	
-	// 동일한 난수가 생성되엇을 경우(로또 맞을 확률)
-	if (document.getElementById(result)) {
-		alert("축하드립니다. 17,067,655,527,413,216e+89의 확률을 뚫으셨습니다.");
-		location.reload();
-		return;
-	}
-	
-	return result;
-}
-
 // input file & label 생성
 function createInputFile() {
+	console.log("새로운 사진 추가하기");
 	const randomId = generateRandomString(15);
 	
 	const input = document.createElement("input");
@@ -373,6 +351,7 @@ function createLabelForInputFile(inputId) {
 	return label;
 }
 
+// input label 숨기기
 function hideLabel(labelId) {	
 	document.getElementById(labelId).style.display = "none";
 	
@@ -383,9 +362,4 @@ function hideLabel(labelId) {
 
 
 
-// 초기 실행
-displayImages();
-imageShow();
-sliderEvent();
-createInputFile();
 
