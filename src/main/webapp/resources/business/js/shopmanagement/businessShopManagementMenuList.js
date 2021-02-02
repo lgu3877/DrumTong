@@ -414,7 +414,6 @@ function populateSubOptions(key, subCategoryId) {
 	document.getElementById(subCategoryId).selected = true;
 }
 
-
 // 배달 서비스 활성화 이벤트
 let deliveryToggle = false;
 function activateVisualization() {
@@ -457,7 +456,6 @@ function activateVisualization() {
 		}	
 	}
 }
-
 
 // 메뉴 수정 버튼(th & td > input + 삭제 버튼)
 function modifyMenuService() {
@@ -665,8 +663,49 @@ function modifyMenuService() {
 	}
 };
 
+// 단일 메뉴 수정
 function modifyMenu(id) {
-	console.log(id);
+	const item = document.getElementById(id);
+	
+	// 입력된 값 추출
+	const menu = {};
+	for (let i = 0; i < item.children.length - 1; i++) {
+		switch(i) {
+		// 서비스 유형
+		case 0: 
+			menu.maincategory = item.children[i].innerText;
+			break;
+		// 서비스 타입
+		case 1: 
+			menu.subcategory = item.children[i].innerText;
+			break;
+		// 메뉴 이름
+		case 2: 
+			menu.name = item.children[i].innerText;
+			break;
+		// 가격 & 배달비 > 배달비가 없을 경우 포함
+		case 3:
+			if (item.children[i].children.length === 2) {
+				menu.price = refineValue("price", item.children[i].children[0].innerText);		
+				menu.quickprice = refineValue("quickprice", item.children[i].children[1].innerText)
+			}
+			else if (item.children[i].children.length === 1) {
+				menu.price = refineValue("price", item.children[i].children[0].innerText);
+			}
+			else {
+				alert("에러");
+			}
+			break;
+		// 소요 시간
+		case 4: 
+			menu.ete = refineValue("ete", item.children[i].innerText);
+			break;
+		}
+	}
+	
+	console.log(menu);
+	
+	// 폼 변경 > 입력된 값 주입
 }
 
 // 상품 리스트 삭제
@@ -719,6 +758,23 @@ function dismissInput(id) {
 	document.getElementById(id).remove();
 }
 
+//가격 & 배달비 & 소요일자 > 문자열 제거 & 숫자 추출
+function refineValue(type, value) {
+	switch(type) {
+	case "price":
+		const price = value.substr(0, value.indexOf("원")).replace(",", "").trim();
+		return price;
+		break;
+	case "quickprice":
+		const quickprice = value.substr(1, value.indexOf("원") - 1).replace(",", "").trim();
+		return quickprice;
+		break;
+	case "ete":
+		const ete = value.substr(0, value.indexOf("(")).trim();
+		return ete;
+		break;
+	}
+}
 
 
 
