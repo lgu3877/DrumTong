@@ -103,9 +103,11 @@ public class BusinessMainManagementService {
     	mav.addObject("defaultcategory", (new Gson()).toJson(defaultcategory));
 		
     	
-    	// 지역 데이터 리스트 ( AddressListSetting class는 static이라 상시호출가능)
-    	HashMap<String, HashMap<String , ArrayList<String>>> addressList = AddressListSetting.getAddressList();
- 	    mav.addObject("addressList", addressList);
+    	// 지역 데이터 리스트 (시도 데이터) 
+    	// 밑에 소스 바꾼 이유 : 원래는 한꺼번에 지역데이터를 전달했으나 리소스를 너무 많이 잡아먹어서 시도 데이터만 먼저보내고 
+    	// 나머지 시군구 / 읍면동은 REST로 처리하기로 맘먹음.
+//    	HashMap<String, HashMap<String , ArrayList<String>>> addressList = AddressListSetting.getAddressList();
+    	mav.addObject("sido", (new Gson()).toJson(mMapAddressListDAO.selectMMapAddressA()));
     	
     	
  	    // 대분류 중분류 카테고리를 셋팅해주는 함수입니다.

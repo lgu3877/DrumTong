@@ -25,6 +25,7 @@ public class AddressListSetting {
 	public static HashMap<String, HashMap<String , ArrayList<String>>> getAddressList() {
 		 HashMap<String, HashMap<String , ArrayList<String>>> addressList = new HashMap<String, HashMap<String , ArrayList<String>>>();
 		 
+		 System.out.println("실행");
 		 
 		 // 시도 데이터 리스트
 		 List<String> addressa = mMapAddressListDAO.selectMMapAddressA();

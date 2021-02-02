@@ -52,8 +52,8 @@
 		const bMenu = ${bMenu};
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
-		const addressList = ${addressList};
-		console.log(addressList);
+		const sido = ${sido};
+		console.log(sido);
 	</script>
 </head>
      
