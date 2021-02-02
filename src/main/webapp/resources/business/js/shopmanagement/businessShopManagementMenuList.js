@@ -15,7 +15,7 @@ function displayMenu() {
 	// 테이플 행 카운트 > 짝수 번째 하이라이트
 	let row = 0;
 	for (let index = 0; index < bMenu.length; index++) {
-		const randomId = generateRandomString(9);
+		const randomId = generateRandomString(16);
 		const tr = document.createElement("tr");
 		tr.id = randomId;
 		
@@ -30,6 +30,7 @@ function displayMenu() {
 			"ete": undefined,
 			"quickprice": undefined,
 		};
+		
 		const count = Object.keys(bMenu[index]).length;
 		let size = 0;
 		for (let key in sortedMenu) {
@@ -110,7 +111,7 @@ function displayMenu() {
 			// 소요 시간
 			case "ete":
 				const estimatedTime = document.createElement("td");
-				estimatedTime.innerHTML = sortedMenu[key];
+				estimatedTime.innerHTML = sortedMenu[key] + " (일)";
 				
 				// 짝수 줄 > 하이라이트
 				if (row % 2 == 0) estimatedTime.className = "even";
@@ -119,6 +120,21 @@ function displayMenu() {
 				tr.appendChild(estimatedTime);
 				break;
 			default:
+				const modificationBtn = document.createElement("td");
+				modificationBtn.style.textAlign = "center";
+				
+				const icon = document.createElement("i");
+				icon.className = "fas fa-pencil-alt";
+				icon.style.color = "green";
+				icon.style.cursor = "pointer";
+				icon.addEventListener("click", () => modifyMenu(randomId));
+				
+				// 짝수 줄 > 하이라이트
+				if (row % 2 == 0) modificationBtn.className = "even";
+				
+				// 삽입
+				modificationBtn.appendChild(icon);
+				tr.appendChild(modificationBtn);
 				break;
 			}			
 		}
@@ -506,7 +522,7 @@ function modifyMenuService() {
 			case 0:	
 				// 초기화(default 값 지정 가능)
 				tr[i].children[j].innerHTML = "";
-				tr[i].children[j].style.width = "16%";
+				tr[i].children[j].style.width = "15%";
 				tr[i].children[j].style.padding = "5px";
 
 				select.className = "service_selector";
@@ -551,7 +567,7 @@ function modifyMenuService() {
 			case 1:
 				// 초기화(default 값 지정 가능)
 				tr[i].children[j].innerHTML = "";
-				tr[i].children[j].style.width = "16%";
+				tr[i].children[j].style.width = "15%";
 				tr[i].children[j].style.padding = "5px";
 				
 				select.className = "service_selector";
@@ -596,7 +612,7 @@ function modifyMenuService() {
 				// 초기화(default 값 지정 가능)
 				tr[i].children[j].innerHTML = "";
 				tr[i].children[j].className += " third_item_prop";
-				tr[i].children[j].style.width = "21%";
+				tr[i].children[j].style.width = "20%";
 				tr[i].children[j].style.padding = "5px";
 				
 				detailInput.type = "text";
@@ -612,7 +628,7 @@ function modifyMenuService() {
 				// 초기화(default 값 지정 가능)
 				tr[i].children[j].innerHTML = "";
 				tr[i].children[j].className += " forth_item_prop";
-				tr[i].children[j].style.width = "16%";
+				tr[i].children[j].style.width = "15%";
 				tr[i].children[j].style.padding = "5px";
 				
 				priceInput.type = "text";
@@ -628,13 +644,13 @@ function modifyMenuService() {
 				// 초기화(default 값 지정 가능)
 				tr[i].children[j].innerHTML = "";
 				tr[i].children[j].className += " fifth_item_prop";
-				tr[i].children[j].style.width = "16%";
+				tr[i].children[j].style.width = "15%";
 				tr[i].children[j].style.padding = "5px";
 				
 				timeInput.type = "text";
 				timeInput.className = "service_detail_input";
 				timeInput.placeholder = 
-					tr[i].children[j].innerHTML ? "초기값(DB)" : "소요시간";
+					tr[i].children[j].innerHTML ? "초기값(DB)" : "소요시간(시간)";
 				
 				tr[i].children[j].appendChild(timeInput);
 				
@@ -643,14 +659,15 @@ function modifyMenuService() {
 			
 			let value = tr[i].children[j].innerHTML;
 //			console.log(value);
-			
+		
 		}
-		
-		
 		tr[i].appendChild(td);						
-		
 	}
 };
+
+function modifyMenu(id) {
+	console.log(id);
+}
 
 // 상품 리스트 삭제
 function deleteList(tr) {

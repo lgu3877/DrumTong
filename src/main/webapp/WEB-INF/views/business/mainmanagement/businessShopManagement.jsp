@@ -291,6 +291,7 @@
 							<th scope="cols">메뉴 이름</th>
 							<th scope="cols">가격(배달비)</th>
 							<th scope="cols">소요시간</th>
+							<th scope="cols">수정/삭제</th>
 						</tr>
 					</thead>
 					
@@ -572,7 +573,7 @@
 			const charArray = characters.split("");
 				
 			for (let i = 0; i < length; i++) {
-				result += charArray[Math.ceil(Math.random() * characters.length)];
+				result += charArray[Math.ceil(Math.random() * (characters.length - 1))];
 			}
 			
 			// 동일한 난수가 생성되엇을 경우(로또 맞을 확률)
