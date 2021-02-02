@@ -17,6 +17,7 @@
       <property name="defaultEncoding" value="utf-8" />
    </bean>
 
+<!-- 	AWS RDS Server  -->
    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
       <property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
 <!--         <property name="jdbcUrl" value="jdbc:oracle:thin:@laundry.cp78wupdravw.ap-northeast-2.rds.amazonaws.com:1521:LAUNDRY" /> -->
@@ -28,8 +29,21 @@
       <property name="idleConnectionTestPeriod" value="300" />
       <property name="checkoutTimeout" value="5000" />
    </bean>
+   
 
-
+<!-- Ubuntu Map Server -->
+   <bean id="dataSourceMap" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+      <property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
+<!--         <property name="jdbcUrl" value="jdbc:oracle:thin:@laundry.cp78wupdravw.ap-northeast-2.rds.amazonaws.com:1521:LAUNDRY" /> -->
+        <property name="jdbcUrl" value="jdbc:oracle:thin:@124.51.143.96:49913:xe" /> 
+        <property name="user" value="drumtong" />
+       <property name="password" value="laundrydrumtong" />
+      <property name="maxPoolSize" value="100" />
+      <property name="maxIdleTime" value="600" />
+      <property name="idleConnectionTestPeriod" value="300" />
+      <property name="checkoutTimeout" value="5000" />
+   </bean>
+   
 <!-- ===============================MyBatis======================================= -->
 
 
@@ -85,7 +99,22 @@
       <constructor-arg ref="systemFactory" />
    </bean>
    
+  
+  <!--    ubuntu Map mybatis    -->
+   <bean id="mapFactory"
+      class="org.mybatis.spring.SqlSessionFactoryBean">
+      <property name="dataSource" ref="dataSourceMap" />
+      <property name="configLocation" value="classpath:mapConfig/mybatis-config.xml" />
+      <property name="mapperLocations">
+         <list>
+            <value>classpath:mapConfig/sqlmap-**</value>
+         </list>
+      </property>
+   </bean>
    
+   <bean id="mapTemplate" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+      <constructor-arg ref="mapFactory" />
+   </bean>
    
 <!-- ===============================transaction======================================= -->
    <bean id="transactionManager"
@@ -109,6 +138,9 @@
    <context:component-scan base-package="com.drumtong.business.service.*" />
    <context:component-scan base-package="com.drumtong.customer.service.*" />
    
+<!--   [map 전역 설정] -->
+   <context:component-scan base-package="com.drumtong.map"/>
+   
    
    
 <!--    [ security 전역 설정] -->
@@ -119,12 +151,13 @@
    <mybatis-spring:scan base-package="com.drumtong.business.dao" factory-ref="businessFactory"/>
    <mybatis-spring:scan base-package="com.drumtong.customer.dao" factory-ref="customerFactory"/>
    <mybatis-spring:scan base-package="com.drumtong.system.dao" factory-ref="systemFactory"/>
+   <mybatis-spring:scan base-package="com.drumtong.map.dao" factory-ref="mapFactory"/>
 
 
 </beans>
 
 
-
+	
 
 
 
