@@ -13,7 +13,7 @@
   
 <%--     <c:if test="${not empty orderList}"> --%>
 <%-- 	  <c:forEach items="${orderList }" var="orderList"> --%>
-    <div class="orderlist-card">
+    <div class="orderlist-card" style="display:none">
       <div class="orderData1">
         <div class="orderData-company">
           <div class="orderData-circle"></div>
@@ -77,7 +77,7 @@
 <%-- 		      		Total <fmt:formatNumber value="${orderList.totalprice }" pattern="#,###" />원 --%>
 		      	</div>
 		      	<div class="orderData-total-reviewButton">
-		      		<button onclick="modalOpen()">리뷰 쓰기</button>
+		      		<button>리뷰 쓰기</button>
 		      	</div>
 		      </div>
 		      
@@ -91,18 +91,19 @@
 <!-- 영경 모달 -->
 <div id="writeReviewButton" class="order_review_modal modal">
 	<div class="modal_box">
-		<div class="modal_title">ㅇㅇㅇ 세탁소에 리뷰 작성하기</div>
+		<div class="modal_title">세탁소 이름</div>
 		<form onsubmit="clacStarCsore();" action="${cpath }/">
 			<div class="modal_menu_1">
-				<input type="text" value="20210102-00004" readonly>
-				<label >티셔츠 외 3개...</label>
+				<input type="hidden" value="estid" name="estid">
+				<input type="text" value="salecode" name="salecode" readonly>
+				<label id="modal_orderListData">구매 목록</label>
 			</div>
 			<div class="modal_menu_2">
-				<img src="${cpath }/resources/customer/img/펭수버럭.jpg" alt="리뷰이미지">
+				<img id="reviewImg" src="${cpath }/resources/customer/img/펭수버럭.jpg" alt="리뷰이미지">
 				<textarea rows="2" cols="4" placeholder="내용을 작성하세요"></textarea>
 			</div>
 			<div class="modal_menu_3">
-				<input type="file">
+				<input type="file" id="reviewImgFile">
 				<label>별점 </label>
 				<input type="hidden" id="starScore">
 				<span>
@@ -121,6 +122,7 @@
 </div>
 <!-- 영경 스크립트 -->
 <script>
+	// 별점 계산하는 메서드[영경]
 	function clacStarCsore(){
 		score = 0;
 		document.querySelectorAll('.modal_menu_3 i').forEach(i => {
@@ -137,17 +139,64 @@
 		return true;
 	}
 	
-	function modalOpen(){
+
+	// 모달 데이터 입력[영경]
+	function writeModalData(aorderList){
+		document.getElementsByClassName('modal_title')[0].innerHTML=aorderList.brandnaming;
+		document.querySelectorAll('.modal_menu_1 [name="estid"]')[0].value=aorderList.estid;
+		document.querySelectorAll('.modal_menu_1 [name="salecode"]')[0].value=aorderList.salecode;
+		
+		keyList = Object.keys(aorderList.maincategory);
+		
+		document.querySelectorAll('.modal_menu_1 label#modal_orderListData')[0].title= keyList;
+		
+		keys = keyList[0];
+		console.log("keys : ",keys);
+		console.log("keyList.length : ",keyList.length);
+		console.log("aorderList.totalamount : ", aorderList.totalamount);
+		if(keyList.length > 1){
+			keys += ' 외 ' + (keyList.length - 1) + '종류'; 
+		}
+		keys += '(총 ' + aorderList.totalamount + '벌)';
+		
+		document.querySelectorAll('.modal_menu_1 label#modal_orderListData')[0].innerHTML= keys;
+		
+		document.getElementById('reviewImgFile').addEventListener('change', Preview);
+		
+		
+	}
+	
+	// 리뷰 이미지 올리면 미리보기[영경]
+    function Preview(){
+    	photo = document.getElementById('reviewImgFile');
+    	priview = document.getElementById('reviewImg');
+    	
+    	var img = new Image();		
+		img.src = URL.createObjectURL(photo.files[0]);
+    	
+		img.onload = function() {
+			priview.setAttribute('src', img.src);
+		}
+		
+    }
+        
+	// 모달 열기, 닫는 메서드 입력[영경]
+	function modalOpen(aorderList){
+		// 모달 데이터 입력
+		writeModalData(aorderList);
+		
 		document.querySelectorAll('#writeReviewButton')[0].style.display="block";
 		
        // When the user clicks anywhere outside of the modal, close it
        document.querySelectorAll('#writeReviewButton')[0].onclick = function (event) {
+    	   // 배경을 클릭하면 모달이 닫히도록
          if (event.target == this) {
         	 this.style.display="none";
          }
        };
 	}
 	
+	// 현재 별 모양에 따라 클릭한 별 모양이 변하도록[영경] 빈 별 => 채운 별 => 반 별 => 빈별
 	function checkStar(click_id){
 		changeClassName = "fas fa-star";
 		document.querySelectorAll('.modal_menu_3 i').forEach(star =>{
@@ -193,30 +242,36 @@
 	// 주문 목록 1개의 Div 영역
 	let initSetting = $('div.orderlist-card');
 	
-	console.log(initSetting);
+// 	console.log(initSetting);
 
 	// 주문 목록 데이터 값
 	let orderList = ${orderList};
 
-	console.log(orderList);
+// 	console.log(orderList);
 	
-	// 처음 화면을 로드했을 시에 Sample Clone을 생성해준다. (orderList[0]에 대한 값)
-	window.onload = function() {
-		
-		insertCloneDiv();
-		console.log("클론 콘테이너 ");
-// 		console.log(clonecontainer);
-		
+	if(orderList.length !== 0){
+		// 처음 화면을 로드했을 시에 Sample Clone을 생성해준다. (orderList[0]에 대한 값)
+		window.onload = function() {
+			
+			insertCloneDiv();
+	// 		console.log("클론 콘테이너 ");
+	// 		console.log(clonecontainer);
+			
+		}
+	} else {
+		h1 = document.createElement('h1');
+		h1.innerHTML = '주문목록이 없습니다.';
+		h1.style.fontSize = '30pt';
+		document.getElementsByClassName('orderlist-wrap')[0].appendChild(h1);
 	}
 	
 	// Clone한 Div영역을 반복문으로 orderList 배열의 길이만큼 반복시켜준다.
 	// orderList[0]에 대한 값은 입력을 했으니 배열은 1부터 시작한다.
 	function insertCloneDiv() {
-		console.log('길이 : ', orderList.length);
-		for (i = 0; i < orderList.length; i++){
+// 		console.log('길이 : ', orderList.length);
+		for (let i = 0; i < orderList.length; i++){
 			initData(i);
-			console.log('objectkey : ' ,Object.keys(orderList[i].maincategory));
-			
+// 			console.log('objectkey : ' ,Object.keys(orderList[i].maincategory));
 		}
 	}
 	
@@ -238,7 +293,7 @@
 // // 		let clonecontainer = $('div.orderlist-card' + value );
 		let clonecontainer = $('div#card' + value );
 		
-		console.log(clonecontainer);
+// 		console.log(clonecontainer);
 // 		// 클론 내부영역에 매장명을 입력시켜준다.
 		clonecontainer.find('.brandNaming').html(orderList[value].brandnaming);
 
@@ -246,7 +301,7 @@
 // 		// 주문 번호를 입력해줍니다.
 		clonecontainer.find('.orderData-date').html('<b>주문번호</b> ' + orderList[value].salecode );
 		
-		console.log('매장명입력3');
+// 		console.log('매장명입력3');
 
 // 		// 주문 옵션을 넣어줍니다.
 // 		console.log('valuemainccateogry : ' , orderList[value].maincategory);
@@ -296,19 +351,18 @@
 				
 				
 				let mainmenus = subcategories[inputSubKey];
-				console.log('@@@메인메뉴들 ');
-				console.log(mainmenus);
+// 				console.log('@@@메인메뉴들 ');
+// 				console.log(mainmenus);
 				
-				console.log(mainmenus.length);
+// 				console.log(mainmenus.length);
 				for ( let i = 0; i < mainmenus.length; i++ ) {
+// 					console.log('세부메뉴 단일 값 : ' + i);
+// 					console.log(mainmenus[i].name);
+// 					console.log(mainmenus[i]);
 					
-					console.log('세부메뉴 단일 값 : ' + i);
-					console.log(mainmenus[i].name);
-					console.log(mainmenus[i]);
-					
-					console.log(mainmenus[i].quickprice);
+// 					console.log(mainmenus[i].quickprice);
 					let quickprice = ( mainmenus[i].quickprice === 0 ) ? '' : 'Quick Price : ' + numberWithCommas(mainmenus[i].quickprice) + '원';
-					console.log('quick : ' + quickprice);
+// 					console.log('quick : ' + quickprice);
 					
 					clonecontainer.find('#orderData-option-sub-' + inputSubKey).next('ul').
 					html('<li>' + mainmenus[i].name + ' '+ numberWithCommas(mainmenus[i].amount) +'개 X ' + 
@@ -336,9 +390,6 @@
 		// 요청사항에 대한 값을 입력해줍니다.
 		clonecontainer.find('.orderData-options-head-requests').next('ul').html('<li>' + orderList[value].requests + '</li>');
 		
-		
-		
-		
 		// 주문 일자를 입력해줍니다.
 		clonecontainer.find('.orderData-total-purchasedate').html(' <b>주문일자</b> ' +  orderList[value].purchasedate);
 		
@@ -348,9 +399,14 @@
 		// 총 금액을 입력해줍니다.
 		clonecontainer.find('.orderData-total-totalprice').html('Total ' +  numberWithCommas(orderList[value].totalprice));
 		
+		// 리뷰 작성 여부에 따라 리뷰 버튼을 생성 또는 미생성![영경]
+		if(orderList[value].reviewCheck === "Y"){
+			document.querySelectorAll('.orderData-total-reviewButton')[value+1].style.display='none';
+		} else{
+			document.querySelectorAll('.orderData-total-reviewButton')[value+1].addEventListener('click', li => { modalOpen(orderList[value]); });
+		}
 	}
 	
-
 	
 	// 1,000 단위 콤마 찍는 함수
 	function numberWithCommas(value) {

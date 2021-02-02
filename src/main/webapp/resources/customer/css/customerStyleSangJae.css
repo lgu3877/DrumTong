@@ -217,6 +217,12 @@
 }
 
 /* Bookmark */
+body .section-bookmark .bookmark_mainName {
+   text-align: center;
+   margin-left: auto;
+   margin-right: auto;
+   font-size: 30px;
+}
 .bookmark {
   display: inline-block;
   position: relative;
@@ -260,6 +266,15 @@
 }
 .order_review_modal .modal_box form .modal_menu_1{
 	text-align:center;
+}
+.order_review_modal .modal_box form .modal_menu_1 label#modal_orderListData{
+	padding-right: 5pt;
+	padding-left: 5pt;
+}
+.order_review_modal .modal_box form .modal_menu_1 label#modal_orderListData:hover{
+	cursor: pointer;
+	background-color: #EAEAEA;
+	border-radius: 15px;
 }
 .order_review_modal .modal_box form .modal_menu_1 *{
 	border: none;
