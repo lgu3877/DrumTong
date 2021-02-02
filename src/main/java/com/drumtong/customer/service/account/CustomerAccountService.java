@@ -14,6 +14,7 @@ import com.drumtong.business.dao.BInformationDAO;
 import com.drumtong.business.dao.BSalesDAO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.OrderList;
+import com.drumtong.business.vo.ReviewList;
 import com.drumtong.customer.dao.CPaymentDAO;
 import com.drumtong.customer.dao.CPointDAO;
 import com.drumtong.customer.vo.CPaymentVO;
@@ -99,6 +100,11 @@ public class CustomerAccountService {
 //		 		  메인                                            서브                       VO
 //		HashMap<String, HashMap<String,List<BDetailSalesVO>>>
 		mav.addObject("orderList", (new Gson()).toJson(orderList));
+		return mav;
+	}
+
+	public ModelAndView newReview(HttpServletRequest req, ReviewList review) {
+		ModelAndView mav = new ModelAndView("redirect:/customer/account/customerOrderList/");
 		return mav;
 	}
 

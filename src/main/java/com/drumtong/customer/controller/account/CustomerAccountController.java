@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.drumtong.business.vo.ReviewList;
 import com.drumtong.customer.service.account.CustomerAccountService;
 
 @Controller
@@ -46,5 +47,12 @@ public class CustomerAccountController {
 	public ModelAndView orderList(HttpServletRequest req) {
 		return svc.orderList(req);
 	}
+	
+	// 고객 주문 목록 리뷰 작성
+	@RequestMapping("customerNewReview/")
+	public ModelAndView newReview(HttpServletRequest req, ReviewList review){
+		return svc.newReview(req, review);
+	}
+	
 }
 
