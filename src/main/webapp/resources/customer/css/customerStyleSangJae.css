@@ -1066,3 +1066,65 @@ check .option-name,
 	background: rgb(51, 102, 204);
 	clip-path: polygon(50% 0%, 51% 50%, 51% 50%, 51% 51%, 50% 51%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }
+
+.googlechart-div {
+	width: 100%; height: auto; display: flex; margin-top: 20px; margin-bottom: 20px
+}
+
+.googlechart-div .leftchartdiv {
+	width: 70%;
+}
+
+.googlechart-div .rightchartdiv {
+	width: 30%; display: table-column;
+}
+
+#stardiv  {
+	display: flex; align-items: center; justify-content:center ;height: 50%
+}
+
+.googlechart-div .rightchartdiv .rightinner{
+	height: 30%;
+}
+.googlechart-div .rightchartdiv .rightinner .backstars {
+	position: relative;
+	color: white;
+}
+
+.googlechart-div .rightchartdiv .rightinner .frontstars {
+	display: flex;
+	color: white;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    transition: all .5s;
+}
+
+.googlechart-div .rightchartdiv .rightinner .backstars i {
+		font-size: xx-large !important;
+}
+
+.googlechart-div .rightchartdiv .rightinner .frontstars i {
+	color: skyblue !important;
+	font-size: xx-large !important;
+}
+
+.googlechart-div .rightchartdiv .rightinner .cscore{
+	height: 50%; display:flex; align-items: center; justify-content: center ;font-size: 16pt; font-weight: bold;
+}
+
+.googlechart-div .rightchartdiv .outer-more {
+	position: absolute; background: #1564F9; width: 200px; height: 200px; top: 10%; right: 23%; border-radius: 50%; display: flex; justify-content: center; align-items: center
+}
+
+.googlechart-div .rightchartdiv .outer-more .review-more {
+	width: 60%; height: 60%; background: white; border-radius: 50%; display: flex; align-items: center; 	transition: all 1s ease 0s;
+}
+
+.googlechart-div .rightchartdiv .outer-more .review-more p {
+	text-align: center; margin: 0; width: 100%; font-size: 16pt; font-weight: normal !important;	transition: all 1s ease 0s; color: #1564F9
+}
+
+
+
+
