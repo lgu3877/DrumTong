@@ -18,7 +18,7 @@
 
 	<!-- global css -->	
 	<link rel="stylesheet" href="${cpath }/business/css/businessStyle.css">
-	<!-- header css 처음 등록할 때 쓸 헤더입니다. ( status eq 'FAIL' )-->
+	<!-- header css 처음 등록할 때 쓸 헤더입니다. ( status ne 'SUCCESS' )-->
     <link rel="stylesheet" href="${cpath }/business/css/businessHeader.css">
 	<!-- sub header css -->
 	<link rel="stylesheet" href="${cpath }/business/css/businessSubHeader.css">
@@ -62,7 +62,7 @@
 	
 	
 	<!-- 	온라인 계약이 진행 중인 상태이면은 기본 헤더를 보여준다 -->
-	<c:if test="${status eq 'FAIL' }">
+	<c:if test="${status ne 'SUCCESS' }">
 		<%@ include file="../main/businessHeader.jsp" %>
 	</c:if>
 	
@@ -91,7 +91,7 @@
 <!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
 <!-- 	[전체 폼]에 대한 c:if문 -->
 
-	<c:if test="${status eq 'FAIL' }">
+	<c:if test="${status ne 'SUCCESS' }">
 			<form method="POST" enctype="multipart/form-data">
 	</c:if>
 		
@@ -359,7 +359,7 @@
 						<li class="service_price">가격(배달비)</li>
 						<li class="service_time">소요시간(시간)</li>
 						<!-- POST 형식일 때만 확인 버튼을 활성화 시켜준다.	-->
-						<c:if test="${status eq 'FAIL' }">
+						<c:if test="${status ne 'SUCCESS' }">
 							<li class="service_confirm">확인</li>
 						</c:if>
 						<li class="service_cancle">삭제</li>
@@ -520,7 +520,7 @@
 	<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
 	<!-- 	[전체 폼]에 대한 c:if문 -->
 	
-		<c:if test="${status eq 'FAIL' }">
+		<c:if test="${status ne 'SUCCESS' }">
 	<!-- 전체 form submit -->
 			<div class="submit_con">
 				<input class="submit_btn" type="submit" value="다음 단계로">
