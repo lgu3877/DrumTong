@@ -3,8 +3,7 @@ displayDeliveryOptions()
 
 // 체크 옵션
 function displayDeliveryOptions() {	
-//	switch(bManagement.deliverytype) {
-	switch("BOTH") {
+	switch(bManagement.deliverytype) {
 	case "BOTH": 
 		checkContent(document.getElementById("agencies"));
 		checkContent(document.getElementById("self"));
