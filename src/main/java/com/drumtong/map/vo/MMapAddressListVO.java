@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MMapAddressListVO {
+	private String emdcode;
 //	// 읍,면,동
 	private String addressc;
 //	// 시,군,구
@@ -46,6 +47,14 @@ public class MMapAddressListVO {
 
 	public void setAddressa(String addressa) {
 		this.addressa = addressa;
+	}
+
+	public String getEmdcode() {
+		return emdcode;
+	}
+
+	public void setEmdcode(String emdcode) {
+		this.emdcode = emdcode;
 	}
 	
 	

@@ -62,7 +62,8 @@
 	<update id="updateDeliveryBoolean" parameterType="BManagementVO">
 		UPDATE BMANAGEMENT
 			SET
-				DELIVERYBOOLEAN = #{deliveryboolean}
+				DELIVERYBOOLEAN = #{deliveryboolean},
+				DELIVERYTYPE = #{deliverytype}
 			WHERE
 				ESTID=#{estid}
 	</update>
