@@ -47,6 +47,7 @@
 	
 	<script type="text/javascript">
 		const bImageList = ${bImageList};
+		console.log(bImageList);
 		const bManagement = ${bManagement};
 		const bMenu = ${bMenu};
 		const defaultCategory = ${defaultcategory};
@@ -359,9 +360,10 @@
 						<li class="service_price">가격(배달비)</li>
 						<li class="service_time">소요시간(시간)</li>
 						<!-- POST 형식일 때만 확인 버튼을 활성화 시켜준다.	-->
-						<c:if test="${status eq 'FAIL' }">
+<%-- 						<c:if test="${status eq 'FAIL' }">
 							<li class="service_confirm">확인</li>
-						</c:if>
+						</c:if> 
+--%>
 						<li class="service_cancle">삭제</li>
 					</ul>
 				</div>
