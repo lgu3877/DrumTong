@@ -1,6 +1,7 @@
 package com.drumtong.security;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.Cookie;
@@ -11,7 +12,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.drumtong.business.dao.BInformationDAO;
 import com.drumtong.business.dao.BPrivateDataDAO;
+import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BPrivateDataVO;
 import com.drumtong.customer.dao.CPrivateDataDAO;
 import com.drumtong.customer.vo.CPrivateDataVO;
@@ -117,5 +120,20 @@ public class Login {
 				cPrivateDataDAO.selectLogin(Encrypt.SecurePassword(ID, PW)):
 				bPrivateDataDAO.selectLogin(Encrypt.SecurePassword(ID, PW));
 		return Login != null ? "true" : "false";
+	}
+	
+	// 사업장 정보 들고오고 세션에도 저장해주는 메서드
+	public static void getInformationList(BPrivateDataVO User, HttpSession Session, BInformationDAO bInformationDAO) {
+		if(User != null) {
+			List<BInformationVO> InformationList = bInformationDAO.selectInformationList(User.getBpersonid());
+			
+			BInformationVO selectEST = (BInformationVO)Session.getAttribute("selectEST");
+			if(InformationList != null && InformationList.size() != 0) {
+				selectEST = bInformationDAO.selectEst(InformationList.get(0).getEstid());
+				Session.setAttribute("selectEST", selectEST);
+			}
+			
+			Session.setAttribute("InformationList", InformationList);
+		}
 	}
 }

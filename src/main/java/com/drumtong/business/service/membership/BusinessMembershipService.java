@@ -43,20 +43,8 @@ public class BusinessMembershipService {
 
 		BPrivateDataVO User = ((BPrivateDataVO)Session.getAttribute("bLogin"));
 		
-		// 사업장 정보 들고오기
-		if(User != null) {
-			List<BInformationVO> InformationList = bInformationDAO.selectInformationList(User.getBpersonid());
-			
-			BInformationVO selectEST = (BInformationVO)Session.getAttribute("selectEST");
-			if(InformationList != null && InformationList.size() != 0) {
-				selectEST = bInformationDAO.selectEst(InformationList.get(0).getEstid());
-				Session.setAttribute("selectEST", selectEST);
-			}
-			
-			Session.setAttribute("InformationList", InformationList);
-
-			
-		}
+		// 사업장 정보 들고오고 세션에도 저장해주는 메서드
+		Login.getInformationList(User, Session, bInformationDAO);
 		
 		// 3. 로그인 성공 여부로 반환할 주소 값 다르게 저장
 		mav.setViewName("redirect:" + (LoginResult ? AddressToMove : "/business/membership/businessLogin/" ));
@@ -64,7 +52,7 @@ public class BusinessMembershipService {
 
 		return mav;
 	}
-	
+
 	// 로그아웃 객체[영경]
 	public ModelAndView logOut(HttpServletRequest req, HttpServletResponse resp) {
 		String Referer = req.getHeader("referer");
