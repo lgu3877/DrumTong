@@ -167,29 +167,29 @@ async function deleteMenu() {
 
 // 배달 업데이트
 async function updateDelivery() {
-	const options = [...document.getElementsByClassName("returnOptions")]
-		.filter((input) => input.checked)
-		.map((input) => input.name);
+	const checkOptions = document.getElementsByClassName("returnOptions");
 	
-	console.log(options);
+	const output = [];
+	for (let i = 0; i < checkOptions.length; i++) {
+		checkOptions[i].checked ? output.push(checkOptions[i].value) : null;  
+	}
 	
-	const result = options[0] === "quickboolean" ? "Y" : "N";
-	console.log(result);
+	const deliveryOption = output.includes("AGENCIES") && output.includes("SELF") ? 
+		"BOTH" : 
+			output.includes("AGENCIES") && !output.includes("SELF") ? 
+			"AGENCIES" : 
+				!output.includes("AGENCIES") && output.includes("SELF") ?
+				"SELF" : "VISIT";
 	
-//	const object = {
-//		"processing" : "updateDeliveryBoolean",
-//		"deliveryboolean" : result ,
-//	}
-//	
-//	console.log('object', object.processing);
-//	console.log('introduction' , object.introduction);
-//	
-//	const { data } = await axios.post("/drumtong/business/mainmanagement/BManagement/rest/" + object.processing + "/", object);
-//	
+	const result = {
+		deliverytype: deliveryOption,
+		deliveryboolean: deliveryOption === "VISIT" ? "N" : "Y" 
+	}
 	
-	
+	const { data } = await axios.post("/drumtong/business/mainmanagement/BManagement/rest/updateDeliveryBoolean/", result);
 	console.log(data);
 }
+
 
 // 주소 업데이트
 async function updateAddress() {

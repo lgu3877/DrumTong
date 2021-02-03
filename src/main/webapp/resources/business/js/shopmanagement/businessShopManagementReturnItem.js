@@ -1,13 +1,30 @@
-// 수령 방법 수정
-const returnModifyBtn =  document.getElementById("modify-return-option");
+// 초기 실행
+displayDeliveryOptions()
 
-// 수령 방법 수정 클릭 이벤트 > 제거 (2021-01-15)
-//returnModifyBtn.addEventListener("onclick", function() {
-//	console.log("modify options");
-//})
+// 체크 옵션
+function displayDeliveryOptions() {	
+//	switch(bManagement.deliverytype) {
+	switch("BOTH") {
+	case "BOTH": 
+		checkContent(document.getElementById("agencies"));
+		checkContent(document.getElementById("self"));
+		checkContent(document.getElementById("visit"));
+		break;
+	case "AGENCIES": 
+		checkContent(document.getElementById("agencies"));
+		checkContent(document.getElementById("visit"));
+		break;
+	case "SELF": 
+		checkContent(document.getElementById("self"));
+		checkContent(document.getElementById("visit"));
+		break;
+	case "VISIT": 
+		checkContent(document.getElementById("visit"));
+		break;
+	}
+}
 
-
-// 체크 박스 라벨
+// 체크 박스 클릭이벤트 > 체크 옵션 & 아이콘 & 색상 변경
 function checkContent(obj) {
 	let checkbox = obj.getElementsByClassName("returnOptions")[0];
 	let icon = obj.getElementsByTagName("i")[0];
@@ -30,9 +47,4 @@ function checkContent(obj) {
 		checkbox.parentElement.style.color = "navy";
 		icon.className = "fas fa-window-close";
 	}
-}
-
-function updateDelivery() {
-	console.log("complete and request to load options");	
-	
 }

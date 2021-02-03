@@ -61,7 +61,7 @@ function helpMsg(idArray) {
 		         document.getElementById(`${element.id}-msg`).innerHTML = "";
 		      });	
 	   } catch (e) {
-		   console.log(e);
+//		   console.log(e);
 	   }
      }
    );
