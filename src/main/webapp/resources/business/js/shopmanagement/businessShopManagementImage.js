@@ -6,11 +6,10 @@ const uploadPhotoList = {
 }
 const deletePhotoList = [];
 
-let imageCount = bImageList.filter((file) => file.delegatephotoboolean === "N").length;
+let imageCount = bImageList.filter((file) => file.delegatephotoboolean === "N").length || 0;
 
 // 초기 실행
 displayImages();
-imageShow();
 sliderEvent();
 createInputFile();
 
@@ -91,17 +90,6 @@ $("#image-preview").on('mousewheel',function(e) {
    }
 });
 
-
-// 이미지 선택시 커버 이미지 출력
-function imageShow() {
-	// 대표사진이 있을 경우 > 해당 사진 미리보기
-	const coverImage = document.getElementById("cover-image").src;
-	
-	if (coverImage) {
-		document.getElementById("main-image").src = coverImage;
-		zoomInPhoto(coverImage);
-	}
-}
 
 // 매장 사진 슬라이드 인터페이스   >   swipe cover image view > swipeViewImage()
 function sliderEvent() {   

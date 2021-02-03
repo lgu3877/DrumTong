@@ -359,7 +359,7 @@ function selectMainOption(e, directInputId, subCategoryId, subDirectRandomId) {
 		document.getElementById(subDirectRandomId).value = "";
 				
 		// 하위 항목 생성
-		populateSubOptions(e.target.value, subCategoryId);
+		populateSubOptions(e.target.value, subCategoryId, false);
 	}
 }
 
@@ -390,7 +390,7 @@ function clearSubOptions(subCategoryId) {
 }
 
 // 서브 옵션 생성
-function populateSubOptions(key, subCategoryId) {
+function populateSubOptions(key, subCategoryId, modifyBoolean) {
 	const subSelect = document.getElementById(subCategoryId);
 	
 	// 하부 카테고리
@@ -404,14 +404,17 @@ function populateSubOptions(key, subCategoryId) {
 		subSelect.appendChild(option);
 	}
 	
-	// 직접입력
-	option = document.createElement("option");
-	option.value = "selectedDirect";
-	option.className = "selectedDirect";
-	option.innerHTML = "직접입력";
-	option.style.fontWeight = "600";
-	
-	subSelect.appendChild(option);
+	// 서비스 등록 > 직접입력 & 메뉴 수정에서는 미지원
+	if (modifyBoolean === false) {
+		// 직접입력
+		option = document.createElement("option");
+		option.value = "selectedDirect";
+		option.className = "selectedDirect";
+		option.innerHTML = "직접입력";
+		option.style.fontWeight = "600";
+		
+		subSelect.appendChild(option);		
+	}
 	
 	// default option
 	document.getElementById(subCategoryId).selected = true;
@@ -739,10 +742,28 @@ function modifyMenu(id) {
 			
 			break;
 		// 서비스 타입
-		case 2: 
+		case 1: 
 			const subSelectorId = generateRandomString(14);
 			const subSelector = document.createElement("select");
 			subSelector.id = subSelectorId;
+			subSelector.className = "service_selector";
+			subSelector.name = "subcategory";
+//			subSelector.addEventListener("change", (e) => selectSubOption(e, subDirectRandomId));
+			
+			// 추가
+			item.children[i].appendChild(subSelector);
+			
+			// 서브 메뉴 생성
+			populateSubOptions(menu.maincategory, subSelectorId, true);
+
+			// 기존값 선택 설정
+			const subCategories = document.getElementById(subSelectorId).children;
+			for (let i = 0; i < subCategories.length; i++) {
+				subCategories[i].value === menu.subcategory ? 
+					subCategories[i].selected = true :
+					subCategories[i].selected = false;
+			}
+			
 			break;
 		// 삭제 아이콘
 		case 5: 
@@ -902,6 +923,8 @@ function checkboxVisibility(id) {
 		checkbox.parentElement.getElementsByTagName("i")[0].className = "fas fa-window-close";
 	}
 }
+
+// 서브 메뉴 추가
 
 function attachSubCategories(subCategory) {
 
