@@ -48,6 +48,8 @@
 	<script type="text/javascript">
 		const bImageList = ${bImageList};
 		const bManagement = ${bManagement};
+		// deliverytype > AGENCIES, SELF, BOTH, VISIT(default)
+		// deliveryboolean > Y, N
 		const bMenu = ${bMenu};
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
@@ -359,9 +361,10 @@
 						<li class="service_price">가격(배달비)</li>
 						<li class="service_time">소요시간(시간)</li>
 						<!-- POST 형식일 때만 확인 버튼을 활성화 시켜준다.	-->
-						<c:if test="${status eq 'FAIL' }">
+<%-- 						<c:if test="${status eq 'FAIL' }">
 							<li class="service_confirm">확인</li>
-						</c:if>
+						</c:if> 
+--%>
 						<li class="service_cancle">삭제</li>
 					</ul>
 				</div>
@@ -405,17 +408,23 @@
 		<!-- 수취 선택 -->
 			<div class="return_menu">
 				<ul>
-					<li onclick="checkContent(this)">
-					<!-- BManagementVO > deliveryboolean -->
-						<input class="returnOptions" type="checkbox" name="quickboolean"> 
+					<li id="agencies" onclick="checkContent(this)">
+					<!-- BManagementVO > deliverytype > AGENCIES -->
+						<input class="returnOptions" type="checkbox" name="deliverytype" value="AGENCIES"> 
 						<i class="fas fa-window-close"></i>
 						<span>배달 대행업체 이용</span>
 					</li>
-					<!-- BManagementVO > quickboolean -->
-					<li onclick="checkContent(this)">
-						<input class="returnOptions" type="checkbox" name="deliveryboolean">
+					<!-- BManagementVO > deliverytype > SELF -->
+					<li id="self" onclick="checkContent(this)">
+						<input class="returnOptions" type="checkbox" name="deliverytype" value="SELF" >
 						<i class="fas fa-window-close"></i>
 						<span>배달 서비스 제공</span>
+					</li>
+					<!-- BManagementVO > deliverytype > VISIT -->
+					<li id="visit" onclick="checkContent(this)">
+						<input class="returnOptions" type="checkbox" name="deliverytype" value="VISIT">
+						<i class="fas fa-window-close"></i>
+						<span>방문수령</span>
 					</li>
 				</ul>
 			</div>
@@ -593,9 +602,6 @@
 			return commaAttached.split("").reverse().join("");
 		}
 	</script>
-	
-	<!-- 초기 셋팅 -->
-	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementOnLoad.js"></script>
 	
 	<!-- 이미지 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementImage.js"></script>
