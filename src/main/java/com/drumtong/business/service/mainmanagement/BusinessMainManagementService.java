@@ -90,7 +90,7 @@ public class BusinessMainManagementService {
  	    // 2차 온라인 계약에 매장관리를 완료했다면 전에 입력했던 데이터를 불러와준다.
  	    	
  	    // 매장 사진 데이터
- 	   	mav.addObject("bImageList",(new Gson()).toJson(bImageDAO.selectImageList(estid)));
+ 	   	mav.addObject("bImageList", (new Gson()).toJson(bImageDAO.selectImageList(estid)));
  	   	
  	   	// bManagement 테이블 [매장 소개글] [매장 메뉴] [세탁물 수령방법]
  	   	mav.addObject("bManagement", (new Gson()).toJson(bManagementDAO.selectCustomerDetail(estid)));
@@ -123,9 +123,6 @@ public class BusinessMainManagementService {
 	    //  대분류, 중분류 카테고리 모음
 	    mav.addObject("menuCategories", (new Gson()).toJson(menuCategories));
 	    
-		// MultipartFile mpf = new MultipartFile();
- 	    // aws.s3FileUpload(file, folderName);
- 	    
 	    
     	return mav;
 	}
@@ -172,8 +169,6 @@ public class BusinessMainManagementService {
 	 * 
 	 * [4] -> 배달 지역은  {시도,시군구,시구,읍면동,통리,반}의 신규 데이터를 입력해준다.
 	 * 
-	 * 
-	 * 
 	 */
 	public ModelAndView shopManagement(HttpServletRequest req, MultipartHttpServletRequest mpf, 
 									   BManagementVO bManagementVO,
@@ -194,7 +189,7 @@ public class BusinessMainManagementService {
 	    
  	    
  	    
-		// 1. 매장관리 테이블에  {소개글,배달여부,퀵여부}를 업데이트 시켜준다. 
+		// 1. 매장관리 테이블에  {소개글,배달여부, 배달 타입}를 업데이트 시켜준다. 
 		int BManagementResult = bManagementDAO.updateConstract(bManagementVO);
 
 		// 2. 매장사진 테이블에  {저장이미지}를 업데이트 시켜준다.
@@ -209,7 +204,8 @@ public class BusinessMainManagementService {
 		int BMenuResult = bMenuDAO.insertConstract(bMenuVO);
 		
 		
-//		// 4. 배달지역 테이블에  {시도,시군구,시구,읍면동,통리,반}를 업데이트 시켜준다. 이 메서드는 추후에 데이터 타입을 보고 작업할 수 있도록 한다.
+//		// 4. 배달지역 테이블에  해당 매장의 배달가능한 지역의 {시도,시군구,시구,읍면동}를 업데이트 시켜준다.
+		bDeliveryAreaVO.setEstid(estid);
 		int BDeliveryAreaResult = bDeliveryAreaDAO.insertConstract(bDeliveryAreaVO);
 //		
 		

@@ -6,6 +6,7 @@ public class BManagementVO {
 	private char deliveryboolean;
 	private int hits;
 	private String defaultcategory;
+	private String deliverytype;
 	
 	public String getDefaultcategory() {
 		return defaultcategory;
@@ -36,6 +37,12 @@ public class BManagementVO {
 	}
 	public void setHits(int hits) {
 		this.hits = hits;
+	}
+	public String getDeliverytype() {
+		return deliverytype;
+	}
+	public void setDeliverytype(String deliverytype) {
+		this.deliverytype = deliverytype;
 	}
 	
 	

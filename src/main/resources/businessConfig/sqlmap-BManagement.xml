@@ -10,7 +10,7 @@
 	<select id="selectCustomerDetail" parameterType="String" resultType="BManagementVO" >
 		SELECT 
 			INTRODUCTION, DELIVERYBOOLEAN,
-			HITS, DEFAULTCATEGORY 
+			HITS, DEFAULTCATEGORY, DELIVERYTYPE
 		FROM BMANAGEMENT WHERE ESTID=#{value}
 	</select>
 	
@@ -21,12 +21,13 @@
 	</insert>
 	
 	
-<!-- 매장관리 테이블에  {소개글,배달여부}를 업데이트 시켜준다.  -->
+<!-- 매장관리 테이블에  {소개글,배달여부, 배달타입}를 업데이트 시켜준다.  -->
 	<update id="updateConstract" parameterType="BManagementVO" >
 		UPDATE BMANAGEMENT 
 			SET
 				INTRODUCTION = #{introduction},
-				DELIVERYBOOLEAN = #{deliveryboolean}
+				DELIVERYBOOLEAN = #{deliveryboolean},
+				DELIVERYTYPE = #{deliverytype}
 			WHERE
 				ESTID=#{estid}				
 	</update>
