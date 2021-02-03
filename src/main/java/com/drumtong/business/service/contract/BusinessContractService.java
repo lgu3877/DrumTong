@@ -21,6 +21,7 @@ import com.drumtong.business.vo.BManagementVO;
 import com.drumtong.business.vo.BPaymentVO;
 import com.drumtong.business.vo.BPrivateDataVO;
 import com.drumtong.security.AwsServiceImpl;
+import com.drumtong.security.Login;
 import com.drumtong.security.SerialUUID;
 
 @Service
@@ -165,6 +166,8 @@ public class BusinessContractService {
  	    
 		aws.multipleUpload(mpf, folderName, bInformationVO, req);
 		
+		// [영경 추가] InformationList를 갱신해줌
+		Login.getInformationList(User, Session, bInformationDAO);
 		
 		return mav;
 	}
@@ -188,9 +191,11 @@ public class BusinessContractService {
 	// BInformation(사업장정보 테이블)의 Premium Boolean 값은  매개변수 값으로 String을 가져온다.
 	public ModelAndView premiumAd(BInformationVO bInformationVO, BPaymentVO bPaymentVO, HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView("redirect:/business/");
+		HttpSession Session = req.getSession();
+		BPrivateDataVO User = (BPrivateDataVO)Session.getAttribute("bLogin");
 		
 		// estid를 세션을 받아와준다.
-		String estid = ((BInformationVO)req.getSession().getAttribute("selectEST")).getEstid();
+		String estid = ((BInformationVO)Session.getAttribute("selectEST")).getEstid();
 		
 		// 입력받은 카드번호를  [OOOO-OOOO-OOOO-OOO] 형식으로 수정해준다.
 		bPaymentVO.setEstid(estid);
@@ -211,6 +216,8 @@ public class BusinessContractService {
 			System.out.println("BInformationResult : " + BInformationResult);
 		}
 		
+		// [영경 추가] InformationList를 갱신해줌
+		Login.getInformationList(User, Session, bInformationDAO);
 		
 		return mav;
 	}
