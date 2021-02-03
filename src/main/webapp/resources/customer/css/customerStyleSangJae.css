@@ -1085,28 +1085,37 @@ check .option-name,
 
 .googlechart-div .rightchartdiv .rightinner{
 	height: 30%;
+	text-align: center;
 }
-.googlechart-div .rightchartdiv .rightinner .backstars {
+.googlechart-div .rightchartdiv .rightinner .backstars {	 
+/* 	별자리소수점 */
 	position: relative;
 	color: white;
+	display: inline-flex;
 }
 
 .googlechart-div .rightchartdiv .rightinner .frontstars {
+/* 	별자리소수점 */
 	display: flex;
-	color: white;
+	color: skyblue;
     overflow: hidden;
     position: absolute;
     top: 0;
+    left: 0;
     transition: all .5s;
 }
 
+/* 	별자리소수점 */
 .googlechart-div .rightchartdiv .rightinner .backstars i {
-		font-size: xx-large !important;
+		margin: 0 !important;
+		font-size: 3em !important;
 }
 
+/* 	별자리소수점 */
 .googlechart-div .rightchartdiv .rightinner .frontstars i {
+	margin: 0 !important;
 	color: skyblue !important;
-	font-size: xx-large !important;
+	font-size: 3em !important;
 }
 
 .googlechart-div .rightchartdiv .rightinner .cscore{

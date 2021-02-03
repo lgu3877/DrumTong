@@ -288,17 +288,17 @@
 	        	<div class="rightinner">
 	         		<div class="cscore" id="cscore"></div>
 	         		<div class="backstars">
-	         			<i class="fas fa-star fa-3x"></i>
-	         			<i class="fas fa-star fa-3x"></i>
-	         			<i class="fas fa-star fa-3x"></i>
-	         			<i class="fas fa-star fa-3x"></i>
-	         			<i class="fas fa-star fa-3x"></i>
-	         			<div class="frontstars">
-	         				<i class="fas fa-star fa-3x"></i>
-		         			<i class="fas fa-star fa-3x"></i>
-		         			<i class="fas fa-star fa-3x"></i>
-	    	     			<i class="fas fa-star fa-3x"></i>
-	        	 			<i class="fas fa-star fa-3x"></i>
+	         			<i class="fas fa-star"></i>
+	         			<i class="fas fa-star"></i>
+	         			<i class="fas fa-star"></i>
+	         			<i class="fas fa-star"></i>
+	         			<i class="fas fa-star"></i>
+	         			<div class="frontstars" id="frontstars">
+	         				<i class="fas fa-star"></i>
+	         				<i class="fas fa-star"></i>
+	         				<i class="fas fa-star"></i>
+	         				<i class="fas fa-star"></i>
+	         				<i class="fas fa-star"></i>
 	         			</div>
 	         		</div>
 	          	</div>
@@ -635,6 +635,7 @@
     	let cscore = avgcscore / reviewList.length;
     	
     	$('#cscore').html('고객 평점 : ' + cscore.toFixed(2));
+    	$('#frontstars').css('width', (cscore.toFixed(2) * 20) + '%');
     }
 
     </script>
