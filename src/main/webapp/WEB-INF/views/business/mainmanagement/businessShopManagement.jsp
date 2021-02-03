@@ -421,7 +421,7 @@
 						<span>배달 서비스 제공</span>
 					</li>
 					<!-- BManagementVO > deliverytype > VISIT -->
-					<li id="visit" onclick="checkContent(this)">
+					<li id="visit" class="disabled_checkbox">
 						<input class="returnOptions" type="checkbox" name="deliverytype" value="VISIT">
 						<i class="fas fa-window-close"></i>
 						<span>방문수령</span>

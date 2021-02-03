@@ -3,8 +3,8 @@
 	padding: 0;
 }
 
-.slide_btn {
-	
+.disabled_checkbox {
+	cursor: not-allowed !important;
 }
 
 /* 폼 그림자 */
