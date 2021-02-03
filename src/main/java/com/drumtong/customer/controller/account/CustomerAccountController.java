@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.drumtong.business.vo.ReviewList;
 import com.drumtong.customer.service.account.CustomerAccountService;
 
 @Controller
@@ -46,5 +47,12 @@ public class CustomerAccountController {
 	public ModelAndView orderList(HttpServletRequest req) {
 		return svc.orderList(req);
 	}
+	
+	// 고객 주문 목록 리뷰 작성
+	@RequestMapping(value="customerNewReview/", method = RequestMethod.POST)
+	public ModelAndView newReview(HttpServletRequest req, MultipartHttpServletRequest mpf, ReviewList review){
+		return svc.newReview(req, mpf, review);
+	}
+	
 }
 

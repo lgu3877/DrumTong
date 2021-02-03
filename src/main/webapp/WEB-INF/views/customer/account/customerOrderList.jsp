@@ -92,7 +92,7 @@
 <div id="writeReviewButton" class="order_review_modal modal">
 	<div class="modal_box">
 		<div class="modal_title">세탁소 이름</div>
-		<form onsubmit="clacStarCsore();" action="${cpath }/">
+		<form onsubmit="clacStarCsore();" action="${cpath }/customer/account/customerNewReview/" enctype="multipart/form-data" method="post">
 			<div class="modal_menu_1">
 				<input type="hidden" value="estid" name="estid">
 				<input type="text" value="salecode" name="salecode" readonly>
@@ -100,18 +100,18 @@
 			</div>
 			<div class="modal_menu_2">
 				<img id="reviewImg" src="${cpath }/resources/customer/img/펭수버럭.jpg" alt="리뷰이미지">
-				<textarea rows="2" cols="4" placeholder="내용을 작성하세요"></textarea>
+				<textarea name="ccontent" rows="2" cols="4" placeholder="내용을 작성하세요" required></textarea>
 			</div>
 			<div class="modal_menu_3">
-				<input type="file" id="reviewImgFile">
+				<input type="file" id="reviewImgFile" name="reviewimgbox">
 				<label>별점 </label>
-				<input type="hidden" id="starScore">
+				<input type="hidden" id="starScore" name="gpa">
 				<span>
-					<i id="star_1" class="far fa-star"></i>
-					<i id="star_2" class="far fa-star"></i>
-					<i id="star_3" class="far fa-star"></i>
-					<i id="star_4" class="far fa-star"></i>
-					<i id="star_5" class="far fa-star"></i>
+					<i id="star_1" class="fas fa-star"></i>
+					<i id="star_2" class="fas fa-star"></i>
+					<i id="star_3" class="fas fa-star"></i>
+					<i id="star_4" class="fas fa-star"></i>
+					<i id="star_5" class="fas fa-star"></i>
 				</span>
 			</div>
 			<div class="modal_menu_4">
@@ -136,6 +136,7 @@
 			}
 		});
 		document.getElementById('starScore').value = score;
+		alert('작성이 완료되었습니다.');
 		return true;
 	}
 	

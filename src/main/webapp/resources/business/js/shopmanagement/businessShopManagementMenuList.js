@@ -169,7 +169,7 @@ function createAddService() {
 		mainSelector.addEventListener("change", (e) => selectMainOption(e, directRandomId, subSelectorRandomId, subDirectRandomId));
 		
 		// 하위 선택 항목 생성
-		createOptions(mainSelector); 
+		createOptions(mainSelector, false); 
 		
 		const mainSelectorDirectInput = document.createElement("input");
 		mainSelectorDirectInput.id = directRandomId;
@@ -292,7 +292,7 @@ function createAddService() {
 
 
 // 메인 옵션 생성
-function createOptions(mainSelector) {
+function createOptions(mainSelector, modifyBoolean) {
 	// placeholder
 	let option = document.createElement("option");
 	option.className = "main-category-default";
@@ -315,13 +315,16 @@ function createOptions(mainSelector) {
 	}
 	
 	// 직접입력
-	option = document.createElement("option");
-	option.value = "selectedDirect";
-	option.className = "selectedDirect";
-	option.innerHTML = "직접입력";
-	option.style.fontWeight = "600";
+	if (modifyBoolean === false) {
+		option = document.createElement("option");
+		option.value = "selectedDirect";
+		option.className = "selectedDirect";
+		option.innerHTML = "직접입력";
+		option.style.fontWeight = "600";
+		
+		mainSelector.appendChild(option); // 추가		
+	}
 	
-	mainSelector.appendChild(option); // 추가
 }
 
 
@@ -706,6 +709,50 @@ function modifyMenu(id) {
 	console.log(menu);
 	
 	// 폼 변경 > 입력된 값 주입
+	for (let i = 0; i < item.children.length; i++) {
+		// 초기화
+		item.children[i].innerHTML = "";
+		
+		switch(i) {
+		// 서비스 유형
+		case 0: 
+			const mainSelectorId = generateRandomString(15);
+			const mainSelector = document.createElement("select");
+			mainSelector.id = mainSelectorId;
+			mainSelector.className = "service_selector";
+			mainSelector.name = "maincategory";
+//			mainSelector.addEventListener("change", (e) => selectMainOption(e, directRandomId, subSelectorRandomId, subDirectRandomId));
+			
+			// 서브옵션 생성
+			createOptions(mainSelector, true);
+			
+			// 추가
+			item.children[i].appendChild(mainSelector);
+			
+			// 기존값 선택 설정
+			const mainCategories = document.getElementById(mainSelectorId).children;
+			for (let i = 0; i < mainCategories.length; i++) {
+				mainCategories[i].value === menu.maincategory ? 
+					mainCategories[i].selected = true :
+					mainCategories[i].selected = false;
+			}
+			
+			break;
+		// 서비스 타입
+		case 2: 
+			const subSelectorId = generateRandomString(14);
+			const subSelector = document.createElement("select");
+			subSelector.id = subSelectorId;
+			break;
+		// 삭제 아이콘
+		case 5: 
+			const icon = document.createElement("i");
+			icon.className = "fas fa-trash-alt";
+			
+			item.children[i].appendChild(icon);
+			break;
+		}
+	}
 }
 
 // 상품 리스트 삭제

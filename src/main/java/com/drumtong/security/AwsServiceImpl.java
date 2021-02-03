@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -28,9 +27,11 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.drumtong.business.dao.BImageDAO;
 import com.drumtong.business.dao.BInformationDAO;
 import com.drumtong.business.dao.BPaymentDAO;
+import com.drumtong.business.dao.BReviewDAO;
 import com.drumtong.business.vo.BImageVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BPaymentVO;
+import com.drumtong.business.vo.ReviewList;
 import com.drumtong.customer.dao.CPrivateDataDAO;
 import com.drumtong.customer.vo.CPrivateDataVO;
 
@@ -42,6 +43,7 @@ public class AwsServiceImpl{
 	@Autowired BPaymentDAO bPaymentDAO;
 	@Autowired BInformationDAO bInformationDAO;
 	@Autowired CPrivateDataDAO cPrivateDataDAO;
+	@Autowired BReviewDAO bReviewDAO;
 	
 	
 	// AWS Key를 가져옵니다.
@@ -220,10 +222,6 @@ public class AwsServiceImpl{
 					// UUIDType은 STOREIMG이다.
 					UUIDType = "STOREIMG";
 					
-					// 파일 업로드를 준비시켜주는 함수입니다.
-					result = exeFileUpload( file, object, folderName, subFolderName, UUIDType , tableFieldName);
-					
-					
 				}
 				// 사업자 정보 테이블일 경우	
 				/*
@@ -245,10 +243,6 @@ public class AwsServiceImpl{
 						// UUIDType이다.
 						UUIDType = "REPORTCARD";
 						
-						
-						// 파일 업로드를 준비시켜주는 함수입니다.
-						result = exeFileUpload( file, object, folderName, subFolderName, UUIDType , tableFieldName);
-						
 					}
 					
 					// 두 번째 저장일 시에는 사업자 등록증에 관련한 처리를 해줍니다 사업자 등록증 SerialUUID 생성
@@ -259,9 +253,6 @@ public class AwsServiceImpl{
 						
 						// UUIDType이다.
 						UUIDType = "LICENSE";
-						
-						// 파일 업로드를 준비시켜주는 함수입니다.
-						result = exeFileUpload( file, object, folderName, subFolderName, UUIDType , tableFieldName);
 						
 					}
 				}
@@ -284,9 +275,6 @@ public class AwsServiceImpl{
 					// UUIDTYPE이다.
 					UUIDType = "COPYOFBANKBOOK";
 					
-					// 파일 업로드를 준비시켜주는 함수입니다.
-					result = exeFileUpload( file, object, folderName, subFolderName, UUIDType , tableFieldName);
-					
 				}    	
 				// ======================= 영경 =============================
 		     	// 고객 프로필 사진 등록
@@ -298,13 +286,20 @@ public class AwsServiceImpl{
 					
 					UUIDType = "PhotoID";
 					
-					// 파일 업로드를 준비시켜주는 함수입니다.
-					result = exeFileUpload( file, object, folderName, subFolderName, UUIDType , tableFieldName);
 					
+		     	} else if(object instanceof ReviewList) {
+		     		subFolderName = "Review";
+		     		
+		     		tableFieldName = "BReview";
+		     		
+		     		UUIDType="Review";
+		     		
 		     	}
 		     	// ========================================================
 		 
 				
+				// 파일 업로드를 준비시켜주는 함수입니다.
+				result = exeFileUpload( file, object, folderName, subFolderName, UUIDType , tableFieldName);
 		
 		
 
@@ -465,7 +460,12 @@ public class AwsServiceImpl{
 				cPrivateDataVO.setProfileimg(src);
 				result = cPrivateDataDAO.updateImg(cPrivateDataVO);
 				break;
-	
+			case "Review":
+				ReviewList reviewList = (ReviewList)object;
+				reviewList.setReviewimg(src);
+				result = bReviewDAO.updateImg(reviewList);
+				break;
+				
 		}
 		
 		

@@ -21,4 +21,10 @@ public interface BReviewDAO {
 	int deleteReportConfirm(ReviewList reviewList);
 
 	int checkReview(OrderList li);
+
+	int insertNewReview(ReviewList review);
+
+	int confirm(String serialUUID);
+
+	int updateImg(ReviewList reviewList);
 }

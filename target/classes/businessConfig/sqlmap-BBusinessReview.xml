@@ -17,4 +17,8 @@
 			CONTENT='-', updatedate=TO_CHAR(sysdate,'YYYY-MM-DD HH24:MI:SS') 
 			WHERE ESTID=#{estid} AND SALECODE=#{salecode}
 	</update>
+	
+	<insert id="insertNewReview" parameterType="ReviewList">
+		INSERT INTO BBUSINESSREVIEW (MEMBERID,ESTID,SALECODE) VALUES (#{memberid}, #{estid}, #{salecode})
+	</insert>
 </mapper>
