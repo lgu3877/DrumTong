@@ -464,11 +464,11 @@
 				
 				<div class="delivery_area_set_con">
 				<!-- 시/도 선택 -->
-					<select id="major-area-selector" name="majorArea" onchange="createMinorOptions()">
+					<select id="major-area-selector" name="sido" onchange="createMinorOptions()">
 						<option hidden selected>시/도 선택</option>
 					</select>
 				<!-- 시/군/구 선택 -->
-					<select id="minor-area-selector" name="minorArea" onchange="createDetailOptions()">
+					<select id="minor-area-selector" name="sigungu" onchange="createDetailOptions()">
 						<option hidden selected>시/군/구 선택</option>
 					</select>
 				<!-- 읍/면/동 선택 -->
