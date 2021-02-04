@@ -54,7 +54,6 @@
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
 		const sido = ${sido};
-		console.log(sido);
 	</script>
 </head>
      
@@ -513,7 +512,7 @@
 						<input id="main-address" class="main_address_input" type="text" name="mainlocation" value="${mainAddress }" 
 							onfocus="openAddressSearch()">
 						<input id="main-location" type="hidden" name="maplocation">
-						<button class="address_search_button" onclick="openAddressSearch()">주소 찾기</button>
+						<input type="button" class="address_search_button" onclick="openAddressSearch()" value="주소 찾기">
 					</div>
 					<h3>상세주소</h3>
 					<div class="detail_address_input_wrapper">
