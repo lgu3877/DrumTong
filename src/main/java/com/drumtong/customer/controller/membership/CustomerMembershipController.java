@@ -46,9 +46,9 @@ public class CustomerMembershipController {
 		
 	// 고객 회원가입	(POST)
 	@RequestMapping(value = "customerSignUp/", method = RequestMethod.POST)
-	public ModelAndView signUp(CPrivateDataVO cPrivateDataVO) {
-		System.out.println("실행");
-		return svc.signUp(cPrivateDataVO);
+	public ModelAndView signUp(CPrivateDataVO cPrivateDataVO, String checkAddress) {
+
+		return svc.signUp(cPrivateDataVO, checkAddress);
 	}
 	
 

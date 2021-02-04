@@ -143,11 +143,13 @@
 }
 
 #zipcode,
+#zipcode2,
 #usertel {
   width: 65%;
 }
 
 #findZipcode,
+#findZipcode2,
 #checkTel {
   width: 32%;
   height: 45px;
