@@ -12,6 +12,9 @@
 	
 	<typeAliases>
 		<typeAlias type="com.drumtong.map.vo.MMapAddressListVO" alias="MMapAddressListVO" />
+		<typeAlias type="com.drumtong.map.vo.MSidoVO" alias="MSidoVO" />
+		<typeAlias type="com.drumtong.map.vo.MSigunguVO" alias="MSigunguVO" />
+		<typeAlias type="com.drumtong.map.vo.MEmdVO" alias="MEmdVO" />
 	</typeAliases>
 	
 </configuration>		

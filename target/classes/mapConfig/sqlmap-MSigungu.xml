@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+		"-//mybatis.org//DTD Mapper 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 건욱 -->
+<!-- 지도 전국 시군구 정보 테이블	 -->
+<mapper namespace="com.drumtong.map.dao.MSigunguDAO">
+
+	
+	
+	
+<!-- 	시,군,구 select문 -->
+	<select id="selectMSigunguAddressB"  parameterType="string" resultType="string">
+        SELECT
+            DISTINCT(ADDRESSB)
+        FROM 
+            SIGUNGU
+        WHERE ADDRESSA = #{value}
+    </select>
+
+    
+</mapper>

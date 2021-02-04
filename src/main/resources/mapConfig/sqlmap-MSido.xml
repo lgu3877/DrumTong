@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+		"-//mybatis.org//DTD Mapper 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 건욱 -->
+<!-- 지도 시도 정보 테이블	 -->
+<mapper namespace="com.drumtong.map.dao.MSidoDAO">
+
+	
+<!-- 	시도 select문  -->
+	<select id="selectMSidoAddressA"  resultType="string">
+		SELECT 
+			DISTINCT(ADDRESSA)
+		FROM 
+			SIDO
+	</select>
+	
+    
+</mapper>

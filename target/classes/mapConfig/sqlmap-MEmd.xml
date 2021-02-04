@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+		"-//mybatis.org//DTD Mapper 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 건욱 -->
+<!-- 지도 전국 읍면동 정보 테이블	 -->
+<mapper namespace="com.drumtong.map.dao.MEmdDAO">
+
+
+<!-- 	읍,면,동 select문 -->
+	<select id="selectMEmdAddressC"  parameterType="hashmap" resultType="string">
+        SELECT 
+            ADDRESSC
+        FROM 
+            EMD
+        WHERE ADDRESSA =#{addressa} and ADDRESSB=#{addressb}
+    </select>
+    
+</mapper>
