@@ -48,12 +48,13 @@
 	<script type="text/javascript">
 		const bImageList = ${bImageList};
 		const bManagement = ${bManagement};
-		// deliverytype > AGENCIES, SELF, BOTH, VISIT(default)
-		// deliveryboolean > Y, N
 		const bMenu = ${bMenu};
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
 		const sido = ${sido};
+		const deliveryAreas = ${deliveryAreas}
+
+		console.log(deliveryAreas);
 	</script>
 </head>
      
@@ -494,6 +495,7 @@
 					<div id="address-help-msg"></div>
 				</div>
 			<!-- 버튼 -->
+			<c:if test="${status eq 'SUCCESS' }">
 				<div class="service_button_con">
 					<div id="complete-address-option" class="complete_menu_btn_con"  onclick="updateAddress()">
 						<div class="add_menu_icon_con">
@@ -502,7 +504,9 @@
 						<div class="add_menu_btn_title">변경 완료</div>
 					</div>
 				</div>
+			</c:if>
 			</div>
+			
 			
 		<!-- 주소지 변경 -->
 			<div class="address_input_con form">

@@ -1,5 +1,7 @@
 package com.drumtong.business.dao;
 
+import java.util.ArrayList;
+
 import com.drumtong.business.vo.BDeliveryAreaVO;
 
 public interface BDeliveryAreaDAO {
@@ -10,5 +12,16 @@ public interface BDeliveryAreaDAO {
 	
 	//	배달 지역을 비동기식으로 수정해주는 메서드입니다.
 	int updateBDeliveryArea(BDeliveryAreaVO bDeliveryAreaVO);
+
+	
+	// 시도데이터를 가져와주는 함수이다.
+	ArrayList<String> selectAddressA(String estid);
+
+
+	// 시군구 데이터를 가져와주는 함수이다.
+	ArrayList<String> selectAddressB(BDeliveryAreaVO vo);
+
+	// 읍면동 데이터를 가져와주는 함수입니다.
+	ArrayList<String> selectAddressC(BDeliveryAreaVO vo);
 
 }

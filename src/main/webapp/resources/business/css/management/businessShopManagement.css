@@ -947,13 +947,12 @@
 
 /* 배달 가능 지역 > 뷰 */
 .delivery_area_view_con {
-	background-color: mintcream;
-    padding: 20px;
-    margin-bottom: 30px;
 }
 
 .delivery_view_metro_con {
-
+	background-color: mintcream;
+    padding: 20px;
+    margin-bottom: 30px;
 }
 
 .metroCity {
@@ -1042,6 +1041,10 @@
 	transition: 0.5s;
 	background-color: #5c5ed3;
 	color: white;
+}
+
+.town_selector input {
+	margin-right: 10px;
 }
 
 /* Submit Button */

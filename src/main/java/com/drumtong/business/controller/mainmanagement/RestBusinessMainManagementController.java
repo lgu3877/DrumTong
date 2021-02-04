@@ -128,7 +128,6 @@ public class RestBusinessMainManagementController {
 	@GetMapping(produces = "application/json; charset=utf8")
 //	public String selectMMapAddressB(@PathVariable("sido") String sido) {
 	public ArrayList<String> selectMMapAddressB(@PathVariable("sido") String sido) {
-//		return (new Gson()).toJson(svc.selectMMapAddressb(sido));
 		return svc.selectMMapAddressb(sido);
 	}
 	

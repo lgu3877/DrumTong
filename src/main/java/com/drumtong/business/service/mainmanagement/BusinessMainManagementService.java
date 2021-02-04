@@ -109,6 +109,8 @@ public class BusinessMainManagementService {
 //    	HashMap<String, HashMap<String , ArrayList<String>>> addressList = AddressListSetting.getAddressList();
     	mav.addObject("sido", (new Gson()).toJson(mMapAddressListDAO.selectMMapAddressA()));
     	
+    	// 선택한 지역 데이터 리스트 
+    	mav.addObject("deliveryAreas", (new Gson().toJson(AddressListSetting.getAddressList(estid))));
     	
  	    // 대분류 중분류 카테고리를 셋팅해주는 함수입니다.
 	    HashMap<String, ArrayList<String>> menuCategories = menuCategoriesSetting(estid);

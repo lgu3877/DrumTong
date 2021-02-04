@@ -280,18 +280,38 @@
           </div>
         </div>
 
-       <div style="width: 100%; height: auto; display: flex; margin-top: 20px; margin-bottom: 20px">
-       		<div style="width: 70%">
+       <div class="googlechart-div">
+       		<div class="leftchartdiv">
 	          <div id="columnchart_values"></div>
        		</div>
-       		<div style="width: 30%; display: table-column;">
-	        	<div id="stardiv" style="height: 30%; display: flex; align-items: center; justify-content: center;">
-	         
+       		<div class="rightchartdiv">
+	        	<div class="rightinner">
+	         		<div class="cscore" id="cscore"></div>
+	         		<div class="backstars">
+	         			<i class="fas fa-star"></i>
+	         			<i class="fas fa-star"></i>
+	         			<i class="fas fa-star"></i>
+	         			<i class="fas fa-star"></i>
+	         			<i class="fas fa-star"></i>
+	         			<div class="frontstars" id="frontstars">
+	         				<i class="fas fa-star"></i>
+	         				<i class="fas fa-star"></i>
+	         				<i class="fas fa-star"></i>
+	         				<i class="fas fa-star"></i>
+	         				<i class="fas fa-star"></i>
+	         			</div>
+	         		</div>
 	          	</div>
-	          	<div id="donut_single" style="height: 70%"></div>
+	          	<div id="donut_single" style="height: 70%; position: relative;">
+	          	
+	          		<div class="outer-more">
+	          			<div class="review-more" id="review-more">
+	          				<p>리뷰<br>더보기</p>
+	          			</div>	          		
+	          		</div>
+    	        </div>
        		</div>
         </div>
-          <button class="review-more" id="review-more">리뷰 더보기</button>
       </div>
     </section>
 
@@ -538,24 +558,15 @@
 	var reviewList = ${ReviewList};
 	console.log(reviewList);
     
-    // 구글 부분 스크립트
-    // 이번엔 gson 받아올 때 단순하게  가아니라 .js 에서도 사용될 수 있도록 받아오자
-    google.charts.load("current", {packages:['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-//       var data = google.visualization.arrayToDataTable([
-//         ["score", "number", "total",  { role: 'annotation' }],
-//         [" ", 5, 100 - 5, ''],
-//         ["1.0", 25, 100 - 25, ''],
-//         [" ", 10, 100 - 10, ''],
-//         ["2.0", 15, 100 - 15, ''],
-//         [" ", 18, 100 - 18, ''],
-//         ["3.0", 2, 100 - 2, ''],
-//         [" ", 0, 100 - 0, ''],
-//         ["4.0", 15, 100 - 15, ''],
-//         [" ", 0,  100 - 0, ''],
-//         ["5.0", 10,  100 - 10, ''],
-//       ]);
+	window.onload = function() {
+    	// 구글 부분 스크립트
+    	// 이번엔 gson 받아올 때 단순하게  가아니라 .js 에서도 사용될 수 있도록 받아오자
+    	google.charts.load("current", {packages:['corechart']});
+   	 	google.charts.setOnLoadCallback(drawChart);
+	   	calcscore();
+	}
+	
+    function drawChart() {	// 구글 차트 그려주기
 
 	var data = google.visualization.arrayToDataTable([
         ["score", "number", "total",  { role: 'annotation' }],
@@ -612,33 +623,21 @@
 //         tooltip : { trigger: 'none'}	// hover 했을 때 해당열의 정보 띄우는 기능만 중지
       };
 // 	  console.log('최고값 : ', data.getColumnRange(1).max);
-// 	  var chart = new google.charts.Bar(document.getElementById("columnchart_values"));
 	  var chart = new google.visualization.ComboChart(document.getElementById("columnchart_values"));
       chart.draw(data, options);
   } 
-
-   
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawPie);
-
-    function drawPie() {
-
-      var data2 = google.visualization.arrayToDataTable([
-        ['Effort', 'Amount given'],
-        ['My all',     80],
-      ]);
-
-      var options2 = {
-        pieHole: 0.5,
-        pieSliceTextStyle: {
-          color: 'black',
-        },
-        legend: 'none'	
-      };
-
-      var chart2 = new google.visualization.PieChart(document.getElementById('donut_single'));
-      chart2.draw(data2, options2);
+    
+    function calcscore() {
+    	let avgcscore = 0;
+    	for(i = 0; i < reviewList.length; i++) {
+    		avgcscore += reviewList[i].gpa;
+    	}
+    	let cscore = avgcscore / reviewList.length;
+    	
+    	$('#cscore').html('고객 평점 : ' + cscore.toFixed(2));
+    	$('#frontstars').css('width', (cscore.toFixed(2) * 20) + '%');
     }
+
     </script>
     
     <script type="text/javascript">	// 승원 작업 - 모달
@@ -697,6 +696,19 @@
 		}
 	}
 	
+    document.getElementById('review-more').addEventListener('mouseover', function() {
+    	this.parentNode.style.background = 'white';
+    	this.parentNode.style.border = '3px solid #1564F9';
+    	this.style.background = '#1564F9';
+    	this.querySelector('p').style.color = 'white';
+    });
+
+    document.getElementById('review-more').addEventListener('mouseout', function() {
+    	this.parentNode.style.background = '#1564F9';
+    	this.style.background = 'white';
+    	this.querySelector('p').style.color = '#1564F9';
+    });
+    
     </script>
 
 <%@ include file="../main/customerFooter.jsp" %>    
