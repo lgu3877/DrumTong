@@ -196,7 +196,6 @@ public class RestBusinessMainManagementService {
 	public ArrayList<String> selectMMapAddressb(String sido) {
 		System.out.println(sido);
 		ArrayList<String> addressbList =  mMapAddressListDAO.selectMMapAddressB(sido);
-		System.out.println("고로고로" + addressbList.get(1));
 		
 		return addressbList;
 	}
