@@ -1,11 +1,71 @@
+const dummyObject = {
+		"충청남도" : {
+			"금산군": ["남이면", "진산면"],
+			"태안군" : ["태안읍", "안면읍"]
+		}
+}
+
 // 초기실행
+displayDeliveryArea()
 createMajorOptions();
 
-const dummyObject = {
-	"충청남도" : {
-		"금산군": ["남이면", "진산면"],
-		"태안군" : ["태안읍", "안면읍"]
+
+// 배달지역 뷰
+function displayDeliveryArea() {
+	const viewCon = document.getElementById("delivery-area-view");
+	
+	for (let district in dummyObject) {
+		// container
+		const container = document.createElement("div");
+		container.className = "delivery_view_metro_con";
+		
+		// 시-도 
+		const metroCityCon = document.createElement("div");
+		metroCityCon.className = "metroCity";
+		metroCityCon.innerHTML = `<div class="metroName">${district}</div>`;
+		
+		// 시-군-구
+		const cityCon = document.createElement("div");
+		cityCon.className = "city";
+		
+		const cities = dummyObject[district];
+		
+		for (let cityName in cities) {
+			const city = document.createElement("div");
+			city.className = "cityName";
+			city.innerText = cityName;
+			
+			// 읍-면-동
+			const townCon = document.createElement("div");
+			townCon.className = "town";
+			
+			for (let townName of dummyObject[district][cityName]) {
+				const town = document.createElement("div");
+				town.className = "townName";
+				town.innerHTML = townName;
+				
+				// 삽입
+				townCon.appendChild(town);
+			}
+			
+			// 삽입
+			city.appendChild(townCon);
+			cityCon.appendChild(city);
+			metroCityCon.appendChild(cityCon);
+		}
+		
+		
+		// 삽입
+		container.appendChild(metroCityCon);
+		viewCon.appendChild(container);
 	}
+
+	
+}
+
+// 배달지역 뷰 업데이트
+function updateDeliveryArea(id) {
+	
 }
 
 // 시/도 생성

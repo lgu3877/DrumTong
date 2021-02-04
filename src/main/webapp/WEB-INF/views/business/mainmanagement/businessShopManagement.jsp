@@ -456,13 +456,13 @@
 			</div>
 			
 			
-		<!-- 설정된 배달 가능지역 보기  & 배달 지역 설정  -->
+		<!-- 설정된 배달가능지역 보기  & 배달 지역 설정  -->
 			<div class="delivery_menu">
-				<div id="delivery-area-view" class="delivery_area_view_con">
-					<h1>배달지역 뷰</h1>
-				</div>
+			<!-- 배달가능지역 뷰 -->
+				<div id="delivery-area-view" class="delivery_area_view_con"></div>
 				
-				<div class="delivery_area_set_wrap">
+			<!-- 배달지역 입력 -->
+				<div class="delivery_area_set_wrap form">
 					<div class="delivery_area_set_con">
 					<!-- 시/도 선택 -->
 						<select id="major-area-selector" class="area_selector" name="sido" onchange="createMinorOptions()">
