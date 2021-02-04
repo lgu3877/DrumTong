@@ -459,21 +459,23 @@
 			
 		<!-- 설정된 배달 가능지역 보기  & 배달 지역 설정  -->
 			<div class="delivery_menu">
-				<div class="delivery_area_view_con">
-				
+				<div id="delivery-area-view" class="delivery_area_view_con">
+					<h1>배달지역 뷰</h1>
 				</div>
 				
-				<div class="delivery_area_set_con">
-				<!-- 시/도 선택 -->
-					<select id="major-area-selector" name="sido" onchange="createMinorOptions()">
-						<option hidden selected>시/도 선택</option>
-					</select>
-				<!-- 시/군/구 선택 -->
-					<select id="minor-area-selector" name="sigungu" onchange="createDetailOptions()">
-						<option hidden selected>시/군/구 선택</option>
-					</select>
+				<div class="delivery_area_set_wrap">
+					<div class="delivery_area_set_con">
+					<!-- 시/도 선택 -->
+						<select id="major-area-selector" class="area_selector" name="sido" onchange="createMinorOptions()">
+							<option hidden selected>시/도 선택</option>
+						</select>
+					<!-- 시/군/구 선택 -->
+						<select id="minor-area-selector" class="area_selector" name="sigungu" onchange="createDetailOptions()">
+							<option hidden selected>시/군/구 선택</option>
+						</select>
+					</div>
 				<!-- 읍/면/동 선택 -->
-					<div id="detail-area-selector"></div>
+					<div id="detail-area-selector" class="town_selector_con"></div>
 				</div>
 		
 			</div>

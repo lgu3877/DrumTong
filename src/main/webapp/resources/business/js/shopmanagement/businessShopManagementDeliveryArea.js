@@ -83,18 +83,24 @@ async function createDetailOptions() {
 	for (let i = 0; i < towns.length; i++) {
 		const checkboxId = generateRandomString(13);
 		
+		const div = document.createElement("div");
+		div.className = "town_selector_con";
+		
 		const label = document.createElement("label");
 		label.htmlFor = checkboxId;
+		label.className = "town_selector";
 		
 		const input = document.createElement("input");
 		input.id = checkboxId;
 		input.type = "checkbox";
 		input.name = "town";
 		input.value = towns[i];
-		input.className = "detaile_area_checkbox";
+//		input.className = "detaile_area_checkbox";
 		
+		// 삽입
 		label.appendChild(input);
-		label.innerHTML = towns[i];
+		label.innerHTML += towns[i];
+		div.appendChild(label)
 		detailAreaCon.appendChild(label);
 	}
 }
