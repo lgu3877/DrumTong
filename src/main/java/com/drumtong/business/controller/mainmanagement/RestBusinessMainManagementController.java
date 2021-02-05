@@ -118,7 +118,7 @@ public class RestBusinessMainManagementController {
 	
 
 	// ==== 대분류 [DrumtongMap Database]
-	// ==== 중분류 [MAPADDRESSLIST] 테이블
+	// ==== 중분류 [MSigungu] 테이블
 	
 	// 시도에 대한 시군구데이터를 추출해줍니다.
 	// 이렇게 REST로 추출해주는 이유는 다음과 같습니다.
@@ -128,9 +128,10 @@ public class RestBusinessMainManagementController {
 	@GetMapping(produces = "application/json; charset=utf8")
 //	public String selectMMapAddressB(@PathVariable("sido") String sido) {
 	public ArrayList<String> selectMMapAddressB(@PathVariable("sido") String sido) {
-//		return (new Gson()).toJson(svc.selectMMapAddressb(sido));
 		return svc.selectMMapAddressb(sido);
 	}
+	
+	// ==== 중분류 [MEmd] 테이블
 	
 	// 시도 시군구에 대한 읍면동데이터를 추출해줍니다.
 	@RequestMapping("BManagement/rest/selectMMapAddressC/")

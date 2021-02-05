@@ -33,7 +33,7 @@ import com.drumtong.business.vo.BScheduleDaysVO;
 import com.drumtong.business.vo.BScheduleTimeVO;
 import com.drumtong.business.vo.BTempHolidayVO;
 import com.drumtong.business.vo.BTempSuspensionVO;
-import com.drumtong.map.dao.MMapAddressListDAO;
+import com.drumtong.map.dao.MSidoDAO;
 import com.drumtong.security.AddressListSetting;
 import com.drumtong.security.AwsServiceImpl;
 import com.google.gson.Gson;
@@ -66,9 +66,7 @@ public class BusinessMainManagementService {
 	
 	
 	// 지역 데이터 DAO
-	@Autowired MMapAddressListDAO mMapAddressListDAO;
-	
-	
+	@Autowired MSidoDAO mSidoDAO;
 	
 	// 비즈니스 매장관리 페이지로 이동 (GET) [건욱]
 	public ModelAndView shopManagement(HttpServletRequest req) {
@@ -107,8 +105,11 @@ public class BusinessMainManagementService {
     	// 밑에 소스 바꾼 이유 : 원래는 한꺼번에 지역데이터를 전달했으나 리소스를 너무 많이 잡아먹어서 시도 데이터만 먼저보내고 
     	// 나머지 시군구 / 읍면동은 REST로 처리하기로 맘먹음.
 //    	HashMap<String, HashMap<String , ArrayList<String>>> addressList = AddressListSetting.getAddressList();
-    	mav.addObject("sido", (new Gson()).toJson(mMapAddressListDAO.selectMMapAddressA()));
+//    	mav.addObject("sido", (new Gson()).toJson(mMapAddressListDAO.selectMMapAddressA()));
+    	mav.addObject("sido", (new Gson()).toJson(mSidoDAO.selectMSidoAddressA()));
     	
+    	// 선택한 지역 데이터 리스트 
+    	mav.addObject("deliveryAreas", (new Gson().toJson(AddressListSetting.getAddressList(estid))));
     	
  	    // 대분류 중분류 카테고리를 셋팅해주는 함수입니다.
 	    HashMap<String, ArrayList<String>> menuCategories = menuCategoriesSetting(estid);
