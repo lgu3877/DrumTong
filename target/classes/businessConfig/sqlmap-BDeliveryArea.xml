@@ -13,8 +13,7 @@
 			VALUES
 			( 
 				#{estid}, #{addressa},
-				#{addressb}, #{addressc}, #{addressd},
-				#{addresse}, #{addressf}
+				#{addressb}, #{addressc}
 			)
 	</insert>
 

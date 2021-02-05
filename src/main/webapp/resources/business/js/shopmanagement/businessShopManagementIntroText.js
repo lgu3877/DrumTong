@@ -11,7 +11,7 @@ function displayText() {
 		= document.getElementById("intro-text").innerText;
 }
 
-// 모달 열기
+// 모달 열기	
 function openIntroModal() {
 	 document.getElementById('intro-modal').style.display = "block";	
 }

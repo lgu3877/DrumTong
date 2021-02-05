@@ -8,4 +8,6 @@ public interface BBusinessReviewDAO {
 
 	int deleteReply(ReviewList reviewList);
 
+	int insertNewReview(ReviewList review);
+
 }

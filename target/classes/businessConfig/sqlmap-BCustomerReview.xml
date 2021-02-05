@@ -14,4 +14,8 @@
 	<select id="selectNoReply" parameterType="String" resultType="BCustomerReviewVO">
 		SELECT * FROM (SELECT ESTID FROM BREVIEW WHERE ESTID=#{estid} AND REPLYBOOLEAN='N') A,BCUSTOMERREVIEW B WHERE A.ESTID=B.ESTID 
 	</select>
+	
+	<insert id="insertNewReview" parameterType="ReviewList">
+		INSERT INTO BCUSTOMERREVIEW (MEMBERID,ESTID,SALECODE,CONTENT) VALUES (#{memberid}, #{estid}, #{salecode}, #{ccontent})
+	</insert>
 </mapper>

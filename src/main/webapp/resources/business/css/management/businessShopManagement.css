@@ -3,8 +3,8 @@
 	padding: 0;
 }
 
-.slide_btn {
-	
+.disabled_checkbox {
+	cursor: not-allowed !important;
 }
 
 /* 폼 그림자 */
@@ -346,12 +346,10 @@
 }
 
 .current_menu_table tbody th {
-	width: 16.6666%;
 	padding: 10px;
 }
 
 .current_menu_table td {
-	width: 350px;
 	padding: 10px;
 }
 
@@ -515,10 +513,11 @@
     margin-bottom: 10px;
     padding: 10px 20px;
     border-radius: 5px;
-    font-size: 15pt;
+    font-size: 14pt;
     cursor: pointer;
     text-align: left;
     width: 100px;
+    margin: auto 0;
 }
 
 .category_checkbox_label:hover {
@@ -529,6 +528,20 @@
 .category_checked {
 	background-color: navy;
 }
+
+.sub_category_label {
+	padding: 5px 10px;
+	cursor: pointer;
+	font-size: 13pt;
+}
+
+.sub_category_label:hover {
+	transition: .5s;
+	background-color: cornflowerblue;
+	color: white;
+	border-radius: 5px;
+}
+
 
 /* customizing menu header */
 .customize_menu_head {
@@ -547,23 +560,27 @@
 }
 
 .service_main {
-	width: 13%;
+	width: 16%;
 }
 
 .service_sub {
-	width: 13%;
+	width: 16%;
 }
 
 .service_details {
-	width: 43%;
+	width: 21%;
 }
 
 .service_price {
-	width: 10%;
+	width: 16%;
+}
+
+.service_price_input:invalid {
+	border: 2px solid red;
 }
 
 .service_time {
-	width: 10%;
+	width: 16%;
 }
 
 /* .service_confirm {
@@ -571,14 +588,14 @@
 } */
 
 .service_cancle {
-	width: 5%;
+	width: 6%;
 }
 
 
 
 /* first property input */
 .first_item_prop {
-	width: 13%;
+	width: 16%;
 }
 
 /* select */
@@ -616,7 +633,7 @@
 
 /* second property input */
 .second_item_prop {
-	width: 13%;
+	width: 16%;
 }
 
 .second_item_prop input {
@@ -626,15 +643,15 @@
 
 /* third~fifth property input */
 .third_item_prop {
-	width: 43%;
+	width: 21%;
 }
 
 .forth_item_prop {
-	width: 10%;
+	width: 16%;
 }
 
 .fifth_item_prop {
-	width: 10%;
+	width: 16%;
 }
 
 .third_item_prop input, .forth_item_prop input, .fifth_item_prop input {
@@ -693,7 +710,7 @@
 } */
 
 .cancle_listing {
-	width: 5%;
+	width: 6%;
 	cursor: pointer;
 	color: red;
 	line-height: 35px;

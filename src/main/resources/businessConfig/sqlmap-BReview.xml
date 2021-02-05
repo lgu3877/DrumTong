@@ -61,5 +61,19 @@
 		UPDATE BREVIEW SET BLOCKBOOLEAN='N' WHERE ESTID=#{estid} AND SALECODE=#{salecode}
 	</delete>
 	
+	<select id="checkReview" parameterType="OrderList" resultType="int">
+		SELECT COUNT(*) FROM BREVIEW WHERE ESTID=#{estid} AND SALECODE=#{salecode}
+	</select>
 	
+	<insert id="insertNewReview" parameterType="ReviewList">
+		INSERT INTO BREVIEW (MEMBERID,ESTID,SALECODE,GPA) VALUES (#{memberid}, #{estid}, #{salecode}, #{gpa})
+	</insert>
+	
+	<select id="confirm" parameterType="String" resultType="int">
+		SELECT COUNT(REVIEWIMG) FROM BREVIEW WHERE REVIEWIMG LIKE '%'||#{SerialUUID}||'%'
+	</select>
+	
+	<update id="updateImg" parameterType="ReviewList">
+		UPDATE BREVIEW SET REVIEWIMG=#{reviewimg} WHERE ESTID=#{estid} AND SALECODE=#{salecode} AND MEMBERID=#{memberid}
+	</update>
 </mapper>

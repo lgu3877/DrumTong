@@ -18,7 +18,7 @@
 
 	<!-- global css -->	
 	<link rel="stylesheet" href="${cpath }/business/css/businessStyle.css">
-	<!-- header css 처음 등록할 때 쓸 헤더입니다. ( status eq 'FAIL' )-->
+	<!-- header css 처음 등록할 때 쓸 헤더입니다. ( status ne 'SUCCESS' )-->
     <link rel="stylesheet" href="${cpath }/business/css/businessHeader.css">
 	<!-- sub header css -->
 	<link rel="stylesheet" href="${cpath }/business/css/businessSubHeader.css">
@@ -48,10 +48,13 @@
 	<script type="text/javascript">
 		const bImageList = ${bImageList};
 		const bManagement = ${bManagement};
+		// deliverytype > AGENCIES, SELF, BOTH, VISIT(default)
+		// deliveryboolean > Y, N
 		const bMenu = ${bMenu};
-		
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
+		const sido = ${sido};
+		console.log(sido);
 	</script>
 </head>
      
@@ -61,7 +64,7 @@
 	
 	
 	<!-- 	온라인 계약이 진행 중인 상태이면은 기본 헤더를 보여준다 -->
-	<c:if test="${status eq 'FAIL' }">
+	<c:if test="${status ne 'SUCCESS' }">
 		<%@ include file="../main/businessHeader.jsp" %>
 	</c:if>
 	
@@ -90,7 +93,7 @@
 <!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
 <!-- 	[전체 폼]에 대한 c:if문 -->
 
-	<c:if test="${status eq 'FAIL' }">
+	<c:if test="${status ne 'SUCCESS' }">
 			<form method="POST" enctype="multipart/form-data">
 	</c:if>
 		
@@ -265,10 +268,9 @@
 						<tr>
 							<th scope="cols">서비스 유형</th>
 							<th scope="cols">서비스 타입</th>
-							<th scope="cols">세부 내용</th>
-							<th scope="cols">가격</th>
-							<th scope="cols">소요시간</th>
-							<th scope="cols">기타</th>
+							<th scope="cols">메뉴 이름</th>
+							<th scope="cols">가격(배달비)</th>
+							<th scope="cols">소요시간(시간)</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -288,9 +290,10 @@
 						<tr>
 							<th scope="cols">서비스 유형</th>
 							<th scope="cols">서비스 타입</th>
-							<th scope="cols">세부 내용</th>
-							<th scope="cols">가격</th>
+							<th scope="cols">메뉴 이름</th>
+							<th scope="cols">가격(배달비)</th>
 							<th scope="cols">소요시간</th>
+							<th scope="cols">수정/삭제</th>
 						</tr>
 					</thead>
 					
@@ -354,13 +357,15 @@
 					<ul class="customize_menu_head">
 						<li class="service_main">서비스 유형</li>
 						<li class="service_sub">서비스 타입</li>
-						<li class="service_details">세부 내용</li>
-						<li class="service_price">가격(원)</li>
-						<li class="service_time">소요시간</li>
+						<li class="service_details">메뉴 이름</li>
+						<li class="service_price">가격(배달비)</li>
+						<li class="service_time">소요시간(시간)</li>
 						<!-- POST 형식일 때만 확인 버튼을 활성화 시켜준다.	-->
-						<c:if test="${status eq 'FAIL' }">
+						
+						<c:if test="${status ne 'SUCCESS' }">
 							<li class="service_confirm">확인</li>
-						</c:if>
+						</c:if> 
+						
 						<li class="service_cancle">삭제</li>
 					</ul>
 				</div>
@@ -404,17 +409,23 @@
 		<!-- 수취 선택 -->
 			<div class="return_menu">
 				<ul>
-					<li onclick="checkContent(this)">
-					<!-- BManagementVO > deliveryboolean -->
-						<input class="returnOptions" type="checkbox" name="quickboolean"> 
+					<li id="agencies" onclick="checkContent(this)">
+					<!-- BManagementVO > deliverytype > AGENCIES -->
+						<input class="returnOptions" type="checkbox" name="deliverytype" value="AGENCIES"> 
 						<i class="fas fa-window-close"></i>
 						<span>배달 대행업체 이용</span>
 					</li>
-					<!-- BManagementVO > quickboolean -->
-					<li onclick="checkContent(this)">
-						<input class="returnOptions" type="checkbox" name="deliveryboolean">
+					<!-- BManagementVO > deliverytype > SELF -->
+					<li id="self" onclick="checkContent(this)">
+						<input class="returnOptions" type="checkbox" name="deliverytype" value="SELF" >
 						<i class="fas fa-window-close"></i>
 						<span>배달 서비스 제공</span>
+					</li>
+					<!-- BManagementVO > deliverytype > VISIT -->
+					<li id="visit" class="disabled_checkbox">
+						<input class="returnOptions" type="checkbox" name="deliverytype" value="VISIT">
+						<i class="fas fa-window-close"></i>
+						<span>방문수령</span>
 					</li>
 				</ul>
 			</div>
@@ -454,11 +465,11 @@
 				
 				<div class="delivery_area_set_con">
 				<!-- 시/도 선택 -->
-					<select id="major-area-selector" name="majorArea" onchange="createMinorOptions()">
+					<select id="major-area-selector" name="sido" onchange="createMinorOptions()">
 						<option hidden selected>시/도 선택</option>
 					</select>
 				<!-- 시/군/구 선택 -->
-					<select id="minor-area-selector" name="minorArea" onchange="createDetailOptions()">
+					<select id="minor-area-selector" name="sigungu" onchange="createDetailOptions()">
 						<option hidden selected>시/군/구 선택</option>
 					</select>
 				<!-- 읍/면/동 선택 -->
@@ -519,7 +530,7 @@
 	<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
 	<!-- 	[전체 폼]에 대한 c:if문 -->
 	
-		<c:if test="${status eq 'FAIL' }">
+		<c:if test="${status ne 'SUCCESS' }">
 	<!-- 전체 form submit -->
 			<div class="submit_con">
 				<input class="submit_btn" type="submit" value="다음 단계로">
@@ -543,7 +554,7 @@
 			<span class="intro_close" onclick="closeIntroModal()">&times;</span>
 			<div class="intro_content">
 			<!-- BManagementVO > introduction -->
-				<textarea id="intro-modal-textarea" class="store_intro_input" name="introduction" maxlength="500" placeholder="매장 소개글을 적어주세요." autofocus style="resize: none;"></textarea>
+				<textarea id="intro-modal-textarea" class="store_intro_input" name="introduction" maxlength="500" placeholder="매장 소개글을 적어주세요." autofocus style="resize: none;" maxlength="300"></textarea>
 				<input class="store_intro_btn" type="button" value="작성완료" onclick='comfirmIntro()' >
 			</div>
 		</div>
@@ -572,7 +583,7 @@
 			const charArray = characters.split("");
 				
 			for (let i = 0; i < length; i++) {
-				result += charArray[Math.ceil(Math.random() * characters.length)];
+				result += charArray[Math.ceil(Math.random() * (characters.length - 1))];
 			}
 			
 			// 동일한 난수가 생성되엇을 경우(로또 맞을 확률)
@@ -592,9 +603,6 @@
 			return commaAttached.split("").reverse().join("");
 		}
 	</script>
-	
-	<!-- 초기 셋팅 -->
-	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementOnLoad.js"></script>
 	
 	<!-- 이미지 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementImage.js"></script>

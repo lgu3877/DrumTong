@@ -30,6 +30,7 @@ import com.drumtong.business.vo.BScheduleDaysVO;
 import com.drumtong.business.vo.BScheduleTimeVO;
 import com.drumtong.business.vo.BTempHolidayVO;
 import com.drumtong.business.vo.BTempSuspensionVO;
+import com.drumtong.map.dao.MMapAddressListDAO;
 import com.drumtong.security.AwsServiceImpl;
 
 // [건욱]
@@ -52,6 +53,8 @@ public class RestBusinessMainManagementService {
 	@Autowired BTempHolidayDAO bTempHolidayDAO;
 	@Autowired BTempSuspensionDAO bTempSuspensionDAO;
 	
+	// 지도 데이터 테이블
+	@Autowired MMapAddressListDAO mMapAddressListDAO;
 	// ========================= 대분류 [매장관리] ================================
 	
 	
@@ -181,6 +184,30 @@ public class RestBusinessMainManagementService {
 		return RestInsertBMenuReuslt;
 	}
 	
+	
+	// ==== 대분류 [DrumtongMap Database]
+	// ==== 중분류 [MAPADDRESSLIST] 테이블
+	// 시도에 대한 시군구데이터를 추출해줍니다.
+	// 이렇게 REST로 추출해주는 이유는 다음과 같습니다.
+	// 1. 모든 지역데이터를 한꺼번에 Get방식으로 전달해주면 Client쪽에 부담이 심함
+	// 2. 분할 데이터로 전달시에 부담을 덜수있음.
+	
+	// / Addressa = 시도 / Addressb = 시군구 / Addressc = 읍면동 /
+	public ArrayList<String> selectMMapAddressb(String sido) {
+		System.out.println(sido);
+		ArrayList<String> addressbList =  mMapAddressListDAO.selectMMapAddressB(sido);
+		System.out.println("고로고로" + addressbList.get(1));
+		
+		return addressbList;
+	}
+	
+	// 시도 시군구에 대한 읍면동데이터를 추출해줍니다.
+	public ArrayList<String> selectMMapAddressc(HashMap<String,String> sidoSigungu) {
+		
+		ArrayList<String> addresscList =  mMapAddressListDAO.selectMMapAddressC(sidoSigungu);
+		
+		return addresscList;
+	}
 
 	// ===== 중분류 [BDELIVERYAREA] 테이블 ====	
 	

@@ -1,10 +1,12 @@
 package com.drumtong.business.controller.mainmanagement;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,7 @@ import com.drumtong.business.vo.BScheduleDaysVO;
 import com.drumtong.business.vo.BScheduleTimeVO;
 import com.drumtong.business.vo.BTempHolidayVO;
 import com.drumtong.business.vo.BTempSuspensionVO;
+import com.google.gson.Gson;
 
 /*
  *  [건욱]
@@ -112,7 +115,32 @@ public class RestBusinessMainManagementController {
 
 	
 	
+	
 
+	// ==== 대분류 [DrumtongMap Database]
+	// ==== 중분류 [MAPADDRESSLIST] 테이블
+	
+	// 시도에 대한 시군구데이터를 추출해줍니다.
+	// 이렇게 REST로 추출해주는 이유는 다음과 같습니다.
+	// 1. 모든 지역데이터를 한꺼번에 Get방식으로 전달해주면 Client쪽에 부담이 심함
+	// 2. 분할 데이터로 전달시에 부담을 덜수있음.
+	@RequestMapping("BManagement/rest/selectMMapAddressB/{sido}/")
+	@GetMapping(produces = "application/json; charset=utf8")
+//	public String selectMMapAddressB(@PathVariable("sido") String sido) {
+	public ArrayList<String> selectMMapAddressB(@PathVariable("sido") String sido) {
+//		return (new Gson()).toJson(svc.selectMMapAddressb(sido));
+		return svc.selectMMapAddressb(sido);
+	}
+	
+	// 시도 시군구에 대한 읍면동데이터를 추출해줍니다.
+	@RequestMapping("BManagement/rest/selectMMapAddressC/")
+	@PostMapping(produces = "application/json; charset=utf8")
+	public ArrayList<String> selectMMapAddressC(@RequestBody HashMap<String, String> sidoSigungu) {
+		return svc.selectMMapAddressc(sidoSigungu);
+		
+	}
+	
+	
 	// ===== 중분류 [BDELIVERYAREA] 테이블 ====	
 	
 	// 1. 배달 지역을 비동기식으로 수정해주는 메서드입니다.
