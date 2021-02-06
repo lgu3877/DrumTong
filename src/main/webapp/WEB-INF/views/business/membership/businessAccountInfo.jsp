@@ -25,7 +25,8 @@
 
 
 <!-- 스크립트 영역 -->
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<!-- 다음 주소 검색 script function -->
+<%@ include file="/resources/daumAddressSearch/daumAddressSearch.jsp" %>
 <!-- Axios js min 파일 -->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
    
