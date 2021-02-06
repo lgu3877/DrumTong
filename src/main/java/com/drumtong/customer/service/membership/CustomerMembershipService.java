@@ -79,7 +79,7 @@ public class CustomerMembershipService {
 		if("on".equals(checkAddress)) {
 			// 세탁된 물품을 회수받는 주소에 집 주소 수동으로 입력해주기
 			cPrivateDataVO.setMainreceiptaddress(cPrivateDataVO.getMainaddress());
-			cPrivateDataVO.setDetailreceiptaddress(cPrivateDataVO.getDetailreceiptaddress());
+			cPrivateDataVO.setDetailreceiptaddress(cPrivateDataVO.getDetailaddress());
 		}
 		
 		// SerialUUID 생성
