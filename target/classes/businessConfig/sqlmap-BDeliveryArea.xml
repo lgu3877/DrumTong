@@ -13,12 +13,45 @@
 			VALUES
 			( 
 				#{estid}, #{addressa},
-				#{addressb}, #{addressc}, #{addressd},
-				#{addresse}, #{addressf}
+				#{addressb}, #{addressc}
 			)
 	</insert>
+	
+	
+	
+<!-- 	시도 데이터를 반환시켜주는 함수입니다. -->
+	<select id="selectAddressA" parameterType="string" resultType="string">
+		SELECT DISTINCT(ADDRESSA)
+			FROM
+		BDELIVERYAREA
+		WHERE
+			ESTID = #{value}
+	</select>
 
+<!-- 	시군구 데이터를 반환시켜주는 함수입니다. -->
+	<select id="selectAddressB" parameterType="BDeliveryAreaVO" resultType="string">
+		SELECT DISTINCT(ADDRESSB)
+			FROM
+		BDELIVERYAREA
+		WHERE
+			ESTID = #{estid} 
+				AND
+			ADDRESSA = #{addressa}
+	</select>
 
+<!-- 	읍면동 데이터를 반환시켜주는 데이터입니다.	 -->
+	<select id="selectAddressC" parameterType="BDeliveryAreaVO" resultType="string">
+		SELECT ADDRESSC
+			FROM
+		BDELIVERYAREA
+		WHERE
+			ESTID = #{estid} 
+				AND
+			ADDRESSA = #{addressa}
+				AND
+			ADDRESSB = #{addressb}
+	</select>
+	
 
 
 

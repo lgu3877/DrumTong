@@ -18,7 +18,7 @@
 
 	<!-- global css -->	
 	<link rel="stylesheet" href="${cpath }/business/css/businessStyle.css">
-	<!-- header css 처음 등록할 때 쓸 헤더입니다. ( status eq 'FAIL' )-->
+	<!-- header css 처음 등록할 때 쓸 헤더입니다. ( status ne 'SUCCESS' )-->
     <link rel="stylesheet" href="${cpath }/business/css/businessHeader.css">
 	<!-- sub header css -->
 	<link rel="stylesheet" href="${cpath }/business/css/businessSubHeader.css">
@@ -48,11 +48,15 @@
 	<script type="text/javascript">
 		const bImageList = ${bImageList};
 		const bManagement = ${bManagement};
+		// deliverytype > AGENCIES, SELF, BOTH, VISIT(default)
+		// deliveryboolean > Y, N
 		const bMenu = ${bMenu};
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
 		const sido = ${sido};
+		const deliveryAreas = ${deliveryAreas}
 		console.log(sido);
+		console.log(deliveryAreas);
 	</script>
 </head>
      
@@ -62,7 +66,7 @@
 	
 	
 	<!-- 	온라인 계약이 진행 중인 상태이면은 기본 헤더를 보여준다 -->
-	<c:if test="${status eq 'FAIL' }">
+	<c:if test="${status ne 'SUCCESS' }">
 		<%@ include file="../main/businessHeader.jsp" %>
 	</c:if>
 	
@@ -91,7 +95,7 @@
 <!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
 <!-- 	[전체 폼]에 대한 c:if문 -->
 
-	<c:if test="${status eq 'FAIL' }">
+	<c:if test="${status ne 'SUCCESS' }">
 			<form method="POST" enctype="multipart/form-data">
 	</c:if>
 		
@@ -359,9 +363,11 @@
 						<li class="service_price">가격(배달비)</li>
 						<li class="service_time">소요시간(시간)</li>
 						<!-- POST 형식일 때만 확인 버튼을 활성화 시켜준다.	-->
-						<c:if test="${status eq 'FAIL' }">
+						
+						<c:if test="${status ne 'SUCCESS' }">
 							<li class="service_confirm">확인</li>
-						</c:if>
+						</c:if> 
+						
 						<li class="service_cancle">삭제</li>
 					</ul>
 				</div>
@@ -405,17 +411,23 @@
 		<!-- 수취 선택 -->
 			<div class="return_menu">
 				<ul>
-					<li onclick="checkContent(this)">
-					<!-- BManagementVO > deliveryboolean -->
-						<input class="returnOptions" type="checkbox" name="quickboolean"> 
+					<li id="agencies" onclick="checkContent(this)">
+					<!-- BManagementVO > deliverytype > AGENCIES -->
+						<input class="returnOptions" type="checkbox" name="deliverytype" value="AGENCIES"> 
 						<i class="fas fa-window-close"></i>
 						<span>배달 대행업체 이용</span>
 					</li>
-					<!-- BManagementVO > quickboolean -->
-					<li onclick="checkContent(this)">
-						<input class="returnOptions" type="checkbox" name="deliveryboolean">
+					<!-- BManagementVO > deliverytype > SELF -->
+					<li id="self" onclick="checkContent(this)">
+						<input class="returnOptions" type="checkbox" name="deliverytype" value="SELF" >
 						<i class="fas fa-window-close"></i>
 						<span>배달 서비스 제공</span>
+					</li>
+					<!-- BManagementVO > deliverytype > VISIT -->
+					<li id="visit" class="disabled_checkbox">
+						<input class="returnOptions" type="checkbox" name="deliverytype" value="VISIT">
+						<i class="fas fa-window-close"></i>
+						<span>방문수령</span>
 					</li>
 				</ul>
 			</div>
@@ -449,21 +461,23 @@
 			
 		<!-- 설정된 배달 가능지역 보기  & 배달 지역 설정  -->
 			<div class="delivery_menu">
-				<div class="delivery_area_view_con">
-				
+				<div id="delivery-area-view" class="delivery_area_view_con">
+					<h1>배달지역 뷰</h1>
 				</div>
 				
-				<div class="delivery_area_set_con">
-				<!-- 시/도 선택 -->
-					<select id="major-area-selector" name="majorArea" onchange="createMinorOptions()">
-						<option hidden selected>시/도 선택</option>
-					</select>
-				<!-- 시/군/구 선택 -->
-					<select id="minor-area-selector" name="minorArea" onchange="createDetailOptions()">
-						<option hidden selected>시/군/구 선택</option>
-					</select>
+				<div class="delivery_area_set_wrap">
+					<div class="delivery_area_set_con">
+					<!-- 시/도 선택 -->
+						<select id="major-area-selector" class="area_selector" name="sido" onchange="createMinorOptions()">
+							<option hidden selected>시/도 선택</option>
+						</select>
+					<!-- 시/군/구 선택 -->
+						<select id="minor-area-selector" class="area_selector" name="sigungu" onchange="createDetailOptions()">
+							<option hidden selected>시/군/구 선택</option>
+						</select>
+					</div>
 				<!-- 읍/면/동 선택 -->
-					<div id="detail-area-selector"></div>
+					<div id="detail-area-selector" class="town_selector_con"></div>
 				</div>
 		
 			</div>
@@ -483,6 +497,7 @@
 					<div id="address-help-msg"></div>
 				</div>
 			<!-- 버튼 -->
+			<c:if test="${status eq 'SUCCESS' }">
 				<div class="service_button_con">
 					<div id="complete-address-option" class="complete_menu_btn_con"  onclick="updateAddress()">
 						<div class="add_menu_icon_con">
@@ -491,7 +506,9 @@
 						<div class="add_menu_btn_title">변경 완료</div>
 					</div>
 				</div>
+			</c:if>
 			</div>
+			
 			
 		<!-- 주소지 변경 -->
 			<div class="address_input_con form">
@@ -520,7 +537,7 @@
 	<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
 	<!-- 	[전체 폼]에 대한 c:if문 -->
 	
-		<c:if test="${status eq 'FAIL' }">
+		<c:if test="${status ne 'SUCCESS' }">
 	<!-- 전체 form submit -->
 			<div class="submit_con">
 				<input class="submit_btn" type="submit" value="다음 단계로">
@@ -593,9 +610,6 @@
 			return commaAttached.split("").reverse().join("");
 		}
 	</script>
-	
-	<!-- 초기 셋팅 -->
-	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementOnLoad.js"></script>
 	
 	<!-- 이미지 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementImage.js"></script>

@@ -1,3 +1,4 @@
+
 const helpMessages = [
    {
       id: "photo-help",
@@ -37,26 +38,31 @@ const helpMessages = [
    
 ];
 
+// 초기 실행
+helpMsg(helpMessages);
+
+// 마우스 호버링 > 안내 메세지 출력
 function helpMsg(idArray) {
    helpMessages.forEach((element) => {
-      // 마우스 이벤트 영역설정
-      document.getElementById(element.id).style.width = "150px";
-      document.getElementById(element.id).style.padding = "15px 0";
-      
-      // 도움말 보임
-      document.getElementById(element.id).addEventListener("mouseenter", () => {
-         document.getElementById(`${element.id}-msg`).classList.add(element.className);
-         document.getElementById(`${element.id}-msg`).innerHTML = `<p>${element.content}</p>`;
-      });   
-      
-      // 도움말 사라짐
-      document.getElementById(element.id).addEventListener("mouseleave", () => {
-         document.getElementById(`${element.id}-msg`).classList.remove(element.className);
-         document.getElementById(`${element.id}-msg`).innerHTML = "";
-      });
-   }
+	   try {
+		   // 마우스 이벤트 영역설정
+		      document.getElementById(element.id).style.width = "150px";
+		      document.getElementById(element.id).style.padding = "15px 0";
+		      
+		      // 도움말 보임
+		      document.getElementById(element.id).addEventListener("mouseenter", () => {
+		         document.getElementById(`${element.id}-msg`).classList.add(element.className);
+		         document.getElementById(`${element.id}-msg`).innerHTML = `<p>${element.content}</p>`;
+		      });   
+		      
+		      // 도움말 사라짐
+		      document.getElementById(element.id).addEventListener("mouseleave", () => {
+		         document.getElementById(`${element.id}-msg`).classList.remove(element.className);
+		         document.getElementById(`${element.id}-msg`).innerHTML = "";
+		      });	
+	   } catch (e) {
+//		   console.log(e);
+	   }
+     }
    );
-   
 }
-
-helpMsg(helpMessages);
