@@ -14,7 +14,14 @@ public class BInformationVO {
 	private String longitude;
 	private String status;
 	private String premiumboolean;
+	private String emdcode;
 	
+	public String getEmdcode() {
+		return emdcode;
+	}
+	public void setEmdcode(String emdcode) {
+		this.emdcode = emdcode;
+	}
 	public String getStatus() {
 		return status;
 	}
