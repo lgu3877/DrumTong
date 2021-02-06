@@ -546,7 +546,7 @@
 
 		</c:if>
 		
-		<button onclick="updateDeliveryArea()" />
+		<button onclick="updateDeliveryArea()">배달지역 테스트 버튼</button>
 	
 	</section>
 		

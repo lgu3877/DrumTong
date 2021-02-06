@@ -16,6 +16,56 @@ displayDeliveryArea()
 createMajorOptions();
 
 
+// 폼 업데이트
+function updateDeliveryArea() {
+	// 수정된 정보 업데이트 > updateArea
+	
+	// 시-도가 추가된 경우
+	
+	// 시-도가 추가되지 않은 경우
+	for (let mCity in initialAreas) {		
+		const hasMetroCity = hasProperty(deliveryAreas, mCity);
+		
+		// 시-도가 없을 경우		
+		if (!hasMetroCity) {
+			updateArea.remove[mCity] = initialAreas[mCity];
+		}
+		
+		// 시-도가 있을 경우
+		else {
+//			updateArea.add[mCity] = mCity;
+			for (let city in initialAreas[mCity]) {
+
+				// 시-군-구가 없을 경우
+				const hasCity = hasProperty(deliveryAreas[mCity], city);
+				
+				if (!hasCity) {
+					updateArea.remove[mCity] = {
+						[city] : initialAreas[mCity][city]
+					}
+				}
+			
+				// 시-군-구가 있을 경우
+				else {
+					const isSameArray = compareArray(initialAreas[mCity][city], deliveryAreas[mCity][city]); // 동일 배열인지 비교
+
+					// 읍-면-동이 있고, 그 안(배열)의 값이 다른 경우
+					if (!isSameArray) {
+						console.log("123");
+					}
+					// 읍-면-동이 있고, 그 안(배열)의 값이 같은 경우
+				}
+			}	
+		}
+	}
+	
+	console.log(updateArea);
+	
+//	await axios.post("/drumtong/business/mainmanagement/BManagement/rest/selectMMapAddressC/", updateArea);
+	
+}
+
+
 // 추가-삭제 관련 객체 & 기,존 배달지역 객체 업데이트
 function updatedeliveryAreaObject(id, metroCity, city, town) {
 	const checkbox = document.getElementById(id);
@@ -65,6 +115,25 @@ function updatedeliveryAreaObject(id, metroCity, city, town) {
 	}
 }
 
+// deliveryAreas 객체 업데이트
+function modifiedDeliveryAreas() {
+	// 정렬
+	const sMCities = Object.keys(deliveryAreas).sort(); 
+	const sObject = {};
+		
+	for (let i = 0; i < sMCities.length; i++) {
+		sObject[sMCities[i]] = deliveryAreas[sMCities[i]]; // 시도 정렬
+
+		const sCities = Object.keys(deliveryAreas[sMCities[i]]).sort(); // 시군구 정렬
+		
+		for (let j = 0; j < sCities.length; j++) {
+			sObject[sMCities[i]][sCities[j]] = deliveryAreas[sMCities[i]][sCities[j]].sort();
+		}
+		
+	}
+	
+	deliveryAreas = sObject; // 정렬된 객체로 변경
+}
 
 // 배달지역 뷰
 function displayDeliveryArea() {
@@ -76,17 +145,15 @@ function displayDeliveryArea() {
 		sObject[sMCities[i]] = deliveryAreas[sMCities[i]]; // 시도 정렬
 
 		const sCities = Object.keys(deliveryAreas[sMCities[i]]).sort(); // 시군구 정렬
-		console.log(sCities);
 		
 		for (let j = 0; j < sCities.length; j++) {
-//			Object.defineProperty(sObject[sMCities[i]], sCities[j], deliveryAreas[sMCities[i]][sCities[j]].sort());
 			sObject[sMCities[i]][sCities[j]] = deliveryAreas[sMCities[i]][sCities[j]].sort();
 		}
 		
 	}
 	
 	deliveryAreas = sObject; // 정렬된 객체로 변경
-
+	
 	const viewCon = document.getElementById("delivery-area-view"); // 영역 설정
 	
 	viewCon.innerHTML = ""; // 초기화
@@ -248,14 +315,21 @@ function inquireResource(metroCity, city, town) {
 	return;
 }
 
-// 폼 업데이트
-async function updateDeliveryArea() {
-	const areaCheckboxes = document.getElementsByName("town");
-	
-	
-	const majorValue = document.getElementById("major-area-selector").value;
-	const minorValue = document.getElementById("minor-area-selector").value;
-	
-	console.log("test");
+
+// 객체 참조 > true || false
+const hasProperty = (object, key) => {
+	return object.hasOwnProperty(key);
 }
 
+// 배열 비교 > true || false
+const compareArray = (initialArray, modifiedArray) => {
+	if (initialArray.length !== modifiedArray.length) return false;
+	else {
+		const filteredArray = Array.from(new Set(initialArray.concat(modifiedArray)));
+		
+		if (filteredArray.length === initialArray.length
+				&& filteredArray.length === modifiedArray.length) return true;
+		
+		return false;
+	}
+}
