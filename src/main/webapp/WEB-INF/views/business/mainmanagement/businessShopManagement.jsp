@@ -52,7 +52,7 @@
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
 		const sido = ${sido};
-		const deliveryAreas = ${deliveryAreas}
+		let deliveryAreas = ${deliveryAreas};
 
 		console.log(deliveryAreas);
 	</script>

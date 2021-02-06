@@ -20,8 +20,6 @@ createMajorOptions();
 function updatedeliveryAreaObject(id, metroCity, city, town) {
 	const checkbox = document.getElementById(id);
 	
-	console.log(deliveryAreas);
-	
 	// deliveryAreas 수정 > view 업데이트
 	// 체크
 	if (checkbox.checked === true) {
@@ -65,16 +63,33 @@ function updatedeliveryAreaObject(id, metroCity, city, town) {
 			}
 		}
 	}
-	console.log(deliveryAreas);
 }
 
 
 // 배달지역 뷰
 function displayDeliveryArea() {
-	const viewCon = document.getElementById("delivery-area-view");
+	// 정렬
+	const sMCities = Object.keys(deliveryAreas).sort(); 
+	const sObject = {};
+		
+	for (let i = 0; i < sMCities.length; i++) {
+		sObject[sMCities[i]] = deliveryAreas[sMCities[i]]; // 시도 정렬
+
+		const sCities = Object.keys(deliveryAreas[sMCities[i]]).sort(); // 시군구 정렬
+		console.log(sCities);
+		
+		for (let j = 0; j < sCities.length; j++) {
+//			Object.defineProperty(sObject[sMCities[i]], sCities[j], deliveryAreas[sMCities[i]][sCities[j]].sort());
+			sObject[sMCities[i]][sCities[j]] = deliveryAreas[sMCities[i]][sCities[j]].sort();
+		}
+		
+	}
 	
-	// 초기화
-	viewCon.innerHTML = "";
+	deliveryAreas = sObject; // 정렬된 객체로 변경
+
+	const viewCon = document.getElementById("delivery-area-view"); // 영역 설정
+	
+	viewCon.innerHTML = ""; // 초기화
 	
 	// 출력
 	for (let district in deliveryAreas) {
