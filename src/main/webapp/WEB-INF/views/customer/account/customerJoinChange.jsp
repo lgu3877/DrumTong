@@ -75,7 +75,7 @@
             <form onsubmit="return false;">
                 <p class="join_name">집 주소</p>
                 <input class="join_inputbox join_joso" type="text" id="mainAddress1" name="email" placeholder="우편번호" readonly value="${member.mainaddress }" >
-                <input class="join_button join_joso_ok" type="submit" name="joso_select" value="주소찾기" onclick="searchAddress(document.getElementById('mainAddress1'), document.getElementById('subAddress1'), null)" >
+                <input class="join_button join_joso_ok" type="submit" name="joso_select" value="주소찾기" onclick="searchAddress(document.getElementById('mainAddress1'), document.getElementById('subAddress1'), null, null, null)" >
                 <input class="join_inputbox" type="text" id="subAddress1" name="joso_realjoso" placeholder="상세주소" value="${member.detailaddress }" >
                 <input class="join_button join_pum_ok" type="button" id="address_ok1" value="저장하기" 
                 	onclick="changeDataAddress('mainaddress','detailaddress','1')">
@@ -85,7 +85,7 @@
             <form onsubmit="return false;">
                 <p class="join_name">배송지</p>
                 <input class="join_inputbox join_joso" type="text" id="mainAddress2" name="email" placeholder="우편번호" readonly value="${member.mainreceiptaddress }" >
-                <input class="join_button join_joso_ok" type="submit" name="joso_select" value="주소찾기" onclick="searchAddress(document.getElementById('mainAddress2'), document.getElementById('subAddress2'), document.getElementById('emdcode'))" >
+                <input class="join_button join_joso_ok" type="submit" name="joso_select" value="주소찾기" onclick="searchAddress(document.getElementById('mainAddress2'), document.getElementById('subAddress2'), document.getElementById('emdcode'), null, null)" >
                 <input class="join_inputbox" type="text" id="subAddress2" name="joso_realjoso" placeholder="상세주소" value="${member.detailreceiptaddress }" >
                 <input class="join_inputbox" type="hidden" id="emdcode" name="joso_emdcode">
                 <input class="join_button join_pum_ok" type="button" id="address_ok2" value="저장하기" 
