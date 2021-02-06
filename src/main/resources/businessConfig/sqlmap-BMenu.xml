@@ -8,7 +8,7 @@
 
 <!-- 메뉴 번호순으로 반환 -->
 	<select id="select" parameterType="String" resultType="BMenuVO" >
-		SELECT * FROM BMENU WHERE ESTID=#{estid} ORDER BY NAME ASC
+		SELECT * FROM BMENU WHERE ESTID=#{estid} ORDER BY MAINCATEGORY ASC, SUBCATEGORY ASC, NAME ASC
 	</select>
 	
 	
@@ -26,18 +26,18 @@
 	<select id="selectMaincategories" parameterType="String" resultType="String">
 		SELECT DISTINCT(MAINCATEGORY) 
 			FROM BMENU
-		WHERE ESTID = #{value}
+		WHERE ESTID = #{value} ORDER BY MAINCATEGORY ASC
 	</select>
 	
 	
 <!-- 	메인 카테고리와 중분류 카테고리를 메인관리 (매장관리)에 Get방식으로 접근했을 때 데이터를 뿌려주는 용도로 사용되는 SQL문입니다 -->
-	<select id="selectSubcategories" parameterType="String" resultType="String">
+	<select id="selectSubcategories" parameterType="BMenuVO" resultType="String">
 		SELECT DISTINCT(SUBCATEGORY) 
 			FROM BMENU
 		WHERE 
 			ESTID = #{estid} 
 				AND
-			MAINCATEGORY = #{maincategory}
+			MAINCATEGORY = #{maincategory} ORDER BY MAINCATEGORY ASC, SUBCATEGORY ASC
 	</select>
 	
 	

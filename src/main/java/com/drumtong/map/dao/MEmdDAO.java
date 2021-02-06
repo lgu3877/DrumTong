@@ -8,5 +8,11 @@ public interface MEmdDAO {
 	
 //	읍면동을 select하는 함수입니다.
 	ArrayList<String> selectMEmdAddressC(HashMap<String,String> data);
+
+	// emdcode count를 1 추가한다.[영경]
+	int addCount(String emdcode);
+	
+	// emdcode count를 1 빼준다.[영경]
+	int delCount(String emdcode);
 	
 }
