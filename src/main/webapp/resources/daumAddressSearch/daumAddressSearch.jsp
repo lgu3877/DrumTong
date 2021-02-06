@@ -11,7 +11,7 @@
 <!-- 영경 다음 주소 메서드  -->
 <script>
 // 도큐먼트 넣어주기 (필요없는 부분은 null값을 넣어주기)
-// 예 => searchAddress(document.getElementById('mainAddress'), document.getElementById('subAddress'), null);
+// 예 => searchAddress(document.getElementById('mainAddress'), document.getElementById('subAddress'), null, null, null);
 // mainaddress는 선택한 주소를 넣어주고, subaddress는 비워주고, emdcode에는 읍면동 코드를 넣어준다.
 function searchAddress(mainaddress, subaddress, emdcode, lati, longi) {
        new daum.Postcode(
@@ -53,8 +53,6 @@ function searchAddress(mainaddress, subaddress, emdcode, lati, longi) {
                     	   geoNumFunc(lati, longi, fullRoadAddr);
                        }
 //                        // 우편번호와 주소 정보를 해당 필드에 넣는다.
-//                        document.getElementById('mainAddress').value = fullRoadAddr; //5자리 새우편번호 사용
-//                        document.getElementById('subAddress').value = '';
                        if(mainaddress !== null)
                        		mainaddress.value = fullRoadAddr;
                        if(subaddress !== null)
@@ -79,8 +77,6 @@ function geoNumFunc(lati, longi, address){
 	    	 console.log(result[0].y, result[0].x);
 	    	 lati.value = result[0].y;
 	    	 longi.value = result[0].x;
-// 	    	 document.getElementById('latitude').value = result[0].y;
-// 	    	 document.getElementById('longitude').value = result[0].x;
 	    } else {
 	    	alert("주소가 잘못되었습니다. 다시 시도해주세요");
 	    }

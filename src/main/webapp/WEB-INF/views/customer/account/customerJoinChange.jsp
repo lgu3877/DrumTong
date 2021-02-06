@@ -306,7 +306,7 @@
 	
 		        .then( (response) => {
 		          if(response.data === true){
-		        	if(!typeName.includes('address'))
+		        	if(!typeName.includes('detail') && !typeName.includes('emdcode') )
 		        		// address를 저장하는 방식이 세 번 나누어 저장되는데 세 번 다 경고문이 뜨지 않도록 설정해주기
 		            	alert('정상적으로 변경되었습니다.');
 		          } else{
