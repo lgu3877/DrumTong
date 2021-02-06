@@ -52,6 +52,7 @@
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
 		const sido = ${sido};
+		const initialAreas = ${deliveryAreas};
 		let deliveryAreas = ${deliveryAreas};
 
 		console.log(deliveryAreas);
@@ -521,6 +522,7 @@
 					<h3>상세주소</h3>
 					<div class="detail_address_input_wrapper">
 						<input id="detail-address" class="detail_address_input" type="text" name="detaillocation" value="${detailAddress }">
+						<input id="town-code" type="hidden" name="emdcode">
 					</div>
 				</div>
 				<div class="preview_wrapper">
@@ -544,7 +546,7 @@
 
 		</c:if>
 		
-		
+		<button onclick="updateDeliveryArea()" />
 	
 	</section>
 		

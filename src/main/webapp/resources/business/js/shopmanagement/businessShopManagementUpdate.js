@@ -187,6 +187,7 @@ async function updateDelivery() {
 async function updateAddress() {
 	const mainAddress = document.getElementById("main-address").value;
 	const detailAddress = document.getElementById("detail-address").value;
+	const emdCode = document.getElementById("town-code").value;
 	
 	const LaMa = document.getElementById("main-location").value;
 	const address = mainAddress + detailAddress;
@@ -201,9 +202,8 @@ async function updateAddress() {
 		"detaillocation" : detailAddress,
 		"latitude" : la,
 		"longitude" : ma,
+		"emdcode" : emdCode
 	}
-	const { data } = await axios.post("/drumtong/business/mainmanagement/BInformation/rest/updateLocation/", object);
-
-	
+	await axios.post("/drumtong/business/mainmanagement/BInformation/rest/updateLocation/", object);
 }
 
