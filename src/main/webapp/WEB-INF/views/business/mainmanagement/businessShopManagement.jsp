@@ -48,14 +48,12 @@
 	<script type="text/javascript">
 		const bImageList = ${bImageList};
 		const bManagement = ${bManagement};
-		// deliverytype > AGENCIES, SELF, BOTH, VISIT(default)
-		// deliveryboolean > Y, N
 		const bMenu = ${bMenu};
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
 		const sido = ${sido};
 		const deliveryAreas = ${deliveryAreas}
-		console.log(sido);
+
 		console.log(deliveryAreas);
 	</script>
 </head>
@@ -459,13 +457,13 @@
 			</div>
 			
 			
-		<!-- 설정된 배달 가능지역 보기  & 배달 지역 설정  -->
+		<!-- 설정된 배달가능지역 보기  & 배달 지역 설정  -->
 			<div class="delivery_menu">
-				<div id="delivery-area-view" class="delivery_area_view_con">
-					<h1>배달지역 뷰</h1>
-				</div>
+			<!-- 배달가능지역 뷰 -->
+				<div id="delivery-area-view" class="delivery_area_view_con"></div>
 				
-				<div class="delivery_area_set_wrap">
+			<!-- 배달지역 입력 -->
+				<div class="delivery_area_set_wrap form">
 					<div class="delivery_area_set_con">
 					<!-- 시/도 선택 -->
 						<select id="major-area-selector" class="area_selector" name="sido" onchange="createMinorOptions()">
@@ -518,7 +516,7 @@
 						<input id="main-address" class="main_address_input" type="text" name="mainlocation" value="${mainAddress }" 
 							onfocus="openAddressSearch()">
 						<input id="main-location" type="hidden" name="maplocation">
-						<button class="address_search_button" onclick="openAddressSearch()">주소 찾기</button>
+						<input type="button" class="address_search_button" onclick="openAddressSearch()" value="주소 찾기">
 					</div>
 					<h3>상세주소</h3>
 					<div class="detail_address_input_wrapper">

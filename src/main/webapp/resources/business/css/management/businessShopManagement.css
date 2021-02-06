@@ -945,18 +945,64 @@
 }
 
 
-/* 배달 가능 지역 */
+/* 배달 가능 지역 > 뷰 */
 .delivery_area_view_con {
-	
 }
 
+.delivery_view_metro_con {
+	background-color: mintcream;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.metroCity {
+	text-align: left;
+}
+
+.metroName {
+	display: inline-block;
+	font-size: 15pt;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: navy;
+    border-bottom: 3px solid navy;
+    padding-bottom: 10px;
+}
+
+.city {
+	margin: 0 0 0 20px;
+}
+
+.cityName {
+	padding: 15px;
+    font-size: 14pt;
+    color: navy;
+    font-weight: 600;
+}
+
+.town {
+	display: flex;
+    flex-wrap: wrap;
+	margin-top: 10px;
+	margin-left: 20px;
+}
+
+.townName {
+	margin-right: 10px;
+    text-align: center;
+    padding: 5px 10px;
+    border: 1px solid navy;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+/* 배달 가능 지역 > 입력 */
 .delivery_area_set_wrap {
 	
 }
 
 .delivery_area_set_con {
 	display: flex;
-	margin: 20px 0;
 }
 
 .area_selector_con {
@@ -975,6 +1021,7 @@
 .town_selector_con {
 	display: flex;
     flex-wrap: wrap;
+	margin-top: 20px;
 }
 
 .town_selector {
@@ -985,7 +1032,7 @@
     margin-bottom: 10px;
     width: 120px;
     text-align: center;
-    background-color: #e6f4fa;
+    background-color: khaki;
     letter-spacing: 3px;
     cursor: pointer;
 }
@@ -994,6 +1041,10 @@
 	transition: 0.5s;
 	background-color: #5c5ed3;
 	color: white;
+}
+
+.town_selector input {
+	margin-right: 10px;
 }
 
 /* Submit Button */
