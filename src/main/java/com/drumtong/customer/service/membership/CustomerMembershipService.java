@@ -71,8 +71,8 @@ public class CustomerMembershipService {
 	}
 	
 	// 고객 회원가입 (POST)
-	public ModelAndView signUp(CPrivateDataVO cPrivateDataVO, String checkAddress) {
-
+	public ModelAndView signUp(CPrivateDataVO cPrivateDataVO, String checkAddress, String emdcodeTMP) {
+		
 		ModelAndView mav = new ModelAndView("redirect:/");
 		
 		// 집주소와 배송지주소가 일치하면 [영경]
@@ -80,6 +80,7 @@ public class CustomerMembershipService {
 			// 세탁된 물품을 회수받는 주소에 집 주소 수동으로 입력해주기
 			cPrivateDataVO.setMainreceiptaddress(cPrivateDataVO.getMainaddress());
 			cPrivateDataVO.setDetailreceiptaddress(cPrivateDataVO.getDetailaddress());
+			cPrivateDataVO.setEmdcode(emdcodeTMP);
 		}
 		
 		// SerialUUID 생성
