@@ -16,4 +16,7 @@
         WHERE ADDRESSA =#{addressa} and ADDRESSB=#{addressb}
     </select>
     
+    <update id="addCount" parameterType="string">
+    	update emd set count=count+1 where emdcode=#{emdcode}
+    </update>
 </mapper>

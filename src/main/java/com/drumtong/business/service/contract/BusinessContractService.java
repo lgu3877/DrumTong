@@ -20,6 +20,7 @@ import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BManagementVO;
 import com.drumtong.business.vo.BPaymentVO;
 import com.drumtong.business.vo.BPrivateDataVO;
+import com.drumtong.map.dao.MEmdDAO;
 import com.drumtong.security.AwsServiceImpl;
 import com.drumtong.security.Login;
 import com.drumtong.security.SerialUUID;
@@ -29,6 +30,7 @@ public class BusinessContractService {
 
 	// 아마존 S3 서비스 
 	@Autowired AwsServiceImpl aws; 
+	@Autowired MEmdDAO mEmdDAO;
 	
 	private static final String BInformationVO = null;
 	@Autowired BEstablishmentDAO bEstablishmentDAO;
@@ -168,6 +170,9 @@ public class BusinessContractService {
 		
 		// [영경 추가] InformationList를 갱신해줌
 		Login.getInformationList(User, Session, bInformationDAO);
+		
+		// emdcode를 비교해 emd 테이블의 count를 늘려준다.
+		mEmdDAO.addCount(bInformationVO.getEmdcode());
 		
 		return mav;
 	}
