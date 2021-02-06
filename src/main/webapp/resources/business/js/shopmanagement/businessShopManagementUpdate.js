@@ -46,12 +46,12 @@ async function updatePhoto() {
 
 
 //매장 소개글 업데이트
-const initialText = document.getElementById("intro-text").innerText;
+//const initialText = document.getElementById("intro-text").innerText;
 async function updateIntro() {
 	
 	const text = document.getElementById("intro-text").innerText;
 	
-	if (initialText === text) {
+	if (bManagement.introduction === text) {
 		return alert("변경된 내용이 확인되지 않았습니다.");
 	}
 	
@@ -157,14 +157,6 @@ async function deleteMenu() {
 }
 
 
-// 메뉴 삭제
-async function deleteMenu() {
-	
-//	const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/deleteBMenu/", result);
-//	
-//	console.log(data);
-}
-
 // 배달 업데이트
 async function updateDelivery() {
 	const checkOptions = document.getElementsByClassName("returnOptions");
@@ -195,19 +187,15 @@ async function updateDelivery() {
 async function updateAddress() {
 	const mainAddress = document.getElementById("main-address").value;
 	const detailAddress = document.getElementById("detail-address").value;
+	
 	const LaMa = document.getElementById("main-location").value;
 	const address = mainAddress + detailAddress;
-	console.log(mainAddress);
-	console.log(detailAddress);
-	console.log(address);
-	console.log(LaMa);
+	
 	const tmp = LaMa.replace(/\(/,'').replace(/\)/,'').replace(/\,/,'');
-	console.log('lama2', tmp);
+	
 	const la = tmp.split(" ")[0];
 	const ma = tmp.split(" ")[1];
-	console.log('la',la);
-	console.log('ma',ma);
-	
+
 	const object = {
 		"mainlocation" : mainAddress ,
 		"detaillocation" : detailAddress,
