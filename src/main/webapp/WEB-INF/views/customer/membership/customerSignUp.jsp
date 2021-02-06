@@ -44,12 +44,13 @@
             <input type="text" name="email" id="email" class="join-input-boxs" placeholder="E-mail" />
             <span class="emailmsg" id="emailmsg"></span>
             <input type="text" name="mainaddress" id="zipcode" class="join-input-boxs" placeholder="우편번호(집주소)" readonly/>
-            <input type="button" value="주소찾기" onclick="searchAddress(document.getElementById('zipcode'),document.getElementById('address'),null)" id="findZipcode" class="join-input-buttons" />
+            <input type="button" value="주소찾기" onclick="searchAddress(document.getElementById('zipcode'),document.getElementById('address'),document.getElementById('emdcodeTMP'), null, null)" id="findZipcode" class="join-input-buttons" />
             <input type="text" name="detailaddress" id="address" class="join-input-boxs" placeholder="상세주소(집주소)" />
+	            <input type="hidden" name="emdcodeTMP" id="emdcodeTMP" class="join-input-boxs" />
             <input type="checkbox" name="checkAddress" id="checkAddress" checked onchange="sameAddress()">배송지 동일
             <div id="sameAddress" style="display:none">
 	            <input type="text" name="mainreceiptaddress" id="zipcode2" class="join-input-boxs" placeholder="우편번호(배송지주소)" readonly/>
-	            <input type="button" value="주소찾기" onclick="searchAddress(document.getElementById('zipcode2'),document.getElementById('address2'),document.getElementById('emdcode'))" id="findZipcode2" class="join-input-buttons" />
+	            <input type="button" value="주소찾기" onclick="searchAddress(document.getElementById('zipcode2'),document.getElementById('address2'),document.getElementById('emdcode'), null, null)" id="findZipcode2" class="join-input-buttons" />
 	            <input type="text" name="detailreceiptaddress" id="address2" class="join-input-boxs" placeholder="상세주소(배송지주소)" />
 	            <input type="hidden" name="emdcode" id="emdcode" class="join-input-boxs" />
             </div>

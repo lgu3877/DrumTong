@@ -1,13 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<!-- 사용하는 페이지 주소 리스트 -->
+<!-- /customer/membership/customerSignUp.jsp -->
+<!-- /customer/account/customerJoinChange.jsp -->
+<!-- 다음 주소 검색 라이브러리 -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- 카카오 서비스 라이브러리 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a8f343b25889960b1fdf777c9a2a57c&libraries=services"></script>
 <!-- 영경 다음 주소 메서드  -->
 <script>
 // 도큐먼트 넣어주기 (필요없는 부분은 null값을 넣어주기)
 // 예 => searchAddress(document.getElementById('mainAddress'), document.getElementById('subAddress'), null);
 // mainaddress는 선택한 주소를 넣어주고, subaddress는 비워주고, emdcode에는 읍면동 코드를 넣어준다.
-function searchAddress(mainaddress, subaddress, emdcode) {
+function searchAddress(mainaddress, subaddress, emdcode, lati, longi) {
        new daum.Postcode(
                {
                    oncomplete : function(data) {
@@ -41,6 +47,11 @@ function searchAddress(mainaddress, subaddress, emdcode) {
 
 //                        console.log('읍면동 코드 번호 :', data.bcode);
                        
+                       if(lati !== null && longi !== null){
+                    	   console.log('실행 테스트');
+                    	   // 마저 수정하기
+                    	   geoNumFunc(lati, longi, fullRoadAddr);
+                       }
 //                        // 우편번호와 주소 정보를 해당 필드에 넣는다.
 //                        document.getElementById('mainAddress').value = fullRoadAddr; //5자리 새우편번호 사용
 //                        document.getElementById('subAddress').value = '';
@@ -54,4 +65,25 @@ function searchAddress(mainaddress, subaddress, emdcode) {
                    }
                }).open();
    }
+   
+// 영경 스크립트(주소의 좌표값을 DB에 저장하는 부분)
+function geoNumFunc(lati, longi, address){
+	//주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	//주소로 좌표를 검색합니다
+	geocoder.addressSearch(address, function(result, status) {
+
+		// 정상적으로 검색이 완료됐으면 
+	     if (status === kakao.maps.services.Status.OK) {
+	    	 console.log(result[0].y, result[0].x);
+	    	 lati.value = result[0].y;
+	    	 longi.value = result[0].x;
+// 	    	 document.getElementById('latitude').value = result[0].y;
+// 	    	 document.getElementById('longitude').value = result[0].x;
+	    } else {
+	    	alert("주소가 잘못되었습니다. 다시 시도해주세요");
+	    }
+	});    
+}
 </script>

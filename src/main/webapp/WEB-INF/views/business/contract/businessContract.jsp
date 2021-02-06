@@ -16,14 +16,12 @@
     <!-- Font -->
    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-
-	<!-- 스크립트 영역 -->
-	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
-	<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a8f343b25889960b1fdf777c9a2a57c&libraries=services,clusterer,drawing"></script>
+<!-- 	businessContract2.jsp -> 주소 확인 -->
+<%@ include file="/resources/daumAddressSearch/daumAddressSearch.jsp" %>
 </head>
 <body>
+
     <%@ include file="../main/businessHeader.jsp" %>
 
 	<div class="marginauto" style="width: 900px; height: 1000px; border: 1px">
@@ -264,71 +262,6 @@
 			document.getElementById('preB').checked = true;
 		}
 	})
-	
-	//  businessContract2.jsp -> 주소 확인
-	function searchAddress() {
-        new daum.Postcode(
-                {
-                    oncomplete : function(data) {
-                        // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                        // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-                        // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                        var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-                        var extraRoadAddr = ''; // 도로명 조합형 주소 변수
-
-                        // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                        // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                        if (data.bname !== ''
-                                && /[동|로|가]$/g.test(data.bname)) {
-                            extraRoadAddr += data.bname;
-                        }
-                        // 건물명이 있고, 공동주택일 경우 추가한다.
-                        if (data.buildingName !== ''
-                                && data.apartment === 'Y') {
-                            extraRoadAddr += (extraRoadAddr !== '' ? ', '
-                                    + data.buildingName : data.buildingName);
-                        }
-                        // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                        if (extraRoadAddr !== '') {
-                            extraRoadAddr = ' (' + extraRoadAddr + ')';
-                        }
-                        
-                        // 영경 추가(주소의 위도, 경도값을 저장하는 함수)
-                        kakaoFunc(fullRoadAddr);
-                        
-                        // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-                        if (fullRoadAddr !== '') {
-                            fullRoadAddr += extraRoadAddr;
-                        }
-                        
-                        // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                        document.getElementById('mainlocation').value = fullRoadAddr; //5자리 새우편번호 사용
-                        
-                    }
-                }).open();
-    }
-	
-	// 영경 스크립트(주소의 좌표값을 DB에 저장하는 부분)
-	function kakaoFunc(address){
-		//주소-좌표 변환 객체를 생성합니다
-    	var geocoder = new kakao.maps.services.Geocoder();
-    	
-    	//주소로 좌표를 검색합니다
-    	geocoder.addressSearch(address, function(result, status) {
-
-    		// 정상적으로 검색이 완료됐으면 
-    	     if (status === kakao.maps.services.Status.OK) {
-//     	    	 console.log(result[0].y, result[0].x);
-    	    	 document.getElementById('latitude').value = result[0].y;
-    	    	 document.getElementById('longitude').value = result[0].x;
-    	    } else {
-    	    	alert("주소가 잘못되었습니다. 다시 시도해주세요");
-    	    }
-    	});    
-	}
-	
-	
 	
 	// businessContract3.jsp -> 은행찾기 선택시 은행 이미지가 모인 모달 창 띄우기 
 	document.getElementById('bank-modal-button').addEventListener('click', bankModal);
