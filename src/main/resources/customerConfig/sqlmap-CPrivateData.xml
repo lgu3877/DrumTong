@@ -33,7 +33,7 @@
 		SELECT COUNT(*) FROM CPRIVATEDATA WHERE ID=#{id}
 	</select>
 	
-<!-- 	DB 수정 -->
+<!-- 	고객 개인정보 업데이트 -->
 	<update id="updateChange" parameterType="hashmap">
 		UPDATE CPRIVATEDATA SET ${name}=#{value} WHERE MEMBERID=#{memberid}
 	</update>

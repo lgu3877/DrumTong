@@ -1,51 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../main/customerHeader.jsp"%>
-	<!-- Axios script -->
-	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 	<!-- 다음 주소 검색 script function -->
-	<script>
-	function searchAddress() {
-        new daum.Postcode(
-                {
-                    oncomplete : function(data) {
-                        // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                        // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-                        // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                        var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-                        var extraRoadAddr = ''; // 도로명 조합형 주소 변수
-
-                        // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                        // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                        if (data.bname !== ''
-                                && /[동|로|가]$/g.test(data.bname)) {
-                            extraRoadAddr += data.bname;
-                        }
-                        // 건물명이 있고, 공동주택일 경우 추가한다.
-                        if (data.buildingName !== ''
-                                && data.apartment === 'Y') {
-                            extraRoadAddr += (extraRoadAddr !== '' ? ', '
-                                    + data.buildingName : data.buildingName);
-                        }
-                        // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                        if (extraRoadAddr !== '') {
-                            extraRoadAddr = ' (' + extraRoadAddr + ')';
-                        }
-                        // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-                        if (fullRoadAddr !== '') {
-                            fullRoadAddr += extraRoadAddr;
-                        }
-
-                        // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                        document.getElementById('mainAddress').value = fullRoadAddr; //5자리 새우편번호 사용
-                        document.getElementById('subAddress').value = '';
-                        
-                    }
-                }).open();
-    }
-	</script>
+<%@ include file="/resources/daumAddressSearch/daumAddressSearch.jsp" %>
+	<!-- Axios script -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	
 <section class="section_Joinchange">
         <h1 class="join_mainName">개인정보 수정</h1>
 
@@ -112,12 +73,23 @@
             <hr>
 
             <form onsubmit="return false;">
-                <p class="join_name">주소</p>
-                <input class="join_inputbox join_joso" type="text" id="mainAddress" name="email" placeholder="우편번호" readonly value="${member.mainaddress }" >
-                <input class="join_button join_joso_ok" type="submit" name="joso_select" value="주소찾기" onclick="searchAddress()" >
-                <input class="join_inputbox" type="text" id="subAddress" name="joso_realjoso" placeholder="상세주소" value="${member.detailaddress }" >
-                <input class="join_button join_pum_ok" type="button" id="address_ok" value="저장하기" 
-                	onclick="changeDataAddress()">
+                <p class="join_name">집 주소</p>
+                <input class="join_inputbox join_joso" type="text" id="mainAddress1" name="email" placeholder="우편번호" readonly value="${member.mainaddress }" >
+                <input class="join_button join_joso_ok" type="submit" name="joso_select" value="주소찾기" onclick="searchAddress(document.getElementById('mainAddress1'), document.getElementById('subAddress1'), null)" >
+                <input class="join_inputbox" type="text" id="subAddress1" name="joso_realjoso" placeholder="상세주소" value="${member.detailaddress }" >
+                <input class="join_button join_pum_ok" type="button" id="address_ok1" value="저장하기" 
+                	onclick="changeDataAddress('mainaddress','detailaddress','1')">
+            </form>
+            <hr>
+
+            <form onsubmit="return false;">
+                <p class="join_name">배송지</p>
+                <input class="join_inputbox join_joso" type="text" id="mainAddress2" name="email" placeholder="우편번호" readonly value="${member.mainreceiptaddress }" >
+                <input class="join_button join_joso_ok" type="submit" name="joso_select" value="주소찾기" onclick="searchAddress(document.getElementById('mainAddress2'), document.getElementById('subAddress2'), document.getElementById('emdcode'))" >
+                <input class="join_inputbox" type="text" id="subAddress2" name="joso_realjoso" placeholder="상세주소" value="${member.detailreceiptaddress }" >
+                <input class="join_inputbox" type="hidden" id="emdcode" name="joso_emdcode">
+                <input class="join_button join_pum_ok" type="button" id="address_ok2" value="저장하기" 
+                	onclick="changeDataAddress_emd('mainreceiptaddress','detailreceiptaddress','emdcode','2')">
             </form>
             <hr>
 
@@ -324,23 +296,22 @@
 			document.getElementById('passwordSpan').style.color='grey';
 		}
 		
-		function changeData(typeName, InputBoxId){
+		function changeData(typeName, InputBoxId){ // type이름은 db 컬럼 이름이어야 하고, inputboxid는 값이 들어있는 id이어야 한다.
 			InputBox = document.getElementById(InputBoxId);
 			var axPost = async (InputBox) => {
 				ob = {};
 				ob[typeName] = InputBox.value;
 				
-				console.log(ob);
-				console.log('testtest');
 		        await axios.post('/drumtong/customer/account/customerJoinChange/rest/Change/' + typeName + '/', ob)
 	
 		        .then( (response) => {
 		          if(response.data === true){
-		        	if(typeName!='mainaddress')
+		        	if(!typeName.includes('address'))
+		        		// address를 저장하는 방식이 세 번 나누어 저장되는데 세 번 다 경고문이 뜨지 않도록 설정해주기
 		            	alert('정상적으로 변경되었습니다.');
 		          } else{
-		            alert('정상적으로 변경되지 않았습니다. 다시 시도해주세요');
-		            InputBox.value = '';
+			            alert('정상적으로 변경되지 않았습니다. 다시 시도해주세요');
+			            InputBox.value = '';
 		          }
 		          return false;
 		        });
@@ -349,9 +320,14 @@
 		    return false;
 		}
 		
-		function changeDataAddress(){
-			changeData('mainaddress', 'mainAddress');
-			changeData('detailaddress', 'subAddress');
+		function changeDataAddress(type1, type2, n){
+			changeData(type1, 'mainAddress'+n);
+			changeData(type2, 'subAddress'+n);
+		}
+		
+		function changeDataAddress_emd(type1, type2, type3, n){
+			changeDataAddress(type1, type2, n);
+			changeData(type3, 'emdcode');
 		}
 		
 		function checkInput(type, InputId){
