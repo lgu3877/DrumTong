@@ -17,7 +17,7 @@
 		INSERT INTO BMENU
 			VALUES
 			(#{estid}, #{name},
-			 #{price}, #{quickprice}, #{ete},
+			 #{price}, #{quickprice}, #{ete, jdbcType=INTEGER},
 			 #{maincategory}, #{subcategory}
 			)
 	</insert>

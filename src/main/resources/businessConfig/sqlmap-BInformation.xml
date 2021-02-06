@@ -148,5 +148,13 @@
 			WHERE ESTID = #{estid}
 	</update>
 	
+	<select id="selectStatus" parameterType="string" resultType="string">
+		SELECT STATUS 
+			FROM
+		BINFORMATION		
+			WHERE 
+				ESTID = #{value}
+	</select>
+	
 	
 </mapper>

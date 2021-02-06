@@ -101,7 +101,7 @@
 		
 		<div class="shop_introduction">
 		
-				
+			<input type="hidden" name="saveType" value="businessStoreImage">
 			<div class="shop_image_con">
 			
 			<!-- title -->	
@@ -530,28 +530,6 @@
 			</div>
 		</div>
 		
-		
-	<!-- [50줄] 여는 태그  세션의 상태가 FAIL이면 POST 형식   -->
-	<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
-	<!-- 	[전체 폼]에 대한 c:if문 -->
-	
-		<c:if test="${status ne 'SUCCESS' }">
-	<!-- 전체 form submit -->
-			<div class="submit_con">
-				<input class="submit_btn" type="submit" value="다음 단계로">
-			</div>
-			</form>
-
-		</c:if>
-		
-		
-	
-	</section>
-		
-		
-<!-- footer -->
-	<%-- <%@ include file="../main/businessFooter.jsp" %> --%>
-
 <!-- Intro Modal  -->
 	<div id="intro-modal" class="intro_modal">
 	<!-- Modal content -->
@@ -577,6 +555,43 @@
 			</div>
 		</div>
 	</div>
+
+		
+	<!-- [50줄] 여는 태그  세션의 상태가 FAIL이면 POST 형식   -->
+	<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
+	<!-- 	[전체 폼]에 대한 c:if문 -->
+	
+		<c:if test="${status ne 'SUCCESS' }">
+	<!-- 전체 form submit -->
+			<div class="submit_con">
+				<input class="submit_btn" type="submit" value="다음 단계로">
+			</div>
+			</form>
+
+		</c:if>
+		
+		
+	
+	</section>
+		
+		
+<!-- footer -->
+	<%-- <%@ include file="../main/businessFooter.jsp" %> --%>
+
+
+
+<!-- <!-- Category Modal  --> -->
+<!-- 	<div id="category_modal" class="category_modal" style="display: none;"> -->
+<!-- 		<div class="category_modal_content"> -->
+<!-- 			<span id="category-close">&times;</span> -->
+<!-- 			<div class="category_modal_title"> -->
+<!-- 				메뉴를 수정하실 수 있습니다. -->
+<!-- 			</div> -->
+<!-- 			<div id="category-list" class="category_content"> -->
+				
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 
 	
 	

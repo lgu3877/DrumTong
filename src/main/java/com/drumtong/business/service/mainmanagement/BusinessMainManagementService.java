@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -171,56 +172,162 @@ public class BusinessMainManagementService {
 	 * [4] -> 배달 지역은  {시도,시군구,시구,읍면동,통리,반}의 신규 데이터를 입력해준다.
 	 * 
 	 */
+	@Transactional
 	public ModelAndView shopManagement(HttpServletRequest req, MultipartHttpServletRequest mpf, 
-									   BManagementVO bManagementVO,
-									   BImageVO bImageVO, BMenuVO bMenuVO, 	
-									   BDeliveryAreaVO bDeliveryAreaVO) {
+									   BManagementVO bManagementVO, BMenuVO bMenuVO, 	
+									   BDeliveryAreaVO bDeliveryAreaVO, BInformationVO bInformationVO) {
 		ModelAndView mav = new ModelAndView("redirect:/");
 		
 		HttpSession Session = req.getSession();
- 	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
- 	    String estid = bInformationVO.getEstid();
+		
+		BInformationVO bInfoSession = (BInformationVO)Session.getAttribute("selectEST");
+ 	    String estid = bInfoSession.getEstid();
  	    
  	    BPrivateDataVO bPrivateDataVO = (BPrivateDataVO)Session.getAttribute("bLogin");
 	    String bpersonid = bPrivateDataVO.getBpersonid();
 	    
 	    
+
+		// 현재 매장의 상태 값을 가져온다.
+		// 매장의 상태 값은 다음과 같이 구분된다. [FAIL / PROCESS / SUCCEESS]
+		String status = bInformationDAO.selectStatus(estid);
+	    
+	    
 	    // S3에 저장된 폴더 이름을 정의해줍니다.
 	    String folderName = "business/"+ bpersonid + "/" + estid; 
 	    
- 	    
- 	    
+	    System.out.println("status : " + status);
+	    
+	    System.out.println("introduction : " + bManagementVO.getIntroduction());
+		System.out.println("deliveryboolean : " + bManagementVO.getDeliveryboolean());
+		System.out.println("deliverytype ; " + bManagementVO.getDeliverytype());
+		
+		bManagementVO = setDeliveryBooleanAndType(bManagementVO);
+		bManagementVO.setEstid(estid);
+		System.out.println("deliveryBoolean change : " + bManagementVO.getDeliveryboolean());
+		System.out.println("deliveryType change : "  + bManagementVO.getDeliverytype());
+		
+		
 		// 1. 매장관리 테이블에  {소개글,배달여부, 배달 타입}를 업데이트 시켜준다. 
 		int BManagementResult = bManagementDAO.updateConstract(bManagementVO);
-
+		
+		System.out.println(BManagementResult);
+		
 		// 2. 매장사진 테이블에  {저장이미지}를 업데이트 시켜준다.
 		// 계약을 위한 매장사진 등록이기 떄문에 POST를 염두하고 작업해준다.
 		// 다중 이미지 업로드이기 떄문에 multipleUpload 메서드를 호출해준다.
+		BImageVO bImageVO = new BImageVO();
 		bImageVO.setEstid(estid);	// ESTID를 세팅하는 이유는 S3 저장방식이 ESTID(폴더명)/ESTID + UUID로 저장되기 때문에 sql문에 필요하다.
 		aws.multipleUpload(mpf, folderName, bImageVO, req);
 		
+		// 처음부터 데이터가 들어가있기 떄문에 null 체크를 해준다.
+		System.out.println("binforvo null check : " + bInformationVO.getMainlocation());
 		
-
-		// 3. 메뉴 테이블에  {메뉴이름, 가격, 퀵가격, 예상소요시간}를 업데이트 시켜준다.
-		int BMenuResult = bMenuDAO.insertConstract(bMenuVO);
-		
-		
-//		// 4. 배달지역 테이블에  해당 매장의 배달가능한 지역의 {시도,시군구,시구,읍면동}를 업데이트 시켜준다.
-		bDeliveryAreaVO.setEstid(estid);
-		int BDeliveryAreaResult = bDeliveryAreaDAO.insertConstract(bDeliveryAreaVO);
+		if(bInformationVO != null)
+			bInformationDAO.updateLocation(bInformationVO);
+	    
+	    
+	    switch(status) {
+				
+			case "FAIL" :
+				
+				System.out.println(bMenuVO.getEstid());
+				bMenuVO.setEstid(estid);
+				// 3. 메뉴 테이블에  {메뉴이름, 가격, 퀵가격, 예상소요시간}를 업데이트 시켜준다.
+				int BMenuResult = bMenuDAO.insertConstract(bMenuVO);
+				
+				// 4. 배달지역 테이블에  해당 매장의 배달가능한 지역의 {시도,시군구,시구,읍면동}를 업데이트 시켜준다.
+				bDeliveryAreaVO.setEstid(estid);
+				int BDeliveryAreaResult = bDeliveryAreaDAO.insertConstract(bDeliveryAreaVO);
+				
+				// 5. 2차 온라인 계약 매장관리가 작성이 완료되었으면 status = 'Process' 로 변경시켜준다.
+				HashMap<String, String> map = new HashMap<String,String>();
+				map.put("estid", estid);
+				map.put("status", "PROCESS");
+				
+				int BInformationResult = bInformationDAO.updateStatus(map);
+				break;
+				
+			case "PROCESS" :
+				
+				break;
+	    }
+	    
+	    
+	    
+//	    // 이미지는 process 일 때 예외처리 필요...
+//	    
+//		// 1. 매장관리 테이블에  {소개글,배달여부, 배달 타입}를 업데이트 시켜준다. 
+//		int BManagementResult = bManagementDAO.updateConstract(bManagementVO);
+//
+//		// 2. 매장사진 테이블에  {저장이미지}를 업데이트 시켜준다.
+//		// 계약을 위한 매장사진 등록이기 떄문에 POST를 염두하고 작업해준다.
+//		// 다중 이미지 업로드이기 떄문에 multipleUpload 메서드를 호출해준다.
+//		bImageVO.setEstid(estid);	// ESTID를 세팅하는 이유는 S3 저장방식이 ESTID(폴더명)/ESTID + UUID로 저장되기 때문에 sql문에 필요하다.
+//		aws.multipleUpload(mpf, folderName, bImageVO, req);
 //		
-		
-		// 5. 2차 온라인 계약 매장관리가 작성이 완료되었으면 status = 'Process' 로 변경시켜준다.
-		HashMap<String, String> map = new HashMap<String,String>();
-		map.put("estid", estid);
-		map.put("status", "PROCESS");
-		
-		
-		int BInformationResult = bInformationDAO.updateStatus(map);
+//		
+//		
+//		// 메뉴는 process 일 때 예외처리 필요...
+//
+//		// 3. 메뉴 테이블에  {메뉴이름, 가격, 퀵가격, 예상소요시간}를 업데이트 시켜준다.
+//		int BMenuResult = bMenuDAO.insertConstract(bMenuVO);
+//		
+//		
+//		// 배달지역은 process 일 때 예외처리 필요...
+//		
+////		// 4. 배달지역 테이블에  해당 매장의 배달가능한 지역의 {시도,시군구,시구,읍면동}를 업데이트 시켜준다.
+//		bDeliveryAreaVO.setEstid(estid);
+//		int BDeliveryAreaResult = bDeliveryAreaDAO.insertConstract(bDeliveryAreaVO);
+////		
+//		
+//		// 5. 2차 온라인 계약 매장관리가 작성이 완료되었으면 status = 'Process' 로 변경시켜준다.
+//		HashMap<String, String> map = new HashMap<String,String>();
+//		map.put("estid", estid);
+//		map.put("status", "PROCESS");
+//		
+//		
+//		int BInformationResult = bInformationDAO.updateStatus(map);
 		
 		return mav;
 	}
 
+
+
+	private BManagementVO setDeliveryBooleanAndType(BManagementVO bManagementVO) {
+		
+		final String[] deliveryTypeValues = {"AGENCIES", "BOTH", "SELF", "VISIT"};
+		
+		String deliveryType = bManagementVO.getDeliverytype();
+//		직접방문은 항상 체크되어있다.
+//		배달 직접 방문  = VISIT  &&   DELIVERYBOOLEAN = N
+//		배달 서비스제공 = SELF && VISIT     &&     DELIVERYBOOLEAN = Y
+//		배달 대행업체이용 = AGENCIES && VISIT   &&   DELIVERYBOOLEAN = Y
+//		배달 서비스제공 && 배달 대행업체이용 = VISIT && AGENCIES & BOTH   &&  DELIVERYBOOLEAN = Y
+		
+		String[] array = deliveryType.split(",");
+		if( array.length == 3 )
+			bManagementVO.setDeliverytype("BOTH");
+		else {
+			// array의 배열 안에 deliveryTypeValues의 값이 포함된다면 그 첫 번째 값이 deliveryType의 값이된다.
+			// deliveryTypevalues의 배열 순서대로 값을 조회하기 때문에 
+			// 예외 상황은 걱정할 필요가 없다.
+			for (String type : deliveryTypeValues) {
+				if(Arrays.asList(array).contains(type)) {
+					bManagementVO.setDeliverytype(type);
+					break;
+				}
+			}
+		}
+		
+		
+		
+		// deliveryType 이 VISIT이면 DELIVERYBOOLEAN 값을 N으로 준다. 그렇지 않다면 Y 값을 준다.
+		char deliveryBoolean = bManagementVO.getDeliverytype().equals("VISIT") ? 'N' : 'Y';
+		bManagementVO.setDeliveryboolean(deliveryBoolean);
+
+		return bManagementVO;
+	}
 
 
 	// 비즈니스 온라인계약 {신규일정관리} 데이터 등록 (POST) [건욱]
