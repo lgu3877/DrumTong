@@ -19,4 +19,8 @@
     <update id="addCount" parameterType="string">
     	update emd set count=count+1 where emdcode=#{emdcode}
     </update>
+    
+    <update id="delCount" parameterType="string">
+    	update emd set count=count-1 where emdcode=#{emdcode}
+    </update>
 </mapper>

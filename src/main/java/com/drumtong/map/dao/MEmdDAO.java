@@ -12,4 +12,7 @@ public interface MEmdDAO {
 	// emdcode count를 1 추가한다.[영경]
 	int addCount(String emdcode);
 	
+	// emdcode count를 1 빼준다.[영경]
+	int delCount(String emdcode);
+	
 }
