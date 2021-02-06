@@ -8,7 +8,7 @@
 // DB에 보낼 배달가능지역 객체
 const updateArea = {
 	"add" : {},
-	"delete" : {}
+	"remove" : {}
 };
 
 // 초기실행
@@ -16,37 +16,80 @@ displayDeliveryArea()
 createMajorOptions();
 
 
-// 추가-삭제 관련 객체 & 기존 배달지역 객체 업데이트
+// 추가-삭제 관련 객체 & 기,존 배달지역 객체 업데이트
 function updatedeliveryAreaObject(id, metroCity, city, town) {
-	// DB에 보낼 객체 업데이트
 	const checkbox = document.getElementById(id);
-	console.log(checkbox.checked);
 	
-	// 체크(추가)
+	// deliveryAreas 수정 > view 업데이트
+	// 체크
 	if (checkbox.checked === true) {
-		const isIncluded = deliveryAreas[metroCity][city].includes(town);
-		!isIncluded ? deliveryAreas[metroCity][city].push(town) : null;
-		
-		Array.isArray(updateArea[metroCity][city]) ? 
-			updateArea.add[metroCity][city].push(town) : 
-			updateArea.add[metroCity][city] = [town];
-		
-		console.log(deliveryAreas);
-		console.log(updateArea);		
+		const hasMetroCity = deliveryAreas.hasOwnProperty(metroCity);
+		if (!hasMetroCity) {
+			deliveryAreas[metroCity] = {
+					[city] : [ town ]
+			};
+		} 
+		else {
+			const hasCity = deliveryAreas[metroCity].hasOwnProperty(city);
+			if (!hasCity) {
+				deliveryAreas[metroCity][city] = [ town ];
+			}
+			else {
+				const hasTown = deliveryAreas[metroCity][city].includes(town);
+				if (!hasTown) {
+					deliveryAreas[metroCity][city].push(town);
+				}
+			}
+		}
+	} 
+	// 체크 해제
+	else {
+		// 읍면동이 2개 이상
+		if (deliveryAreas[metroCity][city].length !== 1) {
+			const index = deliveryAreas[metroCity][city].indexOf(town);
+			deliveryAreas[metroCity][city].splice(index, 1);
+		}
+		// 읍면동이 1개
+		else {
+			
+			const numberOfCities = Object.keys(deliveryAreas[metroCity]).length; // 시군구 개수
+			// 시군구가 2개 이상
+			if (numberOfCities !== 1) {
+				delete deliveryAreas[metroCity][city]; // 읍면동이 없는 시군구를 객체에서 제거
+			}
+			// 시군구 1개
+			else {
+				delete deliveryAreas[metroCity];
+			}
+		}
 	}
-	
-	// 체크(삭제)
-	
-	// 출력 객체 업데이트
 }
 
 
 // 배달지역 뷰
 function displayDeliveryArea() {
-	const viewCon = document.getElementById("delivery-area-view");
+	// 정렬
+	const sMCities = Object.keys(deliveryAreas).sort(); 
+	const sObject = {};
+		
+	for (let i = 0; i < sMCities.length; i++) {
+		sObject[sMCities[i]] = deliveryAreas[sMCities[i]]; // 시도 정렬
+
+		const sCities = Object.keys(deliveryAreas[sMCities[i]]).sort(); // 시군구 정렬
+		console.log(sCities);
+		
+		for (let j = 0; j < sCities.length; j++) {
+//			Object.defineProperty(sObject[sMCities[i]], sCities[j], deliveryAreas[sMCities[i]][sCities[j]].sort());
+			sObject[sMCities[i]][sCities[j]] = deliveryAreas[sMCities[i]][sCities[j]].sort();
+		}
+		
+	}
 	
-	// 초기화
-	viewCon.innerHTML = "";
+	deliveryAreas = sObject; // 정렬된 객체로 변경
+
+	const viewCon = document.getElementById("delivery-area-view"); // 영역 설정
+	
+	viewCon.innerHTML = ""; // 초기화
 	
 	// 출력
 	for (let district in deliveryAreas) {
