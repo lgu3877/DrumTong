@@ -10,10 +10,10 @@
 <!-- 	읍,면,동 select문 -->
 	<select id="selectMEmdAddressC"  parameterType="hashmap" resultType="string">
         SELECT 
-            ADDRESSC
+            EMDNAME
         FROM 
             EMD
-        WHERE ADDRESSA =#{addressa} and ADDRESSB=#{addressb}
+        WHERE SIDONAME =#{sidoname} and SIGNAME=#{signame}
     </select>
     
 </mapper>

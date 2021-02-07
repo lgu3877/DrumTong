@@ -154,8 +154,8 @@ async function createDetailOptions() {
 	detailAreaCon.innerHTML = "";
 	
 	const object = {
-		addressa : majorValue,
-		addressb : minorValue,
+		sidoname : majorValue,
+		signame : minorValue,
 	}
 	
 	const { data:towns } = await axios.post("/drumtong/business/mainmanagement/BManagement/rest/selectMMapAddressC/", object);

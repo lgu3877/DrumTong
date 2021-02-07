@@ -12,10 +12,10 @@
 <!-- 	시,군,구 select문 -->
 	<select id="selectMSigunguAddressB"  parameterType="string" resultType="string">
         SELECT
-            DISTINCT(ADDRESSB)
+            DISTINCT(SIGNAME)
         FROM 
             SIGUNGU
-        WHERE ADDRESSA = #{value}
+        WHERE SIDONAME = #{value}
     </select>
 
     

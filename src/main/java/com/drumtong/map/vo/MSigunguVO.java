@@ -6,29 +6,39 @@ public class MSigunguVO extends MCoordValueVO{
 	private String sigungucode;
 	
 	// 시군구
-	private String addressb;
+	private String signame;
 	
 	// 시도
-	private String addressa;
-	
+	private String sidoname;
+
 	public String getSigungucode() {
 		return sigungucode;
 	}
+
 	public void setSigungucode(String sigungucode) {
 		this.sigungucode = sigungucode;
 	}
-	public String getAddressb() {
-		return addressb;
+
+	public String getSigname() {
+		return signame;
 	}
-	public void setAddressb(String addressb) {
-		this.addressb = addressb;
+
+	public void setSigname(String signame) {
+		this.signame = signame;
 	}
-	public String getAddressa() {
-		return addressa;
+
+	public String getSidoname() {
+		return sidoname;
 	}
-	public void setAddressa(String addressa) {
-		this.addressa = addressa;
+
+	public void setSidoname(String sidoname) {
+		this.sidoname = sidoname;
 	}
+	
+	
+	
+	
+	
 	
 	
 }

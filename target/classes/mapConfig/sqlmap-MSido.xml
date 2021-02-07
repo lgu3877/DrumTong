@@ -10,7 +10,7 @@
 <!-- 	시도 select문  -->
 	<select id="selectMSidoAddressA"  resultType="string">
 		SELECT 
-			DISTINCT(ADDRESSA)
+			DISTINCT(SIDONAME)
 		FROM 
 			SIDO
 	</select>
