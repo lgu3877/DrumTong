@@ -18,16 +18,12 @@ function updateDeliveryArea() {
 	const copiedInitialAreas = JSON.parse(JSON.stringify(initialAreas));
 	const copiedDeliveryAreas = JSON.parse(JSON.stringify(deliveryAreas));
 	
-	const concatAreas = Object.assign(copiedInitialAreas, copiedDeliveryAreas);
+	const concatAreas = Object.assign(copiedInitialAreas, copiedDeliveryAreas); // 초기값+ 수정값
 	
 	const concatMetroCities = Object.keys(concatAreas); // 병합된 시-도 배열
 	const initialMetroCities = Object.keys(initialAreas); // 초기 시-도 배열
 	const modifiedMetroCities = Object.keys(deliveryAreas); // 수정된 시-도 배열
 
-	console.log("concatMetroCities", concatMetroCities);
-	console.log("initialMetroCities", initialMetroCities);
-	console.log("modifiedMetroCities", modifiedMetroCities);
-	
 	// 변경되지 않은 시-도
 	const commonMetroCities = concatMetroCities.filter(name => {
 		return initialMetroCities.includes(name) && modifiedMetroCities.includes(name)
@@ -45,27 +41,73 @@ function updateDeliveryArea() {
 	
 	// add > updateArea(add)
 	if (addedMetroCities.length !== 0) {
+		const addMetroCityObject = {};
+		
 		for (let i = 0; i < addedMetroCities.length; i++) {
-			updateArea.add = {
-				[addedMetroCities[i]] : deliveryAreas[addedMetroCities[i]]
-			}
+			addMetroCityObject[addedMetroCities[i]] = deliveryAreas[addedMetroCities[i]];
 		}
+		
+		updateArea.add = addMetroCityObject;
 	}
 	
 	// remove > updateArea(remove)
 	if (removedMetroCities.length !== 0) {
+		const removeMetroCityObject = {};
+		
 		for (let i = 0; i < removedMetroCities.length; i++) {
-			updateArea.remove = {
-				[removedMetroCities[i]] : deliveryAreas[removedMetroCities[i]]
-			}
+			removeMetroCityObject[removedMetroCities[i]] = initialAreas[removedMetroCities[i]];
 		}
+		
+		updateArea.remove = removeMetroCityObject;
 	}
 	
-	console.log(commonMetroCities);
-	console.log(addedMetroCities);
-	console.log(removedMetroCities);	
 	
 	// 시-군-구
+	for (let i = 0; i < commonMetroCities.length; i++) {
+		const metroCityName = commonMetroCities[i];
+		console.log(metroCityName);
+		
+		const allCities = Object.keys(concatAreas[metroCityName]);
+		const initialCities = Object.keys(initialAreas[metroCityName]);
+		const modifiedCities = Object.keys(deliveryAreas[metroCityName]);
+
+		// 시-군-구가 변경되지 않은 경우
+		const commonCities = allCities.filter(name => {
+			return initialCities.includes(name) && modifiedCities.includes(name);
+		})
+
+		// 시-군-구가 추가된 경우
+		const addedCities = allCities.filter(name => {
+			return !initialCities.includes(name) && modifiedCities.includes(name);
+		})
+		
+		// 시-군-구가 삭제된 경우
+		const removedCities = allCities.filter(name => {
+			return initialCities.includes(name) && !modifiedCities.includes(name);
+		})
+
+		// add > updateArea(add)
+		if (addedCities.length !== 0) {
+			const addedCityObject = {};
+			
+			for (let j = 0; j < addedCities.length; j++) {
+				addedCityObject[addedCities[j]] = deliveryAreas[metroCityName][addedCities[j]];
+			}
+			
+			updateArea.add[metroCityName] = addedCityObject;
+		}
+		
+		// remove > updateArea(remove)
+		if (removedCities.length !== 0) {
+			const removedCityObject = {}
+
+			for (let j = 0; j < removedCities.length; j++) {
+				removedCityObject[removedCities[j]] = initialAreas[metroCityName][removedCities[j]];
+			}
+			
+			updateArea.remove[metroCityName] = removedCityObject;
+		}
+	}
 	
 	console.log(updateArea);
 	
