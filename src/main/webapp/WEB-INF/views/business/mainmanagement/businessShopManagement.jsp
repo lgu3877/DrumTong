@@ -49,13 +49,15 @@
 		const bImageList = ${bImageList};
 		const bManagement = ${bManagement};
 		const bMenu = ${bMenu};
+		
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
+		
 		const sido = ${sido};
+		
 		const initialAreas = ${deliveryAreas};
-		let deliveryAreas = ${deliveryAreas};
-
-		console.log(deliveryAreas);
+		let deliveryAreas = JSON.parse(JSON.stringify(initialAreas));
+		console.log(deliveryAreas)
 	</script>
 </head>
      
@@ -644,6 +646,18 @@
 			const reversedString = string.split("").reverse().join("");
 			const commaAttached = reversedString.replace(/(.{3})/g,"$1,");
 			return commaAttached.split("").reverse().join("");
+		}
+		
+		// 객체 복사(deep copy)
+		function deepCopyObject(object) {
+			let clone = {};
+			for (let key in object) {
+				if( typeof (object[key]) == "object" && object[key] != null)
+					clone[key] = deepCopyObject(object[key]);
+				else
+					clone[key] = object[key];
+			}
+			return clone;
 		}
 	</script>
 	
