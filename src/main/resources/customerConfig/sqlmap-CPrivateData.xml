@@ -11,11 +11,11 @@
 		INSERT INTO CPRIVATEDATA 
 			(MEMBERID, ID, PW, NAME, BIRTH, GENDERBOOLEAN, PHONENUM,
 			MAINADDRESS, DETAILADDRESS, MAINRECEIPTADDRESS, 
-			DETAILRECEIPTADDRESS, EMAIL)
+			DETAILRECEIPTADDRESS, EMAIL, EMDCODE)
 			VALUES
 			(#{memberid}, #{id}, #{pw}, #{name}, #{birth},
 			 #{genderboolean}, #{phonenum}, #{mainaddress}, #{detailaddress},
-			 #{mainreceiptaddress}, #{detailreceiptaddress},#{email})
+			 #{mainreceiptaddress}, #{detailreceiptaddress},#{email}, #{emdcode})
 	</insert>
 	
 <!-- 	아이디,비밀번호와 일치하는 로그인 객체 반환 -->

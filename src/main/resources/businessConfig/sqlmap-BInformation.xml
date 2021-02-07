@@ -44,11 +44,11 @@
 		INSERT INTO BINFORMATION 
 			(ESTID, TAXATION, CRN, 
 			BRANDNAMING, REPRESENTATIVE, MAINLOCATION,
-			 DETAILLOCATION, LATITUDE, LONGITUDE) 
+			 DETAILLOCATION, LATITUDE, LONGITUDE, EMDCODE) 
 			VALUES
 			( #{estid}, #{taxation}, #{crn},
 			  #{brandnaming}, #{representative}, #{mainlocation},
-			  #{detaillocation}, #{latitude}, #{longitude})
+			  #{detaillocation}, #{latitude}, #{longitude}, #{emdcode})
 	</insert>
 
 

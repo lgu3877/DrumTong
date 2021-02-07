@@ -30,8 +30,11 @@ function openAddressSearch() {
 						
 			document.getElementById('main-address').value = fullRoadAddr;
 			document.getElementById('detail-address').value = "";
+			document.getElementById('town-code').value = data.bcode.substring(0,8);
 			document.getElementById('detail-address').focus();
 			
+			console.log(data.bcode.substring(0,8));
+
 			// preivew 지도 생성
 			createMap();
 		}

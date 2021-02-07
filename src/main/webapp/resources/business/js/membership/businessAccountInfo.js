@@ -124,8 +124,16 @@
            'wheredata': whereparam.id,
            'whereparam': whereparam.value,
          };
+	 	 var inputChange3 = div.children[2].children[3];
+		 let ob3={
+			'fieldname': inputChange3.name,
+           'paramdata': inputChange3.value,
+           'wheredata': whereparam.id,
+           'whereparam': whereparam.value,
+         };
 		 axPostAddress(ob1);
 		 axPostAddress(ob2);
+		 axPostAddress(ob3);
 				
     	 axcancle(obj, inputChange.value + ' ' + inputChange2.value );
 		
@@ -359,7 +367,7 @@
       var input2 = document.createElement('input');
       input2.setAttribute("type", "button");
       input2.setAttribute("value", "주소찾기");
-      input2.setAttribute("onclick", "searchAddress()");
+      input2.setAttribute("onclick", "searchAddress(document.getElementById('mainaddress'),document.getElementById('detailaddress'),document.getElementById('emdcode'),null,null)");
       input2.setAttribute("class", "search");
       
       var input3 = document.createElement('input');
@@ -370,9 +378,15 @@
       input3.setAttribute("placeholder", "나머지 주소를 입력하세요");
       input3.setAttribute("class", "detailadress");
       
+      var input4 = document.createElement('input');
+      input4.setAttribute("type", "hidden");
+      input4.setAttribute("name", "emdcode");
+      input4.setAttribute("id", "emdcode");
+      
       div.appendChild(input1);
       div.appendChild(input2);
       div.appendChild(input3);
+      div.appendChild(input4);
       
       inputdiv.appendChild(div);
    }
@@ -392,35 +406,7 @@
       inputdiv.children[0].value = axReturn;
       inputdiv.removeChild(inputdiv.children[2]);
    }
-   
-   // 주소 찾기
-   function searchAddress() {
-        new daum.Postcode(
-                {
-                    oncomplete : function(data) {
-                        var fullRoadAddr = data.roadAddress;
-                        var extraRoadAddr = '';
 
-                        if (data.bname !== ''
-                                && /[동|로|가]$/g.test(data.bname)) {
-                            extraRoadAddr += data.bname;
-                        }
-                        if (data.buildingName !== ''
-                                && data.apartment === 'Y') {
-                            extraRoadAddr += (extraRoadAddr !== '' ? ', '
-                                    + data.buildingName : data.buildingName);
-                        }
-                        if (extraRoadAddr !== '') {
-                            extraRoadAddr = ' (' + extraRoadAddr + ')';
-                        }
-                        if (fullRoadAddr !== '') {
-                            fullRoadAddr += extraRoadAddr;
-                        }
-
-                        document.getElementById('mainaddress').value = fullRoadAddr; //5자리 새우편번호 사용
-                    }
-                }).open();
-    }
 
   // 휴대폰 인증
   function phoneCheck() {

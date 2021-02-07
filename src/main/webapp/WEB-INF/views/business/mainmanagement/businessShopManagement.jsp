@@ -52,7 +52,8 @@
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
 		const sido = ${sido};
-		const deliveryAreas = ${deliveryAreas}
+		const initialAreas = ${deliveryAreas};
+		let deliveryAreas = ${deliveryAreas};
 
 		console.log(deliveryAreas);
 	</script>
@@ -521,6 +522,7 @@
 					<h3>상세주소</h3>
 					<div class="detail_address_input_wrapper">
 						<input id="detail-address" class="detail_address_input" type="text" name="detaillocation" value="${detailAddress }">
+						<input id="town-code" type="hidden" name="emdcode">
 					</div>
 				</div>
 				<div class="preview_wrapper">
@@ -530,6 +532,27 @@
 			</div>
 		</div>
 		
+	<!-- [50줄] 여는 태그  세션의 상태가 FAIL이면 POST 형식   -->
+	<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
+	<!-- 	[전체 폼]에 대한 c:if문 -->
+	
+		<c:if test="${status ne 'SUCCESS' }">
+	<!-- 전체 form submit -->
+			<div class="submit_con">
+				<input class="submit_btn" type="submit" value="다음 단계로">
+			</div>
+			</form>
+
+		</c:if>
+		
+		<button onclick="updateDeliveryArea()">배달지역 테스트 버튼</button>
+	
+	</section>
+		
+		
+<!-- footer -->
+	<%-- <%@ include file="../main/businessFooter.jsp" %> --%>
+
 <!-- Intro Modal  -->
 	<div id="intro-modal" class="intro_modal">
 	<!-- Modal content -->

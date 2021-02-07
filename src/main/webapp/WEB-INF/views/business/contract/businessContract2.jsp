@@ -33,11 +33,12 @@
     <div  class="c2-input">
     	<h1>소재지</h1>
     	<span style="width: 200px"></span>
-    	<input type="button" value="주소찾기" style="width: 200px; text-align: center"  onclick="searchAddress()"/>
+    	<input type="button" value="주소찾기" style="width: 200px; text-align: center"  onclick="searchAddress(document.getElementById('mainlocation'), document.getElementById('detaillocation'), document.getElementById('emdcode'), document.getElementById('latitude'), document.getElementById('longitude'))">
     </div>
     <div class="c2-input" name="address">
     	<input type="text" placeholder="메인소재지를 입력하세요" name="mainlocation"  id="mainlocation" required readonly>
     	<!-- 위도, 경도 값 저장 -->
+    	<input type="hidden" name="emdcode" id="emdcode">
     	<input type="hidden" name="latitude" id="latitude">
     	<input type="hidden" name="longitude" id="longitude">
     </div>

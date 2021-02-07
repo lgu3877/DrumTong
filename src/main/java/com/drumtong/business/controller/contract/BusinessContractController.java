@@ -37,7 +37,7 @@ public class BusinessContractController {
 	@RequestMapping(value = "businessContract/", method = RequestMethod.POST)
 	public ModelAndView contract(BInformationVO bInformationVO, BPaymentVO bPaymentVO,
 								BManagementVO bManagementVO, HttpServletRequest req, MultipartHttpServletRequest mpf) {
-		System.out.println("Contract Controller 실행 ");
+//		System.out.println("Contract Controller 실행 ");
 		return svc.contract(bInformationVO, bPaymentVO, bManagementVO, req, mpf);
 	}
 	

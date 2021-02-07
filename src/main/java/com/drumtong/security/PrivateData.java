@@ -10,6 +10,14 @@ public abstract class PrivateData {
 	private String mainaddress;
 	private String detailaddress;
 	private String email;
+	private String emdcode;
+	
+	public String getEmdcode() {
+		return emdcode;
+	}
+	public void setEmdcode(String emdcode) {
+		this.emdcode = emdcode;
+	}
 	public String getId() {
 		return id;
 	}
