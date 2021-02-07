@@ -19,45 +19,71 @@ createMajorOptions();
 // 폼 업데이트
 function updateDeliveryArea() {
 	// 수정된 정보 업데이트 > updateArea
+	const concatAreas = Object.assign(initialAreas, deliveryAreas);
 	
-	// 시-도가 추가된 경우
+	const concatMetroCities = Object.keys(concatAreas); // 병합된 시-도 배열
+	const initialMetroCities = Object.keys(initialAreas); // 초기 시-도 배열
+	const modifiedMetroCities = Object.keys(deliveryAreas); // 수정된 시-도 배열
+
+	// 변경되지 않은 시-도
+	const commonMetroCities = concatMetroCities.filter((name) => {
+		initialMetroCities.includes(name) && modifiedMetroCities.includes(name);
+	})
+
+	// 추가된 시-도
+	const addedMetroCities = concatMetroCities.filter((name) => {
+		!initialMetroCities.includes(name) && modifiedMetroCities.includes(name);
+	});
+
+	// 삭제된 시-도
+	const removedMetroCities = concatMetroCities.filter((name) => {
+		initialMetroCities.includes(name) && !modifiedMetroCities.includes(name);
+	});
 	
-	// 시-도가 추가되지 않은 경우
-	for (let mCity in initialAreas) {		
-		const hasMetroCity = hasProperty(deliveryAreas, mCity);
-		
-		// 시-도가 없을 경우		
-		if (!hasMetroCity) {
-			updateArea.remove[mCity] = initialAreas[mCity];
-		}
-		
-		// 시-도가 있을 경우
-		else {
-//			updateArea.add[mCity] = mCity;
-			for (let city in initialAreas[mCity]) {
-
-				// 시-군-구가 없을 경우
-				const hasCity = hasProperty(deliveryAreas[mCity], city);
-				
-				if (!hasCity) {
-					updateArea.remove[mCity] = {
-						[city] : initialAreas[mCity][city]
-					}
-				}
-			
-				// 시-군-구가 있을 경우
-				else {
-					const isSameArray = compareArray(initialAreas[mCity][city], deliveryAreas[mCity][city]); // 동일 배열인지 비교
-
-					// 읍-면-동이 있고, 그 안(배열)의 값이 다른 경우
-					if (!isSameArray) {
-						console.log("123");
-					}
-					// 읍-면-동이 있고, 그 안(배열)의 값이 같은 경우
-				}
-			}	
+	if (addedMetroCities.length !== 0) {
+		for (let i = 0; i < addedMetroCities.length; i++) {
+			updateArea.add : {
+				addedMetroCities[i] : modifiedMetroCities[addedMetroCities[i]]
+			}
 		}
 	}
+	
+	console.log(commonMetroCities);
+	console.log(addedMetroCities);
+	console.log(removedMetroCities);
+
+//	const commonMetroCities = []; 
+//	const addedMetroCities = [];
+//	const removedMetroCities = [];
+
+//	const concatMetroCities = Array.from(
+//								new Set(initialMetroCities.concat(modifiedMetroCities))
+//							);
+	
+//	const commonMetroCities = []; 
+//	const addedMetroCities = [];
+//	const removedMetroCities = [];
+	
+//	for (let i = 0; i < concatMetroCities.length; i++) {
+//		// 시-도 변경없음
+//		const isCommon = initialMetroCities.includes(concatMetroCities[i])
+//					&& modifiedMetroCities.includes(concatMetroCities[i]);
+//		
+//		isCommon ? commonMetroCities.push(concatMetroCities[i]) : null;
+//		
+//		// 시-도 추가
+//		const isAdded = !initialMetroCities.includes(concatMetroCities[i])
+//					&& modifiedMetroCities.includes(concatMetroCities[i]);
+//		
+//		isAdded ? addedMetroCities.push(concatMetroCities[i]) : null;
+//		
+//		// 시-도 삭제
+//		const isRemoved = initialMetroCities.includes(concatMetroCities[i])
+//					&& !modifiedMetroCities.includes(concatMetroCities[i]);
+//		
+//		isRemoved ? removedMetroCities.push(concatMetroCities[i]) : null;
+//	}
+	
 	
 	console.log(updateArea);
 	
