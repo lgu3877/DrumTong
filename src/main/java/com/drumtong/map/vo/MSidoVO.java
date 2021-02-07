@@ -6,20 +6,24 @@ public class MSidoVO extends MCoordValueVO {
 	private String sidocode;
 	
 	// 시도
-	private String addressa;
-	
+	private String sidoname;
+
 	public String getSidocode() {
 		return sidocode;
 	}
+
 	public void setSidocode(String sidocode) {
 		this.sidocode = sidocode;
 	}
-	public String getAddressa() {
-		return addressa;
+
+	public String getSidoname() {
+		return sidoname;
 	}
-	public void setAddressa(String addressa) {
-		this.addressa = addressa;
+
+	public void setSidoname(String sidoname) {
+		this.sidoname = sidoname;
 	}
+	
 	
 	
 
