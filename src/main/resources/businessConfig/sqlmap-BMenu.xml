@@ -41,7 +41,7 @@
 	</select>
 	
 	<select id="selectMenu" parameterType="BMenuVO" resultType="BMenuVO">
-		SELECT NAME 
+		SELECT NAME,PRICE,QUICKPRICE,ETE  
 			FROM BMENU 
 				WHERE ESTID=#{estid} 
 				AND MAINCATEGORY = #{maincategory} 
