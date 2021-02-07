@@ -37,7 +37,7 @@
 		WHERE 
 			ESTID = #{estid} 
 				AND
-			MAINCATEGORY = #{maincategory} ORDER BY MAINCATEGORY ASC, SUBCATEGORY ASC
+			MAINCATEGORY = #{maincategory} ORDER BY SUBCATEGORY ASC
 	</select>
 	
 	
