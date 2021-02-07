@@ -4,7 +4,9 @@ let copiedList;
 
 
 // 초기 실행
-displayMenu();
+if(status === "SUCCESS")
+	displayMenu();
+
 createAddService();
 createCategoryList(); // 메뉴수정 관련 Modal
 

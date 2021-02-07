@@ -40,13 +40,13 @@ function updateDeliveryArea() {
 		initialMetroCities.includes(name) && !modifiedMetroCities.includes(name);
 	});
 	
-	if (addedMetroCities.length !== 0) {
-		for (let i = 0; i < addedMetroCities.length; i++) {
-			updateArea.add : {
-				addedMetroCities[i] : modifiedMetroCities[addedMetroCities[i]]
-			}
-		}
-	}
+//	if (addedMetroCities.length !== 0) {
+//		for (let i = 0; i < addedMetroCities.length; i++) {
+//			updateArea.add : {
+//				addedMetroCities[i] : modifiedMetroCities[addedMetroCities[i]]
+//			}
+//		}
+//	}
 	
 	console.log(commonMetroCities);
 	console.log(addedMetroCities);

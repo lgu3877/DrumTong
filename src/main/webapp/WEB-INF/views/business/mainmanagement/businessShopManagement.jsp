@@ -54,7 +54,8 @@
 		const sido = ${sido};
 		const initialAreas = ${deliveryAreas};
 		let deliveryAreas = ${deliveryAreas};
-
+		const status = '${status}';
+		console.log(status);
 		console.log(deliveryAreas);
 	</script>
 </head>
@@ -516,12 +517,13 @@
 					<div class="main_address_input_wrapper">
 						<input id="main-address" class="main_address_input" type="text" name="mainlocation" value="${mainAddress }" 
 							onfocus="openAddressSearch()">
-						<input id="main-location" type="hidden" name="maplocation">
 						<input type="button" class="address_search_button" onclick="openAddressSearch()" value="주소 찾기">
 					</div>
 					<h3>상세주소</h3>
 					<div class="detail_address_input_wrapper">
 						<input id="detail-address" class="detail_address_input" type="text" name="detaillocation" value="${detailAddress }">
+						<input id="latitude" type="hidden" name="latitude">
+						<input id="longitude" type="hidden" name="longitude">
 						<input id="town-code" type="hidden" name="emdcode">
 					</div>
 				</div>
@@ -536,18 +538,18 @@
 	<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
 	<!-- 	[전체 폼]에 대한 c:if문 -->
 	
-		<c:if test="${status ne 'SUCCESS' }">
-	<!-- 전체 form submit -->
-			<div class="submit_con">
-				<input class="submit_btn" type="submit" value="다음 단계로">
-			</div>
-			</form>
+<%-- 		<c:if test="${status ne 'SUCCESS' }"> --%>
+<!-- 	<!-- 전체 form submit --> -->
+<!-- 			<div class="submit_con"> -->
+<!-- 				<input class="submit_btn" type="submit" value="다음 단계로"> -->
+<!-- 			</div> -->
+<!-- 			</form> -->
 
-		</c:if>
 		
-		<button onclick="updateDeliveryArea()">배달지역 테스트 버튼</button>
-	
-	</section>
+		
+<!-- 		<button onclick="updateDeliveryArea()">배달지역 테스트 버튼</button> -->
+<%-- 		</c:if> --%>
+<!-- 	</section> -->
 		
 		
 <!-- footer -->

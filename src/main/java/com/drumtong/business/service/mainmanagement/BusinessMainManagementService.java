@@ -176,7 +176,7 @@ public class BusinessMainManagementService {
 	public ModelAndView shopManagement(HttpServletRequest req, MultipartHttpServletRequest mpf, 
 									   BManagementVO bManagementVO, BMenuVO bMenuVO, 	
 									   BDeliveryAreaVO bDeliveryAreaVO, BInformationVO bInformationVO) {
-		ModelAndView mav = new ModelAndView("redirect:/");
+		ModelAndView mav = new ModelAndView("business/mainmanagement/businessScheduleManagement");
 		
 		HttpSession Session = req.getSession();
 		
@@ -220,11 +220,8 @@ public class BusinessMainManagementService {
 		bImageVO.setEstid(estid);	// ESTID를 세팅하는 이유는 S3 저장방식이 ESTID(폴더명)/ESTID + UUID로 저장되기 때문에 sql문에 필요하다.
 		aws.multipleUpload(mpf, folderName, bImageVO, req);
 		
-		// 처음부터 데이터가 들어가있기 떄문에 null 체크를 해준다.
-		System.out.println("binforvo null check : " + bInformationVO.getMainlocation());
-		
-		if(bInformationVO != null)
-			bInformationDAO.updateLocation(bInformationVO);
+		bInformationVO.setEstid(estid);
+		bInformationDAO.updateLocation(bInformationVO);
 	    
 	    
 	    switch(status) {

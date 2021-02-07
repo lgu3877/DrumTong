@@ -3,8 +3,9 @@ async function updatePhoto() {
 	const formData = new FormData();
 	
 	const coverImage = document.getElementById("update-cover");
-	const photoInputs = document.getElementsByName("storeimg");
+	const photoInputs = document.getElementsByName("businessStoreImage");
 	const fileList = [];
+	
 	
 	
 	// 이미지 저장 타입 
@@ -189,14 +190,11 @@ async function updateAddress() {
 	const detailAddress = document.getElementById("detail-address").value;
 	const emdCode = document.getElementById("town-code").value;
 	
-	const LaMa = document.getElementById("main-location").value;
+	const la = document.getElementById("latitude").value;
+	const ma = document.getElementById("longitude").value;
+	
 	const address = mainAddress + detailAddress;
 	
-	const tmp = LaMa.replace(/\(/,'').replace(/\)/,'').replace(/\,/,'');
-	
-	const la = tmp.split(" ")[0];
-	const ma = tmp.split(" ")[1];
-
 	const object = {
 		"mainlocation" : mainAddress ,
 		"detaillocation" : detailAddress,

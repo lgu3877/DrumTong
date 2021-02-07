@@ -144,7 +144,8 @@
 				MAINLOCATION = #{mainlocation},
 				DETAILLOCATION = #{detaillocation},
 				LATITUDE = #{latitude},
-				LONGITUDE = #{longitude}
+				LONGITUDE = #{longitude},
+				EMDCODE = #{emdcode}
 			WHERE ESTID = #{estid}
 	</update>
 	
