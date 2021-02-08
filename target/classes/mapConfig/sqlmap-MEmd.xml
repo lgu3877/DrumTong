@@ -16,11 +16,31 @@
         WHERE SIDONAME =#{sidoname} and SIGNAME=#{signame}
     </select>
     
+<!--      지도 DB에 매장 개수를 올려주는 함수입니다 -->
     <update id="addCount" parameterType="string">
-    	update emd set count=count+1 where emdcode=#{emdcode}
+    	UPDATE 
+    		EMD 
+    	SET 
+    		COUNT=COUNT+1 
+    	WHERE 
+    		EMDCODE=#{emdcode}
     </update>
     
+   <!--      지도 DB에 매장 개수를 줄여주는 함수입니다 -->
     <update id="delCount" parameterType="string">
-    	update emd set count=count-1 where emdcode=#{emdcode}
+    	UPDATE 
+    		EMD 
+    	SET 
+    		COUNT=COUNT-1 
+    	WHERE EMDCODE=#{emdcode}
     </update>
+    
+<!--     읍면동 Select REST [건욱] -->
+    <select id="selectEmd" parameterType="MSigunguVO">
+    	SELECT 
+    		BRANDNAMING, LATITUDE, LONGITUDE 
+    	FROM 
+    		BINFORMATION
+    </select>
+    
 </mapper>

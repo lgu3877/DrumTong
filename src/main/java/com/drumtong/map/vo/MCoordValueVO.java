@@ -23,6 +23,4 @@ public class MCoordValueVO {
 		this.latitude = latitude;
 	}
 	
-	
-	
 }

@@ -157,5 +157,13 @@
 				ESTID = #{value}
 	</select>
 	
+<!-- 	매장 좌표 Select REST  -->
+	<select id="selectBInformationCoord" resultType="BInformationVO">
+		SELECT 
+			BRANDNAMING, LATITUDE, LONGITUDE
+		FROM
+			BINFORMATION
+	</select>
+	
 	
 </mapper>

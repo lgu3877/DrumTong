@@ -2,6 +2,9 @@ package com.drumtong.map.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import com.drumtong.map.vo.MSigunguVO;
 //건욱
 public interface MEmdDAO {
 	
@@ -14,5 +17,8 @@ public interface MEmdDAO {
 	
 	// emdcode count를 1 빼준다.[영경]
 	int delCount(String emdcode);
+
+	// 읍면동 Select REST [건욱]
+	List<MSigunguVO> selectEmd();
 	
 }
