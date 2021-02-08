@@ -12,15 +12,24 @@ import com.drumtong.customer.dao.CBookmarkDAO;
 import com.drumtong.customer.dao.CCouponDAO;
 import com.drumtong.customer.vo.CBookmarkVO;
 import com.drumtong.customer.vo.CCouponVO;
+import com.drumtong.map.dao.MEmdDAO;
+import com.drumtong.map.dao.MSidoDAO;
+import com.drumtong.map.dao.MSigunguDAO;
+import com.drumtong.map.vo.MSidoVO;
+import com.drumtong.map.vo.MSigunguVO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 @Service
 public class RestCustomerLaundryService {
 	
 	@Autowired CBookmarkDAO cBookmarkDAO;
 	@Autowired CCouponDAO cCouponDAO;
-	@Autowired BInformationDAO bInformationDAO;		
+	@Autowired BInformationDAO bInformationDAO;
+	@Autowired MEmdDAO mEmdDAO;
+	@Autowired MSidoDAO mSidoDAO;
+	@Autowired MSigunguDAO mSigunguDAO;
 	
 	public String setBookmark(HashMap<String, String> param) {
 		String result = param.get("result");
@@ -65,6 +74,18 @@ public class RestCustomerLaundryService {
 		}
 		
 		return insertResult == 1 ? "true" : "false";
+	}
+
+
+	public String getsido() {
+		List<MSidoVO> sido = mSidoDAO.getsidoxy();
+		return new Gson().toJson(sido);
+	}
+
+
+	public String getsigungu() {
+		List<MSigunguVO> sigungu = mSigunguDAO.getsigunguxy();
+		return new Gson().toJson(sigungu);
 	}
 
 

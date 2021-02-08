@@ -39,4 +39,16 @@ public class RestCustomerLaundryController {
 //	public String clusterer(@PathVariable("address")String address){
 //		return svc.clusterer(address);
 //	}
+	
+	@RequestMapping(value = "customerMap/rest/sido/", produces =org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PostMapping(produces="application/json; charset=utf8")
+	public String getsido() {
+		return svc.getsido();
+	}
+
+	@RequestMapping(value = "customerMap/rest/sigungu/", produces =org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PostMapping(produces="application/json; charset=utf8")
+	public String getsigungu() {
+		return svc.getsigungu();
+	}
 }
