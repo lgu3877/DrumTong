@@ -82,11 +82,13 @@ function displayImages() {
 // 커버 사진 출력(초기 실행)
 function displayCover() {
 	let img;
-	for (let i = 0; i < bImageList.length; i++) {
-		bImageList[i].delegatephotoboolean === "Y" ? img = bImageList[i].storeimg : null;
+	if (bImageList.length !== 0) {
+		for (let i = 0; i < bImageList.length; i++) {
+			bImageList[i].delegatephotoboolean === "Y" ? img = bImageList[i].storeimg : null;
+		}
+		
+		document.getElementById("main-image").src = "https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + img;
 	}
-	
-	document.getElementById("main-image").src = "https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + img;
 }
 
 
