@@ -1,5 +1,7 @@
 package com.drumtong.business.controller.mainmanagement;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +39,10 @@ public class BusinessMainManagementController {
 	// AWS S3에 다중 이미지 업로드를 해줍니다.
 	@RequestMapping(value="businessShopManagement/", method = RequestMethod.POST)
 	public ModelAndView shopManagement( HttpServletRequest req,MultipartHttpServletRequest mpf,
-									   BManagementVO bManagementVO, BMenuVO bMenuVO, 
+									   BManagementVO bManagementVO, ArrayList<BMenuVO> bMenuVOList, 
 									   BDeliveryAreaVO bDeliveryAreaVO,
 									   BInformationVO bInformationVO) {
-		return svc.shopManagement(req,mpf,bManagementVO, bMenuVO, bDeliveryAreaVO, bInformationVO);
+		return svc.shopManagement(req,mpf,bManagementVO, bMenuVOList, bDeliveryAreaVO, bInformationVO);
 	}
 	
 	

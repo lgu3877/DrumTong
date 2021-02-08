@@ -2,23 +2,27 @@ package com.drumtong.map.vo;
 
 public class MCoordValueVO {
 	// 경도
-	private String longitude;
+	private double longitude;
 
 	// 위도
-	private String latitude;
-	
-	public String getLongitude() {
+	private double latitude;
+
+	public double getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(String longitude) {
+
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-	public String getLatitude() {
+
+	public double getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(String latitude) {
+
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
+	
 	
 	
 }
