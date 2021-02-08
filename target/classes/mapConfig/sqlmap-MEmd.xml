@@ -38,9 +38,9 @@
 <!--     읍면동 Select REST [건욱] -->
     <select id="selectEmd" parameterType="MSigunguVO">
     	SELECT 
-    		BRANDNAMING, LATITUDE, LONGITUDE 
+    		EMDCODE, LATITUDE
     	FROM 
-    		BINFORMATION
+    		EMD
     </select>
     
 </mapper>

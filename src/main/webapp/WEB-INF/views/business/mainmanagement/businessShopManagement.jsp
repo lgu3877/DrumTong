@@ -49,19 +49,20 @@
 		const bImageList = ${bImageList};
 		const bManagement = ${bManagement};
 		const bMenu = ${bMenu};
-		
+		console.log("@@@@", bImageList);
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
 		
 		const sido = ${sido};
 		
-		const initialAreas = ${deliveryAreas};
+// 		const initialAreas = ${deliveryAreas};
+// 		const deliveryAreas = ${deliveryAreas};
 		let deliveryAreas = ${deliveryAreas};
 		const status = '${status}';
 		console.log(status);
 		console.log(deliveryAreas);
-		let deliveryAreas = JSON.parse(JSON.stringify(initialAreas));
-		console.log(deliveryAreas)
+// 		let deliveryAreas = JSON.parse(JSON.stringify(initialAreas));
+		console.log(deliveryAreas);
 	</script>
 </head>
      

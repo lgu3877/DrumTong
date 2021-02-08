@@ -319,7 +319,8 @@ public class AwsServiceImpl{
      private int exeFileUpload (MultipartFile file, Object object, 
 		       String folderName, String subFolderName, 
 		       String UUIDType , String tableFieldName){
-    	 	
+    	 	System.out.println("ExeFileUpload 실행...");
+    	 
     	 	int result = 0;
 			
 			// 실질적으로 저장될 파일 이름을 선언해준다.
@@ -431,6 +432,8 @@ public class AwsServiceImpl{
     	
     	// DB에 저장될 파일경로입니다. 이것을 이용해서 view상에서 그림을 S3에서 호출해서 불러옵니다.
     	String src =  folderName + "/"  + subFolderName + "/" + fileName ;
+    	
+    	System.out.println("StoreImg 경로 : " + src);
     	
 		switch (UUIDType) {
 			case "STOREIMG" : 

@@ -24,10 +24,12 @@ import com.drumtong.business.dao.BScheduleDaysDAO;
 import com.drumtong.business.dao.BScheduleTimeDAO;
 import com.drumtong.business.dao.BTempHolidayDAO;
 import com.drumtong.business.dao.BTempSuspensionDAO;
+import com.drumtong.business.vo.BDeliveryAreaListVO;
 import com.drumtong.business.vo.BDeliveryAreaVO;
 import com.drumtong.business.vo.BImageVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BManagementVO;
+import com.drumtong.business.vo.BMenuListVO;
 import com.drumtong.business.vo.BMenuVO;
 import com.drumtong.business.vo.BPrivateDataVO;
 import com.drumtong.business.vo.BScheduleDaysVO;
@@ -174,8 +176,8 @@ public class BusinessMainManagementService {
 	 */
 	@Transactional
 	public ModelAndView shopManagement(HttpServletRequest req, MultipartHttpServletRequest mpf, 
-									   BManagementVO bManagementVO, ArrayList<BMenuVO> bMenuVOList, 	
-									   BDeliveryAreaVO bDeliveryAreaVO, BInformationVO bInformationVO) {
+									   BManagementVO bManagementVO, BMenuListVO bMenuVOList, 	
+									   BDeliveryAreaListVO bDeliveryAreaVOList, BInformationVO bInformationVO) {
 		ModelAndView mav = new ModelAndView("business/mainmanagement/businessScheduleManagement");
 		
 		HttpSession Session = req.getSession();
@@ -222,6 +224,11 @@ public class BusinessMainManagementService {
 		// AWS 파일 여러개 입력
 		aws.multipleUpload(mpf, folderName, bImageVO, req);
 		
+		System.out.println("updateLocation 실행 ... ");
+		System.out.println("detalilocation : " + bInformationVO.getDetaillocation());
+		System.out.println("latitude : " + bInformationVO.getLatitude());
+		System.out.println("Longitude : " + bInformationVO.getLongitude());
+		System.out.println("EMDCODE : " + bInformationVO.getEmdcode());
 		bInformationVO.setEstid(estid);
 		bInformationDAO.updateLocation(bInformationVO);
 	    
@@ -236,8 +243,8 @@ public class BusinessMainManagementService {
 				
 				
 				// 4. 배달지역 테이블에  해당 매장의 배달가능한 지역의 {시도,시군구,시구,읍면동}를 업데이트 시켜준다.
-				bDeliveryAreaVO.setEstid(estid);
-				int BDeliveryAreaResult = bDeliveryAreaDAO.insertConstract(bDeliveryAreaVO);
+				
+				int result3 = bDeliveryInsertAreatoDAO(bDeliveryAreaVOList, estid);
 				
 				// 5. 2차 온라인 계약 매장관리가 작성이 완료되었으면 status = 'Process' 로 변경시켜준다.
 				HashMap<String, String> map = new HashMap<String,String>();
@@ -292,9 +299,43 @@ public class BusinessMainManagementService {
 	}
 
 
+	// 매장 배달지역을 분리시켜서 Bdevliveryareas 정보를 입력시켜줍니다.
+	private int bDeliveryInsertAreatoDAO(BDeliveryAreaListVO bDeliveryAreaVOList, String estid) {
+		
+		System.out.println("bDeliveryAreaVOList Size : " + bDeliveryAreaVOList.getBdeliveryarealistvo().size());
+		
+		for(BDeliveryAreaVO bDeliveryAreaVO : bDeliveryAreaVOList.getBdeliveryarealistvo()) {
+			System.out.println("실행");
+			
+			System.out.println("getAddressa : " + bDeliveryAreaVO.getAddressa());
+			System.out.println("getAddressb : " + bDeliveryAreaVO.getAddressb());
+			System.out.println("getAddressc : " + bDeliveryAreaVO.getAddressc());
+			System.out.println("getEstid : " + bDeliveryAreaVO.getEstid());
+			
+			bDeliveryAreaVO.setEstid(estid);
+			int BDeliveryAreaResult = bDeliveryAreaDAO.insertConstract(bDeliveryAreaVO);
+			
+		}
+		
+		
+		return 0;
+	}
+
+
 	// bMenuList 를 분리시켜서 bMenu 정보를 입력시켜줍니다.
-	private int bMenuListInsertConstractToDAO(ArrayList<BMenuVO> bMenuVOList, String estid) {
-		for(BMenuVO bMenuVO : bMenuVOList) {
+	private int bMenuListInsertConstractToDAO(BMenuListVO bMenuVOList, String estid) {
+		
+		System.out.println("insertContract foreach 실행...");
+		System.out.println("bemnulist Size : " + bMenuVOList.getBmenulistvo().size());
+		for(BMenuVO bMenuVO : bMenuVOList.getBmenulistvo()) {
+			
+			System.out.println("estid : " + estid);
+			System.out.println("getName : " + bMenuVO.getName());
+			System.out.println("getPrice : " + bMenuVO.getPrice());
+			System.out.println("getEte : " + bMenuVO.getEte());
+			System.out.println("getQuickprice : " + bMenuVO.getQuickprice());
+			System.out.println("getMaincategory : " + bMenuVO.getMaincategory());
+			System.out.println("getSubcategory : " + bMenuVO.getSubcategory());
 			
 			bMenuVO.setEstid(estid);
 			System.out.println("EstId : " + bMenuVO.getEstid());
