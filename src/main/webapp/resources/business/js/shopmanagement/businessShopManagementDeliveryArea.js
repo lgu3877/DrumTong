@@ -18,11 +18,48 @@ function updateDeliveryArea() {
 	const copiedInitialAreas = JSON.parse(JSON.stringify(initialAreas));
 	const copiedDeliveryAreas = JSON.parse(JSON.stringify(deliveryAreas));
 	
-	const concatAreas = Object.assign(copiedInitialAreas, copiedDeliveryAreas); // 초기값+ 수정값
+	// 시-도 병합
+	const concatAreas = Object.assign(initialAreas, copiedDeliveryAreas); // 초기값 + 수정값
 	
+
+	for (let i = 0; i < Object.keys(concatAreas).length; i++) {
+		const metroCityName = Object.keys(concatAreas)[i];
+		
+		// 시-군-구 병합
+		concatAreas[metroCityName]
+			= Object.assign(initialAreas[metroCityName], copiedDeliveryAreas[metroCityName])
+
+		// 읍-면-동 병합
+//		for (let j = 0; j < Object.keys(concatAreas[metroCityName]).length; j++) {
+//			const cityName = Object.keys(concatAreas[metroCityName])[j];
+//			console.log(cityName);
+//
+//			console.log(copiedInitialAreas[metroCityName]);
+//			
+//			if (copiedInitialAreas[metroCityName]) {
+//				copiedInitialAreas[metroCityName] = {
+//					[cityName] : []
+//				}
+//			}
+//			if (!Object.keys(copiedDeliveryAreas[metroCityName]).includes(cityName)) {
+//				copiedDeliveryAreas[metroCityName] = {
+//					[cityName] : []						
+//				}
+//			}
+//					
+//			concatAreas[metroCityName][cityName]
+//				= Array.from(new Set(copiedInitialAreas[metroCityName][cityName]
+//					.concat(copiedDeliveryAreas[metroCityName][cityName])));
+//		}
+	}
+
+	console.log("---------");
+	console.log(concatAreas);
+	console.log("---------");
+
 	const concatMetroCities = Object.keys(concatAreas); // 병합된 시-도 배열
-	const initialMetroCities = Object.keys(initialAreas); // 초기 시-도 배열
-	const modifiedMetroCities = Object.keys(deliveryAreas); // 수정된 시-도 배열
+	const initialMetroCities = Object.keys(copiedInitialAreas); // 초기 시-도 배열
+	const modifiedMetroCities = Object.keys(copiedDeliveryAreas); // 수정된 시-도 배열
 
 	// 변경되지 않은 시-도
 	const commonMetroCities = concatMetroCities.filter(name => {
@@ -51,7 +88,7 @@ function updateDeliveryArea() {
 		const addMetroCityObject = {};
 		
 		for (let i = 0; i < addedMetroCities.length; i++) {
-			addMetroCityObject[addedMetroCities[i]] = deliveryAreas[addedMetroCities[i]];
+			addMetroCityObject[addedMetroCities[i]] = copiedDeliveryAreas[addedMetroCities[i]];
 		}
 		
 		updateArea.add = addMetroCityObject;
@@ -62,7 +99,7 @@ function updateDeliveryArea() {
 		const removeMetroCityObject = {};
 		
 		for (let i = 0; i < removedMetroCities.length; i++) {
-			removeMetroCityObject[removedMetroCities[i]] = initialAreas[removedMetroCities[i]];
+			removeMetroCityObject[removedMetroCities[i]] = copiedDeliveryAreas[removedMetroCities[i]];
 		}
 		
 		updateArea.remove = removeMetroCityObject;
@@ -72,33 +109,33 @@ function updateDeliveryArea() {
 	// 시-군-구
 	for (let i = 0; i < commonMetroCities.length; i++) {
 		const metroCityName = commonMetroCities[i];
-		console.log(metroCityName);
 		
 		const allCities = Object.keys(concatAreas[metroCityName]);
-		const initialCities = Object.keys(initialAreas[metroCityName]);
-		const modifiedCities = Object.keys(deliveryAreas[metroCityName]);
+		const initialCities = Object.keys(copiedDeliveryAreas[metroCityName]);
+		const modifiedCities = Object.keys(copiedDeliveryAreas[metroCityName]);
 
 		// 시-군-구가 변경되지 않은 경우
 		const commonCities = allCities.filter(name => {
 			return initialCities.includes(name) && modifiedCities.includes(name);
-		})
+		});
 
 		// 시-군-구가 추가된 경우
 		const addedCities = allCities.filter(name => {
 			return !initialCities.includes(name) && modifiedCities.includes(name);
-		})
+		});
 		
 		// 시-군-구가 삭제된 경우
 		const removedCities = allCities.filter(name => {
 			return initialCities.includes(name) && !modifiedCities.includes(name);
-		})
+		});
+
 
 		// add > updateArea(add)
 		if (addedCities.length !== 0) {
 			const addedCityObject = {};
 			
 			for (let j = 0; j < addedCities.length; j++) {
-				addedCityObject[addedCities[j]] = deliveryAreas[metroCityName][addedCities[j]];
+				addedCityObject[addedCities[j]] = copiedDeliveryAreas[metroCityName][addedCities[j]];
 			}
 			
 			updateArea.add[metroCityName] = addedCityObject;
@@ -109,10 +146,49 @@ function updateDeliveryArea() {
 			const removedCityObject = {}
 
 			for (let j = 0; j < removedCities.length; j++) {
-				removedCityObject[removedCities[j]] = initialAreas[metroCityName][removedCities[j]];
+				removedCityObject[removedCities[j]] = copiedDeliveryAreas[metroCityName][removedCities[j]];
 			}
 			
 			updateArea.remove[metroCityName] = removedCityObject;
+		}
+		
+		
+		// 읍-면-동 > commonMetroCities[i] > commonCities[x] 
+		for (let x = 0; x < commonCities.length; x++) {
+			const cityName = commonCities[x];
+			
+//			const allTowns = Array.from(new Set(initialTowns.concat(modifiedTowns)));
+			const allTowns = concatAreas[metroCityName][cityName];
+			const initialTowns = copiedInitialAreas[metroCityName][cityName];
+			const modifiedTowns = copiedDeliveryAreas[metroCityName][cityName];
+			
+			
+			console.log("Whole : ", concatAreas);
+			console.log("allTowns : ", allTowns);
+			console.log("initialTowns : ", initialTowns);
+			console.log("modifiedTowns : ", modifiedTowns);
+			
+			// 읍-면-동 배열 비교 > true || false
+			const isSame = compareArray(initialTowns, modifiedTowns);
+			console.log(isSame);
+			
+			// 읍-면-동에 변동 사항이 있을 경우
+			if (!isSame) {
+				console.log("123");
+				
+				// 읍-면-동에 값이 추가된 경우
+				const addedTowns = allTowns.filter(town => {
+					!initialTowns.includes(town) & modifiedTowns.includes(town);
+				});
+				
+				// 읍-면-동에 값이 삭제된 경우
+				const removedTowns = allTowns.filter(town => {
+					initialTowns.includes(town) & !modifiedTowns.includes(town);
+				});
+				
+				console.log(addedTowns);
+				console.log(removedTowns);
+			}
 		}
 	}
 	
@@ -188,8 +264,6 @@ function displayDeliveryArea() {
 		}
 		
 	}
-	
-//	sObject; // 정렬된 객체로 변경
 	
 	const viewCon = document.getElementById("delivery-area-view"); // 영역 설정
 	
