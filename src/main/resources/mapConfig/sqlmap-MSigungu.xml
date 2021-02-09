@@ -18,5 +18,14 @@
         WHERE SIDONAME = #{value}
     </select>
 
+<!-- 	시,군,구 select문  : 이승원 -->
+	<select id="selectMSigungu" resultType="MSigunguVO" parameterType="string">
+        SELECT
+            SIDONAME, SIGNAME,LONGITUDE, LATITUDE
+        FROM 
+            SIGUNGU
+        WHERE SIDONAME = #{sidoname}
+    </select>
+
     
 </mapper>

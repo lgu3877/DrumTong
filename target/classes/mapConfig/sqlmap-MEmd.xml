@@ -36,11 +36,12 @@
     </update>
     
 <!--     읍면동 Select REST [건욱] -->
-    <select id="selectEmd" parameterType="MSigunguVO">
+    <select id="selectEmd" resultType="MEmdVO">
     	SELECT 
-    		BRANDNAMING, LATITUDE, LONGITUDE 
+    		EMDNAME, SIGNAME, SIDONAME, LATITUDE, LONGITUDE, COUNT
     	FROM 
-    		BINFORMATION
+    		EMD
+    	 WHERE NOT COUNT=0	
     </select>
-    
+
 </mapper>
