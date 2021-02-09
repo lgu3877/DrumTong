@@ -2,11 +2,14 @@
 let singleList = document.querySelector('.single_item_selector');
 let copiedList;
 
+// main toggle
+const mainToggle = { }
 
 // 초기 실행
 displayMenu();
 createAddService();
 createCategoryList(); // 메뉴수정 관련 Modal
+
 
 // 메뉴 생성
 function displayMenu() {
@@ -61,13 +64,17 @@ function displayMenu() {
 		}
 	}
 	
-	console.log(list);
+	// toggle switch
+	const mainCategories = Object.keys(list);
+	for (let i = 0; i < mainCategories.length; i++) {
+		mainToggle[mainCategories[i]] = false;
+	}
+	console.log(mainToggle);
 	
 	// menu list 생성
 	const container = document.getElementById("posted-service-list");
 	
 	// main category
-	
 	for (let main in list) {
 		const mainCon = document.createElement("div");
 		const containerId = generateRandomString(10);
@@ -83,7 +90,16 @@ function displayMenu() {
 		const mainExIcon = document.createElement("div");
 		mainExIcon.className = "menu_main_icon";
 		mainExIcon.innerHTML = '<i class="fas fa-plus-square"></i>';
-		mainExIcon.onclick = () => toggleMainCategory(containerId, list[main]);
+		mainExIcon.onclick = () => {
+			const isOpened = mainToggle[main];
+			if (!isOpened) {
+				toggleMainCategory(containerId, list[main], main);
+			}
+			else {
+				mainToggle[main] = false;
+				document.getElementById(containerId).getElementsByClassName("menu_sub_con")[0].remove();
+			}
+		}
 		
 		// title
 		const mainTitle = document.createElement("div");
@@ -105,9 +121,15 @@ function displayMenu() {
 	}
 }
 
-
 // 서비스 메뉴 > 리스트 > 클릭 이벤트(메인 > 서브)
-function toggleMainCategory(id, list) {
+function toggleMainCategory(id, list, main) {
+	// toggle
+	mainToggle[main] = true;
+	
+	// sub toggle object
+	const subToggle = { }
+	
+	// script
 	const mainWrapper = document.getElementById(id);
 	const subCon = document.createElement("div");
 	const subContainerId = generateRandomString(10);
@@ -115,6 +137,9 @@ function toggleMainCategory(id, list) {
 	subCon.className = "menu_sub_con";
 	
 	for (let sub in list) {
+		// sub toggle
+		subToggle[sub] = false;
+		
 		// wrapper
 		const subWrapper = document.createElement("div");
 		subWrapper.className = "menu_sub_wrapper";
@@ -1115,17 +1140,9 @@ function attachSubCategories(subCategory) {
 function measureAmount(object) {
 	let sum = 0;
 
-	const type = typeof object;
-	
-	if (type === "list") {
-		return object.length;		
-	}
-	
-	else if (type === "object") {
-		for (let key in object) {
-			sum += object[key].length;
-		}		
-	}
-	
+	for (let key in object) {
+		sum += object[key].length;
+	}		
+		
 	return sum;
 }
