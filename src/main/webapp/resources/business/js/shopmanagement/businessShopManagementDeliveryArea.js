@@ -297,7 +297,13 @@ function displayDeliveryArea() {
 				town.innerHTML = townName;
 				
 				// 삽입
+				const townInput = document.createElement("input");
+				townInput.type = "hidden";
+				townInput.name = "deliveryArea";
+				townInput.value = `${district}/${cityName}/${townName}`;
+				
 				townCon.appendChild(town);
+				townCon.appendChild(townInput);
 			}
 			
 			// 삽입
