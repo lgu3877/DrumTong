@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
  <!-- 스크립트 영역 -->
-    <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>s
+    <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>
     <script>
       function listUp(event) {
         choose = event.target;
