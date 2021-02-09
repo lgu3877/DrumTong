@@ -6,7 +6,6 @@
 <style>
 	div.detailview-mainCate, div.detailview-subCate{
 		width:570px;
-		height: 45px;
 	}
 	div.mainButton, div.mainButton_select{
 		display: inline-flex;
@@ -750,11 +749,8 @@
 		
 		// 0번째 메인 메뉴
 		selectMainKey =Object.keys(menuList.menuList)[0];
-// 		selectMainKey ='';
 		// 0번째 서브 메뉴
 		selectSubKey = '';
-// 		selectMenu = menuList.menuList[selectMainKey][selectSubKey];
-		console.log(selectMainKey, selectSubKey);
 		// 메인 카테고리 버튼 넣는 부분
 		mainCategory.innerHTML="";
 		mainCtList.forEach(mct => {
@@ -789,19 +785,16 @@
 		}
 		
 		function afterSubClick(checksct){
-			console.log("checksct :",checksct);
 			selectSubKey = checksct;
 			subCtList.forEach(mct => {
 				document.getElementById("sub_"+mct).className = (mct === selectSubKey ? "subButton_select" : "subButton");
 				})
 			menuCtList = menuList.menuList[selectMainKey][selectSubKey];
-			console.log("menuCtList : " + menuCtList);
 			menuCategory.innerHTML="";
 			createMenu(menuCtList);
 		}
 		
 		function createMenu(list){
-			console.log("list : ",list);
 			menuCategory.innerHTML="";
 			list.forEach(li => {
 				menuDiv_1 = document.createElement('div');
