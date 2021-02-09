@@ -11,4 +11,6 @@ public interface MSidoDAO {
 
 	List<MSidoVO> getsidoxy();
 	List<String> selectMSidoAddressA();
+	List<MSidoVO> selectMSido();
+
 }

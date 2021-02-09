@@ -11,7 +11,7 @@ import com.drumtong.map.vo.MSigunguVO;
 public interface MSigunguDAO {
 
 	List<MSigunguVO> getsigunguxy();
-
 	ArrayList<String> selectMSigunguAddressB(String sido);
+	List<MSigunguVO> selectMSigungu(String sidoname);
 	
 }

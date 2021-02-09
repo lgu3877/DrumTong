@@ -40,7 +40,14 @@
 			MAINCATEGORY = #{maincategory} ORDER BY SUBCATEGORY ASC
 	</select>
 	
-	
+	<select id="selectMenu" parameterType="BMenuVO" resultType="BMenuVO">
+		SELECT NAME,PRICE,QUICKPRICE,ETE  
+			FROM BMENU 
+				WHERE ESTID=#{estid} 
+				AND MAINCATEGORY = #{maincategory} 
+				AND SUBCATEGORY = #{subcategory} 
+					ORDER BY NAME ASC
+	</select>
 	
 	
 	

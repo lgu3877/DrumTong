@@ -3,8 +3,53 @@
 <%@ include file="../main/customerHeader.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<style>
+	div.detailview-mainCate, div.detailview-subCate{
+		width:570px;
+	}
+	div.mainButton, div.mainButton_select{
+		display: inline-flex;
+ 		width: 140px;
+		border-radius: 10px;
+		font-size: 20pt;
+		margin: 1px;
+		cursor: pointer;
+	}
+	div.mainButton{
+		border: 2px solid #35AEFD;
+	}
+	div.mainButton_select{
+		border: 5px solid #35AEFD;
+		
+	}
+	div.mainButton:hover{
+		background-color: #35AEFD;
+		color:white;
+		font-weight: bold;
+	}
+	div.subButton, div.subButton_select{
+		display: inline-flex;
+ 		width: 140px;
+		border-radius: 10px;
+		font-size: 20pt;
+		margin: 1px;
+		cursor: pointer;
+	}
+	div.subButton{
+		border: 2px solid skyblue;
+	}
+	div.subButton_select{
+		border: 5px solid skyblue;
+		
+	}
+	div.subButton:hover{
+		background-color: skyblue;
+		color:white;
+		font-weight: bold;
+	}
+</style>
  <!-- 스크립트 영역 -->
-    <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>s
+    <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>
     <script>
       function listUp(event) {
         choose = event.target;
@@ -184,21 +229,6 @@
         });
       } //submit 체크 함수 종료
     </script>
-<!-- 	영경 스크립트 -->
-	<script>
-// 		imgList = ${bImageVO};
-// 		i = 0;
-// 		imgBoxs = document.querySelectorAll('detailview-imgBlock');
-		
-// 		imgList.forEach(img =>{
-// 			imgBoxs[i++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + img.storeimg;
-// 		})
-		
-// 		reviewList = ${ReviewList};
-// 		reviewList.forEach(rv =>{
-// 			console.log(rv);
-// 		})
-	</script>
     <!-- 본문 영역 -->
 <!--     <header>헤더셈</header> -->
     <section class="section-SangJae">
@@ -230,20 +260,11 @@
           <div class="detailview-options">
             <button class="add-coupon" id="add-coupon" value="1000">쿠폰 받기</button>
 
-            <div class="detailview-selectOptions">
-           <c:forEach items="${bMenuVO }" var="menu">
-              <div class="option-row"" >
-                <div class="option-text">
-                  <div class="option-name" id="option-name">${menu.maincategory }/${menu.subcategory }</div>
-                  <div class="option-context">${menu.name } / 예상시간 ${menu.ete }일</div>
-                </div>
-                <input type="number" class="quantity" id="quantity" placeholder="0" min="0" value="0" />
-                <div class="option-price">${menu.price } 원</div>
-                <input type="checkbox" id="quick" class="quickcheck" value="${menu.quickprice }">
-                <label class="quick" id="checkLabel" for="quick" title="빠른 서비스"><i class="fas fa-shipping-fast"></i>+${menu.quickprice } 원</label>
-              </div>
-         </c:forEach>
-
+           	<div class="detailview-mainCate" id="mainCate">
+           	</div>
+           	<div class="detailview-subCate" id="subCate">
+           	</div>
+            <div class="detailview-selectOptions" id="detailview-selectOptions">
             </div>
           </div>
 
@@ -710,5 +731,132 @@
     });
     
     </script>
-
+<!-- 	영경 스크립트 -->
+	<script>
+// 		imgList = ${bImageVO};
+// 		i = 0;
+// 		imgBoxs = document.querySelectorAll('detailview-imgBlock');
+		
+// 		imgList.forEach(img =>{
+// 			imgBoxs[i++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + img.storeimg;
+// 		})
+		
+		menuList = ${menuList};
+		mainCtList = Object.keys(menuList.menuList);
+		mainCategory = document.getElementById('mainCate');
+		subCategory = document.getElementById('subCate');
+		menuCategory = document.getElementById('detailview-selectOptions');
+		
+		// 0번째 메인 메뉴
+		selectMainKey =Object.keys(menuList.menuList)[0];
+// 		selectMainKey ='';
+		// 0번째 서브 메뉴
+		selectSubKey = '';
+// 		selectMenu = menuList.menuList[selectMainKey][selectSubKey];
+		console.log(selectMainKey, selectSubKey);
+		// 메인 카테고리 버튼 넣는 부분
+		mainCategory.innerHTML="";
+		mainCtList.forEach(mct => {
+			mainDiv = document.createElement('div');
+			mainDiv.innerHTML = mct;
+			mainDiv.setAttribute("class", "mainButton");
+			mainDiv.setAttribute("id", "main_" + mct);
+			mainDiv.addEventListener('click', event => afterMainClik(mct));
+			mainCategory.appendChild(mainDiv);
+		})
+		afterMainClik(selectMainKey);
+// 		createMenu(selectMenu);
+		
+		function afterMainClik(checkmct){
+			selectMainKey = checkmct;
+			selectSubKey = '';
+			mainCtList.forEach(mct => {
+				document.getElementById("main_"+mct).className = (mct === selectMainKey ? "mainButton_select" : "mainButton");
+				})
+			subCtList = Object.keys(menuList.menuList[selectMainKey]);
+			subCategory.innerHTML="";
+			menuCategory.innerHTML="";
+			subCtList.forEach(sct =>{
+				subDiv = document.createElement('div');
+				subDiv.innerHTML = sct;
+				subDiv.setAttribute("class", selectSubKey !== sct ? "subButton" : "subButton_select");
+				subDiv.setAttribute("id", "sub_" + sct);
+				subDiv.addEventListener('click', event => afterSubClick(sct));
+				subCategory.appendChild(subDiv);
+			})
+			afterSubClick(subCtList[0]);
+		}
+		
+		function afterSubClick(checksct){
+			console.log("checksct :",checksct);
+			selectSubKey = checksct;
+			subCtList.forEach(mct => {
+				document.getElementById("sub_"+mct).className = (mct === selectSubKey ? "subButton_select" : "subButton");
+				})
+			menuCtList = menuList.menuList[selectMainKey][selectSubKey];
+			console.log("menuCtList : " + menuCtList);
+			menuCategory.innerHTML="";
+			createMenu(menuCtList);
+		}
+		
+		function createMenu(list){
+			console.log("list : ",list);
+			menuCategory.innerHTML="";
+			list.forEach(li => {
+				menuDiv_1 = document.createElement('div');
+				menuDiv_1.setAttribute("class", "option-row");
+				
+				// 1
+				menuDiv_2 = document.createElement('div');
+				menuDiv_2.setAttribute("class", "option-text");
+				
+				menuDiv_2_1 = document.createElement('div');
+				menuDiv_2_1.setAttribute("class", "option-name");
+				menuDiv_2_1.innerHTML = selectMainKey + "/" + selectSubKey;
+				
+				menuDiv_2_2 = document.createElement('div');
+				menuDiv_2_2.setAttribute("class", "option-context");
+				menuDiv_2_2.innerHTML = li.name + "/예상시간 " + li.ete + "일";
+				
+				menuDiv_2.appendChild(menuDiv_2_1);
+				menuDiv_2.appendChild(menuDiv_2_2);
+				
+				// 2
+				menuInput_3 = document.createElement('input');
+				menuInput_3.setAttribute("class", "quantity");
+				menuInput_3.setAttribute("min", "0");
+				menuInput_3.setAttribute("value", "1");
+				
+				// 3
+				menudiv_4 = document.createElement('div');
+				menudiv_4.setAttribute("class", "option-price");
+				menudiv_4.innerHTML = li.price + "원";
+				
+				//4
+				menuLabel_5 = document.createElement('label');
+				menuLabel_5.setAttribute("class", "quick");
+				menuLabel_5.setAttribute("title", "빠른서비스");
+				
+				menuInput_5_1 = document.createElement('input');
+				menuInput_5_1.setAttribute("class", "quickcheck");
+				menuInput_5_1.setAttribute("type", "checkbox");
+				menuInput_5_1.setAttribute("value", li.quickprice);
+				
+				menuI_5_2 = document.createElement('i');
+				menuI_5_2.setAttribute("class", "fas fa-shipping-fast");
+				menuI_5_2.innerHTML = li.quickprice + "원";
+				
+				menuLabel_5.appendChild(menuInput_5_1);
+				menuLabel_5.appendChild(menuI_5_2);
+				
+				
+				menuDiv_1.appendChild(menuDiv_2);
+				menuDiv_1.appendChild(menuInput_3);
+				menuDiv_1.appendChild(menudiv_4);
+				menuDiv_1.appendChild(menuLabel_5);
+				
+				menuCategory.appendChild(menuDiv_1);
+			})
+		}
+	</script>
 <%@ include file="../main/customerFooter.jsp" %>    

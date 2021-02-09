@@ -135,22 +135,6 @@
 				
 				</div>
 				
-			<!-- cover-image input form -->
-			<!-- 	<div id="shop-image-view" class="shop_image_view">
-					<div class="upload_icon_con">
-						<div class="cover_file_text_con">
-							<div class="cover_file_text">
-								<p>
-									기존에 등록된 사진이 있다면, <br>
-									클릭 후 미리보기로 확대해 볼 수 있습니다.<br>
-									사진을등록하지 않으셨다면, <br>
-									아래 추가하기 버튼을 통해 사진을 추가해주세요.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div> -->
-				
 			<!-- image viewer as long as cover image is already uploaded when you visit this page for modification -->
 				<div id="main-image-con" class="main_image_con">
 					<img id="main-image" class="shop_image_view">	
@@ -291,10 +275,11 @@
 					</tbody>
 				</table>
 				
+				<div id="posted-service-list"></div>
 			<!-- registered table -->
-				<table class="current_menu_table form">
+				<!-- <table class="current_menu_table form"> -->
 				<!-- thead -->
-					<thead id="item-list-thead">
+					<!-- <thead id="item-list-thead">
 						<tr>
 							<th scope="cols">서비스 유형</th>
 							<th scope="cols">서비스 타입</th>
@@ -304,11 +289,11 @@
 							<th scope="cols">수정/삭제</th>
 						</tr>
 					</thead>
-					
+					 -->
 				<!-- tbody -->
-					<tbody id="item-list-tbody"></tbody>
+					<!-- <tbody id="item-list-tbody"></tbody>
 					
-				</table>
+				</table> -->
 			</div>
 		</c:if>
 		</div>

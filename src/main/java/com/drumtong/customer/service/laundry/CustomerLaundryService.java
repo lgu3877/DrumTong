@@ -22,9 +22,11 @@ import com.drumtong.business.vo.BImageVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BManagementVO;
 import com.drumtong.business.vo.BMenuVO;
+import com.drumtong.business.vo.MenuList;
 import com.drumtong.business.vo.ReviewList;
 import com.drumtong.customer.dao.CBookmarkDAO;
 import com.drumtong.customer.vo.CPrivateDataVO;
+import com.drumtong.security.MenuListSetting;
 import com.drumtong.security.Review;
 import com.google.gson.Gson;
 
@@ -63,6 +65,8 @@ public class CustomerLaundryService {
 		
 		// 메뉴 정보(메뉴이름, 가격, 퀵 가격, 예상소요시간)를 저장한 객체(오름차순)
 		List<BMenuVO> bMenuVO = bMenuDAO.select(estid);
+		MenuList menuList = MenuListSetting.selectMenuList(estid);
+		mav.addObject("menuList", new Gson().toJson(menuList));
 		
 		List<ReviewList> ReviewList = Review.selectList(estid, "whole");
 		
