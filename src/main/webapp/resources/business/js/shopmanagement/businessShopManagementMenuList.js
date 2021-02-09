@@ -177,8 +177,12 @@ function createAddService() {
 		mainSelectorDirectInput.id = directRandomId;
 		mainSelectorDirectInput.type = "text";
 		mainSelectorDirectInput.className = "direct_type_input";
-		mainSelectorDirectInput.name = "maincategory";
+//		mainSelectorDirectInput.name = "maincategory";
 		mainSelectorDirectInput.placeholder = "서비스 입력";
+		mainSelectorDirectInput.onchange = () => changeSelectBoxName(selectorRandomId,directRandomId, "maincategory");
+
+		
+		
 		mainSelectorDirectInput.style.display = "none";
 	
 			// 추가
@@ -213,6 +217,8 @@ function createAddService() {
 		subDirectInput.style.display = "none";
 		subDirectInput.maxlength = "10";
 		
+		subDirectInput.onchange = () => changeSelectBoxName(subSelectorRandomId,subDirectRandomId, "subcategory");
+
 		
 		// 추가
 		subSelector.appendChild(option);
@@ -292,7 +298,13 @@ function createAddService() {
 			container.appendChild(singleServiceInputCon);
 }
 
-
+// [건욱] Select 박스의 이름을 결정해주는 함수입니다 (POST 형식일 때 Spring에서 데이터 바인딩을 제대로 해주기 위해서 설정하는 함수.)
+function changeSelectBoxName(selectID, inputID, type) {
+	let name = (type === "maincategory") ? "maincategory" : "subcategory";
+	console.log("changename : ", name);
+	document.getElementById(selectID).name = name + "SelectBox"
+	document.getElementById(inputID).name = name;
+}	
 // 메인 옵션 생성
 function createOptions(mainSelector, modifyBoolean) {
 	// placeholder
@@ -725,7 +737,7 @@ function modifyMenu(id) {
 			const mainSelector = document.createElement("select");
 			mainSelector.id = mainSelectorId;
 			mainSelector.className = "service_selector";
-			mainSelector.name = "maincategory";
+			mainSelector.name = "maincategorySelectBox";
 //			mainSelector.addEventListener("change", (e) => selectMainOption(e, directRandomId, subSelectorRandomId, subDirectRandomId));
 			
 			// 서브옵션 생성
@@ -749,7 +761,7 @@ function modifyMenu(id) {
 			const subSelector = document.createElement("select");
 			subSelector.id = subSelectorId;
 			subSelector.className = "service_selector";
-			subSelector.name = "subcategory";
+			subSelector.name = "subcategorySelectBox";
 //			subSelector.addEventListener("change", (e) => selectSubOption(e, subDirectRandomId));
 			
 			// 추가

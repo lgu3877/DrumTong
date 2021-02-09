@@ -8,6 +8,8 @@ public class BDeliveryAreaVO {
 	private String addressd;
 	private String addresse;
 	private String addressf;
+	
+	
 	public String getEstid() {
 		return estid;
 	}
@@ -50,6 +52,11 @@ public class BDeliveryAreaVO {
 	public void setAddressf(String addressf) {
 		this.addressf = addressf;
 	}
+
+	
+	
+	
+	
 	
 	
 }

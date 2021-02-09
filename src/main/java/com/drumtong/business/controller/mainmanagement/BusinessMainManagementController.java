@@ -42,10 +42,11 @@ public class BusinessMainManagementController {
 	// AWS S3에 다중 이미지 업로드를 해줍니다.
 	@RequestMapping(value="businessShopManagement/", method = RequestMethod.POST)
 	public ModelAndView shopManagement( HttpServletRequest req,MultipartHttpServletRequest mpf,
-									   BManagementVO bManagementVO, BMenuListVO  bMenuVOList, 
-									   BDeliveryAreaListVO bDeliveryAreaVOList,
+									   BManagementVO bManagementVO, 
+									   BMenuListVO  bMenuVOList, 
+									   String[] bDeliveryAreaList,
 									   BInformationVO bInformationVO) {
-		return svc.shopManagement(req,mpf,bManagementVO, bMenuVOList, bDeliveryAreaVOList, bInformationVO);
+		return svc.shopManagement(req,mpf,bManagementVO, bMenuVOList, bDeliveryAreaList, bInformationVO);
 	}
 	
 	
