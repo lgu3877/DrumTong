@@ -591,7 +591,85 @@
 	width: 6%;
 }
 
+/* menu list */
+/* main */
+.menu_main_con {
 
+}
+
+.menu_main_wrapper {
+	display: flex;
+	justify-content: space-between;
+	height: 70px;
+}
+
+.menu_main_icon {
+	margin: auto 0;
+}
+
+.menu_main_icon i {
+	font-size: 20pt;
+    color: darkcyan;
+    cursor: pointer;
+}
+
+.menu_main_title {
+    width: 100%;
+	margin: auto 0 auto 15px;
+    padding: 3px 0 3px 25px;
+    text-align: left;
+    border-radius: 3px;
+    font-size: 20pt;
+    background-color: lightcoral;
+    color: white;
+    letter-spacing: 5px;
+}
+
+.menu_main_amount {
+	margin: auto 10px;
+    padding: 5px 10px;
+    background-color: lightgray;
+    border-radius: 7px;
+    color: white;
+}
+
+/* sub */
+.menu_sub_wrapper {
+    margin: 0 0 0 30px;
+    display: flex;
+    justify-content: space-between;
+	height: 50px;
+}
+
+.menu_sub_icon {
+	margin: auto 0;
+}
+
+.menu_sub_icon i {
+	font-size: 15pt;
+    color: darkgray;
+    cursor: pointer;
+}
+
+.menu_sub_title {
+	width: 100%;
+    margin: auto 0 auto 15px;
+    padding: 3px 0 3px 25px;
+    text-align: left;
+    border-radius: 3px;
+    font-size: 15pt;
+    background-color: lightpink;
+    color: white;
+    letter-spacing: 5px;
+}
+
+.menu_sub_amount {
+    margin: auto 12px;
+    padding: 3px 8px;
+    background-color: lightgray;
+    border-radius: 7px;
+    color: white;
+}
 
 /* first property input */
 .first_item_prop {
