@@ -10,6 +10,148 @@ createCategoryList(); // 메뉴수정 관련 Modal
 
 // 메뉴 생성
 function displayMenu() {
+
+	// object 생성
+	let list = {};
+	for (let item = 0; item < bMenu.length; item++) {
+		const menu = bMenu[item];
+		
+		const isMainIncluded = Object.keys(list).includes(menu.maincategory);
+		
+		// 메인 카테고리 있음
+		if (isMainIncluded) {
+			const isSubIncluded = Object.keys(list[menu.maincategory]).includes(menu.subcategory);
+			
+			// 서브카테고리 있음
+			if (isSubIncluded) {
+				const detailInfo = {
+						name : menu.name,
+						price : menu.price,
+						quickprice: menu.quickprice || 0,
+						ete : menu.ete,
+						estid : menu.estid,
+					}
+				
+				list[menu.maincategory][menu.subcategory].push(detailInfo);
+			}
+			
+			// 서브카테고리 없음
+			else {
+				list[menu.maincategory][menu.subcategory] = [{
+					name : menu.name,
+					price : menu.price,
+					quickprice: menu.quickprice || 0,
+					ete : menu.ete,
+					estid : menu.estid,
+				}]
+			}
+		}
+		
+		// 메인 카테고리 없음
+		else {
+			list[menu.maincategory] = {
+				[menu.subcategory] : [{
+					name : menu.name,
+					price : menu.price,
+					quickprice : menu.quickprice || 0,
+					ete : menu.ete,
+					estid : menu.estid,
+				}]
+			}			
+		}
+	}
+	
+	console.log(list);
+	
+	// menu list 생성
+	const container = document.getElementById("posted-service-list");
+	
+	// main category
+	
+	for (let main in list) {
+		const mainCon = document.createElement("div");
+		const containerId = generateRandomString(10);
+		mainCon.className = "menu_main_con";
+		mainCon.id = containerId;
+		
+		// wrapper
+		const mainWrapper = document.createElement("div");
+		mainWrapper.className = "menu_main_wrapper";
+		
+
+		// icon
+		const mainExIcon = document.createElement("div");
+		mainExIcon.className = "menu_main_icon";
+		mainExIcon.innerHTML = '<i class="fas fa-plus-square"></i>';
+		mainExIcon.onclick = () => toggleMainCategory(containerId, list[main]);
+		
+		// title
+		const mainTitle = document.createElement("div");
+		mainTitle.className = "menu_main_title";
+		mainTitle.innerHTML = main;
+		
+		// total number of services
+		const mainAmount = document.createElement("div");
+		mainAmount.className = "menu_main_amount"
+		mainAmount.innerHTML = measureAmount(list[main]);
+		
+		
+		mainWrapper.appendChild(mainExIcon);
+		mainWrapper.appendChild(mainTitle);
+		mainWrapper.appendChild(mainAmount);
+		
+		mainCon.appendChild(mainWrapper);
+		container.appendChild(mainCon);
+	}
+}
+
+
+// 서비스 메뉴 > 리스트 > 클릭 이벤트(메인 > 서브)
+function toggleMainCategory(id, list) {
+	const mainWrapper = document.getElementById(id);
+	const subCon = document.createElement("div");
+	const subContainerId = generateRandomString(10);
+	subCon.id = subContainerId;
+	subCon.className = "menu_sub_con";
+	
+	for (let sub in list) {
+		// wrapper
+		const subWrapper = document.createElement("div");
+		subWrapper.className = "menu_sub_wrapper";
+		
+		// icon
+		const subExIcon = document.createElement("div");
+		subExIcon.className = "menu_sub_icon";
+		subExIcon.innerHTML = '<i class="fas fa-plus-square"></i>';
+		subExIcon.onclick = () => toggleSubCategory(subContainerId, list[sub]);
+		
+		// title
+		const subTitle = document.createElement("div");
+		subTitle.className = "menu_sub_title";
+		subTitle.innerHTML = sub;
+		
+		// total number of services
+		const subAmount = document.createElement("div");
+		subAmount.className = "menu_sub_amount"
+		subAmount.innerHTML = list[sub].length;
+		
+		subWrapper.appendChild(subExIcon);
+		subWrapper.appendChild(subTitle);
+		subWrapper.appendChild(subAmount);
+		
+		subCon.appendChild(subWrapper);
+	}
+	
+	mainWrapper.appendChild(subCon)
+}
+
+// 서비스 메뉴 > 리스트 > 클릭 이벤트(서브 > 디테일)
+function toggleSubCategory() {
+	
+}
+
+
+function displayMenus() {
 	const tbody = document.getElementById("item-list-tbody");
 	
 	// 테이플 행 카운트 > 짝수 번째 하이라이트
@@ -177,7 +319,6 @@ function createAddService() {
 		mainSelectorDirectInput.className = "direct_type_input";
 		mainSelectorDirectInput.name = "maincategory";
 		mainSelectorDirectInput.placeholder = "서비스 입력";
-		mainSelectorDirectInput.style.display = "none";
 	
 			// 추가
 			firstInputCon.appendChild(mainSelector);
@@ -971,20 +1112,20 @@ function attachSubCategories(subCategory) {
 
 
 
+function measureAmount(object) {
+	let sum = 0;
 
-//function insertComma(string) {
-//const reversedString = string.split("").reverse().join("");
-//const commaAttached = reversedString.replace(/(.{3})/g,"$1,");
-//return commaAttached.split("").reverse().join("");
-//
-//메모
-//const length = string.length;
-//const numberOfZero = 
-//	length <= 3 ?
-//		0 : 
-//		length % 3 === 0 ? (length / 3) -1 : (length / 3);
-//
-//	for (let i = numberOfZero; i > 0; i--) {
-//	reversedString[numberOfZero * 3]
-//}
-//}
+	const type = typeof object;
+	
+	if (type === "list") {
+		return object.length;		
+	}
+	
+	else if (type === "object") {
+		for (let key in object) {
+			sum += object[key].length;
+		}		
+	}
+	
+	return sum;
+}
