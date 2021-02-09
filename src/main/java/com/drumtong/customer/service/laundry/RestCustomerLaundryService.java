@@ -18,6 +18,7 @@ import com.drumtong.customer.vo.CCouponVO;
 import com.drumtong.map.dao.MEmdDAO;
 import com.drumtong.map.dao.MSidoDAO;
 import com.drumtong.map.dao.MSigunguDAO;
+import com.drumtong.map.vo.MEmdVO;
 import com.drumtong.map.vo.MSidoVO;
 import com.drumtong.map.vo.MSigunguVO;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -84,19 +85,19 @@ public class RestCustomerLaundryService {
 
 	// 승원씨가 작업한 sido를 가져오는 REST함수입니다
 	public String getsido() {
-		List<MSidoVO> sido = mSidoDAO.getsidoxy();
+		List<MSidoVO> sido = mSidoDAO.selectMSido();
 		return new Gson().toJson(sido);
 	}
 
 	// 승원씨가 작업한 sido를 가져오는 REST함수입니다
-	public String getsigungu() {
-		List<MSigunguVO> sigungu = mSigunguDAO.getsigunguxy();
+	public String getsigungu(String sidoname) {
+		List<MSigunguVO> sigungu = mSigunguDAO.selectMSigungu(sidoname);
 		return new Gson().toJson(sigungu);
 	}
 
 	// 읍면동 Select REST [건욱]
 	public String getEmd() {
-		List<MSigunguVO> emd = mEmdDAO.selectEmd();
+		List<MEmdVO> emd = mEmdDAO.selectEmd();
 		return new Gson().toJson(emd);
 	}
 

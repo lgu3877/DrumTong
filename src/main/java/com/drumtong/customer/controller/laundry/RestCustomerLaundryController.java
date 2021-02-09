@@ -50,10 +50,10 @@ public class RestCustomerLaundryController {
 	}
 
 	// 승원씨가 작업한 sido를 가져오는 REST함수입니다
-	@RequestMapping(value = "customerMap/rest/sigungu/", produces =org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "customerMap/rest/sigungu/{sidoname}", produces =org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@PostMapping(produces="application/json; charset=utf8")
-	public String getsigungu() {
-		return svc.getsigungu();
+	public String getsigungu(@PathVariable String sidoname) {
+		return svc.getsigungu(sidoname);
 	}
 	
 	
