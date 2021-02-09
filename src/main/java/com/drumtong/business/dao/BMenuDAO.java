@@ -36,6 +36,9 @@ public interface BMenuDAO {
 	// 매장 메뉴를 비동기식으로 삭제해주는 메서드입니다.
 	int deleteBMenu(BMenuVO bMenuVO);
 
+	// 메인, 서브 카테고리에 해당하는 메뉴 리스트를 반환하는 메서드
+	List<BMenuVO> selectMenu(BMenuVO param);
+
 
 	
 

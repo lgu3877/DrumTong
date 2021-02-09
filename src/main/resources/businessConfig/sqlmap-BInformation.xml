@@ -144,7 +144,8 @@
 				MAINLOCATION = #{mainlocation},
 				DETAILLOCATION = #{detaillocation},
 				LATITUDE = #{latitude},
-				LONGITUDE = #{longitude}
+				LONGITUDE = #{longitude},
+				EMDCODE = #{emdcode}
 			WHERE ESTID = #{estid}
 	</update>
 	
@@ -154,6 +155,14 @@
 		BINFORMATION		
 			WHERE 
 				ESTID = #{value}
+	</select>
+	
+<!-- 	매장 좌표 Select REST  -->
+	<select id="selectBInformationCoord" resultType="BInformationVO">
+		SELECT 
+			BRANDNAMING, LATITUDE, LONGITUDE
+		FROM
+			BINFORMATION
 	</select>
 	
 	

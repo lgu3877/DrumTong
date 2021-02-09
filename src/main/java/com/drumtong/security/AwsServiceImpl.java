@@ -182,7 +182,11 @@ public class AwsServiceImpl{
     // 서버에 파일을 저장하지 않고 바로 S3로 파일을 전달해줍니다.
     // public void fileUpload(File file, String folderName) {
      public int fileUpload(MultipartFile file, String folderName, Object object, int count) {
-    	 
+    	
+    	// 파일이 비어있다면 아래 함수를 실행시켜주지 않는다.
+    	if(file.isEmpty())
+    		return 0;
+    	
 		// AWS S3에 저장될 파일 이름을 UUID 형식으로 다시 지정해준다.
 		// ESTID가 필요하므로 SerialUUID에 ESTID값을 보내준다.
 		System.out.println(file.getOriginalFilename());

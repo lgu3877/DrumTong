@@ -61,7 +61,9 @@ function createMap() {
 			console.log('좌표값1 : ', coords.La);
 			console.log('좌표값 : ', coords.Ma);
 			// 좌표값 input value로 설정
-			document.getElementById("main-location").value = coords;
+			document.getElementById("latitude").value = coords.Ma;
+			// 좌표값 수정
+			document.getElementById("longitude").value = coords.La;
 			// 지도 설정값
 			const mapContainer = document.getElementById("preview-map");
 			const mapOption = {

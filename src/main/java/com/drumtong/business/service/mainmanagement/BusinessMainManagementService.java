@@ -174,9 +174,9 @@ public class BusinessMainManagementService {
 	 */
 	@Transactional
 	public ModelAndView shopManagement(HttpServletRequest req, MultipartHttpServletRequest mpf, 
-									   BManagementVO bManagementVO, BMenuVO bMenuVO, 	
+									   BManagementVO bManagementVO, ArrayList<BMenuVO> bMenuVOList, 	
 									   BDeliveryAreaVO bDeliveryAreaVO, BInformationVO bInformationVO) {
-		ModelAndView mav = new ModelAndView("redirect:/");
+		ModelAndView mav = new ModelAndView("business/mainmanagement/businessScheduleManagement");
 		
 		HttpSession Session = req.getSession();
 		
@@ -218,23 +218,22 @@ public class BusinessMainManagementService {
 		// 다중 이미지 업로드이기 떄문에 multipleUpload 메서드를 호출해준다.
 		BImageVO bImageVO = new BImageVO();
 		bImageVO.setEstid(estid);	// ESTID를 세팅하는 이유는 S3 저장방식이 ESTID(폴더명)/ESTID + UUID로 저장되기 때문에 sql문에 필요하다.
+		
+		// AWS 파일 여러개 입력
 		aws.multipleUpload(mpf, folderName, bImageVO, req);
 		
-		// 처음부터 데이터가 들어가있기 떄문에 null 체크를 해준다.
-		System.out.println("binforvo null check : " + bInformationVO.getMainlocation());
-		
-		if(bInformationVO != null)
-			bInformationDAO.updateLocation(bInformationVO);
+		bInformationVO.setEstid(estid);
+		bInformationDAO.updateLocation(bInformationVO);
 	    
 	    
 	    switch(status) {
 				
 			case "FAIL" :
 				
-				System.out.println(bMenuVO.getEstid());
-				bMenuVO.setEstid(estid);
-				// 3. 메뉴 테이블에  {메뉴이름, 가격, 퀵가격, 예상소요시간}를 업데이트 시켜준다.
-				int BMenuResult = bMenuDAO.insertConstract(bMenuVO);
+				
+				// bMenuList의 데이터를 입력해주는 함수입니다.
+				int result2 = bMenuListInsertConstractToDAO(bMenuVOList,estid);
+				
 				
 				// 4. 배달지역 테이블에  해당 매장의 배달가능한 지역의 {시도,시군구,시구,읍면동}를 업데이트 시켜준다.
 				bDeliveryAreaVO.setEstid(estid);
@@ -292,6 +291,20 @@ public class BusinessMainManagementService {
 		return mav;
 	}
 
+
+	// bMenuList 를 분리시켜서 bMenu 정보를 입력시켜줍니다.
+	private int bMenuListInsertConstractToDAO(ArrayList<BMenuVO> bMenuVOList, String estid) {
+		for(BMenuVO bMenuVO : bMenuVOList) {
+			
+			bMenuVO.setEstid(estid);
+			System.out.println("EstId : " + bMenuVO.getEstid());
+			
+			// 3. 메뉴 테이블에  {메뉴이름, 가격, 퀵가격, 예상소요시간}를 업데이트 시켜준다.
+			int BMenuResult = bMenuDAO.insertConstract(bMenuVO);
+			
+		}
+		return 0;
+	}
 
 
 	private BManagementVO setDeliveryBooleanAndType(BManagementVO bManagementVO) {
