@@ -10,12 +10,13 @@ createMajorOptions();
 
 
 // 폼 업데이트
-async function updateDeliveryArea() {
+function updateDeliveryArea() {
 	// data
 	const copiedDeliveryAreas = JSON.parse(JSON.stringify(deliveryAreas));
+	console.log(copiedDeliveryAreas);
 	
 	// axios > post > update
-	await axios.post("/drumtong/business/mainmanagement/BManagement/rest/selectMMapAddressC/", copiedDeliveryAreas);
+//	await axios.post("/drumtong/business/mainmanagement/BManagement/rest/selectMMapAddressC/", copiedDeliveryAreas);
 	
 	// 뷰 업데이트
 	displayDeliveryArea();
