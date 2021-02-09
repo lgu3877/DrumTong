@@ -9,6 +9,6 @@ import com.drumtong.map.vo.MSigunguVO;
 // 시군구 DAO
 public interface MSigunguDAO {
 
-	List<MSigunguVO> getsigunguxy();
+	List<MSigunguVO> selectMSigungu(String sidoname);
 	
 }
