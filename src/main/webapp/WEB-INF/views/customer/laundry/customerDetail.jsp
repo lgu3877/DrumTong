@@ -6,6 +6,7 @@
 <style>
 	div.detailview-mainCate, div.detailview-subCate{
 		width:570px;
+		height: 45px;
 	}
 	div.mainButton, div.mainButton_select{
 		display: inline-flex;
