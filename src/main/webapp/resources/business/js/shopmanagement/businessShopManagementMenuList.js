@@ -2,6 +2,8 @@
 let singleList = document.querySelector('.single_item_selector');
 let copiedList;
 
+// main toggle
+const mainToggle = { }
 
 // 초기 실행
 if(status === "SUCCESS")
@@ -9,6 +11,7 @@ if(status === "SUCCESS")
 
 createAddService();
 createCategoryList(); // 메뉴수정 관련 Modal
+
 
 // 메뉴 생성
 function displayMenu() {
@@ -63,13 +66,17 @@ function displayMenu() {
 		}
 	}
 	
-	console.log(list);
+	// toggle switch
+	const mainCategories = Object.keys(list);
+	for (let i = 0; i < mainCategories.length; i++) {
+		mainToggle[mainCategories[i]] = false;
+	}
+	console.log(mainToggle);
 	
 	// menu list 생성
 	const container = document.getElementById("posted-service-list");
 	
 	// main category
-	
 	for (let main in list) {
 		const mainCon = document.createElement("div");
 		const containerId = generateRandomString(10);
@@ -85,7 +92,16 @@ function displayMenu() {
 		const mainExIcon = document.createElement("div");
 		mainExIcon.className = "menu_main_icon";
 		mainExIcon.innerHTML = '<i class="fas fa-plus-square"></i>';
-		mainExIcon.onclick = () => toggleMainCategory(containerId, list[main]);
+		mainExIcon.onclick = () => {
+			const isOpened = mainToggle[main];
+			if (!isOpened) {
+				toggleMainCategory(containerId, list[main], main);
+			}
+			else {
+				mainToggle[main] = false;
+				document.getElementById(containerId).getElementsByClassName("menu_sub_con")[0].remove();
+			}
+		}
 		
 		// title
 		const mainTitle = document.createElement("div");
@@ -107,16 +123,27 @@ function displayMenu() {
 	}
 }
 
-
 // 서비스 메뉴 > 리스트 > 클릭 이벤트(메인 > 서브)
-function toggleMainCategory(id, list) {
+function toggleMainCategory(id, list, main) {
+	// toggle
+	mainToggle[main] = true;
+	
+	// sub toggle object
+	const subToggle = { };
+	
+	// script
 	const mainWrapper = document.getElementById(id);
-	const subCon = document.createElement("div");
-	const subContainerId = generateRandomString(10);
-	subCon.id = subContainerId;
-	subCon.className = "menu_sub_con";
 	
 	for (let sub in list) {
+		// sub toggle
+		subToggle[sub] = false;
+		
+		// sub container
+		const subCon = document.createElement("div");
+		const subContainerId = generateRandomString(10);
+		subCon.id = subContainerId;
+		subCon.className = "menu_sub_con";
+		
 		// wrapper
 		const subWrapper = document.createElement("div");
 		subWrapper.className = "menu_sub_wrapper";
@@ -125,7 +152,17 @@ function toggleMainCategory(id, list) {
 		const subExIcon = document.createElement("div");
 		subExIcon.className = "menu_sub_icon";
 		subExIcon.innerHTML = '<i class="fas fa-plus-square"></i>';
-		subExIcon.onclick = () => toggleSubCategory(subContainerId, list[sub]);
+		subExIcon.onclick = () => {
+			const isOpened = subToggle[sub];
+			
+			if (!isOpened) {
+				toggleSubCategory(subContainerId, list[sub], subToggle, sub);
+			}
+			else {
+				subToggle[sub] = false;
+				document.getElementById(subContainerId).getElementsByClassName("menu_detail_con")[0].remove();
+			}
+		}
 		
 		// title
 		const subTitle = document.createElement("div");
@@ -142,14 +179,64 @@ function toggleMainCategory(id, list) {
 		subWrapper.appendChild(subAmount);
 		
 		subCon.appendChild(subWrapper);
+		mainWrapper.appendChild(subCon)
 	}
-	
-	mainWrapper.appendChild(subCon)
 }
 
 // 서비스 메뉴 > 리스트 > 클릭 이벤트(서브 > 디테일)
-function toggleSubCategory() {
+function toggleSubCategory(id, list, subToggle, sub) {
+	// toggle
+	subToggle[sub] = true;
 	
+	// script
+	const subWrapper = document.getElementById(id);
+	const detailCon = document.createElement("div");
+	const detailId = generateRandomString(11);
+	detailCon.id = detailId;
+	detailCon.className = "menu_detail_con";
+	
+	for (let item = 0; item < list.length; item++) {
+		// wrapper
+		const detailWrapper = document.createElement("div");
+		detailWrapper.className = "menu_detail_wrapper";
+		
+		// icon
+		const detailExIcon = document.createElement("div");
+		detailExIcon.className = "menu_detail_icon";
+		detailExIcon.innerHTML = '<i class="fas fa-bars"></i>';
+		detailExIcon.onclick = () => console.log("clicked");
+		
+		// title
+		const detailInfo = document.createElement("div");
+		detailInfo.className = "menu_detail_info_con";
+		detailInfo.id = list.estid;
+		
+			// detail info
+			const serviceName = document.createElement("div");
+			serviceName.innerHTML = list[item].name;
+			
+			const servicePrice = document.createElement("div");
+			servicePrice.innerHTML = list[item].price + " (원)";
+			
+			const serviceTime = document.createElement("div");
+			serviceTime.innerHTML = list[item].ete + " (일)";
+		
+		detailInfo.appendChild(serviceName);
+		detailInfo.appendChild(servicePrice);
+		detailInfo.appendChild(serviceTime);
+		
+		// total number of services
+		const detailIcon = document.createElement("div");
+		detailIcon.className = "menu_detail_option"
+		detailIcon.innerHTML = '<i class="far fa-edit"></i>';
+		
+		detailWrapper.appendChild(detailExIcon);
+		detailWrapper.appendChild(detailInfo);
+		detailWrapper.appendChild(detailIcon);
+		
+		detailCon.appendChild(detailWrapper);
+	}
+	subWrapper.appendChild(detailCon)
 }
 
 
@@ -1130,17 +1217,9 @@ function attachSubCategories(subCategory) {
 function measureAmount(object) {
 	let sum = 0;
 
-	const type = typeof object;
-	
-	if (type === "list") {
-		return object.length;		
-	}
-	
-	else if (type === "object") {
-		for (let key in object) {
-			sum += object[key].length;
-		}		
-	}
-	
+	for (let key in object) {
+		sum += object[key].length;
+	}		
+		
 	return sum;
 }

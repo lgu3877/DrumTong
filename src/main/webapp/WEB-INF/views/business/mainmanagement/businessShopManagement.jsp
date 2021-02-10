@@ -276,24 +276,6 @@
 				</table>
 				
 				<div id="posted-service-list"></div>
-			<!-- registered table -->
-				<!-- <table class="current_menu_table form"> -->
-				<!-- thead -->
-					<!-- <thead id="item-list-thead">
-						<tr>
-							<th scope="cols">서비스 유형</th>
-							<th scope="cols">서비스 타입</th>
-							<th scope="cols">메뉴 이름</th>
-							<th scope="cols">가격(배달비)</th>
-							<th scope="cols">소요시간</th>
-							<th scope="cols">수정/삭제</th>
-						</tr>
-					</thead>
-					 -->
-				<!-- tbody -->
-					<!-- <tbody id="item-list-tbody"></tbody>
-					
-				</table> -->
 			</div>
 		</c:if>
 		</div>
