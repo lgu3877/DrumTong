@@ -159,8 +159,8 @@
     <script>
       function calTotal() {
         orders = document.querySelectorAll('.selected-row');
-        quickText = document.getElementById('select-quick');
-        totalText = document.getElementById('select-total');
+        quickText = document.getElementById('select-quick');	// 퀵 요금
+        totalText = document.getElementById('select-total');	// 토탈 요금
 
         deliCheck = document.getElementById('deli-check');
 
@@ -175,18 +175,18 @@
 
         for (i = 0; i < orders.length; i++) {
           quantity = orders[i].children[1].value;
-          price = orders[i].children[2].innerText.split(' ');
+          price = orders[i].children[2].innerText.split(' ')[0];
           quick = 0;
 
-          if (orders[i].children[3].checked) {
-            quick = orders[i].children[3].value;
+          if (orders[i].children[3].children[0].checked) {
+            quick = orders[i].children[3].children[0].value;
           }
 
           quickCal = parseInt(quantity) * parseInt(quick);
 
           quickPrice += quickCal;
 
-          totalPrice += parseInt(quantity) * parseInt(price[0]) + quickCal;
+          totalPrice += parseInt(quantity) * parseInt(price) + quickCal;
         }
       
         quickText.innerText = 'Quick 요금 : ' +quickPrice +' 원';
@@ -750,6 +750,9 @@
 
          //수량 바뀌는 이벤트 리스너를 이곳에서 삽입
          document.getElementById('selected-List').addEventListener('change', calTotal);
+         
+    	console.log("User");
+    	console.log(User);
     </script>
     
     <script type="text/javascript">	// 승원 작업 - 구글 차트
