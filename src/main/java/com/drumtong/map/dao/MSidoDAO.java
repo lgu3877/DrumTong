@@ -1,12 +1,16 @@
 package com.drumtong.map.dao;
 
-import java.util.ArrayList;
+
+import java.util.List;
+
+import com.drumtong.map.vo.MSidoVO;
 
 
 // 시도 DAO
 public interface MSidoDAO {
 
-	// 시도 select문  [건욱]
-	ArrayList<String> selectMSidoAddressA();
-	
+	List<MSidoVO> getsidoxy();
+	List<String> selectMSidoAddressA();
+	List<MSidoVO> selectMSido();
+
 }

@@ -157,6 +157,7 @@ function updateDeliveryArea() {
 //		for (let x = 0; x < commonCities.length; x++) {
 //			const cityName = commonCities[x];
 //			
+
 //			const allTowns = Array.from(new Set(initialTowns.concat(modifiedTowns)));
 //			const allTowns = concatAreas[metroCityName][cityName];
 //			const initialTowns = copiedInitialAreas[metroCityName][cityName];

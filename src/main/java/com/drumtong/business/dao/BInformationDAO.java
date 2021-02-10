@@ -57,6 +57,9 @@ public interface BInformationDAO {
 	
 	// 매장의 현재 상태를 가져와줍니다.
 	String selectStatus(String estid);
+	
+	// 매장 좌표 Select REST 
+	List<BInformationVO> selectBInformationCoord();
 
 
 

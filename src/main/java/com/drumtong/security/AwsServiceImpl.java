@@ -182,7 +182,11 @@ public class AwsServiceImpl{
     // 서버에 파일을 저장하지 않고 바로 S3로 파일을 전달해줍니다.
     // public void fileUpload(File file, String folderName) {
      public int fileUpload(MultipartFile file, String folderName, Object object, int count) {
-    	 
+    	
+    	// 파일이 비어있다면 아래 함수를 실행시켜주지 않는다.
+    	if(file.isEmpty())
+    		return 0;
+    	
 		// AWS S3에 저장될 파일 이름을 UUID 형식으로 다시 지정해준다.
 		// ESTID가 필요하므로 SerialUUID에 ESTID값을 보내준다.
 		System.out.println(file.getOriginalFilename());
@@ -315,7 +319,8 @@ public class AwsServiceImpl{
      private int exeFileUpload (MultipartFile file, Object object, 
 		       String folderName, String subFolderName, 
 		       String UUIDType , String tableFieldName){
-    	 	
+    	 	System.out.println("ExeFileUpload 실행...");
+    	 
     	 	int result = 0;
 			
 			// 실질적으로 저장될 파일 이름을 선언해준다.
@@ -427,6 +432,8 @@ public class AwsServiceImpl{
     	
     	// DB에 저장될 파일경로입니다. 이것을 이용해서 view상에서 그림을 S3에서 호출해서 불러옵니다.
     	String src =  folderName + "/"  + subFolderName + "/" + fileName ;
+    	
+    	System.out.println("StoreImg 경로 : " + src);
     	
 		switch (UUIDType) {
 			case "STOREIMG" : 

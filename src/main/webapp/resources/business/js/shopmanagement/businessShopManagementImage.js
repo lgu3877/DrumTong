@@ -34,7 +34,7 @@ function displayImages() {
 		coverImg.id = "cover-image";
 		coverImg.src = 
 			"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + 
-			coverImage[0].storeimg;
+			coverImage[0].businessStoreImage;
 		coverImg.alt = ""; 
 		
 		// 삭제 아이콘 (X)
@@ -64,7 +64,7 @@ function displayImages() {
 			const otherImg = document.createElement("img");
 			otherImg.src = 
 				"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + 
-				otherImages[i].storeimg;
+				otherImages[i].businessStoreImage;
 			otherImg.alt = "";
 			
 			// 삭제 아이콘 (X)
@@ -337,7 +337,7 @@ function createInputFile() {
 	input.setAttribute("id", randomId);
 	input.setAttribute("className", "add_photo_input");
 	input.setAttribute("type", "file");
-	input.setAttribute("name", "storeimg");
+	input.setAttribute("name", "businessStoreImage");
 	input.setAttribute("onchange", "imageCheck(event)");
 	input.setAttribute("style", "display: none");
 	input.setAttribute("accept", ".png, .jpg, .jpeg");

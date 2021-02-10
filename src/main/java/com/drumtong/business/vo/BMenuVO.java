@@ -9,18 +9,6 @@ public class BMenuVO {
 	private String maincategory;
 	private String subcategory;
 	
-	public String getMaincategory() {
-		return maincategory;
-	}
-	public void setMaincategory(String maincategory) {
-		this.maincategory = maincategory;
-	}
-	public String getSubcategory() {
-		return subcategory;
-	}
-	public void setSubcategory(String subcategory) {
-		this.subcategory = subcategory;
-	}
 	public String getEstid() {
 		return estid;
 	}
@@ -51,6 +39,22 @@ public class BMenuVO {
 	public void setEte(int ete) {
 		this.ete = ete;
 	}
+	public String getMaincategory() {
+		return maincategory;
+	}
+	public void setMaincategory(String maincategory) {
+		this.maincategory = maincategory;
+	}
+	public String getSubcategory() {
+		return subcategory;
+	}
+	public void setSubcategory(String subcategory) {
+		this.subcategory = subcategory;
+	}
+	
+	
+	
+	
 	
 	
 }

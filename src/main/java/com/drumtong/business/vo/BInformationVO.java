@@ -1,6 +1,8 @@
 package com.drumtong.business.vo;
 
-public class BInformationVO {
+import com.drumtong.map.vo.MCoordValueVO;
+
+public class BInformationVO extends MCoordValueVO {
 	private String estid;
 	private String taxation;
 	private String crn;
@@ -10,8 +12,6 @@ public class BInformationVO {
 	private String detaillocation;
 	private String reportcard;
 	private String license;
-	private String latitude;
-	private String longitude;
 	private String status;
 	private String premiumboolean;
 	private String emdcode;
@@ -87,18 +87,6 @@ public class BInformationVO {
 	}
 	public void setLicense(String license) {
 		this.license = license;
-	}
-	public String getLatitude() {
-		return latitude;
-	}
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
-	}
-	public String getLongitude() {
-		return longitude;
-	}
-	public void setLongitude(String longitude) {
-		this.longitude = longitude;
 	}
 	
 }

@@ -1,5 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="cpath">${pageContext.request.contextPath }</c:set>
+<!DOCTYPE html>
+ 
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+	<!-- title -->
+    <title>customerDrumtong :: customerSearch</title>
+    <link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet" type="text/css">
+    <link rel="stylesheet" href="${cpath }/customer/css/customerStyle.css">
+    <link rel="stylesheet" href="${cpath }/customer/css/laundry/customerSearch.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<script type="text/javascript" src="${cpath }/customer/js/laundry/customerSearch.js"></script>
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="https://kit.fontawesome.com/7522a35233.js" crossorigin="anonymous"></script>
+</head>
+	
 <%@ include file="../main/customerHeader.jsp"%>
 
 <!-- services와 clusterer, drawing 라이브러리 불러오기 -->
@@ -559,11 +580,19 @@
                 </div>
 
             </div>
-
-            <div class="laundryList_map" >
-            </div>
-            
-        </article>
+			
+				<span style="visibility: hidden;" id="sido-hidden"></span>
+				<span style="visibility: hidden;" id="hidden"></span>
+				<span style="visibility: hidden;" id="currentlatitude"></span>
+				<span style="visibility: hidden;" id="currentlongitude"></span>
+				<span style="visibility: hidden;" id="hidden"></span>
+			<div class="map_wrap">
+				<div id="drumtongMap" class="laundryList_map"></div>
+				<div class="hAddr">
+					<span class="title">지도중심기준 행정동 주소정보</span> <span id="centerAddr"></span>
+				</div>
+			</div>
+	</article>
 
 
     </section>
@@ -578,206 +607,11 @@
             more.style.display = 'block';
         }
     </script>
-    <script>
-// 	    const axGet = async (move, map) => {	// async : 비동기 실행 함수
-// 			move = '${pageContext.request.contextPath}/customer/laundry/customerSearch/rest/clusterer/' + move + '/';
-// // 			실제 코드 동작 시
-// 	        await axios.get(move)
-	
-// 	//			테스트 코드 동작 시
-// 	//			await axios.get('${pageContext.request.contextPath}/customer/js/laundry/MapTestData.json')
-// 		        // 정상 통신 시에..
-// 		        .then( (response) => {
-// 	        		console.log(response.data);
-// 		        	// 마커들의 저장 함수
-// 		        	let markers = response.data.forEach(function(i, position) {
-// 		        		// 마커 생성
-// 		        		let marker = new kakao.maps.Marker({
-// 			                position : new kakao.maps.LatLng(i.latitude, i.longitude),
-// 			                clickable : true
-// 			            });
-		           
-// 	                //생성된 마커를 반환
-// 	                return marker;
-		            
-// 			        }); // 마커들 저장 함수 종료
-	        	
-// 			    });
-	        	
-// 		    };
-		    
-	    function searchAddress(map){
-	    	address = document.getElementById('searchText').value;
-	    	//주소-좌표 변환 객체를 생성합니다
-	    	var geocoder = new kakao.maps.services.Geocoder();
-	    	
-	    	//주소로 좌표를 검색합니다
-	    	geocoder.addressSearch(address, function(result, status) {
-	    	
-	    	    // 정상적으로 검색이 완료됐으면 
-	    	     if (status === kakao.maps.services.Status.OK) {
-	    	
-	    	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-// 	    			axGet(address, map);
-	    	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-	    	        map.setCenter(coords);
-	    	    } else {
-	    	    	alert("정확한 주소를 입력해주세요");
-	    	    	document.getElementById('searchText').value='';
-	    	    }
-	    	});    
-	    }
-	    
- 		let container = document.getElementsByClassName('laundryList_map')[0]; //지도를 담을 영역의 DOM 레퍼런스
-		let options = { //지도를 생성할 때 필요한 기본 옵션
-			center: new kakao.maps.LatLng(37.553505, 126.969641), //지도의 중심좌표.
-			level: 7, //지도의 레벨(확대, 축소 정도)
-			maxLevel: 11,
-			minLevel : 0,
-		};
- 		
-		let map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
- 		
-		searchAddress(map);
-		
-    </script>
-<script>
-
-// // 			폴리곤 생성 코드
-
-// 	    	const axGet2 = async () => {	// async : 비동기 실행 함수
-			
-// // 			실제 코드 동작 시
-// // 	        await axios.get('${pageContext.request.contextPath}/customer/laundry/customerSearch/rest/clusterer/')
-
-// //			테스트 코드 동작 시
-// 			await axios.get('${pageContext.request.contextPath}/customer/json/EMD.geojson')
-// 	        // 정상 통신 시에..
-// 	        .then( (response) => {
-// 	        	console.log('실행');
-// 	        	console.log(response.data.positions);
-	        	
-// 	        	let data = response.data.features;
-// 	        	let coordinates = [];
-// 	        	let name = '';
-	        	
-// // 	        	jquery문
-// // 	        	$.each(data, function(index, val) {
-	        		
-// // 	        		coordinates = val.geometry.coordinates;
-// // 	        		name = val.properties.SIG_KOR_NM;
-	        		
-// // 	        		displayArea(coordinates, name);
-// // 	        	})
-	        	
-// 	        	data.forEach(function(val,index) {
-// 	        		coordinates = val.geometry.coordinates;
-// 	        		name = val.properties.EMD_KOR_NM;
-	        		
-// 	        		displayArea(coordinates, name);
-// 	        	})
-		            
-// 		    });
-	        	
-// 	    };
-// // 	    axGet2();
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-// 	    let polygons = [];
-// 	    let customOverlay;
-	    
-	    
-// 	    function displayArea(coordinates, name) {
-// 	    	let path = [];
-// 	    	let points =[];
-	    	
-// // 	    	jquery문
-// // 	    	$.each(coordinates[0], function(index, coordinate) {
-// // 	    		var point = new Object();
-// // 	    		point.x = coordinate[1];
-// // 	    		point.y = coordinate[0];
-// // 	    		points.push(point);
-// // 	    		path.push(new kakaomaps.LatLng(coordinate[1], coordinate[0]));
-// // 	    	})
-	    	
-// 	    	coordinates[0].forEach(function (coordinate, index) {
-// 	    		let point = new Object();
-// 	    		point.x = coordinate[1];
-// 	    		point.y = coordinate[0];
-// 	    		points.push(point);
-// 	    		path.push(new kakao.maps.LatLng(coordinate[1], coordinate[0]));
-// 	    	});
-	    	
-// 	    	// 다각형 생성
-// 	    	let polygon = new kakao.maps.Polygon({
-// 	    		map : map,
-// 	    		path : path,
-// 	    		strokeWeight : 1,
-// 	    		strokeColor : '#004c80',
-// 	    		strokeOpacity : 0.8,
-// 	    		fillColor : '#fff',
-// 	    		fillOpacity : 0.7
-// 	    	});
-	    	
-// 	    	polygons.push(polygon);
-	    	
-// 	    	kakao.maps.event.addListener(polygon, 'mouseover', function(mouseEvent) {
-// 	    		polygon.setOptions({
-// 	    			fillColor : '#09f'
-// 	    		});
-// 	    		console.log("name : ", name);
-	    		
-// 	    		let content =  '<div class="area">' + name + '</div>';
-// 	    		let customOverlay = new kakao.maps.CustomerOverlay({
-// 	    	    	map : map,
-// 	    	    	position : mouseEvent.latLng,
-// 	    	    	content : content,
-// 	    		}); 
-	    		
-	    		
-// // 	    		customOverlay.setContent('<div class="area">' + name + '</div>');
-// // 	    		customOverlay.setPosition(mouseEvent.latLng);
-// // 	    		customOverlay.setMap(map);
-
-// 	    	});
-	    	
-	    	
-// 	    	kakao.maps.event.addListener(polygon, 'mousemove', function(mouseEvent) {
-// 	    		customOverlay.setPosition(mouseEvent.latLng);
-// 	    	});
-	    	
-	    	
-// 	    	kakao.maps.event.addListener(polygon, 'mouseout', function(mouseEvent) {
-// 	    		polygon.setOptions({
-// 	    			fillColor : '#fff'
-// 	    		});
-// 	    		customOverlay.setMap(null);
-// 	    	});
-	    	
-// 	    	kakao.maps.event.addListener(polygon, 'click', function() {
-	    		
-// 	    		let level = map.getLevel() -2; 
-	    		
-// 	    		map.setLevel(level, {anchor : centroid(points), animate : {
-// 	    			duration : 350
-// 	    		}});
-	    		
-// 	    		deletePolygon(polygons);
-// 	    	});
-	    	
-// 	    }
-	    
-	    
-	    
-</script>
+    <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-main.js"></script>
+    <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-sub.js"></script>
+    <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-sido.js"></script>
+    <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-sigungu.js"></script>
+    <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-emd.js"></script>
+    <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-shop.js"></script>
 </body>
 </html>

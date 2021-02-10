@@ -3,6 +3,9 @@ package com.drumtong.customer.service.laundry;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,15 +15,28 @@ import com.drumtong.customer.dao.CBookmarkDAO;
 import com.drumtong.customer.dao.CCouponDAO;
 import com.drumtong.customer.vo.CBookmarkVO;
 import com.drumtong.customer.vo.CCouponVO;
+import com.drumtong.map.dao.MEmdDAO;
+import com.drumtong.map.dao.MSidoDAO;
+import com.drumtong.map.dao.MSigunguDAO;
+import com.drumtong.map.vo.MEmdVO;
+import com.drumtong.map.vo.MSidoVO;
+import com.drumtong.map.vo.MSigunguVO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 @Service
 public class RestCustomerLaundryService {
 	
 	@Autowired CBookmarkDAO cBookmarkDAO;
 	@Autowired CCouponDAO cCouponDAO;
-	@Autowired BInformationDAO bInformationDAO;		
+	@Autowired BInformationDAO bInformationDAO;
+	
+	
+	// 지도 DAO
+	@Autowired MEmdDAO mEmdDAO;
+	@Autowired MSidoDAO mSidoDAO;
+	@Autowired MSigunguDAO mSigunguDAO;
 	
 	public String setBookmark(HashMap<String, String> param) {
 		String result = param.get("result");
@@ -67,11 +83,36 @@ public class RestCustomerLaundryService {
 		return insertResult == 1 ? "true" : "false";
 	}
 
+	// 승원씨가 작업한 sido를 가져오는 REST함수입니다
+	public String getsido() {
+		List<MSidoVO> sido = mSidoDAO.selectMSido();
+		return new Gson().toJson(sido);
+	}
+
+	// 승원씨가 작업한 sido를 가져오는 REST함수입니다
+	public String getsigungu(String sidoname) {
+		List<MSigunguVO> sigungu = mSigunguDAO.selectMSigungu(sidoname);
+		return new Gson().toJson(sigungu);
+	}
+
+	// 읍면동 Select REST [건욱]
+	public String getEmd() {
+		List<MEmdVO> emd = mEmdDAO.selectEmd();
+		return new Gson().toJson(emd);
+	}
+
+	// 매장 좌표 Select REST [건욱]
+	public String selectBInformationCoord() {
+ 	    
+		List<BInformationVO> bInformationCoordList = bInformationDAO.selectBInformationCoord();
+		return new Gson().toJson(bInformationCoordList);
+	}
+
 
 //	public String clusterer(String address, int level, String type) {
 //		// address에 따라 관련 세탁소 가지고 오도록!
 //		// level에 따라 주소를 비교하기
-//		// type에 따라 개수를 가지고올지, 리스트를 통째로 가지고 올지 정하기
+//		// type에 따라 개수를 가지고올지, 리스트를 통째로 가지고 올지 정하기a
 //		List<BInformationVO> list = bInformationDAO.selectBusinessMapInfo();
 //		try {
 //			return list != null

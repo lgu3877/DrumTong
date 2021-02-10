@@ -1,5 +1,8 @@
 package com.drumtong.business.controller.mainmanagement;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +13,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.drumtong.business.service.mainmanagement.BusinessMainManagementService;
+import com.drumtong.business.vo.BDeliveryAreaListVO;
 import com.drumtong.business.vo.BDeliveryAreaVO;
 import com.drumtong.business.vo.BImageVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BManagementVO;
+import com.drumtong.business.vo.BMenuListVO;
 import com.drumtong.business.vo.BMenuVO;
 import com.drumtong.business.vo.BScheduleDaysVO;
 import com.drumtong.business.vo.BScheduleTimeVO;
@@ -37,10 +42,11 @@ public class BusinessMainManagementController {
 	// AWS S3에 다중 이미지 업로드를 해줍니다.
 	@RequestMapping(value="businessShopManagement/", method = RequestMethod.POST)
 	public ModelAndView shopManagement( HttpServletRequest req,MultipartHttpServletRequest mpf,
-									   BManagementVO bManagementVO, BMenuVO bMenuVO, 
-									   BDeliveryAreaVO bDeliveryAreaVO,
+									   BManagementVO bManagementVO, 
+									   BMenuListVO  bMenuVOList, 
+									   String[] bDeliveryAreaList,
 									   BInformationVO bInformationVO) {
-		return svc.shopManagement(req,mpf,bManagementVO, bMenuVO, bDeliveryAreaVO, bInformationVO);
+		return svc.shopManagement(req,mpf,bManagementVO, bMenuVOList, bDeliveryAreaList, bInformationVO);
 	}
 	
 	
