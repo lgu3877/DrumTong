@@ -152,7 +152,7 @@ public class AwsServiceImpl{
             	MultipartFile delegate = mpf.getFile("delegatephotoboolean");
             	
             	// 대표 사진을 추가시켜주는 함수입니다.
-            	addStoreDelegatePhoto(delegate, object);
+            	addStoreDelegatePhoto(delegate,folderName, object);
             	
             	
             	
@@ -501,18 +501,17 @@ public class AwsServiceImpl{
    
    
    // [내부함수] MultipleUpload에 대표사진이 있을 경우 추가적으로 업로드를 해주는 함수입니다.
-   private int addStoreDelegatePhoto(MultipartFile delegate, Object object) {
+   private int addStoreDelegatePhoto(MultipartFile delegate,String folderName, Object object) {
    	
 	   	// 받아온 파일이 비어있다면 함수를 종료시킨다.
 	   	if(delegate == null || delegate.isEmpty() ) 
 	   		return 0;
 	   	
-	   	
+	   	System.out.println("@@@add sotre 대표사진 실행");
 	   	BImageVO vo = (BImageVO)object;
 	   	
 	   	// 대표사진 유무를 'Y' 로 설정해준다.
 	    vo.setDelegatephotoboolean("Y");
-	    String folderName = "business/" + vo.getEstid();
 	      
 	    // S3의 파일 업로드를 시켜준다.
 	    // 결과 값을 반환시켜준다. 

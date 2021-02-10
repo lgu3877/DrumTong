@@ -297,14 +297,18 @@ function displayDeliveryArea() {
 				town.className = "townName";
 				town.innerHTML = townName;
 				
-				// 삽입
-				const townInput = document.createElement("input");
-				townInput.type = "hidden";
-				townInput.name = "deliveryArea";
-				townInput.value = `${district}/${cityName}/${townName}`;
+				// [건욱] 코드 추가 매장 상태가 SUCCESS가 아닐떄
+				if(status !== "SUCCESS"){
+					// 삽입
+					const townInput = document.createElement("input");
+					townInput.type = "hidden";
+					townInput.name = "deliveryArea";
+					townInput.value = `${district}/${cityName}/${townName}`;
+					townCon.appendChild(townInput);
+				}
 				
 				townCon.appendChild(town);
-				townCon.appendChild(townInput);
+				
 			}
 			
 			// 삽입

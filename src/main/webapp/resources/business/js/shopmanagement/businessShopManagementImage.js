@@ -85,6 +85,7 @@ function displayCover() {
 	if (bImageList.length !== 0) {
 		for (let i = 0; i < bImageList.length; i++) {
 			bImageList[i].delegatephotoboolean === "Y" ? img = bImageList[i].storeimg : null;
+			console.log('매장사잔 경로 : ', img);
 		}
 		
 		document.getElementById("main-image").src = "https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + img;

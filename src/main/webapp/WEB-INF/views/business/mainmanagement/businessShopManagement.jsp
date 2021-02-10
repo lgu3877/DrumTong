@@ -658,5 +658,36 @@
 	<!-- 비동기 update (Axios) -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementUpdate.js"></script>
 	
+	<script type="text/javascript">
+		
+// 		// [건욱] 
+// 		// PROCESS 일 때 수정된 데이터를 업데이트 시켜주는 함수.
+// 		if(status === "PROCESS") {
+// 			document.getElementByClassName("submit_btn").onclick = function () {
+				
+// 				// 매장 사진 업데이트
+// 				updatePhoto();
+				
+// 				// 매장 소개글 업데이트
+// 				updateIntro();
+				
+// 				// 매장 메뉴 업데이트
+// 				addService();
+				
+// 				// 배달 지역 업데이트
+// 				updateDelivery();
+				
+// 				// 매장 주소 업데이트
+// 				updateAddress();
+				
+// 				// 매장 status 값 "SUCCESS"으로 변경
+// 				updateStatus();
+// 			}
+// 		}
+		
+// 		function updateStatus() {
+			
+// 		}
+	</script>
 </body>
 </html>
