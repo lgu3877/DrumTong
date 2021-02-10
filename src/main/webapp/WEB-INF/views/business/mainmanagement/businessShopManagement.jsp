@@ -275,7 +275,7 @@
 					</tbody>
 				</table>
 				
-				<div id="posted-service-list"></div>
+				<div id="posted-service-list" class="form"></div>
 			</div>
 		</c:if>
 		</div>

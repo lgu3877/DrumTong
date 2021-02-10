@@ -6,9 +6,7 @@ let copiedList;
 const mainToggle = { }
 
 // 초기 실행
-if(status === "SUCCESS")
-	displayMenu();
-
+if(status === "SUCCESS") displayMenu();
 createAddService();
 createCategoryList(); // 메뉴수정 관련 Modal
 
@@ -79,9 +77,9 @@ function displayMenu() {
 	// main category
 	for (let main in list) {
 		const mainCon = document.createElement("div");
-		const containerId = generateRandomString(10);
+		const mainContainerId = generateRandomString(10);
 		mainCon.className = "menu_main_con";
-		mainCon.id = containerId;
+		mainCon.id = mainContainerId;
 		
 		// wrapper
 		const mainWrapper = document.createElement("div");
@@ -95,11 +93,13 @@ function displayMenu() {
 		mainExIcon.onclick = () => {
 			const isOpened = mainToggle[main];
 			if (!isOpened) {
-				toggleMainCategory(containerId, list[main], main);
-			}
+				mainExIcon.innerHTML = '<i class="fas fa-minus-square"></i>'; // 아이콘 변경 > -
+				toggleMainCategory(mainContainerId, list[main], main);
+			}	
 			else {
 				mainToggle[main] = false;
-				document.getElementById(containerId).getElementsByClassName("menu_sub_con")[0].remove();
+				mainExIcon.innerHTML = '<i class="fas fa-plus-square"></i>'; // 아이콘 변경 > +
+				document.getElementById(mainContainerId).getElementsByClassName("menu_sub_con")[0].remove();
 			}
 		}
 		
@@ -134,19 +134,26 @@ function toggleMainCategory(id, list, main) {
 	// script
 	const mainWrapper = document.getElementById(id);
 	
+	// sub container
+	const subCon = document.createElement("div");
+	const subContainerId = generateRandomString(11);
+	subCon.id = subContainerId;
+	subCon.className = "menu_sub_con";
+	
+	// sub contents
 	for (let sub in list) {
 		// sub toggle
 		subToggle[sub] = false;
 		
-		// sub container
-		const subCon = document.createElement("div");
-		const subContainerId = generateRandomString(10);
-		subCon.id = subContainerId;
-		subCon.className = "menu_sub_con";
-		
 		// wrapper
 		const subWrapper = document.createElement("div");
+		const subWrapperId = generateRandomString(12);
 		subWrapper.className = "menu_sub_wrapper";
+		subWrapper.id = subWrapperId;
+		
+		// sub content container
+		const subContentBox = document.createElement("div");
+		subContentBox.className = "menu_sub_content";
 		
 		// icon
 		const subExIcon = document.createElement("div");
@@ -154,12 +161,14 @@ function toggleMainCategory(id, list, main) {
 		subExIcon.innerHTML = '<i class="fas fa-plus-square"></i>';
 		subExIcon.onclick = () => {
 			const isOpened = subToggle[sub];
-			
+
 			if (!isOpened) {
-				toggleSubCategory(subContainerId, list[sub], subToggle, sub);
+				subExIcon.innerHTML = '<i class="fas fa-minus-square"></i>';
+				toggleSubCategory(subWrapperId, list[sub], subToggle, sub);
 			}
 			else {
 				subToggle[sub] = false;
+				subExIcon.innerHTML = '<i class="fas fa-plus-square"></i>';
 				document.getElementById(subContainerId).getElementsByClassName("menu_detail_con")[0].remove();
 			}
 		}
@@ -174,10 +183,11 @@ function toggleMainCategory(id, list, main) {
 		subAmount.className = "menu_sub_amount"
 		subAmount.innerHTML = list[sub].length;
 		
-		subWrapper.appendChild(subExIcon);
-		subWrapper.appendChild(subTitle);
-		subWrapper.appendChild(subAmount);
-		
+		subContentBox.appendChild(subExIcon);
+		subContentBox.appendChild(subTitle);
+		subContentBox.appendChild(subAmount);
+		subWrapper.appendChild(subContentBox);
+
 		subCon.appendChild(subWrapper);
 		mainWrapper.appendChild(subCon)
 	}
@@ -189,22 +199,24 @@ function toggleSubCategory(id, list, subToggle, sub) {
 	subToggle[sub] = true;
 	
 	// script
-	const subWrapper = document.getElementById(id);
+	const subWrapper = document.getElementById(id);	
+	
+	// detail container
 	const detailCon = document.createElement("div");
-	const detailId = generateRandomString(11);
-	detailCon.id = detailId;
 	detailCon.className = "menu_detail_con";
 	
 	for (let item = 0; item < list.length; item++) {
 		// wrapper
 		const detailWrapper = document.createElement("div");
+		const detailWrapperId = generateRandomString(11);
+		detailWrapper.id = document.createElement("div");;
 		detailWrapper.className = "menu_detail_wrapper";
 		
 		// icon
 		const detailExIcon = document.createElement("div");
 		detailExIcon.className = "menu_detail_icon";
 		detailExIcon.innerHTML = '<i class="fas fa-bars"></i>';
-		detailExIcon.onclick = () => console.log("clicked");
+			// detailExIcon.onclick = () => console.log("clicked");
 		
 		// title
 		const detailInfo = document.createElement("div");
@@ -221,9 +233,9 @@ function toggleSubCategory(id, list, subToggle, sub) {
 			const serviceTime = document.createElement("div");
 			serviceTime.innerHTML = list[item].ete + " (일)";
 		
-		detailInfo.appendChild(serviceName);
-		detailInfo.appendChild(servicePrice);
-		detailInfo.appendChild(serviceTime);
+			detailInfo.appendChild(serviceName);
+			detailInfo.appendChild(servicePrice);
+			detailInfo.appendChild(serviceTime);
 		
 		// total number of services
 		const detailIcon = document.createElement("div");
@@ -235,8 +247,8 @@ function toggleSubCategory(id, list, subToggle, sub) {
 		detailWrapper.appendChild(detailIcon);
 		
 		detailCon.appendChild(detailWrapper);
+		subWrapper.appendChild(detailCon);
 	}
-	subWrapper.appendChild(detailCon)
 }
 
 

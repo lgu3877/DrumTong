@@ -635,6 +635,10 @@
 
 /* sub */
 .menu_sub_wrapper {
+	display: block;
+}
+
+.menu_sub_content {
     margin: 0 0 0 30px;
     display: flex;
     justify-content: space-between;
