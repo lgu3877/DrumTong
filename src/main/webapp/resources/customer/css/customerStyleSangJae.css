@@ -697,24 +697,44 @@ check .option-name,
   pointer-events: none;
 }
 
-.quick {
+.noQuick{
   display: inline-block;
   width: 100px;
-  height:58px;
-  line-height:58px;
+  height:40px;
+  line-height:40px;
+  font-size: small;
+  cursor: not-allowed;
+  color: #EAEAEA;
+  text-align: center;
+}
+
+.quick {
+  display: inline-block;
+  background-color: #EAEAEA;
+  width: 100px;
+  height:40px;
+  line-height:40px;
   font-size: small;
   cursor: pointer;
+  color: #35aefd;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 2.5px 2.5px #d8d8d8;
+}
+
+.quick:hover {
+  box-shadow: -2.5px -2.5px #d8d8d8;
+}
+
+.True {
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-image: url("/drumtong/resources/customer/img/QUICK.png");
+  background-position: center;
+  box-shadow: -2.5px -2.5px #d8d8d8;
 }
 
 .quickcheck {
-  display: none;
-}
-
-.fa-shipping-fast {
-  color: #35aefd;
-}
-
-.quick input[type='checkbox'] {
   display: none;
 }
 
