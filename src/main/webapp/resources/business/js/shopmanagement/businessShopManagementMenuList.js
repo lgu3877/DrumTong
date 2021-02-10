@@ -186,8 +186,6 @@ function toggleSubCategory(id, list, subToggle, sub) {
 	// toggle
 	subToggle[sub] = true;
 	
-	console.log(list);
-	
 	// script
 	const subWrapper = document.getElementById(id);
 	const detailCon = document.createElement("div");
