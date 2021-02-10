@@ -49,12 +49,19 @@
 		const bImageList = ${bImageList};
 		const bManagement = ${bManagement};
 		const bMenu = ${bMenu};
+		console.log("@@@@", bImageList);
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
+		
 		const sido = ${sido};
-		const initialAreas = ${deliveryAreas};
+		
+// 		const initialAreas = ${deliveryAreas};
+// 		const deliveryAreas = ${deliveryAreas};
 		let deliveryAreas = ${deliveryAreas};
-
+		const status = '${status}';
+		console.log(status);
+		console.log(deliveryAreas);
+// 		let deliveryAreas = JSON.parse(JSON.stringify(initialAreas));
 		console.log(deliveryAreas);
 	</script>
 </head>
@@ -127,22 +134,6 @@
 				</c:if>
 				
 				</div>
-				
-			<!-- cover-image input form -->
-			<!-- 	<div id="shop-image-view" class="shop_image_view">
-					<div class="upload_icon_con">
-						<div class="cover_file_text_con">
-							<div class="cover_file_text">
-								<p>
-									기존에 등록된 사진이 있다면, <br>
-									클릭 후 미리보기로 확대해 볼 수 있습니다.<br>
-									사진을등록하지 않으셨다면, <br>
-									아래 추가하기 버튼을 통해 사진을 추가해주세요.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div> -->
 				
 			<!-- image viewer as long as cover image is already uploaded when you visit this page for modification -->
 				<div id="main-image-con" class="main_image_con">
@@ -284,24 +275,7 @@
 					</tbody>
 				</table>
 				
-			<!-- registered table -->
-				<table class="current_menu_table form">
-				<!-- thead -->
-					<thead id="item-list-thead">
-						<tr>
-							<th scope="cols">서비스 유형</th>
-							<th scope="cols">서비스 타입</th>
-							<th scope="cols">메뉴 이름</th>
-							<th scope="cols">가격(배달비)</th>
-							<th scope="cols">소요시간</th>
-							<th scope="cols">수정/삭제</th>
-						</tr>
-					</thead>
-					
-				<!-- tbody -->
-					<tbody id="item-list-tbody"></tbody>
-					
-				</table>
+				<div id="posted-service-list"></div>
 			</div>
 		</c:if>
 		</div>
@@ -516,12 +490,13 @@
 					<div class="main_address_input_wrapper">
 						<input id="main-address" class="main_address_input" type="text" name="mainlocation" value="${mainAddress }" 
 							onfocus="openAddressSearch()">
-						<input id="main-location" type="hidden" name="maplocation">
 						<input type="button" class="address_search_button" onclick="openAddressSearch()" value="주소 찾기">
 					</div>
 					<h3>상세주소</h3>
 					<div class="detail_address_input_wrapper">
 						<input id="detail-address" class="detail_address_input" type="text" name="detaillocation" value="${detailAddress }">
+						<input id="latitude" type="hidden" name="latitude">
+						<input id="longitude" type="hidden" name="longitude">
 						<input id="town-code" type="hidden" name="emdcode">
 					</div>
 				</div>
@@ -536,18 +511,18 @@
 	<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
 	<!-- 	[전체 폼]에 대한 c:if문 -->
 	
-		<c:if test="${status ne 'SUCCESS' }">
-	<!-- 전체 form submit -->
-			<div class="submit_con">
-				<input class="submit_btn" type="submit" value="다음 단계로">
-			</div>
-			</form>
+<%-- 		<c:if test="${status ne 'SUCCESS' }"> --%>
+<!-- 	<!-- 전체 form submit --> -->
+<!-- 			<div class="submit_con"> -->
+<!-- 				<input class="submit_btn" type="submit" value="다음 단계로"> -->
+<!-- 			</div> -->
+<!-- 			</form> -->
 
-		</c:if>
 		
-		<button onclick="updateDeliveryArea()">배달지역 테스트 버튼</button>
-	
-	</section>
+		
+<!-- 		<button onclick="updateDeliveryArea()">배달지역 테스트 버튼</button> -->
+<%-- 		</c:if> --%>
+<!-- 	</section> -->
 		
 		
 <!-- footer -->
@@ -644,6 +619,18 @@
 			const reversedString = string.split("").reverse().join("");
 			const commaAttached = reversedString.replace(/(.{3})/g,"$1,");
 			return commaAttached.split("").reverse().join("");
+		}
+		
+		// 객체 복사(deep copy)
+		function deepCopyObject(object) {
+			let clone = {};
+			for (let key in object) {
+				if( typeof (object[key]) == "object" && object[key] != null)
+					clone[key] = deepCopyObject(object[key]);
+				else
+					clone[key] = object[key];
+			}
+			return clone;
 		}
 	</script>
 	

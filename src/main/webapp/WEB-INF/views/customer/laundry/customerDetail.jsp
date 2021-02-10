@@ -49,7 +49,7 @@
 	}
 </style>
  <!-- 스크립트 영역 -->
-    <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>s
+    <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>
     <script>
       function listUp(event) {
     	  

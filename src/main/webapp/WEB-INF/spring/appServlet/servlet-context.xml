@@ -29,6 +29,7 @@
 	<resources mapping="/customer/css/**" location="/resources/customer/css/" />
 	<resources mapping="/customer/js/**" location="/resources/customer/js/" />
 	<resources mapping="/customer/img/**" location="file:D:/customer/upload/**" />
+	<resources mapping="/customer/img2/**" location="/resources/customer/img/" />
 	<resources mapping="/customer/json/**" location="/resources/customer/json/" />
 	
 

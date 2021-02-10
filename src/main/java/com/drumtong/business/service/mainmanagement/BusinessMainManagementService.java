@@ -1,5 +1,7 @@
 package com.drumtong.business.service.mainmanagement;
 
+import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.support.SQLErrorCodes;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,10 +27,12 @@ import com.drumtong.business.dao.BScheduleDaysDAO;
 import com.drumtong.business.dao.BScheduleTimeDAO;
 import com.drumtong.business.dao.BTempHolidayDAO;
 import com.drumtong.business.dao.BTempSuspensionDAO;
+import com.drumtong.business.vo.BDeliveryAreaListVO;
 import com.drumtong.business.vo.BDeliveryAreaVO;
 import com.drumtong.business.vo.BImageVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BManagementVO;
+import com.drumtong.business.vo.BMenuListVO;
 import com.drumtong.business.vo.BMenuVO;
 import com.drumtong.business.vo.BPrivateDataVO;
 import com.drumtong.business.vo.BScheduleDaysVO;
@@ -174,9 +179,10 @@ public class BusinessMainManagementService {
 	 */
 	@Transactional
 	public ModelAndView shopManagement(HttpServletRequest req, MultipartHttpServletRequest mpf, 
-									   BManagementVO bManagementVO, BMenuVO bMenuVO, 	
-									   BDeliveryAreaVO bDeliveryAreaVO, BInformationVO bInformationVO) {
-		ModelAndView mav = new ModelAndView("redirect:/");
+									   BManagementVO bManagementVO, 
+									   BMenuListVO bMenuVOList, 	
+									   String[] bDeliveryAreaList, BInformationVO bInformationVO) {
+		ModelAndView mav = new ModelAndView("business/mainmanagement/businessScheduleManagement");
 		
 		HttpSession Session = req.getSession();
 		
@@ -218,27 +224,33 @@ public class BusinessMainManagementService {
 		// 다중 이미지 업로드이기 떄문에 multipleUpload 메서드를 호출해준다.
 		BImageVO bImageVO = new BImageVO();
 		bImageVO.setEstid(estid);	// ESTID를 세팅하는 이유는 S3 저장방식이 ESTID(폴더명)/ESTID + UUID로 저장되기 때문에 sql문에 필요하다.
+		
+		// AWS 파일 여러개 입력
 		aws.multipleUpload(mpf, folderName, bImageVO, req);
 		
-		// 처음부터 데이터가 들어가있기 떄문에 null 체크를 해준다.
-		System.out.println("binforvo null check : " + bInformationVO.getMainlocation());
-		
-		if(bInformationVO != null)
-			bInformationDAO.updateLocation(bInformationVO);
+		System.out.println("updateLocation 실행 ... ");
+		System.out.println("detalilocation : " + bInformationVO.getDetaillocation());
+		System.out.println("latitude : " + bInformationVO.getLatitude());
+		System.out.println("Longitude : " + bInformationVO.getLongitude());
+		System.out.println("EMDCODE : " + bInformationVO.getEmdcode());
+		bInformationVO.setEstid(estid);
+		bInformationDAO.updateLocation(bInformationVO);
 	    
 	    
 	    switch(status) {
 				
 			case "FAIL" :
 				
-				System.out.println(bMenuVO.getEstid());
-				bMenuVO.setEstid(estid);
-				// 3. 메뉴 테이블에  {메뉴이름, 가격, 퀵가격, 예상소요시간}를 업데이트 시켜준다.
-				int BMenuResult = bMenuDAO.insertConstract(bMenuVO);
+				
+				// bMenuList의 데이터를 입력해주는 함수입니다.
+				ArrayList<BMenuVO> dataBindingBMenuList= dataBindingBMenuVO(bMenuVOList,estid);
+				int result2 = bMenuListInsertConstractToDAO(dataBindingBMenuList);
+				
 				
 				// 4. 배달지역 테이블에  해당 매장의 배달가능한 지역의 {시도,시군구,시구,읍면동}를 업데이트 시켜준다.
-				bDeliveryAreaVO.setEstid(estid);
-				int BDeliveryAreaResult = bDeliveryAreaDAO.insertConstract(bDeliveryAreaVO);
+				ArrayList<BDeliveryAreaVO> dataBindingBDeliveryList = 
+														dataBindingBDeliveryAreaVO(bDeliveryAreaList, estid);
+				int result3 = bDeliveryInsertAreatoDAO(dataBindingBDeliveryList);
 				
 				// 5. 2차 온라인 계약 매장관리가 작성이 완료되었으면 status = 'Process' 로 변경시켜준다.
 				HashMap<String, String> map = new HashMap<String,String>();
@@ -292,6 +304,107 @@ public class BusinessMainManagementService {
 		return mav;
 	}
 
+
+	private ArrayList<BDeliveryAreaVO> dataBindingBDeliveryAreaVO(String[] bDeliveryAreaList,
+			String estid) {
+		ArrayList<BDeliveryAreaVO> dataBindingList = new ArrayList<BDeliveryAreaVO>();
+		
+		for(int i = 0; i < bDeliveryAreaList.length; i++ ) {
+			BDeliveryAreaVO bDeliveryAreaVO = new BDeliveryAreaVO();
+			String[] areaTMP = bDeliveryAreaList[i].split("/");
+
+			bDeliveryAreaVO.setAddressa(areaTMP[0]);
+			bDeliveryAreaVO.setAddressb(areaTMP[1]);
+			bDeliveryAreaVO.setAddressc(areaTMP[2]);
+			
+			dataBindingList.add(bDeliveryAreaVO);
+		}
+		
+		return dataBindingList;
+	}
+
+
+	private ArrayList<BMenuVO> dataBindingBMenuVO(BMenuListVO bMenuVOList, String estid) {
+		System.out.println("insertContract foreach 실행...");
+		System.out.println("test : " + bMenuVOList.getName().length);
+		
+		ArrayList<BMenuVO> dataBindingList = new ArrayList<BMenuVO>();
+		
+		for(int i = 0; i < bMenuVOList.getMaincategory().length; i++ ) {
+			System.out.println("estid : " + estid);
+			
+			System.out.println("getMaincategory : " + bMenuVOList.getMaincategory()[i]);
+			System.out.println("getSubcategory : " + bMenuVOList.getSubcategory()[i]);
+			System.out.println("getName : " + bMenuVOList.getName()[i]);
+			System.out.println("getPrice : " + bMenuVOList.getPrice()[i]);
+			System.out.println("getEte : " + bMenuVOList.getEte()[i]);
+			try {
+				System.out.println("getQuickprice : " + bMenuVOList.getQuickprice()[i]);
+			}
+			catch (Exception e) {
+				System.out.println("에러발생");
+			}
+			
+			BMenuVO bMenuVO = new BMenuVO();
+			bMenuVO.setEstid(estid);
+			bMenuVO.setMaincategory(bMenuVOList.getMaincategory()[i]);
+			bMenuVO.setSubcategory(bMenuVOList.getSubcategory()[i]);
+			bMenuVO.setName(bMenuVOList.getName()[i]);;
+			bMenuVO.setPrice(bMenuVOList.getPrice()[i]);
+			bMenuVO.setEte(bMenuVOList.getEte()[i]);
+			
+			try {
+				bMenuVO.setQuickprice(bMenuVOList.getQuickprice()[i]);
+			}
+			catch (NullPointerException e) {
+				System.out.println("해당 값이 존재하지 않습니다 \n 오류문구 : " + e);
+			}
+			
+			dataBindingList.add(bMenuVO);
+		}
+		return dataBindingList;
+	}
+
+	// bMenuList 를 분리시켜서 bMenu 정보를 입력시켜줍니다.
+		private int bMenuListInsertConstractToDAO(ArrayList<BMenuVO> dataBindingBMenuList) {
+			
+			for(BMenuVO bMenuVO : dataBindingBMenuList) {
+				try {
+					bMenuDAO.insertBMenu(bMenuVO);
+				}
+				catch(Exception e) {
+					System.out.println(e);
+					return 0;
+				}
+				
+			}
+			
+			return 1;
+		}
+	// 매장 배달지역을 분리시켜서 Bdevliveryareas 정보를 입력시켜줍니다.
+	private int bDeliveryInsertAreatoDAO(ArrayList<BDeliveryAreaVO> dataBindingBDeliveryList) {
+		
+//		System.out.println("bDeliveryAreaVOList Size : " + bDeliveryAreaVOList.getBdeliveryarealistvo().size());
+//		
+//		for(BDeliveryAreaVO bDeliveryAreaVO : bDeliveryAreaVOList.getBdeliveryarealistvo()) {
+//			System.out.println("실행");
+//			
+//			System.out.println("getAddressa : " + bDeliveryAreaVO.getAddressa());
+//			System.out.println("getAddressb : " + bDeliveryAreaVO.getAddressb());
+//			System.out.println("getAddressc : " + bDeliveryAreaVO.getAddressc());
+//			System.out.println("getEstid : " + bDeliveryAreaVO.getEstid());
+//			
+//			bDeliveryAreaVO.setEstid(estid);
+//			int BDeliveryAreaResult = bDeliveryAreaDAO.insertConstract(bDeliveryAreaVO);
+//			
+//		}
+		
+		
+		return 0;
+	}
+
+
+	
 
 
 	private BManagementVO setDeliveryBooleanAndType(BManagementVO bManagementVO) {

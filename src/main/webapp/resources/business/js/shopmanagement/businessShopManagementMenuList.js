@@ -2,14 +2,245 @@
 let singleList = document.querySelector('.single_item_selector');
 let copiedList;
 
+// main toggle
+const mainToggle = { }
 
 // 초기 실행
-displayMenu();
+if(status === "SUCCESS")
+	displayMenu();
+
 createAddService();
 createCategoryList(); // 메뉴수정 관련 Modal
 
+
 // 메뉴 생성
 function displayMenu() {
+
+	// object 생성
+	let list = {};
+	for (let item = 0; item < bMenu.length; item++) {
+		const menu = bMenu[item];
+		
+		const isMainIncluded = Object.keys(list).includes(menu.maincategory);
+		
+		// 메인 카테고리 있음
+		if (isMainIncluded) {
+			const isSubIncluded = Object.keys(list[menu.maincategory]).includes(menu.subcategory);
+			
+			// 서브카테고리 있음
+			if (isSubIncluded) {
+				const detailInfo = {
+						name : menu.name,
+						price : menu.price,
+						quickprice: menu.quickprice || 0,
+						ete : menu.ete,
+						estid : menu.estid,
+					}
+				
+				list[menu.maincategory][menu.subcategory].push(detailInfo);
+			}
+			
+			// 서브카테고리 없음
+			else {
+				list[menu.maincategory][menu.subcategory] = [{
+					name : menu.name,
+					price : menu.price,
+					quickprice: menu.quickprice || 0,
+					ete : menu.ete,
+					estid : menu.estid,
+				}]
+			}
+		}
+		
+		// 메인 카테고리 없음
+		else {
+			list[menu.maincategory] = {
+				[menu.subcategory] : [{
+					name : menu.name,
+					price : menu.price,
+					quickprice : menu.quickprice || 0,
+					ete : menu.ete,
+					estid : menu.estid,
+				}]
+			}			
+		}
+	}
+	
+	// toggle switch
+	const mainCategories = Object.keys(list);
+	for (let i = 0; i < mainCategories.length; i++) {
+		mainToggle[mainCategories[i]] = false;
+	}
+	console.log(mainToggle);
+	
+	// menu list 생성
+	const container = document.getElementById("posted-service-list");
+	
+	// main category
+	for (let main in list) {
+		const mainCon = document.createElement("div");
+		const containerId = generateRandomString(10);
+		mainCon.className = "menu_main_con";
+		mainCon.id = containerId;
+		
+		// wrapper
+		const mainWrapper = document.createElement("div");
+		mainWrapper.className = "menu_main_wrapper";
+		
+
+		// icon
+		const mainExIcon = document.createElement("div");
+		mainExIcon.className = "menu_main_icon";
+		mainExIcon.innerHTML = '<i class="fas fa-plus-square"></i>';
+		mainExIcon.onclick = () => {
+			const isOpened = mainToggle[main];
+			if (!isOpened) {
+				toggleMainCategory(containerId, list[main], main);
+			}
+			else {
+				mainToggle[main] = false;
+				document.getElementById(containerId).getElementsByClassName("menu_sub_con")[0].remove();
+			}
+		}
+		
+		// title
+		const mainTitle = document.createElement("div");
+		mainTitle.className = "menu_main_title";
+		mainTitle.innerHTML = main;
+		
+		// total number of services
+		const mainAmount = document.createElement("div");
+		mainAmount.className = "menu_main_amount"
+		mainAmount.innerHTML = measureAmount(list[main]);
+		
+		
+		mainWrapper.appendChild(mainExIcon);
+		mainWrapper.appendChild(mainTitle);
+		mainWrapper.appendChild(mainAmount);
+		
+		mainCon.appendChild(mainWrapper);
+		container.appendChild(mainCon);
+	}
+}
+
+// 서비스 메뉴 > 리스트 > 클릭 이벤트(메인 > 서브)
+function toggleMainCategory(id, list, main) {
+	// toggle
+	mainToggle[main] = true;
+	
+	// sub toggle object
+	const subToggle = { };
+	
+	// script
+	const mainWrapper = document.getElementById(id);
+	
+	for (let sub in list) {
+		// sub toggle
+		subToggle[sub] = false;
+		
+		// sub container
+		const subCon = document.createElement("div");
+		const subContainerId = generateRandomString(10);
+		subCon.id = subContainerId;
+		subCon.className = "menu_sub_con";
+		
+		// wrapper
+		const subWrapper = document.createElement("div");
+		subWrapper.className = "menu_sub_wrapper";
+		
+		// icon
+		const subExIcon = document.createElement("div");
+		subExIcon.className = "menu_sub_icon";
+		subExIcon.innerHTML = '<i class="fas fa-plus-square"></i>';
+		subExIcon.onclick = () => {
+			const isOpened = subToggle[sub];
+			
+			if (!isOpened) {
+				toggleSubCategory(subContainerId, list[sub], subToggle, sub);
+			}
+			else {
+				subToggle[sub] = false;
+				document.getElementById(subContainerId).getElementsByClassName("menu_detail_con")[0].remove();
+			}
+		}
+		
+		// title
+		const subTitle = document.createElement("div");
+		subTitle.className = "menu_sub_title";
+		subTitle.innerHTML = sub;
+		
+		// total number of services
+		const subAmount = document.createElement("div");
+		subAmount.className = "menu_sub_amount"
+		subAmount.innerHTML = list[sub].length;
+		
+		subWrapper.appendChild(subExIcon);
+		subWrapper.appendChild(subTitle);
+		subWrapper.appendChild(subAmount);
+		
+		subCon.appendChild(subWrapper);
+		mainWrapper.appendChild(subCon)
+	}
+}
+
+// 서비스 메뉴 > 리스트 > 클릭 이벤트(서브 > 디테일)
+function toggleSubCategory(id, list, subToggle, sub) {
+	// toggle
+	subToggle[sub] = true;
+	
+	// script
+	const subWrapper = document.getElementById(id);
+	const detailCon = document.createElement("div");
+	const detailId = generateRandomString(11);
+	detailCon.id = detailId;
+	detailCon.className = "menu_detail_con";
+	
+	for (let item = 0; item < list.length; item++) {
+		// wrapper
+		const detailWrapper = document.createElement("div");
+		detailWrapper.className = "menu_detail_wrapper";
+		
+		// icon
+		const detailExIcon = document.createElement("div");
+		detailExIcon.className = "menu_detail_icon";
+		detailExIcon.innerHTML = '<i class="fas fa-bars"></i>';
+		detailExIcon.onclick = () => console.log("clicked");
+		
+		// title
+		const detailInfo = document.createElement("div");
+		detailInfo.className = "menu_detail_info_con";
+		detailInfo.id = list.estid;
+		
+			// detail info
+			const serviceName = document.createElement("div");
+			serviceName.innerHTML = list[item].name;
+			
+			const servicePrice = document.createElement("div");
+			servicePrice.innerHTML = list[item].price + " (원)";
+			
+			const serviceTime = document.createElement("div");
+			serviceTime.innerHTML = list[item].ete + " (일)";
+		
+		detailInfo.appendChild(serviceName);
+		detailInfo.appendChild(servicePrice);
+		detailInfo.appendChild(serviceTime);
+		
+		// total number of services
+		const detailIcon = document.createElement("div");
+		detailIcon.className = "menu_detail_option"
+		detailIcon.innerHTML = '<i class="far fa-edit"></i>';
+		
+		detailWrapper.appendChild(detailExIcon);
+		detailWrapper.appendChild(detailInfo);
+		detailWrapper.appendChild(detailIcon);
+		
+		detailCon.appendChild(detailWrapper);
+	}
+	subWrapper.appendChild(detailCon)
+}
+
+
+function displayMenus() {
 	const tbody = document.getElementById("item-list-tbody");
 	
 	// 테이플 행 카운트 > 짝수 번째 하이라이트
@@ -175,8 +406,12 @@ function createAddService() {
 		mainSelectorDirectInput.id = directRandomId;
 		mainSelectorDirectInput.type = "text";
 		mainSelectorDirectInput.className = "direct_type_input";
-		mainSelectorDirectInput.name = "maincategory";
+//		mainSelectorDirectInput.name = "maincategory";
 		mainSelectorDirectInput.placeholder = "서비스 입력";
+		mainSelectorDirectInput.onchange = () => changeSelectBoxName(selectorRandomId,directRandomId, "maincategory");
+
+		
+		
 		mainSelectorDirectInput.style.display = "none";
 	
 			// 추가
@@ -211,6 +446,8 @@ function createAddService() {
 		subDirectInput.style.display = "none";
 		subDirectInput.maxlength = "10";
 		
+		subDirectInput.onchange = () => changeSelectBoxName(subSelectorRandomId,subDirectRandomId, "subcategory");
+
 		
 		// 추가
 		subSelector.appendChild(option);
@@ -290,7 +527,13 @@ function createAddService() {
 			container.appendChild(singleServiceInputCon);
 }
 
-
+// [건욱] Select 박스의 이름을 결정해주는 함수입니다 (POST 형식일 때 Spring에서 데이터 바인딩을 제대로 해주기 위해서 설정하는 함수.)
+function changeSelectBoxName(selectID, inputID, type) {
+	let name = (type === "maincategory") ? "maincategory" : "subcategory";
+	console.log("changename : ", name);
+	document.getElementById(selectID).name = name + "SelectBox"
+	document.getElementById(inputID).name = name;
+}	
 // 메인 옵션 생성
 function createOptions(mainSelector, modifyBoolean) {
 	// placeholder
@@ -723,7 +966,7 @@ function modifyMenu(id) {
 			const mainSelector = document.createElement("select");
 			mainSelector.id = mainSelectorId;
 			mainSelector.className = "service_selector";
-			mainSelector.name = "maincategory";
+			mainSelector.name = "maincategorySelectBox";
 //			mainSelector.addEventListener("change", (e) => selectMainOption(e, directRandomId, subSelectorRandomId, subDirectRandomId));
 			
 			// 서브옵션 생성
@@ -747,7 +990,7 @@ function modifyMenu(id) {
 			const subSelector = document.createElement("select");
 			subSelector.id = subSelectorId;
 			subSelector.className = "service_selector";
-			subSelector.name = "subcategory";
+			subSelector.name = "subcategorySelectBox";
 //			subSelector.addEventListener("change", (e) => selectSubOption(e, subDirectRandomId));
 			
 			// 추가
@@ -971,20 +1214,12 @@ function attachSubCategories(subCategory) {
 
 
 
+function measureAmount(object) {
+	let sum = 0;
 
-//function insertComma(string) {
-//const reversedString = string.split("").reverse().join("");
-//const commaAttached = reversedString.replace(/(.{3})/g,"$1,");
-//return commaAttached.split("").reverse().join("");
-//
-//메모
-//const length = string.length;
-//const numberOfZero = 
-//	length <= 3 ?
-//		0 : 
-//		length % 3 === 0 ? (length / 3) -1 : (length / 3);
-//
-//	for (let i = numberOfZero; i > 0; i--) {
-//	reversedString[numberOfZero * 3]
-//}
-//}
+	for (let key in object) {
+		sum += object[key].length;
+	}		
+		
+	return sum;
+}
