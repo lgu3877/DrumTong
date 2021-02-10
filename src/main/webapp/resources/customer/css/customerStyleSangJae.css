@@ -628,7 +628,51 @@ body .section-bookmark .bookmark_mainName {
 .detailview-options{
 	height:810px;
 }
-
+div.detailview-mainCate, div.detailview-subCate{
+	width:570px;
+}
+div.mainButton, div.mainButton_select{
+	display: inline-flex;
+		width: 140px;
+	border-radius: 10px;
+	font-size: 20pt;
+	margin: 1px;
+	cursor: pointer;
+	justify-content: center;
+}
+div.mainButton{
+	border: 2px solid #35AEFD;
+}
+div.mainButton_select{
+	border: 5px solid #35AEFD;
+	
+}
+div.mainButton:hover{
+	background-color: #35AEFD;
+	color:white;
+	font-weight: bold;
+}
+div.subButton, div.subButton_select{
+	display: inline-flex;
+		width: 140px;
+	border-radius: 10px;
+	font-size: 20pt;
+	margin: 1px;
+	cursor: pointer;
+	justify-content: center;
+}
+div.subButton{
+	border: 2px solid skyblue;
+}
+div.subButton_select{
+	border: 5px solid skyblue;
+	
+}
+div.subButton:hover{
+	background-color: skyblue;
+	color:white;
+	font-weight: bold;
+}
 .detailview-selectOptions {
   display: flex;
   flex-direction: column;

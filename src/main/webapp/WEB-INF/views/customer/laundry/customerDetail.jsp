@@ -3,51 +3,6 @@
 <%@ include file="../main/customerHeader.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<style>
-	div.detailview-mainCate, div.detailview-subCate{
-		width:570px;
-	}
-	div.mainButton, div.mainButton_select{
-		display: inline-flex;
- 		width: 140px;
-		border-radius: 10px;
-		font-size: 20pt;
-		margin: 1px;
-		cursor: pointer;
-	}
-	div.mainButton{
-		border: 2px solid #35AEFD;
-	}
-	div.mainButton_select{
-		border: 5px solid #35AEFD;
-		
-	}
-	div.mainButton:hover{
-		background-color: #35AEFD;
-		color:white;
-		font-weight: bold;
-	}
-	div.subButton, div.subButton_select{
-		display: inline-flex;
- 		width: 140px;
-		border-radius: 10px;
-		font-size: 20pt;
-		margin: 1px;
-		cursor: pointer;
-	}
-	div.subButton{
-		border: 2px solid skyblue;
-	}
-	div.subButton_select{
-		border: 5px solid skyblue;
-		
-	}
-	div.subButton:hover{
-		background-color: skyblue;
-		color:white;
-		font-weight: bold;
-	}
-</style>
  <!-- 스크립트 영역 -->
     <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>
     <script>
@@ -324,8 +279,10 @@
 
            	<div class="detailview-mainCate" id="mainCate">
            	</div>
+           	<hr>
            	<div class="detailview-subCate" id="subCate">
            	</div>
+           	<br>
             <div class="detailview-selectOptions" id="detailview-selectOptions">
             </div>
           </div>
