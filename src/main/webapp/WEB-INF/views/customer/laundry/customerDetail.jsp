@@ -116,6 +116,7 @@
         orders = document.querySelectorAll('.selected-row');
         quickText = document.getElementById('select-quick');	// 퀵 요금
         totalText = document.getElementById('select-total');	// 토탈 요금
+        priceText = document.getElementById('modal-price').children[0]; // 모달창 결제 금액
 
         deliCheck = document.getElementById('deli-check');
 
@@ -133,9 +134,8 @@
           price = orders[i].children[2].innerText.split(' ')[0];
           quick = 0;
 
-          if (orders[i].children[3].children[0].checked) {
+          if (orders[i].children[3].children[0].checked)
             quick = orders[i].children[3].children[0].value;
-          }
 
           quickCal = parseInt(quantity) * parseInt(quick);
 
@@ -144,8 +144,9 @@
           totalPrice += parseInt(quantity) * parseInt(price) + quickCal;
         }
       
-        quickText.innerText = 'Quick 요금 : ' +quickPrice +' 원';
-        totalText.innerText = 'Total : '+totalPrice+' 원';
+        quickText.innerText = 'Quick 요금 : ' + quickPrice +' 원';
+        totalText.innerText = 'Total : '+ totalPrice + ' 원';
+        priceText.innerText = totalPrice;
       }
     </script>
     
@@ -503,25 +504,43 @@
         </div>
         <div class="modal-payment">
           <div class="modal-payment-head">
-            나의 카드
+            결제
             <div class="close">&times;</div>
           </div>
           <textarea readonly>
            약관을 읽고 동의해주세요 
           </textarea>
           <select class="modal-myCardList">
-            <option>국민 0030 3304 0240 0030</option>
-            <option>기업 0030 3304 0240 0030</option>
+            <option selected>포인트 결제</option>
           </select>
-          <div class="modal-check">
-            <label><input type="checkbox" />현금영수증 신청하기</label>
-          </div>
-          <div class="modal-check">
-            <label><input type="checkbox" />현금영수증 신청하기</label>
-          </div>
-          <div class="modal-price">total 10000원</div>
+          <div id="modal-price" class="modal-price">결제 금액 : <span></span> 원</div>
+          <div class="modal-price">현재 포인트 : <span>${myPoint }</span> 원</div>
           <button class="modal-submit" id="modal-submit">결제하기</button>
         </div>
+<!--         <div class="modal-total"> -->
+<!--           total -->
+<!--         </div> -->
+<!--         <div class="modal-payment"> -->
+<!--           <div class="modal-payment-head"> -->
+<!--             나의 카드 -->
+<!--             <div class="close">&times;</div> -->
+<!--           </div> -->
+<!--           <textarea readonly> -->
+<!--            약관을 읽고 동의해주세요  -->
+<!--           </textarea> -->
+<!--           <select class="modal-myCardList"> -->
+<!--             <option>국민 0030 3304 0240 0030</option> -->
+<!--             <option>기업 0030 3304 0240 0030</option> -->
+<!--           </select> -->
+<!--           <div class="modal-check"> -->
+<!--             <label><input type="checkbox" />현금영수증 신청하기</label> -->
+<!--           </div> -->
+<!--           <div class="modal-check"> -->
+<!--             <label><input type="checkbox" />현금영수증 신청하기</label> -->
+<!--           </div> -->
+<!--           <div class="modal-price">total 10000원</div> -->
+<!--           <button class="modal-submit" id="modal-submit">결제하기</button> -->
+<!--         </div> -->
       </div>
 
       <div class="modal-content3" id="modal-content3">
@@ -708,8 +727,6 @@
          //수량 바뀌는 이벤트 리스너를 이곳에서 삽입
          document.getElementById('selected-List').addEventListener('change', calTotal);
          
-    	console.log("User");
-    	console.log(User);
     </script>
     
     <script type="text/javascript">	// 승원 작업 - 구글 차트

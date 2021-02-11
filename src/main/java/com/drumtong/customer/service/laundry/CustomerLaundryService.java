@@ -25,6 +25,7 @@ import com.drumtong.business.vo.BMenuVO;
 import com.drumtong.business.vo.MenuList;
 import com.drumtong.business.vo.ReviewList;
 import com.drumtong.customer.dao.CBookmarkDAO;
+import com.drumtong.customer.dao.CPaymentDAO;
 import com.drumtong.customer.vo.CPrivateDataVO;
 import com.drumtong.security.MenuListSetting;
 import com.drumtong.security.Review;
@@ -38,6 +39,7 @@ public class CustomerLaundryService {
 	@Autowired BMenuDAO bMenuDAO;
 	@Autowired CBookmarkDAO cBookmarkDAO;
 	@Autowired BImageDAO bImageDAO;
+	@Autowired CPaymentDAO cPaymentDAO;
 	
 	// 검색 페이지 이동 [GET]
 	public ModelAndView search() {
@@ -45,7 +47,7 @@ public class CustomerLaundryService {
 		return mav;
 	}
 	
-	public ModelAndView detail(HttpServletRequest req, String estid) {
+	public ModelAndView detail(HttpServletRequest req, String estid) {	// 추가해야할 부분 : cpayment
 		if(estid == null) {
 			return new ModelAndView("customer/");
 		}
@@ -63,18 +65,18 @@ public class CustomerLaundryService {
 		// 쿠폰(할인가격, 기간, 최소금액, 중복가능여부) 객체를 유효기간에 해당하는 리스트만 불러왔음
 		List<BCouponVO> bCouponVO = comparePeriod(bCouponDAO.select(estid));
 		
-		// 메뉴 정보(메뉴이름, 가격, 퀵 가격, 예상소요시간)를 저장한 객체(오름차순)
-		List<BMenuVO> bMenuVO = bMenuDAO.select(estid);
+		// 메뉴 정보(메뉴이름, 가격, 퀵 가격, 예상소요시간)를 저장한 객체
 		MenuList menuList = MenuListSetting.selectMenuList(estid);
-		mav.addObject("menuList", new Gson().toJson(menuList));
 		
+		// 리뷰
 		List<ReviewList> ReviewList = Review.selectList(estid, "whole");
+		
 		
 		mav.addObject("bInformationVO", bInformationVO);
 		mav.addObject("bManagementVO", bManagementVO);
 		if(bImageVO != null) mav.addObject("bImageVO", new Gson().toJson(bImageVO));
 		mav.addObject("bCouponVO", bCouponVO);
-		mav.addObject("bMenuVO", bMenuVO);
+		mav.addObject("menuList", new Gson().toJson(menuList));
 		mav.addObject("ReviewList", new Gson().toJson(ReviewList));
 		
 		// 로그인 되어있을 때 쿠폰 정보, 북마크 체크 여부
@@ -88,6 +90,10 @@ public class CustomerLaundryService {
 			// 고객이 가지고 있으면서 해당 사업장 쿠폰이고 사업장에 유효한(삭제X, 유효기간O) 쿠폰일 때
 			List<BCouponVO> CouponList = comparePeriod(bCouponDAO.selectUsableCoupon(map));
 			mav.addObject("CouponList", CouponList);
+			
+			// 고객 포인트 정보
+			int myPoint = cPaymentDAO.select(Login.getMemberid()).getPoint();
+			mav.addObject("myPoint", myPoint);
 			
 			mav.addObject("Bookmark", (cBookmarkDAO.isCheck(map) != null) ? "y" : "n");
 		}
