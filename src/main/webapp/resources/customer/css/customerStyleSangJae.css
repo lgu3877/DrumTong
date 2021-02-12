@@ -1128,8 +1128,7 @@ check .option-name,
 .section-menu{
 	height:600px;
 }
-.section-bookmark,{
-.section-orderlist
+.section-bookmark, 	.section-orderlist{
 	height:auto;
 }
 
