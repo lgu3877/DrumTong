@@ -4,7 +4,7 @@
 	<footer>
 		<div class="footer_main">
 			<p class="footer_p">
-			(주) Laundry <br> <br>대표이사: 황도현, 김상재, 이건욱, 이영경
+			(주) Laundry <br> <br>대표이사: 이건욱, 이영경, 양의진, 이승원, 황도현, 김상재 
 			</p>
 		</div>
 	</footer>
