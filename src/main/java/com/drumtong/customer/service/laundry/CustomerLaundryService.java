@@ -75,7 +75,7 @@ public class CustomerLaundryService {
 		mav.addObject("bInformationVO", bInformationVO);
 		mav.addObject("bManagementVO", bManagementVO);
 		if(bImageVO != null) mav.addObject("bImageVO", new Gson().toJson(bImageVO));
-		mav.addObject("bCouponVO", bCouponVO);
+		mav.addObject("bCouponVO", new Gson().toJson(bCouponVO));
 		mav.addObject("menuList", new Gson().toJson(menuList));
 		mav.addObject("ReviewList", new Gson().toJson(ReviewList));
 		

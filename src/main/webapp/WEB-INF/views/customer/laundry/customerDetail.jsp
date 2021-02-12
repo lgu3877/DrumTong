@@ -6,6 +6,27 @@
  <!-- 스크립트 영역 -->
     <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>
     <script>
+    	function couponSettings(){ // 쿠폰 다운로드 세팅 메서드
+    		modalCouponList = document.getElementById('modal-couponList');
+    		couponList = ${bCouponVO };
+    		console.log(couponList);
+    		
+    		couponList.forEach(cl => {
+    			couponOption = document.createElement('option');
+    			couponOption.setAttribute('value', cl.couponid);
+    			couponOption.innerHTML = cl.discount + '원 할인/' + cl.minimumprice + '원 이상[' + cl.period + ']';
+    			
+    			modalCouponList.appendChild(couponOption);
+    		})
+    		
+    	}
+    </script>
+    <script>
+    	function myCouponSettings(){ // 내 쿠폰을 현재 결제
+    		myCouponList = document.getElementById()
+    	}
+    </script>
+    <script>
       function listUp(event) {
     	  
         choose = event.target;
@@ -300,9 +321,9 @@
                        <option>선택하기</option>
                  <c:choose>
                     <c:when test="${cLogin != null }">
-                       <c:forEach items="${CouponList }" var="co">
-                         <option value="${co.minimumprice }" disabled="disabled">${co.discount }원 할인/${co.minimumprice }원 이상[${co.period }]</option>
-                       </c:forEach>
+<%--                        <c:forEach items="${CouponList }" var="co"> --%>
+<%--                          <option value="${co.minimumprice }">${co.discount }원 할인/${co.minimumprice }원 이상[${co.period }]</option> --%>
+<%--                        </c:forEach> --%>
                     </c:when>
                     <c:otherwise>
                        <option disabled>로그인 후 이용가능</option>
@@ -365,7 +386,6 @@
 // 		imgList.forEach(img =>{
 // 			imgBoxs[i++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + img.storeimg;
 // 		})
-		
 		menuList = ${menuList};
 		mainCtList = Object.keys(menuList.menuList);
 		mainCategory = document.getElementById('mainCate');
@@ -490,11 +510,7 @@
       <!-- Modal content -->
 
       <div class="modal-content1" id="modal-content1">
-        <select class="modal-couponList" id="modal-couponList">
-        <c:forEach items="${bCouponVO }" var="bco">
-          <option value="${bco.couponid }">${bco.discount }원 할인/${bco.minimumprice }원 이상[${bco.period }]</option>
-        </c:forEach>
-        </select>
+        <select class="modal-couponList" id="modal-couponList"></select>
         <button class="modal-addCoupon" id="modal-addCoupon">받기</button>
       </div>
 
@@ -517,30 +533,6 @@
           <div class="modal-price">현재 포인트 : <span>${myPoint }</span> 원</div>
           <button class="modal-submit" id="modal-submit">결제하기</button>
         </div>
-<!--         <div class="modal-total"> -->
-<!--           total -->
-<!--         </div> -->
-<!--         <div class="modal-payment"> -->
-<!--           <div class="modal-payment-head"> -->
-<!--             나의 카드 -->
-<!--             <div class="close">&times;</div> -->
-<!--           </div> -->
-<!--           <textarea readonly> -->
-<!--            약관을 읽고 동의해주세요  -->
-<!--           </textarea> -->
-<!--           <select class="modal-myCardList"> -->
-<!--             <option>국민 0030 3304 0240 0030</option> -->
-<!--             <option>기업 0030 3304 0240 0030</option> -->
-<!--           </select> -->
-<!--           <div class="modal-check"> -->
-<!--             <label><input type="checkbox" />현금영수증 신청하기</label> -->
-<!--           </div> -->
-<!--           <div class="modal-check"> -->
-<!--             <label><input type="checkbox" />현금영수증 신청하기</label> -->
-<!--           </div> -->
-<!--           <div class="modal-price">total 10000원</div> -->
-<!--           <button class="modal-submit" id="modal-submit">결제하기</button> -->
-<!--         </div> -->
       </div>
 
       <div class="modal-content3" id="modal-content3">
@@ -594,6 +586,10 @@
 
     <!-- 스크립트 영역 -->
     <script type="text/javascript">
+      cLogin = '${cLogin}';
+      console.log('cLogin', cLogin === null, cLogin === '');
+      console.log(cLogin);
+      console.log('cLogin', cLogin !== null, cLogin !== '');
       // Get the modal
        var modal = document.getElementById('myModal');
 
@@ -625,10 +621,13 @@
             }  
          modal.style.display = 'block';
          modalContent1.style.display = 'flex';
-         document.getElementsByClassName('select-coupon').reload;
        };
 
        btn2.onclick = function () {
+    	 if(document.getElementById('selected-List').children.length == 0){
+    		 alert('주문 목록이 비었습니다.');
+    		 return;
+    	 }
          modal.style.display = 'block';
           
         //로그인이 안되있으면 이 문장을 수행
@@ -665,9 +664,9 @@
               await axios.post('/drumtong/customer/laundry/customerDetail/rest/addCoupon/', ob)
               .then ((response) => {
                  if(response.data === true){
-                    console.log("쿠폰 발급 성공");
+                	alert('발급 성공');
                  } else {
-                    console.log("쿠폰 발급 실패");
+                	alert('이미 발급받은 쿠폰입니다.');
                  }
                  modal.style.display = 'none';
                  modalContent1.style.display = 'none';
@@ -885,6 +884,14 @@
     	this.querySelector('p').style.color = '#1564F9';
     });
     
+    </script>
+    <script>
+    	// 로그인 했을 때 초기화
+    	function initLogin(){
+    		
+    	}
+
+    	couponSettings();
     </script>
 
 
