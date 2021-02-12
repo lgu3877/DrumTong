@@ -45,10 +45,9 @@ public class BusinessMainManagementController {
 	public ModelAndView shopManagement( HttpServletRequest req,MultipartHttpServletRequest mpf,
 									   BManagementVO bManagementVO, 
 									   BMenuListVO  bMenuVOList, 
-									   String[] deliveryArea,
-									   BInformationVO bInformationVO
-										) {
-		return svc.shopManagement(req,mpf,bManagementVO, bMenuVOList, deliveryArea, bInformationVO);
+									   String[] bDeliveryAreaList,
+									   BInformationVO bInformationVO) {
+		return svc.shopManagement(req,mpf,bManagementVO, bMenuVOList, bDeliveryAreaList, bInformationVO);
 	}
 	
 	
