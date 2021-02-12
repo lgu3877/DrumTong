@@ -1,0 +1,284 @@
+.section-SangJae{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: calc(100vh - 170px);
+  padding-top: 70px;
+  margin-bottom: 70px;
+}
+
+ .section-orderlist{
+	height:auto;
+}
+
+
+.orderlist-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.orderlist-card {
+  width: 900px;
+/*   height: 300px; */
+  height : 370px;
+  border: 1px solid #eaeaea;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px 5px #eaeaea;
+  margin-bottom: 30px;
+}
+
+.orderData1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid grey;
+}
+
+.orderData-company {
+  display: inline-block;
+  width: 50%;
+  font-size: larger;
+  font-weight: bold;
+}
+
+.orderData-circle {
+  width: 20px;
+  height: 20px;
+  float: left;
+  border-radius: 50%;
+  border: 1px solid #eaeaea;
+  box-shadow: 1px 1px 3px 1px grey inset;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.brandNaming {
+	width : 100%;
+	height : 20px;
+}
+
+.orderData-date {
+  float: right;
+  margin-right: 30px;
+}
+
+.orderData2 {
+  width: 100%;
+/*   height: 200px; */
+  height: 270px;
+  border-bottom: 1px solid grey;
+}
+
+.orderData-onGoing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+/*   width: 200px; */
+/*   height: 200px; */
+  width : 340px;
+  height : 270px;
+  float: left;
+}
+
+.orderData-onGoing img {
+/*   height: 150px; */
+  height: 220;
+  width: auto;
+}
+
+.orderData-options {
+  font-weight : bold;
+  float: right;
+  border-left: 1px solid grey;
+/*   height: 200px; */
+  height : 270px;
+  width: 558px;
+  overflow-y: scroll;
+}
+
+.orderData-options::-webkit-scrollbar,
+.select-list::-webkit-scrollbar,
+.detailview-selectOptions::-webkit-scrollbar {
+  width: 5px;
+}
+
+.orderData-options::-webkit-scrollbar-thumb,
+.select-list::-webkit-scrollbar-thumb,
+.detailview-selectOptions::-webkit-scrollbar-thumb {
+  background-color: #35aefd;
+}
+
+.orderData-options::-webkit-scrollbar-track,
+.select-list::-webkit-scrollbar-track,
+.detailview-selectOptions::-webkit-scrollbar-track {
+  background-color: #a7dcff;
+}
+
+.orderData-options-head {
+  font-size : 23px;
+  height: 43px;
+  background-color: #eaeaea;
+  width: 100%;
+  
+  padding: 5px 10px;
+}
+[id*='orderData-option-main-'] {
+	margin-top : 5px;
+	border-top : solid;
+	border-bottom : solid;
+	padding-bottom : 10px;
+/* background-color: #0100FF; */
+  font-size : 20px;
+  width: 100%;
+  height: 40px;
+  padding: 5px 10px;
+  color : #000000;
+  font-weight : bold;
+}
+
+[id*='orderData-option-sub-'] {
+  margin-top : 5px;
+  font-size : 18px;
+  width: 100%;
+  height: 30px;
+  padding: 5px 10px;
+  color : #5A5A5A;
+  font-weight : bold;
+  padding-left: 14px;
+}
+
+
+
+.orderData-options-head-originalprice {
+	
+  background-color: #eaeaea;
+  width: 100%;
+/*   height: 30px; */
+  font-size : 19px;
+  height: 35px;
+  padding: 5px 10px;
+}
+
+.orderData-options-head-coupon {
+  background-color: #eaeaea;
+  width: 100%;
+/*   height: 30px; */
+  font-size : 19px;
+  height: 35px;
+  padding: 5px 10px;
+}
+
+.orderData-options-head-requests {
+  background-color: #eaeaea;
+  width: 100%;
+/*   height: 30px; */
+  font-size : 19px;
+  height: 35px;
+  padding: 5px 10px;
+}
+
+
+
+.orderData-options ul {
+  color : #A2A2A2;
+  font-size : 15px;
+  list-style: none;
+  padding: 5px;
+  margin: 5px 5px;
+  padding-left : 13px;
+  font-style: normal;
+  font-weight: bold;
+}
+
+
+.orderData-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  text-align: right;
+  width: 100%;
+  height: 50px;
+  line-height: 40px;
+  
+  font-style: normal;
+  padding-right: 30px;
+}
+
+.orderData-total-purchasedate {
+	padding-left : 20px;
+	display :inline-block; 
+	text-align: left;
+	width : 50%;
+	float : right;
+}
+
+.orderData-total-totalamount {
+	float : right;
+	width : auto;
+/* 	font-size: x-large; */
+	font-weight: bold;
+	
+}
+.orderData-total-totalprice {
+	width : auto;
+	font-weight: bold;
+	font-size: x-large;
+	float : right;
+}
+
+/* OlderList */
+/* 디테일페이지 모달, 영경작업 */
+.order_review_modal {
+	display: none;
+}
+.order_review_modal .modal_box {
+	display:block;
+	padding:10px;
+}
+.order_review_modal .modal_box .modal_title{
+	font-weight:bold;
+	font-size: 25pt;
+	text-align: center;
+}
+.order_review_modal .modal_box form .modal_menu_1{
+	text-align:center;
+}
+.order_review_modal .modal_box form .modal_menu_1 label#modal_orderListData{
+	padding-right: 5pt;
+	padding-left: 5pt;
+}
+.order_review_modal .modal_box form .modal_menu_1 label#modal_orderListData:hover{
+	cursor: pointer;
+	background-color: #EAEAEA;
+	border-radius: 15px;
+}
+.order_review_modal .modal_box form .modal_menu_1 *{
+	border: none;
+	font-size: 17pt;
+}
+.order_review_modal .modal_box form .modal_menu_2 img{
+	width:200px;
+	height:200px
+}
+.order_review_modal .modal_box form .modal_menu_2 textarea{
+	width:300px;
+	height:200px;
+	border: 2px dotted grey;
+}
+.order_review_modal .modal_box form .modal_menu_3 i{
+	cursor: pointer;
+	-webkit-text-stroke: none;
+	color: orange;
+}
+.order_review_modal .modal_box form .modal_menu_4{
+	text-align: center;
+}
+.order_review_modal .modal_box form .modal_menu_4 input{
+	width:100px;
+	height:50px;
+}
