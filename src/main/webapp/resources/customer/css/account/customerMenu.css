@@ -1,0 +1,73 @@
+.section-SangJae{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: calc(100vh - 170px);
+  padding-top: 70px;
+  margin-bottom: 70px;
+}
+
+.section-menu{
+	height:600px;
+}
+
+.userMenu-wrap{
+	height: 100%;
+	width: 100%;
+}
+
+.userMenu-row{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+}
+
+.userMenu {
+  width: 300px;
+  height: 150px;
+  border: 1px solid #eaeaea;
+  box-shadow: 5px 5px 5px 5px #eaeaea;
+  margin: 15px 15px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.userMenu-imgs {
+  height: 30px;
+  width: auto;
+  color: white;
+}
+
+.fa-portrait {
+  font-size: 30px;
+}
+
+.userMenu-context {
+  width: 250px;
+  height: 60px;
+  text-align: left;
+}
+
+.userMenu-context h2 {
+  font-size: larger;
+  margin: 10px 0px;
+}
+
+.userMenu-context h2 img {
+  height: 12px;
+  width: auto;
+}
+
+.pointChanrName {
+	width: 800px;
+	height: 45px;
+	border: 1px solid #EAEAEA;
+	box-shadow: 2px 2px 2px 2px #EAEAEA;
+	margin-bottom: 10px;
+	display: inline-flex;
+	background-color: #B2CCFF;
+	font-weight: bold;
+}

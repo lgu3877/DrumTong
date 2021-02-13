@@ -1,4 +1,15 @@
+@media screen and (max-width : 600px) {
+	body {
+		margin: auto;
+		height: auto;
+		/*    최대크기 */
+		max-width: 1000px;
+		max-height: 1500px;
+	}
+}
+
 /* ====================섹션 CSS================================ */
+
 @media ( min-width :1400px) {
 	body section {
 		max-width: 1900px;
