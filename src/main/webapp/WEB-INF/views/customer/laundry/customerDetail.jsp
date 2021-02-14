@@ -22,8 +22,18 @@
     	}
     </script>
     <script>
-    	function myCouponSettings(){ // 내 쿠폰을 현재 결제
-    		myCouponList = document.getElementById()
+    	function oneCouponSettings(minimumprice, discount, period, couponid){ // 내 쿠폰을 현재 결제
+    		myCouponList = document.getElementById('select-coupon');
+    		newCoupon = document.createElement('option');
+    		newCoupon.setAttribute('value', couponid);
+    		newCoupon.innerHTML = discount + '원 할인/' + minimumprice + '원 이상[' + period + ']';
+    		
+    		myCouponList.appendChild(newCoupon);
+    	}
+    	function myCouponSettings (myCoupons){
+    		myCoupons.forEach(co => {
+    			oneCouponSettings(co.minimumprice, co.discount, co.period, co.couponid);
+    		})
     	}
     </script>
     <script>
@@ -317,7 +327,7 @@
 
             <div class="select-coupon">
               내 쿠폰
-              <select>
+              <select id="select-coupon">
                        <option>선택하기</option>
                  <c:choose>
                     <c:when test="${cLogin != null }">
@@ -888,9 +898,12 @@
     <script>
     	// 로그인 했을 때 초기화
     	function initLogin(){
-    		
+    		console.log('initLogin 실행');
+    		myCouponSettings(${CouponList});
     	}
-
+    	if(cLogin !== ''){
+    		initLogin();
+    	}
     	couponSettings();
     </script>
 
