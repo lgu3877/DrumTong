@@ -88,11 +88,19 @@
 
 .detailview-wrap .fa-star {
   font-size: x-large;
-  color: white;
-  -webkit-text-stroke: 2px skyblue;
   margin-right: 10px;
   margin-top: 3px;
   cursor: pointer;
+}
+
+.detailview-wrap .add{
+	-webkit-text-stroke : 2px orange;
+	  color: yellow;
+}
+
+.detailview-wrap .remove{
+	  -webkit-text-stroke: 2px skyblue;
+	  color: white;
 }
 
 .detailview-companyIntro textarea {
@@ -341,7 +349,8 @@ div.subButton:hover{
 
 
 .select-deli,
-.select-quick {
+.select-quick,
+.select-quick span{
   border-bottom: 1px solid #d8d8d8;
   height: 30px;
   line-height: 30px;
@@ -361,7 +370,8 @@ div.subButton:hover{
   pointer-events: none;
 }
 
-.select-total {
+.select-total,
+.select-total span {
   height: 50px;
   padding: 10px 10px;
   line-height: 30px;

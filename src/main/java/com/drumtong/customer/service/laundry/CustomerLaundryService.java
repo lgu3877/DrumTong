@@ -96,6 +96,8 @@ public class CustomerLaundryService {
 			mav.addObject("myPoint", myPoint);
 			
 			mav.addObject("Bookmark", (cBookmarkDAO.isCheck(map) != null) ? "y" : "n");
+		} else {
+			mav.addObject("CouponList", "n");
 		}
 		
 		return mav;

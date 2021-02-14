@@ -26,14 +26,14 @@ public class RestCustomerLaundryController {
 	
 	@RequestMapping("customerDetail/rest/addBookmark/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String setBookmark(@RequestBody HashMap<String, String> param) {
-		return svc.setBookmark(param);
+	public String setBookmark(HttpServletRequest req, @RequestBody HashMap<String, String> param) {
+		return svc.setBookmark(req, param);
 	}
 	
 	@RequestMapping("customerDetail/rest/addCoupon/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String setCoupon(@RequestBody HashMap<String, String> param) {
-		return svc.setCoupon(param);
+	public String setCoupon(HttpServletRequest req, @RequestBody HashMap<String, String> param) {
+		return svc.setCoupon(req, param);
 	}
 	
 //	@RequestMapping("customerSearch/rest/clusterer/{address}/")

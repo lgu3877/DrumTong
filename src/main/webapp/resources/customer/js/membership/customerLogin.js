@@ -57,14 +57,10 @@ function logiinSubmit(type) {
         		await axios.post('/drumtong/customer/membership/customerLogin/rest/login/', ob)
         		
         		.then( (response) => {
-        			if(response.data === true){
-        				console.log('로그인 성공');
-        			} else{
-        				console.log('로그인 실패');
-        			}
+        			// 쿠폰, 즐겨찾기, 포인트 관련 정보 가져와야 함
+        			checkLoginSettings(response.data);
         		})
         	}
-        	axPost(loginInputs[0].value,loginInputs[1].value, document.getElementById('storeid').value);
-        	console.log("로그인", "${cLogin}");
+        	result = axPost(loginInputs[0].value,loginInputs[1].value, document.getElementById('storeid').value);
         }
       } //submit 체크 함수 종료
