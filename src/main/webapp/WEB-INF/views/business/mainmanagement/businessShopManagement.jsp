@@ -433,7 +433,14 @@
 			
 			
 		<!-- 설정된 배달가능지역 보기  & 배달 지역 설정  -->
+			
 			<div class="delivery_menu">
+			
+				<!-- 접근 제한 뷰  [건욱] -->
+				<div id="accessDenied" style="z-index : 1; position : absolute; margin: 0 auto;">
+					해당 기능을 활성화 시키기 위해서는 <br> [세탁물 수령 방법] 기능에서 "배달 대행업체 이용" 혹은  "배달 서비스 제공" 중 하나의 기능이라도 체크가 되어있어야 합니다.
+				</div>
+				
 			<!-- 배달가능지역 뷰 -->
 				<div id="delivery-area-view" class="delivery_area_view_con"></div>
 				
