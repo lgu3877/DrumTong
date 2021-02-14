@@ -610,6 +610,10 @@
             <div style="height: 30px; background: grey; color: white;">추가 확보 공간</div>            
             <div class="modal-grade"><span></span></div>
             <div class="review-context"></div>
+            <div class="owner-review">
+            	<h1 class="owner-name">사장님<span style="margin-left: 15px">그저께</span></h1>
+            	<p class="owner-content">사장님 댓글 공간입니다</p>
+            </div>
           </div>
         </div>
       </div>

@@ -455,6 +455,43 @@ check .option-name,
   padding: 10px;
 }
 
+.owner-review  {
+	width: 100%;
+	height: auto;
+	background-color: aqua;
+	border-radius: 20px;
+	position: relative;
+	border-top-left-radius: 0px;
+}
+
+.owner-review::before  {
+	position: absolute;
+	top: -30px;
+	left: 0;
+	width: 0px;
+	height: 0px;
+	border-top: 30px solid transparent;
+	border-left: 30px solid aqua;
+	content: '';
+}
+
+.owner-review .owner-name {
+	margin: 0;
+	height: 30px;
+	display: flex;
+	align-content: center;
+	padding-left: 20px;
+}
+.owner-review .owner-content {
+	margin: 0;
+	height: auto;
+	display: flex;
+	align-content: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-left: 40px;
+}
+
 .review-more {
   background-color: rgba(89, 147, 255, 0.3);
   border: none;
