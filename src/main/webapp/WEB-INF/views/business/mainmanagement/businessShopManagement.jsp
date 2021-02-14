@@ -198,7 +198,7 @@
 				</div>
 			
 			<!-- text content -->
-				<div class="shop_text_intro">
+				<div class="shop_text_intro" id="introductionArea">
 					<p id="intro-text" class="shop_text_view">
 						이곳은 당신이 작성한 매장 소개글을 확인할 수 있는 칸입니다. 작성한 글이 마음에 들지 않을 경우 아래 '작성하기'버튼을 통해 기존에 작성하신 글을 수정하시거나 새로운 내용의 소개글을 작성하실 수 있습니다.
 					</p>
@@ -484,7 +484,7 @@
 			
 			
 		<!-- 주소지 변경 -->
-			<div class="address_input_con form">
+			<div class="address_input_con form" id="locationArea">
 				<div class="address_wrapper">
 					<h3>주소</h3>
 					<div class="main_address_input_wrapper">
@@ -562,7 +562,7 @@
 		<c:if test="${status ne 'SUCCESS' }">
 	<!-- 전체 form submit -->
 			<div class="submit_con">
-				<input class="submit_btn" type="submit" value="다음 단계로">
+				<input class="submit_btn" id="submitbt" type="button" value="다음 단계로" onclick="checkExceptionBeforeSubmit()">
 			</div>
 			</form>
 
@@ -634,6 +634,10 @@
 		}
 	</script>
 	
+	<!-- 예외 체크 -->
+	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementExceptionCheck.js"></script>
+	
+	
 	<!-- 이미지 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementImage.js"></script>
 
@@ -659,31 +663,100 @@
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementUpdate.js"></script>
 	
 	<script type="text/javascript">
+	
+		// [건욱] 함수를 실행했을 때 오류가 발생하면 사용자에게 오류 메시지를 반환하는 함수입니다.
+		function  expressMessageOnTryCatch (functionList) {
+			
+			let errMSG = "";
+			
+			for (let key in functionList) {
+				try {
+					functionList[key];
+				}
+				catch (error) {
+					switch (key) {
+					
+						case 'updatePhoto' : errMSG += "매장 사진 ";
+							break;
+							
+						case 'updateIntro' : errMSG += "매장 소개글 ";
+							break;
+							
+						case 'addService' : errMSG += "매장 메뉴 ";
+							break;
+							
+						case 'updateDelivery' : errMSG += "배달 지역 ";
+							break;
+							
+						case 'updateAddress' : errMSG += "매장 주소 ";
+							break;
+							
+						case 'updateStatus' : errMSG += "매장 상태 ";
+							break;
+					}
+				}
+				
+				
+			}
+			return (errMSG === "") ? "" : errMSG += "오류가 발생했습니다. 재시도 부탁드립니다.";
+			
+		}
+			
+		// [건욱]
+		// errMSG에 값이 있을 경우에 경고창을 사용자에게 띄워주는 함수입니다.
+		function expressAlert (errMSG) {
+			if(errMSG !== ""){
+				alert(errMSG); 
+				return false;
+			}
+			
+			return true;
+				
+		}
 		
+		function locationBoolean(result) {
+			result ? location.href = "drumtong/business/mainmanagement/businessScheduleManagement/" : "";
+		}
+	
 // 		// [건욱] 
-// 		// PROCESS 일 때 수정된 데이터를 업데이트 시켜주는 함수.
-// 		if(status === "PROCESS") {
-// 			document.getElementByClassName("submit_btn").onclick = function () {
+		// PROCESS 일 때 수정된 데이터를 업데이트 시켜주는 함수.
+		if(status === "PROCESS") {
+			console.log('실행 프로세스');
+			document.getElementsByClassName("submit_btn").onclick = function () {
 				
-// 				// 매장 사진 업데이트
-// 				updatePhoto();
+				const functionList = {
+						
+						// 매장 사진 업데이트	
+						"updatePhoto" : updatePhoto(),
+						
+						// 매장 소개글 업데이트
+						"updateIntro" : updateIntro(),
+						
+						// 매장 메뉴 업데이트
+						"addService" : addService(),
+						
+						// 배달 지역 업데이트
+						"updateDelivery" : updateDelivery(),
+						
+						// 매장 주소 업데이트
+						"updateAddress" : updateAddress(),
+						
+						// 매장 status 값 "SUCCESS" 업데이트 
+						"updateStatus" : updateStatus(),
+						
+				}
 				
-// 				// 매장 소개글 업데이트
-// 				updateIntro();
+				// 함수를 실행했을 때 오류가 발생하면 사용자에게 오류 메시지를 반환하는 함수입니다
+				let errMSG = expressMessageOnTryCatch(functionList);
 				
-// 				// 매장 메뉴 업데이트
-// 				addService();
+				// 알터창을 표출해줍니다.
+				let result = expressAlert(errMSG);
 				
-// 				// 배달 지역 업데이트
-// 				updateDelivery();
+				locationBoolean(result);
 				
-// 				// 매장 주소 업데이트
-// 				updateAddress();
 				
-// 				// 매장 status 값 "SUCCESS"으로 변경
-// 				updateStatus();
-// 			}
-// 		}
+			}
+		}
 		
 // 		function updateStatus() {
 			

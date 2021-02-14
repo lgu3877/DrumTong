@@ -4,7 +4,7 @@ displayText();
 // bManagement > introduction 가져오기 > 소개글 자동완성
 function displayText() {
 	if (bManagement && bManagement.introduction) {
-		document.getElementById("intro-text").innerText = bManagement.introduction; 
+		document.getElementById("intro-text").innerText = bManagement.introduction === '-' ? "" : ""; 
 	}
 	
 	document.getElementById("intro-modal-textarea").innerText
@@ -32,7 +32,14 @@ window.onclick = function(e) {
 function comfirmIntro() {
 	const modalText = document.getElementsByClassName('store_intro_input')[0];
 	const mainText = document.getElementsByClassName('shop_text_view')[0];
+	const textValue = document.getElementById('intro-modal-textarea');
+	
 	const answer = confirm("작성한 메세지를 반영하시겠습니까?");
+	
+	console.log(textValue.value.length);
+	if(textValue.value.length !== 0)
+		borderNone('introductionArea');
+		
 	if (!answer) {
 		modalText.value = '';
 	}
