@@ -39,7 +39,7 @@
 
 		function callAddress() {
 		  	searchDetailAddrFromCoords(map.getCenter(), function(result, status) {
-				$('#hidden').html(result[0].address.address_name.split(' ')[2]);
+				// $('#hidden').html(result[0].address.address_name.split(' ')[2]);
 				// id="hidden" 태그에 카카오맵에서 받아온 행정동 주소의 '읍면동'의 부분을 삽입한다
 		 	})
 		}

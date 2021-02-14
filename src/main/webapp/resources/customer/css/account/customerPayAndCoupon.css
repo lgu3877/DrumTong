@@ -1,0 +1,452 @@
+@media ( min-width :1400px) {
+	body .section_pac {
+		padding-top: 70px;
+		max-width: 1900px;
+		min-width: 1400px;
+		height: 1100px;
+	}
+	body .section_pac .pac_mainName {
+		max-width: 1900px;
+		min-width: 1400px;
+	}
+}
+
+@media ( max-width :1400px) {
+	body .section_pac {
+		padding-top: 70px;
+		max-width: 1400px;
+		min-width: 1200px;
+		height: 1100px;
+	}
+	body .section_pac .pac_mainName {
+		max-width: 1400px;
+		min-width: 1200px;
+	}
+}
+
+@media ( max-width :1200px) {
+	body .section_pac {
+		padding-top: 70px;
+		max-width: 1200px;
+		min-width: 1000px;
+		height: 1100px;
+	}
+	body .section_pac .pac_mainName {
+		max-width: 1200px;
+		min-width: 1000px;
+	}
+}
+
+body .section_pac .pac_mainName {
+	height: 33px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 25px;
+}
+
+body .section_pac .pac_list {
+	width: 800px;
+	height: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	/* text-align: center; */
+}
+
+body .section_pac .pac_list .pac_lists {
+	width: auto;
+	height: auto;
+	display: inline-flex;
+	/* border-bottom: 1px solid #EAEAEA; */
+}
+
+body .section_pac .pac_list .pac_list {
+	width: 265px;
+	height: auto;
+	text-align: center;
+}
+
+body .section_pac .pac_list .pac_list #pac_point_button {
+	width: 190px;
+	height: 30px;
+	border: 0;
+	outline: 0;
+	color: white;
+	background-color: #35aefd;
+	box-shadow: 2px 2px 2px 2px #EAEAEA;
+	font-size: 20px;
+}
+
+body .section_pac .pac_list .pac_list #pac_pay_button, body .section_pac .pac_list .pac_list #pac_coupon_button
+	{
+	width: 190px;
+	height: 30px;
+	border: 0;
+	outline: 0;
+	background-color: white;
+	box-shadow: 2px 2px 2px 2px #EAEAEA;
+	font-size: 20px;
+}
+
+body .section_pac .pac_list .pac_mileage {
+	width: 100px;
+	text-align: center;
+}
+
+body .section_pac .pac_list button {
+	outline: 0;
+	border-radius: 50px;
+	border-color: #EAEAEA;
+	/* border-style: 1px dotted; */
+	/* border: 1px dashed ; */
+}
+
+body .section_pac .pac_list button:active {
+	border: 1px solid #35aefd;
+	/* border-bottom: 1px solid #35aefd; */
+}
+
+body .section_pac .pac_mainList_point {
+	width: auto;
+	height: 200px;
+	margin: 50px 100px;
+	/*    border: 1px solid white; */
+	/* display: none; */
+}
+
+body .section_pac .pac_mainList_pay, body .section_pac .pac_mainList_copon
+	{
+	width: auto;
+	height: 200px;
+	/* border: 1px solid blue; */
+	margin: 50px 100px;
+	display: none;
+}
+
+body .section_pac .pac_mainList_point .pac_mainPoint .pac_pointList,
+	body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList, body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList
+	{
+	width: 1000px;
+	height: auto;
+	margin: 10px 10px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+body .section_pac .pac_mainList_point .pac_mainPoint .pac_pointList .pac_pointText
+	{
+	width: auto;
+	height: 45px;
+	font-size: 25px;
+	margin: 0;
+	margin-top: 15px;
+}
+
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payText
+	{
+	width: 800px;
+	height: 50px;
+	font-size: 25px;
+	margin-top: 15px;
+	margin-bottom: 0px;
+	margin-left: 120px;
+}
+
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists
+	{
+	width: 800px;
+	height: 45px;
+	border: 1px solid #EAEAEA;
+	box-shadow: 2px 2px 2px 2px #EAEAEA;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+	text-align: left;
+}
+
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_name
+	{
+	width: 100px;
+	height: auto;
+	padding: 8px 10px;
+	display: inline-flex;
+	margin: 0px;
+	margin-left: 30px;
+	/* border-right: 1px solid #EAEAEA; */
+}
+
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_kind
+	{
+	width: 100px;
+	height: 30px;
+	display: inline-flex;
+	border: none;
+	background: #B2CCFF;
+	text-align: center;
+	outline: 0;
+}
+
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payAccount_num
+	{
+	width: 430px;
+	height: 35px;
+	display: inline-flex;
+	border: 1px solid #EAEAEA;
+	text-align: center;
+	outline: 0;
+}
+
+
+/*  custoemrSearch */
+
+
+
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_num
+	{
+	width: 95px;
+	height: 35px;
+	display: inline-flex;
+	border: 1px solid #EAEAEA;
+	text-align: center;
+	outline: 0;
+}
+
+body .section_pac .pac_mainList_copon {
+	width: auto;
+	height: 200px;
+	/* border: 1px solid blue; */
+	margin: 50px 100px;
+	display: none;
+}
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponText
+	{
+	width: auto;
+	height: 45px;
+	font-size: 25px;
+	margin: 0;
+	margin-top: 15px;
+}
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists
+	{
+	width: 800px;
+	height: 45px;
+	border: 1px solid #EAEAEA;
+	box-shadow: 2px 2px 2px 2px #EAEAEA;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+	display: inline-flex;
+}
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_brandnaming
+	{
+	width: 170px;
+	height: auto;
+	/*    border-right: 1px solid #EAEAEA; */
+	text-align: center;
+	padding: 8px 10px;
+	/*    display: inline-flex; */
+	margin: 5px 15px;
+	overflow: hidden;
+}
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_brandnaming_link:hover
+	{
+	color: white;
+	font-weight: bold;
+	background-color: #0091e4;
+	cursor: pointer;
+}
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_brandnaming_link:active
+	{
+	font-weight: bold;
+	background-color: #373737;
+}
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_discount
+	{
+	width: 140px;
+	height: auto;
+	/*    border-right: 1px solid #EAEAEA; */
+	text-align: center;
+	padding: 8px 10px;
+	/*    display: inline-flex; */
+	margin: 5px 15px;
+	overflow: hidden;
+}
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_period
+	{
+	width: 240px;
+	height: auto;
+	/*    border-right: 1px solid #EAEAEA; */
+	text-align: center;
+	padding: 8px 10px;
+	/*    display: inline-flex; */
+	margin: 5px 15px;
+	overflow: hidden;
+}
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_minimumprice
+	{
+	width: 140px;
+	height: auto;
+	/*    border-right: 1px solid #EAEAEA; */
+	text-align: center;
+	padding: 8px 10px;
+	/*    display: inline-flex; */
+	margin: 5px 15px;
+	overflow: hidden;
+}
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists_menu
+	{
+	background-color: #B2CCFF;
+}
+.pac_payCard_save {
+	width: 90px;
+	margin: 10px 5px;
+	margin-right: 12px;
+	float: right;
+	border: 1px solid #EAEAEA;
+	border-radius: 30px;
+	background-color: #0091e4;
+	color: white;
+	font-weight: bolder;
+	outline: 0;
+}
+
+.pac_payCard_save:hover {
+	background-color: #373737;
+	transition-duration: 0.5s;
+}
+
+
+/* dropdown */
+
+
+.dropdown-button {
+	width: 100px;
+	background-color: #B2CCFF;
+	padding: 8px;
+	font-size: 15px;
+	border: none;
+}
+
+.dropdown-button a {
+	text-decoration: none !important;
+	color: black !important;
+}
+
+.dropdown {
+	width: 100px;
+	height: 35px;
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #B2CCFF;
+	text-decoration: none !important;
+	width: 100%;
+	padding: 5px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 9999;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 8px;
+	text-decoration: none !important;
+	display: block;
+	z-index: 9999;
+}
+
+.dropdown-content a:hover {
+	background-color: #00A2E8;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown:hover .dropdown-button {
+	background-color: #00A2E8;
+}
+
+/* 떨어져 있던 것들 */
+
+.searchdiv {
+	width: 50%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.pointChanrName {
+	width: 800px;
+	height: 45px;
+	border: 1px solid #EAEAEA;
+	box-shadow: 2px 2px 2px 2px #EAEAEA;
+	margin-bottom: 10px;
+	display: inline-flex;
+	background-color: #B2CCFF;
+	font-weight: bold;
+}
+
+.pointChanrName .firstdiv {
+	width: 20%;
+	font-size: 14pt;
+	font-weight: border;
+	text-align: center
+}
+
+.pointChanrName .default {
+	font-size: 14pt;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.pointChanrContents {
+	width: 800px;
+	height: 45px;
+	border: 1px solid #EAEAEA;
+	box-shadow: 2px 2px 2px 2px #EAEAEA;
+	margin-bottom: 10px;
+	display: inline-flex;
+}
+
+
+.pointChanrContents div {
+	font-size: 14pt;
+	display: flex;
+	align-items: center;
+}
+
+.pointChanrContents:hover {
+	background-color: #dadada;
+}
+
+.pointChanrContents div.registdate {
+	width: 40%;
+	margin-left: 20%;
+	justify-content: center;
+}
+
+.pointChanrContents div.paymenttype {
+	width: 20%;
+	justify-content: center;
+}
+
+.pointChanrContents div.point {
+	width: 20%;
+	justify-content: flex-end;
+	padding-right: 40px;
+}
