@@ -806,8 +806,8 @@
     border: 1px solid navy;
 }
 
-.modify_menu_modal_input {
-	
+.modify_menu_modal_input:disabled {
+	background-color: lightgrey;
 }
 
 .modify_menu_modal_btn_container {

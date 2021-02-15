@@ -1,6 +1,9 @@
 // main toggle
 const mainToggle = { }
 
+// quick service toggle
+let quickToggle;
+
 // 초기 실행
 if(status === "SUCCESS") displayMenu();
 
@@ -396,14 +399,14 @@ function openMenuModifyModal(main, sub, info) {
 						const quickToggleIcon = document.createElement("div");
 						quickToggleIcon.style.margin = "auto 0px";
 						
-						const flag = !service.quickprice || service.quickprice === "" || service.quickprice === 0 ?
-								true : false;
+						quickToggle = !service.quickprice || service.quickprice === "" || service.quickprice === 0 ?
+							true : false;
 						
-						if (flag) {
-							quickToggleIcon.innerHTML = '<i class="fas fa-toggle-off" onclick="activateQuick(this, true)"></i>'; // off
+						if (quickToggle) {
+							quickToggleIcon.innerHTML = '<i class="fas fa-toggle-off" onclick="activateQuick(this)"></i>'; // off
 						}
 						else {
-							quickToggleIcon.innerHTML = '<i class="fas fa-toggle-on" onclick="activateQuick(this, false)"></i>'; // on						
+							quickToggleIcon.innerHTML = '<i class="fas fa-toggle-on" onclick="activateQuick(this)"></i>'; // on						
 						}
 					
 					
@@ -411,7 +414,8 @@ function openMenuModifyModal(main, sub, info) {
 					quickpriceInput.className = "modify_menu_modal_input";
 					quickpriceInput.id = "quickprice-modal";
 					quickpriceInput.name = "quickprice";
-					quickpriceInput.disabled = flag ? "disabled" : ""; // input 활성화 & 비활성화
+					quickpriceInput.placeholder = "퀵 서비스 요금 입력";
+					quickpriceInput.disabled = quickToggle ? "disabled" : ""; // input 활성화 & 비활성화
 					quickpriceInput.value = insertComma(service.quickprice.toString());
 					
 					// 콤마 자동 삽입
@@ -546,21 +550,23 @@ function clearSubOption(subCategoryId) {
 
 
 // quick 활성화
-function activateQuick(icon, flag) {
-	console.log(icon);
-	console.log(flag);
-	
+function activateQuick(icon) {
 	// activate
-	if (flag) {
+	if (quickToggle) {
 		icon.className = "fas fa-toggle-on";
-		document.getElementsByClassName("quickprice-modal").disabled = "";
+		document.getElementById("quickprice-modal").disabled = "";
+		document.getElementById("quickprice-modal").value = "";
+		document.getElementById("quickprice-modal").focus();
 	}
 	
 	// inactivate
 	else {
 		icon.className = "fas fa-toggle-off";
-		document.getElementsByClassName("quickprice-modal").disabled = "disabled";
+		document.getElementById("quickprice-modal").value = "0";
+		document.getElementById("quickprice-modal").disabled = "disabled";
 	}
+
+	quickToggle = !quickToggle;
 }
 
 
