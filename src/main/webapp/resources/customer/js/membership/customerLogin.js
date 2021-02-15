@@ -58,7 +58,18 @@ function logiinSubmit(type) {
         		
         		.then( (response) => {
         			// 쿠폰, 즐겨찾기, 포인트 관련 정보 가져와야 함
-        			checkLoginSettings(response.data);
+        			result = response.data;
+        			loginStatus = result[0];
+        			
+        			if(loginStatus === true){
+	        			alert('로그인 성공');
+	        			coupon = result[2];
+	        			point = result[3];
+	        			bookmark = result[4];
+	        			checkLoginSettings(loginStatus, coupon, point, bookmark);
+        			} else{
+	        			alert('로그인 실패');
+        			}
         		})
         	}
         	result = axPost(loginInputs[0].value,loginInputs[1].value, document.getElementById('storeid').value);

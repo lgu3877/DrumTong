@@ -520,6 +520,7 @@
 	       window.onclick = function (event) { if (event.target == modal) closeAllModal(); };
     	}
     	function checkLoginSettings(checkLogin, CouponList, myPoint, Bookmark){
+    		closeAllModal();
     		// When the user clicks on the button, open the modal
 	 	       btn1.onclick = function () { 
 	 	    	   openModal(checkLogin ? modalContent1 : modalContent3 , 'flex');
