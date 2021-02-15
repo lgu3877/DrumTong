@@ -1,21 +1,14 @@
-// 입력 줄 전체
-let singleList = document.querySelector('.single_item_selector');
-let copiedList;
-
 // main toggle
 const mainToggle = { }
 
+// quick service toggle
+let quickToggle;
+
 // 초기 실행
-if(status === "SUCCESS")
-	displayMenu();
-
-createAddService();
-createCategoryList(); // 메뉴수정 관련 Modal
-
+if(status === "SUCCESS") displayMenu();
 
 // 메뉴 생성
 function displayMenu() {
-
 	// object 생성
 	let list = {};
 	for (let item = 0; item < bMenu.length; item++) {
@@ -79,9 +72,9 @@ function displayMenu() {
 	// main category
 	for (let main in list) {
 		const mainCon = document.createElement("div");
-		const containerId = generateRandomString(10);
+		const mainContainerId = generateRandomString(10);
 		mainCon.className = "menu_main_con";
-		mainCon.id = containerId;
+		mainCon.id = mainContainerId;
 		
 		// wrapper
 		const mainWrapper = document.createElement("div");
@@ -95,11 +88,13 @@ function displayMenu() {
 		mainExIcon.onclick = () => {
 			const isOpened = mainToggle[main];
 			if (!isOpened) {
-				toggleMainCategory(containerId, list[main], main);
-			}
+				mainExIcon.innerHTML = '<i class="fas fa-minus-square"></i>'; // 아이콘 변경 > -
+				toggleMainCategory(mainContainerId, list[main], main);
+			}	
 			else {
 				mainToggle[main] = false;
-				document.getElementById(containerId).getElementsByClassName("menu_sub_con")[0].remove();
+				mainExIcon.innerHTML = '<i class="fas fa-plus-square"></i>'; // 아이콘 변경 > +
+				document.getElementById(mainContainerId).getElementsByClassName("menu_sub_con")[0].remove();
 			}
 		}
 		
@@ -134,19 +129,26 @@ function toggleMainCategory(id, list, main) {
 	// script
 	const mainWrapper = document.getElementById(id);
 	
+	// sub container
+	const subCon = document.createElement("div");
+	const subContainerId = generateRandomString(11);
+	subCon.id = subContainerId;
+	subCon.className = "menu_sub_con";
+	
+	// sub contents
 	for (let sub in list) {
 		// sub toggle
 		subToggle[sub] = false;
 		
-		// sub container
-		const subCon = document.createElement("div");
-		const subContainerId = generateRandomString(10);
-		subCon.id = subContainerId;
-		subCon.className = "menu_sub_con";
-		
 		// wrapper
 		const subWrapper = document.createElement("div");
+		const subWrapperId = generateRandomString(12);
 		subWrapper.className = "menu_sub_wrapper";
+		subWrapper.id = subWrapperId;
+		
+		// sub content container
+		const subContentBox = document.createElement("div");
+		subContentBox.className = "menu_sub_content";
 		
 		// icon
 		const subExIcon = document.createElement("div");
@@ -154,12 +156,14 @@ function toggleMainCategory(id, list, main) {
 		subExIcon.innerHTML = '<i class="fas fa-plus-square"></i>';
 		subExIcon.onclick = () => {
 			const isOpened = subToggle[sub];
-			
+
 			if (!isOpened) {
-				toggleSubCategory(subContainerId, list[sub], subToggle, sub);
+				subExIcon.innerHTML = '<i class="fas fa-minus-square"></i>';
+				toggleSubCategory(subWrapperId, list[sub], subToggle, main, sub);
 			}
 			else {
 				subToggle[sub] = false;
+				subExIcon.innerHTML = '<i class="fas fa-plus-square"></i>';
 				document.getElementById(subContainerId).getElementsByClassName("menu_detail_con")[0].remove();
 			}
 		}
@@ -174,1052 +178,403 @@ function toggleMainCategory(id, list, main) {
 		subAmount.className = "menu_sub_amount"
 		subAmount.innerHTML = list[sub].length;
 		
-		subWrapper.appendChild(subExIcon);
-		subWrapper.appendChild(subTitle);
-		subWrapper.appendChild(subAmount);
-		
+		subContentBox.appendChild(subExIcon);
+		subContentBox.appendChild(subTitle);
+		subContentBox.appendChild(subAmount);
+		subWrapper.appendChild(subContentBox);
+
 		subCon.appendChild(subWrapper);
 		mainWrapper.appendChild(subCon)
 	}
 }
 
 // 서비스 메뉴 > 리스트 > 클릭 이벤트(서브 > 디테일)
-function toggleSubCategory(id, list, subToggle, sub) {
+function toggleSubCategory(id, list, subToggle, main, sub) {
 	// toggle
 	subToggle[sub] = true;
 	
 	// script
-	const subWrapper = document.getElementById(id);
+	const subWrapper = document.getElementById(id);	
+	
+	// detail container
 	const detailCon = document.createElement("div");
-	const detailId = generateRandomString(11);
-	detailCon.id = detailId;
 	detailCon.className = "menu_detail_con";
 	
 	for (let item = 0; item < list.length; item++) {
 		// wrapper
 		const detailWrapper = document.createElement("div");
+		const detailWrapperId = generateRandomString(11);
+		detailWrapper.id = document.createElement("div");;
 		detailWrapper.className = "menu_detail_wrapper";
 		
 		// icon
 		const detailExIcon = document.createElement("div");
 		detailExIcon.className = "menu_detail_icon";
 		detailExIcon.innerHTML = '<i class="fas fa-bars"></i>';
-		detailExIcon.onclick = () => console.log("clicked");
 		
 		// title
 		const detailInfo = document.createElement("div");
 		detailInfo.className = "menu_detail_info_con";
-		detailInfo.id = list.estid;
+		detailInfo.id = list[item].estid; // estid
 		
 			// detail info
 			const serviceName = document.createElement("div");
-			serviceName.innerHTML = list[item].name;
+			serviceName.innerHTML = list[item].name; // name
 			
 			const servicePrice = document.createElement("div");
-			servicePrice.innerHTML = list[item].price + " (원)";
+			servicePrice.innerHTML = list[item].price + " (원)"; // price
 			
 			const serviceTime = document.createElement("div");
-			serviceTime.innerHTML = list[item].ete + " (일)";
+			serviceTime.innerHTML = list[item].ete + " (일)"; // ete
 		
-		detailInfo.appendChild(serviceName);
-		detailInfo.appendChild(servicePrice);
-		detailInfo.appendChild(serviceTime);
+			detailInfo.appendChild(serviceName);
+			detailInfo.appendChild(servicePrice);
+			detailInfo.appendChild(serviceTime);
 		
 		// total number of services
 		const detailIcon = document.createElement("div");
 		detailIcon.className = "menu_detail_option"
 		detailIcon.innerHTML = '<i class="far fa-edit"></i>';
+		detailIcon.onclick = () => openMenuModifyModal(main, sub, list[item]); // 메뉴 수정 Modal
 		
 		detailWrapper.appendChild(detailExIcon);
 		detailWrapper.appendChild(detailInfo);
 		detailWrapper.appendChild(detailIcon);
 		
 		detailCon.appendChild(detailWrapper);
+		subWrapper.appendChild(detailCon);
 	}
-	subWrapper.appendChild(detailCon)
 }
 
 
-function displayMenus() {
-	const tbody = document.getElementById("item-list-tbody");
+// 서비스 수정 모달 열기
+function openMenuModifyModal(main, sub, info) {
+	const modal = document.getElementById("modify-menu-modal");
 	
-	// 테이플 행 카운트 > 짝수 번째 하이라이트
-	let row = 0;
-	for (let index = 0; index < bMenu.length; index++) {
-		const randomId = generateRandomString(16);
-		const tr = document.createElement("tr");
-		tr.id = randomId;
-		
-		row++;
-		
-		// 출력 순서를 위한 오브젝트 정렬
-		const sortedMenu = {
-			"maincategory": undefined,
-			"subcategory": undefined,
-			"name": undefined,
-			"price": undefined,
-			"ete": undefined,
-			"quickprice": undefined,
+	const isOpened = modal.style.display === "none" ? false : true;
+	
+	// 모달 열기
+	if (!isOpened) {
+		// object 
+		const service = {
+			maincategory : main,
+			subcategory : sub,
+			estid : info.estid,
+			name : info.name,
+			ete : info.ete,
+			price: info.price,
+			quickprice: info.quickprice || 0
 		};
 		
-		const count = Object.keys(bMenu[index]).length;
-		let size = 0;
-		for (let key in sortedMenu) {
-			sortedMenu[key] = bMenu[index][key];
-		}
+		modal.style.display = "block";
 		
-
-		for (let key in sortedMenu) {
-		// switch
-			switch(key) {
-			// 서비스 유형(main-category)
-			case "maincategory":
-				const mainCategory = document.createElement("th");
-				mainCategory.scope = "row";
-				mainCategory.innerHTML = sortedMenu[key];
-				
-				// 짝수 줄 > 하이라이트
-				if (row % 2 == 0) mainCategory.className = "even";
-				
-				// 삽입
-				tr.appendChild(mainCategory);
-				break;
+		// 모달 박스
+		const container = document.createElement("div");
+		container.className = "modify_menu_modal_content form";
+		
+			// 닫기 버튼
+			const closeBtn = document.createElement("div");
+			closeBtn.className = "modify_menu_modal_close";
+			closeBtn.innerHTML = '<i class="fas fa-times"></i>';
+		
+			// 닫기 버튼 이벤트
+			closeBtn.onclick = () => {
+				document.getElementById('modify-menu-modal').style.display = "none";
+		    	document.getElementById('modify-menu-modal').innerHTML = "";
+			}
 			
-			// 서비스 타입(sub-category)
-			case "subcategory":
-				const subCategory = document.createElement("td");
-				subCategory.innerHTML = sortedMenu[key];
+			// form
+			const form = document.createElement("div");
+			form.className = "modify_menu_modal_form";
+			
+				// title
+				const formTitle = document.createElement("div");
+				formTitle.className = "modify_menu_modal_title";
+				formTitle.innerHTML = "서비스를 수정할 수 있습니다.";
 				
-				// 짝수 줄 > 하이라이트
-				if (row % 2 == 0) subCategory.className = "even";
+				// main category
+				const mainCon = document.createElement("div");
+				mainCon.className = "modify_menu_modal_input_con";
 				
-				// 삽입
-				tr.appendChild(subCategory);
-				break;
-				
-			// 세부 내용
-			case "name":
-				const detailInfo = document.createElement("td");
-				detailInfo.innerHTML = sortedMenu[key];
-				
-				// 짝수 줄 > 하이라이트
-				if (row % 2 == 0) detailInfo.className = "even";
-				
-				// 삽입
-				tr.appendChild(detailInfo);
-				break;
-				
-			// 가격 & 배달료
-			case "price":
-				const wrapper = document.createElement("td");
-				wrapper.style.display = "block";
-				
-				// 가격
-				const serviceFee = document.createElement("div");
-				serviceFee.innerHTML = insertComma(sortedMenu[key].toString()) + " 원";
-				
-				// 삽입 (가격)
-				wrapper.appendChild(serviceFee);
-				
-				// 배달료
-				if (bMenu[index].hasOwnProperty("quickprice")) {
-					const deliveryFeeCon = document.createElement("div");
+					// selector id (main & sub)
+					const mainSelectorId = generateRandomString(7);
+					const subSelectorId = generateRandomString(8);
 					
-					const deliveryFee = sortedMenu["quickprice"].toString();
-					deliveryFeeCon.innerHTML = "(" + insertComma(deliveryFee) + " 원)";
+					// main selector title
+					const mainSelectorTitle = document.createElement("div"); 
+					mainSelectorTitle.className = "modify_menu_modal_input_title";
+					mainSelectorTitle.innerHTML = "서비스 분류";
+				
+					// main selector
+					const mainSelector = document.createElement("select");
+					mainSelector.id = mainSelectorId;
+					mainSelector.className = "modify_menu_modal_selector";
+					mainSelector.name = "maincategory";
 					
-					// 삽입 (배달료)
-					wrapper.appendChild(deliveryFeeCon);
+					// selector 이벤트 > change 
+					mainSelector.addEventListener("change", (e) => {
+						clearSubOption(subSelectorId);
+						populateSubOptions(e.target.value, subSelectorId, true);
+					});
+											
+					// 추가
+					mainCon.appendChild(mainSelectorTitle);
+					mainCon.appendChild(mainSelector);
+					
+					
+				// sub category
+				const subCon = document.createElement("div");
+				subCon.className = "modify_menu_modal_input_con";
+					
+					const subSelectorTitle = document.createElement("div"); 
+					subSelectorTitle.className = "modify_menu_modal_input_title";
+					subSelectorTitle.innerHTML = "서비스 세부 분류";
+					
+					const subSelector = document.createElement("select");
+					subSelector.className = "modify_menu_modal_selector";
+					subSelector.name = "subcategory";
+					subSelector.id = subSelectorId;
+					
+					// selector 이벤트 > change
+					subSelector.onchange = (e) => {
+						selectOption(subSelector, e.target.value);
+					} 
+					
+					// 추가
+					subCon.appendChild(subSelectorTitle);
+					subCon.appendChild(subSelector);
+					
+					
+				// service name 
+				const nameCon = document.createElement("div");
+				nameCon.className = "modify_menu_modal_input_con";
+				
+					const nameInputTitle = document.createElement("div"); 
+					nameInputTitle.className = "modify_menu_modal_input_title";
+					nameInputTitle.innerHTML = "서비스 이름";
+					
+					const nameInput = document.createElement("input");
+					nameInput.className = "modify_menu_modal_input";
+					nameInput.name = "name";
+					nameInput.value = service.name;
+					
+					// 추가
+					nameCon.appendChild(nameInputTitle);
+					nameCon.appendChild(nameInput);
+				
+					
+				// service price
+				const priceCon = document.createElement("div");
+				priceCon.className = "modify_menu_modal_input_con";
+					
+					const priceInputTitle = document.createElement("div"); 
+					priceInputTitle.className = "modify_menu_modal_input_title";
+					priceInputTitle.innerHTML = "가격(원)";
+					
+					const priceInput = document.createElement("input");
+					priceInput.className = "modify_menu_modal_input";
+					priceInput.name = "price";
+					priceInput.value = insertComma(service.price.toString());
+					
+					// 콤마 자동 삽입
+					priceInput.onchange = (e) => {
+						e.target.value = insertComma(e.target.value);
+					}
+					
+					// 추가
+					priceCon.appendChild(priceInputTitle);
+					priceCon.appendChild(priceInput);
+
+					
+				// service price
+				const quickpriceCon = document.createElement("div");
+				quickpriceCon.className = "modify_menu_modal_input_con";
+					
+					const quickpriceInputTitle = document.createElement("div"); 
+					quickpriceInputTitle.className = "modify_menu_modal_input_title";
+					quickpriceInputTitle.classList.add("toggle");					
+					quickpriceInputTitle.innerHTML = '<div class="font_large">퀵 서비스 요금(원)</div>';
+					
+						// quick price 활성화 버튼
+						const quickToggleIcon = document.createElement("div");
+						quickToggleIcon.style.margin = "auto 0px";
+						
+						quickToggle = !service.quickprice || service.quickprice === "" || service.quickprice === 0 ?
+							true : false;
+						
+						if (quickToggle) {
+							quickToggleIcon.innerHTML = '<i class="fas fa-toggle-off" onclick="activateQuick(this)"></i>'; // off
+						}
+						else {
+							quickToggleIcon.innerHTML = '<i class="fas fa-toggle-on" onclick="activateQuick(this)"></i>'; // on						
+						}
+					
+					
+					const quickpriceInput = document.createElement("input");
+					quickpriceInput.className = "modify_menu_modal_input";
+					quickpriceInput.id = "quickprice-modal";
+					quickpriceInput.name = "quickprice";
+					quickpriceInput.placeholder = "퀵 서비스 요금 입력";
+					quickpriceInput.disabled = quickToggle ? "disabled" : ""; // input 활성화 & 비활성화
+					quickpriceInput.value = insertComma(service.quickprice.toString());
+					
+					// 콤마 자동 삽입
+					quickpriceInput.onchange = (e) => {
+						e.target.value === "" ? 
+							e.target.value = 0 :
+							e.target.value = insertComma(e.target.value);
+					}
+					
+					// 추가
+					quickpriceInputTitle.appendChild(quickToggleIcon);
+					quickpriceCon.appendChild(quickpriceInputTitle);
+					quickpriceCon.appendChild(quickpriceInput);
+					
+					
+				// service name 
+				const timeCon = document.createElement("div");
+				timeCon.className = "modify_menu_modal_input_con";
+					
+					const timeInputTitle = document.createElement("div"); 
+					timeInputTitle.className = "modify_menu_modal_input_title";
+					timeInputTitle.innerHTML = "소요시간(시간)";
+					
+					const timeInput = document.createElement("input");
+					timeInput.className = "modify_menu_modal_input";
+					timeInput.name = "ete";
+					timeInput.value = service.ete;
+					
+					// 추가
+					timeCon.appendChild(timeInputTitle);
+					timeCon.appendChild(timeInput);
+					
+					
+				// 추가
+				form.appendChild(formTitle);
+				form.appendChild(mainCon);
+				form.appendChild(subCon);
+				form.appendChild(nameCon);
+				form.appendChild(priceCon);
+				form.appendChild(quickpriceCon);
+				form.appendChild(timeCon);
+		
+			// Button Container
+			const btnContainer = document.createElement("div");
+			btnContainer.className = "modify_menu_modal_btn_container";
+				
+				// 삭제 버튼
+				const removeBtn = document.createElement("button");
+				removeBtn.className = "modify_menu_modal_btn";
+				removeBtn.classList.add("remove");
+				removeBtn.innerHTML = "메뉴삭제";
+				
+				// 삭제 버튼 이벤트
+				removeBtn.onclick = () => { 
+					console.log(service.estid);
+					if (removeService(service.estid)) {
+						document.getElementById("posted-service-list").innerHTML = ""; // 초기화
+						displayMenu(); // 메뉴 재생성
+					}
 				}
+			
+				// 변경 버튼
+				const confirmBtn = document.createElement("button");
+				confirmBtn.className = "modify_menu_modal_btn";
+				confirmBtn.classList.add("confirm");
+				confirmBtn.innerHTML = "변경하기";
 				
-				// 짝수 줄 > 하이라이트
-				if (row % 2 == 0) wrapper.className = "even";
+				// 변경 버튼 이벤트
+				confirmBtn.onclick = () => {
+					if (updateService(service)) {
+						document.getElementById("posted-service-list").innerHTML = ""; // 초기화
+						displayMenu(); // 메뉴 재생성				
+					}
+				}
+
 				
-				// 삽입
-				tr.appendChild(wrapper);
-				break;
+				btnContainer.appendChild(removeBtn);
+				btnContainer.appendChild(confirmBtn);
 				
-			// 소요 시간
-			case "ete":
-				const estimatedTime = document.createElement("td");
-				estimatedTime.innerHTML = sortedMenu[key] + " (일)";
-				
-				// 짝수 줄 > 하이라이트
-				if (row % 2 == 0) estimatedTime.className = "even";
-				
-				// 삽입
-				tr.appendChild(estimatedTime);
-				break;
-			default:
-				const modificationBtn = document.createElement("td");
-				modificationBtn.style.textAlign = "center";
-				
-				const icon = document.createElement("i");
-				icon.className = "fas fa-pencil-alt";
-				icon.style.color = "green";
-				icon.style.cursor = "pointer";
-				icon.addEventListener("click", () => modifyMenu(randomId));
-				
-				// 짝수 줄 > 하이라이트
-				if (row % 2 == 0) modificationBtn.className = "even";
-				
-				// 삽입
-				modificationBtn.appendChild(icon);
-				tr.appendChild(modificationBtn);
-				break;
-			}			
+			
+			container.appendChild(closeBtn);
+			container.appendChild(form);
+			container.appendChild(btnContainer);
+		
+		modal.appendChild(container);
+		
+		
+		// main options 생성 > 선택 > sub options 생성
+		createOptions(mainSelector, true);
+		
+		if (selectOption(mainSelector, service.maincategory)) {
+			populateSubOptions(service.maincategory, subSelectorId, true);
+			selectOption(subSelector, service.subcategory);
+		} 
+		
+	}
+	// 닫기
+	else modal.style.display = "none";
+}
+
+
+// 서비스 수정 모달 닫기 (모달 밖 클릭)
+window.onclick = function(e) {
+    if (e.target == document.getElementById('modify-menu-modal')) {
+    	 document.getElementById('modify-menu-modal').style.display = "none";
+    	 document.getElementById('modify-menu-modal').innerHTML = "";
+    }
+}
+
+// main selector 선택 (default)
+function selectOption(selector, value) {
+	const options = selector.getElementsByTagName("option");
+	
+	for (let i = 0; i < options.length; i++) {
+		if (options[i].value === value) {
+			options[i].selected = true;
+			return true;
 		}
-		tbody.appendChild(tr);
 	}
-}
-
-// 서비스 등록 > 입력 input & select 생성
-function createAddService() {
-	const container = document.getElementById("add-item-list");
-	
-	const singleServiceInputCon = document.createElement("div"); // 단일 서비스 입력폼
-	const serviceRandomId = generateRandomString(11);
-	singleServiceInputCon.id = serviceRandomId; // single container ID
-	singleServiceInputCon.className = "single_item_selector";
-	
-	
-	// main service category selector (첫번째)
-	const firstInputCon = document.createElement("div");
-	firstInputCon.className = "first_item_prop";
-
-	// random IDs
-	const selectorRandomId = generateRandomString(11); 
-	const directRandomId = generateRandomString(12);
-	const subSelectorRandomId = generateRandomString(12);
-	const subDirectRandomId = generateRandomString(12);
-	
-		const mainSelector = document.createElement("select");
-		mainSelector.id = selectorRandomId;
-		mainSelector.className = "service_selector";
-		mainSelector.name = "maincategory";
-		mainSelector.addEventListener("change", (e) => selectMainOption(e, directRandomId, subSelectorRandomId, subDirectRandomId));
-		
-		// 하위 선택 항목 생성
-		createOptions(mainSelector, false); 
-		
-		const mainSelectorDirectInput = document.createElement("input");
-		mainSelectorDirectInput.id = directRandomId;
-		mainSelectorDirectInput.type = "text";
-		mainSelectorDirectInput.className = "direct_type_input";
-//		mainSelectorDirectInput.name = "maincategory";
-		mainSelectorDirectInput.placeholder = "서비스 입력";
-		mainSelectorDirectInput.onchange = () => changeSelectBoxName(selectorRandomId,directRandomId, "maincategory");
-
-		
-		
-		mainSelectorDirectInput.style.display = "none";
-	
-			// 추가
-			firstInputCon.appendChild(mainSelector);
-			firstInputCon.appendChild(mainSelectorDirectInput);
-			
-			
-			
-	// sub service category selector (두번째)
-	const secondInputCon = document.createElement("div");
-	secondInputCon.className = "second_item_prop";
-	
-		// sub selector
-		const subSelector = document.createElement("select");
-		subSelector.id = subSelectorRandomId;
-		subSelector.className = "service_selector";
-		subSelector.name = "subcategory"
-		subSelector.addEventListener("change", (e) => selectSubOption(e, subDirectRandomId));
-		
-		const option = document.createElement("option");
-		option.hidden = true;
-		option.selected = true;
-		option.innerHTML = "세부 서비스 선택";
-		
-		// sub direct input
-		const subDirectInput = document.createElement("input");
-		subDirectInput.id = subDirectRandomId;
-		subDirectInput.type = "text";
-		subDirectInput.name = "subcategory";
-		subDirectInput.className = "direct_type_input";
-		subDirectInput.placeholder = "서비스 입력";
-		subDirectInput.style.display = "none";
-		subDirectInput.maxlength = "10";
-		
-		subDirectInput.onchange = () => changeSelectBoxName(subSelectorRandomId,subDirectRandomId, "subcategory");
-
-		
-		// 추가
-		subSelector.appendChild(option);
-		secondInputCon.appendChild(subSelector);
-		secondInputCon.appendChild(subDirectInput);
-
-		
-		
-	// 세부내용 (세번째)
-	const thirdInputCon = document.createElement("div");
-	thirdInputCon.className = "third_item_prop";
-	
-		const detailContextInput = document.createElement("input");
-		detailContextInput.type = "text";
-		detailContextInput.className = "service_detail_input";
-		detailContextInput.name = "name";
-		detailContextInput.placeholder = "메뉴 이름 입력";
-		detailContextInput.maxlength = "10";
-	
-		// 추가
-		thirdInputCon.appendChild(detailContextInput);
-		
-		
-		
-	// 가격 (네번째)
-	const forthInputCon = document.createElement("div");
-	forthInputCon.className = "forth_item_prop";
-	
-		const priceInput = document.createElement("input");
-		priceInput.type = "text";
-		priceInput.className = "service_price_input";
-		priceInput.name = "price";
-		priceInput.placeholder = "서비스 가격(원)";
-		priceInput.pattern = "[0-9]+";
-		priceInput.maxlength = "5";
-	
-		
-		// 추가
-		forthInputCon.appendChild(priceInput);
-		
-		
-		
-	// 시간 (다섯번째)
-	const fifthInputCon = document.createElement("div");
-	fifthInputCon.className = "fifth_item_prop";
-	
-		const timeInput = document.createElement("input");
-		timeInput.type = "text";
-		timeInput.className = "service_time_input";
-		timeInput.name = "ete";
-		timeInput.placeholder = "서비스 소요시간";
-
-
-		// 추가
-		fifthInputCon.appendChild(timeInput);
-		
-		
-		
-	// 입력 취소 버튼
-	const cancleBtnCon = document.createElement("div");
-	cancleBtnCon.className = "cancle_listing";
-	cancleBtnCon.addEventListener("click", () => dismissInput(serviceRandomId));
-	cancleBtnCon.innerHTML = `<i class="fas fa-times"></i><span>취소</span>`;
-	
-	
-	
-		// 추가(appending)
-		singleServiceInputCon.appendChild(firstInputCon);
-		singleServiceInputCon.appendChild(secondInputCon);
-	
-		singleServiceInputCon.appendChild(thirdInputCon);
-		singleServiceInputCon.appendChild(forthInputCon);
-		singleServiceInputCon.appendChild(fifthInputCon);
-		singleServiceInputCon.appendChild(cancleBtnCon);
-		
-//			copiedList = singleServiceInputCon.cloneNode(true); // 초기 상태 저장 
-			container.appendChild(singleServiceInputCon);
-}
-
-// [건욱] Select 박스의 이름을 결정해주는 함수입니다 (POST 형식일 때 Spring에서 데이터 바인딩을 제대로 해주기 위해서 설정하는 함수.)
-function changeSelectBoxName(selectID, inputID, type) {
-	let name = (type === "maincategory") ? "maincategory" : "subcategory";
-	console.log("changename : ", name);
-	document.getElementById(selectID).name = name + "SelectBox"
-	document.getElementById(inputID).name = name;
-}	
-// 메인 옵션 생성
-function createOptions(mainSelector, modifyBoolean) {
-	// placeholder
-	let option = document.createElement("option");
-	option.className = "main-category-default";
-	option.hidden = true;
-	option.disabled = true;
-	option.selected = true;
-	option.innerHTML = "서비스 타입 선택";
-	
-	mainSelector.appendChild(option); // 추가
-	
-	// 메뉴
-	const sortedKeys = Object.keys(menuCategories).sort(); // key 정렬
-	for (let i = 0; i < sortedKeys.length; i++) {
-		option = document.createElement("option");
-		option.className = "main_option";
-		option.value = sortedKeys[i];
-		option.innerHTML = sortedKeys[i];
-		
-		mainSelector.appendChild(option); // 추가
-	}
-	
-	// 직접입력
-	if (modifyBoolean === false) {
-		option = document.createElement("option");
-		option.value = "selectedDirect";
-		option.className = "selectedDirect";
-		option.innerHTML = "직접입력";
-		option.style.fontWeight = "600";
-		
-		mainSelector.appendChild(option); // 추가		
-	}
-	
+	return false;
 }
 
 
-//select > option 선택
-function selectMainOption(e, directInputId, subCategoryId, subDirectRandomId) {
-	// 초기화
-	clearSubOptions(subCategoryId);
-
-	// 직접 입력 선택
-	if(e.target.value === 'selectedDirect') {
-		document.getElementById(directInputId).style.display = "";
-		document.getElementById(directInputId).value = "";
-		document.getElementById(subDirectRandomId).style.display = "";
-		document.getElementById(subDirectRandomId).value = "";
-		
-		// 직접입력 > 자동선택 > input 활성화
-		const option = document.createElement("option");
-		option.value = "selectedDirect";
-		option.className = "selectedDirect";
-		option.selected = true;
-		option.innerHTML = "직접입력";
-		option.style.fontWeight = "600";
-		
-		document.getElementById(subCategoryId).appendChild(option);
-	}
-	
-	// 그 외 값 선택
-	else {
-		document.getElementById(directInputId).style.display = "none";
-		document.getElementById(directInputId).value = "";
-		document.getElementById(subDirectRandomId).style.display = "none";
-		document.getElementById(subDirectRandomId).value = "";
-				
-		// 하위 항목 생성
-		populateSubOptions(e.target.value, subCategoryId, false);
-	}
-}
-
-
-// 세부 서비스 선택
-function selectSubOption(e, subDirectId) {
-	const subDirectInput = document.getElementById(subDirectId); 
-	
-	if (e.target.value === "selectedDirect") {
-		subDirectInput.style.display = "";
-		subDirectInput.value = "";
-	}
-	else {
-		subDirectInput.style.display = "none";
-		subDirectInput.value = "";
-	}
-}
-
-
-// 서브 옵션 변경 > 초기화
-function clearSubOptions(subCategoryId) {
+// 메인 옵션 변경 > 초기화
+function clearSubOption(subCategoryId) {
 	const subOptions = document.getElementById(subCategoryId).children;
-	
-	const count = subOptions.length;
-	for (let i = 0; i < count - 1; i++) {
-		subOptions[1].remove();
+
+	for (let i = 0; i < subOptions.length; i++) {
+		subOptions[0].remove();
 	}
 }
 
-// 서브 옵션 생성
-function populateSubOptions(key, subCategoryId, modifyBoolean) {
-	const subSelect = document.getElementById(subCategoryId);
-	
-	// 하부 카테고리
-	const sotredMenu = menuCategories[key].sort(); 	// value 정렬	
-	for (let i = 0; i < sotredMenu.length; i++) {
-		option = document.createElement("option");
-		option.className = "sub_option";
-		option.innerHTML = menuCategories[key][i];
-		option.value = menuCategories[key][i];
-		
-		subSelect.appendChild(option);
+
+// quick 활성화
+function activateQuick(icon) {
+	// activate
+	if (quickToggle) {
+		icon.className = "fas fa-toggle-on";
+		document.getElementById("quickprice-modal").disabled = "";
+		document.getElementById("quickprice-modal").value = "";
+		document.getElementById("quickprice-modal").focus();
 	}
 	
-	// 서비스 등록 > 직접입력 & 메뉴 수정에서는 미지원
-	if (modifyBoolean === false) {
-		// 직접입력
-		option = document.createElement("option");
-		option.value = "selectedDirect";
-		option.className = "selectedDirect";
-		option.innerHTML = "직접입력";
-		option.style.fontWeight = "600";
-		
-		subSelect.appendChild(option);		
-	}
-	
-	// default option
-	document.getElementById(subCategoryId).selected = true;
-}
-
-// 배달 서비스 활성화 이벤트
-let deliveryToggle = false;
-function activateVisualization() {
-	const itemInputList = document.getElementById("add-item-list");
-	const priceCon = itemInputList.getElementsByClassName("forth_item_prop");		
-	deliveryToggle = !deliveryToggle;
-
-	if(deliveryToggle === true) {
-		const priceCon = document.getElementsByClassName("forth_item_prop");	
-		document.getElementById("delivery-btn").style.backgroundColor = "navy";
-		// 아이콘 변경(활성화)
-		document.getElementById("delivery-icon").className = "fas fa-toggle-on";
-		
-		
-		// input(quickprice) 추가
-		for (let i = 0; i < priceCon.length; i++) {
-			// input(quickprice) 생성
-			const quickPriceInput = document.createElement("input");
-			quickPriceInput.type = "text";
-			quickPriceInput.name = "quickprice";
-			quickPriceInput.className = "service_quickprice_input";
-			quickPriceInput.placeholder = "배달 가격";
-			quickPriceInput.style.marginTop = "5px";
-
-			if (priceCon[i].children.length === 1) {
-				priceCon[i].appendChild(quickPriceInput);				
-			}
-		}
-	}
+	// inactivate
 	else {
-		document.getElementById("delivery-btn").style.backgroundColor = "#bedcfa";
-		// 아이콘 변경(비활성화)
-		document.getElementById("delivery-icon").className = "fas fa-toggle-off";
-		
-		// input(quickprice) 삭제
-		for (let i = 0; i < priceCon.length; i++) {
-			if (priceCon[i].children.length !== 1) {
-				priceCon[i].removeChild(priceCon[i].children[1]);
-			}
-		}	
+		icon.className = "fas fa-toggle-off";
+		document.getElementById("quickprice-modal").value = "0";
+		document.getElementById("quickprice-modal").disabled = "disabled";
 	}
-}
 
-// 메뉴 수정 버튼(th & td > input + 삭제 버튼)
-function modifyMenuService() {
-	// 삭제 활성화가 되어 있을 시(폼 변경 후), 작동안함
-	if(document.getElementById("delete_title")) {
-		return;
-	}
-	
-	const tableHead = document.getElementsByClassName("current_menu_table")[1].getElementsByTagName("thead")[0];
-	const tableBody = document.getElementsByClassName("current_menu_table")[1].getElementsByTagName("tbody")[0];
-	
-	// 상품 리스트 수(= 행 개수)
-	const tr = tableBody.getElementsByTagName("tr");
-	const trLength = tr.length;
-	
-	// 열 길이
-	const columnLength = tableHead.children[0].children.length;
-	
-	// 수정 폼 타입(X > index를 사용한 switch로 대체)
-	// const types = [ "first_select", "second_select", "detail", "price", "time"];
-	
-	// 테이블(thead) 삭제 열 추가
-	const deleteList = document.createElement("th");
-	deleteList.setAttribute("id", "delete_title");
-	deleteList.scope = "cols";
-	deleteList.innerHTML = "삭제";
-	deleteList.style.width = "5%";
-	
-	tableHead.children[0].appendChild(deleteList);
-	
-	// 테이블(tbody) 삭제 버튼 추가 & 폼(input) 변경
-	for(let i = 0; i < tr.length; i++) {
-		const td = document.createElement("td");
-		td.style.padding = "5px";
-		
-		// 내부 폼 변경	
-		for (let j = 0; j < columnLength; j++) {
-			const select = document.createElement("select");
-			const defaultOption = document.createElement("option");
-			const testOption = document.createElement("option");
-			const typeOption = document.createElement("option");
-			const directInput = document.createElement("input");
-			
-			const detailInput = document.createElement("input");
-			const priceInput = document.createElement("input");
-			const timeInput = document.createElement("input");
-
-		// 홀수 행(흰색 배경)
-			if(i % 2 !== 0) {
-				td.setAttribute("class", "even delete_item");
-				td.innerHTML = "<div onclick='deleteList(this.parentElement.parentElement)'>" + "<i class='fas fa-times'></i>" + "<span>삭제</span>" + "</div>";
-			}
-		// 짝수 행(하늘색 배경)
-			else {
-				td.setAttribute("class", "delete_item");
-				td.innerHTML = "<div onclick='deleteList(this.parentElement.parentElement)'>" + "<i class='fas fa-times'></i>" + "<span>삭제</span>" + "</div>";			
-			}
-			
-		// switch
-			switch(j) {
-		// 첫번째 select
-			case 0:	
-				// 초기화(default 값 지정 가능)
-				tr[i].children[j].innerHTML = "";
-				tr[i].children[j].style.width = "15%";
-				tr[i].children[j].style.padding = "5px";
-
-				select.className = "service_selector";
-				select.name = ""
-				select.setAttribute("onchange", "directType(this)");
-				
-				// (DB) 옵션 추가(types ~ 직접입력)
-				// placeholder
-				defaultOption.hidden = "true";
-				defaultOption.disabled = "true";
-				defaultOption.selected = "true";
-				defaultOption.innerHTML = "초기값(DB)";			
-				defaultOption.value = "초기값(DB)";			
-				
-				// 기타 옵션들(사용자에 따라 설정된 옵션)
-				testOption.innerHTML = "Service 1";
-				
-				// 직접입력
-				typeOption.value = "selectedDirect";
-				typeOption.className = "selectedDirect"; 
-				typeOption.innerHTML = "직접입력";
-				
-				// 옵션 주입
-				select.appendChild(defaultOption);
-				select.appendChild(testOption);
-				select.appendChild(typeOption);
-				
-				// 직접입력 input 생성
-				directInput.type="text";
-				directInput.className = "direct_type_input";
-				directInput.name = "";
-				directInput.placeholder = "서비스 입력";
-				directInput.style.display = "none";
-				
-				// select & input 주입
-				tr[i].children[j].appendChild(select);
-				tr[i].children[j].appendChild(directInput);
-				
-				break;
-				
-		// 두번째 select
-			case 1:
-				// 초기화(default 값 지정 가능)
-				tr[i].children[j].innerHTML = "";
-				tr[i].children[j].style.width = "15%";
-				tr[i].children[j].style.padding = "5px";
-				
-				select.className = "service_selector";
-				select.name = ""
-				select.setAttribute("onchange", "directType(this)");
-				
-				// (DB) 옵션 추가(types ~ 직접입력)
-				// placeholder
-				defaultOption.hidden = "true";
-				defaultOption.disabled = "true";
-				defaultOption.selected = "true";
-				defaultOption.innerHTML = "초기값(DB)";			
-				defaultOption.value = "초기값(DB)";			
-				
-				// 기타 옵션들(사용자에 따라 설정된 옵션)
-				testOption.innerHTML = "Type 1";
-				
-				// 직접입력
-				typeOption.value = "selectedDirect";
-				typeOption.className = "selectedDirect"; 
-				typeOption.innerHTML = "직접입력";
-				
-				// 옵션 주입
-				select.appendChild(defaultOption);
-				select.appendChild(testOption);
-				select.appendChild(typeOption);
-				
-				// 직접입력 input 생성
-				directInput.type="text";
-				directInput.className = "direct_type_input";
-				directInput.name = "";
-				directInput.placeholder = "서비스 입력";
-				directInput.style.display = "none";
-				
-				// select & input 주입
-				tr[i].children[j].appendChild(select);
-				tr[i].children[j].appendChild(directInput);
-				
-				break;
-		// 세부내용
-			case 2:	
-				// 초기화(default 값 지정 가능)
-				tr[i].children[j].innerHTML = "";
-				tr[i].children[j].className += " third_item_prop";
-				tr[i].children[j].style.width = "20%";
-				tr[i].children[j].style.padding = "5px";
-				
-				detailInput.type = "text";
-				detailInput.className = "service_detail_input";
-				detailInput.placeholder = 
-					tr[i].children[j].innerHTML ? "초기값(DB)" : "세부 서비스 내용을 입력해주세요.";
-				
-				tr[i].children[j].appendChild(detailInput);
-				
-				break;
-		// 가격
-			case 3:	
-				// 초기화(default 값 지정 가능)
-				tr[i].children[j].innerHTML = "";
-				tr[i].children[j].className += " forth_item_prop";
-				tr[i].children[j].style.width = "15%";
-				tr[i].children[j].style.padding = "5px";
-				
-				priceInput.type = "text";
-				priceInput.className = "service_detail_input";
-				priceInput.placeholder = 
-					tr[i].children[j].innerHTML ? "초기값(DB)" : "가격(원)";
-				
-				tr[i].children[j].appendChild(priceInput);
-				
-				break;
-		// 시간
-			case 4:	
-				// 초기화(default 값 지정 가능)
-				tr[i].children[j].innerHTML = "";
-				tr[i].children[j].className += " fifth_item_prop";
-				tr[i].children[j].style.width = "15%";
-				tr[i].children[j].style.padding = "5px";
-				
-				timeInput.type = "text";
-				timeInput.className = "service_detail_input";
-				timeInput.placeholder = 
-					tr[i].children[j].innerHTML ? "초기값(DB)" : "소요시간(시간)";
-				
-				tr[i].children[j].appendChild(timeInput);
-				
-				break;
-			}
-			
-			let value = tr[i].children[j].innerHTML;
-//			console.log(value);
-		
-		}
-		tr[i].appendChild(td);						
-	}
-};
-
-// 단일 메뉴 수정
-function modifyMenu(id) {
-	const item = document.getElementById(id);
-	
-	// 입력된 값 추출
-	const menu = {};
-	for (let i = 0; i < item.children.length - 1; i++) {
-		switch(i) {
-		// 서비스 유형
-		case 0: 
-			menu.maincategory = item.children[i].innerText;
-			break;
-		// 서비스 타입
-		case 1: 
-			menu.subcategory = item.children[i].innerText;
-			break;
-		// 메뉴 이름
-		case 2: 
-			menu.name = item.children[i].innerText;
-			break;
-		// 가격 & 배달비 > 배달비가 없을 경우 포함
-		case 3:
-			if (item.children[i].children.length === 2) {
-				menu.price = refineValue("price", item.children[i].children[0].innerText);		
-				menu.quickprice = refineValue("quickprice", item.children[i].children[1].innerText)
-			}
-			else if (item.children[i].children.length === 1) {
-				menu.price = refineValue("price", item.children[i].children[0].innerText);
-			}
-			else {
-				alert("에러");
-			}
-			break;
-		// 소요 시간
-		case 4: 
-			menu.ete = refineValue("ete", item.children[i].innerText);
-			break;
-		}
-	}
-	
-	console.log(menu);
-	
-	// 폼 변경 > 입력된 값 주입
-	for (let i = 0; i < item.children.length; i++) {
-		// 초기화
-		item.children[i].innerHTML = "";
-		
-		switch(i) {
-		// 서비스 유형
-		case 0: 
-			const mainSelectorId = generateRandomString(15);
-			const mainSelector = document.createElement("select");
-			mainSelector.id = mainSelectorId;
-			mainSelector.className = "service_selector";
-			mainSelector.name = "maincategorySelectBox";
-//			mainSelector.addEventListener("change", (e) => selectMainOption(e, directRandomId, subSelectorRandomId, subDirectRandomId));
-			
-			// 서브옵션 생성
-			createOptions(mainSelector, true);
-			
-			// 추가
-			item.children[i].appendChild(mainSelector);
-			
-			// 기존값 선택 설정
-			const mainCategories = document.getElementById(mainSelectorId).children;
-			for (let i = 0; i < mainCategories.length; i++) {
-				mainCategories[i].value === menu.maincategory ? 
-					mainCategories[i].selected = true :
-					mainCategories[i].selected = false;
-			}
-			
-			break;
-		// 서비스 타입
-		case 1: 
-			const subSelectorId = generateRandomString(14);
-			const subSelector = document.createElement("select");
-			subSelector.id = subSelectorId;
-			subSelector.className = "service_selector";
-			subSelector.name = "subcategorySelectBox";
-//			subSelector.addEventListener("change", (e) => selectSubOption(e, subDirectRandomId));
-			
-			// 추가
-			item.children[i].appendChild(subSelector);
-			
-			// 서브 메뉴 생성
-			populateSubOptions(menu.maincategory, subSelectorId, true);
-
-			// 기존값 선택 설정
-			const subCategories = document.getElementById(subSelectorId).children;
-			for (let i = 0; i < subCategories.length; i++) {
-				subCategories[i].value === menu.subcategory ? 
-					subCategories[i].selected = true :
-					subCategories[i].selected = false;
-			}
-			
-			break;
-		// 삭제 아이콘
-		case 5: 
-			const icon = document.createElement("i");
-			icon.className = "fas fa-trash-alt";
-			
-			item.children[i].appendChild(icon);
-			break;
-		}
-	}
-}
-
-// 상품 리스트 삭제
-function deleteList(tr) {
-	const answer = confirm("해당 목록을 삭제하시겠습니까?");
-	if (answer === true ) {
-		tr.remove();		
-	}
-}
-
-// 취소 버튼
-function dismissInput(id) {
-	const itemlist = document.getElementById('add-item-list');
-	// 목록이 하나 남았을 때
-	if (itemlist.children.length === 1) {
-		
-		const directInputs = document.querySelectorAll(".direct_type_input");
-		const selector = document.querySelectorAll(".service_selector");
-		const directInputCheck = document.querySelectorAll(".selectedDirect");
-		const quickpriceInput = document.querySelectorAll(".service_quickprice_input");
-		
-		// 직접입력 체크 O > input 제거 & 값 초기화
-		for (let i = 0; i < directInputCheck.length; i++) {
-			if (directInputCheck[i].selected === true) {
-				directInputs[i].value = '';
-				directInputs[i].style.display = 'none';
-			}
-		}
-				
-		// 직접입력 체크 X > select 옵선 초기화
-		selector[0].children[0].selected = true;
-		selector[1].children[0].selected = true;
-		
-		// 세부내용, 가격, 시간 초기화
-		document.querySelector(".service_detail_input").value = '';
-		document.querySelector(".service_price_input").value = '';
-		document.querySelector(".service_time_input").value = '';
-		
-		// 퀵서비스 가격 추가
-		if (quickpriceInput.length !== 0) {
-			quickpriceInput[0].style.display !== "none" ?
-				quickpriceInput[0].style.display = "none" : 
-				quickpriceInput[0].style.display = "";
-		}
-
-		return;
-	}
-	
-	// 목록이 2개 이상 > 해당 줄 삭제
-	document.getElementById(id).remove();
-}
-
-//가격 & 배달비 & 소요일자 > 문자열 제거 & 숫자 추출
-function refineValue(type, value) {
-	switch(type) {
-	case "price":
-		const price = value.substr(0, value.indexOf("원")).replace(",", "").trim();
-		return price;
-		break;
-	case "quickprice":
-		const quickprice = value.substr(1, value.indexOf("원") - 1).replace(",", "").trim();
-		return quickprice;
-		break;
-	case "ete":
-		const ete = value.substr(0, value.indexOf("(")).trim();
-		return ete;
-		break;
-	}
+	quickToggle = !quickToggle;
 }
 
 
-
-/* 메뉴 카테고리 모달  */ 
-function openCategoryModal() {
-	// 모달 visibility
-	const display = document.getElementById("category_modal").style.display;
-	display === "none" ? 
-		document.getElementById("category_modal").style.display = "block" : 
-		document.getElementById("category_modal").style.display = "none";
-	
-}
-
-// checkbox list 생성
-function createCategoryList() {
-	// 닫기 버튼
-	document.getElementById("category-close").addEventListener("click", function(e) {
-		document.getElementById("category_modal").style.display = "none";
-	})
-	
-	const allMainCategories = Object.keys(menuCategories).concat(defaultCategory).sort();
-	const filtered = allMainCategories.filter((element, index) => allMainCategories.indexOf(element) === index);
-	
-	// checkbox & label 생성 > Node 추가
-	for (let i = 0; i < filtered.length; i++) {
-		// random string id
-		const randomId = generateRandomString(10);
-
-		// key array
-		const userMenu = Object.keys(menuCategories);
-		
-		// checkbox
-		const checkbox = document.createElement("input");		
-		checkbox.id = randomId;
-		checkbox.name = "mainCategory";
-		checkbox.type = "checkbox";
-		checkbox.value = filtered[i];
-		checkbox.style.display = "none";
-		checkbox.checked = userMenu.includes(filtered[i]);
-
-		// label
-		const label = document.createElement("label");
-		label.htmlFor = randomId;
-		label.innerHTML = 
-			`<i class="${checkbox.checked ? "fas fa-check-square" : "fas fa-window-close"}"></i>
-			${filtered[i]}`; 
-		label.className = "category_checkbox_label"; 
-		label.onclick = () => checkboxVisibility(randomId);
-		
-		// 등록된 메뉴 & 등록하지 않은 메뉴 비교 > 체크 
-		checkbox.checked ? label.classList.add("category_checked") : label.classList.remove("category_checked");
-		
-		// label(checkbox) wrapper
-		const div = document.createElement("div");
-		div.classList.add("category_label_wrapper");
-		
-		// Node 추가
-		label.appendChild(checkbox);
-		div.appendChild(label);
-		document.getElementById("category-list").appendChild(div);
-
-		// 서브카테고리 삽입
-		const subMenus = attachSubCategories(filtered[i]);
-		div.appendChild(subMenus);
-	}
-}
-
-
-function checkboxVisibility(id) {
-	const checkbox = document.getElementById(id);
-	
-	if (checkbox.checked) {
-		checkbox.parentElement.classList.add("category_checked");
-		checkbox.parentElement.getElementsByTagName("i")[0].className = "fas fa-check-square";
-	}
-	else {
-		checkbox.parentElement.classList.remove("category_checked");		
-		checkbox.parentElement.getElementsByTagName("i")[0].className = "fas fa-window-close";
-	}
-}
-
-// 서브 메뉴 추가
-
-function attachSubCategories(subCategory) {
-
-	const subMenus = [...menuCategories[subCategory]];
-	
-	const subMenuContainer = document.createElement("div");
-	subMenuContainer.style.display = "flex";
-	subMenuContainer.style.margin = "auto";
-
-	if (subMenus.length === 0) {
-		const h = document.createElement("h3");
-		h.innerHTML = "등록된 메뉴가 없습니다.";
-		h.style.color = "red";
-		
-		subMenuContainer.appendChild(h);
-	}
-	else {
-		for (let i = 0; i < subMenus.length; i++) {
-			const randomId = generateRandomString(10);
-			
-			const checkbox = document.createElement("input");
-			checkbox.id = randomId;
-			checkbox.name = menuCategories[subCategory];
-			checkbox.type = "checkbox";
-			checkbox.checked = "checked";
-//			checkbox.style.display = "none";
-			checkbox.style.marginRight = "5px";
-			
-			const label = document.createElement("label");
-			label.htmlFor = randomId;
-			label.classList.add("sub_category_label");
-			label.innerHTML = "&nbsp;" + subMenus[i];
-			
-			const wrapper = document.createElement("div");
-			
-			label.prepend(checkbox);
-			wrapper.appendChild(label);
-			subMenuContainer.appendChild(wrapper);
-		}
-	}
-	
-	return subMenuContainer;
-}
-
-
-
+// 서비스 수 계산
 function measureAmount(object) {
 	let sum = 0;
-
 	for (let key in object) {
 		sum += object[key].length;
 	}		
-		
 	return sum;
 }

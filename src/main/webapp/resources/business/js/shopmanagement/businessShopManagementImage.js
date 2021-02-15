@@ -150,7 +150,10 @@ function zoomInPhoto(clickedPhoto) {
 // 이미지 업로드
 function imageCheck(e) {
 // 사진 업로드 제한(5장)
-	imageCount >= 5 ? alert("업로드 할 수 있는 매장 사진은 최대 5장까지 입니다.") : null;
+	if (imageCount >= 5) {
+		alert("업로드 할 수 있는 매장 사진은 최대 5장까지 입니다.");
+		window.location.reload();
+	}
 	
 	const input = e.target;
 	const imageType = input.value.substr(input.value.length - 3, input.value.length).toLocaleLowerCase();
