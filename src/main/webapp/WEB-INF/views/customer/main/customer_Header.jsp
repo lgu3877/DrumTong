@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 	<header>
         <a href="${cpath }/"><img class="logo" src="${cpath }/resources/customer/img/logo3.png"></img></a>
         
@@ -25,21 +24,20 @@
             </ul>
             
             
-                <c:if test="${empty cLogin}">
-            <ul class="menu">
+            <ul class="menu" id="signUP_header">
                 <li>
                     <a href="${cpath }/customer/membership/customerSignUp/" class="middleMenu">회원가입</a>
                 </li>
             </ul>  
-				</c:if>
-            <ul class="menu">
+            <ul class="menu" id="Login_header">
             	
                 <li class="headerLogin">
-                		<c:if test="${empty cLogin}">
                 			<a href="${cpath }/customer/membership/customerLogin/" class="middleMenu middleMenu2 ">로그인</a>
-                		</c:if>
-                		
-                		<c:if test="${not empty cLogin}">
+              	</li>
+            </ul>
+            <ul class="menu" id="MyAccount_header">
+            	
+                <li class="headerLogin">
                 			<a href="${cpath }/customer/account/customerMenu/" class="middleMenu middleMenu2 ">내 계정</a>
                 			
                 			<ul class="mypage">
@@ -50,10 +48,10 @@
 		                            <li class="mypageList"><a href="${cpath }/customer/membership/customerLogOut/" class="listButton">로그아웃</a></li>
 		                        </div>
 		                    </ul>
-                		</c:if>
                 	
                     
                 </li>
             </ul> 
         </div>
     </header>
+    <script>headerSettings('${cLogin}');</script>

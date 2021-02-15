@@ -15,6 +15,7 @@ import com.drumtong.customer.dao.CBookmarkDAO;
 import com.drumtong.customer.dao.CCouponDAO;
 import com.drumtong.customer.vo.CBookmarkVO;
 import com.drumtong.customer.vo.CCouponVO;
+import com.drumtong.customer.vo.CPrivateDataVO;
 import com.drumtong.map.dao.MEmdDAO;
 import com.drumtong.map.dao.MSidoDAO;
 import com.drumtong.map.dao.MSigunguDAO;
@@ -38,7 +39,10 @@ public class RestCustomerLaundryService {
 	@Autowired MSidoDAO mSidoDAO;
 	@Autowired MSigunguDAO mSigunguDAO;
 	
-	public String setBookmark(HashMap<String, String> param) {
+	public String setBookmark(HttpServletRequest req, HashMap<String, String> param) {
+		CPrivateDataVO User = (CPrivateDataVO) req.getSession().getAttribute("cLogin");
+		param.put("memberid", User.getMemberid());
+		
 		String result = param.get("result");
 		
 		// 북마크 이미 추가되있는지 검사하기
@@ -65,7 +69,9 @@ public class RestCustomerLaundryService {
 	}
 
 
-	public String setCoupon(HashMap<String, String> param) {
+	public String setCoupon(HttpServletRequest req, HashMap<String, String> param) {
+		CPrivateDataVO User = (CPrivateDataVO) req.getSession().getAttribute("cLogin");
+		param.put("memberid", User.getMemberid());
 		System.out.println("memberid : " + param.get("memberid"));
 		System.out.println("couponid : " + param.get("couponid"));
 		
