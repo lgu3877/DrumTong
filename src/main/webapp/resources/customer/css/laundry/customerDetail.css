@@ -456,9 +456,11 @@ check .option-name,
 }
 
 .owner-review  {
-	width: 100%;
+	width: 90%;
 	height: auto;
-	background-color: aqua;
+	margin: auto;
+	margin-top: 30px;
+	background-color: whitesmoke;
 	border-radius: 20px;
 	position: relative;
 	border-top-left-radius: 0px;
@@ -471,7 +473,7 @@ check .option-name,
 	width: 0px;
 	height: 0px;
 	border-top: 30px solid transparent;
-	border-left: 30px solid aqua;
+	border-left: 30px solid whitesmoke;
 	content: '';
 }
 
@@ -480,15 +482,20 @@ check .option-name,
 	height: 30px;
 	display: flex;
 	align-content: center;
+	padding-top: 15px;
 	padding-left: 20px;
 }
+.owner-review .owner-name .owner-write-date {
+	margin-left: 15px
+}
+
 .owner-review .owner-content {
 	margin: 0;
 	height: auto;
 	display: flex;
 	align-content: center;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	padding-top: 15px;
+	padding-bottom: 15px;
 	padding-left: 40px;
 }
 
