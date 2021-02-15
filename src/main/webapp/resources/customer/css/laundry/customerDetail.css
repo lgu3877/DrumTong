@@ -455,6 +455,50 @@ check .option-name,
   padding: 10px;
 }
 
+.owner-review  {
+	width: 90%;
+	height: auto;
+	margin: auto;
+	margin-top: 30px;
+	background-color: whitesmoke;
+	border-radius: 20px;
+	position: relative;
+	border-top-left-radius: 0px;
+}
+
+.owner-review::before  {
+	position: absolute;
+	top: -30px;
+	left: 0;
+	width: 0px;
+	height: 0px;
+	border-top: 30px solid transparent;
+	border-left: 30px solid whitesmoke;
+	content: '';
+}
+
+.owner-review .owner-name {
+	margin: 0;
+	height: 30px;
+	display: flex;
+	align-content: center;
+	padding-top: 15px;
+	padding-left: 20px;
+}
+.owner-review .owner-name .owner-write-date {
+	margin-left: 15px
+}
+
+.owner-review .owner-content {
+	margin: 0;
+	height: auto;
+	display: flex;
+	align-content: center;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	padding-left: 40px;
+}
+
 .review-more {
   background-color: rgba(89, 147, 255, 0.3);
   border: none;

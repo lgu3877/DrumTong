@@ -631,6 +631,10 @@
             <div style="height: 30px; background: grey; color: white;">추가 확보 공간</div>            
             <div class="modal-grade"><span></span></div>
             <div class="review-context"></div>
+            <div class="owner-review">
+            	<h1 class="owner-name"></h1>
+            	<p class="owner-content">사장님 댓글 공간입니다</p>
+            </div>
           </div>
         </div>
       </div>
@@ -875,6 +879,16 @@
 				$('.detailview-review-row').attr('id', 'review' + i);
 				$('.detailview-review-row').find('.customerName').html(reviewList[i].customerName);
 				$('.detailview-review-row').find('.review-context').html(reviewList[i].ccontent);
+				
+				// 사장님 댓글 생성 조건문
+				if(reviewList[i].replyboolean == 'N')
+					$('#review' + i).find('.owner-review').css('display', 'none');
+				else {
+					const inputowner =  '사장님<span class="owner-write-date">' + reviewList[i].bregistdate.split(' ')[0] + '</span>';
+					$('#review' + i).find('.owner-review').css('display', '');
+					$('#review' + i).find('.owner-name').html(inputowner);
+					$('#review' + i).find('.owner-content').html(	reviewList[i].bcontent);
+				}
 			}
 			else {
 				const beforerow = $('#review' + (i - 1));
@@ -882,6 +896,17 @@
 				beforerow.next().attr('id', 'review' + i);
 				beforerow.next().find('.customerName').html(reviewList[i].customerName);
 				beforerow.next().find('.review-context').html(reviewList[i].ccontent);
+
+				// 사장님 댓글 생성 조건문
+				if(reviewList[i].replyboolean == 'N')
+					$('#review' + i).find('.owner-review').css('display', 'none');
+				else {
+					const inputowner = '사장님<span class="owner-write-date">' + reviewList[i].bregistdate.split(' ')[0] + '</span>';
+					$('#review' + i).find('.owner-review').css('display', '')
+					$('#review' + i).find('.owner-name').html(inputowner);
+					$('#review' + i).find('.owner-content').html(reviewList[i].bcontent);
+				}
+
 			}
 			
 			$('#review' + i).find('.modal-grade').html('');	// 평점 안의 내용 초기화
