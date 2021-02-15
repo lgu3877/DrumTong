@@ -616,7 +616,7 @@
         <div class="modal-reiview" id="modal-reiview">
           <div class="detailview-review-row">
             <div class="review-head">
-              <div class="review-profilePic"></div>
+              <div class="review-profilePic"><img></div>
               <div class="review-writer">
               	<div class="right-row">
                 	<p class="customerName"></p>
@@ -629,6 +629,7 @@
               </div>
             </div>
             <div style="height: 30px; background: grey; color: white;">추가 확보 공간</div>            
+            <div class="review-reviewimg" style="display: none"><img></div>
             <div class="modal-grade"><span></span></div>
             <div class="review-context"></div>
             <div class="owner-review">
@@ -637,6 +638,13 @@
             </div>
           </div>
         </div>
+      </div>
+      
+      <div class="modal-content5" id="modal-content5" style="display: none">
+      		<img>
+      </div>
+      <div id="modal-content5-exit" style="display: none"  onclick="DeactiveModal5()">
+      		<i class="fas fa-times fa-4x"></i>
       </div>
     </div>
 
@@ -653,6 +661,8 @@
        var modalContent2 = document.getElementById('modal-content2');   // 결제 화면
        var modalContent3 = document.getElementById('modal-content3');   // 로그인 화면
        var modalContent4 = document.getElementById('modal-content4');   // 리뷰 화면
+       var modalContent5 = document.getElementById('modal-content5');   // 모달 컨텐츠4 -> 고객리뷰이미지
+       var modalContent5_exit = document.getElementById('modal-content5-exit');   // 모달 컨텐츠5 -> 닫기
 
        // Get the button that opens the modal
        var btn1 = document.getElementById('add-coupon');
@@ -753,6 +763,8 @@
          modalContent2.style.display = 'none';
          modalContent3.style.display = 'none';
          modalContent4.style.display = 'none';
+         modalContent5.style.display = 'none';
+         modalContent5_exit.style.display = 'none';
          
        };
 
@@ -773,6 +785,8 @@
            modalContent2.style.display = 'none';
            modalContent3.style.display = 'none';
            modalContent4.style.display = 'none';
+           modalContent5.style.display = 'none';
+           modalContent5_exit.style.display = 'none';
          }
        };
          
@@ -880,6 +894,26 @@
 				$('.detailview-review-row').find('.customerName').html(reviewList[i].customerName);
 				$('.detailview-review-row').find('.review-context').html(reviewList[i].ccontent);
 				
+				// 고객이 업로드한 프로필 이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
+				if(typeof reviewList[i].profileimg === typeof undefined) {
+					$('.detailview-review-row').find('.review-profilePic img').attr("src",
+							"https://az-pe.com/wp-content/uploads/2018/05/kemptons-blank-profile-picture.jpg");
+				}
+				else {
+					$('.detailview-review-row').find('.review-profilePic img').attr("src",
+							"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + reviewList[i].profileimg);
+				}
+				
+				// 고객이 업로드한 리뷰이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
+				if(typeof reviewList[i].reviewimg === typeof undefined)
+					$('.detailview-review-row').find('.review-reviewimg').css("display", "none");
+				else {
+					$('.detailview-review-row').find('.review-reviewimg').css("display", "");
+					$('.detailview-review-row').find('.review-reviewimg img').attr("src",
+							"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + reviewList[i].reviewimg);
+					$('.detailview-review-row').find('.review-reviewimg img').attr("onclick", "ActiveModal5('" + reviewList[i].reviewimg + "')");
+				}
+				
 				// 사장님 댓글 생성 조건문
 				if(reviewList[i].replyboolean == 'N')
 					$('#review' + i).find('.owner-review').css('display', 'none');
@@ -896,7 +930,27 @@
 				beforerow.next().attr('id', 'review' + i);
 				beforerow.next().find('.customerName').html(reviewList[i].customerName);
 				beforerow.next().find('.review-context').html(reviewList[i].ccontent);
-
+				
+				// 고객이 업로드한 프로필 이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
+				if(typeof reviewList[i].profileimg === typeof undefined) {
+					beforerow.next().find('.review-profilePic img').attr("src",
+							"https://az-pe.com/wp-content/uploads/2018/05/kemptons-blank-profile-picture.jpg");
+				}
+				else {
+					beforerow.next().find('.review-profilePic img').attr("src",
+							"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + reviewList[i].profileimg);
+				}
+				
+				// 고객이 업로드한 리뷰이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
+				if(typeof reviewList[i].reviewimg === typeof undefined)
+					beforerow.next().find('.review-reviewimg').css("display", "none");
+				else {
+					beforerow.next().find('.review-reviewimg').css("display", "");
+					beforerow.next().find('.review-reviewimg img').attr("src",
+							"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + reviewList[i].reviewimg);
+				}
+						
+				
 				// 사장님 댓글 생성 조건문
 				if(reviewList[i].replyboolean == 'N')
 					$('#review' + i).find('.owner-review').css('display', 'none');
@@ -947,6 +1001,17 @@
 	 		}
 		}
 	}
+    
+    function ActiveModal5(src) {
+    	modalContent5_exit.style.display = "";
+    	modalContent5.style.display = "";
+    	modalContent5.querySelector('img').src = "https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + src;
+    }
+    
+    function DeactiveModal5() {
+    	modalContent5_exit.style.display = "none";
+    	modalContent5.style.display = "none";
+    }
 	
     document.getElementById('review-more').addEventListener('mouseover', function() {
     	this.parentNode.style.background = 'white';
@@ -960,6 +1025,7 @@
     	this.style.background = 'white';
     	this.querySelector('p').style.color = '#1564F9';
     });
+    
     
     </script>
     <script>
