@@ -743,10 +743,12 @@
 	height: 100%;
 	background-color: white;
 	cursor: auto;
+	position: fixed;
 }
 
 .modify_menu_modal_close {
 	text-align: right;
+	cursor: pointer;
 }
 
 .modify_menu_modal_close i {
@@ -754,7 +756,7 @@
 }
 
 .modify_menu_modal_form {
-	height: 89%;
+	height: 88%;
 	margin: 0 10px;
 }
 
@@ -766,9 +768,18 @@
     color: navy;
 }
 
+.toggle {
+	display: flex;
+    justify-content: space-between;
+}
+
+.font_large {
+	font-size: 16pt;
+}
+
 .modify_menu_modal_input_con {
 	text-align: left;
-    margin: 50px 0;
+    margin: 25px 0;
 }
 
 .modify_menu_modal_input_title {
@@ -777,25 +788,57 @@
     margin-bottom: 15px;
 }
 
-.modify_menu_modal_selector {
+.modify_menu_modal_input_title i {
+	font-size: 18pt;
+	cursor: pointer;
+}
+
+.modify_menu_modal_selector,
+.modify_menu_modal_input {
+	width: 100%;
+    height: 45px;
+    border-radius: 5px;
+    text-indent: 10px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    font-size: 13pt;
+    color: navy;
+    border: 1px solid navy;
+}
+
+.modify_menu_modal_input {
 	
 }
 
-.modify_menu_modal_btn {
+.modify_menu_modal_btn_container {
+	display: flex;
 	float: right;
+}
+
+.modify_menu_modal_btn {
     padding: 10px 20px;
     border: none;
     font-weight: 600;
     letter-spacing: 2px;
     font-size: 13pt;
     cursor: pointer;
-    background-color: #6495ED;
-    color: white;
+    margin-left: 20px;
 }
 
 .modify_menu_modal_btn:hover {
 	transition: 0.5s;
 	background-color: navy;
+}
+
+.remove {
+    background-color: lightcoral;
+    color: white;
+}
+
+.confirm {
+    background-color: #6495ED;
+    color: white;
+	
 }
 
 /* first property input */

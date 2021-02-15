@@ -831,3 +831,14 @@ function attachSubCategories(subCategory) {
 	return subMenuContainer;
 }
 
+
+
+function measureAmount(object) {
+	let sum = 0;
+
+	for (let key in object) {
+		sum += object[key].length;
+	}		
+		
+	return sum;
+}

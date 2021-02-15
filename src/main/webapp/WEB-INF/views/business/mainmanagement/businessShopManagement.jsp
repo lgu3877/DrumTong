@@ -49,7 +49,9 @@
 		const bImageList = ${bImageList};
 		const bManagement = ${bManagement};
 		const bMenu = ${bMenu};
-		console.log("@@@@", bImageList);
+		
+		console.log(bImageList);
+		
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
 		
@@ -555,7 +557,7 @@
 	</div>
 
 <!-- Modal > 서비스 메뉴 수정 -->
-	<div id="modify-menu-modal" class="modify_menu_modal"></div>
+	<div id="modify-menu-modal" class="modify_menu_modal" style="display: none"></div>
 
 		
 	<!-- [50줄] 여는 태그  세션의 상태가 FAIL이면 POST 형식   -->
