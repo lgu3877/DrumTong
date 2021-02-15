@@ -68,9 +68,7 @@
            })
            
         };
-        
-        if('${cLogin}' != null && '${cLogin}' !='' ) { 
-           axPost(); }
+        axPost();
         
       }
     </script>

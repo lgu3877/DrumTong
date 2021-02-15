@@ -63,6 +63,7 @@ function logiinSubmit(type) {
         			
         			if(loginStatus === true){
 	        			alert('로그인 성공');
+	        			headerSettings(result[1]);
 	        			coupon = result[2];
 	        			point = result[3];
 	        			bookmark = result[4];
