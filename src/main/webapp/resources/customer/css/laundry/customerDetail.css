@@ -86,11 +86,20 @@
   font-weight: bolder;
 }
 
-.detailview-wrap .fa-star {
+.detailview-intro-headline .fa-star {
   font-size: x-large;
   margin-right: 10px;
   margin-top: 3px;
   cursor: pointer;
+}
+
+.backstars .fa-star {
+  font-size: x-large;
+  margin-right: 10px;
+  margin-top: 3px;
+  cursor: pointer;
+  -webkit-text-stroke: 2px skyblue;
+  color: white;
 }
 
 .detailview-wrap .add{
