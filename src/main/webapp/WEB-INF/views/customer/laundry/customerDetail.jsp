@@ -879,6 +879,8 @@
 				$('.detailview-review-row').attr('id', 'review' + i);
 				$('.detailview-review-row').find('.customerName').html(reviewList[i].customerName);
 				$('.detailview-review-row').find('.review-context').html(reviewList[i].ccontent);
+				
+				// 사장님 댓글 생성 조건문
 				if(reviewList[i].replyboolean == 'N')
 					$('#review' + i).find('.owner-review').css('display', 'none');
 				else {
@@ -894,6 +896,8 @@
 				beforerow.next().attr('id', 'review' + i);
 				beforerow.next().find('.customerName').html(reviewList[i].customerName);
 				beforerow.next().find('.review-context').html(reviewList[i].ccontent);
+
+				// 사장님 댓글 생성 조건문
 				if(reviewList[i].replyboolean == 'N')
 					$('#review' + i).find('.owner-review').css('display', 'none');
 				else {
