@@ -1,95 +1,190 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="../main/customerHeader.jsp" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<style>
-	div.detailview-mainCate, div.detailview-subCate{
-		width:570px;
-	}
-	div.mainButton, div.mainButton_select{
-		display: inline-flex;
- 		width: 140px;
-		border-radius: 10px;
-		font-size: 20pt;
-		margin: 1px;
-		cursor: pointer;
-	}
-	div.mainButton{
-		border: 2px solid #35AEFD;
-	}
-	div.mainButton_select{
-		border: 5px solid #35AEFD;
-		
-	}
-	div.mainButton:hover{
-		background-color: #35AEFD;
-		color:white;
-		font-weight: bold;
-	}
-	div.subButton, div.subButton_select{
-		display: inline-flex;
- 		width: 140px;
-		border-radius: 10px;
-		font-size: 20pt;
-		margin: 1px;
-		cursor: pointer;
-	}
-	div.subButton{
-		border: 2px solid skyblue;
-	}
-	div.subButton_select{
-		border: 5px solid skyblue;
-		
-	}
-	div.subButton:hover{
-		background-color: skyblue;
-		color:white;
-		font-weight: bold;
-	}
-</style>
- <!-- 스크립트 영역 -->
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="cpath">${pageContext.request.contextPath }</c:set>
+<!DOCTYPE html>
+ 
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+	<!-- title -->
+    <title>customerDrumtong :: customerDetail</title>
+    <link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet" type="text/css">
+    <link rel="stylesheet" href="${cpath }/customer/css/customerStyle.css">
+    <link rel="stylesheet" href="${cpath }/customer/css/laundry/customerDetail.css">
+    <link rel="stylesheet" href="${cpath }/customer/css/membership/customerMembership.css">
+	 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+	<script type="text/javascript" src="${cpath }/customer/js/main/customerHeader.js"></script>
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/7522a35233.js" crossorigin="anonymous"></script>
+
+   	<!-- Google Chart -->
+   	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+   	<!-- AXIOS -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	
+ 	<!-- 스크립트 영역 -->
     <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>
+    
+    <script>
+    	function couponSettings(){ // 쿠폰 다운로드 세팅 메서드
+    		modalCouponList = document.getElementById('modal-couponList');
+    		couponList = ${bCouponVO };
+    		console.log(couponList);
+    		
+    		couponList.forEach(cl => {
+    			couponOption = document.createElement('option');
+    			couponOption.setAttribute('value', cl.couponid);
+    			couponOption.innerHTML = cl.discount + '원 할인/' + cl.minimumprice + '원 이상[' + cl.period + ']';
+    			
+    			modalCouponList.appendChild(couponOption);
+    		})
+    		
+    	}
+    </script>
+    <script>
+    	function myCouponSettings(){ // 내 쿠폰을 현재 결제
+    		myCouponList = document.getElementById()
+    	}
+    </script>
+    <script>
+    	function couponSettings(){ // 쿠폰 다운로드 세팅 메서드
+    		modalCouponList = document.getElementById('modal-couponList');
+    		couponList = ${bCouponVO };
+    		console.log(couponList);
+    		
+    		couponList.forEach(cl => {
+    			couponOption = document.createElement('option');
+    			couponOption.setAttribute('value', cl.couponid);
+    			couponOption.innerHTML = cl.discount + '원 할인/' + cl.minimumprice + '원 이상[' + cl.period + ']';
+    			
+    			modalCouponList.appendChild(couponOption);
+    		})
+    		
+    	}
+    </script>
+    <script>
+    	function myCouponSettings(){ // 내 쿠폰을 현재 결제
+    		myCouponList = document.getElementById()
+    	}
+    </script>
     <script>
       function listUp(event) {
+    	  
         choose = event.target;
-   
+    	 if(choose.className.includes("quick") || choose.className.includes("noQuick") || choose.className.includes("fas") || choose.className.includes("quantity")) return;
+        selectedList = document.getElementById('selected-List');
+        
+        
         optionName = choose.children[0].children[0].innerText;
         optionText = choose.children[0].children[1].innerText;
         quantity = choose.children[1].value;
         price = choose.children[2].innerText;
         quick = choose.children[3];
-      
-        if(quantity !== '0'){
+        quickValue = choose.children[3].children[0].value;
+        quickCheck = choose.children[3].children[0].checked;
+        quickBoolean = (quickValue != 0);
         
-           quickHTML = '<input type="checkbox" id="' + quick.getAttribute("id") + '" class="quickcheck" value="' + quick.value + '" ' + (quick.checked ? 'checked' : '' ) + ' onclick="calTotal()"/>'
-           + '<label class="quick" id="checkLabel" for="quick" title="빠른 서비스"><i class="fas fa-shipping-fast"></i>+' + quick.value + '원</label>';
-   
-           newRow = document.createElement('div');
-           newRow.setAttribute('class', 'selected-row');
-         
-           newRow.innerHTML = '<div class="selected-text"><div class="selected-name" id="selected-name">'
-            +optionName+'</div><div class="selected-context">'+optionText
-            +'</div></div><input type="number" class="quantity" id="selected-quantity" value="'+quantity+'" min="1" /><div class="selected-price">'
-            +price+'</div>' + quickHTML + '<div><button class="remove-button" onclick="removeOption()"><i class="fas fa-times"></i></button></div>';
-            
-           selectedList = document.getElementById('selected-List');
-           selectedList.appendChild(newRow);
-   
-           //수량 바뀌는 이벤트 리스너를 이곳에서 삽입
-           selectedList.addEventListener('change', calTotal);
-   
-           calTotal();
+        if(quantity !== '0'){
+        	menuDiv_1 = document.createElement('div');
+			menuDiv_1.setAttribute("class", "selected-row");
+			
+			// 1
+			menuDiv_2 = document.createElement('div');
+			menuDiv_2.setAttribute("class", "selected-text");
+			
+			menuDiv_2_1 = document.createElement('div');
+			menuDiv_2_1.setAttribute("class", "selected-name");
+			menuDiv_2_1.innerHTML = optionName;
+			
+			menuDiv_2_2 = document.createElement('div');
+			menuDiv_2_2.setAttribute("class", "selected-context");
+			menuDiv_2_2.innerHTML = optionText;
+			
+			menuDiv_2.appendChild(menuDiv_2_1);
+			menuDiv_2.appendChild(menuDiv_2_2);
+			
+			// 2
+			menuInput_3 = document.createElement('input');
+			menuInput_3.setAttribute("class", "quantity");
+			menuInput_3.setAttribute("type", "number");
+			menuInput_3.setAttribute("min", "0");
+			menuInput_3.setAttribute("value", quantity);
+			
+			// 3
+			menuDiv_4 = document.createElement('div');
+			menuDiv_4.setAttribute("class", "selected-price");
+			menuDiv_4.innerHTML = price;
+			
+			//4
+			menuLabel_5 = document.createElement('label');
+			menuLabel_5.setAttribute("class", quick.className);
+			menuLabel_5.setAttribute("title", quickBoolean ? "빠른서비스" : "퀵불가");
+			
+			menuInput_5_1 = document.createElement('input');
+			menuInput_5_1.setAttribute("class", "quickcheck");
+			menuInput_5_1.setAttribute("type", "checkbox");
+			menuInput_5_1.checked = quickCheck;
+			menuInput_5_1.setAttribute("value", quickValue);
+			if(quickBoolean)
+				menuInput_5_1.addEventListener('change', quickMark);
+			
+			menuI_5_2 = document.createElement('i');
+			menuI_5_2.setAttribute("class", "fas fa-shipping-fast");
+			menuI_5_2.innerHTML = quickBoolean ? (quickValue + "원") : "퀵불가";
+			
+			menuLabel_5.appendChild(menuInput_5_1);
+			menuLabel_5.appendChild(menuI_5_2);
+			
+			
+			// 5
+			menuDiv_6 = document.createElement('div');
+			
+			menuButton_6_1 = document.createElement('button');
+			menuButton_6_1.setAttribute("class", "remove-button");
+			menuButton_6_1.addEventListener("click", removeOption);
+			
+			menuI_6_2 = document.createElement('i');
+			menuI_6_2.setAttribute("class", "fas fa-times");
+			
+			menuButton_6_1.appendChild(menuI_6_2);
+			menuDiv_6.appendChild(menuButton_6_1);
+			
+			menuDiv_1.appendChild(menuDiv_2);
+			menuDiv_1.appendChild(menuInput_3);
+			menuDiv_1.appendChild(menuDiv_4);
+			menuDiv_1.appendChild(menuLabel_5);
+			menuDiv_1.appendChild(menuDiv_6);
+			selectedList.appendChild(menuDiv_1);
+			
+			calTotal();
+			
+			reset(choose);
         }
         
       }
     </script>
-    
+    <script>
+    function reset(chs){	// 메뉴를 추가했을 때 개수와 퀵여부를 리셋해주는 메서드(영경)
+    	chs.children[1].value = 1;
+
+        if(chs.children[3].className === "quick True"){
+        	chs.children[3].className = "quick";
+        	chs.children[3].children[0].checked = false;
+        }
+    }
+    </script>
     <script>
       function calTotal() {
         orders = document.querySelectorAll('.selected-row');
-        quickText = document.getElementById('select-quick');
-        totalText = document.getElementById('select-total');
+        quickText = document.getElementById('select-quick');	// 퀵 요금
+        totalText = document.getElementById('select-total');	// 토탈 요금
+        priceText = document.getElementById('modal-price').children[0]; // 모달창 결제 금액
 
         deliCheck = document.getElementById('deli-check');
 
@@ -104,29 +199,29 @@
 
         for (i = 0; i < orders.length; i++) {
           quantity = orders[i].children[1].value;
-          price = orders[i].children[2].innerText.split(' ');
+          price = orders[i].children[2].innerText.split(' ')[0];
           quick = 0;
 
-          if (orders[i].children[3].checked) {
-            quick = orders[i].children[3].value;
-          }
+          if (orders[i].children[3].children[0].checked)
+            quick = orders[i].children[3].children[0].value;
 
           quickCal = parseInt(quantity) * parseInt(quick);
 
           quickPrice += quickCal;
 
-          totalPrice += parseInt(quantity) * parseInt(price[0]) + quickCal;
+          totalPrice += parseInt(quantity) * parseInt(price) + quickCal;
         }
       
-        quickText.innerText = 'Quick 요금 : ' +quickPrice +' 원';
-        totalText.innerText = 'Total : '+totalPrice+' 원';
+        quickText.innerText = 'Quick 요금 : ' + quickPrice +' 원';
+        totalText.innerText = 'Total : '+ totalPrice + ' 원';
+        priceText.innerText = totalPrice;
       }
     </script>
     
     <script>
       function removeOption(){
         optionRow = event.target.parentNode.parentNode;
-
+		
         optionRow.parentNode.removeChild(optionRow);
 
         calTotal();
@@ -135,18 +230,9 @@
 
     <script>
       function quickMark(){
-    	  event.stopPropagation()
         check = event.target;
         row = check.parentNode;
-
-        if(check.checked){
-          row.style.backgroundRepeat = "no-repeat";
-          row.style.backgroundPosition = "right";
-          row.style.backgroundImage = "url('${cpath }/resources/customer/img/QUICK.png')";
-        }
-        else{
-          row.style.backgroundImage = "none";
-        }
+        row.className = check.checked ? "quick True" : "quick"; 
       }
     </script>
 
@@ -229,6 +315,11 @@
         });
       } //submit 체크 함수 종료
     </script>
+
+</head>
+    
+<body>
+<%@ include file="../main/customer_Header.jsp"%>
     <!-- 본문 영역 -->
 <!--     <header>헤더셈</header> -->
     <section class="section-SangJae">
@@ -262,8 +353,10 @@
 
            	<div class="detailview-mainCate" id="mainCate">
            	</div>
+           	<hr>
            	<div class="detailview-subCate" id="subCate">
            	</div>
+           	<br>
             <div class="detailview-selectOptions" id="detailview-selectOptions">
             </div>
           </div>
@@ -280,9 +373,9 @@
                        <option>선택하기</option>
                  <c:choose>
                     <c:when test="${cLogin != null }">
-                       <c:forEach items="${CouponList }" var="co">
-                         <option value="${co.minimumprice }" disabled="disabled">${co.discount }원 할인/${co.minimumprice }원 이상[${co.period }]</option>
-                       </c:forEach>
+<%--                        <c:forEach items="${CouponList }" var="co"> --%>
+<%--                          <option value="${co.minimumprice }">${co.discount }원 할인/${co.minimumprice }원 이상[${co.period }]</option> --%>
+<%--                        </c:forEach> --%>
                     </c:when>
                     <c:otherwise>
                        <option disabled>로그인 후 이용가능</option>
@@ -336,16 +429,140 @@
       </div>
     </section>
 
+<!-- 	영경 스크립트, 메뉴판 출력! -->
+	<script>
+// 		imgList = ${bImageVO};
+// 		i = 0;
+// 		imgBoxs = document.querySelectorAll('detailview-imgBlock');
+		
+// 		imgList.forEach(img =>{
+// 			imgBoxs[i++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + img.storeimg;
+// 		})
+		menuList = ${menuList};
+		mainCtList = Object.keys(menuList.menuList);
+		mainCategory = document.getElementById('mainCate');
+		subCategory = document.getElementById('subCate');
+		menuCategory = document.getElementById('detailview-selectOptions');
+		
+		// 0번째 메인 메뉴
+		selectMainKey =Object.keys(menuList.menuList)[0];
+		// 0번째 서브 메뉴
+		selectSubKey = '';
+		// 메인 카테고리 버튼 넣는 부분
+		mainCategory.innerHTML="";
+		mainCtList.forEach(mct => {
+			mainDiv = document.createElement('div');
+			mainDiv.innerHTML = mct;
+			mainDiv.setAttribute("class", "mainButton");
+			mainDiv.setAttribute("id", "main_" + mct);
+			mainDiv.addEventListener('click', event => afterMainClik(mct));
+			mainCategory.appendChild(mainDiv);
+		})
+		afterMainClik(selectMainKey);
+		
+		function afterMainClik(checkmct){
+			selectMainKey = checkmct;
+			selectSubKey = '';
+			mainCtList.forEach(mct => {
+				document.getElementById("main_"+mct).className = (mct === selectMainKey ? "mainButton_select" : "mainButton");
+				})
+			subCtList = Object.keys(menuList.menuList[selectMainKey]);
+			subCategory.innerHTML="";
+			menuCategory.innerHTML="";
+			subCtList.forEach(sct =>{
+				subDiv = document.createElement('div');
+				subDiv.innerHTML = sct;
+				subDiv.setAttribute("class", selectSubKey !== sct ? "subButton" : "subButton_select");
+				subDiv.setAttribute("id", "sub_" + sct);
+				subDiv.addEventListener('click', event => afterSubClick(sct));
+				subCategory.appendChild(subDiv);
+			})
+			afterSubClick(subCtList[0]);
+		}
+		
+		function afterSubClick(checksct){
+			selectSubKey = checksct;
+			subCtList.forEach(mct => {
+				document.getElementById("sub_"+mct).className = (mct === selectSubKey ? "subButton_select" : "subButton");
+				})
+			menuCtList = menuList.menuList[selectMainKey][selectSubKey];
+			menuCategory.innerHTML="";
+			createMenu(menuCtList);
+		}
+		
+		function createMenu(list){
+			menuCategory.innerHTML="";
+			list.forEach(li => {
+				quickBoolean = (li.quickprice != 0);
+				
+				menuDiv_1 = document.createElement('div');
+				menuDiv_1.setAttribute("class", "option-row");
+				menuDiv_1.addEventListener('click', listUp);
+				
+				// 1
+				menuDiv_2 = document.createElement('div');
+				menuDiv_2.setAttribute("class", "option-text");
+				
+				menuDiv_2_1 = document.createElement('div');
+				menuDiv_2_1.setAttribute("class", "option-name");
+				menuDiv_2_1.innerHTML = selectMainKey + "/" + selectSubKey;
+				
+				menuDiv_2_2 = document.createElement('div');
+				menuDiv_2_2.setAttribute("class", "option-context");
+				menuDiv_2_2.innerHTML = li.name + "/예상시간 " + li.ete + "일";
+				
+				menuDiv_2.appendChild(menuDiv_2_1);
+				menuDiv_2.appendChild(menuDiv_2_2);
+				
+				// 2
+				menuInput_3 = document.createElement('input');
+				menuInput_3.setAttribute("class", "quantity");
+				menuInput_3.setAttribute("type", "number");
+				menuInput_3.setAttribute("min", "0");
+				menuInput_3.setAttribute("value", "1");
+				
+				// 3
+				menuDiv_4 = document.createElement('div');
+				menuDiv_4.setAttribute("class", "option-price");
+				menuDiv_4.innerHTML = li.price + "원";
+				
+				//4
+				menuLabel_5 = document.createElement('label');
+				menuLabel_5.setAttribute("class", quickBoolean ? "quick" : "noQuick");
+				menuLabel_5.setAttribute("title", quickBoolean ? "빠른서비스" : "퀵불가");
+				
+				menuInput_5_1 = document.createElement('input');
+				menuInput_5_1.setAttribute("class", "quickcheck");
+				menuInput_5_1.setAttribute("type", "checkbox");
+				menuInput_5_1.checked= false;
+				menuInput_5_1.setAttribute("value", li.quickprice);
+				if(quickBoolean)
+					menuInput_5_1.addEventListener('change', quickMark);
+				
+				menuI_5_2 = document.createElement('i');
+				menuI_5_2.setAttribute("class", "fas fa-shipping-fast");
+				menuI_5_2.innerHTML = quickBoolean ? (li.quickprice + "원") : "퀵불가";
+				
+				menuLabel_5.appendChild(menuInput_5_1);
+				menuLabel_5.appendChild(menuI_5_2);
+				
+				
+				menuDiv_1.appendChild(menuDiv_2);
+				menuDiv_1.appendChild(menuInput_3);
+				menuDiv_1.appendChild(menuDiv_4);
+				menuDiv_1.appendChild(menuLabel_5);
+				
+				menuCategory.appendChild(menuDiv_1);
+			})
+		}
+	</script>
+
 <!-- The Modal -->
     <div id="myModal" class="modal">
       <!-- Modal content -->
 
       <div class="modal-content1" id="modal-content1">
-        <select class="modal-couponList" id="modal-couponList">
-        <c:forEach items="${bCouponVO }" var="bco">
-          <option value="${bco.couponid }">${bco.discount }원 할인/${bco.minimumprice }원 이상[${bco.period }]</option>
-        </c:forEach>
-        </select>
+        <select class="modal-couponList" id="modal-couponList"></select>
         <button class="modal-addCoupon" id="modal-addCoupon">받기</button>
       </div>
 
@@ -355,23 +572,17 @@
         </div>
         <div class="modal-payment">
           <div class="modal-payment-head">
-            나의 카드
+            결제
             <div class="close">&times;</div>
           </div>
           <textarea readonly>
            약관을 읽고 동의해주세요 
           </textarea>
           <select class="modal-myCardList">
-            <option>국민 0030 3304 0240 0030</option>
-            <option>기업 0030 3304 0240 0030</option>
+            <option selected>포인트 결제</option>
           </select>
-          <div class="modal-check">
-            <label><input type="checkbox" />현금영수증 신청하기</label>
-          </div>
-          <div class="modal-check">
-            <label><input type="checkbox" />현금영수증 신청하기</label>
-          </div>
-          <div class="modal-price">total 10000원</div>
+          <div id="modal-price" class="modal-price">결제 금액 : <span></span> 원</div>
+          <div class="modal-price">현재 포인트 : <span>${myPoint }</span> 원</div>
           <button class="modal-submit" id="modal-submit">결제하기</button>
         </div>
       </div>
@@ -420,6 +631,10 @@
             <div style="height: 30px; background: grey; color: white;">추가 확보 공간</div>            
             <div class="modal-grade"><span></span></div>
             <div class="review-context"></div>
+            <div class="owner-review">
+            	<h1 class="owner-name"></h1>
+            	<p class="owner-content">사장님 댓글 공간입니다</p>
+            </div>
           </div>
         </div>
       </div>
@@ -427,6 +642,10 @@
 
     <!-- 스크립트 영역 -->
     <script type="text/javascript">
+      cLogin = '${cLogin}';
+      console.log('cLogin', cLogin === null, cLogin === '');
+      console.log(cLogin);
+      console.log('cLogin', cLogin !== null, cLogin !== '');
       // Get the modal
        var modal = document.getElementById('myModal');
 
@@ -458,10 +677,13 @@
             }  
          modal.style.display = 'block';
          modalContent1.style.display = 'flex';
-         document.getElementsByClassName('select-coupon').reload;
        };
 
        btn2.onclick = function () {
+    	 if(document.getElementById('selected-List').children.length == 0){
+    		 alert('주문 목록이 비었습니다.');
+    		 return;
+    	 }
          modal.style.display = 'block';
           
         //로그인이 안되있으면 이 문장을 수행
@@ -498,9 +720,9 @@
               await axios.post('/drumtong/customer/laundry/customerDetail/rest/addCoupon/', ob)
               .then ((response) => {
                  if(response.data === true){
-                    console.log("쿠폰 발급 성공");
+                	alert('발급 성공');
                  } else {
-                    console.log("쿠폰 발급 실패");
+                	alert('이미 발급받은 쿠폰입니다.');
                  }
                  modal.style.display = 'none';
                  modalContent1.style.display = 'none';
@@ -553,25 +775,13 @@
            modalContent4.style.display = 'none';
          }
        };
-       
-         // 수정한 부분(메뉴에 모두 클릭이벤트 적용)★★★★★★
-         document.querySelectorAll('.option-row').forEach(function(element){
-            element.addEventListener('click', listUp);
-         });
-         
-         document.querySelectorAll('.quickcheck').forEach(function(element){
-             element.addEventListener('change', quickMark);
-          });
-
-           document.querySelectorAll('.remove-button').forEach(function(element){
-             if (element.target !== element.currentTarget) return; 
-              element.addEventListener('click', removeOption);
-           })
          
          
          document.getElementById('loginSubmit').addEventListener('click', function(){ logiinSubmit('asynchronous');});
 
-      
+         //수량 바뀌는 이벤트 리스너를 이곳에서 삽입
+         document.getElementById('selected-List').addEventListener('change', calTotal);
+         
     </script>
     
     <script type="text/javascript">	// 승원 작업 - 구글 차트
@@ -669,6 +879,16 @@
 				$('.detailview-review-row').attr('id', 'review' + i);
 				$('.detailview-review-row').find('.customerName').html(reviewList[i].customerName);
 				$('.detailview-review-row').find('.review-context').html(reviewList[i].ccontent);
+				
+				// 사장님 댓글 생성 조건문
+				if(reviewList[i].replyboolean == 'N')
+					$('#review' + i).find('.owner-review').css('display', 'none');
+				else {
+					const inputowner =  '사장님<span class="owner-write-date">' + reviewList[i].bregistdate.split(' ')[0] + '</span>';
+					$('#review' + i).find('.owner-review').css('display', '');
+					$('#review' + i).find('.owner-name').html(inputowner);
+					$('#review' + i).find('.owner-content').html(	reviewList[i].bcontent);
+				}
 			}
 			else {
 				const beforerow = $('#review' + (i - 1));
@@ -676,6 +896,17 @@
 				beforerow.next().attr('id', 'review' + i);
 				beforerow.next().find('.customerName').html(reviewList[i].customerName);
 				beforerow.next().find('.review-context').html(reviewList[i].ccontent);
+
+				// 사장님 댓글 생성 조건문
+				if(reviewList[i].replyboolean == 'N')
+					$('#review' + i).find('.owner-review').css('display', 'none');
+				else {
+					const inputowner = '사장님<span class="owner-write-date">' + reviewList[i].bregistdate.split(' ')[0] + '</span>';
+					$('#review' + i).find('.owner-review').css('display', '')
+					$('#review' + i).find('.owner-name').html(inputowner);
+					$('#review' + i).find('.owner-content').html(reviewList[i].bcontent);
+				}
+
 			}
 			
 			$('#review' + i).find('.modal-grade').html('');	// 평점 안의 내용 초기화
@@ -731,132 +962,14 @@
     });
     
     </script>
-<!-- 	영경 스크립트 -->
-	<script>
-// 		imgList = ${bImageVO};
-// 		i = 0;
-// 		imgBoxs = document.querySelectorAll('detailview-imgBlock');
-		
-// 		imgList.forEach(img =>{
-// 			imgBoxs[i++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + img.storeimg;
-// 		})
-		
-		menuList = ${menuList};
-		mainCtList = Object.keys(menuList.menuList);
-		mainCategory = document.getElementById('mainCate');
-		subCategory = document.getElementById('subCate');
-		menuCategory = document.getElementById('detailview-selectOptions');
-		
-		// 0번째 메인 메뉴
-		selectMainKey =Object.keys(menuList.menuList)[0];
-// 		selectMainKey ='';
-		// 0번째 서브 메뉴
-		selectSubKey = '';
-// 		selectMenu = menuList.menuList[selectMainKey][selectSubKey];
-		console.log(selectMainKey, selectSubKey);
-		// 메인 카테고리 버튼 넣는 부분
-		mainCategory.innerHTML="";
-		mainCtList.forEach(mct => {
-			mainDiv = document.createElement('div');
-			mainDiv.innerHTML = mct;
-			mainDiv.setAttribute("class", "mainButton");
-			mainDiv.setAttribute("id", "main_" + mct);
-			mainDiv.addEventListener('click', event => afterMainClik(mct));
-			mainCategory.appendChild(mainDiv);
-		})
-		afterMainClik(selectMainKey);
-// 		createMenu(selectMenu);
-		
-		function afterMainClik(checkmct){
-			selectMainKey = checkmct;
-			selectSubKey = '';
-			mainCtList.forEach(mct => {
-				document.getElementById("main_"+mct).className = (mct === selectMainKey ? "mainButton_select" : "mainButton");
-				})
-			subCtList = Object.keys(menuList.menuList[selectMainKey]);
-			subCategory.innerHTML="";
-			menuCategory.innerHTML="";
-			subCtList.forEach(sct =>{
-				subDiv = document.createElement('div');
-				subDiv.innerHTML = sct;
-				subDiv.setAttribute("class", selectSubKey !== sct ? "subButton" : "subButton_select");
-				subDiv.setAttribute("id", "sub_" + sct);
-				subDiv.addEventListener('click', event => afterSubClick(sct));
-				subCategory.appendChild(subDiv);
-			})
-			afterSubClick(subCtList[0]);
-		}
-		
-		function afterSubClick(checksct){
-			console.log("checksct :",checksct);
-			selectSubKey = checksct;
-			subCtList.forEach(mct => {
-				document.getElementById("sub_"+mct).className = (mct === selectSubKey ? "subButton_select" : "subButton");
-				})
-			menuCtList = menuList.menuList[selectMainKey][selectSubKey];
-			console.log("menuCtList : " + menuCtList);
-			menuCategory.innerHTML="";
-			createMenu(menuCtList);
-		}
-		
-		function createMenu(list){
-			console.log("list : ",list);
-			menuCategory.innerHTML="";
-			list.forEach(li => {
-				menuDiv_1 = document.createElement('div');
-				menuDiv_1.setAttribute("class", "option-row");
-				
-				// 1
-				menuDiv_2 = document.createElement('div');
-				menuDiv_2.setAttribute("class", "option-text");
-				
-				menuDiv_2_1 = document.createElement('div');
-				menuDiv_2_1.setAttribute("class", "option-name");
-				menuDiv_2_1.innerHTML = selectMainKey + "/" + selectSubKey;
-				
-				menuDiv_2_2 = document.createElement('div');
-				menuDiv_2_2.setAttribute("class", "option-context");
-				menuDiv_2_2.innerHTML = li.name + "/예상시간 " + li.ete + "일";
-				
-				menuDiv_2.appendChild(menuDiv_2_1);
-				menuDiv_2.appendChild(menuDiv_2_2);
-				
-				// 2
-				menuInput_3 = document.createElement('input');
-				menuInput_3.setAttribute("class", "quantity");
-				menuInput_3.setAttribute("min", "0");
-				menuInput_3.setAttribute("value", "1");
-				
-				// 3
-				menudiv_4 = document.createElement('div');
-				menudiv_4.setAttribute("class", "option-price");
-				menudiv_4.innerHTML = li.price + "원";
-				
-				//4
-				menuLabel_5 = document.createElement('label');
-				menuLabel_5.setAttribute("class", "quick");
-				menuLabel_5.setAttribute("title", "빠른서비스");
-				
-				menuInput_5_1 = document.createElement('input');
-				menuInput_5_1.setAttribute("class", "quickcheck");
-				menuInput_5_1.setAttribute("type", "checkbox");
-				menuInput_5_1.setAttribute("value", li.quickprice);
-				
-				menuI_5_2 = document.createElement('i');
-				menuI_5_2.setAttribute("class", "fas fa-shipping-fast");
-				menuI_5_2.innerHTML = li.quickprice + "원";
-				
-				menuLabel_5.appendChild(menuInput_5_1);
-				menuLabel_5.appendChild(menuI_5_2);
-				
-				
-				menuDiv_1.appendChild(menuDiv_2);
-				menuDiv_1.appendChild(menuInput_3);
-				menuDiv_1.appendChild(menudiv_4);
-				menuDiv_1.appendChild(menuLabel_5);
-				
-				menuCategory.appendChild(menuDiv_1);
-			})
-		}
-	</script>
-<%@ include file="../main/customerFooter.jsp" %>    
+    <script>
+    	// 로그인 했을 때 초기화
+    	function initLogin(){
+    		
+    	}
+
+    	couponSettings();
+    </script>
+
+
+<%@ include file="../main/customerFooter.jsp" %>

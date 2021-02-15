@@ -1,0 +1,51 @@
+.section-SangJae{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: calc(100vh - 170px);
+  padding-top: 70px;
+  margin-bottom: 70px;
+}
+
+
+.bookmark-row {
+  display: inline-block;
+  justify-content: center;
+  width: 1300px;
+  height: auto;
+}
+
+
+/* Bookmark */
+body .section-bookmark .bookmark_mainName {
+   text-align: center;
+   margin-left: auto;
+   margin-right: auto;
+   font-size: 30px;
+}
+.bookmark {
+  display: inline-block;
+  position: relative;
+  width: 600px;
+  height: 300px;
+  border: 1px solid #eaeaea;
+  box-shadow: 5px 5px 5px 5px #eaeaea;
+  margin: 15px 15px;
+  border-radius: 20px;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.bookmark-context {
+  position: absolute;
+  background-color: #35aefd;
+  height: 100px;
+  width: 100%;
+  bottom: 0px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding: 10px 20px;
+  line-height: 50px;
+
+  font-weight: bolder;
+}

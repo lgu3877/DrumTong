@@ -64,13 +64,19 @@
 		
 		
 	function setLevel9(latitude, longitude) {
+	    // 이동할 위도 경도 위치를 생성합니다 
+	    // new kakao.maps.LatLng 없이 하면 오류 발생함
+    	let moveLatLon = new kakao.maps.LatLng(latitude, longitude);
+		map.setCenter(moveLatLon);
 		map.setLevel(9);
-		map.setCenter(latitude, longitude);
 	}
 	
 	function setLevel7(latitude, longitude) {
+		// 이동할 위도 경도 위치를 생성합니다
+		// new kakao.maps.LatLng 없이 하면 오류 발생함
+    	let moveLatLon = new kakao.maps.LatLng(latitude, longitude);
+		map.setCenter(moveLatLon);
 		map.setLevel(7);
-		map.setCenter(latitude, longitude);
 	}
 	
 	    function searchAddress(){

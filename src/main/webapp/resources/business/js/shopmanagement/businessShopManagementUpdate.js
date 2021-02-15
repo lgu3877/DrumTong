@@ -1,5 +1,10 @@
 // 사진 업데이트
 async function updatePhoto() {
+	
+	// 예외가 발생하면 false를 해준다.
+	if(exceptionCheckBImage() === false)
+		return false;
+	
 	const formData = new FormData();
 	
 	const coverImage = document.getElementById("update-cover");
@@ -13,6 +18,7 @@ async function updatePhoto() {
 	
 	// 대표 사진
 	formData.append("delegatephotoboolean", coverImage.files[0]);
+	
 	
 	
 	
@@ -43,12 +49,19 @@ async function updatePhoto() {
 	if (data) {
 		alert("사진이 성공정으로 수정되었습니다.");
 	}
+	
+	return data;
 }
 
 
 //매장 소개글 업데이트
 //const initialText = document.getElementById("intro-text").innerText;
 async function updateIntro() {
+	
+	if(exceptionCheckBIntroduction() === false )
+		return false;
+	
+	
 	
 	const text = document.getElementById("intro-text").innerText;
 	
@@ -186,6 +199,8 @@ async function updateDelivery() {
 
 // 주소 업데이트
 async function updateAddress() {
+	if(exceptionCheckBLocation() === false)
+		return false;
 	const mainAddress = document.getElementById("main-address").value;
 	const detailAddress = document.getElementById("detail-address").value;
 	const emdCode = document.getElementById("town-code").value;
@@ -203,5 +218,7 @@ async function updateAddress() {
 		"emdcode" : emdCode
 	}
 	await axios.post("/drumtong/business/mainmanagement/BInformation/rest/updateLocation/", object);
+	
+	borderNone('locationArea');
 }
 

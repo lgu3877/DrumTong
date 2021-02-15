@@ -1,0 +1,149 @@
+/* ====================회원정보 수정(joinchange) 미리보기 CSS========================== */
+@media ( min-width :1400px) {
+	body .section_Joinchange {
+		padding-top: 70px;
+		max-width: 1900px;
+		min-width: 1400px;
+		height: 1400px;
+	}
+}
+
+@media ( max-width :1400px) {
+	body .section_Joinchange {
+		padding-top: 70px;
+		max-width: 1400px;
+		min-width: 1200px;
+		height: 1400px;
+	}
+}
+
+@media ( max-width :1200px) {
+	body .section_Joinchange {
+		padding-top: 70px;
+		max-width: 1200px;
+		min-width: 1100px;
+		height: 1400px;
+	}
+}
+
+body .section_Joinchange .join_mainName {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 30px;
+}
+
+body .section_Joinchange .join_change {
+	width: 800px;
+	height: 1200px;
+	padding: 30px;
+	border: 1px solid #EAEAEA;
+	box-shadow: 5px 5px 5px 5px #EAEAEA;
+	margin-left: auto;
+	margin-right: auto;
+	/* padding-top: 200px; */
+	/* margin-top: 200px; */
+}
+
+body .section_Joinchange .join_change .join_fo1 {
+	width: 700px;
+	/* border: 1px solid #EAEAEA; */
+	display: inline-flex;
+}
+
+.join_fo1_1 {
+	width: 200px;
+	height: 150px;
+	border: 1px solid #EAEAEA;
+	box-shadow: 2px 2px 2px 2px #EAEAEA;
+}
+
+.join_fo1_2 {
+	width: 500px;
+	margin-left: 10px;
+	/* margin-top: 30px; */
+	float: right;
+	border: 0;
+	outline: 0;
+}
+
+.join_fo1_2_file {
+	width: 500px;
+	float: right;
+	/* border: 0;
+   outline: 0; */
+}
+
+.join_fo1_2_sub {
+	width: 500px;
+	float: left;
+	margin-top: 10px;
+	/* border: 0;
+   outline: 0; */
+}
+
+body .section_Joinchange .join_change .join_button {
+	float: right;
+	width: 60px;
+	height: 40px;
+	outline: 0;
+	border-radius: 20px;
+	border-color: #EAEAEA;
+	border-style: dotted;
+	/* border: 0; */
+}
+
+body .section_Joinchange .join_change .join_button:active {
+	border: 1px solid #35aefd;
+}
+
+body .section_Joinchange .join_change form .join_name {
+	margin-top: 20px;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+
+body .section_Joinchange .join_change form .join_name .join_id_p {
+	display: inline-block;
+}
+
+body .section_Joinchange .join_change .join_inputbox {
+	width: 500px;
+	height: 40px;
+	outline-color: #35aefd;
+	border: 0;
+	/* margin-bottom: 15px; */
+	/* text-align: center; */
+}
+
+body .section_Joinchange .join_change .join_pnum {
+	width: 500px;
+	display: inline-block;
+}
+
+body .section_Joinchange .join_change .join_pum_ok {
+	width: 85px;
+	height: 40px;
+	float: right;
+	border: 0;
+	outline-color: #35aefd;
+	/* margin-right: 30px; */
+}
+
+body .section_Joinchange .join_change .join_joso {
+	width: 500px;
+	display: inline-block;
+}
+
+body .section_Joinchange .join_change .join_joso_ok {
+	width: 85px;
+	height: 35px;
+	border: 0;
+	float: right;
+	outline-color: #35aefd;
+	/* margin-right: 30px; */
+}
+
+body .section_Joinchange .join_change .join_cmp .join_complete:active {
+	background-color: #35aefd;
+}

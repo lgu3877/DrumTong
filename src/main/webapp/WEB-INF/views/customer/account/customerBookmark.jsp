@@ -1,12 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="../main/customerHeader.jsp" %>    
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="cpath">${pageContext.request.contextPath }</c:set>
+<!DOCTYPE html>
+ 
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+	<!-- title -->
+    <title>customerDrumtong :: customerBookmark</title>
+    <link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet" type="text/css">
+    <link rel="stylesheet" href="${cpath }/customer/css/customerStyle.css">
+    <link rel="stylesheet" href="${cpath }/customer/css/account/customerBookmark.css">
+	
+	<script type="text/javascript" src="${cpath }/customer/js/main/customerHeader.js"></script>
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	 
+</head>
 
-<!-- 스크립트 영역 -->
-<script>
-  
+<body>
 
-</script>
+<%@ include file="../main/customer_Header.jsp"%>
 
 <!-- 본문 영역 -->
 <section class="section-SangJae section-bookmark">
@@ -33,7 +49,6 @@
 <!-- 스크립트 영역 -->
 <script>
 	list = document.getElementsByClassName('boarmark-text');
-	console.log(list);
 	for(i = 0; i < list.length; i++){
 		if(list[i].innerHTML.length > 43){
 			list[i].innerHTML = list[i].innerHTML.substring(0,43) + '...';
@@ -41,4 +56,6 @@
 	}
 </script>
 
-<%@ include file="../main/customerFooter.jsp" %>    
+<%@ include file="../main/customerFooter.jsp" %>
+</body>
+</html>

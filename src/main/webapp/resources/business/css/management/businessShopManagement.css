@@ -6,7 +6,14 @@
 .disabled_checkbox {
 	cursor: not-allowed !important;
 }
-
+#accessDenied {
+ z-index : 1; 
+ position : absolute; 
+ margin: 0 auto; 
+ font-weight: bold; 
+ cursor: no-drop;
+ font-size: 22px;
+ }
 /* 폼 그림자 */
 .form {
 	background-color: whitesmoke;

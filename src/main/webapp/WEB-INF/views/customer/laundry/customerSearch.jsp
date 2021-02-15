@@ -19,17 +19,21 @@
 	<script type="text/javascript" src="${cpath }/customer/js/laundry/customerSearch.js"></script>
 	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="https://kit.fontawesome.com/7522a35233.js" crossorigin="anonymous"></script>
-</head>
-	
-<%@ include file="../main/customerHeader.jsp"%>
 
-<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a8f343b25889960b1fdf777c9a2a57c&libraries=services,clusterer,drawing"></script>
+	<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a8f343b25889960b1fdf777c9a2a57c&libraries=services,clusterer,drawing"></script>
+
+	<!-- Axios script -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<%-- <script type="text/javascript" src="${cpath }/customer/js/laundry/customerSearch.js" charset="UTF-8"></script> --%>
+
+   	<!-- Google Chart -->
+   	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	</head>
+<body>
+<%@ include file="../main/customer_Header.jsp"%>
 
 
-<!-- Axios script -->
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<%-- <script type="text/javascript" src="${cpath }/customer/js/laundry/customerSearch.js" charset="UTF-8"></script> --%>
 
 <section class="section_search" >
 
@@ -581,11 +585,11 @@
 
             </div>
 			
-				<span style="visibility: hidden;" id="sido-hidden"></span>
-				<span style="visibility: hidden;" id="hidden"></span>
-				<span style="visibility: hidden;" id="currentlatitude"></span>
-				<span style="visibility: hidden;" id="currentlongitude"></span>
-				<span style="visibility: hidden;" id="hidden"></span>
+				<span style="display: none;" id="sido-hidden"></span>
+				<span style="display: none;" id="hidden"></span>
+				<span style="display: none;" id="currentlatitude"></span>
+				<span style="display: none;" id="currentlongitude"></span>
+				<!-- <span style="display: none;" id="hidden"></span> -->
 			<div class="map_wrap">
 				<div id="drumtongMap" class="laundryList_map"></div>
 				<div class="hAddr">
