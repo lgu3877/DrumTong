@@ -305,3 +305,33 @@ function myCouponSettings (myCoupons){
 		oneCouponSettings(co.minimumprice, co.discount, co.period, co.couponid);
 	})
 }
+function addBookmark() {
+   bookMarker = document.getElementById('bookMarker');
+   className = bookMarker.className;
+    if (className.search(/add/) > 0) {
+      bookMarker.className = 'fas fa-star remove';
+      iconColor = 'white';
+    }
+    else if (className.search(/remove/) > 0) {
+      bookMarker.className = 'fas fa-star add';
+      iconColor = 'yellow';
+    }
+    
+    const axPost = async () =>{
+       ob={
+          'estid' : '${estid}',
+          'result' : iconColor,
+       };
+       await axios.post('/drumtong/customer/laundry/customerDetail/rest/addBookmark/', ob)
+       .then ((response) => {
+          if(response.data === true){
+             console.log("추가함");
+          } else {
+             console.log("삭제함");
+          }
+       })
+       
+    };
+    axPost();
+    
+  }
