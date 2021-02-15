@@ -32,9 +32,11 @@ function displayImages() {
 		// 이미지 슬라이더
 		const coverImg = document.createElement("img");
 		coverImg.id = "cover-image";
+		console.log('storeimg 경로 1',coverImage[0].businessStoreImage)
 		coverImg.src = 
 			"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + 
-			coverImage[0].businessStoreImage;
+			coverImage[0].storeimg;
+		
 		coverImg.alt = ""; 
 		
 		// 삭제 아이콘 (X)
@@ -64,7 +66,7 @@ function displayImages() {
 			const otherImg = document.createElement("img");
 			otherImg.src = 
 				"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + 
-				otherImages[i].businessStoreImage;
+				otherImages[i].storeimg;
 			otherImg.alt = "";
 			
 			// 삭제 아이콘 (X)
@@ -259,6 +261,13 @@ function imageCheck(e) {
 		hideLabel(e.target.id + "label");
 		// 업로드 사진 계산
 		imageCount++;
+		
+		let coverImage = document.getElementById('cover-image-con');
+		let sideImage = document.getElementsByClassName('shop_picture');
+		let addPhoto = document.getElementsByClassName('add_photo_input');
+		
+		if((addPhoto.length < 3 ) ||  (addPhoto.length < 3)  ||  (coverImage !== null && sideImage.length < 2 )) 
+			borderNone('main-image-con');		
 		console.log(imageCount);
 	}
 }
@@ -336,7 +345,7 @@ function createInputFile() {
 	
 	const input = document.createElement("input");
 	input.setAttribute("id", randomId);
-	input.setAttribute("className", "add_photo_input");
+	input.setAttribute("class", "add_photo_input");
 	input.setAttribute("type", "file");
 	input.setAttribute("name", "businessStoreImage");
 	input.setAttribute("onchange", "imageCheck(event)");

@@ -53,6 +53,27 @@
     	}
     </script>
     <script>
+    	function couponSettings(){ // 쿠폰 다운로드 세팅 메서드
+    		modalCouponList = document.getElementById('modal-couponList');
+    		couponList = ${bCouponVO };
+    		console.log(couponList);
+    		
+    		couponList.forEach(cl => {
+    			couponOption = document.createElement('option');
+    			couponOption.setAttribute('value', cl.couponid);
+    			couponOption.innerHTML = cl.discount + '원 할인/' + cl.minimumprice + '원 이상[' + cl.period + ']';
+    			
+    			modalCouponList.appendChild(couponOption);
+    		})
+    		
+    	}
+    </script>
+    <script>
+    	function myCouponSettings(){ // 내 쿠폰을 현재 결제
+    		myCouponList = document.getElementById()
+    	}
+    </script>
+    <script>
       function listUp(event) {
     	  
         choose = event.target;
