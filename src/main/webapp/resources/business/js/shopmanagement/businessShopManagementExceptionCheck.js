@@ -52,6 +52,7 @@ function exceptionCheckBIntroduction () {
 	
 }
 
+// 주소 빈값 체크
 function exceptionCheckBLocation() {
 	let mainAddress = document.getElementById('main-address');
 	let detailAddress = document.getElementById('detail-address');

@@ -238,7 +238,7 @@
         <div class="modal-reiview" id="modal-reiview">
           <div class="detailview-review-row">
             <div class="review-head">
-              <div class="review-profilePic"></div>
+              <div class="review-profilePic"><img></div>
               <div class="review-writer">
               	<div class="right-row">
                 	<p class="customerName"></p>
@@ -251,15 +251,173 @@
               </div>
             </div>
             <div style="height: 30px; background: grey; color: white;">추가 확보 공간</div>            
+            <div class="review-reviewimg" style="display: none"><img></div>
             <div class="modal-grade"><span></span></div>
             <div class="review-context"></div>
+            <div class="owner-review">
+            	<h1 class="owner-name"></h1>
+            	<p class="owner-content">사장님 댓글 공간입니다</p>
+            </div>
           </div>
         </div>
+      </div>
+      
+      <div class="modal-content5" id="modal-content5" style="display: none">
+      		<img>
+      </div>
+      <div id="modal-content5-exit" style="display: none"  onclick="DeactiveModal5()">
+      		<i class="fas fa-times fa-4x"></i>
       </div>
     </div>
 
     <!-- 스크립트 영역 -->
     <script type="text/javascript">
+      cLogin = '${cLogin}';
+      console.log('cLogin', cLogin === null, cLogin === '');
+      console.log(cLogin);
+      console.log('cLogin', cLogin !== null, cLogin !== '');
+      // Get the modal
+       var modal = document.getElementById('myModal');
+
+       var modalContent1 = document.getElementById('modal-content1');   // 쿠폰 받기 화면
+       var modalContent2 = document.getElementById('modal-content2');   // 결제 화면
+       var modalContent3 = document.getElementById('modal-content3');   // 로그인 화면
+       var modalContent4 = document.getElementById('modal-content4');   // 리뷰 화면
+       var modalContent5 = document.getElementById('modal-content5');   // 모달 컨텐츠4 -> 고객리뷰이미지
+       var modalContent5_exit = document.getElementById('modal-content5-exit');   // 모달 컨텐츠5 -> 닫기
+
+       // Get the button that opens the modal
+       var btn1 = document.getElementById('add-coupon');
+       var btn2 = document.getElementById('order-submit');
+       var btn3 = document.getElementById('review-more');
+       var btn4 = document.getElementById('modal-submit');
+       var btn5 = document.getElementById('modal-addCoupon');// 모달에서 쿠폰받기 누르면
+
+       // Get the <span> element that closes the modal
+       var span = document.getElementsByClassName('close')[0];
+
+       function LoginModalOpen(){
+          modal.style.display = 'block';
+          modalContent3.style.display = 'flex';
+       }
+       
+       // When the user clicks on the button, open the modal
+       btn1.onclick = function () {
+            if('${cLogin}' == ''){
+               LoginModalOpen();
+               return;
+            }  
+         modal.style.display = 'block';
+         modalContent1.style.display = 'flex';
+       };
+
+       btn2.onclick = function () {
+    	 if(document.getElementById('selected-List').children.length == 0){
+    		 alert('주문 목록이 비었습니다.');
+    		 return;
+    	 }
+         modal.style.display = 'block';
+          
+        //로그인이 안되있으면 이 문장을 수행
+        if('${cLogin}' == ''){
+           modalContent3.style.display = 'flex';
+        } else{
+           //로그인이 되어있다면 submit 기능 수행
+            modalContent2.style.display = 'flex';
+        }
+       };
+
+       btn3.onclick = function () {
+         modal.style.display = 'block';
+//          modalContent4.style.display = 'flex';
+         modalContent4.style.display = '';
+         reviewMore();
+       };
+       
+       btn4.onclick = function () {
+         modal.style.display = 'block';
+
+         submit();
+
+       };
+       
+
+       btn5.onclick = function(){
+          selectedCouponID = document.getElementById('modal-couponList').value;
+           const axPost = async (memberid) =>{
+              ob={
+                 'memberid' : memberid,
+                 'couponid' : selectedCouponID,
+              };
+              await axios.post('/drumtong/customer/laundry/customerDetail/rest/addCoupon/', ob)
+              .then ((response) => {
+                 if(response.data === true){
+                	alert('발급 성공');
+                 } else {
+                	alert('이미 발급받은 쿠폰입니다.');
+                 }
+                 modal.style.display = 'none';
+                 modalContent1.style.display = 'none';
+              })
+              
+           };
+           if('${cLogin}' != ''   ){
+              axPost('${cLogin.memberid}');
+           } else{
+              console.log("로그인 안되어 있어서 다운못해요~");
+           }
+          
+       }
+
+       // When the user clicks on <span> (x), close the modal
+       span.onclick = function () {
+
+         const reviewModals = document.querySelector('#modal-reiview').querySelectorAll('.detailview-review-row');
+         for(i = reviewModals.length; i > 0; i--) {
+      	   if(i == 1)
+      		   reviewModals[i - 1].querySelector('.modal-grade').innerHTML = '';
+      	   else
+		 		   reviewModals[i - 1].remove();
+         }
+         
+    	 modal.style.display = 'none';
+         modalContent1.style.display = 'none';
+         modalContent2.style.display = 'none';
+         modalContent3.style.display = 'none';
+         modalContent4.style.display = 'none';
+         modalContent5.style.display = 'none';
+         modalContent5_exit.style.display = 'none';
+         
+       };
+
+       // When the user clicks anywhere outside of the modal, close it
+       window.onclick = function (event) {
+         if (event.target == modal) {
+           
+           const reviewModals = document.querySelector('#modal-reiview').querySelectorAll('.detailview-review-row');
+           for(i = reviewModals.length; i > 0; i--) {
+        	   if(i == 1)
+        		   reviewModals[i - 1].querySelector('.modal-grade').innerHTML = '';
+        	   else
+		 		   reviewModals[i - 1].remove();
+           }
+
+           modal.style.display = 'none';
+           modalContent1.style.display = 'none';
+           modalContent2.style.display = 'none';
+           modalContent3.style.display = 'none';
+           modalContent4.style.display = 'none';
+           modalContent5.style.display = 'none';
+           modalContent5_exit.style.display = 'none';
+         }
+       };
+         
+         
+         document.getElementById('loginSubmit').addEventListener('click', function(){ logiinSubmit('asynchronous');});
+
+         //수량 바뀌는 이벤트 리스너를 이곳에서 삽입
+         document.getElementById('selected-List').addEventListener('change', calTotal);
+         
     </script>
     
     <script type="text/javascript">	// 승원 작업 - 구글 차트
@@ -357,6 +515,36 @@
 				$('.detailview-review-row').attr('id', 'review' + i);
 				$('.detailview-review-row').find('.customerName').html(reviewList[i].customerName);
 				$('.detailview-review-row').find('.review-context').html(reviewList[i].ccontent);
+				
+				// 고객이 업로드한 프로필 이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
+				if(typeof reviewList[i].profileimg === typeof undefined) {
+					$('.detailview-review-row').find('.review-profilePic img').attr("src",
+							"https://az-pe.com/wp-content/uploads/2018/05/kemptons-blank-profile-picture.jpg");
+				}
+				else {
+					$('.detailview-review-row').find('.review-profilePic img').attr("src",
+							"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + reviewList[i].profileimg);
+				}
+				
+				// 고객이 업로드한 리뷰이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
+				if(typeof reviewList[i].reviewimg === typeof undefined)
+					$('.detailview-review-row').find('.review-reviewimg').css("display", "none");
+				else {
+					$('.detailview-review-row').find('.review-reviewimg').css("display", "");
+					$('.detailview-review-row').find('.review-reviewimg img').attr("src",
+							"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + reviewList[i].reviewimg);
+					$('.detailview-review-row').find('.review-reviewimg img').attr("onclick", "ActiveModal5('" + reviewList[i].reviewimg + "')");
+				}
+				
+				// 사장님 댓글 생성 조건문
+				if(reviewList[i].replyboolean == 'N')
+					$('#review' + i).find('.owner-review').css('display', 'none');
+				else {
+					const inputowner =  '사장님<span class="owner-write-date">' + reviewList[i].bregistdate.split(' ')[0] + '</span>';
+					$('#review' + i).find('.owner-review').css('display', '');
+					$('#review' + i).find('.owner-name').html(inputowner);
+					$('#review' + i).find('.owner-content').html(	reviewList[i].bcontent);
+				}
 			}
 			else {
 				const beforerow = $('#review' + (i - 1));
@@ -364,6 +552,37 @@
 				beforerow.next().attr('id', 'review' + i);
 				beforerow.next().find('.customerName').html(reviewList[i].customerName);
 				beforerow.next().find('.review-context').html(reviewList[i].ccontent);
+				
+				// 고객이 업로드한 프로필 이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
+				if(typeof reviewList[i].profileimg === typeof undefined) {
+					beforerow.next().find('.review-profilePic img').attr("src",
+							"https://az-pe.com/wp-content/uploads/2018/05/kemptons-blank-profile-picture.jpg");
+				}
+				else {
+					beforerow.next().find('.review-profilePic img').attr("src",
+							"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + reviewList[i].profileimg);
+				}
+				
+				// 고객이 업로드한 리뷰이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
+				if(typeof reviewList[i].reviewimg === typeof undefined)
+					beforerow.next().find('.review-reviewimg').css("display", "none");
+				else {
+					beforerow.next().find('.review-reviewimg').css("display", "");
+					beforerow.next().find('.review-reviewimg img').attr("src",
+							"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + reviewList[i].reviewimg);
+				}
+						
+				
+				// 사장님 댓글 생성 조건문
+				if(reviewList[i].replyboolean == 'N')
+					$('#review' + i).find('.owner-review').css('display', 'none');
+				else {
+					const inputowner = '사장님<span class="owner-write-date">' + reviewList[i].bregistdate.split(' ')[0] + '</span>';
+					$('#review' + i).find('.owner-review').css('display', '')
+					$('#review' + i).find('.owner-name').html(inputowner);
+					$('#review' + i).find('.owner-content').html(reviewList[i].bcontent);
+				}
+
 			}
 			
 			$('#review' + i).find('.modal-grade').html('');	// 평점 안의 내용 초기화
@@ -404,6 +623,17 @@
 	 		}
 		}
 	}
+    
+    function ActiveModal5(src) {
+    	modalContent5_exit.style.display = "";
+    	modalContent5.style.display = "";
+    	modalContent5.querySelector('img').src = "https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + src;
+    }
+    
+    function DeactiveModal5() {
+    	modalContent5_exit.style.display = "none";
+    	modalContent5.style.display = "none";
+    }
 	
     document.getElementById('review-more').addEventListener('mouseover', function() {
     	this.parentNode.style.background = 'white';
@@ -417,6 +647,7 @@
     	this.style.background = 'white';
     	this.querySelector('p').style.color = '#1564F9';
     });
+    
     
     </script>
     

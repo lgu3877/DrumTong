@@ -49,7 +49,9 @@
 		const bImageList = ${bImageList};
 		const bManagement = ${bManagement};
 		const bMenu = ${bMenu};
-		console.log("@@@@", bImageList);
+		
+		console.log(bImageList);
+		
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
 		
@@ -275,7 +277,7 @@
 					</tbody>
 				</table>
 				
-				<div id="posted-service-list"></div>
+				<div id="posted-service-list" class="form"></div>
 			</div>
 		</c:if>
 		</div>
@@ -437,8 +439,8 @@
 			<div class="delivery_menu">
 			
 				<!-- 접근 제한 뷰  [건욱] -->
-				<div id="accessDenied" style="z-index : 1; position : absolute; margin: 0 auto;">
-					해당 기능을 활성화 시키기 위해서는 <br> [세탁물 수령 방법] 기능에서 "배달 대행업체 이용" 혹은  "배달 서비스 제공" 중 하나의 기능이라도 체크가 되어있어야 합니다.
+				<div id="accessDenied" >
+					해당 기능을 활성화 시키기 위해서는 <br> [세탁물 수령 방법] 기능에서 "배달 대행업체 이용" 혹은  "배달 서비스 제공" 중 <br> 하나의 기능이라도 체크가 되어있어야 합니다.
 				</div>
 				
 			<!-- 배달가능지역 뷰 -->
@@ -561,6 +563,9 @@
 		</div>
 	</div>
 
+<!-- Modal > 서비스 메뉴 수정 -->
+	<div id="modify-menu-modal" class="modify_menu_modal" style="display: none"></div>
+
 		
 	<!-- [50줄] 여는 태그  세션의 상태가 FAIL이면 POST 형식   -->
 	<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
@@ -582,22 +587,6 @@
 		
 <!-- footer -->
 	<%-- <%@ include file="../main/businessFooter.jsp" %> --%>
-
-
-
-<!-- <!-- Category Modal  --> -->
-<!-- 	<div id="category_modal" class="category_modal" style="display: none;"> -->
-<!-- 		<div class="category_modal_content"> -->
-<!-- 			<span id="category-close">&times;</span> -->
-<!-- 			<div class="category_modal_title"> -->
-<!-- 				메뉴를 수정하실 수 있습니다. -->
-<!-- 			</div> -->
-<!-- 			<div id="category-list" class="category_content"> -->
-				
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-
 	
 	
 	<script type="text/javascript">
@@ -651,8 +640,11 @@
 	<!-- 소개글 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementIntroText.js"></script>
 
-	<!-- 서비스 매뉴 -->
+	<!-- 서비스 매뉴(view) -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementMenuList.js"></script>
+
+	<!-- 서비스 매뉴(input) -->
+	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementMenuRegister.js"></script>
 
 	<!-- 배달 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementReturnItem.js"></script>
