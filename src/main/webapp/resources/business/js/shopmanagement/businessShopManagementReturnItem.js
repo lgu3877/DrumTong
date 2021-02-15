@@ -46,4 +46,33 @@ function checkContent(obj) {
 		checkbox.parentElement.style.color = "navy";
 		icon.className = "fas fa-window-close";
 	}
+	
+	checkBoth();
+	
+}
+
+// [건욱] 배달 여부에 따라 필터를 씌웁니다.
+// 방문 수령(VISIT)를 제외한 나머지 체크박스 중 하나라도 체크되어 있으면 filter를 none해주고
+// 방문 수령(VISIT)만 체크되어있다면 배달지역관리도 필요가없어지기 때문에 filter 효과를 주어서 해당 값에 접근하지 못하게 막아주어야합니다.
+function checkBoth() {
+	let agencies = document.getElementsByClassName("returnOptions")[0];
+	let self = document.getElementsByClassName("returnOptions")[1];
+	let deliveryMenu = document.getElementsByClassName("delivery_menu")[0];
+	let accessDenined = document.getElementById('accessDenied');
+	console.log('실행');
+	if(agencies.checked || self.checked ) {
+//		deliveryMenu.style = "filter : none";
+		for (let i = 0 ; i < deliveryMenu.children.length; i++ ) 
+			deliveryMenu.children[i].style.filter = "none";	
+			
+	}
+	else if(agencies.checked === false && self.checked === false) {
+//		deliveryMenu.style = "filter: blur(5px)";
+		
+		for (let i = 0 ; i < deliveryMenu.children.length; i++ )
+			deliveryMenu.children[i].style.filter = "blur(5px)";	
+		
+		
+	}
+	accessDenined.style.filter = "none";
 }

@@ -71,6 +71,7 @@ public class AwsServiceImpl{
                 .build(); 		
     }
     
+    
     // AWS Key를 가져오는 함수입니다.
     private static String[] Security() {
 		String[] Security = new String[3];
@@ -115,7 +116,6 @@ public class AwsServiceImpl{
     	// 매장 관리 이미지 
     	// 메인이미지 "delegatephotoboolean"  서브 이미지들 "storeimg"
     	int count = 0;
-    	
     	
     	
     	
