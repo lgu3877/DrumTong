@@ -19,7 +19,7 @@
 	<update id="updateConstract" parameterType="BScheduleTimeVO">
 		UPDATE BSCHEDULETIME
 			SET
-			WEEKDAY = #{weekday}, SATURDAY = #{saturday}, SUNDAY = #{sunday}
+			WEEKDAY = #{weekday, jdbcType=VARCHAR}, SATURDAY = #{saturday, jdbcType=VARCHAR}, SUNDAY = #{sunday, jdbcType=VARCHAR}
 			WHERE ESTID = #{estid}
 	</update>
 	
