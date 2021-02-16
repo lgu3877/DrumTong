@@ -26,7 +26,8 @@
 	<select id="selectReview" parameterType="hashmap" resultType="ReviewList">
 		SELECT CONCAT(SUBSTR(P.NAME,0,2),'***') as customerName, profileimg, A.* FROM CPRIVATEDATA P right outer join 
 				(SELECT R.*, C.CONTENT as ccontent, C.REGISTDATE as cregistdate, 
-							B.CONTENT as bcontent, B.REGISTDATE as bregistdate 
+							B.CONTENT as bcontent, B.REGISTDATE as bregistdate,
+							F.orderlist as orderlist, F.amount as amount 
 					FROM (SELECT * FROM BREVIEW WHERE 
 						<choose>
 							<when test='division eq "whole"'>
@@ -44,8 +45,14 @@
 					 on C.estid=#{estid} and R.estid=C.estid and R.memberid=C.memberid and R.salecode=C.salecode
   					left outer join bbusinessreview B
   					 on B.estid=#{estid} and R.estid=B.estid and R.memberid=B.memberid and R.salecode=B.salecode
+					inner join 
+						(select 
+							salecode,LISTAGG(distinct(maincategory),',') WITHIN GROUP (ORDER BY SALECODE) as orderlist, sum(amount) as amount 
+							from bdetailsales group by salecode) F 
+					 on R.salecode = F.salecode 
 					WHERE R.estid=#{estid} 
-					ORDER BY R.SALECODE DESC ) A
+					ORDER BY C.registdate DESC ) A
+					
 			on P.MEMBERID=A.MEMBERID
 	</select>
 	

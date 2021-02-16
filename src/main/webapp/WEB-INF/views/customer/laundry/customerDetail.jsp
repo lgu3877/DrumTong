@@ -715,6 +715,9 @@
 
 	       // When the user clicks anywhere outside of the modal, close it
 	       window.onclick = function (event) { if (event.target == modal) closeAllModal(); };
+	       
+
+			couponSettings(${bCouponVO }); // 매장의 쿠폰을 다운
     	}
     	function checkLoginSettings(checkLogin, CouponList, myPoint, Bookmark){
     		closeAllModal();
@@ -758,7 +761,6 @@
     		if(checkLogin){
     			console.log('로그인 되어있을 때');
     			// 로그인 되어있을 때
-				couponSettings(${bCouponVO }); // 매장의 쿠폰을 다운
 	    		myCouponSettings(CouponList); // 고객 쿠폰 다운로드
 	    		
 	    		document.getElementById('my-point').children[0].innerHTML = myPoint; // 현재 포인트

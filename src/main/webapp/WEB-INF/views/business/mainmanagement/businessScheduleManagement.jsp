@@ -124,12 +124,22 @@
 							</button>
 							<input id="weekend-also" type="radio" name="workingHour">
 						</div>
-						<!-- 토/일 선택 체크박스 -->
+						<!-- 토/일 선택 라디오버튼 -->
 						<div class="checkbox_con">
-							<input id="weekday-only" type="checkbox" name="" value="">
-							<button id="weekday-only-btn" class="checkBtn transparent" onclick="checkOption('weekday-only')" disabled>토요일 운영</button>
-							<input id="whole-week" type="checkbox" name="" value="">
-							<button id="whole-week-btn" class="checkBtn transparent" onclick="checkOption('whole-week')" disabled>일요일 운영</button>
+<!-- 							<input id="weekday-only" type="checkbox" name="" value=""> -->
+<!-- 							<button id="weekday-only-btn" class="checkBtn transparent" onclick="checkOption('weekday-only')" disabled>토요일 운영</button> -->
+<!-- 							<input id="whole-week" type="checkbox" name="" value=""> -->
+<!-- 							<button id="whole-week-btn" class="checkBtn transparent" onclick="checkOption('whole-week')" disabled>일요일 운영</button> -->
+							
+<!-- 							토일 선택 라디오버튼 [건욱] -->
+							<input id="weekendBoth" type="radio" name="weekends" value="">
+							<button id="weekendBoth-btn" class="checkBtn transparent" onclick="checkOption('weekendBoth')" disabled>토/일 운영</button>
+							
+							<input id="weekendSat" type="radio" name="weekends" value="">
+							<button id="weekendSat-btn" class="checkBtn transparent" onclick="checkOption('weekendSat')" disabled>토요일만 운영</button>
+							
+							<input id="weekendSun" type="radio" name="weekends" value="">
+							<button id="weekendSun-btn" class="checkBtn transparent" onclick="checkOption('weekendSun')" disabled>일요일만 운영</button>
 						
 						</div>
 					</div>	
@@ -167,7 +177,7 @@
 										<button class="btn time_zone_btn border_l">오후</button>
 									</div>
 								</div>
-								<input class="time_input hour" type="number" name="hour" max="12" placeholder="시">
+								<input class="time_input hour" type="number" name="hour" max="24" placeholder="시">
 								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
 								<div class="time_range_text">
 									<span>부터</span>
@@ -183,7 +193,7 @@
 										<button class="btn time_zone_btn border_l">오후</button>
 									</div>
 								</div>
-								<input class="time_input hour" type="number" name="hour" max="12" placeholder="시">
+								<input class="time_input hour" type="number" name="hour" max="24" placeholder="시">
 								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
 								<div class="time_range_text">
 									<span>까지</span>
@@ -210,7 +220,7 @@
 										<button class="btn time_zone_btn border_l">오후</button>
 									</div>
 								</div>
-								<input class="time_input hour" type="number" name="hour" max="12" placeholder="시">
+								<input class="time_input hour" type="number" name="hour" max="24" placeholder="시">
 								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
 								<div class="time_range_text">
 									<span>부터</span>
@@ -226,7 +236,7 @@
 										<button class="btn time_zone_btn border_l">오후</button>
 									</div>
 								</div>
-								<input class="time_input hour" type="number" name="hour" max="12" placeholder="시">
+								<input class="time_input hour" type="number" name="hour" max="24" placeholder="시">
 								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
 								<div class="time_range_text">
 									<span>까지</span>
@@ -253,7 +263,7 @@
 										<button class="btn time_zone_btn border_l">오후</button>
 									</div>
 								</div>
-								<input class="time_input hour" type="number" name="hour" max="12" placeholder="시">
+								<input class="time_input hour" type="number" name="hour" max="24" placeholder="시">
 								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
 								<div class="time_range_text">
 									<span>부터</span>
@@ -269,7 +279,7 @@
 										<button class="btn time_zone_btn border_l">오후</button>
 									</div>
 								</div>
-								<input class="time_input hour" type="number" name="hour" max="12" placeholder="시">
+								<input class="time_input hour" type="number" name="hour" max="24" placeholder="시">
 								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
 								<div class="time_range_text">
 									<span>까지</span>
