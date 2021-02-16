@@ -108,7 +108,7 @@
   </div>
 </section>
 <!-- 영경 모달 -->
-<div id="writeReviewButton" class="order_review_modal modal">
+<div id="writeReviewButton" class="order_review_modal">
 	<div class="modal_box">
 		<div class="modal_title">세탁소 이름</div>
 		<form onsubmit="clacStarCsore();" action="${cpath }/customer/account/customerNewReview/" enctype="multipart/form-data" method="post">

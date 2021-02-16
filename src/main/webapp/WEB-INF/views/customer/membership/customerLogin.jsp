@@ -19,7 +19,8 @@
 	<!-- Axios script -->
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- 스크립트 영역 -->
-	    <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>
+    <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>
+   	<script type="text/javascript" src="${cpath }/customer/js/main/customerHeader.js"></script>
 </head>
 
 <body>

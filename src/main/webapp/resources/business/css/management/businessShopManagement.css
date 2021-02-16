@@ -575,11 +575,11 @@
 }
 
 .service_details {
-	width: 21%;
+	width: 20%;
 }
 
 .service_price {
-	width: 16%;
+	width: 18%;
 }
 
 .service_price_input:invalid {
@@ -627,7 +627,7 @@
     text-align: left;
     border-radius: 3px;
     font-size: 20pt;
-    background-color: lightcoral;
+    background-color: steelblue;
     color: white;
     letter-spacing: 5px;
 }
@@ -669,7 +669,7 @@
     text-align: left;
     border-radius: 3px;
     font-size: 15pt;
-    background-color: lightpink;
+    background-color: cornflowerblue;
     color: white;
     letter-spacing: 5px;
 }
@@ -705,27 +705,36 @@
 
 .menu_detail_info_con {
 	display: flex;
-    justify-content: left;
+    justify-content: space-between;
 	width: 100%;
     margin: auto 0 auto 15px;
     padding: 3px 0 3px 25px;
     text-align: left;
     border-radius: 3px;
     font-size: 15pt;
-    background-color: hotpink;
-    color: white;
-    letter-spacing: 5px;
+    background-color: lightblue;
+    color: #323232;
+    letter-spacing: 2px;
 }
 
-. {
+.highlight {
+	font-weight: 600;
+}
+
+.menu_detail_info_con div {
+	width: 33.33%;
 }
 
 .menu_detail_option {
 	margin: auto 11px;
     padding: 4px;
-    background-color: darkgreen;
+    background-color: lightcoral;
     border-radius: 7px;
     color: white;
+}
+
+.menu_detail_option i {
+	cursor: pointer;
 }
 
 /* 서비스 메뉴 수정 모달 */
@@ -770,7 +779,10 @@
 .modify_menu_modal_title {
 	font-size: 20pt;
     font-weight: 600;
-    margin: 15px 0;
+    border-top: 2px solid navy;
+    border-bottom: 2px solid navy;
+    padding: 5px;
+    margin: 5px 0;
     text-align: left;
     color: navy;
 }
@@ -784,9 +796,14 @@
 	font-size: 16pt;
 }
 
+.invalid,
+.invalid:focus {
+	border: 2px solid red !important;
+}
+
 .modify_menu_modal_input_con {
 	text-align: left;
-    margin: 25px 0;
+    margin: 20px 0;
 }
 
 .modify_menu_modal_input_title {
@@ -835,6 +852,10 @@
 .modify_menu_modal_btn:hover {
 	transition: 0.5s;
 	background-color: navy;
+}
+
+.modify_menu_modal_btn:focus {
+	outline: none;
 }
 
 .remove {
