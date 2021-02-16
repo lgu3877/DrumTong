@@ -770,7 +770,10 @@
 .modify_menu_modal_title {
 	font-size: 20pt;
     font-weight: 600;
-    margin: 15px 0;
+    border-top: 2px solid navy;
+    border-bottom: 2px solid navy;
+    padding: 5px;
+    margin: 5px 0;
     text-align: left;
     color: navy;
 }
@@ -784,9 +787,14 @@
 	font-size: 16pt;
 }
 
+.invalid,
+.invalid:focus {
+	border: 2px solid red !important;
+}
+
 .modify_menu_modal_input_con {
 	text-align: left;
-    margin: 25px 0;
+    margin: 20px 0;
 }
 
 .modify_menu_modal_input_title {
@@ -835,6 +843,10 @@
 .modify_menu_modal_btn:hover {
 	transition: 0.5s;
 	background-color: navy;
+}
+
+.modify_menu_modal_btn:focus {
+	outline: none;
 }
 
 .remove {

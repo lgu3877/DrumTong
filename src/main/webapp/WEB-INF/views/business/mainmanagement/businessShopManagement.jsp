@@ -614,7 +614,14 @@
 		function insertComma(string) {
 			const reversedString = string.split("").reverse().join("");
 			const commaAttached = reversedString.replace(/(.{3})/g,"$1,");
-			return commaAttached.split("").reverse().join("");
+			
+			const array = commaAttached.split("").reverse();
+			
+			if (array[0] === ",") {
+				array.shift();
+			}
+			
+			return array.join("");
 		}
 		
 		// 객체 복사(deep copy)
