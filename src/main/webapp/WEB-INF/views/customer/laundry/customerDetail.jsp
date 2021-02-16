@@ -30,255 +30,16 @@
 	
  	<!-- 스크립트 영역 -->
     <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>
-    
-    <script>
-    	function couponSettings(){ // 쿠폰 다운로드 세팅 메서드
-    		modalCouponList = document.getElementById('modal-couponList');
-    		couponList = ${bCouponVO };
-    		console.log(couponList);
-    		
-    		couponList.forEach(cl => {
-    			couponOption = document.createElement('option');
-    			couponOption.setAttribute('value', cl.couponid);
-    			couponOption.innerHTML = cl.discount + '원 할인/' + cl.minimumprice + '원 이상[' + cl.period + ']';
-    			
-    			modalCouponList.appendChild(couponOption);
-    		})
-    		
-    	}
-    </script>
-    <script>
-    	function myCouponSettings(){ // 내 쿠폰을 현재 결제
-    		myCouponList = document.getElementById()
-    	}
-    </script>
-    <script>
-    	function couponSettings(){ // 쿠폰 다운로드 세팅 메서드
-    		modalCouponList = document.getElementById('modal-couponList');
-    		couponList = ${bCouponVO };
-    		console.log(couponList);
-    		
-    		couponList.forEach(cl => {
-    			couponOption = document.createElement('option');
-    			couponOption.setAttribute('value', cl.couponid);
-    			couponOption.innerHTML = cl.discount + '원 할인/' + cl.minimumprice + '원 이상[' + cl.period + ']';
-    			
-    			modalCouponList.appendChild(couponOption);
-    		})
-    		
-    	}
-    </script>
-    <script>
-    	function myCouponSettings(){ // 내 쿠폰을 현재 결제
-    		myCouponList = document.getElementById()
-    	}
-    </script>
-    <script>
-      function listUp(event) {
-    	  
-        choose = event.target;
-    	 if(choose.className.includes("quick") || choose.className.includes("noQuick") || choose.className.includes("fas") || choose.className.includes("quantity")) return;
-        selectedList = document.getElementById('selected-List');
-        
-        
-        optionName = choose.children[0].children[0].innerText;
-        optionText = choose.children[0].children[1].innerText;
-        quantity = choose.children[1].value;
-        price = choose.children[2].innerText;
-        quick = choose.children[3];
-        quickValue = choose.children[3].children[0].value;
-        quickCheck = choose.children[3].children[0].checked;
-        quickBoolean = (quickValue != 0);
-        
-        if(quantity !== '0'){
-        	menuDiv_1 = document.createElement('div');
-			menuDiv_1.setAttribute("class", "selected-row");
-			
-			// 1
-			menuDiv_2 = document.createElement('div');
-			menuDiv_2.setAttribute("class", "selected-text");
-			
-			menuDiv_2_1 = document.createElement('div');
-			menuDiv_2_1.setAttribute("class", "selected-name");
-			menuDiv_2_1.innerHTML = optionName;
-			
-			menuDiv_2_2 = document.createElement('div');
-			menuDiv_2_2.setAttribute("class", "selected-context");
-			menuDiv_2_2.innerHTML = optionText;
-			
-			menuDiv_2.appendChild(menuDiv_2_1);
-			menuDiv_2.appendChild(menuDiv_2_2);
-			
-			// 2
-			menuInput_3 = document.createElement('input');
-			menuInput_3.setAttribute("class", "quantity");
-			menuInput_3.setAttribute("type", "number");
-			menuInput_3.setAttribute("min", "0");
-			menuInput_3.setAttribute("value", quantity);
-			
-			// 3
-			menuDiv_4 = document.createElement('div');
-			menuDiv_4.setAttribute("class", "selected-price");
-			menuDiv_4.innerHTML = price;
-			
-			//4
-			menuLabel_5 = document.createElement('label');
-			menuLabel_5.setAttribute("class", quick.className);
-			menuLabel_5.setAttribute("title", quickBoolean ? "빠른서비스" : "퀵불가");
-			
-			menuInput_5_1 = document.createElement('input');
-			menuInput_5_1.setAttribute("class", "quickcheck");
-			menuInput_5_1.setAttribute("type", "checkbox");
-			menuInput_5_1.checked = quickCheck;
-			menuInput_5_1.setAttribute("value", quickValue);
-			if(quickBoolean)
-				menuInput_5_1.addEventListener('change', quickMark);
-			
-			menuI_5_2 = document.createElement('i');
-			menuI_5_2.setAttribute("class", "fas fa-shipping-fast");
-			menuI_5_2.innerHTML = quickBoolean ? (quickValue + "원") : "퀵불가";
-			
-			menuLabel_5.appendChild(menuInput_5_1);
-			menuLabel_5.appendChild(menuI_5_2);
-			
-			
-			// 5
-			menuDiv_6 = document.createElement('div');
-			
-			menuButton_6_1 = document.createElement('button');
-			menuButton_6_1.setAttribute("class", "remove-button");
-			menuButton_6_1.addEventListener("click", removeOption);
-			
-			menuI_6_2 = document.createElement('i');
-			menuI_6_2.setAttribute("class", "fas fa-times");
-			
-			menuButton_6_1.appendChild(menuI_6_2);
-			menuDiv_6.appendChild(menuButton_6_1);
-			
-			menuDiv_1.appendChild(menuDiv_2);
-			menuDiv_1.appendChild(menuInput_3);
-			menuDiv_1.appendChild(menuDiv_4);
-			menuDiv_1.appendChild(menuLabel_5);
-			menuDiv_1.appendChild(menuDiv_6);
-			selectedList.appendChild(menuDiv_1);
-			
-			calTotal();
-			
-			reset(choose);
-        }
-        
-      }
-    </script>
-    <script>
-    function reset(chs){	// 메뉴를 추가했을 때 개수와 퀵여부를 리셋해주는 메서드(영경)
-    	chs.children[1].value = 1;
-
-        if(chs.children[3].className === "quick True"){
-        	chs.children[3].className = "quick";
-        	chs.children[3].children[0].checked = false;
-        }
-    }
-    </script>
-    <script>
-      function calTotal() {
-        orders = document.querySelectorAll('.selected-row');
-        quickText = document.getElementById('select-quick');	// 퀵 요금
-        totalText = document.getElementById('select-total');	// 토탈 요금
-        priceText = document.getElementById('modal-price').children[0]; // 모달창 결제 금액
-
-        deliCheck = document.getElementById('deli-check');
-
-        deli = 2000;
-
-        if (!deliCheck.checked) {
-          deli = 0;
-        }
-
-        quickPrice = 0;
-        totalPrice = 0 + deli;
-
-        for (i = 0; i < orders.length; i++) {
-          quantity = orders[i].children[1].value;
-          price = orders[i].children[2].innerText.split(' ')[0];
-          quick = 0;
-
-          if (orders[i].children[3].children[0].checked)
-            quick = orders[i].children[3].children[0].value;
-
-          quickCal = parseInt(quantity) * parseInt(quick);
-
-          quickPrice += quickCal;
-
-          totalPrice += parseInt(quantity) * parseInt(price) + quickCal;
-        }
-      
-        quickText.innerText = 'Quick 요금 : ' + quickPrice +' 원';
-        totalText.innerText = 'Total : '+ totalPrice + ' 원';
-        priceText.innerText = totalPrice;
-      }
-    </script>
-    
-    <script>
-      function removeOption(){
-        optionRow = event.target.parentNode.parentNode;
+    <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail.js"></script>
+   	<script>
+// 		imgList = ${bImageVO};
+// 		i = 0;
+// 		imgBoxs = document.querySelectorAll('detailview-imgBlock');
 		
-        optionRow.parentNode.removeChild(optionRow);
-
-        calTotal();
-      }
-    </script>
-
-    <script>
-      function quickMark(){
-        check = event.target;
-        row = check.parentNode;
-        row.className = check.checked ? "quick True" : "quick"; 
-      }
-    </script>
-
-    <script>
-      function addBookmark() {
-       if('${cLogin}' == ''){
-          LoginModalOpen();
-          return;
-       }  
-         
-        icon = event.target;
-        className = icon.className;
-      
-        if (className.search(/add/) > 0) {
-          icon.style['-webkit-text-stroke'] = '2px orange';
-          icon.style.color = 'yellow';
-          icon.className = 'fas fa-star remove';
-        }
-        else if (className.search(/remove/) > 0) {
-          icon.style['-webkit-text-stroke'] = '2px skyblue';
-          icon.style.color = '';
-          icon.className = 'fas fa-star add';
-        }
-        
-        const axPost = async (memberid) =>{
-           ob={
-              'memberid' : memberid,
-              'estid' : '${estid}',
-              'result' : icon.style.color,
-           };
-           await axios.post('/drumtong/customer/laundry/customerDetail/rest/addBookmark/', ob)
-           .then ((response) => {
-              if(response.data === true){
-                 console.log("추가함");
-              } else {
-                 console.log("삭제함");
-              }
-           })
-           
-        };
-        
-        if('${cLogin}' != null && '${cLogin}' !='' ) { 
-           axPost('${cLogin.memberid}'); }
-        
-      }
-    </script>
+// 		imgList.forEach(img =>{
+// 			imgBoxs[i++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + img.storeimg;
+// 		})
+	</script>
 
     <script>
       function submit() {
@@ -340,8 +101,7 @@
           <div class="detailview-companyIntro">
             <div class="detailview-intro-headline">
               <h1>${bInformationVO.brandnaming}</h1>
-              <c:set var="checkBookmark" value="${empty cLogin || Bookmark eq 'n' }" />
-              <i class="fas fa-star ${checkBookmark ? 'add': 'remove' }" id="bookMarker" style="-webkit-text-stroke: 2px ${checkBookmark ? 'skyblue': 'orange' };color:${checkBookmark ? '': 'yellow' }" onclick="addBookmark()"></i>
+              <i id="bookMarker"></i>
             </div>
             <textarea readonly>${bManagementVO.introduction }</textarea>
           </div>
@@ -369,26 +129,17 @@
 
             <div class="select-coupon">
               내 쿠폰
-              <select>
-                       <option>선택하기</option>
-                 <c:choose>
-                    <c:when test="${cLogin != null }">
-<%--                        <c:forEach items="${CouponList }" var="co"> --%>
-<%--                          <option value="${co.minimumprice }">${co.discount }원 할인/${co.minimumprice }원 이상[${co.period }]</option> --%>
-<%--                        </c:forEach> --%>
-                    </c:when>
-                    <c:otherwise>
-                       <option disabled>로그인 후 이용가능</option>
-                    </c:otherwise>
-                 </c:choose>
+              <select id="select-coupon">
+                       <option hidden="true">선택 X</option>
+                       <option id="noLogin" disabled>로그인 후 이용가능</option>
               </select>
             </div>
             <div class="select-deli" id="select-deli"><input type="checkbox" id="deli-check" checked onclick="calTotal()" /> 배달 (+ 2000 원)</div>
             <div class="select-quick" id="select-quick">
-              Quick 요금 : 0 원
+              Quick 요금 : <span>0</span> 원
             </div>
             <div class="select-total" id="select-total">
-              Total : 2000 원
+              Total : <span>2000</span> 원
             </div>
             <button class="order-submit" id="order-submit">결제하기</button>
           </div>
@@ -428,135 +179,6 @@
         </div>
       </div>
     </section>
-
-<!-- 	영경 스크립트, 메뉴판 출력! -->
-	<script>
-// 		imgList = ${bImageVO};
-// 		i = 0;
-// 		imgBoxs = document.querySelectorAll('detailview-imgBlock');
-		
-// 		imgList.forEach(img =>{
-// 			imgBoxs[i++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + img.storeimg;
-// 		})
-		menuList = ${menuList};
-		mainCtList = Object.keys(menuList.menuList);
-		mainCategory = document.getElementById('mainCate');
-		subCategory = document.getElementById('subCate');
-		menuCategory = document.getElementById('detailview-selectOptions');
-		
-		// 0번째 메인 메뉴
-		selectMainKey =Object.keys(menuList.menuList)[0];
-		// 0번째 서브 메뉴
-		selectSubKey = '';
-		// 메인 카테고리 버튼 넣는 부분
-		mainCategory.innerHTML="";
-		mainCtList.forEach(mct => {
-			mainDiv = document.createElement('div');
-			mainDiv.innerHTML = mct;
-			mainDiv.setAttribute("class", "mainButton");
-			mainDiv.setAttribute("id", "main_" + mct);
-			mainDiv.addEventListener('click', event => afterMainClik(mct));
-			mainCategory.appendChild(mainDiv);
-		})
-		afterMainClik(selectMainKey);
-		
-		function afterMainClik(checkmct){
-			selectMainKey = checkmct;
-			selectSubKey = '';
-			mainCtList.forEach(mct => {
-				document.getElementById("main_"+mct).className = (mct === selectMainKey ? "mainButton_select" : "mainButton");
-				})
-			subCtList = Object.keys(menuList.menuList[selectMainKey]);
-			subCategory.innerHTML="";
-			menuCategory.innerHTML="";
-			subCtList.forEach(sct =>{
-				subDiv = document.createElement('div');
-				subDiv.innerHTML = sct;
-				subDiv.setAttribute("class", selectSubKey !== sct ? "subButton" : "subButton_select");
-				subDiv.setAttribute("id", "sub_" + sct);
-				subDiv.addEventListener('click', event => afterSubClick(sct));
-				subCategory.appendChild(subDiv);
-			})
-			afterSubClick(subCtList[0]);
-		}
-		
-		function afterSubClick(checksct){
-			selectSubKey = checksct;
-			subCtList.forEach(mct => {
-				document.getElementById("sub_"+mct).className = (mct === selectSubKey ? "subButton_select" : "subButton");
-				})
-			menuCtList = menuList.menuList[selectMainKey][selectSubKey];
-			menuCategory.innerHTML="";
-			createMenu(menuCtList);
-		}
-		
-		function createMenu(list){
-			menuCategory.innerHTML="";
-			list.forEach(li => {
-				quickBoolean = (li.quickprice != 0);
-				
-				menuDiv_1 = document.createElement('div');
-				menuDiv_1.setAttribute("class", "option-row");
-				menuDiv_1.addEventListener('click', listUp);
-				
-				// 1
-				menuDiv_2 = document.createElement('div');
-				menuDiv_2.setAttribute("class", "option-text");
-				
-				menuDiv_2_1 = document.createElement('div');
-				menuDiv_2_1.setAttribute("class", "option-name");
-				menuDiv_2_1.innerHTML = selectMainKey + "/" + selectSubKey;
-				
-				menuDiv_2_2 = document.createElement('div');
-				menuDiv_2_2.setAttribute("class", "option-context");
-				menuDiv_2_2.innerHTML = li.name + "/예상시간 " + li.ete + "일";
-				
-				menuDiv_2.appendChild(menuDiv_2_1);
-				menuDiv_2.appendChild(menuDiv_2_2);
-				
-				// 2
-				menuInput_3 = document.createElement('input');
-				menuInput_3.setAttribute("class", "quantity");
-				menuInput_3.setAttribute("type", "number");
-				menuInput_3.setAttribute("min", "0");
-				menuInput_3.setAttribute("value", "1");
-				
-				// 3
-				menuDiv_4 = document.createElement('div');
-				menuDiv_4.setAttribute("class", "option-price");
-				menuDiv_4.innerHTML = li.price + "원";
-				
-				//4
-				menuLabel_5 = document.createElement('label');
-				menuLabel_5.setAttribute("class", quickBoolean ? "quick" : "noQuick");
-				menuLabel_5.setAttribute("title", quickBoolean ? "빠른서비스" : "퀵불가");
-				
-				menuInput_5_1 = document.createElement('input');
-				menuInput_5_1.setAttribute("class", "quickcheck");
-				menuInput_5_1.setAttribute("type", "checkbox");
-				menuInput_5_1.checked= false;
-				menuInput_5_1.setAttribute("value", li.quickprice);
-				if(quickBoolean)
-					menuInput_5_1.addEventListener('change', quickMark);
-				
-				menuI_5_2 = document.createElement('i');
-				menuI_5_2.setAttribute("class", "fas fa-shipping-fast");
-				menuI_5_2.innerHTML = quickBoolean ? (li.quickprice + "원") : "퀵불가";
-				
-				menuLabel_5.appendChild(menuInput_5_1);
-				menuLabel_5.appendChild(menuI_5_2);
-				
-				
-				menuDiv_1.appendChild(menuDiv_2);
-				menuDiv_1.appendChild(menuInput_3);
-				menuDiv_1.appendChild(menuDiv_4);
-				menuDiv_1.appendChild(menuLabel_5);
-				
-				menuCategory.appendChild(menuDiv_1);
-			})
-		}
-	</script>
-
 <!-- The Modal -->
     <div id="myModal" class="modal">
       <!-- Modal content -->
@@ -582,7 +204,7 @@
             <option selected>포인트 결제</option>
           </select>
           <div id="modal-price" class="modal-price">결제 금액 : <span></span> 원</div>
-          <div class="modal-price">현재 포인트 : <span>${myPoint }</span> 원</div>
+          <div id="my-point" class="modal-price">현재 포인트 : <span></span> 원</div>
           <button class="modal-submit" id="modal-submit">결제하기</button>
         </div>
       </div>
@@ -616,7 +238,7 @@
         <div class="modal-reiview" id="modal-reiview">
           <div class="detailview-review-row">
             <div class="review-head">
-              <div class="review-profilePic"></div>
+              <div class="review-profilePic"><img></div>
               <div class="review-writer">
               	<div class="right-row">
                 	<p class="customerName"></p>
@@ -629,6 +251,7 @@
               </div>
             </div>
             <div style="height: 30px; background: grey; color: white;">추가 확보 공간</div>            
+            <div class="review-reviewimg" style="display: none"><img></div>
             <div class="modal-grade"><span></span></div>
             <div class="review-context"></div>
             <div class="owner-review">
@@ -637,6 +260,13 @@
             </div>
           </div>
         </div>
+      </div>
+      
+      <div class="modal-content5" id="modal-content5" style="display: none">
+      		<img>
+      </div>
+      <div id="modal-content5-exit" style="display: none"  onclick="DeactiveModal5()">
+      		<i class="fas fa-times fa-4x"></i>
       </div>
     </div>
 
@@ -653,6 +283,8 @@
        var modalContent2 = document.getElementById('modal-content2');   // 결제 화면
        var modalContent3 = document.getElementById('modal-content3');   // 로그인 화면
        var modalContent4 = document.getElementById('modal-content4');   // 리뷰 화면
+       var modalContent5 = document.getElementById('modal-content5');   // 모달 컨텐츠4 -> 고객리뷰이미지
+       var modalContent5_exit = document.getElementById('modal-content5-exit');   // 모달 컨텐츠5 -> 닫기
 
        // Get the button that opens the modal
        var btn1 = document.getElementById('add-coupon');
@@ -753,6 +385,8 @@
          modalContent2.style.display = 'none';
          modalContent3.style.display = 'none';
          modalContent4.style.display = 'none';
+         modalContent5.style.display = 'none';
+         modalContent5_exit.style.display = 'none';
          
        };
 
@@ -773,6 +407,8 @@
            modalContent2.style.display = 'none';
            modalContent3.style.display = 'none';
            modalContent4.style.display = 'none';
+           modalContent5.style.display = 'none';
+           modalContent5_exit.style.display = 'none';
          }
        };
          
@@ -880,6 +516,26 @@
 				$('.detailview-review-row').find('.customerName').html(reviewList[i].customerName);
 				$('.detailview-review-row').find('.review-context').html(reviewList[i].ccontent);
 				
+				// 고객이 업로드한 프로필 이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
+				if(typeof reviewList[i].profileimg === typeof undefined) {
+					$('.detailview-review-row').find('.review-profilePic img').attr("src",
+							"https://az-pe.com/wp-content/uploads/2018/05/kemptons-blank-profile-picture.jpg");
+				}
+				else {
+					$('.detailview-review-row').find('.review-profilePic img').attr("src",
+							"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + reviewList[i].profileimg);
+				}
+				
+				// 고객이 업로드한 리뷰이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
+				if(typeof reviewList[i].reviewimg === typeof undefined)
+					$('.detailview-review-row').find('.review-reviewimg').css("display", "none");
+				else {
+					$('.detailview-review-row').find('.review-reviewimg').css("display", "");
+					$('.detailview-review-row').find('.review-reviewimg img').attr("src",
+							"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + reviewList[i].reviewimg);
+					$('.detailview-review-row').find('.review-reviewimg img').attr("onclick", "ActiveModal5('" + reviewList[i].reviewimg + "')");
+				}
+				
 				// 사장님 댓글 생성 조건문
 				if(reviewList[i].replyboolean == 'N')
 					$('#review' + i).find('.owner-review').css('display', 'none');
@@ -896,7 +552,27 @@
 				beforerow.next().attr('id', 'review' + i);
 				beforerow.next().find('.customerName').html(reviewList[i].customerName);
 				beforerow.next().find('.review-context').html(reviewList[i].ccontent);
-
+				
+				// 고객이 업로드한 프로필 이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
+				if(typeof reviewList[i].profileimg === typeof undefined) {
+					beforerow.next().find('.review-profilePic img').attr("src",
+							"https://az-pe.com/wp-content/uploads/2018/05/kemptons-blank-profile-picture.jpg");
+				}
+				else {
+					beforerow.next().find('.review-profilePic img').attr("src",
+							"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + reviewList[i].profileimg);
+				}
+				
+				// 고객이 업로드한 리뷰이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
+				if(typeof reviewList[i].reviewimg === typeof undefined)
+					beforerow.next().find('.review-reviewimg').css("display", "none");
+				else {
+					beforerow.next().find('.review-reviewimg').css("display", "");
+					beforerow.next().find('.review-reviewimg img').attr("src",
+							"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + reviewList[i].reviewimg);
+				}
+						
+				
 				// 사장님 댓글 생성 조건문
 				if(reviewList[i].replyboolean == 'N')
 					$('#review' + i).find('.owner-review').css('display', 'none');
@@ -947,6 +623,17 @@
 	 		}
 		}
 	}
+    
+    function ActiveModal5(src) {
+    	modalContent5_exit.style.display = "";
+    	modalContent5.style.display = "";
+    	modalContent5.querySelector('img').src = "https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + src;
+    }
+    
+    function DeactiveModal5() {
+    	modalContent5_exit.style.display = "none";
+    	modalContent5.style.display = "none";
+    }
 	
     document.getElementById('review-more').addEventListener('mouseover', function() {
     	this.parentNode.style.background = 'white';
@@ -961,14 +648,130 @@
     	this.querySelector('p').style.color = '#1564F9';
     });
     
+    
     </script>
+    
     <script>
-    	// 로그인 했을 때 초기화
-    	function initLogin(){
-    		
-    	}
+//     	총 정리
+		cLogin = '${cLogin}';
+		checkLogin = cLogin !== ''; // 로그인 했을 땐 true, 로그인 안되어있을 땐 false
+		
+   		// 메뉴 세팅 관련 메서드
+   		menuList = ${menuList};
+   		mainCtList = Object.keys(menuList.menuList);
+   		mainCategory = document.getElementById('mainCate');
+   		subCategory = document.getElementById('subCate');
+   		menuCategory = document.getElementById('detailview-selectOptions');
+   		// 0번째 메인 메뉴
+   		selectMainKey =Object.keys(menuList.menuList)[0];
+   		// 0번째 서브 메뉴
+   		selectSubKey = '';
+   		
+  	    // Get the modal
+       var modal = document.getElementById('myModal');
 
-    	couponSettings();
+       var modalContent1 = document.getElementById('modal-content1');   // 쿠폰 받기 화면
+       var modalContent2 = document.getElementById('modal-content2');   // 결제 화면
+       var modalContent3 = document.getElementById('modal-content3');   // 로그인 화면
+       var modalContent4 = document.getElementById('modal-content4');   // 리뷰 화면
+
+       // Get the button that opens the modal
+       var btn1 = document.getElementById('add-coupon');
+       var btn2 = document.getElementById('order-submit');
+       var btn3 = document.getElementById('review-more');
+       var btn4 = document.getElementById('modal-submit');
+       var btn5 = document.getElementById('modal-addCoupon');// 모달에서 쿠폰받기 누르면
+	   var btn6 = document.getElementById('bookMarker'); // 북마크 버튼
+       
+       // Get the <span> element that closes the modal
+       var span = document.getElementsByClassName('close')[0];
+   		// 페이지 초기화
+    	function initPage(checkLogin){
+			// 1. 로그인 여부와 상관없이 초기세팅되어야 하는 메서드들
+			// 2. 로그인 여부에 따라 나뉘는 세팅들
+    		console.log('initLogin 실행');
+    		
+    		// 메인 카테고리 버튼 넣는 부분
+    		mainCtList.forEach(mct => {
+    			mainDiv = document.createElement('div');
+    			mainDiv.innerHTML = mct;
+    			mainDiv.setAttribute("class", "mainButton");
+    			mainDiv.setAttribute("id", "main_" + mct);
+    			mainDiv.addEventListener('click', event => afterMainClik(mct));
+    			mainCategory.appendChild(mainDiv);
+    		})
+    		afterMainClik(selectMainKey);
+    		
+            //수량 바뀌는 이벤트 리스너를 이곳에서 삽입
+    	    document.getElementById('selected-List').addEventListener('change', calTotal);
+    		
+    		// 로그인 여부에 따라 나뉘는 메서드들
+			checkLoginSettings(checkLogin, (checkLogin ? ${CouponList} : ''), '${myPoint }', '${Bookmark}');
+    		
+	       
+
+	       // When the user clicks on <span> (x), close the modal
+	       span.onclick = function () { closeAllModal(); };
+
+	       // When the user clicks anywhere outside of the modal, close it
+	       window.onclick = function (event) { if (event.target == modal) closeAllModal(); };
+    	}
+    	function checkLoginSettings(checkLogin, CouponList, myPoint, Bookmark){
+    		closeAllModal();
+    		// When the user clicks on the button, open the modal
+	 	       btn1.onclick = function () { 
+	 	    	   openModal(checkLogin ? modalContent1 : modalContent3 , 'flex');
+	 	       };
+	 	       
+	 	       btn2.onclick = function () {
+	 	    	 if(document.getElementById('selected-List').children.length == 0)
+	 	    		 alert('주문 목록이 비었습니다.');
+	 	    	 else
+	 	    	 	openModal(checkLogin ? modalContent2 : modalContent3, 'flex'); };
+
+	 	       btn3.onclick = function () { openModal(modalContent4, ''); reviewMore(); };
+	 	       
+	 	       btn4.onclick = function () { modal.style.display = 'block'; submit(); };
+	 	       
+
+	 	       btn5.onclick = async function(){
+	 	    	  if(checkLogin){
+	 		          selectedCouponID = document.getElementById('modal-couponList').value;
+	 	    		  ob={
+	 		                 'couponid' : selectedCouponID,
+	 		              };
+	 	    		  const {btn5_data} = await axios.post('/drumtong/customer/laundry/customerDetail/rest/addCoupon/', ob);
+	 	    		  alert(btn5_data ? '발급 성공' : '이미 발급받은 쿠폰입니다.');
+	 	    		  closeModal(modalContent1);
+	 	    	  }
+	 	       }
+	 	      btn6.onclick = function(){
+	 	    	 if(checkLogin){
+	 	    		addBookmark();
+	 	    	 } else {
+	 	    		openModal(modalContent3 , 'flex');
+	 	    	 }
+	 	      }
+	 	      bookMarker = document.getElementById('bookMarker');
+	 	      checkBM = Bookmark === 'y' ? true : false;
+	 	      bookMarker.setAttribute('class', 'fas fa-star ' + (checkBM ? 'add': 'remove'));
+    		if(checkLogin){
+    			console.log('로그인 되어있을 때');
+    			// 로그인 되어있을 때
+				couponSettings(${bCouponVO }); // 매장의 쿠폰을 다운
+	    		myCouponSettings(CouponList); // 고객 쿠폰 다운로드
+	    		
+	    		document.getElementById('my-point').children[0].innerHTML = myPoint; // 현재 포인트
+	    		
+	    		
+    		}
+    		else{
+    			console.log('로그인 안되어있을 때');
+    			 document.getElementById('loginSubmit').addEventListener('click', function(){ logiinSubmit('asynchronous'); });
+    		}
+    	} 
+    	initPage(checkLogin);
+    	
     </script>
 
 

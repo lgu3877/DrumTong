@@ -86,13 +86,30 @@
   font-weight: bolder;
 }
 
-.detailview-wrap .fa-star {
+.detailview-intro-headline .fa-star {
   font-size: x-large;
-  color: white;
-  -webkit-text-stroke: 2px skyblue;
   margin-right: 10px;
   margin-top: 3px;
   cursor: pointer;
+}
+
+.backstars .fa-star {
+  font-size: x-large;
+  margin-right: 10px;
+  margin-top: 3px;
+  cursor: pointer;
+  -webkit-text-stroke: 2px skyblue;
+  color: white;
+}
+
+.detailview-wrap .add{
+	-webkit-text-stroke : 2px orange;
+	  color: yellow;
+}
+
+.detailview-wrap .remove{
+	  -webkit-text-stroke: 2px skyblue;
+	  color: white;
 }
 
 .detailview-companyIntro textarea {
@@ -210,7 +227,7 @@ div.subButton:hover{
   width: 300px;
   pointer-events: none;
 }
-check .option-name,
+.option-name,
 .selected-name {
   width: 250px;
   font-weight: bold;
@@ -341,7 +358,8 @@ check .option-name,
 
 
 .select-deli,
-.select-quick {
+.select-quick,
+.select-quick span{
   border-bottom: 1px solid #d8d8d8;
   height: 30px;
   line-height: 30px;
@@ -361,7 +379,8 @@ check .option-name,
   pointer-events: none;
 }
 
-.select-total {
+.select-total,
+.select-total span {
   height: 50px;
   padding: 10px 10px;
   line-height: 30px;
@@ -413,13 +432,29 @@ check .option-name,
 }
 
 .review-profilePic {
+  display: flex;
   justify-content: center;
+  align-content: center;  
   width: 90px;
   height: 90px;
-  border-radius: 50%;
-/*   background-image : url(https://i1.wp.com/tccwayland.org/wp-content/uploads/2018/02/blank-profile-picture-973460_1280.png?fit=300%2C300&ssl=1) center no-repeat; */
-  background : url(https://az-pe.com/wp-content/uploads/2018/05/kemptons-blank-profile-picture.jpg) center no-repeat;;
-  background-size: contain;
+}
+.review-profilePic img {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+.review-reviewimg {
+  display: flex;
+  justify-content: center;
+  align-content: center;  
+  width: 400px;
+  height: 200px;
+}
+.review-reviewimg img {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	cursor: pointer;
 }
 
 .review-writer {
@@ -637,6 +672,25 @@ check .option-name,
   background-color: #fefefe;
   overflow: scroll;
 }
+
+.modal-content5 {
+  width: 600px;
+  height: 80%;
+  position: fixed;
+  left: 800px;
+  top: 10%;
+  justify-content: space-between;
+  background-color: #fefefe;
+}
+
+.modal-content5 img {
+	width: 100%;
+}
+
+#modal-content5-exit {
+	position: fixed; width: auto; height: auto; top: 0; right: 0;	cursor: pointer;
+}
+
 /* The Close Button */
 .close {
   height: 40px;

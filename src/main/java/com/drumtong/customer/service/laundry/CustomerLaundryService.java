@@ -89,13 +89,15 @@ public class CustomerLaundryService {
 			
 			// 고객이 가지고 있으면서 해당 사업장 쿠폰이고 사업장에 유효한(삭제X, 유효기간O) 쿠폰일 때
 			List<BCouponVO> CouponList = comparePeriod(bCouponDAO.selectUsableCoupon(map));
-			mav.addObject("CouponList", CouponList);
+			mav.addObject("CouponList", new Gson().toJson(CouponList));
 			
 			// 고객 포인트 정보
 			int myPoint = cPaymentDAO.select(Login.getMemberid()).getPoint();
 			mav.addObject("myPoint", myPoint);
 			
 			mav.addObject("Bookmark", (cBookmarkDAO.isCheck(map) != null) ? "y" : "n");
+		} else {
+			mav.addObject("CouponList", "n");
 		}
 		
 		return mav;
