@@ -357,7 +357,12 @@
 	
 	// 답글 작성 함수
 	function replyAdd(obj) {
-		var salecode = document.getElementById(obj.name);
+		
+		let salecode = document.getElementById(obj.name);
+
+		if(salecode.children.length != 0) {
+			return false;
+		}
 		
 		var replyInput = document.createElement('textarea');
 		replyInput.setAttribute('name', 'bcontent');
