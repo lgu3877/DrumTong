@@ -149,9 +149,7 @@ async function addService() {
 
 
 // 퀵 서비스 활성화 < 서비스 등록
-function updateMenu(service) {
-	console.log(service);
-	
+async function updateMenu(service) {
 	for (let key in service) {
 		if (service[key] === "") {
 			alert("잘못된 입력입니다.\n입력하신 내용을 다시 한 번 확인해주세요.")

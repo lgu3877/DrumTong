@@ -349,12 +349,8 @@
 
 			<!-- 서비스 등록 input -->
 				<div id="add-item-list" class="add_item_list"></div>
-					
 				</div>
-				
 			</div>
-		
-			
 		</div>
 		
 		
@@ -437,7 +433,6 @@
 		<!-- 설정된 배달가능지역 보기  & 배달 지역 설정  -->
 			
 			<div class="delivery_menu">
-			
 				<!-- 접근 제한 뷰  [건욱] -->
 				<div id="accessDenied" >
 					해당 기능을 활성화 시키기 위해서는 <br> [세탁물 수령 방법] 기능에서 "배달 대행업체 이용" 혹은  "배달 서비스 제공" 중 <br> 하나의 기능이라도 체크가 되어있어야 합니다.
@@ -461,13 +456,8 @@
 				<!-- 읍/면/동 선택 -->
 					<div id="detail-area-selector" class="town_selector_con"></div>
 				</div>
-		
 			</div>
-
-
 		</div>
-
-
 
 	
 	<!-- 주소 확인 & 변경 -->
@@ -515,24 +505,6 @@
 				</div>
 			</div>
 		</div>
-		
-	<!-- [50줄] 여는 태그  세션의 상태가 FAIL이면 POST 형식   -->
-	<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
-	<!-- 	[전체 폼]에 대한 c:if문 -->
-	
-<%-- 		<c:if test="${status ne 'SUCCESS' }"> --%>
-<!-- 	<!-- 전체 form submit --> -->
-<!-- 			<div class="submit_con"> -->
-<!-- 				<input class="submit_btn" type="submit" value="다음 단계로"> -->
-<!-- 			</div> -->
-<!-- 			</form> -->
-
-		
-		
-<!-- 		<button onclick="updateDeliveryArea()">배달지역 테스트 버튼</button> -->
-<%-- 		</c:if> --%>
-<!-- 	</section> -->
-		
 		
 <!-- footer -->
 	<%-- <%@ include file="../main/businessFooter.jsp" %> --%>

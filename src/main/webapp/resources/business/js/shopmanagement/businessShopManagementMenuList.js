@@ -218,13 +218,13 @@ function toggleSubCategory(id, list, subToggle, main, sub) {
 		
 			// detail info
 			const serviceName = document.createElement("div");
-			serviceName.innerHTML = list[item].name; // name
+			serviceName.innerHTML = "<span class='highlight'>" + list[item].name + "</span>"; // name
 			
 			const servicePrice = document.createElement("div");
-			servicePrice.innerHTML = list[item].price + " (원)"; // price
+			servicePrice.innerHTML = "<span class='highlight'>" + insertComma(list[item].price.toString()) + "</span>(원)"; // price
 			
 			const serviceTime = document.createElement("div");
-			serviceTime.innerHTML = list[item].ete + " (일)"; // ete
+			serviceTime.innerHTML = "<span class='highlight'>" + list[item].ete + "</span>(일)"; // ete
 		
 			detailInfo.appendChild(serviceName);
 			detailInfo.appendChild(servicePrice);
@@ -394,18 +394,19 @@ function openMenuModifyModal(main, sub, info) {
 					
 					// 콤마 자동 삽입
 					priceInput.onchange = (e) => {
-						e.target.value = insertComma(e.target.value.replace(",", ""));
 						
 						// 정규식 > service > price
 						const regex = /^[0-9]*$/;
 						
 						if (regex.test(e.target.value)) {
 							priceInput.classList.remove("invalid");
+							e.target.value = insertComma(e.target.value.replace(",", ""));
 							service.price = e.target.value; 
 						} 
 						
 						else {
 							priceInput.classList.add("invalid");
+							e.target.value = insertComma(e.target.value.replace(",", ""));
 							service.price = "";
 						}
 					}
@@ -449,19 +450,24 @@ function openMenuModifyModal(main, sub, info) {
 					
 					// 콤마 자동 삽입
 					quickpriceInput.onchange = (e) => {
-						e.target.value === "" ? 
-							e.target.value = 0 :
-							e.target.value = insertComma(e.target.value.replace(",", ""));
 						
 						// 정규식 > service > quickprice
 						const regex = /^[0-9]*$/;
 						
 						if (regex.test(e.target.value)) {
+							e.target.value === "" ? 
+									e.target.value = 0 :
+									e.target.value = insertComma(e.target.value.replace(",", ""));
+							
 							quickpriceInput.classList.remove("invalid");
 							service.quickprice = e.target.value;
 						} 
 						
 						else {
+							e.target.value === "" ? 
+									e.target.value = 0 :
+									e.target.value = insertComma(e.target.value.replace(",", ""));
+							
 							quickpriceInput.classList.add("invalid");
 							service.quickprice = "";
 						}
