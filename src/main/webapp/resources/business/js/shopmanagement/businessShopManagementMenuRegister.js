@@ -128,7 +128,7 @@ function createAddService() {
 		timeInput.type = "text";
 		timeInput.className = "service_time_input";
 		timeInput.name = "ete";
-		timeInput.placeholder = "서비스 시간(일)";
+		timeInput.placeholder = "(일)";
 
 		// 추가
 		fifthInputCon.appendChild(timeInput);
@@ -299,11 +299,13 @@ function activateQuick(icon, list) {
 	
 	if (iconClass.includes("off")) {
 		icon.className = "fas fa-toggle-on";
+		icon.style.color = "lightcoral";
 		toggle = true; // quick 활성화
 	}
 	
 	else {
 		icon.className = "fas fa-toggle-off";
+		icon.style.color = "navy";
 		toggle = false; // quick 비활성화
 	}
 	
@@ -522,7 +524,7 @@ function modifyMenuService() {
 				timeInput.type = "text";
 				timeInput.className = "service_detail_input";
 				timeInput.placeholder = 
-					tr[i].children[j].innerHTML ? "초기값(DB)" : "소요시간(시간)";
+					tr[i].children[j].innerHTML ? "초기값(DB)" : "소요일";
 				
 				tr[i].children[j].appendChild(timeInput);
 				

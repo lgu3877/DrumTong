@@ -264,7 +264,7 @@
 							<th scope="cols">서비스 타입</th>
 							<th scope="cols">메뉴 이름</th>
 							<th scope="cols">가격(배달비)</th>
-							<th scope="cols">소요시간(시간)</th>
+							<th scope="cols">소요시간(일)</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -328,8 +328,11 @@
 						<li class="service_main">서비스 유형</li>
 						<li class="service_sub">서비스 타입</li>
 						<li class="service_details">메뉴 이름</li>
-						<li class="service_price">가격(배달비)</li>
-						<li class="service_time">소요시간(시간)</li>
+						<li class="service_price">요금 (퀵서비스)
+							<i id="quick-help" class="far fa-question-circle" style="font-weight: 600; cursor: pointer; margin-left: 3px;"></i>
+							<div id="quick-help-msg"></div>
+						</li>
+						<li class="service_time">소요일</li>
 						<!-- POST 형식일 때만 확인 버튼을 활성화 시켜준다.	-->
 						
 						<c:if test="${status ne 'SUCCESS' }">
