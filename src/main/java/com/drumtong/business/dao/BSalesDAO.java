@@ -34,6 +34,9 @@ public interface BSalesDAO {
 
 	//주문목록 삭제
 	int deleteOrderList(HashMap<String, String> map);
+
+	// 방문횟수 조회
+	int visits(HashMap<String, String> paramVisit);
 	
 	
 
