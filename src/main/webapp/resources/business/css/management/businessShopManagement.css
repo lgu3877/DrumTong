@@ -72,6 +72,19 @@
 	border-top: 5px solid transparent;	
 }
 
+.quick_help_msg {
+	width: 300px;
+	margin-top: 10px;
+    position: absolute;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: navy;
+    color: white;
+    line-height: 25px;
+    text-align: justify;
+    transition: 1s;
+}
+
 /* 매장 사진 슬라이드 좌우 화살표 */
 .prev {
 	text-decoration: none;
@@ -575,11 +588,16 @@
 }
 
 .service_details {
-	width: 20%;
+	width: 28%;
 }
 
 .service_price {
 	width: 18%;
+}
+
+.service_price i {
+	width: inherit !important;
+	padding: 0 !important; 
 }
 
 .service_price_input:invalid {
@@ -587,7 +605,7 @@
 }
 
 .service_time {
-	width: 16%;
+	width: 8%;
 }
 
 /* .service_confirm {
@@ -919,15 +937,29 @@
 
 /* third~fifth property input */
 .third_item_prop {
-	width: 21%;
+	width: 28%;
 }
 
 .forth_item_prop {
-	width: 16%;
+	width: 18%;
+}
+ 
+.service_price_input_con {
+	display: flex;
+	justify-content: space-between;
 }
 
+.forth_item_prop i {
+	width: 20%;
+	margin: auto;
+	cursor: pointer;
+	font-size: 15pt;
+	text-align: right;
+}
+
+
 .fifth_item_prop {
-	width: 16%;
+	width: 8%;
 }
 
 .third_item_prop input, .forth_item_prop input, .fifth_item_prop input {
