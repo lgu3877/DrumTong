@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.drumtong.business.dao.BReviewDAO;
+import com.drumtong.business.dao.BSalesDAO;
 import com.drumtong.business.vo.ReviewList;
 import com.google.gson.Gson;
 
@@ -17,17 +18,22 @@ import com.google.gson.Gson;
 public class Review {
 	
 	@Autowired BReviewDAO beanbReviewDAO;
+	@Autowired BSalesDAO beanBSalesDAO;
 	
 	static BReviewDAO bReviewDAO;
+	static BSalesDAO bSalesDAO;
 	
 	@PostConstruct
 	public void init() {
 		bReviewDAO = beanbReviewDAO;
+		bSalesDAO = beanBSalesDAO;
 	}
 
 	public static void reviewForBusiness(ModelAndView mav, String estid, String pageKind) {
 		pageKind = pageKind == null ? "whole" : pageKind;				// 페이지 종류에 대한 정보가 없으면 "whole"
 		List<ReviewList> bReviewList = selectList(estid, pageKind);
+		
+		
 		
 		// 컨트롤러에서 jsp 로 JSON 넘기기 - GSON
 		Gson gson = new Gson();
@@ -54,9 +60,37 @@ public class Review {
 			break;
 		}
 //		System.out.println("pageKind : " + pageKind);
-		return bReviewDAO.selectReview(map);
+		
+		List<ReviewList> firstResult = bReviewDAO.selectReview(map);
+		
+		return countVisits(estid, firstResult);
 	}
 	
+	private static List<ReviewList> countVisits(String estid, List<ReviewList> firstResult) {
+		for(int i = 0; i < firstResult.size(); i++) {
+			ReviewList li = firstResult.get(i);
+			HashMap<String, String> paramVisit = new HashMap<String, String>();
+			paramVisit.put("estid", estid);
+			paramVisit.put("memberid", li.getMemberid());
+			paramVisit.put("salecode", li.getSalecode());
+			
+			int visits = bSalesDAO.visits(paramVisit);
+			li.setVisits(visits);
+			
+			String orderListMsg = settingMSG(li.getAmount(), li.getOrderList());
+			li.setOrderListMsg(orderListMsg);
+		}
+		return firstResult;
+	}
+
+	private static String settingMSG(int amount, String orderList) {
+		String[] tmpList = orderList.split(",");
+		int tmpCount = tmpList.length;
+		String result = tmpList[0] + (tmpCount == 1 ? "" : " 외 " + (tmpCount - 1) + "종류");
+		result += "(총 " + amount + "벌)";
+		return result;
+	}
+
 	public static HashMap<String, Integer> pageList(String estid){
 		HashMap<String, String> map = new HashMap<String, String>();
 		HashMap<String, Integer> result = new HashMap<String, Integer>();
