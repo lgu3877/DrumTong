@@ -297,13 +297,6 @@
 				</div>
 			<!-- 버튼 -->
 				<div class="service_button_con">
-				<!-- 배달 서비스 활성화 -->
-					<div id="delivery-btn" class="delivery_menu_btn_con" onclick="activateVisualization()">
-						<div class="add_menu_icon_con">
-							<i id="delivery-icon" class="fas fa-toggle-off"></i>
-						</div>
-						<div class="add_menu_btn_title">퀵 서비스</div>
-					</div>
 				<!-- 메뉴 추가 -->	
 					<div id="add-item-btn" class="add_menu_btn_con" onclick="createAddService()">
 						<div class="add_menu_icon_con">

@@ -101,18 +101,25 @@ function createAddService() {
 	// 가격 (네번째)
 	const forthInputCon = document.createElement("div");
 	forthInputCon.className = "forth_item_prop";
-	
-		const priceInput = document.createElement("input");
-		priceInput.type = "text";
-		priceInput.className = "service_price_input";
-		priceInput.name = "price";
-		priceInput.placeholder = "서비스 가격(원)";
-		priceInput.pattern = "[0-9]+";
-		priceInput.maxlength = "5";
-	
-		// 추가
-		forthInputCon.appendChild(priceInput);
 		
+		const priceCon = document.createElement("div");
+		priceCon.className = "service_price_input_con";
+	
+			const priceInput = document.createElement("input");
+			priceInput.type = "text";
+			priceInput.className = "service_price_input";
+			priceInput.name = "price";
+			priceInput.placeholder = "서비스 요금(원)";
+			priceInput.pattern = "[0-9]+";
+			priceInput.maxlength = "5";
+			priceInput.style.width = "80%";
+				
+			// 추가
+			priceCon.appendChild(priceInput);
+			priceCon.innerHTML += `<i class="fas fa-toggle-off" onclick="activateQuick(this, ${serviceRandomId})"></i>`;
+		
+		forthInputCon.appendChild(priceCon);
+			
 	// 시간 (다섯번째)
 	const fifthInputCon = document.createElement("div");
 	fifthInputCon.className = "fifth_item_prop";
@@ -121,7 +128,7 @@ function createAddService() {
 		timeInput.type = "text";
 		timeInput.className = "service_time_input";
 		timeInput.name = "ete";
-		timeInput.placeholder = "서비스 소요시간";
+		timeInput.placeholder = "서비스 시간(일)";
 
 		// 추가
 		fifthInputCon.appendChild(timeInput);
@@ -283,47 +290,46 @@ function populateSubOptions(key, subCategoryId, modifyBoolean) {
 	document.getElementById(subCategoryId).selected = true;
 }
 
-// 배달 서비스 활성화 이벤트
-function activateVisualization() {
-	const itemInputList = document.getElementById("add-item-list");
-	const priceCon = itemInputList.getElementsByClassName("forth_item_prop");		
-	deliveryToggle = !deliveryToggle;
 
-	if(deliveryToggle === true) {
-		const priceCon = document.getElementsByClassName("forth_item_prop");	
-		document.getElementById("delivery-btn").style.backgroundColor = "navy";
-		// 아이콘 변경(활성화)
-		document.getElementById("delivery-icon").className = "fas fa-toggle-on";
-		
-		
-		// input(quickprice) 추가
-		for (let i = 0; i < priceCon.length; i++) {
-			// input(quickprice) 생성
-			const quickPriceInput = document.createElement("input");
-			quickPriceInput.type = "text";
-			quickPriceInput.name = "quickprice";
-			quickPriceInput.className = "service_quickprice_input";
-			quickPriceInput.placeholder = "배달 가격";
-			quickPriceInput.style.marginTop = "5px";
-
-			if (priceCon[i].children.length === 1) {
-				priceCon[i].appendChild(quickPriceInput);				
-			}
-		}
+//배달 서비스 활성화 이벤트
+function activateQuick(icon, list) {
+	// icon 변경
+	const iconClass = icon.className;
+	let toggle;
+	
+	if (iconClass.includes("off")) {
+		icon.className = "fas fa-toggle-on";
+		toggle = true; // quick 활성화
 	}
+	
 	else {
-		document.getElementById("delivery-btn").style.backgroundColor = "#bedcfa";
-		// 아이콘 변경(비활성화)
-		document.getElementById("delivery-icon").className = "fas fa-toggle-off";
+		icon.className = "fas fa-toggle-off";
+		toggle = false; // quick 비활성화
+	}
+	
+	// quick 인터페이스
+	const chargeCon = list.getElementsByClassName("forth_item_prop")[0];
 		
-		// input(quickprice) 삭제
-		for (let i = 0; i < priceCon.length; i++) {
-			if (priceCon[i].children.length !== 1) {
-				priceCon[i].removeChild(priceCon[i].children[1]);
-			}
-		}	
+	// 활성화 되었을 때
+	if (toggle) {
+		const quickPriceInput = document.createElement("input");
+		quickPriceInput.type = "text";
+		quickPriceInput.name = "quickprice";
+		quickPriceInput.className = "service_quickprice_input";
+		quickPriceInput.placeholder = "퀵 서비스 요금(원)";
+		quickPriceInput.style.marginTop = "5px";
+		
+		
+		chargeCon.appendChild(quickPriceInput);
+	}
+	
+	// 비활성화 되었을 때
+	else {
+		chargeCon.getElementsByClassName("service_quickprice_input")[0].remove();
 	}
 }
+
+
 
 // 메뉴 수정 버튼(th & td > input + 삭제 버튼)
 function modifyMenuService() {

@@ -919,12 +919,26 @@
 
 /* third~fifth property input */
 .third_item_prop {
-	width: 21%;
+	width: 20%;
 }
 
 .forth_item_prop {
-	width: 16%;
+	width: 18%;
 }
+ 
+.service_price_input_con {
+	display: flex;
+	justify-content: space-between;
+}
+
+.forth_item_prop i {
+	width: 20%;
+	margin: auto;
+	cursor: pointer;
+	font-size: 15pt;
+	text-align: right;
+}
+
 
 .fifth_item_prop {
 	width: 16%;
