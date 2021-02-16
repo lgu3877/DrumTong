@@ -7,7 +7,7 @@ function couponSettings(couponList){
 	couponList.forEach(cl => {
 		couponOption = document.createElement('option');
 		couponOption.setAttribute('value', cl.couponid);
-		couponOption.innerHTML = cl.discount + '원 할인/' + cl.minimumprice + '원 이상[' + cl.period + ']';
+		couponOption.innerHTML = '<span><span>' + cl.discount + '</span><span>원 할인/</span><span>' + cl.minimumprice + '</span><span>원 이상[' + cl.period + ']</span></span>';
 		
 		modalCouponList.appendChild(couponOption);
 	})
@@ -15,7 +15,6 @@ function couponSettings(couponList){
 }
 // 메뉴를 선택했을 때 실행하는 메서드(주문리스트에 추가해준다.)
 function listUp(event) {
-    	  
         choose = event.target;
     	 if(choose.className.includes("quick") || choose.className.includes("noQuick") || choose.className.includes("fas") || choose.className.includes("quantity")) return;
         selectedList = document.getElementById('selected-List');
@@ -160,8 +159,13 @@ function calTotal() {
         }
       
         quickText.innerText = quickPrice;
+        console.log('계산 전', totalPrice);
+        totalPrice -= checkAbleCoupon(totalPrice - deli);
+        console.log('계산 후', totalPrice);
         totalText.innerText = totalPrice;
         priceText.innerText = totalPrice;
+        
+        ;
 }
 // 퀵 마크를 체크 또는 체크 해제 해주는 메서드
   function quickMark(){
@@ -295,7 +299,8 @@ function oneCouponSettings(minimumprice, discount, period, couponid){ // 내 쿠
 	myCouponList = document.getElementById('select-coupon');
 	newCoupon = document.createElement('option');
 	newCoupon.setAttribute('value', couponid);
-	newCoupon.innerHTML = discount + '원 할인/' + minimumprice + '원 이상[' + period + ']';
+	
+	newCoupon.innerHTML = '<span><span>' + discount + '</span><span>원 할인/</span><span>' + minimumprice + '</span><span>원 이상[' + period + ']</span></span>';
 	
 	myCouponList.appendChild(newCoupon);
 }
