@@ -31,15 +31,7 @@
  	<!-- 스크립트 영역 -->
     <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail.js"></script>
-   	<script>
-// 		imgList = ${bImageVO};
-// 		i = 0;
-// 		imgBoxs = document.querySelectorAll('detailview-imgBlock');
-		
-// 		imgList.forEach(img =>{
-// 			imgBoxs[i++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + img.storeimg;
-// 		})
-	</script>
+   	
 	<script>
 	// 쿠폰을 사용했을 때 couponid 값을 넘기도록 설정해주어야 한다!
 		function checkAbleCoupon(currentPrice){
@@ -124,11 +116,12 @@
               <img src="" />
             </div>
             <div class="detailview-imgBlock-subRow">
-              <img src="" />
-              <img src="" />
-              <img src="" />
-              <img src="" />
-              <img src="" />
+              <img src="" id="imgBox1" class="select exist"/>
+              <img src="" id="imgBox2" />
+              <img src="" id="imgBox3" />
+              <img src="" id="imgBox4" />
+              <img src="" id="imgBox5" />
+              <img src="" id="imgBox6" />
             </div>
           </div>
           <div class="detailview-companyIntro">
@@ -679,5 +672,35 @@
     	initPage(checkLogin);
     	
     </script>
-
+<script>
+		imgList = ${bImageVO};
+		imgBoxs = document.getElementById('detailview-imgBlock');
+		subImgNum = 1;
+		for(imageNum = 0; imageNum < 6; imageNum++){
+			if(imageNum < imgList.length){
+				imgBoxs.children[1].children[imageNum].className = 'exist'; 
+				if(imgList[imageNum].delegatephotoboolean === 'Y'){
+					imgBoxs.children[0].children[0].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + imgList[imageNum].storeimg;
+					imgBoxs.children[1].children[0].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + imgList[imageNum].storeimg;
+					imgBoxs.children[1].children[0].className = 'select exist'; 
+				} else{
+					imgBoxs.children[1].children[subImgNum++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + imgList[imageNum].storeimg;
+				}
+				document.querySelector('#imgBox' + (imageNum + 1)).addEventListener('click', () => {
+					for(let i = 0; i < imgList.length; i++){
+						console.log()
+						if(event.target.id === imgBoxs.children[1].children[i].id){
+							event.target.className = "select exist";
+							imgBoxs.children[0].children[0].src = event.target.src;
+						} else{
+							imgBoxs.children[1].children[i].className = "exist";
+// 							document.querySelector('#' + imgBoxs.children[1].children[i].id).style.border = 'none';
+						}
+					}
+				});
+			} else {
+				imgBoxs.children[1].children[imageNum].src = '/drumtong/resources/business/img/slide/laundry1_02.jpg';
+			}
+		}
+	</script>
 <%@ include file="../main/customerFooter.jsp" %>
