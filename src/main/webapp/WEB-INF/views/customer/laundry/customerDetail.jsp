@@ -646,7 +646,7 @@
 	 	       }
 	 	      btn6.onclick = function(){
 	 	    	 if(checkLoginBoolean){
-	 	    		addBookmark();
+	 	    		addBookmark('${estid}');
 	 	    	 } else {
 	 	    		openModal(modalContent3 , 'flex');
 	 	    	 }

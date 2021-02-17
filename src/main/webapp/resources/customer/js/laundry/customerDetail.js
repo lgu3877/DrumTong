@@ -306,7 +306,7 @@ function myCouponSettings (myCoupons){
 		oneCouponSettings(co.minimumprice, co.discount, co.period, co.couponid);
 	})
 }
-function addBookmark() {
+function addBookmark(estid) {
    bookMarker = document.getElementById('bookMarker');
    className = bookMarker.className;
     if (className.search(/add/) > 0) {
@@ -318,9 +318,9 @@ function addBookmark() {
       iconColor = 'yellow';
     }
     
-    const axPost = async () =>{
+    const axPost = async (estid) =>{
        ob={
-          'estid' : '${estid}',
+          'estid' : estid,
           'result' : iconColor,
        };
        await axios.post('/drumtong/customer/laundry/customerDetail/rest/addBookmark/', ob)
@@ -333,6 +333,6 @@ function addBookmark() {
        })
        
     };
-    axPost();
+    axPost(estid);
     
   }
