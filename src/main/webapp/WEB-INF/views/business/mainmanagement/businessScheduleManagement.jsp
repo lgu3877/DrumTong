@@ -722,6 +722,10 @@
 	<!-- 업데이트 -->
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/filter.js"></script>
 
+	<script type="text/javascript">
+	 let bscheduledays = ${bscheduledays};
+	 console.log(bscheduledays);
+	</script>
 
 </body>
 </html>

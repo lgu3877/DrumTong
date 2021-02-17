@@ -24,6 +24,7 @@ import com.drumtong.business.vo.BDeliveryAreaVO;
 import com.drumtong.business.vo.BImageVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BManagementVO;
+import com.drumtong.business.vo.BMenuUpdateVO;
 import com.drumtong.business.vo.BMenuVO;
 import com.drumtong.business.vo.BPrivateDataVO;
 import com.drumtong.business.vo.BScheduleDaysVO;
@@ -136,42 +137,70 @@ public class RestBusinessMainManagementService {
 	
 	
 	// ===== 중분류 [BMenu] 테이블 ====
-	
-	// 통합
-	public int bMenuRestProcessing(HttpServletRequest req, List<BMenuVO> ListBMenuVO, String processing) {
+
+	// 메뉴 수정
+	public int updateMenu(HttpServletRequest req, BMenuUpdateVO bMenuUpdateVO) {
 		HttpSession Session = req.getSession();
  	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
  	    String estid = bInformationVO.getEstid();
+ 	    
+ 	    bMenuUpdateVO.setEstid(estid);
+ 	    
+ 	    int updateBMenuResult = bMenuDAO.updateBMenu(bMenuUpdateVO);
 		
- 	    int result = 0;
- 	    
- 	    
- 	    
- 	    for ( BMenuVO bMenuVO : ListBMenuVO ) {
- 	    	bMenuVO.setEstid(estid);
- 	    	System.out.println(bMenuVO.getQuickprice());
- 	    	
- 	    	switch(processing) {
- 	    	
- 	    	// 매장 메뉴를 입력하는 메서드입니다.
- 	    	case "insertBMenu" :
- 	    		result = bMenuDAO.insertBMenu(bMenuVO);
- 	    		break;
- 	 	    // 매장 메뉴를 수정하는 메서드입니다. 	    	
- 	    	case "updateBMenu" :
- 	    		result = bMenuDAO.updateBMenu(bMenuVO);
- 	    		break;
- 	    		
- 	 	    // 매장 메뉴를 삭제하는 메서드입니다. 	    		
- 	    	case "deleteBMenu" :
- 	    		result = bMenuDAO.deleteBMenu(bMenuVO);
- 	    		break;
- 	    	}
- 	    	
- 	    }
- 	    
-		return result;
+		return updateBMenuResult;
 	}
+	
+	
+	// 메뉴 삭제
+	public int deleteMenu(HttpServletRequest req, BMenuVO bMenuVO) {
+		HttpSession Session = req.getSession();
+ 	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+ 	    String estid = bInformationVO.getEstid();
+ 	    
+ 	    bMenuVO.setEstid(estid);
+ 	    
+ 	    int deleteBMenuResult = bMenuDAO.deleteBMenu(bMenuVO);
+ 	    
+		return deleteBMenuResult;
+	}
+	
+	
+	// 통합
+//	public int bMenuRestProcessing(HttpServletRequest req, List<BMenuVO> ListBMenuVO, String processing) {
+//		HttpSession Session = req.getSession();
+// 	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+// 	    String estid = bInformationVO.getEstid();
+//		
+// 	    int result = 0;
+// 	    
+// 	    
+// 	    
+// 	    for ( BMenuVO bMenuVO : ListBMenuVO ) {
+// 	    	bMenuVO.setEstid(estid);
+// 	    	System.out.println(bMenuVO.getQuickprice());
+// 	    	
+// 	    	switch(processing) {
+// 	    	
+// 	    	// 매장 메뉴를 입력하는 메서드입니다.
+// 	    	case "insertBMenu" :
+// 	    		result = bMenuDAO.insertBMenu(bMenuVO);
+// 	    		break;
+// 	 	    // 매장 메뉴를 수정하는 메서드입니다. 	    	
+// 	    	case "updateBMenu" :
+// 	    		result = bMenuDAO.updateBMenu(bMenuVO);
+// 	    		break;
+// 	    		
+// 	 	    // 매장 메뉴를 삭제하는 메서드입니다. 	    		
+// 	    	case "deleteBMenu" :
+// 	    		result = bMenuDAO.deleteBMenu(bMenuVO);
+// 	    		break;
+// 	    	}
+// 	    	
+// 	    }
+// 	    
+//		return result;
+//	}
 
 	
 	
@@ -369,6 +398,10 @@ public class RestBusinessMainManagementService {
 
 		return RestInsertBTempSuspensionReuslt;
 	}
+
+
+	
+
 
 
 

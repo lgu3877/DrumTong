@@ -2,6 +2,8 @@
 <!DOCTYPE mapper PUBLIC 	
 		"-//mybatis.org//DTD Mapper 3.0//EN" 
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 건욱 -->
+
 
 <!-- 	사업장 메뉴 테이블	 -->
 <mapper namespace="com.drumtong.business.dao.BMenuDAO">
@@ -69,13 +71,20 @@
 
 	
 <!-- 	매장 메뉴를 비동기식으로 수정해주는 메서드입니다. -->
-	<update id="updateBMenu" parameterType="BMenuVO">
+	<update id="updateBMenu" parameterType="BMenuUpdateVO">
 		UPDATE BMENU 
 			SET
-				NUM = #{num}, NAME = #{name}, PRICE = #{price}, QUICKPRICE = #{quickprice},
+				NAME = #{name}, PRICE = #{price}, QUICKPRICE = #{quickprice},
 				ETE = #{ete}, MAINCATEGORY = #{maincategory}, SUBCATEGORY = #{subcategory}
-			WHERE ESTID = #{estid}
-				
+			WHERE 
+				ESTID = #{estid} 
+			AND
+				MAINCATEGORY = #{previousmaincategory}
+			AND 
+				SUBCATEGORY = #{previoussubcategory}
+			AND
+				NAME = #{previousname}
+			
 	</update>
 	
 
@@ -91,7 +100,7 @@
  			AND 
  				SUBCATEGORY = #{subcategory} 
  			AND 
- 				NAME= #{name};
+ 				NAME= #{name}
 	
 	</delete>
 	

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.drumtong.business.vo.BMenuUpdateVO;
 import com.drumtong.business.vo.BMenuVO;
 
 public interface BMenuDAO {
@@ -31,7 +32,7 @@ public interface BMenuDAO {
 	int insertBMenu(BMenuVO bMenuVO);
 	
 	// 매장 메뉴를 비둥기식으로 수정해주는 메서드입니다.
-	int updateBMenu(BMenuVO bMenuVO);
+	int updateBMenu(BMenuUpdateVO bMenuUpdateVO);
 
 	// 매장 메뉴를 비동기식으로 삭제해주는 메서드입니다.
 	int deleteBMenu(BMenuVO bMenuVO);

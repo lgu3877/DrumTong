@@ -531,10 +531,17 @@ function openMenuModifyModal(main, sub, info) {
 				removeBtn.classList.add("remove");
 				removeBtn.innerHTML = "메뉴삭제";
 				
+				
 				// 삭제 버튼 이벤트
 				removeBtn.onclick = () => { 
-					console.log(service.estid);
-					if (removeMenu(service.estid)) {
+					
+					let rmObject =  {
+						maincategory : service.maincategory ,
+						subcategory : service.subcategory,
+						name : service.name ,
+					};
+					
+					if (deleteMenu(rmObject)) {
 						document.getElementById("posted-service-list").innerHTML = ""; // 초기화
 						displayMenu(); // 메뉴 재생성
 					}
