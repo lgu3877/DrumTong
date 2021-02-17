@@ -724,7 +724,10 @@
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/calendar.js"></script>
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/tmpHolidayButtons.js"></script>
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/filter.js"></script>
-
+	<script type="text/javascript">
+	 let bscheduledays = ${bscheduledays};
+	 console.log(test);
+	</script>
 
 </body>
 </html>
