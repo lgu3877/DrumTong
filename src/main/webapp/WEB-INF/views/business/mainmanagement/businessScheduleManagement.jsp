@@ -294,11 +294,10 @@
 						</ul>
 					</div>
 				</div>
-				
 			</div>
 			<!-- </form> -->
 			
-			<!-- 정기 휴무 설정 -->
+		<!-- 정기 휴무 설정 -->
 			<!-- <form class="holiday"> -->
 			<div class="holiday">
 				<!-- title -->
@@ -309,14 +308,6 @@
 					</div>
 					<!-- button -->
 					<div class="btn_con">
-					<!-- 
-						<div id="modify-holiday" class="btn format_btn">
-							<div class="icon_con">
-								<i class="fas fa-plus-square"></i>
-							</div>
-							<div class="btn_title">일자 변경</div>
-						</div>
-					-->	
 					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
 					<c:if test="${status eq 'SUCCESS' }">
 						<div id="complete-holiday" class="btn update_btn">
@@ -384,7 +375,7 @@
 					</div>
 					
 				<!-- 저장된 정기 휴무일 표기 -->
-					<ul class="h_schedule_con form">
+					<ul id="reg-holiday-schedule" class="h_schedule_con form">
 						<li class="h_schedule_list">
 					<!-- 내용 -->
 					<!-- 1 -->
@@ -723,6 +714,12 @@
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/interface.js"></script>
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/calendar.js"></script>
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/tmpHolidayButtons.js"></script>
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/filter.js"></script>
+	
+	<!-- 정기휴무 -->
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/regularHoliday.js"></script>
+	
+	<!-- 업데이트 -->
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/filter.js"></script>
 
 
