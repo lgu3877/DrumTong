@@ -163,7 +163,7 @@
             <div class="select-coupon">
               내 쿠폰
               <select id="select-coupon">
-                       <option>선택 X</option>
+                       <option value="noCoupon">선택 X</option>
                        <option id="noLogin" disabled>로그인 후 이용가능</option>
               </select>
             </div>
@@ -304,154 +304,6 @@
     </div>
 
     <!-- 스크립트 영역 -->
-<!--     <script type="text/javascript"> -->
-//       cLogin = '${cLogin}';
-//       console.log('cLogin', cLogin === null, cLogin === '');
-//       console.log(cLogin);
-//       console.log('cLogin', cLogin !== null, cLogin !== '');
-//       // Get the modal
-//        var modal = document.getElementById('myModal');
-
-//        var modalContent1 = document.getElementById('modal-content1');   // 쿠폰 받기 화면
-//        var modalContent2 = document.getElementById('modal-content2');   // 결제 화면
-//        var modalContent3 = document.getElementById('modal-content3');   // 로그인 화면
-//        var modalContent4 = document.getElementById('modal-content4');   // 리뷰 화면
-//        var modalContent5 = document.getElementById('modal-content5');   // 모달 컨텐츠4 -> 고객리뷰이미지
-//        var modalContent5_exit = document.getElementById('modal-content5-exit');   // 모달 컨텐츠5 -> 닫기
-
-//        // Get the button that opens the modal
-//        var btn1 = document.getElementById('add-coupon');
-//        var btn2 = document.getElementById('order-submit');
-//        var btn3 = document.getElementById('review-more');
-//        var btn4 = document.getElementById('modal-submit');
-//        var btn5 = document.getElementById('modal-addCoupon');// 모달에서 쿠폰받기 누르면
-
-//        // Get the <span> element that closes the modal
-//        var span = document.getElementsByClassName('close')[0];
-
-//        function LoginModalOpen(){
-//           modal.style.display = 'block';
-//           modalContent3.style.display = 'flex';
-//        }
-       
-//        // When the user clicks on the button, open the modal
-//        btn1.onclick = function () {
-//             if('${cLogin}' == ''){
-//                LoginModalOpen();
-//                return;
-//             }  
-//          modal.style.display = 'block';
-//          modalContent1.style.display = 'flex';
-//        };
-
-//        btn2.onclick = function () {
-//     	 if(document.getElementById('selected-List').children.length == 0){
-//     		 alert('주문 목록이 비었습니다.');
-//     		 return;
-//     	 }
-//          modal.style.display = 'block';
-          
-//         //로그인이 안되있으면 이 문장을 수행
-//         if('${cLogin}' == ''){
-//            modalContent3.style.display = 'flex';
-//         } else{
-//            //로그인이 되어있다면 submit 기능 수행
-//             modalContent2.style.display = 'flex';
-//         }
-//        };
-
-//        btn3.onclick = function () {
-//          modal.style.display = 'block';
-// //          modalContent4.style.display = 'flex';
-//          modalContent4.style.display = '';
-//          reviewMore();
-//        };
-       
-//        btn4.onclick = function () {
-//          modal.style.display = 'block';
-
-//          submit();
-
-//        };
-       
-
-//        btn5.onclick = function(){
-//           selectedCouponID = document.getElementById('modal-couponList').value;
-//            const axPost = async (memberid) =>{
-//               ob={
-//                  'memberid' : memberid,
-//                  'couponid' : selectedCouponID,
-//               };
-//               await axios.post('/drumtong/customer/laundry/customerDetail/rest/addCoupon/', ob)
-//               .then ((response) => {
-//                  if(response.data === true){
-//                 	alert('발급 성공');
-//                  } else {
-//                 	alert('이미 발급받은 쿠폰입니다.');
-//                  }
-//                  modal.style.display = 'none';
-//                  modalContent1.style.display = 'none';
-//               })
-              
-//            };
-//            if('${cLogin}' != ''   ){
-//               axPost('${cLogin.memberid}');
-//            } else{
-//               console.log("로그인 안되어 있어서 다운못해요~");
-//            }
-          
-//        }
-
-//        // When the user clicks on <span> (x), close the modal
-//        span.onclick = function () {
-
-//          const reviewModals = document.querySelector('#modal-reiview').querySelectorAll('.detailview-review-row');
-//          for(i = reviewModals.length; i > 0; i--) {
-//       	   if(i == 1)
-//       		   reviewModals[i - 1].querySelector('.modal-grade').innerHTML = '';
-//       	   else
-// 		 		   reviewModals[i - 1].remove();
-//          }
-         
-//     	 modal.style.display = 'none';
-//          modalContent1.style.display = 'none';
-//          modalContent2.style.display = 'none';
-//          modalContent3.style.display = 'none';
-//          modalContent4.style.display = 'none';
-//          modalContent5.style.display = 'none';
-//          modalContent5_exit.style.display = 'none';
-         
-//        };
-
-//        // When the user clicks anywhere outside of the modal, close it
-//        window.onclick = function (event) {
-//          if (event.target == modal) {
-           
-//            const reviewModals = document.querySelector('#modal-reiview').querySelectorAll('.detailview-review-row');
-//            for(i = reviewModals.length; i > 0; i--) {
-//         	   if(i == 1)
-//         		   reviewModals[i - 1].querySelector('.modal-grade').innerHTML = '';
-//         	   else
-// 		 		   reviewModals[i - 1].remove();
-//            }
-
-//            modal.style.display = 'none';
-//            modalContent1.style.display = 'none';
-//            modalContent2.style.display = 'none';
-//            modalContent3.style.display = 'none';
-//            modalContent4.style.display = 'none';
-//            modalContent5.style.display = 'none';
-//            modalContent5_exit.style.display = 'none';
-//          }
-//        };
-         
-         
-//          document.getElementById('loginSubmit').addEventListener('click', function(){ logiinSubmit('asynchronous');});
-
-
-         
-<!--     </script> -->
-    
     <script type="text/javascript">	// 승원 작업 - 구글 차트
     
 	var reviewList = ${ReviewList};
@@ -776,11 +628,26 @@
 	 	       btn5.onclick = async function(){
 	 	    	  if(checkLogin){
 	 		          selectedCouponID = document.getElementById('modal-couponList').value;
+	 		          
 	 	    		  ob={
 	 		                 'couponid' : selectedCouponID,
 	 		              };
-	 	    		  const {btn5_data} = await axios.post('/drumtong/customer/laundry/customerDetail/rest/addCoupon/', ob);
-	 	    		  alert(btn5_data ? '발급 성공' : '이미 발급받은 쿠폰입니다.');
+	 	    		  const {data} = await axios.post('/drumtong/customer/laundry/customerDetail/rest/addCoupon/', ob);
+	 	    		  console.log(data);
+	 	    		  alert(data ? '발급 성공' : '이미 발급받은 쿠폰입니다.');
+	 	    		  if(data){
+	 	    			  let listCoupon = document.getElementById('modal-couponList');
+	 	    			  
+		 		          for(check = 0; check < listCoupon.length; check++){
+		 		        	  if(listCoupon.children[check].value === selectedCouponID){
+		 		        		  val1 = listCoupon.children[check].children[0].children[0].innerHTML;
+		 		        		  val2 = listCoupon.children[check].children[0].children[2].innerHTML;
+		 		        		  val3 = listCoupon.children[check].children[0].children[4].innerHTML;
+		 		        		  oneCouponSettings(val1, val2, val3, selectedCouponID);
+		 		        		  calTotal();
+		 		        	  }
+		 		          }
+	 	    		  }
 	 	    		  closeModal(modalContent1);
 	 	    	  }
 	 	       }

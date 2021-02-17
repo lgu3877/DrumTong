@@ -2,12 +2,11 @@
 // 쿠폰 다운로드(사업자 측) 세팅 메서드
 function couponSettings(couponList){ 
 	modalCouponList = document.getElementById('modal-couponList');
-	console.log(couponList);
 	
 	couponList.forEach(cl => {
 		couponOption = document.createElement('option');
 		couponOption.setAttribute('value', cl.couponid);
-		couponOption.innerHTML = '<span><span>' + cl.discount + '</span><span>원 할인/</span><span>' + cl.minimumprice + '</span><span>원 이상[' + cl.period + ']</span></span>';
+		couponOption.innerHTML = '<span><span>' + cl.discount + '</span><span>원 할인/</span><span>' + cl.minimumprice + '</span><span>원 이상[</span><span>' + cl.period + '</span><span>]</span></span>';
 		
 		modalCouponList.appendChild(couponOption);
 	})
@@ -159,13 +158,10 @@ function calTotal() {
         }
       
         quickText.innerText = quickPrice;
-        console.log('계산 전', totalPrice);
         totalPrice -= checkAbleCoupon(totalPrice - deli);
-        console.log('계산 후', totalPrice);
         totalText.innerText = totalPrice;
         priceText.innerText = totalPrice;
         
-        ;
 }
 // 퀵 마크를 체크 또는 체크 해제 해주는 메서드
   function quickMark(){
@@ -300,7 +296,7 @@ function oneCouponSettings(minimumprice, discount, period, couponid){ // 내 쿠
 	newCoupon = document.createElement('option');
 	newCoupon.setAttribute('value', couponid);
 	
-	newCoupon.innerHTML = '<span><span>' + discount + '</span><span>원 할인/</span><span>' + minimumprice + '</span><span>원 이상[' + period + ']</span></span>';
+	newCoupon.innerHTML = '<span><span>' + discount + '</span><span>원 할인/</span><span>' + minimumprice + '</span><span>원 이상[</span><span>' + period + '</span><span>]</span></span>';
 	
 	myCouponList.appendChild(newCoupon);
 }
