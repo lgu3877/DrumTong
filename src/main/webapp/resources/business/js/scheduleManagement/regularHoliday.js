@@ -1,42 +1,66 @@
 displayRegHolidays();
 
 function displayRegHolidays() {
+	// week array
+	const weekObject = {
+		"firstweek" : "첫째주", 
+		"secondweek" : "둘째주",
+		"thirdweek" : "셋째주",
+		"forthweek" : "넷째주",
+		"fifthweek" : "다섯째주",
+		"sixthweek" : "여섯째주",	
+	};
+
 	// ul
 	const ul = document.getElementById("reg-holiday-schedule");
 	
 	// li 생성 > 추가
-	for (let week in b) {
-		// li
-		const li = document.createElement("li");
-		li.className = "h_schedule_list";
+	for (let enWeek in weekObject) {
+		const week = weekObject[enWeek];
+		const days = bscheduledays[enWeek];
+		
+		
+		
+
+		if (days !== undefined) {
+			const dayArray = days.split("/");
+			dayArray.pop(); // 마지막 배열의 공백 제거
 			
-			// week(header)
-			const week = document.createElement("div");
-			week.className = "h_schedule_list";
-			week.innerHTML = '<span class="h_week">' +  + '</span>'
+			console.log(dayArray);
+			
+			// li
+			const li = document.createElement("li");
+			li.className = "h_schedule_list";
 			
 			// close button
 			const removeBtn = document.createElement("div");
-			removeBtn.className = "h_schedule_remove"
-			removeBtn.onclick = () => removeRegHoliday();
+			removeBtn.className = "h_schedule_remove";
+			removeBtn.innerHTML = "&times";
+			removeBtn.onclick = () => removeRegHoliday(); // click event (remove item)
+
+			// week(header)
+			const weekCon = document.createElement("div");
+			weekCon.className = "h_schedule_week";
+			weekCon.innerHTML = '<span class="h_week">' + week + '</span>' // 주(week) 출력
 				
-			// day list
-			const dayCon = document.createElement("div");
-			dayCon.className = "h_schedule_day_wrapper";
-			
-			// day(content)
-			for () {
-				const day = document.createElement("div");
-				day.innerHTML = '<span class="h_day">' +  + '</span>'
+				// day list
+				const dayCon = document.createElement("div");
+				dayCon.className = "h_schedule_day_wrapper";
 				
-				dayCon.appendChild(day)
-			}
-		 
-		// 추가
-		li.appendChild(week);
-		li.appendChild(removeBtn);
-		li.appendChild(dayCon);
-		ul.appendChild(li);
+				// day(content)
+				for (let i = 0; i < dayArray.length; i++) {
+					const day = document.createElement("div");
+					day.innerHTML = '<span class="h_day">' + dayArray[i] + '</span>' // 요일(day) 출력
+					
+					dayCon.appendChild(day)
+				}
+				
+			// 추가
+			li.appendChild(removeBtn);
+			li.appendChild(weekCon);
+			li.appendChild(dayCon);
+			ul.appendChild(li);
+		}
 	}
 }
 

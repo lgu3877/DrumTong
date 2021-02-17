@@ -1,7 +1,7 @@
 
 let hourInputs = document.getElementsByClassName("hour");
 
-console.log(hourInputs);
+
 hourInputs[0].onblur = function (e) {
 	let hourValue = e.target.value;
 	
