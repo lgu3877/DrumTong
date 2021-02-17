@@ -64,7 +64,6 @@ function displayMenu() {
 	for (let i = 0; i < mainCategories.length; i++) {
 		mainToggle[mainCategories[i]] = false;
 	}
-	console.log(mainToggle);
 	
 	// menu list 생성
 	const container = document.getElementById("posted-service-list");
@@ -219,13 +218,13 @@ function toggleSubCategory(id, list, subToggle, main, sub) {
 		
 			// detail info
 			const serviceName = document.createElement("div");
-			serviceName.innerHTML = list[item].name; // name
+			serviceName.innerHTML = "<span class='highlight'>" + list[item].name + "</span>"; // name
 			
 			const servicePrice = document.createElement("div");
-			servicePrice.innerHTML = list[item].price + " (원)"; // price
+			servicePrice.innerHTML = "<span class='highlight'>" + insertComma(list[item].price.toString()) + "</span>(원)"; // price
 			
 			const serviceTime = document.createElement("div");
-			serviceTime.innerHTML = list[item].ete + " (일)"; // ete
+			serviceTime.innerHTML = "<span class='highlight'>" + list[item].ete + "</span>(일)"; // ete
 		
 			detailInfo.appendChild(serviceName);
 			detailInfo.appendChild(servicePrice);
@@ -303,7 +302,7 @@ function openMenuModifyModal(main, sub, info) {
 					// main selector title
 					const mainSelectorTitle = document.createElement("div"); 
 					mainSelectorTitle.className = "modify_menu_modal_input_title";
-					mainSelectorTitle.innerHTML = "서비스 분류";
+					mainSelectorTitle.innerHTML = "서비스 분류*";
 				
 					// main selector
 					const mainSelector = document.createElement("select");
@@ -315,6 +314,7 @@ function openMenuModifyModal(main, sub, info) {
 					mainSelector.addEventListener("change", (e) => {
 						clearSubOption(subSelectorId);
 						populateSubOptions(e.target.value, subSelectorId, true);
+						service.maincategory = e.target.value;
 					});
 											
 					// 추가
@@ -328,7 +328,7 @@ function openMenuModifyModal(main, sub, info) {
 					
 					const subSelectorTitle = document.createElement("div"); 
 					subSelectorTitle.className = "modify_menu_modal_input_title";
-					subSelectorTitle.innerHTML = "서비스 세부 분류";
+					subSelectorTitle.innerHTML = "서비스 세부 분류*";
 					
 					const subSelector = document.createElement("select");
 					subSelector.className = "modify_menu_modal_selector";
@@ -338,6 +338,7 @@ function openMenuModifyModal(main, sub, info) {
 					// selector 이벤트 > change
 					subSelector.onchange = (e) => {
 						selectOption(subSelector, e.target.value);
+						service.subcategory = e.target.value;
 					} 
 					
 					// 추가
@@ -351,12 +352,27 @@ function openMenuModifyModal(main, sub, info) {
 				
 					const nameInputTitle = document.createElement("div"); 
 					nameInputTitle.className = "modify_menu_modal_input_title";
-					nameInputTitle.innerHTML = "서비스 이름";
+					nameInputTitle.innerHTML = "서비스 이름*";
 					
 					const nameInput = document.createElement("input");
 					nameInput.className = "modify_menu_modal_input";
 					nameInput.name = "name";
 					nameInput.value = service.name;
+					
+					nameInput.onchange = (e) => {
+						// 정규식 > service > name
+						const regex = /^[가-힣]*$/;
+						
+						if (regex.test(e.target.value)) {
+							nameInput.classList.remove("invalid");
+							service.name = e.target.value;
+						}
+					
+						else {
+							nameInput.classList.add("invalid");							
+							service.name = "";
+						}
+					}
 					
 					// 추가
 					nameCon.appendChild(nameInputTitle);
@@ -369,7 +385,7 @@ function openMenuModifyModal(main, sub, info) {
 					
 					const priceInputTitle = document.createElement("div"); 
 					priceInputTitle.className = "modify_menu_modal_input_title";
-					priceInputTitle.innerHTML = "가격(원)";
+					priceInputTitle.innerHTML = "가격(원)*";
 					
 					const priceInput = document.createElement("input");
 					priceInput.className = "modify_menu_modal_input";
@@ -378,7 +394,21 @@ function openMenuModifyModal(main, sub, info) {
 					
 					// 콤마 자동 삽입
 					priceInput.onchange = (e) => {
-						e.target.value = insertComma(e.target.value);
+						
+						// 정규식 > service > price
+						const regex = /^[0-9]*$/;
+						
+						if (regex.test(e.target.value)) {
+							priceInput.classList.remove("invalid");
+							e.target.value = insertComma(e.target.value.replace(",", ""));
+							service.price = e.target.value; 
+						} 
+						
+						else {
+							priceInput.classList.add("invalid");
+							e.target.value = insertComma(e.target.value.replace(",", ""));
+							service.price = "";
+						}
 					}
 					
 					// 추가
@@ -420,9 +450,27 @@ function openMenuModifyModal(main, sub, info) {
 					
 					// 콤마 자동 삽입
 					quickpriceInput.onchange = (e) => {
-						e.target.value === "" ? 
-							e.target.value = 0 :
-							e.target.value = insertComma(e.target.value);
+						
+						// 정규식 > service > quickprice
+						const regex = /^[0-9]*$/;
+						
+						if (regex.test(e.target.value)) {
+							e.target.value === "" ? 
+									e.target.value = 0 :
+									e.target.value = insertComma(e.target.value.replace(",", ""));
+							
+							quickpriceInput.classList.remove("invalid");
+							service.quickprice = e.target.value;
+						} 
+						
+						else {
+							e.target.value === "" ? 
+									e.target.value = 0 :
+									e.target.value = insertComma(e.target.value.replace(",", ""));
+							
+							quickpriceInput.classList.add("invalid");
+							service.quickprice = "";
+						}
 					}
 					
 					// 추가
@@ -437,12 +485,27 @@ function openMenuModifyModal(main, sub, info) {
 					
 					const timeInputTitle = document.createElement("div"); 
 					timeInputTitle.className = "modify_menu_modal_input_title";
-					timeInputTitle.innerHTML = "소요시간(시간)";
+					timeInputTitle.innerHTML = "소요시간(일)*";
 					
 					const timeInput = document.createElement("input");
 					timeInput.className = "modify_menu_modal_input";
 					timeInput.name = "ete";
 					timeInput.value = service.ete;
+					
+					timeInput.onchange = (e) => {
+						// 정규식 > service > ete
+						const regex = /^[0-9]*$/;
+						
+						if (regex.test(e.target.value)) {
+							timeInput.classList.remove("invalid");
+							service.ete = e.target.value;
+						} 
+						
+						else {
+							timeInput.classList.add("invalid");
+							service.ete = "";
+						}
+					}
 					
 					// 추가
 					timeCon.appendChild(timeInputTitle);
@@ -468,15 +531,25 @@ function openMenuModifyModal(main, sub, info) {
 				removeBtn.classList.add("remove");
 				removeBtn.innerHTML = "메뉴삭제";
 				
+				
 				// 삭제 버튼 이벤트
 				removeBtn.onclick = () => { 
-					console.log(service.estid);
-					if (removeService(service.estid)) {
+					
+					let rmObject =  {
+						maincategory : service.maincategory ,
+						subcategory : service.subcategory,
+						name : service.name ,
+					};
+					
+					if (deleteMenu(rmObject)) {
 						document.getElementById("posted-service-list").innerHTML = ""; // 초기화
 						displayMenu(); // 메뉴 재생성
 					}
+					else {
+						alert("존재하지 않는 서비스입니다. 새로고침이 필요합니다.");
+					}
 				}
-			
+	
 				// 변경 버튼
 				const confirmBtn = document.createElement("button");
 				confirmBtn.className = "modify_menu_modal_btn";
@@ -485,7 +558,7 @@ function openMenuModifyModal(main, sub, info) {
 				
 				// 변경 버튼 이벤트
 				confirmBtn.onclick = () => {
-					if (updateService(service)) {
+					if (updateMenu(service)) {
 						document.getElementById("posted-service-list").innerHTML = ""; // 초기화
 						displayMenu(); // 메뉴 재생성				
 					}

@@ -14,6 +14,19 @@
 			( #{ESTID} )
 	</insert>
 	
+	
+<!-- 	정기휴무 일자 조회문 -->
+	<select id="selectBScheduleDays"  parameterType="String" resultType="BScheduleDaysVO">
+		SELECT  
+			FIRSTWEEK, SECONDWEEK, THRIDWEEK, 
+			FOURTHWEEK, FIFTHWEEK, SIXTHWEEK,
+			HOLIDAY
+		FROM 
+			BSCHEDULEDAYS
+		WHERE 
+			ESTID = #{value}	
+	</select>
+	
 <!-- 	영업일정관리 {첫 번째 주, 두 번째 주, 세 번째 주, 네 번째 주, 다섯 번째 주, 여섯 번째 주, 공휴일 휴무 여부}를 업데이트 시켜준다.-->
 	<update id="updateConstract" parameterType="BScheduleDaysVO">
 		UPDATE BSCHEDULEDAYS

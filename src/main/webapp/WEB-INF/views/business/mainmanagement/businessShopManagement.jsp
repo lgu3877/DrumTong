@@ -264,7 +264,7 @@
 							<th scope="cols">서비스 타입</th>
 							<th scope="cols">메뉴 이름</th>
 							<th scope="cols">가격(배달비)</th>
-							<th scope="cols">소요시간(시간)</th>
+							<th scope="cols">소요시간(일)</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -297,13 +297,6 @@
 				</div>
 			<!-- 버튼 -->
 				<div class="service_button_con">
-				<!-- 배달 서비스 활성화 -->
-					<div id="delivery-btn" class="delivery_menu_btn_con" onclick="activateVisualization()">
-						<div class="add_menu_icon_con">
-							<i id="delivery-icon" class="fas fa-toggle-off"></i>
-						</div>
-						<div class="add_menu_btn_title">퀵 서비스</div>
-					</div>
 				<!-- 메뉴 추가 -->	
 					<div id="add-item-btn" class="add_menu_btn_con" onclick="createAddService()">
 						<div class="add_menu_icon_con">
@@ -335,8 +328,11 @@
 						<li class="service_main">서비스 유형</li>
 						<li class="service_sub">서비스 타입</li>
 						<li class="service_details">메뉴 이름</li>
-						<li class="service_price">가격(배달비)</li>
-						<li class="service_time">소요시간(시간)</li>
+						<li class="service_price">요금 (퀵서비스)
+							<i id="quick-help" class="far fa-question-circle" style="font-weight: 600; cursor: pointer; margin-left: 3px;"></i>
+							<div id="quick-help-msg"></div>
+						</li>
+						<li class="service_time">소요일</li>
 						<!-- POST 형식일 때만 확인 버튼을 활성화 시켜준다.	-->
 						
 						<c:if test="${status ne 'SUCCESS' }">
@@ -349,12 +345,8 @@
 
 			<!-- 서비스 등록 input -->
 				<div id="add-item-list" class="add_item_list"></div>
-					
 				</div>
-				
 			</div>
-		
-			
 		</div>
 		
 		
@@ -437,7 +429,6 @@
 		<!-- 설정된 배달가능지역 보기  & 배달 지역 설정  -->
 			
 			<div class="delivery_menu">
-			
 				<!-- 접근 제한 뷰  [건욱] -->
 				<div id="accessDenied" >
 					해당 기능을 활성화 시키기 위해서는 <br> [세탁물 수령 방법] 기능에서 "배달 대행업체 이용" 혹은  "배달 서비스 제공" 중 <br> 하나의 기능이라도 체크가 되어있어야 합니다.
@@ -461,13 +452,8 @@
 				<!-- 읍/면/동 선택 -->
 					<div id="detail-area-selector" class="town_selector_con"></div>
 				</div>
-		
 			</div>
-
-
 		</div>
-
-
 
 	
 	<!-- 주소 확인 & 변경 -->
@@ -515,24 +501,6 @@
 				</div>
 			</div>
 		</div>
-		
-	<!-- [50줄] 여는 태그  세션의 상태가 FAIL이면 POST 형식   -->
-	<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
-	<!-- 	[전체 폼]에 대한 c:if문 -->
-	
-<%-- 		<c:if test="${status ne 'SUCCESS' }"> --%>
-<!-- 	<!-- 전체 form submit --> -->
-<!-- 			<div class="submit_con"> -->
-<!-- 				<input class="submit_btn" type="submit" value="다음 단계로"> -->
-<!-- 			</div> -->
-<!-- 			</form> -->
-
-		
-		
-<!-- 		<button onclick="updateDeliveryArea()">배달지역 테스트 버튼</button> -->
-<%-- 		</c:if> --%>
-<!-- 	</section> -->
-		
 		
 <!-- footer -->
 	<%-- <%@ include file="../main/businessFooter.jsp" %> --%>
@@ -614,7 +582,14 @@
 		function insertComma(string) {
 			const reversedString = string.split("").reverse().join("");
 			const commaAttached = reversedString.replace(/(.{3})/g,"$1,");
-			return commaAttached.split("").reverse().join("");
+			
+			const array = commaAttached.split("").reverse();
+			
+			if (array[0] === ",") {
+				array.shift();
+			}
+			
+			return array.join("");
 		}
 		
 		// 객체 복사(deep copy)

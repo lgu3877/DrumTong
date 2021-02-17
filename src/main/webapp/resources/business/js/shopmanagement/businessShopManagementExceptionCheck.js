@@ -42,6 +42,7 @@ function exceptionCheckBIntroduction () {
 	let introduction = document.getElementById('intro-modal-textarea');
 	let msg = "";
 	let idName = 'introductionArea';
+	
 	if(introduction.value === "" ) {
 		msg = '해당 매장을 소개시켜줄 수 있는 소개글을 작성해주세요!';
 		warning(msg, idName);
@@ -87,17 +88,23 @@ function borderNone(idName) {
 // POST 일 때 예외체크
 function checkExceptionBeforeSubmit() {
 	
-	// 매장 사진 체크
-	if(exceptionCheckBImage() === false) {
-		return false;
-	}
-	// 매장 소개글 체크
-	else if (exceptionCheckBIntroduction() === false) {
-		return false;
-	}
-	// 매장 주소 체크
-	else if (exceptionCheckBLocation() === false) {
-		return false;
+	try {
+		
+		// 매장 사진 체크
+		if(exceptionCheckBImage() === false) {
+			return false;
+		}
+		// 매장 소개글 체크
+		else if (exceptionCheckBIntroduction() === false) {
+			return false;
+		}
+		// 매장 주소 체크
+		else if (exceptionCheckBLocation() === false) {
+			return false;
+		}
+			
+	} catch (e) {
+		
 	}
 	
 	document.getElementById('submitbt').submit();
