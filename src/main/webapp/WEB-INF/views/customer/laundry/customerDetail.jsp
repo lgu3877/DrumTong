@@ -438,7 +438,7 @@
 // 		imgList.forEach(img =>{
 // 			imgBoxs[i++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + img.storeimg;
 // 		})
-		menuList = ${menuList};
+		var menuList = ${menuList};
 		mainCtList = Object.keys(menuList.menuList);
 		mainCategory = document.getElementById('mainCate');
 		subCategory = document.getElementById('subCate');
@@ -801,7 +801,6 @@
     <script type="text/javascript">	// 승원 작업 - 구글 차트
     
 	var reviewList = ${ReviewList};
-	console.log(reviewList);
     
 	window.onload = function() {
     	// 구글 부분 스크립트
@@ -810,224 +809,10 @@
    	 	google.charts.setOnLoadCallback(drawChart);
 	   	calcscore();
 	}
-	
-    function drawChart() {	// 구글 차트 그려주기
-
-	var data = google.visualization.arrayToDataTable([
-        ["score", "number", "total",  { role: 'annotation' }],
-        [" ", 0, reviewList.length, ''],
-        ["1.0", 0, reviewList.length, ''],
-        [" ", 0, reviewList.length, ''],
-        ["2.0", 0, reviewList.length, ''],
-        [" ", 0, reviewList.length, ''],
-        ["3.0", 0, reviewList.length, ''],
-        [" ", 0, reviewList.length, ''],
-        ["4.0", 0, reviewList.length, ''],
-        [" ", 0, reviewList.length, ''],
-        ["5.0", 0,  reviewList.length, ''],
-      ]);
-      
-      
-      for(i = 0; i < reviewList.length; i++) {		// 구글 차트 그래프에 점수 넣는 기능
-		data.setCell((reviewList[i].gpa * 2) - 1, 1, data.getValue((reviewList[i].gpa * 2) - 1, 1) + 1);
-		data.setCell((reviewList[i].gpa * 2) - 1, 2, data.getValue((reviewList[i].gpa * 2) - 1, 2) - 1);
-      }
-      
-
-      var view = new google.visualization.DataView(data);
-      view.setColumns([0, 1,
-                       { calc: "stringify",
-                         sourceColumn: 1,
-                         type: "string",
-                         role: "annotation" },
-                       2]);
-
-      var options = {
-		width:'100%',
-  		height: 400,
-  		chartArea:{	
-  			
-  			top: '5%',
-  			width:'90%',
-  			height: '85%',
-  		},
-        bar: {groupWidth: "50%",         },	// bar 하나하나의 굵기
-        legend: { position: "none" },
-        isStacked: true,
-        seriesType: 'bars',
-        series: {
-        	0: {color: 'navy' },
-        	1: {color: '#e5e4e2' },
-        },
-        vAxis: {
-            gridlines: {
-                color: 'transparent'
-            }
-	     },
-        enableInteractivity: false,		// hover와 관련된 모든 기능 중지
-//         tooltip : { trigger: 'none'}	// hover 했을 때 해당열의 정보 띄우는 기능만 중지
-      };
-// 	  console.log('최고값 : ', data.getColumnRange(1).max);
-	  var chart = new google.visualization.ComboChart(document.getElementById("columnchart_values"));
-      chart.draw(data, options);
-  } 
-    
-    function calcscore() {
-    	let avgcscore = 0;
-    	for(i = 0; i < reviewList.length; i++) {
-    		avgcscore += reviewList[i].gpa;
-    	}
-    	let cscore = avgcscore / reviewList.length;
-    	
-    	$('#cscore').html('고객 평점 : ' + cscore.toFixed(2));
-    	$('#frontstars').css('width', (cscore.toFixed(2) * 20) + '%');
-    }
-
     </script>
     
-    <script type="text/javascript">	// 승원 작업 - 모달
-	
-	function reviewMore() {	// 리뷰 더보기를 클릭했을 때
-		for(i = 0; i < reviewList.length; i++) {
-			if(i == 0) {
-				$('.detailview-review-row').attr('id', 'review' + i);
-				$('.detailview-review-row').find('.customerName').html(reviewList[i].customerName);
-				$('.detailview-review-row').find('.review-context').html(reviewList[i].ccontent);
-				
-				// 고객이 업로드한 프로필 이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
-				if(typeof reviewList[i].profileimg === typeof undefined) {
-					$('.detailview-review-row').find('.review-profilePic img').attr("src",
-							"https://az-pe.com/wp-content/uploads/2018/05/kemptons-blank-profile-picture.jpg");
-				}
-				else {
-					$('.detailview-review-row').find('.review-profilePic img').attr("src",
-							"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + reviewList[i].profileimg);
-				}
-				
-				// 고객이 업로드한 리뷰이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
-				if(typeof reviewList[i].reviewimg === typeof undefined)
-					$('.detailview-review-row').find('.review-reviewimg').css("display", "none");
-				else {
-					$('.detailview-review-row').find('.review-reviewimg').css("display", "");
-					$('.detailview-review-row').find('.review-reviewimg img').attr("src",
-							"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + reviewList[i].reviewimg);
-					$('.detailview-review-row').find('.review-reviewimg img').attr("onclick", "ActiveModal5('" + reviewList[i].reviewimg + "')");
-				}
-				
-				// 사장님 댓글 생성 조건문
-				if(reviewList[i].replyboolean == 'N')
-					$('#review' + i).find('.owner-review').css('display', 'none');
-				else {
-					const inputowner =  '사장님<span class="owner-write-date">' + reviewList[i].bregistdate.split(' ')[0] + '</span>';
-					$('#review' + i).find('.owner-review').css('display', '');
-					$('#review' + i).find('.owner-name').html(inputowner);
-					$('#review' + i).find('.owner-content').html(	reviewList[i].bcontent);
-				}
-			}
-			else {
-				const beforerow = $('#review' + (i - 1));
-				beforerow.after('<div class="detailview-review-row">' + beforerow.html() + '</div>');
-				beforerow.next().attr('id', 'review' + i);
-				beforerow.next().find('.customerName').html(reviewList[i].customerName);
-				beforerow.next().find('.review-context').html(reviewList[i].ccontent);
-				
-				// 고객이 업로드한 프로필 이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
-				if(typeof reviewList[i].profileimg === typeof undefined) {
-					beforerow.next().find('.review-profilePic img').attr("src",
-							"https://az-pe.com/wp-content/uploads/2018/05/kemptons-blank-profile-picture.jpg");
-				}
-				else {
-					beforerow.next().find('.review-profilePic img').attr("src",
-							"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + reviewList[i].profileimg);
-				}
-				
-				// 고객이 업로드한 리뷰이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
-				if(typeof reviewList[i].reviewimg === typeof undefined)
-					beforerow.next().find('.review-reviewimg').css("display", "none");
-				else {
-					beforerow.next().find('.review-reviewimg').css("display", "");
-					beforerow.next().find('.review-reviewimg img').attr("src",
-							"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + reviewList[i].reviewimg);
-				}
-						
-				
-				// 사장님 댓글 생성 조건문
-				if(reviewList[i].replyboolean == 'N')
-					$('#review' + i).find('.owner-review').css('display', 'none');
-				else {
-					const inputowner = '사장님<span class="owner-write-date">' + reviewList[i].bregistdate.split(' ')[0] + '</span>';
-					$('#review' + i).find('.owner-review').css('display', '')
-					$('#review' + i).find('.owner-name').html(inputowner);
-					$('#review' + i).find('.owner-content').html(reviewList[i].bcontent);
-				}
-
-			}
-			
-			$('#review' + i).find('.modal-grade').html('');	// 평점 안의 내용 초기화
-			
-			// 별자리를 만들어주는 반복문
-			for(j = 0; j < reviewList[i].gpa; j++) {
-				switch ((reviewList[i].gpa - j).toFixed(1)) {
-				case '0.5':
-					const halfstar = document.createElement('i');
-					halfstar.className = 'fas fa-star-half-alt fa-2x';
-	 				$('#review' + i).find('.modal-grade').append(halfstar);
-					break;
-				default:
-					const star = document.createElement('i');
-					star.className = 'fas fa-star fa-2x';
-	 				$('#review' + i).find('.modal-grade').append(star);
-	 				break;
-				}
-			}
-			
-			// 빈별자리를 만들어주는 반복문 -> 0.5 이면 4개의 별은 빈별이어야 한다
-			for(k = 5 - (reviewList[i].gpa).toFixed(0); k > 0; k--) {	// 반올림
-					const nullstar = document.createElement('i');
-					nullstar.className = 'far fa-star fa-2x';
-					$('#review' + i).find('.modal-grade').append(nullstar);
-			}
-			
-			// 별자리 옆에 평점 표시			
-			const gpaspan = document.createElement('span');
-			gpaspan.innerHTML = reviewList[i].gpa;
- 	 		$('#review' + i).find('.modal-grade').append(gpaspan);
-	 		
- 	 		$('#review' + i).find('.mgood').html('좋아요 ' + reviewList[i].mgood + ' ·&nbsp');
- 	 		$('#review' + i).find('.gpa').html('&nbsp평점 ' + reviewList[i].gpa);
- 	 		
-	 		if(reviewList[i].bcontent != '-') {
-	 			console.log('사장님 댓글이 달려있습니다.');
-	 		}
-		}
-	}
-    
-    function ActiveModal5(src) {
-    	modalContent5_exit.style.display = "";
-    	modalContent5.style.display = "";
-    	modalContent5.querySelector('img').src = "https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + src;
-    }
-    
-    function DeactiveModal5() {
-    	modalContent5_exit.style.display = "none";
-    	modalContent5.style.display = "none";
-    }
-	
-    document.getElementById('review-more').addEventListener('mouseover', function() {
-    	this.parentNode.style.background = 'white';
-    	this.parentNode.style.border = '3px solid #1564F9';
-    	this.style.background = '#1564F9';
-    	this.querySelector('p').style.color = 'white';
-    });
-
-    document.getElementById('review-more').addEventListener('mouseout', function() {
-    	this.parentNode.style.background = '#1564F9';
-    	this.style.background = 'white';
-    	this.querySelector('p').style.color = '#1564F9';
-    });
-    
-    
-    </script>
+    <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail/detail-google.js"></script>
+    <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail/detail-modal.js"></script>
     <script>
     	// 로그인 했을 때 초기화
     	function initLogin(){
