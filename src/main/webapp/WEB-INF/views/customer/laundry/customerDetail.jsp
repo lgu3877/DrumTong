@@ -32,40 +32,6 @@
     <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail.js"></script>
    	
-	<script>
-	// 쿠폰을 사용했을 때 couponid 값을 넘기도록 설정해주어야 한다!
-		function checkAbleCoupon(currentPrice){
-			let result = 0
-			if(checkLogin){
-				couponcCheckList = document.getElementById('select-coupon');
-				
-				couponNum = couponcCheckList.children.length;
-				selectValue = couponcCheckList.value;
-				// 현재 체크되어있는 value 값이 사용할수 없을 땐 첫번째가 선택되있게 변경하기
-				for(num = 1; num < couponNum; num++){
-					spanCoupon = couponcCheckList.children[num];
-					spanCouponIn = spanCoupon.children[0];
-					if(currentPrice < spanCouponIn.children[2].innerHTML){ // 사용할 수 없는 쿠폰일 땐 선택 못하게 설정
-						spanCoupon.setAttribute('disabled','disabled');
-					} else{ // 사용할 수 있는 쿠폰일 땐 선택 할 수 있게 설정
-						spanCoupon.removeAttribute('disabled');
-					}
-					
-					// 금액이 바뀌었을 때 선택되어있는 쿠폰이 사용할 수 없는 쿠폰이면 선택 X 로 selected 설정
-					if(selectValue === spanCoupon.value){
-						if(currentPrice < spanCouponIn.children[2].innerHTML){
-							couponcCheckList[0].selected = true;
-						} else {
-							result = spanCouponIn.children[0].innerHTML;
-						}
-					}
-				}
-				
-			}
-			return result;
-		}
-		// 로그인이 되어있을 때 첫 번째로 실행, 금액이 바뀔때마다 실행(단, 로그인 여부를 구분해주어야 한다)
-	</script>
     <script>
       function submit() {
         selecteds = document.querySelectorAll('.selected-row');
@@ -160,7 +126,17 @@
                        <option id="noLogin" disabled>로그인 후 이용가능</option>
               </select>
             </div>
-            <div class="select-deli" id="select-deli"><input type="checkbox" id="deli-check" checked onclick="calTotal()" /> 배달 (+ 2000 원)</div>
+            <div class="select-date" id="select-date">
+				▼ 희망 날짜(선택사항)
+            </div>
+            <div class="select-pickup" id="select-pickup"> 수거 방법 : 
+            	<input type="radio" name="pickup-check" onclick="calTotal()" value="0"/> 직접 방문
+            	<input type="radio" name="pickup-check" id="pickup-check" checked onclick="calTotal()" value="1000"/> 수거 요청(+ 1000 원)
+            </div>
+            <div class="select-deli" id="select-deli"> 받는 방법 : 
+   		         <input type="radio" name="deli-check" onclick="calTotal()" value="0"/> 직접 방문
+   		         <input type="radio" name="deli-check" id="deli-check" checked onclick="calTotal()" value="1000"/> 배달 요청(+ 1000 원)
+            </div>
             <div class="select-quick" id="select-quick">
               Quick 요금 : <span>0</span> 원
             </div>
