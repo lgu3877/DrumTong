@@ -161,8 +161,6 @@
     	var checkFile = obj.parentNode.querySelector('div.c3-input input[type="file"]');
 
     	
-    	console.log(checkFile);
-    	
     	//input 태그에 공백이거나 공백이 포함됐을 때 그쪽으로 focus
 		for(i = 0; i < checkItem.length; i++) {
 	    	if(str_space.exec(checkItem[i].value) || checkItem[i].value === '') {
@@ -354,13 +352,6 @@
     	});
  	}
     
-/*     var path = '${cpath}/resources/business/img/bank/';
-    var fs = require('fs`');
-    
-    fs.readdir(path, (err, filelist) => {
-    	console.log(filelist);
-    }); */
-	
 </script>
 
 </body>
