@@ -153,7 +153,7 @@ public class RestBusinessMainManagementService {
 	
 	
 	// 메뉴 삭제
-	public int deleteMenu(HttpServletRequest req, BMenuVO bMenuVO) {
+	public List<BMenuVO> deleteMenu(HttpServletRequest req, BMenuVO bMenuVO) {
 		HttpSession Session = req.getSession();
  	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
  	    String estid = bInformationVO.getEstid();
@@ -162,45 +162,45 @@ public class RestBusinessMainManagementService {
  	    
  	    int deleteBMenuResult = bMenuDAO.deleteBMenu(bMenuVO);
  	    
-		return deleteBMenuResult;
+ 	    return deleteBMenuResult == 1  ? bMenuDAO.select(estid) : null ;
 	}
 	
 	
 	// 통합
-//	public int bMenuRestProcessing(HttpServletRequest req, List<BMenuVO> ListBMenuVO, String processing) {
-//		HttpSession Session = req.getSession();
-// 	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
-// 	    String estid = bInformationVO.getEstid();
-//		
-// 	    int result = 0;
-// 	    
-// 	    
-// 	    
-// 	    for ( BMenuVO bMenuVO : ListBMenuVO ) {
-// 	    	bMenuVO.setEstid(estid);
-// 	    	System.out.println(bMenuVO.getQuickprice());
-// 	    	
-// 	    	switch(processing) {
-// 	    	
-// 	    	// 매장 메뉴를 입력하는 메서드입니다.
-// 	    	case "insertBMenu" :
-// 	    		result = bMenuDAO.insertBMenu(bMenuVO);
-// 	    		break;
-// 	 	    // 매장 메뉴를 수정하는 메서드입니다. 	    	
-// 	    	case "updateBMenu" :
+	public int bMenuRestProcessing(HttpServletRequest req, List<BMenuVO> ListBMenuVO, String processing) {
+		HttpSession Session = req.getSession();
+ 	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+ 	    String estid = bInformationVO.getEstid();
+		
+ 	    int result = 0;
+ 	    
+ 	    
+ 	    
+ 	    for ( BMenuVO bMenuVO : ListBMenuVO ) {
+ 	    	bMenuVO.setEstid(estid);
+ 	    	System.out.println(bMenuVO.getQuickprice());
+ 	    	
+ 	    	switch(processing) {
+ 	    	
+ 	    	// 매장 메뉴를 입력하는 메서드입니다.
+ 	    	case "insertBMenu" :
+ 	    		result = bMenuDAO.insertBMenu(bMenuVO);
+ 	    		break;
+ 	 	    // 매장 메뉴를 수정하는 메서드입니다. 	    	
+ 	    	case "updateBMenu" :
 // 	    		result = bMenuDAO.updateBMenu(bMenuVO);
-// 	    		break;
-// 	    		
-// 	 	    // 매장 메뉴를 삭제하는 메서드입니다. 	    		
-// 	    	case "deleteBMenu" :
-// 	    		result = bMenuDAO.deleteBMenu(bMenuVO);
-// 	    		break;
-// 	    	}
-// 	    	
-// 	    }
-// 	    
-//		return result;
-//	}
+ 	    		break;
+ 	    		
+ 	 	    // 매장 메뉴를 삭제하는 메서드입니다. 	    		
+ 	    	case "deleteBMenu" :
+ 	    		result = bMenuDAO.deleteBMenu(bMenuVO);
+ 	    		break;
+ 	    	}
+ 	    	
+ 	    }
+ 	    
+		return result;
+	}
 
 	
 	

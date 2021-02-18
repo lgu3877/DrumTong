@@ -139,8 +139,9 @@ async function addService() {
 	}
 	
 	// 퀵 서비스 옵션 설정
-	activateDelivery();
-	
+//	activateDelivery();
+//	activateQuick();
+
 	const processing = "insertBMenu";
 	// 서비스 등록
 	const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/" + processing + "/", object);
@@ -171,7 +172,9 @@ async function updateMenu(service) {
 async function deleteMenu(rmObject) {
 	
 	try {
-		const {data} = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/deleteMenu/", rmObject);
+		let {data} = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/deleteMenu/", rmObject);
+		bMenu = data;
+		displayMenu();
 		alertShow(data);
 		
 	} catch (e) {
