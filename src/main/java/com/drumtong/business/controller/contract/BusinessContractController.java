@@ -48,6 +48,12 @@ public class BusinessContractController {
 		return svc.premiumAd(req);
 	}		
 	
+	// 비즈니스 프리미엄 광고 계약 해지 페이지 이동(GET) [영경]
+	@RequestMapping(value = "businessPremiumCancel/", method = RequestMethod.GET)
+	public ModelAndView premiumCencel(HttpServletRequest req) {
+		return svc.premiumCencel(req);
+	}	
+	
 	// 비즈니스 프리미엄 광고 계약 (POST) [건욱]
 	@RequestMapping(value = "businessPremiumAd/", method = RequestMethod.POST)
 	public ModelAndView premiumAd(BInformationVO bInformationVO, BPaymentVO bPaymentVO, HttpServletRequest req) {
