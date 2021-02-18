@@ -422,6 +422,11 @@
     height: 250px;
 }
 
+.h_schedule_list:hover {
+	transition: 1s;
+	box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
 .h_schedule_remove {
     position: absolute;
     width: calc(100% - 10px);
@@ -430,12 +435,23 @@
     font-size: 18pt;
     font-weight: 600;
     color: white;
+    cursor: pointer;
+}
+
+.h_schedule_remove:hover {
+	color: navy;
+    font-size: 20pt;
+	transition: 1s;
 }
 
 .h_schedule_week {
     padding: 20px;
     color: white;
     background-color: #6495EF;
+}
+
+.h_schedule_day {
+    margin: 5px;
 }
 
 .h_schedule_context {
@@ -465,11 +481,13 @@
 }
 
 .h_week {
+	letter-spacing: 5px;
 }
 
 .h_day {
-	background-color: beige;
-    border-radius: 20px;
+	font-size: 13pt;
+    color: white;
+	letter-spacing: 2px;
 }
 
 .tmp_holiday_input_con {
