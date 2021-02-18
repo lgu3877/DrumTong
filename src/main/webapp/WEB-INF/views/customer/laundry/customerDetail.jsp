@@ -657,7 +657,6 @@
 	 	      checkBM = Bookmark === 'y' ? true : false;
 	 	      bookMarker.setAttribute('class', 'fas fa-star ' + (checkBM ? 'add': 'remove'));
     		if(checkLogin){
-    			console.log('로그인 되어있을 때');
     			// 로그인 되어있을 때
 	    		myCouponSettings(CouponList); // 고객 쿠폰 다운로드
 	    		
