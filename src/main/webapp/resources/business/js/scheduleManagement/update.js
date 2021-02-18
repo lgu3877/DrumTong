@@ -35,6 +35,7 @@ function updateRegHoliday() {
 	
 	// request object
 	const object = {
+		estid : "123",
 		week : selectedWeek,
 		days : selectedDays	
 	};
@@ -56,6 +57,37 @@ function updateRegHoliday() {
 }
 
 // 정기 휴무 삭제
-//async function removeRegHoliday() {
-//	await axios.delete("/drumtong/business/mainmanagement/BScheduleDays/rest/deleteBScheduleDays/", object);
-//}
+function removeRegHoliday(id) {
+	const list = document.getElementById(id);
+	
+	// 주 (week)
+	const removeWeek = list.getElementsByClassName("h_week")[0].innerText;
+	
+	// 일 (day)
+	let removeDays = "";
+	const dayCon = list.getElementsByClassName("h_day");
+	
+	for (let i = 0; i < dayCon.length; i++) {
+		removeDays += dayCon[i].innerText.replace("요일", "") + "/";
+	}
+	
+	// request object
+	const object = {
+		estid : "123",
+		week : removeWeek,
+		days : removeDays	
+	};
+	console.log(object);
+	
+//	const { data } = await axios.delete("/drumtong/business/mainmanagement/BScheduleDays/rest/deleteBScheduleDays/", object);
+//	
+//	if (data) {
+//		bscheduledays = data; // 데이터 덮어씌우기
+//		document.getElementById("reg-holiday-schedule").innerHTML = ""; // 정기휴무 리스트 초기화
+//		displayRegHolidays(); // 정기휴무 리스트 다시 출력
+//	}
+//	
+//	else {
+//		alert("잘못된 입력입니다.");
+//	}
+}

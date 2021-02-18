@@ -1,16 +1,17 @@
+// week array
+const weekObject = {
+	"firstweek" : "첫째주", 
+	"secondweek" : "둘째주",
+	"thirdweek" : "셋째주",
+	"forthweek" : "넷째주",
+	"fifthweek" : "다섯째주",
+	"sixthweek" : "여섯째주",	
+};
+
+
 displayRegHolidays();
 
 function displayRegHolidays() {
-	// week array
-	const weekObject = {
-		"firstweek" : "첫째주", 
-		"secondweek" : "둘째주",
-		"thirdweek" : "셋째주",
-		"forthweek" : "넷째주",
-		"fifthweek" : "다섯째주",
-		"sixthweek" : "여섯째주",	
-	};
-
 	// ul
 	const ul = document.getElementById("reg-holiday-schedule");
 	
@@ -27,13 +28,15 @@ function displayRegHolidays() {
 			
 			// li
 			const li = document.createElement("li");
+			const holidayId = generateRandomString(10);
+			li.id = holidayId;
 			li.className = "h_schedule_list";
 			
-			// close button
+			// remove button
 			const removeBtn = document.createElement("div");
 			removeBtn.className = "h_schedule_remove";
 			removeBtn.innerHTML = "&times";
-			removeBtn.onclick = () => removeRegHoliday(); // click event (remove item)
+			removeBtn.onclick = () => removeRegHoliday(holidayId); // click event (remove item)
 
 			// week(header)
 			const weekCon = document.createElement("div");

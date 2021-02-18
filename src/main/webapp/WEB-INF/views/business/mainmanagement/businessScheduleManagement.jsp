@@ -673,6 +673,28 @@
 <!-- footer -->
 	<%-- <%@ include file="../main/businessFooter.jsp" %> --%>
 	
+	<!-- global functions -->
+	<script type="text/javascript">
+		//랜덤 String 생성
+		function generateRandomString(length) {
+			let result = "";
+			const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+			const charArray = characters.split("");
+				
+			for (let i = 0; i < length; i++) {
+				result += charArray[Math.ceil(Math.random() * (characters.length - 1))];
+			}
+			
+			// 동일한 난수가 생성되엇을 경우(로또 맞을 확률)
+			if (document.getElementById(result)) {
+				alert("축하드립니다. 17,067,655,527,413,216e+89의 확률을 뚫으셨습니다.");
+				location.reload();
+				return;
+			}
+			
+			return result;
+		}
+	</script>
 	
 	<!-- 영업시간 -->
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/interface.js"></script>
