@@ -2,14 +2,21 @@
 // 쿠폰 다운로드(사업자 측) 세팅 메서드
 function couponSettings(couponList){ 
 	modalCouponList = document.getElementById('modal-couponList');
-	
-	couponList.forEach(cl => {
+	if(couponList.length === 0 ){
 		couponOption = document.createElement('option');
-		couponOption.setAttribute('value', cl.couponid);
-		couponOption.innerHTML = '<span><span>' + cl.discount + '</span><span>원 할인/</span><span>' + cl.minimumprice + '</span><span>원 이상[</span><span>' + cl.period + '</span><span>]</span></span>';
+		couponOption.setAttribute('hidden', 'hidden');
+		couponOption.innerHTML = '발급 가능하신 쿠폰이 없습니다.';
 		
 		modalCouponList.appendChild(couponOption);
-	})
+	} else{
+		couponList.forEach(cl => {
+			couponOption = document.createElement('option');
+			couponOption.setAttribute('value', cl.couponid);
+			couponOption.innerHTML = '<span><span>' + cl.discount + '</span><span>원 할인/</span><span>' + cl.minimumprice + '</span><span>원 이상[</span><span>' + cl.period + '</span><span>]</span></span>';
+			
+			modalCouponList.appendChild(couponOption);
+		})
+	}
 	
 }
 // 메뉴를 선택했을 때 실행하는 메서드(주문리스트에 추가해준다.)
@@ -133,11 +140,7 @@ function calTotal() {
 
         deliCheck = document.getElementById('deli-check');
 
-        deli = 2000;
-
-        if (!deliCheck.checked) {
-          deli = 0;
-        }
+        deli = deliCheck.checked ? 2000 : 0;
 
         quickPrice = 0;
         totalPrice = 0 + deli;
