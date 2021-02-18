@@ -72,12 +72,13 @@ public class CustomerLaundryService {
 		List<ReviewList> ReviewList = Review.selectList(estid, "whole");
 		
 		
+		Gson gson = new Gson();
 		mav.addObject("bInformationVO", bInformationVO);
 		mav.addObject("bManagementVO", bManagementVO);
-		if(bImageVO != null) mav.addObject("bImageVO", new Gson().toJson(bImageVO));
-		mav.addObject("bCouponVO", new Gson().toJson(bCouponVO));
-		mav.addObject("menuList", new Gson().toJson(menuList));
-		mav.addObject("ReviewList", new Gson().toJson(ReviewList));
+		if(bImageVO != null) mav.addObject("bImageVO", gson.toJson(bImageVO));
+		mav.addObject("bCouponVO", gson.toJson(bCouponVO));
+		mav.addObject("menuList", gson.toJson(menuList));
+		mav.addObject("ReviewList", gson.toJson(ReviewList));
 		
 		// 로그인 되어있을 때 쿠폰 정보, 북마크 체크 여부
 		CPrivateDataVO Login = (CPrivateDataVO)req.getSession().getAttribute("cLogin");
@@ -89,13 +90,15 @@ public class CustomerLaundryService {
 			
 			// 고객이 가지고 있으면서 해당 사업장 쿠폰이고 사업장에 유효한(삭제X, 유효기간O) 쿠폰일 때
 			List<BCouponVO> CouponList = comparePeriod(bCouponDAO.selectUsableCoupon(map));
-			mav.addObject("CouponList", CouponList);
+			mav.addObject("CouponList", new Gson().toJson(CouponList));
 			
 			// 고객 포인트 정보
 			int myPoint = cPaymentDAO.select(Login.getMemberid()).getPoint();
 			mav.addObject("myPoint", myPoint);
 			
 			mav.addObject("Bookmark", (cBookmarkDAO.isCheck(map) != null) ? "y" : "n");
+		} else {
+			mav.addObject("CouponList", "n");
 		}
 		
 		return mav;

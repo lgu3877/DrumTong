@@ -21,6 +21,8 @@ function displayDeliveryOptions() {
 		checkContent(document.getElementById("visit"));
 		break;
 	}
+	
+	
 }
 
 // 체크 박스 클릭이벤트 > 체크 옵션 & 아이콘 & 색상 변경
@@ -60,18 +62,39 @@ function checkBoth() {
 	let deliveryMenu = document.getElementsByClassName("delivery_menu")[0];
 	let accessDenined = document.getElementById('accessDenied');
 	console.log('실행');
+	
+	// 배달 지역 관리 활성화
 	if(agencies.checked || self.checked ) {
 //		deliveryMenu.style = "filter : none";
 		for (let i = 0 ; i < deliveryMenu.children.length; i++ ) 
-			deliveryMenu.children[i].style.filter = "none";	
-			
+			deliveryMenu.children[i].style.filter = "none";
+		
+		accessDenined.style.display = "none";
+		
 	}
+	// 배달 지역관리 비활성화
 	else if(agencies.checked === false && self.checked === false) {
 //		deliveryMenu.style = "filter: blur(5px)";
 		
 		for (let i = 0 ; i < deliveryMenu.children.length; i++ )
 			deliveryMenu.children[i].style.filter = "blur(5px)";	
 		
+		accessDenined.style.display = "";
+		
+		
+		// 사이즈가 유동적으로 변하기 때문에 그에 맞춰서 높이를 변경시켜주는 코드입니다.
+		let parentHeight = document.getElementsByClassName('delivery_menu')[0].offsetHeight;
+		let parentWidth = document.getElementsByClassName('delivery_menu')[0].offsetWidth;
+		document.getElementById('accessDenied').style.height = (parentHeight/2) +'px';
+		document.getElementById('accessDenied').style.width = parentWidth +'px';
+		
+		parentWidth
+		let marginValue = parentHeight / 4;
+		document.getElementById('accessDenied').style.paddingTop = marginValue +'px';
+		document.getElementById('accessDenied').style.paddingBottom = marginValue +'px';
+	
+		console.log(parentHeight);
+	
 		
 	}
 	accessDenined.style.filter = "none";

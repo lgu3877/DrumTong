@@ -202,7 +202,7 @@
 }
 
 .checkBtn {
-	width: 100px;
+	width: 120px;
 	height: 30px;
 	font-size: 12pt;
 	border: none;
@@ -408,15 +408,34 @@
 /* 휴무 스케쥴 */
 .h_schedule_con {
 	list-style: none;
-    display: block;
+    display: inline-flex;
+	width: 100%;
 }
 
 .h_schedule_list {
-	display: flex;
-    justify-content: space-between;
-    margin: 15px 10px;
-	padding-bottom: 10px;
-    border-bottom: 1px solid black;
+	position: relative;
+	display: block;
+    margin-right: 20px;
+    background-color: #f38181;
+    border: none;
+    width: 200px;
+    height: 250px;
+}
+
+.h_schedule_remove {
+    position: absolute;
+    width: calc(100% - 10px);
+    text-align: right;
+    margin-top: 3px;
+    font-size: 18pt;
+    font-weight: 600;
+    color: white;
+}
+
+.h_schedule_week {
+    padding: 20px;
+    color: white;
+    background-color: #6495EF;
 }
 
 .h_schedule_context {
@@ -446,8 +465,6 @@
 }
 
 .h_week {
-	background-color: beige;
-    border-radius: 20px;
 }
 
 .h_day {

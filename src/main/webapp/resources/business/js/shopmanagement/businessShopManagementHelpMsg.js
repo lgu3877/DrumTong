@@ -35,7 +35,11 @@ const helpMessages = [
 	   content: "배달 가능 지역을 설정합니다. 서비스 가능 지역을 선택 옵션에서 체크하시면 배달 서비스 지역이 업데이트됩니다.",
 	   className: "help_msg_down"      
    },
-   
+   {
+	   id: "quick-help",
+	   content: "고객은 추가요금을 지불하고, 더 빠른 세탁 서비스를 제공받을 수 있습니다. 버튼을 클릭하면 서비스를 확설화 시킬 수 있습니다.",
+	   className: "quick_help_msg"   
+   },
 ];
 
 // 초기 실행

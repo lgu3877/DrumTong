@@ -6,7 +6,14 @@
 .disabled_checkbox {
 	cursor: not-allowed !important;
 }
-
+#accessDenied {
+ z-index : 1; 
+ position : absolute; 
+ margin: 0 auto; 
+ font-weight: bold; 
+ cursor: no-drop;
+ font-size: 22px;
+ }
 /* 폼 그림자 */
 .form {
 	background-color: whitesmoke;
@@ -63,6 +70,19 @@
 .help_msg_down:after {
 	border-bottom: 10px solid navy;
 	border-top: 5px solid transparent;	
+}
+
+.quick_help_msg {
+	width: 300px;
+	margin-top: 10px;
+    position: absolute;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: navy;
+    color: white;
+    line-height: 25px;
+    text-align: justify;
+    transition: 1s;
 }
 
 /* 매장 사진 슬라이드 좌우 화살표 */
@@ -568,11 +588,16 @@
 }
 
 .service_details {
-	width: 21%;
+	width: 28%;
 }
 
 .service_price {
-	width: 16%;
+	width: 18%;
+}
+
+.service_price i {
+	width: inherit !important;
+	padding: 0 !important; 
 }
 
 .service_price_input:invalid {
@@ -580,7 +605,7 @@
 }
 
 .service_time {
-	width: 16%;
+	width: 8%;
 }
 
 /* .service_confirm {
@@ -620,7 +645,7 @@
     text-align: left;
     border-radius: 3px;
     font-size: 20pt;
-    background-color: lightcoral;
+    background-color: steelblue;
     color: white;
     letter-spacing: 5px;
 }
@@ -635,6 +660,10 @@
 
 /* sub */
 .menu_sub_wrapper {
+	display: block;
+}
+
+.menu_sub_content {
     margin: 0 0 0 30px;
     display: flex;
     justify-content: space-between;
@@ -658,7 +687,7 @@
     text-align: left;
     border-radius: 3px;
     font-size: 15pt;
-    background-color: lightpink;
+    background-color: cornflowerblue;
     color: white;
     letter-spacing: 5px;
 }
@@ -694,27 +723,168 @@
 
 .menu_detail_info_con {
 	display: flex;
-    justify-content: left;
+    justify-content: space-between;
 	width: 100%;
     margin: auto 0 auto 15px;
     padding: 3px 0 3px 25px;
     text-align: left;
     border-radius: 3px;
     font-size: 15pt;
-    background-color: hotpink;
-    color: white;
-    letter-spacing: 5px;
+    background-color: lightblue;
+    color: #323232;
+    letter-spacing: 2px;
 }
 
-. {
+.highlight {
+	font-weight: 600;
+}
+
+.menu_detail_info_con div {
+	width: 33.33%;
 }
 
 .menu_detail_option {
 	margin: auto 11px;
     padding: 4px;
-    background-color: darkgreen;
+    background-color: lightcoral;
     border-radius: 7px;
     color: white;
+}
+
+.menu_detail_option i {
+	cursor: pointer;
+}
+
+/* 서비스 메뉴 수정 모달 */
+.modify_menu_modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%; 
+	height: 100%; 
+	overflow: auto; 
+	background-color: rgb(0, 0, 0); 
+	background-color: rgba(0, 0, 0, 0.4);
+	cursor: pointer;
+}
+
+.modify_menu_modal_content {
+	left: 0;
+	width: 400px;
+	padding: 10px 15px;
+	height: 100%;
+	background-color: white;
+	cursor: auto;
+	position: fixed;
+}
+
+.modify_menu_modal_close {
+	text-align: right;
+	cursor: pointer;
+}
+
+.modify_menu_modal_close i {
+	font-size: 20pt;
+}
+
+.modify_menu_modal_form {
+	height: 88%;
+	margin: 0 10px;
+}
+
+.modify_menu_modal_title {
+	font-size: 20pt;
+    font-weight: 600;
+    border-top: 2px solid navy;
+    border-bottom: 2px solid navy;
+    padding: 5px;
+    margin: 5px 0;
+    text-align: left;
+    color: navy;
+}
+
+.toggle {
+	display: flex;
+    justify-content: space-between;
+}
+
+.font_large {
+	font-size: 16pt;
+}
+
+.invalid,
+.invalid:focus {
+	border: 2px solid red !important;
+}
+
+.modify_menu_modal_input_con {
+	text-align: left;
+    margin: 20px 0;
+}
+
+.modify_menu_modal_input_title {
+	font-size: 16pt;
+    color: navy;
+    margin-bottom: 15px;
+}
+
+.modify_menu_modal_input_title i {
+	font-size: 18pt;
+	cursor: pointer;
+}
+
+.modify_menu_modal_selector,
+.modify_menu_modal_input {
+	width: 100%;
+    height: 45px;
+    border-radius: 5px;
+    text-indent: 10px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    font-size: 13pt;
+    color: navy;
+    border: 1px solid navy;
+}
+
+.modify_menu_modal_input:disabled {
+	background-color: lightgrey;
+}
+
+.modify_menu_modal_btn_container {
+	display: flex;
+	float: right;
+}
+
+.modify_menu_modal_btn {
+    padding: 10px 20px;
+    border: none;
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-size: 13pt;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.modify_menu_modal_btn:hover {
+	transition: 0.5s;
+	background-color: navy;
+}
+
+.modify_menu_modal_btn:focus {
+	outline: none;
+}
+
+.remove {
+    background-color: lightcoral;
+    color: white;
+}
+
+.confirm {
+    background-color: #6495ED;
+    color: white;
+	
 }
 
 /* first property input */
@@ -767,15 +937,29 @@
 
 /* third~fifth property input */
 .third_item_prop {
-	width: 21%;
+	width: 28%;
 }
 
 .forth_item_prop {
-	width: 16%;
+	width: 18%;
+}
+ 
+.service_price_input_con {
+	display: flex;
+	justify-content: space-between;
 }
 
+.forth_item_prop i {
+	width: 20%;
+	margin: auto;
+	cursor: pointer;
+	font-size: 15pt;
+	text-align: right;
+}
+
+
 .fifth_item_prop {
-	width: 16%;
+	width: 8%;
 }
 
 .third_item_prop input, .forth_item_prop input, .fifth_item_prop input {

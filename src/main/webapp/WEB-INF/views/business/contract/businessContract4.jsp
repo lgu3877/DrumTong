@@ -8,9 +8,9 @@
     	<div class="c4-sideDiv" style="float: left;">
     		<div class="categoryDiv">
     			<div>
-    				<input type="checkbox" value="${cpath }/resources/business/img/category/상의.jpg">
+    				<input type="checkbox">
     				<h1>상의</h1>
-	    			<img src="${cpath }/resources/business/img/category/top.jpg">
+	    			<img src="${cpath }/resources/business/img/category/상의.jpg">
     			</div>
     		</div>
     		    		<div style="height: 4%"></div>
@@ -18,7 +18,7 @@
     			<div>
     				<input type="checkbox">
     				<h1>하의</h1>
-	    			<img src="${cpath }/resources/business/img/category/pants.jpg">
+	    			<img src="${cpath }/resources/business/img/category/하의.jpg">
     			</div>
     		</div>
     		    		<div style="height: 4%"></div>
@@ -26,7 +26,7 @@
     			<div>
 	    			<input type="checkbox">
     				<h1>드레스</h1>
-	    			<img src="${cpath }/resources/business/img/category/dress.jpg">
+	    			<img src="${cpath }/resources/business/img/category/드레스.jpg">
     			</div>    		    			
     		</div>
     		    		<div style="height: 4%"></div>
@@ -34,7 +34,7 @@
     			<div>
     				<input type="checkbox">
     				<h1>정장</h1>
-	    			<img src="${cpath }/resources/business/img/category/suit.jpg">
+	    			<img src="${cpath }/resources/business/img/category/정장.jpg">
     			</div>    			
     		</div>
     	</div>
@@ -43,7 +43,7 @@
     			<div>
     				<input type="checkbox">
     				<h1>명품류</h1>
-	    			<img src="${cpath }/resources/business/img/category/luxury.jpg">
+	    			<img src="${cpath }/resources/business/img/category/명품류.jpg">
     			</div>    			
     		</div>
     		    		<div style="height: 4%"></div>
@@ -51,7 +51,7 @@
     			<div>
     				<input type="checkbox">
     				<h1>모자류</h1>
-	    			<img src="${cpath }/resources/business/img/category/hat.jpg">
+	    			<img src="${cpath }/resources/business/img/category/모자류.jpg">
     			</div>    			
     		</div>
     		    		<div style="height: 4%"></div>
@@ -59,7 +59,7 @@
     			<div>
     				<input type="checkbox">
     				<h1>속옷류</h1>
-	    			<img src="${cpath }/resources/business/img/category/underwear.jpg">
+	    			<img src="${cpath }/resources/business/img/category/속옷류.jpg">
     			</div>    			
     		</div>
     		    		<div style="height: 4%"></div>
@@ -67,7 +67,7 @@
     			<div>
     				<input type="checkbox">
     				<h1>커튼</h1>
-	    			<img src="${cpath }/resources/business/img/category/cutton.jpg">
+	    			<img src="${cpath }/resources/business/img/category/커튼.jpg">
     			</div>    			
     		</div>
     	</div>

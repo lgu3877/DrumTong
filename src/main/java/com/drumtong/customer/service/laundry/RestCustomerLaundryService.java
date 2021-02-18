@@ -4,25 +4,24 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.drumtong.business.dao.BCouponDAO;
 import com.drumtong.business.dao.BInformationDAO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.customer.dao.CBookmarkDAO;
 import com.drumtong.customer.dao.CCouponDAO;
 import com.drumtong.customer.vo.CBookmarkVO;
 import com.drumtong.customer.vo.CCouponVO;
+import com.drumtong.customer.vo.CPrivateDataVO;
 import com.drumtong.map.dao.MEmdDAO;
 import com.drumtong.map.dao.MSidoDAO;
 import com.drumtong.map.dao.MSigunguDAO;
 import com.drumtong.map.vo.MEmdVO;
 import com.drumtong.map.vo.MSidoVO;
 import com.drumtong.map.vo.MSigunguVO;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 @Service
@@ -30,6 +29,7 @@ public class RestCustomerLaundryService {
 	
 	@Autowired CBookmarkDAO cBookmarkDAO;
 	@Autowired CCouponDAO cCouponDAO;
+	@Autowired BCouponDAO bCouponDAO;
 	@Autowired BInformationDAO bInformationDAO;
 	
 	
@@ -38,7 +38,10 @@ public class RestCustomerLaundryService {
 	@Autowired MSidoDAO mSidoDAO;
 	@Autowired MSigunguDAO mSigunguDAO;
 	
-	public String setBookmark(HashMap<String, String> param) {
+	public String setBookmark(HttpServletRequest req, HashMap<String, String> param) {
+		CPrivateDataVO User = (CPrivateDataVO) req.getSession().getAttribute("cLogin");
+		param.put("memberid", User.getMemberid());
+		
 		String result = param.get("result");
 		
 		// 북마크 이미 추가되있는지 검사하기
@@ -65,9 +68,9 @@ public class RestCustomerLaundryService {
 	}
 
 
-	public String setCoupon(HashMap<String, String> param) {
-		System.out.println("memberid : " + param.get("memberid"));
-		System.out.println("couponid : " + param.get("couponid"));
+	public String setCoupon(HttpServletRequest req, HashMap<String, String> param) {
+		CPrivateDataVO User = (CPrivateDataVO) req.getSession().getAttribute("cLogin");
+		param.put("memberid", User.getMemberid());
 		
 		// 쿠폰아이디와 멤버아이디로 중복확인
 		CCouponVO hasCoupon = cCouponDAO.selectCheck(param);
@@ -75,9 +78,9 @@ public class RestCustomerLaundryService {
 		// 없다면 추가
 		int insertResult = 0;
 		if(hasCoupon == null) {
-			insertResult = cCouponDAO.insertCoupon(param);
-		} else {
-			System.out.println("널아니");
+			insertResult = bCouponDAO.updateDownload(param.get("couponid"));
+			if(insertResult == 1)	
+				insertResult = cCouponDAO.insertCoupon(param);
 		}
 		
 		return insertResult == 1 ? "true" : "false";

@@ -238,24 +238,24 @@ function markRegHolidays() {
 		fifthWeek: [],
 		sixthWeek: [],
 	};
-	
-	// 값 가져오기 > object 설정
-	const lists = document.getElementsByClassName("h_schedule_list");
-	for (let i = 0; i < lists.length; i++) {
-		// 주(week)
-		let week = lists[i].getElementsByClassName("h_week")[0].getElementsByTagName("span")[0].innerHTML;
-		week = weekConvert(week.trim());
-		
-		// 일(days)
-		const days = lists[i].getElementsByClassName("h_day");
-		
-		for (let j = 0; j < days.length; j++) {
-			let day = days[j].getElementsByTagName("span")[0].innerHTML;
-			day = dayConvert(day.trim());
-			
-			obj[week].push(day);
-		}
-	}
+//	
+//	// 값 가져오기 > object 설정
+//	const lists = document.getElementsByClassName("h_schedule_list");
+//	for (let i = 0; i < lists.length; i++) {
+//		// 주(week)
+//		let week = lists[i].getElementsByClassName("h_week")[0].getElementsByTagName("span")[0].innerHTML;
+//		week = weekConvert(week.trim());
+//		
+//		// 일(days)
+//		const days = lists[i].getElementsByClassName("h_day");
+//		
+//		for (let j = 0; j < days.length; j++) {
+//			let day = days[j].getElementsByTagName("span")[0].innerHTML;
+//			day = dayConvert(day.trim());
+//			
+//			obj[week].push(day);
+//		}
+//	}
 	
 	// 달력 container & 주(week) 
 	const calendar = document.getElementById("calendar-days");
