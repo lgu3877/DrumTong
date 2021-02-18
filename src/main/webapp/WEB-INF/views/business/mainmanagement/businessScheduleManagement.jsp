@@ -37,6 +37,16 @@
    	<!-- jQuery -->
    	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
+	<!-- objects from DB -->
+	<script type="text/javascript">
+		let bscheduledays = ${bscheduledays};
+		const holiday = bscheduledays.holiday; // holiday > 'Y' or 'N'
+		delete bscheduledays.holiday; // holiday 삭제
+		
+		console.log(bscheduledays);
+		console.log(holiday);
+	</script>
+
 </head>
 <body>
 
@@ -294,11 +304,10 @@
 						</ul>
 					</div>
 				</div>
-				
 			</div>
 			<!-- </form> -->
 			
-			<!-- 정기 휴무 설정 -->
+		<!-- 정기 휴무 설정 -->
 			<!-- <form class="holiday"> -->
 			<div class="holiday">
 				<!-- title -->
@@ -309,14 +318,6 @@
 					</div>
 					<!-- button -->
 					<div class="btn_con">
-					<!-- 
-						<div id="modify-holiday" class="btn format_btn">
-							<div class="icon_con">
-								<i class="fas fa-plus-square"></i>
-							</div>
-							<div class="btn_title">일자 변경</div>
-						</div>
-					-->	
 					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
 					<c:if test="${status eq 'SUCCESS' }">
 						<div id="complete-holiday" class="btn update_btn">
@@ -384,57 +385,9 @@
 					</div>
 					
 				<!-- 저장된 정기 휴무일 표기 -->
-					<ul class="h_schedule_con form">
-						<li class="h_schedule_list">
-					<!-- 내용 -->
-					<!-- 1 -->
-							<div class="h_schedule_context">
-								<p class="scheduled_days">
-									매월 
-										<span class="h_week">[첫째 주]</span> |
-										<span class="h_day">[일요일]</span>
-										<span class="h_day">[화요일]</span>
-									휴무
-								</p>						
-							</div>
-							<div class="h_schedule_delete">
-								<p>삭제</p>
-							</div>
-						</li>
-					<!-- 2 -->
-						<li class="h_schedule_list">
-							<div class="h_schedule_context">
-								<p class="scheduled_days">
-									매월 
-										<span class="h_week">[셋째 주]</span> |
-										<span class="h_day">[월요일]</span>
-										<span class="h_day">[목요일]</span>
-										<span class="h_day">[금요일]</span>
-										<span class="h_day">[토요일]</span>
-									휴무
-								</p>
-							</div>
-							<div class="h_schedule_delete">
-								<p>삭제</p>
-							</div>
-						</li>
-					<!-- 3 -->
-						<li class="h_schedule_list">
-							<div class="h_schedule_context">
-								<p class="scheduled_days">
-									매월 
-										<span class="h_week">[다섯째 주]</span> |
-										<span class="h_day">[월요일]</span>
-										<span class="h_day">[토요일]</span>
-									휴무
-								</p>
-							</div>
-							<div class="h_schedule_delete">
-								<p>삭제</p>
-							</div>
-						</li>
-					</ul>
-
+					<div class="form">
+						<ul id="reg-holiday-schedule" class="h_schedule_con"></ul>
+					</div>
 				<!-- 달력 -->
 					<div id="calander" class="calendar form">
 						<div class="calendar_selector_con">
@@ -720,14 +673,24 @@
 
 <!-- footer -->
 	<%-- <%@ include file="../main/businessFooter.jsp" %> --%>
+	
+	
+	<!-- 영업시간 -->
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/interface.js"></script>
-	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/calendar.js"></script>
+	
+	<!-- 임시휴무 -->
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/tmpHolidayButtons.js"></script>
-	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/filter.js"></script>
-	<script type="text/javascript">
-	 let bscheduledays = ${bscheduledays};
-	 console.log(test);
-	</script>
+	
+	<!-- 정기휴무 -->
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/regularHoliday.js"></script>
 
+	<!-- 달력 -->
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/calendar.js"></script>
+	
+	<!-- 필터 -->
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/filter.js"></script>
+	
+	<!-- 업데이트 -->
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/filter.js"></script>
 </body>
 </html>
