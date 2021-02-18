@@ -97,3 +97,30 @@ async function removeRegHoliday(id) {
 		alert("잘못된 입력입니다.");
 	}
 }
+
+
+function updateTmpHoliday() {
+	const startDate = document.getElementById("startDay").value;
+	const endDate = document.getElementById("endDay").value;
+	const reason = document.getElementById("tmp-holiday-text").value;
+	
+	// validation (시작일 > 종료일 & null 체크)
+	if (startDate > endDate || startDate === "" || endDate === "" || reason.value === "")
+		return alert("잘못된 날짜입력 입니다.");
+	
+	// request object 생성
+	const object = {
+		start : startDate, 
+		end : endDate,
+		reason : reason
+	}
+	
+	console.log(object);
+	const { data } = axios.post("/drumtong/business/mainmanagement/BTempHoliday/rest/deleteBTempHoliday/", object);
+
+	
+	// form 초기화
+	document.getElementById("startDay").value = "";
+	document.getElementById("endDay").value = "";
+	document.getElementById("tmp-holiday-text").value = "";
+}
