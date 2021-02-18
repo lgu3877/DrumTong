@@ -48,8 +48,9 @@
     
     <div  class="c2-input">
     	<h1>영업자 신고증</h1>
-    	<label for="reportcard" class="forLabel" style="display: table;"><span style="display: table-cell; vertical-align: middle;">업로드</span></label>
-    	<input type="file" placeholder="영업자 신고증을 등록하세요" name="businessInformationImage" id="reportcard" required>
+    	<label for="reportcard" class="forLabel" style="display: table;"><span style="display: table-cell; vertical-align: middle;">업로드</span>
+    		<input type="file" placeholder="영업자 신고증을 등록하세요" name="businessInformationImage" id="reportcard" required>
+    	</label>
     </div>
     <div id="reportcarddiv">
     	<img id="reportcard-space" width="600px">
@@ -57,8 +58,9 @@
 	
     <div  class="c2-input">
     	<h1>사업자 등록증</h1>
-    	<label for="license" class="forLabel" style="display: table;"><span style="display: table-cell; vertical-align: middle;">업로드</span></label>
-    	<input type="file" placeholder="사업자 등록증을 등록하세요" name="businessInformationImage" id="license" required>
+    	<label for="license" class="forLabel" style="display: table;"><span style="display: table-cell; vertical-align: middle;">업로드</span>
+    		<input type="file" placeholder="사업자 등록증을 등록하세요" name="businessInformationImage" id="license" required>
+    	</label>
     </div>
     <div id="imgdiv">
     	<img id="img-space" width="600px">
