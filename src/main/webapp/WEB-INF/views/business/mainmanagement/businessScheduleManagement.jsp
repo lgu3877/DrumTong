@@ -439,24 +439,16 @@
 					</div>
 					<!-- button -->
 					<div class="btn_con">
-					<!-- 
-						<div id="modify-holiday" class="btn format_btn">
-							<div class="icon_con">
-								<i class="fas fa-plus-square"></i>
-							</div>
-							<div class="btn_title">휴무 수정</div>
-						</div>
-					 -->
 					 
-					 <!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
-					<c:if test="${status eq 'SUCCESS' }">
-						<div id="complete-holiday" class="btn update_btn">
-							<div class="icon_con">
-								<i class="fas fa-check-square"></i>
+					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
+						<c:if test="${status eq 'SUCCESS' }">
+							<div id="complete-holiday" class="btn update_btn" onclick="updateTmpHoliday()">
+								<div class="icon_con">
+									<i class="fas fa-check-square"></i>
+								</div>
+								<div class="btn_title">휴무 등록</div>
 							</div>
-							<div class="btn_title">휴무 등록</div>
-						</div>
-					</c:if>
+						</c:if>
 					</div>
 				</div>
 				
@@ -473,25 +465,22 @@
 							<div class="reason_title">임시 휴무 기간 선택 및 사유 작성</div>
 
 							<div class="set_day_range_con">
+							<!-- form -->
 								<input id="startDay" type="date" name="startDay" pattern="\d{4}-\d{2}-\d{2}">
-								<!-- <label for="startDay">시작 일</label> -->
 
-								<!-- 화살표 -->
+							<!-- ~ -->
 								<div class="date_arrow">
 									<i class="fas fa-long-arrow-alt-right"></i>
 								</div>
-								<!-- to -->
+							<!-- to -->
 								<input id="endDay" type="date" name="endDay" pattern="\d{4}-\d{2}-\d{2}">
-								<!-- <label for="endDay">마지막 일</label> -->
 							</div>
 							<div id="date-error-msg" class="error_msg text_red"></div>
 
 						<!-- 사유 -->
 							<div class="text_area_con">
-								<textarea class="text_area" cols="100" rows="30"></textarea>
+								<textarea id="tmp-holiday-text" class="text_area" cols="100" rows="30"></textarea>
 							</div>
-						<!-- 버튼 -->
-							<button class="reason_btn btn">작성 완료</button>
 						</div>
 					<!-- </form> -->	
 						
@@ -557,7 +546,7 @@
 										<li class="cancle_icon_con">
 											<i class="fas fa-times" onclick="cancleUpdate(this)"></i>
 										</li>
-										<li>
+										<li class="remove_icon_con">
 											<i class="fas fa-trash-alt" onclick="deleteSchedule(this)"></i>
 										</li>
 										<li class="complete_icon_con">
@@ -675,8 +664,6 @@
 	
 	<!-- global functions -->
 	<script type="text/javascript">
-		let btempsuspension = ${btempsuspension};
-		console.log(btempsuspension);
 		//랜덤 String 생성
 		function generateRandomString(length) {
 			let result = "";
@@ -701,14 +688,14 @@
 	<!-- 영업시간 -->
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/interface.js"></script>
 	
-	<!-- 임시휴무 -->
-	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/tmpHolidayButtons.js"></script>
+	<!-- 달력 -->
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/calendar.js"></script>
 	
 	<!-- 정기휴무 -->
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/regularHoliday.js"></script>
 
-	<!-- 달력 -->
-	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/calendar.js"></script>
+	<!-- 임시휴무 -->
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/tmpHoliday.js"></script>
 	
 	<!-- 필터 -->
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/filter.js"></script>
