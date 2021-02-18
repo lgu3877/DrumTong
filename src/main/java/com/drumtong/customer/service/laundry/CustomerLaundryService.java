@@ -72,12 +72,13 @@ public class CustomerLaundryService {
 		List<ReviewList> ReviewList = Review.selectList(estid, "whole");
 		
 		
+		Gson gson = new Gson();
 		mav.addObject("bInformationVO", bInformationVO);
 		mav.addObject("bManagementVO", bManagementVO);
-		if(bImageVO != null) mav.addObject("bImageVO", new Gson().toJson(bImageVO));
-		mav.addObject("bCouponVO", new Gson().toJson(bCouponVO));
-		mav.addObject("menuList", new Gson().toJson(menuList));
-		mav.addObject("ReviewList", new Gson().toJson(ReviewList));
+		if(bImageVO != null) mav.addObject("bImageVO", gson.toJson(bImageVO));
+		mav.addObject("bCouponVO", gson.toJson(bCouponVO));
+		mav.addObject("menuList", gson.toJson(menuList));
+		mav.addObject("ReviewList", gson.toJson(ReviewList));
 		
 		// 로그인 되어있을 때 쿠폰 정보, 북마크 체크 여부
 		CPrivateDataVO Login = (CPrivateDataVO)req.getSession().getAttribute("cLogin");

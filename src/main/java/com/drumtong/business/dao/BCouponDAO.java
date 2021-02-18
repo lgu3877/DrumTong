@@ -21,4 +21,6 @@ public interface BCouponDAO {
 	// 고객 계정관리의 쿠폰 리스트를 가져와주는 메서드
 	List<CouponList> selectCouponList(String memberid);
 
+	int updateDownload(String couponid);
+
 }
