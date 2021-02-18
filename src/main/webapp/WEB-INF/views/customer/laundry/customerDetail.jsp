@@ -662,8 +662,7 @@
 	    		document.getElementById('my-point').children[0].innerHTML = myPoint; // 현재 포인트
 	    		
 	    		// 사용할 수 있는 쿠폰을 체크하도록
-	    		checkAbleCoupon(0);
-	    		
+	     		calTotal();
     		}
     		else{
     			 document.getElementById('loginSubmit').addEventListener('click', function(){ logiinSubmit('asynchronous'); });
