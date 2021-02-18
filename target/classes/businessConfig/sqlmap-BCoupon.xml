@@ -59,4 +59,8 @@
 				ON cc.COUPONID = a.COUPONID 
 				WHERE cc.MEMBERID=#{memberid} AND USEBOOLEAN='Y'
 	</select>
+	
+	<update id="updateDownload" parameterType="String">
+		UPDATE BCOUPON SET ISSUENUM = ISSUENUM + 1 WHERE COUPONID=#{couponid} AND ((MAXISSUENUM <![CDATA[<>]]> 0 AND ISSUENUM <![CDATA[<]]> MAXISSUENUM) OR MAXISSUENUM = 0)
+	</update>
 </mapper>

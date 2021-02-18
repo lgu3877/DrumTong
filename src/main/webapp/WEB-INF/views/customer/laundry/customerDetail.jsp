@@ -31,16 +31,41 @@
  	<!-- 스크립트 영역 -->
     <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail.js"></script>
-   	<script>
-// 		imgList = ${bImageVO};
-// 		i = 0;
-// 		imgBoxs = document.querySelectorAll('detailview-imgBlock');
-		
-// 		imgList.forEach(img =>{
-// 			imgBoxs[i++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + img.storeimg;
-// 		})
+   	
+	<script>
+	// 쿠폰을 사용했을 때 couponid 값을 넘기도록 설정해주어야 한다!
+		function checkAbleCoupon(currentPrice){
+			let result = 0
+			if(checkLogin){
+				couponcCheckList = document.getElementById('select-coupon');
+				
+				couponNum = couponcCheckList.children.length;
+				selectValue = couponcCheckList.value;
+				// 현재 체크되어있는 value 값이 사용할수 없을 땐 첫번째가 선택되있게 변경하기
+				for(num = 1; num < couponNum; num++){
+					spanCoupon = couponcCheckList.children[num];
+					spanCouponIn = spanCoupon.children[0];
+					if(currentPrice < spanCouponIn.children[2].innerHTML){ // 사용할 수 없는 쿠폰일 땐 선택 못하게 설정
+						spanCoupon.setAttribute('disabled','disabled');
+					} else{ // 사용할 수 있는 쿠폰일 땐 선택 할 수 있게 설정
+						spanCoupon.removeAttribute('disabled');
+					}
+					
+					// 금액이 바뀌었을 때 선택되어있는 쿠폰이 사용할 수 없는 쿠폰이면 선택 X 로 selected 설정
+					if(selectValue === spanCoupon.value){
+						if(currentPrice < spanCouponIn.children[2].innerHTML){
+							couponcCheckList[0].selected = true;
+						} else {
+							result = spanCouponIn.children[0].innerHTML;
+						}
+					}
+				}
+				
+			}
+			return result;
+		}
+		// 로그인이 되어있을 때 첫 번째로 실행, 금액이 바뀔때마다 실행(단, 로그인 여부를 구분해주어야 한다)
 	</script>
-
     <script>
       function submit() {
         selecteds = document.querySelectorAll('.selected-row');
@@ -91,11 +116,12 @@
               <img src="" />
             </div>
             <div class="detailview-imgBlock-subRow">
-              <img src="" />
-              <img src="" />
-              <img src="" />
-              <img src="" />
-              <img src="" />
+              <img src="" id="imgBox1" class="select exist"/>
+              <img src="" id="imgBox2" />
+              <img src="" id="imgBox3" />
+              <img src="" id="imgBox4" />
+              <img src="" id="imgBox5" />
+              <img src="" id="imgBox6" />
             </div>
           </div>
           <div class="detailview-companyIntro">
@@ -130,7 +156,7 @@
             <div class="select-coupon">
               내 쿠폰
               <select id="select-coupon">
-                       <option hidden="true">선택 X</option>
+                       <option value="noCoupon">선택 X</option>
                        <option id="noLogin" disabled>로그인 후 이용가능</option>
               </select>
             </div>
@@ -271,155 +297,6 @@
     </div>
 
     <!-- 스크립트 영역 -->
-    <script type="text/javascript">
-      cLogin = '${cLogin}';
-      console.log('cLogin', cLogin === null, cLogin === '');
-      console.log(cLogin);
-      console.log('cLogin', cLogin !== null, cLogin !== '');
-      // Get the modal
-       var modal = document.getElementById('myModal');
-
-       var modalContent1 = document.getElementById('modal-content1');   // 쿠폰 받기 화면
-       var modalContent2 = document.getElementById('modal-content2');   // 결제 화면
-       var modalContent3 = document.getElementById('modal-content3');   // 로그인 화면
-       var modalContent4 = document.getElementById('modal-content4');   // 리뷰 화면
-       var modalContent5 = document.getElementById('modal-content5');   // 모달 컨텐츠4 -> 고객리뷰이미지
-       var modalContent5_exit = document.getElementById('modal-content5-exit');   // 모달 컨텐츠5 -> 닫기
-
-       // Get the button that opens the modal
-       var btn1 = document.getElementById('add-coupon');
-       var btn2 = document.getElementById('order-submit');
-       var btn3 = document.getElementById('review-more');
-       var btn4 = document.getElementById('modal-submit');
-       var btn5 = document.getElementById('modal-addCoupon');// 모달에서 쿠폰받기 누르면
-
-       // Get the <span> element that closes the modal
-       var span = document.getElementsByClassName('close')[0];
-
-       function LoginModalOpen(){
-          modal.style.display = 'block';
-          modalContent3.style.display = 'flex';
-       }
-       
-       // When the user clicks on the button, open the modal
-       btn1.onclick = function () {
-            if('${cLogin}' == ''){
-               LoginModalOpen();
-               return;
-            }  
-         modal.style.display = 'block';
-         modalContent1.style.display = 'flex';
-       };
-
-       btn2.onclick = function () {
-    	 if(document.getElementById('selected-List').children.length == 0){
-    		 alert('주문 목록이 비었습니다.');
-    		 return;
-    	 }
-         modal.style.display = 'block';
-          
-        //로그인이 안되있으면 이 문장을 수행
-        if('${cLogin}' == ''){
-           modalContent3.style.display = 'flex';
-        } else{
-           //로그인이 되어있다면 submit 기능 수행
-            modalContent2.style.display = 'flex';
-        }
-       };
-
-       btn3.onclick = function () {
-         modal.style.display = 'block';
-//          modalContent4.style.display = 'flex';
-         modalContent4.style.display = '';
-         reviewMore();
-       };
-       
-       btn4.onclick = function () {
-         modal.style.display = 'block';
-
-         submit();
-
-       };
-       
-
-       btn5.onclick = function(){
-          selectedCouponID = document.getElementById('modal-couponList').value;
-           const axPost = async (memberid) =>{
-              ob={
-                 'memberid' : memberid,
-                 'couponid' : selectedCouponID,
-              };
-              await axios.post('/drumtong/customer/laundry/customerDetail/rest/addCoupon/', ob)
-              .then ((response) => {
-                 if(response.data === true){
-                	alert('발급 성공');
-                 } else {
-                	alert('이미 발급받은 쿠폰입니다.');
-                 }
-                 modal.style.display = 'none';
-                 modalContent1.style.display = 'none';
-              })
-              
-           };
-           if('${cLogin}' != ''   ){
-              axPost('${cLogin.memberid}');
-           } else{
-              console.log("로그인 안되어 있어서 다운못해요~");
-           }
-          
-       }
-
-       // When the user clicks on <span> (x), close the modal
-       span.onclick = function () {
-
-         const reviewModals = document.querySelector('#modal-reiview').querySelectorAll('.detailview-review-row');
-         for(i = reviewModals.length; i > 0; i--) {
-      	   if(i == 1)
-      		   reviewModals[i - 1].querySelector('.modal-grade').innerHTML = '';
-      	   else
-		 		   reviewModals[i - 1].remove();
-         }
-         
-    	 modal.style.display = 'none';
-         modalContent1.style.display = 'none';
-         modalContent2.style.display = 'none';
-         modalContent3.style.display = 'none';
-         modalContent4.style.display = 'none';
-         modalContent5.style.display = 'none';
-         modalContent5_exit.style.display = 'none';
-         
-       };
-
-       // When the user clicks anywhere outside of the modal, close it
-       window.onclick = function (event) {
-         if (event.target == modal) {
-           
-           const reviewModals = document.querySelector('#modal-reiview').querySelectorAll('.detailview-review-row');
-           for(i = reviewModals.length; i > 0; i--) {
-        	   if(i == 1)
-        		   reviewModals[i - 1].querySelector('.modal-grade').innerHTML = '';
-        	   else
-		 		   reviewModals[i - 1].remove();
-           }
-
-           modal.style.display = 'none';
-           modalContent1.style.display = 'none';
-           modalContent2.style.display = 'none';
-           modalContent3.style.display = 'none';
-           modalContent4.style.display = 'none';
-           modalContent5.style.display = 'none';
-           modalContent5_exit.style.display = 'none';
-         }
-       };
-         
-         
-         document.getElementById('loginSubmit').addEventListener('click', function(){ logiinSubmit('asynchronous');});
-
-         //수량 바뀌는 이벤트 리스너를 이곳에서 삽입
-         document.getElementById('selected-List').addEventListener('change', calTotal);
-         
-    </script>
-    
     <script type="text/javascript">	// 승원 작업 - 구글 차트
     
 	var reviewList = ${ReviewList};
@@ -689,8 +566,11 @@
     	function initPage(checkLogin){
 			// 1. 로그인 여부와 상관없이 초기세팅되어야 하는 메서드들
 			// 2. 로그인 여부에 따라 나뉘는 세팅들
-    		console.log('initLogin 실행');
     		
+   	    	//수량 바뀌는 이벤트 리스너를 이곳에서 삽입
+    	    document.getElementById('selected-List').addEventListener('change', calTotal);
+    	    document.getElementById('select-coupon').addEventListener('change', calTotal);
+			
     		// 메인 카테고리 버튼 넣는 부분
     		mainCtList.forEach(mct => {
     			mainDiv = document.createElement('div');
@@ -719,7 +599,8 @@
 
 			couponSettings(${bCouponVO }); // 매장의 쿠폰을 다운
     	}
-    	function checkLoginSettings(checkLogin, CouponList, myPoint, Bookmark){
+    	function checkLoginSettings(checkLoginBoolean, CouponList, myPoint, Bookmark){
+    		checkLogin = checkLoginBoolean;
     		closeAllModal();
     		// When the user clicks on the button, open the modal
 	 	       btn1.onclick = function () { 
@@ -740,17 +621,32 @@
 	 	       btn5.onclick = async function(){
 	 	    	  if(checkLogin){
 	 		          selectedCouponID = document.getElementById('modal-couponList').value;
+	 		          
 	 	    		  ob={
 	 		                 'couponid' : selectedCouponID,
 	 		              };
-	 	    		  const {btn5_data} = await axios.post('/drumtong/customer/laundry/customerDetail/rest/addCoupon/', ob);
-	 	    		  alert(btn5_data ? '발급 성공' : '이미 발급받은 쿠폰입니다.');
+	 	    		  const {data} = await axios.post('/drumtong/customer/laundry/customerDetail/rest/addCoupon/', ob);
+	 	    		  console.log(data);
+	 	    		  alert(data ? '발급 성공' : '이미 발급받은 쿠폰입니다.');
+	 	    		  if(data){
+	 	    			  let listCoupon = document.getElementById('modal-couponList');
+	 	    			  
+		 		          for(check = 0; check < listCoupon.length; check++){
+		 		        	  if(listCoupon.children[check].value === selectedCouponID){
+		 		        		  val1 = listCoupon.children[check].children[0].children[0].innerHTML;
+		 		        		  val2 = listCoupon.children[check].children[0].children[2].innerHTML;
+		 		        		  val3 = listCoupon.children[check].children[0].children[4].innerHTML;
+		 		        		  oneCouponSettings(val1, val2, val3, selectedCouponID);
+		 		        		  calTotal();
+		 		        	  }
+		 		          }
+	 	    		  }
 	 	    		  closeModal(modalContent1);
 	 	    	  }
 	 	       }
 	 	      btn6.onclick = function(){
-	 	    	 if(checkLogin){
-	 	    		addBookmark();
+	 	    	 if(checkLoginBoolean){
+	 	    		addBookmark('${estid}');
 	 	    	 } else {
 	 	    		openModal(modalContent3 , 'flex');
 	 	    	 }
@@ -765,16 +661,46 @@
 	    		
 	    		document.getElementById('my-point').children[0].innerHTML = myPoint; // 현재 포인트
 	    		
+	    		// 사용할 수 있는 쿠폰을 체크하도록
+	    		checkAbleCoupon(0);
 	    		
     		}
     		else{
-    			console.log('로그인 안되어있을 때');
     			 document.getElementById('loginSubmit').addEventListener('click', function(){ logiinSubmit('asynchronous'); });
     		}
     	} 
     	initPage(checkLogin);
     	
     </script>
-
-
+<script>
+		imgList = ${bImageVO};
+		imgBoxs = document.getElementById('detailview-imgBlock');
+		subImgNum = 1;
+		for(imageNum = 0; imageNum < 6; imageNum++){
+			if(imageNum < imgList.length){
+				imgBoxs.children[1].children[imageNum].className = 'exist'; 
+				if(imgList[imageNum].delegatephotoboolean === 'Y'){
+					imgBoxs.children[0].children[0].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + imgList[imageNum].storeimg;
+					imgBoxs.children[1].children[0].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + imgList[imageNum].storeimg;
+					imgBoxs.children[1].children[0].className = 'select exist'; 
+				} else{
+					imgBoxs.children[1].children[subImgNum++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + imgList[imageNum].storeimg;
+				}
+				document.querySelector('#imgBox' + (imageNum + 1)).addEventListener('click', () => {
+					for(let i = 0; i < imgList.length; i++){
+						console.log()
+						if(event.target.id === imgBoxs.children[1].children[i].id){
+							event.target.className = "select exist";
+							imgBoxs.children[0].children[0].src = event.target.src;
+						} else{
+							imgBoxs.children[1].children[i].className = "exist";
+// 							document.querySelector('#' + imgBoxs.children[1].children[i].id).style.border = 'none';
+						}
+					}
+				});
+			} else {
+				imgBoxs.children[1].children[imageNum].src = '/drumtong/resources/business/img/slide/laundry1_02.jpg';
+			}
+		}
+	</script>
 <%@ include file="../main/customerFooter.jsp" %>
