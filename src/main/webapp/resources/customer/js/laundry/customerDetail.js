@@ -138,12 +138,14 @@ function calTotal() {
         totalText = document.getElementById('select-total').children[0];	// 토탈 요금
         priceText = document.getElementById('modal-price').children[0]; // 모달창 결제 금액
 
-        deliCheck = document.getElementById('deli-check');
-
-        deli = deliCheck.checked ? 2000 : 0;
+        pickUpCheck = document.getElementById('pickup-check'); // 수거 여부
+        deliCheck = document.getElementById('deli-check'); // 배달 여부
+        
+		pick = pickUpCheck.checked ? 1000 : 0;
+        deli = deliCheck.checked ? 1000 : 0;
 
         quickPrice = 0;
-        totalPrice = 0 + deli;
+        totalPrice = 0 + pick + deli;
 
         for (i = 0; i < orders.length; i++) {
           quantity = orders[i].children[1].value;
@@ -161,10 +163,41 @@ function calTotal() {
         }
       
         quickText.innerText = quickPrice;
-        totalPrice -= checkAbleCoupon(totalPrice - deli);
+        totalPrice -= checkAbleCoupon(totalPrice - pick -deli);
         totalText.innerText = totalPrice;
         priceText.innerText = totalPrice;
         
+}
+// 쿠폰을 사용했을 때 couponid 값을 넘기도록 설정해주어야 한다!
+function checkAbleCoupon(currentPrice){
+	let result = 0
+	if(checkLogin){
+		couponcCheckList = document.getElementById('select-coupon');
+		
+		couponNum = couponcCheckList.children.length;
+		selectValue = couponcCheckList.value;
+		// 현재 체크되어있는 value 값이 사용할수 없을 땐 첫번째가 선택되있게 변경하기
+		for(num = 1; num < couponNum; num++){
+			spanCoupon = couponcCheckList.children[num];
+			spanCouponIn = spanCoupon.children[0];
+			if(currentPrice < spanCouponIn.children[2].innerHTML){ // 사용할 수 없는 쿠폰일 땐 선택 못하게 설정
+				spanCoupon.setAttribute('disabled','disabled');
+			} else{ // 사용할 수 있는 쿠폰일 땐 선택 할 수 있게 설정
+				spanCoupon.removeAttribute('disabled');
+			}
+			
+			// 금액이 바뀌었을 때 선택되어있는 쿠폰이 사용할 수 없는 쿠폰이면 선택 X 로 selected 설정
+			if(selectValue === spanCoupon.value){
+				if(currentPrice < spanCouponIn.children[2].innerHTML){
+					couponcCheckList[0].selected = true;
+				} else {
+					result = spanCouponIn.children[0].innerHTML;
+				}
+			}
+		}
+		
+	}
+	return result;
 }
 // 퀵 마크를 체크 또는 체크 해제 해주는 메서드
   function quickMark(){

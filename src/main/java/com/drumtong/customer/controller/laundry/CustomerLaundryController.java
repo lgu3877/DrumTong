@@ -16,7 +16,7 @@ import com.drumtong.customer.service.laundry.CustomerLaundryService;
 public class CustomerLaundryController {
 	@Autowired CustomerLaundryService svc;
 	
-	// 검색 페이지 이동 [GET]
+	// 검색 페이지 이동 [GET] // 사용 안할 예정! 아래 메서드 사용할거라 나중에 삭제해줘야 함( - 영경)
 	@RequestMapping("customerSearch/")
 	public ModelAndView search(HttpServletRequest req) {	
 		return svc.search();
