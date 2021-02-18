@@ -8,5 +8,8 @@ public interface BEstablishmentDAO {
 	int confirm(String ESTID);
 
 	// 신규 데이터 생성
-	int insertSignUp(BEstablishmentVO bEstablishmentVO);	
+	int insertSignUp(BEstablishmentVO bEstablishmentVO);
+
+	// BPersonID 를 가져옵니다.
+	String selectBPersonID(String estid);	
 }
