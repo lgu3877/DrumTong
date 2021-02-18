@@ -28,6 +28,10 @@
 	background-color: #f38181 !important;
 }
 
+.reg_holiday h {
+	color: white;
+}
+
 /* 폰트 옵션 */
 .text_blue {
 	color: #3b5998;

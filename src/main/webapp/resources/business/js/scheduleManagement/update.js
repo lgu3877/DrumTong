@@ -1,5 +1,5 @@
 // 정기 휴무 등록
-function updateRegHoliday() {
+async function updateRegHoliday() {
 	// 주(week)
 	const weekSelector = document.getElementsByName("restWeek")[0];
 	const weekOptions = weekSelector.getElementsByTagName("option");
@@ -35,33 +35,40 @@ function updateRegHoliday() {
 	
 	// request object
 	const object = {
-		estid : "123",
 		week : selectedWeek,
 		days : selectedDays	
 	};
 	
-	console.log(object);
+	// axios
+	const { data } = await axios.post("/drumtong/business/mainmanagement/BScheduleDays/rest/insertBScheduleDays/", object);
+	console.log(data);
+
+	if (data) {
+		bscheduledays = data; // 데이터 덮어씌우기
+		document.getElementById("reg-holiday-schedule").innerHTML = ""; // 정기휴무 리스트 초기화
+		displayRegHolidays(); // 정기휴무 리스트 다시 출력
+	}
 	
-//	const { data } = await axios.post("/drumtong/business/mainmanagement/BScheduleDays/rest/insertBScheduleDays/", object);
-//	console.log(data);
-//
-//	if (data) {
-//		bscheduledays = data; // 데이터 덮어씌우기
-//		document.getElementById("reg-holiday-schedule").innerHTML = ""; // 정기휴무 리스트 초기화
-//		displayRegHolidays(); // 정기휴무 리스트 다시 출력
-//	}
-//	
-//	else {
-//		alert("잘못된 입력입니다.");
-//	}
+	else {
+		alert("잘못된 입력입니다.");
+	}
 }
 
+
+
 // 정기 휴무 삭제
-function removeRegHoliday(id) {
+async function removeRegHoliday(id) {
 	const list = document.getElementById(id);
 	
 	// 주 (week)
-	const removeWeek = list.getElementsByClassName("h_week")[0].innerText;
+	let removeWeek = list.getElementsByClassName("h_week")[0].innerText;
+	
+	// 주 (kor > en) 변환
+	for (let key in weekObject) {
+		if (weekObject[key] === removeWeek) {
+			removeWeek = key;
+		}
+	}
 	
 	// 일 (day)
 	let removeDays = "";
@@ -73,21 +80,20 @@ function removeRegHoliday(id) {
 	
 	// request object
 	const object = {
-		estid : "123",
 		week : removeWeek,
 		days : removeDays	
 	};
-	console.log(object);
+		
+	// axios
+	const { data } = await axios.delete("/drumtong/business/mainmanagement/BScheduleDays/rest/deleteBScheduleDays/", object);
 	
-//	const { data } = await axios.delete("/drumtong/business/mainmanagement/BScheduleDays/rest/deleteBScheduleDays/", object);
-//	
-//	if (data) {
-//		bscheduledays = data; // 데이터 덮어씌우기
-//		document.getElementById("reg-holiday-schedule").innerHTML = ""; // 정기휴무 리스트 초기화
-//		displayRegHolidays(); // 정기휴무 리스트 다시 출력
-//	}
-//	
-//	else {
-//		alert("잘못된 입력입니다.");
-//	}
+	if (data) {
+		bscheduledays = data; // 데이터 덮어씌우기
+		document.getElementById("reg-holiday-schedule").innerHTML = ""; // 정기휴무 리스트 초기화
+		displayRegHolidays(); // 정기휴무 리스트 다시 출력
+	}
+	
+	else {
+		alert("잘못된 입력입니다.");
+	}
 }

@@ -699,14 +699,14 @@
 	<!-- 영업시간 -->
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/interface.js"></script>
 	
+	<!-- 달력 -->
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/calendar.js"></script>
+
 	<!-- 임시휴무 -->
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/tmpHolidayButtons.js"></script>
 	
 	<!-- 정기휴무 -->
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/regularHoliday.js"></script>
-
-	<!-- 달력 -->
-	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/calendar.js"></script>
 	
 	<!-- 필터 -->
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/filter.js"></script>
