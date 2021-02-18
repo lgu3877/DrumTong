@@ -36,11 +36,21 @@ public class RestCustomerLaundryController {
 		return svc.setCoupon(req, param);
 	}
 	
-//	@RequestMapping("customerSearch/rest/clusterer/{address}/")
-//	@GetMapping(produces="application/json; charset=utf8")	
-//	public String clusterer(@PathVariable("address")String address){
-//		return svc.clusterer(address);
-//	}
+	// =======================================지도에 필요한 세탁소 리스트 가져오기===================================================
+	// 좌표를 이용해서 세탁소 리스트를 가져오는 경우[영경]
+	@RequestMapping("customerSearch/rest/selectLaundry/coordinate/{latitude}/{longitude}/{premium}/")
+	@GetMapping(produces="application/json; charset=utf8")	
+	public String selectLaundry(@PathVariable("latitude")String latitude, @PathVariable("longitude")String longitude, @PathVariable("premium")String premium){
+		return svc.selectLaundry(latitude,longitude);
+	}
+	
+	// emd 코드를 이용해서 세탁소 리스트를 가져오는 경우[영경]
+	@RequestMapping("customerSearch/rest/selectLaundry/emdcode/{emdcode}/{premium}/")
+	@GetMapping(produces="application/json; charset=utf8")	
+	public String selectLaundry(@PathVariable("emdcode")String emdcode, @PathVariable("premium")String premium){
+		return svc.selectLaundry(emdcode, premium);
+	}
+	// ====================================================================================================================
 	
 	// 승원씨가 작업한 sido를 가져오는 REST함수입니다
 	@RequestMapping(value = "customerMap/rest/sido/", produces =org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
