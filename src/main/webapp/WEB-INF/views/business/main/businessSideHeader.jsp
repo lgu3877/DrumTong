@@ -136,10 +136,13 @@
 	
 	for(let i = 0; i < back_side_headers.length; i++ ) {
 // 		back_side_headers[i].style.left = document.querySelector('.side_header_con').offsetWidth + 'px';
-		back_side_headers[i].style.left = '-175px';
+		back_side_headers[i].style.left = '-175px';	
+		// class="side_header_con" 의 width = '125px' 이므로
+		// width = "300px" 인 class="side_header_sub_back"를 숨기려면 최소 left = '-175px'로 설정해야 한다
 	}
 	
-	
+	// object1	->	사이드 바에서 클릭했을 때의 객체 class="side_menu_list"
+	// object2	->	사이드 바를 클릭하면 나타나는 객체 class="side_header_sub_back"
 	function anontherBackExit(object1, object2) {
 		let subBack = document.querySelectorAll('.side_header_sub_back');
 // 		console.log('object1 : ' + object1.id);
@@ -178,6 +181,7 @@
 	
 	document.getElementById('review-list').addEventListener("click", function() {
 		
+		// class="side_header_sub_back" 태그의 ID는 class="side_menu_list" 에 숨겨져 있는 input 태그 name 이랑 똑같음 
 		let sub_bacK_div = document.getElementById(this.querySelector('input[type="hidden"]').name);
 
 		if(this.className == 'side_menu_list') {	//	나타나기
