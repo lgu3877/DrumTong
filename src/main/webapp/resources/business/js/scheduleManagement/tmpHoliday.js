@@ -9,55 +9,108 @@ function displayTmpHoliday() {
 	// container
 	const container = document.getElementById("schedule-container");
 	
-	// list
-	const ul = document.createElement("ul");
-	ul.className = "list_content";
 	
-	
-	
-	// 날짜
-	const periodCon = document.createElement("li");
-	periodCon.className = "period_con";
-	
-	const subCon = document.createElement("div");
-	subCon.className = "period_view_default";
-	
-	const inputCon = document.createElement("div");
-	inputCon.className = "period_view_input";
-	
-	// 사유
-	const reasonCon = document.createElement("li");
-	reasonCon.className = "reason_con";
-	
-	// 아이콘(update)
-	const updateIcon = document.createElement("li");
-	updateIcon.innerHTML = '<i class="fas fa-pen-square" onclick="updateSchedule(this)"></i>';
-	
-	// 아이콘(cancle)
-	const cancleIcon = document.createElement("li");
-	cancleIcon.innerHTML = '<i class="fas fa-times" onclick="cancleUpdate(this)"></i>';
-
-	// 아이콘(remove)
-	const removeIcon = document.createElement("li");
-	removeIcon.innerHTML = '<i class="fas fa-trash-alt" onclick="deleteSchedule(this)"></i>';
-
-	// 아이콘(complete)
-	const completeIcon = document.createElement("li");
-	completeIcon.innerHTML = '<i class="fas fa-check-square" onclick="postSchedule(this)"></i>';
-	
-	// 추가
-	periodCon.appendChild(subCon);
-	periodCon.appendChild(inputCon);
-	
-	ul.appendChild(periodCon);
-	ul.appendChild(reasonCon);
-	ul.appendChild(updateIcon);
-	ul.appendChild(cancleIcon);
-	ul.appendChild(removeIcon);
-	ul.appendChild(completeIcon);
-	
-	container.appendChild(ul);
+	for (let i = 0; i < btempsuspension.length; i++) {
+		// temp holiday info
+		const data = btempsuspension[i];
+		
+		// list
+		const ul = document.createElement("ul");
+		const randomId = generateRandomString(9);
+		ul.className = "list_content";
+		ul.id = randomId;
+		
+			// 날짜
+			const periodCon = document.createElement("li");
+			periodCon.className = "period_con";
+				
+				// view
+				const subCon = document.createElement("div");
+				subCon.className = "period_view_default";
+					
+					// start
+					const start = document.createElement("div");
+					start.className = "list_start_day";
+					start.innerHTML = data.beginday; // data
+						
+					// ~
+					const firstArrow = document.createElement("div");
+					firstArrow.className = "arrow";
+					
+					// end
+					const end = document.createElement("div");
+					end.className = "list_end_day"
+					end.innerHTML = data.endday; // data
+				
+				// input
+				const inputCon = document.createElement("div");
+				inputCon.className = "period_view_input";
+					
+					// start input
+					const startInput = document.createElement("input"); 
+					startInput.type = "date";
+					startInput.name = "updateStartDay";
+					startInput.value = data.beginday; // data preview
+					
+					// ~
+					const secondArrow = document.createElement("div");
+					secondArrow.className = "arrow";
+					
+					// end input
+					const endInput = document.createElement("input");
+					endInput.type = "date";
+					endInput.name = "updateEndDay";
+					endInput.value = data.endday; // data preview
+			
+			// 사유
+			const reasonCon = document.createElement("li");
+			reasonCon.className = "reason_con";
+			
+				const reason = document.createElement("div");
+				reason.className = "reason_view_default";
+				reason.innerHTML = data.reason // data preview
+			
+			// 아이콘(update)
+			const updateIcon = document.createElement("li");
+			updateIcon.innerHTML = '<i class="fas fa-pen-square" onclick="updateSchedule(randomId)"></i>';
+			
+			// 아이콘(cancle)
+			const cancleIcon = document.createElement("li");
+			cancleIcon.innerHTML = '<i class="fas fa-times" onclick="cancleUpdate(randomId)"></i>';
+			
+			// 아이콘(remove)
+			const removeIcon = document.createElement("li");
+			removeIcon.innerHTML = '<i class="fas fa-trash-alt" onclick="deleteSchedule(randomId)"></i>';
+			
+			// 아이콘(complete)
+			const completeIcon = document.createElement("li");
+			completeIcon.innerHTML = '<i class="fas fa-check-square" onclick="postSchedule(randomId)"></i>';
+			
+		// 추가
+		subCon.appendChild(start);
+		subCon.appendChild(firstArrow);
+		subCon.appendChild(end);
+		
+		inputCon.appendChild(startInput);
+		inputCon.appendChild(secondArrow);
+		inputCon.appendChild(endInput);
+			
+		periodCon.appendChild(subCon);
+		periodCon.appendChild(inputCon);
+		
+		reasonCon.appendChild(reason);
+		
+		ul.appendChild(periodCon);
+		ul.appendChild(reasonCon);
+		ul.appendChild(updateIcon);
+		ul.appendChild(cancleIcon);
+		ul.appendChild(removeIcon);
+		ul.appendChild(completeIcon);
+		
+		container.appendChild(ul);
+	}
 }
+
 
 // 임시 휴무 수정 취소 버튼 숨기기
 function hideCancleBtn() {
@@ -71,6 +124,7 @@ function hideCancleBtn() {
 		completeIcons[i].style.color = "lawngreen";
 	}
 }
+
 
 // 임시 휴무 리스트 수정 버튼
 function updateSchedule(obj) {
@@ -94,6 +148,7 @@ function updateSchedule(obj) {
 	cancleIcon.style.display = "block";
 	completeIcon.style.display = "block";
 }
+
 
 // 임시 휴무 리스트 수정 취소 버튼
 function cancleUpdate(obj) {
@@ -119,6 +174,7 @@ function cancleUpdate(obj) {
 	
 	
 }
+
 
 // 임시 휴무 리스트 삭제 버튼
 function deleteSchedule(obj) {
