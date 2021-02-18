@@ -621,12 +621,14 @@
 	 	       btn5.onclick = async function(){
 	 	    	  if(checkLogin){
 	 		          selectedCouponID = document.getElementById('modal-couponList').value;
-	 		          
+	 		          if(!selectedCouponID.includes('CouponID_')){
+	 		        	  alert('발급 가능한 쿠폰이 없습니다.');
+	 		        	  return;
+	 		          }
 	 	    		  ob={
 	 		                 'couponid' : selectedCouponID,
 	 		              };
 	 	    		  const {data} = await axios.post('/drumtong/customer/laundry/customerDetail/rest/addCoupon/', ob);
-	 	    		  console.log(data);
 	 	    		  alert(data ? '발급 성공' : '이미 발급받은 쿠폰입니다.');
 	 	    		  if(data){
 	 	    			  let listCoupon = document.getElementById('modal-couponList');
