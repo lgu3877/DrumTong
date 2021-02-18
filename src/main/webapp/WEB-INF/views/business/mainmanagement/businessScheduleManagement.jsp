@@ -102,14 +102,6 @@
 					</div>
 					<!-- buttons -->
 					<div class="btn_con">
-					<!-- 
-						<div id="modify-working-hour" class="btn format_btn">
-							<div class="icon_con">
-								<i class="fas fa-plus-square"></i>
-							</div>
-							<div class="btn_title">시간 수정</div>
-						</div>
-					 -->
 					
 					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
 					<c:if test="${status eq 'SUCCESS' }">

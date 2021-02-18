@@ -1,7 +1,9 @@
 // 초기실행 (뷰 & 인터페이스)
 displayTmpHoliday();
 
-hideCancleBtn();
+//hideCancleBtn();
+
+hideModiIcons();
 
 
 // 임시 휴무 리스트 출력
@@ -70,21 +72,27 @@ function displayTmpHoliday() {
 				reason.className = "reason_view_default";
 				reason.innerHTML = data.reason // data preview
 			
-			// 아이콘(update)
-			const updateIcon = document.createElement("li");
-			updateIcon.innerHTML = '<i class="fas fa-pen-square" onclick="updateSchedule(randomId)"></i>';
-			
 			// 아이콘(cancle)
 			const cancleIcon = document.createElement("li");
+			cancleIcon.className = "cancle_icon";
 			cancleIcon.innerHTML = '<i class="fas fa-times" onclick="cancleUpdate(randomId)"></i>';
-			
-			// 아이콘(remove)
-			const removeIcon = document.createElement("li");
-			removeIcon.innerHTML = '<i class="fas fa-trash-alt" onclick="deleteSchedule(randomId)"></i>';
 			
 			// 아이콘(complete)
 			const completeIcon = document.createElement("li");
+			completeIcon.className = "complete_icon";
 			completeIcon.innerHTML = '<i class="fas fa-check-square" onclick="postSchedule(randomId)"></i>';
+
+			// 아이콘(remove)
+			const removeIcon = document.createElement("li");
+			removeIcon.className = "remove_icon";
+			removeIcon.innerHTML = '<i class="fas fa-trash-alt" onclick="deleteSchedule(randomId)"></i>';
+			
+			// 아이콘(update)
+			const updateIcon = document.createElement("li");
+			updateIcon.className = "update_icon";
+			updateIcon.innerHTML = '<i class="fas fa-pen-square" onclick="updateSchedule(randomId)"></i>';
+			
+			
 			
 		// 추가
 		subCon.appendChild(start);
@@ -102,12 +110,27 @@ function displayTmpHoliday() {
 		
 		ul.appendChild(periodCon);
 		ul.appendChild(reasonCon);
-		ul.appendChild(updateIcon);
+		
 		ul.appendChild(cancleIcon);
-		ul.appendChild(removeIcon);
 		ul.appendChild(completeIcon);
+		ul.appendChild(removeIcon);
+		ul.appendChild(updateIcon);
 		
 		container.appendChild(ul);
+	}
+}
+
+// 아이콘 숨기기 (수정전)
+function hideModiIcons() {
+	const cancleIcons = document.getElementsByClassName("cancle_icon");
+	const completeIcons = document.getElementsByClassName("complete_icon");
+	const removeIcons = document.getElementsByClassName("remove_icon");
+	
+	for (let i = 0; i < btempsuspension.length; i++) {
+		console.log(i);
+		cancleIcons[i].classList.add("hide");
+		completeIcons[i].classList.add("hide");
+		removeIcons[i].classList.add("hide");
 	}
 }
 
