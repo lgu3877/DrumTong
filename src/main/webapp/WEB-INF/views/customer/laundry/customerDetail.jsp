@@ -621,12 +621,14 @@
 	 	       btn5.onclick = async function(){
 	 	    	  if(checkLogin){
 	 		          selectedCouponID = document.getElementById('modal-couponList').value;
-	 		          
+	 		          if(!selectedCouponID.includes('CouponID_')){
+	 		        	  alert('발급 가능한 쿠폰이 없습니다.');
+	 		        	  return;
+	 		          }
 	 	    		  ob={
 	 		                 'couponid' : selectedCouponID,
 	 		              };
 	 	    		  const {data} = await axios.post('/drumtong/customer/laundry/customerDetail/rest/addCoupon/', ob);
-	 	    		  console.log(data);
 	 	    		  alert(data ? '발급 성공' : '이미 발급받은 쿠폰입니다.');
 	 	    		  if(data){
 	 	    			  let listCoupon = document.getElementById('modal-couponList');
@@ -655,15 +657,13 @@
 	 	      checkBM = Bookmark === 'y' ? true : false;
 	 	      bookMarker.setAttribute('class', 'fas fa-star ' + (checkBM ? 'add': 'remove'));
     		if(checkLogin){
-    			console.log('로그인 되어있을 때');
     			// 로그인 되어있을 때
 	    		myCouponSettings(CouponList); // 고객 쿠폰 다운로드
 	    		
 	    		document.getElementById('my-point').children[0].innerHTML = myPoint; // 현재 포인트
 	    		
 	    		// 사용할 수 있는 쿠폰을 체크하도록
-	    		checkAbleCoupon(0);
-	    		
+	     		calTotal();
     		}
     		else{
     			 document.getElementById('loginSubmit').addEventListener('click', function(){ logiinSubmit('asynchronous'); });
