@@ -19,9 +19,6 @@ function displayRegHolidays() {
 		const week = weekObject[enWeek];
 		const days = bscheduledays[enWeek];
 		
-		
-		
-
 		if (days !== undefined) {
 			const dayArray = days.split("/");
 			dayArray.pop(); // 마지막 배열의 공백 제거
@@ -50,7 +47,8 @@ function displayRegHolidays() {
 				// day(content)
 				for (let i = 0; i < dayArray.length; i++) {
 					const day = document.createElement("div");
-					day.innerHTML = '<span class="h_day">' + dayArray[i] + '</span>' // 요일(day) 출력
+					day.className = "h_schedule_day";
+					day.innerHTML = '<span class="h_day">' + dayArray[i] + '요일</span>' // 요일(day) 출력
 					
 					dayCon.appendChild(day)
 				}

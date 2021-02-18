@@ -335,53 +335,52 @@
 				<!-- 정기 휴무 -->
 					<div class="select_wrapper form">
 					<!-- 주 선택 -->
-						<div class="select_box_con">
-							<select>
+						<div id="reg-holiday-week" class="select_box_con">
+							<select name="restWeek">
 								<option selected hidden="true" disabled>&nbsp;주 선택&nbsp;</option>
-								<option>매주</option>
-								<option>첫째 주</option>
-								<option>둘째 주</option>
-								<option>셋째 주</option>
-								<option>넷째 주</option>
-								<option>다섯째 주</option>
-								<option>여섯째 주</option>
+								<option value="allweek">매주</option>
+								<option value="firstweek">첫째 주</option>
+								<option value="secondweek">둘째 주</option>
+								<option value="thirdweek">셋째 주</option>
+								<option value="forthweek">넷째 주</option>
+								<option value="fifthweek">다섯째 주</option>
+								<option value="sixthweek">여섯째 주</option>
 							</select>
 						</div>
 					<!-- 일 선택 -->
-						<div class="day_selector_con">
+						<div id="reg-holiday-day" class="day_selector_con">
 							<div class="day_selector">
-								<input type="checkbox" name="restDay">
+								<input type="checkbox" name="restDay" value = "월">
 								월
 							</div>
 							<div class="day_selector">
-								<input type="checkbox" name="restDay">
+								<input type="checkbox" name="restDay" value = "화">
 								화
 							</div>
 							<div class="day_selector">
-								<input type="checkbox" name="restDay">
+								<input type="checkbox" name="restDay" value = "수">
 								수
 							</div>
 							<div class="day_selector">
-								<input type="checkbox" name="restDay">
+								<input type="checkbox" name="restDay" value = "목">
 								목
 							</div>
 							<div class="day_selector">
-								<input type="checkbox" name="restDay">
+								<input type="checkbox" name="restDay" value = "금">
 								금
 							</div>
 							<div class="day_selector">
-								<input type="checkbox" name="restDay">
+								<input type="checkbox" name="restDay" value = "토">
 								토
 							</div>
 							<div class="day_selector">
-								<input type="checkbox" name="restDay">
+								<input type="checkbox" name="restDay" value = "일">
 								일
 							</div>
 						</div>
 						
-						<div class="day_select_btn btn">
-							휴무 등록
-						</div>
+						<!-- 휴뮤등록 버튼 -->
+						<div class="day_select_btn btn" onclick="updateRegHoliday()">휴무등록 </div>
 					</div>
 					
 				<!-- 저장된 정기 휴무일 표기 -->
@@ -691,6 +690,6 @@
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/filter.js"></script>
 	
 	<!-- 업데이트 -->
-	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/filter.js"></script>
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/update.js"></script>
 </body>
 </html>
