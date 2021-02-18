@@ -230,7 +230,7 @@ async function updateAddress() {
 		"emdcode" : emdCode
 	}
 	await axios.post("/drumtong/business/mainmanagement/BInformation/rest/updateLocation/", object);
-	
+	 
 	borderNone('locationArea');
 }
 
