@@ -145,7 +145,6 @@ async function addService() {
 	const processing = "insertBMenu";
 	// 서비스 등록
 	const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/" + processing + "/", object);
-	console.log(data);
 }
 
 

@@ -2,20 +2,25 @@
 // 쿠폰 다운로드(사업자 측) 세팅 메서드
 function couponSettings(couponList){ 
 	modalCouponList = document.getElementById('modal-couponList');
-	console.log(couponList);
-	
-	couponList.forEach(cl => {
+	if(couponList.length === 0 ){
 		couponOption = document.createElement('option');
-		couponOption.setAttribute('value', cl.couponid);
-		couponOption.innerHTML = cl.discount + '원 할인/' + cl.minimumprice + '원 이상[' + cl.period + ']';
+		couponOption.setAttribute('hidden', 'hidden');
+		couponOption.innerHTML = '발급 가능하신 쿠폰이 없습니다.';
 		
 		modalCouponList.appendChild(couponOption);
-	})
+	} else{
+		couponList.forEach(cl => {
+			couponOption = document.createElement('option');
+			couponOption.setAttribute('value', cl.couponid);
+			couponOption.innerHTML = '<span><span>' + cl.discount + '</span><span>원 할인/</span><span>' + cl.minimumprice + '</span><span>원 이상[</span><span>' + cl.period + '</span><span>]</span></span>';
+			
+			modalCouponList.appendChild(couponOption);
+		})
+	}
 	
 }
 // 메뉴를 선택했을 때 실행하는 메서드(주문리스트에 추가해준다.)
 function listUp(event) {
-    	  
         choose = event.target;
     	 if(choose.className.includes("quick") || choose.className.includes("noQuick") || choose.className.includes("fas") || choose.className.includes("quantity")) return;
         selectedList = document.getElementById('selected-List');
@@ -133,16 +138,14 @@ function calTotal() {
         totalText = document.getElementById('select-total').children[0];	// 토탈 요금
         priceText = document.getElementById('modal-price').children[0]; // 모달창 결제 금액
 
-        deliCheck = document.getElementById('deli-check');
-
-        deli = 2000;
-
-        if (!deliCheck.checked) {
-          deli = 0;
-        }
+        pickUpCheck = document.getElementById('pickup-check'); // 수거 여부
+        deliCheck = document.getElementById('deli-check'); // 배달 여부
+        
+		pick = pickUpCheck.checked ? 1000 : 0;
+        deli = deliCheck.checked ? 1000 : 0;
 
         quickPrice = 0;
-        totalPrice = 0 + deli;
+        totalPrice = 0 + pick + deli;
 
         for (i = 0; i < orders.length; i++) {
           quantity = orders[i].children[1].value;
@@ -160,8 +163,41 @@ function calTotal() {
         }
       
         quickText.innerText = quickPrice;
+        totalPrice -= checkAbleCoupon(totalPrice - pick -deli);
         totalText.innerText = totalPrice;
         priceText.innerText = totalPrice;
+        
+}
+// 쿠폰을 사용했을 때 couponid 값을 넘기도록 설정해주어야 한다!
+function checkAbleCoupon(currentPrice){
+	let result = 0
+	if(checkLogin){
+		couponcCheckList = document.getElementById('select-coupon');
+		
+		couponNum = couponcCheckList.children.length;
+		selectValue = couponcCheckList.value;
+		// 현재 체크되어있는 value 값이 사용할수 없을 땐 첫번째가 선택되있게 변경하기
+		for(num = 1; num < couponNum; num++){
+			spanCoupon = couponcCheckList.children[num];
+			spanCouponIn = spanCoupon.children[0];
+			if(currentPrice < spanCouponIn.children[2].innerHTML){ // 사용할 수 없는 쿠폰일 땐 선택 못하게 설정
+				spanCoupon.setAttribute('disabled','disabled');
+			} else{ // 사용할 수 있는 쿠폰일 땐 선택 할 수 있게 설정
+				spanCoupon.removeAttribute('disabled');
+			}
+			
+			// 금액이 바뀌었을 때 선택되어있는 쿠폰이 사용할 수 없는 쿠폰이면 선택 X 로 selected 설정
+			if(selectValue === spanCoupon.value){
+				if(currentPrice < spanCouponIn.children[2].innerHTML){
+					couponcCheckList[0].selected = true;
+				} else {
+					result = spanCouponIn.children[0].innerHTML;
+				}
+			}
+		}
+		
+	}
+	return result;
 }
 // 퀵 마크를 체크 또는 체크 해제 해주는 메서드
   function quickMark(){
@@ -295,7 +331,8 @@ function oneCouponSettings(minimumprice, discount, period, couponid){ // 내 쿠
 	myCouponList = document.getElementById('select-coupon');
 	newCoupon = document.createElement('option');
 	newCoupon.setAttribute('value', couponid);
-	newCoupon.innerHTML = discount + '원 할인/' + minimumprice + '원 이상[' + period + ']';
+	
+	newCoupon.innerHTML = '<span><span>' + discount + '</span><span>원 할인/</span><span>' + minimumprice + '</span><span>원 이상[</span><span>' + period + '</span><span>]</span></span>';
 	
 	myCouponList.appendChild(newCoupon);
 }
@@ -305,7 +342,7 @@ function myCouponSettings (myCoupons){
 		oneCouponSettings(co.minimumprice, co.discount, co.period, co.couponid);
 	})
 }
-function addBookmark() {
+function addBookmark(estid) {
    bookMarker = document.getElementById('bookMarker');
    className = bookMarker.className;
     if (className.search(/add/) > 0) {
@@ -317,9 +354,9 @@ function addBookmark() {
       iconColor = 'yellow';
     }
     
-    const axPost = async () =>{
+    const axPost = async (estid) =>{
        ob={
-          'estid' : '${estid}',
+          'estid' : estid,
           'result' : iconColor,
        };
        await axios.post('/drumtong/customer/laundry/customerDetail/rest/addBookmark/', ob)
@@ -332,6 +369,6 @@ function addBookmark() {
        })
        
     };
-    axPost();
+    axPost(estid);
     
   }

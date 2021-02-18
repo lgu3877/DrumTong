@@ -17,8 +17,9 @@
     
     <div  class="c3-input">
     	<h1>통장사본</h1>
-    	<label for="copyofbankbook" class="forLabel" style="display: table;"><span style="display: table-cell; vertical-align: middle;">업로드</span></label>
-    	<input type="file" placeholder="통장사본을 등록하세요" name="businessInformationImage" id="copyofbankbook" required>
+    	<label for="copyofbankbook" class="forLabel" style="display: table;"><span style="display: table-cell; vertical-align: middle;">업로드</span>
+    		<input type="file" placeholder="통장사본을 등록하세요" name="businessInformationImage" id="copyofbankbook" required>
+    	</label>
     </div>
     
     <div id="copydiv">

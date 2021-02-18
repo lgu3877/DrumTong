@@ -27,7 +27,7 @@
 .detailview-top {
   display: flex;
   justify-content: space-between;
-  height: 514px;
+  height: 500px;
   width: calc(100% - 20px);
   background-color: #f7f7f7;
   border-radius: 20px;
@@ -35,17 +35,16 @@
 }
 
 .detailview-imgBlock {
-  width: 570px;
-  height: 514px;
+  width: 600px;
+  height: 500px;
   margin: 0;
   box-shadow: 5px 5px 5px 5px #d8d8d8;
 }
 
 .detailview-imgBlock-main,
 .detailview-imgBlock-main img {
-  width: 570px;
+  width: 600px;
   height: 400px;
-  background-color: teal;
 }
 
 .detailview-imgBlock-main img {
@@ -53,17 +52,22 @@
 }
 
 .detailview-imgBlock-subRow {
-  width: 570px;
-  height: 80px;
+  width: 600px;
+  height: 100px;
   font-size: 0;
 }
 
 .detailview-imgBlock-subRow img {
-  width: 114px;
-  height: 114px;
+  width: 100px;
+  height: 100px;
   margin: 0;
-  background-color: salmon;
+}
+.detailview-imgBlock-subRow img.exist {
   cursor: pointer;
+}
+
+.detailview-imgBlock-subRow img.select {
+  border : 2px solid grey;
 }
 
 .detailview-companyIntro {
@@ -357,7 +361,9 @@ div.subButton:hover{
 
 
 
+.select-date,
 .select-deli,
+.select-pickup,
 .select-quick,
 .select-quick span{
   border-bottom: 1px solid #d8d8d8;

@@ -190,6 +190,11 @@ public class BusinessContractService {
 		ModelAndView mav = new ModelAndView(route);
 		return mav;
 	}
+	
+	public ModelAndView premiumCencel(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView("business/contract/businessPremiumCancel");
+		return mav;
+	}
 
 	
 	// 비즈니스 온라인 프리미엄 광고 계약 (POST)) [건욱]
@@ -226,8 +231,5 @@ public class BusinessContractService {
 		
 		return mav;
 	}
-	
-	
-	
 	
 }

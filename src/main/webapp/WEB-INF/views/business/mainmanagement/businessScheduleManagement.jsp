@@ -37,6 +37,16 @@
    	<!-- jQuery -->
    	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
+	<!-- objects from DB -->
+	<script type="text/javascript">
+		let bscheduledays = ${bscheduledays};
+		const holiday = bscheduledays.holiday; // holiday > 'Y' or 'N'
+		delete bscheduledays.holiday; // holiday 삭제
+		
+		console.log(bscheduledays);
+		console.log(holiday);
+	</script>
+
 </head>
 <body>
 
@@ -294,11 +304,10 @@
 						</ul>
 					</div>
 				</div>
-				
 			</div>
 			<!-- </form> -->
 			
-			<!-- 정기 휴무 설정 -->
+		<!-- 정기 휴무 설정 -->
 			<!-- <form class="holiday"> -->
 			<div class="holiday">
 				<!-- title -->
@@ -309,14 +318,6 @@
 					</div>
 					<!-- button -->
 					<div class="btn_con">
-					<!-- 
-						<div id="modify-holiday" class="btn format_btn">
-							<div class="icon_con">
-								<i class="fas fa-plus-square"></i>
-							</div>
-							<div class="btn_title">일자 변경</div>
-						</div>
-					-->	
 					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
 					<c:if test="${status eq 'SUCCESS' }">
 						<div id="complete-holiday" class="btn update_btn">
@@ -334,107 +335,58 @@
 				<!-- 정기 휴무 -->
 					<div class="select_wrapper form">
 					<!-- 주 선택 -->
-						<div class="select_box_con">
-							<select>
+						<div id="reg-holiday-week" class="select_box_con">
+							<select name="restWeek">
 								<option selected hidden="true" disabled>&nbsp;주 선택&nbsp;</option>
-								<option>매주</option>
-								<option>첫째 주</option>
-								<option>둘째 주</option>
-								<option>셋째 주</option>
-								<option>넷째 주</option>
-								<option>다섯째 주</option>
-								<option>여섯째 주</option>
+								<option value="allweek">매주</option>
+								<option value="firstweek">첫째 주</option>
+								<option value="secondweek">둘째 주</option>
+								<option value="thirdweek">셋째 주</option>
+								<option value="forthweek">넷째 주</option>
+								<option value="fifthweek">다섯째 주</option>
+								<option value="sixthweek">여섯째 주</option>
 							</select>
 						</div>
 					<!-- 일 선택 -->
-						<div class="day_selector_con">
+						<div id="reg-holiday-day" class="day_selector_con">
 							<div class="day_selector">
-								<input type="checkbox" name="restDay">
+								<input type="checkbox" name="restDay" value = "월">
 								월
 							</div>
 							<div class="day_selector">
-								<input type="checkbox" name="restDay">
+								<input type="checkbox" name="restDay" value = "화">
 								화
 							</div>
 							<div class="day_selector">
-								<input type="checkbox" name="restDay">
+								<input type="checkbox" name="restDay" value = "수">
 								수
 							</div>
 							<div class="day_selector">
-								<input type="checkbox" name="restDay">
+								<input type="checkbox" name="restDay" value = "목">
 								목
 							</div>
 							<div class="day_selector">
-								<input type="checkbox" name="restDay">
+								<input type="checkbox" name="restDay" value = "금">
 								금
 							</div>
 							<div class="day_selector">
-								<input type="checkbox" name="restDay">
+								<input type="checkbox" name="restDay" value = "토">
 								토
 							</div>
 							<div class="day_selector">
-								<input type="checkbox" name="restDay">
+								<input type="checkbox" name="restDay" value = "일">
 								일
 							</div>
 						</div>
 						
-						<div class="day_select_btn btn">
-							휴무 등록
-						</div>
+						<!-- 휴뮤등록 버튼 -->
+						<div class="day_select_btn btn" onclick="updateRegHoliday()">휴무등록 </div>
 					</div>
 					
 				<!-- 저장된 정기 휴무일 표기 -->
-					<ul class="h_schedule_con form">
-						<li class="h_schedule_list">
-					<!-- 내용 -->
-					<!-- 1 -->
-							<div class="h_schedule_context">
-								<p class="scheduled_days">
-									매월 
-										<span class="h_week">[첫째 주]</span> |
-										<span class="h_day">[일요일]</span>
-										<span class="h_day">[화요일]</span>
-									휴무
-								</p>						
-							</div>
-							<div class="h_schedule_delete">
-								<p>삭제</p>
-							</div>
-						</li>
-					<!-- 2 -->
-						<li class="h_schedule_list">
-							<div class="h_schedule_context">
-								<p class="scheduled_days">
-									매월 
-										<span class="h_week">[셋째 주]</span> |
-										<span class="h_day">[월요일]</span>
-										<span class="h_day">[목요일]</span>
-										<span class="h_day">[금요일]</span>
-										<span class="h_day">[토요일]</span>
-									휴무
-								</p>
-							</div>
-							<div class="h_schedule_delete">
-								<p>삭제</p>
-							</div>
-						</li>
-					<!-- 3 -->
-						<li class="h_schedule_list">
-							<div class="h_schedule_context">
-								<p class="scheduled_days">
-									매월 
-										<span class="h_week">[다섯째 주]</span> |
-										<span class="h_day">[월요일]</span>
-										<span class="h_day">[토요일]</span>
-									휴무
-								</p>
-							</div>
-							<div class="h_schedule_delete">
-								<p>삭제</p>
-							</div>
-						</li>
-					</ul>
-
+					<div class="form">
+						<ul id="reg-holiday-schedule" class="h_schedule_con"></ul>
+					</div>
 				<!-- 달력 -->
 					<div id="calander" class="calendar form">
 						<div class="calendar_selector_con">
@@ -720,14 +672,46 @@
 
 <!-- footer -->
 	<%-- <%@ include file="../main/businessFooter.jsp" %> --%>
-	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/interface.js"></script>
-	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/calendar.js"></script>
-	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/tmpHolidayButtons.js"></script>
-	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/filter.js"></script>
+	
+	<!-- global functions -->
 	<script type="text/javascript">
-	 let bscheduledays = ${bscheduledays};
-	 console.log(test);
+		//랜덤 String 생성
+		function generateRandomString(length) {
+			let result = "";
+			const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+			const charArray = characters.split("");
+				
+			for (let i = 0; i < length; i++) {
+				result += charArray[Math.ceil(Math.random() * (characters.length - 1))];
+			}
+			
+			// 동일한 난수가 생성되엇을 경우(로또 맞을 확률)
+			if (document.getElementById(result)) {
+				alert("축하드립니다. 17,067,655,527,413,216e+89의 확률을 뚫으셨습니다.");
+				location.reload();
+				return;
+			}
+			
+			return result;
+		}
 	</script>
+	
+	<!-- 영업시간 -->
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/interface.js"></script>
+	
+	<!-- 임시휴무 -->
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/tmpHolidayButtons.js"></script>
+	
+	<!-- 정기휴무 -->
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/regularHoliday.js"></script>
 
+	<!-- 달력 -->
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/calendar.js"></script>
+	
+	<!-- 필터 -->
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/filter.js"></script>
+	
+	<!-- 업데이트 -->
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/update.js"></script>
 </body>
 </html>
