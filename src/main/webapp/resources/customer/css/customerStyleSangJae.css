@@ -722,7 +722,7 @@ div.subButton:hover{
   width: 300px;
   pointer-events: none;
 }
-check .option-name,
+.option-name,
 .selected-name {
   width: 250px;
   font-weight: bold;

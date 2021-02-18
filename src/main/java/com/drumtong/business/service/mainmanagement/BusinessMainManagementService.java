@@ -137,9 +137,20 @@ public class BusinessMainManagementService {
 	
 	// 비즈니스 일정관리 페이지로 이동 (GET) [건욱]
 	public ModelAndView scheduleManagement(HttpServletRequest req) {
+		
+		
+		HttpSession Session = req.getSession();
+ 	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+ 	    String estid = bInformationVO.getEstid();
+ 		
+		
 		ModelAndView mav = new ModelAndView("business/mainmanagement/businessScheduleManagement");
 		
+		
+		
 		if(checkEstStatus(req, "ScheduleManagement")) return mainMove(req, "ScheduleManagement");
+		
+		mav.addObject("bscheduledays", (new Gson().toJson(bScheduleDaysDAO.selectBScheduleDays(estid))));
 		
 		return mav;
 	}

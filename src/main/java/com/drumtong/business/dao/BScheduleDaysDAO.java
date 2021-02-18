@@ -27,5 +27,8 @@ public interface BScheduleDaysDAO {
 	// 매장 일정관리에 공휴일 휴일 여부를 수정해주는 메서드입니다. 필드  { 휴일 유무  }
 	int updateHoliday(BScheduleDaysVO bScheduleDaysVO);
 
+	// select 매장 정기휴무  일정
+	BScheduleDaysVO selectBScheduleDays(String estid);
+
 
 }

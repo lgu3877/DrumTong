@@ -149,25 +149,36 @@ async function addService() {
 
 
 // 퀵 서비스 활성화 < 서비스 등록
-async function activateDelivery() {
-//	activateVisualization(); // MenuList > 스위치 디자인 변경 & input 생성
+async function updateMenu(service) {
+	console.log(service);
+	for (let key in service) {
+		if (service[key] === "") {
+			alert("잘못된 입력입니다.\n입력하신 내용을 다시 한 번 확인해주세요.")
+			return false;
+		}
+	}
 	
-	const result = deliveryToggle  ? "Y" : "N"; // js > MenuList
-
-	console.log(result);
-
-//	const { data } = await axios.post("/drumtong/business/mainmanagement/BManagement/rest/updateQuickBoolean/", result);
-//	
-//	console.log(data);
+	try {
+		await axios.post("/drumtong/business/mainmanagement/BManagement/rest/updateQuickBoolean/", service);
+	} catch (e) {
+		console.log(e);
+		return false;
+	}
 }
 
 
 // 메뉴 수정
-async function deleteMenu() {
+async function deleteMenu(rmObject) {
 	
-//	const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/updateBMenu/", result);
-//	
-//	console.log(data);
+	try {
+		const {data} = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/deleteMenu/", rmObject);
+		alertShow(data);
+		
+	} catch (e) {
+		console.log(e);
+		alert('비정상적인 오류가 발생되었습니다. 다시 시도해주세요..!');
+		return false;
+	}
 }
 
 
@@ -222,3 +233,9 @@ async function updateAddress() {
 	borderNone('locationArea');
 }
 
+function alertShow(data) {
+	if(data) 
+		alert("수정 완료되었습니다.");
+	else 
+		alert("비정상적인 오류가 발생했습니다. 다시 시도 해주세요..")
+}

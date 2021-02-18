@@ -19,7 +19,36 @@ public class ReviewList extends BReviewVO{
 	private String bregistdate;	// 사업자 답글 날짜
 	private String customerName;	// 고객 이름(앞에 두 글자 나오고, 무조건 별 3개 붙이도록 설정 EX 이름: 이영경 -> 이영***)
 	private String profileimg;		// 고객 프로필 사진 주소(없으면 null값이 들어가 있음)
+	private String orderList;	// 주문 목록
+	private int amount;	// 총 주문 개수
+	private int visits; // 방문 수
+	private String orderListMsg; // 주문현황 메세지
 	
+	
+	public String getOrderListMsg() {
+		return orderListMsg;
+	}
+	public void setOrderListMsg(String orderListMsg) {
+		this.orderListMsg = orderListMsg;
+	}
+	public int getVisits() {
+		return visits;
+	}
+	public void setVisits(int visits) {
+		this.visits = visits;
+	}
+	public int getAmount() {
+		return amount;
+	}
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+	public String getOrderList() {
+		return orderList;
+	}
+	public void setOrderList(String orderList) {
+		this.orderList = orderList;
+	}
 	public String getProfileimg() {
 		return profileimg;
 	}
