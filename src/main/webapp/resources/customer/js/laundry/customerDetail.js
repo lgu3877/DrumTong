@@ -133,11 +133,7 @@ function calTotal() {
 
         deliCheck = document.getElementById('deli-check');
 
-        deli = 2000;
-
-        if (!deliCheck.checked) {
-          deli = 0;
-        }
+        deli = deliCheck.checked ? 2000 : 0;
 
         quickPrice = 0;
         totalPrice = 0 + deli;
