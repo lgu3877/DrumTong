@@ -675,6 +675,8 @@
 	
 	<!-- global functions -->
 	<script type="text/javascript">
+		let btempsuspension = ${btempsuspension};
+		console.log(btempsuspension);
 		//랜덤 String 생성
 		function generateRandomString(length) {
 			let result = "";
