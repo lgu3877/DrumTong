@@ -138,6 +138,11 @@ async function addService() {
 		console.log(object);
 	}
 	
+	// 퀵 서비스 옵션 설정
+//	activateDelivery();
+//	activateQuick();
+	
+	
 	const processing = "insertBMenu";
 	// 서비스 등록
 	const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/" + processing + "/", object);

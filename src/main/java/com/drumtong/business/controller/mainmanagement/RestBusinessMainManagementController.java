@@ -117,24 +117,21 @@ public class RestBusinessMainManagementController {
 	// 메뉴 삭제
 	@RequestMapping("BMenu/rest/deleteMenu/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String deleteMenu(HttpServletRequest req, @RequestBody BMenuVO bMenuVO ) {
-		int result = svc.deleteMenu(req, bMenuVO);
-		return result == 1
-				? "true"
-				: "false";
+	public List<BMenuVO> deleteMenu(HttpServletRequest req, @RequestBody BMenuVO bMenuVO ) {
+		return svc.deleteMenu(req, bMenuVO);
 	}
 
 	
 	
-//	@RequestMapping("BMenu/rest/{processing}/")
-//	@PostMapping(produces="application/json; charset=utf8")
-//	public String bMenuRestProcessing(HttpServletRequest req, @RequestBody List<BMenuVO> ListBMenuVO, 
-//									  @PathVariable("processing")String processing) {
-//		int result = svc.bMenuRestProcessing(req, ListBMenuVO, processing);
-//		return result == 1
-//				? "true"
-//				: "false";
-//	}
+	@RequestMapping("BMenu/rest/{processing}/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String bMenuRestProcessing(HttpServletRequest req, @RequestBody List<BMenuVO> ListBMenuVO, 
+									  @PathVariable("processing")String processing) {
+		int result = svc.bMenuRestProcessing(req, ListBMenuVO, processing);
+		return result == 1
+				? "true"
+				: "false";
+	}
 
 
 	

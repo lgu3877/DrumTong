@@ -152,6 +152,8 @@ public class BusinessMainManagementService {
 		
 		mav.addObject("bscheduledays", (new Gson().toJson(bScheduleDaysDAO.selectBScheduleDays(estid))));
 		
+		mav.addObject("btempsuspension", (new Gson().toJson(bTempSuspensionDAO.selectBTempSuspension(estid))));
+		
 		return mav;
 	}
 

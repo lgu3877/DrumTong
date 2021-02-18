@@ -32,40 +32,6 @@
     <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail.js"></script>
    	
-	<script>
-	// 쿠폰을 사용했을 때 couponid 값을 넘기도록 설정해주어야 한다!
-		function checkAbleCoupon(currentPrice){
-			let result = 0
-			if(checkLogin){
-				couponcCheckList = document.getElementById('select-coupon');
-				
-				couponNum = couponcCheckList.children.length;
-				selectValue = couponcCheckList.value;
-				// 현재 체크되어있는 value 값이 사용할수 없을 땐 첫번째가 선택되있게 변경하기
-				for(num = 1; num < couponNum; num++){
-					spanCoupon = couponcCheckList.children[num];
-					spanCouponIn = spanCoupon.children[0];
-					if(currentPrice < spanCouponIn.children[2].innerHTML){ // 사용할 수 없는 쿠폰일 땐 선택 못하게 설정
-						spanCoupon.setAttribute('disabled','disabled');
-					} else{ // 사용할 수 있는 쿠폰일 땐 선택 할 수 있게 설정
-						spanCoupon.removeAttribute('disabled');
-					}
-					
-					// 금액이 바뀌었을 때 선택되어있는 쿠폰이 사용할 수 없는 쿠폰이면 선택 X 로 selected 설정
-					if(selectValue === spanCoupon.value){
-						if(currentPrice < spanCouponIn.children[2].innerHTML){
-							couponcCheckList[0].selected = true;
-						} else {
-							result = spanCouponIn.children[0].innerHTML;
-						}
-					}
-				}
-				
-			}
-			return result;
-		}
-		// 로그인이 되어있을 때 첫 번째로 실행, 금액이 바뀔때마다 실행(단, 로그인 여부를 구분해주어야 한다)
-	</script>
     <script>
       function submit() {
         selecteds = document.querySelectorAll('.selected-row');
@@ -160,7 +126,17 @@
                        <option id="noLogin" disabled>로그인 후 이용가능</option>
               </select>
             </div>
-            <div class="select-deli" id="select-deli"><input type="checkbox" id="deli-check" checked onclick="calTotal()" /> 배달 (+ 2000 원)</div>
+            <div class="select-date" id="select-date">
+				▼ 희망 날짜(선택사항)
+            </div>
+            <div class="select-pickup" id="select-pickup"> 수거 방법 : 
+            	<input type="radio" name="pickup-check" onclick="calTotal()" value="0"/> 직접 방문
+            	<input type="radio" name="pickup-check" id="pickup-check" checked onclick="calTotal()" value="1000"/> 수거 요청(+ 1000 원)
+            </div>
+            <div class="select-deli" id="select-deli"> 받는 방법 : 
+   		         <input type="radio" name="deli-check" onclick="calTotal()" value="0"/> 직접 방문
+   		         <input type="radio" name="deli-check" id="deli-check" checked onclick="calTotal()" value="1000"/> 배달 요청(+ 1000 원)
+            </div>
             <div class="select-quick" id="select-quick">
               Quick 요금 : <span>0</span> 원
             </div>
@@ -205,6 +181,135 @@
         </div>
       </div>
     </section>
+
+<!-- 	영경 스크립트, 메뉴판 출력! -->
+	<script>
+// 		imgList = ${bImageVO};
+// 		i = 0;
+// 		imgBoxs = document.querySelectorAll('detailview-imgBlock');
+		
+// 		imgList.forEach(img =>{
+// 			imgBoxs[i++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + img.storeimg;
+// 		})
+		var menuList = ${menuList};
+		mainCtList = Object.keys(menuList.menuList);
+		mainCategory = document.getElementById('mainCate');
+		subCategory = document.getElementById('subCate');
+		menuCategory = document.getElementById('detailview-selectOptions');
+		
+		// 0번째 메인 메뉴
+		selectMainKey =Object.keys(menuList.menuList)[0];
+		// 0번째 서브 메뉴
+		selectSubKey = '';
+		// 메인 카테고리 버튼 넣는 부분
+		mainCategory.innerHTML="";
+		mainCtList.forEach(mct => {
+			mainDiv = document.createElement('div');
+			mainDiv.innerHTML = mct;
+			mainDiv.setAttribute("class", "mainButton");
+			mainDiv.setAttribute("id", "main_" + mct);
+			mainDiv.addEventListener('click', event => afterMainClik(mct));
+			mainCategory.appendChild(mainDiv);
+		})
+		afterMainClik(selectMainKey);
+		
+		function afterMainClik(checkmct){
+			selectMainKey = checkmct;
+			selectSubKey = '';
+			mainCtList.forEach(mct => {
+				document.getElementById("main_"+mct).className = (mct === selectMainKey ? "mainButton_select" : "mainButton");
+				})
+			subCtList = Object.keys(menuList.menuList[selectMainKey]);
+			subCategory.innerHTML="";
+			menuCategory.innerHTML="";
+			subCtList.forEach(sct =>{
+				subDiv = document.createElement('div');
+				subDiv.innerHTML = sct;
+				subDiv.setAttribute("class", selectSubKey !== sct ? "subButton" : "subButton_select");
+				subDiv.setAttribute("id", "sub_" + sct);
+				subDiv.addEventListener('click', event => afterSubClick(sct));
+				subCategory.appendChild(subDiv);
+			})
+			afterSubClick(subCtList[0]);
+		}
+		
+		function afterSubClick(checksct){
+			selectSubKey = checksct;
+			subCtList.forEach(mct => {
+				document.getElementById("sub_"+mct).className = (mct === selectSubKey ? "subButton_select" : "subButton");
+				})
+			menuCtList = menuList.menuList[selectMainKey][selectSubKey];
+			menuCategory.innerHTML="";
+			createMenu(menuCtList);
+		}
+		
+		function createMenu(list){
+			menuCategory.innerHTML="";
+			list.forEach(li => {
+				quickBoolean = (li.quickprice != 0);
+				
+				menuDiv_1 = document.createElement('div');
+				menuDiv_1.setAttribute("class", "option-row");
+				menuDiv_1.addEventListener('click', listUp);
+				
+				// 1
+				menuDiv_2 = document.createElement('div');
+				menuDiv_2.setAttribute("class", "option-text");
+				
+				menuDiv_2_1 = document.createElement('div');
+				menuDiv_2_1.setAttribute("class", "option-name");
+				menuDiv_2_1.innerHTML = selectMainKey + "/" + selectSubKey;
+				
+				menuDiv_2_2 = document.createElement('div');
+				menuDiv_2_2.setAttribute("class", "option-context");
+				menuDiv_2_2.innerHTML = li.name + "/예상시간 " + li.ete + "일";
+				
+				menuDiv_2.appendChild(menuDiv_2_1);
+				menuDiv_2.appendChild(menuDiv_2_2);
+				
+				// 2
+				menuInput_3 = document.createElement('input');
+				menuInput_3.setAttribute("class", "quantity");
+				menuInput_3.setAttribute("type", "number");
+				menuInput_3.setAttribute("min", "0");
+				menuInput_3.setAttribute("value", "1");
+				
+				// 3
+				menuDiv_4 = document.createElement('div');
+				menuDiv_4.setAttribute("class", "option-price");
+				menuDiv_4.innerHTML = li.price + "원";
+				
+				//4
+				menuLabel_5 = document.createElement('label');
+				menuLabel_5.setAttribute("class", quickBoolean ? "quick" : "noQuick");
+				menuLabel_5.setAttribute("title", quickBoolean ? "빠른서비스" : "퀵불가");
+				
+				menuInput_5_1 = document.createElement('input');
+				menuInput_5_1.setAttribute("class", "quickcheck");
+				menuInput_5_1.setAttribute("type", "checkbox");
+				menuInput_5_1.checked= false;
+				menuInput_5_1.setAttribute("value", li.quickprice);
+				if(quickBoolean)
+					menuInput_5_1.addEventListener('change', quickMark);
+				
+				menuI_5_2 = document.createElement('i');
+				menuI_5_2.setAttribute("class", "fas fa-shipping-fast");
+				menuI_5_2.innerHTML = quickBoolean ? (li.quickprice + "원") : "퀵불가";
+				
+				menuLabel_5.appendChild(menuInput_5_1);
+				menuLabel_5.appendChild(menuI_5_2);
+				
+				
+				menuDiv_1.appendChild(menuDiv_2);
+				menuDiv_1.appendChild(menuInput_3);
+				menuDiv_1.appendChild(menuDiv_4);
+				menuDiv_1.appendChild(menuLabel_5);
+				
+				menuCategory.appendChild(menuDiv_1);
+			})
+		}
+	</script>
+
 <!-- The Modal -->
     <div id="myModal" class="modal">
       <!-- Modal content -->
@@ -300,7 +405,6 @@
     <script type="text/javascript">	// 승원 작업 - 구글 차트
     
 	var reviewList = ${ReviewList};
-	console.log(reviewList);
     
 	window.onload = function() {
     	// 구글 부분 스크립트
@@ -309,225 +413,10 @@
    	 	google.charts.setOnLoadCallback(drawChart);
 	   	calcscore();
 	}
-	
-    function drawChart() {	// 구글 차트 그려주기
-
-	var data = google.visualization.arrayToDataTable([
-        ["score", "number", "total",  { role: 'annotation' }],
-        [" ", 0, reviewList.length, ''],
-        ["1.0", 0, reviewList.length, ''],
-        [" ", 0, reviewList.length, ''],
-        ["2.0", 0, reviewList.length, ''],
-        [" ", 0, reviewList.length, ''],
-        ["3.0", 0, reviewList.length, ''],
-        [" ", 0, reviewList.length, ''],
-        ["4.0", 0, reviewList.length, ''],
-        [" ", 0, reviewList.length, ''],
-        ["5.0", 0,  reviewList.length, ''],
-      ]);
-      
-      
-      for(i = 0; i < reviewList.length; i++) {		// 구글 차트 그래프에 점수 넣는 기능
-		data.setCell((reviewList[i].gpa * 2) - 1, 1, data.getValue((reviewList[i].gpa * 2) - 1, 1) + 1);
-		data.setCell((reviewList[i].gpa * 2) - 1, 2, data.getValue((reviewList[i].gpa * 2) - 1, 2) - 1);
-      }
-      
-
-      var view = new google.visualization.DataView(data);
-      view.setColumns([0, 1,
-                       { calc: "stringify",
-                         sourceColumn: 1,
-                         type: "string",
-                         role: "annotation" },
-                       2]);
-
-      var options = {
-		width:'100%',
-  		height: 400,
-  		chartArea:{	
-  			
-  			top: '5%',
-  			width:'90%',
-  			height: '85%',
-  		},
-        bar: {groupWidth: "50%",         },	// bar 하나하나의 굵기
-        legend: { position: "none" },
-        isStacked: true,
-        seriesType: 'bars',
-        series: {
-        	0: {color: 'navy' },
-        	1: {color: '#e5e4e2' },
-        },
-        vAxis: {
-            gridlines: {
-                color: 'transparent'
-            }
-	     },
-        enableInteractivity: false,		// hover와 관련된 모든 기능 중지
-//         tooltip : { trigger: 'none'}	// hover 했을 때 해당열의 정보 띄우는 기능만 중지
-      };
-// 	  console.log('최고값 : ', data.getColumnRange(1).max);
-	  var chart = new google.visualization.ComboChart(document.getElementById("columnchart_values"));
-      chart.draw(data, options);
-  } 
-    
-    function calcscore() {
-    	let avgcscore = 0;
-    	for(i = 0; i < reviewList.length; i++) {
-    		avgcscore += reviewList[i].gpa;
-    	}
-    	let cscore = avgcscore / reviewList.length;
-    	
-    	$('#cscore').html('고객 평점 : ' + cscore.toFixed(2));
-    	$('#frontstars').css('width', (cscore.toFixed(2) * 20) + '%');
-    }
-
     </script>
     
-    <script type="text/javascript">	// 승원 작업 - 모달
-	
-	function reviewMore() {	// 리뷰 더보기를 클릭했을 때
-		for(i = 0; i < reviewList.length; i++) {
-			if(i == 0) {
-				$('.detailview-review-row').attr('id', 'review' + i);
-				$('.detailview-review-row').find('.customerName').html(reviewList[i].customerName);
-				$('.detailview-review-row').find('.review-context').html(reviewList[i].ccontent);
-				
-				// 고객이 업로드한 프로필 이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
-				if(typeof reviewList[i].profileimg === typeof undefined) {
-					$('.detailview-review-row').find('.review-profilePic img').attr("src",
-							"https://az-pe.com/wp-content/uploads/2018/05/kemptons-blank-profile-picture.jpg");
-				}
-				else {
-					$('.detailview-review-row').find('.review-profilePic img').attr("src",
-							"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + reviewList[i].profileimg);
-				}
-				
-				// 고객이 업로드한 리뷰이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
-				if(typeof reviewList[i].reviewimg === typeof undefined)
-					$('.detailview-review-row').find('.review-reviewimg').css("display", "none");
-				else {
-					$('.detailview-review-row').find('.review-reviewimg').css("display", "");
-					$('.detailview-review-row').find('.review-reviewimg img').attr("src",
-							"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + reviewList[i].reviewimg);
-					$('.detailview-review-row').find('.review-reviewimg img').attr("onclick", "ActiveModal5('" + reviewList[i].reviewimg + "')");
-				}
-				
-				// 사장님 댓글 생성 조건문
-				if(reviewList[i].replyboolean == 'N')
-					$('#review' + i).find('.owner-review').css('display', 'none');
-				else {
-					const inputowner =  '사장님<span class="owner-write-date">' + reviewList[i].bregistdate.split(' ')[0] + '</span>';
-					$('#review' + i).find('.owner-review').css('display', '');
-					$('#review' + i).find('.owner-name').html(inputowner);
-					$('#review' + i).find('.owner-content').html(	reviewList[i].bcontent);
-				}
-			}
-			else {
-				const beforerow = $('#review' + (i - 1));
-				beforerow.after('<div class="detailview-review-row">' + beforerow.html() + '</div>');
-				beforerow.next().attr('id', 'review' + i);
-				beforerow.next().find('.customerName').html(reviewList[i].customerName);
-				beforerow.next().find('.review-context').html(reviewList[i].ccontent);
-				
-				// 고객이 업로드한 프로필 이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
-				if(typeof reviewList[i].profileimg === typeof undefined) {
-					beforerow.next().find('.review-profilePic img').attr("src",
-							"https://az-pe.com/wp-content/uploads/2018/05/kemptons-blank-profile-picture.jpg");
-				}
-				else {
-					beforerow.next().find('.review-profilePic img').attr("src",
-							"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + reviewList[i].profileimg);
-				}
-				
-				// 고객이 업로드한 리뷰이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
-				if(typeof reviewList[i].reviewimg === typeof undefined)
-					beforerow.next().find('.review-reviewimg').css("display", "none");
-				else {
-					beforerow.next().find('.review-reviewimg').css("display", "");
-					beforerow.next().find('.review-reviewimg img').attr("src",
-							"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + reviewList[i].reviewimg);
-				}
-						
-				
-				// 사장님 댓글 생성 조건문
-				if(reviewList[i].replyboolean == 'N')
-					$('#review' + i).find('.owner-review').css('display', 'none');
-				else {
-					const inputowner = '사장님<span class="owner-write-date">' + reviewList[i].bregistdate.split(' ')[0] + '</span>';
-					$('#review' + i).find('.owner-review').css('display', '')
-					$('#review' + i).find('.owner-name').html(inputowner);
-					$('#review' + i).find('.owner-content').html(reviewList[i].bcontent);
-				}
-
-			}
-			
-			$('#review' + i).find('.modal-grade').html('');	// 평점 안의 내용 초기화
-			
-			// 별자리를 만들어주는 반복문
-			for(j = 0; j < reviewList[i].gpa; j++) {
-				switch ((reviewList[i].gpa - j).toFixed(1)) {
-				case '0.5':
-					const halfstar = document.createElement('i');
-					halfstar.className = 'fas fa-star-half-alt fa-2x';
-	 				$('#review' + i).find('.modal-grade').append(halfstar);
-					break;
-				default:
-					const star = document.createElement('i');
-					star.className = 'fas fa-star fa-2x';
-	 				$('#review' + i).find('.modal-grade').append(star);
-	 				break;
-				}
-			}
-			
-			// 빈별자리를 만들어주는 반복문 -> 0.5 이면 4개의 별은 빈별이어야 한다
-			for(k = 5 - (reviewList[i].gpa).toFixed(0); k > 0; k--) {	// 반올림
-					const nullstar = document.createElement('i');
-					nullstar.className = 'far fa-star fa-2x';
-					$('#review' + i).find('.modal-grade').append(nullstar);
-			}
-			
-			// 별자리 옆에 평점 표시			
-			const gpaspan = document.createElement('span');
-			gpaspan.innerHTML = reviewList[i].gpa;
- 	 		$('#review' + i).find('.modal-grade').append(gpaspan);
-	 		
- 	 		$('#review' + i).find('.mgood').html('좋아요 ' + reviewList[i].mgood + ' ·&nbsp');
- 	 		$('#review' + i).find('.gpa').html('&nbsp평점 ' + reviewList[i].gpa);
- 	 		
-	 		if(reviewList[i].bcontent != '-') {
-	 			console.log('사장님 댓글이 달려있습니다.');
-	 		}
-		}
-	}
-    
-    function ActiveModal5(src) {
-    	modalContent5_exit.style.display = "";
-    	modalContent5.style.display = "";
-    	modalContent5.querySelector('img').src = "https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + src;
-    }
-    
-    function DeactiveModal5() {
-    	modalContent5_exit.style.display = "none";
-    	modalContent5.style.display = "none";
-    }
-	
-    document.getElementById('review-more').addEventListener('mouseover', function() {
-    	this.parentNode.style.background = 'white';
-    	this.parentNode.style.border = '3px solid #1564F9';
-    	this.style.background = '#1564F9';
-    	this.querySelector('p').style.color = 'white';
-    });
-
-    document.getElementById('review-more').addEventListener('mouseout', function() {
-    	this.parentNode.style.background = '#1564F9';
-    	this.style.background = 'white';
-    	this.querySelector('p').style.color = '#1564F9';
-    });
-    
-    
-    </script>
-    
+    <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail/detail-google.js"></script>
+    <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail/detail-modal.js"></script>
     <script>
 //     	총 정리
 		cLogin = '${cLogin}';
@@ -621,12 +510,14 @@
 	 	       btn5.onclick = async function(){
 	 	    	  if(checkLogin){
 	 		          selectedCouponID = document.getElementById('modal-couponList').value;
-	 		          
+	 		          if(!selectedCouponID.includes('CouponID_')){
+	 		        	  alert('발급 가능한 쿠폰이 없습니다.');
+	 		        	  return;
+	 		          }
 	 	    		  ob={
 	 		                 'couponid' : selectedCouponID,
 	 		              };
 	 	    		  const {data} = await axios.post('/drumtong/customer/laundry/customerDetail/rest/addCoupon/', ob);
-	 	    		  console.log(data);
 	 	    		  alert(data ? '발급 성공' : '이미 발급받은 쿠폰입니다.');
 	 	    		  if(data){
 	 	    			  let listCoupon = document.getElementById('modal-couponList');
@@ -655,15 +546,13 @@
 	 	      checkBM = Bookmark === 'y' ? true : false;
 	 	      bookMarker.setAttribute('class', 'fas fa-star ' + (checkBM ? 'add': 'remove'));
     		if(checkLogin){
-    			console.log('로그인 되어있을 때');
     			// 로그인 되어있을 때
 	    		myCouponSettings(CouponList); // 고객 쿠폰 다운로드
 	    		
 	    		document.getElementById('my-point').children[0].innerHTML = myPoint; // 현재 포인트
 	    		
 	    		// 사용할 수 있는 쿠폰을 체크하도록
-	    		checkAbleCoupon(0);
-	    		
+	     		calTotal();
     		}
     		else{
     			 document.getElementById('loginSubmit').addEventListener('click', function(){ logiinSubmit('asynchronous'); });

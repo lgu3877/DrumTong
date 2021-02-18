@@ -361,7 +361,9 @@ div.subButton:hover{
 
 
 
+.select-date,
 .select-deli,
+.select-pickup,
 .select-quick,
 .select-quick span{
   border-bottom: 1px solid #d8d8d8;
