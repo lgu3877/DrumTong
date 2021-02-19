@@ -1,8 +1,8 @@
 // 업로드로 추가된 사진 > 업로드 할 파일 임시 저장
 const uploadPhotoList = {
 		originalCover: document.getElementById("cover-image") ? document.getElementById("cover-image").src : "",
-				uploadCover: "",
-				uploadPhoto: [],
+		uploadCover: "",
+		uploadPhoto: [],
 }
 const deletePhotoList = [];
 
@@ -171,13 +171,23 @@ function imageCheck(e) {
 	
 // 커버 사진 업로드
 	if (isImage && e.target.id === "update-cover") {
-		console.log('커버사진 업로드 실행');
-		// 미리보기
-		const reader = new FileReader();
 		// 대표사진이 있을 경우 삭제
-		document.getElementById("cover-image-con") ? document.getElementById("cover-image-con").remove() : null;
+		const previousCover = document.getElementById("cover-image") ? 
+					document.getElementById("cover-image").src : "No-Image";
 		
+		const uploadedCover = bImageList.filter(photo => photo.delegatephotoboolean === "Y")[0].storeimg;
+		
+		// 이미지 비교(DB 이미지 === 신규 이미지 ?)
+		if (previousCover !== "No-Image" && previousCover.includes(uploadedCover)) {
+			deletePhotoList.push(previousCover);
+		}
+		
+		// 초기화
+		document.getElementById("cover-image-con") ? 
+				document.getElementById("cover-image-con").remove() : null;
+
 		// 이미지 주입
+		const reader = new FileReader();
 		reader.onload = (e) => {
 			// 태그 생성
 			const li = document.createElement("li");
@@ -271,7 +281,6 @@ function imageCheck(e) {
 		
 		if((addPhoto.length < 3 ) ||  (addPhoto.length < 3)  ||  (coverImage !== null && sideImage.length < 2 )) 
 			borderNone('main-image-con');		
-		console.log(imageCount);
 	}
 }
 
@@ -279,65 +288,71 @@ function imageCheck(e) {
 
 // 슬라이드 사진 지우기(X 아이콘 클릭)
 function deletePhoto(clickedPhoto) {
-   const result = confirm("사진을 삭제하시겠습니까?");
-   
-   // 선택된 사진 지우기 > 임시로 JS로 처리 > DB 작업 필요
-   if (result) {      
-      const photoSlideCon = document.getElementById("image-preview");
-      let photoList = [...document.getElementsByClassName("shop_picture")];
-      
-      // 삭제 > DB작업 적용 가능
-      for (let index = 0; index < photoList.length; index++) {
-         if (photoList[index].children[0].src === clickedPhoto) {
-        	
-        	// (업로드)커버 사진 삭제 > input value 제거
-        	if (clickedPhoto === uploadPhotoList.uploadCover) {
-        		// 커버사진 input value 초기화
-        		document.getElementById("update-cover").value = "";        		
-        	}
-            
-        	// (업로드)일반 사진 삭제 > input value 제거
-        	else if (uploadPhotoList.uploadPhoto.map((obj) => obj.src).includes(clickedPhoto)) {        		
-        		const index = uploadPhotoList.uploadPhoto.map((obj) => obj.src).indexOf(clickedPhoto);
-        		const id = uploadPhotoList.uploadPhoto[index].id;
-        		
-        		document.getElementById(id).value = "";  		
-        	}
-        	
-        	// 삭제
-        	photoList.splice(index, 1);
-        	
-        	// 삭제 후 다음 사진 미리보기
-        	if (photoList.length !== 0 ) {
-        		zoomInPhoto(photoList[index % photoList.length].children[0].src);        		
-        	}
-        	
-        	
-            // DB에서 삭제 > 기존에 등록된 사진일 경우에만 진행
-        	const isUploaded = clickedPhoto.includes("https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/");
-        	console.log(isUploaded);
-        	if (isUploaded) {
-        		deletePhotoList.push(clickedPhoto.substr(55));
-        	}
-          
-            break;
-         }
-      }
-      
-      // 리스트 초기화
-      photoSlideCon.innerHTML = "";
-      
-      // 리스트 재구성
-      for (let i = 0; i < photoList.length; i++) {
-         photoSlideCon.appendChild(photoList[i]);
-      }
-      
-      // 화면 초기화(삭제하는 사진과 메인에 보여지는 미리보기 사진이 동일한 경우)
-      if (document.getElementById("main-image").src === clickedPhoto) {
-    	  document.getElementById("main-image").removeAttribute("src");
-      }
-      
-   }
+	const result = confirm("사진을 삭제하시겠습니까?");
+	
+	// 선택된 사진 지우기 > 임시로 JS로 처리 > DB 작업 필요
+	if (result) {      
+		const photoSlideCon = document.getElementById("image-preview");
+		let photoList = [...document.getElementsByClassName("shop_picture")];
+		
+		// 삭제 > DB작업 적용 가능
+		for (let index = 0; index < photoList.length; index++) {
+			if (photoList[index].children[0].src === clickedPhoto) {
+				
+				const uploadedCover = bImageList.filter(photo => photo.delegatephotoboolean === "Y")[0].storeimg;
+				
+				// (업로드)커버 사진 삭제 > input value 제거
+				if (clickedPhoto.includes(uploadedCover)) {
+					// 커버사진 input value 초기화
+					document.getElementById("update-cover").value = "";
+					
+					// 삭제할 사진 목록에 추가 ( + 중복검사)
+					!deletePhotoList.includes(clickedPhoto) ?  
+							deletePhotoList.push(document.getElementById("cover-image").src) : null;
+				}
+				
+				// (업로드)일반 사진 삭제 > input value 제거
+				else if (uploadPhotoList.uploadPhoto.map((obj) => obj.src).includes(clickedPhoto)) {        		
+					const index = uploadPhotoList.uploadPhoto.map((obj) => obj.src).indexOf(clickedPhoto);
+					const id = uploadPhotoList.uploadPhoto[index].id;
+					
+					document.getElementById(id).value = "";  		
+				}
+				
+				// 삭제
+				photoList.splice(index, 1);
+				
+				// 삭제 후 다음 사진 미리보기
+				if (photoList.length !== 0 ) {
+					zoomInPhoto(photoList[index % photoList.length].children[0].src);        		
+				}
+				
+				
+				// DB에서 삭제 > 기존에 등록된 사진일 경우에만 진행
+				const isUploaded = clickedPhoto.includes("https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/");
+				
+				if (isUploaded) {
+					deletePhotoList.push(clickedPhoto.substr(55));
+				}
+				
+				break;
+			}
+		}
+		
+		// 리스트 초기화
+		photoSlideCon.innerHTML = "";
+		
+		// 리스트 재구성
+		for (let i = 0; i < photoList.length; i++) {
+			photoSlideCon.appendChild(photoList[i]);
+		}
+		
+		// 화면 초기화(삭제하는 사진과 메인에 보여지는 미리보기 사진이 동일한 경우)
+		if (document.getElementById("main-image").src === clickedPhoto) {
+			document.getElementById("main-image").removeAttribute("src");
+		}
+		
+	}
 }
 
 
