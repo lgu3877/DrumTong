@@ -39,12 +39,18 @@
 
 	<!-- objects from DB -->
 	<script type="text/javascript">
+		// 정기휴무
 		let bscheduledays = ${bscheduledays};
 		const holiday = bscheduledays.holiday; // holiday > 'Y' or 'N'
 		delete bscheduledays.holiday; // holiday 삭제
 		
 		console.log(bscheduledays);
 		console.log(holiday);
+
+		// 임시휴무
+		let btempsuspension = ${btempsuspension};
+
+		console.log(btempsuspension);
 	</script>
 
 </head>
@@ -96,14 +102,6 @@
 					</div>
 					<!-- buttons -->
 					<div class="btn_con">
-					<!-- 
-						<div id="modify-working-hour" class="btn format_btn">
-							<div class="icon_con">
-								<i class="fas fa-plus-square"></i>
-							</div>
-							<div class="btn_title">시간 수정</div>
-						</div>
-					 -->
 					
 					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
 					<c:if test="${status eq 'SUCCESS' }">
@@ -518,119 +516,8 @@
 									</ul>
 								</li>
 							<!-- 리스트 -->
-								<li id="schedule-container" class="list_content_con">
-								
-								<!-- sample 1 -->
-									<ul class="list_content">
-										<li class="period_con">
-											<div class="period_view_default">
-												<div class="list_start_day">2020-10-07</div>
-												<div class="arrow">~</div>
-												<div class="list_end_day">2019-04-06</div>
-											</div>
-											<div class="period_view_input">
-												<input type="date" name="updateStartDay" pattern="\d{4}-\d{2}-\d{2}">
-												<div class="arrow">~</div>
-												<input type="date" name="updateEndDay" pattern="\d{4}-\d{2}-\d{2}">
-											</div>
-										</li>
-										<li class="reason_con">
-											<div class="reason_view_default">
-												회장님 돌잔치합니다. 돌잡이 피죤 잡음
-											</div>
-											<input class="reason_view_input" type="text" name="updateReason" placeholder="휴무 사유를 적어주세요." maxlength="300">												
-										</li>
-										<li class="update_icon_con">
-											<i class="fas fa-pen-square" onclick="updateSchedule(this)"></i>
-										</li>
-										<li class="cancle_icon_con">
-											<i class="fas fa-times" onclick="cancleUpdate(this)"></i>
-										</li>
-										<li class="remove_icon_con">
-											<i class="fas fa-trash-alt" onclick="deleteSchedule(this)"></i>
-										</li>
-										<li class="complete_icon_con">
-											<i class="fas fa-check-square" onclick="postSchedule(this)"></i>
-										</li>
-									</ul>
-									
-									
-									
-								<!-- sample 2 -->
-									<ul class="list_content">
-										<li class="period_con">
-											<div class="period_view_default">
-												<div class="list_start_day">2020-10-05</div>
-												<div class="arrow">~</div>
-												<div class="list_end_day">2020-11-06</div>
-											</div>
-											<div class="period_view_input">
-												<input type="date" name="updateStartDay" pattern="\d{4}-\d{2}-\d{2}">
-												<div class="arrow">~</div>
-												<input type="date" name="updateEndDay" pattern="\d{4}-\d{2}-\d{2}">
-											</div>
-										</li>
-										<li class="reason_con">
-											<div class="reason_view_default">
-												사업자 생일 파티로 임시 휴무합니다.
-											</div>
-											<input class="reason_view_input" type="text" name="updateReason" placeholder="휴무 사유를 적어주세요." maxlength="300">												
-										</li>
-										<li class="update_icon_con">
-											<i class="fas fa-pen-square" onclick="updateSchedule(this)"></i>
-										</li>
-										<li class="cancle_icon_con">
-											<i class="fas fa-times" onclick="cancleUpdate(this)"></i>
-										</li>
-										<li>
-											<i class="fas fa-trash-alt" onclick="deleteSchedule(this)"></i>
-										</li>
-										<li class="complete_icon_con">
-											<i class="fas fa-check-square" onclick="postSchedule(this)"></i>
-										</li>
-									</ul>
-									
-									
-								<!-- sample 3 -->
-									<ul class="list_content">
-										<li class="period_con">
-											<div class="period_view_default">
-												<div class="list_start_day">2021-08-05</div>
-												<div class="arrow">~</div>
-												<div class="list_end_day">2021-08-06</div>
-											</div>
-											<div class="period_view_input">
-												<input type="date" name="updateStartDay" pattern="\d{4}-\d{2}-\d{2}">
-												<div class="arrow">~</div>
-												<input type="date" name="updateEndDay" pattern="\d{4}-\d{2}-\d{2}">
-											</div>
-										</li>
-										<li class="reason_con">
-											<div class="reason_view_default">
-												사장님이 돌아가셨습니다.
-											</div>
-											<input class="reason_view_input" type="text" name="updateReason" placeholder="휴무 사유를 적어주세요." maxlength="300">												
-										</li>
-										<li class="update_icon_con">
-											<i class="fas fa-pen-square" onclick="updateSchedule(this)"></i>
-										</li>
-										<li class="cancle_icon_con">
-											<i class="fas fa-times" onclick="cancleUpdate(this)"></i>
-										</li>
-										<li>
-											<i class="fas fa-trash-alt" onclick="deleteSchedule(this)"></i>
-										</li>
-										<li class="complete_icon_con">
-											<i class="fas fa-check-square" onclick="postSchedule(this)"></i>
-										</li>
-									</ul>
-									
-									
-								</li>
+								<li id="schedule-container" class="list_content_con"></li>
 							</ul>
-							
-							
-							
 						</div>
 					<!-- </form> -->
 					</div>
