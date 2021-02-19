@@ -61,6 +61,8 @@ public interface BInformationDAO {
 	// 매장 좌표 Select REST 
 	List<BInformationVO> selectBInformationCoord();
 
+//	List<EstablishmentList> selectLaundryList(HashMap<String, String> param);
+
 
 
 }

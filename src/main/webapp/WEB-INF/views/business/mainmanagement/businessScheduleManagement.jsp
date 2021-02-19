@@ -39,12 +39,17 @@
 
 	<!-- objects from DB -->
 	<script type="text/javascript">
+		// 정기휴무
 		let bscheduledays = ${bscheduledays};
 		const holiday = bscheduledays.holiday; // holiday > 'Y' or 'N'
 		delete bscheduledays.holiday; // holiday 삭제
 		
 		console.log(bscheduledays);
 		console.log(holiday);
+		// 임시휴무
+		let btempsuspension = ${btempsuspension};
+
+		console.log(btempsuspension);
 	</script>
 
 </head>
