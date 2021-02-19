@@ -126,7 +126,7 @@ function hideModiIcons() {
 	const cancleIcons = document.getElementsByClassName("cancle_icon");
 	const completeIcons = document.getElementsByClassName("complete_icon");
 	const removeIcons = document.getElementsByClassName("remove_icon");
-	
+	 
 	for (let i = 0; i < btempsuspension.length; i++) {
 		console.log(i);
 		cancleIcons[i].classList.add("hide");
