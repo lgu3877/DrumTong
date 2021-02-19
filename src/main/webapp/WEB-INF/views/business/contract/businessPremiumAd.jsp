@@ -10,14 +10,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
 	<!-- title -->
-  	<title>Login :: Laundry</title>
+  	<title>businessContaract :: businessPremiumAd</title>
   	
   	<!-- global css -->
     <link rel="stylesheet" href="${cpath }/business/css/businessStyle.css">
     <!-- header css -->
     <link rel="stylesheet" href="${cpath }/business/css/businessHeader.css">
     <!-- preminumAd css -->
-    <link rel="stylesheet" href="${cpath }/business/css/contract/businessPreminumAd.css"> 	  	
+    <link rel="stylesheet" href="${cpath }/business/css/contract/businessPremiumAd.css"> 	  	
 	
 	<!-- Font -->
 	<link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
