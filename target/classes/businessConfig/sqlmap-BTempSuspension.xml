@@ -16,7 +16,7 @@
  		WHERE
  			ESTID = #{value}
  		ORDER BY 
- 			BEGINDAY DESC;
+ 			BEGINDAY DESC
  	</select>
 
 
