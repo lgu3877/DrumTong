@@ -16,6 +16,7 @@ import com.drumtong.customer.dao.CCouponDAO;
 import com.drumtong.customer.vo.CBookmarkVO;
 import com.drumtong.customer.vo.CCouponVO;
 import com.drumtong.customer.vo.CPrivateDataVO;
+import com.drumtong.customer.vo.EstablishmentList;
 import com.drumtong.map.dao.MEmdDAO;
 import com.drumtong.map.dao.MSidoDAO;
 import com.drumtong.map.dao.MSigunguDAO;
@@ -109,6 +110,28 @@ public class RestCustomerLaundryService {
  	    
 		List<BInformationVO> bInformationCoordList = bInformationDAO.selectBInformationCoord();
 		return new Gson().toJson(bInformationCoordList);
+	}
+
+	// 좌표 값 안에 해당되는 세탁소들을 들고오는 메서드[영경]
+	public String selectLaundry(String latitude, String longitude, String premium) {
+		System.out.println("latitude : " + latitude);
+		System.out.println("longitude : " + longitude);
+		HashMap<String, String> param = new HashMap<String, String>();
+		param.put("latitude", latitude);
+		param.put("longitude", longitude);
+//		List<EstablishmentList> list = bInformationDAO.selectLaundryList(param);
+//		return new Gson().toJson(list);
+		return null;
+	}
+
+	// emd 코드가 일치하는 세탁소들을 들고오는 메서드[영경]
+	public String selectLaundry(String emdcode, String premium) {
+		System.out.println("emdcode : " + emdcode);
+		HashMap<String, String> param = new HashMap<String, String>();
+		param.put("emdcode", emdcode);
+//		List<EstablishmentList> list = bInformationDAO.selectLaundryList(param);
+//		return new Gson().toJson(list);
+		return null;
 	}
 
 

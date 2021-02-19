@@ -1,27 +1,29 @@
 package com.drumtong.business.vo;
 
 public class BSalesVO {
-	private String memberid;		// 고객 고유 ID
-	private String estid;			// 매장 고유 ID
-	private String salecode;		// 구매 코드
-	private String purchasedate;	// 구매 일자
-	private int totalamount;		// 총 개수
-	private int originalprice;		// 원래 금액
-	private int discountprice;		// 세일 금액
-	private int totalprice;			// 총 금액
-	private String ableday;			// 완료예정 일자 (사장->고객) 
-	private String status;			// 현재 상태	[REQUEST] 요청  , [PROCESSING] 처리중 , [SUCCESS] 완료
-	private String pickupdate;		// 받은 날짜
-	private String deliverydate;	// 배송 날짜
-	private String requesttype;		// 요청 타입 	[DELIVERY] 배달, [VISIT] 매장방문
-	private String requests;		// 요청 사항
-	
+	private String memberid;			// 고객 고유 ID
+	private String estid;				// 매장 고유 ID
+	private String salecode;			// 구매 코드
+	private String purchasedate;		// 구매 일자
+	private int totalamount;			// 총 개수
+	private int originalprice;			// 원래 금액
+	private int discountprice;			// 세일 금액
+	private int totalprice;				// 총 금액
+	private String status;				// 현재 상태	[REQUEST] 요청  , [PROCESSING] 처리중 , [SUCCESS] 완료
+	private String deliverydate;		// 배송 날짜
+	private String collectiondate;		// 수거 날짜
+	private String laundrystatus;		// 현재 세탁물 위치('COLLECTING','WASHING','SENDING')
+	private String collectionboolean;	// 수거 요청 타입('VISIT', 'COLLECTION')
+	private String deliveryboolean;		// 배달 요청 타입('VISIT','DELIVERY')
+	private String collectionrequests;	// 수거 요청 사항
+	private String laundryrequests;		// 세탁 요청 사항
+	private String deliveryrequests;	// 배송 요청 사항
 	
 	public String getMemberid() {
 		return memberid;
 	}
 	public void setMemberid(String memberid) {
-		this.memberid = memberid;	
+		this.memberid = memberid;
 	}
 	public String getEstid() {
 		return estid;
@@ -41,7 +43,12 @@ public class BSalesVO {
 	public void setPurchasedate(String purchasedate) {
 		this.purchasedate = purchasedate;
 	}
-	
+	public int getTotalamount() {
+		return totalamount;
+	}
+	public void setTotalamount(int totalamount) {
+		this.totalamount = totalamount;
+	}
 	public int getOriginalprice() {
 		return originalprice;
 	}
@@ -60,23 +67,11 @@ public class BSalesVO {
 	public void setTotalprice(int totalprice) {
 		this.totalprice = totalprice;
 	}
-	public String getAbleday() {
-		return ableday;
-	}
-	public void setAbleday(String ableday) {
-		this.ableday = ableday;
-	}
 	public String getStatus() {
 		return status;
 	}
 	public void setStatus(String status) {
 		this.status = status;
-	}
-	public String getPickupdate() {
-		return pickupdate;
-	}
-	public void setPickupdate(String pickupdate) {
-		this.pickupdate = pickupdate;
 	}
 	public String getDeliverydate() {
 		return deliverydate;
@@ -84,25 +79,47 @@ public class BSalesVO {
 	public void setDeliverydate(String deliverydate) {
 		this.deliverydate = deliverydate;
 	}
-	public String getRequesttype() {
-		return requesttype;
+	public String getCollectiondate() {
+		return collectiondate;
 	}
-	public void setRequesttype(String requesttype) {
-		this.requesttype = requesttype;
+	public void setCollectiondate(String collectiondate) {
+		this.collectiondate = collectiondate;
 	}
-	public String getRequests() {
-		return requests;
+	public String getLaundrystatus() {
+		return laundrystatus;
 	}
-	public void setRequests(String requests) {
-		this.requests = requests;
+	public void setLaundrystatus(String laundrystatus) {
+		this.laundrystatus = laundrystatus;
 	}
-	public int getTotalamount() {
-		return totalamount;
+	public String getCollectionboolean() {
+		return collectionboolean;
 	}
-	public void setTotalamount(int totalamount) {
-		this.totalamount = totalamount;
+	public void setCollectionboolean(String collectionboolean) {
+		this.collectionboolean = collectionboolean;
 	}
-	
-	
+	public String getDeliveryboolean() {
+		return deliveryboolean;
+	}
+	public void setDeliveryboolean(String deliveryboolean) {
+		this.deliveryboolean = deliveryboolean;
+	}
+	public String getCollectionrequests() {
+		return collectionrequests;
+	}
+	public void setCollectionrequests(String collectionrequests) {
+		this.collectionrequests = collectionrequests;
+	}
+	public String getLaundryrequests() {
+		return laundryrequests;
+	}
+	public void setLaundryrequests(String laundryrequests) {
+		this.laundryrequests = laundryrequests;
+	}
+	public String getDeliveryrequests() {
+		return deliveryrequests;
+	}
+	public void setDeliveryrequests(String deliveryrequests) {
+		this.deliveryrequests = deliveryrequests;
+	}
 	
 }

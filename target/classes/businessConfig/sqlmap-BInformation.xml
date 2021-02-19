@@ -165,5 +165,8 @@
 			BINFORMATION
 	</select>
 	
+<!-- 	<select id="selectLaundryList" parameterType="hashmap" resultType="EstablishmentList"> -->
+		
+<!-- 	</select> -->
 	
 </mapper>
