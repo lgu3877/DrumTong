@@ -19,6 +19,41 @@ function couponSettings(couponList){
 	}
 	
 }
+// 매장 이미지 세팅하는 메서드
+function imgSettings(imgList){
+	imgBoxs = document.getElementById('detailview-imgBlock');
+	subImgNum = 1;
+	console.log(imgList);
+	for(imgNum = 0; imgNum < 6; imgNum++){
+		if(imgNum < imgList.length){
+			if(imgList[imgNum].delegatephotoboolean === 'Y'){
+				// 메인 이미지일 때
+				imgBoxs.children[0].children[0].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + imgList[imgNum].storeimg;
+				imgBoxs.children[1].children[0].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + imgList[imgNum].storeimg;
+				imgBoxs.children[1].children[0].className = 'select exist'; 
+			}
+			else {
+				// 서브 이미지일 때
+				imgBoxs.children[1].children[subImgNum].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + imgList[imgNum].storeimg;
+				imgBoxs.children[1].children[subImgNum++].className = 'exist'; 
+			}
+			document.querySelector('#imgBox' + (imgNum+1)).addEventListener('click', () => {
+				for(let i = 0; i < imgList.length; i++){
+					console.log()
+					if(event.target.id === imgBoxs.children[1].children[i].id){
+						event.target.className = "select exist";
+						imgBoxs.children[0].children[0].src = event.target.src;
+					} else{
+						imgBoxs.children[1].children[i].className = "exist";
+					}
+				}
+			});
+		}
+		else {
+			imgBoxs.children[1].children[imgNum].src = '/drumtong/resources/business/img/slide/laundry1_02.jpg';
+		}
+	}
+}
 // 메뉴를 선택했을 때 실행하는 메서드(주문리스트에 추가해준다.)
 function listUp(event) {
         choose = event.target;
