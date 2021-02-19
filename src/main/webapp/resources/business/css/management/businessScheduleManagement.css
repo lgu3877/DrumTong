@@ -424,6 +424,7 @@
     border: none;
     width: 200px;
     height: 250px;
+	border-top: groove;
 }
 
 .h_schedule_list:hover {
