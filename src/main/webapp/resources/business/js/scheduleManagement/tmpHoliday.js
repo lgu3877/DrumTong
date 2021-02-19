@@ -1,7 +1,7 @@
 // 초기실행 (뷰 & 인터페이스)
 displayTmpHoliday();
 
-//hideCancleBtn();
+hideCancleBtn();
 
 hideModiIcons();
 
@@ -11,6 +11,7 @@ function displayTmpHoliday() {
 	// container
 	const container = document.getElementById("schedule-container");
 	
+
 	
 	for (let i = 0; i < btempsuspension.length; i++) {
 		// temp holiday info
@@ -148,7 +149,6 @@ function hideCancleBtn() {
 	}
 }
 
-
 // 임시 휴무 리스트 수정 버튼
 function updateSchedule(obj) {
 	const list = obj.parentElement.parentElement;
@@ -171,7 +171,6 @@ function updateSchedule(obj) {
 	cancleIcon.style.display = "block";
 	completeIcon.style.display = "block";
 }
-
 
 // 임시 휴무 리스트 수정 취소 버튼
 function cancleUpdate(obj) {
@@ -197,7 +196,6 @@ function cancleUpdate(obj) {
 	
 	
 }
-
 
 // 임시 휴무 리스트 삭제 버튼
 function deleteSchedule(obj) {
