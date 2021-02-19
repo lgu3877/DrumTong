@@ -24,5 +24,15 @@
 			(#{bpersonid}, #{estid})
 	</insert>
 	
+<!-- 	BPersonID 를 가져옵니다. -->
+	<select id="selectBPersonID" parameterType="String">
+		SELECT 
+			BPERSONID 
+		FROM
+			BESTABLISHMENT
+		WHERE
+			ESTID = #{value}
+	</select>
+	
 	
 </mapper>

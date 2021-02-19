@@ -100,9 +100,10 @@ async function addService() {
 			if (j === 0 || j === 1) {
 				const select = eachInput.getElementsByTagName("select")[0];
 				const direct = eachInput.getElementsByTagName("input")[0];
+				console.log(select);
 				
 				// select 입력 검사
-				if (select.value === "서비스 타입 선택" || select.value === "세부 서비스 유형 선택") {
+				if (select.value === "서비스 타입 선택" || select.value === "세부 서비스 선택") {
 					return alert("서비스 등록 과정에서 유형 및 타입을 선택하지 않으셨습니다.");
 				}
 				
@@ -141,10 +142,13 @@ async function addService() {
 	// 퀵 서비스 옵션 설정
 //	activateDelivery();
 //	activateQuick();
-
+	
+	
 	const processing = "insertBMenu";
 	// 서비스 등록
 	const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/" + processing + "/", object);
+	
+	console.log(data);
 }
 
 
@@ -171,9 +175,7 @@ async function updateMenu(service) {
 async function deleteMenu(rmObject) {
 	
 	try {
-		let {data} = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/deleteMenu/", rmObject);
-		bMenu = data;
-		displayMenu();
+		const {data} = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/deleteMenu/", rmObject);
 		alertShow(data);
 		
 	} catch (e) {
@@ -231,7 +233,7 @@ async function updateAddress() {
 		"emdcode" : emdCode
 	}
 	await axios.post("/drumtong/business/mainmanagement/BInformation/rest/updateLocation/", object);
-	
+	 
 	borderNone('locationArea');
 }
 

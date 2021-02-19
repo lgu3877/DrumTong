@@ -32,6 +32,15 @@ document.getElementById(
 		"current-month"
 ).innerHTML = `<span id="month-value">${currentMonth}</span> <i class="fas fa-angle-down"></i>`;
 
+
+
+//달력 렌더링
+yearMonthSelector();
+createYears();
+createMonths();
+loadDays(currentYear, currentMonth, currentDate);
+
+
 // 달력 년-월 선택 디자인
 function yearMonthSelector() {
 	const yearSelector = document.getElementById("current-year");
@@ -55,7 +64,8 @@ function yearMonthSelector() {
 	}
 }
 
-// dropdown years
+
+// 연도 드랍다운 (dropdown)
 function createYears() {
   const startYear = currentYear;
   const endYear = currentYear + 3;
@@ -80,7 +90,8 @@ function createYears() {
   }
 }
 
-// dropdown months
+
+// 월 드랍다운 (dropdown)
 function createMonths() {
   for (let i = 0; i < months.length; i++) {
     const monthDiv = document.createElement("div");
@@ -102,6 +113,7 @@ function createMonths() {
   }
 }
 
+
 // dropdown 이벤트 > open & close
 function showMenu(id) {
   //   console.log(document.getElementById("years"));
@@ -114,20 +126,12 @@ function showMenu(id) {
   }
 }
 
+
 // 날짜 구성 > 출력
 function loadDays(year, month, day) {
   const lastDate = new Date(year, month, 0).getDate();
   const prevLastDate = new Date(year, month - 1, 0).getDate();
   const startDay = new Date(year, month - 1, 1).getDay();
-  //   const firstdate = new Date(year, month - 1, 1).getDate();
-  //   const prevLastDay = new Date(year, month - 1, 0).getDay();
-
-  //   console.log(`현재 ${year}년 ${month}월`);
-  //   console.log(`시작 일: ${firstdate}`);
-  //   console.log(`마지막 일: ${lastDate}`);
-  //   console.log(`지난달 마지막 일: ${prevLastDate}`);
-  //   console.log(`지난달 마지막 요일: ${prevLastDay}`);
-  //   console.log(`시작 요일: ${swipeDay(startDay)}`);
 
   let currentCount = 0;
   let lastCount = 0;
@@ -171,7 +175,8 @@ function loadDays(year, month, day) {
           date.innerHTML = ++currentCount;
 
           weekDiv.appendChild(date);
-        } else {
+        } 
+        else {
           const date = document.createElement("div");
           date.classList.add("nextDays");
 
@@ -210,52 +215,47 @@ function weekConvert(value) {
 // 일(변환) > index
 function dayConvert(value) {
 	switch(value) {
-	case "일요일":
+	case "일":
 		return 0;
-	case "월요일":
+	case "월":
 		return 1;
-	case "화요일":
+	case "화":
 		return 2;
-	case "수요일":
+	case "수":
 		return 3;
-	case "목요일":
+	case "목":
 		return 4;
-	case "금요일":
+	case "금":
 		return 5;
-	case "토요일":
+	case "토":
 		return 6;
 	}
 }
 
-// 정기 휴무 일정 달력 출력
+
+
+
+//정기 휴무 일정 달력 출력
 function markRegHolidays() {
 	// 정기 휴무 일정 object
 	const obj = {
-		firstWeek: [],
-		secondWeek: [],
-		thirdWeek: [],
-		forthWeek: [],
-		fifthWeek: [],
-		sixthWeek: [],
+		firstweek: [],
+		secondweek: [],
+		thirdweek: [],
+		forthweek: [],
+		fifthweek: [],
+		sixthweek: [],
 	};
-//	
-//	// 값 가져오기 > object 설정
-//	const lists = document.getElementsByClassName("h_schedule_list");
-//	for (let i = 0; i < lists.length; i++) {
-//		// 주(week)
-//		let week = lists[i].getElementsByClassName("h_week")[0].getElementsByTagName("span")[0].innerHTML;
-//		week = weekConvert(week.trim());
-//		
-//		// 일(days)
-//		const days = lists[i].getElementsByClassName("h_day");
-//		
-//		for (let j = 0; j < days.length; j++) {
-//			let day = days[j].getElementsByTagName("span")[0].innerHTML;
-//			day = dayConvert(day.trim());
-//			
-//			obj[week].push(day);
-//		}
-//	}
+	
+	// object 형성 (bscheduledays > obj)
+	for (let week in bscheduledays) {
+		const dayArray = bscheduledays[week].split("/");
+		dayArray.pop();
+		
+		for (let i = 0; i < dayArray.length; i++) {
+			obj[week].push(dayConvert(dayArray[i]));
+		}
+	}
 	
 	// 달력 container & 주(week) 
 	const calendar = document.getElementById("calendar-days");
@@ -271,32 +271,27 @@ function markRegHolidays() {
 	
 	// 달력에 표시
 	for (let row = 0; row < weeks.length; row++) {
-		let dayArray = [...weeks[row].childNodes];
+		const dayArray = [...weeks[row].childNodes];
 		switch(row) {
 		case 0:
-			obj.firstWeek.length !== 0 ? markDay(dayArray, obj.firstWeek) : null;
+			obj.firstweek.length !== 0 ? markDay(dayArray, obj.firstweek) : null;
 			break;
 		case 1:
-			obj.secondWeek.length !== 0 ? markDay(dayArray, obj.secondWeek) : null;
+			obj.secondweek.length !== 0 ? markDay(dayArray, obj.secondweek) : null;
 			break;
 		case 2:
-			obj.thirdWeek.length !== 0 ? markDay(dayArray, obj.thirdWeek) : null;
+			obj.thirdweek.length !== 0 ? markDay(dayArray, obj.thirdweek) : null;
 			break;
 		case 3:
-			obj.forthWeek.length !== 0 ? markDay(dayArray, obj.forthWeek) : null;
+			obj.forthweek.length !== 0 ? markDay(dayArray, obj.forthweek) : null;
 			break;
 		case 4:
-			obj.fifthWeek.length !== 0 ? markDay(dayArray, obj.fifthWeek) : null;
+			obj.fifthweek.length !== 0 ? markDay(dayArray, obj.fifthweek) : null;
 			break;
 		case 5:
-			obj.sixthWeek.length !== 0 ? markDay(dayArray, obj.sixthWeek) : null;
+			obj.sixthweek.length !== 0 ? markDay(dayArray, obj.sixthweek) : null;
 			break;
 		}
 	}	
 }
 
-// 달력 렌더링
-yearMonthSelector();
-createYears();
-createMonths();
-loadDays(currentYear, currentMonth, currentDate);
