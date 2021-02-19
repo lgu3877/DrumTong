@@ -43,7 +43,11 @@ function createAddService() {
 		mainSelectorDirectInput.type = "text";
 		mainSelectorDirectInput.className = "direct_type_input";
 		mainSelectorDirectInput.placeholder = "서비스 입력";
-		mainSelectorDirectInput.onchange = () => changeSelectBoxName(selectorRandomId,directRandomId, "maincategory");
+		console.log('비치 암어 솔로');
+		
+		if(status !== "SUCCESS")
+			mainSelector.onchange = () => changeSelectBoxName(selectorRandomId,directRandomId, "maincategory");
+//		mainSelectorDirectInput.onchange = () => changeSelectBoxName(selectorRandomId,directRandomId, "maincategory");
 
 		mainSelectorDirectInput.style.display = "none";
 	
@@ -76,8 +80,10 @@ function createAddService() {
 		subDirectInput.placeholder = "서비스 입력";
 		subDirectInput.style.display = "none";
 		subDirectInput.maxlength = "10";
+		if(status !== "SUCCESS")
+			subSelector.onchange = () => changeSelectBoxName(subSelectorRandomId,subDirectRandomId, "subcategory");
 		
-		subDirectInput.onchange = () => changeSelectBoxName(subSelectorRandomId,subDirectRandomId, "subcategory");
+//		subDirectInput.onchange = () => changeSelectBoxName(subSelectorRandomId,subDirectRandomId, "subcategory");
 
 		// 추가
 		subSelector.appendChild(option);
@@ -155,9 +161,24 @@ function createAddService() {
 // [건욱] Select 박스의 이름을 결정해주는 함수입니다 (POST 형식일 때 Spring에서 데이터 바인딩을 제대로 해주기 위해서 설정하는 함수.)
 function changeSelectBoxName(selectID, inputID, type) {
 	let name = (type === "maincategory") ? "maincategory" : "subcategory";
+	
+	let selectValue = document.querySelector('select#'+selectID+' option:checked').value;
+	console.log(selectValue);
+	
+	if(selectValue === "selectedDirect"){
+		document.getElementById(selectID).name = name + "SelectBox";
+		document.getElementById(inputID).name = name;
+	}
+	else {
+		document.getElementById(selectID).name = name;
+		document.getElementById(inputID).name = name + "InputBox";
+	}
+	
+	
+//	document.querySelector('select#sel option:checked').value;
+
 	console.log("changename : ", name);
-	document.getElementById(selectID).name = name + "SelectBox"
-	document.getElementById(inputID).name = name;
+	
 }	
 
 

@@ -28,6 +28,10 @@
 	background-color: #f38181 !important;
 }
 
+.reg_holiday h {
+	color: white;
+}
+
 /* 폰트 옵션 */
 .text_blue {
 	color: #3b5998;
@@ -504,9 +508,14 @@
     border: none;
     background-color: #f38181;
     border-radius: 5px;
-    padding: 0 15px;
+    padding: 0 0 0 15px;
     font-size: 12pt;
     color: white;
+    letter-spacing: 3px;
+    font-size: 14pt;
+}
+
+.set_day_range_con input[type="date" i]:hover {
 }
 
 .set_day_range_con input[type="date"]::-webkit-calendar-picker-indicator {
@@ -581,6 +590,7 @@
     text-indent: 10px;
     padding: 10px;	
     line-height: 30px;
+	letter-spacing: 2px;
 }
 
 .tmp_holiday_reason_con button {

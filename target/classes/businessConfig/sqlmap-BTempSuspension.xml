@@ -6,6 +6,20 @@
 <!-- 사업장 임시중지 테이블	 -->
 <mapper namespace="com.drumtong.business.dao.BTempSuspensionDAO">
 
+
+<!-- 	영업 강제 중지의 데이터를 가져와줍니다. -->
+ 	<select id="selectBTempSuspension" parameterType="String" resultType="BTempSuspensionVO">
+ 		SELECT 
+ 			BEGINDAY,ENDDAY,REASON
+ 		FROM
+ 			BTEMPSUSPENSION
+ 		WHERE
+ 			ESTID = #{value}
+ 		ORDER BY 
+ 			BEGINDAY DESC;
+ 	</select>
+
+
 <!-- 영업임시중지관리 {임시중지 시작일, 임시중지 마지막일}을 업데이트 시켜준다. -->
 	<insert id="insertConstract" parameterType="BTempSuspensionVO">
 		INSERT INTO BTEMPSUSPENSION

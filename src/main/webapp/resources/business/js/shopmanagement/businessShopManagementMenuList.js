@@ -66,9 +66,9 @@ function displayMenu() {
 	}
 	
 	// menu list 생성
-	const container = document.getElementById("posted-service-list");
-	
+	let container = document.getElementById("posted-service-list");
 	// main category
+	container.innerHTML = '';
 	for (let main in list) {
 		const mainCon = document.createElement("div");
 		const mainContainerId = generateRandomString(10);
@@ -113,6 +113,8 @@ function displayMenu() {
 		mainWrapper.appendChild(mainAmount);
 		
 		mainCon.appendChild(mainWrapper);
+		
+		
 		container.appendChild(mainCon);
 	}
 }
@@ -543,7 +545,7 @@ function openMenuModifyModal(main, sub, info) {
 					
 					if (deleteMenu(rmObject)) {
 						document.getElementById("posted-service-list").innerHTML = ""; // 초기화
-						displayMenu(); // 메뉴 재생성
+//						displayMenu(); // 메뉴 재생성
 					}
 					else {
 						alert("존재하지 않는 서비스입니다. 새로고침이 필요합니다.");
@@ -620,6 +622,7 @@ function clearSubOption(subCategoryId) {
 		subOptions[0].remove();
 	}
 }
+
 
 
 // quick 활성화
