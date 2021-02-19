@@ -1,5 +1,6 @@
 package com.drumtong.customer.service.laundry;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -112,40 +113,32 @@ public class RestCustomerLaundryService {
 		return new Gson().toJson(bInformationCoordList);
 	}
 
-	// 좌표 값 안에 해당되는 세탁소들을 들고오는 메서드[영경]
-	public String selectLaundry(String latitude, String longitude, String premium) {
-		System.out.println("latitude : " + latitude);
-		System.out.println("longitude : " + longitude);
+	// 좌표 값 안에 해당되는 세탁소들을 들고오는 메서드[영경] 여기서부터 작업하기! 위도 경도 배치 정확하게 하기! 큰 위도, 작은 위도 등..
+	public String selectLaundry(String left, String right, String top, String bottom) {
 		HashMap<String, String> param = new HashMap<String, String>();
-		param.put("latitude", latitude);
-		param.put("longitude", longitude);
-//		List<EstablishmentList> list = bInformationDAO.selectLaundryList(param);
-//		return new Gson().toJson(list);
-		return null;
+		List<Object> list = new ArrayList<Object>();
+		param.put("left", left);
+		param.put("right", right);
+		param.put("top", top);
+		param.put("bottom", bottom);
+		param.put("premium", "Y");
+		list.add(bInformationDAO.selectEstablishmentList(param));
+		param.put("premium", "N");
+		list.add(bInformationDAO.selectEstablishmentList(param));
+		return new Gson().toJson(list);
 	}
 
 	// emd 코드가 일치하는 세탁소들을 들고오는 메서드[영경]
-	public String selectLaundry(String emdcode, String premium) {
-		System.out.println("emdcode : " + emdcode);
+	public String selectLaundry(String emdcode) {
 		HashMap<String, String> param = new HashMap<String, String>();
+		List<Object> list = new ArrayList<Object>();
 		param.put("emdcode", emdcode);
-//		List<EstablishmentList> list = bInformationDAO.selectLaundryList(param);
-//		return new Gson().toJson(list);
-		return null;
+		param.put("premium", "Y");
+		list.add(bInformationDAO.selectEstablishmentList(param));
+		param.put("premium", "N");
+		list.add(bInformationDAO.selectEstablishmentList(param));
+		return new Gson().toJson(list);
 	}
 
 
-//	public String clusterer(String address, int level, String type) {
-//		// address에 따라 관련 세탁소 가지고 오도록!
-//		// level에 따라 주소를 비교하기
-//		// type에 따라 개수를 가지고올지, 리스트를 통째로 가지고 올지 정하기a
-//		List<BInformationVO> list = bInformationDAO.selectBusinessMapInfo();
-//		try {
-//			return list != null
-//					? new ObjectMapper().writeValueAsString(list):null;
-//		} catch (JsonProcessingException e) {
-//			e.printStackTrace();
-//		}
-//		return null;
-//	}
 }
