@@ -283,6 +283,7 @@
 	width:300px;
 	height:200px;
 	border: 2px dotted grey;
+	resize: none;
 }
 .order_review_modal .modal_box form .modal_menu_3 i{
 	cursor: pointer;
