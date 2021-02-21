@@ -20,7 +20,16 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 	<script type="text/javascript" src="${cpath }/customer/js/main/customerHeader.js"></script>
     <script src="https://kit.fontawesome.com/7522a35233.js" crossorigin="anonymous"></script>
-	   	
+	
+	<style type="text/css">
+		.notice_area_1 {
+			float: left;
+			margin-right: 15px;
+		}
+		.notice_area_2 {
+			float: left;
+		}
+	</style>	   	
 </head>
 <body>
 	
