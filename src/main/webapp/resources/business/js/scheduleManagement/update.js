@@ -9,7 +9,6 @@ async function updateRegHoliday() {
 		if (weekOptions[i].selected === true && !weekOptions[i].value.includes("주 선택")) {
 			selectedWeek = weekOptions[i].value;
 		}
-		
 	}
 	
 	// 주 선택 유무 검사
@@ -17,7 +16,6 @@ async function updateRegHoliday() {
 		alert("주(week)가 선택되지 않았습니다. 다시 한 번 확인해주세요.");
 		return;
 	}
-	
 	
 	// 일(day) > 배열
 	const dayArray = document.getElementsByName("restDay");
@@ -99,7 +97,9 @@ async function removeRegHoliday(id) {
 }
 
 
-function updateTmpHoliday() {
+
+// 임시휴무 등록
+async function updateTmpHoliday() {
 	const startDate = document.getElementById("startDay").value;
 	const endDate = document.getElementById("endDay").value;
 	const reason = document.getElementById("tmp-holiday-text").value;
@@ -115,20 +115,23 @@ function updateTmpHoliday() {
 		reason : reason
 	}
 	
-	console.log(object);
 	const { data } = axios.post("/drumtong/business/mainmanagement/BTempHoliday/rest/deleteBTempHoliday/", object);
-
+	btempsuspension = data;
 	
 	// form 초기화
 	document.getElementById("startDay").value = "";
 	document.getElementById("endDay").value = "";
 	document.getElementById("tmp-holiday-text").value = "";
+	
+	// list 초기화 > 업데이트
+	document.getElementById("schedule-container").innerHTML = ""; // 초기화
+	displayTmpHoliday(); // list 출력
+	hideModiIcons(); // 수정 관련 버튼 숨기기
 }
 
 
 
-
-//임시 휴무 리스트 삭제 버튼
+// 임시휴무 단일 삭제
 async function deleteSchedule(list) {
 	// 일자 (시작일 ~ 마지막일)
 	const startDay = list.getElementsByClassName("list_start_day")[0].innerHTML;
@@ -159,12 +162,13 @@ async function deleteSchedule(list) {
 			displayTmpHoliday(); // list 출력
 			hideModiIcons(); // 수정 관련 버튼 숨기기
 		}
-		
 	}
 }
 
-// 임시 휴무 리스트 확인 버튼
-function postSchedule(list) {
+
+
+// 임시휴무 단일 업데이트
+async function postSchedule(list) {
 	// 일자 (시작일 ~ 마지막일)
 	const startDay = list.getElementsByClassName("period_start")[0].value;
 	const endDay = list.getElementsByClassName("period_end")[0].value;	
@@ -194,6 +198,5 @@ function postSchedule(list) {
 			displayTmpHoliday(); // list 출력
 			hideModiIcons(); // 수정 관련 버튼 숨기기
 		}
-		
 	}
 }
