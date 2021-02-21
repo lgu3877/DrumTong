@@ -129,26 +129,71 @@ function updateTmpHoliday() {
 
 
 //임시 휴무 리스트 삭제 버튼
-function deleteSchedule(list) {
+async function deleteSchedule(list) {
+	// 일자 (시작일 ~ 마지막일)
 	const startDay = list.getElementsByClassName("list_start_day")[0].innerHTML;
 	const endDay = list.getElementsByClassName("list_end_day")[0].innerHTML;	
 	
+	// 동의
 	const agree = confirm(`${startDay} ~ ${endDay}의 휴무 일정을 삭제하시겠습니까?`);
+	
 	if (agree) {
-		// DB에서 리스트 삭제 > redirect
-		list.remove();
-		window.location.reload();
-		return;
+		// 정규식 > validation (잘짜 & 텍스트)
+		const dateReg = "/^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/";
+		
+		// 사유
+		const reason = list.getElementsByClassName("reason_view_default")[0].innerHTML;
+			
+		const object = {
+			start: startDay,
+			end: endDay,
+			reason: reason || ""
+		}
+		
+		if (dateReg.test(startDay) && dateReg.test(endDay)) {
+			const { data } = await axios.post("/drumtong/business/mainmanagement/BTempSuspension/rest/deleteBTempSuspension/", object);
+			btempsuspension = data;
+			
+			// view 초기화 > 업데이트(리스트 & 버튼)
+			document.getElementById("schedule-container").innerHTML = ""; // 초기화
+			displayTmpHoliday(); // list 출력
+			hideModiIcons(); // 수정 관련 버튼 숨기기
+		}
+		
 	}
 }
 
 // 임시 휴무 리스트 확인 버튼
-function postSchedule(obj) {
+function postSchedule(list) {
+	// 일자 (시작일 ~ 마지막일)
+	const startDay = list.getElementsByClassName("period_start")[0].value;
+	const endDay = list.getElementsByClassName("period_end")[0].value;	
+	
+	// 동의
 	const agree = confirm("수정하신 내용을 반영하시겠습니까?");
 	
 	if (agree) {
-		// DB에 리스트 추가 > rediect
-		window.location.reload();
+		// 정규식 > validation (잘짜 & 텍스트)
+		const dateReg = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/;
+		
+		// 사유
+		const reason = list.getElementsByClassName("reason_view_input")[0].value;
+			
+		const object = {
+			start: startDay,
+			end: endDay,
+			reason: reason || ""
+		}
+		
+		if (dateReg.test(startDay) && dateReg.test(endDay)) {
+			const { data } = await axios.post("/drumtong/business/mainmanagement/BTempSuspension/rest/deleteBTempSuspension/", object);
+			btempsuspension = data;
+			
+			// view 초기화 > 업데이트(리스트 & 버튼)
+			document.getElementById("schedule-container").innerHTML = ""; // 초기화
+			displayTmpHoliday(); // list 출력
+			hideModiIcons(); // 수정 관련 버튼 숨기기
+		}
+		
 	}
-	
 }
