@@ -17,7 +17,6 @@ import com.drumtong.customer.dao.CCouponDAO;
 import com.drumtong.customer.vo.CBookmarkVO;
 import com.drumtong.customer.vo.CCouponVO;
 import com.drumtong.customer.vo.CPrivateDataVO;
-import com.drumtong.customer.vo.EstablishmentList;
 import com.drumtong.map.dao.MEmdDAO;
 import com.drumtong.map.dao.MSidoDAO;
 import com.drumtong.map.dao.MSigunguDAO;
