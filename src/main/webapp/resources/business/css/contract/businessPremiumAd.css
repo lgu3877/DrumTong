@@ -173,6 +173,13 @@ input[type=submit]:hover {
     border: none;
     outline: none;
     font-size: 16pt;
+    cursor: pointer;
+}
+
+.ad_contract_submit_btn:hover {
+	transform: translate(0, -5px) !important;
+    transition: all 0.5s ease 0s !important;
+    box-shadow: 0px 15px 20px rgb(182 182 182) !important;
 }
 
 .ad_error_msg {
