@@ -317,8 +317,13 @@ function markTempHolidays() {
 	}
 	else {
 		const year = currentMonth !== 1 ? currentYear : currentYear - 1;
-		const month = currentMonth !== 1 ? currentMonth - 1 : 12;
-		const day = lastDays.querySelector('.day').innerHTML;
+		
+		let month = currentMonth !== 1 ? currentMonth - 1 : 12;
+		month = month < 10 ? "0" + month : month;
+		
+		let day = lastDays.querySelector('.day').innerHTML;
+		day = day < 10  ? "0" + day : day;
+		
 		firstDate = `${year}-${month}-${day}`;
 	}
 	
@@ -327,28 +332,35 @@ function markTempHolidays() {
 	if (nextDays === null) {
 		const lastDay = [ ...calendar.querySelectorAll(".nextDays") ].pop();
 		const day = currentDay.innerHTML;
+		
 		lastDate = `${currentYear}-${currentMonth}-${day}`;
 	}
 	
 	else {
 		const year = currentMonth !== 12 ? currentYear : currentYear + 1;
-		const month = currentMonth !== 12 ? currentMonth + 1 : 1;
-		const day = nextDays.querySelector('.day').innerHTML;
+		
+		let month = currentMonth !== 12 ? currentMonth + 1 : 1;
+		month = month < 10 ? "0" + month : month;
+		
+		let day = nextDays.querySelector('.day').innerHTML;
+		day = day < 10 ? "0" + day : day;
+		
 		lastDate = `${year}-${month}-${day}`;
 	}
 
-	console.log(firstDate);
-	console.log(lastDate);
-	
-	
 	const filtered = [];
 	
 	for (let i = 0; i < btempsuspension.length; i++) {
 		const data = btempsuspension[i];
+		
 		const startDay = data.beginday;
 		const endDay = data.endday;
 		
-		if (startDay <= lastDate || endDay >= firstDate) {
+		if (startDay >= firstDate && startDay <= lastDate) {
+			filtered.push(data);
+		}
+		
+		else if (endDay >= firstDate && endDay <= lastDate) {
 			filtered.push(data);
 		}
 	}
