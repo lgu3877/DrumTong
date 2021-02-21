@@ -124,3 +124,31 @@ function updateTmpHoliday() {
 	document.getElementById("endDay").value = "";
 	document.getElementById("tmp-holiday-text").value = "";
 }
+
+
+
+
+//임시 휴무 리스트 삭제 버튼
+function deleteSchedule(list) {
+	const startDay = list.getElementsByClassName("list_start_day")[0].innerHTML;
+	const endDay = list.getElementsByClassName("list_end_day")[0].innerHTML;	
+	
+	const agree = confirm(`${startDay} ~ ${endDay}의 휴무 일정을 삭제하시겠습니까?`);
+	if (agree) {
+		// DB에서 리스트 삭제 > redirect
+		list.remove();
+		window.location.reload();
+		return;
+	}
+}
+
+// 임시 휴무 리스트 확인 버튼
+function postSchedule(obj) {
+	const agree = confirm("수정하신 내용을 반영하시겠습니까?");
+	
+	if (agree) {
+		// DB에 리스트 추가 > rediect
+		window.location.reload();
+	}
+	
+}
