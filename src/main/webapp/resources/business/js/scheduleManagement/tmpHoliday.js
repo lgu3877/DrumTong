@@ -1,9 +1,6 @@
 // 초기실행 (뷰 & 인터페이스)
-displayTmpHoliday();
-
-hideCancleBtn();
-
-hideModiIcons();
+displayTmpHoliday(); // list 출력
+hideModiIcons(); // 수정 관련 버튼 숨기기
 
 
 // 임시 휴무 리스트 출력
@@ -39,6 +36,7 @@ function displayTmpHoliday() {
 					// ~
 					const firstArrow = document.createElement("div");
 					firstArrow.className = "arrow";
+					firstArrow.innerHTML = "~";
 					
 					// end
 					const end = document.createElement("div");
@@ -48,6 +46,7 @@ function displayTmpHoliday() {
 				// input
 				const inputCon = document.createElement("div");
 				inputCon.className = "period_view_input";
+				inputCon.classList.add("hide");
 					
 					// start input
 					const startInput = document.createElement("input"); 
@@ -58,6 +57,7 @@ function displayTmpHoliday() {
 					// ~
 					const secondArrow = document.createElement("div");
 					secondArrow.className = "arrow";
+					secondArrow.innerHTML = "~";
 					
 					// end input
 					const endInput = document.createElement("input");
@@ -68,31 +68,38 @@ function displayTmpHoliday() {
 			// 사유
 			const reasonCon = document.createElement("li");
 			reasonCon.className = "reason_con";
-			
+				
+				// view
 				const reason = document.createElement("div");
 				reason.className = "reason_view_default";
 				reason.innerHTML = data.reason // data preview
+				
+				// input
+				const reasonInput = document.createElement("input");
+				reasonInput.className = "reason_view_input";
+				reasonInput.classList.add("hide");
+				reasonInput.type = "text";
+				reasonInput.value = data.reason;
 			
 			// 아이콘(cancle)
 			const cancleIcon = document.createElement("li");
 			cancleIcon.className = "cancle_icon";
-			cancleIcon.innerHTML = '<i class="fas fa-times" onclick="cancleUpdate(randomId)"></i>';
+			cancleIcon.innerHTML = '<i class="fas fa-times" onclick="cancleUpdate(' + randomId + ')"></i>';
 			
 			// 아이콘(complete)
 			const completeIcon = document.createElement("li");
 			completeIcon.className = "complete_icon";
-			completeIcon.innerHTML = '<i class="fas fa-check-square" onclick="postSchedule(randomId)"></i>';
+			completeIcon.innerHTML = '<i class="fas fa-check-square" onclick="postSchedule(' + randomId + ')"></i>';
 
 			// 아이콘(remove)
 			const removeIcon = document.createElement("li");
 			removeIcon.className = "remove_icon";
-			removeIcon.innerHTML = '<i class="fas fa-trash-alt" onclick="deleteSchedule(randomId)"></i>';
+			removeIcon.innerHTML = '<i class="fas fa-trash-alt" onclick="deleteSchedule(' + randomId + ')"></i>';
 			
 			// 아이콘(update)
 			const updateIcon = document.createElement("li");
 			updateIcon.className = "update_icon";
-			updateIcon.innerHTML = '<i class="fas fa-pen-square" onclick="updateSchedule(randomId)"></i>';
-			
+			updateIcon.innerHTML = '<i class="fas fa-pen-square" onclick="updateSchedule(' + randomId + ')"></i>';
 			
 			
 		// 추가
@@ -108,6 +115,7 @@ function displayTmpHoliday() {
 		periodCon.appendChild(inputCon);
 		
 		reasonCon.appendChild(reason);
+		reasonCon.appendChild(reasonInput);
 		
 		ul.appendChild(periodCon);
 		ul.appendChild(reasonCon);
@@ -121,14 +129,14 @@ function displayTmpHoliday() {
 	}
 }
 
-// 아이콘 숨기기 (수정전)
+
+// 아이콘 숨기기 (수정완료, 삭제, 취소)
 function hideModiIcons() {
 	const cancleIcons = document.getElementsByClassName("cancle_icon");
 	const completeIcons = document.getElementsByClassName("complete_icon");
 	const removeIcons = document.getElementsByClassName("remove_icon");
-	 
+	
 	for (let i = 0; i < btempsuspension.length; i++) {
-		console.log(i);
 		cancleIcons[i].classList.add("hide");
 		completeIcons[i].classList.add("hide");
 		removeIcons[i].classList.add("hide");
@@ -136,92 +144,58 @@ function hideModiIcons() {
 }
 
 
-// 임시 휴무 수정 취소 버튼 숨기기
-function hideCancleBtn() {
-	const cancleIcons = document.getElementsByClassName("cancle_icon_con");
-	const completeIcons = document.getElementsByClassName("complete_icon_con");
-
-	for (let i = 0; i < cancleIcons.length; i++) {
-		cancleIcons[i].style.display = "none";
-		cancleIcons[i].style.color = "red";
-		completeIcons[i].style.display = "none";
-		completeIcons[i].style.color = "lawngreen";
-	}
-}
-
 // 임시 휴무 리스트 수정 버튼
-function updateSchedule(obj) {
-	const list = obj.parentElement.parentElement;
+function updateSchedule(list) {
+	// icon display
+	const updateIcon = list.getElementsByClassName("update_icon")[0];
+	const cancleIcon = list.getElementsByClassName("cancle_icon")[0];
+	const completeIcon = list.getElementsByClassName("complete_icon")[0];
+	const removeIcon = list.getElementsByClassName("remove_icon")[0];
 	
-	const viewCon = list.getElementsByClassName("period_view_default")[0];
-	const updateIcon = list.getElementsByClassName("update_icon_con")[0];
-	const viewReasonCon = list.getElementsByClassName("reason_view_default")[0];
-		
-	const timeInputCon = list.getElementsByClassName("period_view_input")[0];
-	const inputReasonCon = list.getElementsByClassName("reason_view_input")[0];
-	const cancleIcon = list.getElementsByClassName("cancle_icon_con")[0];
-	const completeIcon = list.getElementsByClassName("complete_icon_con")[0]
+	updateIcon.classList.add("hide"); // add hide
+	cancleIcon.classList.remove("hide"); // remove hide
+	completeIcon.classList.remove("hide"); // remove hide
+	removeIcon.classList.remove("hide"); // remove hide
 	
-	viewCon.style.display = "none";
-	viewReasonCon.style.display = "none"; 
-	updateIcon.style.display = "none";
-
-	timeInputCon.style.display = "flex";
-	inputReasonCon.style.display = "block";
-	cancleIcon.style.display = "block";
-	completeIcon.style.display = "block";
+	// input display
+	const dateView = list.getElementsByClassName("period_view_default")[0];
+	const dateInput = list.getElementsByClassName("period_view_input")[0];
+	const reasonView = list.getElementsByClassName("reason_view_default")[0];
+	const reasonInput = list.getElementsByClassName("reason_view_input")[0];
+	
+	dateView.classList.add("hide");
+	reasonView.classList.add("hide");
+	
+	dateInput.classList.remove("hide");
+	reasonInput.classList.remove("hide");
 }
+
 
 // 임시 휴무 리스트 수정 취소 버튼
-function cancleUpdate(obj) {
-	const list = obj.parentElement.parentElement.parentElement;
+function cancleUpdate(list) {
+	const updateIcon = list.getElementsByClassName("update_icon")[0];
+	const cancleIcon = list.getElementsByClassName("cancle_icon")[0];
+	const completeIcon = list.getElementsByClassName("complete_icon")[0];
+	const removeIcon = list.getElementsByClassName("remove_icon")[0];
 	
-	const viewCon = list.getElementsByClassName("period_view_default")[0];
-	const updateIcon = list.getElementsByClassName("update_icon_con")[0];
-	const viewReasonCon = list.getElementsByClassName("reason_view_default")[0];
-		
-	const timeInputCon = list.getElementsByClassName("period_view_input")[0];
-	const inputReasonCon = list.getElementsByClassName("reason_view_input")[0];
-	const cancleIcon = list.getElementsByClassName("cancle_icon_con")[0];
-	const completeIcon = list.getElementsByClassName("complete_icon_con")[0]
+	updateIcon.classList.remove("hide"); // remove hide
+	cancleIcon.classList.add("hide"); // add hide
+	completeIcon.classList.add("hide"); // add hide
+	removeIcon.classList.add("hide"); // add hide
 	
-	viewCon.style.display = "flex";
-	updateIcon.style.display = "block";
-	viewReasonCon.style.display = "block"; 
+	// input display
+	const dateView = list.getElementsByClassName("period_view_default")[0];
+	const dateInput = list.getElementsByClassName("period_view_input")[0];
+	const reasonView = list.getElementsByClassName("reason_view_default")[0];
+	const reasonInput = list.getElementsByClassName("reason_view_input")[0];
 	
-	inputReasonCon.style.display = "none";	
-	timeInputCon.style.display = "none";
-	cancleIcon.style.display = "none";
-	completeIcon.style.display = "none";
+	dateView.classList.remove("hide");
+	reasonView.classList.remove("hide");
 	
-	
+	dateInput.classList.add("hide");
+	reasonInput.classList.add("hide");
 }
 
-// 임시 휴무 리스트 삭제 버튼
-function deleteSchedule(obj) {
-	const list = obj.parentElement.parentElement.parentElement;
-	const startDay = list.getElementsByClassName("list_start_day")[0].innerHTML;
-	const endDay = list.getElementsByClassName("list_end_day")[0].innerHTML;	
-	
-	const agree = confirm(`${startDay} ~ ${endDay}의 휴무 일정을 삭제하시겠습니까?`);
-	if (agree) {
-		// DB에서 리스트 삭제 > redirect
-		list.remove();
-		window.location.reload();
-		return;
-	}
-}
-
-// 임시 휴무 리스트 확인 버튼
-function postSchedule(obj) {
-	const agree = confirm("수정하신 내용을 반영하시겠습니까?");
-	
-	if (agree) {
-		// DB에 리스트 추가 > rediect
-		window.location.reload();
-	}
-	
-}
 
 
 
