@@ -7,11 +7,6 @@
 <!-- 사업장 테이블	 -->
 <mapper namespace="com.drumtong.business.dao.BEstablishmentDAO">
 
-	<!-- 	테스트 코드 -->
-	<select id="test" resultType="String" >
-		select * from v$version where rownum=1
-	</select>
-	
 	<!-- 	UUID 중복검사 -->
 	<select id="confirm" resultType="int" parameterType="String">
 		SELECT COUNT(ESTID) FROM BESTABLISHMENT WHERE ESTID = #{ESTID}
@@ -25,7 +20,7 @@
 	</insert>
 	
 <!-- 	BPersonID 를 가져옵니다. -->
-	<select id="selectBPersonID" parameterType="String">
+	<select id="selectBPersonID" parameterType="String" resultType="String">
 		SELECT 
 			BPERSONID 
 		FROM

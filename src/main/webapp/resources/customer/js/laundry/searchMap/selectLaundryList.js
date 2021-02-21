@@ -1,30 +1,38 @@
 // 지도가 변화할 때 함수를 불러오기!	// 남서 북동
-	async function useCoordinates(swLatLng, neLatLng){
+function useCoordinates(swLatLng, neLatLng){
 	console.log('[test코드]swLatLng :',swLatLng);
 	console.log('[test코드]neLatLng :',neLatLng);
-	bottom_ = swLatLng.getLat();
-	left_ = swLatLng.getLng();
-	top_ = neLatLng.getLat();
-	right_ = neLatLng.getLng();
+	let bottom_ = swLatLng.getLat();
+	let left_ = swLatLng.getLng();
+	let top_ = neLatLng.getLat();
+	let right_ = neLatLng.getLng();
 
-	let address = left_+'/'+right_+'/'+top_+'/'+bottom_;
-	console.log('address :', address)
-	// 프리미엄 Y 인 리스트
-	const {data} = await axios.get('/drumtong/customer/laundry/customerSearch/rest/selectLaundry/coordinate/'+ address +'/');
-	const premiumList = data[0];
-
-	const generalList = data[1];
-	insertLaundryList(premiumList, generalList);
+	let coordinatesAddress = 'coordinate/' + left_ + '/' + right_ + '/' + top_ + '/' + bottom_ + '/';
+	console.log('coordinatesAddress :', coordinatesAddress)
+	
+	selectLaundry(coordinatesAddress);
 }
-async function useEmdcode(emdcode){
+function useEmdcode(emdcode){
 	console.log('[test코드]emdcode :',emdcode);
 	
-	const {data} = await axios.get('/drumtong/customer/laundry/customerSearch/rest/selectLaundry/emdcode/' +emdcode+'/');
+	let emdAddress = 'emdcode/' +emdcode+'/';
+	
+	selectLaundry(emdAddress);
+}
+async function selectLaundry(axiosAddress){
+	let filter1 = document.getElementById('filter1').value;
+	let filter2 = document.getElementById('filter2').value;
+	let filter3 = document.getElementById('filter3').value;
+	let filter4 = document.getElementById('filter4').value;
+
+	console.log('filter', filter1, filter2, filter3, filter4);
+	
+	const {data} = await axios.get('/drumtong/customer/laundry/customerSearch/rest/selectLaundry/' + axiosAddress);
 	const premiumList = data[0];
 	
 	const generalList = data[1];
 	insertLaundryList(premiumList, generalList);
-}
+} 
 function insertLaundryList(premiumList, generalList){
 	console.log('premiumList :', premiumList);
 	console.log('generalList :', generalList);
