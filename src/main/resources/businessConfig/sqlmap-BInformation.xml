@@ -115,7 +115,22 @@
 			AND B.LONGITUDE <![CDATA[<=]]> #{right} 
 			AND B.LATITUDE <![CDATA[>=]]> #{bottom}  
 			AND B.LATITUDE <![CDATA[<=]]> #{top}
-		</if>  
+		</if>
+		<if test='filter1 != null and filter1 != "none"'>
+			AND M.DEFAULTCATEGORY LIKE '%' ||#{filter1 }|| '%'
+		</if>
+<!-- 		<if test='filter2 != null and filter2 != "none"'> -->
+<!-- 			AND 영업시간 -->
+<!-- 		</if> -->
+<!-- 		<if test='filter3 != null and filter3 != "none"'> -->
+<!-- 			AND 배달여부 -->
+<!-- 		</if> -->
+<!-- 		<if test='filter4 != null and filter4 != "none"'> -->
+<!-- 			AND 정렬 -->
+<!-- 		</if> -->
+<!-- 		<if test='filter5 != null and filter5 != "none"'> -->
+<!-- 			AND 정렬 -->
+<!-- 		</if> -->
 		<if test='premium != null'>
           AND PREMIUMBOOLEAN=#{premium} 
 		</if>

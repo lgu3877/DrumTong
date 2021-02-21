@@ -113,7 +113,7 @@ public class RestCustomerLaundryService {
 	}
 
 	// 좌표 값 안에 해당되는 세탁소들을 들고오는 메서드[영경] 여기서부터 작업하기! 위도 경도 배치 정확하게 하기! 큰 위도, 작은 위도 등..
-	public String selectLaundry(String left, String right, String top, String bottom, String filter1, String filter2, String filter3, String filter4) {
+	public String selectLaundry(String left, String right, String top, String bottom, String filter1, String filter2, String filter3, String filter4, String filter5) {
 		HashMap<String, String> param = new HashMap<String, String>();
 		List<Object> list = new ArrayList<Object>();
 		param.put("left", left);
@@ -134,7 +134,7 @@ public class RestCustomerLaundryService {
 	}
 
 	// emd 코드가 일치하는 세탁소들을 들고오는 메서드[영경]
-	public String selectLaundry(String emdcode, String filter1, String filter2, String filter3, String filter4) {
+	public String selectLaundry(String emdcode, String filter1, String filter2, String filter3, String filter4, String filter5) {
 		HashMap<String, String> param = new HashMap<String, String>();
 		List<Object> list = new ArrayList<Object>();
 		param.put("emdcode", emdcode);
