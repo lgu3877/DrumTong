@@ -25,9 +25,11 @@ async function selectLaundry(axiosAddress){
 	let filter3 = document.getElementById('filter3').value;
 	let filter4 = document.getElementById('filter4').value;
 
-	console.log('filter', filter1, filter2, filter3, filter4);
+	filterAddress = filter1 + '/' + filter2 + '/' + filter3 + '/' + filter4 + '/';
+
+	console.log('filter :', filterAddress);
 	
-	const {data} = await axios.get('/drumtong/customer/laundry/customerSearch/rest/selectLaundry/' + axiosAddress);
+	const {data} = await axios.get('/drumtong/customer/laundry/customerSearch/rest/selectLaundry/' + axiosAddress + filterAddress);
 	const premiumList = data[0];
 	
 	const generalList = data[1];
