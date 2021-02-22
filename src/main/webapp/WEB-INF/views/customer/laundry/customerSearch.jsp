@@ -57,6 +57,12 @@
             </select>
 
             <select class="filter_op" id="filter2">
+                <option value="none">요일</option>
+                <option value="12시~18시">평일</option>
+                <option value="18시~24시">주말</option>
+            </select>
+            
+            <select class="filter_op" id="filter3">
                 <option value="none">영업 시간</option>
                 <option value="24">24시간</option>
                 <option value="0시~6시">0시~6시</option>
@@ -65,13 +71,13 @@
                 <option value="18시~24시">18시~24시</option>
             </select>
 
-            <select class="filter_op" id="filter3">
+            <select class="filter_op" id="filter4">
                 <option value="none">배달 여부</option>
                 <option value="delivery">수거,배달 X</option>
                 <option value="noDelivery">수거,배달 O</option>
             </select>
 
-            <select class="filter_op" id="filter4">
+            <select class="filter_op" id="filter5">
                 <option value="none">정렬 없음</option>
                 <option value="score">평점 높은순</option>
                 <option value="count">리뷰 많은순</option>

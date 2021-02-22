@@ -38,18 +38,22 @@ public class RestCustomerLaundryController {
 	
 	// =======================================지도에 필요한 세탁소 리스트 가져오기===================================================
 	// 좌표를 이용해서 세탁소 리스트를 가져오는 경우[영경]
-	@RequestMapping(value = "customerSearch/rest/selectLaundry/coordinate/{left}/{right}/{top}/{bottom}/", produces =org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "customerSearch/rest/selectLaundry/coordinate/{left}/{right}/{top}/{bottom}/{filter1}/{filter2}/{filter3}/{filter4}/{filter5}/", produces =org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@GetMapping(produces="application/json; charset=utf8")	
 	public String selectLaundry(@PathVariable("left")String left, @PathVariable("right")String right, 
-								@PathVariable("top")String top, @PathVariable("bottom")String bottom){
-		return svc.selectLaundry(left, right, top, bottom);
+								@PathVariable("top")String top, @PathVariable("bottom")String bottom,
+								@PathVariable("filter1")String filter1, @PathVariable("filter2")String filter2,
+								@PathVariable("filter3")String filter3, @PathVariable("filter4")String filter4, @PathVariable("filter5")String filter5){
+		return svc.selectLaundry(left, right, top, bottom, filter1, filter2, filter3, filter4, filter5);
 	}
 	
 	// emd 코드를 이용해서 세탁소 리스트를 가져오는 경우[영경]
-	@RequestMapping(value = "customerSearch/rest/selectLaundry/emdcode/{emdcode}/", produces =org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "customerSearch/rest/selectLaundry/emdcode/{emdcode}/{filter1}/{filter2}/{filter3}/{filter4}/{filter5}/", produces =org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@GetMapping(produces="application/json; charset=utf8")	
-	public String selectLaundry(@PathVariable("emdcode")String emdcode){
-		return svc.selectLaundry(emdcode);
+	public String selectLaundry(@PathVariable("emdcode")String emdcode,
+							@PathVariable("filter1")String filter1, @PathVariable("filter2")String filter2,
+							@PathVariable("filter3")String filter3, @PathVariable("filter4")String filter4, @PathVariable("filter5")String filter5){
+		return svc.selectLaundry(emdcode, filter1, filter2, filter3, filter4, filter5);
 	}
 	// ====================================================================================================================
 	

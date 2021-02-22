@@ -24,10 +24,13 @@ async function selectLaundry(axiosAddress){
 	let filter2 = document.getElementById('filter2').value;
 	let filter3 = document.getElementById('filter3').value;
 	let filter4 = document.getElementById('filter4').value;
+	let filter5 = document.getElementById('filter5').value;
 
-	console.log('filter', filter1, filter2, filter3, filter4);
+	filterAddress = filter1 + '/' + filter2 + '/' + filter3 + '/' + filter4 + '/' + filter5 + '/';
+
+	console.log('filter :', filterAddress);
 	
-	const {data} = await axios.get('/drumtong/customer/laundry/customerSearch/rest/selectLaundry/' + axiosAddress);
+	const {data} = await axios.get('/drumtong/customer/laundry/customerSearch/rest/selectLaundry/' + axiosAddress + filterAddress);
 	const premiumList = data[0];
 	
 	const generalList = data[1];
@@ -37,3 +40,5 @@ function insertLaundryList(premiumList, generalList){
 	console.log('premiumList :', premiumList);
 	console.log('generalList :', generalList);
 }
+
+useEmdcode('26350105');
