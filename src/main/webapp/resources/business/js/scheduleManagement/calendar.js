@@ -78,7 +78,7 @@ function createYears() {
 }
 
 
-// 월 드랍다운 (dropdown)
+// 휠 드랍다운 (dropdown)
 function createMonths() {
   for (let i = 0; i < months.length; i++) {
     const monthDiv = document.createElement("div");
@@ -139,7 +139,23 @@ function loadDays(year, month, day) {
 	        dayDiv.className = "day";
 	        dayDiv.innerHTML = prevLastDate - day;
 
+	        // 휴무 마커
+	        const markerCon = document.createElement("div");
+	        markerCon.className = "marker_con";
+	        
+	        	// 정기 휴일 마커 
+	        	const regMarker = document.createElement("div");
+	        	regMarker.className = "reg_marker";
+
+	        	// 임시 휴일 마커
+	        	const tempMarker = document.createElement("div");
+	        	tempMarker.className = "temp_marker";
+	        
+	        markerCon.appendChild(regMarker);	
+	        markerCon.appendChild(tempMarker);	
+	        	
         date.appendChild(dayDiv);
+        date.appendChild(markerCon);
         weekDiv.appendChild(date);
       }
 
@@ -152,7 +168,23 @@ function loadDays(year, month, day) {
 	        dayDiv.className = "day";
 	        dayDiv.innerHTML = ++currentCount;
 
+	        // 휴무 마커
+	        const markerCon = document.createElement("div");
+	        markerCon.className = "marker_con";
+	        
+	        	// 정기 휴일 마커 
+	        	const regMarker = document.createElement("div");
+	        	regMarker.className = "reg_marker";
+
+	        	// 임시 휴일 마커
+	        	const tempMarker = document.createElement("div");
+	        	tempMarker.className = "temp_marker";
+	        
+	        markerCon.appendChild(regMarker);	
+	        markerCon.appendChild(tempMarker);	
+	        
         date.appendChild(dayDiv);
+        date.appendChild(markerCon);
         weekDiv.appendChild(date);
       }
     }
@@ -169,7 +201,23 @@ function loadDays(year, month, day) {
 	          dayDiv.className = "day";
 	          dayDiv.innerHTML = ++currentCount;
 
+	          // 휴무 마커
+		      const markerCon = document.createElement("div");
+		      markerCon.className = "marker_con";
+		        
+		      	// 정기 휴일 마커 
+		        const regMarker = document.createElement("div");
+		        regMarker.className = "reg_marker";
+
+		        // 임시 휴일 마커
+		        const tempMarker = document.createElement("div");
+		        tempMarker.className = "temp_marker";
+		        
+		        markerCon.appendChild(regMarker);	
+		        markerCon.appendChild(tempMarker);	
+
           date.appendChild(dayDiv);
+          date.appendChild(markerCon);
           weekDiv.appendChild(date);
         } 
         else {
@@ -180,8 +228,24 @@ function loadDays(year, month, day) {
 	          const dayDiv = document.createElement("div");
 	          dayDiv.className = "day";
 	          dayDiv.innerHTML = ++lastCount;
+	          
+	          // 휴무 마커
+		      const markerCon = document.createElement("div");
+		      markerCon.className = "marker_con";
+		        
+		      	// 정기 휴일 마커 
+		        const regMarker = document.createElement("div");
+		        regMarker.className = "reg_marker";
 
-          date.appendChild(dayDiv)
+		        // 임시 휴일 마커
+		        const tempMarker = document.createElement("div");
+		        tempMarker.className = "temp_marker";
+		        
+		        markerCon.appendChild(regMarker);	
+		        markerCon.appendChild(tempMarker);	
+
+          date.appendChild(dayDiv);
+          date.appendChild(markerCon);
           weekDiv.appendChild(date);
         }
       }
@@ -266,7 +330,7 @@ function markRegHolidays() {
 			if (!dayCon.className.includes("lastDays") 
 					&& !dayCon.className.includes("nextDays")
 					&& !dayCon.className.includes(className)) {
-				dayCon.classList.add(className);
+				dayCon.querySelector(".reg_marker").classList.add(className);
 			}
 		} 		
 	}
@@ -412,7 +476,7 @@ function markTempHolidays() {
 							&& !dayCon.className.includes("nextDays")
 							&& !dayCon.className.includes("temp_holiday")) {
 						// 임시휴무 표기
-						dayCon.classList.add("temp_holiday");
+						dayCon.querySelector(".temp_marker").classList.add("temp_holiday");
 					} 
 						
 					if (day === lastDay) {
@@ -444,7 +508,7 @@ function markTempHolidays() {
 								&& !dayCon.className.includes("nextDays")
 								&& !dayCon.className.includes("temp_holiday")) {
 							// 임시휴무 표기
-							dayCon.classList.add("temp_holiday");
+							dayCon.querySelector(".temp_marker").classList.add("temp_holiday");
 						} 
 					}
 					
@@ -470,7 +534,7 @@ function markTempHolidays() {
 							&& !dayCon.className.includes("nextDays")
 							&& !dayCon.className.includes("temp_holiday")) {
 						// 임시휴무 표기
-						dayCon.classList.add("temp_holiday");
+						dayCon.querySelector(".temp_marker").classList.add("temp_holiday");
 					}
 						
 					if (day === firstDay) {
