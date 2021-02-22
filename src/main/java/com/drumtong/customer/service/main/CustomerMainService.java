@@ -74,10 +74,10 @@ public class CustomerMainService {
 		CPrivateDataVO Login = (CPrivateDataVO)req.getSession().getAttribute("cLogin");
 		boolean isUser = Login != null;
 		// 로그인 했을 땐 수령지 주소 기준(메인 주소만)으로 안했을 땐 기본 주소로
-		String MainAddress = isUser ? Login.getMainreceiptaddress() : "서울특별시 마포구 상암동 월드컵로42길";
+		String EMDCODE = isUser ? Login.getEmdcode() : "26350105";
 		
-		// MainAddress와 배송가능 주소가 일치하는 매장 리스트를 10개 이상 가지고온다.
-		List<EstablishmentList> establishmentList = perCalcReturnList(MainAddress, 10);
+		// EMDCODE와 배송가능 주소가 일치하는 매장 리스트를 10개 이상 가지고온다.
+		List<EstablishmentList> establishmentList = perCalcReturnList(EMDCODE, 10);
 		
 		Set<EstablishmentList> result = new HashSet<EstablishmentList>();
 		
@@ -94,13 +94,13 @@ public class CustomerMainService {
 		return new ArrayList<>(result);
 	}
 	
-	// 주소(MainAddress)와 배송가능 주소가 일치하면서 상위 n% 안에 해당하는 매장 리스트를 n개(limitNum) 이상 구한다  [영경]
-	private List<EstablishmentList> perCalcReturnList(String MainAddress, int limitNum){
+	// 주소(EMDCODE)와 배송가능 주소가 일치하면서 상위 n% 안에 해당하는 매장 리스트를 n개(limitNum) 이상 구한다  [영경]
+	private List<EstablishmentList> perCalcReturnList(String EMDCODE, int limitNum){
 		List<EstablishmentList> tmp = new ArrayList<EstablishmentList>();
 		HashMap<String, String> param = new HashMap<String, String>();
 		
 		// 파라미터 값을 넣는다.
-		param.put("MainAddress", MainAddress);
+		param.put("emdcode", EMDCODE);
 		
 		// 파라미터 값으로 list를 가져온다.
 		tmp = bInformationDAO.selectEstablishmentList(param);

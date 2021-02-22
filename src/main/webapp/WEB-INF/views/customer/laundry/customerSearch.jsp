@@ -44,29 +44,44 @@
                 <input class="search_button" type="button" name="search" id="search" value="검색" onclick="searchAddress()">
             </div>
 
-            <select class="filter_op filter_op1">
-                <option>옵션1</option>
-                <option>옵션1</option>
+            <select class="filter_op filter_op1" id="filter1">
+            	<option value="none">세탁물</option>
+                <option value="상의">상의</option>
+                <option value="하의">하의</option>
+                <option value="커튼">커튼</option>
+                <option value="명품류">명품류</option>
+                <option value="속옷류">속옷류</option>
+                <option value="드레스">드레스</option>
+                <option value="정장류">정장류</option>
+                <option value="모자">모자</option>
             </select>
 
-            <select class="filter_op">
-                <option>옵션2</option>
-                <option>옵션2</option>
+            <select class="filter_op" id="filter2">
+                <option value="none">요일</option>
+                <option value="12시~18시">평일</option>
+                <option value="18시~24시">주말</option>
+            </select>
+            
+            <select class="filter_op" id="filter3">
+                <option value="none">영업 시간</option>
+                <option value="24">24시간</option>
+                <option value="0시~6시">0시~6시</option>
+                <option value="6시~12시">6시~12시</option>
+                <option value="12시~18시">12시~18시</option>
+                <option value="18시~24시">18시~24시</option>
             </select>
 
-            <select class="filter_op">
-                <option>옵션3</option>
-                <option>옵션3</option>
+            <select class="filter_op" id="filter4">
+                <option value="none">배달 여부</option>
+                <option value="delivery">수거,배달 X</option>
+                <option value="noDelivery">수거,배달 O</option>
             </select>
 
-            <select class="filter_op">
-                <option>옵션4</option>
-                <option>옵션4</option>
-            </select>
-
-            <select class="filter_op">
-                <option>옵션5</option>
-                <option>옵션5</option>
+            <select class="filter_op" id="filter5">
+                <option value="none">정렬 없음</option>
+                <option value="score">평점 높은순</option>
+                <option value="count">리뷰 많은순</option>
+                <option value="location">현재 지도 중심 거리순</option>
             </select>
 
             <div class="filter_reset">
@@ -101,7 +116,6 @@
                                         <div class="childs_info_1 premium_childs_info_1">
                                             <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                             <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
-                                            <!-- <img/> -->
                                         </div>
                                         <div class="childs_info_1_1 premium_childs_info_1_1">
                                             <p>펭수에욤</p>
@@ -116,57 +130,6 @@
                                             <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                             <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
                                             <!-- <img/> -->
-                                        </div>
-                                        <div class="childs_info_1_1 premium_childs_info_1_1">
-                                            <p>펭수에욤</p>
-                                            <p>버럭!</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="laundryList_childs premium_childs">
-                                    <a href="${cpath }/customer/laundry/customerDetail/ESTID_ce8e90b3489649d788116e8113d6f65e/">
-                                        <div class="childs_info_1 premium_childs_info_1">
-                                            <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
-                                            <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
-                                            <!-- <img/> -->
-                                        </div>
-                                        <div class="childs_info_1_1 premium_childs_info_1_1">
-                                            <p>펭수에욤</p>
-                                            <p>버럭!</p>
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li class="laundryList_childs premium_childs">
-                                    <a href="${cpath }/customer/laundry/customerDetail/ESTID_ce8e90b3489649d788116e8113d6f65e/">
-                                        <div class="childs_info_1 premium_childs_info_1">
-                                            <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
-                                            <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
-                                        </div>
-                                        <div class="childs_info_1_1 premium_childs_info_1_1">
-                                            <p>펭수에욤</p>
-                                            <p>버럭!</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                 
-                                <li class="laundryList_childs premium_childs">
-                                    <a href="${cpath }/customer/laundry/customerDetail/ESTID_ce8e90b3489649d788116e8113d6f65e/">
-                                        <div class="childs_info_1 premium_childs_info_1">
-                                            <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
-                                            <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
-                                        </div>
-                                        <div class="childs_info_1_1 premium_childs_info_1_1">
-                                            <p>펭수에욤</p>
-                                            <p>버럭!</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="laundryList_childs premium_childs">
-                                    <a href="${cpath }/customer/laundry/customerDetail/ESTID_ce8e90b3489649d788116e8113d6f65e/">
-                                        <div class="childs_info_1 premium_childs_info_1">
-                                            <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
-                                            <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
                                         </div>
                                         <div class="childs_info_1_1 premium_childs_info_1_1">
                                             <p>펭수에욤</p>
@@ -175,18 +138,6 @@
                                     </a>
                                 </li>
                                 
-                                <!-- <li class="laundryList_childs premium_childs">
-                                    <a href="#">
-                                        <div class="childs_info_1 premium_childs_info_1">
-                                            <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
-                                            <img src="/laundry/src/main/webapp/resources/customer/img/펭수버럭.jpg">
-                                        </div>
-                                        <div class="childs_info_1_1 premium_childs_info_1_1">
-                                            <p>펭수에욤</p>
-                                            <p>버럭!</p>
-                                        </div>
-                                    </a>
-                                </li> -->
                             </ul>
                         </div>
                         <hr class="premium_hr">
@@ -611,6 +562,7 @@
             more.style.display = 'block';
         }
     </script>
+    <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/selectLaundryList.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-main.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-sub.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-sido.js"></script>

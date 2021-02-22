@@ -181,135 +181,6 @@
         </div>
       </div>
     </section>
-
-<!-- 	영경 스크립트, 메뉴판 출력! -->
-	<script>
-// 		imgList = ${bImageVO};
-// 		i = 0;
-// 		imgBoxs = document.querySelectorAll('detailview-imgBlock');
-		
-// 		imgList.forEach(img =>{
-// 			imgBoxs[i++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + img.storeimg;
-// 		})
-		var menuList = ${menuList};
-		mainCtList = Object.keys(menuList.menuList);
-		mainCategory = document.getElementById('mainCate');
-		subCategory = document.getElementById('subCate');
-		menuCategory = document.getElementById('detailview-selectOptions');
-		
-		// 0번째 메인 메뉴
-		selectMainKey =Object.keys(menuList.menuList)[0];
-		// 0번째 서브 메뉴
-		selectSubKey = '';
-		// 메인 카테고리 버튼 넣는 부분
-		mainCategory.innerHTML="";
-		mainCtList.forEach(mct => {
-			mainDiv = document.createElement('div');
-			mainDiv.innerHTML = mct;
-			mainDiv.setAttribute("class", "mainButton");
-			mainDiv.setAttribute("id", "main_" + mct);
-			mainDiv.addEventListener('click', event => afterMainClik(mct));
-			mainCategory.appendChild(mainDiv);
-		})
-		afterMainClik(selectMainKey);
-		
-		function afterMainClik(checkmct){
-			selectMainKey = checkmct;
-			selectSubKey = '';
-			mainCtList.forEach(mct => {
-				document.getElementById("main_"+mct).className = (mct === selectMainKey ? "mainButton_select" : "mainButton");
-				})
-			subCtList = Object.keys(menuList.menuList[selectMainKey]);
-			subCategory.innerHTML="";
-			menuCategory.innerHTML="";
-			subCtList.forEach(sct =>{
-				subDiv = document.createElement('div');
-				subDiv.innerHTML = sct;
-				subDiv.setAttribute("class", selectSubKey !== sct ? "subButton" : "subButton_select");
-				subDiv.setAttribute("id", "sub_" + sct);
-				subDiv.addEventListener('click', event => afterSubClick(sct));
-				subCategory.appendChild(subDiv);
-			})
-			afterSubClick(subCtList[0]);
-		}
-		
-		function afterSubClick(checksct){
-			selectSubKey = checksct;
-			subCtList.forEach(mct => {
-				document.getElementById("sub_"+mct).className = (mct === selectSubKey ? "subButton_select" : "subButton");
-				})
-			menuCtList = menuList.menuList[selectMainKey][selectSubKey];
-			menuCategory.innerHTML="";
-			createMenu(menuCtList);
-		}
-		
-		function createMenu(list){
-			menuCategory.innerHTML="";
-			list.forEach(li => {
-				quickBoolean = (li.quickprice != 0);
-				
-				menuDiv_1 = document.createElement('div');
-				menuDiv_1.setAttribute("class", "option-row");
-				menuDiv_1.addEventListener('click', listUp);
-				
-				// 1
-				menuDiv_2 = document.createElement('div');
-				menuDiv_2.setAttribute("class", "option-text");
-				
-				menuDiv_2_1 = document.createElement('div');
-				menuDiv_2_1.setAttribute("class", "option-name");
-				menuDiv_2_1.innerHTML = selectMainKey + "/" + selectSubKey;
-				
-				menuDiv_2_2 = document.createElement('div');
-				menuDiv_2_2.setAttribute("class", "option-context");
-				menuDiv_2_2.innerHTML = li.name + "/예상시간 " + li.ete + "일";
-				
-				menuDiv_2.appendChild(menuDiv_2_1);
-				menuDiv_2.appendChild(menuDiv_2_2);
-				
-				// 2
-				menuInput_3 = document.createElement('input');
-				menuInput_3.setAttribute("class", "quantity");
-				menuInput_3.setAttribute("type", "number");
-				menuInput_3.setAttribute("min", "0");
-				menuInput_3.setAttribute("value", "1");
-				
-				// 3
-				menuDiv_4 = document.createElement('div');
-				menuDiv_4.setAttribute("class", "option-price");
-				menuDiv_4.innerHTML = li.price + "원";
-				
-				//4
-				menuLabel_5 = document.createElement('label');
-				menuLabel_5.setAttribute("class", quickBoolean ? "quick" : "noQuick");
-				menuLabel_5.setAttribute("title", quickBoolean ? "빠른서비스" : "퀵불가");
-				
-				menuInput_5_1 = document.createElement('input');
-				menuInput_5_1.setAttribute("class", "quickcheck");
-				menuInput_5_1.setAttribute("type", "checkbox");
-				menuInput_5_1.checked= false;
-				menuInput_5_1.setAttribute("value", li.quickprice);
-				if(quickBoolean)
-					menuInput_5_1.addEventListener('change', quickMark);
-				
-				menuI_5_2 = document.createElement('i');
-				menuI_5_2.setAttribute("class", "fas fa-shipping-fast");
-				menuI_5_2.innerHTML = quickBoolean ? (li.quickprice + "원") : "퀵불가";
-				
-				menuLabel_5.appendChild(menuInput_5_1);
-				menuLabel_5.appendChild(menuI_5_2);
-				
-				
-				menuDiv_1.appendChild(menuDiv_2);
-				menuDiv_1.appendChild(menuInput_3);
-				menuDiv_1.appendChild(menuDiv_4);
-				menuDiv_1.appendChild(menuLabel_5);
-				
-				menuCategory.appendChild(menuDiv_1);
-			})
-		}
-	</script>
-
 <!-- The Modal -->
     <div id="myModal" class="modal">
       <!-- Modal content -->
@@ -487,6 +358,9 @@
 	       
 
 			couponSettings(${bCouponVO }); // 매장의 쿠폰을 다운
+			
+			// 매장 이미지 세팅하는 메서드
+			imgSettings(${bImageVO})
     	}
     	function checkLoginSettings(checkLoginBoolean, CouponList, myPoint, Bookmark){
     		checkLogin = checkLoginBoolean;
@@ -561,35 +435,4 @@
     	initPage(checkLogin);
     	
     </script>
-<script>
-		imgList = ${bImageVO};
-		imgBoxs = document.getElementById('detailview-imgBlock');
-		subImgNum = 1;
-		for(imageNum = 0; imageNum < 6; imageNum++){
-			if(imageNum < imgList.length){
-				imgBoxs.children[1].children[imageNum].className = 'exist'; 
-				if(imgList[imageNum].delegatephotoboolean === 'Y'){
-					imgBoxs.children[0].children[0].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + imgList[imageNum].storeimg;
-					imgBoxs.children[1].children[0].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + imgList[imageNum].storeimg;
-					imgBoxs.children[1].children[0].className = 'select exist'; 
-				} else{
-					imgBoxs.children[1].children[subImgNum++].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + imgList[imageNum].storeimg;
-				}
-				document.querySelector('#imgBox' + (imageNum + 1)).addEventListener('click', () => {
-					for(let i = 0; i < imgList.length; i++){
-						console.log()
-						if(event.target.id === imgBoxs.children[1].children[i].id){
-							event.target.className = "select exist";
-							imgBoxs.children[0].children[0].src = event.target.src;
-						} else{
-							imgBoxs.children[1].children[i].className = "exist";
-// 							document.querySelector('#' + imgBoxs.children[1].children[i].id).style.border = 'none';
-						}
-					}
-				});
-			} else {
-				imgBoxs.children[1].children[imageNum].src = '/drumtong/resources/business/img/slide/laundry1_02.jpg';
-			}
-		}
-	</script>
 <%@ include file="../main/customerFooter.jsp" %>

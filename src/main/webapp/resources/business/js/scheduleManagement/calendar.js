@@ -7,20 +7,7 @@ const currentDate = today.getDate(); // 일
 const currentDay = today.getDay(); // 요일
 
 // (윤)년, 월, 일
-const months = [
-  "1월",
-  "2월",
-  "3월",
-  "4월",
-  "5월",
-  "6월",
-  "7월",
-  "8월",
-  "9월",
-  "10월",
-  "11월",
-  "12월",
-];
+const months = [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ];
 
 // 현재 년도 설정
 document.getElementById(
@@ -147,9 +134,12 @@ function loadDays(year, month, day) {
         const date = document.createElement("div");
         date.classList.add("lastDays");
         
-        // 날짜 입력 > DB 스케쥴 추가 가능
-        date.innerHTML = prevLastDate - day;
+        // 날짜 입력
+        const dayDiv = document.createElement("div");
+        dayDiv.className = "day";
+        dayDiv.innerHTML = prevLastDate - day;
 
+        date.appendChild(dayDiv);
         weekDiv.appendChild(date);
       }
 
@@ -171,18 +161,24 @@ function loadDays(year, month, day) {
           const date = document.createElement("div");
           date.classList.add("currentDays");
 
-          // 날짜 입력 > DB 스케쥴 추가 가능
-          date.innerHTML = ++currentCount;
+	          // 날짜 입력
+	          const dayDiv = document.createElement("div");
+	          dayDiv.className = "day";
+	          dayDiv.innerHTML = ++currentCount;
 
+          date.appendChild(dayDiv);
           weekDiv.appendChild(date);
         } 
         else {
           const date = document.createElement("div");
           date.classList.add("nextDays");
 
-          // 날짜 입력 > DB 스케쥴 추가 가능
-          date.innerHTML = ++lastCount;
+	          // 날짜 입력
+	          const dayDiv = document.createElement("div");
+	          dayDiv.className = "day";
+	          dayDiv.innerHTML = ++lastCount;
 
+          date.appendChild(dayDiv)
           weekDiv.appendChild(date);
         }
       }
@@ -191,7 +187,8 @@ function loadDays(year, month, day) {
     document.getElementById("calendar-days").appendChild(weekDiv);
   }
   
-  markRegHolidays();
+  markRegHolidays(); // 정기휴무
+  markTempHolidays(); // 임시휴무
 }
 
 //주(week) 변환 > object key
@@ -211,6 +208,7 @@ function weekConvert(value) {
 		return "sixthWeek";
 	}
 }
+
 
 // 일(변환) > index
 function dayConvert(value) {
@@ -295,3 +293,77 @@ function markRegHolidays() {
 	}	
 }
 
+
+
+// 임시휴무 출력
+function markTempHolidays() {
+	const calendar = document.getElementById("calendar-days");
+	
+	let firstDate;
+	let lastDate;
+
+	// 필터링(전월, 당월, 익월)
+	let currentMonth = document.getElementById("month-value").innerHTML;
+	currentMonth = parseInt(currentMonth);
+	let currentYear = document.getElementById("year-value").innerHTML;
+	currentYear = parseInt(currentYear); 
+	
+	const lastDays = calendar.querySelector(".lastDays"); // 현재 달력에서 지날달 표기
+	const nextDays = [ ...calendar.querySelectorAll(".nextDays") ].pop(); // 현재 달력에서 다음달 표기
+
+	// 달력 첫날이 1 일 경우 & 지난달이 표기되지 않을 경우
+	if (lastDays === null) {
+		firstDate = `${currentYear}-${currentMonth}-1`;
+	}
+	else {
+		const year = currentMonth !== 1 ? currentYear : currentYear - 1;
+		
+		let month = currentMonth !== 1 ? currentMonth - 1 : 12;
+		month = month < 10 ? "0" + month : month;
+		
+		let day = lastDays.querySelector('.day').innerHTML;
+		day = day < 10  ? "0" + day : day;
+		
+		firstDate = `${year}-${month}-${day}`;
+	}
+	
+	
+	// 달력 마지막 날이 다음달이 아닐 경우
+	if (nextDays === null) {
+		const lastDay = [ ...calendar.querySelectorAll(".nextDays") ].pop();
+		const day = currentDay.innerHTML;
+		
+		lastDate = `${currentYear}-${currentMonth}-${day}`;
+	}
+	
+	else {
+		const year = currentMonth !== 12 ? currentYear : currentYear + 1;
+		
+		let month = currentMonth !== 12 ? currentMonth + 1 : 1;
+		month = month < 10 ? "0" + month : month;
+		
+		let day = nextDays.querySelector('.day').innerHTML;
+		day = day < 10 ? "0" + day : day;
+		
+		lastDate = `${year}-${month}-${day}`;
+	}
+
+	const filtered = [];
+	
+	for (let i = 0; i < btempsuspension.length; i++) {
+		const data = btempsuspension[i];
+		
+		const startDay = data.beginday;
+		const endDay = data.endday;
+		
+		if (startDay >= firstDate && startDay <= lastDate) {
+			filtered.push(data);
+		}
+		
+		else if (endDay >= firstDate && endDay <= lastDate) {
+			filtered.push(data);
+		}
+	}
+	
+	console.log(filtered);
+}

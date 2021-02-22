@@ -36,10 +36,10 @@
 		border: 1px solid #EAEAEA;
 	}
 	body .section_search .filter .filter_op1 {
-		margin-left: 150px;
+		margin-left: 120px;
 	}
 	body .section_search .filter .filter_reset {
-		margin-left: 200px;
+		margin-left: 120px;
 	}
 	body .section_search .laundryList_main {
 		max-width: 1900px;
@@ -107,10 +107,10 @@
 		border: 1px solid #EAEAEA;
 	}
 	body .section_search .filter .filter_reset {
-		margin-left: 150px;
+		margin-left: 105px;
 	}
 	body .section_search .filter .filter_op1 {
-		margin-left: 200px;
+		margin-left: 180px;
 	}
 	body .section_search .laundryList_main {
 		max-width: 1400px;
@@ -175,10 +175,10 @@
 		border: 1px solid #EAEAEA;
 	}
 	body .section_search .filter .filter_reset {
-		margin-left: 50px;
+		margin-left: 5px;
 	}
 	body .section_search .filter .filter_op1 {
-		margin-left: 100px;
+		margin-left: 50px;
 	}
 	body .section_search .laundryList_main {
 		max-width: 1200px;

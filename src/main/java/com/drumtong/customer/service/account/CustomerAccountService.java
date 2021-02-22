@@ -129,7 +129,7 @@ public class CustomerAccountService {
 		String estid = review.getEstid();
 		
 		if(!file.isEmpty()) {
-			String folderName = "business/" + bEstablishmentDAO.selectBPersonID(estid) + estid;
+			String folderName = "business/" + bEstablishmentDAO.selectBPersonID(estid) + "/" + estid;
 			result = awsServiceImpl.fileUpload(file, folderName, review, -1);
 		}
 		

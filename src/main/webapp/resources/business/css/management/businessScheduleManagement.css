@@ -20,7 +20,7 @@
 
 /* 숨기기(hide) */
 .hide {
-	display: none;
+	display: none !important;
 }
 
 /* 정기 휴무 캘린더 배경색 */
@@ -692,7 +692,6 @@
 }
 
 .period_view_input {
-	display: none;
 	/* width: 250px; */
 }
 
@@ -716,7 +715,22 @@
 }
 
 .reason_view_input {
-	display: none;
 	width: 100%;
 	text-indent: 5px;
+}
+
+.remove_icon {
+	color: #f38181;
+}
+
+.complete_icon {
+	color: #6495EF;
+}
+
+.cancle_icon {
+	color: black;
+}
+
+.update_icon {
+	color: navy;
 }
