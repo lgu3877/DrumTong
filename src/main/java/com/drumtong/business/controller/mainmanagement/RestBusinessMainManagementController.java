@@ -125,12 +125,9 @@ public class RestBusinessMainManagementController {
 	
 	@RequestMapping("BMenu/rest/{processing}/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String bMenuRestProcessing(HttpServletRequest req, @RequestBody List<BMenuVO> ListBMenuVO, 
+	public List<BMenuVO> bMenuRestProcessing(HttpServletRequest req, @RequestBody List<BMenuVO> ListBMenuVO, 
 									  @PathVariable("processing")String processing) {
-		int result = svc.bMenuRestProcessing(req, ListBMenuVO, processing);
-		return result == 1
-				? "true"
-				: "false";
+		return svc.bMenuRestProcessing(req, ListBMenuVO, processing);
 	}
 
 
@@ -168,9 +165,9 @@ public class RestBusinessMainManagementController {
 	// 1. 배달 지역을 비동기식으로 수정해주는 메서드입니다.
 	@RequestMapping("BDeliveryArea/rest/updateBDeliveryArea/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String updateBDeliveryArea(HttpServletRequest req, @RequestBody BDeliveryAreaVO bDeliveryAreaVO) {
+	public String updateBDeliveryArea(HttpServletRequest req, @RequestBody HashMap<String,HashMap<String,ArrayList<String>>> bDeliveryAreaList)  {
 		
-		int result = svc.updateBDeliveryArea(req,bDeliveryAreaVO);
+		int result = svc.updateBDeliveryArea(req,bDeliveryAreaList);
 		System.out.println(result + " : result 값 입니다");
 		return result == 1
 				? "true"
