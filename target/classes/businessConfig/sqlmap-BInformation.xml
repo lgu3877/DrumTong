@@ -106,6 +106,7 @@
 		  LEFT OUTER JOIN 
 		  	(SELECT * FROM BIMAGE WHERE DELEGATEPHOTOBOOLEAN='Y') I 
 		  		ON B.ESTID=I.ESTID
+		  LEFT OUTER JOIN BSCHEDULETIME SC ON B.ESTID = SC.ESTID 
       	  WHERE B.STATUS='SUCCESS' 
 		<if test='(emdcode != null) and (emdcode!="All")'>
 		  AND B.EMDCODE=#{emdcode} 
@@ -119,15 +120,22 @@
 		<if test='filter1 != null and filter1 != "none"'>
 			AND M.DEFAULTCATEGORY LIKE '%' ||#{filter1 }|| '%'
 		</if>
-<!-- 		<if test='filter2 != null and filter2 != "none"'> -->
-<!-- 			AND 영업요일 -->
-<!-- 		</if> -->
+		<if test='filter2 != null and filter2 != "none"'>
+			<choose>
+				<when test='filter2 == "weekend"'>
+					AND SATURDAY <![CDATA[<>]]> '-' AND SUNDAY <![CDATA[<>]]> '-' 
+				</when>
+				<otherwise>
+					AND ${filter2} <![CDATA[<>]]> '-'
+				</otherwise>
+			</choose>
+		</if>
 <!-- 		<if test='filter3 != null and filter3 != "none"'> -->
 <!-- 			AND 영업시간 -->
 <!-- 		</if> -->
-<!-- 		<if test='filter4 != null and filter4 != "none"'> -->
-<!-- 			AND 배달여부 -->
-<!-- 		</if> -->
+		<if test='filter4 != null and filter4 != "none"'>
+			AND M.DELIVERYBOOLEAN=#{filter4}
+		</if>
 <!-- 		<if test='filter5 != null and filter5 != "none"'> -->
 <!-- 			AND 정렬 -->
 <!-- 		</if> -->

@@ -58,9 +58,9 @@
 
             <select class="filter_op" id="filter2">
                 <option value="today">오늘 영업</option>
-                <option value="weekday">평일 영업</option>
-                <option value="weekday">토요일 영업</option>
-                <option value="weekday">일요일 영업</option>
+                <option value="WEEKDAY">평일 영업</option>
+                <option value="SATURDAY">토요일 영업</option>
+                <option value="SUNDAY">일요일 영업</option>
                 <option value="weekend">주말 영업</option>
             </select>
             
@@ -75,8 +75,8 @@
 
             <select class="filter_op" id="filter4">
                 <option value="none">배달 여부</option>
-                <option value="delivery">수거,배달 X</option>
-                <option value="noDelivery">수거,배달 O</option>
+                <option value="N">수거,배달 X</option>
+                <option value="Y">수거,배달 O</option>
             </select>
 
             <select class="filter_op" id="filter5">

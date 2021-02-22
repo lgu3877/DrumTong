@@ -34,6 +34,7 @@ async function selectLaundry(page){
 	pageAddress = page + '/';
 	console.log('paramAddress :', paramAddress);
 	console.log('filter :', filterAddress);
+	console.log('pageAddress :', pageAddress);
 	
 	const {data} = await axios.get('/drumtong/customer/laundry/customerSearch/rest/selectLaundry/' + paramAddress + filterAddress + pageAddress);
 	const premiumList = data[0];

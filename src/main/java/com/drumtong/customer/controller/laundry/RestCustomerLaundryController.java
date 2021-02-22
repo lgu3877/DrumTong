@@ -41,7 +41,7 @@ public class RestCustomerLaundryController {
 								@PathVariable("filter1")String filter1, @PathVariable("filter2")String filter2,
 								@PathVariable("filter3")String filter3, @PathVariable("filter4")String filter4, 
 								@PathVariable("filter5")String filter5, @PathVariable("page")String page){
-		return svc.selectLaundry(left, right, top, bottom, svc.paramSet(filter1, filter2, filter3, filter4, filter5, page));
+		return svc.selectLaundry(left, right, top, bottom, filter1, filter2, filter3, filter4, filter5, page);
 	}
 	
 	// emd 코드를 이용해서 세탁소 리스트를 가져오는 경우[영경]
@@ -51,7 +51,7 @@ public class RestCustomerLaundryController {
 							@PathVariable("filter1")String filter1, @PathVariable("filter2")String filter2,
 							@PathVariable("filter3")String filter3, @PathVariable("filter4")String filter4, 
 							@PathVariable("filter5")String filter5, @PathVariable("page")String page){
-		return svc.selectLaundry(emdcode, svc.paramSet(filter1, filter2, filter3, filter4, filter5, page));
+		return svc.selectLaundry(emdcode, filter1, filter2, filter3, filter4, filter5, page);
 	}
 	// ====================================================================================================================
 	

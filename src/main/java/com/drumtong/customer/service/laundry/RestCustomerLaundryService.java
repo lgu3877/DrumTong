@@ -1,6 +1,5 @@
 package com.drumtong.customer.service.laundry;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,6 +22,7 @@ import com.drumtong.map.dao.MSigunguDAO;
 import com.drumtong.map.vo.MEmdVO;
 import com.drumtong.map.vo.MSidoVO;
 import com.drumtong.map.vo.MSigunguVO;
+import com.drumtong.security.SelectLaundryList;
 import com.google.gson.Gson;
 
 @Service
@@ -113,44 +113,19 @@ public class RestCustomerLaundryService {
 	}
 
 	// 좌표 값 안에 해당되는 세탁소들을 들고오는 메서드[영경] 여기서부터 작업하기! 위도 경도 배치 정확하게 하기! 큰 위도, 작은 위도 등..
-	public String selectLaundry(String left, String right, String top, String bottom, HashMap<String, String> param) {
-		param.put("left", left);
-		param.put("right", right);
-		param.put("top", top);
-		param.put("bottom", bottom);
-		
-		return getLaundryList(param);
+	public String selectLaundry(String left, String right, String top, String bottom, String filter1, String filter2, String filter3, String filter4, String filter5, String page) {
+
+		return new Gson().toJson(SelectLaundryList.getMapList(left, right, top, bottom, filter1, filter2, filter3, filter4, filter5, page));
 	}
 
 	// emd 코드가 일치하는 세탁소들을 들고오는 메서드[영경]
-	public String selectLaundry(String emdcode, HashMap<String, String> param) {
-		param.put("emdcode", emdcode);
-		
-		return getLaundryList(param);
-	}
-	
-	// 세탁소 리스트를 sql문 통해 적절히 가져와주는 내부 메서드
-	private String getLaundryList(HashMap<String, String> param) {
-		List<Object> list = new ArrayList<Object>();
-		param.put("premium", "Y");
-		list.add(bInformationDAO.selectEstablishmentList(param));
-		
-		param.put("premium", "N");
-		list.add(bInformationDAO.selectEstablishmentList(param));
-		return new Gson().toJson(list);
-	}
+	public String selectLaundry(String emdcode, String filter1, String filter2, String filter3, String filter4, String filter5, String page) {
 
-	// 매개변수들을 모아 hash map에 풋 해주는 함수
-	public HashMap<String, String> paramSet(String filter1, String filter2, String filter3, String filter4, String filter5, String page){
-		HashMap<String, String> param = new HashMap<String, String>();
-		param.put("filter1", filter1);
-		param.put("filter2", filter2);
-		param.put("filter3", filter3);
-		param.put("filter4", filter4);
-		param.put("filter5", filter5);
-		param.put("page", page);
-		return param;
+		return new Gson().toJson(SelectLaundryList.getMapList(emdcode, filter1, filter2, filter3, filter4, filter5, page));
 	}
 	
 
+
+
+	
 }
