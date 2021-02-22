@@ -120,13 +120,13 @@
 			AND M.DEFAULTCATEGORY LIKE '%' ||#{filter1 }|| '%'
 		</if>
 <!-- 		<if test='filter2 != null and filter2 != "none"'> -->
-<!-- 			AND 영업시간 -->
+<!-- 			AND 영업요일 -->
 <!-- 		</if> -->
 <!-- 		<if test='filter3 != null and filter3 != "none"'> -->
-<!-- 			AND 배달여부 -->
+<!-- 			AND 영업시간 -->
 <!-- 		</if> -->
 <!-- 		<if test='filter4 != null and filter4 != "none"'> -->
-<!-- 			AND 정렬 -->
+<!-- 			AND 배달여부 -->
 <!-- 		</if> -->
 <!-- 		<if test='filter5 != null and filter5 != "none"'> -->
 <!-- 			AND 정렬 -->
