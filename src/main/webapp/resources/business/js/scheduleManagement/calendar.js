@@ -421,6 +421,9 @@ function markTempHolidays() {
 		lastDate = `${year}-${month}-${day}`;
 	}
 
+	
+	
+	
 	// 필터링 1
 	const filtered = [];
 	
@@ -437,9 +440,9 @@ function markTempHolidays() {
 	}
 	
 	// 필터링 2
-	const beforeRange = [];
-	const currentRange = [];
-	const afterRange = [];
+	let beforeRange = [];
+	let currentRange = [];
+	let afterRange = [];
 	
 	for (let i = 0; i < filtered.length; i++) {
 		const data = filtered[i];
@@ -454,9 +457,15 @@ function markTempHolidays() {
 	
 	console.log(filtered);
 
-	console.log(beforeRange);
-	console.log(currentRange);
-	console.log(afterRange);
+	beforeRange = [];
+	currentRange = [];
+//	afterRange = [];
+
+	console.log("beforeRange", beforeRange);
+	console.log("currentRange", currentRange);
+	console.log("afterRange", afterRange);
+	
+	
 	
 	// 전월-당월
 	if (beforeRange.length !== 0) {
@@ -464,55 +473,130 @@ function markTempHolidays() {
 		FirstLoop:
 		for (let i = 0; i < beforeRange.length; i++) {
 			const data = beforeRange[i];
-			const lastDay = data.endday.split("-")[2].replace("0", "");
-
-			SecondLoop:
-			for (let row = 0; row < week.length; row++) {
-				for (let col = 0; col < 7; col++) {
-					const dayCon = week[row].children[col];
-					const day = dayCon.querySelector(".day").innerText;
-					
-					if (!dayCon.className.includes("lastDays")
-							&& !dayCon.className.includes("nextDays")
-							&& !dayCon.className.includes("temp_holiday")) {
-						// 임시휴무 표기
-						dayCon.querySelector(".temp_marker").classList.add("temp_holiday");
-					} 
+			
+			const lastDay = parseInt(data.endday.split("-")[2]);
+			
+			const endMonth = parseInt(data.endday.split("-")[1]);
+			
+			console.log(lastDay);
+			
+			// ~ 당월
+			if (endMonth === currentMonth) {
+				for (let row = 0; row < week.length; row++) {
+					for (let col = 0; col < 7; col++) {
+						const dayCon = week[row].children[col];
+						const day = parseInt(dayCon.querySelector(".day").innerText);
 						
-					if (day === lastDay) {
-						break SecondLoop;
+						if (dayCon.className.includes("currentDays") 
+								&& !dayCon.className.includes("temp_holiday")
+								&& day <= lastDay) {
+							
+							// 임시휴무 표기
+							dayCon.querySelector(".temp_marker").classList.add("temp_holiday");
+						}
+					}
+				}
+			}
+			
+			// ~ 익월
+			else if (endMonth > currentMonth) {
+				console.log("2");
+				for (let row = 0; row < week.length; row++) {
+					for (let col = 0; col < 7; col++) {
+						const dayCon = week[row].children[col];
+						
+						if (dayCon.className.includes("currentDays") 
+								&& !dayCon.className.includes("temp_holiday")) {
+							
+							// 임시휴무 표기
+							dayCon.querySelector(".temp_marker").classList.add("temp_holiday");
+						}
 					}
 				}
 			}
 		}
 	}
 
-	// 당월
+	// 당월 
 	if (currentRange.length !== 0) {
 		for (let i = 0; i < currentRange.length; i++) {
 			const data = currentRange[i];
-			const firstDay = data.beginday.split("-")[2].replace("0", "");
-			const lastDay = data.endday.split("-")[2].replace("0", "");
-
-			console.log(firstDay);
-			console.log(lastDay);
 			
-			SecondLoop:
-			for (let row = 0; row < week.length; row++) {
-				for (let col = 0; col < 7; col++) {
-					const dayCon = week[row].children[col];
-					const day = dayCon.querySelector(".day").innerText;
-					
-					if (day >= firstDay && day <= lastDay) {
-						if (!dayCon.className.includes("lastDays")
-								&& !dayCon.className.includes("nextDays")
-								&& !dayCon.className.includes("temp_holiday")) {
+			const firstDay = parseInt(data.beginday.split("-")[2]);
+			const lastDay = parseInt(data.endday.split("-")[2]);
+			
+			const startMonth = parseInt(data.beginday.split("-")[1]);
+			const endMonth = parseInt(data.endday.split("-")[1]);
+		
+			
+			// 당월 내
+			if (endMonth === currentMonth && startMonth === currentMonth) {
+				for (let row = 0; row < week.length; row++) {
+					for (let col = 0; col < 7; col++) {
+						const dayCon = week[row].children[col];
+						const day = parseInt(dayCon.querySelector(".day").innerText);
+						
+						if (dayCon.className.includes("currentDays")
+								&& !dayCon.className.includes("temp_holiday")
+								&& day >= firstDay && day <= lastDay) {
+							
 							// 임시휴무 표기
 							dayCon.querySelector(".temp_marker").classList.add("temp_holiday");
-						} 
+						}
 					}
-					
-//					if (day > lastDay) break SecondLoop;
+				}
+			}
+			
+			// 당월 ~ 익월
+			else if (endMonth > currentMonth && startMonth === currentMonth) {
+				for (let row = 0; row < week.length; row++) {
+					for (let col = 0; col < 7; col++) {
+						const dayCon = week[row].children[col];
+						const day = parseInt(dayCon.querySelector(".day").innerText);
+				
+						if (dayCon.className.includes("currentDays")
+								&& !dayCon.className.includes("temp_holiday")
+								&& day >= firstDay) {
+							
+							console.log(day, " >= ", firstDay, " ? ", day >= firstDay);
+							// 임시휴무 표기
+							dayCon.querySelector(".temp_marker").classList.add("temp_holiday");
+						}
+					}
+				}
+			}
+			
+			// 전월 ~ 당월
+			else if (endMonth === currentMonth && startMonth < currentMonth) {
+				for (let row = 0; row < week.length; row++) {
+					for (let col = 0; col < 7; col++) {
+						const dayCon = week[row].children[col];
+						const day = parseInt(dayCon.querySelector(".day").innerText);
+				
+						if (dayCon.className.includes("currentDays") 
+								&& !dayCon.className.includes("temp_holiday")
+								&& day <= lastDay) {
+							
+							// 임시휴무 표기
+							dayCon.querySelector(".temp_marker").classList.add("temp_holiday");
+						}
+					}
+				}
+			}
+			
+			// 전월 ~ 익월
+			else if (endMonth > currentMonth && startMonth < currentMonth) {
+				for (let row = 0; row < week.length; row++) {
+					for (let col = 0; col < 7; col++) {
+						const dayCon = week[row].children[col];
+				
+						if (dayCon.className.includes("currentDays")
+								&& !dayCon.className.includes("temp_holiday")) {
+							
+							// 임시휴무 표기
+							dayCon.querySelector(".temp_marker").classList.add("temp_holiday");
+						}
+					}
 				}
 			}
 		}
@@ -522,7 +606,8 @@ function markTempHolidays() {
 	if (afterRange.length !== 0) {
 		for (let i = 0; i < afterRange.length; i++) {
 			const data = afterRange[i];
-			const firstDay = data.beginday.split("-")[2].replace("0", "");
+			const firstDay = parseInt(data.beginday.split("-")[2]);
+			const startMonth = parseInt(data.beginday.split("-")[1]);
 
 			SecondLoop:
 			for (let row = week.length - 1; row >= 0; row--) {
@@ -530,16 +615,12 @@ function markTempHolidays() {
 					const dayCon = week[row].children[col];
 					const day = dayCon.querySelector(".day").innerText;
 					
-					if (!dayCon.className.includes("lastDays")
-							&& !dayCon.className.includes("nextDays")
-							&& !dayCon.className.includes("temp_holiday")) {
-						// 임시휴무 표기
-						dayCon.querySelector(".temp_marker").classList.add("temp_holiday");
+					if (dayCon.className.includes("currentDays") && !dayCon.className.includes("temp_holiday")) {
+						dayCon.querySelector(".temp_marker").classList.add("temp_holiday"); // 임시휴무 표기
 					}
 						
-					if (day === firstDay) {
+					if (day === firstDay && currentMonth >= startMonth)
 						break SecondLoop;
-					}
 				}
 			}
 		}
