@@ -116,7 +116,6 @@
                                         <div class="childs_info_1 premium_childs_info_1">
                                             <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
                                             <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
-                                            <!-- <img/> -->
                                         </div>
                                         <div class="childs_info_1_1 premium_childs_info_1_1">
                                             <p>펭수에욤</p>

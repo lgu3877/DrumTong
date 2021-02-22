@@ -100,9 +100,6 @@
 		
 		</div>
 
-		<!-- 모달 버튼 -->
-		<button id="myBtn2">Open Modal</button>
-
 	</section>
 		
 	<!-- footer -->

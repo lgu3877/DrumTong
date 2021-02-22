@@ -54,6 +54,8 @@
 		
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
+		console.log(defaultCategory);
+		console.log(menuCategories);
 		
 		const sido = ${sido};
 		
