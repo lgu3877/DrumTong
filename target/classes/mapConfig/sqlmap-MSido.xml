@@ -10,7 +10,15 @@
 <!-- 	시도 select문  -->
 	<select id="selectMSidoAddressA"  resultType="string">
 		SELECT 
-			DISTINCT(ADDRESSA)
+			DISTINCT(SIDONAME)
+		FROM 
+			SIDO
+	</select>
+
+<!-- 	이승원 - 지도 작업 Sido 테이블에 속성을 가져와줍니다.  -->
+	<select id="selectMSido"  resultType="MSidoVO">
+		SELECT 
+			SIDONAME, LONGITUDE, LATITUDE
 		FROM 
 			SIDO
 	</select>

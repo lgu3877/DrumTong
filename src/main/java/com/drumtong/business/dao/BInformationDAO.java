@@ -54,6 +54,12 @@ public interface BInformationDAO {
 	// 1.매장 정보에 [매장 주소]를 변경해주는 함수입니다.
 	int updateLocation(BInformationVO bInformationVO);
 
+	
+	// 매장의 현재 상태를 가져와줍니다.
+	String selectStatus(String estid);
+	
+	// 매장 좌표 Select REST 
+	List<BInformationVO> selectBInformationCoord();
 
 
 }

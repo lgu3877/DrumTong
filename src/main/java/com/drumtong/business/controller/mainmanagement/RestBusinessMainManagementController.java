@@ -23,6 +23,7 @@ import com.drumtong.business.vo.BDeliveryAreaVO;
 import com.drumtong.business.vo.BImageVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BManagementVO;
+import com.drumtong.business.vo.BMenuUpdateVO;
 import com.drumtong.business.vo.BMenuVO;
 import com.drumtong.business.vo.BScheduleDaysVO;
 import com.drumtong.business.vo.BScheduleTimeVO;
@@ -101,15 +102,32 @@ public class RestBusinessMainManagementController {
 	// ===== 중분류 [BMenu] 테이블 ====	
 	
 	
-	//통합
-	@RequestMapping("BMenu/rest/{processing}/")
+	
+	
+	// 메뉴 수정 
+	@RequestMapping("BMenu/rest/updateMenu/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String bMenuRestProcessing(HttpServletRequest req, @RequestBody List<BMenuVO> ListBMenuVO, 
-									  @PathVariable("processing")String processing) {
-		int result = svc.bMenuRestProcessing(req, ListBMenuVO, processing);
+	public String updateMenu(HttpServletRequest req, @RequestBody BMenuUpdateVO bMenuUpdateVO ) {
+		int result = svc.updateMenu(req, bMenuUpdateVO);
 		return result == 1
 				? "true"
 				: "false";
+	}
+
+	// 메뉴 삭제
+	@RequestMapping("BMenu/rest/deleteMenu/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public List<BMenuVO> deleteMenu(HttpServletRequest req, @RequestBody BMenuVO bMenuVO ) {
+		return svc.deleteMenu(req, bMenuVO);
+	}
+
+	
+	
+	@RequestMapping("BMenu/rest/{processing}/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public List<BMenuVO> bMenuRestProcessing(HttpServletRequest req, @RequestBody List<BMenuVO> ListBMenuVO, 
+									  @PathVariable("processing")String processing) {
+		return svc.bMenuRestProcessing(req, ListBMenuVO, processing);
 	}
 
 
@@ -147,9 +165,9 @@ public class RestBusinessMainManagementController {
 	// 1. 배달 지역을 비동기식으로 수정해주는 메서드입니다.
 	@RequestMapping("BDeliveryArea/rest/updateBDeliveryArea/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String updateBDeliveryArea(HttpServletRequest req, @RequestBody BDeliveryAreaVO bDeliveryAreaVO) {
+	public String updateBDeliveryArea(HttpServletRequest req, @RequestBody HashMap<String,HashMap<String,ArrayList<String>>> bDeliveryAreaList)  {
 		
-		int result = svc.updateBDeliveryArea(req,bDeliveryAreaVO);
+		int result = svc.updateBDeliveryArea(req,bDeliveryAreaList);
 		System.out.println(result + " : result 값 입니다");
 		return result == 1
 				? "true"

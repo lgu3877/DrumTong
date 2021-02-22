@@ -1,10 +1,16 @@
 // 사진 업데이트
 async function updatePhoto() {
+	
+	// 예외가 발생하면 false를 해준다.
+	if(exceptionCheckBImage() === false)
+		return false;
+	
 	const formData = new FormData();
 	
 	const coverImage = document.getElementById("update-cover");
-	const photoInputs = document.getElementsByName("storeimg");
+	const photoInputs = document.getElementsByName("businessStoreImage");
 	const fileList = [];
+	
 	
 	
 	// 이미지 저장 타입 
@@ -12,6 +18,7 @@ async function updatePhoto() {
 	
 	// 대표 사진
 	formData.append("delegatephotoboolean", coverImage.files[0]);
+	
 	
 	
 	
@@ -42,16 +49,23 @@ async function updatePhoto() {
 	if (data) {
 		alert("사진이 성공정으로 수정되었습니다.");
 	}
+	
+	return data;
 }
 
 
 //매장 소개글 업데이트
-const initialText = document.getElementById("intro-text").innerText;
+//const initialText = document.getElementById("intro-text").innerText;
 async function updateIntro() {
+	
+	if(exceptionCheckBIntroduction() === false )
+		return false;
+	
+	
 	
 	const text = document.getElementById("intro-text").innerText;
 	
-	if (initialText === text) {
+	if (bManagement.introduction === text) {
 		return alert("변경된 내용이 확인되지 않았습니다.");
 	}
 	
@@ -86,9 +100,10 @@ async function addService() {
 			if (j === 0 || j === 1) {
 				const select = eachInput.getElementsByTagName("select")[0];
 				const direct = eachInput.getElementsByTagName("input")[0];
+				console.log(select);
 				
 				// select 입력 검사
-				if (select.value === "서비스 타입 선택" || select.value === "세부 서비스 유형 선택") {
+				if (select.value === "서비스 타입 선택" || select.value === "세부 서비스 선택") {
 					return alert("서비스 등록 과정에서 유형 및 타입을 선택하지 않으셨습니다.");
 				}
 				
@@ -125,45 +140,85 @@ async function addService() {
 	}
 	
 	// 퀵 서비스 옵션 설정
-	activateDelivery();
+//	activateDelivery();
+//	activateQuick();
+	
 	
 	const processing = "insertBMenu";
-	// 서비스 등록
-	const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/" + processing + "/", object);
-	console.log(data);
+	// 서비스 등록 [건욱]
+	
+	try{
+		const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/" + processing + "/", object);
+		
+		// 메뉴 등록을 초기화시켜주고
+		cleanAddService();
+		
+		// 기본 인풋을 추가시켜줍니다.
+		createAddService();
+		
+		// 수정된 데이터를 bMenu에 반영시켜주니다.
+		bMenu = data;
+		
+		// 화면을 재구성 시켜줍니다.
+		displayMenu();
+		
+		// 데이터 성공여부에 따라서 Alert를 날려줍니다.
+		alertShow(data);
+	} catch (e) {
+		console.log(e);
+		alert('비정상적인 오류가 발생되었습니다. 다시 시도해주세요..!');
+		return false;
+	}
 }
 
 
 // 퀵 서비스 활성화 < 서비스 등록
-async function activateDelivery() {
-//	activateVisualization(); // MenuList > 스위치 디자인 변경 & input 생성
+async function updateMenu(service) {
+	console.log(service);
+	for (let key in service) {
+		if (service[key] === "") {
+			alert("잘못된 입력입니다.\n입력하신 내용을 다시 한 번 확인해주세요.")
+			return false;
+		}
+	}
 	
-	const result = deliveryToggle  ? "Y" : "N"; // js > MenuList
-
-	console.log(result);
-
-//	const { data } = await axios.post("/drumtong/business/mainmanagement/BManagement/rest/updateQuickBoolean/", result);
-//	
-//	console.log(data);
+	try {
+		await axios.post("/drumtong/business/mainmanagement/BManagement/rest/updateQuickBoolean/", service);
+	} catch (e) {
+		console.log(e);
+		return false;
+	}
 }
 
 
-// 메뉴 수정
-async function deleteMenu() {
+// 메뉴 수정 [건욱]
+async function deleteMenu(rmObject) {
 	
-//	const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/updateBMenu/", result);
-//	
-//	console.log(data);
+	try {
+		// Rest 로 삭제를 성공시에 data에 List<BMenuVO> 리스트를 받아옵니다.
+		const {data} = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/deleteMenu/", rmObject);
+		
+		
+		// 수정된 데이터 List<BMenuVO>를 수정되기 전 데이터 bMenu에 다시 반영해줍니다.
+		bMenu = data;
+		
+		// display를 다시 재구성해줍니다.
+		displayMenu();
+		
+		
+		// 모달을 닫아줍니다.
+		modalClose();
+		
+		// 데이터 성공여부에 따라서 Alert를 날려줍니다.
+		alertShow(data);
+		
+	} catch (e) {
+		console.log(e);
+		alert('비정상적인 오류가 발생되었습니다. 다시 시도해주세요..!');
+		return false;
+	}
 }
 
-
-// 메뉴 삭제
-async function deleteMenu() {
-	
-//	const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/deleteBMenu/", result);
-//	
-//	console.log(data);
-}
 
 // 배달 업데이트
 async function updateDelivery() {
@@ -185,37 +240,45 @@ async function updateDelivery() {
 		deliverytype: deliveryOption,
 		deliveryboolean: deliveryOption === "VISIT" ? "N" : "Y" 
 	}
+	try{
+		const { data } = await axios.post("/drumtong/business/mainmanagement/BManagement/rest/updateDeliveryBoolean/", result);
+		alertShow(data);
+	} catch(e) {
+		console.log(data);	
+	}
 	
-	const { data } = await axios.post("/drumtong/business/mainmanagement/BManagement/rest/updateDeliveryBoolean/", result);
-	console.log(data);
+	
 }
 
 
 // 주소 업데이트
 async function updateAddress() {
+	if(exceptionCheckBLocation() === false)
+		return false;
 	const mainAddress = document.getElementById("main-address").value;
 	const detailAddress = document.getElementById("detail-address").value;
-	const LaMa = document.getElementById("main-location").value;
+	const emdCode = document.getElementById("town-code").value;
+	
+	const la = document.getElementById("latitude").value;
+	const ma = document.getElementById("longitude").value;
+	
 	const address = mainAddress + detailAddress;
-	console.log(mainAddress);
-	console.log(detailAddress);
-	console.log(address);
-	console.log(LaMa);
-	const tmp = LaMa.replace(/\(/,'').replace(/\)/,'').replace(/\,/,'');
-	console.log('lama2', tmp);
-	const la = tmp.split(" ")[0];
-	const ma = tmp.split(" ")[1];
-	console.log('la',la);
-	console.log('ma',ma);
 	
 	const object = {
 		"mainlocation" : mainAddress ,
 		"detaillocation" : detailAddress,
 		"latitude" : la,
 		"longitude" : ma,
+		"emdcode" : emdCode
 	}
-	const { data } = await axios.post("/drumtong/business/mainmanagement/BInformation/rest/updateLocation/", object);
-
-	
+	await axios.post("/drumtong/business/mainmanagement/BInformation/rest/updateLocation/", object);
+	 
+	borderNone('locationArea');
 }
 
+function alertShow(data) {
+	if(data) 
+		alert("정상 수행되었습니다.");
+	else 
+		alert("비정상적인 오류가 발생했습니다. 다시 시도 해주세요..")
+}

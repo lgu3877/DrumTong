@@ -33,11 +33,12 @@
     <div  class="c2-input">
     	<h1>소재지</h1>
     	<span style="width: 200px"></span>
-    	<input type="button" value="주소찾기" style="width: 200px; text-align: center"  onclick="searchAddress()"/>
+    	<input type="button" value="주소찾기" style="width: 200px; text-align: center"  onclick="searchAddress(document.getElementById('mainlocation'), document.getElementById('detaillocation'), document.getElementById('emdcode'), document.getElementById('latitude'), document.getElementById('longitude'))">
     </div>
     <div class="c2-input" name="address">
     	<input type="text" placeholder="메인소재지를 입력하세요" name="mainlocation"  id="mainlocation" required readonly>
     	<!-- 위도, 경도 값 저장 -->
+    	<input type="hidden" name="emdcode" id="emdcode">
     	<input type="hidden" name="latitude" id="latitude">
     	<input type="hidden" name="longitude" id="longitude">
     </div>
@@ -47,8 +48,9 @@
     
     <div  class="c2-input">
     	<h1>영업자 신고증</h1>
-    	<label for="reportcard" class="forLabel" style="display: table;"><span style="display: table-cell; vertical-align: middle;">업로드</span></label>
-    	<input type="file" placeholder="영업자 신고증을 등록하세요" name="businessInformationImage" id="reportcard" required>
+    	<label for="reportcard" class="forLabel" style="display: table;"><span style="display: table-cell; vertical-align: middle;">업로드</span>
+    		<input type="file" placeholder="영업자 신고증을 등록하세요" name="businessInformationImage" id="reportcard" required>
+    	</label>
     </div>
     <div id="reportcarddiv">
     	<img id="reportcard-space" width="600px">
@@ -56,8 +58,9 @@
 	
     <div  class="c2-input">
     	<h1>사업자 등록증</h1>
-    	<label for="license" class="forLabel" style="display: table;"><span style="display: table-cell; vertical-align: middle;">업로드</span></label>
-    	<input type="file" placeholder="사업자 등록증을 등록하세요" name="businessInformationImage" id="license" required>
+    	<label for="license" class="forLabel" style="display: table;"><span style="display: table-cell; vertical-align: middle;">업로드</span>
+    		<input type="file" placeholder="사업자 등록증을 등록하세요" name="businessInformationImage" id="license" required>
+    	</label>
     </div>
     <div id="imgdiv">
     	<img id="img-space" width="600px">

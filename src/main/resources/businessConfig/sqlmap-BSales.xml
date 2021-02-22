@@ -88,8 +88,7 @@
         BSALES.ESTID,
 		BSALES.SALECODE, BSALES.PURCHASEDATE, BSALES.TOTALAMOUNT,
 		BSALES.ORIGINALPRICE, BSALES.DISCOUNTPRICE, BSALES.TOTALPRICE,
-		BSALES.ABLEDAY, BSALES.STATUS, BSALES.PICKUPDATE,
-		BSALES.DELIVERYDATE, BSALES.REQUESTTYPE, BSALES.REQUESTS,
+		BSALES.STATUS,BSALES.DELIVERYDATE,
         
         BINFORMATION.BRANDNAMING
         
@@ -111,43 +110,25 @@
         #{memberidORestid}      ORDER BY SALECODE DESC
 	</select>
 	
-<!-- 	주문 목록 데이터 Bsales, BDetailSales, Binformation Join되어있음. -->
-<!-- 	<select id="selectOrderList" parameterType="String" resultType="OrderList"> -->
-<!-- 	SELECT -->
-<!--         BSALES.ESTID, -->
-<!-- 		BSALES.SALECODE, BSALES.PURCHASEDATE, BSALES.TOTALAMOUNT, -->
-<!-- 		BSALES.ORIGINALPRICE, BSALES.DISCOUNTPRICE, BSALES.TOTALPRICE, -->
-<!-- 		BSALES.ABLEDAY, BSALES.STATUS, BSALES.PICKUPDATE, -->
-<!-- 		BSALES.DELIVERYDATE, BSALES.REQUESTTYPE, BSALES.REQUESTS, -->
-        
-<!--         BDETAILSALES.MAINCATEGORY, BDETAILSALES.SUBCATEGORY, BDETAILSALES.NAME, BDETAILSALES.AMOUNT, -->
-<!--         BDETAILSALES.MENUPRICE, BDETAILSALES.SUMPRICE, -->
-        
-<!--         BINFORMATION.BRANDNAMING -->
-<!-- 	FROM BSALES   -->
-<!-- 		INNER JOIN BDETAILSALES  -->
-<!-- 	    ON BSALES.SALECODE = BDETAILSALES.SALECODE -->
-<!-- 	    INNER JOIN BINFORMATION -->
-<!-- 		ON BINFORMATION.ESTID = BSALES.ESTID -->
-<!-- 	WHERE MEMBERID = #{memberid} -->
-<!-- 	</select> -->
-	
 	<update id="updateOrderList">
 		UPDATE BSALES SET STATUS='PROCESSING',  
-			<choose>
-				<when test='requesttype.equals("DELIVERY")'>
-					DELIVERYDATE
-				</when>
-				<otherwise>
-					PICKUPDATE
-				</otherwise>
-			</choose>
-			= #{orderDate} 
-			WHERE ESTID=#{estid} AND SALECODE=#{salecode}
+			DELIVERYDATE= #{orderDate} 
+				WHERE ESTID=#{estid} AND SALECODE=#{salecode}
 	</update>
 	
 	<delete id="deleteOrderList">
 		DELETE FROM BSALES WHERE ESTID=#{estid} AND SALECODE=#{salecode}
 	</delete>
 	
+<!-- 	몇 번째 방문(이용횟수)인지 조회 -->
+	<select id="visits" parameterType="hashmap" resultType="int">
+		SELECT RN AS VISITS 
+			FROM
+				(SELECT ROWNUM AS RN, BSALES.* 
+					FROM BSALES 
+						WHERE MEMBERID=#{memberid} 
+						AND ESTID=#{estid} 
+						ORDER BY PURCHASEDATE ASC)
+ 			WHERE SALECODE=#{salecode}
+	</select>
 </mapper>

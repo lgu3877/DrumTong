@@ -40,6 +40,7 @@ public class RestCustomerAccountService {
 		HttpSession Session= req.getSession();
 		CPrivateDataVO Login = (CPrivateDataVO)Session.getAttribute("cLogin");
 		
+		// type이 비밀번호인 경우 비밀번호 검사를 해야한다.
 		if(type.equals("pw")) {
 			String securePW = Encrypt.SecurePassword(Login.getId(), param.get("pw"));
 			param.put("pw", securePW);
@@ -66,8 +67,8 @@ public class RestCustomerAccountService {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("memberid", Login.getMemberid());
 		
-		System.out.println("테스트코드");
-		System.out.println("type : " + param.get("type"));
+//		System.out.println("테스트코드");
+//		System.out.println("type : " + param.get("type"));
 		
 		switch(param.get("type")) {
 		case "account":

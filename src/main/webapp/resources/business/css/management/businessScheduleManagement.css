@@ -20,14 +20,42 @@
 
 /* 숨기기(hide) */
 .hide {
-	display: none;
+	display: none !important;
 }
 
 /* 정기 휴무 캘린더 배경색 */
 .reg_holiday {
+	height: 10px;
+    width: 10px;
+    margin-left: 3px;
 	background-color: #f38181 !important;
 }
 
+.temp_holiday {
+	height: 10px;
+    width: 10px;
+    margin-left: 3px;
+	background-color: #08d9d6 !important;
+}
+
+.reg_holiday h {
+	color: white;
+}
+
+.marker_con {
+	position: absolute;
+    background-color: transparent;
+    height: 18px;
+    width: 100%;
+    top: 1px;
+    display: flex;
+}
+
+.reg_marker,
+.temp_marker {
+	
+}
+ 
 /* 폰트 옵션 */
 .text_blue {
 	color: #3b5998;
@@ -202,7 +230,7 @@
 }
 
 .checkBtn {
-	width: 100px;
+	width: 120px;
 	height: 30px;
 	font-size: 12pt;
 	border: none;
@@ -408,15 +436,51 @@
 /* 휴무 스케쥴 */
 .h_schedule_con {
 	list-style: none;
-    display: block;
+    display: inline-flex;
+	width: 100%;
 }
 
 .h_schedule_list {
-	display: flex;
-    justify-content: space-between;
-    margin: 15px 10px;
-	padding-bottom: 10px;
-    border-bottom: 1px solid black;
+	position: relative;
+	display: block;
+    margin-right: 20px;
+    background-color: #f38181;
+    border: none;
+    width: 200px;
+    height: 250px;
+	border-top: groove;
+}
+
+.h_schedule_list:hover {
+	transition: 1s;
+	box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+.h_schedule_remove {
+    position: absolute;
+    width: calc(100% - 10px);
+    text-align: right;
+    margin-top: 3px;
+    font-size: 18pt;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+}
+
+.h_schedule_remove:hover {
+	color: navy;
+    font-size: 20pt;
+	transition: 1s;
+}
+
+.h_schedule_week {
+    padding: 20px;
+    color: white;
+    background-color: #6495EF;
+}
+
+.h_schedule_day {
+    margin: 5px;
 }
 
 .h_schedule_context {
@@ -446,13 +510,13 @@
 }
 
 .h_week {
-	background-color: beige;
-    border-radius: 20px;
+	letter-spacing: 5px;
 }
 
 .h_day {
-	background-color: beige;
-    border-radius: 20px;
+	font-size: 13pt;
+    color: white;
+	letter-spacing: 2px;
 }
 
 .tmp_holiday_input_con {
@@ -469,9 +533,14 @@
     border: none;
     background-color: #f38181;
     border-radius: 5px;
-    padding: 0 15px;
+    padding: 0 0 0 15px;
     font-size: 12pt;
     color: white;
+    letter-spacing: 3px;
+    font-size: 14pt;
+}
+
+.set_day_range_con input[type="date" i]:hover {
 }
 
 .set_day_range_con input[type="date"]::-webkit-calendar-picker-indicator {
@@ -546,6 +615,7 @@
     text-indent: 10px;
     padding: 10px;	
     line-height: 30px;
+	letter-spacing: 2px;
 }
 
 .tmp_holiday_reason_con button {
@@ -646,7 +716,6 @@
 }
 
 .period_view_input {
-	display: none;
 	/* width: 250px; */
 }
 
@@ -670,7 +739,22 @@
 }
 
 .reason_view_input {
-	display: none;
 	width: 100%;
 	text-indent: 5px;
+}
+
+.remove_icon {
+	color: #f38181;
+}
+
+.complete_icon {
+	color: #6495EF;
+}
+
+.cancle_icon {
+	color: black;
+}
+
+.update_icon {
+	color: navy;
 }

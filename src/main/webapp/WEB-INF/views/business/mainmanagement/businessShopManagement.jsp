@@ -48,14 +48,24 @@
 	<script type="text/javascript">
 		const bImageList = ${bImageList};
 		const bManagement = ${bManagement};
-		// deliverytype > AGENCIES, SELF, BOTH, VISIT(default)
-		// deliveryboolean > Y, N
-		const bMenu = ${bMenu};
+		let bMenu = ${bMenu};
+		console.log(bMenu);
+		console.log(bImageList);
+		
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
+		console.log(defaultCategory);
+		console.log(menuCategories);
+		
 		const sido = ${sido};
-		const deliveryAreas = ${deliveryAreas}
-		console.log(sido);
+		
+// 		const initialAreas = ${deliveryAreas};
+// 		const deliveryAreas = ${deliveryAreas};
+		let deliveryAreas = ${deliveryAreas};
+		const status = '${status}';
+		console.log(status);
+		console.log(deliveryAreas);
+// 		let deliveryAreas = JSON.parse(JSON.stringify(initialAreas));
 		console.log(deliveryAreas);
 	</script>
 </head>
@@ -103,7 +113,7 @@
 		
 		<div class="shop_introduction">
 		
-				
+			<input type="hidden" name="saveType" value="businessStoreImage">
 			<div class="shop_image_con">
 			
 			<!-- title -->	
@@ -128,22 +138,6 @@
 				</c:if>
 				
 				</div>
-				
-			<!-- cover-image input form -->
-			<!-- 	<div id="shop-image-view" class="shop_image_view">
-					<div class="upload_icon_con">
-						<div class="cover_file_text_con">
-							<div class="cover_file_text">
-								<p>
-									기존에 등록된 사진이 있다면, <br>
-									클릭 후 미리보기로 확대해 볼 수 있습니다.<br>
-									사진을등록하지 않으셨다면, <br>
-									아래 추가하기 버튼을 통해 사진을 추가해주세요.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div> -->
 				
 			<!-- image viewer as long as cover image is already uploaded when you visit this page for modification -->
 				<div id="main-image-con" class="main_image_con">
@@ -208,7 +202,7 @@
 				</div>
 			
 			<!-- text content -->
-				<div class="shop_text_intro">
+				<div class="shop_text_intro" id="introductionArea">
 					<p id="intro-text" class="shop_text_view">
 						이곳은 당신이 작성한 매장 소개글을 확인할 수 있는 칸입니다. 작성한 글이 마음에 들지 않을 경우 아래 '작성하기'버튼을 통해 기존에 작성하신 글을 수정하시거나 새로운 내용의 소개글을 작성하실 수 있습니다.
 					</p>
@@ -272,7 +266,7 @@
 							<th scope="cols">서비스 타입</th>
 							<th scope="cols">메뉴 이름</th>
 							<th scope="cols">가격(배달비)</th>
-							<th scope="cols">소요시간(시간)</th>
+							<th scope="cols">소요시간(일)</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -285,24 +279,7 @@
 					</tbody>
 				</table>
 				
-			<!-- registered table -->
-				<table class="current_menu_table form">
-				<!-- thead -->
-					<thead id="item-list-thead">
-						<tr>
-							<th scope="cols">서비스 유형</th>
-							<th scope="cols">서비스 타입</th>
-							<th scope="cols">메뉴 이름</th>
-							<th scope="cols">가격(배달비)</th>
-							<th scope="cols">소요시간</th>
-							<th scope="cols">수정/삭제</th>
-						</tr>
-					</thead>
-					
-				<!-- tbody -->
-					<tbody id="item-list-tbody"></tbody>
-					
-				</table>
+				<div id="posted-service-list" class="form"></div>
 			</div>
 		</c:if>
 		</div>
@@ -322,13 +299,6 @@
 				</div>
 			<!-- 버튼 -->
 				<div class="service_button_con">
-				<!-- 배달 서비스 활성화 -->
-					<div id="delivery-btn" class="delivery_menu_btn_con" onclick="activateVisualization()">
-						<div class="add_menu_icon_con">
-							<i id="delivery-icon" class="fas fa-toggle-off"></i>
-						</div>
-						<div class="add_menu_btn_title">퀵 서비스</div>
-					</div>
 				<!-- 메뉴 추가 -->	
 					<div id="add-item-btn" class="add_menu_btn_con" onclick="createAddService()">
 						<div class="add_menu_icon_con">
@@ -360,8 +330,11 @@
 						<li class="service_main">서비스 유형</li>
 						<li class="service_sub">서비스 타입</li>
 						<li class="service_details">메뉴 이름</li>
-						<li class="service_price">가격(배달비)</li>
-						<li class="service_time">소요시간(시간)</li>
+						<li class="service_price">요금 (퀵서비스)
+							<i id="quick-help" class="far fa-question-circle" style="font-weight: 600; cursor: pointer; margin-left: 3px;"></i>
+							<div id="quick-help-msg"></div>
+						</li>
+						<li class="service_time">소요일</li>
 						<!-- POST 형식일 때만 확인 버튼을 활성화 시켜준다.	-->
 						
 						<c:if test="${status ne 'SUCCESS' }">
@@ -374,12 +347,8 @@
 
 			<!-- 서비스 등록 input -->
 				<div id="add-item-list" class="add_item_list"></div>
-					
 				</div>
-				
 			</div>
-		
-			
 		</div>
 		
 		
@@ -459,13 +428,19 @@
 			</div>
 			
 			
-		<!-- 설정된 배달 가능지역 보기  & 배달 지역 설정  -->
+		<!-- 설정된 배달가능지역 보기  & 배달 지역 설정  -->
+			
 			<div class="delivery_menu">
-				<div id="delivery-area-view" class="delivery_area_view_con">
-					<h1>배달지역 뷰</h1>
+				<!-- 접근 제한 뷰  [건욱] -->
+				<div id="accessDenied" >
+					해당 기능을 활성화 시키기 위해서는 <br> [세탁물 수령 방법] 기능에서 "배달 대행업체 이용" 혹은  "배달 서비스 제공" 중 <br> 하나의 기능이라도 체크가 되어있어야 합니다.
 				</div>
 				
-				<div class="delivery_area_set_wrap">
+			<!-- 배달가능지역 뷰 -->
+				<div id="delivery-area-view" class="delivery_area_view_con"></div>
+				
+			<!-- 배달지역 입력 -->
+				<div class="delivery_area_set_wrap form">
 					<div class="delivery_area_set_con">
 					<!-- 시/도 선택 -->
 						<select id="major-area-selector" class="area_selector" name="sido" onchange="createMinorOptions()">
@@ -479,13 +454,8 @@
 				<!-- 읍/면/동 선택 -->
 					<div id="detail-area-selector" class="town_selector_con"></div>
 				</div>
-		
 			</div>
-
-
 		</div>
-
-
 
 	
 	<!-- 주소 확인 & 변경 -->
@@ -511,18 +481,20 @@
 			
 			
 		<!-- 주소지 변경 -->
-			<div class="address_input_con form">
+			<div class="address_input_con form" id="locationArea">
 				<div class="address_wrapper">
 					<h3>주소</h3>
 					<div class="main_address_input_wrapper">
 						<input id="main-address" class="main_address_input" type="text" name="mainlocation" value="${mainAddress }" 
 							onfocus="openAddressSearch()">
-						<input id="main-location" type="hidden" name="maplocation">
-						<button class="address_search_button" onclick="openAddressSearch()">주소 찾기</button>
+						<input type="button" class="address_search_button" onclick="openAddressSearch()" value="주소 찾기">
 					</div>
 					<h3>상세주소</h3>
 					<div class="detail_address_input_wrapper">
 						<input id="detail-address" class="detail_address_input" type="text" name="detaillocation" value="${detailAddress }">
+						<input id="latitude" type="hidden" name="latitude">
+						<input id="longitude" type="hidden" name="longitude">
+						<input id="town-code" type="hidden" name="emdcode">
 					</div>
 				</div>
 				<div class="preview_wrapper">
@@ -531,25 +503,6 @@
 				</div>
 			</div>
 		</div>
-		
-		
-	<!-- [50줄] 여는 태그  세션의 상태가 FAIL이면 POST 형식   -->
-	<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
-	<!-- 	[전체 폼]에 대한 c:if문 -->
-	
-		<c:if test="${status ne 'SUCCESS' }">
-	<!-- 전체 form submit -->
-			<div class="submit_con">
-				<input class="submit_btn" type="submit" value="다음 단계로">
-			</div>
-			</form>
-
-		</c:if>
-		
-		
-	
-	</section>
-		
 		
 <!-- footer -->
 	<%-- <%@ include file="../main/businessFooter.jsp" %> --%>
@@ -580,6 +533,30 @@
 		</div>
 	</div>
 
+<!-- Modal > 서비스 메뉴 수정 -->
+	<div id="modify-menu-modal" class="modify_menu_modal" style="display: none"></div>
+
+		
+	<!-- [50줄] 여는 태그  세션의 상태가 FAIL이면 POST 형식   -->
+	<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
+	<!-- 	[전체 폼]에 대한 c:if문 -->
+	
+		<c:if test="${status ne 'SUCCESS' }">
+	<!-- 전체 form submit -->
+			<div class="submit_con">
+				<input class="submit_btn" id="submitbt" type="button" value="다음 단계로" onclick="checkExceptionBeforeSubmit()">
+			</div>
+			</form>
+
+		</c:if>
+		
+		
+	
+	</section>
+		
+		
+<!-- footer -->
+	<%-- <%@ include file="../main/businessFooter.jsp" %> --%>
 	
 	
 	<script type="text/javascript">
@@ -607,9 +584,32 @@
 		function insertComma(string) {
 			const reversedString = string.split("").reverse().join("");
 			const commaAttached = reversedString.replace(/(.{3})/g,"$1,");
-			return commaAttached.split("").reverse().join("");
+			
+			const array = commaAttached.split("").reverse();
+			
+			if (array[0] === ",") {
+				array.shift();
+			}
+			
+			return array.join("");
+		}
+		
+		// 객체 복사(deep copy)
+		function deepCopyObject(object) {
+			let clone = {};
+			for (let key in object) {
+				if( typeof (object[key]) == "object" && object[key] != null)
+					clone[key] = deepCopyObject(object[key]);
+				else
+					clone[key] = object[key];
+			}
+			return clone;
 		}
 	</script>
+	
+	<!-- 예외 체크 -->
+	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementExceptionCheck.js"></script>
+	
 	
 	<!-- 이미지 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementImage.js"></script>
@@ -617,8 +617,11 @@
 	<!-- 소개글 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementIntroText.js"></script>
 
-	<!-- 서비스 매뉴 -->
+	<!-- 서비스 매뉴(view) -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementMenuList.js"></script>
+
+	<!-- 서비스 매뉴(input) -->
+	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementMenuRegister.js"></script>
 
 	<!-- 배달 -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementReturnItem.js"></script>
@@ -635,5 +638,105 @@
 	<!-- 비동기 update (Axios) -->
 	<script type="text/javascript" src="${cpath }/business/js/shopmanagement/businessShopManagementUpdate.js"></script>
 	
+	<script type="text/javascript">
+	
+		// [건욱] 함수를 실행했을 때 오류가 발생하면 사용자에게 오류 메시지를 반환하는 함수입니다.
+		function  expressMessageOnTryCatch (functionList) {
+			
+			let errMSG = "";
+			
+			for (let key in functionList) {
+				try {
+					functionList[key];
+				}
+				catch (error) {
+					switch (key) {
+					
+						case 'updatePhoto' : errMSG += "매장 사진 ";
+							break;
+							
+						case 'updateIntro' : errMSG += "매장 소개글 ";
+							break;
+							
+						case 'addService' : errMSG += "매장 메뉴 ";
+							break;
+							
+						case 'updateDelivery' : errMSG += "배달 지역 ";
+							break;
+							
+						case 'updateAddress' : errMSG += "매장 주소 ";
+							break;
+							
+						case 'updateStatus' : errMSG += "매장 상태 ";
+							break;
+					}
+				}
+				
+				
+			}
+			return (errMSG === "") ? "" : errMSG += "오류가 발생했습니다. 재시도 부탁드립니다.";
+			
+		}
+			
+		// [건욱]
+		// errMSG에 값이 있을 경우에 경고창을 사용자에게 띄워주는 함수입니다.
+		function expressAlert (errMSG) {
+			if(errMSG !== ""){
+				alert(errMSG); 
+				return false;
+			}
+			
+			return true;
+				
+		}
+		
+		function locationBoolean(result) {
+			result ? location.href = "drumtong/business/mainmanagement/businessScheduleManagement/" : "";
+		}
+	
+// 		// [건욱] 
+		// PROCESS 일 때 수정된 데이터를 업데이트 시켜주는 함수.
+		if(status === "PROCESS") {
+			console.log('실행 프로세스');
+			document.getElementsByClassName("submit_btn").onclick = function () {
+				
+				const functionList = {
+						
+						// 매장 사진 업데이트	
+						"updatePhoto" : updatePhoto(),
+						
+						// 매장 소개글 업데이트
+						"updateIntro" : updateIntro(),
+						
+						// 매장 메뉴 업데이트
+						"addService" : addService(),
+						
+						// 배달 지역 업데이트
+						"updateDelivery" : updateDelivery(),
+						
+						// 매장 주소 업데이트
+						"updateAddress" : updateAddress(),
+						
+						// 매장 status 값 "SUCCESS" 업데이트 
+						"updateStatus" : updateStatus(),
+						
+				}
+				
+				// 함수를 실행했을 때 오류가 발생하면 사용자에게 오류 메시지를 반환하는 함수입니다
+				let errMSG = expressMessageOnTryCatch(functionList);
+				
+				// 알터창을 표출해줍니다.
+				let result = expressAlert(errMSG);
+				
+				locationBoolean(result);
+				
+				
+			}
+		}
+		
+// 		function updateStatus() {
+			
+// 		}
+	</script>
 </body>
 </html>

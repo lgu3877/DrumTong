@@ -71,6 +71,7 @@ public class AwsServiceImpl{
                 .build(); 		
     }
     
+    
     // AWS Key를 가져오는 함수입니다.
     private static String[] Security() {
 		String[] Security = new String[3];
@@ -118,7 +119,6 @@ public class AwsServiceImpl{
     	
     	
     	
-    	
     	try {
     		
     		// 타입에 따라서  fileList를 처리해줍니다.
@@ -152,7 +152,7 @@ public class AwsServiceImpl{
             	MultipartFile delegate = mpf.getFile("delegatephotoboolean");
             	
             	// 대표 사진을 추가시켜주는 함수입니다.
-            	addStoreDelegatePhoto(delegate, object);
+            	addStoreDelegatePhoto(delegate,folderName, object);
             	
             	
             	
@@ -182,7 +182,11 @@ public class AwsServiceImpl{
     // 서버에 파일을 저장하지 않고 바로 S3로 파일을 전달해줍니다.
     // public void fileUpload(File file, String folderName) {
      public int fileUpload(MultipartFile file, String folderName, Object object, int count) {
-    	 
+    	
+    	// 파일이 비어있다면 아래 함수를 실행시켜주지 않는다.
+    	if(file.isEmpty())
+    		return 0;
+    	
 		// AWS S3에 저장될 파일 이름을 UUID 형식으로 다시 지정해준다.
 		// ESTID가 필요하므로 SerialUUID에 ESTID값을 보내준다.
 		System.out.println(file.getOriginalFilename());
@@ -315,7 +319,8 @@ public class AwsServiceImpl{
      private int exeFileUpload (MultipartFile file, Object object, 
 		       String folderName, String subFolderName, 
 		       String UUIDType , String tableFieldName){
-    	 	
+    	 	System.out.println("ExeFileUpload 실행...");
+    	 
     	 	int result = 0;
 			
 			// 실질적으로 저장될 파일 이름을 선언해준다.
@@ -428,6 +433,8 @@ public class AwsServiceImpl{
     	// DB에 저장될 파일경로입니다. 이것을 이용해서 view상에서 그림을 S3에서 호출해서 불러옵니다.
     	String src =  folderName + "/"  + subFolderName + "/" + fileName ;
     	
+    	System.out.println("StoreImg 경로 : " + src);
+    	
 		switch (UUIDType) {
 			case "STOREIMG" : 
 				BImageVO bImageVO = (BImageVO)object;
@@ -494,18 +501,17 @@ public class AwsServiceImpl{
    
    
    // [내부함수] MultipleUpload에 대표사진이 있을 경우 추가적으로 업로드를 해주는 함수입니다.
-   private int addStoreDelegatePhoto(MultipartFile delegate, Object object) {
+   private int addStoreDelegatePhoto(MultipartFile delegate,String folderName, Object object) {
    	
 	   	// 받아온 파일이 비어있다면 함수를 종료시킨다.
 	   	if(delegate == null || delegate.isEmpty() ) 
 	   		return 0;
 	   	
-	   	
+	   	System.out.println("@@@add sotre 대표사진 실행");
 	   	BImageVO vo = (BImageVO)object;
 	   	
 	   	// 대표사진 유무를 'Y' 로 설정해준다.
 	    vo.setDelegatephotoboolean("Y");
-	    String folderName = "business/" + vo.getEstid();
 	      
 	    // S3의 파일 업로드를 시켜준다.
 	    // 결과 값을 반환시켜준다. 

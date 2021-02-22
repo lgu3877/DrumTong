@@ -2,9 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../main/customerHeader.jsp" %>    
 
-   	<!-- 스크립트 영역 -->
-	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	
+	<!-- 다음 주소 검색 script function -->
+	<%@ include file="/resources/daumAddressSearch/daumAddressSearch.jsp" %>
 	<!-- Axios script -->
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	
@@ -44,9 +43,17 @@
             </div>
             <input type="text" name="email" id="email" class="join-input-boxs" placeholder="E-mail" />
             <span class="emailmsg" id="emailmsg"></span>
-            <input type="text" name="mainaddress" id="zipcode" class="join-input-boxs" placeholder="우편번호" readonly/>
-            <input type="button" value="주소찾기" onclick="searchAddress()" id="findZipcode" class="join-input-buttons" />
-            <input type="text" name="detailaddress" id="address" class="join-input-boxs" placeholder="상세주소" />
+            <input type="text" name="mainaddress" id="zipcode" class="join-input-boxs" placeholder="우편번호(집주소)" readonly/>
+            <input type="button" value="주소찾기" onclick="searchAddress(document.getElementById('zipcode'),document.getElementById('address'),document.getElementById('emdcodeTMP'), null, null)" id="findZipcode" class="join-input-buttons" />
+            <input type="text" name="detailaddress" id="address" class="join-input-boxs" placeholder="상세주소(집주소)" />
+	            <input type="hidden" name="emdcodeTMP" id="emdcodeTMP" class="join-input-boxs" />
+            <input type="checkbox" name="checkAddress" id="checkAddress" checked onchange="sameAddress()">배송지 동일
+            <div id="sameAddress" style="display:none">
+	            <input type="text" name="mainreceiptaddress" id="zipcode2" class="join-input-boxs" placeholder="우편번호(배송지주소)" readonly/>
+	            <input type="button" value="주소찾기" onclick="searchAddress(document.getElementById('zipcode2'),document.getElementById('address2'),document.getElementById('emdcode'), null, null)" id="findZipcode2" class="join-input-buttons" />
+	            <input type="text" name="detailreceiptaddress" id="address2" class="join-input-boxs" placeholder="상세주소(배송지주소)" />
+	            <input type="hidden" name="emdcode" id="emdcode" class="join-input-boxs" />
+            </div>
             <div class="login-buttons">
               <input type="button" value="회원가입" id="joinSubmit" class="join-input-buttons" />
             </div>
@@ -55,6 +62,17 @@
       </div>
     </section>
 
+<!-- [영경] 스크립트 -->
+    <script>
+		function sameAddress(){
+			subDiv = document.querySelectorAll("#sameAddress")[0];
+			if(document.getElementById('checkAddress').checked === true){
+				subDiv.style.display="none";
+			} else{
+				subDiv.style.display="block";
+			}
+		}
+    </script>
     <!-- 스크립트 영역 -->
     <script>
       function getFocus() {

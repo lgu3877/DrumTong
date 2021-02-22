@@ -6,7 +6,14 @@
 .disabled_checkbox {
 	cursor: not-allowed !important;
 }
-
+#accessDenied {
+ z-index : 1; 
+ position : absolute; 
+ margin: 0 auto; 
+ font-weight: bold; 
+ cursor: no-drop;
+ font-size: 22px;
+ }
 /* 폼 그림자 */
 .form {
 	background-color: whitesmoke;
@@ -63,6 +70,19 @@
 .help_msg_down:after {
 	border-bottom: 10px solid navy;
 	border-top: 5px solid transparent;	
+}
+
+.quick_help_msg {
+	width: 300px;
+	margin-top: 10px;
+    position: absolute;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: navy;
+    color: white;
+    line-height: 25px;
+    text-align: justify;
+    transition: 1s;
 }
 
 /* 매장 사진 슬라이드 좌우 화살표 */
@@ -568,11 +588,16 @@
 }
 
 .service_details {
-	width: 21%;
+	width: 28%;
 }
 
 .service_price {
-	width: 16%;
+	width: 18%;
+}
+
+.service_price i {
+	width: inherit !important;
+	padding: 0 !important; 
 }
 
 .service_price_input:invalid {
@@ -580,7 +605,7 @@
 }
 
 .service_time {
-	width: 16%;
+	width: 8%;
 }
 
 /* .service_confirm {
@@ -591,7 +616,276 @@
 	width: 6%;
 }
 
+/* menu list */
+/* main */
+.menu_main_con {
 
+}
+
+.menu_main_wrapper {
+	display: flex;
+	justify-content: space-between;
+	height: 70px;
+}
+
+.menu_main_icon {
+	margin: auto 0;
+}
+
+.menu_main_icon i {
+	font-size: 20pt;
+    color: darkcyan;
+    cursor: pointer;
+}
+
+.menu_main_title {
+    width: 100%;
+	margin: auto 0 auto 15px;
+    padding: 3px 0 3px 25px;
+    text-align: left;
+    border-radius: 3px;
+    font-size: 20pt;
+    background-color: steelblue;
+    color: white;
+    letter-spacing: 5px;
+}
+
+.menu_main_amount {
+	margin: auto 10px;
+    padding: 5px 10px;
+    background-color: lightgray;
+    border-radius: 7px;
+    color: white;
+}
+
+/* sub */
+.menu_sub_wrapper {
+	display: block;
+}
+
+.menu_sub_content {
+    margin: 0 0 0 30px;
+    display: flex;
+    justify-content: space-between;
+	height: 50px;
+}
+
+.menu_sub_icon {
+	margin: auto 0;
+}
+
+.menu_sub_icon i {
+	font-size: 15pt;
+    color: darkgray;
+    cursor: pointer;
+}
+
+.menu_sub_title {
+	width: 100%;
+    margin: auto 0 auto 15px;
+    padding: 3px 0 3px 25px;
+    text-align: left;
+    border-radius: 3px;
+    font-size: 15pt;
+    background-color: cornflowerblue;
+    color: white;
+    letter-spacing: 5px;
+}
+
+.menu_sub_amount {
+    margin: auto 12px;
+    padding: 3px 8px;
+    background-color: lightgray;
+    border-radius: 7px;
+    color: white;
+}
+
+/* detail */
+.menu_detail_con {
+	
+}
+
+.menu_detail_wrapper {
+	margin: 0 0 0 50px;
+    display: flex;
+    justify-content: space-between;
+	height: 50px;
+}
+
+.menu_detail_icon {
+	margin: auto 0;
+}
+
+.menu_detail_icon i {
+	font-size: 15pt;
+    color: darkgray;
+}
+
+.menu_detail_info_con {
+	display: flex;
+    justify-content: space-between;
+	width: 100%;
+    margin: auto 0 auto 15px;
+    padding: 3px 0 3px 25px;
+    text-align: left;
+    border-radius: 3px;
+    font-size: 15pt;
+    background-color: lightblue;
+    color: #323232;
+    letter-spacing: 2px;
+}
+
+.highlight {
+	font-weight: 600;
+}
+
+.menu_detail_info_con div {
+	width: 33.33%;
+}
+
+.menu_detail_option {
+	margin: auto 11px;
+    padding: 4px;
+    background-color: lightcoral;
+    border-radius: 7px;
+    color: white;
+}
+
+.menu_detail_option i {
+	cursor: pointer;
+}
+
+/* 서비스 메뉴 수정 모달 */
+.modify_menu_modal {
+	display: none;
+	position: fixed;
+	z-index: 11;
+	left: 0;
+	top: 0;
+	width: 100%; 
+	height: 100%; 
+	overflow: auto; 
+	background-color: rgb(0, 0, 0); 
+	background-color: rgba(0, 0, 0, 0.4);
+	cursor: pointer;
+}
+
+.modify_menu_modal_content {
+	left: 0;
+	width: 400px;
+	padding: 10px 15px;
+	height: 100%;
+	background-color: white;
+	cursor: auto;
+	position: fixed;
+}
+
+.modify_menu_modal_close {
+	text-align: right;
+	cursor: pointer;
+}
+
+.modify_menu_modal_close i {
+	font-size: 20pt;
+}
+
+.modify_menu_modal_form {
+	height: 88%;
+	margin: 0 10px;
+}
+
+.modify_menu_modal_title {
+	font-size: 20pt;
+    font-weight: 600;
+    border-top: 2px solid navy;
+    border-bottom: 2px solid navy;
+    padding: 5px;
+    margin: 5px 0;
+    text-align: left;
+    color: navy;
+}
+
+.toggle {
+	display: flex;
+    justify-content: space-between;
+}
+
+.font_large {
+	font-size: 16pt;
+}
+
+.invalid,
+.invalid:focus {
+	border: 2px solid red !important;
+}
+
+.modify_menu_modal_input_con {
+	text-align: left;
+    margin: 20px 0;
+}
+
+.modify_menu_modal_input_title {
+	font-size: 16pt;
+    color: navy;
+    margin-bottom: 15px;
+}
+
+.modify_menu_modal_input_title i {
+	font-size: 18pt;
+	cursor: pointer;
+}
+
+.modify_menu_modal_selector,
+.modify_menu_modal_input {
+	width: 100%;
+    height: 45px;
+    border-radius: 5px;
+    text-indent: 10px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    font-size: 13pt;
+    color: navy;
+    border: 1px solid navy;
+}
+
+.modify_menu_modal_input:disabled {
+	background-color: lightgrey;
+}
+
+.modify_menu_modal_btn_container {
+	display: flex;
+	float: right;
+}
+
+.modify_menu_modal_btn {
+    padding: 10px 20px;
+    border: none;
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-size: 13pt;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.modify_menu_modal_btn:hover {
+	transition: 0.5s;
+	background-color: navy;
+}
+
+.modify_menu_modal_btn:focus {
+	outline: none;
+}
+
+.remove {
+    background-color: lightcoral;
+    color: white;
+}
+
+.confirm {
+    background-color: #6495ED;
+    color: white;
+	
+}
 
 /* first property input */
 .first_item_prop {
@@ -643,15 +937,29 @@
 
 /* third~fifth property input */
 .third_item_prop {
-	width: 21%;
+	width: 28%;
 }
 
 .forth_item_prop {
-	width: 16%;
+	width: 18%;
+}
+ 
+.service_price_input_con {
+	display: flex;
+	justify-content: space-between;
 }
 
+.forth_item_prop i {
+	width: 20%;
+	margin: auto;
+	cursor: pointer;
+	font-size: 15pt;
+	text-align: right;
+}
+
+
 .fifth_item_prop {
-	width: 16%;
+	width: 8%;
 }
 
 .third_item_prop input, .forth_item_prop input, .fifth_item_prop input {
@@ -945,18 +1253,64 @@
 }
 
 
-/* 배달 가능 지역 */
+/* 배달 가능 지역 > 뷰 */
 .delivery_area_view_con {
-	
 }
 
+.delivery_view_metro_con {
+	background-color: mintcream;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.metroCity {
+	text-align: left;
+}
+
+.metroName {
+	display: inline-block;
+	font-size: 15pt;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: navy;
+    border-bottom: 3px solid navy;
+    padding-bottom: 10px;
+}
+
+.city {
+	margin: 0 0 0 20px;
+}
+
+.cityName {
+	padding: 15px;
+    font-size: 14pt;
+    color: navy;
+    font-weight: 600;
+}
+
+.town {
+	display: flex;
+    flex-wrap: wrap;
+	margin-top: 10px;
+	margin-left: 20px;
+}
+
+.townName {
+	margin-right: 10px;
+    text-align: center;
+    padding: 5px 10px;
+    border: 1px solid navy;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+/* 배달 가능 지역 > 입력 */
 .delivery_area_set_wrap {
 	
 }
 
 .delivery_area_set_con {
 	display: flex;
-	margin: 20px 0;
 }
 
 .area_selector_con {
@@ -975,6 +1329,7 @@
 .town_selector_con {
 	display: flex;
     flex-wrap: wrap;
+	margin-top: 20px;
 }
 
 .town_selector {
@@ -985,7 +1340,7 @@
     margin-bottom: 10px;
     width: 120px;
     text-align: center;
-    background-color: #e6f4fa;
+    background-color: khaki;
     letter-spacing: 3px;
     cursor: pointer;
 }
@@ -994,6 +1349,10 @@
 	transition: 0.5s;
 	background-color: #5c5ed3;
 	color: white;
+}
+
+.town_selector input {
+	margin-right: 10px;
 }
 
 /* Submit Button */

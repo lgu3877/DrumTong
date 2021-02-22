@@ -30,8 +30,11 @@ function openAddressSearch() {
 						
 			document.getElementById('main-address').value = fullRoadAddr;
 			document.getElementById('detail-address').value = "";
+			document.getElementById('town-code').value = data.bcode.substring(0,8);
 			document.getElementById('detail-address').focus();
 			
+			console.log(data.bcode.substring(0,8));
+
 			// preivew 지도 생성
 			createMap();
 		}
@@ -57,8 +60,15 @@ function createMap() {
 			console.log('좌표값 : ', coords);
 			console.log('좌표값1 : ', coords.La);
 			console.log('좌표값 : ', coords.Ma);
+			
 			// 좌표값 input value로 설정
-			document.getElementById("main-location").value = coords;
+			document.getElementById("latitude").value = coords.Ma;
+			
+			// 좌표값 수정
+			document.getElementById("longitude").value = coords.La;
+			
+			
+			
 			// 지도 설정값
 			const mapContainer = document.getElementById("preview-map");
 			const mapOption = {

@@ -2,13 +2,15 @@
 <!DOCTYPE mapper PUBLIC 	
 		"-//mybatis.org//DTD Mapper 3.0//EN" 
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 건욱 -->
+
 
 <!-- 	사업장 메뉴 테이블	 -->
 <mapper namespace="com.drumtong.business.dao.BMenuDAO">
 
 <!-- 메뉴 번호순으로 반환 -->
 	<select id="select" parameterType="String" resultType="BMenuVO" >
-		SELECT * FROM BMENU WHERE ESTID=#{estid} ORDER BY NAME ASC
+		SELECT * FROM BMENU WHERE ESTID=#{estid} ORDER BY MAINCATEGORY ASC, SUBCATEGORY ASC, NAME ASC
 	</select>
 	
 	
@@ -17,7 +19,7 @@
 		INSERT INTO BMENU
 			VALUES
 			(#{estid}, #{name},
-			 #{price}, #{quickprice}, #{ete},
+			 #{price}, #{quickprice, jdbcType=INTEGER}, #{ete, jdbcType=INTEGER},
 			 #{maincategory}, #{subcategory}
 			)
 	</insert>
@@ -26,21 +28,28 @@
 	<select id="selectMaincategories" parameterType="String" resultType="String">
 		SELECT DISTINCT(MAINCATEGORY) 
 			FROM BMENU
-		WHERE ESTID = #{value}
+		WHERE ESTID = #{value} ORDER BY MAINCATEGORY ASC
 	</select>
 	
 	
 <!-- 	메인 카테고리와 중분류 카테고리를 메인관리 (매장관리)에 Get방식으로 접근했을 때 데이터를 뿌려주는 용도로 사용되는 SQL문입니다 -->
-	<select id="selectSubcategories" parameterType="String" resultType="String">
+	<select id="selectSubcategories" parameterType="BMenuVO" resultType="String">
 		SELECT DISTINCT(SUBCATEGORY) 
 			FROM BMENU
 		WHERE 
 			ESTID = #{estid} 
 				AND
-			MAINCATEGORY = #{maincategory}
+			MAINCATEGORY = #{maincategory} ORDER BY SUBCATEGORY ASC
 	</select>
 	
-	
+	<select id="selectMenu" parameterType="BMenuVO" resultType="BMenuVO">
+		SELECT NAME,PRICE,QUICKPRICE,ETE  
+			FROM BMENU 
+				WHERE ESTID=#{estid} 
+				AND MAINCATEGORY = #{maincategory} 
+				AND SUBCATEGORY = #{subcategory} 
+					ORDER BY NAME ASC
+	</select>
 	
 	
 	
@@ -62,13 +71,20 @@
 
 	
 <!-- 	매장 메뉴를 비동기식으로 수정해주는 메서드입니다. -->
-	<update id="updateBMenu" parameterType="BMenuVO">
+	<update id="updateBMenu" parameterType="BMenuUpdateVO">
 		UPDATE BMENU 
 			SET
-				NUM = #{num}, NAME = #{name}, PRICE = #{price}, QUICKPRICE = #{quickprice},
+				NAME = #{name}, PRICE = #{price}, QUICKPRICE = #{quickprice},
 				ETE = #{ete}, MAINCATEGORY = #{maincategory}, SUBCATEGORY = #{subcategory}
-			WHERE ESTID = #{estid}
-				
+			WHERE 
+				ESTID = #{estid} 
+			AND
+				MAINCATEGORY = #{previousmaincategory}
+			AND 
+				SUBCATEGORY = #{previoussubcategory}
+			AND
+				NAME = #{previousname}
+			
 	</update>
 	
 
@@ -84,7 +100,7 @@
  			AND 
  				SUBCATEGORY = #{subcategory} 
  			AND 
- 				NAME= #{name};
+ 				NAME= #{name}
 	
 	</delete>
 	

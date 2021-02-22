@@ -3,6 +3,8 @@ package com.drumtong.customer.controller.laundry;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,19 +26,65 @@ public class RestCustomerLaundryController {
 	
 	@RequestMapping("customerDetail/rest/addBookmark/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String setBookmark(@RequestBody HashMap<String, String> param) {
-		return svc.setBookmark(param);
+	public String setBookmark(HttpServletRequest req, @RequestBody HashMap<String, String> param) {
+		return svc.setBookmark(req, param);
 	}
 	
 	@RequestMapping("customerDetail/rest/addCoupon/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String setCoupon(@RequestBody HashMap<String, String> param) {
-		return svc.setCoupon(param);
+	public String setCoupon(HttpServletRequest req, @RequestBody HashMap<String, String> param) {
+		return svc.setCoupon(req, param);
 	}
 	
-//	@RequestMapping("customerSearch/rest/clusterer/{address}/")
-//	@GetMapping(produces="application/json; charset=utf8")	
-//	public String clusterer(@PathVariable("address")String address){
-//		return svc.clusterer(address);
-//	}
+	// =======================================지도에 필요한 세탁소 리스트 가져오기===================================================
+	// 좌표를 이용해서 세탁소 리스트를 가져오는 경우[영경]
+	@RequestMapping(value = "customerSearch/rest/selectLaundry/coordinate/{left}/{right}/{top}/{bottom}/{filter1}/{filter2}/{filter3}/{filter4}/{filter5}/", produces =org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(produces="application/json; charset=utf8")	
+	public String selectLaundry(@PathVariable("left")String left, @PathVariable("right")String right, 
+								@PathVariable("top")String top, @PathVariable("bottom")String bottom,
+								@PathVariable("filter1")String filter1, @PathVariable("filter2")String filter2,
+								@PathVariable("filter3")String filter3, @PathVariable("filter4")String filter4, @PathVariable("filter5")String filter5){
+		return svc.selectLaundry(left, right, top, bottom, filter1, filter2, filter3, filter4, filter5);
+	}
+	
+	// emd 코드를 이용해서 세탁소 리스트를 가져오는 경우[영경]
+	@RequestMapping(value = "customerSearch/rest/selectLaundry/emdcode/{emdcode}/{filter1}/{filter2}/{filter3}/{filter4}/{filter5}/", produces =org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(produces="application/json; charset=utf8")	
+	public String selectLaundry(@PathVariable("emdcode")String emdcode,
+							@PathVariable("filter1")String filter1, @PathVariable("filter2")String filter2,
+							@PathVariable("filter3")String filter3, @PathVariable("filter4")String filter4, @PathVariable("filter5")String filter5){
+		return svc.selectLaundry(emdcode, filter1, filter2, filter3, filter4, filter5);
+	}
+	// ====================================================================================================================
+	
+	// 승원씨가 작업한 sido를 가져오는 REST함수입니다
+	@RequestMapping(value = "customerMap/rest/sido/", produces =org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PostMapping(produces="application/json; charset=utf8")
+	public String getsido() {
+		return svc.getsido();
+	}
+
+	// 승원씨가 작업한 sido를 가져오는 REST함수입니다
+	@RequestMapping(value = "customerMap/rest/sigungu/{sidoname}", produces =org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PostMapping(produces="application/json; charset=utf8")
+	public String getsigungu(@PathVariable String sidoname) {
+		return svc.getsigungu(sidoname);
+	}
+	
+	
+	// 읍면동 Select REST [건욱]
+	@RequestMapping(value = "customerMap/rest/emd/", produces =org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PostMapping(produces="application/json; charset=utf8")
+	public String getEmd() {
+		return svc.getEmd();
+	}
+	
+	// 매장 좌표 Select REST [건욱]
+	@RequestMapping(value = "customerMap/rest/selectBInformationCoord/", produces =org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PostMapping(produces="application/json; charset=utf8")
+	public String selectBInformationCoord() {
+		return svc.selectBInformationCoord();
+	}
+		
+	
 }

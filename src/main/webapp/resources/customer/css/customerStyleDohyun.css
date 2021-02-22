@@ -50,7 +50,6 @@
    
    4. 추후에 마치고 완료가 됐다고 생각하면 팀원들에게 확인을 하고 GitHub에는 최종적으로 확인이 다 된 것만 올린다.
 */
-
 @charset "utf-8";
 
 /* * { */
@@ -59,7 +58,6 @@
 /*    font-size: 16px; */
 /*    box-sizing: border-box; */
 /* } */
-
 
 /* body, header, nav, ul, li, section, article, div, footer { */
 
@@ -82,96 +80,267 @@
 /*    margin: auto; */
 /*    height: auto; */
 
-/*       최대크기 */ 
+/*       최대크기 */
 /*    max-width: 1900px; */
 /*    max-height: 3000px; */
 
-/*       최소크기 */ 
+/*       최소크기 */
 /*    min-width : 100%; */
 /*    min-height: 100%; */
 /* } */
-
 @media screen and (max-width : 600px) {
-   body {
-   
-   margin: auto;
-   height: auto;
-
-   /*    최대크기 */
-   max-width: 1000px;
-   max-height: 1500px;
-   
-   }
+	body {
+		margin: auto;
+		height: auto;
+		/*    최대크기 */
+		max-width: 1000px;
+		max-height: 1500px;
+	}
 }
 
 /* ====================섹션 CSS================================ */
-@media (min-width:1400px) {
+@media ( min-width :1400px) {
 	body section {
-	   max-width: 1900px;
-	   min-width: 1400px;
-	   height: auto;
- 	  /*    height: 2000px; */
-  	 /* padding: 10px; */
-  	 /* margin-top: 70px; */
+		max-width: 1900px;
+		min-width: 1400px;
+		height: auto;
+		/*    height: 2000px; */
+		/* padding: 10px; */
+		/* margin-top: 70px; */
+	}
+	body .section_search .filter {
+		max-width: 1900px;
+		min-width: 1400px;
+		height: 70px;
+		display: inline-flex;
+		border-bottom: 1px solid #EAEAEA;
+		position: relative;
+	}
+	body .section_search .filter .filter_op {
+		height: 37px;
+		margin-top: 15px;
+		margin-left: 30px;
+		text-align: center;
+		padding: 0px 15px;
+		border: 1px solid #EAEAEA;
+	}
+	body .section_search .filter .filter_op1 {
+		margin-left: 150px;
+	}
+	body .section_search .filter .filter_reset {
+		margin-left: 200px;
+	}
+	body .section_search .laundryList_main {
+		max-width: 1900px;
+		min-width: 1400px;
+		height: 797px;
+		display: flex;
+	}
+	body .section_search .laundryList_main .laundryList_list {
+		width: 50%;
+		height: 797px;
+		float: left;
+		/* border: 1px solid red; */
+	}
+	
+	body .section_search .laundryList_main .laundryList_list .laundryList_sum {
+		width: 100%;
+		height: 70px;
+		padding: 10px 30px;
+		/* display: inline-flex; */
+		/* border-bottom: 1px solid #EAEAEA; */
+	}
+	
+	body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs
+	{
+		width: 320px;
+		height: 300px;
+		margin-left: 10px;
+		margin-top: 10px;
+		display: inline-flex;
+		/* border: 1px solid #EAEAEA; */
+		/* flex-wrap: wrap; */
+	}
+	
+	body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs .childs_info_1 img
+	{
+		width: 320px;
+		height: 200px;
+		margin: 0px;
+	}
+}
+
+/* ====================섹션 CSS================================ */
+@media ( max-width :1400px) {
+	body section {
+		max-width: 1400px;
+		min-width: 1200px;
+		height: auto;
+		/*    height: 2000px; */
+		/* padding: 10px; */
+		/* margin-top: 70px; */
+	}
+	body .section_search .filter {
+		max-width: 1400px;
+		min-width: 1200px;
+		height: 70px;
+		display: inline-flex;
+		border-bottom: 1px solid #EAEAEA;
+	}
+	body .section_search .filter .filter_op {
+		height: 37px;
+		margin-top: 15px;
+		margin-left: 30px;
+		text-align: center;
+		padding: 0px 15px;
+		border: 1px solid #EAEAEA;
+	}
+	body .section_search .filter .filter_reset {
+		margin-left: 150px;
+	}
+	body .section_search .filter .filter_op1 {
+		margin-left: 200px;
+	}
+	body .section_search .laundryList_main {
+		max-width: 1400px;
+		min-width: 1200px;
+		height: 797px;
+		display: flex;
+	}
+	body .section_search .laundryList_main .laundryList_list {
+		width: 50%;
+		height: 797px;
+		float: left;
+		/* border: 1px solid red; */
+	}
+	body .section_search .laundryList_main .laundryList_list .laundryList_sum {
+		width: 100%;
+		height: 70px;
+		padding: 10px 30px;
+		/* display: inline-flex; */
+		/* border-bottom: 1px solid #EAEAEA; */
+	}
+	
+	body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs
+	{
+		width: 260px;
+		height: 260px;
+		margin-left: 10px;
+		margin-top: 10px;
+		display: inline-flex;
+		/* border: 1px solid #EAEAEA; */
+		/* flex-wrap: wrap; */
+	}
+		body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs .childs_info_1 img
+	{
+		width: 260px;
+		height: 200px;
+		margin: 0px;
 	}
 }
 /* ====================섹션 CSS================================ */
-@media (max-width:1400px) {
+@media ( max-width :1200px) {
 	body section {
-	   max-width: 1400px;
-	   min-width: 1200px;
-	   height: auto;
- 	  /*    height: 2000px; */
-  	 /* padding: 10px; */
-  	 /* margin-top: 70px; */
+		max-width: 1200px;
+		min-width: 1000px;
+		height: auto;
+		/*    height: 2000px; */
+		/* padding: 10px; */
+		/* margin-top: 70px; */
 	}
-}
-/* ====================섹션 CSS================================ */
-@media (max-width:1200px) {
-	body section {
-	   max-width: 1200px;
-	   min-width: 1000px;
-	   height: auto;
- 	  /*    height: 2000px; */
-  	 /* padding: 10px; */
-  	 /* margin-top: 70px; */
+		body .section_search .filter {
+		max-width: 1200px;
+		min-width: 1000px;
+		height: 70px;
+		display: inline-flex;
+		border-bottom: 1px solid #EAEAEA;
+	}
+	body .section_search .filter .filter_op {
+		height: 37px;
+		margin-top: 15px;
+		margin-left: 30px;
+		text-align: center;
+		padding: 0px 15px;
+		border: 1px solid #EAEAEA;
+	}
+	body .section_search .filter .filter_reset {
+		margin-left: 50px;
+	}
+	body .section_search .filter .filter_op1 {
+		margin-left: 100px;
+	}
+	body .section_search .laundryList_main {
+		max-width: 1200px;
+		min-width: 1000px;
+		height: 600px;
+		display: flex;
+	}
+	body .section_search .laundryList_main .laundryList_list {
+		width: 50%;
+		height: 600px;
+		float: left;
+		/* border: 1px solid red; */
+	}
+	body .section_search .laundryList_main .laundryList_list .laundryList_sum {
+		width: 100%;
+		height: 70px;
+		padding: 10px 30px;
+		/* display: inline-flex; */
+		/* border-bottom: 1px solid #EAEAEA; */
+	}
+	
+	body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs
+	{
+		width: 150px;
+		height: 150px;
+		margin-left: 10px;
+		margin-top: 10px;
+		display: inline-flex;
+		/* border: 1px solid #EAEAEA; */
+		/* flex-wrap: wrap; */
+	}
+		body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs .childs_info_1 img
+	{
+		width: 150px;
+		height: 120px;
+		margin: 0px;
 	}
 }
 
 body section .fa-search-plus {
-   color: #0091e4;
+	color: #0091e4;
 }
 
 /* ====================메인 검색(search) CSS========================= */
 body .section_main .search {
-   width: auto;
-   height: 400px;
-   display: flex;
-   flex-direction: row;
-   box-sizing: border-box;
-   /* background-color: antiquewhite; */
-   background-color: #FFFFFF;
-   padding-top: 150px;
-
+	width: auto;
+	height: 400px;
+	display: flex;
+	flex-direction: row;
+	box-sizing: border-box;
+	/* background-color: antiquewhite; */
+	background-color: #FFFFFF;
+	padding-top: 150px;
 }
 
 body .section_main .search .searchs {
-   width: auto;
-   margin: 0 auto;
+	width: auto;
+	margin: 0 auto;
 }
 
 body .section_main .search .searchs .searchs_p {
-   width: auto;
-   text-align: center;
-   font-size: 35px;
-   margin: 10px;
-}
-body .section_main .search .searchs .searchs_p  b{
-   color: #1564F9;
-   font-size : 35px;
+	width: auto;
+	text-align: center;
+	font-size: 35px;
+	margin: 10px;
 }
 
-@media (min-width:1200px) {
+body .section_main .search .searchs .searchs_p  b {
+	color: #1564F9;
+	font-size: 35px;
+}
+
+@media ( min-width :1200px) {
 	body .section_main .search .searchBox {
 		text-align: center;
 		width: 1000px;
@@ -183,7 +352,8 @@ body .section_main .search .searchs .searchs_p  b{
 		margin-top: 20px;
 	}
 }
-@media (max-width:1200px) {
+
+@media ( max-width :1200px) {
 	body .section_main .search .searchBox {
 		text-align: center;
 		width: 800px;
@@ -197,7 +367,7 @@ body .section_main .search .searchs .searchs_p  b{
 }
 
 body .section_main .search .searchBox .fa-search-plus {
-   font-size: 20px;
+	font-size: 20px;
 }
 
 @media ( min-width :1200px) {
@@ -214,6 +384,7 @@ body .section_main .search .searchBox .fa-search-plus {
 		/* text-align: center; */
 	}
 }
+
 @media ( max-width :1200px) {
 	body .section_main .search .searchBox .searchLine {
 		width: 650px;
@@ -228,153 +399,153 @@ body .section_main .search .searchBox .fa-search-plus {
 		/* text-align: center; */
 	}
 }
+
 body .section_main .search .searchBox .search_button {
-   width: 100px;
-   height: 41px;
-   border: 1px solid #EAEAEA;
-   background-color: #0091e4;
-   color: white;
-   outline: 0;
-   font-weight: bolder;
-   
+	width: 100px;
+	height: 41px;
+	border: 1px solid #EAEAEA;
+	background-color: #0091e4;
+	color: white;
+	outline: 0;
+	font-weight: bolder;
 }
 
 body .section_main .search .searchBox .search_button:active {
-   background-color: #373737;
+	background-color: #373737;
 }
 
 body .section_main .search .searchs .filter {
-   width: auto;
-   height: 100px;
-   padding: 10px 50px;
-   margin-top: 150px;
-   border: 1px solid black;
+	width: auto;
+	height: 100px;
+	padding: 10px 50px;
+	margin-top: 150px;
+	border: 1px solid black;
 }
 
 /* ====================공지사항(notice) CSS========================== */
 body .section_main .notice {
-   box-sizing: border-box;
-   width: auto;
-   height: 350px;
-   /* background-color: aliceblue; */
-   background-color: #FFFFFF;
-   text-align: center;
-
+	box-sizing: border-box;
+	width: auto;
+	height: 350px;
+	/* background-color: aliceblue; */
+	background-color: #FFFFFF;
+	text-align: center;
 }
 
 body .section_main .notice .notice_name {
-   width: auto;
-   font-size: 27px;
-   margin: 0;
-   padding-top: 20px;
-   font-weight: bolder;
+	width: auto;
+	font-size: 27px;
+	margin: 0;
+	padding-top: 20px;
+	font-weight: bolder;
 }
 
 body .section_main .notice .notices {
-   /* border: 1px solid black; */
-   width: 1144px;
-   height: 340px;
-   margin-top: 10px;
-   margin-left: auto;
-   margin-right: auto;
-}
-body .section_main .notice .notices .notices_0 a {
-   text-decoration: none;
-   color: black;
+	/* border: 1px solid black; */
+	width: 1144px;
+	height: 340px;
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 body .section_main .notice .notices .notices_0 a {
-   text-decoration: none;
+	text-decoration: none;
+	color: black;
+}
+
+body .section_main .notice .notices .notices_0 a {
+	text-decoration: none;
 }
 
 body .section_main .notice .notices .notices_0 {
-   text-align: center;
-   margin-top: 30px;
-   margin-left: auto;
-   margin-right: auto;
-   border: 1px solid #EAEAEA;
+	text-align: center;
+	margin-top: 30px;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid #EAEAEA;
 }
 
 body .section_main .notice .notices .notices_1 {
-   float: left;
-   width: 50%;
-   height: 250px;
-   padding: 10px;
-
+	float: left;
+	width: 50%;
+	height: 250px;
+	padding: 10px;
 }
 
 body .section_main .notice .notices .notices_2 {
-   float: left;
-   width: 50%;
-   height: 250px;
-   padding: 10px;
+	float: left;
+	width: 50%;
+	height: 250px;
+	padding: 10px;
 }
 
 body .section_main .notice .notices .notices_1 a .notices_1_1 {
-   font-size: 18px;
-   font-weight: bolder;
-   color : #000000;
+	font-size: 18px;
+	font-weight: bolder;
+	color: #000000;
 }
 
 body .section_main .notice .notices .notices_2 a .notices_1_2 {
-   font-size: 18px;
-   font-weight: bolder;
-   color : #000000;
+	font-size: 18px;
+	font-weight: bolder;
+	color: #000000;
 }
 
-
 body .section_main .notice .notices .notices_0 .notice_hr {
-   /* border: 1px solid #EAEAEA; */
-   /* height: 1px; */
-   border: 0;
-   height: 1px;
-   background: #EAEAEA;
+	/* border: 1px solid #EAEAEA; */
+	/* height: 1px; */
+	border: 0;
+	height: 1px;
+	background: #EAEAEA;
 }
 
 body .section_main .notice .notices .notice_ul {
-   padding: 10px;
-   margin: 10px;
+	padding: 10px;
+	margin: 10px;
 }
 
 /* body .section_main .notice .notices .notice_ul .notice_li { */
 /*    margin: 10px; */
 /*    list-style: none; */
 /* } */
-
 body .section_main .notice .notices .notice_ul .notice_area {
-   width : 100%;
-   height: 30px;
-/*    background-color: red;    */
-   float: left;
+	width: 100%;
+	height: 30px;
+	/*    background-color: red;    */
+	float: left;
 }
 
-body .section_main .notice .notices .notice_ul .notice_area .notice_new {
-   width : 7%;
-   height : 100%;
-   float: left;
-   color : red;
-   font-size: 9px;
+body .section_main .notice .notices .notice_ul .notice_area .notice_new
+	{
+	width: 7%;
+	height: 100%;
+	float: left;
+	color: red;
+	font-size: 9px;
 }
 
-body .section_main .notice .notices .notice_ul .notice_area .notice_area_title {
-   width : 81%;
-   height : 100%;
-   float: left;
-   font-weight: bolder;
+body .section_main .notice .notices .notice_ul .notice_area .notice_area_title
+	{
+	width: 81%;
+	height: 100%;
+	float: left;
+	font-weight: bolder;
 }
-body .section_main .notice .notices .notice_ul .notice_area .notice_area_registdate {
-   width : 15%;
-   height : 100%;
-   float: left;
-   font-size: 12px;
-   color : #747474;
+
+body .section_main .notice .notices .notice_ul .notice_area .notice_area_registdate
+	{
+	width: 15%;
+	height: 100%;
+	float: left;
+	font-size: 12px;
+	color: #747474;
 }
 
 body .section_main .notice .notices .notice_ul .notice_li a {
-   text-decoration: none;
-   color: #373737;
+	text-decoration: none;
+	color: #373737;
 }
-
 
 @media ( min-width :1400px) {
 	/* ====================세탁소(laundryList) 미리보기 CSS========================== */
@@ -386,7 +557,6 @@ body .section_main .notice .notices .notice_ul .notice_li a {
 		background-color: #FFFFFF;
 		text-align: center;
 	}
-
 	body .section_main .laundryList .laundryLists {
 		/*    @주석처리해라 */
 		/*    border: 1px solid black; */
@@ -400,80 +570,90 @@ body .section_main .notice .notices .notice_ul .notice_li a {
 		display: flex;
 	}
 }
-	
-	body .section_main .laundryList .laundry_p {
-		width: 100%;
-		font-size: 25px;
-		margin: 0;
-		padding-top: 20px;
-	}
-	body .section_main .laundryList .laundry_p1 {
-		font-size: 17pt;
-		font-weight: bolder;
-	}
-	body .section_main .laundryList .laundry_p2 {
-		font-size: 11pt;
-	}
-	body .section_main .laundryList .laundryLists a {
-		text-decoration: none;
-		color: black;
-		width: 100%;
-		height: 550px;
-	}
-	body .section_main .laundryList .laundryLists .laundryLists_1 {
-		border: 1px solid #EAEAEA;
-		width: 33%;
-		height: 550px;
-		margin-left: 10px;
-		/* padding-top: 5px; */
-		/* text-align: center; */
-	}
-	body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_1
-		{
-		/* background-color: blueviolet; */
-		width: 100%;
-		height: 400px;
-		margin: 0px;
-	}
-	body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_1 img
-		{
-		width: 100%;
-		height: 400px;
-		margin: 0px;
-		/* margin-top: 5px; */
-	}
-	body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_2
-		{
-		/* background-color: bisque; */
-		width: 100%;
-		height: auto;
-		padding: 10px 15px;
-		margin: 0;
-	}
-	body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_2 p
-		{
-		width: auto;
-		height: auto;
-		text-align: left;
-		font-size: 16px;
-		margin: 0px;
-		margin-bottom: 5px;
-	}
-	body .section_main .laundryList .laundryLists .btn {
-		width: 37px;
-		height: 50px;
-		margin: 70px 27px;
-		font-size: 25px;
-		text-align: center;
-		border-radius: 30px;
-		background-color: #FFFFFF;
-		border: 1px solid #EAEAEA;
-		outline: 0;
-	}
-	body .section_main .laundryList .laundryLists .btn:active {
-		background-color: #EAEAEA;
-	}
-	
+
+body .section_main .laundryList .laundry_p {
+	width: 100%;
+	font-size: 25px;
+	margin: 0;
+	padding-top: 20px;
+}
+
+body .section_main .laundryList .laundry_p1 {
+	font-size: 17pt;
+	font-weight: bolder;
+}
+
+body .section_main .laundryList .laundry_p2 {
+	font-size: 11pt;
+}
+
+body .section_main .laundryList .laundryLists a {
+	text-decoration: none;
+	color: black;
+	width: 100%;
+	height: 550px;
+}
+
+body .section_main .laundryList .laundryLists .laundryLists_1 {
+	border: 1px solid #EAEAEA;
+	width: 33%;
+	height: 550px;
+	margin-left: 10px;
+	/* padding-top: 5px; */
+	/* text-align: center; */
+}
+
+body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_1
+	{
+	/* background-color: blueviolet; */
+	width: 100%;
+	height: 400px;
+	margin: 0px;
+}
+
+body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_1 img
+	{
+	width: 100%;
+	height: 400px;
+	margin: 0px;
+	/* margin-top: 5px; */
+}
+
+body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_2
+	{
+	/* background-color: bisque; */
+	width: 100%;
+	height: auto;
+	padding: 10px 15px;
+	margin: 0;
+}
+
+body .section_main .laundryList .laundryLists .laundryLists_1 .laundryLists_1_2 p
+	{
+	width: auto;
+	height: auto;
+	text-align: left;
+	font-size: 16px;
+	margin: 0px;
+	margin-bottom: 5px;
+}
+
+body .section_main .laundryList .laundryLists .btn {
+	width: 37px;
+	height: 50px;
+	margin: 70px 27px;
+	font-size: 25px;
+	text-align: center;
+	border-radius: 30px;
+	background-color: #FFFFFF;
+	border: 1px solid #EAEAEA;
+	outline: 0;
+}
+
+body .section_main .laundryList .laundryLists .btn:active {
+	background-color: #EAEAEA;
+}
+
 @media ( max-width :1400px) {
 	/* ====================세탁소(laundryList) 미리보기 CSS========================== */
 	body .section_main .laundryList {
@@ -498,6 +678,7 @@ body .section_main .notice .notices .notice_ul .notice_li a {
 		display: flex;
 	}
 }
+
 @media ( max-width :1200px) {
 	/* ====================세탁소(laundryList) 미리보기 CSS========================== */
 	body .section_main .laundryList {
@@ -524,754 +705,466 @@ body .section_main .notice .notices .notice_ul .notice_li a {
 }
 
 /* ====================회원정보 수정(joinchange) 미리보기 CSS========================== */
-
-@media (min-width:1400px) {
+@media ( min-width :1400px) {
 	body .section_Joinchange {
-  		padding-top: 70px;
-   		max-width: 1900px;
-   		min-width: 1400px;
-   		height: 1400px;
-	}
-}
-@media (max-width:1400px) {
-	body .section_Joinchange {
-  		padding-top: 70px;
-   		max-width: 1400px;
-   		min-width: 1200px;
-   		height: 1400px;
-	}
-}
-@media (max-width:1200px) {
-	body .section_Joinchange {
-  		padding-top: 70px;
-   		max-width: 1200px;
-   		min-width: 1100px;
-   		height: 1400px;
+		padding-top: 70px;
+		max-width: 1900px;
+		min-width: 1400px;
+		height: 1400px;
 	}
 }
 
+@media ( max-width :1400px) {
+	body .section_Joinchange {
+		padding-top: 70px;
+		max-width: 1400px;
+		min-width: 1200px;
+		height: 1400px;
+	}
+}
+
+@media ( max-width :1200px) {
+	body .section_Joinchange {
+		padding-top: 70px;
+		max-width: 1200px;
+		min-width: 1100px;
+		height: 1400px;
+	}
+}
 
 body .section_Joinchange .join_mainName {
-   text-align: center;
-   margin-left: auto;
-   margin-right: auto;
-   font-size: 30px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 30px;
 }
 
 body .section_Joinchange .join_change {
-   width: 800px;
-   height: 1050px;
-   padding: 30px;
-   border: 1px solid #EAEAEA;
-   box-shadow: 5px 5px 5px 5px #EAEAEA;
-   margin-left: auto;
-   margin-right: auto;
-   /* padding-top: 200px; */
-   /* margin-top: 200px; */
+	width: 800px;
+	height: 1200px;
+	padding: 30px;
+	border: 1px solid #EAEAEA;
+	box-shadow: 5px 5px 5px 5px #EAEAEA;
+	margin-left: auto;
+	margin-right: auto;
+	/* padding-top: 200px; */
+	/* margin-top: 200px; */
 }
 
 body .section_Joinchange .join_change .join_fo1 {
-   width: 700px;
-   /* border: 1px solid #EAEAEA; */
-   display: inline-flex;
+	width: 700px;
+	/* border: 1px solid #EAEAEA; */
+	display: inline-flex;
 }
 
 .join_fo1_1 {
-   width: 200px;
-   height: 150px;
-   border: 1px solid #EAEAEA;
-   box-shadow: 2px 2px 2px 2px #EAEAEA;
+	width: 200px;
+	height: 150px;
+	border: 1px solid #EAEAEA;
+	box-shadow: 2px 2px 2px 2px #EAEAEA;
 }
 
 .join_fo1_2 {
-   width: 500px;
-   margin-left: 10px;
-   /* margin-top: 30px; */
-   float: right;
-   border: 0;
-   outline: 0;
+	width: 500px;
+	margin-left: 10px;
+	/* margin-top: 30px; */
+	float: right;
+	border: 0;
+	outline: 0;
 }
+
 .join_fo1_2_file {
-   width: 500px;
-   float: right;
-   /* border: 0;
+	width: 500px;
+	float: right;
+	/* border: 0;
    outline: 0; */
 }
 
 .join_fo1_2_sub {
-   width: 500px;
-   float: left;
-   margin-top: 10px;
-   /* border: 0;
+	width: 500px;
+	float: left;
+	margin-top: 10px;
+	/* border: 0;
    outline: 0; */
 }
 
 body .section_Joinchange .join_change .join_button {
-   float: right;
-   width: 60px;
-   height: 40px;
-   outline: 0;
-   border-radius: 20px;
-   border-color: #EAEAEA;
-   border-style: dotted;
-   /* border: 0; */
-
+	float: right;
+	width: 60px;
+	height: 40px;
+	outline: 0;
+	border-radius: 20px;
+	border-color: #EAEAEA;
+	border-style: dotted;
+	/* border: 0; */
 }
 
 body .section_Joinchange .join_change .join_button:active {
-   border: 1px solid #35aefd;
-
+	border: 1px solid #35aefd;
 }
 
 body .section_Joinchange .join_change form .join_name {
-   margin-top: 20px;
-   margin-bottom: 5px;
-   font-weight: bold;
+	margin-top: 20px;
+	margin-bottom: 5px;
+	font-weight: bold;
 }
 
 body .section_Joinchange .join_change form .join_name .join_id_p {
-   display: inline-block;
+	display: inline-block;
 }
 
 body .section_Joinchange .join_change .join_inputbox {
-   width: 500px;
-   height: 40px;
-   outline-color: #35aefd;
-   border: 0;
-   /* margin-bottom: 15px; */
-   /* text-align: center; */
+	width: 500px;
+	height: 40px;
+	outline-color: #35aefd;
+	border: 0;
+	/* margin-bottom: 15px; */
+	/* text-align: center; */
 }
 
 body .section_Joinchange .join_change .join_pnum {
-   width: 500px;
-   display: inline-block;
+	width: 500px;
+	display: inline-block;
 }
 
 body .section_Joinchange .join_change .join_pum_ok {
-   width: 85px;
-   height: 40px;
-   float: right;
-   border: 0;
-   outline-color: #35aefd;
-   /* margin-right: 30px; */
+	width: 85px;
+	height: 40px;
+	float: right;
+	border: 0;
+	outline-color: #35aefd;
+	/* margin-right: 30px; */
 }
 
 body .section_Joinchange .join_change .join_joso {
-   width: 500px;
-   display: inline-block;
+	width: 500px;
+	display: inline-block;
 }
 
 body .section_Joinchange .join_change .join_joso_ok {
-   width: 85px;
-   height: 35px;
-   border: 0;
-   float: right;
-   outline-color: #35aefd;
-   /* margin-right: 30px; */
+	width: 85px;
+	height: 35px;
+	border: 0;
+	float: right;
+	outline-color: #35aefd;
+	/* margin-right: 30px; */
 }
 
 body .section_Joinchange .join_change .join_cmp .join_complete:active {
-   background-color: #35aefd;
-}
-
-/* ====================검색 상세페이지 (search) CSS========================= */
-
-body .section_search {
-   padding-top: 70px;
-   height: 940px;
-}
-
-body .section_search .filter {
-   width: 1900px;
-   height: 70px;
-   display: inline-flex;
-   border-bottom: 1px solid #EAEAEA;
-}
-
-body .section_search .filter .searchBox {
-   border-right: 1px solid #EAEAEA;
-   width: 280px;
-   height: 70px;
-   text-align: center;
-   display: flex;
-   margin: 0px;
-   margin-top: 2px;
-   padding-left: 25px;
-
-}
-
-body .section_search .filter .searchBox .search_icon {
-   margin-top: 25px;
-}
-
-body .section_search .filter .searchBox .searchLine {
-   height: 66px;
-   border: 0;
-   outline: none;
-   padding: 10px;
-}
-
-body .section_search .filter .searchBox .search_button {
-   width: 60px;
-   height: 35px;
-   margin-top: 15px;
-   margin-right: 5px;
-   border: 1px solid #EAEAEA;
-   background-color: #0091e4;
-   color: white;
-   outline: 0;
-   font-weight: bolder;
-}
-
-body .section_search .filter .searchBox .search_button:active {
-   background-color: #35aefd;
-}
-
-body .section_search .filter .filter_op {
-   height: 37px;
-   margin-top: 15px;
-   margin-left: 30px;
-   text-align: center;
-   padding: 0px 15px;
-   border: 1px solid #EAEAEA;
-}
-
-body .section_search .filter .filter_op1 {
-   margin-left: 350px;
-}
-
-body .section_search .filter .filter_reset {
-   width: 800px;
-   height: auto;
-   /* border: 1px solid black; */
-   /* display: flex; */
-}
-
-body .section_search .filter .filter_reset .filter_resets {
-   border-left: 1px solid #EAEAEA;
-   width: 180px;
-   height: 68px;
-   float: right;
-}
-
-body .section_search .filter .filter_reset button {
-   width: 150px;
-   height: 50px;
-   margin: 10px 13px;
-   outline: 0;
-   float: right;
-   border: 1px solid #EAEAEA;
-   background-color: #0091e4;
-   color: white;
-   font-weight: bolder;
-}
-
-body .section_search .filter .filter_reset button:active {
-   background-color: #35aefd;
-}
-
-body .section_search .laundryList_main {
-   width: 1900px;
-   height: 797px;
-   /* border-bottom: 1px solid red; */
-   /* display: inline-flex; */
-}
-
-body .section_search .laundryList_main .laundryList_list {
-   width: 1100px;
-   height: 797px;
-   float: left;
-   /* border: 1px solid red; */
-}
-
-body .section_search .laundryList_main .laundryList_map {
-   width: 800px;
-   height: 797px;
-   border: 1px solid blue;
-   float: left;
-}
-
-body .section_search .laundryList_main .laundryList_list .laundryList_sum {
-   width: 1100px;
-   height: 70px;
-   padding: 10px 30px;
-   /* display: inline-flex; */
-   /* border-bottom: 1px solid #EAEAEA; */
-}
-
-body .section_search .laundryList_main .laundryList_list .laundryList_sum .sum_hr {
-   border: 0;
-   height: 1px;
-   background: #EAEAEA;
-}
-
-body .section_search .laundryList_main .laundryList_list .laundryList_child {
-   width: auto;
-   height: auto;
-   padding: 0px 5px 0px 15px;
-   /* border: 1px solid violet; */
-   /* overflow-y: scroll; */
-
-}
-
-body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list {
-   height: 695px;
-   padding: 0px;
-   overflow-y: scroll;
-   /* display: inline-block; */
+	background-color: #35aefd;
 }
 
 
-.premium_nameBox {
-   width: auto;
-   height: 30px;
-   margin-left: 20px;
-   margin-right: 10px;
-}
-
-.premium_nameBox .premium_name {
-   display: inline-block;
-   margin: 0;
-   /* border-bottom: 1px solid #EAEAEA; */
-}
-
-.premium_nameBox .premium_more {
-   width: auto;
-   height: auto;
-   float: right;
-   cursor: pointer;
-   outline: 0;
-   display: none;
-   /* border-bottom: 1px solid #EAEAEA; */
-   /* font-weight: bolder; */
-   /* color: white; */
-   /* border: 1px solid #EAEAEA;
-   background-color: #0091e4; */
-}
-
-.premium_hr {
-   border: 0;
-   height: 1px;
-   margin-left: 20px;
-   margin-right: 10px;
-   background: #EAEAEA;
-}
-
-.laundryList_premium {
-   width: auto;
-   height: auto;
-   /* border: 1px solid red; */
-}
-
-.premium_list {
-   width: auto;
-   height: auto;
-   /* border: 1px solid blue; */
-   padding: 0;
-}
-
-.premium_childs {
-   width: 320px;
-   height: 300px;
-   display: inline-flex;
-   /* border: 1px solid #EAEAEA; */
-}
-.premium_childs .premium_childs_info_1{
-   position: relative;
-}
-.premium_list .premium_childs a {
-   width: auto;
-   height: auto;
-   text-decoration: none;
-   color: black;
-}
-.premium_childs .premium_childs_info_1 img {
-   /* position: absolute; */
-   /* z-index: 0; */
-   width: 320px;
-   height: 200px;
-   margin: 0px;
-   /* top: 0; */
-   /* background: url(/laundry/src/main/webapp/resources/customer/img/펭수버럭.jpg);
-   background-size: 320px 200px; */
-   /* display: inline-flex; */
-}
-
-.fa-start {
-   position: absolute;
-   z-index: 1;
-   width: auto;
-   height: 30px;
-   list-style: none;
-   margin: 0px;
-   padding: 0px;
-   margin-left: 293px;
-   float: right;
-   cursor: pointer; 
-   color: white;
-   display: inline-flex;
-   font-size: x-large;
-/*    -webkit-text-stroke: none; */
-   /* background-color: orange; */
-   /* top: 0; */
-   /* margin-top: 5px; */
-}
-
-/* .fa-start:active {
-   color: yellow;
-} */
-
-.premium_childs_info_1_1 {
-   width: auto;
-   height: auto;
-   padding: 10px 15px;
-   margin: 0;
-   /* border: 1px solid red; */
-}
-
-.premium_childs_info_1_1 p {
-   width: auto;
-   height: auto;
-   text-align: left;
-   font-size: 16px;
-   margin: 0px;
-   margin-bottom: 5px;
-}
-
-
-body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs {
-   width: 320px;
-   height: 300px;
-   margin-left: 10px;
-   margin-top: 10px;
-   display: inline-flex;
-   /* border: 1px solid #EAEAEA; */
-   /* flex-wrap: wrap; */
-}
-
-body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs a {
-   width: auto;
-   height: auto;
-   text-decoration: none;
-   color: black;
-}
-
-body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs .childs_info_1 {
-   position: relative;
-}
-
-body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs .childs_info_1 img {
-   width: 320px;
-   height: 200px;
-   margin: 0px;
-}
-
-body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs .childs_info_1_1 {
-   width: auto;
-   height: auto;
-   padding: 10px 15px;
-   margin: 0;
-}
-
-body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs .childs_info_1_1 p {
-   width: auto;
-   height: auto;
-   text-align: left;
-   font-size: 16px;
-   margin: 0px;
-   margin-bottom: 5px;
-}
 
 /* ====================결제 수단 및 쿠폰 마일리지 관리 (PayAndCopon) CSS========================= */
-
-@media (min-width:1400px) {
+@media ( min-width :1400px) {
 	body .section_pac {
-   		padding-top: 70px;
-   		max-width: 1900px;
-   		min-width: 1400px;
-   		height: 1100px;
+		padding-top: 70px;
+		max-width: 1900px;
+		min-width: 1400px;
+		height: 1100px;
 	}
 	body .section_pac .pac_mainName {
 		max-width: 1900px;
-   		min-width: 1400px;
+		min-width: 1400px;
 	}
 }
-@media (max-width:1400px) {
+
+@media ( max-width :1400px) {
 	body .section_pac {
-   		padding-top: 70px;
-   		max-width: 1400px;
-   		min-width: 1200px;
-   		height: 1100px;
+		padding-top: 70px;
+		max-width: 1400px;
+		min-width: 1200px;
+		height: 1100px;
 	}
 	body .section_pac .pac_mainName {
 		max-width: 1400px;
-   		min-width: 1200px;
+		min-width: 1200px;
 	}
 }
-@media (max-width:1200px) {
+
+@media ( max-width :1200px) {
 	body .section_pac {
-   		padding-top: 70px;
-   		max-width: 1200px;
-   		min-width: 1000px;
-   		height: 1100px;
+		padding-top: 70px;
+		max-width: 1200px;
+		min-width: 1000px;
+		height: 1100px;
 	}
 	body .section_pac .pac_mainName {
 		max-width: 1200px;
-   		min-width: 1000px;
+		min-width: 1000px;
 	}
 }
 
-
 body .section_pac .pac_mainName {
-   height: 33px;
-   text-align: center;
-   margin-left: auto;
-   margin-right: auto;
-   font-size: 25px;
+	height: 33px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 25px;
 }
 
 body .section_pac .pac_list {
-   width: 800px;
-   height: 50px;
-   margin-left: auto;
-   margin-right: auto;
-   /* text-align: center; */
+	width: 800px;
+	height: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	/* text-align: center; */
 }
 
 body .section_pac .pac_list .pac_lists {
-   width: auto;
-   height: auto;
-   display: inline-flex;
-   /* border-bottom: 1px solid #EAEAEA; */
+	width: auto;
+	height: auto;
+	display: inline-flex;
+	/* border-bottom: 1px solid #EAEAEA; */
 }
 
 body .section_pac .pac_list .pac_list {
-   width: 265px;
-   height: auto;
-   text-align: center;
+	width: 265px;
+	height: auto;
+	text-align: center;
 }
 
 body .section_pac .pac_list .pac_list #pac_point_button {
-   width: 190px;
-   height: 30px;
-   border: 0;
-   outline: 0;
-   color: white;
-   background-color: #35aefd;
-   box-shadow: 2px 2px 2px 2px #EAEAEA;
-   font-size: 20px;
+	width: 190px;
+	height: 30px;
+	border: 0;
+	outline: 0;
+	color: white;
+	background-color: #35aefd;
+	box-shadow: 2px 2px 2px 2px #EAEAEA;
+	font-size: 20px;
 }
 
-body .section_pac .pac_list .pac_list #pac_pay_button,
-body .section_pac .pac_list .pac_list #pac_coupon_button {
-   width: 190px;
-   height: 30px;
-   border: 0;
-   outline: 0;
-   background-color: white;
-   box-shadow: 2px 2px 2px 2px #EAEAEA;
-   font-size: 20px;
+body .section_pac .pac_list .pac_list #pac_pay_button, body .section_pac .pac_list .pac_list #pac_coupon_button
+	{
+	width: 190px;
+	height: 30px;
+	border: 0;
+	outline: 0;
+	background-color: white;
+	box-shadow: 2px 2px 2px 2px #EAEAEA;
+	font-size: 20px;
 }
 
 body .section_pac .pac_list .pac_mileage {
-   width: 100px;
-   text-align: center;
-
+	width: 100px;
+	text-align: center;
 }
 
 body .section_pac .pac_list button {
-   outline: 0;
-   border-radius: 50px;
-   border-color: #EAEAEA;
-   /* border-style: 1px dotted; */
-   /* border: 1px dashed ; */
-
+	outline: 0;
+	border-radius: 50px;
+	border-color: #EAEAEA;
+	/* border-style: 1px dotted; */
+	/* border: 1px dashed ; */
 }
 
 body .section_pac .pac_list button:active {
-   border: 1px solid #35aefd;
-   /* border-bottom: 1px solid #35aefd; */
+	border: 1px solid #35aefd;
+	/* border-bottom: 1px solid #35aefd; */
 }
 
 body .section_pac .pac_mainList_point {
-   width: auto;
-   height: 200px;
-   margin: 50px 100px;
-/*    border: 1px solid white; */
-   /* display: none; */
+	width: auto;
+	height: 200px;
+	margin: 50px 100px;
+	/*    border: 1px solid white; */
+	/* display: none; */
 }
 
-body .section_pac .pac_mainList_pay,
-body .section_pac .pac_mainList_copon {
-   width: auto;
-   height: 200px;
-   /* border: 1px solid blue; */
-   margin: 50px 100px;
-   display: none;
+body .section_pac .pac_mainList_pay, body .section_pac .pac_mainList_copon
+	{
+	width: auto;
+	height: 200px;
+	/* border: 1px solid blue; */
+	margin: 50px 100px;
+	display: none;
 }
 
 body .section_pac .pac_mainList_point .pac_mainPoint .pac_pointList,
-body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList,
-body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList {
-   width: 1000px;
-   height: auto;
-   margin: 10px 10px;
-   margin-left: auto;
-   margin-right: auto;
-   text-align: center;
+	body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList, body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList
+	{
+	width: 1000px;
+	height: auto;
+	margin: 10px 10px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
 }
 
-body .section_pac .pac_mainList_point .pac_mainPoint .pac_pointList .pac_pointText {
-   width: auto;
-   height: 45px;
-   font-size: 25px;
-   margin: 0;
-   margin-top: 15px;
+body .section_pac .pac_mainList_point .pac_mainPoint .pac_pointList .pac_pointText
+	{
+	width: auto;
+	height: 45px;
+	font-size: 25px;
+	margin: 0;
+	margin-top: 15px;
 }
 
-body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payText {
-   width: 800px;
-   height: 50px;
-   font-size: 25px;
-   margin-top: 15px;
-   margin-bottom: 0px;
-   margin-left: 120px;
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payText
+	{
+	width: 800px;
+	height: 50px;
+	font-size: 25px;
+	margin-top: 15px;
+	margin-bottom: 0px;
+	margin-left: 120px;
+}
+
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists
+	{
+	width: 800px;
+	height: 45px;
+	border: 1px solid #EAEAEA;
+	box-shadow: 2px 2px 2px 2px #EAEAEA;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+	text-align: left;
+}
+
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_name
+	{
+	width: 100px;
+	height: auto;
+	padding: 8px 10px;
+	display: inline-flex;
+	margin: 0px;
+	margin-left: 30px;
+	/* border-right: 1px solid #EAEAEA; */
+}
+
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_kind
+	{
+	width: 100px;
+	height: 30px;
+	display: inline-flex;
+	border: none;
+	background: #B2CCFF;
+	text-align: center;
+	outline: 0;
+}
+
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payAccount_num
+	{
+	width: 430px;
+	height: 35px;
+	display: inline-flex;
+	border: 1px solid #EAEAEA;
+	text-align: center;
+	outline: 0;
 }
 
 
-body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists {
-   width: 800px;
-   height: 45px;
-   border: 1px solid #EAEAEA;
-   box-shadow: 2px 2px 2px 2px #EAEAEA;
-   margin-left: auto;
-   margin-right: auto;
-   margin-bottom: 10px;
-   text-align: left;
-}
+/*  custoemrSearch */
 
 
-body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_name {
-   width: 100px;
-   height: auto;
-   padding: 8px 10px;
-   display: inline-flex;
-   margin: 0px;
-   margin-left: 30px;
-   /* border-right: 1px solid #EAEAEA; */
-}
 
-body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_kind {
-   width: 100px;
-   height: 30px;
-   display: inline-flex;
-   border: none;
-   background : #B2CCFF;
-   text-align: center;
-   outline: 0;
-}
-
-body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payAccount_num {
-   width: 430px;
-   height: 35px;
-   display: inline-flex;
-   border: 1px solid #EAEAEA;
-   text-align: center;
-   outline: 0;
-}
-
-body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_num {
-   width: 95px;
-   height: 35px;
-   display: inline-flex;
-   border: 1px solid #EAEAEA;
-   text-align: center;
-   outline: 0;
+body .section_pac .pac_mainList_pay .pac_mainPay .pac_payList .pac_payLists .pac_payCard_num
+	{
+	width: 95px;
+	height: 35px;
+	display: inline-flex;
+	border: 1px solid #EAEAEA;
+	text-align: center;
+	outline: 0;
 }
 
 body .section_pac .pac_mainList_copon {
-   width: auto;
-   height: 200px;
-   /* border: 1px solid blue; */
-   margin: 50px 100px;
-   display: none;
+	width: auto;
+	height: 200px;
+	/* border: 1px solid blue; */
+	margin: 50px 100px;
+	display: none;
 }
 
-body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponText {
-   width: auto;
-   height: 45px;
-   font-size: 25px;
-   margin: 0;
-   margin-top: 15px;
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponText
+	{
+	width: auto;
+	height: 45px;
+	font-size: 25px;
+	margin: 0;
+	margin-top: 15px;
 }
 
-body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists {
-   width: 800px;
-   height: 45px;
-   border: 1px solid #EAEAEA;
-   box-shadow: 2px 2px 2px 2px #EAEAEA;
-   margin-left: auto;
-   margin-right: auto;
-   margin-bottom: 10px;
-   display: inline-flex;
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists
+	{
+	width: 800px;
+	height: 45px;
+	border: 1px solid #EAEAEA;
+	box-shadow: 2px 2px 2px 2px #EAEAEA;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+	display: inline-flex;
 }
 
-body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_brandnaming {
-   width: 170px;
-   height: auto;
-/*    border-right: 1px solid #EAEAEA; */
-   text-align: center;
-   padding: 8px 10px;
-/*    display: inline-flex; */
-   margin: 5px 15px;
-   overflow: hidden;
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_brandnaming
+	{
+	width: 170px;
+	height: auto;
+	/*    border-right: 1px solid #EAEAEA; */
+	text-align: center;
+	padding: 8px 10px;
+	/*    display: inline-flex; */
+	margin: 5px 15px;
+	overflow: hidden;
 }
-body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_brandnaming_link:hover {
-	color:white;
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_brandnaming_link:hover
+	{
+	color: white;
 	font-weight: bold;
 	background-color: #0091e4;
 	cursor: pointer;
 }
-body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_brandnaming_link:active {
+
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_brandnaming_link:active
+	{
 	font-weight: bold;
-	background-color: #373737; 
+	background-color: #373737;
 }
 
-body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_discount {
-   width: 140px;
-   height: auto;
-/*    border-right: 1px solid #EAEAEA; */
-   text-align: center;
-   padding: 8px 10px;
-/*    display: inline-flex; */
-   margin: 5px 15px;
-   overflow: hidden;
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_discount
+	{
+	width: 140px;
+	height: auto;
+	/*    border-right: 1px solid #EAEAEA; */
+	text-align: center;
+	padding: 8px 10px;
+	/*    display: inline-flex; */
+	margin: 5px 15px;
+	overflow: hidden;
 }
 
-body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_period {
-   width: 240px;
-   height: auto;
-/*    border-right: 1px solid #EAEAEA; */
-   text-align: center;
-   padding: 8px 10px;
-/*    display: inline-flex; */
-   margin: 5px 15px;
-   overflow: hidden;
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_period
+	{
+	width: 240px;
+	height: auto;
+	/*    border-right: 1px solid #EAEAEA; */
+	text-align: center;
+	padding: 8px 10px;
+	/*    display: inline-flex; */
+	margin: 5px 15px;
+	overflow: hidden;
 }
 
-body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_minimumprice {
-   width: 140px;
-   height: auto;
-/*    border-right: 1px solid #EAEAEA; */
-   text-align: center;
-   padding: 8px 10px;
-/*    display: inline-flex; */
-   margin: 5px 15px;
-   overflow: hidden;
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_minimumprice
+	{
+	width: 140px;
+	height: auto;
+	/*    border-right: 1px solid #EAEAEA; */
+	text-align: center;
+	padding: 8px 10px;
+	/*    display: inline-flex; */
+	margin: 5px 15px;
+	overflow: hidden;
 }
 
-body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists_menu {
-   background-color : #B2CCFF;
+body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists_menu
+	{
+	background-color: #B2CCFF;
 }
 
 /* body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLists .pac_copon_num { */
@@ -1281,77 +1174,76 @@ body .section_pac .pac_mainList_copon .pac_mainCopon .pac_coponList .pac_coponLi
 /*    text-align: center; */
 /*    margin: 10px 15px; */
 /* } */
-
 .pac_payCard_save {
-   width: 90px;
-   margin: 10px 5px;
-   margin-right: 12px;
-   float: right;
-   border: 1px solid #EAEAEA;
-   border-radius: 30px;
-   background-color: #0091e4;
-   color: white;
-   font-weight: bolder;
-   outline: 0;
+	width: 90px;
+	margin: 10px 5px;
+	margin-right: 12px;
+	float: right;
+	border: 1px solid #EAEAEA;
+	border-radius: 30px;
+	background-color: #0091e4;
+	color: white;
+	font-weight: bolder;
+	outline: 0;
 }
 
 .pac_payCard_save:hover {
-   background-color: #373737;
-   transition-duration: 0.5s;
+	background-color: #373737;
+	transition-duration: 0.5s;
 }
-
 
 /* ====================게시판 (board) CSS========================= */
-
 body .section_board {
-   width: auto;
-   height: 1000px;
-   border: 1px solid white;
+	width: auto;
+	height: 1000px;
+	border: 1px solid white;
 }
 
 body .section_board .board {
-   height: 700px;
-   margin: 0 auto;
-   margin-top: 100px;	
+	height: 700px;
+	margin: 0 auto;
+	margin-top: 100px;
 }
 
-@media (min-width:1400px) {
-body .section_board .board {
-   width: 1200px;
+@media ( min-width :1400px) {
+	body .section_board .board {
+		width: 1200px;
 	}
 }
-@media (max-width:1400px) {
-body .section_board .board {
-   max-width: 1200px;
-   min-width: 1100px;
+
+@media ( max-width :1400px) {
+	body .section_board .board {
+		max-width: 1200px;
+		min-width: 1100px;
 	}
 }
-@media (max-width:1200px) {
-body .section_board .board {
-   max-width: 1100px;
-   min-width: 1000px;
+
+@media ( max-width :1200px) {
+	body .section_board .board {
+		max-width: 1100px;
+		min-width: 1000px;
 	}
 }
 
 body .section_board .board .board_mainName {
-   width: 75%;
-   margin: 0 auto;
-   font-size: 25px;
+	width: 75%;
+	margin: 0 auto;
+	font-size: 25px;
 }
 
 .board_mainName span {
-  font-weight: bold;	
-  text-align: left;
-  font-size: 25px;
-  letter-spacing: 3px;
-  border-bottom: 1px solid black;
+	font-weight: bold;
+	text-align: left;
+	font-size: 25px;
+	letter-spacing: 3px;
+	border-bottom: 1px solid black;
 }
 
 body .section_board .board .board_box {
-   width: 100%;
-   height: 700px;
-   margin-top: 25px;
-/*    border: 1px solid blue; */
+	width: 100%;
+	height: 700px;
+	margin-top: 25px;
+	/*    border: 1px solid blue; */
 }
 
 .board_box .writeform {
@@ -1360,43 +1252,43 @@ body .section_board .board .board_box {
 }
 
 .btn {
-   width: auto;
-   height: 40px;
-   border: 1px solid #EAEAEA;
-   background-color: #0091e4;
-   color: white;
-   outline: 0;
-   font-weight: bolder;
-   cursor: pointer;
-   /* border-radius: 15px; */
+	width: auto;
+	height: 40px;
+	border: 1px solid #EAEAEA;
+	background-color: #0091e4;
+	color: white;
+	outline: 0;
+	font-weight: bolder;
+	cursor: pointer;
+	/* border-radius: 15px; */
 }
 
 .btn:hover {
-   background-color: navy;
-   transition-duration: 0.5s;
+	background-color: navy;
+	transition-duration: 0.5s;
 }
 
-section.section_board div.paging div.onclick{
+section.section_board div.paging div.onclick {
 	cursor: pointer;
 }
 
 /* ====================게시판 읽기 (boardRead) CSS========================= */
 .boardList {
-   width: 100%;
-   margin-bottom: 20px;
+	width: 100%;
+	margin-bottom: 20px;
 }
 
 .boardMenu {
-   width: 100%;
-   height: 50px;
-   margin-top: 50px;
-   margin-bottom: 20px;
-   position: relative;
-   text-align: center;
+	width: 100%;
+	height: 50px;
+	margin-top: 50px;
+	margin-bottom: 20px;
+	position: relative;
+	text-align: center;
 }
 
 .boardMenu .leftMenu form {
-   display: inline-block;
+	display: inline-block;
 }
 
 .boardMenu .rightMenu {
@@ -1409,42 +1301,41 @@ section.section_board div.paging div.onclick{
 }
 
 .boardMenu2 {
-   width: 100%;
-   height: 50px;
-   margin-top: 30px;
-   margin-bottom: 20px;
-   display: inline-flex;
+	width: 100%;
+	height: 50px;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	display: inline-flex;
 }
 
 /* .boardMenu2 .leftMenu2 { */
 /*    width: auto; */
 /*    float: left; */
 /* } */
-
 .boardMenu2 .leftMenu2 {
-   width: 80%;
-   margin: 0 auto;
+	width: 80%;
+	margin: 0 auto;
 }
 
 .boardMenu2 .rightMenu2 {
-   width: 75%;
-   margin: 0 auto;
+	width: 75%;
+	margin: 0 auto;
 }
 
 .rightMenu2 .btn {
-	float: left !important;	
+	float: left !important;
 }
 
 .boardLine {
-   width: 75%;
-   border-bottom: 1px solid #dadada;
-   margin: auto;
-   font-size: 11pt;
-   color: #5a5a5a;
-   height: 60px;
-   line-height: 35px;
-   display: flex;
-   align-items: center;
+	width: 75%;
+	border-bottom: 1px solid #dadada;
+	margin: auto;
+	font-size: 11pt;
+	color: #5a5a5a;
+	height: 60px;
+	line-height: 35px;
+	display: flex;
+	align-items: center;
 }
 
 .boardLine * {
@@ -1452,7 +1343,7 @@ section.section_board div.paging div.onclick{
 }
 
 .boarlineTitle {
-	border-bottom: 3px double grey !important;	
+	border-bottom: 3px double grey !important;
 }
 
 .boarlineTitle * {
@@ -1460,28 +1351,27 @@ section.section_board div.paging div.onclick{
 }
 
 .boardLine2 {
-   width: 80%;
-   border-bottom: 1px solid #dadada;
-   margin: auto;
-   font-size: 11pt;
-   color: #5a5a5a;
-   height: 40px;
-   line-height: 35px;
-   display: flex;
+	width: 80%;
+	border-bottom: 1px solid #dadada;
+	margin: auto;
+	font-size: 11pt;
+	color: #5a5a5a;
+	height: 40px;
+	line-height: 35px;
+	display: flex;
 }
 
 .boardLine .num {
-   width: 10%;
-   text-align: left;
+	width: 10%;
+	text-align: left;
 }
 
 .boardLine .title {
-   left: 0;
-   text-align: left;
-   width: 60%;
-   font-weight: bolder;
+	left: 0;
+	text-align: left;
+	width: 60%;
+	font-weight: bolder;
 }
-
 
 .boardLine .title a {
 	width: 100% !important;
@@ -1491,147 +1381,143 @@ section.section_board div.paging div.onclick{
 }
 
 .boardLine .registdate {
-   width: 30%;
-   float: right;
-   margin-right: 10px;
-   text-align: right;
+	width: 30%;
+	float: right;
+	margin-right: 10px;
+	text-align: right;
 }
 
 .boardLine .num2 {
-   width: 5%;
+	width: 5%;
 }
 
 .boardLine .title2 {
-   left: 0;
-   text-align: center;
-   padding-left: 30px;
-   width: 70%;
-   font-weight: bolder;
+	left: 0;
+	text-align: center;
+	padding-left: 30px;
+	width: 70%;
+	font-weight: bolder;
 }
 
 .boardLine .registdate2 {
-   width: 25%;
-   float: right;
-   text-align: right;
+	width: 25%;
+	float: right;
+	text-align: right;
 }
 
 .boardLine * {
-   display: inline-block;
-   margin-left: 0px;
-   margin-right: 0px;
-   padding-left: 0px;
-   padding-right: 0px;
+	display: inline-block;
+	margin-left: 0px;
+	margin-right: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
 }
 
 .boardMenu3 {
-   width: 100%;
-   height: 50px;
-   margin-top: 30px;
-   margin-bottom: 20px;
-   margin-right: auto;
-   display: inline-flex;
+	width: 100%;
+	height: 50px;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	margin-right: auto;
+	display: inline-flex;
 }
 
 .boardMenu3 .leftMenu3 {
-   width: 550px;
+	width: 550px;
 }
 
 .boardMenu3 .leftMenu3 input {
-   width: auto;
-   float: left;
+	width: auto;
+	float: left;
 }
 
 .boardMenu3 .rightMenu3 {
-   width: 550px;
+	width: 550px;
 }
 
 .boardMenu3 .rightMenu3 input {
-   width: auto;
-   float: right;
+	width: auto;
+	float: right;
 }
 
 .boardContent {
-   text-align: left;
-   padding: 20px;
-   border: 1px solid #dadada;
-   border-top: 0px;
-   width: 75%;
-   height: 450px;
-   margin: auto;
+	text-align: left;
+	padding: 20px;
+	border: 1px solid #dadada;
+	border-top: 0px;
+	width: 75%;
+	height: 450px;
+	margin: auto;
 }
 
 div.boardList a {
-   display: block;
-   width: 500px;
+	display: block;
+	width: 500px;
 }
 
 div.paging {
-   width: auto;
-   height: auto;
-   text-align: center;
+	width: auto;
+	height: auto;
+	text-align: center;
 }
 
 div.paging div {
 	width: 35px;
 	height: 35px;
-   	border: 1px solid #dadada;
-   	display: inline-flex;
-   	text-align: center;
-   	align-items: center;
-   	justify-content: center;
+	border: 1px solid #dadada;
+	display: inline-flex;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
 }
 
 div.paging div a {
-   color: #dadada !important;
-   text-decoration: none;
+	color: #dadada !important;
+	text-decoration: none;
 }
 
 div.paging div strong {
-   color: black !important;
+	color: black !important;
 }
 
 div.boardLine:hover {
-   background-color: #dadada;
+	background-color: #dadada;
 }
 
 div.boardMenu input[type="text"] {
-   height: 25px;
+	height: 25px;
 }
 
 div.boardMenu select {
-   width: 80px;
-   height: 30px;
+	width: 80px;
+	height: 30px;
 }
 
-div.boardLine input,
-div.boardLine input {
-   padding: 7px;
-   border: 1px solid skyblue;
+div.boardLine input, div.boardLine input {
+	padding: 7px;
+	border: 1px solid skyblue;
 }
 
-div.boardLine input:focus,
-div.boardLine input:focus,
-textarea:focus {
-   border: 1px solid rgb(135, 145, 235);
+div.boardLine input:focus, div.boardLine input:focus, textarea:focus {
+	border: 1px solid rgb(135, 145, 235);
 }
 
 textarea {
-   width: 100%;
-   height: 100%;
-   margin: 0px;
-   resize: none;
-   border: none;
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	resize: none;
+	border: none;
 }
 
 /* ====================게시판 쓰기 (boardWrite) CSS========================= */
-
 .boardContent2 {
-   width: 100%;
-   height: 450px;
-   text-align: left;
-   border: 1px solid #dadada;
-   margin: auto;
-   /* margin-top: 10px; */
+	width: 100%;
+	height: 450px;
+	text-align: left;
+	border: 1px solid #dadada;
+	margin: auto;
+	/* margin-top: 10px; */
 }
 
 .boardContent2 textarea {
@@ -1639,30 +1525,30 @@ textarea {
 }
 
 .boardLine3 {
-   width: 100%;
-   height: 40px;
-   font-size: 11pt;
-   display: inline-flex;
-   margin-top: 5px;
-   /* line-height: 35px; */
-   /* background-color: #097ce6; */
-   /* text-align: center; */
-   /* border-bottom: 1px solid #dadada; */
+	width: 100%;
+	height: 40px;
+	font-size: 11pt;
+	display: inline-flex;
+	margin-top: 5px;
+	/* line-height: 35px; */
+	/* background-color: #097ce6; */
+	/* text-align: center; */
+	/* border-bottom: 1px solid #dadada; */
 }
 
 .boardLine3 .title2 {
-   width: 100%;
-   padding-left: 0px;
-   text-align: center;
-   font-weight: bolder;
-   float: left;
+	width: 100%;
+	padding-left: 0px;
+	text-align: center;
+	font-weight: bolder;
+	float: left;
 }
 
 .boardLine3 .title2 .title2_name {
-   width: 100%;
-   height: 35px;
-   outline: none;
-   padding-left: 20px;
+	width: 100%;
+	height: 35px;
+	outline: none;
+	padding-left: 20px;
 }
 
 .writer2 {
@@ -1670,98 +1556,130 @@ textarea {
 }
 
 .write_name {
-   width: auto;
-   height: 35px;
-   text-align: center;
-   float: right;
-   outline: none;
+	width: auto;
+	height: 35px;
+	text-align: center;
+	float: right;
+	outline: none;
 }
 
 .board_fo1 {
-   width: 100%;
-   height: auto;
-   /* border: 1px solid #EAEAEA; */
+	width: 100%;
+	height: auto;
+	/* border: 1px solid #EAEAEA; */
 }
 
 .board_fo1_2 {
-   margin-left: 10px;
-   /* margin-top: 30px; */
-   float: right;
-   border: 0;
-   outline: 0;
+	margin-left: 10px;
+	/* margin-top: 30px; */
+	float: right;
+	border: 0;
+	outline: 0;
 }
+
 .board_fo1_2_file {
-   float: left;
-   /* border: 0;
+	float: left;
+	/* border: 0;
    outline: 0; */
 }
 
 .board_fo1_2_sub {
-   width: 150px;
-   float: right;
-   /* margin-top: 10px; */
-   /* border: 0;
+	width: 150px;
+	float: right;
+	/* margin-top: 10px; */
+	/* border: 0;
    outline: 0; */
 }
 
 .dropdown-button {
-   width: 100px;
-   background-color: #B2CCFF;
-   padding: 8px;
-   font-size: 15px;
-   border: none;
+	width: 100px;
+	background-color: #B2CCFF;
+	padding: 8px;
+	font-size: 15px;
+	border: none;
 }
-.dropdown-button a{
-   text-decoration: none !important;
-   color: black !important;
-}
-.dropdown {
-   width: 100px;
-   height: 35px;
-   position: relative;
-   display: inline-block;
-}
-.dropdown-content {
-   display: none;
-   position: absolute;
-   background-color: #B2CCFF;
-   text-decoration: none !important;
-   width: 100%;
-   padding: 5px;
-   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-   z-index: 9999;
-}
-.dropdown-content a {
-   color: black;
-   padding: 8px;
-   text-decoration: none !important;
-   display: block;
-   z-index: 9999;
-}
-.dropdown-content a:hover { background-color: #00A2E8;}
-.dropdown:hover .dropdown-content { display: block; }
-.dropdown:hover .dropdown-button { background-color: #00A2E8; }
 
+.dropdown-button a {
+	text-decoration: none !important;
+	color: black !important;
+}
+
+.dropdown {
+	width: 100px;
+	height: 35px;
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #B2CCFF;
+	text-decoration: none !important;
+	width: 100%;
+	padding: 5px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 9999;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 8px;
+	text-decoration: none !important;
+	display: block;
+	z-index: 9999;
+}
+
+.dropdown-content a:hover {
+	background-color: #00A2E8;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown:hover .dropdown-button {
+	background-color: #00A2E8;
+}
 
 .pointChanrName {
-	width: 800px; height: 45px; border: 1px solid #EAEAEA; box-shadow: 2px 2px 2px 2px #EAEAEA; margin-bottom: 10px;  display: inline-flex; background-color: #B2CCFF; font-weight: bold;
+	width: 800px;
+	height: 45px;
+	border: 1px solid #EAEAEA;
+	box-shadow: 2px 2px 2px 2px #EAEAEA;
+	margin-bottom: 10px;
+	display: inline-flex;
+	background-color: #B2CCFF;
+	font-weight: bold;
 }
 
 .pointChanrName .firstdiv {
-	width: 20%; font-size: 14pt; font-weight: border; text-align: center
+	width: 20%;
+	font-size: 14pt;
+	font-weight: border;
+	text-align: center
 }
 
 .pointChanrName .default {
- font-size: 14pt; display: flex; align-items: center; justify-content: center; 
+	font-size: 14pt;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .pointChanrContents {
-	width: 800px; height: 45px; border: 1px solid #EAEAEA; box-shadow: 2px 2px 2px 2px #EAEAEA; margin-bottom: 10px;  display: inline-flex;
+	width: 800px;
+	height: 45px;
+	border: 1px solid #EAEAEA;
+	box-shadow: 2px 2px 2px 2px #EAEAEA;
+	margin-bottom: 10px;
+	display: inline-flex;
 }
 
-
 .pointChanrContents div {
-	font-size: 14pt; display: flex; align-items: center;
+	font-size: 14pt;
+	display: flex;
+	align-items: center;
 }
 
 .pointChanrContents:hover {
@@ -1769,29 +1687,47 @@ textarea {
 }
 
 .pointChanrContents div.registdate {
-	width: 40%;  margin-left: 20%; justify-content: center;
+	width: 40%;
+	margin-left: 20%;
+	justify-content: center;
 }
 
 .pointChanrContents div.paymenttype {
-	width: 20%; justify-content: center;
+	width: 20%;
+	justify-content: center;
 }
 
 .pointChanrContents div.point {
-	width: 20%; justify-content: flex-end; padding-right: 40px;
+	width: 20%;
+	justify-content: flex-end;
+	padding-right: 40px;
 }
 
 .searchdiv {
-	width: 50%; height: 100%; display: flex; align-items: center;
+	width: 50%;
+	height: 100%;
+	display: flex;
+	align-items: center;
 }
 
 .searchdiv #point {
-	width: 50%; height: 80%;
+	width: 50%;
+	height: 80%;
 }
 
 .searchdiv #paymenttype {
-	width: 25%; height: 80%;    background-color: #dadada;
+	width: 25%;
+	height: 80%;
+	background-color: #dadada;
 }
 
 .searchdiv button {
-	width: 25%; height: 82%; font-weight: bold;background-color: #35aefd; color: white; outline: none; border: 1px solid white; cursor: pointer;
+	width: 25%;
+	height: 82%;
+	font-weight: bold;
+	background-color: #35aefd;
+	color: white;
+	outline: none;
+	border: 1px solid white;
+	cursor: pointer;
 }

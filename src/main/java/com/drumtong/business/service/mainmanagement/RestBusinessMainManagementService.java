@@ -24,6 +24,7 @@ import com.drumtong.business.vo.BDeliveryAreaVO;
 import com.drumtong.business.vo.BImageVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BManagementVO;
+import com.drumtong.business.vo.BMenuUpdateVO;
 import com.drumtong.business.vo.BMenuVO;
 import com.drumtong.business.vo.BPrivateDataVO;
 import com.drumtong.business.vo.BScheduleDaysVO;
@@ -34,6 +35,7 @@ import com.drumtong.map.dao.MEmdDAO;
 import com.drumtong.map.dao.MSidoDAO;
 import com.drumtong.map.dao.MSigunguDAO;
 import com.drumtong.security.AwsServiceImpl;
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
 // [건욱]
 @Service
@@ -136,9 +138,37 @@ public class RestBusinessMainManagementService {
 	
 	
 	// ===== 중분류 [BMenu] 테이블 ====
+
+	// 메뉴 수정
+	public int updateMenu(HttpServletRequest req, BMenuUpdateVO bMenuUpdateVO) {
+		HttpSession Session = req.getSession();
+ 	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+ 	    String estid = bInformationVO.getEstid();
+ 	    
+ 	    bMenuUpdateVO.setEstid(estid);
+ 	    
+ 	    int updateBMenuResult = bMenuDAO.updateBMenu(bMenuUpdateVO);
+		
+		return updateBMenuResult;
+	}
+	
+	
+	// 메뉴 삭제
+	public List<BMenuVO> deleteMenu(HttpServletRequest req, BMenuVO bMenuVO) {
+		HttpSession Session = req.getSession();
+ 	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+ 	    String estid = bInformationVO.getEstid();
+ 	    
+ 	    bMenuVO.setEstid(estid);
+ 	    
+ 	    int deleteBMenuResult = bMenuDAO.deleteBMenu(bMenuVO);
+ 	    
+ 	    return deleteBMenuResult == 1  ? bMenuDAO.select(estid) : null ;
+	}
+	
 	
 	// 통합
-	public int bMenuRestProcessing(HttpServletRequest req, List<BMenuVO> ListBMenuVO, String processing) {
+	public List<BMenuVO> bMenuRestProcessing(HttpServletRequest req, List<BMenuVO> ListBMenuVO, String processing) {
 		HttpSession Session = req.getSession();
  	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
  	    String estid = bInformationVO.getEstid();
@@ -159,7 +189,7 @@ public class RestBusinessMainManagementService {
  	    		break;
  	 	    // 매장 메뉴를 수정하는 메서드입니다. 	    	
  	    	case "updateBMenu" :
- 	    		result = bMenuDAO.updateBMenu(bMenuVO);
+// 	    		result = bMenuDAO.updateBMenu(bMenuVO);
  	    		break;
  	    		
  	 	    // 매장 메뉴를 삭제하는 메서드입니다. 	    		
@@ -167,10 +197,12 @@ public class RestBusinessMainManagementService {
  	    		result = bMenuDAO.deleteBMenu(bMenuVO);
  	    		break;
  	    	}
- 	    	
  	    }
  	    
-		return result;
+ 	    
+ 	    
+ 	    
+ 	   return result == 1  ? bMenuDAO.select(estid) : null ;
 	}
 
 	
@@ -224,18 +256,26 @@ public class RestBusinessMainManagementService {
 	// ===== 중분류 [BDELIVERYAREA] 테이블 ====	
 	
 	// 1. 배달 지역을 비동기식으로 수정해주는 메서드입니다.
-	public int updateBDeliveryArea(HttpServletRequest req, BDeliveryAreaVO bDeliveryAreaVO) {
+	public int updateBDeliveryArea(HttpServletRequest req, HashMap<String,HashMap<String,ArrayList<String>>> bDeliveryAreaList) {
 		HttpSession Session = req.getSession();
 		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
 		String estid= bInformationVO.getEstid();
-		bDeliveryAreaVO.setEstid(estid);
 		
-		int RestUpdateBDeliveryAreaReuslt = bDeliveryAreaDAO.updateBDeliveryArea(bDeliveryAreaVO);
 		
-		return RestUpdateBDeliveryAreaReuslt;
+//		int RestUpdateBDeliveryAreaReuslt = bDeliveryAreaDAO.updateBDeliveryArea(bDeliveryAreaDataBinding(bDeliveryAreaList,estid));
+		
+//		return RestUpdateBDeliveryAreaReuslt;
+		return null;
 	}
 
-
+	
+	private List<BDeliveryAreaVO> bDeliveryAreaDataBinding(HashMap<String,HashMap<String,ArrayList<String>>> bDeliveryAreaList, String estid) {
+		
+		
+		
+		return null;
+	}
+	
 	// ========================= 대분류 [일정관리] ================================
 	
 	
@@ -369,6 +409,10 @@ public class RestBusinessMainManagementService {
 
 		return RestInsertBTempSuspensionReuslt;
 	}
+
+
+	
+
 
 
 

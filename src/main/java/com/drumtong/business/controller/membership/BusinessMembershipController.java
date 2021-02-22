@@ -67,7 +67,7 @@ public class BusinessMembershipController {
 		return svc.finishSignUp();
 	}
 	
-	// 사업자 계약해지 & 패스워드 재확인 이동 (GET) [건욱]
+	// 사업자 계약해지 & 패스워드 재확인 이동 (GET) [건욱] -- 사용 여부 체크하기
 	@RequestMapping(value = "businessPWReconfirm/", method = RequestMethod.GET)
 	public ModelAndView pwReconfirm() {
 		return svc.pwReconfirm();

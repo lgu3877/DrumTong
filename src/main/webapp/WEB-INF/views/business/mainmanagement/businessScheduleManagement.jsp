@@ -37,6 +37,21 @@
    	<!-- jQuery -->
    	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
+	<!-- objects from DB -->
+	<script type="text/javascript">
+		// 정기휴무
+		let bscheduledays = ${bscheduledays};
+		const holiday = bscheduledays.holiday; // holiday > 'Y' or 'N'
+		delete bscheduledays.holiday; // holiday 삭제
+		
+		console.log(bscheduledays);
+		console.log(holiday);
+		// 임시휴무
+		let btempsuspension = ${btempsuspension};
+
+		console.log(btempsuspension);
+	</script>
+
 </head>
 <body>
 
@@ -86,15 +101,6 @@
 					</div>
 					<!-- buttons -->
 					<div class="btn_con">
-					<!-- 
-						<div id="modify-working-hour" class="btn format_btn">
-							<div class="icon_con">
-								<i class="fas fa-plus-square"></i>
-							</div>
-							<div class="btn_title">시간 수정</div>
-						</div>
-					 -->
-					
 					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
 					<c:if test="${status eq 'SUCCESS' }">
 						<div id="complete-working-hour" class="btn update_btn">
@@ -124,12 +130,17 @@
 							</button>
 							<input id="weekend-also" type="radio" name="workingHour">
 						</div>
-						<!-- 토/일 선택 체크박스 -->
+						<!-- 토/일 선택 라디오버튼 -->
 						<div class="checkbox_con">
-							<input id="weekday-only" type="checkbox" name="" value="">
-							<button id="weekday-only-btn" class="checkBtn transparent" onclick="checkOption('weekday-only')" disabled>토요일 운영</button>
-							<input id="whole-week" type="checkbox" name="" value="">
-							<button id="whole-week-btn" class="checkBtn transparent" onclick="checkOption('whole-week')" disabled>일요일 운영</button>
+						<!-- 토일 선택 라디오버튼 [건욱] -->
+							<input id="weekendBoth" type="radio" name="weekends" value="">
+							<button id="weekendBoth-btn" class="checkBtn transparent" onclick="checkOption('weekendBoth')" disabled>토/일 운영</button>
+							
+							<input id="weekendSat" type="radio" name="weekends" value="">
+							<button id="weekendSat-btn" class="checkBtn transparent" onclick="checkOption('weekendSat')" disabled>토요일만 운영</button>
+							
+							<input id="weekendSun" type="radio" name="weekends" value="">
+							<button id="weekendSun-btn" class="checkBtn transparent" onclick="checkOption('weekendSun')" disabled>일요일만 운영</button>
 						
 						</div>
 					</div>	
@@ -167,7 +178,7 @@
 										<button class="btn time_zone_btn border_l">오후</button>
 									</div>
 								</div>
-								<input class="time_input hour" type="number" name="hour" max="12" placeholder="시">
+								<input class="time_input hour" type="number" name="hour" max="24" placeholder="시">
 								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
 								<div class="time_range_text">
 									<span>부터</span>
@@ -183,7 +194,7 @@
 										<button class="btn time_zone_btn border_l">오후</button>
 									</div>
 								</div>
-								<input class="time_input hour" type="number" name="hour" max="12" placeholder="시">
+								<input class="time_input hour" type="number" name="hour" max="24" placeholder="시">
 								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
 								<div class="time_range_text">
 									<span>까지</span>
@@ -210,7 +221,7 @@
 										<button class="btn time_zone_btn border_l">오후</button>
 									</div>
 								</div>
-								<input class="time_input hour" type="number" name="hour" max="12" placeholder="시">
+								<input class="time_input hour" type="number" name="hour" max="24" placeholder="시">
 								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
 								<div class="time_range_text">
 									<span>부터</span>
@@ -226,7 +237,7 @@
 										<button class="btn time_zone_btn border_l">오후</button>
 									</div>
 								</div>
-								<input class="time_input hour" type="number" name="hour" max="12" placeholder="시">
+								<input class="time_input hour" type="number" name="hour" max="24" placeholder="시">
 								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
 								<div class="time_range_text">
 									<span>까지</span>
@@ -253,7 +264,7 @@
 										<button class="btn time_zone_btn border_l">오후</button>
 									</div>
 								</div>
-								<input class="time_input hour" type="number" name="hour" max="12" placeholder="시">
+								<input class="time_input hour" type="number" name="hour" max="24" placeholder="시">
 								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
 								<div class="time_range_text">
 									<span>부터</span>
@@ -269,7 +280,7 @@
 										<button class="btn time_zone_btn border_l">오후</button>
 									</div>
 								</div>
-								<input class="time_input hour" type="number" name="hour" max="12" placeholder="시">
+								<input class="time_input hour" type="number" name="hour" max="24" placeholder="시">
 								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
 								<div class="time_range_text">
 									<span>까지</span>
@@ -284,11 +295,10 @@
 						</ul>
 					</div>
 				</div>
-				
 			</div>
 			<!-- </form> -->
 			
-			<!-- 정기 휴무 설정 -->
+		<!-- 정기 휴무 설정 -->
 			<!-- <form class="holiday"> -->
 			<div class="holiday">
 				<!-- title -->
@@ -299,14 +309,6 @@
 					</div>
 					<!-- button -->
 					<div class="btn_con">
-					<!-- 
-						<div id="modify-holiday" class="btn format_btn">
-							<div class="icon_con">
-								<i class="fas fa-plus-square"></i>
-							</div>
-							<div class="btn_title">일자 변경</div>
-						</div>
-					-->	
 					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
 					<c:if test="${status eq 'SUCCESS' }">
 						<div id="complete-holiday" class="btn update_btn">
@@ -324,107 +326,58 @@
 				<!-- 정기 휴무 -->
 					<div class="select_wrapper form">
 					<!-- 주 선택 -->
-						<div class="select_box_con">
-							<select>
+						<div id="reg-holiday-week" class="select_box_con">
+							<select name="restWeek">
 								<option selected hidden="true" disabled>&nbsp;주 선택&nbsp;</option>
-								<option>매주</option>
-								<option>첫째 주</option>
-								<option>둘째 주</option>
-								<option>셋째 주</option>
-								<option>넷째 주</option>
-								<option>다섯째 주</option>
-								<option>여섯째 주</option>
+								<option value="allweek">매주</option>
+								<option value="firstweek">첫째 주</option>
+								<option value="secondweek">둘째 주</option>
+								<option value="thirdweek">셋째 주</option>
+								<option value="forthweek">넷째 주</option>
+								<option value="fifthweek">다섯째 주</option>
+								<option value="sixthweek">여섯째 주</option>
 							</select>
 						</div>
 					<!-- 일 선택 -->
-						<div class="day_selector_con">
+						<div id="reg-holiday-day" class="day_selector_con">
 							<div class="day_selector">
-								<input type="checkbox" name="restDay">
+								<input type="checkbox" name="restDay" value = "월">
 								월
 							</div>
 							<div class="day_selector">
-								<input type="checkbox" name="restDay">
+								<input type="checkbox" name="restDay" value = "화">
 								화
 							</div>
 							<div class="day_selector">
-								<input type="checkbox" name="restDay">
+								<input type="checkbox" name="restDay" value = "수">
 								수
 							</div>
 							<div class="day_selector">
-								<input type="checkbox" name="restDay">
+								<input type="checkbox" name="restDay" value = "목">
 								목
 							</div>
 							<div class="day_selector">
-								<input type="checkbox" name="restDay">
+								<input type="checkbox" name="restDay" value = "금">
 								금
 							</div>
 							<div class="day_selector">
-								<input type="checkbox" name="restDay">
+								<input type="checkbox" name="restDay" value = "토">
 								토
 							</div>
 							<div class="day_selector">
-								<input type="checkbox" name="restDay">
+								<input type="checkbox" name="restDay" value = "일">
 								일
 							</div>
 						</div>
 						
-						<div class="day_select_btn btn">
-							휴무 등록
-						</div>
+						<!-- 휴뮤등록 버튼 -->
+						<div class="day_select_btn btn" onclick="updateRegHoliday()">휴무등록 </div>
 					</div>
 					
 				<!-- 저장된 정기 휴무일 표기 -->
-					<ul class="h_schedule_con form">
-						<li class="h_schedule_list">
-					<!-- 내용 -->
-					<!-- 1 -->
-							<div class="h_schedule_context">
-								<p class="scheduled_days">
-									매월 
-										<span class="h_week">[첫째 주]</span> |
-										<span class="h_day">[일요일]</span>
-										<span class="h_day">[화요일]</span>
-									휴무
-								</p>						
-							</div>
-							<div class="h_schedule_delete">
-								<p>삭제</p>
-							</div>
-						</li>
-					<!-- 2 -->
-						<li class="h_schedule_list">
-							<div class="h_schedule_context">
-								<p class="scheduled_days">
-									매월 
-										<span class="h_week">[셋째 주]</span> |
-										<span class="h_day">[월요일]</span>
-										<span class="h_day">[목요일]</span>
-										<span class="h_day">[금요일]</span>
-										<span class="h_day">[토요일]</span>
-									휴무
-								</p>
-							</div>
-							<div class="h_schedule_delete">
-								<p>삭제</p>
-							</div>
-						</li>
-					<!-- 3 -->
-						<li class="h_schedule_list">
-							<div class="h_schedule_context">
-								<p class="scheduled_days">
-									매월 
-										<span class="h_week">[다섯째 주]</span> |
-										<span class="h_day">[월요일]</span>
-										<span class="h_day">[토요일]</span>
-									휴무
-								</p>
-							</div>
-							<div class="h_schedule_delete">
-								<p>삭제</p>
-							</div>
-						</li>
-					</ul>
-
+					<div class="form">
+						<ul id="reg-holiday-schedule" class="h_schedule_con"></ul>
+					</div>
 				<!-- 달력 -->
 					<div id="calander" class="calendar form">
 						<div class="calendar_selector_con">
@@ -477,24 +430,16 @@
 					</div>
 					<!-- button -->
 					<div class="btn_con">
-					<!-- 
-						<div id="modify-holiday" class="btn format_btn">
-							<div class="icon_con">
-								<i class="fas fa-plus-square"></i>
-							</div>
-							<div class="btn_title">휴무 수정</div>
-						</div>
-					 -->
 					 
-					 <!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
-					<c:if test="${status eq 'SUCCESS' }">
-						<div id="complete-holiday" class="btn update_btn">
-							<div class="icon_con">
-								<i class="fas fa-check-square"></i>
+					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
+						<c:if test="${status eq 'SUCCESS' }">
+							<div id="complete-holiday" class="btn update_btn" onclick="updateTmpHoliday()">
+								<div class="icon_con">
+									<i class="fas fa-check-square"></i>
+								</div>
+								<div class="btn_title">휴무 등록</div>
 							</div>
-							<div class="btn_title">휴무 등록</div>
-						</div>
-					</c:if>
+						</c:if>
 					</div>
 				</div>
 				
@@ -511,25 +456,22 @@
 							<div class="reason_title">임시 휴무 기간 선택 및 사유 작성</div>
 
 							<div class="set_day_range_con">
+							<!-- form -->
 								<input id="startDay" type="date" name="startDay" pattern="\d{4}-\d{2}-\d{2}">
-								<!-- <label for="startDay">시작 일</label> -->
 
-								<!-- 화살표 -->
+							<!-- ~ -->
 								<div class="date_arrow">
 									<i class="fas fa-long-arrow-alt-right"></i>
 								</div>
-								<!-- to -->
+							<!-- to -->
 								<input id="endDay" type="date" name="endDay" pattern="\d{4}-\d{2}-\d{2}">
-								<!-- <label for="endDay">마지막 일</label> -->
 							</div>
 							<div id="date-error-msg" class="error_msg text_red"></div>
 
 						<!-- 사유 -->
 							<div class="text_area_con">
-								<textarea class="text_area" cols="100" rows="30"></textarea>
+								<textarea id="tmp-holiday-text" class="text_area" cols="100" rows="30"></textarea>
 							</div>
-						<!-- 버튼 -->
-							<button class="reason_btn btn">작성 완료</button>
 						</div>
 					<!-- </form> -->	
 						
@@ -567,115 +509,7 @@
 									</ul>
 								</li>
 							<!-- 리스트 -->
-								<li id="schedule-container" class="list_content_con">
-								
-								<!-- sample 1 -->
-									<ul class="list_content">
-										<li class="period_con">
-											<div class="period_view_default">
-												<div class="list_start_day">2020-10-07</div>
-												<div class="arrow">~</div>
-												<div class="list_end_day">2019-04-06</div>
-											</div>
-											<div class="period_view_input">
-												<input type="date" name="updateStartDay" pattern="\d{4}-\d{2}-\d{2}">
-												<div class="arrow">~</div>
-												<input type="date" name="updateEndDay" pattern="\d{4}-\d{2}-\d{2}">
-											</div>
-										</li>
-										<li class="reason_con">
-											<div class="reason_view_default">
-												회장님 돌잔치합니다. 돌잡이 피죤 잡음
-											</div>
-											<input class="reason_view_input" type="text" name="updateReason" placeholder="휴무 사유를 적어주세요." maxlength="300">												
-										</li>
-										<li class="update_icon_con">
-											<i class="fas fa-pen-square" onclick="updateSchedule(this)"></i>
-										</li>
-										<li class="cancle_icon_con">
-											<i class="fas fa-times" onclick="cancleUpdate(this)"></i>
-										</li>
-										<li>
-											<i class="fas fa-trash-alt" onclick="deleteSchedule(this)"></i>
-										</li>
-										<li class="complete_icon_con">
-											<i class="fas fa-check-square" onclick="postSchedule(this)"></i>
-										</li>
-									</ul>
-									
-									
-									
-								<!-- sample 2 -->
-									<ul class="list_content">
-										<li class="period_con">
-											<div class="period_view_default">
-												<div class="list_start_day">2020-10-05</div>
-												<div class="arrow">~</div>
-												<div class="list_end_day">2020-11-06</div>
-											</div>
-											<div class="period_view_input">
-												<input type="date" name="updateStartDay" pattern="\d{4}-\d{2}-\d{2}">
-												<div class="arrow">~</div>
-												<input type="date" name="updateEndDay" pattern="\d{4}-\d{2}-\d{2}">
-											</div>
-										</li>
-										<li class="reason_con">
-											<div class="reason_view_default">
-												사업자 생일 파티로 임시 휴무합니다.
-											</div>
-											<input class="reason_view_input" type="text" name="updateReason" placeholder="휴무 사유를 적어주세요." maxlength="300">												
-										</li>
-										<li class="update_icon_con">
-											<i class="fas fa-pen-square" onclick="updateSchedule(this)"></i>
-										</li>
-										<li class="cancle_icon_con">
-											<i class="fas fa-times" onclick="cancleUpdate(this)"></i>
-										</li>
-										<li>
-											<i class="fas fa-trash-alt" onclick="deleteSchedule(this)"></i>
-										</li>
-										<li class="complete_icon_con">
-											<i class="fas fa-check-square" onclick="postSchedule(this)"></i>
-										</li>
-									</ul>
-									
-									
-								<!-- sample 3 -->
-									<ul class="list_content">
-										<li class="period_con">
-											<div class="period_view_default">
-												<div class="list_start_day">2021-08-05</div>
-												<div class="arrow">~</div>
-												<div class="list_end_day">2021-08-06</div>
-											</div>
-											<div class="period_view_input">
-												<input type="date" name="updateStartDay" pattern="\d{4}-\d{2}-\d{2}">
-												<div class="arrow">~</div>
-												<input type="date" name="updateEndDay" pattern="\d{4}-\d{2}-\d{2}">
-											</div>
-										</li>
-										<li class="reason_con">
-											<div class="reason_view_default">
-												사장님이 돌아가셨습니다.
-											</div>
-											<input class="reason_view_input" type="text" name="updateReason" placeholder="휴무 사유를 적어주세요." maxlength="300">												
-										</li>
-										<li class="update_icon_con">
-											<i class="fas fa-pen-square" onclick="updateSchedule(this)"></i>
-										</li>
-										<li class="cancle_icon_con">
-											<i class="fas fa-times" onclick="cancleUpdate(this)"></i>
-										</li>
-										<li>
-											<i class="fas fa-trash-alt" onclick="deleteSchedule(this)"></i>
-										</li>
-										<li class="complete_icon_con">
-											<i class="fas fa-check-square" onclick="postSchedule(this)"></i>
-										</li>
-									</ul>
-									
-									
-								</li>
+								<li id="schedule-container" class="list_content_con"></li>
 							</ul>
 							
 							
@@ -710,11 +544,46 @@
 
 <!-- footer -->
 	<%-- <%@ include file="../main/businessFooter.jsp" %> --%>
+	
+	<!-- global functions -->
+	<script type="text/javascript">
+		//랜덤 String 생성
+		function generateRandomString(length) {
+			let result = "";
+			const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+			const charArray = characters.split("");
+				
+			for (let i = 0; i < length; i++) {
+				result += charArray[Math.ceil(Math.random() * (characters.length - 1))];
+			}
+			
+			// 동일한 난수가 생성되엇을 경우(로또 맞을 확률)
+			if (document.getElementById(result)) {
+				alert("축하드립니다. 17,067,655,527,413,216e+89의 확률을 뚫으셨습니다.");
+				location.reload();
+				return;
+			}
+			
+			return result;
+		}
+	</script>
+	
+	<!-- 영업시간 -->
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/interface.js"></script>
+	
+	<!-- 달력 -->
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/calendar.js"></script>
-	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/tmpHolidayButtons.js"></script>
+	
+	<!-- 정기휴무 -->
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/regularHoliday.js"></script>
+
+	<!-- 임시휴무 -->
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/tmpHoliday.js"></script>
+	
+	<!-- 필터 -->
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/filter.js"></script>
-
-
+	
+	<!-- 업데이트 -->
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/update.js"></script>
 </body>
 </html>

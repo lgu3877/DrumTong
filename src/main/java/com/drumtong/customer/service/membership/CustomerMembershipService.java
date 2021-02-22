@@ -71,17 +71,22 @@ public class CustomerMembershipService {
 	}
 	
 	// 고객 회원가입 (POST)
-	public ModelAndView signUp(CPrivateDataVO cPrivateDataVO) {
-
+	public ModelAndView signUp(CPrivateDataVO cPrivateDataVO, String checkAddress, String emdcodeTMP) {
+		
 		ModelAndView mav = new ModelAndView("redirect:/");
+		
+		// 집주소와 배송지주소가 일치하면 [영경]
+		if("on".equals(checkAddress)) {
+			// 세탁된 물품을 회수받는 주소에 집 주소 수동으로 입력해주기
+			cPrivateDataVO.setMainreceiptaddress(cPrivateDataVO.getMainaddress());
+			cPrivateDataVO.setDetailreceiptaddress(cPrivateDataVO.getDetailaddress());
+			cPrivateDataVO.setEmdcode(emdcodeTMP);
+		}
 		
 		// SerialUUID 생성
 		String MemberID =  SerialUUID.getSerialUUID("CPrivateData", "MemberID");
 		System.out.println("MemberID : " + MemberID);
 		
-		// 세탁된 물품을 회수받는 주소
-		String MainReceiptAddress = cPrivateDataVO.getMainaddress();
-		String DetailReceiptAddress = cPrivateDataVO.getDetailaddress();
 		
 		// 암호화할 아이디, 패스워드 받기
 		String PassWord = cPrivateDataVO.getPw();
@@ -90,10 +95,8 @@ public class CustomerMembershipService {
 		// 암호화
 		cPrivateDataVO.setPw(Encrypt.SecurePassword(ID, PassWord));
 		
-		// 고객 정보 VO에 MemberID, MainReciptAddress, DetailReceiptAddress 입력
+		// 고객 정보 VO에 MemberID 입력
 		cPrivateDataVO.setMemberid(MemberID);
-		cPrivateDataVO.setMainreceiptaddress(MainReceiptAddress);
-		cPrivateDataVO.setDetailreceiptaddress(DetailReceiptAddress);
 		
 		
 		

@@ -6,49 +6,60 @@ public class MEmdVO extends MCoordValueVO {
 	private String emdcode;
 	
 	// 읍면동
-	private String addressc;
+	private String emdname;
 	
 	// 시군구
-	private String addressb;
+	private String signame;
 	
 	// 시도
-	private String addressa;
+	private String sidoname;
 	
 	// 해당 지역에 세탁소가 몇 개 인지 구분할 수 있는 필드 ex) 망미동 (13개)
 	private String count;
 	
 	
-	
+
 	public String getEmdcode() {
 		return emdcode;
 	}
+
 	public void setEmdcode(String emdcode) {
 		this.emdcode = emdcode;
 	}
-	public String getAddressc() {
-		return addressc;
+
+	public String getEmdname() {
+		return emdname;
 	}
-	public void setAddressc(String addressc) {
-		this.addressc = addressc;
+
+	public void setEmdname(String emdname) {
+		this.emdname = emdname;
 	}
-	public String getAddressb() {
-		return addressb;
+
+	public String getSigname() {
+		return signame;
 	}
-	public void setAddressb(String addressb) {
-		this.addressb = addressb;
+
+	public void setSigname(String signame) {
+		this.signame = signame;
 	}
-	public String getAddressa() {
-		return addressa;
+
+	public String getSidoname() {
+		return sidoname;
 	}
-	public void setAddressa(String addressa) {
-		this.addressa = addressa;
+
+	public void setSidoname(String sidoname) {
+		this.sidoname = sidoname;
 	}
+
 	public String getCount() {
 		return count;
 	}
+
 	public void setCount(String count) {
 		this.count = count;
 	}
+	
+	
 	
 	
 }

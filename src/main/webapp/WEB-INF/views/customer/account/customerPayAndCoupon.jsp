@@ -1,7 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<%@ include file="../main/customerHeader.jsp"%>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="cpath">${pageContext.request.contextPath }</c:set>
+<!DOCTYPE html>
+ 
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+	<!-- title -->
+    <title>customerDrumtong :: customerPayAndCoupon</title>
+    <link href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet" type="text/css">
+    <link rel="stylesheet" href="${cpath }/customer/css/customerStyle.css">
+    <link rel="stylesheet" href="${cpath }/customer/css/account/customerPayAndCoupon.css">
+	
+	
+	<script type="text/javascript" src="${cpath }/customer/js/main/customerHeader.js"></script>
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+
+<%@ include file="../main/customer_Header.jsp"%>
 
 <section class="section_pac">
         <h1 class="pac_mainName">결제 수단 및 쿠폰 마일리지 관리</h1>
@@ -285,3 +307,5 @@
         $('#currentPoint').html('현재 포인트 : ' +  numberWithCommas('${myPoint }') + '원');
     </script>
 <%@ include file="../main/customerFooter.jsp"%>
+	</body>
+</html>

@@ -37,7 +37,7 @@ public class BusinessContractController {
 	@RequestMapping(value = "businessContract/", method = RequestMethod.POST)
 	public ModelAndView contract(BInformationVO bInformationVO, BPaymentVO bPaymentVO,
 								BManagementVO bManagementVO, HttpServletRequest req, MultipartHttpServletRequest mpf) {
-		System.out.println("Contract Controller 실행 ");
+//		System.out.println("Contract Controller 실행 ");
 		return svc.contract(bInformationVO, bPaymentVO, bManagementVO, req, mpf);
 	}
 	
@@ -47,6 +47,12 @@ public class BusinessContractController {
 	public ModelAndView premiumAd(HttpServletRequest req) {
 		return svc.premiumAd(req);
 	}		
+	
+	// 비즈니스 프리미엄 광고 계약 해지 페이지 이동(GET) [영경]
+	@RequestMapping(value = "businessPremiumCancel/", method = RequestMethod.GET)
+	public ModelAndView premiumCencel(HttpServletRequest req) {
+		return svc.premiumCencel(req);
+	}	
 	
 	// 비즈니스 프리미엄 광고 계약 (POST) [건욱]
 	@RequestMapping(value = "businessPremiumAd/", method = RequestMethod.POST)

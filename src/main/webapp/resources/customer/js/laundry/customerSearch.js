@@ -65,7 +65,7 @@ function laundryList_paging(totalData, dataPerPage, pageCount, currentPage) {
 
         }
 
-        $("document").ready(function () {
+/*        $("document").ready(function () {
             laundryList_paging(totalData, dataPerPage, pageCount, 1);
 });
- 
+ */

@@ -1,6 +1,7 @@
 package com.drumtong.customer.controller.membership;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +39,7 @@ public class RestCustomerMembershipController {
 	// 로그인 비동기식 버전
 	@RequestMapping("customerLogin/rest/login/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String login(HttpServletRequest req, HttpServletResponse resp, @RequestBody HashMap<String, String> param) {
+	public List<Object> login(HttpServletRequest req, HttpServletResponse resp, @RequestBody HashMap<String, String> param) {
 		return svc.login(req, resp, param);
 	}
 	

@@ -14,6 +14,7 @@ import com.drumtong.business.dao.BBusinessReviewDAO;
 import com.drumtong.business.dao.BCouponDAO;
 import com.drumtong.business.dao.BCustomerReviewDAO;
 import com.drumtong.business.dao.BDetailSalesDAO;
+import com.drumtong.business.dao.BEstablishmentDAO;
 import com.drumtong.business.dao.BInformationDAO;
 import com.drumtong.business.dao.BReviewDAO;
 import com.drumtong.business.dao.BSalesDAO;
@@ -42,7 +43,7 @@ public class CustomerAccountService {
 	@Autowired BCustomerReviewDAO bCustomerReviewDAO;
 	@Autowired BBusinessReviewDAO bBusinessReviewDAO;
 	@Autowired AwsServiceImpl awsServiceImpl;
-	
+	@Autowired BEstablishmentDAO bEstablishmentDAO;
 	
 	
 	// 북마크[영경]
@@ -124,8 +125,11 @@ public class CustomerAccountService {
 		// 2. Review 이미지 올리기(aws)
 		MultipartFile file = mpf.getFile("reviewimgbox");
 		System.out.println("file : " + file.isEmpty());
+		
+		String estid = review.getEstid();
+		
 		if(!file.isEmpty()) {
-			String folderName = "business/" + review.getEstid();
+			String folderName = "business/" + bEstablishmentDAO.selectBPersonID(estid) + "/" + estid;
 			result = awsServiceImpl.fileUpload(file, folderName, review, -1);
 		}
 		

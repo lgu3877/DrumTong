@@ -1,0 +1,540 @@
+@media screen and (max-width : 600px) {
+	body {
+		margin: auto;
+		height: auto;
+		/*    최대크기 */
+		max-width: 1000px;
+		max-height: 1500px;
+	}
+}
+
+/* ====================섹션 CSS================================ */
+
+@media ( min-width :1400px) {
+	body section {
+		max-width: 1900px;
+		min-width: 1400px;
+		height: auto;
+		/*    height: 2000px; */
+		/* padding: 10px; */
+		/* margin-top: 70px; */
+	}
+	body .section_search .filter {
+		max-width: 1900px;
+		min-width: 1400px;
+		height: 70px;
+		display: inline-flex;
+		border-bottom: 1px solid #EAEAEA;
+		position: relative;
+	}
+	body .section_search .filter .filter_op {
+		height: 37px;
+		margin-top: 15px;
+		margin-left: 30px;
+		text-align: center;
+		padding: 0px 15px;
+		border: 1px solid #EAEAEA;
+	}
+	body .section_search .filter .filter_op1 {
+		margin-left: 120px;
+	}
+	body .section_search .filter .filter_reset {
+		margin-left: 120px;
+	}
+	body .section_search .laundryList_main {
+		max-width: 1900px;
+		min-width: 1400px;
+		height: 797px;
+		display: flex;
+	}
+	body .section_search .laundryList_main .laundryList_list {
+		width: 50%;
+		height: 797px;
+		float: left;
+		/* border: 1px solid red; */
+	}
+	
+	body .section_search .laundryList_main .laundryList_list .laundryList_sum {
+		width: 100%;
+		height: 70px;
+		padding: 10px 30px;
+		/* display: inline-flex; */
+		/* border-bottom: 1px solid #EAEAEA; */
+	}
+	
+	body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs
+	{
+		width: 320px;
+		height: 300px;
+		margin-left: 10px;
+		margin-top: 10px;
+		display: inline-flex;
+		/* border: 1px solid #EAEAEA; */
+		/* flex-wrap: wrap; */
+	}
+	
+	body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs .childs_info_1 img
+	{
+		width: 320px;
+		height: 200px;
+		margin: 0px;
+	}
+}
+
+/* ====================섹션 CSS================================ */
+@media ( max-width :1400px) {
+	body section {
+		max-width: 1400px;
+		min-width: 1200px;
+		height: auto;
+		/*    height: 2000px; */
+		/* padding: 10px; */
+		/* margin-top: 70px; */
+	}
+	body .section_search .filter {
+		max-width: 1400px;
+		min-width: 1200px;
+		height: 70px;
+		display: inline-flex;
+		border-bottom: 1px solid #EAEAEA;
+	}
+	body .section_search .filter .filter_op {
+		height: 37px;
+		margin-top: 15px;
+		margin-left: 30px;
+		text-align: center;
+		padding: 0px 15px;
+		border: 1px solid #EAEAEA;
+	}
+	body .section_search .filter .filter_reset {
+		margin-left: 105px;
+	}
+	body .section_search .filter .filter_op1 {
+		margin-left: 180px;
+	}
+	body .section_search .laundryList_main {
+		max-width: 1400px;
+		min-width: 1200px;
+		height: 797px;
+		display: flex;
+	}
+	body .section_search .laundryList_main .laundryList_list {
+		width: 50%;
+		height: 797px;
+		float: left;
+		/* border: 1px solid red; */
+	}
+	body .section_search .laundryList_main .laundryList_list .laundryList_sum {
+		width: 100%;
+		height: 70px;
+		padding: 10px 30px;
+		/* display: inline-flex; */
+		/* border-bottom: 1px solid #EAEAEA; */
+	}
+	
+	body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs
+	{
+		width: 260px;
+		height: 260px;
+		margin-left: 10px;
+		margin-top: 10px;
+		display: inline-flex;
+		/* border: 1px solid #EAEAEA; */
+		/* flex-wrap: wrap; */
+	}
+		body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs .childs_info_1 img
+	{
+		width: 260px;
+		height: 200px;
+		margin: 0px;
+	}
+}
+/* ====================섹션 CSS================================ */
+@media ( max-width :1200px) {
+	body section {
+		max-width: 1200px;
+		min-width: 1000px;
+		height: auto;
+		/*    height: 2000px; */
+		/* padding: 10px; */
+		/* margin-top: 70px; */
+	}
+		body .section_search .filter {
+		max-width: 1200px;
+		min-width: 1000px;
+		height: 70px;
+		display: inline-flex;
+		border-bottom: 1px solid #EAEAEA;
+	}
+	body .section_search .filter .filter_op {
+		height: 37px;
+		margin-top: 15px;
+		margin-left: 30px;
+		text-align: center;
+		padding: 0px 15px;
+		border: 1px solid #EAEAEA;
+	}
+	body .section_search .filter .filter_reset {
+		margin-left: 5px;
+	}
+	body .section_search .filter .filter_op1 {
+		margin-left: 50px;
+	}
+	body .section_search .laundryList_main {
+		max-width: 1200px;
+		min-width: 1000px;
+		height: 600px;
+		display: flex;
+	}
+	body .section_search .laundryList_main .laundryList_list {
+		width: 50%;
+		height: 600px;
+		float: left;
+		/* border: 1px solid red; */
+	}
+	body .section_search .laundryList_main .laundryList_list .laundryList_sum {
+		width: 100%;
+		height: 70px;
+		padding: 10px 30px;
+		/* display: inline-flex; */
+		/* border-bottom: 1px solid #EAEAEA; */
+	}
+	
+	body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs
+	{
+		width: 150px;
+		height: 150px;
+		margin-left: 10px;
+		margin-top: 10px;
+		display: inline-flex;
+		/* border: 1px solid #EAEAEA; */
+		/* flex-wrap: wrap; */
+	}
+		body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs .childs_info_1 img
+	{
+		width: 150px;
+		height: 120px;
+		margin: 0px;
+	}
+}
+
+/* ====================검색 상세페이지 (search) CSS========================= */
+body .section_search {
+	padding-top: 70px;
+	height: 940px;
+}
+
+body .section_search .filter .searchBox {
+	border-right: 1px solid #EAEAEA;
+	width: 280px;
+	height: 70px;
+	text-align: center;
+	display: flex;
+	margin: 0px;
+	margin-top: 2px;
+	padding-left: 25px;
+}
+
+body .section_search .filter .searchBox .search_icon {
+	margin-top: 25px;
+}
+
+body .section_search .filter .searchBox .searchLine {
+	height: 66px;
+	border: 0;
+	outline: none;
+	padding: 10px;
+}
+
+body .section_search .filter .searchBox .search_button {
+	width: 60px;
+	height: 35px;
+	margin-top: 15px;
+	margin-right: 5px;
+	border: 1px solid #EAEAEA;
+	background-color: #0091e4;
+	color: white;
+	outline: 0;
+	font-weight: bolder;
+}
+
+body .section_search .filter .searchBox .search_button:active {
+	background-color: #35aefd;
+}
+
+body .section_search .filter .filter_reset .filter_resets {
+	border-left: 1px solid #EAEAEA;
+	width: 180px;
+	height: 68px;
+	float: right;
+}
+
+body .section_search .filter .filter_reset button {
+	width: 150px;
+	height: 50px;
+	margin: 10px 13px;
+	outline: 0;
+	float: right;
+	border: 1px solid #EAEAEA;
+	background-color: #0091e4;
+	color: white;
+	font-weight: bolder;
+}
+
+body .section_search .filter .filter_reset button:active {
+	background-color: #35aefd;
+}
+
+
+body .section_search .laundryList_main .laundryList_list .laundryList_sum .sum_hr
+	{
+	border: 0;
+	height: 1px;
+	background: #EAEAEA;
+}
+
+body .section_search .laundryList_main .laundryList_list .laundryList_child
+	{
+	width: auto;
+	height: auto;
+	padding: 0px 5px 0px 15px;
+	/* border: 1px solid violet; */
+	/* overflow-y: scroll; */
+}
+
+body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list
+	{
+	height: 695px;
+	padding: 0px;
+	overflow-y: scroll;
+	/* display: inline-block; */
+}
+
+.premium_nameBox {
+	width: auto;
+	height: 30px;
+	margin-left: 20px;
+	margin-right: 10px;
+}
+
+.premium_nameBox .premium_name {
+	display: inline-block;
+	margin: 0;
+	/* border-bottom: 1px solid #EAEAEA; */
+}
+
+.premium_nameBox .premium_more {
+	width: auto;
+	height: auto;
+	float: right;
+	cursor: pointer;
+	outline: 0;
+	display: none;
+	/* border-bottom: 1px solid #EAEAEA; */
+	/* font-weight: bolder; */
+	/* color: white; */
+	/* border: 1px solid #EAEAEA;
+   background-color: #0091e4; */
+}
+
+.premium_hr {
+	border: 0;
+	height: 1px;
+	margin-left: 20px;
+	margin-right: 10px;
+	background: #EAEAEA;
+}
+
+.laundryList_premium {
+	width: auto;
+	height: auto;
+	/* border: 1px solid red; */
+}
+
+.premium_list {
+	width: auto;
+	height: auto;
+	/* border: 1px solid blue; */
+	padding: 0;
+}
+
+.premium_childs {
+	width: 320px;
+	height: 300px;
+	display: inline-flex;
+	/* border: 1px solid #EAEAEA; */
+}
+
+.premium_childs .premium_childs_info_1 {
+	position: relative;
+}
+
+.premium_list .premium_childs a {
+	width: auto;
+	height: auto;
+	text-decoration: none;
+	color: black;
+}
+
+.premium_childs .premium_childs_info_1 img {
+	/* position: absolute; */
+	/* z-index: 0; */
+	width: 320px;
+	height: 200px;
+	margin: 0px;
+	/* top: 0; */
+	/* background: url(/laundry/src/main/webapp/resources/customer/img/펭수버럭.jpg);
+   background-size: 320px 200px; */
+	/* display: inline-flex; */
+}
+
+.fa-start {
+	position: absolute;
+	z-index: 1;
+	width: auto;
+	height: 30px;
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	margin-left: 293px;
+	float: right;
+	cursor: pointer;
+	color: white;
+	display: inline-flex;
+	font-size: x-large;
+	/*    -webkit-text-stroke: none; */
+	/* background-color: orange; */
+	/* top: 0; */
+	/* margin-top: 5px; */
+}
+
+/* .fa-start:active {
+   color: yellow;
+} */
+.premium_childs_info_1_1 {
+	width: auto;
+	height: auto;
+	padding: 10px 15px;
+	margin: 0;
+	/* border: 1px solid red; */
+}
+
+.premium_childs_info_1_1 p {
+	width: auto;
+	height: auto;
+	text-align: left;
+	font-size: 16px;
+	margin: 0px;
+	margin-bottom: 5px;
+}
+
+
+body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs a
+	{
+	width: auto;
+	height: auto;
+	text-decoration: none;
+	color: black;
+}
+
+body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs .childs_info_1
+	{
+	position: relative;
+}
+
+
+body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs .childs_info_1_1
+	{
+	width: auto;
+	height: auto;
+	padding: 10px 15px;
+	margin: 0;
+}
+
+body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs .childs_info_1_1 p
+	{
+	width: auto;
+	height: auto;
+	text-align: left;
+	font-size: 16px;
+	margin: 0px;
+	margin-bottom: 5px;
+}
+
+
+/* 지도 css */
+
+.map_wrap {
+	position:relative;
+	width:800px;
+	height:797px; 
+	display: flex; 
+	align-items: center; 
+	justify-content: center;
+	border: 1px solid blue;
+	float: left;
+}
+
+  .map_wrap  .title {font-weight:bold;display:block;}
+  .map_wrap  .hAddr {position:absolute;left:10px;top:50px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;}
+    #centerAddr {display:block;margin-top:2px;font-weight: normal;}
+    
+
+body .section_search .laundryList_main .map_wrap .laundryList_map {
+	width: 100%;
+	height: 100%;
+}
+
+	.erase {width: auto; height: auto; z-index: 0; cursor: pointer;}
+
+	.sido {
+		width: auto;
+		height: 30px;
+		padding-left: 10px;
+		padding-right: 10px;
+		background: rgb(67, 77, 104);
+		border: 2px solid rgb(67, 77, 104);
+		border-radius: 30px;
+		color: white;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+	}
+	.mark-content {
+		position:relative ;display:flex; height: 30px; border: 2px solid skyblue; justify-content: right;
+		border-radius: 30px; align-items: center; background: white; padding-left: 35px; padding-right: 10px;
+	}
+	
+	.mark-count {
+		position: absolute; top:-1px ; left:-1px ;border-radius:50%; color: white; font-size: 10pt; width: 30px; height: 105%; background: skyblue; text-align: center;
+		display: flex; align-items: center; justify-content: center;
+	}
+	
+	.mark-content .emdnametag {
+		font-size: 12pt; 
+	}
+		
+	.circle {
+		border-radius:50%; border: 1px solid aqua; color: white; font-size: 24px; width: 100px; height: 100px; background: aqua; display: flex; align-items: center; justify-content: center;
+	}
+	
+	.area {
+    position: absolute;
+    background: #fff;
+    border: 1px solid #888;
+    border-radius: 3px;
+    font-size: 12px;
+    top: -5px;
+    left: 15px;
+    padding:2px;
+	}
+	
+	 .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+    
+    
+    
+    .customoverlay {position:relative;bottom:85px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left; background: white}
+.customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
+.customoverlay .title {display:block;text-align:center; padding:10px 15px;font-size:14px;font-weight:bold;}
+.customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}

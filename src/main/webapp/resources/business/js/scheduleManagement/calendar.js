@@ -7,20 +7,7 @@ const currentDate = today.getDate(); // 일
 const currentDay = today.getDay(); // 요일
 
 // (윤)년, 월, 일
-const months = [
-  "1월",
-  "2월",
-  "3월",
-  "4월",
-  "5월",
-  "6월",
-  "7월",
-  "8월",
-  "9월",
-  "10월",
-  "11월",
-  "12월",
-];
+const months = [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ];
 
 // 현재 년도 설정
 document.getElementById(
@@ -31,6 +18,15 @@ document.getElementById(
 document.getElementById(
 		"current-month"
 ).innerHTML = `<span id="month-value">${currentMonth}</span> <i class="fas fa-angle-down"></i>`;
+
+
+
+//달력 렌더링
+yearMonthSelector();
+createYears();
+createMonths();
+loadDays(currentYear, currentMonth, currentDate);
+
 
 // 달력 년-월 선택 디자인
 function yearMonthSelector() {
@@ -55,7 +51,8 @@ function yearMonthSelector() {
 	}
 }
 
-// dropdown years
+
+// 연도 드랍다운 (dropdown)
 function createYears() {
   const startYear = currentYear;
   const endYear = currentYear + 3;
@@ -80,7 +77,8 @@ function createYears() {
   }
 }
 
-// dropdown months
+
+// 휠 드랍다운 (dropdown)
 function createMonths() {
   for (let i = 0; i < months.length; i++) {
     const monthDiv = document.createElement("div");
@@ -102,6 +100,7 @@ function createMonths() {
   }
 }
 
+
 // dropdown 이벤트 > open & close
 function showMenu(id) {
   //   console.log(document.getElementById("years"));
@@ -114,20 +113,12 @@ function showMenu(id) {
   }
 }
 
+
 // 날짜 구성 > 출력
 function loadDays(year, month, day) {
   const lastDate = new Date(year, month, 0).getDate();
   const prevLastDate = new Date(year, month - 1, 0).getDate();
   const startDay = new Date(year, month - 1, 1).getDay();
-  //   const firstdate = new Date(year, month - 1, 1).getDate();
-  //   const prevLastDay = new Date(year, month - 1, 0).getDay();
-
-  //   console.log(`현재 ${year}년 ${month}월`);
-  //   console.log(`시작 일: ${firstdate}`);
-  //   console.log(`마지막 일: ${lastDate}`);
-  //   console.log(`지난달 마지막 일: ${prevLastDate}`);
-  //   console.log(`지난달 마지막 요일: ${prevLastDay}`);
-  //   console.log(`시작 요일: ${swipeDay(startDay)}`);
 
   let currentCount = 0;
   let lastCount = 0;
@@ -143,9 +134,28 @@ function loadDays(year, month, day) {
         const date = document.createElement("div");
         date.classList.add("lastDays");
         
-        // 날짜 입력 > DB 스케쥴 추가 가능
-        date.innerHTML = prevLastDate - day;
+	        // 날짜 입력
+	        const dayDiv = document.createElement("div");
+	        dayDiv.className = "day";
+	        dayDiv.innerHTML = prevLastDate - day;
 
+	        // 휴무 마커
+	        const markerCon = document.createElement("div");
+	        markerCon.className = "marker_con";
+	        
+	        	// 정기 휴일 마커 
+	        	const regMarker = document.createElement("div");
+	        	regMarker.className = "reg_marker";
+
+	        	// 임시 휴일 마커
+	        	const tempMarker = document.createElement("div");
+	        	tempMarker.className = "temp_marker";
+	        
+	        markerCon.appendChild(regMarker);	
+	        markerCon.appendChild(tempMarker);	
+	        	
+        date.appendChild(dayDiv);
+        date.appendChild(markerCon);
         weekDiv.appendChild(date);
       }
 
@@ -153,9 +163,28 @@ function loadDays(year, month, day) {
         const date = document.createElement("div");
         date.classList.add("currentDays");
 
-        // 날짜 입력 > DB 스케쥴 추가 가능
-        date.innerHTML = ++currentCount;
+	        // 날짜 입력
+	        const dayDiv = document.createElement("div");
+	        dayDiv.className = "day";
+	        dayDiv.innerHTML = ++currentCount;
 
+	        // 휴무 마커
+	        const markerCon = document.createElement("div");
+	        markerCon.className = "marker_con";
+	        
+	        	// 정기 휴일 마커 
+	        	const regMarker = document.createElement("div");
+	        	regMarker.className = "reg_marker";
+
+	        	// 임시 휴일 마커
+	        	const tempMarker = document.createElement("div");
+	        	tempMarker.className = "temp_marker";
+	        
+	        markerCon.appendChild(regMarker);	
+	        markerCon.appendChild(tempMarker);	
+	        
+        date.appendChild(dayDiv);
+        date.appendChild(markerCon);
         weekDiv.appendChild(date);
       }
     }
@@ -167,17 +196,56 @@ function loadDays(year, month, day) {
           const date = document.createElement("div");
           date.classList.add("currentDays");
 
-          // 날짜 입력 > DB 스케쥴 추가 가능
-          date.innerHTML = ++currentCount;
+	          // 날짜 입력
+	          const dayDiv = document.createElement("div");
+	          dayDiv.className = "day";
+	          dayDiv.innerHTML = ++currentCount;
 
+	          // 휴무 마커
+		      const markerCon = document.createElement("div");
+		      markerCon.className = "marker_con";
+		        
+		      	// 정기 휴일 마커 
+		        const regMarker = document.createElement("div");
+		        regMarker.className = "reg_marker";
+
+		        // 임시 휴일 마커
+		        const tempMarker = document.createElement("div");
+		        tempMarker.className = "temp_marker";
+		        
+		        markerCon.appendChild(regMarker);	
+		        markerCon.appendChild(tempMarker);	
+
+          date.appendChild(dayDiv);
+          date.appendChild(markerCon);
           weekDiv.appendChild(date);
-        } else {
+        } 
+        else {
           const date = document.createElement("div");
           date.classList.add("nextDays");
 
-          // 날짜 입력 > DB 스케쥴 추가 가능
-          date.innerHTML = ++lastCount;
+	          // 날짜 입력
+	          const dayDiv = document.createElement("div");
+	          dayDiv.className = "day";
+	          dayDiv.innerHTML = ++lastCount;
+	          
+	          // 휴무 마커
+		      const markerCon = document.createElement("div");
+		      markerCon.className = "marker_con";
+		        
+		      	// 정기 휴일 마커 
+		        const regMarker = document.createElement("div");
+		        regMarker.className = "reg_marker";
 
+		        // 임시 휴일 마커
+		        const tempMarker = document.createElement("div");
+		        tempMarker.className = "temp_marker";
+		        
+		        markerCon.appendChild(regMarker);	
+		        markerCon.appendChild(tempMarker);	
+
+          date.appendChild(dayDiv);
+          date.appendChild(markerCon);
           weekDiv.appendChild(date);
         }
       }
@@ -186,7 +254,8 @@ function loadDays(year, month, day) {
     document.getElementById("calendar-days").appendChild(weekDiv);
   }
   
-  markRegHolidays();
+  markRegHolidays(); // 정기휴무
+  markTempHolidays(); // 임시휴무
 }
 
 //주(week) 변환 > object key
@@ -207,96 +276,273 @@ function weekConvert(value) {
 	}
 }
 
+
 // 일(변환) > index
 function dayConvert(value) {
 	switch(value) {
-	case "일요일":
+	case "일":
 		return 0;
-	case "월요일":
+	case "월":
 		return 1;
-	case "화요일":
+	case "화":
 		return 2;
-	case "수요일":
+	case "수":
 		return 3;
-	case "목요일":
+	case "목":
 		return 4;
-	case "금요일":
+	case "금":
 		return 5;
-	case "토요일":
+	case "토":
 		return 6;
 	}
 }
 
-// 정기 휴무 일정 달력 출력
+
+
+//정기 휴무 일정 달력 출력
 function markRegHolidays() {
 	// 정기 휴무 일정 object
 	const obj = {
-		firstWeek: [],
-		secondWeek: [],
-		thirdWeek: [],
-		forthWeek: [],
-		fifthWeek: [],
-		sixthWeek: [],
+		firstweek: [],
+		secondweek: [],
+		thirdweek: [],
+		forthweek: [],
+		fifthweek: [],
+		sixthweek: [],
 	};
 	
-	// 값 가져오기 > object 설정
-	const lists = document.getElementsByClassName("h_schedule_list");
-	for (let i = 0; i < lists.length; i++) {
-		// 주(week)
-		let week = lists[i].getElementsByClassName("h_week")[0].getElementsByTagName("span")[0].innerHTML;
-		week = weekConvert(week.trim());
+	// object 형성 (bscheduledays > obj)
+	for (let week in bscheduledays) {
+		const dayArray = bscheduledays[week].split("/");
+		dayArray.pop();
 		
-		// 일(days)
-		const days = lists[i].getElementsByClassName("h_day");
-		
-		for (let j = 0; j < days.length; j++) {
-			let day = days[j].getElementsByTagName("span")[0].innerHTML;
-			day = dayConvert(day.trim());
-			
-			obj[week].push(day);
+		for (let i = 0; i < dayArray.length; i++) {
+			obj[week].push(dayConvert(dayArray[i]));
 		}
+	}
+	
+	//디자인 변경 함수
+	const markDay = (dayArray, holidayArray, className) => {
+		
+		for (let col = 0; col < holidayArray.length; col++) {
+			const dayCon = dayArray[holidayArray[col]];
+
+			if (!dayCon.className.includes("lastDays") 
+					&& !dayCon.className.includes("nextDays")
+					&& !dayCon.className.includes(className)) {
+				dayCon.querySelector(".reg_marker").classList.add(className);
+			}
+		} 		
 	}
 	
 	// 달력 container & 주(week) 
 	const calendar = document.getElementById("calendar-days");
 	const weeks = calendar.getElementsByClassName("week");
 	
-	// 디자인 변경 함수
-	const markDay = (dayArray, holidayArray) => {
-		for (let col = 0; col < holidayArray.length; col++) {
-			dayArray[holidayArray[col]].classList.add("reg_holiday");
-			dayArray[holidayArray[col]].innerHTML += `<h4>정기휴무</h4>`;
-		} 		
-	}
-	
 	// 달력에 표시
 	for (let row = 0; row < weeks.length; row++) {
-		let dayArray = [...weeks[row].childNodes];
+		const dayArray = [...weeks[row].childNodes];
 		switch(row) {
 		case 0:
-			obj.firstWeek.length !== 0 ? markDay(dayArray, obj.firstWeek) : null;
+			obj.firstweek.length !== 0 ? markDay(dayArray, obj.firstweek, "reg_holiday") : null;
 			break;
 		case 1:
-			obj.secondWeek.length !== 0 ? markDay(dayArray, obj.secondWeek) : null;
+			obj.secondweek.length !== 0 ? markDay(dayArray, obj.secondweek, "reg_holiday") : null;
 			break;
 		case 2:
-			obj.thirdWeek.length !== 0 ? markDay(dayArray, obj.thirdWeek) : null;
+			obj.thirdweek.length !== 0 ? markDay(dayArray, obj.thirdweek, "reg_holiday") : null;
 			break;
 		case 3:
-			obj.forthWeek.length !== 0 ? markDay(dayArray, obj.forthWeek) : null;
+			obj.forthweek.length !== 0 ? markDay(dayArray, obj.forthweek, "reg_holiday") : null;
 			break;
 		case 4:
-			obj.fifthWeek.length !== 0 ? markDay(dayArray, obj.fifthWeek) : null;
+			obj.fifthweek.length !== 0 ? markDay(dayArray, obj.fifthweek, "reg_holiday") : null;
 			break;
 		case 5:
-			obj.sixthWeek.length !== 0 ? markDay(dayArray, obj.sixthWeek) : null;
+			obj.sixthweek.length !== 0 ? markDay(dayArray, obj.sixthweek, "reg_holiday") : null;
 			break;
 		}
 	}	
 }
 
-// 달력 렌더링
-yearMonthSelector();
-createYears();
-createMonths();
-loadDays(currentYear, currentMonth, currentDate);
+
+
+// 임시휴무 출력
+function markTempHolidays() {
+	const calendar = document.getElementById("calendar-days");
+	const week = calendar.getElementsByClassName("week");
+	
+	let firstDate;
+	let lastDate;
+
+	// 필터링(전월, 당월, 익월)
+	let currentMonth = document.getElementById("month-value").innerHTML;
+	currentMonth = parseInt(currentMonth);
+	let currentYear = document.getElementById("year-value").innerHTML;
+	currentYear = parseInt(currentYear); 
+	
+	const lastDays = calendar.querySelector(".lastDays"); // 현재 달력에서 지날달 표기
+	const nextDays = [ ...calendar.querySelectorAll(".nextDays") ].pop(); // 현재 달력에서 다음달 표기
+
+	// 달력 첫날이 1 일 경우 & 지난달이 표기되지 않을 경우
+	if (lastDays === null) {
+		firstDate = `${currentYear}-${currentMonth}-1`;
+	}
+	else {
+		const year = currentMonth !== 1 ? currentYear : currentYear - 1;
+		
+		let month = currentMonth !== 1 ? currentMonth - 1 : 12;
+		month = month < 10 ? "0" + month : month;
+		
+		let day = lastDays.querySelector('.day').innerHTML;
+		day = day < 10  ? "0" + day : day;
+		
+		firstDate = `${year}-${month}-${day}`;
+	}
+	
+	
+	// 달력 마지막 날이 다음달이 아닐 경우
+	if (nextDays === null) {
+		const lastDay = [ ...calendar.querySelectorAll(".nextDays") ].pop();
+		const day = currentDay.innerHTML;
+		
+		lastDate = `${currentYear}-${currentMonth}-${day}`;
+	}
+	
+	else {
+		const year = currentMonth !== 12 ? currentYear : currentYear + 1;
+		
+		let month = currentMonth !== 12 ? currentMonth + 1 : 1;
+		month = month < 10 ? "0" + month : month;
+		
+		let day = nextDays.querySelector('.day').innerHTML;
+		day = day < 10 ? "0" + day : day;
+		
+		lastDate = `${year}-${month}-${day}`;
+	}
+
+	// 필터링 1
+	const filtered = [];
+	
+	for (let i = 0; i < btempsuspension.length; i++) {
+		const data = btempsuspension[i];
+		
+		if (data.beginday >= firstDate && data.beginday <= lastDate) {
+			filtered.push(data);
+		}
+		
+		else if (data.endday >= firstDate && data.endday <= lastDate) {
+			filtered.push(data);
+		}
+	}
+	
+	// 필터링 2
+	const beforeRange = [];
+	const currentRange = [];
+	const afterRange = [];
+	
+	for (let i = 0; i < filtered.length; i++) {
+		const data = filtered[i];
+		
+		// 전월-당월
+		if (data.beginday < firstDate && data.endday <= lastDate) beforeRange.push(data);
+		// 당월-익월
+		else if (data.beginday <= lastDate && data.endday > lastDate) afterRange.push(data);
+		// 당월
+		else currentRange.push(data);
+	}
+	
+	console.log(filtered);
+
+	console.log(beforeRange);
+	console.log(currentRange);
+	console.log(afterRange);
+	
+	// 전월-당월
+	if (beforeRange.length !== 0) {
+		
+		FirstLoop:
+		for (let i = 0; i < beforeRange.length; i++) {
+			const data = beforeRange[i];
+			const lastDay = data.endday.split("-")[2].replace("0", "");
+
+			SecondLoop:
+			for (let row = 0; row < week.length; row++) {
+				for (let col = 0; col < 7; col++) {
+					const dayCon = week[row].children[col];
+					const day = dayCon.querySelector(".day").innerText;
+					
+					if (!dayCon.className.includes("lastDays")
+							&& !dayCon.className.includes("nextDays")
+							&& !dayCon.className.includes("temp_holiday")) {
+						// 임시휴무 표기
+						dayCon.querySelector(".temp_marker").classList.add("temp_holiday");
+					} 
+						
+					if (day === lastDay) {
+						break SecondLoop;
+					}
+				}
+			}
+		}
+	}
+
+	// 당월
+	if (currentRange.length !== 0) {
+		for (let i = 0; i < currentRange.length; i++) {
+			const data = currentRange[i];
+			const firstDay = data.beginday.split("-")[2].replace("0", "");
+			const lastDay = data.endday.split("-")[2].replace("0", "");
+
+			console.log(firstDay);
+			console.log(lastDay);
+			
+			SecondLoop:
+			for (let row = 0; row < week.length; row++) {
+				for (let col = 0; col < 7; col++) {
+					const dayCon = week[row].children[col];
+					const day = dayCon.querySelector(".day").innerText;
+					
+					if (day >= firstDay && day <= lastDay) {
+						if (!dayCon.className.includes("lastDays")
+								&& !dayCon.className.includes("nextDays")
+								&& !dayCon.className.includes("temp_holiday")) {
+							// 임시휴무 표기
+							dayCon.querySelector(".temp_marker").classList.add("temp_holiday");
+						} 
+					}
+					
+//					if (day > lastDay) break SecondLoop;
+				}
+			}
+		}
+	}
+	
+	// 당월-익월
+	if (afterRange.length !== 0) {
+		for (let i = 0; i < afterRange.length; i++) {
+			const data = afterRange[i];
+			const firstDay = data.beginday.split("-")[2].replace("0", "");
+
+			SecondLoop:
+			for (let row = week.length - 1; row >= 0; row--) {
+				for (let col = 6; col >= 0; col--) {
+					const dayCon = week[row].children[col];
+					const day = dayCon.querySelector(".day").innerText;
+					
+					if (!dayCon.className.includes("lastDays")
+							&& !dayCon.className.includes("nextDays")
+							&& !dayCon.className.includes("temp_holiday")) {
+						// 임시휴무 표기
+						dayCon.querySelector(".temp_marker").classList.add("temp_holiday");
+					}
+						
+					if (day === firstDay) {
+						break SecondLoop;
+					}
+				}
+			}
+		}
+	}
+	
+}
