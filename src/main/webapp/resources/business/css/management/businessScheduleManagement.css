@@ -25,13 +25,37 @@
 
 /* 정기 휴무 캘린더 배경색 */
 .reg_holiday {
+	height: 10px;
+    width: 10px;
+    margin-left: 3px;
 	background-color: #f38181 !important;
+}
+
+.temp_holiday {
+	height: 10px;
+    width: 10px;
+    margin-left: 3px;
+	background-color: #08d9d6 !important;
 }
 
 .reg_holiday h {
 	color: white;
 }
 
+.marker_con {
+	position: absolute;
+    background-color: transparent;
+    height: 18px;
+    width: 100%;
+    top: 1px;
+    display: flex;
+}
+
+.reg_marker,
+.temp_marker {
+	
+}
+ 
 /* 폰트 옵션 */
 .text_blue {
 	color: #3b5998;
