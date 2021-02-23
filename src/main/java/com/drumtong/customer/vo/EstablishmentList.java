@@ -52,12 +52,13 @@ public class EstablishmentList extends BInformationVO{
 		return gpa;
 	}
 	public void setGpa(double gpa) {
-		// 1. 소수 첫째자리까지 끊어준 후 2를 곱한다
-		gpa = Math.round((gpa * 1.0) / 1.0) * 2.0;
-		// 2. 1의 자리를 반올림 해준다.
-		double tmp = gpa % 10;
-		gpa = gpa + -tmp + (tmp < 5 ? 0 : (10));
-		this.gpa = gpa / 2.0;
+//		// 1. 소수 첫째자리까지 끊어준 후 2를 곱한다
+//		gpa = Math.round((gpa * 1.0) / 1.0) * 2.0;
+//		// 2. 1의 자리를 반올림 해준다.
+//		double tmp = gpa % 10;
+//		gpa = gpa + -tmp + (tmp < 5 ? 0 : (10));
+//		this.gpa = gpa / 2.0;
+		this.gpa  = Double.parseDouble((String.format("%.2f",gpa)));
 	}
 	public char getDeliveryboolean() {
 		return deliveryboolean;
