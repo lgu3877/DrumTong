@@ -127,20 +127,6 @@
 			polygonoverlay.setMap(null);
 		});
 
-		// 다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
-		kakao.maps.event.addListener(emd_polygon, 'click',
-				function(mouseEvent) {
-					var content = '<div class="info">'
-							+ '   <div class="title">' + name + '</div>'
-							+ '   <div class="size">총 면적 : 약 '
-							+ Math.floor(emd_polygon.getArea())
-							+ ' m<sup>2</sup></area>' + '</div>';
-
-					emdinfowindow.setContent(content);
-					emdinfowindow.setPosition(mouseEvent.latLng);
-					emdinfowindow.setMap(map);
-				});
-
 		// 폴리곤 활성화시킨 읍면동을 다시 클릭했을 때 지우는 함수를 부여하고자
 		object.setAttribute("onClick", "deletePolygon(this)");
 	}

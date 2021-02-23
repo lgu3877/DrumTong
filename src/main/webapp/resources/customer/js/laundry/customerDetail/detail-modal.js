@@ -1,10 +1,14 @@
 	
 	function reviewMore() {	// 리뷰 더보기를 클릭했을 때
+		console.log(reviewList);
+	
 		for(i = 0; i < reviewList.length; i++) {
 			if(i == 0) {
 				$('.detailview-review-row').attr('id', 'review' + i);
 				$('.detailview-review-row').find('.customerName').html(reviewList[i].customerName);
 				$('.detailview-review-row').find('.review-context').html(reviewList[i].ccontent);
+				$('.detailview-review-row').find('.orderListMsg').html(reviewList[i].orderListMsg + 
+							'<span class="orderList-hide">' + reviewList[i].orderList + '</span>');
 				
 				// 고객이 업로드한 프로필 이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
 				if(typeof reviewList[i].profileimg === typeof undefined) {
@@ -42,6 +46,10 @@
 				beforerow.next().attr('id', 'review' + i);
 				beforerow.next().find('.customerName').html(reviewList[i].customerName);
 				beforerow.next().find('.review-context').html(reviewList[i].ccontent);
+				beforerow.next().find('.orderListMsg').html(reviewList[i].orderListMsg);
+				beforerow.next().find('.orderListMsg').html(reviewList[i].orderListMsg + 
+							'<span class="orderList-hide">' + reviewList[i].orderList + '</span>');
+				
 				
 				// 고객이 업로드한 프로필 이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
 				if(typeof reviewList[i].profileimg === typeof undefined) {
