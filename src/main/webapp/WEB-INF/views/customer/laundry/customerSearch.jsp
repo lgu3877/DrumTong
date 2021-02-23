@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 	<script type="text/javascript" src="${cpath }/customer/js/laundry/customerSearch.js"></script>
+	<script type="text/javascript" src="${cpath }/customer/js/main/customerHeader.js"></script>
 	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="https://kit.fontawesome.com/7522a35233.js" crossorigin="anonymous"></script>
 
