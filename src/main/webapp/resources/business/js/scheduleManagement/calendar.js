@@ -26,7 +26,7 @@ yearMonthSelector();
 createYears();
 createMonths();
 loadDays(currentYear, currentMonth, currentDate);
-
+displayMarker(); // 정기휴무
 
 // 달력 년-월 선택 디자인
 function yearMonthSelector() {
@@ -253,9 +253,55 @@ function loadDays(year, month, day) {
 
     document.getElementById("calendar-days").appendChild(weekDiv);
   }
-  
+
   markRegHolidays(); // 정기휴무
   markTempHolidays(); // 임시휴무
+}
+
+
+// 마커 정보
+function displayMarker() {
+	const calendar = document.getElementById("calander");
+	
+		// 마커 Wrapper
+		const markerWrapper = document.createElement("div");
+		markerWrapper.className = "marker_wrapper";
+		
+			// 정기휴무 마커
+			const regMarkerCon = document.createElement("div");
+			regMarkerCon.className = "marker_info_con";
+			
+				const regMarker = document.createElement("div");
+				regMarker.className = "marker_bar";
+				regMarker.classList.add("bg_red");
+				
+				const regMarkerInfo = document.createElement("div");
+				regMarkerInfo.className = "marker_info";
+				regMarkerInfo.innerHTML = "정기휴무";
+			
+			// 임시휴무 마커
+			const tempMarkerCon = document.createElement("div");
+			tempMarkerCon.className = "marker_info_con";
+				
+				const tempMarker = document.createElement("div");
+				tempMarker.className = "marker_bar";
+				tempMarker.classList.add("bg_mint");
+					
+				const tempMarkerInfo = document.createElement("div");
+				tempMarkerInfo.className = "marker_info";
+				tempMarkerInfo.innerHTML = "임시휴무";
+	
+			// 추가
+			regMarkerCon.appendChild(regMarker);	
+			regMarkerCon.appendChild(regMarkerInfo);	
+
+			tempMarkerCon.appendChild(tempMarker);	
+			tempMarkerCon.appendChild(tempMarkerInfo);	
+	
+		markerWrapper.appendChild(regMarkerCon);
+		markerWrapper.appendChild(tempMarkerCon);
+			
+	calendar.appendChild(markerWrapper);
 }
 
 
