@@ -19,54 +19,59 @@ displayDeliveryArea();
 createMajorOptions();
 
 
-// 폼 업데이트
-function updateDeliveryArea() {
-	// data
-	const copiedDeliveryAreas = JSON.parse(JSON.stringify(deliveryAreas));
-	console.log(copiedDeliveryAreas);
-	
-	// axios > post > update
-//	await axios.post("/drumtong/business/mainmanagement/BManagement/rest/selectMMapAddressC/", copiedDeliveryAreas);
-	
-	// 뷰 업데이트
-	displayDeliveryArea();	
-}
+
 
 // 시도 데이터의 존재 여부에 따라서 데이터를 넣어주는 형식을 다르게 해줍니다. [건욱]
 function addEnterValue(type, hasMetroCity, metroCity, city, town) {
 	
 	console.log('displayArea0' , displayArea);
+	
+	// 경기도를 가졌으면
 	if(hasMetroCity) {
 		
 		
 		let hasCity =  updateArea[type][metroCity].hasOwnProperty(city);
 		console.log(hasCity);
+		console.log(city);
 		
+		// 수영구를 가졌으면
 		if(hasCity) {
+			
+			// 값이 중복되지 않으면 넣어준다.
 			if(!updateArea[type][metroCity][city].includes(town))
 				updateArea[type][metroCity][city].push(town);
-			if(type !== "remove" &&  !displayArea[metroCity][city].includes(town))
-				displayArea[metroCity][city].push(town);
+				
+				
+			// add에 추가되면서 displayArea에 값을 안가지고 있어야지 DisplayArea에 값을 추가해준다.
+//			if(type === "add" && displayArea.hasOwnProperty(metroCity) && displayArea[metroCity].hasOwnProperty(city))
+				if(!displayArea[metroCity][city].includes(town))
+					displayArea[metroCity][city].push(town);
 		}
-		else {
-			updateArea[type][metroCity][city] = [ town ];
-			if(type !== "remove" &&  !displayArea[metroCity][city].includes(town))
-				displayArea[metroCity][city] = [town];
+		// 수영구가 없으면
+		else if(!hasCity){
 			
+//			if(type === "add" && displayArea.hasOwnProperty(metroCity) && displayArea[metroCity].hasOwnProperty(city))
+//				if(!displayArea[metroCity][city].includes(town))
+					displayArea[metroCity][city] = [town];
+//			else 
+				updateArea[type][metroCity][city] = [ town ];
 		}
-		
-		
-		
-	}
+	}	
 		
 	else {
 		updateArea[type][metroCity] = {
 			[city] : [ town ]
 		};
-		if(type !== "remove")
+		
+		
+		if(type === "add" && displayArea.hasOwnProperty(metroCity) && displayArea[metroCity].hasOwnProperty(city)) 
+			displayArea[metroCity][city].push(town);
+		else if(type === "add"){
 			displayArea[metroCity] = {
 				[city] : [ town ]
 			};
+		}
+			
 	}
 		
 	console.log('displayArea1' , displayArea);
@@ -91,6 +96,7 @@ function removeEnterValue(metroCity, city, town) {
 					if(deliveryAreas[metroCity][city].includes(town))
 						getBoolean = true;
 			}
+			
 			let ownHasMetroCity = updateArea["remove"].hasOwnProperty(metroCity);
 			
 			
@@ -98,8 +104,27 @@ function removeEnterValue(metroCity, city, town) {
 			// DB 데이터에 시,도 데이터가 있으면 addEnterValue함수를 호출해서 remove필드에 삭제데이터를 추가해줍니다.
 			if(hasMetroCity) {	
 				
+				if(displayArea.hasOwnProperty(metroCity))
+						if(displayArea[metroCity].hasOwnProperty(city)){
+								const idx = displayArea[metroCity][city].indexOf(town);
+								delete displayArea[metroCity][city].splice(idx,1);
+							}
+				// deliveryAreas에 읍면동이 있으면
 				if(getBoolean){
+					
+					// updateArea에 remove를 더해준다.
 					addEnterValue("remove", ownHasMetroCity, metroCity, city, town);
+					if(displayArea.hasOwnProperty(metroCity))
+						if(displayArea[metroCity].hasOwnProperty(city))
+							if(displayArea[metroCity][city].includes(town))	{
+								const idx = displayArea[metroCity][city].indexOf(town);
+								delete displayArea[metroCity][city].splice(idx,1);
+							}
+								
+					
+					
+					
+					
 				}
 				else if (!getBoolean) {
 					const idx = updateArea["add"][metroCity][city].indexOf(town);	
@@ -114,15 +139,27 @@ function removeEnterValue(metroCity, city, town) {
 			}
 			// DB 데이터에 시,도 데이터가 존재하지 않으면  add에 추가된 데이터 값만 삭제해줍니다.
 			else {
+				
+					
+				if(displayArea.hasOwnProperty(metroCity))
+						if(displayArea[metroCity].hasOwnProperty(city))
+							if(displayArea[metroCity][city].includes(town))	{
+								const idx = displayArea[metroCity][city].indexOf(town);
+								delete displayArea[metroCity][city].splice(idx,1);
+							}
+				
 				const idx = updateArea["add"][metroCity][city].indexOf(town);	
 				console.log(idx);
 				delete updateArea["add"][metroCity][city].splice(idx,1);
+				
+				
 			}
 			
 			
+						
 			
-			const disidx = displayArea[metroCity][city].indexOf(town);
-			delete displayArea[metroCity][city].splice(disidx,1);
+//			const disidx = displayArea[metroCity][city].indexOf(town);
+//			delete displayArea[metroCity][city].splice(disidx,1);
 			
 			
 			
@@ -192,7 +229,7 @@ function displayDeliveryArea() {
 	
 	// 출력
 	for (let district in sObject) {
-		// container
+		// containerㄹㅇ
 		const container = document.createElement("div");
 		container.className = "delivery_view_metro_con";
 		
@@ -253,8 +290,11 @@ function displayDeliveryArea() {
 		console.log(metroCityCon.childElementCount);
 		
 		// [건욱] display 생성도중 도시가 없으면 시,도 뷰를 삭제해줍니다.
-		if(cityCon.childElementCount === 0 )
+		if(cityCon.childElementCount === 0 ) {
 			container.remove();
+			
+		}
+			
 		
 	}
 }

@@ -165,7 +165,7 @@ public class RestBusinessMainManagementController {
 	// 1. 배달 지역을 비동기식으로 수정해주는 메서드입니다.
 	@RequestMapping("BDeliveryArea/rest/updateBDeliveryArea/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String updateBDeliveryArea(HttpServletRequest req, @RequestBody HashMap<String,HashMap<String,ArrayList<String>>> bDeliveryAreaList)  {
+	public String updateBDeliveryArea(HttpServletRequest req, @RequestBody HashMap<String,HashMap<String,HashMap<String,ArrayList<String>>>> bDeliveryAreaList)  {
 		
 		int result = svc.updateBDeliveryArea(req,bDeliveryAreaList);
 		System.out.println(result + " : result 값 입니다");

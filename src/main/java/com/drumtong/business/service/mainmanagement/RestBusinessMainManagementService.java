@@ -35,6 +35,7 @@ import com.drumtong.map.dao.MEmdDAO;
 import com.drumtong.map.dao.MSidoDAO;
 import com.drumtong.map.dao.MSigunguDAO;
 import com.drumtong.security.AwsServiceImpl;
+import com.drumtong.security.DeliveryAreaListSetting;
 import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
 // [건욱]
@@ -256,25 +257,23 @@ public class RestBusinessMainManagementService {
 	// ===== 중분류 [BDELIVERYAREA] 테이블 ====	
 	
 	// 1. 배달 지역을 비동기식으로 수정해주는 메서드입니다.
-	public int updateBDeliveryArea(HttpServletRequest req, HashMap<String,HashMap<String,ArrayList<String>>> bDeliveryAreaList) {
+	public int updateBDeliveryArea(HttpServletRequest req, HashMap<String,HashMap<String,HashMap<String,ArrayList<String>>>> bDeliveryAreaList) {
 		HttpSession Session = req.getSession();
 		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
 		String estid= bInformationVO.getEstid();
 		
+		List<BDeliveryAreaVO> deleteBDeliveryAreaList = DeliveryAreaListSetting.selectBDeliveryAreaList(bDeliveryAreaList, "remove");
+		
+		List<BDeliveryAreaVO> insertBDeliveryAreaList = DeliveryAreaListSetting.selectBDeliveryAreaList(bDeliveryAreaList, "add");
 		
 //		int RestUpdateBDeliveryAreaReuslt = bDeliveryAreaDAO.updateBDeliveryArea(bDeliveryAreaDataBinding(bDeliveryAreaList,estid));
 		
 //		return RestUpdateBDeliveryAreaReuslt;
-		return null;
+		return 0;
 	}
-
 	
-	private List<BDeliveryAreaVO> bDeliveryAreaDataBinding(HashMap<String,HashMap<String,ArrayList<String>>> bDeliveryAreaList, String estid) {
-		
-		
-		
-		return null;
-	}
+	
+	
 	
 	// ========================= 대분류 [일정관리] ================================
 	

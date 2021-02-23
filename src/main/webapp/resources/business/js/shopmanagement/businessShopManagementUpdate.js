@@ -250,6 +250,16 @@ async function updateDelivery() {
 	
 }
 
+// 배달 지역 업데이트 [건욱]
+async function updateDeliveryArea() {
+	// data
+	
+	// axios > post > update
+	const { data } = await axios.post("/drumtong/business/mainmanagement/BDeliveryArea/rest/updateBDeliveryArea/", updateArea);
+	
+	// 뷰 업데이트
+}
+
 
 // 주소 업데이트
 async function updateAddress() {
