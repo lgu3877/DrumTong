@@ -279,10 +279,4 @@ function fullHours(inputs, buttons, radios) {
 		else
 			radios[i].checked = false;
 	}
-	
-	
-	
 }
-
-
-

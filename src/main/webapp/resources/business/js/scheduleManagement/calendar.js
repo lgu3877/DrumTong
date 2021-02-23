@@ -3,11 +3,11 @@ const today = new Date(); // 날짜
 const currentYear = today.getFullYear(); // 년
 const currentMonth = today.getMonth() + 1; // 월
 const currentDate = today.getDate(); // 일
-// 0 ~ 6 (일요일 ~ 토요일)
-const currentDay = today.getDay(); // 요일
+const currentDay = today.getDay(); // 요일, 0 ~ 6 (일요일 ~ 토요일)
 
-// (윤)년, 월, 일
+//월
 const months = [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ];
+
 
 // 현재 년도 설정
 document.getElementById(
@@ -80,24 +80,24 @@ function createYears() {
 
 // 휠 드랍다운 (dropdown)
 function createMonths() {
-  for (let i = 0; i < months.length; i++) {
-    const monthDiv = document.createElement("div");
-    monthDiv.innerHTML = months[i];
-    monthDiv.classList.add("dropdown_item");
-
-    // 옵션에서 '월' 클릭시 달력 재구성
-    monthDiv.onclick = () => {
-      document.getElementById("calendar-days").innerHTML = "";
-
-      const selectedYear = document.getElementById("year-value").innerText;
-      document.getElementById("month-value").innerText = i + 1;
-
-      showMenu("months");
-      loadDays(selectedYear, i + 1, currentDate);
-    };
-
-    document.getElementById("months").appendChild(monthDiv);
-  }
+	for (let i = 0; i < months.length; i++) {
+		const monthDiv = document.createElement("div");
+		monthDiv.innerHTML = months[i];
+		monthDiv.classList.add("dropdown_item");
+		
+		// 옵션에서 '월' 클릭시 달력 재구성
+		monthDiv.onclick = () => {
+			document.getElementById("calendar-days").innerHTML = "";
+			
+			const selectedYear = document.getElementById("year-value").innerText;
+			document.getElementById("month-value").innerText = i + 1;
+			
+			showMenu("months");
+			loadDays(selectedYear, i + 1, currentDate);
+		};
+		
+		document.getElementById("months").appendChild(monthDiv);
+	}
 }
 
 

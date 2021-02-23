@@ -1,5 +1,3 @@
-// 필터링
-
 // 전체보기 > page reload
 function pageReload() {
 	const lists = document.getElementsByClassName("list_content");
@@ -86,12 +84,15 @@ function openCalendar() {
 		if (i === 0) {
 			const leftArrowCon = document.createElement("li");
 			leftArrowCon.innerHTML += `<i class="fas fa-chevron-left"></i>`;
+			leftArrowCon.onclick = () => changeYear("before");
+			
 			yearContainer.appendChild(leftArrowCon);
 		}
 		
 		const year = document.createElement("li");
 		year.classList.add("s_years");
 		year.innerHTML = calendarObject.years[i];
+		
 		yearContainer.appendChild(year);
 		
 		// 클릭 이벤트
@@ -101,6 +102,8 @@ function openCalendar() {
 		if (i === calendarObject.years.length - 1) {
 			const rightArrowCon = document.createElement("li");
 			rightArrowCon.innerHTML += `<i class="fas fa-chevron-right"></i>`;
+			rightArrowCon.onclick = () => changeYear("after");
+			
 			yearContainer.appendChild(rightArrowCon);
 		}
 	}
@@ -201,4 +204,24 @@ function checkMonth(e) {
 	
 	// 가까운 날짜 순 정렬
 	sort("recent");
+}
+
+
+// 월 검색 > 연도변경 이벤트
+function changeYear(command) {
+	// before & after (year)
+	const years = document.querySelectorAll(".s_years");
+	
+	switch(command) {
+	case "before":
+		for (let i = 0; i < years.length; i++) {
+			years[i].innerHTML = parseInt(years[i].innerHTML) - 1; 
+		}
+		break;
+	case "after":
+		for (let i = 0; i < years.length; i++) {
+			years[i].innerHTML = parseInt(years[i].innerHTML) + 1; 
+		}
+		break;
+	}
 }
