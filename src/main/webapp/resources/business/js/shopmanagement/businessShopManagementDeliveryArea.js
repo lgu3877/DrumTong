@@ -12,6 +12,19 @@ createMajorOptions();
 
 // deliveryAreas(View)에 대한 추가/삭제 를 처리해주는 함수입니다.   [영경 & 건욱]
 function configuredeliveryAreas(type, metroCity, city, town) {
+	
+	
+	/*
+	 type == add
+	 체크한 데이터를 추가해준다
+	 
+ 	 switch 문으로 구분시켜주는 이유는 데이터의 존재여부에 따라서 들어가는 형식이 다르기 때문에 구분시켜주어야한다.\
+
+	
+	 type == remove
+     체크해제한 데이터를 deleteNullProperty 함수를 호출해서 삭제해준다.
+     
+	*/
 	switch(type){
 		case "add":
 			switch(existAddress(deliveryAreas, metroCity, city, town)){
@@ -37,11 +50,16 @@ function configuredeliveryAreas(type, metroCity, city, town) {
 	
 }
 
+
+// 함수의 Property 혹은 배열을 삭제해줄 때 사용해주는 함수이다. [건욱 && 영경]
 function deleteNullProperty(checkList, metroCity, city, town) {
+	
+	// 전달받은 Object에 대한 값을 삭제해준다.
 	const idx = checkList[metroCity][city].indexOf(town);
 	delete checkList[metroCity][city].splice(idx,1);
 			
-		
+	
+	// 만약 삭제한 후 안의 데이터가 비어있다면 비어있는 프로퍼티를 삭제시켜준다.
 	if(checkList[metroCity][city].length === 0){
 		delete checkList[metroCity][city];		
 		
@@ -53,6 +71,7 @@ function deleteNullProperty(checkList, metroCity, city, town) {
 
 // 시도 데이터의 존재 여부에 따라서 데이터를 넣어주는 형식을 다르게 해줍니다. [영경 & 건욱]
 function addEnterValue(type, metroCity, city, town) {
+	
 	
 	switch(existAddress(updateArea[type], metroCity, city, town)){
 		case "metrocityNull":	// 시도 없을 때, 데이터가 존재하지 않을 때
