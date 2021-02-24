@@ -19,6 +19,11 @@
 	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	 
 	<script type="text/javascript" src="${cpath }/customer/js/account/customerJoinChange.js"></script>
+	
+	<!-- 다음 주소 검색 script function -->
+	<%@ include file="/resources/daumAddressSearch/daumAddressSearch.jsp" %>
+	<!-- Axios script -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>

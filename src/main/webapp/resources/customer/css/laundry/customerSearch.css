@@ -36,10 +36,10 @@
 		border: 1px solid #EAEAEA;
 	}
 	body .section_search .filter .filter_op1 {
-		margin-left: 150px;
+		margin-left: 120px;
 	}
 	body .section_search .filter .filter_reset {
-		margin-left: 200px;
+		margin-left: 120px;
 	}
 	body .section_search .laundryList_main {
 		max-width: 1900px;
@@ -68,7 +68,7 @@
 		height: 300px;
 		margin-left: 10px;
 		margin-top: 10px;
-		display: inline-flex;
+		display: table;
 		/* border: 1px solid #EAEAEA; */
 		/* flex-wrap: wrap; */
 	}
@@ -78,6 +78,7 @@
 		width: 320px;
 		height: 200px;
 		margin: 0px;
+		cursor: pointer;
 	}
 }
 
@@ -107,10 +108,10 @@
 		border: 1px solid #EAEAEA;
 	}
 	body .section_search .filter .filter_reset {
-		margin-left: 150px;
+		margin-left: 105px;
 	}
 	body .section_search .filter .filter_op1 {
-		margin-left: 200px;
+		margin-left: 180px;
 	}
 	body .section_search .laundryList_main {
 		max-width: 1400px;
@@ -138,7 +139,7 @@
 		height: 260px;
 		margin-left: 10px;
 		margin-top: 10px;
-		display: inline-flex;
+		display: table;
 		/* border: 1px solid #EAEAEA; */
 		/* flex-wrap: wrap; */
 	}
@@ -147,6 +148,7 @@
 		width: 260px;
 		height: 200px;
 		margin: 0px;
+		cursor: pointer;
 	}
 }
 /* ====================섹션 CSS================================ */
@@ -175,10 +177,10 @@
 		border: 1px solid #EAEAEA;
 	}
 	body .section_search .filter .filter_reset {
-		margin-left: 50px;
+		margin-left: 5px;
 	}
 	body .section_search .filter .filter_op1 {
-		margin-left: 100px;
+		margin-left: 50px;
 	}
 	body .section_search .laundryList_main {
 		max-width: 1200px;
@@ -206,7 +208,7 @@
 		height: 150px;
 		margin-left: 10px;
 		margin-top: 10px;
-		display: inline-flex;
+		display: table;
 		/* border: 1px solid #EAEAEA; */
 		/* flex-wrap: wrap; */
 	}
@@ -215,6 +217,7 @@
 		width: 150px;
 		height: 120px;
 		margin: 0px;
+		cursor: pointer;
 	}
 }
 
@@ -310,7 +313,7 @@ body .section_search .laundryList_main .laundryList_list .laundryList_child .lau
 	/* display: inline-block; */
 }
 
-.premium_nameBox {
+.premium_nameBox, .common_nameBox {
 	width: auto;
 	height: 30px;
 	margin-left: 20px;
@@ -323,21 +326,8 @@ body .section_search .laundryList_main .laundryList_list .laundryList_child .lau
 	/* border-bottom: 1px solid #EAEAEA; */
 }
 
-.premium_nameBox .premium_more {
-	width: auto;
-	height: auto;
-	float: right;
-	cursor: pointer;
-	outline: 0;
-	display: none;
-	/* border-bottom: 1px solid #EAEAEA; */
-	/* font-weight: bolder; */
-	/* color: white; */
-	/* border: 1px solid #EAEAEA;
-   background-color: #0091e4; */
-}
 
-.premium_hr {
+.premium_hr, .common_hr {
 	border: 0;
 	height: 1px;
 	margin-left: 20px;
@@ -345,38 +335,32 @@ body .section_search .laundryList_main .laundryList_list .laundryList_child .lau
 	background: #EAEAEA;
 }
 
-.laundryList_premium {
+.laundryList_premium, .laundryList_common {
 	width: auto;
 	height: auto;
-	/* border: 1px solid red; */
+	border-bottom: 1px solid #EAEAEA;
+	margin-bottom: 25px;
 }
 
-.premium_list {
+.premium_list, .common_list {
 	width: auto;
 	height: auto;
-	/* border: 1px solid blue; */
 	padding: 0;
+	display: flex;
 }
 
-.premium_childs {
+.premium_childs, .common_childs {
 	width: 320px;
 	height: 300px;
 	display: inline-flex;
 	/* border: 1px solid #EAEAEA; */
 }
 
-.premium_childs .premium_childs_info_1 {
+.premium_childs .premium_childs_info_1, .common_childs .common_childs_info_1 {
 	position: relative;
 }
 
-.premium_list .premium_childs a {
-	width: auto;
-	height: auto;
-	text-decoration: none;
-	color: black;
-}
-
-.premium_childs .premium_childs_info_1 img {
+.premium_childs .premium_childs_info_1 img, .common_childs .common_childs_info_1 img {
 	/* position: absolute; */
 	/* z-index: 0; */
 	width: 320px;
@@ -411,23 +395,6 @@ body .section_search .laundryList_main .laundryList_list .laundryList_child .lau
 /* .fa-start:active {
    color: yellow;
 } */
-.premium_childs_info_1_1 {
-	width: auto;
-	height: auto;
-	padding: 10px 15px;
-	margin: 0;
-	/* border: 1px solid red; */
-}
-
-.premium_childs_info_1_1 p {
-	width: auto;
-	height: auto;
-	text-align: left;
-	font-size: 16px;
-	margin: 0px;
-	margin-bottom: 5px;
-}
-
 
 body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs a
 	{
@@ -447,18 +414,32 @@ body .section_search .laundryList_main .laundryList_list .laundryList_child .lau
 	{
 	width: auto;
 	height: auto;
-	padding: 10px 15px;
+	padding: 10px 0px 10px 0px;
 	margin: 0;
 }
 
-body .section_search .laundryList_main .laundryList_list .laundryList_child .laundryList_child_list .laundryList_childs .childs_info_1_1 p
-	{
-	width: auto;
-	height: auto;
-	text-align: left;
-	font-size: 16px;
-	margin: 0px;
-	margin-bottom: 5px;
+.laundryList_childs .childs_info_1_1 .child_info_left {
+	width: 100%; height: auto; display: flex; align-items: baseline;
+}
+
+.laundryList_childs .childs_info_1_1 .child_info_left .brandnaming {
+	width: 70%; margin: 0; padding: 0; text-align: left
+}
+
+.laundryList_childs .childs_info_1_1 .child_info_left .gpa {
+	float: right; margin: 0; padding: 0; text-align: right; width: 30%; margin: 0; padding: 0
+}
+
+.laundryList_childs .childs_info_1_1 .mainlocation {
+	width: 100%; height: 30px; overflow: hidden; line-height: 30px; margin: 5px 0px 5px 0px; padding: 0
+}
+
+.laundryList_childs .childs_info_1_1 .childs_image_1_1 {
+	width: 100%; display: flex; justify-content: center;
+}
+
+.laundryList_childs .childs_info_1_1 .childs_image_1_1 img {
+	width: 12%;
 }
 
 

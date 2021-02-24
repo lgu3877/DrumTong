@@ -57,9 +57,9 @@ function searchAddress(mainaddress, subaddress, emdcode, lati, longi) {
                        		mainaddress.value = fullRoadAddr;
                        if(subaddress !== null)
                        		subaddress.value = '';
-                       if(emdcode !== null)
-                    	   	// data.bcode는 리 코드까지 나와서 읍면동 코드만 잘라준다.
+                       if(emdcode !== null) // data.bcode는 리 코드까지 나와서 읍면동 코드만 잘라준다.
                        		emdcode.value = data.bcode.substring(0,8);
+                    	   	
                    }
                }).open();
    }

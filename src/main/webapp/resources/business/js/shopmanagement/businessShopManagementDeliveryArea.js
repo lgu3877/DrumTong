@@ -4,76 +4,164 @@ const updateArea = {
 	"remove" : {}
 };
 
+
+
 // 초기실행
 displayDeliveryArea();
 createMajorOptions();
 
-
-// 폼 업데이트
-function updateDeliveryArea() {
-	// data
-	const copiedDeliveryAreas = JSON.parse(JSON.stringify(deliveryAreas));
-	console.log(copiedDeliveryAreas);
+// deliveryAreas(View)에 대한 추가/삭제 를 처리해주는 함수입니다.   [영경 & 건욱]
+function configuredeliveryAreas(type, metroCity, city, town) {
+	switch(type){
+		case "add":
+			switch(existAddress(deliveryAreas, metroCity, city, town)){
+				case "metrocityNull":	// 시도 없을 때, 데이터가 존재하지 않을 때
+					deliveryAreas[metroCity] = {
+						[city] : [ town ]
+					};
+					break;
+					
+				case "cityNull":		// 시군구 없을 때
+					deliveryAreas[metroCity][city] = [town];
+					break;
+		
+				case "townNull":		// 읍면동 없을 때
+					deliveryAreas[metroCity][city].push(town);
+					break;
+			}
+			break;
+		case "remove":
+			deleteNullProperty(deliveryAreas, metroCity, city, town);
+			break;
+	}
 	
-	// axios > post > update
-//	await axios.post("/drumtong/business/mainmanagement/BManagement/rest/selectMMapAddressC/", copiedDeliveryAreas);
-	
-	// 뷰 업데이트
-	displayDeliveryArea();	
 }
 
-
-// 추가-삭제 관련 객체 & 기,존 배달지역 객체 업데이트
-function updatedeliveryAreaObject(id, metroCity, city, town) {
-	const checkbox = document.getElementById(id);
-	
-	// deliveryAreas 수정 > view 업데이트
-	// 체크
-	if (checkbox.checked === true) {
-		const hasMetroCity = deliveryAreas.hasOwnProperty(metroCity);
-		if (!hasMetroCity) {
-			deliveryAreas[metroCity] = {
-					[city] : [ town ]
-			};
-		} 
-		else {
-			const hasCity = deliveryAreas[metroCity].hasOwnProperty(city);
-			if (!hasCity) {
-				deliveryAreas[metroCity][city] = [ town ];
-			}
-			else {
-				const hasTown = deliveryAreas[metroCity][city].includes(town);
-				if (!hasTown) {
-					deliveryAreas[metroCity][city].push(town);
-				}
-			}
-		}
-	} 
-	// 체크 해제
-	else {
-		// 읍면동이 2개 이상
-		if (deliveryAreas[metroCity][city].length !== 1) {
-			const index = deliveryAreas[metroCity][city].indexOf(town);
-			deliveryAreas[metroCity][city].splice(index, 1);
-		}
-		// 읍면동이 1개
-		else {
+function deleteNullProperty(checkList, metroCity, city, town) {
+	const idx = checkList[metroCity][city].indexOf(town);
+	delete checkList[metroCity][city].splice(idx,1);
 			
-			const numberOfCities = Object.keys(deliveryAreas[metroCity]).length; // 시군구 개수
-			// 시군구가 2개 이상
-			if (numberOfCities !== 1) {
-				delete deliveryAreas[metroCity][city]; // 읍면동이 없는 시군구를 객체에서 제거
+		
+	if(checkList[metroCity][city].length === 0){
+		delete checkList[metroCity][city];		
+		
+		if(Object.keys(checkList[metroCity]).length === 0){
+			delete checkList[metroCity];
+		} 
+	} 
+}
+
+// 시도 데이터의 존재 여부에 따라서 데이터를 넣어주는 형식을 다르게 해줍니다. [영경 & 건욱]
+function addEnterValue(type, metroCity, city, town) {
+	
+	switch(existAddress(updateArea[type], metroCity, city, town)){
+		case "metrocityNull":	// 시도 없을 때, 데이터가 존재하지 않을 때
+			updateArea[type][metroCity] = {
+				[city] : [ town ]
+			};
+			break;
+			
+		case "cityNull":		// 시군구 없을 때
+			updateArea[type][metroCity][city] = [ town ];
+			break;
+
+		case "townNull":		// 읍면동 없을 때
+			updateArea[type][metroCity][city].push(town);
+			break;
+
+	}
+	
+}
+
+// [건욱 && 영경] 존재하는 주소인지 체크하는 함수
+function existAddress(checkList, metroCity, city, town){
+	
+	if(checkList.hasOwnProperty(metroCity)){
+		if(checkList[metroCity].hasOwnProperty(city)){
+			if(checkList[metroCity][city].includes(town)){
+				return "exist";
+			} else {
+				return "townNull";
 			}
-			// 시군구 1개
-			else {
-				delete deliveryAreas[metroCity];
-			}
+		} else{
+			return "cityNull";
 		}
+	} else{
+		return "metrocityNull";
 	}
 }
 
+// 지역 데이터를 삭제해주는 역할을 담당하는 함수입니다. [건욱]
+function removeEnterValue(metroCity, city, town) {
+			
+			
+			let addBucket = updateArea["add"];
+			
+			/*
+			 ♨ existBoolean 
+			
+			 	① true
+					updateArea["add"]에 체크된 배달 주소 삭제
+				
+				② false
+					updateArea["remove"]에 체크된 배달 주소 추가
+			*/
+			
+			let existBoolean = existAddress(addBucket, metroCity, city, town) === "exist";
+			
+			if(existBoolean){
+				// updateArea["add"]에 체크된 배달 주소 삭제
+				
+				
+				deleteNullProperty(addBucket, metroCity, city, town);
+				
+				
+			} else {
+				// updateArea["remove"]에 체크된 배달 주소 추가
+				
+				addEnterValue("remove", metroCity, city, town);
+				
+			}
+				
+}
+
+
+
+// 시,도 데이터가 존재하는지 안하는지 구분해주는 hasMetroCity에 대한 값을 정의해주고
+// check한 type에 따라서 다른 함수를 불러와주는 역할을 담당하는 함수입니다. [건욱]
+function configurationObject(checkBoolean,metroCity,city,town) {
+	let type = checkBoolean ? "add" : "remove";
+	
+	// type이 add이면 addEnterValue함수를 호출합니다.
+	if(type === "add") 
+		addEnterValue(type, metroCity, city, town);
+		
+	// type이 remove이면 removeEnterValue함수를 호출합니다.	
+	else 
+		removeEnterValue( metroCity, city, town);
+	
+	
+	configuredeliveryAreas(type, metroCity, city, town);
+	
+}
+
+// 추가-삭제 관련 객체 & 기,존 배달지역 객체 업데이트 [건욱]
+function updatedeliveryAreaObject(id, metroCity, city, town) {
+	const checkbox = document.getElementById(id);
+
+	// [건욱] 코드 수정합니다. 배달지역 추가 삭제시에 삭제데이터와 신규데이터가 구분해서 들어가야되기 때문에 기존의 객체를 활용하면 안되고 새로 선언해주어야합니다.
+	configurationObject(checkbox.checked,metroCity,city,town);
+	
+	console.log(updateArea);	
+	console.log('display', deliveryAreas);
+}
+
+
+
 // 배달지역 뷰
 function displayDeliveryArea() {
+	
+	
 	// 정렬
 	const sMCities = Object.keys(deliveryAreas).sort(); 
 	const sObject = {};
@@ -95,7 +183,7 @@ function displayDeliveryArea() {
 	
 	// 출력
 	for (let district in sObject) {
-		// container
+		// containerㄹㅇ
 		const container = document.createElement("div");
 		container.className = "delivery_view_metro_con";
 		
@@ -142,10 +230,17 @@ function displayDeliveryArea() {
 			city.appendChild(townCon);
 			cityCon.appendChild(city);
 			metroCityCon.appendChild(cityCon);
+			
+			
 		}
 		// 삽입
 		container.appendChild(metroCityCon);
 		viewCon.appendChild(container);
+		
+		
+		
+			
+		
 	}
 }
 
@@ -201,6 +296,8 @@ async function createMinorOptions() {
 
 // 읍/면/동 생성
 async function createDetailOptions() {
+	
+	
 	const detailAreaCon = document.getElementById("detail-area-selector");
 	const majorValue = document.getElementById("major-area-selector").value;
 	const minorValue = document.getElementById("minor-area-selector").value;

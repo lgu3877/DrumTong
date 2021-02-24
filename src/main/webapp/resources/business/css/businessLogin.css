@@ -361,6 +361,13 @@ input[type=submit]:hover, button:hover {
     outline: none;
     font-size: 16pt;
     margin-top: 38px;
+    cursor: pointer;
+}
+
+.single_page_login_btn:hover {
+	transform: translate(0, -5px);
+    transition: all 0.5s ease 0s;
+    box-shadow: 0px 15px 20px rgb(182 182 182);
 }
 
 .login_search_con div {

@@ -6,7 +6,7 @@
 <section class="section_main">
 
 	<article class="search">
-		<form class="searchs">
+		<div class="searchs">
 			<p class="searchs_p"><b>세탁물</b>을 <b>깨끗</b>하게</p>
 			<p class="searchs_p">주거지까지 배달합니다.</p>
 			<div class="searchBox">
@@ -15,17 +15,17 @@
 					class="searchLine" 
 					type="text" 
 					name="search" 
-					id="search" 
+					id="search"
 					placeholder="                                                                 검색어를 입력하세요"/>
+					
 				<input 
 					class="search_button"
 					type="button" 
 					name="search" 
-					id="search" 
 					value="검색"
 					onclick="mainSearch()"/>
 			</div>
-		</form>
+		</div>
 	</article>
 
 	<article class="notice">
@@ -45,7 +45,7 @@
 									<div class="notice_new">
 										<c:if test="${bList.registdate eq todayDate }">new</c:if>
 									</div>
-									<a href="${cpath }/customer/board/customerBoardRead/notice/${bList.num }/">[공지] ${bList.title } </a>
+									<a href="${cpath }/customer/board/customerBoardRead/notice/${bList.num }/"><span class="notice_area_1">[공지]</span> <span class="notice_area_2">${bList.title } </span></a>
 								</div>
 								<div class="notice_area_registdate">
 									${bList.registdate }
@@ -67,7 +67,7 @@
 									<div class="notice_new">
 										<c:if test="${eList.registdate eq todayDate }">new</c:if>
 									</div>
-									<a href="${cpath }/customer/board/customerBoardRead/event/${eList.num }/">[event] ${eList.title } </a>
+									<a href="${cpath }/customer/board/customerBoardRead/event/${eList.num }/"><span class="notice_area_1">[event]</span><span class="notice_area_2">${eList.title }</span></a>
 								</div>
 								<div class="notice_area_registdate">
 									${eList.registdate }
@@ -122,9 +122,16 @@
 
 </section>
 <script>
-// 	영경스크립트
-	function mainSearch(){
-		location.href='${cpath}/customer/laundry/customerSearch/' + document.getElementById('search').value + '/';
-	}
+//	영경스크립트
+function mainSearch(){
+	location.href='${cpath}/customer/laundry/customerSearch/' + document.getElementById('search').value + '/';
+}
+//  승원스크립트
+	document.getElementById('search').addEventListener('keyup', event => {
+		  if (window.event.keyCode == 13)
+			  mainSearch();
+	})
+
+
 </script>
 <%@ include file="customerFooter.jsp"%>
