@@ -52,7 +52,7 @@ public class SelectLaundryList {
 	
 	// 고객 세탁소 검색 페이지에서 필터, 페이지, 지도 상태에 따라 세탁소 리스트를 가져와주는 메서드(남서쪽, 북동쪽 좌표를 이용할 때)
 	public static List<Object> getMapList(String left, String right, String top, String bottom, String filter1, String filter2, String filter3, String filter4, String filter5, String page){
-		param = paramSet(filter1, filter2, filter3, filter4, filter5, page);
+		paramSet(filter1, filter2, filter3, filter4, filter5, page);
 		param.put("left", left);
 		param.put("right", right);
 		param.put("top", top);
@@ -62,7 +62,7 @@ public class SelectLaundryList {
 	
 	// 고객 세탁소 검색 페이지에서 필터, 페이지, 지도 상태에 따라 세탁소 리스트를 가져와주는 메서드(emdcode를 이용할 때)
 	public static List<Object> getMapList(String emdcode, String filter1, String filter2, String filter3, String filter4, String filter5, String page){
-		param = paramSet(filter1, filter2, filter3, filter4, filter5, page);
+		paramSet(filter1, filter2, filter3, filter4, filter5, page);
 		param.put("emdcode", emdcode);
 		return SeparateAccordingToPremium(param);
 	}
@@ -83,23 +83,29 @@ public class SelectLaundryList {
 	}
 	
 	// 매개변수들을 모아 hash map에 풋 해주는 함수
-	private static HashMap<String, String> paramSet(String filter1, String filter2, String filter3, String filter4, String filter5, String page){
-		HashMap<String, String> tmp = new HashMap<String, String>();
+	private static void paramSet(String filter1, String filter2, String filter3, String filter4, String filter5, String page){
+		param = new HashMap<String, String>();
 
 
-		tmp.put("filter1", filter1);
-		tmp.put("filter2", filter2Setting(filter2));
-		tmp.put("filter3", filter3);
-		tmp.put("filter4", filter4);
-		tmp.put("filter5", filter5);
-		tmp.put("page", page);
-		return tmp;
+		param.put("filter1", filter1);
+		param.put("filter2", filter2Setting(filter2));
+		param.put("filter3", filter3);
+		param.put("filter4", filter4);
+		param.put("filter5", filter5);
+		param.put("page", page);
 	}
 	
 	// 요일관련된 필터
 	private static String filter2Setting(String filter2) {
 		if(filter2.equals("today")) {
+			String[] days = {"일", "월", "화", "수", "목", "금", "토"};
+			String[] weeks = {"FIRSTWEEK", "SECONDWEEK", "THIRDWEEK", "FOUTHWEEK", "FIFTHWEEK", "SIXTHWEEK"};
 			int todayNum = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+			int weekOfMonth = Calendar.getInstance().get(Calendar.WEEK_OF_MONTH);
+			System.out.println("오늘은 몇 째 주일까요 ?" + weekOfMonth);
+			System.out.println("오늘은 무슨요일 일까요 ?" + days[todayNum-1]);
+			param.put("todayDay", weeks[weekOfMonth-1]);
+			param.put("todayWeekNum", days[todayNum-1]);
 			switch (todayNum) {
 			case 1:// 일요일
 				filter2 = "SUNDAY";
@@ -145,7 +151,7 @@ public class SelectLaundryList {
 	// 주소(EMDCODE)와 배송가능 주소가 일치하면서 상위 n% 안에 해당하는 매장 리스트를 n개(limitNum) 이상 구한다  [영경]
 	private static List<EstablishmentList> perCalcReturnList(String EMDCODE, int limitNum){
 		List<EstablishmentList> tmp = new ArrayList<EstablishmentList>();
-		param = paramSet("none", "today", "none", "none", "none", "0");
+		paramSet("none", "today", "none", "none", "none", "0");
 		
 		// 파라미터 값을 넣는다.
 		param.put("emdcode", EMDCODE);
