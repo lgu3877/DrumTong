@@ -4,166 +4,124 @@ const updateArea = {
 	"remove" : {}
 };
 
-let displayArea = {
-	
-};
-
-const cloneObj = obj => JSON.parse(JSON.stringify(obj));
-
-
-displayArea = cloneObj(deliveryAreas);
 
 
 // 초기실행
 displayDeliveryArea();
 createMajorOptions();
 
-
-
-
-// 시도 데이터의 존재 여부에 따라서 데이터를 넣어주는 형식을 다르게 해줍니다. [건욱]
-function addEnterValue(type, hasMetroCity, metroCity, city, town) {
-	
-	console.log('displayArea0' , displayArea);
-	
-	// 경기도를 가졌으면
-	if(hasMetroCity) {
+// deliveryAreas(View)에 대한 추가/삭제 를 처리해주는 함수입니다.   [영경 & 건욱]
+function configuredeliveryAreas(type, metroCity, city, town) {
+	switch(type){
+		case "add":
+			switch(existAddress(deliveryAreas, metroCity, city, town)){
+				case "metrocityNull":	// 시도 없을 때, 데이터가 존재하지 않을 때
+					deliveryAreas[metroCity] = {
+						[city] : [ town ]
+					};
+					break;
+					
+				case "cityNull":		// 시군구 없을 때
+					deliveryAreas[metroCity][city] = [town];
+					break;
 		
-		
-		let hasCity =  updateArea[type][metroCity].hasOwnProperty(city);
-		console.log(hasCity);
-		console.log(city);
-		
-		// 수영구를 가졌으면
-		if(hasCity) {
-			
-			// 값이 중복되지 않으면 넣어준다.
-			if(!updateArea[type][metroCity][city].includes(town))
-				updateArea[type][metroCity][city].push(town);
-				
-				
-			// add에 추가되면서 displayArea에 값을 안가지고 있어야지 DisplayArea에 값을 추가해준다.
-//			if(type === "add" && displayArea.hasOwnProperty(metroCity) && displayArea[metroCity].hasOwnProperty(city))
-				if(!displayArea[metroCity][city].includes(town))
-					displayArea[metroCity][city].push(town);
-		}
-		// 수영구가 없으면
-		else if(!hasCity){
-			
-//			if(type === "add" && displayArea.hasOwnProperty(metroCity) && displayArea[metroCity].hasOwnProperty(city))
-//				if(!displayArea[metroCity][city].includes(town))
-					displayArea[metroCity][city] = [town];
-//			else 
-				updateArea[type][metroCity][city] = [ town ];
-		}
-	}	
-		
-	else {
-		updateArea[type][metroCity] = {
-			[city] : [ town ]
-		};
-		
-		
-		if(type === "add" && displayArea.hasOwnProperty(metroCity) && displayArea[metroCity].hasOwnProperty(city)) 
-			displayArea[metroCity][city].push(town);
-		else if(type === "add"){
-			displayArea[metroCity] = {
-				[city] : [ town ]
-			};
-		}
-			
+				case "townNull":		// 읍면동 없을 때
+					deliveryAreas[metroCity][city].push(town);
+					break;
+			}
+			break;
+		case "remove":
+			deleteNullProperty(deliveryAreas, metroCity, city, town);
+			break;
 	}
-		
-	console.log('displayArea1' , displayArea);
 	
 }
 
+function deleteNullProperty(checkList, metroCity, city, town) {
+	const idx = checkList[metroCity][city].indexOf(town);
+	delete checkList[metroCity][city].splice(idx,1);
+			
+		
+	if(checkList[metroCity][city].length === 0){
+		delete checkList[metroCity][city];		
+		
+		if(Object.keys(checkList[metroCity]).length === 0){
+			delete checkList[metroCity];
+		} 
+	} 
+}
+
+// 시도 데이터의 존재 여부에 따라서 데이터를 넣어주는 형식을 다르게 해줍니다. [영경 & 건욱]
+function addEnterValue(type, metroCity, city, town) {
+	
+	switch(existAddress(updateArea[type], metroCity, city, town)){
+		case "metrocityNull":	// 시도 없을 때, 데이터가 존재하지 않을 때
+			updateArea[type][metroCity] = {
+				[city] : [ town ]
+			};
+			break;
+			
+		case "cityNull":		// 시군구 없을 때
+			updateArea[type][metroCity][city] = [ town ];
+			break;
+
+		case "townNull":		// 읍면동 없을 때
+			updateArea[type][metroCity][city].push(town);
+			break;
+
+	}
+	
+}
+
+// [건욱 && 영경] 존재하는 주소인지 체크하는 함수
+function existAddress(checkList, metroCity, city, town){
+	
+	if(checkList.hasOwnProperty(metroCity)){
+		if(checkList[metroCity].hasOwnProperty(city)){
+			if(checkList[metroCity][city].includes(town)){
+				return "exist";
+			} else {
+				return "townNull";
+			}
+		} else{
+			return "cityNull";
+		}
+	} else{
+		return "metrocityNull";
+	}
+}
 
 // 지역 데이터를 삭제해주는 역할을 담당하는 함수입니다. [건욱]
 function removeEnterValue(metroCity, city, town) {
 			
-			// 체크 해제했을 때 기존 DB 데이터에 시,도 데이터가 있다면 
-			// remove 필드에 데이터를 넣어준다.
 			
-			// 체크 해제했을 때 기존 DB에 시,도 데이터가 없으면
-			// updateArea add에서 데이터를 삭제해준다.
-			let hasMetroCity =  deliveryAreas.hasOwnProperty(metroCity);
+			let addBucket = updateArea["add"];
 			
-			let getBoolean = false;
+			/*
+			 ♨ existBoolean 
 			
-			if(hasMetroCity) {
-				if(deliveryAreas[metroCity].hasOwnProperty(city))
-					if(deliveryAreas[metroCity][city].includes(town))
-						getBoolean = true;
-			}
-			
-			let ownHasMetroCity = updateArea["remove"].hasOwnProperty(metroCity);
-			
-			
-			
-			// DB 데이터에 시,도 데이터가 있으면 addEnterValue함수를 호출해서 remove필드에 삭제데이터를 추가해줍니다.
-			if(hasMetroCity) {	
+			 	① true
+					updateArea["add"]에 체크된 배달 주소 삭제
 				
-				if(displayArea.hasOwnProperty(metroCity))
-						if(displayArea[metroCity].hasOwnProperty(city)){
-								const idx = displayArea[metroCity][city].indexOf(town);
-								delete displayArea[metroCity][city].splice(idx,1);
-							}
-				// deliveryAreas에 읍면동이 있으면
-				if(getBoolean){
-					
-					// updateArea에 remove를 더해준다.
-					addEnterValue("remove", ownHasMetroCity, metroCity, city, town);
-					if(displayArea.hasOwnProperty(metroCity))
-						if(displayArea[metroCity].hasOwnProperty(city))
-							if(displayArea[metroCity][city].includes(town))	{
-								const idx = displayArea[metroCity][city].indexOf(town);
-								delete displayArea[metroCity][city].splice(idx,1);
-							}
-								
-					
-					
-					
-					
-				}
-				else if (!getBoolean) {
-					const idx = updateArea["add"][metroCity][city].indexOf(town);	
-					console.log(idx);
-					delete updateArea["add"][metroCity][city].splice(idx,1);
-				}
+				② false
+					updateArea["remove"]에 체크된 배달 주소 추가
+			*/
+			
+			let existBoolean = existAddress(addBucket, metroCity, city, town) === "exist";
+			
+			if(existBoolean){
+				// updateArea["add"]에 체크된 배달 주소 삭제
 				
 				
+				deleteNullProperty(addBucket, metroCity, city, town);
 				
 				
+			} else {
+				// updateArea["remove"]에 체크된 배달 주소 추가
+				
+				addEnterValue("remove", metroCity, city, town);
 				
 			}
-			// DB 데이터에 시,도 데이터가 존재하지 않으면  add에 추가된 데이터 값만 삭제해줍니다.
-			else {
-				
-					
-				if(displayArea.hasOwnProperty(metroCity))
-						if(displayArea[metroCity].hasOwnProperty(city))
-							if(displayArea[metroCity][city].includes(town))	{
-								const idx = displayArea[metroCity][city].indexOf(town);
-								delete displayArea[metroCity][city].splice(idx,1);
-							}
-				
-				const idx = updateArea["add"][metroCity][city].indexOf(town);	
-				console.log(idx);
-				delete updateArea["add"][metroCity][city].splice(idx,1);
-				
-				
-			}
-			
-			
-						
-			
-//			const disidx = displayArea[metroCity][city].indexOf(town);
-//			delete displayArea[metroCity][city].splice(disidx,1);
-			
-			
-			
-			
 				
 }
 
@@ -174,21 +132,17 @@ function removeEnterValue(metroCity, city, town) {
 function configurationObject(checkBoolean,metroCity,city,town) {
 	let type = checkBoolean ? "add" : "remove";
 	
-	
-	console.log("type", type);
-	
-	// DB에 전달할 객체에 클릭한 시,도 데이터가 존재하는지 확인해주는 값입니다.
-	let hasMetroCity = updateArea[type].hasOwnProperty(metroCity);
-	
-	
 	// type이 add이면 addEnterValue함수를 호출합니다.
 	if(type === "add") 
-		addEnterValue(type, hasMetroCity, metroCity, city, town);
+		addEnterValue(type, metroCity, city, town);
 		
 	// type이 remove이면 removeEnterValue함수를 호출합니다.	
 	else 
 		removeEnterValue( metroCity, city, town);
-			
+	
+	
+	configuredeliveryAreas(type, metroCity, city, town);
+	
 }
 
 // 추가-삭제 관련 객체 & 기,존 배달지역 객체 업데이트 [건욱]
@@ -199,7 +153,7 @@ function updatedeliveryAreaObject(id, metroCity, city, town) {
 	configurationObject(checkbox.checked,metroCity,city,town);
 	
 	console.log(updateArea);	
-	console.log('display', displayArea);
+	console.log('display', deliveryAreas);
 }
 
 
@@ -209,16 +163,16 @@ function displayDeliveryArea() {
 	
 	
 	// 정렬
-	const sMCities = Object.keys(displayArea).sort(); 
+	const sMCities = Object.keys(deliveryAreas).sort(); 
 	const sObject = {};
 		
 	for (let i = 0; i < sMCities.length; i++) {
-		sObject[sMCities[i]] = displayArea[sMCities[i]]; // 시도 정렬
+		sObject[sMCities[i]] = deliveryAreas[sMCities[i]]; // 시도 정렬
 
-		const sCities = Object.keys(displayArea[sMCities[i]]).sort(); // 시군구 정렬
+		const sCities = Object.keys(deliveryAreas[sMCities[i]]).sort(); // 시군구 정렬
 		
 		for (let j = 0; j < sCities.length; j++) {
-			sObject[sMCities[i]][sCities[j]] = displayArea[sMCities[i]][sCities[j]].sort();
+			sObject[sMCities[i]][sCities[j]] = deliveryAreas[sMCities[i]][sCities[j]].sort();
 		}
 		
 	}
@@ -277,9 +231,6 @@ function displayDeliveryArea() {
 			cityCon.appendChild(city);
 			metroCityCon.appendChild(cityCon);
 			
-			// 읍면동 데이터가 없으면 시군구 뷰를 삭제해줍니다.
-			if(townCon.childElementCount === 0)
-				city.remove();
 			
 		}
 		// 삽입
@@ -287,13 +238,7 @@ function displayDeliveryArea() {
 		viewCon.appendChild(container);
 		
 		
-		console.log(metroCityCon.childElementCount);
 		
-		// [건욱] display 생성도중 도시가 없으면 시,도 뷰를 삭제해줍니다.
-		if(cityCon.childElementCount === 0 ) {
-			container.remove();
-			
-		}
 			
 		
 	}
@@ -399,13 +344,13 @@ async function createDetailOptions() {
 
 //체크박스 설정
 function inquireResource(metroCity, city, town) {
-	const isMetroCity = displayArea[metroCity];
+	const isMetroCity = deliveryAreas[metroCity];
 	
 	if (isMetroCity) {
-		const isCity = displayArea[metroCity][city];
+		const isCity = deliveryAreas[metroCity][city];
 		
 		if (isCity) {
-			const isTown = displayArea[metroCity][city].includes(town);
+			const isTown = deliveryAreas[metroCity][city].includes(town);
 			return isTown ? true : false;
 		}
 	}
