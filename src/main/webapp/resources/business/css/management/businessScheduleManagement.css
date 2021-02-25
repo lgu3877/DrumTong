@@ -52,6 +52,12 @@
 	color: white;
 }
 
+.marker_today {
+	transition: 1s;
+	background-color: navy;
+	color: white;
+}
+
 .marker_con {
 	position: absolute;
     background-color: transparent;
