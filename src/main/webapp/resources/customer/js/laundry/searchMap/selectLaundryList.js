@@ -55,6 +55,12 @@ function insertLaundryList(premiumList, generalList) {
 	console.log('premiumList :', premiumList);
 	console.log('generalList :', generalList);
 
+	createPremium(premiumList);
+	createGeneral(generalList);
+}
+
+// ■ 프리미엄 리스트를 생성하는 함수
+function createPremium(premiumList) {
 	let laundryList_premium = document.querySelector('#laundryList_premium');
 	let primium_childs = laundryList_premium.querySelectorAll('.premium_childs');
 	const p_length = premiumList.length;
@@ -69,6 +75,7 @@ function insertLaundryList(premiumList, generalList) {
 		for (let i = 0; i < premiumList.length; i++) {
 			primium_childs[i].style.display = '';
 			
+			console.log(typeof premiumList[i].mainimg);
 			primium_childs[i].querySelector('.mainimg').setAttribute('src',  'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + premiumList[i].mainimg);
 			
 			const img_path = 'location.href = "' + getContextPath() + '/customer/laundry/customerDetail/' + premiumList[i].estid + '/"'
@@ -94,13 +101,21 @@ function insertLaundryList(premiumList, generalList) {
 		if (premiumList.length == 1)
 			primium_childs[1].style.display = 'none';
 	}
-	// 프리미엄 리스트 부분 생성하는 조건문 끝자락
+}
 
 
-	// 일반 리스트 부분 생성하는 조건문 시작지점
+function createGeneral(generalList) {
+//	document.querySelector('.laundryList_child_list').append(common_clone);
+	let laundryList = document.querySelector('.laundryList_child_list');
+	const half_length = Math.round(generalList.length / 2) - 1;
 	
+	console.log('half_length : ' + half_length);
 	
-	// 일반 리스트 부분 생성하는 조건문 끝자락
+	for(let i = 0; i < half_length; i++) {
+		laundryList.append(common_clone);
+	}
+	
+
 }
 
 useEmdcode('26350105');	// ■ 테스트 코드! 나중에 지워야 한다!

@@ -135,13 +135,11 @@
                                         </div>
                                         <div class="childs_info_1_1">
                                             <div class="child_info_left">
-                                            	<h1 class="brandnaming">드럼세탁소<span class="reviewnum">(3)</span></h1>
-	                                            <p class="gpa">
-	                                            	5.0
-	                                            </p>
+                                            	<h1 class="brandnaming"><span class="reviewnum">(3)</span></h1>
+	                                            <p class="gpa"></p>
                                          	</div>
                                             
-                                            <p class="mainlocation" title="부산 해운대구 해운대해변로 85 (우동, 경동아파트)">부산 해운대구 해운대해변로 85 (우동, 경동아파트)</p>
+                                            <p class="mainlocation"></p>
                                             <div class="childs_image_1_1"></div>
                                         </div>
                                 </li>
@@ -164,14 +162,11 @@
 									</div>
 									<div class="childs_info_1_1">
 										<div class="child_info_left">
-											<h1 class="brandnaming">
-												드럼세탁소<span class="reviewnum">(3)</span>
-											</h1>
-											<p class="gpa">5.0</p>
+											<h1 class="brandnaming"><span class="reviewnum"></span></h1>
+											<p class="gpa"></p>
 										</div>
 
-										<p class="mainlocation" title="부산 해운대구 해운대해변로 85 (우동, 경동아파트)">부산
-											해운대구 해운대해변로 85 (우동, 경동아파트)</p>
+										<p class="mainlocation"></p>
 										<div class="childs_image_1_1"></div>
 									</div>
 								</li>
@@ -235,7 +230,8 @@
 					if (counts.length > 6) {
 						more.style.display = 'block';
 					}
-				</script>
+					
+	</script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/selectLaundryList.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-main.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-sub.js"></script>
