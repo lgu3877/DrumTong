@@ -244,7 +244,8 @@ async function updateDelivery() {
 		const { data } = await axios.post("/drumtong/business/mainmanagement/BManagement/rest/updateDeliveryBoolean/", result);
 		alertShow(data);
 	} catch(e) {
-		console.log(data);	
+		alert('비정상적인 오류가 발생되었습니다. 다시 시도해주세요..!');
+		return false;
 	}
 	
 	
@@ -255,8 +256,13 @@ async function updateDeliveryArea() {
 	// data
 	
 	// axios > post > update
-	const { data } = await axios.post("/drumtong/business/mainmanagement/BDeliveryArea/rest/updateBDeliveryArea/", updateArea);
-	
+	try{
+		const { data } = await axios.post("/drumtong/business/mainmanagement/BDeliveryArea/rest/updateBDeliveryArea/", updateArea);
+		alertShow(data);
+	} catch(e) {
+		alert('비정상적인 오류가 발생되었습니다. 다시 시도해주세요..!');
+		return false;	
+	}
 	// 뷰 업데이트
 }
 

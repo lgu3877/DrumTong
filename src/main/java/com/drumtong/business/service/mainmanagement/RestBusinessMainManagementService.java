@@ -262,14 +262,38 @@ public class RestBusinessMainManagementService {
 		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
 		String estid= bInformationVO.getEstid();
 		
-		List<BDeliveryAreaVO> deleteBDeliveryAreaList = DeliveryAreaListSetting.selectBDeliveryAreaList(bDeliveryAreaList, "remove");
+		// 프론트에서 전달받은 데이터를 databinding 시켜준다. [Delete 데이터]
+		List<BDeliveryAreaVO> deleteBDeliveryAreaList = DeliveryAreaListSetting.selectBDeliveryAreaList(estid, bDeliveryAreaList, "remove");
+
+		// 프론트에서 전달받은 데이터를 databinding 시켜준다. [Insert 데이터]
+		List<BDeliveryAreaVO> insertBDeliveryAreaList = DeliveryAreaListSetting.selectBDeliveryAreaList(estid, bDeliveryAreaList, "add");
 		
-		List<BDeliveryAreaVO> insertBDeliveryAreaList = DeliveryAreaListSetting.selectBDeliveryAreaList(bDeliveryAreaList, "add");
 		
-//		int RestUpdateBDeliveryAreaReuslt = bDeliveryAreaDAO.updateBDeliveryArea(bDeliveryAreaDataBinding(bDeliveryAreaList,estid));
+		int result = 0;
 		
-//		return RestUpdateBDeliveryAreaReuslt;
-		return 0;
+		// 전달받은 데이터를 Delete -> insert 순으로 시켜준다.
+		
+		for (BDeliveryAreaVO deleteVO : deleteBDeliveryAreaList) {
+			
+			result = bDeliveryAreaDAO.deleteBDeliveryAreaList(deleteVO);
+			if(result == 0 )
+				return 0;
+		}
+			
+			
+		for (BDeliveryAreaVO insertVO : insertBDeliveryAreaList) {
+			
+			result = bDeliveryAreaDAO.insertConstract(insertVO);
+			if(result == 0 )
+				return 0;
+		}
+			
+		
+		
+		
+		
+		
+		return result;
 	}
 	
 	

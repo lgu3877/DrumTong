@@ -3,6 +3,8 @@
 		"-//mybatis.org//DTD Mapper 3.0//EN" 
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!-- 건욱 -->
+
 <!-- 사업장 배달지역 테이블	 -->
 <mapper namespace="com.drumtong.business.dao.BDeliveryAreaDAO">
 
@@ -67,5 +69,20 @@
 			WHERE ESTID = #{estid}
 			
 	</update>
+	
+<!-- 	배달 지역을 비동기식으로 삭제해주는 메서드입니다. -->
+	<delete id="deleteBDeliveryAreaList" parameterType="BDeliveryAreaVO">
+		DELETE 
+			FROM 
+		BDELIVERYAREA
+			WHERE
+		ESTID = #{estid} 
+			AND 
+				ADDRESSA = #{addressa} 
+			AND 
+				ADDRESSB = #{addressb} 
+			AND 
+				ADDRESSC = #{addressc}
+	</delete>
 
 </mapper>
