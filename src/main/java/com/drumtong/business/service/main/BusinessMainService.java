@@ -57,5 +57,19 @@ public class BusinessMainService {
 		return mav;
 	}
 
+	// 비즈니스 메뉴얼 페이지로 이동 (GET) [건욱]
+	public ModelAndView businessIntroduceService(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView("business/main/businessIntroduceService");
+		return mav;
+	}
+
+	// 비즈니스 서비스 소개 페이지로 이동 (GET) [건욱]
+	public ModelAndView businessManual(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView("business/main/businessManual");
+		return mav;
+	}
+	
+	
+
 //	@Transactional(timeout=5)
 }
