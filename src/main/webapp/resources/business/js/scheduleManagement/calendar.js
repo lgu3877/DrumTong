@@ -358,7 +358,6 @@ function markToday() {
 		for (let i = 0; i < days.length; i++) {
 			const dayString = days[i].querySelector(".day").innerText;
 			
-			
 			if (currentDate === parseInt(dayString)) {
 				days[i].classList.add("marker_today");
 				
