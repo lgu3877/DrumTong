@@ -58,20 +58,8 @@
             </select>
 
             <select class="filter_op" id="filter2">
-                <option value="today">오늘 영업</option>
-                <option value="WEEKDAY">평일 영업</option>
-                <option value="SATURDAY">토요일 영업</option>
-                <option value="SUNDAY">일요일 영업</option>
-                <option value="weekend">주말 영업</option>
-            </select>
-            
-            <select class="filter_op" id="filter3">
-                <option value="none">영업 시간</option>
-                <option value="24">24시간</option>
-                <option value="0시~6시">0시~6시</option>
-                <option value="6시~12시">6시~12시</option>
-                <option value="12시~18시">12시~18시</option>
-                <option value="18시~24시">18시~24시</option>
+                <option value="weekend">모든 매장</option>
+                <option value="today">영업중인 매장</option>
             </select>
 
             <select class="filter_op" id="filter4">
