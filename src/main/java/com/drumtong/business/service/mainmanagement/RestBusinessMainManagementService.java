@@ -35,6 +35,8 @@ import com.drumtong.map.dao.MEmdDAO;
 import com.drumtong.map.dao.MSidoDAO;
 import com.drumtong.map.dao.MSigunguDAO;
 import com.drumtong.security.AwsServiceImpl;
+import com.drumtong.security.DeliveryAreaListSetting;
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
 // [건욱]
 @Service
@@ -167,7 +169,7 @@ public class RestBusinessMainManagementService {
 	
 	
 	// 통합
-	public int bMenuRestProcessing(HttpServletRequest req, List<BMenuVO> ListBMenuVO, String processing) {
+	public List<BMenuVO> bMenuRestProcessing(HttpServletRequest req, List<BMenuVO> ListBMenuVO, String processing) {
 		HttpSession Session = req.getSession();
  	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
  	    String estid = bInformationVO.getEstid();
@@ -196,10 +198,12 @@ public class RestBusinessMainManagementService {
  	    		result = bMenuDAO.deleteBMenu(bMenuVO);
  	    		break;
  	    	}
- 	    	
  	    }
  	    
-		return result;
+ 	    
+ 	    
+ 	    
+ 	   return result == 1  ? bMenuDAO.select(estid) : null ;
 	}
 
 	
@@ -253,18 +257,48 @@ public class RestBusinessMainManagementService {
 	// ===== 중분류 [BDELIVERYAREA] 테이블 ====	
 	
 	// 1. 배달 지역을 비동기식으로 수정해주는 메서드입니다.
-	public int updateBDeliveryArea(HttpServletRequest req, BDeliveryAreaVO bDeliveryAreaVO) {
+	public int updateBDeliveryArea(HttpServletRequest req, HashMap<String,HashMap<String,HashMap<String,ArrayList<String>>>> bDeliveryAreaList) {
 		HttpSession Session = req.getSession();
 		BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
 		String estid= bInformationVO.getEstid();
-		bDeliveryAreaVO.setEstid(estid);
 		
-		int RestUpdateBDeliveryAreaReuslt = bDeliveryAreaDAO.updateBDeliveryArea(bDeliveryAreaVO);
+		// 프론트에서 전달받은 데이터를 databinding 시켜준다. [Delete 데이터]
+		List<BDeliveryAreaVO> deleteBDeliveryAreaList = DeliveryAreaListSetting.selectBDeliveryAreaList(estid, bDeliveryAreaList, "remove");
+
+		// 프론트에서 전달받은 데이터를 databinding 시켜준다. [Insert 데이터]
+		List<BDeliveryAreaVO> insertBDeliveryAreaList = DeliveryAreaListSetting.selectBDeliveryAreaList(estid, bDeliveryAreaList, "add");
 		
-		return RestUpdateBDeliveryAreaReuslt;
+		
+		int result = 0;
+		
+		// 전달받은 데이터를 Delete -> insert 순으로 시켜준다.
+		
+		for (BDeliveryAreaVO deleteVO : deleteBDeliveryAreaList) {
+			
+			result = bDeliveryAreaDAO.deleteBDeliveryAreaList(deleteVO);
+			if(result == 0 )
+				return 0;
+		}
+			
+			
+		for (BDeliveryAreaVO insertVO : insertBDeliveryAreaList) {
+			
+			result = bDeliveryAreaDAO.insertConstract(insertVO);
+			if(result == 0 )
+				return 0;
+		}
+			
+		
+		
+		
+		
+		
+		return result;
 	}
-
-
+	
+	
+	
+	
 	// ========================= 대분류 [일정관리] ================================
 	
 	

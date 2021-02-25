@@ -7,8 +7,30 @@ let quickToggle;
 // 초기 실행
 if(status === "SUCCESS") displayMenu();
 
+// 서비스 등록 메뉴가 비어있을 때 나타내주는 메시지입니다. [건욱]
+function emptyMenuListMSG(bMenu) {
+	console.log('실행 비어있는 메뉴');
+	let expressMSG = document.getElementById("posted-service-list");
+
+	
+	if(bMenu.length === 0) {
+		expressMSG.innerHTML = "등록된 서비스 메뉴가 존재하지 않습니다. 서비스 등록을 해주세요."
+		return true;
+	}
+	else {
+		expressMSG.innerHTML = "";
+		return false;
+	}	
+	
+}
+
 // 메뉴 생성
 function displayMenu() {
+	
+	// 등록된 메뉴가 없으면은 이 함수를 실행시키지 않고 빠져나가줍니다 [건욱]
+	if(emptyMenuListMSG(bMenu))
+		return false;
+	
 	// object 생성
 	let list = {};
 	for (let item = 0; item < bMenu.length; item++) {
@@ -117,6 +139,9 @@ function displayMenu() {
 		
 		container.appendChild(mainCon);
 	}
+	
+	
+	console.log('list',list);
 }
 
 // 서비스 메뉴 > 리스트 > 클릭 이벤트(메인 > 서브)
@@ -248,6 +273,12 @@ function toggleSubCategory(id, list, subToggle, main, sub) {
 }
 
 
+// 모달 닫기 함수 [건욱]
+function modalClose() {
+	document.getElementById('modify-menu-modal').style.display = "none";
+	document.getElementById('modify-menu-modal').innerHTML = "";
+}
+
 // 서비스 수정 모달 열기
 function openMenuModifyModal(main, sub, info) {
 	const modal = document.getElementById("modify-menu-modal");
@@ -280,8 +311,7 @@ function openMenuModifyModal(main, sub, info) {
 		
 			// 닫기 버튼 이벤트
 			closeBtn.onclick = () => {
-				document.getElementById('modify-menu-modal').style.display = "none";
-		    	document.getElementById('modify-menu-modal').innerHTML = "";
+				modalClose();
 			}
 			
 			// form
@@ -545,7 +575,7 @@ function openMenuModifyModal(main, sub, info) {
 					
 					if (deleteMenu(rmObject)) {
 						document.getElementById("posted-service-list").innerHTML = ""; // 초기화
-//						displayMenu(); // 메뉴 재생성
+						displayMenu(); // 메뉴 재생성
 					}
 					else {
 						alert("존재하지 않는 서비스입니다. 새로고침이 필요합니다.");

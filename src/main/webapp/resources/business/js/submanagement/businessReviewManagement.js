@@ -30,49 +30,56 @@
 		// 페이지까지 고려해서 i 값을 변경하도록 하자 -> 리뷰 3개씩 보여주는 형식이라면 2페이지에서 i = 3이 되도록...
 		// count < 숫자 -> 에서 '숫자'만큼 한페이지에 리뷰 게시판이 표현됩니다
 		for (i = (pagenum - 1) * 3; i < bReviewList.length && count < 3; i++) {
-			var reviewflex = document.createElement('div');
+			let reviewflex = document.createElement('div');
 			reviewflex.className = 'reviewflex';
-			var imgdiv = document.createElement('div');
+			let imgdiv = document.createElement('div');
 			imgdiv.className = 'imgdiv';
-			var profile = document.createElement('img');
-			profile.setAttribute('src', '');				// 고객 프로필 이미지 경로 추가시키기		
+			let profile = document.createElement('img');
+			
+			if(typeof bReviewList[i].profileimg !== typeof undefined) {
+				profile.setAttribute('src', 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + bReviewList[i].profileimg);				// 고객 프로필 이미지 경로 추가시키기		
+			}
+			else {
+				profile.setAttribute('src', '');
+			}
+			
 			imgdiv.appendChild(profile);
 			reviewflex.appendChild(imgdiv);
 
 
-			var table = document.createElement('div');
+			let table = document.createElement('div');
 			table.className = 'table';
-			var row1 = document.createElement('div');
+			let row1 = document.createElement('div');
 			row1.className = 'row';
-			var row2 = document.createElement('div');
+			let row2 = document.createElement('div');
 			row2.className = 'row';
 
-			var customerName = document.createElement('h1');
+			let customerName = document.createElement('h1');
 			customerName.className = 'customerName';
 			customerName.innerHTML = bReviewList[i].customerName;
-			var cregistdate = document.createElement('h1');
+			let cregistdate = document.createElement('h1');
 			cregistdate.className = 'cregistdate';
 			cregistdate.innerHTML = bReviewList[i].cregistdate;
 			row1.appendChild(customerName);
 			row1.appendChild(cregistdate);
 			table.appendChild(row1);
 			
-			var good = document.createElement('h1');
+			let good = document.createElement('h1');
 			good.className = 'left15';
 			good.innerHTML = '좋아요';
-			var mgood = document.createElement('h1');
+			let mgood = document.createElement('h1');
 			mgood.className = 'left10';
 			mgood.innerHTML = bReviewList[i].mgood;
-			var report = document.createElement('h1');
+			let report = document.createElement('h1');
 			report.className = 'left10';
 			report.innerHTML = '신고';
-			var reportcount = document.createElement('h1');
+			let reportcount = document.createElement('h1');
 			reportcount.className = 'left15';
 			reportcount.innerHTML = bReviewList[i].reportcount;
-			var score = document.createElement('h1');
+			let score = document.createElement('h1');
 			score.className = 'center15';
 			score.innerHTML = '평점';
-			var gpadiv = document.createElement('div');
+			let gpadiv = document.createElement('div');
 			gpadiv.className = 'left35';
 			
 			var gpa = bReviewList[i].gpa;
@@ -100,16 +107,16 @@
 			table.appendChild(row2);
 			reviewflex.appendChild(table);
 			
-			var btndiv = document.createElement('div');
+			let btndiv = document.createElement('div');
 			btndiv.className = 'btndiv';
 			
 			// 사업자가 답글을 작성하는 공간 및 작성된 답글을 보여주는 공간
-			var businessdiv = document.createElement('div');
+			let businessdiv = document.createElement('div');
 			businessdiv.className = 'businessdiv';
 			businessdiv.setAttribute('id', bReviewList[i].salecode);			
 			
 			if(bReviewList[i].blockboolean == 'N') {
-				var button1 = document.createElement('input');
+				let button1 = document.createElement('input');
 				button1.setAttribute('type', 'button');
 				button1.setAttribute('name', bReviewList[i].salecode);
 				if(bReviewList[i].replyboolean == 'N') {
@@ -120,16 +127,16 @@
 					button1.setAttribute('value', '답변삭제');
 					button1.setAttribute('onclick', 'replyDelete(this)');
 					
-					var div15 = document.createElement('div');
+					let div15 = document.createElement('div');
 					div15.style.width = '15%';
 					
-					var replydiv = document.createElement('div');
+					let replydiv = document.createElement('div');
 					replydiv.className = 'replydiv';
 					
-					var righthand = document.createElement('i');
+					let righthand = document.createElement('i');
 					righthand.className = 'far fa-hand-point-right fa-3x';
 					
-					var bcontent = document.createElement('h1');
+					let bcontent = document.createElement('h1');
 					bcontent.innerHTML =  bReviewList[i].bcontent;
 					
 					businessdiv.appendChild(div15);
@@ -137,8 +144,8 @@
 					replydiv.appendChild(bcontent);
 					businessdiv.appendChild(replydiv);
 				}
-				var betweendiv = document.createElement('div');
-				var button2 = document.createElement('input');
+				let betweendiv = document.createElement('div');
+				let button2 = document.createElement('input');
 				button2.setAttribute('type', 'button');
 				button2.setAttribute('value', '차단/신고');				// 차단/신고 란에서는 '차단/신고 해제'로...
 				button2.setAttribute('name', bReviewList[i].salecode);
@@ -150,7 +157,7 @@
 				btndiv.appendChild(button2);
 			}
 			else {
-				var button = document.createElement('input');
+				let button = document.createElement('input');
 				button.setAttribute('type', 'button');
 				button.setAttribute('value', '차단/신고 해제');
 				button.setAttribute('onclick', 'blockCancle(this)');
@@ -160,22 +167,32 @@
 			
 			reviewflex.appendChild(btndiv);
 
-			var extradiv1 = document.createElement('div');
+			let extradiv1 = document.createElement('div');
 			extradiv1.className = 'extradiv';
-			var textarea = document.createElement('textarea');
+			let textarea = document.createElement('textarea');
+			textarea.readOnly = true;
 			textarea.innerHTML = bReviewList[i].ccontent;
 			extradiv1.appendChild(textarea);
 
-			var extradiv2 = document.createElement('div');
-			extradiv2.className = 'extradiv';
-			var reviewimg = document.createElement('img');
-			reviewimg.setAttribute('src', '');						// 리뷰 이미지 경로 추가시키기
-			extradiv2.appendChild(reviewimg);
+			
+			let end_hr = document.createElement('hr');
+			end_hr.style.marginBottom = '30px';
 			
 			reviewDiv.appendChild(reviewflex);
 			reviewDiv.appendChild(extradiv1);
-			reviewDiv.appendChild(extradiv2);
+			
+			if(typeof bReviewList[i].reviewimg !== typeof undefined) {
+				let extradiv2 = document.createElement('div');
+				extradiv2.className = 'extradiv';
+				let reviewimg = document.createElement('img');
+				reviewimg.setAttribute('src', 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + bReviewList[i].reviewimg);						// 리뷰 이미지 경로 추가시키기
+				reviewimg.style.height = '200px';
+				extradiv2.appendChild(reviewimg);
+				reviewDiv.appendChild(extradiv2);
+			}
+
 			reviewDiv.appendChild(businessdiv);
+			reviewDiv.appendChild(end_hr);
 					
 			count++;
 		}

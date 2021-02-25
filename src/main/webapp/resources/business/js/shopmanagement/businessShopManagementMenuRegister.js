@@ -8,6 +8,11 @@ let deliveryToggle = false;
 createAddService();
 createCategoryList(); // 메뉴수정 관련 Modal
 
+// 서비스 등록을 초기화시켜줍니다. [건욱]
+function cleanAddService() {
+	let container = document.getElementById("add-item-list");
+	container.innerHTML = "";
+}
 
 
 // 서비스 등록 > 입력 input & select 생성
@@ -284,9 +289,17 @@ function clearSubOptions(subCategoryId) {
 function populateSubOptions(key, subCategoryId, modifyBoolean) {
 	const subSelect = document.getElementById(subCategoryId);
 	
+	console.log('서브옵션 생성 발동');
+	console.log(key);
+	console.log(subCategoryId);
+	console.log(modifyBoolean);
+	console.log(menuCategories);
 	// 하부 카테고리
 	const sotredMenu = menuCategories[key].sort(); 	// value 정렬	
+	console.log(sotredMenu);
 	for (let i = 0; i < sotredMenu.length; i++) {
+		
+		console.log(menuCategories[key][i]);
 		option = document.createElement("option");
 		option.className = "sub_option";
 		option.innerHTML = menuCategories[key][i];

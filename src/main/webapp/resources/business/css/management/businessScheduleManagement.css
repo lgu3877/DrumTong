@@ -23,15 +23,67 @@
 	display: none !important;
 }
 
+/* 색(color) */
+.bg_red {
+	background-color: #f38181 !important;
+	
+}
+
+.bg_mint {
+	background-color: #95e1d3 !important;
+}
+
 /* 정기 휴무 캘린더 배경색 */
 .reg_holiday {
+	height: 10px;
+    width: 10px;
+    margin-left: 3px;
 	background-color: #f38181 !important;
+}
+
+.temp_holiday {
+	height: 10px;
+    width: 10px;
+    margin-left: 3px;
+	background-color: #95e1d3 !important;
 }
 
 .reg_holiday h {
 	color: white;
 }
 
+.marker_con {
+	position: absolute;
+    background-color: transparent;
+    height: 18px;
+    width: 100%;
+    top: 1px;
+    display: flex;
+}
+
+.marker_wrapper {
+	display: block;
+    margin-top: 10px;
+}
+
+.marker_info_con {
+	justify-content: flex-end;
+    display: flex;
+}
+
+.marker_bar {
+	width: 50px;
+    height: 10px;
+    margin: auto 10px auto 0;
+}
+
+.marker_info {
+	letter-spacing: 2px;
+    font-size: 11pt;
+	margin: auto 0;
+}
+
+ 
 /* 폰트 옵션 */
 .text_blue {
 	color: #3b5998;

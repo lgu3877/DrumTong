@@ -50,6 +50,7 @@ function displayTmpHoliday() {
 					
 					// start input
 					const startInput = document.createElement("input"); 
+					startInput.className = "period_start";
 					startInput.type = "date";
 					startInput.name = "updateStartDay";
 					startInput.value = data.beginday; // data preview
@@ -61,6 +62,7 @@ function displayTmpHoliday() {
 					
 					// end input
 					const endInput = document.createElement("input");
+					endInput.className = "period_end";
 					endInput.type = "date";
 					endInput.name = "updateEndDay";
 					endInput.value = data.endday; // data preview
@@ -79,7 +81,9 @@ function displayTmpHoliday() {
 				reasonInput.className = "reason_view_input";
 				reasonInput.classList.add("hide");
 				reasonInput.type = "text";
+				reasonInput.name = "updateReason";
 				reasonInput.value = data.reason;
+				reasonInput.maxlength = "500";
 			
 			// 아이콘(cancle)
 			const cancleIcon = document.createElement("li");

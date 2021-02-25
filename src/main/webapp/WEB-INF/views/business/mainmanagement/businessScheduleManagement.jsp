@@ -37,6 +37,10 @@
    	<!-- jQuery -->
    	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
+	<!-- Holiday API -->
+   	<script type="text/javascript" src="${cpath }/business/js/holidayApi.js"></script>
+
+
 	<!-- objects from DB -->
 	<script type="text/javascript">
 		// 정기휴무

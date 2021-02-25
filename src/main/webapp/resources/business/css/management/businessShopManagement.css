@@ -1296,6 +1296,7 @@
 }
 
 .townName {
+	margin-bottom : 10px;
 	margin-right: 10px;
     text-align: center;
     padding: 5px 10px;

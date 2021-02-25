@@ -92,177 +92,95 @@
 
                 <div class="laundryList_child">
 
-                    <ul class="laundryList_child_list">
+                    <div class="laundryList_child_list">
                         <div class="premium_nameBox">
                             <p class="premium_name">프리미엄</p>
-                            <a class="premium_more">더보기 〉</a>
                         </div>
                         <hr class="premium_hr">
 
-                        <div class="laundryList_premium">
+                        <div class="laundryList_premium" id="laundryList_premium">
                             <ul class="premium_list">
 
-                                <li class="laundryList_childs premium_childs">
-                                    <a href="${cpath }/customer/laundry/customerDetail/ESTID_ce8e90b3489649d788116e8113d6f65e/">
+                                <li class="laundryList_childs premium_childs" >
                                         <div class="childs_info_1 premium_childs_info_1">
-                                            <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
-                                            <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
+                                            <i class="fas fa-star fa-start" aria-hidden="true" onclick="bookmark()"></i>
+                                            <img class="mainimg" onclick="location.href = '${cpath }/customer/laundry/customerDetail/ESTID_ce8e90b3489649d788116e8113d6f65e/'">
                                         </div>
-                                        <div class="childs_info_1_1 premium_childs_info_1_1">
-                                            <p>펭수에욤</p>
-                                            <p>버럭!</p>
+                                        <div class="childs_info_1_1">
+                                            <div class="child_info_left">
+                                            	<h1 class="brandnaming"></h1>
+	                                            <p class="gpa"></p>
+                                         	</div>
+                                            
+                                            <p class="mainlocation"></p>
+                                            <div class="childs_image_1_1"></div>
                                         </div>
-                                    </a>
-                                </li>
-
-                                <li class="laundryList_childs premium_childs">
-                                    <a href="${cpath }/customer/laundry/customerDetail/ESTID_ce8e90b3489649d788116e8113d6f65e/">
-                                        <div class="childs_info_1 premium_childs_info_1">
-                                            <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
-                                            <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
-                                            <!-- <img/> -->
-                                        </div>
-                                        <div class="childs_info_1_1 premium_childs_info_1_1">
-                                            <p>펭수에욤</p>
-                                            <p>버럭!</p>
-                                        </div>
-                                    </a>
                                 </li>
                                 
+                                <li class="laundryList_childs premium_childs" >
+                                        <div class="childs_info_1 premium_childs_info_1">
+                                            <i class="fas fa-star fa-start"  aria-hidden="true" onclick="bookmark()"></i>
+                                            <img src="${cpath }/resources/customer/img/펭수버럭.jpg" onclick="location.href = '${cpath }/customer/laundry/customerDetail/ESTID_ce8e90b3489649d788116e8113d6f65e/'">
+                                        </div>
+                                        <div class="childs_info_1_1">
+                                            <div class="child_info_left">
+                                            	<h1 class="brandnaming"><span class="reviewnum">(3)</span></h1>
+	                                            <p class="gpa"></p>
+                                         	</div>
+                                            
+                                            <p class="mainlocation"></p>
+                                            <div class="childs_image_1_1"></div>
+                                        </div>
+                                </li>
                             </ul>
                         </div>
-                        <hr class="premium_hr">
 
-                        <li class="laundryList_childs">
-                            <a href="${cpath }/customer/laundry/customerDetail/ESTID_ce8e90b3489649d788116e8113d6f65e/">
-                                <div class="childs_info_1">
-                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
-                                    <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
-                                </div>
-                                <div class="childs_info_1_1">
-                                    <p>펭수에욤</p>
-                                    <p>버럭!</p>
-                                </div>
-                            </a>
-                        </li>
+						<div class="common_nameBox">
+							<p class="common_name">일반</p>
+						</div>
+						<hr class="common_hr">
+						<div class="laundryList_common">
+							<ul class="common_list">
 
-                        <li class="laundryList_childs">
-                            <a href="#">
-                                <div class="childs_info_1">
-                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
-                                    <img src="${cpath }/resources/customer/img/펭수버럭.jpg"> </div> <div
-                                        class="childs_info_1_1">
-                                        <p>펭수에욤</p>
-                                        <p>버럭!</p>
-                                </div>
-                            </a>
-                        </li>
+								<li class="laundryList_childs common_childs">
+									<div class="childs_info_1 common_childs_info_1">
+										<i class="fas fa-star fa-start" 
+											aria-hidden="true" onclick="bookmark()"></i> <img
+											src="${cpath }/resources/customer/img/펭수버럭.jpg"
+											onclick="location.href = '${cpath }/customer/laundry/customerDetail/ESTID_ce8e90b3489649d788116e8113d6f65e/'">
+									</div>
+									<div class="childs_info_1_1">
+										<div class="child_info_left">
+											<h1 class="brandnaming"><span class="reviewnum"></span></h1>
+											<p class="gpa"></p>
+										</div>
 
-                        <li class="laundryList_childs">
-                            <a href="#">
-                                <div class="childs_info_1">
-                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
-                                    <img src="${cpath }/resources/customer/img/펭수귀염.jpg">
-                                </div>
-                                <div class="childs_info_1_1">
-                                    <p>펭수에욤</p>
-                                    <p>버럭!</p>
-                                </div>
-                            </a>
-                        </li>
+										<p class="mainlocation"></p>
+										<div class="childs_image_1_1"></div>
+									</div>
+								</li>
+								<li class="laundryList_childs common_childs">
+									<div class="childs_info_1 common_childs_info_1">
+										<i class="fas fa-star fa-start" 
+											aria-hidden="true" onclick="bookmark()"></i> <img
+											src="${cpath }/resources/customer/img/펭수버럭.jpg"
+											onclick="location.href = '${cpath }/customer/laundry/customerDetail/ESTID_ce8e90b3489649d788116e8113d6f65e/'">
+									</div>
+									<div class="childs_info_1_1">
+										<div class="child_info_left">
+											<h1 class="brandnaming"><span class="reviewnum"></span></h1>
+											<p class="gpa"></p>
+										</div>
 
-                        <li class="laundryList_childs">
-                            <a href="#">
-                                <div class="childs_info_1">
-                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
-                                    <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
-                                </div>
-                                <div class="childs_info_1_1">
-                                    <p>펭수에욤</p>
-                                    <p>버럭!</p>
-                                </div>
-                            </a>
-                        </li>
+										<p class="mainlocation"></p>
+										<div class="childs_image_1_1"></div>
+									</div>
+								</li>
+							</ul>
+						</div>
 
-                        <li class="laundryList_childs">
-                            <a href="#">
-                                <div class="childs_info_1">
-                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
-                                    <img src="${cpath }/resources/customer/img/펭수귀염.jpg">
-                                </div>
-                                <div class="childs_info_1_1">
-                                    <p>펭수에욤</p>
-                                    <p>버럭!</p>
-                                </div>
-                            </a>
-                        </li>
+					</div>
 
-                        <li class="laundryList_childs">
-                            <a href="#">
-                                <div class="childs_info_1">
-                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
-                                    <img src="${cpath }/resources/customer/img/펭수버럭.jpg">
-                                </div>
-                                <div class="childs_info_1_1">
-                                    <p>펭수에욤</p>
-                                    <p>버럭!</p>
-                                </div>
-                            </a>
-                        </li>
-
-                        <li class="laundryList_childs">
-                            <a href="#">
-                                <div class="childs_info_1">
-                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
-                                    <img src="${cpath }/resources/customer/img/시크도시.jpg">
-                                </div>
-                                <div class="childs_info_1_1">
-                                    <p>펭수에욤</p>
-                                    <p>버럭!</p>
-                                </div>
-                            </a>
-                        </li>
-
-                        <li class="laundryList_childs">
-                            <a href="#">
-                                <div class="childs_info_1">
-                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
-                                    <img src="${cpath }/resources/customer/img/파란하늘.jpg">
-                                </div>
-                                <div class="childs_info_1_1">
-                                    <p>펭수에욤</p>
-                                    <p>버럭!</p>
-                                </div>
-                            </a>
-                        </li>
-
-                        <li class="laundryList_childs">
-                            <a href="#">
-                                <div class="childs_info_1">
-                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
-                                    <img src="${cpath }/resources/customer/img/펭수귀염.jpg">
-                                </div>
-                                <div class="childs_info_1_1">
-                                    <p>펭수에욤</p>
-                                    <p>버럭!</p>
-                                </div>
-                            </a>
-                        </li>
-
-                        <li class="laundryList_childs">
-                            <a href="#">
-                                <div class="childs_info_1">
-                                    <i class="fas fa-star fa-start" id="fa-start" aria-hidden="true" onclick="bookmark()"></i>
-                                    <img src="${cpath }/resources/customer/img/시크도시.jpg">
-                                </div>
-                                <div class="childs_info_1_1">
-                                    <p>펭수에욤</p>
-                                    <p>버럭!</p>
-                                </div>
-                            </a>
-                        </li>
-
-                    </ul>
                 </div>
 
             </div>
@@ -282,17 +200,27 @@
 
 
     </section>
+	<script type="text/javascript" charset="utf-8">
 
+		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+		
+		function getContextPath() {
+
+		    return sessionStorage.getItem("contextpath");
+
+		}
+	</script>
     <script>
         let more = document.querySelector('.premium_more');
         let counts = document.querySelectorAll('.premium_childs');
 
-//         console.log("펭수 몇마리? = " + counts.length);
+					//         console.log("펭수 몇마리? = " + counts.length);
 
-        if(counts.length > 6){
-            more.style.display = 'block';
-        }
-    </script>
+					if (counts.length > 6) {
+						more.style.display = 'block';
+					}
+					
+	</script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/selectLaundryList.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-main.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-sub.js"></script>
