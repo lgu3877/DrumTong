@@ -41,5 +41,17 @@ public class BusinessMainController {
 	public ModelAndView mainCover() {
 		return svc.mainCover();
 	}
+	
+	// 비즈니스 서비스 소개 페이지로 이동 (GET) [건욱]
+	@RequestMapping(value = "businessIntroduceService/", method = RequestMethod.GET)
+	public ModelAndView businessIntroduceService(HttpServletRequest req) {
+		return svc.businessIntroduceService(req);
+	}
+	
+	// 비즈니스 메뉴얼 페이지로 이동 (GET) [건욱]
+	@RequestMapping(value = "businessManual/", method = RequestMethod.GET)
+	public ModelAndView businessManual(HttpServletRequest req) {
+		return svc.businessManual(req);
+	}
 
 }
