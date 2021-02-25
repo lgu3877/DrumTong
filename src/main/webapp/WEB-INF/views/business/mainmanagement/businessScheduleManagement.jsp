@@ -37,10 +37,6 @@
    	<!-- jQuery -->
    	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-	<!-- Holiday API -->
-   	<script type="text/javascript" src="${cpath }/business/js/holidayApi.js"></script>
-
-
 	<!-- objects from DB -->
 	<script type="text/javascript">
 		// 정기휴무
@@ -153,17 +149,17 @@
 					<div class="input_time_form">
 						<ul class="input_title_con">
 							<li class="day_range">
-								<div>
-									월 ㅡ 금
+								<div class="bg_red text_white bd_trim" style="width: 100%; padding: 8px 0;">
+									월 ~ 금
 								</div>
 							</li>
 							<li class="day_range">
-								<div>
+								<div class="bg_red text_white bd_trim" style="width: 100%; padding: 8px 0;">
 									토							
 								</div>
 							</li>
 							<li class="day_range">
-								<div>
+								<div class="bg_red text_white bd_trim" style="width: 100%; padding: 8px 0;">
 									일
 								</div>
 							</li>
@@ -185,7 +181,7 @@
 								<input class="time_input hour" type="number" name="hour" max="24" placeholder="시">
 								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
 								<div class="time_range_text">
-									<span>부터</span>
+									<span class="time_arrow">~</span>
 								</div>
 							<!-- to -->
 								<div class="time_zone_con">
@@ -200,9 +196,6 @@
 								</div>
 								<input class="time_input hour" type="number" name="hour" max="24" placeholder="시">
 								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
-								<div class="time_range_text">
-									<span>까지</span>
-								</div>
 								<div class="all_day_con">
 									<button class="btn" onclick="clearInputs(this)">
 										<i class="far fa-clock"></i>
@@ -228,7 +221,7 @@
 								<input class="time_input hour" type="number" name="hour" max="24" placeholder="시">
 								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
 								<div class="time_range_text">
-									<span>부터</span>
+									<span class="time_arrow">~</span>
 								</div>
 							<!-- to -->
 								<div class="time_zone_con">
@@ -243,9 +236,6 @@
 								</div>
 								<input class="time_input hour" type="number" name="hour" max="24" placeholder="시">
 								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
-								<div class="time_range_text">
-									<span>까지</span>
-								</div>
 								<div class="all_day_con">
 									<button class="btn" onclick="clearInputs(this)">
 										<i class="far fa-clock"></i>
@@ -271,7 +261,7 @@
 								<input class="time_input hour" type="number" name="hour" max="24" placeholder="시">
 								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
 								<div class="time_range_text">
-									<span>부터</span>
+									<span class="time_arrow">~</span>
 								</div>
 							<!-- to -->
 								<div class="time_zone_con">
@@ -286,9 +276,6 @@
 								</div>
 								<input class="time_input hour" type="number" name="hour" max="24" placeholder="시">
 								<input class="time_input minute" type="number" name="minute" max="59" placeholder="분">
-								<div class="time_range_text">
-									<span>까지</span>
-								</div>
 								<div class="all_day_con">
 									<button class="btn" onclick="clearInputs(this)">
 										<i class="far fa-clock"></i>

@@ -254,6 +254,7 @@ function loadDays(year, month, day) {
     document.getElementById("calendar-days").appendChild(weekDiv);
   }
 
+  markToday(); // 오늘
   markRegHolidays(); // 정기휴무
   markTempHolidays(); // 임시휴무
 }
@@ -345,8 +346,33 @@ function dayConvert(value) {
 }
 
 
+// 오늘 날짜(today) 출력
+function markToday() {
+	const calendarMonth = document.getElementById("month-value").innerHTML;
+	
+	const isThisMonth = currentMonth === parseInt(calendarMonth);
+	
+	if (isThisMonth) {
+		const days = document.getElementsByClassName("currentDays");
+		
+		for (let i = 0; i < days.length; i++) {
+			const dayString = days[i].querySelector(".day").innerText;
+			
+			
+			if (currentDate === parseInt(dayString)) {
+				days[i].classList.add("marker_today");
+				
+				const todayText = document.createElement("div");
+				todayText.innerText = "Today";
+				
+				days[i].appendChild(todayText);
+			}
+		}
+	}
+}
 
-//정기 휴무 일정 달력 출력
+
+// 정기 휴무 일정 달력 출력
 function markRegHolidays() {
 	// 정기 휴무 일정 object
 	const obj = {
@@ -502,16 +528,6 @@ function markTempHolidays() {
 		else currentRange.push(data);
 	}
 	
-//	console.log(filtered);
-
-//	beforeRange = [];
-//	currentRange = [];
-//	afterRange = [];
-
-//	console.log("beforeRange", beforeRange);
-//	console.log("currentRange", currentRange);
-//	console.log("afterRange", afterRange);
-	
 	
 	// 전월-당월
 	if (beforeRange.length !== 0) {
@@ -523,8 +539,6 @@ function markTempHolidays() {
 			const lastDay = parseInt(data.endday.split("-")[2]);
 			
 			const endMonth = parseInt(data.endday.split("-")[1]);
-			
-			console.log(lastDay);
 			
 			// ~ 당월
 			if (endMonth === currentMonth) {

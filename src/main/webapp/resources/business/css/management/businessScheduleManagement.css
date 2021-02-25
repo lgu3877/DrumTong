@@ -52,6 +52,12 @@
 	color: white;
 }
 
+.marker_today {
+	transition: 1s;
+	background-color: navy;
+	color: white;
+}
+
 .marker_con {
 	position: absolute;
     background-color: transparent;
@@ -83,6 +89,11 @@
 	margin: auto 0;
 }
 
+/* 시간 & 분 */
+.hour {
+	margin-left: 10px !important;
+}
+
  
 /* 폰트 옵션 */
 .text_blue {
@@ -99,6 +110,10 @@
 
 .text_thick {
 	font-weight: bold;
+}
+
+.text_white {
+	color: white;
 }
 
 /* 버튼 default */
@@ -128,6 +143,10 @@
 .border_l {
 	border-radius: 1px;
 	box-shadow: 0px 0px 0px 0.5px rgba(0, 0, 0, 0.3);
+}
+
+.bd_trim {
+	border-radius: 5px;
 }
 
 /* 그림자(hover) */
@@ -303,9 +322,6 @@
 	display: flex;
 	height: 40px;
     padding: 7px 10px;
-    border-bottom: 1px solid black;
-    border-bottom-style: groove;
-    justify-content: space-between;
 }
     
 /* 	background-color: antiquewhite;
@@ -327,7 +343,7 @@
 	width: 70px;
 	height: 36px;
 	text-indent: 10px;
-	margin: auto 5px;
+	margin: auto 1px auto 1px;
 	font-size: 14pt;
 }
 
@@ -358,7 +374,12 @@
 .time_range_text {
     width: 50px;
 	text-align: center;
-	margin: auto 20px;
+	margin: auto 0;
+}
+
+.time_arrow {
+	font-weight: 600;
+    font-size: 20pt;
 }
 
 .input_title_con {
@@ -378,6 +399,7 @@
 .all_day_con button {
 	width: 100px;
 	height: 100%;
+	margin-left: 20px;
 	background-color: #6495EF;
 }
 
