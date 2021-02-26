@@ -358,7 +358,6 @@ function markToday() {
 		for (let i = 0; i < days.length; i++) {
 			const dayString = days[i].querySelector(".day").innerText;
 			
-			
 			if (currentDate === parseInt(dayString)) {
 				days[i].classList.add("marker_today");
 				
@@ -370,8 +369,6 @@ function markToday() {
 		}
 	}
 }
-
-
 // 정기 휴무 일정 달력 출력
 function markRegHolidays() {
 	// 정기 휴무 일정 object

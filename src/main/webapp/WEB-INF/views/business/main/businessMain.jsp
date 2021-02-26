@@ -43,7 +43,7 @@
    <!-- title -->
      <title>businessMain :: Laundry</title>
      
-     <!-- global css -->
+    <!-- global css -->
     <link rel="stylesheet" href="${cpath }/business/css/businessStyle.css">
     <!-- header css -->
     <link rel="stylesheet" href="${cpath }/business/css/businessHeader.css">
