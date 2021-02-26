@@ -78,7 +78,7 @@ public class SelectLaundryList {
 	}
 	// 세탁소 리스트를 sql문 통해 적절히 가져와주는 내부 메서드
 	private static List<EstablishmentList> getLaundryList() {
-		System.out.println("param : " + param.toString());
+//		System.out.println("param : " + param.toString());
 		return bInformationDAO.selectEstablishmentList(param);
 	}
 	
@@ -101,8 +101,8 @@ public class SelectLaundryList {
 			String[] weeks = {"FIRSTWEEK", "SECONDWEEK", "THIRDWEEK", "FOUTHWEEK", "FIFTHWEEK", "SIXTHWEEK"};
 			int todayNum = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
 			int weekOfMonth = Calendar.getInstance().get(Calendar.WEEK_OF_MONTH);
-			System.out.println("오늘은 몇 째 주일까요 ?" + weekOfMonth);
-			System.out.println("오늘은 무슨요일 일까요 ?" + days[todayNum-1]);
+//			System.out.println("오늘은 몇 째 주일까요 ?" + weekOfMonth);
+//			System.out.println("오늘은 무슨요일 일까요 ?" + days[todayNum-1]);
 			param.put("todayDay", weeks[weekOfMonth-1]);
 			param.put("todayWeekNum", days[todayNum-1]);
 			switch (todayNum) {
