@@ -463,12 +463,14 @@ function openMenuModifyModal(main, sub, info) {
 						
 						quickToggle = !service.quickprice || service.quickprice === "" || service.quickprice === 0 ?
 							true : false;
+							
+							console.log(quickToggle);
 						
 						if (quickToggle) {
-							quickToggleIcon.innerHTML = '<i class="fas fa-toggle-off" onclick="activateQuick(this)"></i>'; // off
+							quickToggleIcon.innerHTML = '<i class="fas fa-toggle-off" onclick="activateModalQuick(this)"></i>'; // off
 						}
 						else {
-							quickToggleIcon.innerHTML = '<i class="fas fa-toggle-on" onclick="activateQuick(this)"></i>'; // on						
+							quickToggleIcon.innerHTML = '<i class="fas fa-toggle-on" onclick="activateModalQuick(this)"></i>'; // on						
 						}
 					
 					
@@ -656,7 +658,7 @@ function clearSubOption(subCategoryId) {
 
 
 // quick 활성화
-function activateQuick(icon) {
+function activateModalQuick(icon) {
 	// activate
 	if (quickToggle) {
 		icon.className = "fas fa-toggle-on";

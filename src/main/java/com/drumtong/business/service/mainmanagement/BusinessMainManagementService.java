@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -122,10 +124,19 @@ public class BusinessMainManagementService {
 	    
 	    // 선택한 기본카테고리도 같이 셋팅해줍니다.
 	    for(String category : defaultcategory) {
-	    	ArrayList<String> tmp = new ArrayList<String>();
-	    	menuCategories.put(category, tmp);
+	    	// 기본 카테고리가 존재하지 않을 때만 값을 넣어줍니다.
+	    	if(menuCategories.containsKey(category) == false) {
+	    		ArrayList<String> tmp = new ArrayList<String>();
+	    		menuCategories.put(category, tmp);
+	    	}
+	    		
 	    }
 	    
+	    for(Map.Entry<String, ArrayList<String>> entry : menuCategories.entrySet()) {
+	    	System.out.println(entry.getKey());
+	    	System.out.println(entry.getValue());
+	    	
+	    }
 	    
 	    //  대분류, 중분류 카테고리 모음
 	    mav.addObject("menuCategories", (new Gson()).toJson(menuCategories));

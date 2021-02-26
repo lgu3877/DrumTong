@@ -104,7 +104,7 @@
                                 <li class="laundryList_childs premium_childs" >
                                         <div class="childs_info_1 premium_childs_info_1">
                                             <i class="fas fa-star fa-start" aria-hidden="true" onclick="bookmark()"></i>
-                                            <img class="mainimg" onclick="location.href = '${cpath }/customer/laundry/customerDetail/ESTID_ce8e90b3489649d788116e8113d6f65e/'">
+                                            <img class="mainimg">
                                         </div>
                                         <div class="childs_info_1_1">
                                             <div class="child_info_left">
@@ -120,7 +120,7 @@
                                 <li class="laundryList_childs premium_childs" >
                                         <div class="childs_info_1 premium_childs_info_1">
                                             <i class="fas fa-star fa-start"  aria-hidden="true" onclick="bookmark()"></i>
-                                            <img src="${cpath }/resources/customer/img/펭수버럭.jpg" onclick="location.href = '${cpath }/customer/laundry/customerDetail/ESTID_ce8e90b3489649d788116e8113d6f65e/'">
+                                            <img  class="mainimg">
                                         </div>
                                         <div class="childs_info_1_1">
                                             <div class="child_info_left">
@@ -145,9 +145,8 @@
 								<li class="laundryList_childs common_childs">
 									<div class="childs_info_1 common_childs_info_1">
 										<i class="fas fa-star fa-start" 
-											aria-hidden="true" onclick="bookmark()"></i> <img
-											src="${cpath }/resources/customer/img/펭수버럭.jpg"
-											onclick="location.href = '${cpath }/customer/laundry/customerDetail/ESTID_ce8e90b3489649d788116e8113d6f65e/'">
+											aria-hidden="true" onclick="bookmark()"></i> 
+										<img  class="mainimg">
 									</div>
 									<div class="childs_info_1_1">
 										<div class="child_info_left">
@@ -162,9 +161,8 @@
 								<li class="laundryList_childs common_childs">
 									<div class="childs_info_1 common_childs_info_1">
 										<i class="fas fa-star fa-start" 
-											aria-hidden="true" onclick="bookmark()"></i> <img
-											src="${cpath }/resources/customer/img/펭수버럭.jpg"
-											onclick="location.href = '${cpath }/customer/laundry/customerDetail/ESTID_ce8e90b3489649d788116e8113d6f65e/'">
+											aria-hidden="true" onclick="bookmark()"></i>
+										<img  class="mainimg">
 									</div>
 									<div class="childs_info_1_1">
 										<div class="child_info_left">
