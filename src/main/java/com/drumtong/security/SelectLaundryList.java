@@ -51,8 +51,8 @@ public class SelectLaundryList {
 	}
 	
 	// 고객 세탁소 검색 페이지에서 필터, 페이지, 지도 상태에 따라 세탁소 리스트를 가져와주는 메서드(남서쪽, 북동쪽 좌표를 이용할 때)
-	public static List<Object> getMapList(String left, String right, String top, String bottom, String filter1, String filter2, String filter3, String filter4, String filter5, String page){
-		paramSet(filter1, filter2, filter3, filter4, filter5, page);
+	public static List<Object> getMapList(String left, String right, String top, String bottom, String filter1, String filter2, String filter3, String filter4, String page){
+		paramSet(filter1, filter2, filter3, filter4, page);
 		param.put("left", left);
 		param.put("right", right);
 		param.put("top", top);
@@ -61,8 +61,8 @@ public class SelectLaundryList {
 	}
 	
 	// 고객 세탁소 검색 페이지에서 필터, 페이지, 지도 상태에 따라 세탁소 리스트를 가져와주는 메서드(emdcode를 이용할 때)
-	public static List<Object> getMapList(String emdcode, String filter1, String filter2, String filter3, String filter4, String filter5, String page){
-		paramSet(filter1, filter2, filter3, filter4, filter5, page);
+	public static List<Object> getMapList(String emdcode, String filter1, String filter2, String filter3, String filter4, String page){
+		paramSet(filter1, filter2, filter3, filter4, page);
 		param.put("emdcode", emdcode);
 		return SeparateAccordingToPremium(param);
 	}
@@ -83,7 +83,7 @@ public class SelectLaundryList {
 	}
 	
 	// 매개변수들을 모아 hash map에 풋 해주는 함수
-	private static void paramSet(String filter1, String filter2, String filter3, String filter4, String filter5, String page){
+	private static void paramSet(String filter1, String filter2, String filter3, String filter4, String page){
 		param = new HashMap<String, String>();
 
 
@@ -91,7 +91,6 @@ public class SelectLaundryList {
 		param.put("filter2", filter2Setting(filter2));
 		param.put("filter3", filter3);
 		param.put("filter4", filter4);
-		param.put("filter5", filter5);
 		param.put("page", page);
 	}
 	
@@ -151,7 +150,7 @@ public class SelectLaundryList {
 	// 주소(EMDCODE)와 배송가능 주소가 일치하면서 상위 n% 안에 해당하는 매장 리스트를 n개(limitNum) 이상 구한다  [영경]
 	private static List<EstablishmentList> perCalcReturnList(String EMDCODE, int limitNum){
 		List<EstablishmentList> tmp = new ArrayList<EstablishmentList>();
-		paramSet("none", "today", "none", "none", "none", "0");
+		paramSet("none", "today", "none", "none", "0");
 		
 		// 파라미터 값을 넣는다.
 		param.put("emdcode", EMDCODE);
