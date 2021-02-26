@@ -369,8 +369,6 @@ function markToday() {
 		}
 	}
 }
-
-
 // 정기 휴무 일정 달력 출력
 function markRegHolidays() {
 	// 정기 휴무 일정 object
