@@ -35,11 +35,17 @@
 	
 	
 	<!-- section -->
-	<div id="viewer-wrapper"class="viewer_wrapper">
-		<div class="viewer bg_red"></div>
-		<div class="viewer bg_mint"></div>
-		<div class="viewer bg_blue"></div>
-		<div class="viewer bg_grey"></div>
+	<div class="viewer_wrapper">
+		<div class="viewer_up">
+		</div>
+		<div id="viewer-container" class="viewer_con" style="position: relative;">
+			<div class="viewer bg_red" style="position: absolute; top: 100vh; left: 0; transition: all 2s ease;"></div>
+			<div class="viewer bg_mint" style="position: absolute; top: 100vh; left: 0; transition: all 2s ease;"></div>
+			<div class="viewer bg_blue" style="position: absolute; top: 100vh; left: 0; transition: all 2s ease;"></div>
+			<div class="viewer bg_grey" style="position: absolute; top: 100vh; left: 0; transition: all 2s ease;"></div>
+		</div>
+		<div class="viewer_down">
+		</div>
 	</div>
 	
 	<!-- footer -->
