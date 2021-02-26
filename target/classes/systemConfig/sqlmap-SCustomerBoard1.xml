@@ -11,7 +11,7 @@
 	<select id="selectRecentData1" parameterType="int" resultType="SBoardVO">
 		SELECT TITLE, NUM, SUBSTR(REGISTDATE,1,10) as registdate FROM SCUSTOMERBOARD1  
 			WHERE  
-			NUM <![CDATA[ >= ]]> (SELECT MAX(NUM) FROM SCUSTOMERBOARD1) - #{NumberOfData}
+			NUM <![CDATA[ >= ]]> (SELECT MAX(ROWNUM) FROM SCUSTOMERBOARD1) - #{NumberOfData}
 			ORDER BY NUM DESC
 	</select>
 	

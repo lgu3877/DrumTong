@@ -33,9 +33,8 @@ async function selectLaundry(page) {
 	let filter2 = document.getElementById('filter2').value;
 	let filter3 = document.getElementById('filter3').value;
 	let filter4 = document.getElementById('filter4').value;
-	let filter5 = document.getElementById('filter5').value;
 
-	filterAddress = filter1 + '/' + filter2 + '/' + filter3 + '/' + filter4 + '/' + filter5 + '/';
+	filterAddress = filter1 + '/' + filter2 + '/' + filter3 + '/' + filter4 + '/';
 	pageAddress = page + '/';
 //	console.log('paramAddress :', paramAddress);
 //	console.log('filter :', filterAddress);
