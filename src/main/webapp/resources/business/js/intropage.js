@@ -1,31 +1,38 @@
 // viewer container
 const container = document.getElementById("viewer-container");
+const viewers = document.getElementsByClassName("viewer");
+const viewerCount = document.getElementsByClassName("viewer").length;
 
-const initializer = document.getElementsByClassName("viewer").length * 100;
-
+let view = 0;
+const execution = 100;
 
 
 // scroll event
 container.onmousewheel = (e) => {
 	const wheel = e.wheelDelta; // scroll movement value
-//	console.log(wheel);
-	
-	const execution = 100;
+	console.log(wheel);
 	
 	// wheel up
 	if (wheel > 0) {
-		console.log("scroll up");
+		if (view === 0) return ;
+		view = view + execution;
 		
-		
-		container.style.transform = "translateY(" + execution + "vh)";
+		for (let i = 0; i < viewers.length; i++) {
+			const viewer = viewers[i];
+			viewer.style.transform = "translateY(" + view + "%)";
+		}
 	}
 
 	// wheel down
 	else {
+		const limit = (viewerCount - 1) * execution;
 		
-		console.log("scroll down");
-
-		container.style.transform = "translateY(-" + execution + "vh)";
-//		container.style.transform = "translateY(-" + indicator + "vh)";
+		if (view === -limit) return;
+		view = view - execution;
+		
+		for (let i = 0; i < viewers.length; i++) {
+			const viewer = viewers[i];
+			viewer.style.transform = "translateY(" + view + "%)";
+		}
 	}
 };

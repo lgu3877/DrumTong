@@ -9,22 +9,22 @@ body {
     top: 100px;
     height: calc(100vh - 100px);
     width: 100%;
-    background-color: #eee;
 }
 
 .viewer_con {
 	height: 100%;
 	overflow: hidden;
-	transition: all 1s;
 }
 
 .viewer {
 	width:100%;
 	height: 100%;
-	background-color: navy;
+	transition: all 1s;
+	transform: translateY(0%);
 }
 
 .viewer_up {
+	z-index: 1;
 	position: absolute;
     width: 100%;
     height: 50px;
@@ -34,6 +34,7 @@ body {
 }
 
 .viewer_down {
+    z-index: 1;
 	position: absolute;
     width: 100%;
     height: 50px;
