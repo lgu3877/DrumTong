@@ -1,0 +1,137 @@
+* {
+	marign: 0;
+	padding: 0;
+}
+
+/* display */
+.flex {
+	display:flex;
+}
+
+.flex_end {
+	justify-content: flex-end;
+}
+
+/* padding */
+.pt-10 {
+	padding-top: 10px
+}
+
+
+
+/* Header Wrapper */
+.h_wrapper {
+	display: flex;
+	height: 100%;
+}
+
+/* Header > left > logo */
+.h_left_con {
+	width: 30%;
+	min-width: 360px;
+	float: left;
+	justify-content: center;
+	align-items: center;
+}
+
+.h_left_con img {
+	width: 100%;
+	height: auto;
+}
+
+/* Header > right */
+.h_right_con {
+	width: 100%;
+	float: right;
+	display: block;
+}
+
+/* Header > right > upper > login & join */
+.h_right_upper {
+	
+}
+
+.h_right_upper_main_menu {
+	display: flex;	
+	font-size: 22pt;
+}
+
+.h_right_upper_main_menu div {
+	margin-right: 30px;
+}
+
+.upper_options {
+	margin: 0 10px;
+	cursor: pointer;
+	font-weight: 600;
+	color: #3b5998;
+}
+
+.upper_options i {
+	font-weight: 600;
+}
+
+/* Header > right > lower */
+.h_right_lower {
+	color: #3b5998;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.h_right_lower div {
+	margin-right: 40px;
+    font-size: 25pt;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Header > right > upper > store */
+.menu {
+	font-size: 15px;
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+}
+
+.menu a {
+	display: block;
+    width: 100px;
+    text-align: center;
+    background-color: #dfe3ee;
+    color: #3b5998;
+    text-decoration: none;
+    border-radius: 10px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+}
+
+#menulist {
+	position: absolute;
+    top: 35px;
+    padding-top: 5px;
+    background-color: #f7f7f7;
+    display: none;
+    border: none;
+    outline: none;
+    text-align: center;
+    width: 100px;
+    z-index: 1;
+    width: 100px;
+}
+
+#menu:hover #menulist {
+	width: 100px;
+	display: block;
+	overflow: auto;
+	
+}
+
+.menulist div {
+	margin-left: 0px;
+	padding: 3px;
+	width: 90%;
+}
+
+.menulist li {
+	list-style: none;	
+}

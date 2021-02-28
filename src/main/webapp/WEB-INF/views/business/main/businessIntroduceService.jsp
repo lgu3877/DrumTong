@@ -17,7 +17,7 @@
      <link rel="stylesheet" href="${cpath }/business/css/businessStyle.css">
      -->
  	<!-- header css -->
-    <link rel="stylesheet" href="${cpath }/business/css/businessHeader.css">
+    <link rel="stylesheet" href="${cpath }/business/css/businessAltHeader.css">
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
@@ -31,21 +31,45 @@
 </head>
 <body style="position: relative;">
 	<!-- header(navbar) -->
-	<%@ include file="businessHeader.jsp" %>
+	<%@ include file="businessAltHeader.jsp" %>
 	
 	
 	<!-- section -->
-	<div class="viewer_wrapper">
-		<div class="viewer_up">
+	<div id="viewr-wrapper" class="viewer_wrapper">
+	
+		<!-- down btn -->
+		<div class="viewer_up top pointer bg_trans">
+			<i class="fas fa-chevron-up"></i>
 		</div>
+		
+		<!-- sliders -->
 		<div id="viewer-container" class="viewer_con">
-			<div class="viewer bg_red"></div>
-			<div class="viewer bg_mint"></div>
+			<!-- content 01 -->
+			<div class="viewer bg_red">
+				<div class="image_01"></div>
+				<div class="intro_01"></div>
+			</div>
+			<!-- content 02 -->
+			<div class="viewer bg_mint">
+				<div class="image_02"></div>
+				<div class="intro_02"></div>
+			</div>
+			<!-- content 03 -->
 			<div class="viewer bg_blue"></div>
+			<!-- content 04 -->
 			<div class="viewer bg_grey"></div>
 		</div>
-		<div class="viewer_down">
+		
+		<!-- up btn -->
+		<div class="viewer_down bottom pointer bg_trans">
+			<i class="fas fa-chevron-down"></i>
 		</div>
+		
+		<!-- move to top -->
+		<div class="move_top pointer invisible">
+			<i class="far fa-arrow-alt-circle-up"></i>
+		</div>
+		
 	</div>
 	
 	<!-- footer -->
