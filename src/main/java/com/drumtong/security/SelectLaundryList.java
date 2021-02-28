@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.drumtong.business.dao.BInformationDAO;
+import com.drumtong.business.dao.BScheduleDaysDAO;
+import com.drumtong.business.dao.BScheduleTimeDAO;
+import com.drumtong.business.dao.BTempSuspensionDAO;
 import com.drumtong.customer.vo.CPrivateDataVO;
 import com.drumtong.customer.vo.EstablishmentList;
 
@@ -24,11 +28,21 @@ public class SelectLaundryList {
 	private static final String INITEMDCODE = "26350105";	// 랜덤 리스트를 가져올 때 로그인을 하지 않았다면 이 emd 코드를 참조해 세탁소 리스트를 가지고 온다!
 	
 	@Autowired BInformationDAO beanBInformationDAO;
+	@Autowired BScheduleTimeDAO beanBScheduleTimeDAO;
+	@Autowired BScheduleDaysDAO beanBScheduleDaysDAO;
+	@Autowired BTempSuspensionDAO beanBTempSuspensionDAO;
+	
 	private static BInformationDAO bInformationDAO;
+	private static BScheduleTimeDAO bScheduleTimeDAO;
+	private static BScheduleDaysDAO bScheduleDaysDAO;
+	private static BTempSuspensionDAO bTempSuspensionDAO;
 	
 	@PostConstruct
 	public void init() {
 		bInformationDAO = beanBInformationDAO;
+		bScheduleTimeDAO = beanBScheduleTimeDAO;
+		bScheduleDaysDAO = beanBScheduleDaysDAO;
+		bTempSuspensionDAO = beanBTempSuspensionDAO;
 	}
 	
 	
@@ -69,53 +83,100 @@ public class SelectLaundryList {
 	
 	private static List<Object> SeparateAccordingToPremium(HashMap<String, String> param) {
 		List<Object> list = new ArrayList<Object>();
+		// 페이징
 		param.put("premium", "Y");
-		list.add(getLaundryList());
+		List<EstablishmentList> premiumList = getLaundryList();
 		
 		param.put("premium", "N");
-		list.add(getLaundryList());
+		List<EstablishmentList> generalList = getLaundryList();
+		
+		list.add(premiumList.size() + generalList.size());
+		
+		// 페이징하기
+		list.add(premiumList);
+		list.add(generalList);
 		return list;
 	}
 	// 세탁소 리스트를 sql문 통해 적절히 가져와주는 내부 메서드
 	private static List<EstablishmentList> getLaundryList() {
+//		System.out.println("============== List getLaundryList 함수 실행 ==============");
 //		System.out.println("param : " + param.toString());
-		return bInformationDAO.selectEstablishmentList(param);
+		List<EstablishmentList> List = bInformationDAO.selectEstablishmentList(param);
+		boolean now = param.get("todayIsOpen").equals("now");
+		// ① 휴무 필터
+		for(int i = 0; i < List.size(); i++) {
+			EstablishmentList li = List.get(i);
+			param.put("estid", li.getEstid());
+			char openboolean = 'Y';
+			String reason = "";
+			// 영업중인지 체크하기(임시 휴무)- sql 안적음
+			if(bTempSuspensionDAO.isOpen(param) >= 1) {
+				reason = "개인적인 사정으로 휴무입니다.";
+				openboolean = 'N';
+			}
+			// 영업중인지 체크하기(정기 휴무)
+			else if(bScheduleDaysDAO.isOpen(param) == 1) {
+				reason = "정기 휴무입니다.";
+				openboolean = 'N';
+			}
+			// 영업중인지 체크하기(영업시간)- sql 안적음
+			else if(bScheduleTimeDAO.isOpen(param) != 1) {
+				reason = "영업시간이 아닙니다.";
+				openboolean = 'N';
+			}
+			// 영업 여부에 따라 필드에 결과를 넣어주고
+			
+			if(openboolean == 'N') {
+//				System.out.println("reason : " + reason);
+				li.setOpenboolean('N');
+				li.setReason(reason);
+			}
+		}
+		// 만약 오늘 영업하는 매장만 나오도록 한다면 그 필드를 삭제해준다.
+//		System.out.println("컬렉션 전 : " + List.size());
+//		for(EstablishmentList li : List) System.out.println(li.getReason());
+//		System.out.println("now : " + now);
+		if(now) {
+//			System.out.println("stream 함수 실행");
+			List = List.stream().filter(li -> li.getOpenboolean() == 'Y').collect(Collectors.toList());
+		}
+//		System.out.println("컬렉션 후 : " + List.size());
+//		for(EstablishmentList li : List) System.out.println(li.getReason());
+		
+		return List;
 	}
 	
 	// 매개변수들을 모아 hash map에 풋 해주는 함수
 	private static void paramSet(String filter1, String filter2, String filter3, String filter4, String page){
 		param = new HashMap<String, String>();
 
-
 		param.put("filter1", filter1);
-		param.put("filter2", filter2Setting(filter2));
+		param.put("todayIsOpen", filter2);
 		param.put("filter3", filter3);
 		param.put("filter4", filter4);
 		param.put("page", page);
+		param.put("filter2", filter2Setting(filter2));
 	}
 	
 	// 요일관련된 필터
 	private static String filter2Setting(String filter2) {
-		if(filter2.equals("today")) {
-			String[] days = {"일", "월", "화", "수", "목", "금", "토"};
-			String[] weeks = {"FIRSTWEEK", "SECONDWEEK", "THIRDWEEK", "FOUTHWEEK", "FIFTHWEEK", "SIXTHWEEK"};
-			int todayNum = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-			int weekOfMonth = Calendar.getInstance().get(Calendar.WEEK_OF_MONTH);
-//			System.out.println("오늘은 몇 째 주일까요 ?" + weekOfMonth);
-//			System.out.println("오늘은 무슨요일 일까요 ?" + days[todayNum-1]);
-			param.put("todayDay", weeks[weekOfMonth-1]);
-			param.put("todayWeekNum", days[todayNum-1]);
-			switch (todayNum) {
-			case 1:// 일요일
-				filter2 = "SUNDAY";
-				break;
-			case 7:// 토요일
-				filter2 = "SATURDAY";
-				break;
-			default: // 2~6// 평일
-				filter2 = "WEEKDAY";
-				break;
-			}
+		String[] days = {"일", "월", "화", "수", "목", "금", "토"};
+		String[] weeks = {"FIRSTWEEK", "SECONDWEEK", "THIRDWEEK", "FOUTHWEEK", "FIFTHWEEK", "SIXTHWEEK"};
+		int todayNum = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+		int weekOfMonth = Calendar.getInstance().get(Calendar.WEEK_OF_MONTH);
+		param.put("weekNum", weeks[weekOfMonth-1]);	// 몇번째 주인지
+		param.put("dayOfWeek", days[todayNum-1]);	// 무슨 요일인지
+		param.put("holiday", "none");	// 공휴일 영업 여부(추후 건욱이가 공휴일 관련 메서드 만들면 오늘이 공휴일일 경우 Y를 넣어주기!)
+		switch (todayNum) {
+		case 1:// 일요일
+			filter2 = "SUNDAY";
+			break;
+		case 7:// 토요일
+			filter2 = "SATURDAY";
+			break;
+		default: // 2~6// 평일
+			filter2 = "WEEKDAY";
+			break;
 		}
 		return filter2;
 	}
@@ -150,7 +211,7 @@ public class SelectLaundryList {
 	// 주소(EMDCODE)와 배송가능 주소가 일치하면서 상위 n% 안에 해당하는 매장 리스트를 n개(limitNum) 이상 구한다  [영경]
 	private static List<EstablishmentList> perCalcReturnList(String EMDCODE, int limitNum){
 		List<EstablishmentList> tmp = new ArrayList<EstablishmentList>();
-		paramSet("none", "today", "none", "none", "0");
+		paramSet("none", "none", "none", "count", "0");
 		
 		// 파라미터 값을 넣는다.
 		param.put("emdcode", EMDCODE);

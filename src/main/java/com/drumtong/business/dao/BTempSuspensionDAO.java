@@ -1,5 +1,6 @@
 package com.drumtong.business.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.drumtong.business.vo.BTempSuspensionVO;
@@ -30,6 +31,9 @@ public interface BTempSuspensionDAO {
 
 	// 매장 임시 중지에 새 데이터를 입력해주는 메서드입니다.
 	int insertBTempSuspension(BTempSuspensionVO bTempSuspensionVO);
+
+	// 영업중인지 체크하기(임시 휴무)
+	int isOpen(HashMap<String, String> param);
 
 
 	

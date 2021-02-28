@@ -22,7 +22,21 @@ public class EstablishmentList extends BInformationVO{
 	private double gpa;				// 좋아요 평균
 	private char deliveryboolean;	// 배달 여부 'Y' or 'N'
 	private int reviewnum;			// 리뷰 개수
-
+	private char openboolean;		// 휴무 여부
+	private String reason;		// 휴무 이유
+	
+	public char getOpenboolean() {
+		return openboolean;
+	}
+	public void setOpenboolean(char openboolean) {
+		this.openboolean = openboolean;
+	}
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
 	public int getReviewnum() {
 		return reviewnum;
 	}

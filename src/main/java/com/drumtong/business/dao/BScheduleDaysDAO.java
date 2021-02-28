@@ -30,5 +30,8 @@ public interface BScheduleDaysDAO {
 	// select 매장 정기휴무  일정
 	BScheduleDaysVO selectBScheduleDays(String estid);
 
+	// 영업중인지 체크하기(정기 휴무)
+	int isOpen(HashMap<String, String> param);
+
 
 }

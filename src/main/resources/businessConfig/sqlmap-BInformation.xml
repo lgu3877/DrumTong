@@ -98,15 +98,15 @@
 	<!-- 주소에  -->
 	<select id="selectEstablishmentList" parameterType="hashmap" resultType="EstablishmentList">
 		SELECT B.ESTID, NVL(I.STOREIMG, '-') AS MAINIMG, B.BRANDNAMING, M.DEFAULTCATEGORY, 
-			B.MAINLOCATION, B.DETAILLOCATION, NVL(R.GPA,0) AS GPA, M.DELIVERYBOOLEAN,R.REVIEWNUM FROM BINFORMATION B 
+			B.MAINLOCATION, B.DETAILLOCATION, NVL(R.GPA,0) AS GPA, M.DELIVERYBOOLEAN,R.REVIEWNUM
+				FROM BINFORMATION B 
 		  LEFT OUTER JOIN 
-		  	(SELECT AVG(GPA) AS GPA,COUNT(*) AS REVIEWNUM, ESTID FROM BREVIEW GROUP BY ESTID) R 
+		  	(SELECT AVG(GPA) AS GPA,COUNT(*) AS REVIEWNUM, ESTID FROM BREVIEW WHERE BLOCKBOOLEAN = 'N' GROUP BY ESTID) R 
 		  		ON B.ESTID = R.ESTID 
 		  LEFT OUTER JOIN BMANAGEMENT M ON B.ESTID = M.ESTID
 		  LEFT OUTER JOIN 
 		  	(SELECT * FROM BIMAGE WHERE DELEGATEPHOTOBOOLEAN='Y') I 
 		  		ON B.ESTID=I.ESTID
-		  LEFT OUTER JOIN BSCHEDULETIME SC ON B.ESTID = SC.ESTID 
       	  WHERE B.STATUS='SUCCESS' 
 		<if test='(emdcode != null) and (emdcode!="All")'>
 		  AND B.EMDCODE=#{emdcode} 
@@ -115,36 +115,28 @@
 			AND B.LONGITUDE <![CDATA[>=]]> #{left} 
 			AND B.LONGITUDE <![CDATA[<=]]> #{right} 
 			AND B.LATITUDE <![CDATA[>=]]> #{bottom}  
-			AND B.LATITUDE <![CDATA[<=]]> #{top}
+			AND B.LATITUDE <![CDATA[<=]]> #{top} 
 		</if>
 		<if test='filter1 != null and filter1 != "none"'>
 			AND M.DEFAULTCATEGORY LIKE '%' ||#{filter1 }|| '%'
 		</if>
-		<if test='filter2 != null and filter2 != "none"'>
-			<choose>
-				<when test='filter2 == "weekend"'>
-					AND SATURDAY <![CDATA[<>]]> '-' AND SUNDAY <![CDATA[<>]]> '-' 
-				</when>
-				<otherwise>
-					AND ${filter2} <![CDATA[<>]]> '-'
-				</otherwise>
-			</choose>
+		<if test='filter3 != null and filter3 != "none"'>
+			AND M.DELIVERYBOOLEAN=#{filter3}
 		</if>
-<!-- 		<if test='filter3 != null and filter3 != "none"'> -->
-<!-- 			AND 영업시간 -->
-<!-- 		</if> -->
-		<if test='filter4 != null and filter4 != "none"'>
-			AND M.DELIVERYBOOLEAN=#{filter4}
-		</if>
-<!-- 		<if test='filter5 != null and filter5 != "none"'> -->
-<!-- 			AND 정렬 -->
-<!-- 		</if> -->
 		<if test='premium != null'>
           AND PREMIUMBOOLEAN=#{premium} 
 		</if>
-		  ORDER BY GPA
+		<if test='filter4 != null and filter4 != "none"'>
+			<choose>
+				<when test='filter4 == "score"'>
+					ORDER BY GPA
+				</when>
+				<when test='filter4 == "count"'>
+					ORDER BY REVIEWNUM
+				</when>
+			</choose>
+		</if>
 	</select>
-	
 	
 	
 	<update id="updateStatus" parameterType="hashmap">
@@ -153,7 +145,6 @@
 				STATUS = #{status}
 			WHERE ESTID = #{estid}
 	</update>
-	
 	
 	
 <!-- 	======================REST============================ -->
