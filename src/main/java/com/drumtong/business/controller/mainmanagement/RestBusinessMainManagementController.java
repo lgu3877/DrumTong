@@ -107,11 +107,8 @@ public class RestBusinessMainManagementController {
 	// 메뉴 수정 
 	@RequestMapping("BMenu/rest/updateMenu/")
 	@PostMapping(produces="application/json; charset=utf8")
-	public String updateMenu(HttpServletRequest req, @RequestBody BMenuUpdateVO bMenuUpdateVO ) {
-		int result = svc.updateMenu(req, bMenuUpdateVO);
-		return result == 1
-				? "true"
-				: "false";
+	public List<BMenuVO>  updateMenu(HttpServletRequest req, @RequestBody BMenuUpdateVO bMenuUpdateVO ) {
+		return svc.updateMenu(req, bMenuUpdateVO);
 	}
 
 	// 메뉴 삭제

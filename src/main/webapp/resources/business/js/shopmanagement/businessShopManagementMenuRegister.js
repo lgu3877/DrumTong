@@ -125,12 +125,30 @@ function createAddService() {
 			priceInput.maxlength = "5";
 			priceInput.style.width = "80%";
 				
-			// 추가
-			priceCon.appendChild(priceInput);
-			priceCon.innerHTML += `<i class="fas fa-toggle-off" onclick="activateQuick(this, ${serviceRandomId})"></i>`;
-		
-		forthInputCon.appendChild(priceCon);
 			
+		forthInputCon.appendChild(priceCon);
+	
+	
+	const quickPriceInput = document.createElement("input");
+		quickPriceInput.type = "hidden";
+		quickPriceInput.name = "quickprice";
+		quickPriceInput.className = "service_quickprice_input";
+		quickPriceInput.placeholder = "퀵 서비스 요금(원)";
+		quickPriceInput.style.marginTop = "5px";
+		quickPriceInput.value = "0";
+	
+	
+		forthInputCon.appendChild(quickPriceInput);
+
+		console.log("실행");
+		// 추가
+		priceCon.appendChild(priceInput);
+		priceCon.innerHTML += `<i class="fas fa-toggle-off" onclick="activateQuick(this)"></i>`;
+		
+	
+	
+	
+		
 	// 시간 (다섯번째)
 	const fifthInputCon = document.createElement("div");
 	fifthInputCon.className = "fifth_item_prop";
@@ -161,7 +179,6 @@ function createAddService() {
 		
 			container.appendChild(singleServiceInputCon);
 }
-
 
 // [건욱] Select 박스의 이름을 결정해주는 함수입니다 (POST 형식일 때 Spring에서 데이터 바인딩을 제대로 해주기 위해서 설정하는 함수.)
 function changeSelectBoxName(selectID, inputID, type) {
@@ -325,9 +342,10 @@ function populateSubOptions(key, subCategoryId, modifyBoolean) {
 }
 
 
-//배달 서비스 활성화 이벤트
-function activateQuick(icon, list) {
+//배달 서비스 활성화 이벤트 [건욱]
+function activateQuick(icon) {
 	// icon 변경
+	const quickInput = icon.parentNode.parentNode.querySelector("input.service_quickprice_input");	
 	const iconClass = icon.className;
 	let toggle;
 	
@@ -344,25 +362,13 @@ function activateQuick(icon, list) {
 	}
 	
 	// quick 인터페이스
-	const chargeCon = list.getElementsByClassName("forth_item_prop")[0];
+	console.log(quickInput);
 		
-	// 활성화 되었을 때
-	if (toggle) {
-		const quickPriceInput = document.createElement("input");
-		quickPriceInput.type = "text";
-		quickPriceInput.name = "quickprice";
-		quickPriceInput.className = "service_quickprice_input";
-		quickPriceInput.placeholder = "퀵 서비스 요금(원)";
-		quickPriceInput.style.marginTop = "5px";
-		
-		
-		chargeCon.appendChild(quickPriceInput);
-	}
-	
-	// 비활성화 되었을 때
-	else {
-		chargeCon.getElementsByClassName("service_quickprice_input")[0].remove();
-	}
+	// toggle의 참여부에 따라서 quickInput type을 변경시켜준다.
+	quickInput.type = toggle ? "text" : "hidden";
+
+//	 toggle이 호출될 때마다 값을 초기화시켜준다.
+	quickInput.value = toggle ? "" : "0";
 }
 
 

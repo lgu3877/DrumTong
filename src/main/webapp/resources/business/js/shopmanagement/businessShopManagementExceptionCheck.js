@@ -107,8 +107,7 @@ function checkExceptionBeforeSubmit() {
 		
 	}
 	
-	document.getElementById('submitbt').submit();
-	
+	document.getElementById('theForm').submit();
 	return true;
 	
 	

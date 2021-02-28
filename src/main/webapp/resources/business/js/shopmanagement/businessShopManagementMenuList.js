@@ -284,19 +284,31 @@ function openMenuModifyModal(main, sub, info) {
 	const modal = document.getElementById("modify-menu-modal");
 	
 	const isOpened = modal.style.display === "none" ? false : true;
-	
+	const service = {
+		previousmaincategory : main,
+		previoussubcategory : sub,
+		previousname : info.name,
+	}
 	// 모달 열기
 	if (!isOpened) {
 		// object 
-		const service = {
-			maincategory : main,
-			subcategory : sub,
-			estid : info.estid,
-			name : info.name,
-			ete : info.ete,
-			price: info.price,
-			quickprice: info.quickprice || 0
-		};
+		service.maincategory = main;
+		service.subcategory = sub;
+		service.estid = info.estid;
+		service.name = info.name;
+		service.ete = info.ete;
+		service.price = info.price;
+		service.quickprice = info.quickprice || 0;
+		
+//		const service = {
+//			maincategory : main,
+//			subcategory : sub,
+//			estid : info.estid,
+//			name : info.name,
+//			ete : info.ete,
+//			price: info.price,
+//			quickprice: info.quickprice || 0
+//		};
 		
 		modal.style.display = "block";
 		
@@ -431,9 +443,10 @@ function openMenuModifyModal(main, sub, info) {
 						const regex = /^[0-9]*$/;
 						
 						if (regex.test(e.target.value)) {
+							service.price = e.target.value; 
 							priceInput.classList.remove("invalid");
 							e.target.value = insertComma(e.target.value.replace(",", ""));
-							service.price = e.target.value; 
+							
 						} 
 						
 						else {
@@ -489,12 +502,12 @@ function openMenuModifyModal(main, sub, info) {
 						const regex = /^[0-9]*$/;
 						
 						if (regex.test(e.target.value)) {
+							service.quickprice = e.target.value;
 							e.target.value === "" ? 
 									e.target.value = 0 :
 									e.target.value = insertComma(e.target.value.replace(",", ""));
 							
 							quickpriceInput.classList.remove("invalid");
-							service.quickprice = e.target.value;
 						} 
 						
 						else {
@@ -592,10 +605,12 @@ function openMenuModifyModal(main, sub, info) {
 				
 				// 변경 버튼 이벤트
 				confirmBtn.onclick = () => {
+					console.log("실험 test : ", service);
 					if (updateMenu(service)) {
 						document.getElementById("posted-service-list").innerHTML = ""; // 초기화
 						displayMenu(); // 메뉴 재생성				
 					}
+					console.log('test');
 				}
 
 				

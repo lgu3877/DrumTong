@@ -80,7 +80,7 @@ public class BusinessMainManagementService {
 	public ModelAndView shopManagement(HttpServletRequest req) {
  		ModelAndView mav = new ModelAndView("business/mainmanagement/businessShopManagement");
 		
-
+ 		
 		if(checkEstStatus(req, "ShopManagement")) return mainMove(req, "ShopManagement");
  		
  		/*

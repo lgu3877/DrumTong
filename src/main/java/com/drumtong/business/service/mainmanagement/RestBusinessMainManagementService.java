@@ -141,7 +141,7 @@ public class RestBusinessMainManagementService {
 	// ===== 중분류 [BMenu] 테이블 ====
 
 	// 메뉴 수정
-	public int updateMenu(HttpServletRequest req, BMenuUpdateVO bMenuUpdateVO) {
+	public List<BMenuVO> updateMenu(HttpServletRequest req, BMenuUpdateVO bMenuUpdateVO) {
 		HttpSession Session = req.getSession();
  	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
  	    String estid = bInformationVO.getEstid();
@@ -150,7 +150,7 @@ public class RestBusinessMainManagementService {
  	    
  	    int updateBMenuResult = bMenuDAO.updateBMenu(bMenuUpdateVO);
 		
-		return updateBMenuResult;
+		return updateBMenuResult == 1  ? bMenuDAO.select(estid) : null;
 	}
 	
 	

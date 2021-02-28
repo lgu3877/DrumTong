@@ -172,7 +172,7 @@ async function addService() {
 }
 
 
-// 퀵 서비스 활성화 < 서비스 등록
+// 퀵 서비스 활성화 < 서비스 등록 [건욱]
 async function updateMenu(service) {
 	console.log(service);
 	for (let key in service) {
@@ -183,7 +183,22 @@ async function updateMenu(service) {
 	}
 	
 	try {
-		await axios.post("/drumtong/business/mainmanagement/BManagement/rest/updateQuickBoolean/", service);
+		const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/updateMenu/", service);
+		
+		
+		// 수정된 데이터를 bMenu에 반영시켜주니다.
+		bMenu = data;
+		
+		// 화면을 재구성 시켜줍니다.
+		displayMenu();
+		
+		// 데이터 성공여부에 따라서 Alert를 날려줍니다.
+		alertShow(data);
+		
+		// 모달을 닫아줍니다.
+		document.getElementById('modify-menu-modal').style.display = "none";
+    	document.getElementById('modify-menu-modal').innerHTML = "";
+		
 	} catch (e) {
 		console.log(e);
 		return false;
@@ -287,8 +302,8 @@ async function updateAddress() {
 		"longitude" : ma,
 		"emdcode" : emdCode
 	}
-	await axios.post("/drumtong/business/mainmanagement/BInformation/rest/updateLocation/", object);
-	 
+	const { data } =  await axios.post("/drumtong/business/mainmanagement/BInformation/rest/updateLocation/", object);
+	alertShow(data);	 
 	borderNone('locationArea');
 }
 

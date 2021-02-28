@@ -51,7 +51,7 @@
 		let bMenu = ${bMenu};
 		console.log(bMenu);
 		console.log(bImageList);
-		
+		console.log(bManagement.introduction);
 		const defaultCategory = ${defaultcategory};
 		const menuCategories = ${menuCategories};
 		console.log(defaultCategory);
@@ -106,7 +106,7 @@
 <!-- 	[전체 폼]에 대한 c:if문 -->
 
 	<c:if test="${status ne 'SUCCESS' }">
-			<form method="POST" enctype="multipart/form-data">
+			<form method="POST" id="theForm" enctype="multipart/form-data">
 	</c:if>
 		
 		<!-- 매장 소개(사진 & 글) -->

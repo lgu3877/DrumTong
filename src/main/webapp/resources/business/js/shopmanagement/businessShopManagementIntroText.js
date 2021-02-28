@@ -4,7 +4,7 @@ displayText();
 // bManagement > introduction 가져오기 > 소개글 자동완성
 function displayText() {
 	if (bManagement && bManagement.introduction) {
-		document.getElementById("intro-text").innerText = bManagement.introduction === '-' ? "" : ""; 
+		document.getElementById("intro-text").innerText = bManagement.introduction === '-' ? "" : bManagement.introduction; 
 	}
 	
 	document.getElementById("intro-modal-textarea").innerText
