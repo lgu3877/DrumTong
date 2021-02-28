@@ -59,7 +59,7 @@
 
             <select class="filter_op" id="filter2">
                 <option value="weekend">모든 매장</option>
-                <option value="today">영업중인 매장</option>
+                <option value="now">영업중인 매장</option>
             </select>
 
             <select class="filter_op" id="filter3">
@@ -72,7 +72,6 @@
                 <option value="none">정렬 없음</option>
                 <option value="score">평점 높은순</option>
                 <option value="count">리뷰 많은순</option>
-                <option value="location">현재 지도 중심 거리순</option>
             </select>
 
             <div class="filter_reset">
