@@ -17,7 +17,7 @@
      <link rel="stylesheet" href="${cpath }/business/css/businessStyle.css">
      -->
  	<!-- header css -->
-    <link rel="stylesheet" href="${cpath }/business/css/businessHeader.css">
+    <link rel="stylesheet" href="${cpath }/business/css/businessAltHeader.css">
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
@@ -31,7 +31,7 @@
 </head>
 <body style="position: relative;">
 	<!-- header(navbar) -->
-	<%@ include file="businessHeader.jsp" %>
+	<%@ include file="businessAltHeader.jsp" %>
 	
 	
 	<!-- section -->
