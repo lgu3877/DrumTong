@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 	<script type="text/javascript" src="${cpath }/customer/js/laundry/customerSearch.js"></script>
+	<script type="text/javascript" src="${cpath }/customer/js/main/customerHeader.js"></script>
 	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="https://kit.fontawesome.com/7522a35233.js" crossorigin="anonymous"></script>
 
@@ -57,29 +58,17 @@
             </select>
 
             <select class="filter_op" id="filter2">
-                <option value="today">오늘 영업</option>
-                <option value="WEEKDAY">평일 영업</option>
-                <option value="SATURDAY">토요일 영업</option>
-                <option value="SUNDAY">일요일 영업</option>
-                <option value="weekend">주말 영업</option>
-            </select>
-            
-            <select class="filter_op" id="filter3">
-                <option value="none">영업 시간</option>
-                <option value="24">24시간</option>
-                <option value="0시~6시">0시~6시</option>
-                <option value="6시~12시">6시~12시</option>
-                <option value="12시~18시">12시~18시</option>
-                <option value="18시~24시">18시~24시</option>
+                <option value="weekend">모든 매장</option>
+                <option value="today">영업중인 매장</option>
             </select>
 
-            <select class="filter_op" id="filter4">
+            <select class="filter_op" id="filter3">
                 <option value="none">배달 여부</option>
                 <option value="N">수거,배달 X</option>
                 <option value="Y">수거,배달 O</option>
             </select>
 
-            <select class="filter_op" id="filter5">
+            <select class="filter_op" id="filter4">
                 <option value="none">정렬 없음</option>
                 <option value="score">평점 높은순</option>
                 <option value="count">리뷰 많은순</option>
