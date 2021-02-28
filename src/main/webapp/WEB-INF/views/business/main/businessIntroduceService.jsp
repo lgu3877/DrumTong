@@ -36,8 +36,11 @@
 	
 	<!-- section -->
 	<div id="viewr-wrapper" class="viewer_wrapper">
+	
 		<!-- down btn -->
-		<div class="viewer_up pointer"></div>
+		<div class="viewer_up top pointer bg_trans">
+			<i class="fas fa-chevron-up"></i>
+		</div>
 		
 		<!-- sliders -->
 		<div id="viewer-container" class="viewer_con">
@@ -46,8 +49,12 @@
 			<div class="viewer bg_blue"></div>
 			<div class="viewer bg_grey"></div>
 		</div>
+		
 		<!-- up btn -->
-		<div class="viewer_down pointer"></div>
+		<div class="viewer_down bottom pointer bg_trans">
+			<i class="fas fa-chevron-down"></i>
+		</div>
+		
 	</div>
 	
 	<!-- footer -->

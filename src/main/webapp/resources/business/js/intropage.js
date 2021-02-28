@@ -21,7 +21,7 @@ container.onmousewheel = (e) => {
 		isRunning = false; // (이벤트 실행불가)
 		setTimeout(() => isRunning = true, 1500); // 1초 후 실행가능(true)
 
-		scrollSlide(e);
+		scrollSlide(e); // 슬라이드 이동
 		slideHover(); // 슬라이드 버튼 업데이트 (button visibility)
 	}
 }
@@ -33,8 +33,8 @@ container.onmouseenter = () => slideHover();
 container.onmouseleave = () => slideOut();
 
 // click event > up/down 이동
-upViewer.onclick = (e) => clickSlideButton(e.target);
-downViewer.onclick = (e) => clickSlideButton(e.target);
+upViewer.onclick = (e) => clickSlideButton("up");
+downViewer.onclick = (e) => clickSlideButton("down");
 
 
 
@@ -72,7 +72,6 @@ function scrollSlide(event) {
 
 // 클릭 > 스크롤 위 아래 이동
 function slideHover() {
-	console.log("123");
 	// 마지막 슬라이드 위치  > translateY % 값
 	const limit = (viewerCount - 1) * execution;
 	
@@ -107,41 +106,39 @@ function slideHover() {
 	}
 }
 
+
 // 슬라이더에서 마우스가 나왔을 때(mouse leave)
 function slideOut() {
 	upViewer.classList.remove("visible");
 	downViewer.classList.remove("visible");
 }
 
+
 // 클릭 > 스크롤 위 아래 이동
-function clickSlideButton(button) {
-	console.log(button);
-	
-	const limit = (viewerCount - 1) * execution;
-
-	if (view === 0) {
-		console.log(view);
+function clickSlideButton(move) {
+	switch(move) {
+	case "up":
+		if (view === 0) return;
 		
-		// class remove
-		downViewer.classList.remove("invisible");
+		view = view + execution;
 		
-		// class add
-		upViewer.classList.add("invisible");
+		for (let i = 0; i < viewers.length; i++) {
+			const viewer = viewers[i];
+			viewer.style.transform = "translateY(" + view + "%)";
+		}
+		break;
+	case "down":
+		const limit = (viewerCount - 1) * execution;
+		if (view === -limit) return;
+		
+		view = view - execution;
+		
+		for (let i = 0; i < viewers.length; i++) {
+			const viewer = viewers[i];
+			viewer.style.transform = "translateY(" + view + "%)";
+		}
+		break;
 	}
 	
-	else if (view === -limit) {
-		console.log(view);
-		// class remove
-		upViewer.classList.remove("invisible");
-
-		// class add
-		downViewer.classList.add("invisible");
-	}
-	
-	else {
-		console.log(view);
-		// class add
-		downViewer.classList.remove("invisible");
-		upViewer.classList.remove("invisible");
-	}
+	slideHover();
 }
