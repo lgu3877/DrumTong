@@ -59,6 +59,7 @@
 		
 		const sido = ${sido};
 		
+		console.log(bMenu);
 // 		const initialAreas = ${deliveryAreas};
 // 		const deliveryAreas = ${deliveryAreas};
 		let deliveryAreas = ${deliveryAreas};
@@ -485,13 +486,13 @@
 				<div class="address_wrapper">
 					<h3>주소</h3>
 					<div class="main_address_input_wrapper">
-						<input id="main-address" class="main_address_input" type="text" name="mainlocation" value="${mainAddress }" 
+						<input id="main-address" class="main_address_input" type="text" name="mainlocation" value="${bInformation.mainlocation }" 
 							onfocus="openAddressSearch()">
 						<input type="button" class="address_search_button" onclick="openAddressSearch()" value="주소 찾기">
 					</div>
 					<h3>상세주소</h3>
 					<div class="detail_address_input_wrapper">
-						<input id="detail-address" class="detail_address_input" type="text" name="detaillocation" value="${detailAddress }">
+						<input id="detail-address" class="detail_address_input" type="text" name="detaillocation" value="${bInformation.detaillocation }">
 						<input id="latitude" type="hidden" name="latitude">
 						<input id="longitude" type="hidden" name="longitude">
 						<input id="town-code" type="hidden" name="emdcode">

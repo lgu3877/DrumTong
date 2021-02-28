@@ -56,6 +56,14 @@
 	</select>
 	
 
+<!-- 	배달 지역 전체를 삭제해주는 메서드입니다. -->
+	<delete id="deleteBDeliveryAreaAll" parameterType="String">
+		DELETE 
+			FROM 
+		BDELIVERYAREA
+			WHERE
+		ESTID = #{value} 
+	</delete>
 
 
 <!--  ======================================= REST ================================================ -->
@@ -85,4 +93,6 @@
 				ADDRESSC = #{addressc}
 	</delete>
 
+
+	
 </mapper>

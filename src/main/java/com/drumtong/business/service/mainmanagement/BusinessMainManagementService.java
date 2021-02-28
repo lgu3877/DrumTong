@@ -92,7 +92,18 @@ public class BusinessMainManagementService {
  		HttpSession Session = req.getSession();
  	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
  	    String estid = bInformationVO.getEstid();
- 		
+ 	    
+ 	    mav = shopManagementAddObject(estid, mav);
+ 	    
+	    
+    	return mav;
+	}
+
+	
+	// 매장관리 페이지에 보내줄 데이터를 처리해주는 함수이다. [건욱]
+	private ModelAndView shopManagementAddObject(String estid, ModelAndView mav) {
+		
+
  	    // 2차 온라인 계약에 매장관리를 완료했다면 전에 입력했던 데이터를 불러와준다.
  	    	
  	    // 매장 사진 데이터
@@ -119,8 +130,11 @@ public class BusinessMainManagementService {
     	// 선택한 지역 데이터 리스트 
     	mav.addObject("deliveryAreas", (new Gson().toJson(AddressListSetting.getAddressList(estid))));
     	
+    	
+    	
  	    // 대분류 중분류 카테고리를 셋팅해주는 함수입니다.
 	    HashMap<String, ArrayList<String>> menuCategories = menuCategoriesSetting(estid);
+	    
 	    
 	    // 선택한 기본카테고리도 같이 셋팅해줍니다.
 	    for(String category : defaultcategory) {
@@ -132,20 +146,16 @@ public class BusinessMainManagementService {
 	    		
 	    }
 	    
-	    for(Map.Entry<String, ArrayList<String>> entry : menuCategories.entrySet()) {
-	    	System.out.println(entry.getKey());
-	    	System.out.println(entry.getValue());
-	    	
-	    }
-	    
 	    //  대분류, 중분류 카테고리 모음
 	    mav.addObject("menuCategories", (new Gson()).toJson(menuCategories));
 	    
+	    // 매장 주소 
+	    mav.addObject("bInformation", (new Gson()).toJson(bInformationDAO.selectCustomerDetail(estid)));
 	    
-    	return mav;
+		return mav;
 	}
 
-	
+
 	// 비즈니스 일정관리 페이지로 이동 (GET) [건욱]
 	public ModelAndView scheduleManagement(HttpServletRequest req) {
 		
@@ -179,7 +189,7 @@ public class BusinessMainManagementService {
 	 * [2] BImage[매장사진] <- AWS S3에 저장됨
 	 * [3] BMenu[매장메뉴] 
 	 * [4] BDeliveryArea[배달지역]
-	 * 
+	 * -
 	 * [1] -> 매장관리는 {소개글, 배달여부, 퀵여부} 데이터가 BManagementVO를 통해서 데이터가 들어와 SQL문으로 RDS서버에 넣어준다.
 	 * 
 	 * [2] -> BImage는 AWS S3에 이미지가 저장된다. 
@@ -263,6 +273,8 @@ public class BusinessMainManagementService {
 		// AWS 파일 여러개 입력
 		aws.multipleUpload(mpf, folderName, bImageVO, req);
 		
+		
+		// 3. 매장 주소 업데이트
 		System.out.println("updateLocation 실행 ... ");
 		System.out.println("detalilocation : " + bInformationVO.getDetaillocation());
 		System.out.println("latitude : " + bInformationVO.getLatitude());
@@ -284,12 +296,14 @@ public class BusinessMainManagementService {
 				break;
 				
 			case "PROCESS" :
-//				processingOnProcess();
+				processingOnProcess(bMenuVOList,bDeliveryAreaList,estid);
 				break;
 	    }
 		
 	}
 
+
+	
 
 	private void processingOnFail(BMenuListVO bMenuVOList, String[] bDeliveryAreaList, String estid) {
 		
@@ -311,6 +325,17 @@ public class BusinessMainManagementService {
 		int BInformationResult = bInformationDAO.updateStatus(map);
 		
 	}
+	
+	private void processingOnProcess(BMenuListVO bMenuVOList, String[] bDeliveryAreaList, String estid) {
+		
+		int result1 = bMenuDAO.deleteBMenuAll(estid);
+		
+		int result2 = bDeliveryAreaDAO.deleteBDeliveryAreaAll(estid);
+		
+		processingOnFail(bMenuVOList, bDeliveryAreaList, estid);
+		
+	}
+
 
 
 	// 매장 배달 가능 지역을 데이터 바인딩 해주는 함수입니다. [건욱]

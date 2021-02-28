@@ -29,4 +29,7 @@ public interface BDeliveryAreaDAO {
 	//	배달 지역을 비동기식으로 삭제해주는 메서드입니다.
 	int deleteBDeliveryAreaList(BDeliveryAreaVO bDeliveryAreaVO);
 
+//	배달 지역 전체를 삭제해주는 메서드입니다.
+	int deleteBDeliveryAreaAll(String estid);
+
 }

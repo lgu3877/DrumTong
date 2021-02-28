@@ -5,8 +5,10 @@ let copiedList;
 let deliveryToggle = false;
 
 // 초기 실행
-createAddService();
+status === "PROCESS" ? processTMPDP() : createAddService();
 createCategoryList(); // 메뉴수정 관련 Modal
+
+
 
 // 서비스 등록을 초기화시켜줍니다. [건욱]
 function cleanAddService() {
@@ -14,6 +16,59 @@ function cleanAddService() {
 	container.innerHTML = "";
 }
 
+
+// [건욱] 매장이 PROCESS 상태일때 등록된 메뉴를 불러올 때 사용되는 함수
+function processTMPDP() {
+	console.log('실행 processtmp');
+	for(let i = 0; i < bMenu.length; i++) {
+		const divId = createAddService();
+		const divArea = document.getElementById(divId);
+		const mainCategorySelectBox = divArea.children[0].children[0];
+		const subCategorySelectBox = divArea.children[1].children[0];
+		const subCategoryInputBox = divArea.children[1].children[1];
+		const menuName = divArea.children[2].children[0];
+		
+		const quickIcon = divArea.children[3].children[0].children[1];
+		const quickPrice = 	divArea.children[3].children[1];	
+		
+		const menuPrice = divArea.children[3].children[0].children[0];
+		const menuETE = divArea.children[4].children[0];
+		
+		
+		selectedDisplay(mainCategorySelectBox, bMenu[i].maincategory);
+		
+		// 정장 / sub selectbox id / false
+		populateSubOptions(bMenu[i].maincategory, subCategorySelectBox.getAttribute('id'),true);
+		
+		
+		const subBoolean = selectedDisplay(subCategorySelectBox, bMenu[i].subcategory);
+		if(subBoolean)
+			subCategoryInputBox.setAttribute('name', 'subcategoryInputBox');
+		
+		
+		menuName.value = bMenu[i].name;
+		menuPrice.value = bMenu[i].price;		
+		if(bMenu[i].quickprice !== 0){
+			activateQuick(quickIcon);	
+			quickPrice.value = bMenu[i].quickprice
+		} 
+		
+		
+		menuETE.value = bMenu[i].ete;
+	}
+}
+
+
+// 매장이 FAIL 상태에서 입력한 서비스 등록 메뉴들을 Select박스를 Selected 로 만들어준다. [건욱]
+function selectedDisplay(object, compareThing) {
+	for(let j = 0; j < object.options.length; j++) {
+			if(compareThing === object.options[j].value){
+				object.options[j].selected = true;
+				return true;
+			}
+						
+	}
+}
 
 // 서비스 등록 > 입력 input & select 생성
 function createAddService() {
@@ -178,6 +233,8 @@ function createAddService() {
 		singleServiceInputCon.appendChild(cancleBtnCon);
 		
 			container.appendChild(singleServiceInputCon);
+			
+	return serviceRandomId;
 }
 
 // [건욱] Select 박스의 이름을 결정해주는 함수입니다 (POST 형식일 때 Spring에서 데이터 바인딩을 제대로 해주기 위해서 설정하는 함수.)
@@ -301,7 +358,7 @@ function clearSubOptions(subCategoryId) {
 		subOptions[1].remove();
 	}
 }
-
+// 정장 / sub selectbox id / false
 // 서브 옵션 생성
 function populateSubOptions(key, subCategoryId, modifyBoolean) {
 	const subSelect = document.getElementById(subCategoryId);
