@@ -43,9 +43,11 @@ async function selectLaundry(page) {
 	const { data } = await axios.get('/drumtong/customer/laundry/customerSearch/rest/selectLaundry/' + paramAddress + filterAddress + pageAddress);
 	const premiumList = data[0];
 	const generalList = data[1];
+	const resultNum = data[2];
 
 	console.log('select_premiumList : ', premiumList);
 	console.log('select_generalList : ', generalList);
+	console.log('resultNum : ', resultNum);
 
 	insertLaundryList(premiumList, generalList);
 }

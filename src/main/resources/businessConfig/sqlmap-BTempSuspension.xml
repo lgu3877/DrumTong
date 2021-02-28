@@ -63,6 +63,10 @@
 	
 <!-- 	</insert> -->
 	
-
+	<select id="isOpen" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) FROM BTEMPSUSPENSION 
+			WHERE ESTID=#{estid}
+				AND TO_CHAR(SYSDATE,'YYYY-MM-DD') BETWEEN BEGINDAY AND ENDDAY
+	</select>
 
 </mapper>
