@@ -8,6 +8,11 @@ const viewerCount = document.getElementsByClassName("viewer").length;
 const upViewer = document.querySelector(".viewer_up");
 const downViewer = document.querySelector(".viewer_down");
 
+// move to top
+const topMover = document.querySelector(".move_top");
+
+
+// variables
 let view = 0; // 초기 위치값 (css > translateY 값 기준)
 const execution = 100; // 스크롤 이동 값 > translateY (% 단위)
 
@@ -19,7 +24,7 @@ container.onmousewheel = (e) => {
 	if (isRunning) {
 		// 스크롤 이벤트 딜레이
 		isRunning = false; // (이벤트 실행불가)
-		setTimeout(() => isRunning = true, 1500); // 1초 후 실행가능(true)
+		setTimeout(() => isRunning = true, 1000); // 1초 후 실행가능(true)
 
 		scrollSlide(e); // 슬라이드 이동
 		slideHover(); // 슬라이드 버튼 업데이트 (button visibility)
@@ -36,6 +41,8 @@ container.onmouseleave = () => slideOut();
 upViewer.onclick = (e) => clickSlideButton("up");
 downViewer.onclick = (e) => clickSlideButton("down");
 
+// click event > 최상단 이동
+topMover.onclick = () => moveToTop();
 
 
 // 스크롤 이동
@@ -70,7 +77,7 @@ function scrollSlide(event) {
 };
 
 
-// 클릭 > 스크롤 위 아래 이동
+// 슬라이더에서 마우스가 들어왔을 때 (mouse enter)
 function slideHover() {
 	// 마지막 슬라이드 위치  > translateY % 값
 	const limit = (viewerCount - 1) * execution;
@@ -83,6 +90,10 @@ function slideHover() {
 		// up button
 		upViewer.className.includes("visible") ?
 			upViewer.classList.remove("visible") : null;
+			
+		// move to top button
+		topMover.className.includes("invisible") ?
+			null : topMover.classList.add("invisible");
 	}
 	
 	else if (view === -limit) {
@@ -93,6 +104,10 @@ function slideHover() {
 		// up button
 		upViewer.className.includes("visible") ?
 			null : upViewer.classList.add("visible");
+		
+		// move to top button
+		topMover.className.includes("invisible") ?
+			topMover.classList.remove("invisible") : null;
 	}
 	
 	else {
@@ -103,6 +118,10 @@ function slideHover() {
 		// up button
 		upViewer.className.includes("visible") ?
 			null : upViewer.classList.add("visible");
+
+		// move to top button
+		topMover.className.includes("invisible") ?
+			topMover.classList.remove("invisible") : null;
 	}
 }
 
@@ -141,4 +160,15 @@ function clickSlideButton(move) {
 	}
 	
 	slideHover();
+}
+
+
+// 최상단 이동
+function moveToTop() {
+	view = 0;
+	
+	for (let i = 0; i < viewers.length; i++) {
+		const viewer = viewers[i];
+		viewer.style.transform = "translateY(" + view + "%)";
+	}
 }

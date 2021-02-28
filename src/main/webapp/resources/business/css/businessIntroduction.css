@@ -4,6 +4,38 @@ body {
     margin: 0;
 }
 
+/* slide content 1 */
+.image_01 {
+	width: 720px;
+    height: 540px;
+    background-size: cover;
+    position: absolute;
+    top: 200px;
+    left: 50px;
+    border-radius: 30px;
+	background-image: url("/drumtong/resources/business/img/introPage/laundry-image_01.jpg");;
+}
+
+.intro_01 {
+	
+}
+
+/* slide content 2 */
+.image_02 {
+	width: 720px;
+    height: 540px;
+    background-size: cover;
+    position: absolute;
+    top: 200px;
+    left: 50px;
+    border-radius: 30px;
+	background-image: url("/drumtong/resources/business/img/introPage/laundry-image_01.jpg");;
+}
+
+.intro_02 {
+	
+}
+
 /* position */
 .top {
 	top: 0
@@ -100,4 +132,23 @@ body {
 .viewer_up:hover,
 .viewer_down:hover {
 	background-color: rgba(0, 0, 0, 0.3);
+}
+
+.move_top {
+	position: fixed;
+	padding: 5px;
+    color: white;
+    bottom: 50px;
+    right: 15px;
+    border-radius: 10px;
+    visibility: visible;
+}
+
+.move_top:hover {
+	transition: all 1s;
+	color: navy;
+}
+
+.move_top i {
+	font-size: 30pt;
 }

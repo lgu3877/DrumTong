@@ -44,15 +44,30 @@
 		
 		<!-- sliders -->
 		<div id="viewer-container" class="viewer_con">
-			<div class="viewer bg_red"></div>
-			<div class="viewer bg_mint"></div>
+			<!-- content 01 -->
+			<div class="viewer bg_red">
+				<div class="image_01"></div>
+				<div class="intro_01"></div>
+			</div>
+			<!-- content 02 -->
+			<div class="viewer bg_mint">
+				<div class="image_02"></div>
+				<div class="intro_02"></div>
+			</div>
+			<!-- content 03 -->
 			<div class="viewer bg_blue"></div>
+			<!-- content 04 -->
 			<div class="viewer bg_grey"></div>
 		</div>
 		
 		<!-- up btn -->
 		<div class="viewer_down bottom pointer bg_trans">
 			<i class="fas fa-chevron-down"></i>
+		</div>
+		
+		<!-- move to top -->
+		<div class="move_top pointer invisible">
+			<i class="far fa-arrow-alt-circle-up"></i>
 		</div>
 		
 	</div>
