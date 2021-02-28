@@ -4,6 +4,26 @@ body {
     margin: 0;
 }
 
+/* visible */
+.visible {
+	visibility: visible !important;
+}
+
+.invisible {
+	visibility: hidden !important;
+}
+
+/* cursor */
+.pointer {
+	cursor: pointer;
+}
+
+/* transition */
+.transition_1s {
+	transition: all 1s;
+}
+
+/* viewer */
 .viewer_wrapper {
 	position: absolute;
     top: 100px;
@@ -24,23 +44,25 @@ body {
 }
 
 .viewer_up {
+    visibility: hidden;
 	z-index: 1;
 	position: absolute;
     width: 100%;
     height: 50px;
     background-color: beige;
-    cursor: pointer;
     top: 0;
+    transition: all 1s;
 }
 
 .viewer_down {
+    visibility: hidden;
     z-index: 1;
 	position: absolute;
     width: 100%;
     height: 50px;
     background-color: navy;
-    cursor: pointer;
     bottom: 0;
+    transition: all 1s;
 }
 
 .bg_red {

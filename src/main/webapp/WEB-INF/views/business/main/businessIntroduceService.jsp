@@ -35,17 +35,19 @@
 	
 	
 	<!-- section -->
-	<div class="viewer_wrapper">
-		<div class="viewer_up">
-		</div>
+	<div id="viewr-wrapper" class="viewer_wrapper">
+		<!-- down btn -->
+		<div class="viewer_up pointer"></div>
+		
+		<!-- sliders -->
 		<div id="viewer-container" class="viewer_con">
 			<div class="viewer bg_red"></div>
 			<div class="viewer bg_mint"></div>
 			<div class="viewer bg_blue"></div>
 			<div class="viewer bg_grey"></div>
 		</div>
-		<div class="viewer_down">
-		</div>
+		<!-- up btn -->
+		<div class="viewer_down pointer"></div>
 	</div>
 	
 	<!-- footer -->
