@@ -313,9 +313,12 @@ public class BusinessMainManagementService {
 		
 		
 		// 4. 배달지역 테이블에  해당 매장의 배달가능한 지역의 {시도,시군구,시구,읍면동}를 업데이트 시켜준다.
-		ArrayList<BDeliveryAreaVO> dataBindingBDeliveryList = 
-												dataBindingBDeliveryAreaVO(bDeliveryAreaList, estid);
-		int result3 = bDeliveryInsertAreatoDAO(dataBindingBDeliveryList);
+		if(bDeliveryAreaList != null ) {
+			ArrayList<BDeliveryAreaVO> dataBindingBDeliveryList = 
+					dataBindingBDeliveryAreaVO(bDeliveryAreaList, estid);
+			int result3 = bDeliveryInsertAreatoDAO(dataBindingBDeliveryList);
+		}
+		
 		
 		// 5. 2차 온라인 계약 매장관리가 작성이 완료되었으면 status = 'Process' 로 변경시켜준다.
 		HashMap<String, String> map = new HashMap<String,String>();

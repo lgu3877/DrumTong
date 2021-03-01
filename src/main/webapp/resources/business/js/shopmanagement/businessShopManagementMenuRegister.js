@@ -190,6 +190,7 @@ function createAddService() {
 		quickPriceInput.className = "service_quickprice_input";
 		quickPriceInput.placeholder = "퀵 서비스 요금(원)";
 		quickPriceInput.style.marginTop = "5px";
+		quickPriceInput.pattern = "[0-9]+";
 		quickPriceInput.value = "0";
 	
 	
@@ -213,7 +214,7 @@ function createAddService() {
 		timeInput.className = "service_time_input";
 		timeInput.name = "ete";
 		timeInput.placeholder = "(일)";
-
+		timeInput.pattern = "[0-9]+";
 		// 추가
 		fifthInputCon.appendChild(timeInput);
 		

@@ -600,10 +600,12 @@
 	padding: 0 !important; 
 }
 
+.service_time_input:invalid,
+.service_quickprice_input:invalid,
 .service_price_input:invalid {
 	border: 2px solid red;
 }
-
+	
 .service_time {
 	width: 8%;
 }
