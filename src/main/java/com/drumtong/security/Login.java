@@ -129,7 +129,6 @@ public class Login {
 			
 			BInformationVO selectEST = (BInformationVO)Session.getAttribute("selectEST");
 			if(InformationList != null && InformationList.size() != 0) {
-				System.out.println("selectEST : " + selectEST);
 				selectEST = bInformationDAO.selectEst(selectEST == null ? InformationList.get(0).getEstid() : selectEST.getEstid());
 				Session.setAttribute("selectEST", selectEST);
 			}
