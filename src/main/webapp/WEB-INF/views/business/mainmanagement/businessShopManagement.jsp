@@ -441,7 +441,7 @@
 				<div id="delivery-area-view" class="delivery_area_view_con"></div>
 				
 			<!-- 배달지역 입력 -->
-				<div class="delivery_area_set_wrap form">
+				<div class="delivery_area_set_wrap form" id="delivery_area_set_wrapping">
 					<div class="delivery_area_set_con">
 					<!-- 시/도 선택 -->
 						<select id="major-area-selector" class="area_selector" name="sido" onchange="createMinorOptions()">
