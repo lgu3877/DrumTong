@@ -44,6 +44,7 @@ import com.drumtong.business.vo.BTempSuspensionVO;
 import com.drumtong.map.dao.MSidoDAO;
 import com.drumtong.security.AddressListSetting;
 import com.drumtong.security.AwsServiceImpl;
+import com.drumtong.security.Login;
 import com.google.gson.Gson;
 
 @Service
@@ -241,6 +242,7 @@ public class BusinessMainManagementService {
 	    // 매장의 상태값에 따라서 처리해야될 함수입니다.
 		processingAccordingToStoreStatus(status, bMenuVOList, bDeliveryAreaList, estid);
 		
+		Login.getInformationList(bPrivateDataVO, Session, bInformationDAO);
 		
 		return mav;
 	}
