@@ -4,6 +4,10 @@ body {
     margin: 0;
 }
 
+.wide_view {
+	height: calc(100vh - 50px) !important;
+}
+
 /* slide content 1 */
 .image_01 {
 	width: 720px;
@@ -97,11 +101,13 @@ body {
     top: 100px;
     height: calc(100vh - 100px);
     width: 100%;
+    transition: all 1s;
 }
 
 .viewer_con {
 	height: 100%;
 	overflow: hidden;
+	transition: all 1s;
 }
 
 .viewer {
