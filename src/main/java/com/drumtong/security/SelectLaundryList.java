@@ -83,24 +83,27 @@ public class SelectLaundryList {
 	
 	private static List<Object> SeparateAccordingToPremium(HashMap<String, String> param) {
 		List<Object> list = new ArrayList<Object>();
+		int PageNum = Integer.parseInt(param.get("page"));
+		int prePeriod = 2; // 프리미엄은 두개 씩 페이징
+		int genPeriod = 10; // 일반은 열개 씩 페이징
+		
 		// 페이징
 		param.put("premium", "Y");
 		List<EstablishmentList> premiumList = getLaundryList();
+		premiumList = premiumList.size() > 2 ? premiumList.subList((PageNum-1) * prePeriod, PageNum * prePeriod) : premiumList;
 		
 		param.put("premium", "N");
 		List<EstablishmentList> generalList = getLaundryList();
-		
-		list.add(premiumList.size() + generalList.size());
+		generalList = generalList.size() > 10 ? generalList.subList((PageNum - 1) * genPeriod, PageNum * genPeriod) : generalList;
 		
 		// 페이징하기
 		list.add(premiumList);
 		list.add(generalList);
+		list.add(premiumList.size() + generalList.size());
 		return list;
 	}
 	// 세탁소 리스트를 sql문 통해 적절히 가져와주는 내부 메서드
 	private static List<EstablishmentList> getLaundryList() {
-//		System.out.println("============== List getLaundryList 함수 실행 ==============");
-//		System.out.println("param : " + param.toString());
 		List<EstablishmentList> List = bInformationDAO.selectEstablishmentList(param);
 		boolean now = param.get("todayIsOpen").equals("now");
 		// ① 휴무 필터
@@ -133,15 +136,9 @@ public class SelectLaundryList {
 			}
 		}
 		// 만약 오늘 영업하는 매장만 나오도록 한다면 그 필드를 삭제해준다.
-//		System.out.println("컬렉션 전 : " + List.size());
-//		for(EstablishmentList li : List) System.out.println(li.getReason());
-//		System.out.println("now : " + now);
 		if(now) {
-//			System.out.println("stream 함수 실행");
 			List = List.stream().filter(li -> li.getOpenboolean() == 'Y').collect(Collectors.toList());
 		}
-//		System.out.println("컬렉션 후 : " + List.size());
-//		for(EstablishmentList li : List) System.out.println(li.getReason());
 		
 		return List;
 	}
