@@ -346,8 +346,6 @@ public class BusinessMainManagementService {
 			String estid) {
 		ArrayList<BDeliveryAreaVO> dataBindingList = new ArrayList<BDeliveryAreaVO>();
 		
-		System.out.println("bDeliveryLength 값 : "  + bDeliveryAreaList.length);
-		
 		for(int i = 0; i < bDeliveryAreaList.length; i++ ) {
 			BDeliveryAreaVO bDeliveryAreaVO = new BDeliveryAreaVO();
 			String[] areaTMP = bDeliveryAreaList[i].split("/");
