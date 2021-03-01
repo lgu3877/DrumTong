@@ -83,10 +83,6 @@ public class SelectLaundryList {
 	
 	private static List<Object> SeparateAccordingToPremium(HashMap<String, String> param) {
 		List<Object> list = new ArrayList<Object>();
-		int PageNum = Integer.parseInt(param.get("page"));
-		int prePeriod = 2; // 프리미엄은 두개 씩 페이징
-		int genPeriod = 10; // 일반은 열개 씩 페이징
-		
 		// 페이징
 		param.put("premium", "Y");
 		List<EstablishmentList> premiumList = getLaundryList();
@@ -95,8 +91,20 @@ public class SelectLaundryList {
 		List<EstablishmentList> generalList = getLaundryList();
 		int allPageNum = premiumList.size() + generalList.size();
 		
-		premiumList = premiumList.size() > 2 ? premiumList.subList((PageNum-1) * prePeriod, PageNum * prePeriod) : premiumList;
-		generalList = generalList.size() > 10 ? generalList.subList((PageNum - 1) * genPeriod, PageNum * genPeriod) : generalList;
+		int PageNum = Integer.parseInt(param.get("page"));
+		int prePeriod = 2; // 프리미엄은 두개 씩 페이징
+		int preStartPage = (PageNum-1) * prePeriod;
+		int preEndPage = PageNum * prePeriod;
+		preEndPage = preEndPage > premiumList.size() ? premiumList.size() : preEndPage;
+		
+		int genPeriod = 10; // 일반은 열개 씩 페이징
+		int genStartPage = (PageNum - 1) * genPeriod;
+		int genEndPage = PageNum * genPeriod;
+		genEndPage = genEndPage > generalList.size() ? generalList.size() : genEndPage;
+		
+		
+		premiumList = preStartPage > premiumList.size() ? premiumList.subList(0, 0) : premiumList.subList(preStartPage, preEndPage);
+		generalList = genStartPage > generalList.size() ? generalList.subList(0, 0) : generalList.subList(genStartPage, genEndPage);
 		// 페이징하기
 		list.add(premiumList);
 		list.add(generalList);
