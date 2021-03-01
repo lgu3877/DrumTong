@@ -90,16 +90,17 @@ public class SelectLaundryList {
 		// 페이징
 		param.put("premium", "Y");
 		List<EstablishmentList> premiumList = getLaundryList();
-		premiumList = premiumList.size() > 2 ? premiumList.subList((PageNum-1) * prePeriod, PageNum * prePeriod) : premiumList;
 		
 		param.put("premium", "N");
 		List<EstablishmentList> generalList = getLaundryList();
-		generalList = generalList.size() > 10 ? generalList.subList((PageNum - 1) * genPeriod, PageNum * genPeriod) : generalList;
+		int allPageNum = premiumList.size() + generalList.size();
 		
+		premiumList = premiumList.size() > 2 ? premiumList.subList((PageNum-1) * prePeriod, PageNum * prePeriod) : premiumList;
+		generalList = generalList.size() > 10 ? generalList.subList((PageNum - 1) * genPeriod, PageNum * genPeriod) : generalList;
 		// 페이징하기
 		list.add(premiumList);
 		list.add(generalList);
-		list.add(premiumList.size() + generalList.size());
+		list.add(allPageNum);
 		return list;
 	}
 	// 세탁소 리스트를 sql문 통해 적절히 가져와주는 내부 메서드
