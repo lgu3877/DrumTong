@@ -1,3 +1,5 @@
+// [건욱]
+
 
 // 매장 사진 빈 값 || 데이터 형식 불일치 체크 함수
 function exceptionCheckBImage() {
@@ -67,6 +69,18 @@ function exceptionCheckBLocation() {
 	
 	return true;
 		
+}
+
+
+function exceptionCheckBDelieryAreas() {
+	let checkedAreas = document.getElementById('delivery-area-view');
+	let shouldCheckAreas = document.getElementsByClassName('delivery_area_set_wrap form');
+	
+	
+	if(checkAreas.children.length === 0){
+		let msg = "배달 지역관리가 하나도 체크되어 있지 않습니다. 현재 매장에서 배달이 가능한 지역을 체크해주세요."	;
+		warning(msg,shouldCheckAreas);
+	}
 }
 
 

@@ -150,7 +150,7 @@ public class BusinessMainManagementService {
 	    mav.addObject("menuCategories", (new Gson()).toJson(menuCategories));
 	    
 	    // 매장 주소 
-	    mav.addObject("bInformation", (new Gson()).toJson(bInformationDAO.selectCustomerDetail(estid)));
+	    mav.addObject("bInformation", bInformationDAO.selectCustomerDetail(estid));
 	    
 		return mav;
 	}
