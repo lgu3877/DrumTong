@@ -38,6 +38,16 @@ public class Login {
 		sLoginLogDAO = BeansLoginLogDAO;
 	}
 	
+	public static void createNewSLoginLog(HttpServletRequest request, HttpSession session, String addressToMove) {
+		new LoginInterceptor().CreateNewSLoginLog(request, session, request.getHeader("Referer"));
+	}
+	
+	public static boolean loginWidthoutInterceptor(HttpServletRequest req, HttpServletResponse resp, PrivateData privateData, String storeid) {
+		HttpSession Session = req.getSession();
+		createNewSLoginLog(req, Session, req.getHeader("Referer"));
+		return login(Session, resp, privateData, storeid);
+	}
+	
 	public static boolean login(HttpSession session, HttpServletResponse resp, PrivateData privateData, String storeid){
 		Cookie SessionID = new Cookie("JSESSIONID", session.getId());
 		String ID = privateData.getId();	// 아이디
