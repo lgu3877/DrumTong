@@ -8,7 +8,7 @@
 		// 서버에 시도 이름을 보내줘서 작업속도가 더 빨라지도록 합시다
 	
 		const axiosPath = '/drumtong/customer/laundry/customerMap/rest/sigungu/' + $('#sido-hidden').html() + '/';
-		console.log('axiosPath : ' + axiosPath);
+//		console.log('axiosPath : ' + axiosPath);
 		const axPost = async() => {
 		    await axios.post(axiosPath)
 		    // 정상
