@@ -104,9 +104,6 @@ public class SelectLaundryList {
 		genEndPage = genEndPage > generalList.size() ? generalList.size() : genEndPage;
 		int genPageBox = generalList.size() / genPeriod + (generalList.size() % genPeriod == 0 ? 0 : 1);
 		
-		System.out.println("페이지 : " + prePageBox + ", " + genPageBox);
-		
-		
 		premiumList = preStartPage > premiumList.size() ? premiumList.subList(0, 0) : premiumList.subList(preStartPage, preEndPage);
 		generalList = genStartPage > generalList.size() ? generalList.subList(0, 0) : generalList.subList(genStartPage, genEndPage);
 		// 페이징하기
