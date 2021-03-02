@@ -65,7 +65,7 @@
 			<div class="h_right_lower">
 				<div onclick='location.href="${cpath}/business/contract/businessContract/"'>온라인 계약</div>
 				<div onclick='location.href="${cpath}/business/businessIntroduceService/"'>서비스 소개</div>
-				<div>메뉴 3</div>
+				<div onclick='location.href="${cpath}/business/businessManual/"'>이용 가이드</div>
 				<div>메뉴 4</div>
 			</div>
 		</div>

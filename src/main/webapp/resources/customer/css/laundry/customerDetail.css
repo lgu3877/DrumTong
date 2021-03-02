@@ -379,6 +379,27 @@ div.subButton:hover{
   text-align: right;
 }
 
+.select-date a{
+	cursor: pointer;
+}
+
+.select-date-area{
+  display: none;
+  border-bottom: 1px solid #d8d8d8;
+  height: 250px;
+  padding: 0px 10px;
+}
+
+.select-date-area article{
+	width : 250px;
+	height : 220px;
+	margin: 5px;
+	border: 1px solid #d8d8d8;
+}
+.select-date-area article div{
+	text-align: center;
+	font-size: 15pt;
+}
 .remove-button {
   font-size: medium;
   color: #35aefd;
@@ -404,6 +425,7 @@ div.subButton:hover{
 .order-submit {
   width: 530px;
   height: 50px;
+  min-height: 50px;
   border: none;
   border-radius: 10px;
   background-color: #35aefd;
@@ -559,6 +581,7 @@ div.subButton:hover{
   background-color: ivory;
   height: 100%;
   width: 200px;
+  padding: 10px;
 }
 
 .modal-payment {
@@ -577,15 +600,17 @@ div.subButton:hover{
   background-image: '';
 }
 
+.modal-total textarea {
+  height: 300px;
+  resize: none;
+  overflow-y: scroll;
+}
+.modal-total .submit-agree{
+	color: red;
+}
 .modal-payment-head {
   height: 40px;
   line-height: 40px;
-}
-
-.modal-payment textarea {
-  height: 150px;
-  resize: none;
-  overflow-y: scroll;
 }
 
 .modal-myCardList {
@@ -614,6 +639,18 @@ div.subButton:hover{
   font-size: large;
   font-weight: 900;
   color: white;
+}
+
+.orderListMsg {
+	height: 40px; display: inline-flex; font-size: 14pt; align-items: center; padding: 10px; width: auto; background: rgb(229, 228, 226); cursor: pointer;
+}
+
+.orderListMsg .orderList-hide {
+	display: none;
+}
+.orderListMsg:hover {
+	transition : all 1s ease-in-out;
+	transform: translateX(10px);
 }
 
 .modal-grade {

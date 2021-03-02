@@ -1,6 +1,15 @@
 	
 	function reviewMore() {	// 리뷰 더보기를 클릭했을 때
 		console.log(reviewList);
+		if(reviewList.length == 0){
+			let reviewRow = document.querySelector('.detailview-review-row');
+			reviewRow.style.display='none';
+			let h1 = document.createElement('h1');
+			h1.innerHTML = '리뷰가 존재하지 않습니다';
+			reviewRow.parentNode.appendChild(h1);
+			
+			return;
+		}
 	
 		for(i = 0; i < reviewList.length; i++) {
 			if(i == 0) {
@@ -114,7 +123,10 @@
  	 		$('#review' + i).find('.modal-grade').append(gpaspan);
 	 		
  	 		$('#review' + i).find('.mgood').html('좋아요 ' + reviewList[i].mgood + ' ·&nbsp');
+ 	 		$('#review' + i).find('.visit').html('방문수 ' + reviewList[i].visits + ' ·&nbsp');
  	 		$('#review' + i).find('.gpa').html('&nbsp평점 ' + reviewList[i].gpa);
+ 	 		$('#review' + i).find('.reviewOrderList').html('&nbsp' + reviewList[i].orderListMsg);
+ 	 		document.querySelector('#review' + i + ' .reviewOrderList').title = reviewList[i].orderList;
  	 		
 	 		if(reviewList[i].bcontent != '-') {
 	 			console.log('사장님 댓글이 달려있습니다.');
