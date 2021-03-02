@@ -87,3 +87,81 @@ function displayRegHolidays() {
 	}
 }
 
+
+// 정기휴무 스케쥴 추가
+function addRegSchedule() {
+	// 주(week)
+	const weekSelector = document.getElementsByName("restWeek")[0];
+	const weekOptions = weekSelector.getElementsByTagName("option");
+	let selectedWeek;
+	
+	for (let i = 0; i < weekOptions.length; i++) {
+		if (weekOptions[i].selected === true && !weekOptions[i].value.includes("주 선택")) {
+			selectedWeek = weekOptions[i].value;
+		}
+	}
+	
+	// 주 선택 유무 검사
+	if (selectedWeek === undefined) {
+		alert("주(week)가 선택되지 않았습니다. 다시 한 번 확인해주세요.");
+		return;
+	}
+	
+	// 일(day) > 배열
+	const dayArray = document.getElementsByName("restDay");
+	let selectedDays = "";
+	
+	for (let i = 0; i < dayArray.length; i++) {
+		dayArray[i].checked === true ? selectedDays += dayArray[i].value + "/" : null; 
+	}
+	
+	// 일 선택 유무 검사
+	if (selectedDays === "") {
+		alert("일(day)이 선택되지 않았습니다. 다시 한 번 확인해주세요.");
+		return;
+	}
+	
+	// selected values
+	const selected = {
+		week : selectedWeek,
+		days : selectedDays	
+	};
+	
+	for (let key in bscheduledays) {
+		if (key === selected.week) {
+			const dayString = bscheduledays[key];
+			const dayArray = dayString.split("/");
+			dayArray.pop();
+			
+			const selectedDay = selected.days;
+			const selectedDayArray = selectedDay.split("/");
+			selectedDayArray.pop();
+
+			// 배열 병합
+			const concatDayArray = [ ...dayArray, ...selectedDayArray].sort();
+			
+			// 중복 제거
+			for (let i = 0; i < concatDayArray.length - 1; i++) {
+				concatDayArray[i] === concatDayArray[i + 1] ?
+					concatDayArray.splice(i, 1) : null;
+			}
+			
+			console.log("concatDayArray", concatDayArray);
+			
+			
+//			bscheduledays[key]
+		}
+	}
+	
+	// 뷰 초기화
+	document.getElementById("reg-holiday-schedule").innerHTML = "";
+	
+	// 뷰 출력
+	displayRegHolidays();
+}
+
+
+// 정기휴무 스케쥴 삭제
+function removeRegSchedule() {
+	
+}
