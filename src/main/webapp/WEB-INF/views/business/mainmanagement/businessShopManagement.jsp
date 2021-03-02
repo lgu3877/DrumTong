@@ -120,7 +120,7 @@
 			<!-- title -->	
 				<div class="shop_info_title_con">
 					<div>
-						<span class="shop_info_title">매장 사진</span>
+						<span class="shop_info_title" id="addPhoto">매장 사진</span>
 						<i id="photo-help" class="far fa-question-circle" style="font-weight: 600">도움말</i>
 						<div id="photo-help-msg"></div>
 					</div>
@@ -168,8 +168,15 @@
 					<input id="update-cover" class="add_photo_input" type="file" 
 						name="delegatephotoboolean" onchange="imageCheck(event)"
 						style="display: none;" accept=".png, .jpg, .jpeg" >
-					<label for="update-cover"> <span style="margin-right: 10px">커버
-							사진 바꾸기 <i class="far fa-images"></i>
+					<label for="update-cover"> <span style="margin-right: 10px">
+					<c:if test="${status eq  'SUCCESS' }">
+						커버 사진 바꾸기 
+					</c:if>
+					<c:if test="${status ne 'SUCCESS' }">
+						새로운 커버 사진 추가하기
+					</c:if>
+					
+					<i class="far fa-images"></i>
 					</span>
 					</label>
 					
@@ -294,7 +301,7 @@
 		<!-- title -->
 			<div class="shop_info_title_con">
 				<div>
-					<span class="shop_info_title">서비스 등록</span>
+					<span class="shop_info_title" id="addService">서비스 등록</span>
 					<i id="post-help" class="far fa-question-circle" style="font-weight: 600">도움말</i>
 					<div id="post-help-msg"></div>
 				</div>

@@ -11,10 +11,13 @@ const downViewer = document.querySelector(".viewer_down");
 // move to top
 const topMover = document.querySelector(".move_top");
 
+// slides
+const slides = document.querySelectorAll(".h_right_lower_menu");
 
 // variables
 let view = 0; // 초기 위치값 (css > translateY 값 기준)
 const execution = 100; // 스크롤 이동 값 > translateY (% 단위)
+
 
 let isRunning = true; // 스크롤 슬라이드 이벤트 딜레이 변수
 
@@ -27,6 +30,7 @@ container.onmousewheel = (e) => {
 		setTimeout(() => isRunning = true, 1000); // 1초 후 실행가능(true)
 
 		scrollSlide(e); // 슬라이드 이동
+		displayHeader(); // 반응형 헤더
 		slideHover(); // 슬라이드 버튼 업데이트 (button visibility)
 	}
 }
@@ -44,6 +48,9 @@ downViewer.onclick = (e) => clickSlideButton("down");
 // click event > 최상단 이동
 topMover.onclick = () => moveToTop();
 
+// menu(slide) click event
+clickSlideMenu();
+
 
 // 스크롤 이동
 function scrollSlide(event) {
@@ -54,6 +61,7 @@ function scrollSlide(event) {
 	if (wheel > 0) {
 		if (view === 0) return;
 		
+//		view.viewValue(view, "inc");
 		view = view + execution;
 		
 		for (let i = 0; i < viewers.length; i++) {
@@ -172,3 +180,74 @@ function moveToTop() {
 		viewer.style.transform = "translateY(" + view + "%)";
 	}
 }
+
+
+// 슬라이드 이동 메뉴
+function clickSlideMenu() {
+	for (let i = 0; i < slides.length; i++) {
+		slides[i].onclick = (e) => {
+			view = -i * 100;
+			
+			for (let j = 0; j < viewers.length; j++) {
+				viewers[j].style.transform = "translateY(" + view + "%)";
+			}
+			
+			slideHover(); // mouse hover event > 위 & 아래 이동 버튼
+		}
+	}
+}
+
+
+// 반응형 헤더
+function displayHeader() {
+	console.log(view);
+	// 마지막 슬라이드 위치  > translateY % 값
+	const limit = (viewerCount - 1) * execution;
+	
+	const rightMenu = document.querySelector(".h_right_con");
+//	const upperMenu = document.querySelector(".h_right_upper");
+//	const lowerMenu = document.querySelector(".h_right_lower");
+	
+	if (view === 0) {
+//		wrapper.className.includes("wide_view") ? 
+//			wrapoer.classList.remove("wide_view") : null;
+		
+		rightMenu.className.includes("pushUp") ? 
+			rightMenu.classList.remove("pushUp") : null;	
+	}
+	
+	else if (view === -limit) {
+//		wrapper.className.includes("wide_view") ? 
+//			null : wrapper.classList.add("wide_view");
+
+		rightMenu.className.includes("pushUp") ? 
+			null : rightMenu.classList.add("pushUp");
+	}
+	
+	else {
+//		wrapper.className.includes("wide_view") ? 
+//			null : wrapper.classList.add("wide_view");
+
+		rightMenu.className.includes("pushUp") ? 
+			null : rightMenu.classList.add("pushUp");
+	}
+}
+
+
+//const view = {
+//get viewValue() {
+//	return this._value || 0;
+//},
+//set viewValue(value, command) {
+//	switch(command) {
+//	case "inc":
+//		this._value = value + execution;
+//		break;
+//	case "dec":
+//		this._value = value - execution;
+//		break;
+//	}
+//	console.log(num); // 이렇게 일괄적으로 디버깅 가능.
+//	alert("123");
+//}
+//};

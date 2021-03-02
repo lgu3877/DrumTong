@@ -63,6 +63,7 @@
 	font-size: 25pt;
 	font-weight: 1000;
 	cursor: pointer;
+	overflow: hidden;
 }
 
 /* Navigation > Member > Select Stores with drop-down function */

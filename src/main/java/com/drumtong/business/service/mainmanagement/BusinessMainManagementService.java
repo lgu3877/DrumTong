@@ -44,6 +44,7 @@ import com.drumtong.business.vo.BTempSuspensionVO;
 import com.drumtong.map.dao.MSidoDAO;
 import com.drumtong.security.AddressListSetting;
 import com.drumtong.security.AwsServiceImpl;
+import com.drumtong.security.Login;
 import com.google.gson.Gson;
 
 @Service
@@ -241,6 +242,7 @@ public class BusinessMainManagementService {
 	    // 매장의 상태값에 따라서 처리해야될 함수입니다.
 		processingAccordingToStoreStatus(status, bMenuVOList, bDeliveryAreaList, estid);
 		
+		Login.getInformationList(bPrivateDataVO, Session, bInformationDAO);
 		
 		return mav;
 	}
@@ -313,9 +315,12 @@ public class BusinessMainManagementService {
 		
 		
 		// 4. 배달지역 테이블에  해당 매장의 배달가능한 지역의 {시도,시군구,시구,읍면동}를 업데이트 시켜준다.
-		ArrayList<BDeliveryAreaVO> dataBindingBDeliveryList = 
-												dataBindingBDeliveryAreaVO(bDeliveryAreaList, estid);
-		int result3 = bDeliveryInsertAreatoDAO(dataBindingBDeliveryList);
+		if(bDeliveryAreaList != null ) {
+			ArrayList<BDeliveryAreaVO> dataBindingBDeliveryList = 
+					dataBindingBDeliveryAreaVO(bDeliveryAreaList, estid);
+			int result3 = bDeliveryInsertAreatoDAO(dataBindingBDeliveryList);
+		}
+		
 		
 		// 5. 2차 온라인 계약 매장관리가 작성이 완료되었으면 status = 'Process' 로 변경시켜준다.
 		HashMap<String, String> map = new HashMap<String,String>();
