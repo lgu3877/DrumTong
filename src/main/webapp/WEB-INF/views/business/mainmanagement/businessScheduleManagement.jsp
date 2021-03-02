@@ -44,12 +44,10 @@
 		const holiday = bscheduledays.holiday; // holiday > 'Y' or 'N'
 		delete bscheduledays.holiday; // holiday 삭제
 		
-		console.log(bscheduledays);
-		console.log(holiday);
 		// 임시휴무
 		let btempsuspension = ${btempsuspension};
 
-		console.log(btempsuspension);
+		console.log(bscheduledays);
 	</script>
 
 </head>
@@ -302,7 +300,7 @@
 					<div class="btn_con">
 					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
 					<c:if test="${status eq 'SUCCESS' }">
-						<div id="complete-holiday" class="btn update_btn">
+						<div id="complete-holiday" class="btn update_btn" onclick="updateRegHoliday()")>
 							<div class="icon_con">
 								<i class="fas fa-check-square"></i>
 							</div>
@@ -362,7 +360,7 @@
 						</div>
 						
 						<!-- 휴뮤등록 버튼 -->
-						<div class="day_select_btn btn" onclick="updateRegHoliday()">휴무등록 </div>
+						<div class="day_select_btn btn" onclick="addRegSchedule()">추가</div>
 					</div>
 					
 				<!-- 저장된 정기 휴무일 표기 -->
