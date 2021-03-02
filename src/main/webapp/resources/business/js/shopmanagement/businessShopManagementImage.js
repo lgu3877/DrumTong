@@ -171,6 +171,9 @@ function imageCheck(e) {
 	
 // 커버 사진 업로드
 	if (isImage && e.target.id === "update-cover") {
+		
+		
+		
 		// 대표사진이 있을 경우 삭제
 		const previousCover = document.getElementById("cover-image") ? 
 					document.getElementById("cover-image").src : "No-Image";
@@ -221,8 +224,13 @@ function imageCheck(e) {
 			// 미리보기
 			const clickedImage = document.getElementById("cover-image").src;
 			zoomInPhoto(clickedImage);
+			
+			let coverImage = document.getElementById('cover-image-con');
+			borderNone('main-image-con');
 		}
 		reader.readAsDataURL(e.target.files[0]);
+		
+		
 	}
 // 일반 사진 업로드
 	else {
@@ -275,13 +283,11 @@ function imageCheck(e) {
 		// 업로드 사진 계산
 		imageCount++;
 		
-		let coverImage = document.getElementById('cover-image-con');
-		let sideImage = document.getElementsByClassName('shop_picture');
-		let addPhoto = document.getElementsByClassName('add_photo_input');
 		
-		if((addPhoto.length < 3 ) ||  (addPhoto.length < 3)  ||  (coverImage !== null && sideImage.length < 2 )) 
-			borderNone('main-image-con');		
+				
 	}
+	
+	
 }
 
 

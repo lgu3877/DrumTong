@@ -342,6 +342,11 @@ async function createDetailOptions() {
 		label.addEventListener("change", () => {
 			updatedeliveryAreaObject(checkboxId, majorValue, minorValue, towns[i]); // 추가&삭제 관련 객체 업데이트
 			displayDeliveryArea(); // 화면 업데이트
+			if(status !=="SUCCESS"){
+				let idName = 'delivery_area_set_wrapping';
+				borderNone(idName);	
+			}
+			
 		})
 		
 		const input = document.createElement("input");

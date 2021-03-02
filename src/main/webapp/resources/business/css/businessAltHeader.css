@@ -12,16 +12,39 @@
 	justify-content: flex-end;
 }
 
+.display_n {
+	display: none;
+}
+
 /* padding */
 .pt-10 {
 	padding-top: 10px
 }
 
+/* margin */
+.mt-m-20 {
+	margin-top: -20px !important;
+}
 
+/* height */
+.h_50_p {
+	height: 50%;
+}
+
+.pushUp {
+	transition: all 1s ease-in;
+	transform: translateY(-50%);
+}
+
+
+header {
+	height: 100px;
+}
 
 /* Header Wrapper */
 .h_wrapper {
 	display: flex;
+    justify-content: space-between;
 	height: 100%;
 }
 
@@ -29,7 +52,6 @@
 .h_left_con {
 	width: 30%;
 	min-width: 360px;
-	float: left;
 	justify-content: center;
 	align-items: center;
 }
@@ -42,13 +64,13 @@
 /* Header > right */
 .h_right_con {
 	width: 100%;
-	float: right;
 	display: block;
+	transition: all 1s;
 }
 
 /* Header > right > upper > login & join */
 .h_right_upper {
-	
+	height: 50%
 }
 
 .h_right_upper_main_menu {
@@ -73,17 +95,27 @@
 
 /* Header > right > lower */
 .h_right_lower {
-	color: #3b5998;
     display: flex;
     justify-content: flex-end;
+	height: 50%;
+	transition: all 1s;
+	color: #3b5998;
 }
 
-.h_right_lower div {
-	margin-right: 40px;
-    font-size: 25pt;
-    font-weight: 600;
-    cursor: pointer;
+.h_right_lower_menu {
+	font-size: 20pt;
+    width: 100px;
+	height: 50px;
+    text-align: center;
+    margin: auto 0 auto 30px;
 }
+
+.h_right_lower_menu:hover {
+	transition: color 1s, font-size 1s;
+	color: navy;
+	font-size: 25pt;
+}
+
 
 /* Header > right > upper > store */
 .menu {

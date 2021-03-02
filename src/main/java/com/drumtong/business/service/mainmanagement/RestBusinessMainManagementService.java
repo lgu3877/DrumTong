@@ -220,6 +220,27 @@ public class RestBusinessMainManagementService {
 		bInformationVO.setEstid(estid);
 		
 		
+		// * 여기서 EMDCODE의 COUNT란? drumtongMap(지도 DB)에 지역이 가지고있는 고유 번호가 있다. 각각의 지역에는 Count라는 필드가 존재하는데 읍면동 단위에서 
+		// 1. 현재 EMDCODE를 BInformation 테이블에서 가져온다.
+		String previousEMDCode  = bInformationDAO.selectEMDCode(estid);
+		
+		System.out.println("previousEMDCode : "  + previousEMDCode);
+		
+		System.out.println("bInformationVO.getEmdcode() : " + bInformationVO.getEmdcode());
+		
+		// 바꾸어진 코드에 지역이동이 있다면 Count를 변경 시켜준다.
+		if (!previousEMDCode.equals(bInformationVO.getEmdcode())) {
+			
+			System.out.println("실해애앵");
+			
+			// 2. 현재 EMDCODE에 해당하는 지역의 Count를 -1 시켜준다.
+			int delCountResult = mEmdDAO.delCount(previousEMDCode);
+
+			// 3. 새로 추가된 EMDCODE에 해당하는 지역의 Count를 +1 시켜준다.
+			int addCountResul = mEmdDAO.addCount(bInformationVO.getEmdcode());
+
+		}
+		
 		int RestInsertBMenuReuslt = bInformationDAO.updateLocation(bInformationVO);
 		return RestInsertBMenuReuslt;
 	}

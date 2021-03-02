@@ -41,9 +41,11 @@ import com.drumtong.business.vo.BScheduleDaysVO;
 import com.drumtong.business.vo.BScheduleTimeVO;
 import com.drumtong.business.vo.BTempHolidayVO;
 import com.drumtong.business.vo.BTempSuspensionVO;
+import com.drumtong.map.dao.MEmdDAO;
 import com.drumtong.map.dao.MSidoDAO;
 import com.drumtong.security.AddressListSetting;
 import com.drumtong.security.AwsServiceImpl;
+import com.drumtong.security.Login;
 import com.google.gson.Gson;
 
 @Service
@@ -75,6 +77,7 @@ public class BusinessMainManagementService {
 	
 	// 지역 데이터 DAO
 	@Autowired MSidoDAO mSidoDAO;
+	@Autowired MEmdDAO mEmdDAO;
 	
 	// 비즈니스 매장관리 페이지로 이동 (GET) [건욱]
 	public ModelAndView shopManagement(HttpServletRequest req) {
@@ -241,6 +244,7 @@ public class BusinessMainManagementService {
 	    // 매장의 상태값에 따라서 처리해야될 함수입니다.
 		processingAccordingToStoreStatus(status, bMenuVOList, bDeliveryAreaList, estid);
 		
+		Login.getInformationList(bPrivateDataVO, Session, bInformationDAO);
 		
 		return mav;
 	}
@@ -280,6 +284,23 @@ public class BusinessMainManagementService {
 		System.out.println("latitude : " + bInformationVO.getLatitude());
 		System.out.println("Longitude : " + bInformationVO.getLongitude());
 		System.out.println("EMDCODE : " + bInformationVO.getEmdcode());
+		
+		// * 여기서 EMDCODE의 COUNT란? drumtongMap(지도 DB)에 지역이 가지고있는 고유 번호가 있다. 각각의 지역에는 Count라는 필드가 존재하는데 읍면동 단위에서 
+		// 1. 현재 EMDCODE를 BInformation 테이블에서 가져온다.
+		String previousEMDCode  = bInformationDAO.selectEMDCode(estid);
+		
+		// 바꾸어진 코드에 지역이동이 있다면 Count를 변경 시켜준다.
+		if(!previousEMDCode.equals(bInformationVO.getEmdcode())) {
+			// 2. 현재 EMDCODE에 해당하는 지역의 Count를 -1 시켜준다.
+			int delCountResult = mEmdDAO.delCount(previousEMDCode);
+			
+			// 3. 새로 추가된 EMDCODE에 해당하는 지역의 Count를 +1 시켜준다.
+			int addCountResul = mEmdDAO.addCount(bInformationVO.getEmdcode());
+			
+		}
+		
+		
+		
 		bInformationVO.setEstid(estid);
 		bInformationDAO.updateLocation(bInformationVO);
 		
@@ -313,9 +334,12 @@ public class BusinessMainManagementService {
 		
 		
 		// 4. 배달지역 테이블에  해당 매장의 배달가능한 지역의 {시도,시군구,시구,읍면동}를 업데이트 시켜준다.
-		ArrayList<BDeliveryAreaVO> dataBindingBDeliveryList = 
-												dataBindingBDeliveryAreaVO(bDeliveryAreaList, estid);
-		int result3 = bDeliveryInsertAreatoDAO(dataBindingBDeliveryList);
+		if(bDeliveryAreaList != null ) {
+			ArrayList<BDeliveryAreaVO> dataBindingBDeliveryList = 
+					dataBindingBDeliveryAreaVO(bDeliveryAreaList, estid);
+			int result3 = bDeliveryInsertAreatoDAO(dataBindingBDeliveryList);
+		}
+		
 		
 		// 5. 2차 온라인 계약 매장관리가 작성이 완료되었으면 status = 'Process' 로 변경시켜준다.
 		HashMap<String, String> map = new HashMap<String,String>();

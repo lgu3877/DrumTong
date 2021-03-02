@@ -168,6 +168,15 @@
 				ESTID = #{value}
 	</select>
 	
+<!-- 	EMDCODE 를 출력해주는 SQL문입니다. -->
+	<select id="selectEMDCode" parameterType="string" resultType="string">
+		SELECT EMDCODE 
+			FROM
+		BINFORMATION 
+			WHERE
+				ESTID = #{value}
+	</select>
+	
 <!-- 	매장 좌표 Select REST  -->
 	<select id="selectBInformationCoord" resultType="BInformationVO">
 		SELECT 

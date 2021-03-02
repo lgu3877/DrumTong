@@ -74,10 +74,10 @@
 			
 		<!-- 오른쪽 하단 (slide menu)-->
 			<div class="h_right_lower">
-				<div>layout</div>
-				<div>layout</div>
-				<div>layout</div>
-				<div>layout</div>
+				<div class="h_right_lower_menu pointer">layout</div>
+				<div class="h_right_lower_menu pointer">layout</div>
+				<div class="h_right_lower_menu pointer">layout</div>
+				<div class="h_right_lower_menu pointer">layout</div>
 			</div>
 		</div>
 	</div>
