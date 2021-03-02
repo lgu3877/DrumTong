@@ -33,7 +33,19 @@
     <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail.js"></script>
    	
     <script>
+      function checkAgree(){
+    	  let radio = document.getElementById('agree');
+    	  if(!radio.checked){
+    		console.log('체크 안되어있을 때');
+      		return false;
+    	  }
+    	  else{
+    		console.log('체크 되어있을 때');
+      		return true;
+    	  }
+      }
       function submit() {
+    	if(!checkAgree()) return false; 
         selecteds = document.querySelectorAll('.selected-row');
 
         cnt = 0;
@@ -128,7 +140,11 @@
               </select>
             </div>
             <div class="select-date" id="select-date">
-				▼ 희망 날짜(선택사항)
+				<a onclick="activeSelectDateArea()"><b>▶</b> 희망 날짜(선택사항)</a>
+            </div>
+            <div class="select-date-area" id="select-date-area">
+            	<article><div>보내는 날짜</div><input type="date">이 영역에 버튼을 만들고 버튼 누르면 달력 모달창이 뜨고 날짜 선택시 이 영역에 선택한 날짜를 띄워줄 예정!input date는 display none으로!</article>
+            	<article><div>받는 날짜</div><input type="date">이 영역에 버튼을 만들고 버튼 누르면 달력 모달창이 뜨고 날짜 선택시 이 영역에 선택한 날짜를 띄워줄 예정!input date는 display none으로!</article>
             </div>
             <div class="select-pickup" id="select-pickup"> 수거 방법 : 
             	<input type="radio" name="pickup-check" onclick="calTotal()" value="0"/> 직접 방문
@@ -193,16 +209,26 @@
 
       <div class="modal-content2" id="modal-content2">
         <div class="modal-total">
-          total
+        <div class="modal-payment-head">
+        	약관
+       	</div>
+          <textarea readonly>
+ 약관을 읽고 동의해주세요
+[Drumtong 결제 약관]
+1. 포인트 결제
+① 사전에 충전해둔 포인트를 이용해 결제할 수 있습니다.
+② 결제한 포인트는 저희 Drumtong 가상계좌에 입금되며, 세탁이 종료되는 시점에 세탁소 측으로 입금됩니다. 
+          </textarea>
+          <input type="radio" id="agree" value="agree" class="submit-agree">동의합니다.활성화
         </div>
         <div class="modal-payment">
           <div class="modal-payment-head">
             결제
             <div class="close">&times;</div>
           </div>
-          <textarea readonly>
-           약관을 읽고 동의해주세요 
-          </textarea>
+          <div>수거 요청사항 : <input type="text" placeholder="요청사항" readonly></div>
+          <div>세탁 요청사항 : <input type="text" placeholder="요청사항" readonly></div>
+          <div>배달 요청사항 : <input type="text" placeholder="요청사항" readonly></div>
           <select class="modal-myCardList">
             <option selected>포인트 결제</option>
           </select>
@@ -253,6 +279,7 @@
                 </div>
               </div>
             </div>
+            <div class="reviewOrderList" style="height: 30px; background: grey; color: white;">추가 확보 공간</div>            
             <div class="review-reviewimg" style="display: none"><img></div>
             <div class="orderListMsg"><span class="orderList-hide"></span></div>            
             <div class="modal-grade"><span></span></div>
@@ -260,7 +287,7 @@
             <div class="owner-review">
             	<h1 class="owner-name"></h1>
             	<p class="owner-content">사장님 댓글 공간입니다</p>
-            </div>
+            </div>"src/main/webapp/resources/customer/js/laundry/customerDetail/detail-modal.js"
           </div>
         </div>
       </div>
@@ -272,7 +299,24 @@
       		<i class="fas fa-times fa-4x"></i>
       </div>
     </div>
-
+<!--     희망 날짜 선택 관련 스크립트 -->
+	<script>
+		function activeSelectDateArea(event){
+			let buttonShape = document.querySelector(".select-date b");
+			let area = document.getElementById('select-date-area');
+			
+			switch(buttonShape.innerHTML){
+			case '▶':
+				buttonShape.innerHTML = '▼';
+				area.style.display = 'flex';
+				break;
+			case '▼':
+				buttonShape.innerHTML = '▶';
+				area.style.display = 'none';
+				break;
+			}
+		}
+	</script>
     <!-- 스크립트 영역 -->
     <script type="text/javascript">	// 승원 작업 - 구글 차트
     

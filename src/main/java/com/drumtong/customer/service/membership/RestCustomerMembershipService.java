@@ -35,10 +35,12 @@ public class RestCustomerMembershipService {
 	}
 
 	public List<Object> login(HttpServletRequest req, HttpServletResponse resp, HashMap<String, String> param) {
+		
 		CPrivateDataVO cPrivateDataVO = new CPrivateDataVO();
 		cPrivateDataVO.setId(param.get("id"));
 		cPrivateDataVO.setPw(param.get("pw"));
-		boolean LoginResult = Login.login(req.getSession(), resp, cPrivateDataVO, param.get("storeid"));
+		
+		boolean LoginResult = Login.loginWidthoutInterceptor(req, resp, cPrivateDataVO, param.get("storeid"));
 		
 		CPrivateDataVO Login = (CPrivateDataVO)req.getSession().getAttribute("cLogin");
 		

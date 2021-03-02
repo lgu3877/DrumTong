@@ -64,8 +64,10 @@
     	for(i = 0; i < reviewList.length; i++) {
     		avgcscore += reviewList[i].gpa;
     	}
-    	let cscore = avgcscore / reviewList.length;
+		let checkReviewExist = reviewList.length != 0;
+		let cscore = checkReviewExist ? (avgcscore / reviewList.length).toFixed(2) : '없음';
     	
-    	$('#cscore').html('고객 평점 : ' + cscore.toFixed(2));
-    	$('#frontstars').css('width', (cscore.toFixed(2) * 20) + '%');
+    	$('#cscore').html('고객 평점 : ' + cscore);
+    	if(checkReviewExist)
+    		$('#frontstars').css('width', (cscore * 20) + '%');
     }

@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.drumtong.business.service.membership.BusinessMembershipService;
 import com.drumtong.business.vo.BPrivateDataVO;
+import com.drumtong.security.Login;
 import com.drumtong.security.LoginInterceptor;
 
 @Controller
@@ -36,8 +37,8 @@ public class BusinessMembershipController {
 	@RequestMapping(value = "businessLogin/POST/main/", method = RequestMethod.POST)
 	public ModelAndView loginMain(HttpServletRequest req, HttpServletResponse resp, BPrivateDataVO bPrivateDatavo, String storeid) {
 		HttpSession Session = req.getSession();
-		new LoginInterceptor().CreateNewSLoginLog(req, Session, req.getHeader("Referer"));
 		Session.setAttribute("AddressToMove", "/business/");
+		Login.createNewSLoginLog(req, Session, req.getHeader("Referer"));
 		return login(req, resp, bPrivateDatavo, storeid);
 	}
 	
