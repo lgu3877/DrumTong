@@ -135,14 +135,14 @@ public class SelectLaundryList {
 			else if(bScheduleTimeDAO.isOpen(param) != 1) {
 				reason = "영업시간이 아닙니다.";
 				openboolean = 'N';
+			} else {
+				reason = "영업중";
+				openboolean = 'Y';
 			}
-			// 영업 여부에 따라 필드에 결과를 넣어주고
 			
-			if(openboolean == 'N') {
-//				System.out.println("reason : " + reason);
-				li.setOpenboolean('N');
-				li.setReason(reason);
-			}
+			// 영업 여부에 따라 필드에 결과를 넣어주고
+			li.setReason(reason);
+			li.setOpenboolean(openboolean);
 		}
 		// 만약 오늘 영업하는 매장만 나오도록 한다면 그 필드를 삭제해준다.
 		if(now) {

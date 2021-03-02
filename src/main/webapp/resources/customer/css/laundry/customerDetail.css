@@ -118,12 +118,18 @@
 
 .detailview-companyIntro textarea {
   width: 100%;
-  height: 440px;
+  height: 410px;
   resize: none;
   padding: 0;
   border: none;
   outline-style: none;
   background-color: #f7f7f7;
+}
+
+.detailview-companyIntro .detailview-address{
+	height: 30px;
+	font-weight: bold;
+	color: grey;
 }
 
 .detailview-bottom {

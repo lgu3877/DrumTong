@@ -28,9 +28,9 @@
 		SELECT COUNT(*) 
 			FROM BSCHEDULETIME 
 				WHERE ESTID=#{estid} 
-				AND #{filter2} !='-' 
+				AND ${filter2} !='-' 
 				AND TO_CHAR(SYSDATE,'HH24:MI') 
-					BETWEEN SUBSTR(#{filter2},1,5) AND NVL(SUBSTR(#{filter2},9,12),'-')
+					BETWEEN SUBSTR(${filter2},1,5) AND NVL(SUBSTR(${filter2},9,12),'-')
 	
 	</select>
 	

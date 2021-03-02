@@ -96,6 +96,7 @@
               <i id="bookMarker"></i>
             </div>
             <textarea readonly>${bManagementVO.introduction }</textarea>
+            <div class="detailview-address">주소 : ${bInformationVO.mainlocation } ${bInformationVO.detaillocation }</div>
           </div>
         </div>
 
