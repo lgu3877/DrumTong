@@ -610,6 +610,18 @@ div.subButton:hover{
   color: white;
 }
 
+.orderListMsg {
+	height: 40px; display: inline-flex; font-size: 14pt; align-items: center; padding: 10px; width: auto; background: rgb(229, 228, 226); cursor: pointer;
+}
+
+.orderListMsg .orderList-hide {
+	display: none;
+}
+.orderListMsg:hover {
+	transition : all 1s ease-in-out;
+	transform: translateX(10px);
+}
+
 .modal-grade {
   width: 400px;
   padding: 10px;
