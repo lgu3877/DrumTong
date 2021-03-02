@@ -18,8 +18,8 @@
 				.then( (response) => {
 		    const data = response.data;
 		    let shopCenter = data;			// 반환 결과 불러오기
-		    console.log('상점 지도 불러오기');
-		    console.log(shopCenter);
+//		    console.log('상점 지도 불러오기');
+//		    console.log(shopCenter);
 		    
 		    var markerImageSrc = '/drumtong/customer/img2/laundry_marker.JPG';
 			
@@ -37,7 +37,7 @@
 			        		offset: new kakao.maps.Point(27, 69)
 	        		    };
 				        
-				        console.log('마커 이벤트 : ' + shopCenter[i].brandnaming);
+//				        console.log('마커 이벤트 : ' + shopCenter[i].brandnaming);
 				        let markerContent = '<div class="customoverlay">' +
 				        '    <span class="title">' + shopCenter[i].brandnaming + '</span>' +
 				        '</div>';
