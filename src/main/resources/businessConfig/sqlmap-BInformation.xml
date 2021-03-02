@@ -77,7 +77,7 @@
 	<select id="selectBookmark" parameterType="String" resultType="BInformationVO">
 		SELECT * FROM BINFORMATION B, (SELECT ESTID FROM CBOOKMARK WHERE MEMBERID=#{memberid}) A 
 			WHERE 
-				B.ESTID=A.ESTID
+				B.ESTID=A.ESTID AND B.STATUS='SUCCESS'
 	</select>
 	
 	<select id="selectInformationList" parameterType="String" resultType="BInformationVO">
