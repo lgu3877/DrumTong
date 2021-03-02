@@ -96,11 +96,15 @@ public class SelectLaundryList {
 		int preStartPage = (PageNum-1) * prePeriod;
 		int preEndPage = PageNum * prePeriod;
 		preEndPage = preEndPage > premiumList.size() ? premiumList.size() : preEndPage;
+		int prePageBox = premiumList.size() / prePeriod + (premiumList.size() % prePeriod == 0 ? 0 : 1);
 		
 		int genPeriod = 10; // 일반은 열개 씩 페이징
 		int genStartPage = (PageNum - 1) * genPeriod;
 		int genEndPage = PageNum * genPeriod;
 		genEndPage = genEndPage > generalList.size() ? generalList.size() : genEndPage;
+		int genPageBox = generalList.size() / genPeriod + (generalList.size() % genPeriod == 0 ? 0 : 1);
+		
+		System.out.println("페이지 : " + prePageBox + ", " + genPageBox);
 		
 		
 		premiumList = preStartPage > premiumList.size() ? premiumList.subList(0, 0) : premiumList.subList(preStartPage, preEndPage);
@@ -109,6 +113,7 @@ public class SelectLaundryList {
 		list.add(premiumList);
 		list.add(generalList);
 		list.add(allPageNum);
+		list.add(prePageBox > genPageBox ? prePageBox : genPageBox);
 		return list;
 	}
 	// 세탁소 리스트를 sql문 통해 적절히 가져와주는 내부 메서드
