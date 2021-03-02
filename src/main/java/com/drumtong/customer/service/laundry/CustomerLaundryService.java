@@ -59,7 +59,7 @@ public class CustomerLaundryService {
 		// 매장관리(소개글, 배달, 퀵여부)를 저장한 객체
 		BManagementVO bManagementVO = bManagementDAO.selectCustomerDetail(estid);
 		
-		// ★★★★★★★★미완성★★★★★★★★★
+		// 매장 이미지 객체
 		List<BImageVO> bImageVO = bImageDAO.selectImageList(estid);
 		
 		// 쿠폰(할인가격, 기간, 최소금액, 중복가능여부) 객체를 유효기간에 해당하는 리스트만 불러왔음
@@ -71,6 +71,8 @@ public class CustomerLaundryService {
 		// 리뷰
 		List<ReviewList> ReviewList = Review.selectList(estid, "whole");
 		
+		// 추가 작업할 일 정리(영경)
+		// 영업 시간 가지고 와야함, 매장 주소
 		
 		Gson gson = new Gson();
 		mav.addObject("bInformationVO", bInformationVO);
