@@ -253,8 +253,8 @@
                 </div>
               </div>
             </div>
-            <div style="height: 30px; background: grey; color: white;">추가 확보 공간</div>            
             <div class="review-reviewimg" style="display: none"><img></div>
+            <div class="orderListMsg"><span class="orderList-hide"></span></div>            
             <div class="modal-grade"><span></span></div>
             <div class="review-context"></div>
             <div class="owner-review">
