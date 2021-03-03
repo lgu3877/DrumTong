@@ -279,15 +279,14 @@
                 </div>
               </div>
             </div>
-            <div class="reviewOrderList" style="height: 30px; background: grey; color: white;">추가 확보 공간</div>            
-            <div class="review-reviewimg" style="display: none"><img></div>
             <div class="orderListMsg"><span class="orderList-hide"></span></div>            
+            <div class="review-reviewimg" style="display: none"><img></div>
             <div class="modal-grade"><span></span></div>
             <div class="review-context"></div>
             <div class="owner-review">
             	<h1 class="owner-name"></h1>
             	<p class="owner-content">사장님 댓글 공간입니다</p>
-            </div>"src/main/webapp/resources/customer/js/laundry/customerDetail/detail-modal.js"
+            </div>
           </div>
         </div>
       </div>
