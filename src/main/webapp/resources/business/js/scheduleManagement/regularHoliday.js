@@ -24,11 +24,11 @@ function toggleHoliday() {
 			
 			checkbox.checked === false ? 
 					checkbox.checked = true : 
-						checkbox.checked = false;
+					checkbox.checked = false;
 			
 			checkbox.checked === true ? 
 					button.style.backgroundColor = "navy" :	
-						button.style.backgroundColor = "#95e1d3";	
+					button.style.backgroundColor = "#95e1d3";	
 		})
 	}
 }
@@ -88,6 +88,41 @@ function displayRegHolidays() {
 }
 
 
+// 정기휴무 select 이벤트 (초기화 & 데이터 불러오기)
+function loadRegHolidays(select) {
+	// 정기휴무 선택 초기화 (button & checkbox) 
+	const buttons = document.querySelectorAll(".day_selector");
+	const checkboxes = document.getElementsByName("restDay");
+	
+	for (let i = 0; i < buttons.length; i++) {
+		// checkbox > not-checked
+		checkboxes[i].checked = false;
+		// button > default color
+		buttons[i].style.backgroundColor = "#95e1d3";	
+	}
+	
+	// 데이터 로드
+	if (bscheduledays[select.value] === undefined) return; // 불러올 데이터가 없을 때 > 종료(return)
+
+	const days = bscheduledays[select.value].split("/"); // 불러올 데이터가 있을 때
+	days.pop();
+	
+	// 로드된 데이터 > checkbox에 표기
+	for (let i = 0; i < checkboxes.length; i++) {
+		for (let j = 0; j < days.length; j++) {
+			const checkbox = checkboxes[i];
+			const button = buttons[i];
+			if (days[j] === checkbox.value) {
+				// checkbox > checked
+				checkbox.checked = true;
+				// button > selected color
+				button.style.backgroundColor = "navy";	
+			}
+		}
+	}
+}
+
+
 // 정기휴무 스케쥴 추가
 function addRegSchedule() {
 	// 주(week)
@@ -129,29 +164,33 @@ function addRegSchedule() {
 	
 	for (let key in bscheduledays) {
 		if (key === selected.week) {
-			const dayString = bscheduledays[key];
-			const dayArray = dayString.split("/");
-			dayArray.pop();
+			// 기존 값 (GET 방식으로 전달받은 데이터)
+//			const dayString = bscheduledays[key];
+//			const dayArray = dayString.split("/");
+//			dayArray.pop();
 			
+			// 입력 값 (클라이언트가 선택한 데이터)
 			const selectedDay = selected.days;
 			const selectedDayArray = selectedDay.split("/");
 			selectedDayArray.pop();
 
 			// 배열 병합
-			const concatDayArray = [ ...dayArray, ...selectedDayArray].sort();
+//			const concatDayArray = [ ...dayArray, ...selectedDayArray].sort();
 			
 			// 중복 제거
-			for (let i = 0; i < concatDayArray.length - 1; i++) {
-				concatDayArray[i] === concatDayArray[i + 1] ?
-					concatDayArray.splice(i, 1) : null;
-			}
+//			for (let i = 0; i < concatDayArray.length - 1; i++) {
+//				concatDayArray[i] === concatDayArray[i + 1] ?
+//					concatDayArray.splice(i, 1) : null;
+//			}
 			
-			console.log("concatDayArray", concatDayArray);
-			
-			
-//			bscheduledays[key]
+			// 업데이트
+//			bscheduledays[key] = concatDayArray.join("/");
+			bscheduledays[key] = selected.days;
 		}
 	}
+	
+	// Select & Option 초기화
+//	loadRegHolidays();
 	
 	// 뷰 초기화
 	document.getElementById("reg-holiday-schedule").innerHTML = "";

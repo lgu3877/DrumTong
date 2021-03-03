@@ -316,7 +316,7 @@
 					<div class="select_wrapper form">
 					<!-- 주 선택 -->
 						<div id="reg-holiday-week" class="select_box_con">
-							<select name="restWeek">
+							<select name="restWeek" onchange="loadRegHolidays(this)">
 								<option selected hidden="true" disabled>&nbsp;주 선택&nbsp;</option>
 								<option value="allweek">매주</option>
 								<option value="firstweek">첫째 주</option>
