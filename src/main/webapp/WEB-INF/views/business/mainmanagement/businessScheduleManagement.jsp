@@ -317,7 +317,7 @@
 					<!-- 주 선택 -->
 						<div id="reg-holiday-week" class="select_box_con">
 							<select name="restWeek" onchange="loadRegHolidays(this)">
-								<option selected hidden="true" disabled>&nbsp;주 선택&nbsp;</option>
+								<option id="week-default-option" selected hidden="true" disabled>&nbsp;주 선택&nbsp;</option>
 								<option value="allweek">매주</option>
 								<option value="firstweek">첫째 주</option>
 								<option value="secondweek">둘째 주</option>

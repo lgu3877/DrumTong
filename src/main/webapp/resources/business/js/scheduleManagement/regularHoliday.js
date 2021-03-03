@@ -58,7 +58,7 @@ function displayRegHolidays() {
 			const removeBtn = document.createElement("div");
 			removeBtn.className = "h_schedule_remove";
 			removeBtn.innerHTML = "&times";
-			removeBtn.onclick = () => removeRegHoliday(holidayId); // click event (remove item)
+			removeBtn.onclick = () => removeRegSchedule(holidayId); // click event (remove item)
 
 			// week(header)
 			const weekCon = document.createElement("div");
@@ -162,35 +162,11 @@ function addRegSchedule() {
 		days : selectedDays	
 	};
 	
-	for (let key in bscheduledays) {
-		if (key === selected.week) {
-			// 기존 값 (GET 방식으로 전달받은 데이터)
-//			const dayString = bscheduledays[key];
-//			const dayArray = dayString.split("/");
-//			dayArray.pop();
-			
-			// 입력 값 (클라이언트가 선택한 데이터)
-			const selectedDay = selected.days;
-			const selectedDayArray = selectedDay.split("/");
-			selectedDayArray.pop();
-
-			// 배열 병합
-//			const concatDayArray = [ ...dayArray, ...selectedDayArray].sort();
-			
-			// 중복 제거
-//			for (let i = 0; i < concatDayArray.length - 1; i++) {
-//				concatDayArray[i] === concatDayArray[i + 1] ?
-//					concatDayArray.splice(i, 1) : null;
-//			}
-			
-			// 업데이트
-//			bscheduledays[key] = concatDayArray.join("/");
-			bscheduledays[key] = selected.days;
-		}
-	}
+	// 객체 업데이트
+	bscheduledays[selected.week] = selected.days;
 	
-	// Select & Option 초기화
-//	loadRegHolidays();
+	// selector & checkbox 초기화
+	initializeRegInput();
 	
 	// 뷰 초기화
 	document.getElementById("reg-holiday-schedule").innerHTML = "";
@@ -201,6 +177,33 @@ function addRegSchedule() {
 
 
 // 정기휴무 스케쥴 삭제
-function removeRegSchedule() {
+function removeRegSchedule(id) {
+	const scheduleCon = document.getElementById(id);
+	const korWeek = scheduleCon.querySelector(".h_week").innerText; 
 	
+	const answer = confirm(korWeek + "의 정기휴무 설정을 삭제하시겠습니까?");
+
+	if (answer === true) {
+		// Korean > English 변경(convert) > bscheduledays 오브젝트에서 해당 휴무정보 제거 
+		for (let engWeek in weekObject) {
+			if (korWeek === weekObject[engWeek]) {
+				// 객체 수정(값 제거)
+				delete bscheduledays[engWeek];
+				
+				// 뷰 삭제(초기화)
+				document.getElementById("reg-holiday-schedule").innerHTML = "";
+				
+				// 뷰 업데이트
+				displayRegHolidays();
+			}
+		}
+	}
+	else return;
+}
+
+
+// 정기휴무 입력창 초기화(select & checkbox)
+function initializeRegInput() {
+	const selectorDefault = document.getElementById("week-default-option");
+	console.log(selectorDefault);
 }
