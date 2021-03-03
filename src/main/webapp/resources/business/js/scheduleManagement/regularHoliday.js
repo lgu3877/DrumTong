@@ -206,4 +206,17 @@ function removeRegSchedule(id) {
 function initializeRegInput() {
 	const selectorDefault = document.getElementById("week-default-option");
 	console.log(selectorDefault);
+	
+	selectorDefault.selected = true;
+	
+	// 정기휴무 선택 초기화 (button & checkbox) 
+	const buttons = document.querySelectorAll(".day_selector");
+	const checkboxes = document.getElementsByName("restDay");
+	
+	for (let i = 0; i < buttons.length; i++) {
+		// checkbox > not-checked
+		checkboxes[i].checked = false;
+		// button > default color
+		buttons[i].style.backgroundColor = "#95e1d3";	
+	}
 }
