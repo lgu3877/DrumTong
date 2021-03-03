@@ -147,9 +147,9 @@ public class BusinessMembershipService {
 	
 	
 
-	// 사업자 계정 정보 관리 이동 (GET) [건욱]
+	// 사업자 계정 정보 관리 이동 (POST) [건욱]
 	public ModelAndView accountInfo() {
-		ModelAndView mav = new ModelAndView("business/membership/businessAccountInfo");
+		ModelAndView mav = new ModelAndView("redirect:business/membership/businessAccountInfo");
 		return mav;
 	}
 
