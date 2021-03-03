@@ -44,6 +44,7 @@ async function selectLaundry(page) {
 	const premiumList = data[0];
 	const generalList = data[1];
 	const resultNum = data[2];
+	console.log('data[3] : ' + data[3]);
 
 	console.log('select_premiumList : ', premiumList);
 	console.log('select_generalList : ', generalList);
@@ -127,7 +128,6 @@ function deleteGeneral(generalList) {
 	
 	if(generalList.length == 0) {
 		common_lists[0].style.display = 'none';
-		return false;
 	}
 	else
 		common_lists[0].style.display = '';
@@ -163,7 +163,7 @@ function createGeneral(generalList) {
 			
 			const img_path0 = 'location.href = "' + getContextPath() + '/customer/laundry/customerDetail/' + generalList[count].estid + '/"'
 			common_childs[j].querySelectorAll('.mainimg')[0].setAttribute('onclick', img_path0);
-			common_childs[j].querySelectorAll('.brandnaming')[0].innerHTML = generalList[j].brandnaming +
+			common_childs[j].querySelectorAll('.brandnaming')[0].innerHTML = generalList[count].brandnaming +
 				'<span class="reviewnum">(' + generalList[count].reviewnum + ')</span>';
 			common_childs[j].querySelectorAll('.gpa')[0].innerHTML = generalList[count].gpa.toFixed(1);
 			common_childs[j].querySelectorAll('.mainlocation')[0].innerHTML = generalList[count].mainlocation;
@@ -233,4 +233,4 @@ function createGeneral(generalList) {
 
 
 
-useEmdcode('26350105');	// ■ 테스트 코드! 나중에 지워야 한다!
+//useEmdcode('26350105');	// ■ 테스트 코드! 나중에 지워야 한다!
