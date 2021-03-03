@@ -5,7 +5,7 @@
 	document.getElementById('pwck').addEventListener('keyup', pwCheck);
     document.getElementById('checkphone').addEventListener('click', checkTel);
 	document.getElementById('delegatecrn').addEventListener('blur', checkBusinessNumber);
-	document.getElementByIed('email').addEventListener('blur', checkEmail);
+	document.getElementById('email').addEventListener('blur', checkEmail);
 
 
 	// 약관 모두 동의

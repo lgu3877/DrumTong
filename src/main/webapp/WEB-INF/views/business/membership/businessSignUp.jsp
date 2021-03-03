@@ -73,7 +73,7 @@
 	<hr>
 	</div>
 	
-	<div class="marginauto" style="width: 40%; height: 50%; min-width: 500px;">
+	<div class="marginauto" style="width: 40%; height: auto; min-width: 500px;">
 		<form class="marginauto signup" id="loginForm" method="POST" onsubmit="return AgreeCheck();">
 			<div>
 				<div class="table"><div class="cell">&nbsp아&nbsp이&nbsp디</div></div> 
