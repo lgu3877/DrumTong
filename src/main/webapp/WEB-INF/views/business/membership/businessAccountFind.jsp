@@ -236,9 +236,6 @@
 
 	<!-- Account Search -->
 	<script type="text/javascript" src="${cpath }/business/js/businessAccountSearch.js"></script>
-	
-	<!-- footer -->
-	<%@ include file="../main/businessFooter.jsp"%>
 
 </body>
 </html>

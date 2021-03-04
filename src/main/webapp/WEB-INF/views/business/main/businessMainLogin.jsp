@@ -15,7 +15,7 @@
 				</p>		</div>
 			<div class="login_input_con">
 				<div class="input_box">
-					<input class="input_tag" type="text" name="id" placeholder="아이디를 입력하세요." required="required"  onkeyup="loginEnter()">
+					<input class="input_tag" type="text" name="id" placeholder="아이디를 입력하세요." required="required"  onkeyup="loginEnter()" autocomplete="off">
 	       		<!-- incorrect id error message -->
 	        		<div class="auth_error_msg red-mark"></div>
 				</div>

@@ -16,6 +16,7 @@
 					type="text" 
 					name="search" 
 					id="search"
+					autocomplete="off"
 					placeholder="                                                                 검색어를 입력하세요"/>
 					
 				<input 
