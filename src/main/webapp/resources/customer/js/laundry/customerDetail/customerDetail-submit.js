@@ -27,6 +27,7 @@
         totalamount += optionKey_3;
         
         order = {
+          estid : estid,
           maincategory : optionKey_1[0],
           subcategory : optionKey_1[1],
           name : optionKey_2[0],
@@ -51,12 +52,13 @@
 	  let deliveryboolean = checkList[1];
 	  
 	  sales = {
+	  		estid : estid,
 			totalamount : totalamountParam,
 			originalprice : originalprice, 
 			discountprice : couponParam,
 			totalprice : originalprice - couponParam,
-			deliverydate : '',
-			collectiondate : '',
+			deliverydate : '-',
+			collectiondate : '-',
 			collectionboolean : collectionboolean,
 			deliveryboolean : deliveryboolean,
 			collectionrequests : '',
@@ -100,6 +102,8 @@
     let couponPrice = couponBox[1];
     
     paramList['couponID'] = couponID;
+    
+    paramList['estid'] = estid;
     
     paramList['sales'] = salesSettings(resultList[1], resultList[2], couponPrice);	// total 가격에 배송, 수거 요금도 추가해야함!!
     

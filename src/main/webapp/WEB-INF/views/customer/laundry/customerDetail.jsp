@@ -287,6 +287,7 @@
     <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail/detail-modal.js"></script>
     <script>
 //     	총 정리
+		var estid = '${estid}';
 		cLogin = '${cLogin}';
 		checkLogin = cLogin !== ''; // 로그인 했을 땐 true, 로그인 안되어있을 땐 false
 		
@@ -408,7 +409,7 @@
 	 	       }
 	 	      btn6.onclick = function(){
 	 	    	 if(checkLoginBoolean){
-	 	    		addBookmark('${estid}');
+	 	    		addBookmark(estid);
 	 	    	 } else {
 	 	    		openModal(modalContent3 , 'flex');
 	 	    	 }

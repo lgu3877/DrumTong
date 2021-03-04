@@ -3,6 +3,7 @@ package com.drumtong.business.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import com.drumtong.business.vo.BSalesVO;
 import com.drumtong.business.vo.OrderList;
 import com.drumtong.business.vo.StatisticsData;
 
@@ -37,6 +38,12 @@ public interface BSalesDAO {
 
 	// 방문횟수 조회
 	int visits(HashMap<String, String> paramVisit);
+
+	// 매출 횟수 조회
+	int searchSales(String estid);
+
+	// 매출 발생
+	int insert(BSalesVO bSales);
 	
 	
 
