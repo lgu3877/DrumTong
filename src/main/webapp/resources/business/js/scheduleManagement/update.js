@@ -1,16 +1,3 @@
-// 배열 속 중복값 제거 (정렬 필수)
-function removeRepeatValue(array) {
-	array.sort();
-	
-	for (let i = 0; i < array.length - 1; i++) {
-		if (array[i] === array[i + 1]) {
-			array.splice(i + 1, 1);
-		} 
-	}
-	
-	return array;
-}
-
 // 정기 휴무 등록
 async function updateRegHoliday() {
 	// axios
@@ -18,15 +5,17 @@ async function updateRegHoliday() {
 
 	if (data) {
 		bscheduledays = data; // 데이터 덮어씌우기
-		document.getElementById("reg-holiday-schedule").innerHTML = ""; // 정기휴무 리스트 초기화
 
 		// 정기휴무 뷰 업데이트
+		document.getElementById("reg-holiday-schedule").innerHTML = ""; // 정기휴무 리스트 초기화
 		displayRegHolidays(); // 정기휴무 리스트 다시 출력
 
 		// selct & checkbox 초기화
-		
+		initializeRegInput();
 		
 		// 캘린더 업데이트
+		document.getElementById("calander").innerHTML = ""; 
+		renderCalendar();
 	}
 	
 	else {
