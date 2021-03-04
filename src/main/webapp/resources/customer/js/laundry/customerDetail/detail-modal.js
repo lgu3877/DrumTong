@@ -77,6 +77,7 @@
 					beforerow.next().find('.review-reviewimg').css("display", "");
 					beforerow.next().find('.review-reviewimg img').attr("src",
 							"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + reviewList[i].reviewimg);
+					beforerow.next().find('.review-reviewimg img').attr("onclick", "ActiveModal5('" + reviewList[i].reviewimg + "')");		
 				}
 						
 				
