@@ -73,7 +73,7 @@ public class BusinessContractService {
 									BManagementVO bManagementVO, HttpServletRequest req,MultipartHttpServletRequest mpf) {
 
 		
-		ModelAndView mav = new ModelAndView("redirect:/business/");
+		ModelAndView mav = new ModelAndView("redirect:/business/contract/businessContractFinish/");
 		
 		// BEstablishment 테이블을 위한 ESTID UUID 생성
 		/*
