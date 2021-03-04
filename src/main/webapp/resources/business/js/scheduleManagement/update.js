@@ -16,6 +16,7 @@ async function updateRegHoliday() {
 	const initial = {};
 	const updated = {};
 	const concat = {};
+	const copiedConcat = {};
 	
 	// 초기 객체
 	for (let week in initialRegHoliday) {
@@ -42,12 +43,9 @@ async function updateRegHoliday() {
 		const initialDays = initial[week] || [];
 		const updatedDays = updated[week] || [];
 		
+		copiedConcat[week] = removeRepeatValue([ ...initialDays, ...updatedDays ]);
 		concat[week] = removeRepeatValue([ ...initialDays, ...updatedDays ]);
 	}
-	
-	console.log(initial);
-	console.log(updated);
-	console.log(concat);
 	
 	// request 생성
 	const object = {
@@ -58,12 +56,42 @@ async function updateRegHoliday() {
 	// 객체 업데이트(add & remove values)
 	// add = concat - initial
 	for (let week in concat) {
+		if (initial[week] === undefined) {
+			object.add[week] = concat[week]; // 추가
+		}
 		
+		else {
+			for (let i = 0; i < initial[week].length; i++) {
+				const day = initial[week][i];
+				const index = concat[week].indexOf(day)
+				concat[week].splice(index, 1);
+			}
+			if (concat[week].length !== 0) { // 추가
+				object.add[week] = concat[week];
+			} 
+		}
 	}
 	
 	// remove = concat - updated
+	for (let week in copiedConcat) {
+		if (updated[week] === undefined) {
+			object.remove[week] = copiedConcat[week]; // 추가
+		}
+		
+		else {
+			for (let i = 0; i < updated[week].length; i++) {
+				const day = updated[week][i];
+				const index = copiedConcat[week].indexOf(day)
+				copiedConcat[week].splice(index, 1);
+			}
+			if (copiedConcat[week].length !== 0) { 
+				object.remove[week] = copiedConcat[week]; // 추가
+			} 
+		}
+	}	
 	
-	
+	console.log(object);
+
 	// axios
 //	const { data } = await axios.post("/drumtong/business/mainmanagement/BScheduleDays/rest/insertBScheduleDays/", object);
 //	console.log(data);
