@@ -21,4 +21,6 @@ public interface BDetailSalesDAO {
 	List<BDetailSalesVO> selectBDetailSalesMenu(HashMap<String, String> map);
 
 	List<EteNums> calcEte(HashMap<String, String> map);
+
+	int insert(List<BDetailSalesVO> bDetailSalesList);
 }

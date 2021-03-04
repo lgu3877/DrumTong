@@ -20,4 +20,10 @@
 		(#{memberid}, #{couponid})
 	</insert>
 	
+	<delete id="delete" parameterType="hashmap">
+		DELETE FROM CCOUPON 
+			WHERE MEMBERID =#{memberid} 
+			AND COUPONID=#{couponid}
+	</delete>
+	
 </mapper>

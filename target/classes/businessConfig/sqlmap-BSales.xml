@@ -131,4 +131,18 @@
 						ORDER BY PURCHASEDATE ASC)
  			WHERE SALECODE=#{salecode}
 	</select>
+	
+	<select id="searchSales" parameterType="String" resultType="int">
+		SELECT COUNT(*)+1  
+			FROM BSALES 
+				WHERE ESTID=#{estid} 
+				AND SUBSTR(PURCHASEDATE, 1, 10) = TO_CHAR(SYSDATE,'YYYY-MM-DD')
+	</select>
+	
+	<insert id="insert" parameterType="BSalesVO">
+		insert into bsales 
+			(memberid, estid, salecode, totalamount, originalprice, discountprice, totalprice, deliverydate, collectiondate, collectionboolean, deliveryboolean, collectionrequests, laundryrequests, deliveryrequests)
+				values
+			(#{memberid}, #{estid}, #{salecode}, #{totalamount}, #{originalprice}, #{discountprice}, #{totalprice}, #{deliverydate}, #{collectiondate}, #{collectionboolean}, #{deliveryboolean}, #{collectionrequests}, #{laundryrequests}, #{deliveryrequests})
+	</insert>
 </mapper>
