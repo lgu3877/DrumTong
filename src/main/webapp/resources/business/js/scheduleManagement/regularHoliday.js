@@ -206,7 +206,7 @@ function removeRegSchedule(id) {
 function initializeRegInput() {
 	// selector 초기화 > default hidden
 	const selectorDefault = document.getElementById("week-default-option");
-	selectorDefault.selected = true;
+	selectorDefault.selectedected = true;
 	
 	// 정기휴무 선택 초기화 (button & checkbox) 
 	const buttons = document.querySelectorAll(".day_selector");

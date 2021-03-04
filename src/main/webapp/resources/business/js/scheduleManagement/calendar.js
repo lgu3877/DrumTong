@@ -22,11 +22,15 @@ document.getElementById(
 
 
 //달력 렌더링
-yearMonthSelector();
-createYears();
-createMonths();
-loadDays(currentYear, currentMonth, currentDate);
-displayMarker(); // 정기휴무
+renderCalendar();
+
+function renderCalendar() {
+	yearMonthSelector();
+	createYears();
+	createMonths();
+	loadDays(currentYear, currentMonth, currentDate);
+	displayMarker(); // 정기휴무
+}
 
 // 달력 년-월 선택 디자인
 function yearMonthSelector() {

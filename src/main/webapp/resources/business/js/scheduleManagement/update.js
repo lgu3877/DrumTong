@@ -62,15 +62,17 @@ async function updateRegHoliday() {
 
 	if (data) {
 		bscheduledays = data; // 데이터 덮어씌우기
-		document.getElementById("reg-holiday-schedule").innerHTML = ""; // 정기휴무 리스트 초기화
 
 		// 정기휴무 뷰 업데이트
+		document.getElementById("reg-holiday-schedule").innerHTML = ""; // 정기휴무 리스트 초기화
 		displayRegHolidays(); // 정기휴무 리스트 다시 출력
 
 		// selct & checkbox 초기화
-		
+		initializeRegInput();
 		
 		// 캘린더 업데이트
+		document.getElementById("calander").innerHTML = ""; 
+		renderCalendar();
 	}
 	
 	else {
