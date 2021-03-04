@@ -31,59 +31,7 @@
  	<!-- 스크립트 영역 -->
     <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail.js"></script>
-   	
-    <script>
-      function checkAgree(){
-    	  let radio = document.getElementById('agree');
-    	  if(!radio.checked){
-    		alert('약관에 동의를 체크해주세요');
-      		return false;
-    	  } else{
-      		return true;
-    	  }
-      }
-      function orderListSettings(){
-        selecteds = document.querySelectorAll('.selected-row');
-        orderMap = new Array();
-        for (i = 0; i < selecteds.length; i++) {
-        	let oneSelect = selecteds[i];
-            optionKey_1 = oneSelect.firstChild.children[0].innerText.split('/');
-            optionKey_2 = oneSelect.firstChild.children[1].innerText.split('/');
-            optionKey_3 = oneSelect.children[1].value;
-            optionKey_4 = oneSelect.children[2].innerText.split('원')[0];
-            quickCheck = oneSelect.children[3].children[0];
-            optionKey_5 = quickCheck.checked ? quickCheck.value : '0';
-            
-            order = {
-              maincategory : optionKey_1[0],
-              subcategory : optionKey_1[1],
-              name : optionKey_2[0],
-              amount : optionKey_3,
-              menuprice : optionKey_4,
-              sumprice : parseInt(optionKey_3) * parseInt(optionKey_4),
-              quickprice : optionKey_5,
-            };
-            orderMap.push(order);
-            
-         }
-        return orderMap;
-      }
-      async function submit() {
-    	if(!checkAgree()) return false; // 동의합니다 체크 여부
-    	
-        let paramList = {};
-    	
-        paramList['orderMap'] = orderListSettings();
-        
-		console.log(paramList);
-		
-		// 수거, 배송 체크, 쿠폰 사용, 희망날짜
-		
-		const {data} = await axios.post('/drumtong/customer/laundry/customerDetail/rest/submit/', paramList);
-		
-		console.log(data);
-      } //submit 체크 함수 종료
-    </script>
+    <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail/customerDetail-submit.js"></script>
 
 </head>
     

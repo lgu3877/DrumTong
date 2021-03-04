@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.drumtong.business.dao.BCouponDAO;
 import com.drumtong.business.dao.BInformationDAO;
+import com.drumtong.business.vo.BDetailSalesVO;
 import com.drumtong.business.vo.BInformationVO;
+import com.drumtong.business.vo.BSalesVO;
 import com.drumtong.customer.dao.CBookmarkDAO;
 import com.drumtong.customer.dao.CCouponDAO;
 import com.drumtong.customer.vo.CBookmarkVO;
@@ -23,6 +25,8 @@ import com.drumtong.map.vo.MEmdVO;
 import com.drumtong.map.vo.MSidoVO;
 import com.drumtong.map.vo.MSigunguVO;
 import com.drumtong.security.SelectLaundryList;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 @Service
@@ -122,6 +126,17 @@ public class RestCustomerLaundryService {
 	public String selectLaundry(String emdcode, String filter1, String filter2, String filter3, String filter4, String page) {
 
 		return new Gson().toJson(SelectLaundryList.getMapList(emdcode, filter1, filter2, filter3, filter4, page));
+	}
+
+	// 세탁소에서 결제 완료 눌렀을 때[영경]
+	public String submitDetail(HashMap<String, Object> param) {
+		ObjectMapper mapper = new ObjectMapper();
+		List<BDetailSalesVO> list = mapper.convertValue(param.get("detailSales"), new TypeReference<List<BDetailSalesVO>>() {});
+		BSalesVO blist = mapper.convertValue(param.get("sales"), new TypeReference<BSalesVO>() {});
+		String useCouponId = (String)param.get("couponID");
+		
+//		list.forEach(s -> System.out.println(s));
+		return "true";
 	}
 	
 
