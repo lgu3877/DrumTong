@@ -1,7 +1,6 @@
 package com.drumtong.customer.controller.laundry;
 
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,10 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.drumtong.business.vo.BDetailSalesVO;
 import com.drumtong.customer.service.laundry.RestCustomerLaundryService;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping("customer/laundry/")
@@ -92,14 +88,6 @@ public class RestCustomerLaundryController {
 	@RequestMapping("customerDetail/rest/submit/")
 	@PostMapping(produces="application/json; charset=utf8")
 	public String submitDetail(@RequestBody HashMap<String, Object> param) {
-		ObjectMapper mapper = new ObjectMapper();
-		List<BDetailSalesVO> list = mapper.convertValue(param.get("orderMap"), new TypeReference<List<BDetailSalesVO>>() {});
-		
-		for(int i = 0; i < list.size() ; i++) {
-			BDetailSalesVO test = list.get(i);
-//			System.out.println(i + "번 : " + test.getMaincategory() + ", " + test.getSubcategory() + ", " + test.getName());
-		}
-		
-		return "true";
+		return svc.submitDetail(param);
 	}
 }
