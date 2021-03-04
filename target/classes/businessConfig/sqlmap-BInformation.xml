@@ -65,7 +65,11 @@
 	
 	
 	<select id="selectCustomerDetail" parameterType="String" resultType="BInformationVO" >
-		SELECT BRANDNAMING, MAINLOCATION, DETAILLOCATION FROM BINFORMATION WHERE ESTID=#{estid}
+		SELECT BRANDNAMING, MAINLOCATION, DETAILLOCATION, EMDCODE 
+			FROM 
+		BINFORMATION 
+			WHERE 
+		ESTID=#{estid}
 	</select>
 	
 <!-- 	 사업장의 위도와 경도를 받아온다. -->

@@ -502,7 +502,7 @@
 						<input id="detail-address" class="detail_address_input" type="text" name="detaillocation" value="${bInformation.detaillocation }">
 						<input id="latitude" type="hidden" name="latitude">
 						<input id="longitude" type="hidden" name="longitude">
-						<input id="town-code" type="hidden" name="emdcode">
+						<input id="town-code" type="hidden" name="emdcode" value="${bInformation.emdcode }" >
 					</div>
 				</div>
 				<div class="preview_wrapper">
