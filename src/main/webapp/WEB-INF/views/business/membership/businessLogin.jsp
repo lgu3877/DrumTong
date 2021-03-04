@@ -86,7 +86,7 @@
 					<div class="input_title text-left">
 						아이디<span class="red-mark"> </span>
 					</div>
-					<input name="id" class="loginInput" type="text" required="required" placeholder="아이디를 입력해주세요." onkeyup="loginEnter()">
+					<input name="id" class="loginInput" type="text" required="required" placeholder="아이디를 입력해주세요." onkeyup="loginEnter()" autocomplete="off">
 				</div>
 				<div>	
 					<div class="input_title text-left">
