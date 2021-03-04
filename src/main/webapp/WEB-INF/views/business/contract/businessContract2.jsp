@@ -53,7 +53,7 @@
     	</label>
     </div>
     <div id="reportcarddiv">
-    	<img id="reportcard-space" width="600px">
+    	<img id="reportcard-space" >
     </div>
 	
     <div  class="c2-input">
@@ -63,8 +63,9 @@
     	</label>
     </div>
     <div id="imgdiv">
-    	<img id="img-space" width="600px">
+    	<img id="img-space">
     </div>
 	
+	<input type="button" class="next" onclick="prevButton()" value=" P R E V ">	
 	<input type="button" class="next" onclick="contract2Check(this)" value=" N E X T ">	
 </div>
