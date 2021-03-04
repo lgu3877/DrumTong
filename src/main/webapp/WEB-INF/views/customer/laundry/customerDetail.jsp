@@ -309,7 +309,9 @@
        var modalContent2 = document.getElementById('modal-content2');   // 결제 화면
        var modalContent3 = document.getElementById('modal-content3');   // 로그인 화면
        var modalContent4 = document.getElementById('modal-content4');   // 리뷰 화면
-
+       var modalContent5 = document.getElementById('modal-content5');   // 리뷰 이미지 클릭 화면
+	   var modalContent5_exit = document.getElementById('modal-content5-exit');
+       
        // Get the button that opens the modal
        var btn1 = document.getElementById('add-coupon');
        var btn2 = document.getElementById('order-submit');
