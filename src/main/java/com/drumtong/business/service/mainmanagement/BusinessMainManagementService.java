@@ -219,7 +219,7 @@ public class BusinessMainManagementService {
 									   BManagementVO bManagementVO, 
 									   BMenuListVO bMenuVOList, 	
 									   String[] bDeliveryAreaList, BInformationVO bInformationVO) {
-		ModelAndView mav = new ModelAndView("business/mainmanagement/businessScheduleManagement");
+		ModelAndView mav = new ModelAndView("redirect:/business/mainmanagement/businessScheduleManagement/");
 		
 		HttpSession Session = req.getSession();
 		

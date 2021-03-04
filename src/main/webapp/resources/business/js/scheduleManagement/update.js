@@ -1,3 +1,47 @@
+async function updateScheduleTime() {
+	
+	const timeRange = document.getElementsByClassName('time_range');
+	
+	for(let i = 0; i < timeRange.length; i++) {
+		
+		console.log('display' , timeRange[i].style.display);
+		
+		if(timeRange[i].style.display === "") {
+			const timeInputs = timeRange[i].querySelectorAll('.time_input');
+			
+			const timeZoneCons = timeRange[i].querySelectorAll('.time_zone_con');
+			
+			
+			for(let j = 0; j < timeInputs.length; j++) {
+				 if(timeInputs[j].value === ""){
+					alert("빈 값이 존재합니다");
+					return false;
+				} 
+				
+			}
+			
+			for(let k = 0; k < timeZoneCons.length; k++) {
+				const timeZoneRadioAM = timeZoneCons[k].children[0].children[0];
+				const timeZoneRadioPM = timeZoneCons[k].children[1].children[0];
+				
+				
+				if(.timeZoneInputs[k].checked) {
+					
+				}
+			}
+			
+		}
+		
+	}
+	
+	console.log('');
+	
+	
+	
+}
+
+
+
 // 정기 휴무 등록
 async function updateRegHoliday() {
 	// 주(week)
