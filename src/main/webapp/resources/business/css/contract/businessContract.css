@@ -1,3 +1,10 @@
+.contract-page {
+	margin: 0 auto;
+	width: 900px; 
+	height: 1000px; 
+	border: 1px
+}
+
 #contractTitle {
 	height: 15%; text-align: left; display: flex; align-items: center; margin: 0 auto;
 }
@@ -9,6 +16,18 @@
     color: navy !important;
     border-top: 1.7px solid navy !important;
     border-bottom: 2.5px solid navy !important;
+}
+
+.contract-container {
+	margin: 0 auto;
+	height: 85%; 
+	width: 100%
+}
+
+.contract-container .contract-form {
+	margin: 0 auto;
+	width: 800px; 
+	height: 800px;
 }
 
 #allcheck {
@@ -48,19 +67,21 @@ input.next:hover {
 	background-color: navy !important;
 }
 
+#contract-page {
+	margin-bottom: 15px;
+}
+
+#iconDiv, #contract-page {
+	width: 800px;
+	margin: 0 auto;
+	text-align: left;
+}
 
 #iconDiv i {
 	color: #3088F9;
 	text-shadow: 2px 2px 2px #afafaf;
 }
 
-#prevBtn {
-	position: fixed; width: 70px; top: 45%; left: 0; z-index: 9999;
-}
-
-#nextBtn {
-	position: fixed; width: 70px; top: 45%; right: 0; z-index: 9999;
-}
 
 .c1div {
 	text-align: left; width: 80%; height: 45%; margin: 0 auto; position: relative;
@@ -120,6 +141,10 @@ div .termdiv {
 
 div p i {
 	margin-right: 5px;
+}
+
+#reportcard-space, #img-space {
+	width: 600px
 }
 
 div.c2-input {

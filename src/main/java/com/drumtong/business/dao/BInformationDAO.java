@@ -61,5 +61,8 @@ public interface BInformationDAO {
 	// 매장 좌표 Select REST 
 	List<BInformationVO> selectBInformationCoord();
 
+	//	EMDCODE 를 출력해주는 SQL문입니다.
+	String selectEMDCode(String estid);
+
 
 }

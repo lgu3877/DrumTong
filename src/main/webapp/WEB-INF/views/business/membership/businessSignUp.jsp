@@ -23,6 +23,8 @@
 	<!-- icon -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 	
+	<!-- 다음 주소 검색 script function -->
+	<%@ include file="/resources/daumAddressSearch/daumAddressSearch.jsp" %>
 </head>
 
 <body>
@@ -73,7 +75,7 @@
 	<hr>
 	</div>
 	
-	<div class="marginauto" style="width: 40%; height: 50%; min-width: 500px;">
+	<div class="marginauto" style="width: 40%; height: auto; min-width: 500px;">
 		<form class="marginauto signup" id="loginForm" method="POST" onsubmit="return AgreeCheck();">
 			<div>
 				<div class="table"><div class="cell">&nbsp아&nbsp이&nbsp디</div></div> 
@@ -142,10 +144,11 @@
             		<!-- Reandonly, Disabled : input 작성 방지 기능 -->
             		<!-- Readonly는 form으로 전송가능하지만, disabled 는 form으로 어떤 값도 전송되지 못한다 -->
             		<input type="text" name="mainaddress" id="mainaddress" placeholder="우편번호" style="width: 70%" readonly required/>
-            		<input type="button" value="주소찾기" id="checkTel" style="width: 25%" onclick="searchAddress()"/>
+            		<input type="button" value="주소찾기" id="checkTel" style="width: 25%" onclick="searchAddress(document.getElementById('mainaddress'), document.getElementById('detailaddress'),document.getElementById('emdcode'),null,null)"/>
             	</div>
             	<div>
             		<input id="detailadress" name="detailaddress" type="text" placeholder="나머지 주소를 입력하세요" style="width: 100%" required maxlength="15">
+            		<input id="emdcode" name="emdcode" type="hidden">
             	</div>
             </div>
             <div>

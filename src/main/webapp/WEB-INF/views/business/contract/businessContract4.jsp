@@ -72,7 +72,8 @@
     		</div>
     	</div>
     </div>
-	
+		
+		<input type="button" class="next" onclick="prevButton()" value=" P R E V ">	
 		<input type="submit" class="next" value=" N E X T ">
 		
 </div>

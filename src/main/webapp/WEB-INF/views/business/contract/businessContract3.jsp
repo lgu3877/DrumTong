@@ -38,6 +38,6 @@
     	<a class="modal-close">닫기</a>
     </div>
     
-
+	<input type="button" class="next" onclick="prevButton()" value=" P R E V ">	
 	<input type="button" class="next" onclick="contract3Check(this)" value=" N E X T ">
 </div>

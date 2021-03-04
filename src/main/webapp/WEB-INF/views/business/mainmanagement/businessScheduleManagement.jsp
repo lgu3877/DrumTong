@@ -104,7 +104,7 @@
 					<div class="btn_con">
 					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
 					<c:if test="${status eq 'SUCCESS' }">
-						<div id="complete-working-hour" class="btn update_btn">
+						<div id="complete-working-hour" class="btn update_btn" onclick="updateScheduleTime()">
 							<div class="icon_con">
 								<i class="fas fa-check-square"></i>
 							</div>
@@ -575,6 +575,7 @@
 	</script>
 	
 	<!-- 영업시간 -->
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/businessScheduleManagementScheduleTime.js"></script>
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/interface.js"></script>
 	
 	<!-- 달력 -->
@@ -591,5 +592,8 @@
 	
 	<!-- 업데이트 -->
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/update.js"></script>
+	
+	<!-- 예외처리 -->
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/businessScheduleManagementExceptionCheck.js"></script>
 </body>
 </html>

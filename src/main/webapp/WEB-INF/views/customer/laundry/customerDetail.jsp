@@ -31,54 +31,7 @@
  	<!-- 스크립트 영역 -->
     <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail.js"></script>
-   	
-    <script>
-      function checkAgree(){
-    	  let radio = document.getElementById('agree');
-    	  if(!radio.checked){
-    		console.log('체크 안되어있을 때');
-      		return false;
-    	  }
-    	  else{
-    		console.log('체크 되어있을 때');
-      		return true;
-    	  }
-      }
-      function submit() {
-    	if(!checkAgree()) return false; 
-        selecteds = document.querySelectorAll('.selected-row');
-
-        cnt = 0;
-
-        orderMap = new Array();
-
-        for (i = 0; i < selecteds.length; i++) {
-          optionKey = selecteds[i].firstChild.children[0].innerText;
-          optionValue = selecteds[i].children[1].value;
-
-          // orderMap.put(optionKey, optionValue);
-          order = {
-            optionKey: optionKey,
-            optionValue: optionValue,
-          };
-          orderMap.push(order);
-          
-          cnt++;
-        }
-
-        if (cnt !== selecteds.length) return;
-
-        $.ajax({
-          url: '${cpath}/payment/',
-          type: 'post',
-          dataType: 'json',
-          data: { orderMap: orderMap },
-          success: function (data) {
-            console.log('성공');
-          },
-        });
-      } //submit 체크 함수 종료
-    </script>
+    <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail/customerDetail-submit.js"></script>
 
 </head>
     
@@ -279,15 +232,14 @@
                 </div>
               </div>
             </div>
-            <div class="reviewOrderList" style="height: 30px; background: grey; color: white;">추가 확보 공간</div>            
-            <div class="review-reviewimg" style="display: none"><img></div>
             <div class="orderListMsg"><span class="orderList-hide"></span></div>            
+            <div class="review-reviewimg" style="display: none"><img></div>
             <div class="modal-grade"><span></span></div>
             <div class="review-context"></div>
             <div class="owner-review">
             	<h1 class="owner-name"></h1>
             	<p class="owner-content">사장님 댓글 공간입니다</p>
-            </div>"src/main/webapp/resources/customer/js/laundry/customerDetail/detail-modal.js"
+            </div>
           </div>
         </div>
       </div>
