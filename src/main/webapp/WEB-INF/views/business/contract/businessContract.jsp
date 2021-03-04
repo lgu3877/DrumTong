@@ -26,7 +26,7 @@
 
 	<div class="contract-all-container">
 	
-	<div id="contract-page">
+	<div id="contract-page" class="contract-page">
 		<h1>온라인 계약</h1>
 	</div>	
 	<div  class="contract-container">	
@@ -37,7 +37,7 @@
 			<i class="far fa-circle fa-3x"></i>
 			<i class="far fa-circle fa-3x"></i>
 		</div>
-    	<form action="" method="post" class="contract-form" onsubmit="contract4Check()"
+    	<form action="${cpath }/business/contract/businessContract/" method="post" class="contract-form" onsubmit="return contract4Check()"
     		enctype="multipart/form-data">
         	<%@ include file="./businessContract1.jsp" %>
         	<%@ include file="./businessContract2.jsp" %>

@@ -1,8 +1,21 @@
 .contract-page {
-	margin: 0 auto;
-	width: 900px; 
-	height: 1000px; 
-	border: 1px
+	width: 800px;
+    height: 15%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
+
+.contract-page h1 {
+	text-align: left !important;
+    margin: 5px 0 10px 0 !important;
+    font-size: 19pt !important;
+    font-weight: 300 !important;
+    color: navy !important;
+    border-top: 1.7px solid navy !important;
+    border-bottom: 2.5px solid navy !important;
 }
 
 #contractTitle {
@@ -67,11 +80,7 @@ input.next:hover {
 	background-color: navy !important;
 }
 
-#contract-page {
-	margin-bottom: 15px;
-}
-
-#iconDiv, #contract-page {
+#iconDiv {
 	width: 800px;
 	margin: 0 auto;
 	text-align: left;
@@ -202,7 +211,21 @@ div.c3-input {
 	margin-bottom: 20px;
 }
 
+#accountbank {
+	height: 40px; width: 300px;
+}
 
+#bank-modal-button {
+	height: 46px; width: 100px; margin-left: 10px
+}
+
+#accountnum {
+	height: 40px; width: 410px
+}
+
+#copydiv {
+	margin-top: 15px; margin-bottom: 15px
+}
 
 
 div.message {
@@ -212,6 +235,13 @@ div.message {
 	text-align: right;
 }
 
+div.message-blue {
+	color: blue;
+}
+
+div.message-red {
+	color: red;
+}
 
 
 label i.far:hover {
@@ -267,4 +297,31 @@ label i.far:hover {
 .categoryDiv div img {
 	height: 120px;
 	float: right;
+}
+
+.c-final {
+	width: 100%; height: 100%
+}
+
+.c-final-table {
+	width: 100%; 
+	height: 50%; 	
+	display: table
+}
+
+.c-final-table-cell {
+	width: 700px; 
+	height: 500px; 
+	display: table-cell; 
+	vertical-align: middle;
+}
+
+.c-final-table-cell .input-cell {
+	width: 250px; 
+	height: 80px; 
+	display: block; 
+	margin: 0 auto;
+	margin-top: 15px; 
+	font-size: 20pt; 
+	font-weight: bold
 }
