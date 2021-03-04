@@ -24,9 +24,10 @@ async function updateScheduleTime() {
 				const timeZoneRadioAM = timeZoneCons[k].children[0].children[0];
 				const timeZoneRadioPM = timeZoneCons[k].children[1].children[0];
 				
-				
-				if(.timeZoneInputs[k].checked) {
-					
+				// 
+				if(!timeZoneRadioAM.checked && !timeZoneRadioPM) {
+					alert("빈 값이 존재합니다");
+					return false;
 				}
 			}
 			
