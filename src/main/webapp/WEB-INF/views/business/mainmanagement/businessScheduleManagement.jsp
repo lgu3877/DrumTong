@@ -40,6 +40,9 @@
 	<!-- objects from DB -->
 	<script type="text/javascript">
 		// 정기휴무
+		const initialRegHoliday = ${bscheduledays};
+		delete initialRegHoliday.holiday;
+
 		let bscheduledays = ${bscheduledays};
 		const holiday = bscheduledays.holiday; // holiday > 'Y' or 'N'
 		delete bscheduledays.holiday; // holiday 삭제
@@ -300,7 +303,7 @@
 					<div class="btn_con">
 					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
 					<c:if test="${status eq 'SUCCESS' }">
-						<div id="complete-holiday" class="btn update_btn" onclick="updateRegHoliday()")>
+						<div id="complete-holiday" class="btn update_btn" onclick="updateRegHoliday()">
 							<div class="icon_con">
 								<i class="fas fa-check-square"></i>
 							</div>
@@ -316,8 +319,8 @@
 					<div class="select_wrapper form">
 					<!-- 주 선택 -->
 						<div id="reg-holiday-week" class="select_box_con">
-							<select name="restWeek">
-								<option selected hidden="true" disabled>&nbsp;주 선택&nbsp;</option>
+							<select name="restWeek" onchange="loadRegHolidays(this)">
+								<option id="week-default-option" selected hidden="true" disabled>&nbsp;주 선택&nbsp;</option>
 								<option value="allweek">매주</option>
 								<option value="firstweek">첫째 주</option>
 								<option value="secondweek">둘째 주</option>
