@@ -24,11 +24,11 @@ function toggleHoliday() {
 			
 			checkbox.checked === false ? 
 					checkbox.checked = true : 
-						checkbox.checked = false;
+					checkbox.checked = false;
 			
 			checkbox.checked === true ? 
 					button.style.backgroundColor = "navy" :	
-						button.style.backgroundColor = "#95e1d3";	
+					button.style.backgroundColor = "#95e1d3";	
 		})
 	}
 }
@@ -58,7 +58,7 @@ function displayRegHolidays() {
 			const removeBtn = document.createElement("div");
 			removeBtn.className = "h_schedule_remove";
 			removeBtn.innerHTML = "&times";
-			removeBtn.onclick = () => removeRegHoliday(holidayId); // click event (remove item)
+			removeBtn.onclick = () => removeRegSchedule(holidayId); // click event (remove item)
 
 			// week(header)
 			const weekCon = document.createElement("div");
@@ -87,3 +87,135 @@ function displayRegHolidays() {
 	}
 }
 
+
+// 정기휴무 select 이벤트 (초기화 & 데이터 불러오기)
+function loadRegHolidays(select) {
+	// 정기휴무 선택 초기화 (button & checkbox) 
+	const buttons = document.querySelectorAll(".day_selector");
+	const checkboxes = document.getElementsByName("restDay");
+	
+	for (let i = 0; i < buttons.length; i++) {
+		// checkbox > not-checked
+		checkboxes[i].checked = false;
+		// button > default color
+		buttons[i].style.backgroundColor = "#95e1d3";	
+	}
+	
+	// 데이터 로드
+	if (bscheduledays[select.value] === undefined) return; // 불러올 데이터가 없을 때 > 종료(return)
+
+	const days = bscheduledays[select.value].split("/"); // 불러올 데이터가 있을 때
+	days.pop();
+	
+	// 로드된 데이터 > checkbox에 표기
+	for (let i = 0; i < checkboxes.length; i++) {
+		for (let j = 0; j < days.length; j++) {
+			const checkbox = checkboxes[i];
+			const button = buttons[i];
+			if (days[j] === checkbox.value) {
+				// checkbox > checked
+				checkbox.checked = true;
+				// button > selected color
+				button.style.backgroundColor = "navy";	
+			}
+		}
+	}
+}
+
+
+// 정기휴무 스케쥴 추가
+function addRegSchedule() {
+	// 주(week)
+	const weekSelector = document.getElementsByName("restWeek")[0];
+	const weekOptions = weekSelector.getElementsByTagName("option");
+	let selectedWeek;
+	
+	for (let i = 0; i < weekOptions.length; i++) {
+		if (weekOptions[i].selected === true && !weekOptions[i].value.includes("주 선택")) {
+			selectedWeek = weekOptions[i].value;
+		}
+	}
+	
+	// 주 선택 유무 검사
+	if (selectedWeek === undefined) {
+		alert("주(week)가 선택되지 않았습니다. 다시 한 번 확인해주세요.");
+		return;
+	}
+	
+	// 일(day) > 배열
+	const dayArray = document.getElementsByName("restDay");
+	let selectedDays = "";
+	
+	for (let i = 0; i < dayArray.length; i++) {
+		dayArray[i].checked === true ? selectedDays += dayArray[i].value + "/" : null; 
+	}
+	
+	// 일 선택 유무 검사
+	if (selectedDays === "") {
+		alert("일(day)이 선택되지 않았습니다. 다시 한 번 확인해주세요.");
+		return;
+	}
+	
+	// selected values
+	const selected = {
+		week : selectedWeek,
+		days : selectedDays	
+	};
+	
+	// 객체 업데이트
+	bscheduledays[selected.week] = selected.days;
+	
+	// selector & checkbox 초기화
+	initializeRegInput();
+	
+	// 뷰 초기화
+	document.getElementById("reg-holiday-schedule").innerHTML = "";
+	
+	// 뷰 출력
+	displayRegHolidays();
+}
+
+
+// 정기휴무 스케쥴 삭제
+function removeRegSchedule(id) {
+	const scheduleCon = document.getElementById(id);
+	const korWeek = scheduleCon.querySelector(".h_week").innerText; 
+	
+	const answer = confirm(korWeek + "의 정기휴무 설정을 삭제하시겠습니까?");
+
+	if (answer === true) {
+		// Korean > English 변경(convert) > bscheduledays 오브젝트에서 해당 휴무정보 제거 
+		for (let engWeek in weekObject) {
+			if (korWeek === weekObject[engWeek]) {
+				// 객체 수정(값 제거)
+				delete bscheduledays[engWeek];
+				
+				// 뷰 삭제(초기화)
+				document.getElementById("reg-holiday-schedule").innerHTML = "";
+				
+				// 뷰 업데이트
+				displayRegHolidays();
+			}
+		}
+	}
+	else return;
+}
+
+
+// 정기휴무 입력창 초기화(select & checkbox)
+function initializeRegInput() {
+	// selector 초기화 > default hidden
+	const selectorDefault = document.getElementById("week-default-option");
+	selectorDefault.selected = true;
+	
+	// 정기휴무 선택 초기화 (button & checkbox) 
+	const buttons = document.querySelectorAll(".day_selector");
+	const checkboxes = document.getElementsByName("restDay");
+	
+	for (let i = 0; i < buttons.length; i++) {
+		// checkbox > not-checked
+		checkboxes[i].checked = false;
+		// button > default color
+		buttons[i].style.backgroundColor = "#95e1d3";	
+	}
+}

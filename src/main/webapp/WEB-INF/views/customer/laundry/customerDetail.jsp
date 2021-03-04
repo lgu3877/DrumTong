@@ -36,47 +36,52 @@
       function checkAgree(){
     	  let radio = document.getElementById('agree');
     	  if(!radio.checked){
-    		console.log('체크 안되어있을 때');
+    		alert('약관에 동의를 체크해주세요');
       		return false;
-    	  }
-    	  else{
-    		console.log('체크 되어있을 때');
+    	  } else{
       		return true;
     	  }
       }
-      function submit() {
-    	if(!checkAgree()) return false; 
+      function orderListSettings(){
         selecteds = document.querySelectorAll('.selected-row');
-
-        cnt = 0;
-
         orderMap = new Array();
-
         for (i = 0; i < selecteds.length; i++) {
-          optionKey = selecteds[i].firstChild.children[0].innerText;
-          optionValue = selecteds[i].children[1].value;
-
-          // orderMap.put(optionKey, optionValue);
-          order = {
-            optionKey: optionKey,
-            optionValue: optionValue,
-          };
-          orderMap.push(order);
-          
-          cnt++;
-        }
-
-        if (cnt !== selecteds.length) return;
-
-        $.ajax({
-          url: '${cpath}/payment/',
-          type: 'post',
-          dataType: 'json',
-          data: { orderMap: orderMap },
-          success: function (data) {
-            console.log('성공');
-          },
-        });
+        	let oneSelect = selecteds[i];
+            optionKey_1 = oneSelect.firstChild.children[0].innerText.split('/');
+            optionKey_2 = oneSelect.firstChild.children[1].innerText.split('/');
+            optionKey_3 = oneSelect.children[1].value;
+            optionKey_4 = oneSelect.children[2].innerText.split('원')[0];
+            quickCheck = oneSelect.children[3].children[0];
+            optionKey_5 = quickCheck.checked ? quickCheck.value : '0';
+            
+            order = {
+              maincategory : optionKey_1[0],
+              subcategory : optionKey_1[1],
+              name : optionKey_2[0],
+              amount : optionKey_3,
+              menuprice : optionKey_4,
+              sumprice : parseInt(optionKey_3) * parseInt(optionKey_4),
+              quickprice : optionKey_5,
+            };
+            orderMap.push(order);
+            
+         }
+        return orderMap;
+      }
+      async function submit() {
+    	if(!checkAgree()) return false; // 동의합니다 체크 여부
+    	
+        let paramList = {};
+    	
+        paramList['orderMap'] = orderListSettings();
+        
+		console.log(paramList);
+		
+		// 수거, 배송 체크, 쿠폰 사용, 희망날짜
+		
+		const {data} = await axios.post('/drumtong/customer/laundry/customerDetail/rest/submit/', paramList);
+		
+		console.log(data);
       } //submit 체크 함수 종료
     </script>
 
@@ -279,15 +284,14 @@
                 </div>
               </div>
             </div>
-            <div class="reviewOrderList" style="height: 30px; background: grey; color: white;">추가 확보 공간</div>            
-            <div class="review-reviewimg" style="display: none"><img></div>
             <div class="orderListMsg"><span class="orderList-hide"></span></div>            
+            <div class="review-reviewimg" style="display: none"><img></div>
             <div class="modal-grade"><span></span></div>
             <div class="review-context"></div>
             <div class="owner-review">
             	<h1 class="owner-name"></h1>
             	<p class="owner-content">사장님 댓글 공간입니다</p>
-            </div>"src/main/webapp/resources/customer/js/laundry/customerDetail/detail-modal.js"
+            </div>
           </div>
         </div>
       </div>

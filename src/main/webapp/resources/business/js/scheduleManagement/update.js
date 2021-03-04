@@ -42,105 +42,94 @@ async function updateScheduleTime() {
 }
 
 
+// 배열 속 중복값 제거 (정렬 필수)
+function removeRepeatValue(array) {
+	array.sort();
+	
+	for (let i = 0; i < array.length - 1; i++) {
+		if (array[i] === array[i + 1]) {
+			array.splice(i + 1, 1);
+		} 
+	}
+	
+	return array;
+}
 
 // 정기 휴무 등록
 async function updateRegHoliday() {
-	// 주(week)
-	const weekSelector = document.getElementsByName("restWeek")[0];
-	const weekOptions = weekSelector.getElementsByTagName("option");
-	let selectedWeek;
+	const initial = {};
+	const updated = {};
+	const concat = {};
 	
-	for (let i = 0; i < weekOptions.length; i++) {
-		if (weekOptions[i].selected === true && !weekOptions[i].value.includes("주 선택")) {
-			selectedWeek = weekOptions[i].value;
-		}
-	}
-	
-	// 주 선택 유무 검사
-	if (selectedWeek === undefined) {
-		alert("주(week)가 선택되지 않았습니다. 다시 한 번 확인해주세요.");
-		return;
-	}
-	
-	// 일(day) > 배열
-	const dayArray = document.getElementsByName("restDay");
-	let selectedDays = "";
-	
-	for (let i = 0; i < dayArray.length; i++) {
-		dayArray[i].checked === true ? selectedDays += dayArray[i].value + "/" : null; 
-	}
-	
-	// 일 선택 유무 검사
-	if (selectedDays === "") {
-		alert("일(day)이 선택되지 않았습니다. 다시 한 번 확인해주세요.");
-		return;
-	}
-	
-	// request object
-	const object = {
-		week : selectedWeek,
-		days : selectedDays	
-	};
-	
-	// axios
-	const { data } = await axios.post("/drumtong/business/mainmanagement/BScheduleDays/rest/insertBScheduleDays/", object);
-	console.log(data);
-
-	if (data) {
-		bscheduledays = data; // 데이터 덮어씌우기
-		document.getElementById("reg-holiday-schedule").innerHTML = ""; // 정기휴무 리스트 초기화
-		displayRegHolidays(); // 정기휴무 리스트 다시 출력
-	}
-	
-	else {
-		alert("잘못된 입력입니다.");
-	}
-}
-
-
-
-// 정기 휴무 삭제
-async function removeRegHoliday(id) {
-	const list = document.getElementById(id);
-	
-	// 주 (week)
-	let removeWeek = list.getElementsByClassName("h_week")[0].innerText;
-	
-	// 주 (kor > en) 변환
-	for (let key in weekObject) {
-		if (weekObject[key] === removeWeek) {
-			removeWeek = key;
-		}
-	}
-	
-	// 일 (day)
-	let removeDays = "";
-	const dayCon = list.getElementsByClassName("h_day");
-	
-	for (let i = 0; i < dayCon.length; i++) {
-		removeDays += dayCon[i].innerText.replace("요일", "") + "/";
-	}
-	
-	// request object
-	const object = {
-		week : removeWeek,
-		days : removeDays	
-	};
+	// 초기 객체
+	for (let week in initialRegHoliday) {
+		const dayArray = initialRegHoliday[week].split("/");
+		dayArray.pop();
 		
-	// axios
-	const { data } = await axios.delete("/drumtong/business/mainmanagement/BScheduleDays/rest/deleteBScheduleDays/", object);
-	
-	if (data) {
-		bscheduledays = data; // 데이터 덮어씌우기
-		document.getElementById("reg-holiday-schedule").innerHTML = ""; // 정기휴무 리스트 초기화
-		displayRegHolidays(); // 정기휴무 리스트 다시 출력
+		initial[week] = dayArray;
 	}
-	
-	else {
-		alert("잘못된 입력입니다.");
-	}
-}
 
+	// 업데이트된 객체
+	for (let week in bscheduledays) {
+		const dayArray = bscheduledays[week].split("/");
+		dayArray.pop();
+		
+		updated[week] = dayArray;
+	}
+	
+	// 객체 합(초기 + 업데이트)
+	const concatweeks = removeRepeatValue([ ...Object.keys(initial), ...Object.keys(updated) ]);
+	
+	for (let i = 0; i < concatweeks.length; i++) {
+		const week = concatweeks[i];
+		
+		const initialDays = initial[week] || [];
+		const updatedDays = updated[week] || [];
+		
+		concat[week] = removeRepeatValue([ ...initialDays, ...updatedDays ]);
+	}
+	
+	console.log(initial);
+	console.log(updated);
+	console.log(concat);
+	
+	// request 생성
+	const object = {
+		"add" : {},
+		"remove" : {}
+	}
+	
+	// 객체 업데이트(add & remove values)
+	// add = concat - initial
+	for (let week in concat) {
+		
+	}
+	
+	// remove = concat - updated
+	
+	
+	// axios
+//	const { data } = await axios.post("/drumtong/business/mainmanagement/BScheduleDays/rest/insertBScheduleDays/", object);
+//	console.log(data);
+//
+//	if (data) {
+//		bscheduledays = data; // 데이터 덮어씌우기
+//		document.getElementById("reg-holiday-schedule").innerHTML = ""; // 정기휴무 리스트 초기화
+//		displayRegHolidays(); // 정기휴무 리스트 다시 출력
+//	}
+//	
+//	else {
+//		alert("잘못된 입력입니다.");
+//	}
+	
+	
+	// selct & checkbox 초기화
+	
+	// 정기휴무 뷰 업데이트
+	
+	// 캘린더 업데이트
+	
+}
 
 
 // 임시휴무 등록

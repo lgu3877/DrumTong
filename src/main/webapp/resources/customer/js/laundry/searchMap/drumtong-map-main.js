@@ -1,7 +1,4 @@
-		window.onload = function() {
-			getInfo();	// 윈도우즈 활성화 될때마다 지도 처음 레벨은 6에 맞는 부분을 활성화시켜줌
-		}
-		
+
 		var mapContainer = document.getElementById('drumtongMap'), // 지도를 표시할 div
 
 			mapOption = {
@@ -9,7 +6,18 @@
 					level : 11
 				// 지도의 확대 레벨
 				};
+				
 		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+		
+		
+		window.onload = function() {
+			getInfo();	// 윈도우즈 활성화 될때마다 지도 처음 레벨은 6에 맞는 부분을 활성화시켜줌
+			
+			const searchText = document.getElementById('searchText').value;
+			const text_split = searchText.split(' ');
+//			console.log('text_split : ' + text_split.length);
+		}
+		
 		
 		// HTML5의 geolocation으로 사용할 수 있는지 확인합니다
 		// 현재 위치를 기반으로 맵의 중심을 결정한다
@@ -34,28 +42,33 @@
 			var center = map.getCenter();
 			// 지도의 현재 레벨을 얻어옵니다
 			var level = map.getLevel();
+			var bounds = map.getBounds();
 			
 			switch (level) {
 			case 1:	case 2:	case 3:	case 4: 
 				deleteShopMarkers();
 				shopLevel();
 				deleteEmd();
+				useCoordinates(bounds.getSouthWest(), bounds.getNorthEast());
 				break;
 			case 5:	case 6:	case 7: 
 				emdLevel();
 				deleteShopMarkers();
 				deleteEmd();
+				useCoordinates(bounds.getSouthWest(), bounds.getNorthEast());
 				break;
 			case 8:	case 9:	
 				sigunguLevel();
 				deleteEmd();
+				useCoordinates(bounds.getSouthWest(), bounds.getNorthEast());
 				break;
 			case 10: case 11:
   				sidoLevel();
 				deleteEmd();
+				useCoordinates(bounds.getSouthWest(), bounds.getNorthEast());
 				break;
 			case 12: case 13: case 14:
-				map.setLevel(12);
+				map.setLevel(11);
 				break;
 			default:
 				break;

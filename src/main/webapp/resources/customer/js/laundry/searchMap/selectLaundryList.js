@@ -44,11 +44,12 @@ async function selectLaundry(page) {
 	const premiumList = data[0];
 	const generalList = data[1];
 	const resultNum = data[2];
+	console.log('data[3] : ' + data[3]);
 
 	console.log('select_premiumList : ', premiumList);
 	console.log('select_generalList : ', generalList);
 	console.log('resultNum : ', resultNum);
-
+	document.getElementById('total-laundry').innerHTML = resultNum;
 	insertLaundryList(premiumList, generalList);
 }
 
@@ -79,7 +80,7 @@ function createPremium(premiumList) {
 	else if (p_length > 0) {
 		for (let i = 0; i < premiumList.length; i++) {
 		
-			console.log('i : ' + i);
+//			console.log('i : ' + i);
 		
 			primium_childs[i].style.display = '';
 			
@@ -123,17 +124,17 @@ function createPremium(premiumList) {
 // ■ 일반리스트를 삭제해주는 함수 -> 페이지 기능을 위해서 만듬
 function deleteGeneral(generalList) {
 
-	let common_lists = document.querySelectorAll('.laundryList_common');
+	let common_lists = document.querySelectorAll('.common_list');
 	
 	if(generalList.length == 0) {
 		common_lists[0].style.display = 'none';
-		return false;
 	}
 	else
 		common_lists[0].style.display = '';
 	
 	for(let i = 1; i < common_lists.length; i++) {
-		common_lists[i].removeChild();
+		console.log(i + '번 삭제');
+		document.querySelector('.laundryList_common').removeChild(common_lists[i]);
 	}
 }
 
@@ -151,16 +152,18 @@ function createGeneral(generalList) {
 
 
 	// 일반리스트는 10개를 가지며 최대 5개의 class="laundryList_common"의 div 태그를 가진다
+	// class="laundryList_common" 를 지닌 div는 한줄마다 class="common_list"를 지닌 div 태그가 공간을 차지한다
+	// 
 	for(let j = 0; j < common_childs.length; j++) {
-	
-			let count = 2 * j;		// 다섯번 반복하므로 한번 반복 때마다 두개의 common_childs애 입력하고자 count 변수를 만듬 
+			
+			let count = Number(2 * j);		// 다섯번 반복하므로 한번 반복 때마다 두개의 common_childs애 입력하고자 count 변수를 만듬 
 			
 			common_childs[j].querySelectorAll('.mainimg')[0].setAttribute('src', 
 				'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + generalList[count].mainimg);
 			
 			const img_path0 = 'location.href = "' + getContextPath() + '/customer/laundry/customerDetail/' + generalList[count].estid + '/"'
 			common_childs[j].querySelectorAll('.mainimg')[0].setAttribute('onclick', img_path0);
-			common_childs[j].querySelectorAll('.brandnaming')[0].innerHTML = generalList[j].brandnaming +
+			common_childs[j].querySelectorAll('.brandnaming')[0].innerHTML = generalList[count].brandnaming +
 				'<span class="reviewnum">(' + generalList[count].reviewnum + ')</span>';
 			common_childs[j].querySelectorAll('.gpa')[0].innerHTML = generalList[count].gpa.toFixed(1);
 			common_childs[j].querySelectorAll('.mainlocation')[0].innerHTML = generalList[count].mainlocation;
@@ -185,7 +188,6 @@ function createGeneral(generalList) {
 			
 			common_info_0.append(common_image_0);	
 			
-			
 			// 예를 들어 일반리스트가 5개라면??
 			// 3번째 반복문 돌릴 때, generalList.length = 5 이고, count = 4가 된다
 			// 그러면 5 - 4 == 1 이라는 조건문을 통해서 뒤의 class="common_childs"를 숨기면 된다
@@ -196,27 +198,28 @@ function createGeneral(generalList) {
 				break;
 			}
 			else {
-				common_childs[j].querySelectorAll('.mainimg')[0].setAttribute('src', 
-						'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + generalList[count - 1].mainimg);
+				common_childs[j].querySelectorAll('.common_childs')[1].style.display = '';
+				common_childs[j].querySelectorAll('.mainimg')[1].setAttribute('src', 
+						'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/' + generalList[Number(count + 1)].mainimg);
 			
-				const img_path1 = 'location.href = "' + getContextPath() + '/customer/laundry/customerDetail/' + generalList[count - 1].estid + '/"'
-				common_childs[j].querySelectorAll('.mainimg')[0].setAttribute('onclick', img_path1);
-				common_childs[j].querySelectorAll('.brandnaming')[0].innerHTML = generalList[j].brandnaming +
-					'<span class="reviewnum">(' + generalList[count - 1].reviewnum + ')</span>';
-				common_childs[j].querySelectorAll('.gpa')[0].innerHTML = generalList[count - 1].gpa.toFixed(1);
-				common_childs[j].querySelectorAll('.mainlocation')[0].innerHTML = generalList[count - 1].mainlocation;
-				common_childs[j].querySelectorAll('.mainlocation')[0].setAttribute('title', generalList[count - 1].mainlocation);
+				const img_path1 = 'location.href = "' + getContextPath() + '/customer/laundry/customerDetail/' + generalList[Number(count + 1)].estid + '/"'
+				common_childs[j].querySelectorAll('.mainimg')[1].setAttribute('onclick', img_path1);
+				common_childs[j].querySelectorAll('.brandnaming')[1].innerHTML = generalList[Number(count + 1)].brandnaming +
+					'<span class="reviewnum">(' + generalList[Number(count + 1)].reviewnum + ')</span>';
+				common_childs[j].querySelectorAll('.gpa')[1].innerHTML = generalList[Number(count + 1)].gpa.toFixed(1);
+				common_childs[j].querySelectorAll('.mainlocation')[1].innerHTML = generalList[Number(count + 1)].mainlocation;
+				common_childs[j].querySelectorAll('.mainlocation')[1].setAttribute('title', generalList[Number(count + 1)].mainlocation);
 			
 			
 				let common_info_1 = common_childs[j].querySelectorAll('.childs_info_1_1')[1];
-				common_info_1.removeChild(common_info_0.querySelector('.childs_image_1_1'));	
+				common_info_1.removeChild(common_info_1.querySelector('.childs_image_1_1'));	
 			
 				let common_image_1 = document.createElement('div');
 				common_image_1.className = 'childs_image_1_1';
 						
 			
 				// 명품류, 하의, 상의 등 이미지 넣기
-				const defaultcategory1 = generalList[count - 1].defaultcategory.split('/');
+				const defaultcategory1 = generalList[Number(count + 1)].defaultcategory.split('/');
 				for (let m = 0; m < defaultcategory1.length - 1; m++) {
 					let img_div1 = document.createElement('img');
 					img_div1.setAttribute('src', getContextPath() + '/resources/business/img/category/' + defaultcategory1[m] + '.jpg');
@@ -230,4 +233,4 @@ function createGeneral(generalList) {
 
 
 
-useEmdcode('26350105');	// ■ 테스트 코드! 나중에 지워야 한다!
+//useEmdcode('26350105');	// ■ 테스트 코드! 나중에 지워야 한다!
