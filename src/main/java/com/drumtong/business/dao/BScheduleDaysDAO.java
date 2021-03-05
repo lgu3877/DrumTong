@@ -33,5 +33,7 @@ public interface BScheduleDaysDAO {
 	// 영업중인지 체크하기(정기 휴무)
 	int isOpen(HashMap<String, String> param);
 
+	
+
 
 }

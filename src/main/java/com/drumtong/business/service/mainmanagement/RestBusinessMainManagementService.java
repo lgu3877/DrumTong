@@ -327,11 +327,16 @@ public class RestBusinessMainManagementService {
 	// ===== 중분류 [BSCHEDULETIME] 테이블 ==== { 매장 시간 관리 }
 	
 	// 0. 매장 시간관리를 비동기식으로 수정해주는 메서드입니다.
-	public int updateBScheduleTime(BScheduleTimeVO bScheduleTimeVO) {
-		
+	public int updateBScheduleTime(HttpServletRequest req, BScheduleTimeVO bScheduleTimeVO) {
+		HttpSession Session = req.getSession();
+ 	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+ 	    String estid = bInformationVO.getEstid();
+ 	    
+ 	    bScheduleTimeVO.setEstid(estid);
+	   
 		// 이 메서드는 기존에 온라인계약할 당시에 사용하는 메서드와 똑같이 사용되기 때문에 재사용합니다.
 		int RestUpdateBScheduleTimeReuslt = bScheduleTimeDAO.updateConstract(bScheduleTimeVO);
-
+		
 		return RestUpdateBScheduleTimeReuslt;
 	}	
 	

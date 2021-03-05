@@ -174,6 +174,8 @@ public class BusinessMainManagementService {
 		
 		if(checkEstStatus(req, "ScheduleManagement")) return mainMove(req, "ScheduleManagement");
 		
+		mav.addObject("bscheduletime", (new Gson().toJson(bScheduleTimeDAO.selectBScheduleTime(estid))));
+		
 		mav.addObject("bscheduledays", (new Gson().toJson(bScheduleDaysDAO.selectBScheduleDays(estid))));
 		
 		mav.addObject("btempsuspension", (new Gson().toJson(bTempSuspensionDAO.selectBTempSuspension(estid))));

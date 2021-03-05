@@ -49,9 +49,13 @@ for(let i =0; i< hourInputs.length; i++) {
 			buttonAM.style.backgroundColor = "#95e1d3";
 			buttonPM.style.backgroundColor = "navy";
 		} 
+		console.log(radioAM.checked);
+		console.log(radioPM.checked);
+	
 		
 	};
-
+	
+	
 }
 
 
@@ -294,7 +298,5 @@ function fullHours(inputs, buttons, radios) {
 	for(let i = 0; i < radios.length; i++) {
 		if(i === 0 || i === 3)
 			radios[i].checked = true;
-		else
-			radios[i].checked = false;
 	}
 }

@@ -3,9 +3,11 @@ package com.drumtong.business.dao;
 import java.util.HashMap;
 
 import com.drumtong.business.vo.BScheduleTimeVO;
+import com.google.gson.JsonElement;
 
+// [건욱]
 public interface BScheduleTimeDAO {
-
+	
 	
 	// 신규 데이터 등록
 	int insertSignUp(String ESTID);
@@ -17,10 +19,16 @@ public interface BScheduleTimeDAO {
 	// 영업중인지 체크하기(영업시간)
 	int isOpen(HashMap<String, String> param);
 
+	
+	//	매장 영업시간을 Select해주는 메서드입니다.
+	BScheduleTimeVO selectBScheduleTime(String estid);
+
+	
+
 
 
 	// =======================================REST=========================================
-
+	
 	
 
 }
