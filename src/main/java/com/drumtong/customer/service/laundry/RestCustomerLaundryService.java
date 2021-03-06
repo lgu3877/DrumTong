@@ -157,7 +157,7 @@ public class RestCustomerLaundryService {
 		map.put("memberid", memberid);
 		map.put("couponid", useCouponId);
 		
-		cCouponDAO.delete(map);
+		cCouponDAO.useCoupon(map);
 		
 		int result = bSalesDAO.insert(bSales);
 		
