@@ -1,6 +1,4 @@
 	var iconDiv = document.getElementById('iconDiv');
-	document.getElementById('crn').addEventListener('blur', checkBusinessNumber);
-	
     var container = document.querySelectorAll('form div.container');
 	
     // 페이지 완성되면 삭제할 예정
@@ -73,7 +71,13 @@
     	if(texation.value === 'null') {
     		texation.focus();
     		return false;
-    	} 
+    	}
+    	
+    	let crnmsg = document.getElementById('crnmsg');
+    	if(crnmsg.classList.contains('message-red') === true) {
+    		document.getElementById('crn').focus();
+    		return false;
+    	}
     	    	
 		// 사업자 등록증 삽입했는지 점검
 		for(j = 0; j < checkFile.length; j++){
@@ -103,10 +107,21 @@
 		if (!checkFile.value) {
 			//checkFile.focus();
 			return false;
-		}		
+		}
+		
+		let accountmsg = document.getElementById('accountmsg');
+		if(accountmsg.classList.contains('message-red') === true) {
+			document.getElementById('accountnum').focus();
+			return false;
+		}
+		
+				
 		nextButton();
     }
     
+    
+    // 사업자 번호에 입력할 때마다
+    document.getElementById('crn').addEventListener('blur', checkBusinessNumber);
     
 	// 사업자 번호 확인
 	function checkBusinessNumber() {
@@ -116,16 +131,19 @@
 		
 		if(crn === '') {
 			crnmsg.innerHTML = '사업자 번호를 입력해주세요'
-			crnmsg.style.color = 'red'
+			crnmsg.classList.add('message-red');
+			crnmsg.classList.remove('message-blue');
 		}
 		else if(regExp.test(crn) === false) {
 			crnmsg.innerHTML = 'OOO-OO-OOOOO 양식을 따라주세요';
-			crnmsg.style.color	 = 'red';
+			crnmsg.classList.add('message-red');
+			crnmsg.classList.remove('message-blue');
 			return false;
 		}
 		else if(regExp.test(crn) === true){
 			crnmsg.innerHTML = '사업자번호 인증 완료';
-			crnmsg.style.color = 'blue';
+			crnmsg.classList.remove('message-red');
+			crnmsg.classList.add('message-blue');
 		    return true;
 		}
 		
@@ -167,6 +185,34 @@
 		}		
 	}
 	
+	
+	// 계좌번호 입력할 때마다
+	document.getElementById('accountnum').addEventListener('blur', accountNumCheck);
+	
+	function accountNumCheck() {
+		let accountnum = document.getElementById('accountnum').value;
+		let regexp = /^[0-9]*$/
+		let accountmsg = document.getElementById('accountmsg');
+		
+				
+		if(accountnum === '') {
+			accountmsg.innerHTML = '계좌 번호를 입력해주세요'
+			accountmsg.classList.add('message-red');
+			accountmsg.classList.remove('message-blue');
+		}
+		else if(regexp.test(accountnum) === false) {
+			accountmsg.innerHTML = '숫자만 입력해주세요';
+			accountmsg.classList.add('message-red');
+			accountmsg.classList.remove('message-blue');
+			return false;
+		}
+		else if(regexp.test(accountnum) === true){
+			accountmsg.innerHTML = '계좌번호 인증 완료';
+			accountmsg.classList.remove('message-red');
+			accountmsg.classList.add('message-blue');
+		    return true;
+		}
+	}
 	
 	// 통장 사본 업로드 버튼 변할 때마다
 	document.getElementById('copyofbankbook').addEventListener('change', copyDiv);
@@ -275,3 +321,20 @@
     		}
     	});
  	}
+ 	
+ 	function contract4Check() {
+		let categories = document.querySelectorAll('.categoryDiv input');
+		let sumbit_count = 0;
+		for(let i = 0; i < categories.length; i++) {
+			if(categories[i].checked === true)
+				return true;
+			else
+				sumbit_count++;
+			
+			if(sumbit_count == categories.length) {
+				alert('카테고리를 한개이상 선택해주시길 바랍니다');
+				return false;
+			}
+		}
+		return false;
+	}

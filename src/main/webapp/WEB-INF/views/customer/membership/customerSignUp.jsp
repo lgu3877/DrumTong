@@ -18,7 +18,7 @@
           <div class="join-input">
           <img src="${cpath }/resources/customer/img/logo4.png" class="login-logo" />
           <form method="POST" id="loginForm" class="joinForm">
-            <input type="text" name="id" id="userid" class="join-input-boxs" placeholder="ID"  onblur="axGet(document.getElementById('userid').value)" maxlength="25">
+            <input type="text" name="id" id="userid" class="join-input-boxs" placeholder="ID"  onblur="axGet(document.getElementById('userid').value)" maxlength="25" autocomplete="off">
             <span class="idmsg" id="idmsg"></span>
             <input type="password" name="pw" id="userpw" class="join-input-boxs" placeholder="PW" />
             <span class="pwmsg" id="pwmsg"></span>
@@ -26,13 +26,13 @@
             <span class="pwmsg2" id="pwmsg2"></span>
             <hr />
             <span class="join-alert"></span>
-            <input type="text" name="name" id="username" class="join-input-boxs" placeholder="이름" />
+            <input type="text" name="name" id="username" class="join-input-boxs" placeholder="이름"  autocomplete="off"/>
             <select name="genderboolean" class="join-input-boxs">
               <option value="M">남성</option>
               <option value="W">여성</option>
             </select>
             <input type="date" max="9999-12-31" name="birth" id="userbirth" class="join-input-boxs" placeholder="생년월일" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" />
-            <input type="text" name="phonenum" id="usertel" class="join-input-boxs" placeholder="-을 넣어주세요." />
+            <input type="text" name="phonenum" id="usertel" class="join-input-boxs" placeholder="-을 넣어주세요."  autocomplete="off"/>
             <input type="button" value="인증하기" id="checkTel" class="join-input-buttons" />
             <span class="telmsg" id="telmsg"></span>
             <div class="checkTelNotice">
@@ -41,11 +41,11 @@
                 <li>인증번호가 도착하지 않을 경우 '인증번호 재전송'을 눌러주세요.</li>
               </ul>
             </div>
-            <input type="text" name="email" id="email" class="join-input-boxs" placeholder="E-mail" />
+            <input type="text" name="email" id="email" class="join-input-boxs" placeholder="E-mail"  autocomplete="off"/>
             <span class="emailmsg" id="emailmsg"></span>
             <input type="text" name="mainaddress" id="zipcode" class="join-input-boxs" placeholder="우편번호(집주소)" readonly/>
             <input type="button" value="주소찾기" onclick="searchAddress(document.getElementById('zipcode'),document.getElementById('address'),document.getElementById('emdcodeTMP'), null, null)" id="findZipcode" class="join-input-buttons" />
-            <input type="text" name="detailaddress" id="address" class="join-input-boxs" placeholder="상세주소(집주소)" />
+            <input type="text" name="detailaddress" id="address" class="join-input-boxs" placeholder="상세주소(집주소)"  autocomplete="off"/>
 	            <input type="hidden" name="emdcodeTMP" id="emdcodeTMP" class="join-input-boxs" />
             <input type="checkbox" name="checkAddress" id="checkAddress" checked onchange="sameAddress()">배송지 동일
             <div id="sameAddress" style="display:none">

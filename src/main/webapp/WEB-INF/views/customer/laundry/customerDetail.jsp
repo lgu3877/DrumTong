@@ -31,59 +31,7 @@
  	<!-- 스크립트 영역 -->
     <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail.js"></script>
-   	
-    <script>
-      function checkAgree(){
-    	  let radio = document.getElementById('agree');
-    	  if(!radio.checked){
-    		alert('약관에 동의를 체크해주세요');
-      		return false;
-    	  } else{
-      		return true;
-    	  }
-      }
-      function orderListSettings(){
-        selecteds = document.querySelectorAll('.selected-row');
-        orderMap = new Array();
-        for (i = 0; i < selecteds.length; i++) {
-        	let oneSelect = selecteds[i];
-            optionKey_1 = oneSelect.firstChild.children[0].innerText.split('/');
-            optionKey_2 = oneSelect.firstChild.children[1].innerText.split('/');
-            optionKey_3 = oneSelect.children[1].value;
-            optionKey_4 = oneSelect.children[2].innerText.split('원')[0];
-            quickCheck = oneSelect.children[3].children[0];
-            optionKey_5 = quickCheck.checked ? quickCheck.value : '0';
-            
-            order = {
-              maincategory : optionKey_1[0],
-              subcategory : optionKey_1[1],
-              name : optionKey_2[0],
-              amount : optionKey_3,
-              menuprice : optionKey_4,
-              sumprice : parseInt(optionKey_3) * parseInt(optionKey_4),
-              quickprice : optionKey_5,
-            };
-            orderMap.push(order);
-            
-         }
-        return orderMap;
-      }
-      async function submit() {
-    	if(!checkAgree()) return false; // 동의합니다 체크 여부
-    	
-        let paramList = {};
-    	
-        paramList['orderMap'] = orderListSettings();
-        
-		console.log(paramList);
-		
-		// 수거, 배송 체크, 쿠폰 사용, 희망날짜
-		
-		const {data} = await axios.post('/drumtong/customer/laundry/customerDetail/rest/submit/', paramList);
-		
-		console.log(data);
-      } //submit 체크 함수 종료
-    </script>
+    <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail/customerDetail-submit.js"></script>
 
 </head>
     
@@ -339,6 +287,7 @@
     <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail/detail-modal.js"></script>
     <script>
 //     	총 정리
+		var estid = '${estid}';
 		cLogin = '${cLogin}';
 		checkLogin = cLogin !== ''; // 로그인 했을 땐 true, 로그인 안되어있을 땐 false
 		
@@ -360,7 +309,9 @@
        var modalContent2 = document.getElementById('modal-content2');   // 결제 화면
        var modalContent3 = document.getElementById('modal-content3');   // 로그인 화면
        var modalContent4 = document.getElementById('modal-content4');   // 리뷰 화면
-
+       var modalContent5 = document.getElementById('modal-content5');   // 리뷰 이미지 클릭 화면
+	   var modalContent5_exit = document.getElementById('modal-content5-exit');
+       
        // Get the button that opens the modal
        var btn1 = document.getElementById('add-coupon');
        var btn2 = document.getElementById('order-submit');
@@ -460,7 +411,7 @@
 	 	       }
 	 	      btn6.onclick = function(){
 	 	    	 if(checkLoginBoolean){
-	 	    		addBookmark('${estid}');
+	 	    		addBookmark(estid);
 	 	    	 } else {
 	 	    		openModal(modalContent3 , 'flex');
 	 	    	 }

@@ -724,7 +724,7 @@ div.subButton:hover{
 }
 
 .modal-content5 {
-  width: 600px;
+  width: auto;
   height: 80%;
   position: fixed;
   left: 800px;

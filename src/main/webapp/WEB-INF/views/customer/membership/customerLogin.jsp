@@ -33,7 +33,7 @@
           <img src="${cpath }/resources/customer/img/logo4.png" class="login-logo" />
           <div class="login-alert">메세지</div>
           <div class="login-input">
-            <input type="text" name="id" id="userid" class="login-input-boxs" onkeyup="loginEnter()"/>
+            <input type="text" name="id" id="userid" class="login-input-boxs" onkeyup="loginEnter()"  autocomplete="off"/>
             <input type="password" name="pw" id="userpw" class="login-input-boxs"  onkeyup="loginEnter()"/>
 
             <div class="login-check">
