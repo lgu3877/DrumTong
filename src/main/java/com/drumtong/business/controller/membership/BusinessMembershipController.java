@@ -74,6 +74,11 @@ public class BusinessMembershipController {
 		return svc.pwReconfirm();
 	}
 	
+	// 사업자 계정 정보 관리 이동 (POST) [건욱]
+	@RequestMapping(value = "businessAccountInfo/", method = RequestMethod.GET)
+	public ModelAndView businessAccountInfo() {
+		return svc.businessAccountInfo();
+	}
 	
 	// 사업자 계정 정보 관리 이동 (POST) [건욱]
 	@RequestMapping(value = "businessAccountInfo/", method = RequestMethod.POST)

@@ -137,8 +137,12 @@ public class BusinessMembershipService {
 		return mav;
 	}
 	
-
-
+	// 사업자 개인정보 수정  (GET) [건욱]
+	public ModelAndView businessAccountInfo() {
+		ModelAndView mav = new ModelAndView("business/membership/businessAccountInfo");
+		return mav;
+	}
+	
 	// 사업자 계약해지 & 패스워드 재확인 이동 (GET) [건욱]
 	public ModelAndView pwReconfirm() {
 		ModelAndView mav = new ModelAndView("business/membership/businessPWReconfirm");
@@ -238,6 +242,8 @@ public class BusinessMembershipService {
 	public ModelAndView pwChange() {
 		return new ModelAndView("redirect:/business/");
 	}
+
+
 	
 	
 }
