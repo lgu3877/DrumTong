@@ -57,10 +57,10 @@
 				WHERE TO_DATE(SUBSTR(PERIOD,14),'YYYY-MM-DD') <![CDATA[>=]]>  TO_DATE(SYSDATE, 'YY/MM/DD')) a 
 				INNER JOIN CCOUPON cc 
 				ON cc.COUPONID = a.COUPONID 
-				WHERE cc.MEMBERID=#{memberid} AND USEBOOLEAN='Y'
+				WHERE cc.MEMBERID=#{memberid} AND USEBOOLEAN='N'
 	</select>
 	
-	<update id="updateDownload" parameterType="String">
-		UPDATE BCOUPON SET ISSUENUM = ISSUENUM + 1 WHERE COUPONID=#{couponid} AND ((MAXISSUENUM <![CDATA[<>]]> 0 AND ISSUENUM <![CDATA[<]]> MAXISSUENUM) OR MAXISSUENUM = 0)
+	<update id="updateDownload" parameterType="hashmap">
+		UPDATE BCOUPON SET ISSUENUM =(ISSUENUM + 1) WHERE COUPONID=#{couponid} AND ((MAXISSUENUM != 0 AND ISSUENUM <![CDATA[<]]> MAXISSUENUM) OR MAXISSUENUM = 0)
 	</update>
 </mapper>

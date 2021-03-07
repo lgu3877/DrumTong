@@ -10,6 +10,6 @@ public interface CCouponDAO {
 	
 	int insertCoupon(HashMap<String, String> param);
 
-	int delete(HashMap<String, String> map);
+	int useCoupon(HashMap<String, String> map);
 
 }
