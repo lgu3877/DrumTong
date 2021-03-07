@@ -53,5 +53,11 @@ public class BusinessMainController {
 	public ModelAndView businessManual(HttpServletRequest req) {
 		return svc.businessManual(req);
 	}
+	
+	// 비즈니스 1차 메뉴얼 페이지로 이동 (GET) [건욱]
+	@RequestMapping(value = "businessSelectManual/", method = RequestMethod.GET)
+	public ModelAndView businessSelectManual(HttpServletRequest req) {
+		return svc.businessSelectManual(req);
+	}
 
 }

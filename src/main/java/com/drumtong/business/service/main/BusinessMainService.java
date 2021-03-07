@@ -68,6 +68,12 @@ public class BusinessMainService {
 		ModelAndView mav = new ModelAndView("business/main/businessManual");
 		return mav;
 	}
+
+	// 비즈니스 1차 메뉴얼 페이지로 이동 (GET) [건욱]
+	public ModelAndView businessSelectManual(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView("business/main/businessSelectManual");
+		return mav;
+	}
 	
 	
 
