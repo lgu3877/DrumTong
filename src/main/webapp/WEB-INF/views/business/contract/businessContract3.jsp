@@ -5,15 +5,16 @@
 
     <div class="c3-input">
     	<h1>은행사</h1>
-		<input type="text" placeholder="은행사를 입력하세요" name="accountbank" id="accountbank" required readonly style="height: 40px; width: 300px;">
-		<input type="button" id="bank-modal-button" value="은행 찾기" style="height: 46px; width: 100px; margin-left: 10px">
+		<input type="text" placeholder="은행사를 입력하세요" name="accountbank" id="accountbank" required readonly>
+		<input type="button" id="bank-modal-button" value="은행 찾기">
     </div>    
 
     <div class="c3-input">
     	<h1>계좌번호</h1>
-    	<input type="text" placeholder="계좌번호를 입력하세요" name="accountnum" id="accountnum" 
-    	maxlength="20" required style="height: 40px; width: 410px">
+    	<input type="text" placeholder="계좌번호를 입력하세요" name="accountnum" id="accountnum"  autocomplete="off" maxlength="20" required>
     </div>
+    
+    <div id="accountmsg" class="message"></div>
     
     <div  class="c3-input">
     	<h1>통장사본</h1>
@@ -23,7 +24,7 @@
     </div>
     
     <div id="copydiv">
-    	<img id="copy-space" width="600px" style="margin-top: 15px; margin-bottom: 15px">
+    	<img id="copy-space" width="600px">
     </div>
     
     <div id="modal" style="display: none;">
@@ -38,6 +39,6 @@
     	<a class="modal-close">닫기</a>
     </div>
     
-
+	<input type="button" class="next" onclick="prevButton()" value=" P R E V ">	
 	<input type="button" class="next" onclick="contract3Check(this)" value=" N E X T ">
 </div>

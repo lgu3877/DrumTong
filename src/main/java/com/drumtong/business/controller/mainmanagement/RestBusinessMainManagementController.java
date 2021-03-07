@@ -183,11 +183,11 @@ public class RestBusinessMainManagementController {
 	// ===== 중분류 [BSCHEDULETIME] 테이블 ==== { 매장 시간 관리 }
 	
 	// 0. 매장 시간관리를 비동기식으로 수정해주는 메서드입니다.
-	@RequestMapping("BScheduleTime/rest/updateBScheduleTime/{param}")
-	@GetMapping(produces = "application/json; charset=utf8")
-	public String updateBScheduleTime(@PathVariable("param") BScheduleTimeVO bScheduleTimeVO) {
+	@RequestMapping("BScheduleTime/rest/updateBScheduleTime/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String updateBScheduleTime(HttpServletRequest req, @RequestBody BScheduleTimeVO bScheduleTimeVO) {
 
-		int result = svc.updateBScheduleTime(bScheduleTimeVO);
+		int result = svc.updateBScheduleTime(req, bScheduleTimeVO);
 		System.out.println(result + " : result 값 입니다");
 		return result == 1 ? "true" : "false";
 	}	

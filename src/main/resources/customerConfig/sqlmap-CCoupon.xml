@@ -20,4 +20,11 @@
 		(#{memberid}, #{couponid})
 	</insert>
 	
+	<update id="useCoupon">
+		UPDATE CCOUPON SET 
+			USEBOOLEAN='Y' 
+				WHERE MEMBERID =#{memberid} 
+			AND COUPONID=#{couponid}
+	</update>
+	
 </mapper>

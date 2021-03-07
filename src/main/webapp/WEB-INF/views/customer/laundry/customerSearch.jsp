@@ -85,7 +85,7 @@
             <div class="laundryList_list">
 
                 <div class="laundryList_sum">
-                    <p>전체 세탁소 800개</p>
+                    <p>전체 세탁소 <span id="total-laundry"></span>개</p>
                     <hr class="sum_hr">
                 </div>
 
@@ -216,7 +216,14 @@
 					if (counts.length > 6) {
 						more.style.display = 'block';
 					}
-					
+		let filters = document.querySelectorAll('.filter_op');
+		
+		for(let f = 0; f < filters.length; f++) {
+			filters[f].addEventListener('change', function() {
+				selectLaundry(1);
+			})
+		}
+		
 	</script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/selectLaundryList.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-main.js"></script>

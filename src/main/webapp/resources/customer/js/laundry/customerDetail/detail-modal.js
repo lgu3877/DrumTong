@@ -18,6 +18,7 @@
 				$('.detailview-review-row').find('.review-context').html(reviewList[i].ccontent);
 				$('.detailview-review-row').find('.orderListMsg').html(reviewList[i].orderListMsg + 
 							'<span class="orderList-hide">' + reviewList[i].orderList + '</span>');
+				document.querySelectorAll('.detailview-review-row' + ' .orderListMsg')[i].title = reviewList[i].orderList;
 				
 				// 고객이 업로드한 프로필 이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
 				if(typeof reviewList[i].profileimg === typeof undefined) {
@@ -55,10 +56,9 @@
 				beforerow.next().attr('id', 'review' + i);
 				beforerow.next().find('.customerName').html(reviewList[i].customerName);
 				beforerow.next().find('.review-context').html(reviewList[i].ccontent);
-				beforerow.next().find('.orderListMsg').html(reviewList[i].orderListMsg);
 				beforerow.next().find('.orderListMsg').html(reviewList[i].orderListMsg + 
 							'<span class="orderList-hide">' + reviewList[i].orderList + '</span>');
-				
+				document.querySelectorAll('.detailview-review-row' + ' .orderListMsg')[i].title = reviewList[i].orderList;
 				
 				// 고객이 업로드한 프로필 이미지 -> 만약 올리지 않았다면 undefined 자료형으로 반환함
 				if(typeof reviewList[i].profileimg === typeof undefined) {
@@ -77,6 +77,7 @@
 					beforerow.next().find('.review-reviewimg').css("display", "");
 					beforerow.next().find('.review-reviewimg img').attr("src",
 							"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + reviewList[i].reviewimg);
+					beforerow.next().find('.review-reviewimg img').attr("onclick", "ActiveModal5('" + reviewList[i].reviewimg + "')");		
 				}
 						
 				
@@ -125,8 +126,6 @@
  	 		$('#review' + i).find('.mgood').html('좋아요 ' + reviewList[i].mgood + ' ·&nbsp');
  	 		$('#review' + i).find('.visit').html('방문수 ' + reviewList[i].visits + ' ·&nbsp');
  	 		$('#review' + i).find('.gpa').html('&nbsp평점 ' + reviewList[i].gpa);
- 	 		$('#review' + i).find('.reviewOrderList').html('&nbsp' + reviewList[i].orderListMsg);
- 	 		document.querySelector('#review' + i + ' .reviewOrderList').title = reviewList[i].orderList;
  	 		
 	 		if(reviewList[i].bcontent != '-') {
 	 			console.log('사장님 댓글이 달려있습니다.');

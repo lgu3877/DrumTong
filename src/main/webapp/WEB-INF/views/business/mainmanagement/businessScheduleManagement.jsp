@@ -42,11 +42,11 @@
 		// 정기휴무
 		const initialRegHoliday = ${bscheduledays};
 		delete initialRegHoliday.holiday;
-
+		const bscheduletime = ${bscheduletime}
+		console.log(bscheduletime);
 		let bscheduledays = ${bscheduledays};
 		const holiday = bscheduledays.holiday; // holiday > 'Y' or 'N'
 		delete bscheduledays.holiday; // holiday 삭제
-		
 		// 임시휴무
 		let btempsuspension = ${btempsuspension};
 
@@ -104,7 +104,7 @@
 					<div class="btn_con">
 					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
 					<c:if test="${status eq 'SUCCESS' }">
-						<div id="complete-working-hour" class="btn update_btn">
+						<div id="complete-working-hour" class="btn update_btn" onclick="updateScheduleTime()">
 							<div class="icon_con">
 								<i class="fas fa-check-square"></i>
 							</div>
@@ -167,15 +167,15 @@
 						</ul>
 						<ul class="input_time_con">
 						<!-- mon ~ fri -->
-							<li class="time_range">
+							<li class="time_range" id="weekday">
 							<!-- from -->
 								<div class="time_zone_con">
 									<div>
-										<input class="time_zone_input" type="radio" name="since" value="daytime">
+										<input class="time_zone_input" type="radio" name="weekdaySince" value="daytime">
 										<button class="btn time_zone_btn border_r">오전</button>
 									</div>
 									<div>
-										<input class="time_zone_input" type="radio" name="since" value="nighttime">
+										<input class="time_zone_input" type="radio" name="weekdaySince" value="nighttime">
 										<button class="btn time_zone_btn border_l">오후</button>
 									</div>
 								</div>
@@ -187,11 +187,11 @@
 							<!-- to -->
 								<div class="time_zone_con">
 									<div>
-										<input class="time_zone_input" type="radio" name="until" value="daytime">
+										<input class="time_zone_input" type="radio" name="weekdayUntil" value="daytime">
 										<button class="btn time_zone_btn border_r">오전</button>
 									</div>
 									<div>				
-										<input class="time_zone_input" type="radio" name="until" value="nighttime">
+										<input class="time_zone_input" type="radio" name="weekdayUntil" value="nighttime">
 										<button class="btn time_zone_btn border_l">오후</button>
 									</div>
 								</div>
@@ -207,15 +207,15 @@
 							
 							
 						<!-- sat -->
-							<li class="time_range">
+							<li class="time_range" id="saturday">
 							<!-- from -->
 								<div class="time_zone_con">
 									<div>
-										<input class="time_zone_input" type="radio" name="since" value="daytime">
+										<input class="time_zone_input" type="radio" name="saturdaySince" value="daytime">
 										<button class="btn time_zone_btn border_r">오전</button>
 									</div>
 									<div>
-										<input class="time_zone_input" type="radio" name="since" value="nighttime">
+										<input class="time_zone_input" type="radio" name="saturdaySince" value="nighttime">
 										<button class="btn time_zone_btn border_l">오후</button>
 									</div>
 								</div>
@@ -227,11 +227,11 @@
 							<!-- to -->
 								<div class="time_zone_con">
 									<div>
-										<input class="time_zone_input" type="radio" name="until" value="daytime">
+										<input class="time_zone_input" type="radio" name="saturdayUntil" value="daytime">
 										<button class="btn time_zone_btn border_r">오전</button>
 									</div>
 									<div>				
-										<input class="time_zone_input" type="radio" name="until" value="nighttime">
+										<input class="time_zone_input" type="radio" name="saturdayUntil" value="nighttime">
 										<button class="btn time_zone_btn border_l">오후</button>
 									</div>
 								</div>
@@ -247,15 +247,15 @@
 							
 							
 						<!-- sun -->	
-							<li class="time_range">
+							<li class="time_range" id="sunday">
 								<!-- from -->
 								<div class="time_zone_con">
 									<div>
-										<input class="time_zone_input" type="radio" name="since" value="daytime">
+										<input class="time_zone_input" type="radio" name="sundaySince" value="daytime">
 										<button class="btn time_zone_btn border_r">오전</button>
 									</div>
 									<div>
-										<input class="time_zone_input" type="radio" name="since" value="nighttime">
+										<input class="time_zone_input" type="radio" name="sundaySince" value="nighttime">
 										<button class="btn time_zone_btn border_l">오후</button>
 									</div>
 								</div>
@@ -267,11 +267,11 @@
 							<!-- to -->
 								<div class="time_zone_con">
 									<div>
-										<input class="time_zone_input" type="radio" name="until" value="daytime">
+										<input class="time_zone_input" type="radio" name="sundayUntil" value="daytime">
 										<button class="btn time_zone_btn border_r">오전</button>
 									</div>
 									<div>				
-										<input class="time_zone_input" type="radio" name="until" value="nighttime">
+										<input class="time_zone_input" type="radio" name="sundayUntil" value="nighttime">
 										<button class="btn time_zone_btn border_l">오후</button>
 									</div>
 								</div>
@@ -575,6 +575,7 @@
 	</script>
 	
 	<!-- 영업시간 -->
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/businessScheduleManagementScheduleTime.js"></script>
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/interface.js"></script>
 	
 	<!-- 달력 -->
@@ -591,5 +592,8 @@
 	
 	<!-- 업데이트 -->
 	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/update.js"></script>
+	
+	<!-- 예외처리 -->
+	<script type="text/javascript" src="${cpath }/business/js/scheduleManagement/businessScheduleManagementExceptionCheck.js"></script>
 </body>
 </html>

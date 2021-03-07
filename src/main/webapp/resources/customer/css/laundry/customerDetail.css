@@ -455,6 +455,7 @@ div.subButton:hover{
   margin-bottom: 10px;
   width: 560px;
   padding-left: 15px;
+  border-bottom: 1px solid #EAEAEA;
 }
 
 .review-head {
@@ -723,7 +724,7 @@ div.subButton:hover{
 }
 
 .modal-content5 {
-  width: 600px;
+  width: auto;
   height: 80%;
   position: fixed;
   left: 800px;

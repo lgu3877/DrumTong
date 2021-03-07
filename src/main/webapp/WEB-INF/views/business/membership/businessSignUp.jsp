@@ -23,6 +23,8 @@
 	<!-- icon -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 	
+	<!-- 다음 주소 검색 script function -->
+	<%@ include file="/resources/daumAddressSearch/daumAddressSearch.jsp" %>
 </head>
 
 <body>
@@ -73,11 +75,11 @@
 	<hr>
 	</div>
 	
-	<div class="marginauto" style="width: 40%; height: 50%; min-width: 500px;">
+	<div class="marginauto" style="width: 40%; height: auto; min-width: 500px;">
 		<form class="marginauto signup" id="loginForm" method="POST" onsubmit="return AgreeCheck();">
 			<div>
 				<div class="table"><div class="cell">&nbsp아&nbsp이&nbsp디</div></div> 
-				<input type="text" name="id" id="userid" onblur="axGet(document.getElementById('userid').value)" placeholder="ID" required maxlength="25">
+				<input type="text" name="id" id="userid" onblur="axGet(document.getElementById('userid').value)" placeholder="ID" required maxlength="25" autocomplete="off">
 			</div>
 			<div id="useridmsg" class="message"></div>
 			<div>
@@ -93,7 +95,7 @@
 			<hr>
 			<div>
 				<div class="table"><div class="cell">&nbsp이&nbsp&nbsp&nbsp&nbsp&nbsp름</div></div>
-				<input type="text" name="name" placeholder="NAME" required maxlength="20">
+				<input type="text" name="name" placeholder="NAME" required maxlength="20" autocomplete="off">
 			</div>
 			<div>
 				<div class="table"><div class="cell">생년월일</div></div>
@@ -109,7 +111,7 @@
             <div class="pass">
             	<h1>휴대폰 인증</h1>
             	<div>
-            		<input type="text" name="phonenum" id="phone" placeholder="-을 넣어주세요." style="width: 70%" required/>
+            		<input type="text" name="phonenum" id="phone" placeholder="-을 넣어주세요." style="width: 70%" required autocomplete="off"/>
             		<input type="button" value="인증하기" id="checkphone" style="width: 25%"/>
             	</div>
             </div>
@@ -123,17 +125,17 @@
             <hr>
             <div>
             	<div class="table"><div class="cell">사업번호</div></div>
-            	<input type="text" name="delegatecrn" id="delegatecrn" placeholder="Delegatecrn" required>
+            	<input type="text" name="delegatecrn" id="delegatecrn" placeholder="Delegatecrn" required autocomplete="off">
             </div>
             <div id="delegatecrnmsg" class="message"></div>            
             	<div>
             	<ul>
-                <li>사업번호 양식 ex) 123-45-67890</li>
+                	<li>사업번호 양식 ex) 123-45-67890</li>
              	 </ul>
             	</div>
             <div>
             	<div class="table"><div class="cell">&nbsp이&nbsp메&nbsp일</div></div>
-            	<input type="text" name="email" id="email" placeholder="Email" required maxlength="50">
+            	<input type="text" name="email" id="email" placeholder="Email" required maxlength="50" autocomplete="off">
             </div>
             <div id="emailmsg" class="message"></div> 
             <div class="pass">
@@ -142,10 +144,11 @@
             		<!-- Reandonly, Disabled : input 작성 방지 기능 -->
             		<!-- Readonly는 form으로 전송가능하지만, disabled 는 form으로 어떤 값도 전송되지 못한다 -->
             		<input type="text" name="mainaddress" id="mainaddress" placeholder="우편번호" style="width: 70%" readonly required/>
-            		<input type="button" value="주소찾기" id="checkTel" style="width: 25%" onclick="searchAddress()"/>
+            		<input type="button" value="주소찾기" id="checkTel" style="width: 25%" onclick="searchAddress(document.getElementById('mainaddress'), document.getElementById('detailaddress'),document.getElementById('emdcode'),null,null)"/>
             	</div>
             	<div>
             		<input id="detailadress" name="detailaddress" type="text" placeholder="나머지 주소를 입력하세요" style="width: 100%" required maxlength="15">
+            		<input id="emdcode" name="emdcode" type="hidden">
             	</div>
             </div>
             <div>

@@ -84,5 +84,10 @@ public class RestCustomerLaundryController {
 		return svc.selectBInformationCoord();
 	}
 		
-	
+	// 디테일 페이지 결제하기 [영경]
+	@RequestMapping("customerDetail/rest/submit/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String submitDetail(HttpServletRequest req, @RequestBody HashMap<String, Object> param) {
+		return svc.submitDetail(req, param);
+	}
 }

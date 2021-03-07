@@ -63,6 +63,9 @@
 				$.each(emd_datas, function(index, item) {
 					emd_coordinates = item.geometry.coordinates;
 					emd_nm = item.properties.EMDNAME;
+//					if(emd_nm == '명지동') {
+//						console.log('index : ' + index);
+//					}
 					emd_num = item.properties.EMDNUM;		// EMDCODE로 수정
 					emddisplayArea(emd_coordinates, emd_nm, emd_num, view_emd_nm, object);
 				});
@@ -73,11 +76,12 @@
 	function emddisplayArea(coordinates, name, pknum, viewname, object) {
 		let emd_path = [];		// 폴리곤을 구성하는 모든 좌표를 임시로 담아두는 공간
 								// 폴리곤을 생성하는 kakao.maps.Polygon 에서 한번에 넣어준다 -> path
-		
+				
 		if(name != viewname)	// 함수 속조 증가를 위해서 추가함 -> 클릭한 읍면동이 아니면 함수 종료
 			return false;
 		
 		deletePlygons();
+		useEmdcode(pknum);		// 좌측 리스트가 나오는 공간에 해당 읍면동의 리스트를 나타냄 
 		
 		$.each(coordinates[0][0], function(index1, coordinate) { //console.log(coordinates)를 확인해보면 보면 [0]번째에 배열이 주로 저장이 됨.  그래서 [0]번째 배열에서 꺼내줌.
 			emd_path.push(new kakao.maps.LatLng(coordinate[1], coordinate[0])); //new daum.maps.LatLng가 없으면 인식을 못해서 path 배열에 추가
@@ -131,13 +135,6 @@
 		object.setAttribute("onClick", "deletePolygon(this)");
 	}
 	
-	function deletePolygon(object) {			// 활성화된 폴리곤을 클릭했을 때 해당 폴리곤 지우기
-		deletePlygons();
-		polygonoverlay.setMap(null);
-		emdinfowindow.setMap(null);
-		object.setAttribute("onClick", "emdPolygon(this)");
-	}
-	
 	function deleteEmd() {							// 레벨변경이나 화면이동시 폴리곤 삭제하기
 		deletePlygons();
 		polygonoverlay.setMap(null);
@@ -149,6 +146,16 @@
 			polygons[i].setMap(null);		// 전역변수에 저장해준 읍면동 폴리곤을 삭제
 		}
 		polygons.length = 0;
+	}
+	
+	function deletePolygon(object) {			// 활성화된 폴리곤을 클릭했을 때 해당 폴리곤 지우기
+		deletePlygons();
+		polygonoverlay.setMap(null);
+		emdinfowindow.setMap(null);
+		object.setAttribute("onClick", "emdPolygon(this)");
+		
+		let emd_bounds = map.getBounds();
+		useCoordinates(emd_bounds.getSouthWest(), emd_bounds.getNorthEast());	// 읍면동 선택을 취소했으니 다시 읍면동 범위를 활성화시켜야지
 	}
 	
 	function zindexup(object) {		// 읍면동 마커에 마우스를 올리면 제일 위로 올려줌

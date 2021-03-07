@@ -494,7 +494,7 @@
 	position: relative;
 	display: block;
     margin-right: 20px;
-    background-color: #f38181;
+    background-color: #D6F0FF;
     border: none;
     width: 200px;
     height: 250px;
@@ -565,7 +565,8 @@
 
 .h_day {
 	font-size: 13pt;
-    color: white;
+    color: #4C4C4C;
+    font-weight : bolder;
 	letter-spacing: 2px;
 }
 

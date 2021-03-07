@@ -41,6 +41,7 @@ import com.drumtong.business.vo.BScheduleDaysVO;
 import com.drumtong.business.vo.BScheduleTimeVO;
 import com.drumtong.business.vo.BTempHolidayVO;
 import com.drumtong.business.vo.BTempSuspensionVO;
+import com.drumtong.map.dao.MEmdDAO;
 import com.drumtong.map.dao.MSidoDAO;
 import com.drumtong.security.AddressListSetting;
 import com.drumtong.security.AwsServiceImpl;
@@ -76,6 +77,7 @@ public class BusinessMainManagementService {
 	
 	// 지역 데이터 DAO
 	@Autowired MSidoDAO mSidoDAO;
+	@Autowired MEmdDAO mEmdDAO;
 	
 	// 비즈니스 매장관리 페이지로 이동 (GET) [건욱]
 	public ModelAndView shopManagement(HttpServletRequest req) {
@@ -172,6 +174,8 @@ public class BusinessMainManagementService {
 		
 		if(checkEstStatus(req, "ScheduleManagement")) return mainMove(req, "ScheduleManagement");
 		
+		mav.addObject("bscheduletime", (new Gson().toJson(bScheduleTimeDAO.selectBScheduleTime(estid))));
+		
 		mav.addObject("bscheduledays", (new Gson().toJson(bScheduleDaysDAO.selectBScheduleDays(estid))));
 		
 		mav.addObject("btempsuspension", (new Gson().toJson(bTempSuspensionDAO.selectBTempSuspension(estid))));
@@ -217,7 +221,7 @@ public class BusinessMainManagementService {
 									   BManagementVO bManagementVO, 
 									   BMenuListVO bMenuVOList, 	
 									   String[] bDeliveryAreaList, BInformationVO bInformationVO) {
-		ModelAndView mav = new ModelAndView("business/mainmanagement/businessScheduleManagement");
+		ModelAndView mav = new ModelAndView("redirect:/business/mainmanagement/businessScheduleManagement/");
 		
 		HttpSession Session = req.getSession();
 		
@@ -282,6 +286,23 @@ public class BusinessMainManagementService {
 		System.out.println("latitude : " + bInformationVO.getLatitude());
 		System.out.println("Longitude : " + bInformationVO.getLongitude());
 		System.out.println("EMDCODE : " + bInformationVO.getEmdcode());
+		
+		// * 여기서 EMDCODE의 COUNT란? drumtongMap(지도 DB)에 지역이 가지고있는 고유 번호가 있다. 각각의 지역에는 Count라는 필드가 존재하는데 읍면동 단위에서 
+		// 1. 현재 EMDCODE를 BInformation 테이블에서 가져온다.
+		String previousEMDCode  = bInformationDAO.selectEMDCode(estid);
+		
+		// 바꾸어진 코드에 지역이동이 있다면 Count를 변경 시켜준다.
+		if(!previousEMDCode.equals(bInformationVO.getEmdcode())) {
+			// 2. 현재 EMDCODE에 해당하는 지역의 Count를 -1 시켜준다.
+			int delCountResult = mEmdDAO.delCount(previousEMDCode);
+			
+			// 3. 새로 추가된 EMDCODE에 해당하는 지역의 Count를 +1 시켜준다.
+			int addCountResul = mEmdDAO.addCount(bInformationVO.getEmdcode());
+			
+		}
+		
+		
+		
 		bInformationVO.setEstid(estid);
 		bInformationDAO.updateLocation(bInformationVO);
 		

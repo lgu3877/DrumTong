@@ -220,6 +220,27 @@ public class RestBusinessMainManagementService {
 		bInformationVO.setEstid(estid);
 		
 		
+		// * 여기서 EMDCODE의 COUNT란? drumtongMap(지도 DB)에 지역이 가지고있는 고유 번호가 있다. 각각의 지역에는 Count라는 필드가 존재하는데 읍면동 단위에서 
+		// 1. 현재 EMDCODE를 BInformation 테이블에서 가져온다.
+		String previousEMDCode  = bInformationDAO.selectEMDCode(estid);
+		
+		System.out.println("previousEMDCode : "  + previousEMDCode);
+		
+		System.out.println("bInformationVO.getEmdcode() : " + bInformationVO.getEmdcode());
+		
+		// 바꾸어진 코드에 지역이동이 있다면 Count를 변경 시켜준다.
+		if (!previousEMDCode.equals(bInformationVO.getEmdcode())) {
+			
+			System.out.println("실해애앵");
+			
+			// 2. 현재 EMDCODE에 해당하는 지역의 Count를 -1 시켜준다.
+			int delCountResult = mEmdDAO.delCount(previousEMDCode);
+
+			// 3. 새로 추가된 EMDCODE에 해당하는 지역의 Count를 +1 시켜준다.
+			int addCountResul = mEmdDAO.addCount(bInformationVO.getEmdcode());
+
+		}
+		
 		int RestInsertBMenuReuslt = bInformationDAO.updateLocation(bInformationVO);
 		return RestInsertBMenuReuslt;
 	}
@@ -306,11 +327,16 @@ public class RestBusinessMainManagementService {
 	// ===== 중분류 [BSCHEDULETIME] 테이블 ==== { 매장 시간 관리 }
 	
 	// 0. 매장 시간관리를 비동기식으로 수정해주는 메서드입니다.
-	public int updateBScheduleTime(BScheduleTimeVO bScheduleTimeVO) {
-		
+	public int updateBScheduleTime(HttpServletRequest req, BScheduleTimeVO bScheduleTimeVO) {
+		HttpSession Session = req.getSession();
+ 	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+ 	    String estid = bInformationVO.getEstid();
+ 	    
+ 	    bScheduleTimeVO.setEstid(estid);
+	   
 		// 이 메서드는 기존에 온라인계약할 당시에 사용하는 메서드와 똑같이 사용되기 때문에 재사용합니다.
 		int RestUpdateBScheduleTimeReuslt = bScheduleTimeDAO.updateConstract(bScheduleTimeVO);
-
+		
 		return RestUpdateBScheduleTimeReuslt;
 	}	
 	

@@ -5,7 +5,7 @@
 
     <div class="c2-input">
    		<h1>사업자번호</h1>
-    	<input type="text" placeholder="-를 포함하여 입력하세요" name="crn" id="crn" required>
+    	<input type="text" placeholder="-를 포함하여 입력하세요" name="crn" id="crn" required autocomplete="off">
     </div>
 
     <div id="crnmsg" class="message"></div>
@@ -24,11 +24,11 @@
 
     <div  class="c2-input">
     	<h1>상호명</h1>
-    	<input type="text" placeholder="상호명을 입력하세요" name="brandnaming" id="brandnaming" maxlength="11" required>
+    	<input type="text" placeholder="상호명을 입력하세요" name="brandnaming" id="brandnaming" maxlength="11" required autocomplete="off">
     </div>
     <div  class="c2-input">
        	<h1>대표자</h1>
-    	<input type="text" placeholder="대표자를 입력하세요" name="representative" id="representative" maxlength="9" required>
+    	<input type="text" placeholder="대표자를 입력하세요" name="representative" id="representative" maxlength="9" required  autocomplete="off">
     </div>
     <div  class="c2-input">
     	<h1>소재지</h1>
@@ -43,7 +43,7 @@
     	<input type="hidden" name="longitude" id="longitude">
     </div>
         <div class="c2-input" name="address">
-    	<input type="text" placeholder="상세소세지를 입력하세요" name="detaillocation" id="detaillocation" required maxlength="24" >
+    	<input type="text" placeholder="상세소세지를 입력하세요" name="detaillocation" id="detaillocation" required maxlength="24" autocomplete="off">
     </div>
     
     <div  class="c2-input">
@@ -53,7 +53,7 @@
     	</label>
     </div>
     <div id="reportcarddiv">
-    	<img id="reportcard-space" width="600px">
+    	<img id="reportcard-space" >
     </div>
 	
     <div  class="c2-input">
@@ -63,8 +63,9 @@
     	</label>
     </div>
     <div id="imgdiv">
-    	<img id="img-space" width="600px">
+    	<img id="img-space">
     </div>
 	
+	<input type="button" class="next" onclick="prevButton()" value=" P R E V ">	
 	<input type="button" class="next" onclick="contract2Check(this)" value=" N E X T ">	
 </div>

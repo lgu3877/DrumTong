@@ -65,7 +65,11 @@
 	
 	
 	<select id="selectCustomerDetail" parameterType="String" resultType="BInformationVO" >
-		SELECT BRANDNAMING, MAINLOCATION, DETAILLOCATION FROM BINFORMATION WHERE ESTID=#{estid}
+		SELECT BRANDNAMING, MAINLOCATION, DETAILLOCATION, EMDCODE 
+			FROM 
+		BINFORMATION 
+			WHERE 
+		ESTID=#{estid}
 	</select>
 	
 <!-- 	 사업장의 위도와 경도를 받아온다. -->
@@ -168,12 +172,22 @@
 				ESTID = #{value}
 	</select>
 	
+<!-- 	EMDCODE 를 출력해주는 SQL문입니다. -->
+	<select id="selectEMDCode" parameterType="string" resultType="string">
+		SELECT EMDCODE 
+			FROM
+		BINFORMATION 
+			WHERE
+				ESTID = #{value}
+	</select>
+	
 <!-- 	매장 좌표 Select REST  -->
 	<select id="selectBInformationCoord" resultType="BInformationVO">
 		SELECT 
 			BRANDNAMING, LATITUDE, LONGITUDE
 		FROM
 			BINFORMATION
+				WHERE STATUS='SUCCESS'
 	</select>
 	
 </mapper>

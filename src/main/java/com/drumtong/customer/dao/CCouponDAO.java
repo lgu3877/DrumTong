@@ -9,4 +9,7 @@ public interface CCouponDAO {
 	CCouponVO selectCheck(HashMap<String, String> param);
 	
 	int insertCoupon(HashMap<String, String> param);
+
+	int useCoupon(HashMap<String, String> map);
+
 }

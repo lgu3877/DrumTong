@@ -1,5 +1,7 @@
 package com.drumtong.customer.service.laundry;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,8 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.drumtong.business.dao.BCouponDAO;
+import com.drumtong.business.dao.BDetailSalesDAO;
 import com.drumtong.business.dao.BInformationDAO;
+import com.drumtong.business.dao.BSalesDAO;
+import com.drumtong.business.vo.BDetailSalesVO;
 import com.drumtong.business.vo.BInformationVO;
+import com.drumtong.business.vo.BSalesVO;
 import com.drumtong.customer.dao.CBookmarkDAO;
 import com.drumtong.customer.dao.CCouponDAO;
 import com.drumtong.customer.vo.CBookmarkVO;
@@ -23,6 +29,8 @@ import com.drumtong.map.vo.MEmdVO;
 import com.drumtong.map.vo.MSidoVO;
 import com.drumtong.map.vo.MSigunguVO;
 import com.drumtong.security.SelectLaundryList;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 @Service
@@ -32,7 +40,8 @@ public class RestCustomerLaundryService {
 	@Autowired CCouponDAO cCouponDAO;
 	@Autowired BCouponDAO bCouponDAO;
 	@Autowired BInformationDAO bInformationDAO;
-	
+	@Autowired BSalesDAO bSalesDAO;
+	@Autowired BDetailSalesDAO bDetailSalesDAO;
 	
 	// 지도 DAO
 	@Autowired MEmdDAO mEmdDAO;
@@ -122,6 +131,48 @@ public class RestCustomerLaundryService {
 	public String selectLaundry(String emdcode, String filter1, String filter2, String filter3, String filter4, String page) {
 
 		return new Gson().toJson(SelectLaundryList.getMapList(emdcode, filter1, filter2, filter3, filter4, page));
+	}
+
+	// 세탁소에서 결제 완료 눌렀을 때[영경]
+	public String submitDetail(HttpServletRequest req, HashMap<String, Object> param) {
+		CPrivateDataVO Login = (CPrivateDataVO)req.getSession().getAttribute("cLogin");
+		String memberid = Login.getMemberid();
+		
+		ObjectMapper mapper = new ObjectMapper();
+		List<BDetailSalesVO> bDetailSalesList = mapper.convertValue(param.get("detailSales"), new TypeReference<List<BDetailSalesVO>>() {});
+		
+		BSalesVO bSales = mapper.convertValue(param.get("sales"), new TypeReference<BSalesVO>() {});
+		
+		String useCouponId = (String)param.get("couponID");
+		
+		String estid = (String)param.get("estid");
+		
+		String salecode = createSelectCode(estid);
+		
+		bSales.setMemberid(memberid);
+		bSales.setSalecode(salecode);
+		bDetailSalesList.forEach(li -> li.setSalecode(salecode));
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("memberid", memberid);
+		map.put("couponid", useCouponId);
+		
+		cCouponDAO.useCoupon(map);
+		
+		int result = bSalesDAO.insert(bSales);
+		
+		if(result == 1)
+			result = bDetailSalesDAO.insert(bDetailSalesList);
+		
+		return result == bDetailSalesList.size() ? "true" : "false";
+	}
+
+	private String createSelectCode(String estid) {
+		int todaySaleNum = bSalesDAO.searchSales(estid);
+		// yyyymmdd-000000
+		String salecode = "%s-%06d";
+		String date = new SimpleDateFormat("yyyyMMdd").format(new Date());
+		return String.format(salecode, date, todaySaleNum);
 	}
 	
 
