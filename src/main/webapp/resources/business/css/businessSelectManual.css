@@ -1,0 +1,49 @@
+.page-intro {
+	height: auto;
+}
+
+.h1-intro {
+	text-align: center;
+	margin-top: 80px;
+	font-size: 32px;
+	line-height: 1.45;
+	letter-spacing: -1.65px;
+}
+
+.page-body {
+	height: auto;
+	margin-top: 40px;
+}
+
+.contents-box {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	width: 1000px;
+	height: 250px;
+	margin: 0 auto;
+}
+
+.contents-box .content-box {
+	width: 200px;
+	height: 200px;
+	margin: 10px 0px 10px 0px
+}
+
+.contents-box .content-box .content-title {
+	text-align: left;
+}
+
+.contents-box .content-box a {
+	width: 200px;
+	height: 200px;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	background-size: 200px 175px;
+	background-repeat: no-repeat;
+	padding: 10px 0 10px 0;
+	border-radius: 20px;
+	font-size: 20px;
+	border: 1px solid grey
+}
