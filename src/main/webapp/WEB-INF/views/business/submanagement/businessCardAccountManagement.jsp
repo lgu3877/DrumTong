@@ -110,21 +110,26 @@
 					<h1 id="cardbank"></h1>
 					
 				<!-- 카드사 선택  -->
-					<select id="cardbanksel" style="display: none">
-						<option selected>카드를 선택하세요</option>
-						<option value='삼성카드'>삼성카드</option>
-						<option value='신한카드'>신한카드</option>
-						<option value='현대카드'>현대카드</option>
-						<option value='외환카드'>외환카드</option>
-						<option value='하나카드'>하나카드</option>
-						<option value='롯데카드'>롯데카드</option>
-						<option value='전북카드'>전북카드</option>
-						<option value='제주카드'>제주카드</option>
-						<option value='광주카드'>광주카드</option>
-						<option value='씨티카드'>씨티카드</option>
-						<option value='NH카드'>NH카드</option>
-						<option value='조흥(강원)카드'>조흥(강원)카드</option>
-					</select>
+					<div class="flex1">
+						<div class="card_input_title">
+							카드사
+						</div>
+						<select id="cardbanksel" style="display: none">
+							<option selected>카드를 선택하세요</option>
+							<option value='삼성카드'>삼성카드</option>
+							<option value='신한카드'>신한카드</option>
+							<option value='현대카드'>현대카드</option>
+							<option value='외환카드'>외환카드</option>
+							<option value='하나카드'>하나카드</option>
+							<option value='롯데카드'>롯데카드</option>
+							<option value='전북카드'>전북카드</option>
+							<option value='제주카드'>제주카드</option>
+							<option value='광주카드'>광주카드</option>
+							<option value='씨티카드'>씨티카드</option>
+							<option value='NH카드'>NH카드</option>
+							<option value='조흥(강원)카드'>조흥(강원)카드</option>
+						</select>
+					</div>
 					
 				<!-- 카드번호 16자리 (4 * 4) -->
 					<div class="flex1">
@@ -132,10 +137,10 @@
 							카드번호
 						</div>
 						<div id="carddiv1" class="card_number_input_con">
-							<input type="text" readonly="readonly" maxlength="4" placeholder="OOOO" onkeyup="inputnumck(this)"> 
-							<input type="text" readonly="readonly" maxlength="4" placeholder="OOOO" onkeyup="inputnumck(this)"> 
-							<input type="text" readonly="readonly" maxlength="4" placeholder="OOOO" onkeyup="inputnumck(this)"> 
-							<input type="text" readonly="readonly" maxlength="4" placeholder="OOOO" onkeyup="numck(this)">
+							<input type="text" readonly="readonly" maxlength="4" placeholder="1234" onkeyup="inputnumck(this)"> 
+							<input type="text" readonly="readonly" maxlength="4" placeholder="1234" onkeyup="inputnumck(this)"> 
+							<input type="text" readonly="readonly" maxlength="4" placeholder="1234" onkeyup="inputnumck(this)"> 
+							<input type="text" readonly="readonly" maxlength="4" placeholder="1234" onkeyup="numck(this)">
 						</div>
 					</div>
 				
@@ -157,7 +162,7 @@
 							CCV
 						</div>
 						<div id="carddiv3">
-							<input type="text" maxlength="3" placeholder="OOO" id="cardcvc" onkeyup="numck(this)" readonly>
+							<input type="text" maxlength="3" placeholder="ccv" id="cardcvc" onkeyup="numck(this)" readonly>
 						</div>
 					</div>
 					
@@ -193,6 +198,9 @@
 				
 				<!-- 계좌번호 입력 input -->
 					<div class="flex3">
+						<div class="card_input_title">
+							계좌번호
+						</div>
 						<input type="text" readonly placeholder="계좌번호 입력('-' 제외)" onkeyup="numck(this)" maxlength="25">
 					</div>
 				</div>

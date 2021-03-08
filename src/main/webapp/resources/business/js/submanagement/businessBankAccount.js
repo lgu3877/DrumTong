@@ -8,7 +8,7 @@ function inputAccountNumber() {
 function accountChange(obj) {
 	accountclone = $('#accountdiv').find('input').clone();
 	
-	$('#accountdiv').find('select').css('border', '3px solid #3088F9');
+//	$('#accountdiv').find('select').css('border', '3px solid #3088F9');
 	$('#accountdiv').find('input').removeAttr('readonly');
 	$('#accountdiv').find('input').css('backgroundColor', 'white');
 	$('#accountdiv').find('input').css('border', '3px solid #3088F9');

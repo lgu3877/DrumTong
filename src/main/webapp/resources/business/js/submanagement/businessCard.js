@@ -24,10 +24,10 @@ function fillCardInfo() {
 function cardChange(obj) {
 	cardclone = $('#carddiv').find('input').clone();
 	
-	$('#carddiv').find('select').css('border', '3px solid #3088F9');
+//	$('#carddiv').find('select').css('border', '3px solid #3088F9');
 	$('#carddiv').find('input').removeAttr('readonly');
 	$('#carddiv').find('input').css('backgroundColor', 'white');
-	$('#carddiv').find('input').css('border', '3px solid #3088F9');
+//	$('#carddiv').find('input').css('border', '3px solid #3088F9');
 	obj.setAttribute('onclick', 'cardSubmit(this)');
 	obj.innerHTML = '전송';
 	$('#carddiv').find('input').val('');
