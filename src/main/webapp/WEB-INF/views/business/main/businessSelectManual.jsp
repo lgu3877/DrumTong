@@ -32,27 +32,67 @@
 	
 	<div class="page-body">
 		<div class="contents-box">
-			<div class="content-box">
-				<h2 class="content-title">A</h2>
-			</div>
+			
+			<h2 class="content-title">매장 등록하기</h2>
 			<div class="content-box">
 				<a style="background-image: url('https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/business/BPersonID_c80df0ce2e524f1c849aa2d691a44300/ESTID_da90313621d94293b07b00211a2cdd84/BIMAGE/STOREIMG_413bc78a388a4479970be4516d92e911.png');">
-					A-1
+					등록 절차
 				</a>
 			</div>
 			
 			<div class="content-box">
 				<a style="background-image: url('https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/business/BPersonID_c80df0ce2e524f1c849aa2d691a44300/ESTID_da90313621d94293b07b00211a2cdd84/BIMAGE/STOREIMG_413bc78a388a4479970be4516d92e911.png');">
-					A-1
+					온라인 계약
 				</a>
 			</div>
 			
 			<div class="content-box">
 				<a style="background-image: url('https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/business/BPersonID_c80df0ce2e524f1c849aa2d691a44300/ESTID_da90313621d94293b07b00211a2cdd84/BIMAGE/STOREIMG_413bc78a388a4479970be4516d92e911.png');">
-					A-1
+					프리미엄 계약
+				</a>
+			</div>
+		</div>
+		<div class="contents-box">
+			
+			<h2 class="content-title">매장 관리하기</h2>
+			<div class="content-box">
+				<a style="background-image: url('https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/business/BPersonID_c80df0ce2e524f1c849aa2d691a44300/ESTID_da90313621d94293b07b00211a2cdd84/BIMAGE/STOREIMG_413bc78a388a4479970be4516d92e911.png');">
+					상품 변경
 				</a>
 			</div>
 			
+			<div class="content-box">
+				<a style="background-image: url('https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/business/BPersonID_c80df0ce2e524f1c849aa2d691a44300/ESTID_da90313621d94293b07b00211a2cdd84/BIMAGE/STOREIMG_413bc78a388a4479970be4516d92e911.png');">
+					매장정보 변경
+				</a>
+			</div>
+			
+			<div class="content-box">
+				<a style="background-image: url('https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/business/BPersonID_c80df0ce2e524f1c849aa2d691a44300/ESTID_da90313621d94293b07b00211a2cdd84/BIMAGE/STOREIMG_413bc78a388a4479970be4516d92e911.png');">
+					계약 해지
+				</a>
+			</div>
+		</div>
+		<div class="contents-box">
+			
+			<h2 class="content-title">일정 관리하기</h2>
+			<div class="content-box">
+				<a style="background-image: url('https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/business/BPersonID_c80df0ce2e524f1c849aa2d691a44300/ESTID_da90313621d94293b07b00211a2cdd84/BIMAGE/STOREIMG_413bc78a388a4479970be4516d92e911.png');">
+					영업일 설정
+				</a>
+			</div>
+			
+			<div class="content-box">
+				<a style="background-image: url('https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/business/BPersonID_c80df0ce2e524f1c849aa2d691a44300/ESTID_da90313621d94293b07b00211a2cdd84/BIMAGE/STOREIMG_413bc78a388a4479970be4516d92e911.png');">
+					휴무일 설정
+				</a>
+			</div>
+			
+			<div class="content-box">
+				<a style="background-image: url('https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/business/BPersonID_c80df0ce2e524f1c849aa2d691a44300/ESTID_da90313621d94293b07b00211a2cdd84/BIMAGE/STOREIMG_413bc78a388a4479970be4516d92e911.png');">
+					
+				</a>
+			</div>
 		</div>
 	
 	</div>	
