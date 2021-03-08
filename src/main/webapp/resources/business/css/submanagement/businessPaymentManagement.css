@@ -80,11 +80,8 @@ button:hover {
 }
 
 #cardbanksel, #accountbanksel {
-    width: 200px;
     height: 35px;
     border: 1px solid navy;
-    background: url(arrow.jpg) no-repeat 95% 50%;
-    -moz-appearance: none;
     outline: none;
     cursor: pointer;
 }
@@ -94,8 +91,8 @@ button:hover {
 }
 
 #accountbank, #accountbanksel {
-	margin-bottom: 45px !important;
-	}
+	/* margin-bottom: 45px !important; */
+}
 
 #carddiv, #accountdiv {}
 
@@ -122,7 +119,8 @@ button:hover {
 	width: 100%;
 }
 
-.card_input_title {
+.card_input_title,
+.bank_input_title {
 	width: 120px;
     align-self: center;
     font-size: 14pt;
@@ -141,8 +139,8 @@ button:hover {
     height: 35px;
     text-align: center;
     margin-right: 10px;
-    background-color: #ccc;
-}
+    background-color: #D6F0FF;
+	}
 
 .card_exdate_input {
 	display: flex;
@@ -170,12 +168,11 @@ button:hover {
 }
 
 .flex3 input {
-	width: 100%;
+	width: calc(100% - 118px);
 	height: 35px;
     letter-spacing: 3px;
-	background-color: #adb8c0;
-	padding-left: 20px;
-	font-size: 14pt;
+	background-color: #D6F0FF;
+	text-indent: 5px;
 }
 
 .interiorLine {

@@ -110,11 +110,11 @@
 					<h1 id="cardbank"></h1>
 					
 				<!-- 카드사 선택  -->
-					<div class="flex1">
+					<div id="cardbankcon" class="flex1" style="display: none">
 						<div class="card_input_title">
 							카드사
 						</div>
-						<select id="cardbanksel" style="display: none">
+						<select id="cardbanksel">
 							<option selected>카드를 선택하세요</option>
 							<option value='삼성카드'>삼성카드</option>
 							<option value='신한카드'>신한카드</option>
@@ -185,20 +185,24 @@
 				<!-- 계좌명 -->
 					<h1 id="accountbank"></h1>
 						
-				<!-- 계좌선택 > 은행 리스트  -->			
-					<select id="accountbanksel" style="display: none">
-						<option selected>카드를 선택하세요</option>
-						<option value='Sinhan'>신한은행</option>
-						<option value='Kyungnam'>경남은행</option>
-						<option value='KB'>국민은행</option>
-						<option value='IBK'>기업은행</option>
-						<option value=Nonghyup>농협은행</option>
-						<option value='Busan'>부산은행</option>
-					</select>
-				
+				<!-- 계좌선택 > 은행 리스트  -->
+					<div id="accountbankcon" class="flex1" style="display: none">
+						<div class="bank_input_title">
+							은행명
+						</div>			
+						<select id="accountbanksel">
+							<option selected>카드를 선택하세요</option>
+							<option value='Sinhan'>신한은행</option>
+							<option value='Kyungnam'>경남은행</option>
+							<option value='KB'>국민은행</option>
+							<option value='IBK'>기업은행</option>
+							<option value=Nonghyup>농협은행</option>
+							<option value='Busan'>부산은행</option>
+						</select>
+					</div>
 				<!-- 계좌번호 입력 input -->
 					<div class="flex3">
-						<div class="card_input_title">
+						<div class="bank_input_title">
 							계좌번호
 						</div>
 						<input type="text" readonly placeholder="계좌번호 입력('-' 제외)" onkeyup="numck(this)" maxlength="25">
