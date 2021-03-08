@@ -6,6 +6,7 @@ function cardSubmit(obj) {
 	let exit = true;
 	let cardnumsum = '';
 	
+	// 카드번호
 	$('#carddiv1').find('input').each(function(index, item) {	// index : 반복문의 i처럼 생각해라 // item : for in 처럼
 		cardnumsum += $(item).val();
 		if(index < 3)
@@ -18,11 +19,19 @@ function cardSubmit(obj) {
 		}
 	})
 	
+	// 카드만료일
 	$('#carddiv2').find('input').each(function(index, item) {
 		if($(item).val().length < $(item).attr('maxLength')) {
 			exit = false;
 		}
 	})	
+	
+	// CCV
+	$('#carddiv3').find('input').each(function(index, item) {
+		if($(item).val().length < $(item).attr('maxLength')) {
+			exit = false;
+		}
+	})
 	
 	
 	if(!exit) return;
