@@ -29,95 +29,15 @@
 	
 	<section>
 		<div class="manual-container">
-			<ul>
-				<li class="outer-li">
-					<a class="outer-li-a" title="A">
-						A<i class="fas fa-chevron-down"></i>
-					</a>
-					<ul style="display: none;">
-						<li class="inner-li">
-							<a class="inner-li-a">
-								<i class="fas fa-chevron-right"></i>A-1
-							</a>
-							<ul style="display: none">
-								<li class="inner-inner-li">A-1-1</li>
-								<li class="inner-inner-li">A-1-2</li>
-								<li class="inner-inner-li">A-1-2</li>
-							</ul>
-						</li>
-						<li class="inner-li">
-							<a class="inner-li-a">
-								<i class="fas fa-chevron-right"></i>A-2
-							</a>
-							<ul style="display: none">
-								<li class="inner-inner-li">A-2-1</li>
-								<li class="inner-inner-li">A-2-2</li>
-								<li class="inner-inner-li">A-2-2</li>
-							</ul>
-						</li>
-				
-						<li class="inner-li">
-							<a class="inner-li-a">
-								<i class="fas fa-chevron-right"></i>A-3
-							</a>
-							<ul style="display: none">
-								<li class="inner-inner-li">A-3-1</li>
-								<li class="inner-inner-li">A-3-2</li>
-								<li class="inner-inner-li">A-3-2</li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-				
-				<li class="outer-li">
-					<a class="outer-li-a" title="B">
-						B<i class="fas fa-chevron-down"></i>
-					</a>
-					<ul style="display: none;">
-						<li class="inner-li">
-							<a class="inner-li-a">
-								<i class="fas fa-chevron-right"></i>B-1
-							</a>
-							<ul style="display: none">
-								<li class="inner-inner-li">B-1-1</li>
-								<li class="inner-inner-li">B-1-2</li>
-								<li class="inner-inner-li">B-1-3</li>
-							</ul>
-						</li>
-						<li class="inner-li"><i class="fas fa-chevron-right"></i>B-2</li>
-						<li class="inner-li"><i class="fas fa-chevron-right"></i>B-3</li>
-						<li class="inner-li"><i class="fas fa-chevron-right"></i>B-4</li>
-					</ul>
-				</li>
-				
-				<li class="outer-li">
-					<a class="outer-li-a" title="C">
-						C<i class="fas fa-chevron-down"></i>
-					</a>
-					<ul style="display: none;">
-						<li class="inner-li"><i class="fas fa-chevron-right"></i>C-1</li>
-						<li class="inner-li"><i class="fas fa-chevron-right"></i>C-2</li>
-						<li class="inner-li"><i class="fas fa-chevron-right"></i>C-3</li>
-						<li class="inner-li"><i class="fas fa-chevron-right"></i>C-4</li>
-					</ul>
-				</li>
-				<li class="outer-li">
-					<a class="outer-li-a" title="D">
-						D<i class="fas fa-chevron-down"></i>
-					</a>
-					<ul style="display: none;">
-						<li class="inner-li"><i class="fas fa-chevron-right"></i>D-1</li>
-						<li class="inner-li"><i class="fas fa-chevron-right"></i>D-2</li>
-						<li class="inner-li"><i class="fas fa-chevron-right"></i>D-3</li>
-						<li class="inner-li"><i class="fas fa-chevron-right"></i>D-4</li>
-					</ul>
-				</li>
-			</ul>
+			<%@ include file="businessManualSideBar.jsp" %>
 		</div>
 		
+		<!-- 여기서부터 페이지별로 따로 만들어야합니다 -->
 		<div style="width: 700px; height: 800px; float: left; padding: 50px 25px 0px 50px">
-			<p class="content-path" style="color: #8E929F; text-align: left; padding: 0 0 15px 0">컨텐츠의 패스 경로를 알려줍니다</p>
-		
+			<p class="content-path" style="color: #8E929F; text-align: left; padding: 0 0 15px 0; margin: 0">컨텐츠의 패스 경로를 알려줍니다</p>
+			<h1 class="content-title" style="text-align: left; font-size: 32px; margin: 0">
+				제목이 들어가는 태그
+			</h1>
 		</div>
 	</section>
 		
