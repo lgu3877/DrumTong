@@ -71,76 +71,77 @@ function listUp(event) {
         quickBoolean = (quickValue != 0);
         
         if(quantity !== '0'){
-        	menuDiv_1 = document.createElement('div');
-			menuDiv_1.setAttribute("class", "selected-row");
-			
-			// 1
-			menuDiv_2 = document.createElement('div');
-			menuDiv_2.setAttribute("class", "selected-text");
-			
-			menuDiv_2_1 = document.createElement('div');
-			menuDiv_2_1.setAttribute("class", "selected-name");
-			menuDiv_2_1.innerHTML = optionName;
-			
-			menuDiv_2_2 = document.createElement('div');
-			menuDiv_2_2.setAttribute("class", "selected-context");
-			menuDiv_2_2.innerHTML = optionText;
-			
-			menuDiv_2.appendChild(menuDiv_2_1);
-			menuDiv_2.appendChild(menuDiv_2_2);
-			
-			// 2
-			menuInput_3 = document.createElement('input');
-			menuInput_3.setAttribute("class", "quantity");
-			menuInput_3.setAttribute("type", "number");
-			menuInput_3.setAttribute("min", "0");
-			menuInput_3.setAttribute("value", quantity);
-			
-			// 3
-			menuDiv_4 = document.createElement('div');
-			menuDiv_4.setAttribute("class", "selected-price");
-			menuDiv_4.innerHTML = price;
-			
-			//4
-			menuLabel_5 = document.createElement('label');
-			menuLabel_5.setAttribute("class", quick.className);
-			menuLabel_5.setAttribute("title", quickBoolean ? "빠른서비스" : "퀵불가");
-			
-			menuInput_5_1 = document.createElement('input');
-			menuInput_5_1.setAttribute("class", "quickcheck");
-			menuInput_5_1.setAttribute("type", "checkbox");
-			menuInput_5_1.checked = quickCheck;
-			menuInput_5_1.setAttribute("value", quickValue);
-			if(quickBoolean)
-				menuInput_5_1.addEventListener('change', quickMark);
-			
-			menuI_5_2 = document.createElement('i');
-			menuI_5_2.setAttribute("class", "fas fa-shipping-fast");
-			menuI_5_2.innerHTML = quickBoolean ? (quickValue + "원") : "퀵불가";
-			
-			menuLabel_5.appendChild(menuInput_5_1);
-			menuLabel_5.appendChild(menuI_5_2);
-			
-			
-			// 5
-			menuDiv_6 = document.createElement('div');
-			
-			menuButton_6_1 = document.createElement('button');
-			menuButton_6_1.setAttribute("class", "remove-button");
-			menuButton_6_1.addEventListener("click", removeOption);
-			
-			menuI_6_2 = document.createElement('i');
-			menuI_6_2.setAttribute("class", "fas fa-times");
-			
-			menuButton_6_1.appendChild(menuI_6_2);
-			menuDiv_6.appendChild(menuButton_6_1);
-			
-			menuDiv_1.appendChild(menuDiv_2);
-			menuDiv_1.appendChild(menuInput_3);
-			menuDiv_1.appendChild(menuDiv_4);
-			menuDiv_1.appendChild(menuLabel_5);
-			menuDiv_1.appendChild(menuDiv_6);
-			selectedList.appendChild(menuDiv_1);
+        	if(isEquals(optionName, optionText, quantity, quickCheck)){
+	        	menuDiv_1 = document.createElement('div');
+				menuDiv_1.setAttribute("class", "selected-row");
+				
+				// 1
+				menuDiv_2 = document.createElement('div');
+				menuDiv_2.setAttribute("class", "selected-text");
+				
+				menuDiv_2_1 = document.createElement('div');
+				menuDiv_2_1.setAttribute("class", "selected-name");
+				menuDiv_2_1.innerHTML = optionName;
+				
+				menuDiv_2_2 = document.createElement('div');
+				menuDiv_2_2.setAttribute("class", "selected-context");
+				menuDiv_2_2.innerHTML = optionText;
+				
+				menuDiv_2.appendChild(menuDiv_2_1);
+				menuDiv_2.appendChild(menuDiv_2_2);
+				
+				// 2
+				menuInput_3 = document.createElement('input');
+				menuInput_3.setAttribute("class", "quantity");
+				menuInput_3.setAttribute("type", "number");
+				menuInput_3.setAttribute("min", "0");
+				menuInput_3.setAttribute("value", quantity);
+				
+				// 3
+				menuDiv_4 = document.createElement('div');
+				menuDiv_4.setAttribute("class", "selected-price");
+				menuDiv_4.innerHTML = price;
+				
+				//4
+				menuLabel_5 = document.createElement('label');
+				menuLabel_5.setAttribute("class", quick.className);
+				menuLabel_5.setAttribute("title", quickBoolean ? "빠른서비스" : "퀵불가");
+				
+				menuInput_5_1 = document.createElement('input');
+				menuInput_5_1.setAttribute("class", "quickcheck");
+				menuInput_5_1.setAttribute("type", "checkbox");
+				menuInput_5_1.checked = quickCheck;
+				menuInput_5_1.setAttribute("value", quickValue);
+				menuInput_5_1.setAttribute("disabled", "disabled");
+				
+				menuI_5_2 = document.createElement('i');
+				menuI_5_2.setAttribute("class", "fas fa-shipping-fast");
+				menuI_5_2.innerHTML = quickBoolean ? (quickValue + "원") : "퀵불가";
+				
+				menuLabel_5.appendChild(menuInput_5_1);
+				menuLabel_5.appendChild(menuI_5_2);
+				
+				
+				// 5
+				menuDiv_6 = document.createElement('div');
+				
+				menuButton_6_1 = document.createElement('button');
+				menuButton_6_1.setAttribute("class", "remove-button");
+				menuButton_6_1.addEventListener("click", removeOption);
+				
+				menuI_6_2 = document.createElement('i');
+				menuI_6_2.setAttribute("class", "fas fa-times");
+				
+				menuButton_6_1.appendChild(menuI_6_2);
+				menuDiv_6.appendChild(menuButton_6_1);
+				
+				menuDiv_1.appendChild(menuDiv_2);
+				menuDiv_1.appendChild(menuInput_3);
+				menuDiv_1.appendChild(menuDiv_4);
+				menuDiv_1.appendChild(menuLabel_5);
+				menuDiv_1.appendChild(menuDiv_6);
+				selectedList.appendChild(menuDiv_1);
+        	}
 			
 			calTotal();
 			

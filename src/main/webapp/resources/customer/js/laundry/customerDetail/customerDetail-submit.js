@@ -50,6 +50,15 @@
 	  let originalprice = originalpriceParam + checkList[2];
 	  let collectionboolean = checkList[0];
 	  let deliveryboolean = checkList[1];
+	  let collectionrequests = document.getElementById('collectionRequests').value;
+	  let laundryrequests = document.getElementById('laundryRequests').value;
+	  let deliveryrequests = document.getElementById('deliveryRequests').value;
+	  let dateInputBox = document.getElementById('select-date-area');
+	  let deliverydate = dateInputBox.children[0].children[1].value;
+	  let collectiondate = dateInputBox.children[1].children[1].value;
+	  
+	  deliverydate = deliverydate==='' ? '-' : deliverydate;
+	  collectiondate = collectiondate==='' ? '-' : collectiondate;
 	  
 	  sales = {
 	  		estid : estid,
@@ -57,14 +66,15 @@
 			originalprice : originalprice, 
 			discountprice : couponParam,
 			totalprice : originalprice - couponParam,
-			deliverydate : '-',
-			collectiondate : '-',
+			deliverydate : deliverydate,
+			collectiondate : collectiondate,
 			collectionboolean : collectionboolean,
 			deliveryboolean : deliveryboolean,
-			collectionrequests : '',
-			laundryrequests : '',
-			deliveryrequests : '',
+			collectionrequests : collectionrequests,
+			laundryrequests : laundryrequests,
+			deliveryrequests : deliveryrequests,
 	  }
+	  console.log(sales);
 	  return sales;
   }
   function checkfunc(){
