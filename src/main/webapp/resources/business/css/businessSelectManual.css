@@ -1,0 +1,62 @@
+.page-intro {
+	height: auto;
+}
+
+.h1-intro {
+	text-align: center;
+	margin-top: 80px;
+	font-size: 32px;
+	line-height: 1.45;
+	letter-spacing: -1.65px;
+}
+
+.page-body {
+	height: auto;
+	margin-top: 40px;
+}
+
+.contents-box {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	width: 1100px;
+	height: 250px;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.contents-box .content-box {
+	width: 200px;
+	height: 200px;
+	margin: 0px 25px 0px 25px;
+-webkit-box-shadow: -1px 12px 33px 5px rgba(179,179,179,1);
+-moz-box-shadow: -1px 12px 33px 5px rgba(179,179,179,1);
+box-shadow: -1px 12px 33px 5px rgba(179,179,179,1);
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+}
+
+.contents-box .content-title {
+	width: 200px;
+	text-align: left;
+	font-size: 26px;
+    line-height: 1.5;
+    letter-spacing: 1.1px;
+}
+
+.contents-box .content-box a {
+	width: 200px;
+	height: 200px;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	background-color: white;
+	background-size: 200px 175px;
+	background-repeat: no-repeat;
+	padding: 10px 0 10px 0;
+	border-radius: 20px;
+	font-size: 20px;
+	border: 1px solid #ccc;
+	cursor: pointer;
+}
