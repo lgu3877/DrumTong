@@ -1,8 +1,7 @@
 package com.drumtong.business.vo;
 
-import java.util.List;
 
-public class BMenuListVO {
+public class BMenuList {
 	
 	private String[] estid;
 	private String[] name;

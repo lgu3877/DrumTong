@@ -2,8 +2,8 @@
 const weekObject = {
 	"firstweek" : "첫째주", 
 	"secondweek" : "둘째주",
-	"thirdweek" : "셋째주",
-	"forthweek" : "넷째주",
+	"thridweek" : "셋째주",
+	"fourthweek" : "넷째주",
 	"fifthweek" : "다섯째주",
 	"sixthweek" : "여섯째주",	
 };
@@ -44,7 +44,7 @@ function displayRegHolidays() {
 		const week = weekObject[enWeek];
 		const days = bscheduledays[enWeek];
 		
-		if (days !== undefined) {
+		if (days !== undefined && days !== "-") {
 			const dayArray = days.split("/");
 			dayArray.pop(); // 마지막 배열의 공백 제거
 			
@@ -166,7 +166,7 @@ function addRegSchedule() {
 	bscheduledays[selected.week] = selected.days;
 	
 	// selector & checkbox 초기화
-	initializeRegInput();
+//	initializeRegInput();
 	
 	// 뷰 초기화
 	document.getElementById("reg-holiday-schedule").innerHTML = "";

@@ -31,9 +31,9 @@
 	<update id="updateConstract" parameterType="BScheduleDaysVO">
 		UPDATE BSCHEDULEDAYS
 			SET
-				FIRSTWEEK = #{firstweek}, SECONDWEEK = #{secondweek}, THIRDWEEK = #{thirdweek},
-				FOURWEEK = #{fourweek}, FIFTHWEEK = #{fifthweek}, SIXTHWEEK = #{sixthweek},
-				HOLIDAY = #{holiday} 
+				FIRSTWEEK = #{firstweek, jdbcType=VARCHAR}, SECONDWEEK = #{secondweek ,jdbcType=VARCHAR}, THRIDWEEK = #{thridweek ,jdbcType=VARCHAR},
+				FOURTHWEEK = #{fourthweek ,jdbcType=VARCHAR}, FIFTHWEEK = #{fifthweek ,jdbcType=VARCHAR}, SIXTHWEEK = #{sixthweek ,jdbcType=VARCHAR}
+<!-- 				,HOLIDAY = #{holiday}  -->
 			WHERE ESTID = #{estid}
 	</update>
 	

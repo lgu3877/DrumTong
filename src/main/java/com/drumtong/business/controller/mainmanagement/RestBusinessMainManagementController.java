@@ -196,25 +196,17 @@ public class RestBusinessMainManagementController {
 	
 	// ===== 중분류 [BSCHEDULEDAYS] 테이블 ==== { 매장 일정 관리 }
 	
+
+	// 1. 매장 일정관리를 비동기식으로 수정 해주는 메서드입니다..
+	@RequestMapping("BScheduleDays/rest/updateBScheduleDays")
+	@PostMapping(produces="application/json; charset=utf8")
+	public BScheduleDaysVO updateBScheduleDays(HttpServletRequest req, @RequestBody BScheduleDaysVO bScheduleDaysVO) {
+		return svc.updateBScheduleDays(req, bScheduleDaysVO);
+	}
 	
-	/* 
-	   *  ※※※※※※※※※ [ 해당 메서드를 사용할 때 주의사항 ] ※※※※※※※※※※※
-	 * 포함되는 메서드 @updateBScheduleDays / @insertBScheduleDays
-	 * 
-	 * 반드시 규격에 맞는 형식으로 데이터를 입력할 수 있도록 도와주세요.
-	 * 
-	 *  ex) javascript
-	 *  
-	 *  필드명 반드시 소문자로 부탁드립니다.
-	 *  
-	 *  ob = {
-	 *  	estid 		: 매장 estid명 ,
-	 *  	wherefield  : 삭제 혹은 추가하는 필드명 ,  ex) firstweek , secondweek 등등
-	 *  	changeparam : 삭제 혹은 추가하는 데이터 ,  ex) 토/, 일/, 월/    ※여기서 주의해야할 포인트는 반드시 '토' + '/' 를 붙인 상태에서 데이터값을 보내줘야함.
-	 *  }
-	 *  
-	 * 
-	 */
+	
+	
+	
 	// 1. 매장 일정관리를 비동기식으로 삭제해주는 메서드입니다.
 	@RequestMapping("BScheduleDays/rest/deleteBScheduleDays/{param}")
 	@GetMapping(produces="application/json; charset=utf8")
@@ -266,19 +258,6 @@ public class RestBusinessMainManagementController {
 	 * where 값 : estid, num
 	 * 
 	 */
-	// 1. 매장 임시 휴무일을 수정해주는 메서드입니다. 
-	@RequestMapping("BTempHoliday/rest/updateBTempHoliday/{param}")
-	@GetMapping(produces="application/json; charset=utf8")
-	public String updateBTempHoliday(@PathVariable("param")BTempHolidayVO bTempHolidayVO) {
-		
-		int result = svc.updateBTempHoliday(bTempHolidayVO);
-		System.out.println(result + " : result 값 입니다");
-		return result == 1
-				? "true"
-				: "false";
-	}
-	
-	
 	
 	// 2. 매장 임시 휴무일을 삭제해주는 메서드입니다.
 	@RequestMapping("BTempHoliday/rest/deleteBTempHoliday/{param}")
@@ -314,39 +293,40 @@ public class RestBusinessMainManagementController {
 	 * where 값 : estid, num
 	 * 
 	 */
+	
 	// 1. 매장 임시 중지를 수정해주는 메서드입니다. 
-	@RequestMapping("BTempSuspension/rest/updateBTempSuspension/{param}")
-	@GetMapping(produces="application/json; charset=utf8")
-	public String updateBTempSuspension(@PathVariable("param")BTempSuspensionVO bTempSuspensionVO) {
+	@RequestMapping("BTempSuspension/rest/updateBTempSuspension/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public List<BTempSuspensionVO> updateBTempSuspension(HttpServletRequest req, @RequestBody BTempSuspensionVO bTempSuspensionVO) {
 		
-		int result = svc.updateBTempSuspension(bTempSuspensionVO);
-		System.out.println(result + " : result 값 입니다");
-		return result == 1
-				? "true"
-				: "false";
+		return svc.updateBTempSuspension(req, bTempSuspensionVO);
 	}
 	
 	
 	
 	// 2. 매장 임시 중지를 삭제해주는 메서드입니다.
-	@RequestMapping("BTempSuspension/rest/deleteBTempSuspension/{param}")
-	@GetMapping(produces="application/json; charset=utf8")
-	public String deleteBTempSuspension(@PathVariable("param")BTempSuspensionVO bTempSuspensionVO) {
+	@RequestMapping("BTempSuspension/rest/deleteBTempSuspension/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public List<BTempSuspensionVO> deleteBTempSuspension(HttpServletRequest req,@RequestBody BTempSuspensionVO bTempSuspensionVO) {
 		
-		int result = svc.deleteBTempSuspension(bTempSuspensionVO);
-		System.out.println(result + " : result 값 입니다");
-		return result == 1
-				? "true"
-				: "false";
+		return svc.deleteBTempSuspension(req, bTempSuspensionVO);
 	}
 	
 	// 3. 매장 임시 중지에 새 데이터를 입력해주는 메서드입니다.
-	@RequestMapping("BTempSuspension/rest/insertBTempSuspension/{param}")
-	@GetMapping(produces = "application/json; charset=utf8")
-	public String insertBTempSuspension(@PathVariable("param") BTempSuspensionVO bTempSuspensionVO) {
+	@RequestMapping("BTempSuspension/rest/insertBTempSuspension/")
+	@PostMapping(produces = "application/json; charset=utf8")
+	public List<BTempSuspensionVO> insertBTempSuspension(HttpServletRequest req, @RequestBody BTempSuspensionVO bTempSuspensionVO) {
 
-		int result = svc.insertBTempSuspension(bTempSuspensionVO);
-		System.out.println(result + " : result 값 입니다");
+		return svc.insertBTempSuspension(req, bTempSuspensionVO);
+	}
+	
+	// 0. 매장 상태 값을 바꾸어주는 메서드입니다.
+	@RequestMapping("BInformation/rest/changeShopStatus/")
+	@PostMapping(produces = "application/json; charset=utf8")
+	public String changeShopStatus(HttpServletRequest req,
+			@RequestBody HashMap<String,String> obj) {
+		int result = svc.changeShopStatus(req,obj);
+		System.out.println(result + " : result 값 입니다@@@@@");
 		return result == 1 ? "true" : "false";
 	}
 	

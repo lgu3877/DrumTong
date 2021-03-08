@@ -36,6 +36,7 @@ import com.drumtong.map.dao.MSidoDAO;
 import com.drumtong.map.dao.MSigunguDAO;
 import com.drumtong.security.AwsServiceImpl;
 import com.drumtong.security.DeliveryAreaListSetting;
+import com.drumtong.security.Login;
 import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
 // [건욱]
@@ -363,6 +364,22 @@ public class RestBusinessMainManagementService {
 	 *  
 	 * 
 	 */
+	// 1. 매장 일정관리를 비동기식으로 수정 해주는 메서드입니다..
+	public BScheduleDaysVO updateBScheduleDays(HttpServletRequest req,BScheduleDaysVO bScheduleDaysVO) {
+		HttpSession Session = req.getSession();
+ 	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+ 	    String estid = bInformationVO.getEstid();
+ 	    
+ 	    bScheduleDaysVO.setEstid(estid);
+ 	    
+ 	    
+ 	    
+ 	    int RestUpdateBScheduleDaysReuslt = bScheduleDaysDAO.updateConstract(bScheduleDaysVO);
+		
+ 	    
+		return RestUpdateBScheduleDaysReuslt == 1 ? bScheduleDaysDAO.selectBScheduleDays(estid) : null;
+	}
+	
 	// 1. 매장 일정관리를 비동기식으로 삭제해주는 메서드입니다.
 	public int deleteBScheduleDays(HashMap<String,String> obj) {
 		
@@ -405,10 +422,17 @@ public class RestBusinessMainManagementService {
 	 * 
 	 */
 	// 1. 매장 임시 휴무일을 수정해주는 메서드입니다. 
-	public int updateBTempHoliday(BTempHolidayVO bTempHolidayVO) {
+	public BTempHolidayVO updateBTempHoliday(HttpServletRequest req, BTempHolidayVO bTempHolidayVO) {
+		HttpSession Session = req.getSession();
+ 	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+ 	    String estid = bInformationVO.getEstid();
+ 	    
+ 	    bTempHolidayVO.setEstid(estid);
+ 	    
+ 	    
 		int RestUpdateBTempHolidayReuslt = bTempHolidayDAO.updateBTempHoliday(bTempHolidayVO);
 		
-		return RestUpdateBTempHolidayReuslt;
+		return RestUpdateBTempHolidayReuslt == 1 ? bTempHolidayDAO.selectBTempHoliday(bTempHolidayVO) : null;
 	}
 
 
@@ -439,25 +463,63 @@ public class RestBusinessMainManagementService {
 	 * 
 	 */
 	// 1. 매장 임시 중지을 수정해주는 메서드입니다.
-	public int updateBTempSuspension(BTempSuspensionVO bTempSuspensionVO) {
+	public List<BTempSuspensionVO> updateBTempSuspension(HttpServletRequest req, BTempSuspensionVO bTempSuspensionVO) {
+		HttpSession Session = req.getSession();
+ 	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+ 	    String estid = bInformationVO.getEstid();
+ 	    
+ 	    bTempSuspensionVO.setEstid(estid);
+ 	    
+ 	    
 		int RestUpdateBTempSuspensionReuslt = bTempSuspensionDAO.updateBTempSuspension(bTempSuspensionVO);
-
-		return RestUpdateBTempSuspensionReuslt;
+		
+		System.out.println(RestUpdateBTempSuspensionReuslt);
+		
+		return RestUpdateBTempSuspensionReuslt == 1 ? bTempSuspensionDAO.selectBTempSuspension(estid) : null;
 	}
 
 	// 2. 매장 임시 중지을 삭제해주는 메서드입니다.
-	public int deleteBTempSuspension(BTempSuspensionVO bTempSuspensionVO) {
+	public List<BTempSuspensionVO> deleteBTempSuspension(HttpServletRequest req, BTempSuspensionVO bTempSuspensionVO) {
+		HttpSession Session = req.getSession();
+ 	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+ 	    String estid = bInformationVO.getEstid();
+ 	    
+ 	    bTempSuspensionVO.setEstid(estid);
+ 	    
 		int RestDeleteBTempSuspensionReuslt = bTempSuspensionDAO.deleteBTempSuspension(bTempSuspensionVO);
-
-		return RestDeleteBTempSuspensionReuslt;
+		
+		return RestDeleteBTempSuspensionReuslt == 1 ? bTempSuspensionDAO.selectBTempSuspension(estid) : null;
 	}
 
 	// 3. 매장 임시 중지에 새 데이터를 입력해주는 메서드입니다.
-	public int insertBTempSuspension(BTempSuspensionVO bTempSuspensionVO) {
+	public List<BTempSuspensionVO> insertBTempSuspension(HttpServletRequest req, BTempSuspensionVO bTempSuspensionVO) {
+		HttpSession Session = req.getSession();
+ 	    BInformationVO bInformationVO = (BInformationVO)Session.getAttribute("selectEST");
+ 	    String estid = bInformationVO.getEstid();
+ 	    
+ 	    bTempSuspensionVO.setEstid(estid);
+ 	    
 		int RestInsertBTempSuspensionReuslt = bTempSuspensionDAO.insertBTempSuspension(bTempSuspensionVO);
-
-		return RestInsertBTempSuspensionReuslt;
+		
+		System.out.println(RestInsertBTempSuspensionReuslt);
+		return RestInsertBTempSuspensionReuslt == 1 ? bTempSuspensionDAO.selectBTempSuspension(estid) : null;
 	}
+
+	// 0. 매장 상태 값을 바꾸어주는 메서드입니다.
+	public int changeShopStatus(HttpServletRequest req, HashMap<String,String> obj) {
+		HttpSession Session = req.getSession();
+ 	   	BPrivateDataVO bPrivateDataVO = (BPrivateDataVO)Session.getAttribute("bLogin");
+ 	    
+ 	   	int result = bInformationDAO.updateStatus(obj);
+ 	   	
+ 	    // 세션 초기화
+ 	    Login.getInformationList(bPrivateDataVO, Session, bInformationDAO);
+ 	    
+		return result;
+	}
+
+
+
 
 
 	

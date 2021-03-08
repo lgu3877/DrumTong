@@ -21,13 +21,15 @@ document.getElementById(
 
 
 
-//달력 렌더링
+// 초기실행
 renderCalendar();
 
+
+//달력 렌더링
 function renderCalendar() {
-	yearMonthSelector();
 	createYears();
 	createMonths();
+	yearMonthSelector();
 	loadDays(currentYear, currentMonth, currentDate);
 	displayMarker(); // 정기휴무
 }
@@ -318,9 +320,9 @@ function weekConvert(value) {
 	case "둘째 주":
 		return "secondWeek";
 	case "셋째 주":
-		return "thirdWeek";
+		return "thridweek";
 	case "넷째 주":
-		return "forthWeek";
+		return "fourthweek";
 	case "다섯째 주":
 		return "fifthWeek";
 	case "여섯째 주":
@@ -379,20 +381,24 @@ function markRegHolidays() {
 	const obj = {
 		firstweek: [],
 		secondweek: [],
-		thirdweek: [],
-		forthweek: [],
+		thridweek : [],
+		fourthweek: [],
 		fifthweek: [],
 		sixthweek: [],
 	};
 	
 	// object 형성 (bscheduledays > obj)
 	for (let week in bscheduledays) {
-		const dayArray = bscheduledays[week].split("/");
-		dayArray.pop();
-		
-		for (let i = 0; i < dayArray.length; i++) {
-			obj[week].push(dayConvert(dayArray[i]));
+		console.log(bscheduledays[week] !== "-");
+		if(bscheduledays[week] !== "-"){
+			const dayArray = bscheduledays[week].split("/");
+			dayArray.pop();
+			
+			for (let i = 0; i < dayArray.length; i++) {
+				obj[week].push(dayConvert(dayArray[i]));
+			}	
 		}
+		
 	}
 	
 	//디자인 변경 함수
@@ -424,10 +430,10 @@ function markRegHolidays() {
 			obj.secondweek.length !== 0 ? markDay(dayArray, obj.secondweek, "reg_holiday") : null;
 			break;
 		case 2:
-			obj.thirdweek.length !== 0 ? markDay(dayArray, obj.thirdweek, "reg_holiday") : null;
+			obj.thridweek.length !== 0 ? markDay(dayArray, obj.thridweek, "reg_holiday") : null;
 			break;
 		case 3:
-			obj.forthweek.length !== 0 ? markDay(dayArray, obj.forthweek, "reg_holiday") : null;
+			obj.fourthweek.length !== 0 ? markDay(dayArray, obj.fourthweek, "reg_holiday") : null;
 			break;
 		case 4:
 			obj.fifthweek.length !== 0 ? markDay(dayArray, obj.fifthweek, "reg_holiday") : null;
