@@ -111,8 +111,9 @@ button:hover {
 	 */
 	display: flex;
     margin: 20px 30px;
-    border-bottom: 1px solid navy;
     padding-bottom: 20px !important;
+    border-bottom: 1px solid navy;
+    border-bottom-style: dotted;
 }
 
 .flex2 {
@@ -139,7 +140,8 @@ button:hover {
     height: 35px;
     text-align: center;
     margin-right: 10px;
-    background-color: #D6F0FF;
+    background-color: rgba(0, 51, 204, 0.1);
+    /* background-color: #D6F0FF; */
 	}
 
 .card_exdate_input {
@@ -171,8 +173,9 @@ button:hover {
 	width: calc(100% - 118px);
 	height: 35px;
     letter-spacing: 3px;
-	background-color: #D6F0FF;
-	text-indent: 5px;
+    background-color: rgba(0, 51, 204, 0.1);
+	/* background-color: #D6F0FF; */
+	text-indent: 10px;
 }
 
 .interiorLine {
