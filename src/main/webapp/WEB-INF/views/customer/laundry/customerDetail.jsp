@@ -179,9 +179,9 @@
             결제
             <div class="close">&times;</div>
           </div>
-          <div>수거 요청사항 : <input type="text" placeholder="요청사항" readonly></div>
-          <div>세탁 요청사항 : <input type="text" placeholder="요청사항" readonly></div>
-          <div>배달 요청사항 : <input type="text" placeholder="요청사항" readonly></div>
+          <div>수거 요청사항 : <input id="collectionRequests" type="text" placeholder="요청사항"></div>
+          <div>세탁 요청사항 : <input id="laundryRequests" type="text" placeholder="요청사항"></div>
+          <div>배달 요청사항 : <input id="deliveryRequests" type="text" placeholder="요청사항"></div>
           <select class="modal-myCardList">
             <option selected>포인트 결제</option>
           </select>
@@ -434,5 +434,23 @@
     	} 
     	initPage(checkLogin);
     	
+    </script>
+    <script>
+    	function isEquals(optionName, optionText, quantity, quickCheck){
+    		let selectList = document.querySelectorAll('.selected-row');
+    		console.log(selectList);
+    		for(let i = 0; i < selectList.length; i++){
+    			let select = selectList[i];
+    			
+    			if(select.querySelector('.selected-text .selected-name').innerText === optionName
+    				&& select.querySelector('.selected-text .selected-context').innerText === optionText
+    				&& select.querySelector('.quickcheck').checked === quickCheck){
+    				console.log('같은 데이터다!');
+    				select.querySelector('.quantity').value = parseInt(select.querySelector('.quantity').value) + parseInt(quantity);
+    				return false;
+    			}
+    		}
+    		return true;
+    	}
     </script>
 <%@ include file="../main/customerFooter.jsp" %>

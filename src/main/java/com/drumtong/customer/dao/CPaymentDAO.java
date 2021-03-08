@@ -19,6 +19,4 @@ public interface CPaymentDAO {
 	// 포인트 수정해주기
 	int updatePoint(CPointVO cPointvo);
 	
-
-	
 }

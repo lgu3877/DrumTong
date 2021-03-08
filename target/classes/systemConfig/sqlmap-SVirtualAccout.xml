@@ -6,5 +6,10 @@
 
 <!-- 시스템 가상계좌 테이블	 -->
 <mapper namespace="com.drumtong.system.dao.SVirtualAccoutDAO">
-
+	<insert id="insert" parameterType="SVirtualAccoutVO">
+		INSERT INTO SVIRTUALACCOUNT 
+			(MEMBERID, ESTID, SALECODE, POINT) 
+				VALUES
+			(#{memberid}, #{estid}, #{salecode}, #{point})
+	</insert>
 </mapper>
