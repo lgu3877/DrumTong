@@ -19,8 +19,10 @@ import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BSalesVO;
 import com.drumtong.customer.dao.CBookmarkDAO;
 import com.drumtong.customer.dao.CCouponDAO;
+import com.drumtong.customer.dao.CPaymentDAO;
 import com.drumtong.customer.vo.CBookmarkVO;
 import com.drumtong.customer.vo.CCouponVO;
+import com.drumtong.customer.vo.CPointVO;
 import com.drumtong.customer.vo.CPrivateDataVO;
 import com.drumtong.map.dao.MEmdDAO;
 import com.drumtong.map.dao.MSidoDAO;
@@ -29,6 +31,8 @@ import com.drumtong.map.vo.MEmdVO;
 import com.drumtong.map.vo.MSidoVO;
 import com.drumtong.map.vo.MSigunguVO;
 import com.drumtong.security.SelectLaundryList;
+import com.drumtong.system.dao.SVirtualAccoutDAO;
+import com.drumtong.system.vo.SVirtualAccoutVO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -42,6 +46,8 @@ public class RestCustomerLaundryService {
 	@Autowired BInformationDAO bInformationDAO;
 	@Autowired BSalesDAO bSalesDAO;
 	@Autowired BDetailSalesDAO bDetailSalesDAO;
+	@Autowired SVirtualAccoutDAO sVirtualAccoutDAO;
+	@Autowired CPaymentDAO cPaymentDAO;
 	
 	// 지도 DAO
 	@Autowired MEmdDAO mEmdDAO;
@@ -143,6 +149,8 @@ public class RestCustomerLaundryService {
 		
 		BSalesVO bSales = mapper.convertValue(param.get("sales"), new TypeReference<BSalesVO>() {});
 		
+		int point = bSales.getTotalprice();
+		
 		String useCouponId = (String)param.get("couponID");
 		
 		String estid = (String)param.get("estid");
@@ -160,6 +168,20 @@ public class RestCustomerLaundryService {
 		cCouponDAO.useCoupon(map);
 		
 		int result = bSalesDAO.insert(bSales);
+		
+		SVirtualAccoutVO sVirtualAccoutVO = new SVirtualAccoutVO();
+		sVirtualAccoutVO.setMemberid(memberid);
+		sVirtualAccoutVO.setEstid(estid);
+		sVirtualAccoutVO.setSalecode(salecode);
+		sVirtualAccoutVO.setPoint(point);
+		
+		result = sVirtualAccoutDAO.insert(sVirtualAccoutVO);
+		
+		CPointVO cPointVO = new CPointVO();
+		cPointVO.setMemberid(memberid);
+		cPointVO.setPoint(-point);
+		
+		result = cPaymentDAO.updatePoint(cPointVO);
 		
 		if(result == 1)
 			result = bDetailSalesDAO.insert(bDetailSalesList);
