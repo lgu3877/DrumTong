@@ -25,6 +25,14 @@
 	
 	<!-- Axios -->
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	
+	<!-- javascript cpath -->
+	<script type="text/javascript" charset="utf-8">
+		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+		function getContextPath() {
+		    return sessionStorage.getItem("contextpath");
+		}
+	</script>
   
   <!-- 영경 스크립트(js파일로 변경해야함) -->
   <script>
@@ -50,7 +58,7 @@
             'storeid':storeid,
             'type':'business',
         };
-        await axios.post('/drumtong/business/membership/businessLogin/rest/loginCheck/', ob)
+        await axios.post(getContextPath() + '/business/membership/businessLogin/rest/loginCheck/', ob)
 
         .then( (response) => {
           if(response.data === true){
