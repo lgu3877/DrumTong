@@ -2,7 +2,7 @@
 
 
 	function pageNum(){	// 영경씨 작업
-		var axiosPath = '/drumtong/business/subManagement/businessReviewManagement/rest/pageCount/';
+		var axiosPath = getContextPath() + '/business/subManagement/businessReviewManagement/rest/pageCount/';
 		
 		const axPost = async () => {   // async : 비동기 실행 함수
 		    await axios.post(axiosPath)
@@ -328,7 +328,7 @@
 					   'salecode': obj.name,
 			      	};
 			
-			var axiosPath = '/drumtong/business/subManagement/businessReviewManagement/rest/' + globalPath + '/reportAdd/';
+			var axiosPath = getContextPath() + '/business/subManagement/businessReviewManagement/rest/' + globalPath + '/reportAdd/';
 			console.log('axiosPath : ', axiosPath);
 			
 	        const axPost = async (ob) => {   // async : 비동기 실행 함수
@@ -359,7 +359,7 @@
 			      	};
 			
 	        const axPost = async (ob) => {   // async : 비동기 실행 함수
-	            await axios.post('/drumtong/business/subManagement/businessReviewManagement/rest/reportReply/reportDelete/', ob)
+	            await axios.post(getContextPath() + '/business/subManagement/businessReviewManagement/rest/reportReply/reportDelete/', ob)
 	            // 정상
 	       		.then( (response) => {
 	            const data = response.data;
@@ -386,6 +386,7 @@
 		replyInput.setAttribute('maxlength', '1000');
 
 		var replyButton = document.createElement('input');
+		replyButton.setAttribute('name', obj.name);
 		replyButton.setAttribute('type', 'button');
 		replyButton.setAttribute('value', '작성');
 		replyButton.setAttribute('onclick', 'replyButton(this)');
@@ -414,9 +415,9 @@
 					   'salecode': obj.name,
 					   'bcontent': textarea.value,
 			      	};
-			
-			var axiosPath = '/drumtong/business/subManagement/businessReviewManagement/rest/' + globalPath + '/replyAdd/';
-			
+			console.log('globalPath : ' + globalPath);
+			var axiosPath = getContextPath() + '/business/subManagement/businessReviewManagement/rest/' + globalPath + '/replyAdd/';
+			console.log('axiosPath : ' + axiosPath);
 	        const axPost = async (ob) => {   // async : 비동기 실행 함수
 	            await axios.post(axiosPath, ob)
 	            // 정상
@@ -445,7 +446,7 @@
 					   'salecode': obj.name,
 			      	};
 			
-			var axiosPath = '/drumtong/business/subManagement/businessReviewManagement/rest/' + globalPath + '/replyDelete/';
+			var axiosPath = getContextPath() + '/business/subManagement/businessReviewManagement/rest/' + globalPath + '/replyDelete/';
 			
 	        const axPost = async (ob) => {   // async : 비동기 실행 함수
 	            await axios.post(axiosPath, ob)

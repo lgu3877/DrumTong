@@ -88,7 +88,7 @@
 
 
         const axPost = async (ob) => {   // async : 비동기 실행 함수
-          await axios.post('/drumtong/business/membership/rest/', ob)
+          await axios.post(getContextPath() + '/business/membership/rest/', ob)
           // 정상
      		.then( (response) => {
             const data = response.data;
@@ -99,7 +99,7 @@
            })
         }
         const axPostAddress = async (ob) => {   // async : 비동기 실행 함수
-          await axios.post('/drumtong/business/membership/rest/', ob)
+          await axios.post(getContextPath() + '/business/membership/rest/', ob)
           // 정상
      		.then( (response) => {
            })
@@ -499,7 +499,7 @@
       	};
 
         const axPost = async (ob) => {   // async : 비동기 실행 함수
-          await axios.post('/drumtong/business/membership/rest/', ob)
+          await axios.post(getContextPath() + '/business/membership/rest/', ob)
           // 정상
      		.then( (response) => {
             const data = response.data;

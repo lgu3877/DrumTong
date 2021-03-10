@@ -244,7 +244,7 @@ function pageKindAxios(path) {
 		}
 	}
 	
-	const axiosPath = '/drumtong/business/subManagement/businessStatisticsManagement/rest/';
+	const axiosPath = getContextPath() + '/business/subManagement/businessStatisticsManagement/rest/';
 	const axPost = async (ob) => { // ■ 영경 : 여기 ob를 넘겨주지 않았음! ■   // async : 비동기 실행 함수
 	    await axios.post(axiosPath, ob)	// ■ 영경 : 여기 ob를 넘겨주지 않았음! ■
 	    // 정상

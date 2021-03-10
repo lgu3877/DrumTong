@@ -56,9 +56,9 @@ function afterSendAuth(target, targetDiv, number){	// number : 인증번호
 	confirmButton = document.getElementById(target + '_confirm');
 	confirmButton.disabled='';
 	confirmButton.onclick = function (){
-		console.log(target + "_yours");
+//		console.log(target + "_yours");
 		yours = document.getElementById(target + "_yours");
-		console.log(yours);
+//		console.log(yours);
 		if(yours.value == number){
 			((this.parentNode).parentNode).submit();
 		}else {
@@ -82,9 +82,9 @@ function authInput(target) {
 	  var axPost = async (object) => {
 		let ob;
 		if(parentName === 'PwPhone-search'){
-			console.log(object[0].value);
-			console.log(object[1].value);
-			console.log(object[2].value);
+//			console.log(object[0].value);
+//			console.log(object[1].value);
+//			console.log(object[2].value);
 			ob={
 					'id':object[0].value,
 					'name':object[1].value,
@@ -98,13 +98,13 @@ function authInput(target) {
 					'email':object[1].value,
 			};
 		}
-	    await axios.post("/drumtong/business/membership/businessAccountFind/rest/userCheck/", ob)
+	    await axios.post(getContextPath() + "/business/membership/businessAccountFind/rest/userCheck/", ob)
 	
 	    .then( (response) => {
 	      if(response.data !== -1){
 // 계정이 일치한다면 이 함수를 실행합니당(영경)
-	    	console.log('이 텍스트는 resources/business/js/businessAccountSearch.js 의 authInput 함수 내에 있음');
-	    	console.log('인증번호는 ', response.data);
+//	    	console.log('이 텍스트는 resources/business/js/businessAccountSearch.js 의 authInput 함수 내에 있음');
+//	    	console.log('인증번호는 ', response.data);
 	    	afterSendAuth(target, targetDiv, response.data);
 	      } else{
 	        alert("입력하신 내용이 일치하지 않습니다.\n다시 입력해주세요.");

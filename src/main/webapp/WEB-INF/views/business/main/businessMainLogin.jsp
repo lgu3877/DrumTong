@@ -204,7 +204,7 @@
 						'storeid':storeid,
 						'type':'business',
 				};
-				await axios.post('/drumtong/business/membership/businessLogin/rest/loginCheck/', ob)
+				await axios.post(getContextPath() + '/business/membership/businessLogin/rest/loginCheck/', ob)
 				
 				.then( (response) => {
 					if(response.data === true){
