@@ -267,7 +267,7 @@ public class SelectLaundryList {
 		
 		// 10개 이상일 경우 랜덤으로 리스트를 가져온다.
 		while(checkList) {
-			int random = (int)(Math.random() * maxNum) + 1;
+			int random = (int)(Math.random() * maxNum);
 			
 			// 데이터 가져와서 result 에 추가하기(랜덤 숫자가 중복되거나 데이터가 중복되는 경우 입력되지 않도록 HashSet 이용)
 			if(randomNums.add(random)) {
