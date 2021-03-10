@@ -38,7 +38,7 @@ function cardSubmit(obj) {
 	
 	// axios post request
 	const axPost = async (ob) => {  
-		await axios.post('/drumtong/business/subManagement/BPayment/rest/updateCard/' , ob)
+		await axios.post(getContextPath() + '/business/subManagement/BPayment/rest/updateCard/' , ob)
 		// success
 		.then( (response) => {
 			const data = response.data;
@@ -73,7 +73,7 @@ function accountSubmit(obj) {
 	};
 	
 	const axPost = async (ob) => {   // async : 비동기 실행 함수
-		await axios.post('/drumtong/business/subManagement/BPayment/rest/updateAccount/' , ob)
+		await axios.post(getContextPath() + '/business/subManagement/BPayment/rest/updateAccount/' , ob)
 		// 정상
 		.then( (response) => {
 			const data = response.data;

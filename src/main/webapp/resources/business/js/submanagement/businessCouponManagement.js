@@ -42,7 +42,7 @@
 			
 			
 	        const axPost = async (ob) => {   // async : 비동기 실행 함수
-	            await axios.post('/drumtong/business/subManagement/businessCouponManagement/rest/add/' , ob)
+	            await axios.post(getContextPath() + '/business/subManagement/businessCouponManagement/rest/add/' , ob)
 	            // 정상
 	       		.then( (response) => {
 	            const data = response.data;
@@ -68,7 +68,7 @@
 			      	};
 			
 	        const axPost = async (ob) => {   // async : 비동기 실행 함수
-	            await axios.post('/drumtong/business/subManagement/businessCouponManagement/rest/del/' , ob)
+	            await axios.post(getContextPath() + '/business/subManagement/businessCouponManagement/rest/del/' , ob)
 	            // 정상
 	       		.then( (response) => {
 	            const data = response.data;
