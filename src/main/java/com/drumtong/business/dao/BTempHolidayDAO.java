@@ -23,4 +23,7 @@ public interface BTempHolidayDAO {
 	// 3. 매장 임시 휴무일에 새 데이터를 입력해주는 메서드입니다.
 	int insertBTempHoliday(BTempHolidayVO bTempHolidayVO);
 
+	// 4. 매장 임시휴무일 새 데이터를 입력해주는 메서드입니다ㅏ.
+	BTempHolidayVO selectBTempHoliday(BTempHolidayVO bTempHolidayVO);
+
 }

@@ -4,10 +4,14 @@ public class BScheduleDaysVO {
 	private String estid;
 	private String firstweek;
 	private String secondweek;
-	private String thirdweek;
+	private String thridweek;
+	private String fourthweek;
 	private String fifthweek;
 	private String sixthweek;
 	private char holiday;
+	
+	
+
 	public String getEstid() {
 		return estid;
 	}
@@ -26,11 +30,17 @@ public class BScheduleDaysVO {
 	public void setSecondweek(String secondweek) {
 		this.secondweek = secondweek;
 	}
-	public String getThirdweek() {
-		return thirdweek;
+	public String getThridweek() {
+		return thridweek;
 	}
-	public void setThirdweek(String thirdweek) {
-		this.thirdweek = thirdweek;
+	public void setThridweek(String thridweek) {
+		this.thridweek = thridweek;
+	}
+	public String getFourthweek() {
+		return fourthweek;
+	}
+	public void setFourthweek(String fourthweek) {
+		this.fourthweek = fourthweek;
 	}
 	public String getFifthweek() {
 		return fifthweek;

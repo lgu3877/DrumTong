@@ -34,7 +34,7 @@ import com.drumtong.business.vo.BDeliveryAreaVO;
 import com.drumtong.business.vo.BImageVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BManagementVO;
-import com.drumtong.business.vo.BMenuListVO;
+import com.drumtong.business.vo.BMenuList;
 import com.drumtong.business.vo.BMenuVO;
 import com.drumtong.business.vo.BPrivateDataVO;
 import com.drumtong.business.vo.BScheduleDaysVO;
@@ -219,7 +219,7 @@ public class BusinessMainManagementService {
 	@Transactional
 	public ModelAndView shopManagement(HttpServletRequest req, MultipartHttpServletRequest mpf, 
 									   BManagementVO bManagementVO, 
-									   BMenuListVO bMenuVOList, 	
+									   BMenuList bMenuVOList, 	
 									   String[] bDeliveryAreaList, BInformationVO bInformationVO) {
 		ModelAndView mav = new ModelAndView("redirect:/business/mainmanagement/businessScheduleManagement/");
 		
@@ -246,6 +246,8 @@ public class BusinessMainManagementService {
 	    // 매장의 상태값에 따라서 처리해야될 함수입니다.
 		processingAccordingToStoreStatus(status, bMenuVOList, bDeliveryAreaList, estid);
 		
+		
+		// 세션 초기화
 		Login.getInformationList(bPrivateDataVO, Session, bInformationDAO);
 		
 		return mav;
@@ -309,7 +311,7 @@ public class BusinessMainManagementService {
 	}
 
 
-	private void processingAccordingToStoreStatus(String status, BMenuListVO bMenuVOList, String[] bDeliveryAreaList,
+	private void processingAccordingToStoreStatus(String status, BMenuList bMenuVOList, String[] bDeliveryAreaList,
 			String estid) {
 		
 		 switch(status) {
@@ -328,7 +330,7 @@ public class BusinessMainManagementService {
 
 	
 
-	private void processingOnFail(BMenuListVO bMenuVOList, String[] bDeliveryAreaList, String estid) {
+	private void processingOnFail(BMenuList bMenuVOList, String[] bDeliveryAreaList, String estid) {
 		
 		// bMenuList의 데이터를 입력해주는 함수입니다.
 		ArrayList<BMenuVO> dataBindingBMenuList= dataBindingBMenuVO(bMenuVOList,estid);
@@ -352,7 +354,7 @@ public class BusinessMainManagementService {
 		
 	}
 	
-	private void processingOnProcess(BMenuListVO bMenuVOList, String[] bDeliveryAreaList, String estid) {
+	private void processingOnProcess(BMenuList bMenuVOList, String[] bDeliveryAreaList, String estid) {
 		
 		int result1 = bMenuDAO.deleteBMenuAll(estid);
 		
@@ -399,7 +401,7 @@ public class BusinessMainManagementService {
 	 * 
 	 * 
 	 */
-	private ArrayList<BMenuVO> dataBindingBMenuVO(BMenuListVO bMenuVOList, String estid) {
+	private ArrayList<BMenuVO> dataBindingBMenuVO(BMenuList bMenuVOList, String estid) {
 		System.out.println("insertContract foreach 실행...");
 		System.out.println("test : " + bMenuVOList.getName().length);
 		

@@ -1,140 +1,10 @@
 async function updateScheduleTime() {
 	
-	
-	const timeRange = document.getElementsByClassName('time_range');
-	let object = {
-		weekday : '-',
-		saturday : '-',
-		sunday : '-',
-	};
-	
-	// 영업시간 설정 [월~금] [토] [일] 을 순차적으로 검색해준다.
- 	for(let i = 0; i < timeRange.length; i++) {
+	const object = exceptionCheckBScheduleTime();
+	console.log(object);
+	if(!object)
+		return false;
 		
-		
-		
-		let shopSchedule = "-";
-		let scheduleTime = 0;
-		let datafield = ["weekday", "saturday", "sunday"];
-		
-		let extraTimeA = 0;
-		let extraTimeB = 0;
-		
-		console.log('display' , timeRange[i].style.display);
-		
-		
-		// display가 활성화 되어있는 것만 검사해준다.
-		if(timeRange[i].style.display === "") {
-			
-			// 시간 인풋 텍스트 모음
-			const timeInputs = timeRange[i].querySelectorAll('.time_input');
-			
-			
-			// 오전 오후 버튼 모음
-			const timeZoneCons = timeRange[i].querySelectorAll('.time_zone_con');
-			
-			console.log(timeZoneCons);
-			
-			
-			// 오전 오후 체크 상태 예외 검사
-			for(let k = 0; k < timeZoneCons.length; k++) {
-				const timeZoneRadioAM = timeZoneCons[k].children[0].children[0];	
-				const timeZoneRadioPM = timeZoneCons[k].children[1].children[0];
-				
-				console.log(timeZoneRadioAM);
-				console.log(timeZoneRadioPM);
-				
-				console.log(timeZoneRadioAM.checked);
-				console.log(timeZoneRadioPM.checked);
-				// 
-				if(!timeZoneRadioAM.checked && !timeZoneRadioPM.checked) {
-					alert("체크가 안되어있습니다.");
-					return false;
-				}
-				else if(k === 0 && timeZoneRadioPM.checked) {
-					console.log("+12실행 첫번째");
-					extraTimeA = 12;
-				} else if(k === 1 && timeZoneRadioPM.checked ) {
-					console.log("+12실행 두번째");
-					extraTimeB = 12;
-				}
-			}
-			
-			
-			
-			// Input text 빈값 예외 검사
-			for(let j = 0; j < timeInputs.length; j++) {
-				if(timeInputs[j].value === ""){
-					alert("빈 값이 존재합니다");
-					return false;
-				}
-				
-				switch(j) {
-					case 0 :
-						scheduleTime = (timeInputs[j].value === "12" && extraTimeA === 12 ) ? (timeInputs[j].value * 1)  :  (timeInputs[j].value * 1) + extraTimeA;
-						if(scheduleTime < 10)
-							scheduleTime = "0" + scheduleTime;
-						else if(scheduleTime === 12 && extraTimeA !== 12)
-							scheduleTime = "00";
-						else if(shopSchedule === 24)
-							scheduleTime = "12";
-						
-						
-						
-						
-						
-						shopSchedule = "" + scheduleTime + ":";
-						
-						console.log(scheduleTime);
-						
-						break;
-					
-					case 1 :
-					console.log("@@@@@@@@@@@@@@@@@",timeInputs[j].value);
-						shopSchedule +=  (timeInputs[j].value  === "00") ? "0" : "";
-						shopSchedule += ((timeInputs[j].value !== "00" && timeInputs[j].value < 10) ?  "0" + (timeInputs[j].value * 1) : (timeInputs[j].value * 1))   + " ~ ";
-						
-						
-						
-						console.log(shopSchedule);
-						break;
-					
-					case 2 :
-						scheduleTime = (timeInputs[j].value === "12" && extraTimeB === 12 ) ? (timeInputs[j].value * 1)  :  (timeInputs[j].value * 1) + extraTimeB;
-						console.log(scheduleTime );
-						if(scheduleTime < 10)
-							scheduleTime = "0" + scheduleTime;
-						else if(scheduleTime === 12 && extraTimeB !== 12)
-							scheduleTime = "00";
-						else if(shopSchedule === 24)
-							scheduleTime = "12";
-						
-						
-						shopSchedule += scheduleTime + ":";
-						break;
-					
-					case 3 :
-					console.log("@@@@@@@@@@@@@@@@@",timeInputs[j].value);
-						shopSchedule +=  (timeInputs[j].value  === "00") ? "0" : "";
-						shopSchedule += ((timeInputs[j].value !== "00" && timeInputs[j].value < 10) ?  "0" + (timeInputs[j].value * 1) : (timeInputs[j].value * 1)) + "";
-						break;
-				}
-				
-			}
-			
-			
-		}
-		
-		
-		if(!checkTimeWrongFormat(shopSchedule))
-		 	return false;
-		
-		object[datafield[i]] = shopSchedule; 
-		
-		console.log('object@@', object);
-	}
-	
-	
 	const { data } = await axios.post("/drumtong/business/mainmanagement/BScheduleTime/rest/updateBScheduleTime/", object);
 	
 	if(data) {
@@ -206,11 +76,38 @@ function removeRepeatValue(array) {
 // 정기 휴무 등록
 async function updateRegHoliday() {
 	// axios
-	const { data } = await axios.post("/drumtong/business/mainmanagement/BScheduleDays/rest/insertBScheduleDays/", bscheduledays);
+	if(exceptionCheckBScheduleDays() === false)
+		return false;
+	
+	let dbFields = ["firstweek", "secondweek", "thridweek", "fourthweek", "fifthweek", "sixthweek"];
+	
+	
+	let keys = Object.keys(bscheduledays);
+	
+	console.log(keys);
+	
+	for(let key in bscheduledays){
+		dbFields.forEach((el, i) => {
+			if(el === key){
+				dbFields.splice(i, 1);
+				return;
+			} 
+		});
+	}
+	
+	dbFields.forEach((el, i) => {
+		bscheduledays[el] = "-";
+	});
+	
+	
+	console.log(bscheduledays);
+	
+	const { data } = await axios.post("/drumtong/business/mainmanagement/BScheduleDays/rest/updateBScheduleDays/", bscheduledays);
 
 	if (data) {
 		bscheduledays = data; // 데이터 덮어씌우기
-
+		delete bscheduledays.estid;
+	
 		// 정기휴무 뷰 업데이트
 		document.getElementById("reg-holiday-schedule").innerHTML = ""; // 정기휴무 리스트 초기화
 		displayRegHolidays(); // 정기휴무 리스트 다시 출력
@@ -219,8 +116,11 @@ async function updateRegHoliday() {
 		initializeRegInput();
 		
 		// 캘린더 업데이트
-		document.getElementById("calander").innerHTML = ""; 
-		renderCalendar();
+		document.getElementById("calendar-days").innerHTML = ""; 
+		document.getElementById("year-value").innerHTML = currentYear; 
+		document.getElementById("month-value").innerHTML = currentMonth; 
+		loadDays(currentYear, currentMonth, currentDate);
+		// renderCalendar();
 	}
 	
 	else {
@@ -244,23 +144,32 @@ async function updateTmpHoliday() {
 	
 	// request object 생성
 	const object = {
-		start : startDate, 
-		end : endDate,
-		reason : reason
+		beginday : startDate, 
+		endday : endDate,
+		reason : reason,
 	}
 	
-	const { data } = axios.post("/drumtong/business/mainmanagement/BTempHoliday/rest/deleteBTempHoliday/", object);
-	btempsuspension = data;
+	const { data } = await axios.post("/drumtong/business/mainmanagement/BTempSuspension/rest/insertBTempSuspension/", object);
+	if(data) {
+		alert('성공적으로 입력이 완료되었습니다.');
+		
+		btempsuspension = data;
 	
-	// form 초기화
-	document.getElementById("startDay").value = "";
-	document.getElementById("endDay").value = "";
-	document.getElementById("tmp-holiday-text").value = "";
 	
-	// list 초기화 > 업데이트
-	document.getElementById("schedule-container").innerHTML = ""; // 초기화
-	displayTmpHoliday(); // list 출력
-	hideModiIcons(); // 수정 관련 버튼 숨기기
+		// form 초기화
+		document.getElementById("startDay").value = "";
+		document.getElementById("endDay").value = "";
+		document.getElementById("tmp-holiday-text").value = "";
+		
+		// list 초기화 > 업데이트
+		document.getElementById("schedule-container").innerHTML = ""; // 초기화
+		displayTmpHoliday(); // list 출력
+		hideModiIcons(); // 수정 관련 버튼 숨기기
+	}
+	else {
+		alert('서버 오류가 발생했습니다.')
+	}
+	
 }
 
 
@@ -276,25 +185,38 @@ async function deleteSchedule(list) {
 	
 	if (agree) {
 		// 정규식 > validation (잘짜 & 텍스트)
-		const dateReg = "/^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/";
+		const dateReg = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/;
 		
 		// 사유
 		const reason = list.getElementsByClassName("reason_view_default")[0].innerHTML;
 			
 		const object = {
-			start: startDay,
-			end: endDay,
+			beginday: startDay,
+			endday : endDay,
 			reason: reason || ""
 		}
 		
 		if (dateReg.test(startDay) && dateReg.test(endDay)) {
 			const { data } = await axios.post("/drumtong/business/mainmanagement/BTempSuspension/rest/deleteBTempSuspension/", object);
-			btempsuspension = data;
 			
-			// view 초기화 > 업데이트(리스트 & 버튼)
-			document.getElementById("schedule-container").innerHTML = ""; // 초기화
-			displayTmpHoliday(); // list 출력
-			hideModiIcons(); // 수정 관련 버튼 숨기기
+			
+			if(data) {
+				alert('성공적으로 삭제가 완료되었습니다.');
+				
+				btempsuspension = data;
+			
+			
+				// view 초기화 > 업데이트(리스트 & 버튼)
+				document.getElementById("schedule-container").innerHTML = ""; // 초기화
+				displayTmpHoliday(); // list 출력
+				hideModiIcons(); // 수정 관련 버튼 숨기기
+			
+			}
+			else {
+				alert('서버 오류가 발생했습니다.')
+			}
+			
+			
 		}
 	}
 }
@@ -304,8 +226,12 @@ async function deleteSchedule(list) {
 // 임시휴무 단일 업데이트
 async function postSchedule(list) {
 	// 일자 (시작일 ~ 마지막일)
-	const startDay = list.getElementsByClassName("period_start")[0].value;
-	const endDay = list.getElementsByClassName("period_end")[0].value;	
+	console.log(list);
+	const startDay= list.getElementsByClassName("list_start_day")[0].innerHTML;
+	const endDay= list.getElementsByClassName("list_end_day")[0].innerHTML;
+	
+	const updatebeginday  = list.getElementsByClassName("period_start")[0].value;
+	const updateendday  = list.getElementsByClassName("period_end")[0].value;	
 	
 	// 동의
 	const agree = confirm("수정하신 내용을 반영하시겠습니까?");
@@ -317,20 +243,40 @@ async function postSchedule(list) {
 		// 사유
 		const reason = list.getElementsByClassName("reason_view_input")[0].value;
 			
-		const object = {
-			start: startDay,
-			end: endDay,
-			reason: reason || ""
-		}
+			const object = {
+				updatebeginday : updatebeginday,
+				updateendday : updateendday,
+				beginday : startDay, 
+				endday : endDay,
+				reason : reason,
+			}
 		
 		if (dateReg.test(startDay) && dateReg.test(endDay)) {
-			const { data } = await axios.post("/drumtong/business/mainmanagement/BTempSuspension/rest/deleteBTempSuspension/", object);
+			const { data } = await axios.post("/drumtong/business/mainmanagement/BTempSuspension/rest/updateBTempSuspension/", object);
 			btempsuspension = data;
+			
+			console.log(data);
+			console.log(btempsuspension);
+			
+			alert('성공쩍으로 수정되었습니다.');
 			
 			// view 초기화 > 업데이트(리스트 & 버튼)
 			document.getElementById("schedule-container").innerHTML = ""; // 초기화
 			displayTmpHoliday(); // list 출력
 			hideModiIcons(); // 수정 관련 버튼 숨기기
 		}
+		else {
+			alert("형식에 맞지 않은 데이터입니다..!");
+		}
 	}
+}
+
+async function statusChange(param) {
+	console.log(selectESTID);
+	const object = {
+		estid : selectESTID,
+		status : param,
+	}
+	const { data } = await axios.post("/drumtong/business/mainmanagement/BInformation/rest/changeShopStatus/", object);
+	console.log(data,"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#@#@#@");
 }

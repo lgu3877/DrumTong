@@ -221,3 +221,20 @@
 	color: white;
 	transition: 0.5s;
 }
+.submit_btn {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    width: 140px;
+    background-color: navy;
+    color: white;
+    justify-content: center;
+    height: 40px;
+    border-radius: 8px;
+}
+.submit_con {
+    height: 100px;
+    text-align: right;
+    margin-left: 3.33%;
+    margin-right: 3.33%;
+}

@@ -19,7 +19,7 @@ import com.drumtong.business.vo.BDeliveryAreaVO;
 import com.drumtong.business.vo.BImageVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BManagementVO;
-import com.drumtong.business.vo.BMenuListVO;
+import com.drumtong.business.vo.BMenuList;
 import com.drumtong.business.vo.BMenuVO;
 import com.drumtong.business.vo.BScheduleDaysVO;
 import com.drumtong.business.vo.BScheduleTimeVO;
@@ -44,7 +44,7 @@ public class BusinessMainManagementController {
 	@RequestMapping(value="businessShopManagement/", method = RequestMethod.POST)
 	public ModelAndView shopManagement( HttpServletRequest req,MultipartHttpServletRequest mpf,
 									   BManagementVO bManagementVO, 
-									   BMenuListVO  bMenuVOList, 
+									   BMenuList  bMenuVOList, 
 									   String[] deliveryArea,
 									   BInformationVO bInformationVO) {
 		return svc.shopManagement(req,mpf,bManagementVO, bMenuVOList, deliveryArea, bInformationVO);

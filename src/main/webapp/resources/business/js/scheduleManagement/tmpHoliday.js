@@ -1,6 +1,8 @@
 // 초기실행 (뷰 & 인터페이스)
-displayTmpHoliday(); // list 출력
-hideModiIcons(); // 수정 관련 버튼 숨기기
+if(status === "SUCCESS") {
+	displayTmpHoliday(); // list 출력
+	hideModiIcons(); // 수정 관련 버튼 숨기기
+}
 
 
 // 임시 휴무 리스트 출력
@@ -203,38 +205,41 @@ function cancleUpdate(list) {
 
 
 
-
-//임시 휴무 기간 선택 input > min & max default 설정
-const startDay = document.getElementById("startDay");
-const endDay = document.getElementById("endDay");
-
-const thisYear = new Date().getFullYear();
-const thisMonth = new Date().getMonth() + 1;
-const thisDate = new Date().getDate();
-
-const minDate = `${thisYear}-${thisMonth}-${thisDate}`;
-const maxDate = `${thisYear + 3}-${thisMonth}-${thisDate}`;
-
-startDay.setAttribute("min", minDate);
-startDay.setAttribute("max", maxDate);
-
-endDay.setAttribute("min", minDate);
-endDay.setAttribute("max", maxDate);
-
-
-//임시 휴무 기간 input 유효성 검사
-endDay.addEventListener("change", function(e) {
-	if (startDay.value !== null) {		
-		const inputDate = e.target.value;
-		console.log(inputDate);
-		console.log(startDay.value);
-		
-		inputDate < startDay.value ? 
-			document.getElementById("date-error-msg").innerHTML = "시작일보다 전의 일자를 입력하셨습니다. 다시 입력해주세요." :
-			null;	
-
-		inputDate >= startDay.value ? 
-			document.getElementById("date-error-msg").innerHTML = "" : 
-			null;
-	}
-})
+if(status === "SUCCESS") {
+	
+	
+	//임시 휴무 기간 선택 input > min & max default 설정
+	const startDay = document.getElementById("startDay");
+	const endDay = document.getElementById("endDay");
+	
+	const thisYear = new Date().getFullYear();
+	const thisMonth = new Date().getMonth() + 1;
+	const thisDate = new Date().getDate();
+	
+	const minDate = `${thisYear}-${thisMonth}-${thisDate}`;
+	const maxDate = `${thisYear + 3}-${thisMonth}-${thisDate}`;
+	
+	startDay.setAttribute("min", minDate);
+	startDay.setAttribute("max", maxDate);
+	
+	endDay.setAttribute("min", minDate);
+	endDay.setAttribute("max", maxDate);
+	
+	
+	//임시 휴무 기간 input 유효성 검사
+	endDay.addEventListener("change", function(e) {
+		if (startDay.value !== null) {		
+			const inputDate = e.target.value;
+			console.log(inputDate);
+			console.log(startDay.value);
+			
+			inputDate < startDay.value ? 
+				document.getElementById("date-error-msg").innerHTML = "시작일보다 전의 일자를 입력하셨습니다. 다시 입력해주세요." :
+				null;	
+	
+			inputDate >= startDay.value ? 
+				document.getElementById("date-error-msg").innerHTML = "" : 
+				null;
+		}
+	})
+}

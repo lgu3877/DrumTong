@@ -3,7 +3,6 @@
 <c:set var="cpath">${pageContext.request.contextPath }</c:set>
 <!-- selectEST.status 값을 status에 c:set 해줍니다 -->
 <c:set var = "status" value="${selectEST.status}" />
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,8 +56,7 @@
 		delete bscheduledays.holiday; // holiday 삭제
 		// 임시휴무
 		let btempsuspension = ${btempsuspension};
-
-		console.log(bscheduledays);
+		const selectESTID = "${selectEST.estid}";
 	</script>
 
 </head>
@@ -66,7 +64,7 @@
 
 
 	<!-- 	온라인 계약이 진행 중인 상태이면은 기본 헤더를 보여준다 -->
-	<c:if test="${status eq 'FAIL' }">
+	<c:if test="${status ne 'FAIL' }">
 		<%@ include file="../main/businessHeader.jsp" %>
 	</c:if>
 	
@@ -332,7 +330,7 @@
 								<option value="allweek">매주</option>
 								<option value="firstweek">첫째 주</option>
 								<option value="secondweek">둘째 주</option>
-								<option value="thirdweek">셋째 주</option>
+								<option value="thridweek">셋째 주</option>
 								<option value="forthweek">넷째 주</option>
 								<option value="fifthweek">다섯째 주</option>
 								<option value="sixthweek">여섯째 주</option>
@@ -421,118 +419,120 @@
 			
 		<!-- 임시 휴무 설정 -->
 			<!-- </form> -->
-			<div class="tmp_holiday">
-				<!-- title -->
-				<div class="content_title_con">
-					<div>
-						<span class="content_title">임시 휴무 설정</span> 
-						<i class="far fa-question-circle" style="font-weight: 600">도움말</i>
-					</div>
-					<!-- button -->
-					<div class="btn_con">
-					 
-					<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
-						<c:if test="${status eq 'SUCCESS' }">
-							<div id="complete-holiday" class="btn update_btn" onclick="updateTmpHoliday()">
-								<div class="icon_con">
-									<i class="fas fa-check-square"></i>
-								</div>
-								<div class="btn_title">휴무 등록</div>
-							</div>
-						</c:if>
-					</div>
-				</div>
-				
-			<!-- context -->
-				<div class="tmp_holiday_input_con">
-				
-				<!-- 기간 설정 -->
-				<!-- 사유 작성 -->
-					<div class="tmp_holiday_reason_con">
-
-					<!-- <form> -->
-						<div class="form">
-							<!-- 제목 & 유형 -->
-							<div class="reason_title">임시 휴무 기간 선택 및 사유 작성</div>
-
-							<div class="set_day_range_con">
-							<!-- form -->
-								<input id="startDay" type="date" name="startDay" pattern="\d{4}-\d{2}-\d{2}">
-
-							<!-- ~ -->
-								<div class="date_arrow">
-									<i class="fas fa-long-arrow-alt-right"></i>
-								</div>
-							<!-- to -->
-								<input id="endDay" type="date" name="endDay" pattern="\d{4}-\d{2}-\d{2}">
-							</div>
-							<div id="date-error-msg" class="error_msg text_red"></div>
-
-						<!-- 사유 -->
-							<div class="text_area_con">
-								<textarea id="tmp-holiday-text" class="text_area" cols="100" rows="30"></textarea>
-							</div>
+			<c:if test="${status eq 'SUCCESS' }">
+				<div class="tmp_holiday">
+					<!-- title -->
+					<div class="content_title_con">
+						<div>
+							<span class="content_title">임시 휴무 설정</span> 
+							<i class="far fa-question-circle" style="font-weight: 600">도움말</i>
 						</div>
-					<!-- </form> -->	
-						
+						<!-- button -->
+						<div class="btn_con">
+						 
+						<!-- status 가 SUCCESS일때만 버튼이 생성된다. ( Rest를 위한 버튼 ) -->
+							<c:if test="${status eq 'SUCCESS' }">
+								<div id="complete-holiday" class="btn update_btn" onclick="updateTmpHoliday()">
+									<div class="icon_con">
+										<i class="fas fa-check-square"></i>
+									</div>
+									<div class="btn_title">휴무 등록</div>
+								</div>
+							</c:if>
+						</div>
 					</div>
 					
-				<!-- 임시 영업 중지 목록 -->
-					<div class="tmp_holiday_list_con">
-					<!-- <form> -->
-						<div class="tmp_holiday_list form">
-							
-							<ul class="list_con">
-							<!-- 필터링 -->
-								<li class="list_filter">
-									<ul class="list_filter_content">
-										<li id="view_all" class="list_filter_content_item" onclick="pageReload()">
-											전체보기
-											<i class="fas fa-caret-down"></i>
-										</li>
-										<li id="view_recent" class="list_filter_content_item" onclick="sort('recent')">
-											가까운 날짜 순
-											<i class="fas fa-caret-down"></i>
-										</li>
-										<li id="view_old" class="list_filter_content_item" onclick="sort('late')">
-											먼 날짜 순
-											<i class="fas fa-caret-down"></i>
-										</li>
-										<li id="view_month" class="list_filter_content_item" onclick="openCalendar()">
-											월 검색
-											<i class="fas fa-calendar-alt"></i>
-										</li>
-									<!-- 월 선택 드랍다운 -->
-										<li>
-											<div id="month-selector" class="s_month_selector"></div>
-										<li>
-									</ul>
-								</li>
-							<!-- 리스트 -->
-								<li id="schedule-container" class="list_content_con"></li>
-							</ul>
-							
-							
+				<!-- context -->
+					<div class="tmp_holiday_input_con">
+					
+					<!-- 기간 설정 -->
+					<!-- 사유 작성 -->
+						<div class="tmp_holiday_reason_con">
+	
+						<!-- <form> -->
+							<div class="form">
+								<!-- 제목 & 유형 -->
+								<div class="reason_title">임시 휴무 기간 선택 및 사유 작성</div>
+	
+								<div class="set_day_range_con">
+								<!-- form -->
+									<input id="startDay" type="date" name="startDay" pattern="\d{4}-\d{2}-\d{2}">
+	
+								<!-- ~ -->
+									<div class="date_arrow">
+										<i class="fas fa-long-arrow-alt-right"></i>
+									</div>
+								<!-- to -->
+									<input id="endDay" type="date" name="endDay" pattern="\d{4}-\d{2}-\d{2}">
+								</div>
+								<div id="date-error-msg" class="error_msg text_red"></div>
+	
+							<!-- 사유 -->
+								<div class="text_area_con">
+									<textarea id="tmp-holiday-text" class="text_area" cols="100" rows="30"></textarea>
+								</div>
+							</div>
+						<!-- </form> -->	
 							
 						</div>
-					<!-- </form> -->
-					</div>
-					
 						
+					<!-- 임시 영업 중지 목록 -->
+						<div class="tmp_holiday_list_con">
+						<!-- <form> -->
+							<div class="tmp_holiday_list form">
+								
+								<ul class="list_con">
+								<!-- 필터링 -->
+									<li class="list_filter">
+										<ul class="list_filter_content">
+											<li id="view_all" class="list_filter_content_item" onclick="pageReload()">
+												전체보기
+												<i class="fas fa-caret-down"></i>
+											</li>
+											<li id="view_recent" class="list_filter_content_item" onclick="sort('recent')">
+												가까운 날짜 순
+												<i class="fas fa-caret-down"></i>
+											</li>
+											<li id="view_old" class="list_filter_content_item" onclick="sort('late')">
+												먼 날짜 순
+												<i class="fas fa-caret-down"></i>
+											</li>
+											<li id="view_month" class="list_filter_content_item" onclick="openCalendar()">
+												월 검색
+												<i class="fas fa-calendar-alt"></i>
+											</li>
+										<!-- 월 선택 드랍다운 -->
+											<li>
+												<div id="month-selector" class="s_month_selector"></div>
+											<li>
+										</ul>
+									</li>
+								<!-- 리스트 -->
+									<li id="schedule-container" class="list_content_con"></li>
+								</ul>
+								
+								
+								
+							</div>
+						<!-- </form> -->
+						</div>
+						
+							
+					</div>
 				</div>
+				<!-- </form> -->
 			</div>
-			<!-- </form> -->
-		</div>
+		</c:if>
 		<!-- </form> -->
 		
 	<!-- [66줄] 여는 태그  세션의 상태가 FAIL이면 POST 형식   -->
 	<!-- 	SUCCESS이면 REST형식으로 처리해준다. -->
 	<!-- 	[전체 폼]에 대한 c:if문 -->
-	<c:if test="${status eq 'FAIL' }">
+	<c:if test="${status ne 'SUCCESS' }">
 	
 	<!-- 전체 form submit -->
-		<div>
-			<input type="submit" value="계약 완료">
+		<div class="submit_con">
+			<input type="button" class="submit_btn" value="계약 완료" onclick="checkExceptionBeforeSubmit()">
 		</div>
 	
 	</form>
