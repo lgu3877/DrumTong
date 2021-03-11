@@ -190,4 +190,11 @@
 				WHERE STATUS='SUCCESS'
 	</select>
 	
+<!-- 	검색어 자동완성 -->
+	<select id="searchAutoComplete" parameterType="String" resultType="BInformationVO">
+		SELECT MAINLOCATION, BRANDNAMING 
+			FROM BINFORMATION 
+				WHERE BRANDNAMING LIKE '%' || #{searchWord} || '%'
+	</select>
+	
 </mapper>
