@@ -42,41 +42,47 @@ function showCounpons() {
 	for(i = 0; i < couponlist.length; i++) {
 		
 		// main container 
-		var container = document.createElement('div');
+		const container = document.createElement('div');
 			container.className = 'container';
 			
 		// sub-container
-		var inputFlex = document.createElement('div');
+		const inputFlex = document.createElement('div');
 			inputFlex.className = 'inputFlex form';
 		
 		// left container
-		var inputdivcontainer = document.createElement('div');
+		const inputdivcontainer = document.createElement('div');
 			inputdivcontainer.className = 'inputDivContainer';
 		
-		// input container
-		var inputdiv = document.createElement('div');
-			inputdiv.className = 'inputDiv';
+		// date wrapper	
+		const dateWrapper = document.createElement('div');
+			dateWrapper.className = "mb-20";
 		
-		// split values by ~
-		var listsplit = (couponlist[i].period).split('~'); //	필수
+		// date title
+		const dateTitle = document.createElement('div');
+			dateTitle.className = 'input_title';
+			dateTitle.innerHTML = '기간';
 		
-		
-		// 기간 (title)
-		var period = document.createElement('div');
-			period.className = 'input_title';
-			period.innerHTML = '기간';
-		
+		// date input container
+		const dateTitle = document.createElement('div');
+			dateTitle.style.display = "flex";
+			
+				// input container
+				var inputdiv = document.createElement('div');
+					inputdiv.className = 'inputDiv';
+				
+				// split values by ~
+				var listsplit = (couponlist[i].period).split('~'); //	필수
+				
 		// 시작일
-		var beforedate = document.createElement('input');
+		const beforedate = document.createElement('input');
 			beforedate.setAttribute('type', 'date');
 			beforedate.setAttribute('value', listsplit[0].slice(0,-1));	// 마지막 공백 한글자 제거			//	필수
 			beforedate.readOnly = true;
 		
-		var tagh1 = document.createElement('h1');
-			tagh1.style.width = '20px';
-			tagh1.style.display = 'inline-block';
-			tagh1.style.textAlign = 'center';
-			tagh1.innerHTML = '-';
+		// date arrow (~)
+		const arrow = document.createElement('div');
+			arrow.className = "date_arrow";
+			arrow.innerHTML = '~';
 		
 		var afterdate = document.createElement('input');
 			afterdate.setAttribute('type', 'date');
@@ -84,10 +90,6 @@ function showCounpons() {
 			afterdate.readOnly = true;
 		
 		// appending
-		inputdiv.appendChild(period);
-		inputdiv.appendChild(beforedate);
-		inputdiv.appendChild(tagh1);
-		inputdiv.appendChild(afterdate);
 		
 		
 		
@@ -115,9 +117,9 @@ function showCounpons() {
 		saleinput.setAttribute('type', 'text');
 		saleinput.setAttribute('value', couponlist[i].discount);			//	필수
 		saleinput.readOnly = true;
-		costdiv2.appendChild(minh2);
-		costdiv2.appendChild(saleinput);
-		inputdiv.appendChild(costdiv2);
+			costdiv2.appendChild(minh2);
+			costdiv2.appendChild(saleinput);
+			inputdiv.appendChild(costdiv2);
 		
 		
 		
@@ -127,15 +129,16 @@ function showCounpons() {
 		var radio1 = document.createElement('input');
 		radio1.setAttribute('type', 'radio');
 		radio1.disabled = true;
-		if(couponlist[i].maxissuenum == 0) {
+		if (couponlist[i].maxissuenum == 0) {
 			radio1.checked = true;
 		}
 		var radioname1 = document.createElement('h1');
 		radioname1.innerHTML = '무제한';
-		radiodiv1.appendChild(radio1);
-		radiodiv1.appendChild(radioname1);
-		inputdiv.appendChild(radiodiv1);
 		
+			radiodiv1.appendChild(radio1);
+			radiodiv1.appendChild(radioname1);
+			inputdiv.appendChild(radiodiv1);
+			
 		
 		
 		// 선착순 버튼
@@ -149,17 +152,19 @@ function showCounpons() {
 		radioname2.innerHTML = '선착순';
 		radiodiv2.appendChild(radio2);
 		radiodiv2.appendChild(radioname2);
-		if(couponlist[i].maxissuenum !== 0) {			//	필수
+		if (couponlist[i].maxissuenum !== 0) { // 필수
 			radio2.checked = true;
 			var showcouponnum = document.createElement('input');
 			showcouponnum.setAttribute('type', 'text');
-			showcouponnum.value = couponlist[i].maxissuenum;			//	필수
+			showcouponnum.value = couponlist[i].maxissuenum; // 필수
 			showcouponnum.readOnly = true;
 			radiodiv2.appendChild(showcouponnum);
 		}
-		inputdiv.appendChild(radiodiv2);
-		inputdivcontainer.appendChild(inputdiv);
-		inputFlex.appendChild(inputdivcontainer);
+		
+		
+			inputdiv.appendChild(radiodiv2);
+			inputdivcontainer.appendChild(inputdiv);
+			inputFlex.appendChild(inputdivcontainer);
 		
 		
 	// 삭제 버튼 생성 및 추가
@@ -171,7 +176,7 @@ function showCounpons() {
 		var deleteButton = document.createElement('input');
 			deleteButton.className = "coupon_publish";
 			deleteButton.setAttribute('type', 'button');
-			deleteButton.setAttribute('value', '삭제');
+			deleteButton.setAttribute('value', '쿠폰삭제');
 			deleteButton.setAttribute('id', couponlist[i].couponid);			//	필수
 			deleteButton.setAttribute('onclick', 'deleteCoupon(this)');
 		
