@@ -90,4 +90,10 @@ public class RestCustomerLaundryController {
 	public String submitDetail(HttpServletRequest req, @RequestBody HashMap<String, Object> param) {
 		return svc.submitDetail(req, param);
 	}
+	
+	@RequestMapping("customerSearch/rest/searchAutoComplete/{param}/")
+	@GetMapping(produces="application/json; charset=utf8")
+	public String searchAutoComplete(@PathVariable("param")String searchWord) {
+		return svc.searchAutoComplete(searchWord);
+	}
 }

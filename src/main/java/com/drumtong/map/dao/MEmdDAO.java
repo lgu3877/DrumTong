@@ -21,5 +21,8 @@ public interface MEmdDAO {
 
 	// 읍면동 Select REST [건욱]
 	List<MEmdVO> selectEmd();
+
+	// 검색어 자동완성
+	List<String> searchAutoComplete(String[] searchList);
 	
 }
