@@ -133,6 +133,5 @@ function mainSearch(){
 			  mainSearch();
 	})
 
-
 </script>
 <%@ include file="customerFooter.jsp"%>

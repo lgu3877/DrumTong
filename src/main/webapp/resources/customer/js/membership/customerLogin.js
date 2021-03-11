@@ -30,7 +30,7 @@ function logiinSubmit(type) {
         				'storeid':storeid,
         				'type':'customer',
         		};
-        		await axios.post('/drumtong/customer/membership/customerLogin/rest/loginCheck/', ob)
+        		await axios.post(getContextPath() + '/customer/membership/customerLogin/rest/loginCheck/', ob)
         		
         		.then( (response) => {
         			if(response.data === true){
@@ -54,7 +54,7 @@ function logiinSubmit(type) {
         				'storeid':storeid,
         				'type':'customer',
         		};
-        		await axios.post('/drumtong/customer/membership/customerLogin/rest/login/', ob)
+        		await axios.post(getContextPath() + '/customer/membership/customerLogin/rest/login/', ob)
         		
         		.then( (response) => {
         			// 쿠폰, 즐겨찾기, 포인트 관련 정보 가져와야 함
