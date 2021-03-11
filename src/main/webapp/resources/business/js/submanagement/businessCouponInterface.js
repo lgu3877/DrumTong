@@ -1,92 +1,45 @@
-	document.getElementById('beforeDate').addEventListener('change', function() {
-		if(this.value !== null) {
-			document.getElementById('afterDate').readOnly = false;
-		}
-	})
-	
-	document.getElementById('afterDate').addEventListener('change', function() {
-		var beforeDate = new Date(document.getElementById('beforeDate').value);
-		var afterDate = new Date(this.value);
-				
-		if(beforeDate > afterDate) {
-			alert('만료기간이 시작기간보다 빠릅니다');
-			this.value = '';
-		}
-	})
+// 시작 날짜 값 입력시 마지막 날짜 input 활성화 
+function activateEndDate() {
+	if(this.value !== null) {
+		document.getElementById('afterDate').readOnly = false;
+	}
+}
 
-	// 쿠폰 등록하는 함수
-	function couponEnrollment() {
-		var enrollconfirm = confirm('새로운 쿠폰을 등록하시겠습니까?');
-		
-		if(enrollconfirm == false)
-			return false;
-		else {
-			var beforevalue = document.querySelector('#beforeDate').value; 
-			var aftervalue = document.querySelector('#afterDate').value; 
-			var minimumvalue = document.querySelector('#minimumprice').value;
-			var discountvalue = document.querySelector('#discount').value;
-			var radioResult = document.querySelector('#enrollDiv input[type="radio"]:checked');
-			var maxissuenum = 0;
-			if(radioResult.id == 'limitedcoupon') {
-				maxissuenum = document.getElementById('limitedcouponNum').value;
-			}
-			
-// 			console.log('기간 : ', beforevalue + ' ~ ' + aftervalue);
-			
-			let ob={
-					   'period': beforevalue + ' ~ ' + aftervalue,
-					   'minimumprice': minimumvalue,
-					   'discount': discountvalue,
-					   'maxissuenum': maxissuenum,
-			      	};
-			
-			
-	        const axPost = async (ob) => {   // async : 비동기 실행 함수
-	            await axios.post(getContextPath() + '/business/subManagement/businessCouponManagement/rest/add/' , ob)
-	            // 정상
-	       		.then( (response) => {
-	            const data = response.data;
-	            couponlist = data;
-				showCounpons();
-	             })
-	          }
-			return axPost(ob);			
-		}
-		
-	}
 	
-	// 쿠폰 삭제하는 함수
-	function deleteCoupon(obj) {
-		var deleteconfirm = confirm('정말로 쿠폰을 삭제하시겠습니까?');
-		
-		if(deleteconfirm == false)
-			return false;
-		else {
-			console.log('coupon id : ', obj.id);
-			let ob={
-					   'couponid': obj.id,
-			      	};
+// 시작날짜 - 마지막날짜 검증(validation)
+function dateValidation() {
+	var beforeDate = new Date(document.getElementById('beforeDate').value);
+	var afterDate = new Date(this.value);
 			
-	        const axPost = async (ob) => {   // async : 비동기 실행 함수
-	            await axios.post(getContextPath() + '/business/subManagement/businessCouponManagement/rest/del/' , ob)
-	            // 정상
-	       		.then( (response) => {
-	            const data = response.data;
-	            couponlist = data;
-				showCounpons();
-	             })
-	          }
-			return axPost(ob);		
-		}
+	if(beforeDate > afterDate) {
+		alert('만료기간이 시작기간보다 빠릅니다');
+		this.value = '';
 	}
+}
+
+
+//쿠폰발급 '선착순' 옵션 change 이벤트
+function changeFirstInOutOption(inputSelf) {
+	if (inputSelf.checked === true) {
+		document.getElementById('limitedcouponNum').style.display = '';
+	}
+}
+
+
+// 쿠폰발급 '무제한' 옵션 change 이벤트
+function changeUnlimitedOption() {
+	document.getElementById('limitedcouponNum').style.display = 'none';
+	document.getElementById('limitedcouponNum').value = null;
+}
+
 	
-	// 등록된 쿠폰 리스트 보여주는 함수
-	function showCounpons() {
-		var enrollmentedDiv = document.getElementById('enrollmentedDiv');
-		enrollmentedDiv.innerHTML = null;		
+// 쿠폰 렌더링(DB > GET > Listing)
+function showCounpons() {
+	var enrollmentedDiv = document.getElementById('enrollmentedDiv');
+	enrollmentedDiv.innerHTML = null;		
+	
+	for(i = 0; i < couponlist.length; i++) {
 		
-		for(i = 0; i < couponlist.length; i++) {
-			
 		var container = document.createElement('div');
 		container.className = 'container';
 		var inputFlex = document.createElement('div');
@@ -131,7 +84,7 @@
 		costdiv1.appendChild(minh1);
 		costdiv1.appendChild(mininput);
 		inputdiv.appendChild(costdiv1);
-
+		
 		// 할인금액 div
 		var costdiv2 = document.createElement('div');
 		costdiv2.className = 'costDiv';
@@ -166,7 +119,7 @@
 		var radio2 = document.createElement('input');
 		radio2.setAttribute('type', 'radio');
 		radio2.disabled = true;
-
+		
 		var radioname2 = document.createElement('h1');
 		radioname2.innerHTML = '선착순';
 		radiodiv2.appendChild(radio2);
@@ -190,7 +143,7 @@
 		
 		inputdivcontainer.appendChild(inputdiv);
 		inputFlex.appendChild(inputdivcontainer);
-	
+		
 		var sideinputDiv = document.createElement('div');
 		sideinputDiv.className = 'sideinputDiv';
 		var sidedivborder = document.createElement('div');
@@ -255,30 +208,17 @@
 		container.appendChild(inputFlex);
 		
 		enrollmentedDiv.appendChild(container);
+		
+	}
+}
 	
+
+// 
+function costSlice() {
+	var regexp = /^[0-9]*$/
+		if(!regexp.test(this.value)) {
+			this.value = this.value.slice(0,-1);		// 마지막 한글자만 잘라내기
 		}
-	}
+}
 	
-	// input type="text" 숫자만 입력하기
-	document.getElementById('minimumprice').addEventListener('keyup', costSlice);
-	document.getElementById('discount').addEventListener('keyup', costSlice);
-	document.getElementById('limitedcouponNum').addEventListener('keyup', costSlice);
-	function costSlice() {
-		var regexp = /^[0-9]*$/
-			if(!regexp.test(this.value)) {
-				this.value = this.value.slice(0,-1);		// 마지막 한글자만 잘라내기
-			}
-	}
-	
-	document.getElementById('limitedcoupon').addEventListener('change', function() {
-		var inputradiodiv = document.getElementById('limitedcoupon').parentNode;
-		if(this.checked == true) {
-			document.getElementById('limitedcouponNum').style.display = '';
- 		}
-	})
-	
-	document.getElementById('unlimitedcoupon').addEventListener('change', function() {
-		document.getElementById('limitedcouponNum').style.display = 'none';
-		document.getElementById('limitedcouponNum').value = null;
-	})
 	

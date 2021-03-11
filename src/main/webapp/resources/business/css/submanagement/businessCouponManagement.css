@@ -1,8 +1,34 @@
+/* margin */
+.mb-20 {
+	margin-bottom: 20px;
+}
+
+.mr-20 {
+	margin-right: 20px;
+}
+
+/* display */
+.d-flex {
+	display: flex;
+}
+
+/* form */
+.form {
+	background-color: whitesmoke;
+    padding: 20px;
+    box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
+}
+
+/* font */
+.fs-15 {
+	font-size: 15pt;
+}
 
 input {
-	padding-left: 5px !important;
-	border: 3px solid #3088F9;
-	border-radius: 10px;
+	text-indent: 3px;
+    border: 1px solid navy;
+    letter-spacing: 3px;
+    padding: 8px 0;
 }
 
 input:focus {
@@ -10,175 +36,155 @@ input:focus {
 }
 
 .container {
-	width: 950px;
-	height: 320px;
-	margin: 0 auto;
-	margin-top: 25px;
-	margin-bottom: 25px;
+	margin: 25px auto 0 auto;
 }
 
 .pagetitlediv {
-	width: 1000px;
-	height: 60px;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
+	text-align: left;
+	display: flex;
+	color: navy !important;
 }
 
-.pagetitlediv h1 {
-	text-align: left !important;
-    margin: 5px 0 10px 0 !important;
-    font-size: 24pt !important;
-    font-weight: 300 !important;
-    color: navy !important;
-    border-top: 1.7px solid navy !important;
-    border-bottom: 2.5px solid navy !important;
+.pagetitlediv span {
+	margin: 5px 0 10px 0 !important;
+	font-size: 24pt !important;
+	color: navy !important;
+	border-top: 1.7px solid navy !important;
+	border-bottom: 2.5px solid navy !important;
 }
 
 .inputFlex {
 	display: flex;
-	width: 100%;
-	height: 100%;
+	width: 800px;
 }
 
 .inputDivContainer {
 	position: relative;
-	width: 600px; 
-	height: 320px; 
-	display: inline-block;
-	box-sizing:border-box;
-    border-right: 1px solid white;
-    background: black;
+	width: 600px;
+}
 
+.input_title {
+	text-align: left;
+	font-size: 16pt;
+	letter-spacing: 3px;
+	font-weight: 600;
+	color: navy;
+	margin-bottom: 10px;
+}
+
+.date_arrow {
+	padding: 0 10px;
+    align-self: center;
+    font-weight: 600;
 }
 
 .bookmark {
-	font-size: 26pt; position: absolute; left: -125px; top: 20px; color: white;font-family: cursive;
+	font-size: 26pt;
+	position: absolute;
+	left: -125px;
+	top: 20px;
+	color: white;
+	font-family: cursive;
 }
+
 .inputDiv {
-	 position: absolute;
-     padding-left: 20px;
-     text-align: left; 
-     width: 578px;
-     height: 316px;
-     top: 2px;
-     left: 2px;
-     margin-bottom: 10px;
-     background: white;
+	position: absolute;
+	padding-left: 20px;
+	text-align: left;
+	width: 578px;
+	height: 316px;
+	top: 2px;
+	left: 2px;
+	margin-bottom: 10px;
+	background: white;
 }
+
 .inputDiv:after {
-    position: absolute;
-    content: '';
-    width: 39px;
-    height: 39px;
-    top:-2px;
-    right:0;
-    clip-path: ellipse(100% 100% at 100% 0%);
-    box-sizing:border-box;
-    background: white;
- }
- .bottombg1 {
-    position: absolute;
-    content: '';
-    width: 40px;
-    height: 40px;
-    top:-2px;
-    right:0;
-    clip-path: ellipse(100% 100% at 100% 0%);
-    box-sizing:border-box;
-    background: black;
- }
- .inputDiv:before {
-    position: absolute;
-    content: '';
-    width: 40px;
-    height: 40px;
-    bottom:-2px;
-    right:0;
-    clip-path: ellipse(100% 100% at 100% 100%);
-    box-sizing:border-box;
-    background: black;
- }
- .topbg1 {
-    position: absolute;
-    content: '';
-    width: 39px;
-    height: 39px;
-    bottom:-2px;
-    right:0;
-    clip-path: ellipse(100% 100% at 100% 100%);
-    box-sizing:border-box;
-    background: white;
- }
+	position: absolute;
+	content: '';
+	width: 39px;
+	height: 39px;
+	top: -2px;
+	right: 0;
+	clip-path: ellipse(100% 100% at 100% 0%);
+	box-sizing: border-box;
+	background: white;
+}
+
+.bottombg1 {
+	position: absolute;
+	content: '';
+	width: 40px;
+	height: 40px;
+	top: -2px;
+	right: 0;
+	clip-path: ellipse(100% 100% at 100% 0%);
+	box-sizing: border-box;
+	background: black;
+}
+
+.topbg1 {
+	position: absolute;
+	content: '';
+	width: 39px;
+	height: 39px;
+	bottom: -2px;
+	right: 0;
+	clip-path: ellipse(100% 100% at 100% 100%);
+	box-sizing: border-box;
+	background: white;
+}
+
 .sideinputDiv {
 	position: relative;
-	width: 350px; 
+	width: 350px;
 	height: 320px;
 	display: inline-block;
-    background: black;
-    box-sizing:border-box;
-    margin-bottom: 10px;
+	background: black;
+	box-sizing: border-box;
+	margin-bottom: 10px;
 }
-
 
 .sidedivborder {
-     position: absolute;
-     content: '';
-     width: 350px;
-     height: 316px;
-     left:0px;
-     top: 2px;
-     background-color: white;
-     display: table;
-     align-items: center;
-        border-left: 0;
-}
-.sidedivborder:after {
-    position: absolute;
-    content: '';
-    width: 39px;
-    height: 39px;
-    top:-2px;
-    left:0;
-    clip-path: ellipse(100% 100% at 0% 0%);
-    box-sizing:border-box;
-    background: white;
- }
- .topbg2 {
-    position: absolute;
-    content: '';
-    width: 40px;
-    height: 40px;
-    top:-2px;
-    left:0;
-    clip-path: ellipse(100% 100% at 0% 0%);
-    box-sizing:border-box;
-    background: black;
- }
- .sidedivborder:before {
-    position: absolute;
-    content: '';
-    width: 40px;
-    height: 40px;
-    bottom:-2px;
-    left:0;
-    clip-path: ellipse(100% 100% at 0% 100%);
-    box-sizing:border-box;
-    background: black;
- }
 
- .bottombg2 {
-    position: absolute;
-    content: '';
-    width: 39px;
-    height: 40px;
-    bottom:-3px;
-    left:0;
-    clip-path: ellipse(100% 100% at 0% 100%);
-    box-sizing:border-box;
-    background: white;
- }
+}
+
+
+.topbg2 {
+	position: absolute;
+	content: '';
+	width: 40px;
+	height: 40px;
+	top: -2px;
+	left: 0;
+	clip-path: ellipse(100% 100% at 0% 0%);
+	box-sizing: border-box;
+	background: black;
+}
+
+.sidedivborder:before {
+	position: absolute;
+	content: '';
+	width: 40px;
+	height: 40px;
+	bottom: -2px;
+	left: 0;
+	clip-path: ellipse(100% 100% at 0% 100%);
+	box-sizing: border-box;
+	background: black;
+}
+
+.bottombg2 {
+	position: absolute;
+	content: '';
+	width: 39px;
+	height: 40px;
+	bottom: -3px;
+	left: 0;
+	clip-path: ellipse(100% 100% at 0% 100%);
+	box-sizing: border-box;
+	background: white;
+}
 
 .inputDiv h1 {
 	font-size: 14pt;
@@ -190,42 +196,29 @@ input:focus {
 }
 
 .costDiv {
-	width: 200px;
-	display: inline-block;
-	margin-right: 28px;
+	text-align: left;
 }
 
 .costDiv input {
-	width: 100%;
-	height: 40px;
+    width: 250px;
 }
 
 .radioDiv {
-	width: 200px; 
-	display: inline-block;
-	float: left; 
-	margin-right: 32px; 
-	margin-top: 10px
+	display: flex;
+    text-align: left;
+    margin-right: 30px;
 }
 
 .radioDiv input[type="radio"] {
-	 content: ''; 
-	 width: 21px; 
-	 height: 21px; 
-	 text-align: center; 
-	 background: #fafafa; 
-	 border: 1px solid #cacece; 
-	 border-radius: 100%; 
-	 box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+	background: #fafafa;
 }
 
 .radioDiv input[type="radio"]:checked {
 	background: #E9ECEE;
-    border-color: #adb8c0;
-    }
+}
 
 .radioDiv input {
-	margin-right: 20px;
+	margin-right: 10px;
 }
 
 .radioDiv h1 {
@@ -236,63 +229,74 @@ input:focus {
 	width: 100%;
 }
 
-.buttonDiv {
-    display: table-cell;
-	width: 80%; 
-    height: 100%;
-    vertical-align: middle;
-    text-align: center;
+.radio_label {
+	cursor: pointer;
+	padding: 10px 0;
 }
 
-.buttonDiv input[type="button"]{
-    margin: 0 auto;
-	width: 200px; 
-	height: 200px; 
+.coupon_amount {
+	margin-left: 15px;
+}
+
+.buttonDiv {
+	display: table-cell;
+	width: 80%;
+	height: 100%;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.buttonDiv input[type="button"] {
+	margin: 0 auto;
+	width: 200px;
+	height: 200px;
 	font-size: 32pt;
 	font-weight: bold;
 	border: 1px solid black;
-	clip-path: polygon(50% 0%, 70% 25%, 98% 35%, 83% 63%, 79% 91%, 48% 82%, 21% 91%, 18% 62%, 2% 35%, 27% 25%);
+	clip-path: polygon(50% 0%, 70% 25%, 98% 35%, 83% 63%, 79% 91%, 48% 82%, 21% 91%,
+		18% 62%, 2% 35%, 27% 25%);
 	background-color: #3088F9;
 	color: white;
 	cursor: pointer;
 }
 
-.buttonDiv input[type="button"]:hover{
-   margin: 0 auto;
-	width: 260px; 
-	height: 260px; 
+.buttonDiv input[type="button"]:hover {
+	margin: 0 auto;
+	width: 260px;
+	height: 260px;
 	font-size: 40pt;
 	font-weight: bold;
 	border: 1px solid black;
-   clip-path: polygon(50% 0%, 70% 25%, 98% 35%, 83% 63%, 79% 91%, 48% 82%, 21% 91%, 18% 62%, 2% 35%, 27% 25%);
-   background-color: navy;
-   color: white;
+	clip-path: polygon(50% 0%, 70% 25%, 98% 35%, 83% 63%, 79% 91%, 48% 82%, 21% 91%,
+		18% 62%, 2% 35%, 27% 25%);
+	background-color: navy;
+	color: white;
 }
 
 .sideCircle-black {
-	position: absolute; 
+	position: absolute;
 	right: 0;
-	clip-path: circle(50% at 100% 50%);   
-	width: 20%; 
-	height: 80px; 
+	clip-path: circle(50% at 100% 50%);
+	width: 20%;
+	height: 80px;
 	background: black;
 }
 
 .sideCIrcle-white {
-	position: absolute; 
+	position: absolute;
 	right: -1px;
-	clip-path: circle(50% at 100% 50%);   
-	width: 20%; 
-	height: 78px; 
+	clip-path: circle(50% at 100% 50%);
+	width: 20%;
+	height: 78px;
 	background: white;
 }
 
 .side-hr {
-	position: absolute; 
-	left: 0; 
-	top:38px; 
-	clip-path: inset(0 0 0 0); 
+	position: absolute;
+	left: 0;
+	top: 38px;
+	clip-path: inset(0 0 0 0);
 	background-color: black;
-	 width: 1px; 
-	 height: 240px;
+	width: 1px;
+	height: 240px;
 }
