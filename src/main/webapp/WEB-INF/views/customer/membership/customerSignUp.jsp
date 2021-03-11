@@ -6,10 +6,16 @@
 	<%@ include file="/resources/daumAddressSearch/daumAddressSearch.jsp" %>
 	<!-- Axios script -->
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<!-- javascript cpath -->
+	<script type="text/javascript" charset="utf-8">
+		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+		function getContextPath() {
+		    return sessionStorage.getItem("contextpath");
+		}
+	</script>
 	
     <!-- JavaScript Ajax-->
     <script type="text/javascript" src="${cpath }/customer/js/membership/customerSignUp.js" charset="UTF-8"></script>
-	
 		
 	
     <!-- 본문 영역 -->

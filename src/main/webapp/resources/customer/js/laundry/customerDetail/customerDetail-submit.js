@@ -119,7 +119,7 @@
     
 	// 수거, 배송 체크, 쿠폰 사용, 희망날짜
 	
-	const {data} = await axios.post('/drumtong/customer/laundry/customerDetail/rest/submit/', paramList);
+	const {data} = await axios.post(getContextPath() + '/customer/laundry/customerDetail/rest/submit/', paramList);
 	
 	alert(data ? '정상 처리 되었습니다.' : '정상 처리 되지 않았습니다.');
 	location.href = '/drumtong/customer/account/customerOrderList/';
