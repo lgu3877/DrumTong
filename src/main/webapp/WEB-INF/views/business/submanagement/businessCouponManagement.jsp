@@ -51,7 +51,7 @@
 	
 		<!-- Content Title-->
 		<div class="pagetitlediv">
-			<span>쿠폰등록</span>
+			<span>쿠폰 등록</span>
 		</div>
 		
 		<!-- Content Container -->
@@ -116,11 +116,12 @@
 										   onchange="changeFirstInOutOption(this)">
 									<span class="fs-15">선착순</span>
 								</label>
-		
 							</div>
 
 							<!-- 선착순 인원 입력 input(text) -->
-							<input id="limitedcouponNum" class="coupon_amount" type="text" placeholder="숫자를 입력하세요" onkeyup="costSlice()" style="display: none;">
+							<div class="radioDiv">
+								<input id="limitedcouponNum" class="coupon_amount" type="text" placeholder="발급쿠폰 수(개)" onkeyup="costSlice()" style="display: none;">
+							</div>
 						</div>
 						
 
@@ -130,20 +131,19 @@
 
 				<!-- 쿠폰 등록(발급) 버튼 -->
 				<div class="sideinputDiv">
-					<div class="sidedivborder">
-						<div class="buttonDiv">
-							<input type="button" value="등록" onclick="couponEnrollment()">
-						</div>
-					</div>
+					<input class="coupon_publish" type="button" value="발급" onclick="couponEnrollment()">
 				</div>
 				
 			</div>
 		</div>
 
-		<hr>
-	
+		<!-- Content Title-->
+		<div class="pagetitlediv">
+			<span>쿠폰 리스트</span>
+		</div>
+		
 		<!-- 쿠폰 리스트 -->
-		<div id="enrollmentedDiv" class="container"></div>
+		<div id="enrollmentedDiv"></div>
 
 	</section>
 	
@@ -167,7 +167,21 @@
 			showCounpons();
 			slidenum = 3;
 		}
-	
+		
+		
+		// 가격에 콤마(,) 삽입
+		function insertComma(string) {
+			const reversedString = string.split("").reverse().join("");
+			const commaAttached = reversedString.replace(/(.{3})/g,"$1,");
+			
+			const array = commaAttached.split("").reverse();
+			
+			if (array[0] === ",") {
+				array.shift();
+			}
+			
+			return array.join("");
+		}
 	</script>
 	
 	<!-- 인터페이스(View & Event Control) -->

@@ -36,41 +36,60 @@ function changeUnlimitedOption() {
 // 쿠폰 렌더링(DB > GET > Listing)
 function showCounpons() {
 	var enrollmentedDiv = document.getElementById('enrollmentedDiv');
-	enrollmentedDiv.innerHTML = null;		
+		enrollmentedDiv.innerHTML = "";		
 	
+	// 쿠폰 리스팅
 	for(i = 0; i < couponlist.length; i++) {
 		
+		// main container 
 		var container = document.createElement('div');
-		container.className = 'container';
+			container.className = 'container';
+			
+		// sub-container
 		var inputFlex = document.createElement('div');
-		inputFlex.className = 'inputFlex';
+			inputFlex.className = 'inputFlex form';
+		
+		// left container
 		var inputdivcontainer = document.createElement('div');
-		inputdivcontainer.className = 'inputDivContainer';
+			inputdivcontainer.className = 'inputDivContainer';
+		
+		// input container
 		var inputdiv = document.createElement('div');
-		inputdiv.className = 'inputDiv';
+			inputdiv.className = 'inputDiv';
 		
-		var listsplit = (couponlist[i].period).split('~');			//	필수
+		// split values by ~
+		var listsplit = (couponlist[i].period).split('~'); //	필수
 		
-		// 날짜 div
-		var period = document.createElement('h1');
-		period.innerHTML = '기간';
+		
+		// 기간 (title)
+		var period = document.createElement('div');
+			period.className = 'input_title';
+			period.innerHTML = '기간';
+		
+		// 시작일
 		var beforedate = document.createElement('input');
-		beforedate.setAttribute('type', 'date');
-		beforedate.setAttribute('value', listsplit[0].slice(0,-1));	// 마지막 공백 한글자 제거			//	필수
-		beforedate.readOnly = true;
+			beforedate.setAttribute('type', 'date');
+			beforedate.setAttribute('value', listsplit[0].slice(0,-1));	// 마지막 공백 한글자 제거			//	필수
+			beforedate.readOnly = true;
+		
 		var tagh1 = document.createElement('h1');
-		tagh1.style.width = '20px';
-		tagh1.style.display = 'inline-block';
-		tagh1.style.textAlign = 'center';
-		tagh1.innerHTML = '-';
+			tagh1.style.width = '20px';
+			tagh1.style.display = 'inline-block';
+			tagh1.style.textAlign = 'center';
+			tagh1.innerHTML = '-';
+		
 		var afterdate = document.createElement('input');
-		afterdate.setAttribute('type', 'date');
-		afterdate.setAttribute('value', listsplit[1].slice(1));	// 첫번째 공백 한글자 제거			//	필수
-		afterdate.readOnly = true;
+			afterdate.setAttribute('type', 'date');
+			afterdate.setAttribute('value', listsplit[1].slice(1));	// 첫번째 공백 한글자 제거			//	필수
+			afterdate.readOnly = true;
+		
+		// appending
 		inputdiv.appendChild(period);
 		inputdiv.appendChild(beforedate);
 		inputdiv.appendChild(tagh1);
 		inputdiv.appendChild(afterdate);
+		
+		
 		
 		// 최소주문금액 div
 		var costdiv1 = document.createElement('div');
@@ -85,6 +104,8 @@ function showCounpons() {
 		costdiv1.appendChild(mininput);
 		inputdiv.appendChild(costdiv1);
 		
+		
+		
 		// 할인금액 div
 		var costdiv2 = document.createElement('div');
 		costdiv2.className = 'costDiv';
@@ -97,6 +118,8 @@ function showCounpons() {
 		costdiv2.appendChild(minh2);
 		costdiv2.appendChild(saleinput);
 		inputdiv.appendChild(costdiv2);
+		
+		
 		
 		// 무제한 버튼
 		var radiodiv1 = document.createElement('div');
@@ -112,6 +135,8 @@ function showCounpons() {
 		radiodiv1.appendChild(radio1);
 		radiodiv1.appendChild(radioname1);
 		inputdiv.appendChild(radiodiv1);
+		
+		
 		
 		// 선착순 버튼
 		var radiodiv2 = document.createElement('div');
@@ -133,82 +158,28 @@ function showCounpons() {
 			radiodiv2.appendChild(showcouponnum);
 		}
 		inputdiv.appendChild(radiodiv2);
-		
-		var bottombg1 = document.createElement('div');
-		bottombg1.className = 'bottombg1';
-		var topbg1 = document.createElement('div');
-		topbg1.className = 'topbg1';
-		inputdiv.appendChild(bottombg1);
-		inputdiv.appendChild(topbg1);
-		
 		inputdivcontainer.appendChild(inputdiv);
 		inputFlex.appendChild(inputdivcontainer);
 		
+		
+	// 삭제 버튼 생성 및 추가
+		// container
 		var sideinputDiv = document.createElement('div');
-		sideinputDiv.className = 'sideinputDiv';
-		var sidedivborder = document.createElement('div');
-		sidedivborder.className = 'sidedivborder';
-		var buttonDiv = document.createElement('div');
-		buttonDiv.className = 'buttonDiv';
+			sideinputDiv.className = 'sideinputDiv';
+		
+		// input button
 		var deleteButton = document.createElement('input');
-		deleteButton.setAttribute('type', 'button');
-		deleteButton.setAttribute('value', '삭제');
-		deleteButton.setAttribute('id', couponlist[i].couponid);			//	필수
-		deleteButton.setAttribute('onclick', 'deleteCoupon(this)');
-		buttonDiv.appendChild(deleteButton);
-		sidedivborder.appendChild(buttonDiv);
+			deleteButton.className = "coupon_publish";
+			deleteButton.setAttribute('type', 'button');
+			deleteButton.setAttribute('value', '삭제');
+			deleteButton.setAttribute('id', couponlist[i].couponid);			//	필수
+			deleteButton.setAttribute('onclick', 'deleteCoupon(this)');
 		
-		var black1 = document.createElement('div');
-		black1.className = 'sideCircle-black';
-		black1.style.top = '-2px';
-		sidedivborder.appendChild(black1);
-		var black2 = document.createElement('div');
-		black2.className = 'sideCircle-black';
-		black2.style.top = '78px';
-		sidedivborder.appendChild(black2);
-		var black3 = document.createElement('div');
-		black3.className = 'sideCircle-black';
-		black3.style.top = '158px';
-		sidedivborder.appendChild(black3);
-		var black4 = document.createElement('div');
-		black4.className = 'sideCircle-black';
-		black4.style.top = '238px';
-		sidedivborder.appendChild(black4);
-		
-		var white1 = document.createElement('div');
-		white1.className = 'sideCIrcle-white';
-		white1.style.top = '-1px';
-		sidedivborder.appendChild(white1);
-		var white2 = document.createElement('div');
-		white2.className = 'sideCIrcle-white';
-		white2.style.top = '79px';
-		sidedivborder.appendChild(white2);
-		var white3 = document.createElement('div');
-		white3.className = 'sideCIrcle-white';
-		white3.style.top = '159px';
-		sidedivborder.appendChild(white3);
-		var white4 = document.createElement('div');
-		white4.className = 'sideCIrcle-white';
-		white4.style.top = '239px';
-		sidedivborder.appendChild(white4);
-		
-		var sidehr = document.createElement('div');
-		sidehr.className = 'side-hr';	
-		var bottombg2 = document.createElement('div');
-		bottombg2.className = 'bottombg2';
-		var topbg2 = document.createElement('div');
-		topbg2.className = 'topbg2';
-		sidedivborder.appendChild(sidehr);
-		sidedivborder.appendChild(bottombg2);
-		sidedivborder.appendChild(topbg2);
-		
-		
-		sideinputDiv.appendChild(sidedivborder);
+		// appending
+		sideinputDiv.appendChild(deleteButton);
 		inputFlex.appendChild(sideinputDiv);
 		container.appendChild(inputFlex);
-		
 		enrollmentedDiv.appendChild(container);
-		
 	}
 }
 	

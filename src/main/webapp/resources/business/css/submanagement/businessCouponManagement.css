@@ -15,8 +15,9 @@
 /* form */
 .form {
 	background-color: whitesmoke;
-    padding: 20px;
-    box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
+	padding: 20px;
+	box-shadow: rgb(50 50 93/ 25%) 0px 2px 5px -1px, rgb(0 0 0/ 30%) 0px 1px
+		3px -1px;
 }
 
 /* font */
@@ -24,11 +25,12 @@
 	font-size: 15pt;
 }
 
+/* content */
 input {
-	text-indent: 3px;
-    border: 1px solid navy;
-    letter-spacing: 3px;
-    padding: 8px 0;
+	text-indent: 5px;
+	border: 1px solid navy;
+	letter-spacing: 3px;
+	padding: 8px 0;
 }
 
 input:focus {
@@ -36,7 +38,7 @@ input:focus {
 }
 
 .container {
-	margin: 25px auto 0 auto;
+	margin: 20px;
 }
 
 .pagetitlediv {
@@ -55,6 +57,7 @@ input:focus {
 
 .inputFlex {
 	display: flex;
+	justify-content: space-between;
 	width: 800px;
 }
 
@@ -74,18 +77,24 @@ input:focus {
 
 .date_arrow {
 	padding: 0 10px;
-    align-self: center;
-    font-weight: 600;
+	align-self: center;
+	font-weight: 600;
 }
 
-.bookmark {
-	font-size: 26pt;
-	position: absolute;
-	left: -125px;
-	top: 20px;
+.coupon_publish {
+	cursor: pointer;
+	padding: 10px 20px;
+	border: transparent;
+	font-size: 15pt;
 	color: white;
-	font-family: cursive;
+	background-color: #3088F9;
 }
+
+.coupon_publish:hover {
+	transition: all 1s;
+	background-color: navy;
+}
+
 
 .inputDiv {
 	position: absolute;
@@ -99,91 +108,8 @@ input:focus {
 	background: white;
 }
 
-.inputDiv:after {
-	position: absolute;
-	content: '';
-	width: 39px;
-	height: 39px;
-	top: -2px;
-	right: 0;
-	clip-path: ellipse(100% 100% at 100% 0%);
-	box-sizing: border-box;
-	background: white;
-}
-
-.bottombg1 {
-	position: absolute;
-	content: '';
-	width: 40px;
-	height: 40px;
-	top: -2px;
-	right: 0;
-	clip-path: ellipse(100% 100% at 100% 0%);
-	box-sizing: border-box;
-	background: black;
-}
-
-.topbg1 {
-	position: absolute;
-	content: '';
-	width: 39px;
-	height: 39px;
-	bottom: -2px;
-	right: 0;
-	clip-path: ellipse(100% 100% at 100% 100%);
-	box-sizing: border-box;
-	background: white;
-}
-
 .sideinputDiv {
-	position: relative;
-	width: 350px;
-	height: 320px;
-	display: inline-block;
-	background: black;
-	box-sizing: border-box;
-	margin-bottom: 10px;
-}
-
-.sidedivborder {
-
-}
-
-
-.topbg2 {
-	position: absolute;
-	content: '';
-	width: 40px;
-	height: 40px;
-	top: -2px;
-	left: 0;
-	clip-path: ellipse(100% 100% at 0% 0%);
-	box-sizing: border-box;
-	background: black;
-}
-
-.sidedivborder:before {
-	position: absolute;
-	content: '';
-	width: 40px;
-	height: 40px;
-	bottom: -2px;
-	left: 0;
-	clip-path: ellipse(100% 100% at 0% 100%);
-	box-sizing: border-box;
-	background: black;
-}
-
-.bottombg2 {
-	position: absolute;
-	content: '';
-	width: 39px;
-	height: 40px;
-	bottom: -3px;
-	left: 0;
-	clip-path: ellipse(100% 100% at 0% 100%);
-	box-sizing: border-box;
-	background: white;
+	
 }
 
 .inputDiv h1 {
@@ -200,13 +126,13 @@ input:focus {
 }
 
 .costDiv input {
-    width: 250px;
+	width: 250px;
 }
 
 .radioDiv {
 	display: flex;
-    text-align: left;
-    margin-right: 30px;
+	text-align: left;
+	margin-right: 30px;
 }
 
 .radioDiv input[type="radio"] {
@@ -221,14 +147,6 @@ input:focus {
 	margin-right: 10px;
 }
 
-.radioDiv h1 {
-	display: inline-block;
-}
-
-.radioDiv input[type="text"] {
-	width: 100%;
-}
-
 .radio_label {
 	cursor: pointer;
 	padding: 10px 0;
@@ -236,6 +154,8 @@ input:focus {
 
 .coupon_amount {
 	margin-left: 15px;
+	height: 21px;
+	align-self: center;
 }
 
 .buttonDiv {
