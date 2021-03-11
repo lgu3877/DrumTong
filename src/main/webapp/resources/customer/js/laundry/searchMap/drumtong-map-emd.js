@@ -12,7 +12,7 @@
 	
 	function emdAxios() { // 읍면동 지도 비동기
 		
-		const axiosPath = '/drumtong/customer/laundry/customerMap/rest/emd/';
+		const axiosPath = getContextPath() + '/customer/laundry/customerMap/rest/emd/';
 		const axPost = async() => {
 		    await axios.post(axiosPath)
 		    // 정상
