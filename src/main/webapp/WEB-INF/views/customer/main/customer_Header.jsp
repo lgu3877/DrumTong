@@ -5,21 +5,15 @@
         
         <div class="mainMenu">
             
-            <ul class="menu">
-                <li>
-                    <a href="#" class="middleMenu" onclick="middleMenuClick()">한글</a>
-                </li>
-            </ul>
-
             <ul class="menu" >
                 <li>
-                    <a href="#" class="middleMenu">메뉴1</a>
+                    <a href="${cpath }/customer/board/customerBoard/notice/" class="middleMenu">공지사항</a>
                 </li>
             </ul>   
 
             <ul class="menu">
                 <li>
-                    <a href="#" class="middleMenu">메뉴2</a>
+                    <a href="${cpath }/customer/board/customerBoard/event/" class="middleMenu">이벤트</a>
                 </li>
             </ul>
             
