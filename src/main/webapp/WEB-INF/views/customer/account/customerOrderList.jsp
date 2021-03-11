@@ -408,7 +408,9 @@
 		clonecontainer.find('.orderData-options-head-coupon').next('ul').html('<li>' + numberWithCommas(orderList[value].discountprice) + '원 </li>');
 		
 		// 요청사항에 대한 값을 입력해줍니다.
-		clonecontainer.find('.orderData-options-head-requests').next('ul').html('<li>' + orderList[value].requests + '</li>');
+		clonecontainer.find('.orderData-options-head-requests').next('ul').html('<li>수거 요청사항 : ' + orderList[value].collectionrequests + '</li>'
+																				+ '<li>세탁 요청사항 : ' + orderList[value].laundryrequests + '</li>'
+																				+ '<li>배달 요청사항 : ' + orderList[value].deliveryrequests + '</li>');
 		
 		// 주문 일자를 입력해줍니다.
 		clonecontainer.find('.orderData-total-purchasedate').html(' <b>주문일자</b> ' +  orderList[value].purchasedate);
