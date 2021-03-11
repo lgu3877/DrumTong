@@ -91,8 +91,7 @@ public class RestCustomerLaundryController {
 		return svc.submitDetail(req, param);
 	}
 	
-	@RequestMapping("customerSearch/rest/searchAutoComplete/{param}/")
-	@GetMapping(produces="application/json; charset=utf8")
+	@RequestMapping(value ="customerSearch/rest/searchAutoComplete/{param}/", produces =org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public String searchAutoComplete(@PathVariable("param")String searchWord) {
 		return svc.searchAutoComplete(searchWord);
 	}

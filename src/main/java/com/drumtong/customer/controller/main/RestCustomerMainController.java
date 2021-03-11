@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.drumtong.customer.service.main.RestCustomerMainService;
 
 @RestController
-@RequestMapping("custmer/main/")
+@RequestMapping("customer/main/")
 public class RestCustomerMainController {
 	
 	@Autowired RestCustomerMainService svc;
 	
-	@RequestMapping("customerMain/rest/searchAutoComplete/{param}/")
-	@GetMapping(produces="application/json; charset=utf8")
+	@RequestMapping(value = "customerMain/rest/searchAutoComplete/{param}/", produces =org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public String searchAutoComplete(@PathVariable("param")String searchWord) {
 		return svc.searchAutoComplete(searchWord);
 	}
