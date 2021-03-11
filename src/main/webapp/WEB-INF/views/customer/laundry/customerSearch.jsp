@@ -198,7 +198,10 @@
 
     </section>
 	<script type="text/javascript" charset="utf-8">
-
+		let cLogin = '${cLogin}';
+		let memberID = (cLogin === '') ? getIP() : '${cLogin.memberid}';
+		
+		console.log(memberID);
 		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
 		
 		function getContextPath() {
@@ -232,5 +235,6 @@
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-sigungu.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-emd.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-shop.js"></script>
+	<script type="text/javascript" src="${cpath }/customer/js/main/customerRecentSearchData.js"></script>
 </body>
 </html>

@@ -32,7 +32,6 @@
     <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail/customerDetail-submit.js"></script>
-
 </head>
     
 <body>
@@ -285,10 +284,12 @@
     
     <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail/detail-google.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail/detail-modal.js"></script>
+   	<script type="text/javascript" src="${cpath }/customer/js/main/customerRecentSearchData.js"></script>
     <script>
 //     	총 정리
 		var estid = '${estid}';
 		cLogin = '${cLogin}';
+		let memberID = '${cLogin.memberid}';
 		checkLogin = cLogin !== ''; // 로그인 했을 땐 true, 로그인 안되어있을 땐 false
 		
    		// 메뉴 세팅 관련 메서드

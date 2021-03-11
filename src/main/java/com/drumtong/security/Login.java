@@ -143,6 +143,10 @@ public class Login {
 				Session.setAttribute("selectEST", selectEST);
 			}
 			
+			System.out.println("------------------getInformationList------------------");
+			InformationList.forEach(li -> System.out.println(li.getBrandnaming() + " : " + li.getStatus()));
+			System.out.println("------------------getInformationList------------------");
+			
 			Session.setAttribute("InformationList", InformationList);
 		}
 	}

@@ -157,7 +157,6 @@ function exceptionCheckBScheduleDays() {
 
 
 
-
 // 유저에게 잘못된 데이터 형식 혹은 빈 값을 넣었을 때 인지할 수 있게 해주는 함수입니다.
 function warning(msg, idName, wantBorder) {
 	document.getElementById(idName).style.border = wantBorder ? '4px solid red'  : "";
@@ -171,15 +170,29 @@ function borderNone(idName) {
 }
 
 
-function checkExceptionBeforeSubmit() {
-		if(!updateScheduleTime())
+async function checkExceptionBeforeSubmit() {
+		console.log("status : " , status);
+		if(!await updateScheduleTime())
 			return false;
-		if(!updateRegHoliday())
+		if(!await updateRegHoliday())
 			return false;
 		
-		statusChange("SUCCESS");
-		alert("온라인 계약이 성공적으로 마무리되었습니다!");
-		window.location.replace("http://localhost:8080/drumtong/business/");
+		const result = statusChange("SUCCESS");
+		console.log("statusChange에 대한 결과 : ", result);
+		
+		if(result) {
+			window.location.assign("http://localhost:8080/drumtong/business/");
+			alert("온라인 계약이 성공적으로 마무리되었습니다!");
+//			window.location.reload(true);
+		}
 		
 }
+window.onbeforeunload = function() { 
+    window.setTimeout(function () { 
+        window.location = 'AAA.jsp';
+    }, 0); 
+    window.onbeforeunload = null; // necessary to prevent infinite loop, that kills your browser 
+}
+
+
 
