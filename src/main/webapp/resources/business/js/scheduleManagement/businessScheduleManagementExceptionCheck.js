@@ -179,7 +179,7 @@ function checkExceptionBeforeSubmit() {
 		
 		statusChange("SUCCESS");
 		alert("온라인 계약이 성공적으로 마무리되었습니다!");
-		window.location.replace("http://localhost:8080/drumtong/business/");
+		window.location.replace(getContextPath() + "/business/");
 		
 }
 

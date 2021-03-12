@@ -707,7 +707,7 @@
 		}
 		
 		function locationBoolean(result) {
-			result ? location.href = "drumtong/business/mainmanagement/businessScheduleManagement/" : "";
+			result ? location.href = getContextPath() + "/business/mainmanagement/businessScheduleManagement/" : "";
 		}
 	
 // 		// [건욱] 
