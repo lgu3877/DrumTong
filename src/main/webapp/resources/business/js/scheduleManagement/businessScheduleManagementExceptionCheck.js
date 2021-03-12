@@ -169,6 +169,9 @@ function borderNone(idName) {
 	document.getElementById(idName).style.border = '0 none';
 }
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 async function checkExceptionBeforeSubmit() {
 		console.log("status : " , status);
@@ -177,21 +180,16 @@ async function checkExceptionBeforeSubmit() {
 		if(!await updateRegHoliday())
 			return false;
 		
-		const result = statusChange("SUCCESS");
+		const result = await statusChange("SUCCESS");
 		console.log("statusChange에 대한 결과 : ", result);
 		
 		if(result) {
-			window.location.assign("http://localhost:8080/drumtong/business/");
-			alert("온라인 계약이 성공적으로 마무리되었습니다!");
+			window.location.replace("http://localhost:8080/drumtong/business/");
+			alert("온라인 계약이 성공적으로 마무리되었습니다!!!");
+//			location.href="/drumtong/business/";
 //			window.location.reload(true);
 		}
 		
-}
-window.onbeforeunload = function() { 
-    window.setTimeout(function () { 
-        window.location = 'AAA.jsp';
-    }, 0); 
-    window.onbeforeunload = null; // necessary to prevent infinite loop, that kills your browser 
 }
 
 

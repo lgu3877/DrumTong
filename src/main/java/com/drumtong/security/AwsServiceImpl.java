@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +23,10 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.S3Object;
 import com.drumtong.business.dao.BImageDAO;
 import com.drumtong.business.dao.BInformationDAO;
 import com.drumtong.business.dao.BPaymentDAO;
@@ -375,7 +378,6 @@ public class AwsServiceImpl{
 		}
 			
      	
-     	
     	return 1;
     }
      
@@ -555,7 +557,13 @@ public class AwsServiceImpl{
 		return fileName;
    }
 
-
+   public S3Object getObjectFromS3Bucket(String filePath) {
+	   return amazonS3.getObject(BUCKET_NAME, filePath);
+//	   S3Object object = amazonS3.getObject(BUCKET_NAME, filePath);
+//	   InputStream objectData = object.getObjectContent();
+//	   objectData.close();
+//	   return null;
+   }
 
 
 
