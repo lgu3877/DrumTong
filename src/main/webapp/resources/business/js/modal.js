@@ -26,9 +26,9 @@ const contractProcedureMSGS = [
 		document.getElementsByClassName("btn_blue")[0].innerHTML = contractProcedureMSGS[ct].agree;
 		document.getElementsByClassName("btn_red")[0].innerHTML = contractProcedureMSGS[ct].disagree;
 		
-		document.getElementsByClassName("btn_blue")[0].onclick = function() {location.href= '/drumtong/business/' + preLink;}
+		document.getElementsByClassName("btn_blue")[0].onclick = function() {location.href= getContextPath() + '/business/' + preLink;}
 		if(ct == 2)
-			document.getElementsByClassName("btn_red")[0].onclick = function() {location.href= '/drumtong/business/mainmanagement/businessShopManagement/';}
+			document.getElementsByClassName("btn_red")[0].onclick = function() {location.href= getContextPath() + '/business/mainmanagement/businessShopManagement/';}
 		else
 			document.getElementsByClassName("btn_red")[0].onclick = function() {modal.style.display = "none";}
 	}
@@ -50,7 +50,7 @@ const contractProcedureMSGS = [
 		case 'isNotLogin':
 		case 'SUCCESS':
 			option = (id === "ShopManagement" || id ==="ScheduleManagement") ? 'main' : 'sub';
-			location.href = '/drumtong/business/' + option + 'management/business' + id +'/';
+			location.href = getContextPath() + '/business/' + option + 'management/business' + id +'/';
 			break;
 		case 'PROCESS':
 		case 'FAIL':
