@@ -20,7 +20,7 @@
 		    let shopCenter = data;			// 반환 결과 불러오기
 		    
 		    // AWS로 이동하게 되면 수정하시오
-		    var markerImageSrc = getContextPath() + '/customer/img2/laundry_marker.JPG';
+		    var markerImageSrc = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/system/customer/img/laundry_marker.JPG';
 			
 			let bounds = map.getBounds();
 			let swLatLng = bounds.getSouthWest();		// 남서

@@ -22,7 +22,7 @@
     <section class="section-SangJae section-join">
       <div class="join">
           <div class="join-input">
-          <img src="${cpath }/resources/customer/img/logo4.png" class="login-logo" />
+          <img src="https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/system/customer/img/logo4.png" class="login-logo" />
           <form method="POST" id="loginForm" class="joinForm">
             <input type="text" name="id" id="userid" class="join-input-boxs" placeholder="ID"  onblur="axGet(document.getElementById('userid').value)" maxlength="25" autocomplete="off">
             <span class="idmsg" id="idmsg"></span>

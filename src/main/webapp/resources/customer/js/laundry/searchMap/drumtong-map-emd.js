@@ -48,7 +48,7 @@
 	function emdPolygon(object) {
 		let view_emd_nm = object.querySelector('.emdnametag').innerHTML;
 		
-			console.log('화면 네임 : ' + view_emd_nm);
+//			console.log('화면 네임 : ' + view_emd_nm);
 			
 			// EMD250geoJson 을 경상남도, 경상북도, 서울특별시 등으로 바꾼다면
 			// 개별적으로 geoJson을 불러올 수 있을 것이다
