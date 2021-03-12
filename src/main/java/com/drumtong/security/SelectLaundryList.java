@@ -229,7 +229,7 @@ public class SelectLaundryList {
 		tmp = getLaundryList();
 		
 		// 가져온 리스트 사이즈가 10보다 작거나 같을 때!
-		if(tmp.size() <= limitNum) return tmp;
+		if(tmp.size() <= limitNum || EMDCODE.equals("All")) return tmp;
 		
 		// 가져온 리스트의 N% 해당하는 리스트를 가져오고 그 개수가 limitNum보다 크거나 같아야 리턴한다.
 		double num = 0.1;
@@ -267,7 +267,7 @@ public class SelectLaundryList {
 		
 		// 10개 이상일 경우 랜덤으로 리스트를 가져온다.
 		while(checkList) {
-			int random = (int)Math.random() * maxNum + 1;
+			int random = (int)(Math.random() * maxNum);
 			
 			// 데이터 가져와서 result 에 추가하기(랜덤 숫자가 중복되거나 데이터가 중복되는 경우 입력되지 않도록 HashSet 이용)
 			if(randomNums.add(random)) {
@@ -281,6 +281,7 @@ public class SelectLaundryList {
 
 	// li를 result와 중복되는 estid가 아닌지 확인 후 추가하는 메서드
 	private static Set<EstablishmentList> notDupl(EstablishmentList li, Set<EstablishmentList> result) {
+		
 		boolean Exist = true;
 		for(EstablishmentList re : result) {
 			if(li.getEstid().equals(re.getEstid()) ) {

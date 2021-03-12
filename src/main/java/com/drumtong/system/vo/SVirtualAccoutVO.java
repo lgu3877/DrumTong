@@ -4,7 +4,7 @@ public class SVirtualAccoutVO {
 	private String memberid;
 	private String estid;
 	private String salecode;
-	private int number;
+	private int point;
 	private String status;
 	private String depositdate;
 	private String withdrawdate;
@@ -27,11 +27,11 @@ public class SVirtualAccoutVO {
 	public void setSalecode(String salecode) {
 		this.salecode = salecode;
 	}
-	public int getNumber() {
-		return number;
+	public int getPoint() {
+		return point;
 	}
-	public void setNumber(int number) {
-		this.number = number;
+	public void setPoint(int point) {
+		this.point = point;
 	}
 	public String getStatus() {
 		return status;

@@ -26,6 +26,15 @@
   	
   	<!-- Axios -->
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	
+	<!-- javascript cpath -->
+	<script type="text/javascript" charset="utf-8">
+		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+		function getContextPath() {
+		    return sessionStorage.getItem("contextpath");
+		}
+	</script>
+	
   	<!-- 영경 스크립트 -->
   	<script>
 		function pwChange(bpersonid){
@@ -44,7 +53,7 @@
 		            'pw':password,
 		        };
 		        console.log(ob);
-		        await axios.post('/drumtong/business/membership/businessPWFind/rest/pwChange/', ob)
+		        await axios.post(getContextPath() + '/business/membership/businessPWFind/rest/pwChange/', ob)
 		
 		        .then( (response) => {
 		          if(response.data === true){

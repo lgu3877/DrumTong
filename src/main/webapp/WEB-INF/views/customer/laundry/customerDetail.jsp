@@ -28,6 +28,14 @@
    	<!-- AXIOS -->
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	
+	<!-- javascript cpath -->
+	<script type="text/javascript" charset="utf-8">
+		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+		function getContextPath() {
+		    return sessionStorage.getItem("contextpath");
+		}
+	</script>
+	
  	<!-- 스크립트 영역 -->
     <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail.js"></script>
@@ -178,9 +186,9 @@
             결제
             <div class="close">&times;</div>
           </div>
-          <div>수거 요청사항 : <input type="text" placeholder="요청사항" readonly></div>
-          <div>세탁 요청사항 : <input type="text" placeholder="요청사항" readonly></div>
-          <div>배달 요청사항 : <input type="text" placeholder="요청사항" readonly></div>
+          <div>수거 요청사항 : <input id="collectionRequests" type="text" placeholder="요청사항"></div>
+          <div>세탁 요청사항 : <input id="laundryRequests" type="text" placeholder="요청사항"></div>
+          <div>배달 요청사항 : <input id="deliveryRequests" type="text" placeholder="요청사항"></div>
           <select class="modal-myCardList">
             <option selected>포인트 결제</option>
           </select>
@@ -392,7 +400,7 @@
 	 	    		  ob={
 	 		                 'couponid' : selectedCouponID,
 	 		              };
-	 	    		  const {data} = await axios.post('/drumtong/customer/laundry/customerDetail/rest/addCoupon/', ob);
+	 	    		  const {data} = await axios.post(getContextPath() + '/customer/laundry/customerDetail/rest/addCoupon/', ob);
 	 	    		  alert(data ? '발급 성공' : '이미 발급받은 쿠폰입니다.');
 	 	    		  if(data){
 	 	    			  let listCoupon = document.getElementById('modal-couponList');
@@ -435,5 +443,23 @@
     	} 
     	initPage(checkLogin);
     	
+    </script>
+    <script>
+    	function isEquals(optionName, optionText, quantity, quickCheck){
+    		let selectList = document.querySelectorAll('.selected-row');
+    		console.log(selectList);
+    		for(let i = 0; i < selectList.length; i++){
+    			let select = selectList[i];
+    			
+    			if(select.querySelector('.selected-text .selected-name').innerText === optionName
+    				&& select.querySelector('.selected-text .selected-context').innerText === optionText
+    				&& select.querySelector('.quickcheck').checked === quickCheck){
+    				console.log('같은 데이터다!');
+    				select.querySelector('.quantity').value = parseInt(select.querySelector('.quantity').value) + parseInt(quantity);
+    				return false;
+    			}
+    		}
+    		return true;
+    	}
     </script>
 <%@ include file="../main/customerFooter.jsp" %>

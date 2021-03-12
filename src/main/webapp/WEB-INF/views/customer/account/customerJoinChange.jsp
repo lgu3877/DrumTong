@@ -132,7 +132,7 @@
 	    		img.src = address;
     		}
     	}
-        function FileSubmit(event) {
+        function FileSubmit(cpath) {
             if (event.type === 'keypress' && event.key !== 'Enter') {
                 return;
             }
@@ -218,7 +218,7 @@
 				ob = {
 					"pw" : pw,
 				}
-		        await axios.post('/drumtong/customer/account/customerJoinChange/rest/pwCheck/', ob)
+		        await axios.post(cpath + '/customer/account/customerJoinChange/rest/pwCheck/', ob)
 	
 		        .then( (response) => {
 		          if(response.data === true){
@@ -275,7 +275,7 @@
 					ob = {
 						"pw" : pwCf,
 					}
-			        await axios.post('/drumtong/customer/account/customerJoinChange/rest/Change/pw/', ob)
+			        await axios.post(cpath + '/customer/account/customerJoinChange/rest/Change/pw/', ob)
 		
 			        .then( (response) => {
 			          if(response.data === true){
@@ -325,7 +325,7 @@
 				ob = {};
 				ob[typeName] = InputBox.value;
 				
-		        await axios.post('/drumtong/customer/account/customerJoinChange/rest/Change/' + typeName + '/', ob)
+		        await axios.post(cpath + '/customer/account/customerJoinChange/rest/Change/' + typeName + '/', ob)
 	
 		        .then( (response) => {
 		          if(response.data === true){

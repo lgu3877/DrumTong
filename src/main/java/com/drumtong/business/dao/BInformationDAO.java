@@ -64,5 +64,8 @@ public interface BInformationDAO {
 	//	EMDCODE 를 출력해주는 SQL문입니다.
 	String selectEMDCode(String estid);
 
+	// 검색어 자동완성
+	List<BInformationVO> searchAutoComplete(String searchWord);
+
 
 }

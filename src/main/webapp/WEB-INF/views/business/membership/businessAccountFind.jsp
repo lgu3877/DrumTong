@@ -10,7 +10,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
 	<!-- title -->
-  	<title>Login :: Laundry</title>
+  	<title>businessMembership :: AccountFind</title>
   	
   	<!-- global css -->
     <link rel="stylesheet" href="${cpath }/business/css/businessStyle.css">
@@ -26,6 +26,14 @@
   	
   	<!-- Axios -->
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	
+	<!-- javascript cpath -->
+	<script type="text/javascript" charset="utf-8">
+		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+		function getContextPath() {
+		    return sessionStorage.getItem("contextpath");
+		}
+	</script>
 </head>
 
 

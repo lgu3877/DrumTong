@@ -23,6 +23,14 @@
 	<!-- icon -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 	
+	<!-- javascript cpath -->
+	<script type="text/javascript" charset="utf-8">
+		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+		function getContextPath() {
+		    return sessionStorage.getItem("contextpath");
+		}
+	</script>
+	
 	<!-- 다음 주소 검색 script function -->
 	<%@ include file="/resources/daumAddressSearch/daumAddressSearch.jsp" %>
 </head>

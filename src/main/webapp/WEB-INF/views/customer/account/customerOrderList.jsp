@@ -272,11 +272,7 @@
 	if(orderList.length !== 0){
 		// 처음 화면을 로드했을 시에 Sample Clone을 생성해준다. (orderList[0]에 대한 값)
 		window.onload = function() {
-			
 			insertCloneDiv();
-	// 		console.log("클론 콘테이너 ");
-	// 		console.log(clonecontainer);
-			
 		}
 	} else {
 		h1 = document.createElement('h1');
@@ -288,10 +284,8 @@
 	// Clone한 Div영역을 반복문으로 orderList 배열의 길이만큼 반복시켜준다.
 	// orderList[0]에 대한 값은 입력을 했으니 배열은 1부터 시작한다.
 	function insertCloneDiv() {
-// 		console.log('길이 : ', orderList.length);
 		for (let i = 0; i < orderList.length; i++){
 			initData(i);
-// 			console.log('objectkey : ' ,Object.keys(orderList[i].maincategory));
 		}
 	}
 	
@@ -299,21 +293,12 @@
 	// 초기 데이터 세팅
 	function initData(value){
 		
-// 		orderlistWrap.append('<div class="orderlist-card'+ ((value == 0) ? '' : value) + '">' + initSetting.html() + '</div>');
-		
-// 		let clonecontainer = $('div.orderlist-card' + ((value == 0) ? '' : value));
-		
 		// orderlist-card 한장을 htmtl로 복사 시켜준다.
-// 		orderlistWrap.append('<div class="orderlist-card'+ value + '">' + initSetting.html() + '</div>');
 		orderlistWrap.append('<div class="orderlist-card" id="card' + value + '">' + initSetting.html() + '</div>');
 		
 		
-		
-		
-// // 		let clonecontainer = $('div.orderlist-card' + value );
 		let clonecontainer = $('div#card' + value );
 		
-// 		console.log(clonecontainer);
 // 		// 클론 내부영역에 매장명을 입력시켜준다.
 		clonecontainer.find('.brandNaming').html(orderList[value].brandnaming);
 
@@ -321,22 +306,14 @@
 // 		// 주문 번호를 입력해줍니다.
 		clonecontainer.find('.orderData-date').html('<b>주문번호</b> ' + orderList[value].salecode );
 		
-// 		console.log('매장명입력3');
 
 // 		// 주문 옵션을 넣어줍니다.
-// 		console.log('valuemainccateogry : ' , orderList[value].maincategory);
 		
 // 		// 1차 메인카테고리 HashMap array
 		for(mainkey in Object.keys(orderList[value].maincategory)) {
 			
 // 			// HashMap [maincategory]를  단일 객체로 분리시켜줍니다.
 			let inputMainKey = Object.keys(orderList[value].maincategory)[mainkey];
-			
-			
-// 			console.log();
-// 			console.log('메인카테고리 단일 값');
-// 			console.log(inputMainKey);
-// 			console.log();
 			
 // 			// after은 선택한 영역 뒤에 추가시켜줍니다.
 // 			// 메인 메뉴 이름  <div> 영역에 추가하기  
@@ -346,13 +323,6 @@
 // 			// 서브 카테고리들
 			let subcategories = orderList[value].maincategory[inputMainKey];
 			
-// 			console.log();
-// 			console.log('서브카테고리 배열의 값');
-// 			console.log(subcategories)
-// 			console.log();
-			
-			
-			
 // 			// 2차 서브카테고리 HashMap 해제
 			for(subkey in Object.keys(subcategories)){
 				
@@ -360,29 +330,13 @@
 // 				// HashMap [subcategory]를  단일 객체로 분리시켜줍니
 				let inputSubKey = Object.keys(subcategories)[subkey];
 				
-				
-// 				console.log();
-// 				console.log('서브카테고리 단일의 값');
-// 				console.log(inputSubKey);
-// 				console.log();
-				
-				
 				clonecontainer.find('#orderData-option-main-' + inputMainKey ).after('<div id="orderData-option-sub-' + inputSubKey + '">' + inputSubKey + '</div> <ul></ul>');
 				
 				
 				let mainmenus = subcategories[inputSubKey];
-// 				console.log('@@@메인메뉴들 ');
-// 				console.log(mainmenus);
 				
-// 				console.log(mainmenus.length);
 				for ( let i = 0; i < mainmenus.length; i++ ) {
-// 					console.log('세부메뉴 단일 값 : ' + i);
-// 					console.log(mainmenus[i].name);
-// 					console.log(mainmenus[i]);
-					
-// 					console.log(mainmenus[i].quickprice);
 					let quickprice = ( mainmenus[i].quickprice === 0 ) ? '' : 'Quick Price : ' + numberWithCommas(mainmenus[i].quickprice) + '원';
-// 					console.log('quick : ' + quickprice);
 					
 					clonecontainer.find('#orderData-option-sub-' + inputSubKey).next('ul').
 					html('<li>' + mainmenus[i].name + ' '+ numberWithCommas(mainmenus[i].amount) +'개 X ' + 
@@ -390,7 +344,6 @@
 								  numberWithCommas(mainmenus[i].sumprice) + '원 ' + quickprice  +
 					     '</li>');
 					
-
 				}
 			}
 			
@@ -408,7 +361,9 @@
 		clonecontainer.find('.orderData-options-head-coupon').next('ul').html('<li>' + numberWithCommas(orderList[value].discountprice) + '원 </li>');
 		
 		// 요청사항에 대한 값을 입력해줍니다.
-		clonecontainer.find('.orderData-options-head-requests').next('ul').html('<li>' + orderList[value].requests + '</li>');
+		clonecontainer.find('.orderData-options-head-requests').next('ul').html('<li>수거 요청사항 : ' + orderList[value].collectionrequests + '</li>'
+																				+ '<li>세탁 요청사항 : ' + orderList[value].laundryrequests + '</li>'
+																				+ '<li>배달 요청사항 : ' + orderList[value].deliveryrequests + '</li>');
 		
 		// 주문 일자를 입력해줍니다.
 		clonecontainer.find('.orderData-total-purchasedate').html(' <b>주문일자</b> ' +  orderList[value].purchasedate);

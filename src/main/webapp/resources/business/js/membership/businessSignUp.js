@@ -182,7 +182,7 @@
 
      	const axGet = async (userid) => {	// async : 비동기 실행 함수
 
-          await axios.get('/drumtong/business/membership/businessSignUp/rest/useridDupl/' + userid + '/')
+          await axios.get(getContextPath() + '/business/membership/businessSignUp/rest/useridDupl/' + userid + '/')
           // 정상
           
           .then( (response) => {
