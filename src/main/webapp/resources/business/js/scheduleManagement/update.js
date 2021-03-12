@@ -7,7 +7,7 @@ async function updateScheduleTime() {
 	if(!object)
 		return Promise.resolve(false);
 		
-	const { data } = await axios.post("/drumtong/business/mainmanagement/BScheduleTime/rest/updateBScheduleTime/", object);
+	const { data } = await axios.post(getContextPath() + "/business/mainmanagement/BScheduleTime/rest/updateBScheduleTime/", object);
 	
 	if(status === "SUCCESS" &&  data) {
 		alert('성공적으로 입력이 완료되었습니다.');
@@ -105,7 +105,7 @@ async function updateRegHoliday() {
 	
 	console.log(bscheduledays);
 	
-	const { data } = await axios.post("/drumtong/business/mainmanagement/BScheduleDays/rest/updateBScheduleDays/", bscheduledays);
+	const { data } = await axios.post(getContextPath() + "/business/mainmanagement/BScheduleDays/rest/updateBScheduleDays/", bscheduledays);
 
 	if (data) {
 		bscheduledays = data; // 데이터 덮어씌우기
@@ -153,7 +153,7 @@ async function updateTmpHoliday() {
 		reason : reason,
 	}
 	
-	const { data } = await axios.post("/drumtong/business/mainmanagement/BTempSuspension/rest/insertBTempSuspension/", object);
+	const { data } = await axios.post(getContextPath() + "/business/mainmanagement/BTempSuspension/rest/insertBTempSuspension/", object);
 	if(data) {
 		alert('성공적으로 입력이 완료되었습니다.');
 		
@@ -201,7 +201,7 @@ async function deleteSchedule(list) {
 		}
 		
 		if (dateReg.test(startDay) && dateReg.test(endDay)) {
-			const { data } = await axios.post("/drumtong/business/mainmanagement/BTempSuspension/rest/deleteBTempSuspension/", object);
+			const { data } = await axios.post(getContextPath() + "/business/mainmanagement/BTempSuspension/rest/deleteBTempSuspension/", object);
 			
 			
 			if(data) {
@@ -256,7 +256,7 @@ async function postSchedule(list) {
 			}
 		
 		if (dateReg.test(startDay) && dateReg.test(endDay)) {
-			const { data } = await axios.post("/drumtong/business/mainmanagement/BTempSuspension/rest/updateBTempSuspension/", object);
+			const { data } = await axios.post(getContextPath() + "/business/mainmanagement/BTempSuspension/rest/updateBTempSuspension/", object);
 			btempsuspension = data;
 			
 			console.log(data);
@@ -281,7 +281,7 @@ async function statusChange(param) {
 		estid : selectESTID,
 		status : param,
 	}
-	const { data } = await axios.post("/drumtong/business/mainmanagement/BInformation/rest/changeShopStatus/", object);
+	const { data } = await axios.post(getContextPath() + "/business/mainmanagement/BInformation/rest/changeShopStatus/", object);
 	console.log('statusChangeResult : ' , data);
 	
 	return data;

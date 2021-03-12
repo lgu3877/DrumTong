@@ -111,7 +111,7 @@
 							<div class="laundryLists_1_1">
 								<c:choose>
 									<c:when test="${li.mainimg == '-'}">
-										<img src="${cpath }/resources/customer/img/펭수버럭.jpg">
+										<img src="https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/system/customer/img/펭수버럭.jpg">
 									</c:when>
 									<c:otherwise>
 										<img src="https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/${li.mainimg }">
@@ -168,7 +168,7 @@ function mainSearch(){
 	})
 
    async function getAddressList(searchWord){
-      const {data} = await axios.get('/drumtong/customer/main/customerMain/rest/searchAutoComplete/' + searchWord + '/');
+      const {data} = await axios.get(getContextPath() + '/customer/main/customerMain/rest/searchAutoComplete/' + searchWord + '/');
       console.log(data);
       if(tmp !== searchWord)
     	  return false;
@@ -186,7 +186,7 @@ function mainSearch(){
       return data;
    }
    async function getAddressList2(searchWord){
-      const {data} = await axios.get('/drumtong/customer/laundry/customerSearch/rest/searchAutoComplete/' + searchWord + '/');
+      const {data} = await axios.get(getContextPath() + '/customer/laundry/customerSearch/rest/searchAutoComplete/' + searchWord + '/');
       console.log(data);
       if(tmp !== searchWord)
     	  return false;

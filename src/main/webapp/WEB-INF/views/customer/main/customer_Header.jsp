@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 	<header>
-        <a href="${cpath }/"><img class="logo" src="${cpath }/resources/customer/img/logo3.png"></img></a>
+        <a href="${cpath }/"><img class="logo" src="https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/system/customer/img/logo3.png"></img></a>
         
         <div class="mainMenu">
             
