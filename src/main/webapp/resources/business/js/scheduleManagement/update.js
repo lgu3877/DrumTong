@@ -1,18 +1,21 @@
 async function updateScheduleTime() {
 	
+	let result = false;
+	
 	const object = exceptionCheckBScheduleTime();
 	console.log(object);
 	if(!object)
-		return false;
+		return Promise.resolve(false);
 		
 	const { data } = await axios.post(getContextPath() + "/business/mainmanagement/BScheduleTime/rest/updateBScheduleTime/", object);
 	
-	if(data) {
+	if(status === "SUCCESS" &&  data) {
 		alert('성공적으로 입력이 완료되었습니다.');
 	}
-	else {
+	else if(!data) {
 		alert('서버 오류가 발생했습니다.')
 	}
+	return true;
 	
 }
 
@@ -126,6 +129,7 @@ async function updateRegHoliday() {
 	else {
 		alert("잘못된 입력입니다.");
 	}
+	return true;
 	
 	
 	
@@ -278,5 +282,7 @@ async function statusChange(param) {
 		status : param,
 	}
 	const { data } = await axios.post(getContextPath() + "/business/mainmanagement/BInformation/rest/changeShopStatus/", object);
-	console.log(data,"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#@#@#@");
+	console.log('statusChangeResult : ' , data);
+	
+	return data;
 }
