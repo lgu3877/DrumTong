@@ -25,6 +25,27 @@
 					name="search" 
 					value="검색"
 					onclick="mainSearch()"/>
+				<div id="autosearch" style="position: absolute; top: 100%; left: 0; display: none; justify-content: center; width: 100%; height: auto">
+					<div style="width: 50%; height: auto; border-right: 1px solid rgb(231, 231, 231); background: whitesmoke; l">
+						<h1 style="margin: 0; font-size: 18px; text-align: left; padding: 15px 0 5px 35px">지역 주소</h1>
+						<div style="width: 100%; height: 320px;  text-align: left; padding: 0 10px 0px 40px;overflow-y: scroll">
+								<ul style="padding: 0" id="address-div">
+		
+								</ul>
+						</div>
+					</div>
+					
+					<div style="width: 50%; height: auto; border-right: 1px solid rgb(231, 231, 231); background: whitesmoke; l">
+						<h1 style="margin: 0; font-size: 18px; text-align: left; padding: 15px 0 5px 35px">지역 주소</h1>
+						<div style="width: 100%; height: 320px;  text-align: left; padding: 0 10px 0px 40px;overflow-y: scroll">
+							<div style="width: 100%; height: auto;" id="store-div">
+								<ul style="padding: 0">	
+		
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</article>
@@ -125,13 +146,65 @@
 <script>
 //	영경스크립트
 function mainSearch(){
-	location.href='${cpath}/customer/laundry/customerSearch/' + document.getElementById('search').value + '/';
+	location.href= getContextPath() + '/customer/laundry/customerSearch/' + document.getElementById('search').value + '/';
 }
 //  승원스크립트
-	document.getElementById('search').addEventListener('keyup', event => {
+	var tmp = '';
+	document.getElementById('search').addEventListener('keyup', function() {
 		  if (window.event.keyCode == 13)
 			  mainSearch();
+
+		  const search = document.getElementById('search').value;
+		  console.log('search : ' + search);
+		  if(search !== '') {
+			  document.getElementById('autosearch').style.display = 'flex';
+			 
+			  tmp = search;
+			  getAddressList(search);
+			  getAddressList2(search);			  
+		  }
+		  else
+			  document.getElementById('autosearch').style.display = 'none';
 	})
+
+   async function getAddressList(searchWord){
+      const {data} = await axios.get('/drumtong/customer/main/customerMain/rest/searchAutoComplete/' + searchWord + '/');
+      console.log(data);
+      if(tmp !== searchWord)
+    	  return false;
+
+   	  let address_ui = document.querySelector('#address-div');
+      address_ui.innerHTML = '';
+      for(let i = 0; i < data.addressList.length; i++) {
+    	  let li = document.createElement('li');
+    	  li.style.listStyle = 'none';
+    	  li.style.fontSize = '18px';
+    	  li.style.marginTop = '10px';
+    	  li.innerHTML = data.addressList[i];
+    	  address_ui.append(li);
+      }
+      return data;
+   }
+   async function getAddressList2(searchWord){
+      const {data} = await axios.get('/drumtong/customer/laundry/customerSearch/rest/searchAutoComplete/' + searchWord + '/');
+      console.log(data);
+      if(tmp !== searchWord)
+    	  return false;
+      
+      let store_ui = document.querySelector('#store-div ul');
+      store_ui.innerHTML = '';
+      for(let i = 0; i < data.laundryList.length; i++) {
+    	  let li = document.createElement('li');
+    	  li.style.listStyle = 'none';
+    	  li.style.fontSize = '18px';
+    	  li.style.marginTop = '10px';
+    	  li.innerHTML = data.laundryList[i].brandnaming;
+    	  store_ui.append(li);
+      }
+      return data;
+   }
+   getAddressList('부산 해운대');
+   getAddressList2('모래');
 
 </script>
 <%@ include file="customerFooter.jsp"%>
