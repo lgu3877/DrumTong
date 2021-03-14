@@ -350,6 +350,7 @@ body .section_main .search .searchs .searchs_p  b {
 		padding-top: 5px;
 		border-color: #097ce6;
 		margin-top: 20px;
+		position: relative;
 	}
 }
 
@@ -363,6 +364,7 @@ body .section_main .search .searchs .searchs_p  b {
 		padding-top: 5px;
 		border-color: #097ce6;
 		margin-top: 20px;
+		position: relative;
 	}
 }
 
