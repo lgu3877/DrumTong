@@ -78,6 +78,7 @@ function orderListSettings() {
 	resultArray.push(orderMap);
 	resultArray.push(totalprice);
 	resultArray.push(totalamount);
+	
 	return resultArray;
 }
 
