@@ -147,6 +147,13 @@ div.topdatediv input[type="date"] {
 	height:80px;
 }
 
+/* .check-request { */
+/* 	position: absolute; top:10px; left: 290px ;width: 250px; height: 60px; color: red; font-size: 24px; font-weight: bold ;display: flex; align-items: center; font-style: oblique; */
+/* } */
+.check-request {
+	position: absolute; top: -60px; right:0px ;width: 250px; height: 60px; color: red; font-size: 24px; font-weight: bold ;display: flex; align-items: center; justify-content: flex-end; ;font-style: oblique;
+}
+
 .container {
 	width: 80%; 
 	height: 300px; 
@@ -157,6 +164,7 @@ div.topdatediv input[type="date"] {
 	margin-bottom: 30px;
 	margin-right: 500px;
 	z-index: 997;
+	position: relative;
 }
 
 .container:hover {
@@ -494,4 +502,8 @@ div.detailmenus .innerdetail h3 {
 
 div.detailmenus .innerdetail i {
 	position: absolute !important; left: -20px !important; top: 5px !important;
+}
+
+#collectionrequests, #laundryrequests, #deliveryrequests {
+	color: black !important;
 }
