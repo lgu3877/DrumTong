@@ -64,7 +64,7 @@
 
 
 	<!-- 	온라인 계약이 진행 중인 상태이면은 기본 헤더를 보여준다 -->
-	<c:if test="${status ne 'FAIL' }">
+	<c:if test="${status ne 'SUCCESS' }">
 		<%@ include file="../main/businessHeader.jsp" %>
 	</c:if>
 	

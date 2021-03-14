@@ -59,57 +59,6 @@
 	<section>
 		<!-- sub-header(membership) -->
 		<%@ include file="../main/businessSubHeader.jsp" %>
-
-	<!-- 카드 -->
-	<!-- 
-		<div>
-			<h1 class="subtitle">카드관리</h1>
-			<div class="container">
-				<div id="carddiv">
-					<h1 id="cardbank"></h1>
-					<select id="cardbanksel" style="display: none">
-						<option selected>카드를 선택하세요</option>
-						<option value='삼성카드'>삼성카드</option>
-						<option value='신한카드'>신한카드</option>
-						<option value='현대카드'>현대카드</option>
-						<option value='외환카드'>외환카드</option>
-						<option value='하나카드'>하나카드</option>
-						<option value='롯데카드'>롯데카드</option>
-						<option value='전북카드'>전북카드</option>
-						<option value='제주카드'>제주카드</option>
-						<option value='광주카드'>광주카드</option>
-						<option value='씨티카드'>씨티카드</option>
-						<option value='NH카드'>NH카드</option>
-						<option value='조흥(강원)카드'>조흥(강원)카드</option>
-					</select>
-					<div id="carddiv1" class="flex1">
-						<input type="text" readonly="readonly" maxlength="4"
-							placeholder="OOOO" onkeyup="inputnumck(this)"> <input
-							type="text" readonly="readonly" maxlength="4" placeholder="OOOO"
-							onkeyup="inputnumck(this)"> <input type="text"
-							readonly="readonly" maxlength="4" placeholder="OOOO"
-							onkeyup="inputnumck(this)"> <input type="text"
-							readonly="readonly" maxlength="4" placeholder="OOOO"
-							onkeyup="numck(this)">
-					</div>
-					<div id="carddiv2" class="flex1">
-						<input type="text" maxlength="2" placeholder="YY" id="cardyear"
-							onkeyup="numck(this)" readonly>
-						<h1 style="text-align: center; width: 5%;">/</h1>
-						<input type="text" maxlength="2" placeholder="MM" id="cardmonth"
-							onkeyup="numck(this)" readonly>
-						<h1 style="width: 10%; margin-left: 15px">CVC</h1>
-						<input type="text" maxlength="3" placeholder="OOO" id="cardcvc"
-							onkeyup="numck(this)" readonly>
-					</div>
-				</div>
-				<div class="flex2">
-					<button onclick="cardChange(this)">변경</button>
-				</div>
-				<div class="interiorLine"></div>
-			</div>
-		</div>
-	 -->
 		
 		<!-- 카드 수정본 -->
 		<div class="container">
@@ -228,35 +177,6 @@
 			</div>
 		</div>
 		
-	<!-- 계좌 백업 -->
-	<!-- 
-		<div>
-			<h1 class="subtitle">계좌관리</h1>
-			<div class="container">
-				<div id="accountdiv">
-					<h1 id="accountbank"></h1>
-					<select id="accountbanksel" style="display: none">
-						<option selected>카드를 선택하세요</option>
-						<option value='Sinhan'>신한은행</option>
-						<option value='Kyungnam'>경남은행</option>
-						<option value='KB'>국민은행</option>
-						<option value='IBK'>기업은행</option>
-						<option value=Nonghyup>농협은행</option>
-						<option value='Busan'>부산은행</option>
-					</select>
-					<div class="flex3">
-						<input type="text" readonly placeholder="계좌번호 입력('-' 제외)"
-							onkeyup="numck(this)" maxlength="25">
-					</div>
-				</div>
-				<div class="flex2">
-					<button onclick="accountChange(this)">변경</button>
-				</div>
-				<div class="interiorLine"></div>
-			</div>
-		</div>
-	 -->
-	 
 	</section>
 
 	<!-- 전역변수 & 초기 실행 & 공통함수 -->

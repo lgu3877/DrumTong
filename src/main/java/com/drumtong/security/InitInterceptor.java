@@ -23,8 +23,8 @@ public class InitInterceptor extends HandlerInterceptorAdapter {
 	//▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣
 	
 	//▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣2. 아래 코드 주석 해제▣▣▣▣▣▣▣▣▣▣▣
-//	final String DOMAIN = "http://www.drumtong.tk";
-//	final String SUBDOMAIN = "drumtong.dk";
+//	final String DOMAIN = "https://www.drumtong.ml";
+//	final String SUBDOMAIN = "/";
 	//▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣
 	
 	// extends HandlerInterceptorAdaptor
@@ -42,6 +42,7 @@ public class InitInterceptor extends HandlerInterceptorAdapter {
 		// ▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣
 		HttpSession Session = request.getSession();
 		String Referer = request.getHeader("REFERER");
+//		String typeOfSite = request.getRequestURI().contains("business") ? "b" : "c";
 		String typeOfSite = request.getRequestURI().split(SUBDOMAIN)[1].contains("business") ? "b" : "c";
 //		◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
 		// pull 하고나서 수정 : !referer.startsWith("http://본인아이피주소:본인포트번호/drumtong/"))

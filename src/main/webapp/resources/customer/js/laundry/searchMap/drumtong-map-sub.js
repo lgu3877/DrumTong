@@ -23,7 +23,7 @@
 		// 중심 좌표나 확대 수준이 변경됐을 때 감지하는 이벤트 : 'idle'
 		kakao.maps.event.addListener(map, 'idle', function() {
 			    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-			    console.log('행정동 주소 : ' , $('#centerAddr').html());
+//			    console.log('행정동 주소 : ' , $('#centerAddr').html());
 			    callAddress();
 		});
 

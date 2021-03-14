@@ -49,7 +49,7 @@
 	
 	<div style="width: 20%; height: 100%; display: table;">
 		<div style="display: table-cell; vertical-align: middle;">
-		<img src="${cpath }/resources/business/img/main/laundry.png" width="100%">
+		<img src="https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/system/business/img/main/laundry.png" width="100%">
 		</div>
 	</div>
 		

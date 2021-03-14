@@ -292,7 +292,7 @@ async function createMinorOptions() {
 	});
 	
 	// ■ [영경]await 추가	
-	const { data:sigungu } = await axios.get("/drumtong/business/mainmanagement/BManagement/rest/selectMMapAddressB/" +sido + "/" );
+	const { data:sigungu } = await axios.get(getContextPath() + "/business/mainmanagement/BManagement/rest/selectMMapAddressB/" +sido + "/" );
 
 	if (sigungu) {
 		const defaultOption = document.createElement("option");
@@ -329,7 +329,7 @@ async function createDetailOptions() {
 		signame : minorValue,
 	}
 	
-	const { data:towns } = await axios.post("/drumtong/business/mainmanagement/BManagement/rest/selectMMapAddressC/", object);
+	const { data:towns } = await axios.post(getContextPath() + "/business/mainmanagement/BManagement/rest/selectMMapAddressC/", object);
 	
 	// 생성
 	for (let i = 0; i < towns.length; i++) {

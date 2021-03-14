@@ -11,17 +11,16 @@
 	}
 	
 	function shopAxios() {		// 상점 레벨 비동기
-		const axiosPath = '/drumtong/customer/laundry/customerMap/rest/selectBInformationCoord/';
+		const axiosPath = getContextPath() + '/customer/laundry/customerMap/rest/selectBInformationCoord/';
 		const axPost = async() => {
 		    await axios.post(axiosPath)
 		    // 정상
 				.then( (response) => {
 		    const data = response.data;
 		    let shopCenter = data;			// 반환 결과 불러오기
-//		    console.log('상점 지도 불러오기');
-//		    console.log(shopCenter);
 		    
-		    var markerImageSrc = '/drumtong/customer/img2/laundry_marker.JPG';
+		    // AWS로 이동하게 되면 수정하시오
+		    var markerImageSrc = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/system/customer/img/laundry_marker.JPG';
 			
 			let bounds = map.getBounds();
 			let swLatLng = bounds.getSouthWest();		// 남서

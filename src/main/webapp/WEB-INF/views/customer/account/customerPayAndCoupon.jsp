@@ -205,7 +205,7 @@
 	               .then( (response) => {
 	                 if(response.data === true){
 	                    alert('충전이 완료되었습니다.');
-	                    location.href='/drumtong/customer/account/customerPayAndCoupon/';
+	                    location.href= getContextPath() + '/customer/account/customerPayAndCoupon/';
 	                 } else{
 	                     alert('충전이 정상적으로 이루어지지 않았습니다.');
 	                 }

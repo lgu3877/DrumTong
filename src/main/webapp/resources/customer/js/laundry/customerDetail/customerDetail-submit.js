@@ -74,7 +74,6 @@
 			laundryrequests : laundryrequests,
 			deliveryrequests : deliveryrequests,
 	  }
-	  console.log(sales);
 	  return sales;
   }
   function checkfunc(){
@@ -122,5 +121,5 @@
 	const {data} = await axios.post(getContextPath() + '/customer/laundry/customerDetail/rest/submit/', paramList);
 	
 	alert(data ? '정상 처리 되었습니다.' : '정상 처리 되지 않았습니다.');
-	location.href = '/drumtong/customer/account/customerOrderList/';
+	location.href = getContextPath()  + '/customer/account/customerOrderList/';
   } //submit 체크 함수 종료

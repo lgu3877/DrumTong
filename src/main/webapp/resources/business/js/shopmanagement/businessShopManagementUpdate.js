@@ -35,7 +35,7 @@ async function updatePhoto() {
 
 	
 	const { data } = await axios.post(
-		"/drumtong/business/mainmanagement/BImage/rest/updateStoreIMG/",formData
+		getContextPath() + "/business/mainmanagement/BImage/rest/updateStoreIMG/",formData
 		,
 		{
 			headers: {
@@ -77,7 +77,7 @@ async function updateIntro() {
 	console.log('object', object.processing);
 	console.log('introduction' , object.introduction);
 	
-	const { data } = await axios.post("/drumtong/business/mainmanagement/BManagement/rest/" + object.processing + "/", object);
+	const { data } = await axios.post(getContextPath() + "/business/mainmanagement/BManagement/rest/" + object.processing + "/", object);
 	
 	console.log(data);
 }
@@ -148,7 +148,7 @@ async function addService() {
 	// 서비스 등록 [건욱]
 	
 	try{
-		const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/" + processing + "/", object);
+		const { data } = await axios.post(getContextPath() + "/business/mainmanagement/BMenu/rest/" + processing + "/", object);
 		
 		// 메뉴 등록을 초기화시켜주고
 		cleanAddService();
@@ -183,7 +183,7 @@ async function updateMenu(service) {
 	}
 	
 	try {
-		const { data } = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/updateMenu/", service);
+		const { data } = await axios.post(getContextPath() + "/business/mainmanagement/BMenu/rest/updateMenu/", service);
 		
 		
 		// 수정된 데이터를 bMenu에 반영시켜주니다.
@@ -211,7 +211,7 @@ async function deleteMenu(rmObject) {
 	
 	try {
 		// Rest 로 삭제를 성공시에 data에 List<BMenuVO> 리스트를 받아옵니다.
-		const {data} = await axios.post("/drumtong/business/mainmanagement/BMenu/rest/deleteMenu/", rmObject);
+		const {data} = await axios.post(getContextPath() + "/business/mainmanagement/BMenu/rest/deleteMenu/", rmObject);
 		
 		
 		// 수정된 데이터 List<BMenuVO>를 수정되기 전 데이터 bMenu에 다시 반영해줍니다.
@@ -256,7 +256,7 @@ async function updateDelivery() {
 		deliveryboolean: deliveryOption === "VISIT" ? "N" : "Y" 
 	}
 	try{
-		const { data } = await axios.post("/drumtong/business/mainmanagement/BManagement/rest/updateDeliveryBoolean/", result);
+		const { data } = await axios.post(getContextPath() + "/business/mainmanagement/BManagement/rest/updateDeliveryBoolean/", result);
 		alertShow(data);
 	} catch(e) {
 		alert('비정상적인 오류가 발생되었습니다. 다시 시도해주세요..!');
@@ -272,7 +272,7 @@ async function updateDeliveryArea() {
 	
 	// axios > post > update
 	try{
-		const { data } = await axios.post("/drumtong/business/mainmanagement/BDeliveryArea/rest/updateBDeliveryArea/", updateArea);
+		const { data } = await axios.post(getContextPath() + "/business/mainmanagement/BDeliveryArea/rest/updateBDeliveryArea/", updateArea);
 		alertShow(data);
 	} catch(e) {
 		alert('비정상적인 오류가 발생되었습니다. 다시 시도해주세요..!');
@@ -302,7 +302,7 @@ async function updateAddress() {
 		"longitude" : ma,
 		"emdcode" : emdCode
 	}
-	const { data } =  await axios.post("/drumtong/business/mainmanagement/BInformation/rest/updateLocation/", object);
+	const { data } =  await axios.post(getContextPath() + "/business/mainmanagement/BInformation/rest/updateLocation/", object);
 	alertShow(data);	 
 	borderNone('locationArea');
 }

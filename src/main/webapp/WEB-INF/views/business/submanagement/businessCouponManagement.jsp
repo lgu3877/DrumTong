@@ -44,103 +44,152 @@
 	
 	<!-- section -->
 	<section>
+
 	<!-- sub-header(membership) -->
 	<%@ include file="../main/businessSubHeader.jsp" %>
-	
-	
-	<!-- 발급날짜 별로 자동적으로 정렬이 이루어지도록 만들자 -->
-<div class="pagetitlediv">
-	<h1>쿠폰</h1>
-</div>
-<div class="container">
-        <div class="inputFlex">
-        <div class="inputDivContainer">
-        <i class="fas fa-bookmark fa-10x" style="position: absolute; left: -150px; color: #3b5998"></i>
-        <span class="bookmark">쿠폰<br>입력</span>
-            <div class="inputDiv" id="enrollDiv">
-                <h1>기간</h1>
-                <input type="date" name="period" id="beforeDate">
-                <h1 style="width: 20px; display: inline-block; text-align: center;">-</h1>
-                <input type="date" name="period"  id="afterDate" readonly>
-                
-                <div class="costDiv">
-                    <h1>최소주문금액</h1>
-                    <input type="text" placeholder="금액을 입력하세요" id="minimumprice" name="minimumprice">
-                </div>
-                
-                <div  class="costDiv">
-                    <h1>할인금액</h1>
-                    <input type="text" placeholder="금액을 입력하세요" id="discount" name="discount">
-                </div>
 
-                
-                <div  class="radioDiv">	<!-- 체크되었을 때 옆에 입력란 활성화 -->
-                    <input type="radio" name="maxissuenum" id="unlimitedcoupon">	<!-- 선착순도 name="maxissunum" value 값이 0이 되지 않도록 하기 -->
-                    <h1>무제한</h1>
-                </div>
-                <div  class="radioDiv">	<!-- 체크되었을 때 옆에 입력란 활성화 -->
-                    <input type="radio" name="maxissuenum" id="limitedcoupon">	<!-- 선착순도 name="maxissunum" value 값이 0이 되지 않도록 하기 -->
-                    <h1>선착순</h1>
-                    <input tpye="text" placeholder="숫자를 입력하세요" id="limitedcouponNum" style="display: none; ">
-                </div>
-                <div class="bottombg1"></div>
-                <div class="topbg1"></div>
+	
+		<!-- Content Title-->
+		<div class="pagetitlediv">
+			<span>쿠폰 등록</span>
+		</div>
+		
+		<!-- Content Container -->
+		<div class="container">
 
-            </div>
-                    </div>
-            <div class="sideinputDiv">
-                <div class="sidedivborder">
-                    <div class="buttonDiv">
-                        <input type="button" value="등록" onclick="couponEnrollment()">
-                    </div>
-                        <div class="sideCircle-black" style="top: -2px"></div>
-                        <div class="sideCircle-black" style="top: 78px"></div>
-                        <div class="sideCircle-black" style="top: 158px"></div>
-                        <div class="sideCircle-black" style="top: 238px"></div>
-                        <div class="sideCIrcle-white" style="top: -1px"></div>
-                        <div class="sideCIrcle-white" style="top: 79px"></div>
-                        <div class="sideCIrcle-white" style="top: 159px"></div>
-                        <div class="sideCIrcle-white" style="top: 239px"></div>
-                        <div class="side-hr"></div>
-                        <div class="bottombg2"></div>
-                        <div class="topbg2"></div>
-                    </div>
-                </div>
-            </div>
-    
-    
-        </div>
-	
-	<hr>
-	
-	<div id="enrollmentedDiv" class="container">
-	
-	</div>
+			<!-- 쿠폰 등록 -->
+			<div class="inputFlex form">
+				<div class="inputDivContainer" id="enrollDiv">
+
+					<!-- 기간 -->
+					<div class="mb-20">
+						<div class="input_title">기간</div>
+						<div style="display: flex;">
+							<!-- 쿠폰 시작일 -->
+							<input type="date" name="period" id="beforeDate" onchange="activateEndDate()">
+
+							<!-- 하이픈 -->
+							<div class="date_arrow">~</div>
+
+							<!-- 쿠폰 시작일 -->
+							<input id="afterDate" type="date" name="period" readonly onchange="dateValidation()">
+						</div>
+					</div>
+					
+					<!-- 최소주문금액 -->
+					<div class="mb-20">
+						<div class="input_title">최소주문금액</div>
+						<div class="costDiv">
+							<input type="text" placeholder="최소 주문금액(원)" id="minimumprice"
+								name="minimumprice" onkeyup="costSlice()">
+						</div>
+					</div>
+
+					<!-- 할인금액-->
+					<div class="mb-20">
+						<div class="input_title">할인금액</div>
+						<div class="costDiv">
+							<input type="text" placeholder="할인 적용금액(원)" id="discount"
+								name="discount" onkeyup="costSlice()">
+						</div>
+					</div>
+
+					<!-- 쿠폰발급 옵션 -->
+					<div class="mb-20">
+						<div class="input_title">발급옵션</div>
+						<div class="d-flex">
+							<!-- 무제한 선택 옵션 -->
+							<div class="radioDiv">
+								<!-- label & input(radio) -->
+								<label for="unlimitedCoupon" class="radio_label"> 
+									<input type="radio" name="maxissuenum" id="unlimitedCoupon"
+										   onchange="changeUnlimitedOption()">
+									<span class="fs-15">무제한</span>
+								</label>
+							</div>
+							
+							<!-- 선착순 선택 옵션 -->
+							<div class="radioDiv">
+								<!-- label & input(radio) -->
+								<label for="limitedcoupon" class="radio_label">
+									<input id="limitedcoupon" type="radio" name="maxissuenum"
+										   onchange="changeFirstInOutOption(this)">
+									<span class="fs-15">선착순</span>
+								</label>
+							</div>
+
+							<!-- 선착순 인원 입력 input(text) -->
+							<div class="radioDiv">
+								<input id="limitedcouponNum" class="coupon_amount" type="text" placeholder="발급쿠폰 수(개)" onkeyup="costSlice()" style="display: none;">
+							</div>
+						</div>
+						
+
+					</div>
+				</div>
+
+
+				<!-- 쿠폰 등록(발급) 버튼 -->
+				<div class="sideinputDiv">
+					<input class="coupon_publish" type="button" value="발급" onclick="couponEnrollment()">
+				</div>
+				
+			</div>
+		</div>
+
+		<!-- Content Title-->
+		<div class="pagetitlediv">
+			<span>쿠폰 리스트</span>
+		</div>
+		
+		<!-- 쿠폰 리스트 -->
+		<div id="enrollmentedDiv"></div>
 
 	</section>
-<script type="text/javascript">
-
-	var couponlist = null;
-	var slidenum = null;		// 화살표 누를 때마다 3개씩 쿠폰보여주기 위한 변수
 	
-	window.onload = function() {
-		var inputDate = document.querySelectorAll('input[type="date"]');
-	
-		var date = new Date();
-		var year = date.getFullYear();
-		var month = new String(date.getMonth()+1);
-		var day = new String(date.getDate()); 
+	<!-- 전역변수 & 초기실행(onload) -->
+	<script type="text/javascript">
+		var couponlist = null;
+		var slidenum = null;		// 화살표 누를 때마다 3개씩 쿠폰보여주기 위한 변수
 		
-		for(i = 0; i < 2; i++) {
-			inputDate[i].setAttribute('min', year + '-' + month + '-' + day);
+		window.onload = function() {
+			var inputDate = document.querySelectorAll('input[type="date"]');
+		
+			var date = new Date();
+			var year = date.getFullYear();
+			var month = new String(date.getMonth()+1);
+			var day = new String(date.getDate()); 
+			
+			for(i = 0; i < 2; i++) {
+				inputDate[i].setAttribute('min', year + '-' + month + '-' + day);
+			}
+			couponlist = ${couponList };
+			showCounpons();
+			slidenum = 3;
 		}
-		couponlist = ${couponList };
-		showCounpons();
-		slidenum = 3;
-	}
+		
+		
+		// 가격에 콤마(,) 삽입
+		function insertComma(string) {
+			const reversedString = string.split("").reverse().join("");
+			const commaAttached = reversedString.replace(/(.{3})/g,"$1,");
+			
+			const array = commaAttached.split("").reverse();
+			
+			if (array[0] === ",") {
+				array.shift();
+			}
+			
+			return array.join("");
+		}
+	</script>
+	
+	<!-- 인터페이스(View & Event Control) -->
+	<script type="text/javascript" src="${cpath }/business/js/submanagement/businessCouponInterface.js"></script>
+	
+	<!-- 업데이트(Axios request & response) -->
+	<script type="text/javascript" src="${cpath }/business/js/submanagement/businessCouponUpdate.js"></script>
 
-</script>
-<script type="text/javascript" src="${cpath }/business/js/submanagement/businessCouponManagement.js"></script>
 </body>
 
 </html>
