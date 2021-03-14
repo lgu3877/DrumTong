@@ -116,6 +116,7 @@ public class CustomerLaundryService {
 	private void setHits(HttpServletRequest req, String estid) {
 		// ip를 가져와서
 		String yourIP = GetIPAddress.getIP(req);
+		System.out.println("yourIP : " + yourIP);
 		// ip, estid, 오늘날짜와 일치하는 데이터가 있는지 조회
 		
 		// 결과가 있으면 조회수를 올리지 않고 return
