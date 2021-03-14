@@ -10,13 +10,13 @@ function addToSession(sessionData, searchData) {
 	
 	if(memberIDList === null) 
 		memberIDList = [];
-		
+	
 	console.log("memberIDLIST2 : ", memberIDList);
 	
 	// 가져온 세션의 사이즈가 5이상이면 0번째 최근검색어를 삭제해줍니다.
 	if(memberIDList.length !== 0 && memberIDList.length === 5 ) 
 	   memberIDList.shift();
-	
+		
 	// 최근검색어를 추가해줍니다.
 	memberIDList.push(searchData);
 	

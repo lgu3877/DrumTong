@@ -1,4 +1,5 @@
-// ============로그인과 상관없이 실행되는 메서드 목록=================
+// Default Setting
+
 // 쿠폰 다운로드(사업자 측) 세팅 메서드
 function couponSettings(couponList){ 
 	modalCouponList = document.getElementById('modal-couponList');
@@ -202,7 +203,6 @@ function calTotal() {
         totalPrice -= checkAbleCoupon(totalPrice - pick -deli);
         totalText.innerText = totalPrice;
         priceText.innerText = totalPrice;
-        
 }
 // 쿠폰을 사용했을 때 couponid 값을 넘기도록 설정해주어야 한다!
 function checkAbleCoupon(currentPrice){
@@ -271,6 +271,8 @@ function afterSubClick(checksct){
 		menuCategory.innerHTML="";
 		createMenu(menuCtList);
 }
+
+
 // 하위 메뉴 생성 메서드
 function createMenu(list){
 	menuCategory.innerHTML="";
@@ -337,74 +339,6 @@ function createMenu(list){
 		menuCategory.appendChild(menuDiv_1);
 	})
 }
-// ---------모달 관련 메서드들------------
-// 모달창을 열어주는 메서드
-function openModal(currentModal, styleDisplay){
-	modal.style.display = 'block';
-	currentModal.style.display = styleDisplay;
-}
-function closeModal(currentModal){
-	modal.style.display = 'none';
-	currentModal.style.display = 'none';
-}
-function closeAllModal(){
-	const reviewModals = document.querySelector('#modal-reiview').querySelectorAll('.detailview-review-row');
-	for(i = reviewModals.length; i > 0; i--) {
-    	   if(i == 1)
-    		   reviewModals[i - 1].querySelector('.modal-grade').innerHTML = '';
-    	   else
-	 		   reviewModals[i - 1].remove();
-	}
 
-	modal.style.display = 'none';
-	modalContent1.style.display = 'none';
-	modalContent2.style.display = 'none';
-	modalContent3.style.display = 'none';
-	modalContent4.style.display = 'none';
-}
-// ============로그인 했을 때만 실행되는 메서드 목록=================
-function oneCouponSettings(minimumprice, discount, period, couponid){ // 내 쿠폰을 현재 결제
-	myCouponList = document.getElementById('select-coupon');
-	newCoupon = document.createElement('option');
-	newCoupon.setAttribute('value', couponid);
-	
-	newCoupon.innerHTML = '<span><span>' + discount + '</span><span>원 할인/</span><span>' + minimumprice + '</span><span>원 이상[</span><span>' + period + '</span><span>]</span></span>';
-	
-	myCouponList.appendChild(newCoupon);
-}
-function myCouponSettings (myCoupons){
-	document.getElementById('select-coupon').removeChild(document.getElementById('noLogin'));
-	myCoupons.forEach(co => {
-		oneCouponSettings(co.minimumprice, co.discount, co.period, co.couponid);
-	})
-}
-function addBookmark(estid) {
-   bookMarker = document.getElementById('bookMarker');
-   className = bookMarker.className;
-    if (className.search(/add/) > 0) {
-      bookMarker.className = 'fas fa-star remove';
-      iconColor = 'white';
-    }
-    else if (className.search(/remove/) > 0) {
-      bookMarker.className = 'fas fa-star add';
-      iconColor = 'yellow';
-    }
-    
-    const axPost = async (estid) =>{
-       ob={
-          'estid' : estid,
-          'result' : iconColor,
-       };
-       await axios.post(getContextPath() + '/customer/laundry/customerDetail/rest/addBookmark/', ob)
-       .then ((response) => {
-          if(response.data === true){
-             console.log("추가함");
-          } else {
-             console.log("삭제함");
-          }
-       })
-       
-    };
-    axPost(estid);
-    
-  }
+
+

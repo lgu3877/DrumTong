@@ -259,12 +259,14 @@ function showCounpons() {
 }
 	
 
-// 
-function costSlice() {
-	var regexp = /^[0-9]*$/
-		if(!regexp.test(this.value)) {
-			this.value = this.value.slice(0,-1);		// 마지막 한글자만 잘라내기
-		}
+function costSlice(input) {
+	const regexp = /^[0-9]*$/;
+	
+	console.log(input);
+
+	if (!regexp.test(input.value)) {
+		input.value = input.value.slice(0, -1); // 마지막 한글자만 잘라내기
+	}
 }
 	
 	

@@ -4,6 +4,7 @@ function couponEnrollment() {
 	
 	if(enrollconfirm == false)
 		return false;
+	
 	else {
 		var beforevalue = document.querySelector('#beforeDate').value; 
 		var aftervalue = document.querySelector('#afterDate').value; 

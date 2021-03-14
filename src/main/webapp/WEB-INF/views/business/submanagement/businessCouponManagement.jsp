@@ -81,7 +81,7 @@
 						<div class="input_title">최소주문금액</div>
 						<div class="costDiv">
 							<input type="text" placeholder="최소 주문금액(원)" id="minimumprice"
-								name="minimumprice" onkeyup="costSlice()">
+								name="minimumprice" onkeyup="costSlice(this)">
 						</div>
 					</div>
 
@@ -90,7 +90,7 @@
 						<div class="input_title">할인금액</div>
 						<div class="costDiv">
 							<input type="text" placeholder="할인 적용금액(원)" id="discount"
-								name="discount" onkeyup="costSlice()">
+								name="discount" onkeyup="costSlice(this)">
 						</div>
 					</div>
 
