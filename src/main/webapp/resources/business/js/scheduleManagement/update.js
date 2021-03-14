@@ -82,7 +82,7 @@ async function updateRegHoliday() {
 	if(exceptionCheckBScheduleDays() === false)
 		return false;
 	
-	let dbFields = ["firstweek", "secondweek", "thridweek", "fourthweek", "fifthweek", "sixthweek"];
+	let dbFields = ["firstweek", "secondweek", "thirdweek", "fourthweek", "fifthweek", "sixthweek"];
 	
 	
 	let keys = Object.keys(bscheduledays);

@@ -4,7 +4,7 @@ public class BScheduleDaysVO {
 	private String estid;
 	private String firstweek;
 	private String secondweek;
-	private String thridweek;
+	private String thirdweek;
 	private String fourthweek;
 	private String fifthweek;
 	private String sixthweek;
@@ -30,11 +30,11 @@ public class BScheduleDaysVO {
 	public void setSecondweek(String secondweek) {
 		this.secondweek = secondweek;
 	}
-	public String getThridweek() {
-		return thridweek;
+	public String getThirdweek() {
+		return thirdweek;
 	}
-	public void setThridweek(String thridweek) {
-		this.thridweek = thridweek;
+	public void setThirdweek(String thirdweek) {
+		this.thirdweek = thirdweek;
 	}
 	public String getFourthweek() {
 		return fourthweek;
