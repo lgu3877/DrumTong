@@ -41,6 +41,9 @@ function showCounpons() {
 	// 쿠폰 리스팅
 	for(i = 0; i < couponlist.length; i++) {
 		
+		// values by ~
+		const listsplit = (couponlist[i].period).split('~'); //	필수
+		
 		// main container 
 		const container = document.createElement('div');
 			container.className = 'container';
@@ -63,15 +66,12 @@ function showCounpons() {
 			dateTitle.innerHTML = '기간';
 		
 		// date input container
-		const dateTitle = document.createElement('div');
-			dateTitle.style.display = "flex";
+		const dateInputCon = document.createElement('div');
+			dateInputCon.style.display = "flex";
 			
 				// input container
-				var inputdiv = document.createElement('div');
-					inputdiv.className = 'inputDiv';
-				
-				// split values by ~
-				var listsplit = (couponlist[i].period).split('~'); //	필수
+//				var inputdiv = document.createElement('div');
+//					inputdiv.className = 'inputDiv';
 				
 		// 시작일
 		const beforedate = document.createElement('input');
@@ -84,106 +84,176 @@ function showCounpons() {
 			arrow.className = "date_arrow";
 			arrow.innerHTML = '~';
 		
-		var afterdate = document.createElement('input');
+		const afterdate = document.createElement('input');
 			afterdate.setAttribute('type', 'date');
 			afterdate.setAttribute('value', listsplit[1].slice(1));	// 첫번째 공백 한글자 제거			//	필수
 			afterdate.readOnly = true;
 		
-		// appending
-		
-		
-		
 		// 최소주문금액 div
-		var costdiv1 = document.createElement('div');
-		costdiv1.className = 'costDiv';
-		var minh1 = document.createElement('h1');
-		minh1.innerHTML = '최소주문금액';
-		var mininput = document.createElement('input');
-		mininput.setAttribute('type', 'text');
-		mininput.setAttribute('value', couponlist[i].minimumprice);			//	필수
-		mininput.readOnly = true;
-		costdiv1.appendChild(minh1);
-		costdiv1.appendChild(mininput);
-		inputdiv.appendChild(costdiv1);
+		const costWrapper = document.createElement('div');
+			costWrapper.className = "mb-20";
 		
-		
-		
+			const costTitle = document.createElement('div');
+				costTitle.className = "input_title";
+				costTitle.innerText = "최소주문금액";
+				
+			const costInputCon = document.createElement('div');
+				costInputCon.className = 'costDiv';
+				
+				const costInput = document.createElement('input');
+					costInput.setAttribute('type', 'text');
+					costInput.setAttribute('value', insertComma("" + couponlist[i].minimumprice) + "원"); // 콤마(,) 추가 & String 파싱
+					costInput.readOnly = true;
+			
+			
 		// 할인금액 div
-		var costdiv2 = document.createElement('div');
-		costdiv2.className = 'costDiv';
-		var minh2 = document.createElement('h1');
-		minh2.innerHTML = '할인금액';
-		var saleinput = document.createElement('input');
-		saleinput.setAttribute('type', 'text');
-		saleinput.setAttribute('value', couponlist[i].discount);			//	필수
-		saleinput.readOnly = true;
-			costdiv2.appendChild(minh2);
-			costdiv2.appendChild(saleinput);
-			inputdiv.appendChild(costdiv2);
+		const discountWrapper = document.createElement('div');
+			discountWrapper.className = "mb-20";
+			
+		const discountTitle = document.createElement('div');
+			discountTitle.className = "input_title";
+			discountTitle.innerText = "최소주문금액";
 		
+		const discountInputCon = document.createElement('div');
+			discountInputCon.className = "costDiv";
 		
-		
-		// 무제한 버튼
-		var radiodiv1 = document.createElement('div');
-		radiodiv1.className = 'radioDiv';
-		var radio1 = document.createElement('input');
-		radio1.setAttribute('type', 'radio');
-		radio1.disabled = true;
-		if (couponlist[i].maxissuenum == 0) {
-			radio1.checked = true;
-		}
-		var radioname1 = document.createElement('h1');
-		radioname1.innerHTML = '무제한';
-		
-			radiodiv1.appendChild(radio1);
-			radiodiv1.appendChild(radioname1);
-			inputdiv.appendChild(radiodiv1);
+			const discountInput = document.createElement('input');
+				discountInput.setAttribute('type', 'text');
+				
+				discountInput.setAttribute('value', insertComma("" + couponlist[i].discount) + "원"); // 콤마(,) 추가 & String 파싱
+				discountInput.readOnly = true;
 			
 		
+		// 쿠폰 발급 옵션
+		const optionWrapper = document.createElement('div');
+			optionWrapper.className = "mb-20"; 	
+				
+		const optionTitle = document.createElement('div');
+			optionTitle.className = "input_title";
+			optionTitle.innerText = "발급옵션";
+			
+		const optionInputCon = document.createElement('div');
+			optionInputCon.className = "d-flex";
 		
-		// 선착순 버튼
-		var radiodiv2 = document.createElement('div');
-		radiodiv2.className = 'radioDiv';
-		var radio2 = document.createElement('input');
-		radio2.setAttribute('type', 'radio');
-		radio2.disabled = true;
+		// 무제한 옵션
+		const limitlessOptionCon = document.createElement('div');
+			limitlessOptionCon.className = "radioDiv";
+			
+		const limitlessLabel = document.createElement('div');
+			limitlessLabel.className = "radio_label";
+			limitlessLabel.style.cursor = "auto";
+			
+		const limitlessRadio = document.createElement('input');
+			limitlessRadio.setAttribute('type', 'radio');
+			limitlessRadio.disabled = true;
 		
-		var radioname2 = document.createElement('h1');
-		radioname2.innerHTML = '선착순';
-		radiodiv2.appendChild(radio2);
-		radiodiv2.appendChild(radioname2);
-		if (couponlist[i].maxissuenum !== 0) { // 필수
-			radio2.checked = true;
-			var showcouponnum = document.createElement('input');
-			showcouponnum.setAttribute('type', 'text');
-			showcouponnum.value = couponlist[i].maxissuenum; // 필수
-			showcouponnum.readOnly = true;
-			radiodiv2.appendChild(showcouponnum);
-		}
+			if (couponlist[i].maxissuenum == 0) {
+				limitlessRadio.checked = true;
+			}
 		
+		const limitlessLabelTag = document.createElement('span');
+			limitlessLabelTag.className = 'fs-15';
+			limitlessLabelTag.innerText = '무제한';
 		
-			inputdiv.appendChild(radiodiv2);
-			inputdivcontainer.appendChild(inputdiv);
-			inputFlex.appendChild(inputdivcontainer);
+			
+		// 선착순 옵션
+		const limitOptionCon = document.createElement('div');
+			limitOptionCon.className = 'radioDiv';
+		
+		const limitLabel = document.createElement('div');
+			limitLabel.className = "radio_label";
+			limitLabel.style.cursor = "auto";
+		
+		const limitRadio = document.createElement('input');
+			limitRadio.setAttribute('type', 'radio');
+			limitRadio.disabled = true;
+		
+//			let doesRemain = false;
+			
+			if (couponlist[i].maxissuenum !== 0) {
+				limitRadio.checked = true;
+				
+//				doesRemain = true;
+
+				const amountCon = document.createElement('input');
+					amountCon.className = "radioDiv";
+				
+				const amountInput = document.createElement('input');
+					amountInput.setAttribute('type', 'text');
+					amountInput.value = couponlist[i].maxissuenum;
+					amountInput.readOnly = true;
+				
+				amountCon.appendChild(amountInput);
+				optionInputCon.appendChild(amountCon);
+			}
+		
+		const limitLabelTag = document.createElement('span');
+		limitLabelTag.className = 'fs-15';
+		limitLabelTag.innerText = '선착순';
 		
 		
 	// 삭제 버튼 생성 및 추가
 		// container
-		var sideinputDiv = document.createElement('div');
-			sideinputDiv.className = 'sideinputDiv';
+		const deleteButtonCon = document.createElement('div');
+			deleteButtonCon.className = 'sideinputDiv';
 		
 		// input button
-		var deleteButton = document.createElement('input');
+		const deleteButton = document.createElement('input');
 			deleteButton.className = "coupon_publish";
 			deleteButton.setAttribute('type', 'button');
 			deleteButton.setAttribute('value', '쿠폰삭제');
 			deleteButton.setAttribute('id', couponlist[i].couponid);			//	필수
 			deleteButton.setAttribute('onclick', 'deleteCoupon(this)');
 		
-		// appending
-		sideinputDiv.appendChild(deleteButton);
-		inputFlex.appendChild(sideinputDiv);
-		container.appendChild(inputFlex);
+		
+	// appending
+		// date
+		dateInputCon.appendChild(beforedate);
+		dateInputCon.appendChild(arrow);
+		dateInputCon.appendChild(afterdate);
+							
+		dateWrapper.appendChild(dateTitle);
+		dateWrapper.appendChild(dateInputCon);
+
+		// service fee
+		costInputCon.appendChild(costInput);
+
+		costWrapper.appendChild(costTitle);
+		costWrapper.appendChild(costInputCon);
+		
+		// discount cost
+		discountInputCon.appendChild(discountInput);
+		
+		discountWrapper.appendChild(discountTitle);
+		discountWrapper.appendChild(discountInputCon);
+		
+		// coupon option
+		limitlessLabel.appendChild(limitlessRadio);
+		limitlessLabel.appendChild(limitlessLabelTag);
+		limitLabel.appendChild(limitRadio);
+		limitLabel.appendChild(limitLabelTag);
+		
+		limitlessOptionCon.appendChild(limitlessLabel); // 무제한 옵션
+		limitOptionCon.appendChild(limitLabel); // 선착순 옵션
+
+		optionInputCon.appendChild(limitlessOptionCon);
+		optionInputCon.appendChild(limitOptionCon);
+		
+		optionWrapper.appendChild(optionTitle);
+		optionWrapper.appendChild(optionInputCon);
+		
+		// delete coupon button
+		deleteButtonCon.appendChild(deleteButton);
+
+		// formatting
+		inputdivcontainer.appendChild(dateWrapper);
+		inputdivcontainer.appendChild(discountWrapper);
+		inputdivcontainer.appendChild(costWrapper);
+		inputdivcontainer.appendChild(optionWrapper);
+
+		inputFlex.appendChild(inputdivcontainer);
+		inputFlex.appendChild(deleteButtonCon);
+		container.appendChild(inputFlex);		
 		enrollmentedDiv.appendChild(container);
 	}
 }
