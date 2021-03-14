@@ -14,23 +14,33 @@ import com.drumtong.business.dao.BSalesDAO;
 import com.drumtong.business.vo.BDetailSalesVO;
 import com.drumtong.business.vo.EteNums;
 import com.drumtong.business.vo.OrderList;
+import com.drumtong.customer.dao.CPaymentDAO;
+import com.drumtong.customer.dao.CPointDAO;
+import com.drumtong.system.dao.SVirtualAccoutDAO;
 
 @Component	// [건욱]
 public class OrderListSetting {
 	static BSalesDAO bSalesDAO;
 	static BDetailSalesDAO bDetailSalesDAO;
 	static BReviewDAO bReviewDAO;
+	static SVirtualAccoutDAO sVirtualAccoutDAO;
+	static CPaymentDAO cPaymentDAO;
 	
 	@Autowired BSalesDAO BeanbSalesDAO;
 	@Autowired BDetailSalesDAO BeanbDetailSalesDAO;
 	@Autowired BReviewDAO BeanbBReviewDAO;
+	@Autowired SVirtualAccoutDAO BeanSVirtualAccoutDAO;
+	@Autowired CPaymentDAO beanCPaymentDAO;
+	
 	static HashMap<String, String> param;
 	
 	@PostConstruct
 	private void init() {
-		this.bSalesDAO = BeanbSalesDAO;
-		this.bDetailSalesDAO = BeanbDetailSalesDAO;
-		this.bReviewDAO = BeanbBReviewDAO;
+		bSalesDAO = BeanbSalesDAO;
+		bDetailSalesDAO = BeanbDetailSalesDAO;
+		bReviewDAO = BeanbBReviewDAO;
+		sVirtualAccoutDAO = BeanSVirtualAccoutDAO;
+		cPaymentDAO = beanCPaymentDAO;
 		param = new HashMap<String, String>();
 	}
 	
@@ -200,9 +210,16 @@ public class OrderListSetting {
 		// 필요한 것
 		// estid, salecode
 		
-		// map 과 sale코드 정보로 고객의 이메일 주소를 가져온다.
+//		가상계좌 금액 고객에게 돌려주기
+//		① 가상계좌에 status를 refund으로 바꾸어준다.
+		int result = sVirtualAccoutDAO.refund(map);
 		
-		return bSalesDAO.deleteOrderList(map);
+//		② 금액과 memberid 정보를 가지고 와 고객 포인트를 변경해준다.
+		result = cPaymentDAO.refund(map);
+		
+		// map 과 sale코드 정보로 고객의 이메일 주소를 가져온다.
+		result = bSalesDAO.deleteOrderList(map);
+		return result;
 	}
 	
 	// ete 날짜를 계산하는 메서드[영경]
