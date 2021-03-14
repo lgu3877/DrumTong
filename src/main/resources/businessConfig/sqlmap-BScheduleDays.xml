@@ -18,7 +18,7 @@
 <!-- 	정기휴무 일자 조회문 -->
 	<select id="selectBScheduleDays"  parameterType="String" resultType="BScheduleDaysVO">
 		SELECT  
-			FIRSTWEEK, SECONDWEEK, THRIDWEEK, 
+			FIRSTWEEK, SECONDWEEK, THIRDWEEK, 
 			FOURTHWEEK, FIFTHWEEK, SIXTHWEEK,
 			HOLIDAY
 		FROM 
@@ -31,7 +31,7 @@
 	<update id="updateConstract" parameterType="BScheduleDaysVO">
 		UPDATE BSCHEDULEDAYS
 			SET
-				FIRSTWEEK = #{firstweek, jdbcType=VARCHAR}, SECONDWEEK = #{secondweek ,jdbcType=VARCHAR}, THRIDWEEK = #{thridweek ,jdbcType=VARCHAR},
+				FIRSTWEEK = #{firstweek, jdbcType=VARCHAR}, SECONDWEEK = #{secondweek ,jdbcType=VARCHAR}, THIRDWEEK = #{thirdweek ,jdbcType=VARCHAR},
 				FOURTHWEEK = #{fourthweek ,jdbcType=VARCHAR}, FIFTHWEEK = #{fifthweek ,jdbcType=VARCHAR}, SIXTHWEEK = #{sixthweek ,jdbcType=VARCHAR}
 <!-- 				,HOLIDAY = #{holiday}  -->
 			WHERE ESTID = #{estid}

@@ -330,7 +330,7 @@
 								<option value="allweek">매주</option>
 								<option value="firstweek">첫째 주</option>
 								<option value="secondweek">둘째 주</option>
-								<option value="thridweek">셋째 주</option>
+								<option value="thirdweek">셋째 주</option>
 								<option value="forthweek">넷째 주</option>
 								<option value="fifthweek">다섯째 주</option>
 								<option value="sixthweek">여섯째 주</option>
