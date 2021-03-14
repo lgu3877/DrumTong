@@ -21,6 +21,14 @@
 	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="https://kit.fontawesome.com/7522a35233.js" crossorigin="anonymous"></script>
 
+	<!-- javascript cpath -->
+	<script type="text/javascript" charset="utf-8">
+		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+		function getContextPath() {
+		    return sessionStorage.getItem("contextpath");
+		}
+	</script>
+
 	<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a8f343b25889960b1fdf777c9a2a57c&libraries=services,clusterer,drawing"></script>
 
@@ -198,7 +206,10 @@
 
     </section>
 	<script type="text/javascript" charset="utf-8">
-
+		let cLogin = '${cLogin}';
+		let memberID = (cLogin === '') ? getIP() : '${cLogin.memberid}';
+		
+		console.log(memberID);
 		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
 		
 		function getContextPath() {
@@ -232,5 +243,6 @@
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-sigungu.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-emd.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-shop.js"></script>
+	<script type="text/javascript" src="${cpath }/customer/js/main/customerRecentSearchData.js"></script>
 </body>
 </html>

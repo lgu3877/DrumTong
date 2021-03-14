@@ -395,7 +395,7 @@ function addBookmark(estid) {
           'estid' : estid,
           'result' : iconColor,
        };
-       await axios.post('/drumtong/customer/laundry/customerDetail/rest/addBookmark/', ob)
+       await axios.post(getContextPath() + '/customer/laundry/customerDetail/rest/addBookmark/', ob)
        .then ((response) => {
           if(response.data === true){
              console.log("추가함");

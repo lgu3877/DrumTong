@@ -1,6 +1,5 @@
 	
 	function reviewMore() {	// 리뷰 더보기를 클릭했을 때
-		console.log(reviewList);
 		if(reviewList.length == 0){
 			let reviewRow = document.querySelector('.detailview-review-row');
 			reviewRow.style.display='none';

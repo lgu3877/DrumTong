@@ -30,6 +30,7 @@ import com.drumtong.map.dao.MSigunguDAO;
 import com.drumtong.map.vo.MEmdVO;
 import com.drumtong.map.vo.MSidoVO;
 import com.drumtong.map.vo.MSigunguVO;
+import com.drumtong.security.SearchAutoComplete;
 import com.drumtong.security.SelectLaundryList;
 import com.drumtong.system.dao.SVirtualAccoutDAO;
 import com.drumtong.system.vo.SVirtualAccoutVO;
@@ -197,6 +198,9 @@ public class RestCustomerLaundryService {
 		return String.format(salecode, date, todaySaleNum);
 	}
 	
+	public String searchAutoComplete(String searchWord) {
+		return SearchAutoComplete.getSearchAutoJsonVer(searchWord);
+	}
 
 
 

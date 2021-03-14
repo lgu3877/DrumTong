@@ -7,7 +7,7 @@
 	}
 	
 	function sidoAxios() {		// 시도 SQL 비동기
-		const axiosPath = '/drumtong/customer/laundry/customerMap/rest/sido/';
+		const axiosPath = getContextPath() + '/customer/laundry/customerMap/rest/sido/';
 		const axPost = async () => { // async : 비동기 실행 함수
 		    await axios.post(axiosPath)
 		    // 정상

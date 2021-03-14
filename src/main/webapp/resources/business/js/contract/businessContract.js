@@ -310,7 +310,7 @@
     			hiddenCategory.setAttribute('type', 'hidden');
     			hiddenCategory.setAttribute('name', 'defaultcategory');
     			    			
-    			const path = '${cpath}/resources/business/img/category/';
+    			const path = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/system/business/img/category/';
     			const imgsrc = this.parentNode.querySelector('img').src;
     			hiddenCategory.setAttribute('value', this.parentNode.querySelector('h1').innerHTML);
     			

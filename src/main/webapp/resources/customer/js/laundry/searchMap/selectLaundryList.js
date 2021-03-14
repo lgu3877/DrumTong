@@ -40,15 +40,15 @@ async function selectLaundry(page) {
 //	console.log('filter :', filterAddress);
 //	console.log('pageAddress :', pageAddress);
 
-	const { data } = await axios.get('/drumtong/customer/laundry/customerSearch/rest/selectLaundry/' + paramAddress + filterAddress + pageAddress);
+	const { data } = await axios.get(getContextPath() + '/customer/laundry/customerSearch/rest/selectLaundry/' + paramAddress + filterAddress + pageAddress);
 	const premiumList = data[0];
 	const generalList = data[1];
 	const resultNum = data[2];
-	console.log('data[3] : ' + data[3]);
-
-	console.log('select_premiumList : ', premiumList);
-	console.log('select_generalList : ', generalList);
-	console.log('resultNum : ', resultNum);
+//	console.log('data[3] : ' + data[3]);
+//
+//	console.log('select_premiumList : ', premiumList);
+//	console.log('select_generalList : ', generalList);
+//	console.log('resultNum : ', resultNum);
 	document.getElementById('total-laundry').innerHTML = resultNum;
 	insertLaundryList(premiumList, generalList);
 }
@@ -107,7 +107,7 @@ function createPremium(premiumList) {
 			const defaultcategory = premiumList[i].defaultcategory.split('/');
 			for (let j = 0; j < defaultcategory.length - 1; j++) {
 				let img_div = document.createElement('img');
-				img_div.setAttribute('src', getContextPath() + '/resources/business/img/category/' + defaultcategory[j] + '.jpg');
+				img_div.setAttribute('src', 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/system/business/img/category/' + defaultcategory[j] + '.jpg');
 				primium_image.append(img_div);
 			}
 			
@@ -133,7 +133,6 @@ function deleteGeneral(generalList) {
 		common_lists[0].style.display = '';
 	
 	for(let i = 1; i < common_lists.length; i++) {
-		console.log(i + '번 삭제');
 		document.querySelector('.laundryList_common').removeChild(common_lists[i]);
 	}
 }
@@ -182,7 +181,7 @@ function createGeneral(generalList) {
 			const defaultcategory0 = generalList[count].defaultcategory.split('/');
 			for (let n = 0; n < defaultcategory0.length - 1; n++) {
 				let img_div0 = document.createElement('img');
-				img_div0.setAttribute('src', getContextPath() + '/resources/business/img/category/' + defaultcategory0[n] + '.jpg');
+				img_div0.setAttribute('src', 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/system/business/img/category/' + defaultcategory0[n] + '.jpg');
 				common_image_0.append(img_div0);
 			}
 			
@@ -222,7 +221,7 @@ function createGeneral(generalList) {
 				const defaultcategory1 = generalList[Number(count + 1)].defaultcategory.split('/');
 				for (let m = 0; m < defaultcategory1.length - 1; m++) {
 					let img_div1 = document.createElement('img');
-					img_div1.setAttribute('src', getContextPath() + '/resources/business/img/category/' + defaultcategory1[m] + '.jpg');
+					img_div1.setAttribute('src', 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/system/business/img/category/' + defaultcategory1[m] + '.jpg');
 					common_image_1.append(img_div1);
 				}
 				

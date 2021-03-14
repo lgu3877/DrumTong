@@ -28,11 +28,18 @@
    	<!-- AXIOS -->
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	
+	<!-- javascript cpath -->
+	<script type="text/javascript" charset="utf-8">
+		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+		function getContextPath() {
+		    return sessionStorage.getItem("contextpath");
+		}
+	</script>
+	
  	<!-- 스크립트 영역 -->
     <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail/customerDetail-submit.js"></script>
-
 </head>
     
 <body>
@@ -285,10 +292,12 @@
     
     <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail/detail-google.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/customerDetail/detail-modal.js"></script>
+   	<script type="text/javascript" src="${cpath }/customer/js/main/customerRecentSearchData.js"></script>
     <script>
 //     	총 정리
 		var estid = '${estid}';
 		cLogin = '${cLogin}';
+		let memberID = '${cLogin.memberid}';
 		checkLogin = cLogin !== ''; // 로그인 했을 땐 true, 로그인 안되어있을 땐 false
 		
    		// 메뉴 세팅 관련 메서드
@@ -391,7 +400,7 @@
 	 	    		  ob={
 	 		                 'couponid' : selectedCouponID,
 	 		              };
-	 	    		  const {data} = await axios.post('/drumtong/customer/laundry/customerDetail/rest/addCoupon/', ob);
+	 	    		  const {data} = await axios.post(getContextPath() + '/customer/laundry/customerDetail/rest/addCoupon/', ob);
 	 	    		  alert(data ? '발급 성공' : '이미 발급받은 쿠폰입니다.');
 	 	    		  if(data){
 	 	    			  let listCoupon = document.getElementById('modal-couponList');

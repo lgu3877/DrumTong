@@ -13,14 +13,24 @@
     <link rel="stylesheet" href="${cpath }/customer/css/customerStyleDohyun.css">
     <link rel="stylesheet" href="${cpath }/customer/css/customerStyleSangJae.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="http://kenwheeler.github.io/slick/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="http://kenwheeler.github.io/slick/slick/slick-theme.css" />
     <script type="text/javascript" src="http://kenwheeler.github.io/slick/slick/slick.min.js"></script>
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 	<script type="text/javascript" src="${cpath }/customer/js/main/customerHeader.js"></script>
     <script src="https://kit.fontawesome.com/7522a35233.js" crossorigin="anonymous"></script>
 	
+	<!-- AXIOS -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	
+	<!-- javascript cpath -->
+	<script type="text/javascript" charset="utf-8">
+		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+		function getContextPath() {
+		    return sessionStorage.getItem("contextpath");
+		}
+	</script>
 	<style type="text/css">
 		.notice_area_1 {
 			float: left;
@@ -36,7 +46,7 @@
 	<header>
 <%--         <a href="${cpath }/"><img class="logo" src="${cpath }/resources/customer/img/logo1.png"></img></a> --%>
 <%--         <a href="${cpath }/"><img class="logo" src="${cpath }/resources/customer/img/logo2.png"></img></a> --%>
-        <a href="${cpath }/"><img class="logo" src="${cpath }/resources/customer/img/logo3.png"></img></a>
+        <a href="${cpath }/"><img class="logo" src="https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/system/customer/img/logo3.png"></img></a>
 <%--         <a href="${cpath }/"><img class="logo" src="${cpath }/resources/customer/img/logo4.png"></img></a> --%>
         
         <div class="mainMenu">

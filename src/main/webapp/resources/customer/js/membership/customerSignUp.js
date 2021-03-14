@@ -2,14 +2,10 @@
 // 1. 이메일 정규식 확인!!(.을 넣지 않아도 올바른 식으로 처리되는 문제)
 // 2. (전화번호 인증을 누르지 않아도 submit이 실행되는 문제)
 
-      const cpath = '${pageContext.request.contextPath}';
-      
-      
 
       function checkUserid() {
         const userid = document.querySelector('#userid').value;
         idmsg = document.querySelector('#idmsg');
-        console.log(userid.length);
         if (userid === '') {
           idmsg.innerText = '아이디를 입력하세요';
           idmsg.style.color = 'red';
@@ -25,7 +21,7 @@
         console.log('axGet 실행');
         const axGet = async (userid) => {	// async : 비동기 실행 함수
 
-          await axios.get('/drumtong/customer/membership/customerSignUp/rest/useridDupl/' + userid + '/')
+          await axios.get(getContextPath() + '/customer/membership/customerSignUp/rest/useridDupl/' + userid + '/')
           // 정상
           
           .then( (response) => {
@@ -127,7 +123,7 @@
           return false;
         } else {
         	var axGet = async (email) => {
-        		await axios.get('/drumtong/customer/membership/customerSignUp/rest/emailCheck/' + email + '/')
+        		await axios.get(getContextPath() + '/customer/membership/customerSignUp/rest/emailCheck/' + email + '/')
         		
         		.then( (response) => {
         			if(response.data === true){

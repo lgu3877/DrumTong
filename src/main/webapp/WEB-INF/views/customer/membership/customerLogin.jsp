@@ -18,6 +18,13 @@
 	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<!-- Axios script -->
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<!-- javascript cpath -->
+	<script type="text/javascript" charset="utf-8">
+		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+		function getContextPath() {
+		    return sessionStorage.getItem("contextpath");
+		}
+	</script>
     <!-- 스크립트 영역 -->
     <script type="text/javascript" src="${cpath }/customer/js/membership/customerLogin.js"></script>
    	<script type="text/javascript" src="${cpath }/customer/js/main/customerHeader.js"></script>
@@ -30,7 +37,7 @@
     <section class="section-SangJae">
       <div class="login">
         <form method="POST" id="loginForm" action="${cpath }/customer/membership/customerLogin/POST/">
-          <img src="${cpath }/resources/customer/img/logo4.png" class="login-logo" />
+          <img src="https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/system/customer/img/logo4.png" class="login-logo" />
           <div class="login-alert">메세지</div>
           <div class="login-input">
             <input type="text" name="id" id="userid" class="login-input-boxs" onkeyup="loginEnter()"  autocomplete="off"/>

@@ -19,6 +19,14 @@
 	<script type="text/javascript" src="${cpath }/customer/js/main/customerHeader.js"></script>
 	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	
+	<!-- javascript cpath -->
+	<script type="text/javascript" charset="utf-8">
+		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+		function getContextPath() {
+		    return sessionStorage.getItem("contextpath");
+		}
+	</script>
 </head>
 
 <body>
@@ -190,14 +198,14 @@
 	   			paymenttype : paymenttypeName,
 	   		}
 	   		var axPost = async (ob) => {
-	               await axios.post('/drumtong/customer/account/customerPayAndCoupon/rest/pointSave/', ob)
+	               await axios.post(getContextPath() + '/customer/account/customerPayAndCoupon/rest/pointSave/', ob)
 	               // 배포용
 //	                await axios.post('/customer/account/customerPayAndCoupon/rest/pointSave/', ob)
 
 	               .then( (response) => {
 	                 if(response.data === true){
 	                    alert('충전이 완료되었습니다.');
-	                    location.href='/drumtong/customer/account/customerPayAndCoupon/';
+	                    location.href= getContextPath() + '/customer/account/customerPayAndCoupon/';
 	                 } else{
 	                     alert('충전이 정상적으로 이루어지지 않았습니다.');
 	                 }
@@ -236,9 +244,8 @@
              break;
           }
           var axPost = async (ob) => {
-               await axios.post('/drumtong/customer/account/customerPayAndCoupon/rest/paySave/', ob)
+               await axios.post(getContextPath() +'/customer/account/customerPayAndCoupon/rest/paySave/', ob)
                // 배포용
-//                await axios.post('/customer/account/customerPayAndCoupon/rest/paySave/', ob)
 
                .then( (response) => {
                  if(response.data === true){

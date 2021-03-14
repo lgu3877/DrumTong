@@ -44,4 +44,13 @@
     	 WHERE NOT COUNT=0	
     </select>
 
+<!-- 	검색어 자동완성 -->
+	<select id="searchAutoComplete" resultType="String">
+		SELECT CONCAT(CONCAT(CONCAT(CONCAT(SIDONAME, ' '), SIGNAME),' '), EMDNAME) AS ADDRESS 
+		FROM EMD 
+		WHERE 
+		<foreach collection="array" item="item" separator=" and ">
+			(SIDONAME LIKE '%' || #{item} || '%' OR SIGNAME LIKE '%' || #{item} || '%' OR EMDNAME LIKE '%' || #{item} || '%')
+		</foreach>
+	</select>
 </mapper>

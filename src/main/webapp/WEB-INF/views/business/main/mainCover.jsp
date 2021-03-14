@@ -46,19 +46,19 @@
 <body id="maincover">
 
 	<div class="maincover active">
-		<img src="${cpath }/resources/business/img/maincover/maincover1.jpg" style="width: 100%;">
+		<img src="https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/system/business/img/maincover/maincover1.jpg" style="width: 100%;">
 	</div>
 	<div class="maincover">
-		<img src="${cpath }/resources/business/img/maincover/maincover2.jpg" style="width: 100%">
+		<img src="https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/system/business/img/maincover/maincover2.jpg" style="width: 100%">
 	</div>
 	<div class="maincover">
-		<img src="${cpath }/resources/business/img/maincover/maincover3.jpg" style="width: 100%">
+		<img src="https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/system/business/img/maincover/maincover3.jpg" style="width: 100%">
 	</div>
 	<div class="maincover">
-		<img src="${cpath }/resources/business/img/maincover/maincover4.jpg" style="width: 100%">
+		<img src="https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/system/business/img/maincover/maincover4.jpg" style="width: 100%">
 	</div>
 	<div class="maincover">
-		<img src="${cpath }/resources/business/img/maincover/maincover5.jpg" style="width: 100%">
+		<img src="https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/system/business/img/maincover/maincover5.jpg" style="width: 100%">
 	</div>
 	<div class="maincover" style="padding-top: 200px; text-align: center;">
 		<h1>우리 세탁소를 소개하마!</h1>
