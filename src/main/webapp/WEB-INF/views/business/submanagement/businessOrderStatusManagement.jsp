@@ -89,6 +89,10 @@
 			<div class="outerstatus2"><h1></h1></div>
 			<div class="nulldiv"></div>
 			
+<!-- 			<div class="check-request"> -->
+<!-- 				요청사항이 있습니다! -->
+<!-- 			</div> -->
+			
 			<div class="container" onclick="openDetail(this)">
 				<h1 class="containerName"></h1>
 				<h1 class="requesttype"></h1>
@@ -114,6 +118,10 @@
 						</div>
 						<div class="middleBorder"></div>			
 					</div>
+				</div>
+				
+				<div class="check-request">
+					요청사항
 				</div>
 			</div>
 			
@@ -167,7 +175,11 @@
 			</div>
 		</div>
 		<hr>
-			<div class="in-modal">요청 사항<span id="requests"></span></div>
+			<div class="in-modal" style="height: auto !important;">수거 요청사항<br><p id="collectionrequests"></p></div>
+		<hr>
+			<div class="in-modal" style="height: auto !important;">세탁 요청사항<br><p id="laundryrequests"></p></div>
+		<hr>
+			<div class="in-modal" style="height: auto !important;">배송 요청사항<br><p id="deliveryrequests"></p></div>
 		<hr>
 			<div class="in-modal">기본 금액<span id="originalprice"></span></div>
 			<div class="in-modal">쿠폰 금액<span id="discountprice"></span></div>
@@ -188,12 +200,13 @@
 	
 	<script type="text/javascript">
 		
-		let orderList = ${orderList};							// 서버에서 가져오는 주문현황 리스트
-		let clonecontainer = $('#clonediv0');					// id="clonediv0" 복사 -> 오리지널 주문현황 카드
+		var orderList = ${orderList};							// 서버에서 가져오는 주문현황 리스트
+		var status = '${status }';
+		var clonecontainer = $('#clonediv0');					// id="clonediv0" 복사 -> 오리지널 주문현황 카드
 		// 이 복사한 개체를 이용하여 다른 카드들의 폼을 자동으로 형성함
 
-		let detailmenus = $('#detailmenus').clone();
-		let innerclone = $('#detailmenus').find('.outerdetail').clone(); // 모달 -> 상세주문(=메뉴명, 가격, 개수 등등) 폼의 오리지널을 복사
+		var detailmenus = $('#detailmenus').clone();
+		var innerclone = $('#detailmenus').find('.outerdetail').clone(); // 모달 -> 상세주문(=메뉴명, 가격, 개수 등등) 폼의 오리지널을 복사
 		// 복사한 개체를 이용하여 모달에서 상세주문 부분들을 자동으로 형성함
 		window.onload = function() {
 			zerodiv();
@@ -201,7 +214,6 @@
 		}
 
 		function zerodiv() {
-			let status = '${status }';
 			$('#typeSelect').children('button[name=' + status + ']').attr(
 					'class', 'selectedStatus');
 
@@ -229,7 +241,12 @@
 										$(item).parent().find('.outerstatus2')
 												.css('transition',
 														'all 1s ease 0s');
-
+										$(item).parent().find('.check-request')
+											.css('top', '-45px');
+										$(item).parent().find('.check-request')
+											.css('transform', 'translate(0, -20px)');
+										$(item).parent().find('.check-request')
+											.css('transition', 'all 1s ease 0s');
 									},
 									function() {
 										$(item).parent().find('.outerstatus1')
@@ -242,6 +259,12 @@
 										$(item).parent().find('.outerstatus2')
 												.css('transition',
 														'all 0s ease 0s');
+										$(item).parent().find('.check-request')
+												.css('top', '-60px');
+										$(item).parent().find('.check-request')
+												.css('transform', '');
+										$(item).parent().find('.check-request')
+												.css('transition', 'all 0s ease 0s');
 									})
 						});
 			} else {
@@ -280,6 +303,12 @@
 				$('#clonediv0').find('.requesttype').html('배달');
 				break;
 			}
+ 			
+ 			// 수거 요청사항, 세탁 요청사항, 배달 요청사항이 비어있으면 '요청사항이 있습니다' 문구가 뜨지 않도록 조치함
+ 			if(orderList[0].collectionrequests == '-' && orderList[0].laundryrequests == '-' && orderList[0].deliveryrequests == '-')
+ 				$('#clonediv0').find('.check-request').css('display', 'none');
+ 			else
+ 				$('#clonediv0').find('.check-request').css('display', 'flex');
  			
  			$('#clonediv0').find('p.purchasedate').html(orderList[0].purchasedate);		// 주문일자
  			$('#clonediv0').find('p.deliverydate').html(orderList[0].deliverydate);		// 배송일자
@@ -330,6 +359,12 @@
  					$('#clonediv' + i).find('.requesttype').html('배달');
  					break;
  				}
+ 	 			
+	 	 		// 수거 요청사항, 세탁 요청사항, 배달 요청사항이 비어있으면 '요청사항이 있습니다' 문구가 뜨지 않도록 조치함
+ 	 			if(orderList[i].collectionrequests == '-' && orderList[i].laundryrequests == '-' && orderList[i].deliveryrequests == '-')
+ 	 				$('#clonediv' + i).find('.check-request').css('display', 'none');
+ 	 			else
+ 	 				$('#clonediv' + i).find('.check-request').css('display', 'flex');
  				
  				$('#clonediv' + i).find('p.purchasedate').html(orderList[i].purchasedate);
  				$('#clonediv' + i).find('p.deliverydate').html(orderList[i].deliverydate);
@@ -357,7 +392,6 @@
  		
  	    function openDetail(obj) {      // 상세한 주문현황 정보를 제공하는 모달 활성화
  	    	 
- 	    	console.log('function 반응 속도가 더 빠릅니다');
  	         let detailob = orderList[(obj.parentNode.id).replace('clonediv','')];
  	         // 메인 주문형황 카드를 클릭했을 때, 그 카드가 가지고 있는 id 값에서 마지막 숫자값만 가지고 옴
  	         // 그 숫자를 이용해서 orderList[] 를 가지고 온다
@@ -413,8 +447,8 @@
  	                    if(z > 0)	// 만약 서브카테고리에 저장된 메뉴가 1개보다 많을 때 사용
 	  						$('#clonedetail' + count).find('.outerdetail').append(innerclone.html());
  	                     
- 	                    	 console.log('z : ', z);
- 	                    	 console.log('배달가격 : ', mainmenus[z].quickprice );
+//  	                    	 console.log('z : ', z);
+//  	                    	 console.log('배달가격 : ', mainmenus[z].quickprice );
  	                     $('#clonedetail' + count).find('.innerdetail').children('h3').each(function(index, item) {
  	                    	if(mainmenus[z].quickprice != 0)	// 배달가격이 0원이면 오토바이 안보이기
  	                    		$('#clonedetail' + count).find('i').css('display', '');	// 수정 필요함!!
@@ -447,7 +481,12 @@
  	         $('#modal').find('#ableday').html(detailob.ableday);
  	         $('#modal').find('#deliverydate').html(detailob.deliverydate);
  	         $('#modal').find('#pickupdate').html(detailob.pickupdate);
- 	         $('#modal').find('#requests').html(detailob.requests);
+ 	         
+ 	         detailob.collectionrequests != '-' ? $('#modal').find('#collectionrequests').html(detailob.collectionrequests): $('#modal').find('#collectionrequests').html('');
+ 	         detailob.laundryrequests != '-' ? $('#modal').find('#laundryrequests').html(detailob.laundryrequests): $('#modal').find('#laundryrequests').html('');
+ 	         detailob.deliveryrequests != '-' ? $('#modal').find('#deliveryrequests').html(detailob.deliveryrequests): $('#modal').find('#deliveryrequests').html('');
+ 	         
+ 	         
  	         $('#modal').find('#originalprice').html(numberWithCommas(detailob.originalprice) + '원');
  	         $('#modal').find('#discountprice').html('(-) ' + numberWithCommas(detailob.discountprice) + '원');
  	         $('#modal').find('#quickprice').html('(+) ' + numberWithCommas(totalquickprice) + '원');
@@ -525,12 +564,10 @@
 			let startDate = $('#startDate').val();
 			let endDate = $('#endDate').val();
 			
-// 			console.log('startDate : ', startDate);
-// 			console.log('endDate : ', endDate);
 			if(startDate == '' || endDate == '')
 				return false;
 			
-			const axiosPath = getContextPath() + '/business/subManagement/businessOrderStatusManagement/rest/' + '${status }/' + startDate + '/' + endDate + '/';
+			const axiosPath = getContextPath() + '/business/subManagement/businessOrderStatusManagement/rest/' + status + '/' + startDate + '/' + endDate + '/';
 			const axGet = async () => { // ■ 영경 : 여기 ob를 넘겨주지 않았음! ■   // async : 비동기 실행 함수
 			    await axios.get(axiosPath)	// ■ 영경 : 여기 ob를 넘겨주지 않았음! ■
 			    // 정상
