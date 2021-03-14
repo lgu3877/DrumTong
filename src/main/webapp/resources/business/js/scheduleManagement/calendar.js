@@ -320,7 +320,7 @@ function weekConvert(value) {
 	case "둘째 주":
 		return "secondWeek";
 	case "셋째 주":
-		return "thridweek";
+		return "thirdweek";
 	case "넷째 주":
 		return "fourthweek";
 	case "다섯째 주":
@@ -381,7 +381,7 @@ function markRegHolidays() {
 	const obj = {
 		firstweek: [],
 		secondweek: [],
-		thridweek : [],
+		thirdweek : [],
 		fourthweek: [],
 		fifthweek: [],
 		sixthweek: [],
@@ -430,7 +430,7 @@ function markRegHolidays() {
 			obj.secondweek.length !== 0 ? markDay(dayArray, obj.secondweek, "reg_holiday") : null;
 			break;
 		case 2:
-			obj.thridweek.length !== 0 ? markDay(dayArray, obj.thridweek, "reg_holiday") : null;
+			obj.thirdweek.length !== 0 ? markDay(dayArray, obj.thirdweek, "reg_holiday") : null;
 			break;
 		case 3:
 			obj.fourthweek.length !== 0 ? markDay(dayArray, obj.fourthweek, "reg_holiday") : null;

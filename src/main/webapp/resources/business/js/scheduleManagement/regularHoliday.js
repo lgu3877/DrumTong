@@ -2,7 +2,7 @@
 const weekObject = {
 	"firstweek" : "첫째주", 
 	"secondweek" : "둘째주",
-	"thridweek" : "셋째주",
+	"thirdweek" : "셋째주",
 	"fourthweek" : "넷째주",
 	"fifthweek" : "다섯째주",
 	"sixthweek" : "여섯째주",	

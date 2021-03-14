@@ -64,7 +64,7 @@
 
 
 	<!-- 	온라인 계약이 진행 중인 상태이면은 기본 헤더를 보여준다 -->
-	<c:if test="${status ne 'FAIL' }">
+	<c:if test="${status ne 'SUCCESS' }">
 		<%@ include file="../main/businessHeader.jsp" %>
 	</c:if>
 	
@@ -330,7 +330,7 @@
 								<option value="allweek">매주</option>
 								<option value="firstweek">첫째 주</option>
 								<option value="secondweek">둘째 주</option>
-								<option value="thridweek">셋째 주</option>
+								<option value="thirdweek">셋째 주</option>
 								<option value="forthweek">넷째 주</option>
 								<option value="fifthweek">다섯째 주</option>
 								<option value="sixthweek">여섯째 주</option>
