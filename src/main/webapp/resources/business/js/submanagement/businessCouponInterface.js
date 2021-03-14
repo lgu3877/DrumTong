@@ -112,7 +112,7 @@ function showCounpons() {
 			
 		const discountTitle = document.createElement('div');
 			discountTitle.className = "input_title";
-			discountTitle.innerText = "최소주문금액";
+			discountTitle.innerText = "할인금액";
 		
 		const discountInputCon = document.createElement('div');
 			discountInputCon.className = "costDiv";
