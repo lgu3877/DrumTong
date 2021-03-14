@@ -425,6 +425,38 @@ body .section_main .search .searchs .filter {
 	border: 1px solid black;
 }
 
+.searchBox .autosearch {
+	position: absolute; top: 100%; left: 0; display: none; justify-content: center; width: 100%; height: auto
+}
+
+
+.searchBox .autosearch .autosearch-half {
+	width: 50%; height: auto; border-right: 1px solid rgb(231, 231, 231); background: whitesmoke;
+}
+
+.searchBox .autosearch .autosearch-half .auto-subtitle {
+	margin: 0; font-size: 18px; text-align: left; padding: 15px 0 5px 35px
+}
+
+.searchBox .autosearch .autosearch-half .auto-list-div {
+	width: 100%; height: 320px;  text-align: left; padding: 0 10px 0px 40px;overflow-y: scroll
+}
+
+.auto-list-div ul .single-list {
+	font-size: 18px;
+	list-style: none;
+	margin-top: 10px;
+}
+
+.auto-list-div ul .single-list:hover {
+	background-color: #C6FFFF;
+	cursor: pointer;
+}
+ 
+.auto-list-div ul .single-list .brand-address {
+	display: none;
+}
+
 /* ====================공지사항(notice) CSS========================== */
 body .section_main .notice {
 	box-sizing: border-box;
