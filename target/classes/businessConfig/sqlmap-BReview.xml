@@ -49,9 +49,9 @@
 						(select 
 							salecode,
 <!-- 							18c는 LISTAGG 내부에서 distinct를 사용할 수 있다 -->
-							LISTAGG(distinct(maincategory),',') WITHIN GROUP (ORDER BY SALECODE) 
+<!-- 							LISTAGG(distinct(maincategory),',') WITHIN GROUP (ORDER BY SALECODE)  -->
 <!-- 							11g는 LISTAGG 내부에서 distinct를 사용할 수 없다 -->
-<!-- 							regexp_replace(LISTAGG(maincategory,',') WITHIN GROUP (ORDER BY SALECODE), '([^,]+)(,\1)+', '\1')  -->
+							regexp_replace(LISTAGG(maincategory,',') WITHIN GROUP (ORDER BY SALECODE), '([^,]+)(,\1)+', '\1') 
 							as orderlist, sum(amount) as amount 
 							from bdetailsales group by salecode) F 
 					 on R.salecode = F.salecode 
