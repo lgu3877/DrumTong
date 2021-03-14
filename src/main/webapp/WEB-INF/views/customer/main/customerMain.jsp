@@ -25,24 +25,22 @@
 					name="search" 
 					value="검색"
 					onclick="mainSearch()"/>
-				<div id="autosearch" style="position: absolute; top: 100%; left: 0; display: none; justify-content: center; width: 100%; height: auto">
-					<div style="width: 50%; height: auto; border-right: 1px solid rgb(231, 231, 231); background: whitesmoke; l">
-						<h1 style="margin: 0; font-size: 18px; text-align: left; padding: 15px 0 5px 35px">지역 주소</h1>
-						<div style="width: 100%; height: 320px;  text-align: left; padding: 0 10px 0px 40px;overflow-y: scroll">
+				<div id="autosearch" class="autosearch">
+					<div class="autosearch-half">
+						<h1 class="auto-subtitle">지역 주소</h1>
+						<div class="auto-list-div">
 								<ul style="padding: 0" id="address-div">
 		
 								</ul>
 						</div>
 					</div>
 					
-					<div style="width: 50%; height: auto; border-right: 1px solid rgb(231, 231, 231); background: whitesmoke; l">
-						<h1 style="margin: 0; font-size: 18px; text-align: left; padding: 15px 0 5px 35px">지역 주소</h1>
-						<div style="width: 100%; height: 320px;  text-align: left; padding: 0 10px 0px 40px;overflow-y: scroll">
-							<div style="width: 100%; height: auto;" id="store-div">
-								<ul style="padding: 0">	
+					<div class="autosearch-half">
+						<h1 class="auto-subtitle">세탁소명</h1>
+						<div class="auto-list-div">
+								<ul style="padding: 0" id="store-div">	
 		
 								</ul>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -177,34 +175,44 @@ function mainSearch(){
       address_ui.innerHTML = '';
       for(let i = 0; i < data.addressList.length; i++) {
     	  let li = document.createElement('li');
-    	  li.style.listStyle = 'none';
-    	  li.style.fontSize = '18px';
-    	  li.style.marginTop = '10px';
+    	  li.className = 'single-list';
     	  li.innerHTML = data.addressList[i];
+    	  li.setAttribute('onclick', 'addressSearching(this)');
     	  address_ui.append(li);
       }
       return data;
    }
    async function getAddressList2(searchWord){
       const {data} = await axios.get(getContextPath() + '/customer/laundry/customerSearch/rest/searchAutoComplete/' + searchWord + '/');
-      console.log(data);
+//       console.log(data);
       if(tmp !== searchWord)
     	  return false;
       
-      let store_ui = document.querySelector('#store-div ul');
+      let store_ui = document.querySelector('#store-div');
       store_ui.innerHTML = '';
       for(let i = 0; i < data.laundryList.length; i++) {
     	  let li = document.createElement('li');
-    	  li.style.listStyle = 'none';
-    	  li.style.fontSize = '18px';
-    	  li.style.marginTop = '10px';
+    	  li.className = 'single-list';
     	  li.innerHTML = data.laundryList[i].brandnaming;
+    	  li.setAttribute('onclick', 'brandSearching(this)');
+    	  
+    	  let hidden = document.createElement('span');
+    	  hidden.className = 'brand-address';
+    	  hidden.innerHTML = data.laundryList[i].mainlocation;
+    	  
+    	  li.append(hidden);
     	  store_ui.append(li);
       }
       return data;
    }
-   getAddressList('부산 해운대');
-   getAddressList2('모래');
+   
+   function addressSearching(object) {
+	   location.href= getContextPath() + '/customer/laundry/customerSearch/' + object.innerHTML + '/';	   
+   }
+   
+   function brandSearching(object) {
+	   location.href= getContextPath() + '/customer/laundry/customerSearch/' + object.querySelector('.brand-address').innerHTML + '/';
+   }
 
 </script>
 <%@ include file="customerFooter.jsp"%>
