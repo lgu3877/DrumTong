@@ -121,6 +121,9 @@ public class SelectLaundryList {
 		for(int i = 0; i < List.size(); i++) {
 			EstablishmentList li = List.get(i);
 			param.put("estid", li.getEstid());
+			System.out.println("-------------------------------------------------------------------");
+			System.out.println(param.toString());
+			System.out.println("-------------------------------------------------------------------");
 			char openboolean = 'Y';
 			String reason = "";
 			// 영업중인지 체크하기(임시 휴무)- sql 안적음
