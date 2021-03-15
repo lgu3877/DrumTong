@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="${cpath }/customer/css/customerStyleSangJae.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="http://kenwheeler.github.io/slick/slick/slick.css" />
-    <link rel="stylesheet" type="text/css" href="http://kenwheeler.github.io/slick/slick/slick-theme.css" />
-    <script type="text/javascript" src="http://kenwheeler.github.io/slick/slick/slick.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://kenwheeler.github.io/slick/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="https://kenwheeler.github.io/slick/slick/slick-theme.css" />
+    <script type="text/javascript" src="https://kenwheeler.github.io/slick/slick/slick.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 	<script type="text/javascript" src="${cpath }/customer/js/main/customerHeader.js"></script>
     <script src="https://kit.fontawesome.com/7522a35233.js" crossorigin="anonymous"></script>
