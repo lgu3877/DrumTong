@@ -24,7 +24,7 @@ public class CustomerLaundryController {
 
 	// 검색 페이지 이동 [GET]
 	@RequestMapping("customerSearch/{search}/{level}")
-	public ModelAndView search(HttpServletRequest req, @PathVariable("search")String search, @PathVariable("lever")String level) {	
+	public ModelAndView search(HttpServletRequest req, @PathVariable("search")String search, @PathVariable("level")String level) {	
 		return svc.search(search, level);
 	}
 	
