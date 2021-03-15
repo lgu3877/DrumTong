@@ -2,6 +2,7 @@ package com.drumtong.customer.service.laundry;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -18,17 +19,24 @@ import com.drumtong.business.dao.BImageDAO;
 import com.drumtong.business.dao.BInformationDAO;
 import com.drumtong.business.dao.BManagementDAO;
 import com.drumtong.business.dao.BMenuDAO;
+import com.drumtong.business.dao.BScheduleDaysDAO;
+import com.drumtong.business.dao.BScheduleTimeDAO;
+import com.drumtong.business.dao.BTempSuspensionDAO;
 import com.drumtong.business.vo.BCouponVO;
 import com.drumtong.business.vo.BImageVO;
 import com.drumtong.business.vo.BInformationVO;
 import com.drumtong.business.vo.BManagementVO;
 import com.drumtong.business.vo.BMenuVO;
+import com.drumtong.business.vo.BScheduleDaysVO;
+import com.drumtong.business.vo.BScheduleTimeVO;
+import com.drumtong.business.vo.BTempSuspensionVO;
 import com.drumtong.business.vo.MenuList;
 import com.drumtong.business.vo.ReviewList;
 import com.drumtong.customer.dao.CBookmarkDAO;
 import com.drumtong.customer.dao.CPaymentDAO;
 import com.drumtong.customer.vo.CPrivateDataVO;
 import com.drumtong.security.GetIPAddress;
+import com.drumtong.security.AddressListSetting;
 import com.drumtong.security.MenuListSetting;
 import com.drumtong.security.Review;
 import com.google.gson.Gson;
@@ -43,6 +51,9 @@ public class CustomerLaundryService {
 	@Autowired BImageDAO bImageDAO;
 	@Autowired CPaymentDAO cPaymentDAO;
 	@Autowired BHitsDAO bHitsDAO;
+	@Autowired BScheduleTimeDAO bScheduleTimeDAO;
+	@Autowired BScheduleDaysDAO bScheduleDaysDAO;
+	@Autowired BTempSuspensionDAO bTempSuspensionDAO;
 	
 	// 검색 페이지 이동 [GET]
 	public ModelAndView search() {
@@ -59,6 +70,9 @@ public class CustomerLaundryService {
 		setHits(req, estid);
 		
 		ModelAndView mav = new ModelAndView("customer/laundry/customerDetail");
+		
+		// 기본 카테고리 데이터 	    
+ 	    List<String> defaultcategory = Arrays.asList((bManagementDAO.selectDefaultCategory(estid).split("/")));
 		
 		// 상호명, 메인주소, 상세주소를 저장한 객체
 		BInformationVO bInformationVO = bInformationDAO.selectCustomerDetail(estid);
@@ -78,16 +92,35 @@ public class CustomerLaundryService {
 		// 리뷰
 		List<ReviewList> ReviewList = Review.selectList(estid, "whole");
 		
+		// 선택한 지역 데이터 리스트 
+		HashMap<String, HashMap<String , ArrayList<String>>> deliveryAreas = AddressListSetting.getAddressList(estid);
+    	
+		// 매장 영업 시간
+		BScheduleTimeVO bscheduletime =  bScheduleTimeDAO.selectBScheduleTime(estid);
+		
+		// 매장 영업 일정
+		BScheduleDaysVO bscheduledays =  bScheduleDaysDAO.selectBScheduleDays(estid);
+		
+		// 매장 임시 휴무
+		List<BTempSuspensionVO> btempsuspension = bTempSuspensionDAO.selectBTempSuspension(estid);
+		
 		// 추가 작업할 일 정리(영경)
-		// 영업 시간 가지고 와야함, 매장 주소
+		// 영업 시간 가지고 와야함, 매장 주소 => 가져옴  내가 이건욱 ㅋㅋㅋ
 		
 		Gson gson = new Gson();
+		mav.addObject("defaultcategory", gson.toJson(defaultcategory));
 		mav.addObject("bInformationVO", bInformationVO);
 		mav.addObject("bManagementVO", bManagementVO);
 		if(bImageVO != null) mav.addObject("bImageVO", gson.toJson(bImageVO));
 		mav.addObject("bCouponVO", gson.toJson(bCouponVO));
 		mav.addObject("menuList", gson.toJson(menuList));
 		mav.addObject("ReviewList", gson.toJson(ReviewList));
+		mav.addObject("deliveryAreas", (gson.toJson(deliveryAreas)));
+		mav.addObject("bscheduletime", gson.toJson(bscheduletime));
+		mav.addObject("bscheduledays", gson.toJson(bscheduledays));
+		mav.addObject("btempsuspension", gson.toJson(btempsuspension));
+		
+		
 		
 		// 로그인 되어있을 때 쿠폰 정보, 북마크 체크 여부
 		CPrivateDataVO Login = (CPrivateDataVO)req.getSession().getAttribute("cLogin");
