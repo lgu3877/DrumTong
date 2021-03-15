@@ -12,4 +12,10 @@
 				VALUES
 			(#{memberid}, #{estid}, #{salecode}, #{point})
 	</insert>
+	
+	<update id="refund">
+		UPDATE SVIRTUALACCOUNT SET 
+			STATUS='RETURN' 
+				WHERE ESTID=#{estid} AND SALECODE=#{salecode}
+	</update>
 </mapper>

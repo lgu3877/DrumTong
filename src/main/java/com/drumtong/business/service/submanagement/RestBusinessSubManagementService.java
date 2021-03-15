@@ -162,6 +162,11 @@ public class RestBusinessSubManagementService {
 		}
 		return result == 0? "false" : "true";
 	}
+	
+	public String changeLaundryStatus(HttpServletRequest req, String type, HashMap<String, String> param) {
+		// 처리중에서 세탁물 위치 바꿔주는 메서드
+		return null;
+	}
 
 	// status : 'REQUEST'(요청), 'PROCESSING'(처리중), 'SUCCESS'(완료)
 	// startDate : 시작 날짜 없으면 맨 처음부터, endDate : 끝 날짜 없으면 맨 마지막 날까지
@@ -172,6 +177,7 @@ public class RestBusinessSubManagementService {
 		// gson으로 반환한다.
 		return new Gson().toJson(orderlist);
 	}
+
 
 
 	

@@ -111,6 +111,12 @@ public class RestBusinessSubManagementController {
 		return svc.orderStatusManagementAnswer(req, type, param);
 	}
 	
+	@RequestMapping("businessOrderStatusManagement/rest/changeLaundryStatus/{type}/")
+	@PostMapping(produces="application/json; charset=utf8")
+	public String changeLaundryStatus(HttpServletRequest req, @PathVariable("type")String type, @RequestBody HashMap<String, String> param) {
+		return svc.changeLaundryStatus(req, type, param);
+	}
+	
 
 	// status : 'REQUEST'(요청), 'PROCESSING'(처리중), 'SUCCESS'(완료)
 	// startDate : 시작 날짜 없으면 맨 처음부터, endDate : 끝 날짜 없으면 맨 마지막 날까지

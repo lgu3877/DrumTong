@@ -124,9 +124,10 @@ public class CustomerLaundryService {
 	}
 
 	// 검색어 입력[영경]
-	public ModelAndView search(String searchWord) {
+	public ModelAndView search(String searchWord, String level) {
 		ModelAndView mav = new ModelAndView("customer/laundry/customerSearch");
 		mav.addObject("searchWord", searchWord);
+		mav.addObject("level", level);
 		
 		return mav;
 	}
