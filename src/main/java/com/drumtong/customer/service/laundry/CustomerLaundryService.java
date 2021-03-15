@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.drumtong.business.dao.BCouponDAO;
+import com.drumtong.business.dao.BHitsDAO;
 import com.drumtong.business.dao.BImageDAO;
 import com.drumtong.business.dao.BInformationDAO;
 import com.drumtong.business.dao.BManagementDAO;
@@ -34,6 +35,7 @@ import com.drumtong.business.vo.ReviewList;
 import com.drumtong.customer.dao.CBookmarkDAO;
 import com.drumtong.customer.dao.CPaymentDAO;
 import com.drumtong.customer.vo.CPrivateDataVO;
+import com.drumtong.security.GetIPAddress;
 import com.drumtong.security.AddressListSetting;
 import com.drumtong.security.MenuListSetting;
 import com.drumtong.security.Review;
@@ -48,6 +50,7 @@ public class CustomerLaundryService {
 	@Autowired CBookmarkDAO cBookmarkDAO;
 	@Autowired BImageDAO bImageDAO;
 	@Autowired CPaymentDAO cPaymentDAO;
+	@Autowired BHitsDAO bHitsDAO;
 	@Autowired BScheduleTimeDAO bScheduleTimeDAO;
 	@Autowired BScheduleDaysDAO bScheduleDaysDAO;
 	@Autowired BTempSuspensionDAO bTempSuspensionDAO;
@@ -62,6 +65,10 @@ public class CustomerLaundryService {
 		if(estid == null) {
 			return new ModelAndView("customer/");
 		}
+		
+		// 조회수
+		setHits(req, estid);
+		
 		ModelAndView mav = new ModelAndView("customer/laundry/customerDetail");
 		
 		// 기본 카테고리 데이터 	    
@@ -77,7 +84,7 @@ public class CustomerLaundryService {
 		List<BImageVO> bImageVO = bImageDAO.selectImageList(estid);
 		
 		// 쿠폰(할인가격, 기간, 최소금액, 중복가능여부) 객체를 유효기간에 해당하는 리스트만 불러왔음
-		List<BCouponVO> bCouponVO = comparePeriod(bCouponDAO.select(estid));
+		List<BCouponVO> bCouponVO = bCouponDAO.select(estid);
 		
 		// 메뉴 정보(메뉴이름, 가격, 퀵 가격, 예상소요시간)를 저장한 객체
 		MenuList menuList = MenuListSetting.selectMenuList(estid);
@@ -124,7 +131,7 @@ public class CustomerLaundryService {
 			map.put("estid", estid);
 			
 			// 고객이 가지고 있으면서 해당 사업장 쿠폰이고 사업장에 유효한(삭제X, 유효기간O) 쿠폰일 때
-			List<BCouponVO> CouponList = comparePeriod(bCouponDAO.selectUsableCoupon(map));
+			List<BCouponVO> CouponList = bCouponDAO.selectUsableCoupon(map);
 			mav.addObject("CouponList", new Gson().toJson(CouponList));
 			
 			// 고객 포인트 정보
@@ -139,35 +146,21 @@ public class CustomerLaundryService {
 		return mav;
 	}
 	
-	// 유효기간에 해당하는 쿠폰 리스트만 반환해준다.
-	private List<BCouponVO> comparePeriod(List<BCouponVO> list) {
-		String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-		List<BCouponVO> UserCoupon = new ArrayList<BCouponVO>();
-		for(BCouponVO vo : list) {
-			String[] day = vo.getPeriod().split(" ~ ");
-			// 오늘 날짜가 시작날짜보다 큰 값일 때 양수 || 오늘 날자가 끝날짜보다 작은 값일 때 음수 
-			if(today.compareTo(day[0]) > 0 || today.compareTo(day[1])<0){
-				UserCoupon.add(vo);
-			}
-		}
-		return list;
+	private void setHits(HttpServletRequest req, String estid) {
+		// ip를 가져와서
+		String yourIP = GetIPAddress.getIP(req);
+		System.out.println("yourIP : " + yourIP);
+		// ip, estid, 오늘날짜와 일치하는 데이터가 있는지 조회
+		
+		// 결과가 있으면 조회수를 올리지 않고 return
+		// 결과가 없으면 insert로 추가 후 bmanagement의 hits 필드 1 증가시키기
 	}
 
 	// 검색어 입력[영경]
-	public ModelAndView search(String searchWord) {
+	public ModelAndView search(String searchWord, String level) {
 		ModelAndView mav = new ModelAndView("customer/laundry/customerSearch");
 		mav.addObject("searchWord", searchWord);
-		
-//		HashMap<String, String> param = new HashMap<String, String>();
-//		param.put("MainAddress", searchWord);
-//		
-//		param.put("premium", "no");
-//		List<EstablishmentList> list = bInformationDAO.selectEstablishmentList(param);
-//		mav.addObject("list", list);
-//		
-//		param.put("premium", "yes");
-//		List<EstablishmentList> plist = bInformationDAO.selectEstablishmentList(param);
-//		mav.addObject("plist", plist);
+		mav.addObject("level", level);
 		
 		return mav;
 	}

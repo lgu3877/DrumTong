@@ -103,8 +103,8 @@
 				<a onclick="activeSelectDateArea()"><b>▶</b> 희망 날짜(선택사항)</a>
             </div>
             <div class="select-date-area" id="select-date-area">
-            	<article><div>보내는 날짜</div><input type="date">이 영역에 버튼을 만들고 버튼 누르면 달력 모달창이 뜨고 날짜 선택시 이 영역에 선택한 날짜를 띄워줄 예정!input date는 display none으로!</article>
-            	<article><div>받는 날짜</div><input type="date">이 영역에 버튼을 만들고 버튼 누르면 달력 모달창이 뜨고 날짜 선택시 이 영역에 선택한 날짜를 띄워줄 예정!input date는 display none으로!</article>
+            	<article><div>보내는 날짜</div><input type="date" style="display:none">서비스를 위해 준비중입니다^^.</article>
+            	<article><div>받는 날짜</div><input type="date" style="display:none">서비스를 위해 준비중입니다^^.</article>
             </div>
             <div class="select-pickup" id="select-pickup"> 수거 방법 : 
             	<input type="radio" name="pickup-check" onclick="calTotal()" value="0"/> 직접 방문

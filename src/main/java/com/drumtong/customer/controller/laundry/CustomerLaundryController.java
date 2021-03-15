@@ -23,9 +23,9 @@ public class CustomerLaundryController {
 	}
 
 	// 검색 페이지 이동 [GET]
-	@RequestMapping("customerSearch/{search}/")
-	public ModelAndView search(HttpServletRequest req, @PathVariable("search")String search) {	
-		return svc.search(search);
+	@RequestMapping("customerSearch/{search}/{level}")
+	public ModelAndView search(HttpServletRequest req, @PathVariable("search")String search, @PathVariable("lever")String level) {	
+		return svc.search(search, level);
 	}
 	
 	@RequestMapping(value="customerDetail/{estid}/",method = RequestMethod.GET)

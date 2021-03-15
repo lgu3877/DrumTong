@@ -26,4 +26,15 @@
 			POINT=POINT+#{point} 
 				WHERE MEMBERID=#{memberid}
 	</update>
+	
+	<update id="refund" parameterType="hashmap">
+		UPDATE CPAYMENT
+		    SET POINT = POINT + 
+		    	(SELECT POINT FROM SVIRTUALACCOUNT 
+		    		WHERE ESTID=#{estid} 
+							AND SALECODE=#{salecode}) 
+		    WHERE MEMBERID=
+		    	(SELECT MEMBERID FROM SVIRTUALACCOUNT WHERE ESTID=#{estid} 
+		    				AND SALECODE=#{salecode})
+	</update>
 </mapper>
