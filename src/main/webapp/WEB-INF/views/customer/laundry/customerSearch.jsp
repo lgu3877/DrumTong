@@ -206,6 +206,22 @@
 
     </section>
 	<script type="text/javascript" charset="utf-8">
+		function getIP() {
+			// 현재 접속하고 있는 컴퓨터의 IP를 구한다.
+			text('https://www.cloudflare.com/cdn-cgi/trace').then(data => {
+				let ipRegex = /[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/
+				let ip = data.match(ipRegex)[0];
+				return ip;
+			});
+			
+		}
+	
+	
+		// ip 관련 텍스트 불러오기
+		function text(url) {
+		  return fetch(url).then(res => res.text());
+		}
+		console.log('level : ${level}');
 		let cLogin = '${cLogin}';
 		let memberID = (cLogin === '') ? getIP() : '${cLogin.memberid}';
 		
