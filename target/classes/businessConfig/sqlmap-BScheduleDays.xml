@@ -81,10 +81,10 @@
 	<select id="isOpen" parameterType="hashmap" resultType="int">
 		SELECT COUNT(*) 
 			FROM BSCHEDULEDAYS 
-				WHERE ESTID=#{estid}
-				AND ${weekNum} LIKE '%' ||#{dayOfWeek }|| '%'
+				WHERE ESTID=#{estid, jdbcType=VARCHAR}
+				AND ${weekNum} LIKE '%' ||#{dayOfWeek , jdbcType=VARCHAR}|| '%'
 					<if test='holiday != null and holiday != "none"'>
-						AND HOLIDAY = #{holiday}
+						AND HOLIDAY = #{holiday, jdbcType=VARCHAR}
 					</if>
 	</select>
 </mapper>

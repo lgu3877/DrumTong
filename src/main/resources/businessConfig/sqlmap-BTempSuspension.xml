@@ -72,7 +72,7 @@
 	
 	<select id="isOpen" parameterType="hashmap" resultType="int">
 		SELECT COUNT(*) FROM BTEMPSUSPENSION 
-			WHERE ESTID=#{estid}
+			WHERE ESTID=#{estid, jdbcType=VARCHAR}
 				AND TO_CHAR(SYSDATE,'YYYY-MM-DD') BETWEEN BEGINDAY AND ENDDAY
 	</select>
 
