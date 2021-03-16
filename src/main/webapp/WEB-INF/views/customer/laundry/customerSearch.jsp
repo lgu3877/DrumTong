@@ -182,10 +182,21 @@
 									</div>
 								</li>
 							</ul>
+							
 						</div>
-
+							<div id="page-div" style="display: flex; height: 30px; justify-content: center; align-items: center;">
+<!-- 								<i class="fas fa-angle-double-left"></i> -->
+								<i class="fas fa-angle-left" style="font-size: 36px; border-radius: 50%; border: 1px solid rgb(174, 174, 174); padding: 5px 13px 5px 13px; color: rgb(174, 174, 174);  margin: 0 10px 0 10px"></i>
+								<span style="font-size: 36px; padding: 0 13px 0 13px; margin: 0 5px 0 5px ;border-radius: 50%; background: #0091e4; color: white;">1</span>
+								<span style="font-size: 36px; padding: 0 13px 0 13px; margin: 0 5px 0 5px ; color: #0091e4">2</span>
+								<span style="font-size: 36px; padding: 0 13px 0 13px; margin: 0 5px 0 5px ; color: #0091e4">3</span>
+								<span style="font-size: 36px; padding: 0 13px 0 13px; margin: 0 5px 0 5px ; color: #0091e4">4</span>
+								<span style="font-size: 36px; padding: 0 13px 0 13px; margin: 0 5px 0 5px ; color: #0091e4">5</span>
+								<i class="fas fa-angle-right" style="font-size: 36px; border-radius: 50%; border: 1px solid rgb(174, 174, 174); padding: 5px 13px 5px 13px; color: rgb(174, 174, 174);  margin: 0 10px 0 10px"></i>
+<!-- 								<i class="fas fa-angle-double-right fa-2x"></i> -->
+							</div>
 					</div>
-
+					
                 </div>
 
             </div>
@@ -252,6 +263,7 @@
 		}
 		
 	</script>
+
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/selectLaundryList.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-main.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-sub.js"></script>
@@ -260,5 +272,11 @@
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-emd.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-shop.js"></script>
 	<script type="text/javascript" src="${cpath }/customer/js/main/customerRecentSearchData.js"></script>
+		<script type="text/javascript">
+		function listzero() {
+			let pagediv = document.getElementById('page-div');
+			pagediv.style.display = 'none';
+		}
+	</script>
 </body>
 </html>
