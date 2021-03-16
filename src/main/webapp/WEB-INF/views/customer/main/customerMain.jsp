@@ -142,9 +142,21 @@
 
 </section>
 <script>
-//	영경스크립트
+
+
+//	영경 + 승원 스크립트
 function mainSearch(){
-	location.href= getContextPath() + '/customer/laundry/customerSearch/' + document.getElementById('search').value + '/';
+	
+	const address_lists = document.querySelectorAll('#address-div li');
+	if(address_lists.length != '0')
+		location.href = getContextPath() + '/customer/laundry/customerSearch/' + address_lists[0].innerHTML + '/emdLevel';
+	else {
+		const store_lists = document.querySelectorAll('#store-div li');
+		if(store_lists.length != '0')
+			location.href = getContextPath() + '/customer/laundry/customerSearch/' + store_lists[0].querySelector('.brand-address').innerHTML + '/brandLevel';
+		else
+			location.href = getContextPath() + '/customer/laundry/customerSearch/';
+	}		
 }
 //  승원스크립트
 	var tmp = '';
@@ -207,11 +219,11 @@ function mainSearch(){
    }
    
    function addressSearching(object) {
-	   location.href= getContextPath() + '/customer/laundry/customerSearch/' + object.innerHTML + '/';	   
+	   location.href= getContextPath() + '/customer/laundry/customerSearch/' + object.innerHTML + '/emdLevel';	   
    }
    
    function brandSearching(object) {
-	   location.href= getContextPath() + '/customer/laundry/customerSearch/' + object.querySelector('.brand-address').innerHTML + '/';
+	   location.href= getContextPath() + '/customer/laundry/customerSearch/' + object.querySelector('.brand-address').innerHTML + '/brandLevel';
    }
 
 </script>

@@ -2,7 +2,7 @@ var paramAddress = '';			// ■ 현재 지도 가져오는 데이터를 저장�
 
 // 자식까지 함께 복사하려면 cloneNode() 안에 true도 입력하여야 한다
 //var common_clone = document.querySelector('.laundryList_common').cloneNode(true);
-var common_clone = document.querySelector('.common_list').cloneNode(true);
+//var common_clone = document.querySelector('.common_list').cloneNode(true);
 
 
 // 지도가 변화할 때 함수를 불러오기!	// 남서 북동
@@ -45,7 +45,7 @@ async function selectLaundry(page) {
 	const generalList = data[1];
 	const resultNum = data[2];
 //	console.log('data[3] : ' + data[3]);
-//
+
 //	console.log('select_premiumList : ', premiumList);
 //	console.log('select_generalList : ', generalList);
 //	console.log('resultNum : ', resultNum);
@@ -63,6 +63,14 @@ function insertLaundryList(premiumList, generalList) {
 	
 	if(generalList.length != 0)
 		createGeneral(generalList);
+		
+	let totalnum = document.getElementById('total-laundry').innerHTML;	
+	
+	if(totalnum == '0')
+		listzero();
+	else {
+		document.getElementById('page-div').style.display = 'flex';
+	}
 }
 
 // ■ 프리미엄 리스트를 생성하는 함수
@@ -141,10 +149,12 @@ function deleteGeneral(generalList) {
 function createGeneral(generalList) {
 //	let laundryList = document.querySelector('.laundryList_child_list');
 	let laundryList = document.querySelector('.laundryList_common');
-	const half_length = Math.round(generalList.length / 2) - 1;
+	const half_length = Math.round(generalList.length / 2) - 1;		// 일반 세탁소 리스트를 한줄에 두개씩 넣을 div 태그를 구현하기 위한 반복문 숫자
 	
+
 	for(let i = 0; i < half_length; i++) {
-		laundryList.append(common_clone);
+		let common_clone = document.querySelector('.common_list').cloneNode(true);
+		laundryList.appendChild(common_clone);
 	}
 	
 	let common_childs = document.querySelectorAll('.common_list');
