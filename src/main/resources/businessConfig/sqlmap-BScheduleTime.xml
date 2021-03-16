@@ -36,7 +36,7 @@
 	<select id="isOpen" parameterType="hashmap" resultType="int">
 		SELECT COUNT(*) 
 			FROM BSCHEDULETIME 
-				WHERE ESTID=#{estid} 
+				WHERE ESTID=#{estid, jdbcType=VARCHAR} 
 				AND ${filter2} !='-' 
 				AND TO_CHAR(SYSDATE,'HH24:MI') 
 					BETWEEN SUBSTR(${filter2},1,5) AND NVL(SUBSTR(${filter2},9,12),'-')
