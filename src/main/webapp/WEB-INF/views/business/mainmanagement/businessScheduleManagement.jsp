@@ -49,9 +49,9 @@
 		// 정기휴무
 		const initialRegHoliday = ${bscheduledays};
 		delete initialRegHoliday.holiday;
-		const bscheduletime = ${bscheduletime}
-		console.log(bscheduletime);
+		const bscheduletime = ${bscheduletime};
 		let bscheduledays = ${bscheduledays};
+		console.log(bscheduletime);
 		const holiday = bscheduledays.holiday; // holiday > 'Y' or 'N'
 		delete bscheduledays.holiday; // holiday 삭제
 		// 임시휴무

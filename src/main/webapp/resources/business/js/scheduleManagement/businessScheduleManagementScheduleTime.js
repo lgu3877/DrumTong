@@ -1,64 +1,128 @@
-let hourInputs = document.getElementsByClassName("hour");
 
+init();
+display();
 
-// 시간 Input 텍스트에 onblur 익명함수를 걸어준다.
-for(let i =0; i< hourInputs.length; i++) {
-	hourInputs[i].onblur = function (e) {
-		let hourValue = e.target.value;
-		
-		let radioAM = e.target.previousSibling.previousSibling.querySelectorAll('.time_zone_input')[0];
-		let radioPM = e.target.previousSibling.previousSibling.querySelectorAll('.time_zone_input')[1];
-		
-		let buttonAM = e.target.previousSibling.previousSibling.querySelectorAll('.time_zone_btn')[0];
-		let buttonPM = e.target.previousSibling.previousSibling.querySelectorAll('.time_zone_btn')[1];
-		
-		
-		 
-		const timeZoneBtn = document.getElementsByClassName("time_zone_btn");
-		// 시간이 13부터는 해당 텍스트의 오전/오후를 오후로 바꾸어주며 
-		// 해당 시간에서 -12를 해준다.
-		
-		
-		// 시간에 24를 입력했을 시에  오후 11시 59분으로 교체해줍니다.
-		if (hourValue === "24") {
-			e.target.value = hourValue-13;
-			e.target.nextSibling.nextSibling.value = 59;
-			
-			radioPM.checked = true;
-			buttonAM.style.backgroundColor = "#95e1d3";
-			buttonPM.style.backgroundColor = "navy";
-		
-		// 입력한 값이 12시보다 크면 버튼을 오후로 변경시켜주고 입력한 시간에 -12를 해준다.
-		} else if(hourValue > 12) {
-			e.target.value = hourValue-12;
-			radioPM.checked = true;
-			buttonAM.style.backgroundColor = "#95e1d3";
-			buttonPM.style.backgroundColor = "navy";
-		
-		// 오후버튼이 체크되어있지 않은 상태에서 12보다 작은 값이 입력되면  오전버튼을 체크해준다. 
-		} else if (!radioPM.checked && hourValue < 12){
-			radioAM.checked = true;
-			buttonAM.style.backgroundColor = "navy";
-			buttonPM.style.backgroundColor = "#95e1d3";
-			
-		// 오전버튼이 체크되어있지 않고 오후 버튼이 체크되어있지 않은 상태에서 12값이 입력되면 오후버튼을 체크해준다.
-		// 이렇게 하는 이유는 통상적으로 12를 입력했을 때 오전보다는 오후12시를 입력할려는 고객의 빈도가 높을 것이라고 예상하기 때문이다.
-		} else if(!radioAM.checked && !radioPM.checked && hourValue === "12") {
-			e.target.nextSibling.nextSibling.value = "00";
-			radioPM.checked = true;
-			buttonAM.style.backgroundColor = "#95e1d3";
-			buttonPM.style.backgroundColor = "navy";
-		} 
-		console.log(radioAM.checked);
-		console.log(radioPM.checked);
+function init() {
 	
+	let hourInputs = document.getElementsByClassName("hour");
+	
+	// 시간 Input 텍스트에 onblur 익명함수를 걸어준다.
+	for(let i =0; i< hourInputs.length; i++) {
+		hourInputs[i].onkeydown = function (e) {
+			console.log("@@@@@@@@",e);
+			hourMinuteController(e.target);
+		};
+	}
+
+}
+
+function display() {
+	if(bscheduletime.saturday === "-" && bscheduletime.sunday === "-") {
+		radioSelect('week-only');
+		 
+	}
+	else if(bscheduletime.saturday !== "-" && bscheduletime.sunday === "-") {
+		configurationScheduleTimeViewDependingOnDays("weekendSat");
+	}
+	else if(bscheduletime.saturday === "-" && bscheduletime.sunday !== "-" ){
+		configurationScheduleTimeViewDependingOnDays("weekendSun");
+	}
+	
+	
+	
+	
+	const weekday = bscheduletime.weekday.split(" ~ ");
+	const saturday = bscheduletime.saturday.split(" ~ ");
+	const sunday = bscheduletime.sunday.split(" ~ ");
+	
+	let dayType = ["weekday", "saturday", "sunday"];
+	let count = 0;
+	let bt = true;
+	
+	
+	
+	for(let key in bscheduletime) {
 		
-	};
+		let day = bscheduletime[key].split(" ~ ");
+		
+		day.forEach(function(time, i){
+			const hourInputText = document.getElementById(dayType[count]).querySelectorAll(".hour")[i];
+			const minuteInputText = document.getElementById(dayType[count]).querySelectorAll(".minute")[i]
+			
+			let hourMinute = time.split(":");
+			hourInputText.value = hourMinute[0];
+			minuteInputText.value = hourMinute[1];
+			
+			hourMinuteController(hourInputText);
+		});
+		count++;	
+	}
+	
+	
+	
+	
 	
 	
 }
 
 
+function hourMinuteController(target) {
+	let hourValue = target.value;
+			
+	let radioAM = target.previousSibling.previousSibling.querySelectorAll('.time_zone_input')[0];
+	let radioPM = target.previousSibling.previousSibling.querySelectorAll('.time_zone_input')[1];
+	
+	let buttonAM = target.previousSibling.previousSibling.querySelectorAll('.time_zone_btn')[0];
+	let buttonPM = target.previousSibling.previousSibling.querySelectorAll('.time_zone_btn')[1];
+	
+	
+	 
+	const timeZoneBtn = document.getElementsByClassName("time_zone_btn");
+	// 시간이 13부터는 해당 텍스트의 오전/오후를 오후로 바꾸어주며 
+	// 해당 시간에서 -12를 해준다.
+	
+	
+	// 시간에 24를 입력했을 시에  오후 11시 59분으로 교체해줍니다.
+	if (hourValue === "24") {
+		target.value = hourValue-13;
+		target.nextSibling.nextSibling.value = 59;
+		
+		radioPM.checked = true;
+		buttonAM.style.backgroundColor = "#95e1d3";
+		buttonPM.style.backgroundColor = "navy";
+	
+	} else if(hourValue === "00") {
+		target.value = 12;
+		radioAM.checked = true;
+		buttonAM.style.backgroundColor = "navy";
+		buttonPM.style.backgroundColor = "#95e1d3";
+
+	// 입력한 값이 12시보다 크면 버튼을 오후로 변경시켜주고 입력한 시간에 -12를 해준다.
+	} else if(hourValue > 12) {
+		target.value = hourValue-12;
+		radioPM.checked = true;
+		buttonAM.style.backgroundColor = "#95e1d3";
+		buttonPM.style.backgroundColor = "navy";
+	
+	// 오후버튼이 체크되어있지 않은 상태에서 12보다 작은 값이 입력되면  오전버튼을 체크해준다. 
+	} else if (!radioPM.checked && hourValue < 12){
+		radioAM.checked = true;
+		buttonAM.style.backgroundColor = "navy";
+		buttonPM.style.backgroundColor = "#95e1d3";
+		
+	// 오전버튼이 체크되어있지 않고 오후 버튼이 체크되어있지 않은 상태에서 12값이 입력되면 오후버튼을 체크해준다.
+	// 이렇게 하는 이유는 통상적으로 12를 입력했을 때 오전보다는 오후12시를 입력할려는 고객의 빈도가 높을 것이라고 예상하기 때문이다.
+	} else if(!radioAM.checked && !radioPM.checked && hourValue === "12") {
+		target.nextSibling.nextSibling.value = "00";
+		radioPM.checked = true;
+		buttonAM.style.backgroundColor = "#95e1d3";
+		buttonPM.style.backgroundColor = "navy";
+	} 
+	console.log(radioAM.checked);
+	console.log(radioPM.checked);
+				
+	
+}
 
 // 전에 있는 버튼을 저장하는 값입니다. checkBtn의 색깔을 바꿀 때 사용합니다.
 // var를 사용해서 전에 있는 버튼 값을 저장해주는 역할을 해줍니다.
@@ -79,8 +143,9 @@ function checkOption(id) {
 	checkbox.checked = true;
 	
 	
-	// id 값에 따라 보여주는 뷰를 변경해줍니다.	
+	// id 값에 따라 보여주는 뷰를 변경해줍니다.
 	configurationScheduleTimeViewDependingOnDays(id);
+
 	
 	// 지금의 버튼 값을 이전 버튼 값에 저장해주어서 다음에 불러올 때  이 버튼의 색상을 변경해줍니다.
 	previousButton = button;
@@ -199,11 +264,11 @@ const minuteInput = document.getElementsByName("minute");
 for (let i = 0; i < hourInput.length; i ++) {
 	hourInput[i].addEventListener("keyup", function(e) {
 		e.preventDefault();
-		if (e.target.value <= 0 || e.target.value > 24) e.target.value = ""; 
+		if (target.value <= 0 || target.value > 24) target.value = ""; 
 	})
 	minuteInput[i].addEventListener("keyup", function(e) {
 		e.preventDefault();
-		if (e.target.value < 0 || e.target.value > 59) e.target.value = ""; 
+		if (target.value < 0 || target.value > 59) target.value = ""; 
 	})
 	
 }
