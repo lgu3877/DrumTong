@@ -169,7 +169,7 @@ public class SelectLaundryList {
 	// 요일관련된 필터
 	private static String filter2Setting(String filter2) {
 		String[] days = {"일", "월", "화", "수", "목", "금", "토"};
-		String[] weeks = {"FIRSTWEEK", "SECONDWEEK", "THIRDWEEK", "FOUTHWEEK", "FIFTHWEEK", "SIXTHWEEK"};
+		String[] weeks = {"FIRSTWEEK", "SECONDWEEK", "THIRDWEEK", "FOURTHWEEK", "FIFTHWEEK", "SIXTHWEEK"};
 		int todayNum = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
 		int weekOfMonth = Calendar.getInstance().get(Calendar.WEEK_OF_MONTH);
 		param.put("weekNum", weeks[weekOfMonth-1]);	// 몇번째 주인지

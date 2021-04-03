@@ -30,7 +30,7 @@
    	<script type="text/javascript" src="${cpath }/customer/js/main/customerHeader.js"></script>
 </head>
 
-<body>
+<body> 
 <%@ include file="../main/customer_Header.jsp"%>
 
     <!-- 본문 영역 -->

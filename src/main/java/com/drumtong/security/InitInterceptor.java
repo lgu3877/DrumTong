@@ -18,12 +18,12 @@ public class InitInterceptor extends HandlerInterceptorAdapter {
 	//▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣ AWS 도메인 변경 후 테스트 해 볼 것▣▣▣▣▣▣▣▣LoginInterceptor도 같이 확인하기▣▣▣▣▣▣▣
 	
 	// ▣▣▣▣▣▣▣▣▣▣▣▣▣1. 아래 코드 주석 처리.▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣
-	final String DOMAIN = "http://localhost:8080/drumtong/";
-	final String SUBDOMAIN = "drumtong";
+//	final String DOMAIN = "http://localhost:8080/drumtong/";
+//	final String SUBDOMAIN = "drumtong";
 	//▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣
 	
 	//▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣2. 아래 코드 주석 해제▣▣▣▣▣▣▣▣▣▣▣
-//	final String DOMAIN = "https://www.drumtong.ml";
+	final String DOMAIN = "https://www.drumtong.ml";
 //	final String SUBDOMAIN = "/";
 	//▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣
 	
@@ -42,8 +42,8 @@ public class InitInterceptor extends HandlerInterceptorAdapter {
 		// ▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣▣
 		HttpSession Session = request.getSession();
 		String Referer = request.getHeader("REFERER");
-//		String typeOfSite = request.getRequestURI().contains("business") ? "b" : "c";
-		String typeOfSite = request.getRequestURI().split(SUBDOMAIN)[1].contains("business") ? "b" : "c";
+		String typeOfSite = request.getRequestURI().contains("business") ? "b" : "c";
+//		String typeOfSite = request.getRequestURI().split(SUBDOMAIN)[1].contains("business") ? "b" : "c";
 //		◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
 		// pull 하고나서 수정 : !referer.startsWith("http://본인아이피주소:본인포트번호/drumtong/"))
 		Boolean LinkInitialConnection = (Referer == null || !Referer.startsWith(DOMAIN + (typeOfSite.equals("b") ? "business/" : "")));

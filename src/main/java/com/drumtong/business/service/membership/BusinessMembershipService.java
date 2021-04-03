@@ -38,7 +38,7 @@ public class BusinessMembershipService {
 		HttpSession Session = req.getSession();
 		String AddressToMove = (String)Session.getAttribute("AddressToMove");		// 인터셉터 들어가기 전 이동하려던 주소
 		if(AddressToMove == null) 	AddressToMove = "/business/";
-		
+		 
 		boolean LoginResult = Login.login(Session, resp, bPrivateDatavo, storeid);		// 로그인 성공여부
 
 		BPrivateDataVO User = ((BPrivateDataVO)Session.getAttribute("bLogin"));
