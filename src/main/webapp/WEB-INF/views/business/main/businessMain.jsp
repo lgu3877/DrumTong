@@ -25,7 +25,7 @@
 	<c:when test="${selectEST.premiumboolean=='N' }">
 		<c:set var="preLink" value="contract/businessPremiumAd/"/>
 		<c:set var="preBtName" value="프리미엄 광고" />
-		<c:set var="preStatus" value="${selectEST.status }"/>
+		<c:set var="preStatus" value="${selectEST.status }"/>	
 	</c:when>
 	<c:otherwise>
 		<c:set var="preLink" value=""/>

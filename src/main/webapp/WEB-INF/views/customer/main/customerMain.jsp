@@ -128,7 +128,7 @@
 							<div style="display:inline-flex;">
 							<!-- 아이콘 나타내는 공간 -->
 							<c:forEach items="${li.maincategory }" var="cate">
-								<img style="width:40px;height:40px;" src="${cpath }/resources/business/img/category/${cate }.jpg">
+								<img style="width:40px;height:40px;" src="https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/system/business/img/category/${cate }.jpg">
 							</c:forEach>
 							</div>
 					</div>

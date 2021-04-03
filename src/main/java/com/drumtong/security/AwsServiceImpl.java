@@ -52,14 +52,12 @@ public class AwsServiceImpl{
 	// AWS Key를 가져옵니다.
 	private static String[] Security = Security();
     
-//    private static final String BUCKET_NAME = Security[0];
-//    private static final String ACCESS_KEY = Security[1];
-//    private static final String SECRET_KEY = Security[2];
-
+    private static final String BUCKET_NAME = Security[0];
+    private static final String ACCESS_KEY = Security[1];
+    private static final String SECRET_KEY = Security[2];
     
-    private static final String BUCKET_NAME = "drumtongbucket";
-    private static final String ACCESS_KEY = "AKIASDYEGTH4DLQR7UJL";
-    private static final String SECRET_KEY = "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";
+  
+
 
     private AmazonS3 amazonS3; // 인스턴스를 초기화한다.
 
