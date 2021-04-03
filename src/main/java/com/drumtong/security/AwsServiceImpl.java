@@ -52,6 +52,8 @@ public class AwsServiceImpl{
 	// AWS Key를 가져옵니다.
 	private static String[] Security = Security();
     
+	
+	
     private static final String BUCKET_NAME = Security[0];
     private static final String ACCESS_KEY = Security[1];
     private static final String SECRET_KEY = Security[2];

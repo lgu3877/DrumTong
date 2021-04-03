@@ -56,7 +56,8 @@ public class BusinessMembershipService {
 	// 로그아웃 객체[영경]
 	public ModelAndView logOut(HttpServletRequest req, HttpServletResponse resp) {
 		String Referer = req.getHeader("referer");
-		String AddressToMove = Referer != null ? Referer.split("drumtong")[1] : "/business/";
+//		String AddressToMove = Referer != null ? Referer.split("drumtong")[1] : "/business/";
+		String AddressToMove = Referer != null ? Referer.split("drumtong.ml")[1] : "/business/";
 		ModelAndView mav = new ModelAndView("redirect:" + AddressToMove);
 		HttpSession Session = req.getSession();
 		

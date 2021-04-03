@@ -66,7 +66,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			HttpServletRequest request) {
 		String Referer = request.getHeader("Referer");
 		session.setAttribute("move", "move");
-		
+		System.out.println("Referer : " + Referer);
+		System.out.println("addressToMove : " + addressToMove);
+		System.out.println("loginPageName : " + loginPageName);
+		System.out.println("mainPageName : " + mainPageName);
+		System.out.println("request.getContextPath() : " + request.getContextPath());
 		
 		addressToMove = addressToMove.endsWith(loginPageName)
 				? (Referer != null ? (Referer.split(request.getContextPath())[1]) : mainPageName)	// 로그인 페이지를 눌러 이동한거면
@@ -86,7 +90,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 				
 		session.setAttribute("AddressToMove", addressToMove);
-//		System.out.println("최종 AddressToMove 는'" + addressToMove + "'로 로 되었고 sloginlog 생성함");
+		System.out.println("최종 AddressToMove 는'" + addressToMove + "'로 로 되었고");
 		CreateNewSLoginLog(request, session, addressToMove);
 		return addressToMove;
 	}

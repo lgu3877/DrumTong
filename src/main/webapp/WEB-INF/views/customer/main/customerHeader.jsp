@@ -51,23 +51,23 @@
         
         <div class="mainMenu">
             
-            <ul class="menu">
-                <li>
-                    <a href="#" class="middleMenu" onclick="middleMenuClick()">한글</a>
-                </li>
-            </ul>
+<!--             <ul class="menu"> -->
+<!--                 <li> -->
+<!--                     <a href="#" class="middleMenu" onclick="middleMenuClick()">한글</a> -->
+<!--                 </li> -->
+<!--             </ul> -->
 
-            <ul class="menu" >
-                <li>
-                    <a href="#" class="middleMenu">메뉴1</a>
-                </li>
-            </ul>   
+<!--             <ul class="menu" > -->
+<!--                 <li> -->
+<!--                     <a href="#" class="middleMenu">메뉴1</a> -->
+<!--                 </li> -->
+<!--             </ul>    -->
 
-            <ul class="menu">
-                <li>
-                    <a href="#" class="middleMenu">메뉴2</a>
-                </li>
-            </ul>
+<!--             <ul class="menu"> -->
+<!--                 <li> -->
+<!--                     <a href="#" class="middleMenu">메뉴2</a> -->
+<!--                 </li> -->
+<!--             </ul> -->
             
             
                 <c:if test="${empty cLogin}">

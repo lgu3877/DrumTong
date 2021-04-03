@@ -50,7 +50,7 @@ function imgSettings(imgList){
 			});
 		}
 		else {
-			imgBoxs.children[1].children[imgNum].src = '/drumtong/resources/business/img/slide/laundry1_02.jpg';
+			imgBoxs.children[1].children[imgNum].src = 'https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/system/customer/img/laundry1_02.jpg';
 		}
 	}
 }
