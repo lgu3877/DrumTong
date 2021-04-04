@@ -134,8 +134,6 @@ public class Login {
 	
 	// 사업장 정보 들고오고 세션에도 저장해주는 메서드
 	public static void getInformationList(BPrivateDataVO User, HttpSession Session, BInformationDAO bInformationDAO) {
-		Session.removeAttribute("InformationList");
-		Session.removeAttribute("selectEST");
 		if(User != null) {
 			List<BInformationVO> InformationList = bInformationDAO.selectInformationList(User.getBpersonid());
 			
@@ -147,6 +145,10 @@ public class Login {
 				InformationList.forEach(li -> System.out.println(li.getBrandnaming() + " : " + li.getStatus()));
 				System.out.println(selectEST.getBrandnaming() + ":" + selectEST.getStatus());
 				System.out.println("------------------getInformationList------------------");
+			}
+			else {
+				Session.removeAttribute("InformationList");
+				Session.removeAttribute("selectEST");
 			}
 			
 			

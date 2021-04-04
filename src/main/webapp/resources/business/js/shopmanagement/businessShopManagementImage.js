@@ -177,7 +177,7 @@ function imageCheck(e) {
 		// 대표사진이 있을 경우 삭제
 		const previousCover = document.getElementById("cover-image") ? 
 					document.getElementById("cover-image").src : "No-Image";
-		
+
 		const uploadedCover = (status === "FAIL") ? null : bImageList.filter(photo => photo.delegatephotoboolean === "Y")[0].storeimg;
 		
 		// 이미지 비교(DB 이미지 === 신규 이미지 ?)

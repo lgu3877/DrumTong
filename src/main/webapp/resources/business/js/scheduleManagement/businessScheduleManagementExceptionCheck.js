@@ -184,7 +184,7 @@ async function checkExceptionBeforeSubmit() {
 		console.log("statusChange에 대한 결과 : ", result);
 		
 		if(result) {
-			window.location.replace("http://localhost:8080/drumtong/business/");
+			window.location.replace("https://www.drumtong.ml/business/");
 			alert("온라인 계약이 성공적으로 마무리되었습니다!!!");
 //			location.href="/drumtong/business/";
 //			window.location.reload(true);

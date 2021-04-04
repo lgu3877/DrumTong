@@ -23,7 +23,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession Session = request.getSession();
-		new Cookie("JSESSIONID", Session.getId()).setPath("/drumtong/");
+		new Cookie("JSESSIONID", Session.getId()).setPath("drumtong.ml");
+//		new Cookie("JSESSIONID", Session.getId()).setPath("/drumtong/");
 		boolean NotChangeAddressConfirm = "move".equals(Session.getAttribute("move")) ? true : false;
 		Session.removeAttribute("move");
 		String AddressToMove = CheckAddress(NotChangeAddressConfirm, Session, request);
@@ -65,15 +66,17 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	private String MoveBeforeLogin(HttpSession session, String loginPageName, String mainPageName, String addressToMove,
 			HttpServletRequest request) {
 		String Referer = request.getHeader("Referer");
+//		String ContextPath = request.getContextPath();
+		String ContextPath = "drumtong.ml";
 		session.setAttribute("move", "move");
-		System.out.println("Referer : " + Referer);
-		System.out.println("addressToMove : " + addressToMove);
-		System.out.println("loginPageName : " + loginPageName);
-		System.out.println("mainPageName : " + mainPageName);
-		System.out.println("request.getContextPath() : " + request.getContextPath());
+//		System.out.println("Referer : " + Referer);
+//		System.out.println("addressToMove : " + addressToMove);
+//		System.out.println("loginPageName : " + loginPageName);
+//		System.out.println("mainPageName : " + mainPageName);
+//		System.out.println("request.getContextPath() : " + request.getContextPath());
 		
 		addressToMove = addressToMove.endsWith(loginPageName)
-				? (Referer != null ? (Referer.split(request.getContextPath())[1]) : mainPageName)	// 로그인 페이지를 눌러 이동한거면
+				? (Referer != null ? (Referer.split(ContextPath)[1]) : mainPageName)	// 로그인 페이지를 눌러 이동한거면
 				: addressToMove;	// 로그인 페이지가 아닌 다른 페이지에서 왔다면
 		
 //				if(addressToMove.endsWith(loginPageName)) {	// 로그인 페이지로 직접이동
