@@ -1,10 +1,15 @@
-# DrumTong 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 Read.md 작성자 : 이건욱 
-Project start            : 2020-07-13 (Mon)                                                                                                              문의 :lgu3877@naver.com
+[**프로젝트 이름**]
+# Drumtong
+Read.md 작성자 : 이건욱 
+문의 : lgu3877@naver.com
+
+
+
+Project start            : 2020-07-13 (Mon)                                                                                                              
 prototype v1.0           : 2021-03-23 (Tue)
 Maintenance start        : 2021-04-01 (Thu)
 
-[**프로젝트 이름**]
-# Drumtong
+
 
 [**애플리케이션 설명**]
 
