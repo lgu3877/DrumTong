@@ -4,6 +4,10 @@ Read.md 작성자 : 이건욱
 
 문의 : lgu3877@naver.com
 
+<br>
+
+EB 서버 시작 시간 : 오전 10:00 부터 ~ 오후 11:30 까지
+<br>
 
 
 Project start            : 2020-07-13 (Mon)                                                                                                              
