@@ -96,7 +96,9 @@ Maintenance start        : 2021-04-01 (Thu)
 **@사업자 회원가입 및 매장 온라인 계약 절차**
 
 **사업자 회원가입 절차 https://youtu.be/NIK_6Gcx-2M**  <br>
-**사업자 온라인계약 절차 https://youtu.be/Td_mQbzPefM**
+**사업자 온라인계약 절차 https://youtu.be/Td_mQbzPefM** <br>
+**사업자 프리미엄 광고 서비스 절차 https://youtu.be/W39TDAbQ3Pk**
+ 
 <br>
 
  
