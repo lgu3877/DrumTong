@@ -17,6 +17,17 @@ Maintenance start        : 2021-04-01 (Thu)
 
 <br><br><br><br>
 
+## 유튜브 링크
+
+**사업자 회원가입 절차 https://youtu.be/NIK_6Gcx-2M**  <br>
+**사업자 온라인계약 절차 https://youtu.be/Td_mQbzPefM** <br>
+**사업자 프리미엄 광고 서비스 절차 https://youtu.be/W39TDAbQ3Pk** <br>
+ **사업자 매장 관리 방법 https://youtu.be/40Adf4ga0UM** <br>
+**사업자 일정 관리 방법 https://youtu.be/s_z-pIY1wFs** <br>
+
+<br><br><br>
+
+
 
 ## [**애플리케이션 설명**]
 
@@ -95,11 +106,6 @@ Maintenance start        : 2021-04-01 (Thu)
 
 **@사업자 회원가입 및 매장 온라인 계약 절차**
 
-**사업자 회원가입 절차 https://youtu.be/NIK_6Gcx-2M**  <br>
-**사업자 온라인계약 절차 https://youtu.be/Td_mQbzPefM** <br>
-**사업자 프리미엄 광고 서비스 절차 https://youtu.be/W39TDAbQ3Pk** <br>
- **사업자 매장 관리 방법 https://youtu.be/40Adf4ga0UM** <br>
-**사업자 일정 관리 방법 https://youtu.be/s_z-pIY1wFs** <br>
 <br>
 
  
