@@ -28,6 +28,7 @@ Maintenance start        : 2021-04-01 (Thu)
 <br><br><br>
 
 **고객 회원 가입 절차 https://youtu.be/QQKPVG_6HD0**
+**고객 포인트 충전 절차 https://youtu.be/Kw9aHSWU26o**
 
 <br><br><br>
 
