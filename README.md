@@ -6,7 +6,7 @@ Read.md 작성자 : 이건욱
 
 <br>
 
-EB 서버 시작 시간 : 오전 09:00 부터 ~ 오후 11:30 까지
+EB 서버 자동 시작/종료 시간 : 오전 09:00 부터 ~ 오후 11:30 까지
 <br>
 
 
@@ -24,6 +24,10 @@ Maintenance start        : 2021-04-01 (Thu)
 **사업자 프리미엄 광고 서비스 절차 https://youtu.be/W39TDAbQ3Pk** <br>
  **사업자 매장 관리 방법 https://youtu.be/40Adf4ga0UM** <br>
 **사업자 일정 관리 방법 https://youtu.be/s_z-pIY1wFs** <br>
+
+<br><br><br>
+
+**고객 회원 가입 절차 https://youtu.be/QQKPVG_6HD0**
 
 <br><br><br>
 
