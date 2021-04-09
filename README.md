@@ -17,7 +17,7 @@ Maintenance start        : 2021-04-01 (Thu)
 
 <br><br><br><br>
 
-## 유튜브 링크 (번호 순서대로 보는 것을 권장합니다 ^_^ 계속 업데이트중...)
+## 유튜브 링크 (번호 순서대로 보는 것을 권장합니다.)
 
 **1. 사업자 회원가입 절차 https://youtu.be/NIK_6Gcx-2M**  <br>
 **2. 사업자 온라인계약 절차 https://youtu.be/Td_mQbzPefM** <br>
