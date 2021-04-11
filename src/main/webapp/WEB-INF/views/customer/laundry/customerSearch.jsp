@@ -269,7 +269,7 @@
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-sub.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-sido.js"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-sigungu.js"></script>
-    <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-emd.js"></script>
+    <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-emd.js" charset="UTF-8"></script>
     <script type="text/javascript" src="${cpath }/customer/js/laundry/searchMap/drumtong-map-shop.js"></script>
 	<script type="text/javascript" src="${cpath }/customer/js/main/customerRecentSearchData.js"></script>
 		<script type="text/javascript">

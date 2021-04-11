@@ -18,6 +18,7 @@ createInputFile();
 // 업로드 과정 중 삭제된 사진 이름 배열 > DB에서 이름 비교 후 저장 권장
 function displayImages() {
 	const imageList = document.getElementById("image-preview");
+	console.log('imageList : ', imageList)
 	
 	const coverImage = bImageList.filter((image) => image.delegatephotoboolean === "Y");
 	const otherImages = bImageList.filter((image) => image.delegatephotoboolean === "N");
@@ -32,7 +33,7 @@ function displayImages() {
 		// 이미지 슬라이더
 		const coverImg = document.createElement("img");
 		coverImg.id = "cover-image";
-		console.log('storeimg 경로 1',coverImage[0].businessStoreImage)
+		console.log('storeimg 경로 1',coverImage[0].businessStoreImage);
 		coverImg.src = 
 			"https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/" + 
 			coverImage[0].storeimg;

@@ -54,7 +54,7 @@
 <div class="side_header_con">
 	<div class="side_header_logo">
 		<a href="${cpath }/business/">
-			<img src="${cpath }/resources/business/img/businessLogo.png" />
+			<img style="width:80px;" src="https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/system/customer/img/logo4.png" />
 		</a>
 	</div>
 	<ul class="side_menu_con">

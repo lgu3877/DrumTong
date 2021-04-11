@@ -53,24 +53,28 @@
 			// EMD250geoJson 을 경상남도, 경상북도, 서울특별시 등으로 바꾼다면
 			// 개별적으로 geoJson을 불러올 수 있을 것이다
 			// 해당 지도의 중심 값으로 그 값을 가져오면 유용할듯하다
-			$.getJSON("/drumtong/customer/json/emd/" + $('#sido-hidden').html() + ".geojson", function(geojson) {
+//			$.getJSON("/drumtong/customer/json/emd/" + $('#sido-hidden').html() + ".geojson", function(geojson) {
+//			$.getJSON(getContextPath() + "/customer/json/emd/" + $('#sido-hidden').html() + ".geojson", function(geojson) {
+			$.getJSON(getContextPath() + "/json/emd/" + $('#sido-hidden').html() + ".geojson", function(geojson) {
+//			$.getJSON("https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/system/geojsonMapFile/" + $('#sido-hidden').html() + ".geojson?callback=?", function(geojson) {
+//			$.getJSON("https://drumtongbucket.s3.ap-northeast-2.amazonaws.com/system/geojsonMapFile/" + $('#sido-hidden').html() + ".geojson?callback=?", function(geojson) {
 				let emd_datas = geojson.features;
 				let emd_coordinate = [];
 				let emd_nm = "";
+				
+				console.log(emd_datas);
 			
 // 				console.log('emd_datas : ', emd_datas);
 			
 				$.each(emd_datas, function(index, item) {
 					emd_coordinates = item.geometry.coordinates;
 					emd_nm = item.properties.EMDNAME;
-//					if(emd_nm == '명지동') {
-//						console.log('index : ' + index);
-//					}
 					emd_num = item.properties.EMDNUM;		// EMDCODE로 수정
 					emddisplayArea(emd_coordinates, emd_nm, emd_num, view_emd_nm, object);
 				});
 			});
 	}
+	
 	
 	// 읍면동 폴리곤 활성화
 	function emddisplayArea(coordinates, name, pknum, viewname, object) {

@@ -55,6 +55,7 @@ public class CustomerAccountService {
 		// estid 와 일치하는 사업자 테이블 리스트 출력
 		
 		List<BInformationVO> bookmarkList = bInformationDAO.selectBookmark(Login.getMemberid());
+//		List<BImageVO> bImageList = bImageDAO.selc
 		mav.addObject("bookmarkList", bookmarkList);
 		return mav;
 	}

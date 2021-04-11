@@ -132,7 +132,7 @@
 	    		img.src = address;
     		}
     	}
-        function FileSubmit(cpath) {
+        function FileSubmit() {
             if (event.type === 'keypress' && event.key !== 'Enter') {
                 return;
             }
@@ -186,9 +186,7 @@
 
     <script type="text/javascript">
         // 문서가 불러와지면 곧바로 실행 (onload="")
-//         cpath = '${pageContext.request.contextPath}';
-        cpath = '';
-        console.log('cpath : ', '${pageContext.request.contextPath}');
+        cpath = '${pageContext.request.contextPath}';
         document.getElementById('submit').addEventListener('click', FileSubmit);
         document.getElementById('delete').addEventListener('click', FileDelete);
 
