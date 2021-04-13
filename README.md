@@ -15,6 +15,12 @@ prototype v1.0           : 2021-03-23 (Tue) <br>
 Maintenance start        : 2021-04-01 (Thu)
 
 
+<br><br><br>
+
+### 프로젝트 활동 관련 <br>
+https://www.rocketpunch.com/@lgu3877/jobhunt
+
+
 <br><br><br><br>
 
 ## 유튜브 링크 (번호 순서대로 보는 것을 권장합니다.)
